@@ -14,7 +14,7 @@ redirect_from:
 <center><font  size=7 >Jiajun <b>Fan</b> </font></center>
 
 <center>
-     (+86) 17822018001 | <a href="mailto:jiajunfanthu@gmail.com">jiajunfanthu@gmail.com</a> | <a href="https://www.jiajunfan.com">www.jiajunfan.com</a>
+     (+86) 17822018001 | <a href="mailto:jiajunf3@illinois.edu">jiajunf3@illinois.edu</a> | <a href="https://www.jiajunfan.com">www.jiajunfan.com</a>
 </center>
 
 
