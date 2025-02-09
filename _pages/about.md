@@ -8,12 +8,13 @@ redirect_from:
   - /about.html
 ---
 
-As a master's student at [Tsinghua University](https://www.tsinghua.edu.cn/en/), I am profoundly interested in the development of advanced intelligent agents capable of human-level cognition, and even attaining superhuman levels of intelligence. I am convinced that the integration of machine learning and robotics holds immense potential for transforming human life and reshaping our future in unprecedented ways.
+As a Ph.D. student at [University of Illinois Urbana-Champaign](https://illinois.edu/), I am profoundly interested in the development of advanced intelligent agents capable of human-level cognition, and even attaining superhuman levels of intelligence. I am convinced that the integration of machine learning and robotics holds immense potential for transforming human life and reshaping our future in unprecedented ways.
 
 
 ## Recent News
 
-* I am currently looking for a Ph.D. position in RL (2024 Fall). [My CV](https://www.jiajunfan.com/files/CV.pdf)
+* I am currently looking for a Internship position in RLHF/Post-training of LLM. [My CV](https://www.jiajunfan.com/files/CV.pdf)
+* One paper is accepted by ICLR 2025, See you in Singapore.
 * Invited Reviewer at KDD 2024.
 * Invited Reviewer at ICML 2024.
 * Two papers are submitted to KDD 2024.
