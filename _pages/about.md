@@ -38,7 +38,7 @@ If my research aligns with your interests and academic pursuits, I welcome you t
 ## Background
 
 
-I am currently enrolled in a Master's program in Computer Technology at Tsinghua Shenzhen International Graduate School, which is a constituent of the illustrious Tsinghua University. Prior to this, I obtained my Bachelor's degree in the College of Artificial Intelligence at Nankai University.
+I am currently enrolled in a Ph.D. program in Computer Science at  University of Illinois Urbana-Champaign. 
 
 
 
