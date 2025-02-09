@@ -15,6 +15,9 @@ As a Ph.D. student at [University of Illinois Urbana-Champaign](https://illinois
 
 * I am currently looking for a Internship position in RLHF/Post-training of LLM. [My CV](https://www.jiajunfan.com/files/CV.pdf)
 * One paper is accepted by ICLR 2025, See you in Singapore.
+* Invited Reviewer at ICML 2025.
+* Invited Reviewer at ICLR 2025.
+* Invited Reviewer at NeurIPS 2024.
 * Invited Reviewer at KDD 2024.
 * Invited Reviewer at ICML 2024.
 * Two papers are submitted to KDD 2024.
