@@ -27,7 +27,7 @@ I am currently enrolled in a Ph.D. program in Computer Science at  University of
 
 ## Recent News
 
-* I am currently looking for a Internship position in RLHF/Post-training of LLM (e.g., Data-Efficient RLHF). [My CV](https://www.jiajunfan.com/files/CV.pdf)
+* I am currently looking for a Internship position in RLHF/Post-training of LLM (e.g., Data-Efficient RLHF). [My CV](files/CV.pdf)
 * One paper is accepted by ICLR 2025, See you in Singapore.
 * Invited Reviewer at ICML 2025.
 * Invited Reviewer at ICLR 2025.
