@@ -9,7 +9,7 @@ redirect_from:
 
 {% include base_path %}
 
-[Also available in PDF format.](https://www.jiajunfan.com/files/CV.pdf)
+[Also available in PDF format.](files/CV.pdf)
 
 <center><font  size=7 >Jiajun <b>Fan</b> </font></center>
 
