@@ -1,58 +1,60 @@
 ---
 permalink: /
-title: "About"
-excerpt: "About me"
+title: "Welcome!"
+excerpt: "Welcome!"
 author_profile: true
 redirect_from: 
   - /about/
   - /about.html
 ---
 
-Hello, I'm Jiajun Fan,  a Computer Science Ph.D. student at the University of Illinois Urbana-Champaign, working on making AI systems that can learn and self-evolve continuously. My research focuses on making AI systems more efficient, reliable, and capable of learning from human feedback.
+I'm Jiajun Fan, a Computer Science Ph.D. student at the University of Illinois Urbana-Champaign, working at the intersection of reinforcement learning theory and large-scale AI systems. My research focuses on developing self-evolving AI systems that can learn continuously from human feedback while maintaining reliability and sample efficiency.
 
-## Research Interests
+> *Currently seeking research internship opportunities for Summer 2025*
 
+## Research Focus
 
-My work focuses on three main areas:
-- **Making AI Learn Better**: Creating systems that can learn continuously while staying reliable
-- **Efficient Learning**: Getting AI to learn from less data while performing better
-- **Practical AI**: Building AI systems that work well in real-world situations
+My work addresses fundamental challenges in AI development through three key areas:
 
-## Key Achievements 
+- **Self-Evolving Systems**: Creating AI systems that can continuously improve through online learning while preventing collapse and maintaining diversity
+- **Sample-Efficient Learning**: Developing algorithms that achieve superhuman performance with orders of magnitude less data
+- **Theoretical Foundations**: Building rigorous mathematical frameworks for understanding and improving AI learning processes
 
-- Developed methods that learn 500x faster than previous approaches
-- Published research ranked in top 5 out of 4176 papers at ICLR 2023
-- Broke 24 human world records in classic Atari games
-- Created 9 new patented technologies in AI learning systems
-- Consistently ranked in top 1% throughout academic career
+## Research Highlights
 
-## Recent News
+- **Flow Matching with Wasserstein Regularization**: Developed the first theoretically-grounded framework for continuous model evolution with provable diversity guarantees, reducing data requirements by orders of magnitude [ICLR 2025]
+- **Learnable Behavior Control**: Created a unified framework that broke 24 Atari world records while using 500x less data than previous methods [ICLR 2023 Oral, top 5/4176]
+- **Generalized Data Distribution**: Pioneered a new reinforcement learning paradigm that achieves state-of-the-art performance through optimized data distribution [ICML 2022]
 
-- New research on improving AI learning accepted at ICLR 2025
-- Looking for Summer 2025 internship opportunities in AI development
-- Selected as reviewer for top AI conferences (ICML, ICLR, NeurIPS)
-- Leading new projects in AI learning systems at UIUC
+## Latest News
 
-## Research Experience
+- [2024-02] New paper on self-evolving AI systems accepted to ICLR 2025
+- [2024-01] Selected as reviewer for ICML 2025, ICLR 2025, and NeurIPS 2024
+- [2023-12] Presented research on collapse-free self-evolution at UIUC
+- [2023-10] Visiting researcher at Mila Institute working on robotics control
 
-I've had the privilege of working at leading institutions worldwide:
-- **UIUC**: Working on next-generation AI learning systems
-- **Mila Institute**: Developing better robot control systems
-- **Tsinghua University**: Created new ways for AI to learn from experience
+## Selected Publications
 
-## Publications and Impact
+My research has been published at top venues including ICLR, ICML, and NeurIPS. Recent highlights:
 
-My research has been published in top venues like ICLR, ICML, and NeurIPS, focusing on:
-- Making AI systems that learn more efficiently
-- Developing more reliable learning methods
-- Creating AI that can improve itself over time
+1. **Online Reward-Weighted Fine-Tuning of Flow Matching with Wasserstein Regularization**  
+   *ICLR 2025*  
+   First theoretical framework for continuous model evolution with diversity guarantees
 
-## Let's Connect
+2. **Learnable Behavior Control: Breaking Atari Human World Records**  
+   *ICLR 2023 (Oral Presentation)*  
+   Novel approach achieving superhuman performance with unprecedented efficiency
 
-Interested in AI research or collaboration? Reach out:
+3. **Generalized Data Distribution Iteration**  
+   *ICML 2022*  
+   Fundamental rethinking of reinforcement learning paradigms
+
+## Contact
+
+I'm always interested in discussing research ideas and potential collaborations:
 - Email: jiajunf3@illinois.edu
 - Website: jiajunfan.com
-- CV: [My CV](files/CV.pdf)
+- Location: Thomas M. Siebel Center for Computer Science, UIUC
 
 ---
 
