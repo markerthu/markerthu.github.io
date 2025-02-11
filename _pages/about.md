@@ -8,7 +8,7 @@ redirect_from:
   - /about.html
 ---
   
-# 👋 Hello, I'm Jiajun Fan
+## 👋 Hello, I'm Jiajun Fan
 
 Pioneering researcher in the next generation of artificial intelligence, specializing in self-evolving systems and large-scale generative models. Currently pursuing a Ph.D. in Computer Science at [University of Illinois Urbana-Champaign](https://illinois.edu/). My mission is to develop intelligent systems that can continuously evolve and adapt through human feedback while maintaining reliable performance and theoretical guarantees.
 
