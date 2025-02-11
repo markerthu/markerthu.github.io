@@ -32,18 +32,4 @@ I am currently enrolled in a Ph.D. program in Computer Science at  University of
 * Invited Reviewer at ICML 2025.
 * Invited Reviewer at ICLR 2025.
 * Invited Reviewer at NeurIPS 2024.
-* Invited Reviewer at KDD 2024.
-* Invited Reviewer at ICML 2024.
-* Two papers are submitted to KDD 2024.
-* One paper is submitted to ICML 2024.
-* One paper is submitted to IJCAI 2024.
-* Two papers are submitted to ICDE 2024.
-* One paper is submitted to TMLR.
-* One paper is submitted to AISTATS 2024.
-* Two papers are submitted to WWW 2024.
-* One paper is submitted to ICLR 2024.
-* One paper is accepted by NeurIPS 2023, see you in New Orleans.
-* Two papers are submitted to AAAI 2024.
-* Two papers are submitted to CIKM 2023.
-
 
