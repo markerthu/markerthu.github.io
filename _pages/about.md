@@ -28,7 +28,7 @@ My work addresses fundamental challenges in AI development through three key are
 
 ## Latest News
 
-- [2025-02] New paper on self-evolving AI systems accepted to ICLR 2025
+- [2025-02] New paper on self-evolving Flow Matching Generative Models accepted to ICLR 2025
 - [2025-01] Selected as reviewer for ICML 2025, ICLR 2025, and NeurIPS 2024
 - [2024-08] Started research on collapse-free self-evolution at UIUC
 
