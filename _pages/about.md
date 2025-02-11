@@ -36,17 +36,21 @@ My work addresses fundamental challenges in AI development through three key are
 
 My research has been published at top venues including ICLR, ICML, and NeurIPS. Recent highlights:
 
-1. **Online Reward-Weighted Fine-Tuning of Flow Matching with Wasserstein Regularization**  
-   *ICLR 2025*  
-   First theoretical framework for continuous model evolution with diversity guarantees
 
-2. **Learnable Behavior Control: Breaking Atari Human World Records**  
-   *ICLR 2023 (Oral Presentation)*  
-   Novel approach achieving superhuman performance with unprecedented efficiency
+<!-- ################################################################################## -->
 
-3. **Generalized Data Distribution Iteration**  
-   *ICML 2022*  
-   Fundamental rethinking of reinforcement learning paradigms
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">ICLR 2025</div><img src='images/bio-photo-2.jpg' alt="sym" width="100%"></div></div>
+<div class='paper-box-text' markdown="1">
+<div class='paper-intro' markdown="1">
+
+**Online Reward-Weighted Fine-Tuning of Flow Matching with Wasserstein Regularization**
+
+Jiajun Fan, **Shuaike Shen**, Chaoran Cheng, Chumeng Liang, Ge Liu<sup>†</sup>
+
+
+</div>
+</div>
+</div>
 
 ## Contact
 
