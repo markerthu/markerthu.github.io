@@ -8,7 +8,7 @@ redirect_from:
   - /about.html
 ---
 
-Hello, I'm Jiajun Fan,  a Computer Science Ph.D. student at the University of Illinois Urbana-Champaign, working on making AI systems that can learn and improve continuously. My research focuses on making AI systems more efficient, reliable, and capable of learning from human feedback.
+Hello, I'm Jiajun Fan,  a Computer Science Ph.D. student at the University of Illinois Urbana-Champaign, working on making AI systems that can learn and self-evolve continuously. My research focuses on making AI systems more efficient, reliable, and capable of learning from human feedback.
 
 ## Research Interests
 
