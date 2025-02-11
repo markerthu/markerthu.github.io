@@ -8,55 +8,61 @@ redirect_from:
   - /about.html
 ---
   
-## 👋 Hello, I'm Jiajun Fan
+## Hello, I'm Jiajun Fan
 
-Pioneering researcher in the next generation of artificial intelligence, specializing in self-evolving systems and large-scale generative models. Currently pursuing a Ph.D. in Computer Science at [University of Illinois Urbana-Champaign](https://illinois.edu/). My mission is to develop intelligent systems that can continuously evolve and adapt through human feedback while maintaining reliable performance and theoretical guarantees.
+> "The goal is not just to build better AI, but to understand intelligence itself"
 
-## 🎯 Research Vision & Impact
+I'm a Computer Science Ph.D. student at the University of Illinois Urbana-Champaign, working on making AI systems that can learn and improve continuously. My research focuses on making AI systems more efficient, reliable, and capable of learning from human feedback.
 
-My research pushes the boundaries in:
-- 🤖 **Self-evolving AGI Systems**: Developing frameworks that enable continuous model evolution while preventing policy collapse
-- 🧠 **Large-scale Generative Models**: Creating state-of-the-art alignment with orders of magnitude less data
-- 📊 **Sample-efficient RL**: Achieved 500x data reduction while surpassing SOTA performance
-- 🔍 **Trustworthy AI**: Bridging theoretical guarantees with practical scalability
-- 🎮 **RLHF & Theoretical RL**: Establishing mathematical foundations for collapse-free continuous learning
+## Research Interests
 
-## 🌟 Notable Achievements 
+> "The best way to predict the future is to create it"
 
-- 🏆 **Breakthrough Research**: ICLR 2023 Oral Presentation (ranked 5/4176) for pioneering work in behavior control
-- 💫 **Record-Breaking Performance**: Surpassed 24 human world records in Atari benchmarks
-- 🚀 **Sample Efficiency Champion**: Outperformed Agent57 with 500x less data and doubled average performance
-- 💡 **Innovation Leader**: Secured 9 patents in reinforcement learning algorithms and hyperparameter optimization
-- 🎓 **Academic Excellence**: Consistently ranked top 1% throughout academic career with multiple National Scholarships
+My work focuses on three main areas:
+- **Making AI Learn Better**: Creating systems that can learn continuously while staying reliable
+- **Efficient Learning**: Getting AI to learn from less data while performing better
+- **Practical AI**: Building AI systems that work well in real-world situations
 
-## 📰 Latest Updates
+## Key Achievements 
 
-- 🌟 **[Feb 2025]** Research breakthrough in self-evolving RLHF accepted at ICLR 2025
-- 🎯 **[Feb 2025]** Seeking Summer 2025 Internship in RLHF/LLM Post-training
-- 🔬 **[Jan 2025]** Pioneering work on Wasserstein-regularized flow matching
-- 👑 **[Jan 2025]** Selected as reviewer for ICML 2025, ICLR 2025, NeurIPS 2024, AAAI 2025, and AISTATS 2025
+- Developed methods that learn 500x faster than previous approaches
+- Published research ranked in top 5 out of 4176 papers at ICLR 2023
+- Broke 24 human world records in classic Atari games
+- Created 9 new patented technologies in AI learning systems
+- Consistently ranked in top 1% throughout academic career
 
-## 🎓 Research Leadership
+## Recent News
 
-Active reviewer for premier AI conferences:
-- 📚 **Machine Learning**: ICML (2022-2025), NeurIPS (2022-2024)
-- 🧠 **Deep Learning**: ICLR (2024-2025)
-- 🤖 **Artificial Intelligence**: AAAI 2025, AISTATS 2025
-- 📊 **Data Mining**: KDD 2024
+> "Progress lies not in enhancing what is, but in advancing toward what will be"
 
-## 🌐 Global Research Experience
+- New research on improving AI learning accepted at ICLR 2025
+- Looking for Summer 2025 internship opportunities in AI development
+- Selected as reviewer for top AI conferences (ICML, ICLR, NeurIPS)
+- Leading new projects in AI learning systems at UIUC
 
-- 🇺🇸 **UIUC**: Leading research in self-evolving generative models
-- 🇨🇦 **Mila**: Advancing reinforcement learning for robotics
-- 🇨🇳 **Tsinghua**: Pioneering behavior control in RL (Top 1.3%)
+## Research Experience
 
-## 📬 Collaboration Opportunities
+I've had the privilege of working at leading institutions worldwide:
+- **UIUC**: Working on next-generation AI learning systems
+- **Mila Institute**: Developing better robot control systems
+- **Tsinghua University**: Created new ways for AI to learn from experience
 
-Passionate about pushing AI boundaries? Let's connect:
-- 📧 [Email](mailto:jiajunf3@illinois.edu)
-- 🌐 [Portfolio](https://jiajunfan.com)
-- 📄 [Detailed CV](files/CV.pdf)
+## Publications and Impact
+
+> "The measure of intelligence is the ability to change"
+
+My research has been published in top venues like ICLR, ICML, and NeurIPS, focusing on:
+- Making AI systems that learn more efficiently
+- Developing more reliable learning methods
+- Creating AI that can improve itself over time
+
+## Let's Connect
+
+Interested in AI research or collaboration? Reach out:
+- Email: jiajunf3@illinois.edu
+- Website: jiajunfan.com
+- CV: [Download](files/CV.pdf)
 
 ---
 
-*"Bridging the gap between theoretical elegance and practical impact in AI"*
+> "The future belongs to those who believe in the beauty of their dreams"
