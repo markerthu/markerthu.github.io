@@ -39,14 +39,13 @@ My research has been published at top venues including ICLR, ICML, and NeurIPS. 
 
 <!-- ################################################################################## -->
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">ICLR 2025</div><img src='images/bio-photo-2.jpg' alt="sym" width="100%"></div></div>
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">ICLR 2025</div><img src='images/bio-photo-2.jpg' alt="sym" width="10%"></div></div>
 <div class='paper-box-text' markdown="1">
 <div class='paper-intro' markdown="1">
 
 **Online Reward-Weighted Fine-Tuning of Flow Matching with Wasserstein Regularization**
 
 Jiajun Fan, **Shuaike Shen**, Chaoran Cheng, Chumeng Liang, Ge Liu<sup>†</sup>
-
 
 </div>
 </div>
