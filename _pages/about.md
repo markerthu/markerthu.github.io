@@ -16,8 +16,8 @@ I'm Jiajun Fan, a Computer Science Ph.D. student at the University of Illinois U
 
 My work addresses fundamental challenges in AI development through three key areas:
 
-- **Self-Evolving Systems**: Creating AI systems that can continuously improve through online learning while preventing collapse and maintaining diversity
-- **Sample-Efficient Learning**: Developing algorithms that achieve superhuman performance with orders of magnitude less data
+- **Self-Evolving AI Systems**: Creating AI systems that can continuously improve through online learning while preventing collapse and maintaining diversity
+- **Data-Efficient Learning**: Developing algorithms that achieve superhuman performance with orders of magnitude less data
 - **Theoretical Foundations**: Building rigorous mathematical frameworks for understanding and improving AI learning processes
 
 ## Research Highlights
@@ -51,8 +51,8 @@ My research has been published at top venues including ICLR, ICML, and NeurIPS. 
 ## Contact
 
 I'm always interested in discussing research ideas and potential collaborations:
-- Email: jiajunf3@illinois.edu
-- Website: jiajunfan.com
+- Email: [jiajunf3@illinois.edu](mailto:jiajunf3@illinois.edu)
+- CV: [My CV](files/CV.pdf)
 - Location: Thomas M. Siebel Center for Computer Science, UIUC
 
 ---
