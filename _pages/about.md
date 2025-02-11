@@ -10,13 +10,10 @@ redirect_from:
   
 ## Hello, I'm Jiajun Fan
 
-> "The goal is not just to build better AI, but to understand intelligence itself"
-
 I'm a Computer Science Ph.D. student at the University of Illinois Urbana-Champaign, working on making AI systems that can learn and improve continuously. My research focuses on making AI systems more efficient, reliable, and capable of learning from human feedback.
 
 ## Research Interests
 
-> "The best way to predict the future is to create it"
 
 My work focuses on three main areas:
 - **Making AI Learn Better**: Creating systems that can learn continuously while staying reliable
@@ -33,8 +30,6 @@ My work focuses on three main areas:
 
 ## Recent News
 
-> "Progress lies not in enhancing what is, but in advancing toward what will be"
-
 - New research on improving AI learning accepted at ICLR 2025
 - Looking for Summer 2025 internship opportunities in AI development
 - Selected as reviewer for top AI conferences (ICML, ICLR, NeurIPS)
@@ -48,8 +43,6 @@ I've had the privilege of working at leading institutions worldwide:
 - **Tsinghua University**: Created new ways for AI to learn from experience
 
 ## Publications and Impact
-
-> "The measure of intelligence is the ability to change"
 
 My research has been published in top venues like ICLR, ICML, and NeurIPS, focusing on:
 - Making AI systems that learn more efficiently
@@ -65,4 +58,4 @@ Interested in AI research or collaboration? Reach out:
 
 ---
 
-> "The future belongs to those who believe in the beauty of their dreams"
+> "The goal is not just to build better AI, but to understand intelligence itself"
