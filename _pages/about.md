@@ -17,12 +17,6 @@ I am actively exploring the fascinating area of Reinforcement Learning, which I 
 
 If my research aligns with your interests and academic pursuits, I welcome you to reach out to me via [email](mailto:jiajunfanthu@gmail.com).
 
-## Background
-
-
-I am currently enrolled in a Ph.D. program in Computer Science at  University of Illinois Urbana-Champaign. 
-
-
 
 
 ## Recent News
