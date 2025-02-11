@@ -10,7 +10,7 @@ redirect_from:
 
 I'm Jiajun Fan, a Computer Science Ph.D. student at the University of Illinois Urbana-Champaign, working at the intersection of reinforcement learning theory and large-scale AI systems. My research focuses on developing self-evolving AI systems that can learn continuously from human feedback while maintaining reliability and sample efficiency.
 
-> *Currently seeking research internship opportunities for Summer 2025*
+> Currently seeking research internship opportunities for Summer 2025
 
 ## Research Focus
 
@@ -28,10 +28,9 @@ My work addresses fundamental challenges in AI development through three key are
 
 ## Latest News
 
-- [2024-02] New paper on self-evolving AI systems accepted to ICLR 2025
-- [2024-01] Selected as reviewer for ICML 2025, ICLR 2025, and NeurIPS 2024
-- [2023-12] Presented research on collapse-free self-evolution at UIUC
-- [2023-10] Visiting researcher at Mila Institute working on robotics control
+- [2025-02] New paper on self-evolving AI systems accepted to ICLR 2025
+- [2025-01] Selected as reviewer for ICML 2025, ICLR 2025, and NeurIPS 2024
+- [2024-08] Started research on collapse-free self-evolution at UIUC
 
 ## Selected Publications
 
