@@ -54,7 +54,7 @@ My research has been published in top venues like ICLR, ICML, and NeurIPS, focus
 Interested in AI research or collaboration? Reach out:
 - Email: jiajunf3@illinois.edu
 - Website: jiajunfan.com
-- CV: [Download](files/CV.pdf)
+- CV: [My CV](files/CV.pdf)
 
 ---
 
