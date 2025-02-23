@@ -38,15 +38,15 @@ My research has been published at top venues including ICLR, ICML, and NeurIPS. 
 
 1. **Online Reward-Weighted Fine-Tuning of Flow Matching with Wasserstein Regularization**  
    *ICLR 2025*  
-   First theoretical framework for continuous model evolution with diversity guarantees
+   For the first time, we proposed a framework for online post-training with RL for the flow matching model from both theoretical and practical perspectives (**Collapse-Free, No Human-Collected Data Needed, Self-Evolution by Agent itself**).
 
 2. **Learnable Behavior Control: Breaking Atari Human World Records**  
    *ICLR 2023 (Oral Presentation)*  
-   Novel approach achieving superhuman performance with unprecedented efficiency
+   We demonstrate for the first time the dramatic advantages of MoE in RL and break 24 human world records (**100x cost reduction, Stable Self-Evolution of MoE**)
 
 3. **Generalized Data Distribution Iteration**  
    *ICML 2022*  
-   Fundamental rethinking of reinforcement learning paradigms
+   For the first time, we theoretically demonstrate the importance of data optimization in RL. (**Theoretical guarantee for continuous and stable self-evolution of MoE and single agent**)
 
 
 ## Contact
