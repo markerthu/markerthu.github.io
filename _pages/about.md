@@ -12,6 +12,23 @@ I'm Jiajun Fan, a Computer Science Ph.D. student at the University of Illinois U
 
 > Currently seeking research internship opportunities for Summer 2025. [My CV](files/CV.pdf)
 
+## Selected Publications
+
+My research has been published at top venues including ICLR, ICML, and NeurIPS. Recent highlights:
+
+1. **Online Reward-Weighted Fine-Tuning of Flow Matching with Wasserstein Regularization**  
+   *ICLR 2025*  
+   For the first time, we proposed a framework for online post-training with RL for the flow matching model from both theoretical and practical perspectives (**Collapse-Free, No Human-Collected Data Needed, Self-Evolution by Agent itself**).
+
+2. **Learnable Behavior Control: Breaking Atari Human World Records**  
+   *ICLR 2023 (Oral Presentation)*  
+   We demonstrate for the first time the dramatic advantages of MoE in RL and break 24 human world records (**100x cost reduction, Stable Self-Evolution of MoE**)
+
+3. **Generalized Data Distribution Iteration**  
+   *ICML 2022*  
+   For the first time, we theoretically demonstrate the importance of data optimization in RL. (**Theoretical guarantee for continuous and stable self-evolution of MoE and single agent**)
+
+
 ## Research Focus
 
 My work addresses fundamental challenges in AI development through three key areas:
@@ -32,21 +49,6 @@ My work addresses fundamental challenges in AI development through three key are
 - [2025-01] Selected as reviewer for ICML 2025, ICLR 2025, and NeurIPS 2024
 - [2024-08] Started research on collapse-free self-evolution at UIUC
 
-## Selected Publications
-
-My research has been published at top venues including ICLR, ICML, and NeurIPS. Recent highlights:
-
-1. **Online Reward-Weighted Fine-Tuning of Flow Matching with Wasserstein Regularization**  
-   *ICLR 2025*  
-   For the first time, we proposed a framework for online post-training with RL for the flow matching model from both theoretical and practical perspectives (**Collapse-Free, No Human-Collected Data Needed, Self-Evolution by Agent itself**).
-
-2. **Learnable Behavior Control: Breaking Atari Human World Records**  
-   *ICLR 2023 (Oral Presentation)*  
-   We demonstrate for the first time the dramatic advantages of MoE in RL and break 24 human world records (**100x cost reduction, Stable Self-Evolution of MoE**)
-
-3. **Generalized Data Distribution Iteration**  
-   *ICML 2022*  
-   For the first time, we theoretically demonstrate the importance of data optimization in RL. (**Theoretical guarantee for continuous and stable self-evolution of MoE and single agent**)
 
 
 ## Contact
