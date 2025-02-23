@@ -61,4 +61,3 @@ I'm always interested in discussing research ideas and potential collaborations:
 ---
 
 > "The goal is not just to build better AI, but to understand intelligence itself"
-> "I always believe RL is the key to achieve AGI!"
