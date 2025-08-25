@@ -10,7 +10,7 @@ redirect_from:
 
 I'm Jiajun Fan, a Computer Science Ph.D. student at the University of Illinois Urbana-Champaign, working at the intersection of reinforcement learning theory and large-scale AI systems. My research focuses on developing self-evolving AI systems that can learn continuously from human/AI feedback while maintaining reliability and sample efficiency.
 
-> Currently seeking research internship opportunities for Summer 2025. [My CV](files/CV.pdf)
+> Currently seeking research internship opportunities for Summer 2026. [My CV](files/CV.pdf)
 
 ## Selected Publications
 
