@@ -16,15 +16,17 @@ I'm Jiajun Fan, a Computer Science Ph.D. student at the University of Illinois U
 
 My research has been published at top venues including ICLR, ICML, and NeurIPS. Recent highlights:
 
-1. **Online Reward-Weighted Fine-Tuning of Flow Matching with Wasserstein Regularization**  
+1. Two Papers are accepted by NeurIPS 2025, See you in San Diego.
+
+2. **Online Reward-Weighted Fine-Tuning of Flow Matching with Wasserstein Regularization**  
    *ICLR 2025*  
    For the first time, we proposed a framework for online post-training with RL for the flow matching model from both theoretical and practical perspectives (*Collapse-Free Continuous Self-Learning, No Human-Collected Data Needed, Self-Evolution by Agent itself*).
 
-2. **Learnable Behavior Control: Breaking Atari Human World Records**  
+3. **Learnable Behavior Control: Breaking Atari Human World Records**  
    *ICLR 2023 (Oral Presentation)*  
    We demonstrate for the first time the dramatic advantages of MoE in RL and break 24 human world records (*100x cost reduction, Stable Self-Evolution of MoE in RL*)
 
-3. **Generalized Data Distribution Iteration**  
+4. **Generalized Data Distribution Iteration**  
    *ICML 2022*  
    For the first time, we theoretically demonstrate the importance of data optimization in RL. (*Theoretical guarantee for continuous and stable self-evolution of MoE and single agent in RL*)
 
