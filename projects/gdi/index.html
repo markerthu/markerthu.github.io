@@ -1,0 +1,173 @@
+---
+layout: null
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GDI — 22 Atari World Records | ICML 2022</title>
+<meta name="description" content="Generalized Data Distribution Iteration. ICML 2022. Superhuman RL with 500× less data.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#fff;color:#1a1a2e;line-height:1.7}
+a{color:#b71c1c;text-decoration:none}a:hover{text-decoration:underline}
+.topnav{background:#1a0000;padding:12px 24px;display:flex;align-items:center;gap:12px;font-size:0.84em}
+.topnav a{color:#ef9a9a;font-weight:600}
+.topnav span{color:#3a1010}
+.hero{background:linear-gradient(135deg,#1a0000,#7f0000,#b71c1c);padding:64px 24px 56px;text-align:center}
+.venue-badge{display:inline-block;background:#b71c1c;color:#fff;padding:6px 18px;border-radius:24px;font-size:0.82em;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:20px}
+.hero h1{font-size:clamp(1.6em,4vw,2.5em);font-weight:800;color:#fff;line-height:1.25;max-width:700px;margin:0 auto 14px}
+.hero .short{font-size:1em;color:#ef9a9a;margin-bottom:26px;font-weight:500}
+.authors{font-size:0.88em;color:#ffcdd2;max-width:500px;margin:0 auto 20px;line-height:1.9}
+.authors strong{color:#fff;font-weight:700}
+.affil{font-size:0.8em;color:#e57373;margin-bottom:28px}
+.btn-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:9px 20px;border-radius:8px;font-size:0.85em;font-weight:700;transition:opacity .2s}
+.btn-paper{background:#fff;color:#1a0000}
+.btn-pmlr{background:#ff6f00;color:#fff}
+.btn-arxiv{background:#c62828;color:#fff}
+.btn-home{background:#37474f;color:#fff}
+.btn:hover{opacity:.85}
+.container{max-width:860px;margin:0 auto;padding:0 24px}
+section{padding:52px 0 40px}
+section+section{border-top:1px solid #f0f0f0}
+h2{font-size:1.42em;font-weight:800;color:#1a1a2e;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+h2::after{content:'';flex:1;height:2px;background:linear-gradient(to right,#b71c1c,transparent);border-radius:1px}
+p{color:#333;margin-bottom:14px;font-size:0.97em}
+.tldr{background:#ffebee;border-left:4px solid #b71c1c;border-radius:0 10px 10px 0;padding:16px 22px}
+.tldr strong{color:#7f0000;font-weight:800}
+
+/* Records */
+.records-wall{background:linear-gradient(135deg,#7f0000,#b71c1c);border-radius:16px;padding:28px;margin:24px 0;text-align:center}
+.records-number{font-size:4.5em;font-weight:900;color:#ffd700;line-height:1;text-shadow:0 0 40px rgba(255,215,0,.4)}
+.records-sub{color:#ffcdd2;font-size:1.05em;margin-top:8px;font-weight:600}
+.stats-mini{display:flex;justify-content:center;gap:32px;margin-top:20px;flex-wrap:wrap}
+.sm{text-align:center}.sm-num{font-size:1.7em;font-weight:900;color:#fff}.sm-label{font-size:0.74em;color:#ef9a9a;margin-top:2px}
+
+/* Publication journey */
+.journey{position:relative;margin:20px 0;padding-left:24px}
+.journey::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,#b71c1c,#ef9a9a)}
+.journey-step{position:relative;margin-bottom:20px}
+.journey-step::before{content:'';position:absolute;left:-20px;top:6px;width:12px;height:12px;background:#b71c1c;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 2px #b71c1c}
+.journey-date{font-size:0.78em;font-weight:800;color:#b71c1c;text-transform:uppercase;letter-spacing:.05em}
+.journey-title{font-weight:700;font-size:0.93em;color:#1a1a2e;margin:2px 0}
+.journey-desc{font-size:0.83em;color:#555;line-height:1.5}
+
+/* Cite box */
+.cite-tabs{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.cite-tab{padding:6px 14px;border-radius:20px;font-size:0.8em;font-weight:700;cursor:pointer;border:1.5px solid #e0e0e0;background:#fff;color:#444;transition:all .2s}
+.cite-tab.active{background:#b71c1c;color:#fff;border-color:#b71c1c}
+.cite-box{background:#fff8f8;border:1px solid #ffcdd2;border-radius:8px;padding:16px;font-size:0.82em;overflow-x:auto;line-height:1.6;font-family:monospace}
+
+footer{background:#1a0000;color:#7a3030;text-align:center;padding:28px 24px;font-size:0.84em}
+footer a{color:#ef9a9a}
+@media(max-width:600px){.stats-mini{gap:20px}}
+</style>
+</head>
+<body>
+<div class="topnav">
+  <a href="/">← Jiajun Fan</a>
+  <span>/</span>
+  <a href="/projects/">Projects</a>
+  <span>/</span>
+  <span style="color:#ffcdd2;">GDI</span>
+</div>
+<div class="hero">
+  <div class="venue-badge">📋 ICML 2022</div>
+  <h1>Generalized Data Distribution Iteration</h1>
+  <p class="short">A unified RL framework achieving superhuman performance with 500× less data</p>
+  <div class="authors">
+    <strong>Jiajun Fan</strong>&thinsp;<sup>1</sup>, Changnan Xiao&thinsp;<sup>1</sup>
+  </div>
+  <div class="affil"><sup>1</sup>Tsinghua University / Huawei Noah's Ark Lab</div>
+  <div class="btn-row">
+    <a class="btn btn-paper" href="https://proceedings.mlr.press/v162/fan22c.html">📄 PMLR</a>
+    <a class="btn btn-pmlr" href="https://proceedings.mlr.press/v162/fan22c/fan22c.pdf">PDF</a>
+    <a class="btn btn-home" href="/">🏠 Homepage</a>
+  </div>
+</div>
+
+<div class="container">
+
+<section style="padding-top:40px;">
+  <div class="records-wall">
+    <div class="records-number">22</div>
+    <div class="records-sub">Human World Records Broken</div>
+    <div class="stats-mini">
+      <div class="sm"><div class="sm-num">9,620%</div><div class="sm-label">Mean Human-Normalized Score</div></div>
+      <div class="sm"><div class="sm-num">500×</div><div class="sm-label">More Sample-Efficient than Agent57</div></div>
+      <div class="sm"><div class="sm-num">200M</div><div class="sm-label">Training Frames (vs 78B)</div></div>
+    </div>
+  </div>
+  <div class="tldr">
+    <strong>TL;DR</strong> — Sample efficiency and final performance are two classic RL challenges. GDI addresses both simultaneously by showing that <strong>training data distribution is the key lever</strong> — unifying diverse RL algorithms and achieving 9620% mean human-normalized score with only 200M frames (500× less than Agent57).
+  </div>
+</section>
+
+<section>
+  <h2>💡 Core Insight</h2>
+  <p>GDI decouples RL challenges into two problems and casts both into <strong>training data distribution optimization</strong>:</p>
+  <ul style="font-size:0.9em;color:#444;padding-left:1.4em;line-height:2;margin-bottom:14px;">
+    <li><strong>Data richness</strong> → control the capacity and diversity of behavior policy</li>
+    <li><strong>Exploration-exploitation</strong> → fine-grained adaptive control of sampling distribution</li>
+  </ul>
+  <p>GDI integrates this into <strong>Generalized Policy Iteration (GPI)</strong>, providing operator-based versions of well-known RL methods from DQN to Agent57 — all as special cases of GDI.</p>
+</section>
+
+<section>
+  <h2>📅 Publication Journey</h2>
+  <div class="journey">
+    <div class="journey-step">
+      <div class="journey-date">Late 2021</div>
+      <div class="journey-title">Research & Development</div>
+      <div class="journey-desc">Developed GDI framework at Tsinghua / Huawei Noah's Ark Lab. Core insight: data distribution optimization unifies RL efficiency.</div>
+    </div>
+    <div class="journey-step">
+      <div class="journey-date">Jan 2022</div>
+      <div class="journey-title">Submitted to ICML 2022</div>
+      <div class="journey-desc">Submitted to the 39th International Conference on Machine Learning.</div>
+    </div>
+    <div class="journey-step">
+      <div class="journey-date">May 2022</div>
+      <div class="journey-title">✅ Accepted at ICML 2022</div>
+      <div class="journey-desc">Accepted as a full paper. Published in PMLR Vol. 162, pages 6103–6184.</div>
+    </div>
+    <div class="journey-step">
+      <div class="journey-date">Jul 2022</div>
+      <div class="journey-title">Presented at ICML 2022</div>
+      <div class="journey-desc">Presented at ICML 2022 in Baltimore, Maryland. Available at <a href="https://proceedings.mlr.press/v162/fan22c.html">proceedings.mlr.press</a>.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>📖 Cite This Paper</h2>
+  <div class="cite-tabs">
+    <div class="cite-tab active">BibTeX (PMLR Official)</div>
+  </div>
+  <div class="cite-box">@InProceedings{pmlr-v162-fan22c,<br>
+&nbsp;&nbsp;title     = {Generalized Data Distribution Iteration},<br>
+&nbsp;&nbsp;author    = {Fan, Jiajun and Xiao, Changnan},<br>
+&nbsp;&nbsp;booktitle = {Proceedings of the 39th International Conference on Machine Learning},<br>
+&nbsp;&nbsp;pages     = {6103--6184},<br>
+&nbsp;&nbsp;year      = {2022},<br>
+&nbsp;&nbsp;volume    = {162},<br>
+&nbsp;&nbsp;series    = {Proceedings of Machine Learning Research},<br>
+&nbsp;&nbsp;month     = {17--23 Jul},<br>
+&nbsp;&nbsp;publisher = {PMLR},<br>
+&nbsp;&nbsp;pdf       = {https://proceedings.mlr.press/v162/fan22c/fan22c.pdf},<br>
+&nbsp;&nbsp;url       = {https://proceedings.mlr.press/v162/fan22c.html}<br>
+}</div>
+</section>
+
+</div>
+<footer>
+  <p>GDI · ICML 2022 &nbsp;|&nbsp; <a href="/">Jiajun Fan</a> · Tsinghua University &nbsp;|&nbsp;
+  <a href="https://proceedings.mlr.press/v162/fan22c.html">Paper</a> &nbsp;|&nbsp;
+  <a href="https://proceedings.mlr.press/v162/fan22c/fan22c.pdf">PDF</a></p>
+</footer>
+</body>
+</html>

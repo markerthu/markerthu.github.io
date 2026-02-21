@@ -1,0 +1,160 @@
+---
+layout: null
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AC-Flow — Actor-Critic for Flow Matching | Preprint 2025</title>
+<meta name="description" content="Fine-tuning Flow Matching Generative Models with Intermediate Feedback. arXiv 2025.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#fff;color:#1a1a2e;line-height:1.7}
+a{color:#00695c;text-decoration:none}a:hover{text-decoration:underline}
+.topnav{background:#001a17;padding:12px 24px;display:flex;align-items:center;gap:12px;font-size:0.84em}
+.topnav a{color:#80cbc4;font-weight:600}
+.topnav span{color:#1a3a36}
+.hero{background:linear-gradient(135deg,#001a17,#00695c,#004d40);padding:64px 24px 56px;text-align:center;position:relative;overflow:hidden}
+.preprint-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.15);color:#fff;padding:6px 18px;border-radius:24px;font-size:0.82em;font-weight:800;letter-spacing:0.05em;border:1.5px solid rgba(255,255,255,.3);margin-bottom:20px}
+.hero h1{font-size:clamp(1.4em,3.8vw,2.3em);font-weight:800;color:#fff;line-height:1.3;max-width:800px;margin:0 auto 12px}
+.hero .short{font-size:1em;color:#80cbc4;margin-bottom:26px;font-weight:500}
+.authors{font-size:0.88em;color:#b2dfdb;max-width:660px;margin:0 auto 20px;line-height:1.9}
+.authors strong{color:#fff;font-weight:700}
+.affil{font-size:0.8em;color:#4db6ac;margin-bottom:28px}
+.btn-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:9px 20px;border-radius:8px;font-size:0.85em;font-weight:700;transition:opacity .2s}
+.btn-arxiv{background:#e53935;color:#fff}
+.btn-home{background:#37474f;color:#fff}
+.btn:hover{opacity:.85}
+.container{max-width:860px;margin:0 auto;padding:0 24px}
+section{padding:52px 0 40px}
+section+section{border-top:1px solid #f0f0f0}
+h2{font-size:1.42em;font-weight:800;color:#1a1a2e;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+h2::after{content:'';flex:1;height:2px;background:linear-gradient(to right,#00695c,transparent);border-radius:1px}
+p{color:#333;margin-bottom:14px;font-size:0.97em}
+.tldr{background:#e0f2f1;border-left:4px solid #00695c;border-radius:0 10px 10px 0;padding:16px 22px}
+.tldr strong{color:#004d40;font-weight:800}
+
+/* Three innovations */
+.innovations{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin:20px 0}
+.inn-card{background:#f5fffe;border:2px solid #80cbc4;border-radius:12px;padding:18px}
+.inn-num{width:28px;height:28px;background:#00695c;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:0.85em;margin-bottom:10px}
+.inn-title{font-weight:800;font-size:0.9em;color:#004d40;margin-bottom:6px}
+.inn-desc{font-size:0.82em;color:#444;line-height:1.55;margin:0}
+
+/* Comparison with ORW */
+.compare-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0}
+.cc{border-radius:10px;padding:16px}
+.cc-old{background:#fff8e1;border:2px solid #ffe082}
+.cc-old h3{color:#f57f17;font-size:0.88em;font-weight:800;margin-bottom:8px}
+.cc-new{background:#e0f2f1;border:2px solid #80cbc4}
+.cc-new h3{color:#00695c;font-size:0.88em;font-weight:800;margin-bottom:8px}
+.cc ul{font-size:0.82em;color:#444;padding-left:1.2em;line-height:1.9;margin:0}
+
+.cite-box{background:#f0fffe;border:1px solid #80cbc4;border-radius:8px;padding:16px;font-size:0.82em;overflow-x:auto;line-height:1.6;font-family:monospace;color:#333}
+footer{background:#001a17;color:#2a5a54;text-align:center;padding:28px 24px;font-size:0.84em}
+footer a{color:#80cbc4}
+@media(max-width:600px){.compare-cards{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="topnav">
+  <a href="/">← Jiajun Fan</a>
+  <span>/</span>
+  <a href="/projects/">Projects</a>
+  <span>/</span>
+  <span style="color:#b2dfdb;">AC-Flow</span>
+</div>
+<div class="hero">
+  <div class="preprint-badge">📝 Preprint 2025 · Under Review</div>
+  <h1>Fine-tuning Flow Matching Generative Models with Intermediate Feedback</h1>
+  <p class="short"><strong>AC-Flow</strong>: Robust actor-critic framework for flow matching — stable intermediate value learning without collapse</p>
+  <div class="authors">
+    <strong>Jiajun Fan</strong>&thinsp;<sup>1</sup>,
+    Chaoran Cheng&thinsp;<sup>1</sup>,
+    Shuaike Shen&thinsp;<sup>1</sup>,
+    Xiangxin Zhou&thinsp;<sup>1</sup>,
+    Ge Liu&thinsp;<sup>1</sup>
+  </div>
+  <div class="affil"><sup>1</sup>University of Illinois Urbana-Champaign</div>
+  <div class="btn-row">
+    <a class="btn btn-arxiv" href="https://arxiv.org/abs/2510.18072">arXiv:2510.18072</a>
+    <a class="btn btn-home" href="/">🏠 Homepage</a>
+  </div>
+</div>
+
+<div class="container">
+<section>
+  <div class="tldr">
+    <strong>TL;DR</strong> — Existing RLHF methods for flow matching only use <em>outcome rewards</em> (ORW-CFM-W2), suffering from credit assignment problems. AC-Flow introduces a full <strong>actor-critic framework</strong> with intermediate feedback — reward shaping + dual-stability + generalized critic weighting — achieving SOTA text-to-image alignment on SD3 without degrading diversity or stability.
+  </div>
+</section>
+
+<section>
+  <h2>🔧 Three Key Innovations</h2>
+  <div class="innovations">
+    <div class="inn-card">
+      <div class="inn-num">1</div>
+      <div class="inn-title">Reward Shaping</div>
+      <div class="inn-desc">Provides well-normalized learning signals for stable intermediate value learning and gradient control — enabling the critic to reason about multi-step trajectories.</div>
+    </div>
+    <div class="inn-card">
+      <div class="inn-num">2</div>
+      <div class="inn-title">Dual-Stability Mechanism</div>
+      <div class="inn-desc">Combines <em>advantage clipping</em> (prevents destructive policy updates) with a <em>critic warm-up phase</em> (lets critic mature before guiding the actor).</div>
+    </div>
+    <div class="inn-card">
+      <div class="inn-num">3</div>
+      <div class="inn-title">Generalized Critic Weighting</div>
+      <div class="inn-desc">Extends reward-weighted methods while preserving model diversity via Wasserstein regularization — compatible with ORW-CFM-W2 as a special case.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>🔄 AC-Flow vs ORW-CFM-W2</h2>
+  <div class="compare-cards">
+    <div class="cc cc-old">
+      <h3>ORW-CFM-W2 (ICLR 2025)</h3>
+      <ul>
+        <li>Outcome reward only</li>
+        <li>No intermediate value learning</li>
+        <li>Credit assignment challenge</li>
+        <li>First online RLHF for flow matching</li>
+      </ul>
+    </div>
+    <div class="cc cc-new">
+      <h3>AC-Flow (This Work)</h3>
+      <ul>
+        <li>Intermediate feedback + actor-critic</li>
+        <li>Stable value learning via reward shaping</li>
+        <li>Dual-stability prevents collapse</li>
+        <li>SOTA on SD3 with even less data</li>
+      </ul>
+    </div>
+  </div>
+  <p style="font-size:0.85em;color:#666;">AC-Flow generalizes ORW-CFM-W2 — the critic weighting scheme subsumes reward-weighted methods as a special case.</p>
+</section>
+
+<section>
+  <h2>📖 Cite This Paper</h2>
+  <div class="cite-box">
+@article{fan2025acflow,<br>
+&nbsp;&nbsp;title   = {Fine-tuning Flow Matching Generative Models with Intermediate Feedback},<br>
+&nbsp;&nbsp;author  = {Jiajun Fan and Chaoran Cheng and Shuaike Shen<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and Xiangxin Zhou and Ge Liu},<br>
+&nbsp;&nbsp;journal = {arXiv preprint arXiv:2510.18072},<br>
+&nbsp;&nbsp;year    = {2025},<br>
+&nbsp;&nbsp;url     = {https://arxiv.org/abs/2510.18072}<br>
+}
+  </div>
+</section>
+</div>
+<footer>
+  <p>AC-Flow · arXiv 2025 (Under Review) &nbsp;|&nbsp; <a href="/">Jiajun Fan</a> · UIUC &nbsp;|&nbsp; <a href="https://arxiv.org/abs/2510.18072">arXiv</a></p>
+</footer>
+</body>
+</html>

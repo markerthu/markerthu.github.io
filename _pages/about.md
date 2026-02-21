@@ -148,7 +148,7 @@ redirect_from:
 
 <!-- Intro -->
 <p class="tagline">
-I am a Computer Science Ph.D. student at <strong>UIUC</strong>, advised by Prof. <a href="https://geliu.cs.illinois.edu/">Ge Liu</a>. My research focuses on <strong>autonomous RL post-training for large generative models</strong> — making diffusion/flow models and multi-modal reasoning LLMs continuously self-improve with less and less human intervention. Previously, I pushed RL to <strong>superhuman performance</strong>: breaking 24 Atari world records and outperforming Agent57 with 500× less data.
+I am a Computer Science Ph.D. student at <strong>UIUC</strong>, advised by Prof. <a href="https://geliu.web.illinois.edu/">Ge Liu</a>. My research focuses on <strong>autonomous RL post-training for large generative models</strong> — making diffusion/flow models and multi-modal reasoning LLMs continuously self-improve with less and less human intervention. Previously, I pushed RL to <strong>superhuman performance</strong>: breaking 24 Atari world records and outperforming Agent57 with 500× less data.
 </p>
 
 <div class="internship-banner">
@@ -260,6 +260,18 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>, advised by Prof.
 </div>
 
 <div class="pub-entry">
+  <div class="pub-left"><span class="pb pb-arxiv">Preprint</span><span class="pub-year">2025</span></div>
+  <div class="pub-right">
+    <div class="pub-title">
+      <a href="https://arxiv.org/abs/2510.18072">Fine-tuning Flow Matching Generative Models with Intermediate Feedback</a>
+      <a class="pub-project" href="/projects/ac-flow/">Project Page</a>
+    </div>
+    <div class="pub-authors"><strong>J. Fan*</strong>, C. Cheng, S. Shen, X. Zhou, G. Liu &nbsp;·&nbsp; <em>Under Review</em></div>
+    <div class="pub-desc">AC-Flow: actor-critic with intermediate feedback for flow matching — reward shaping + dual-stability + Wasserstein regularization. Robust fine-tuning on SD3 without collapse.</div>
+  </div>
+</div>
+
+<div class="pub-entry">
   <div class="pub-left"><span class="pb pb-journal">TPAMI 2025</span><span class="pub-year">2025</span></div>
   <div class="pub-right">
     <div class="pub-title"><a href="https://arxiv.org/abs/2407.05010">PRANCE: Joint Token-Optimization and Structural Channel-Pruning for Adaptive ViT Inference</a></div>
@@ -283,7 +295,10 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>, advised by Prof.
 <div class="pub-entry">
   <div class="pub-left"><span class="pb pb-icml">ICML 2022</span><span class="pub-year">2022</span></div>
   <div class="pub-right">
-    <div class="pub-title"><a href="https://proceedings.mlr.press/v162/fan22c.html">Generalized Data Distribution Iteration</a></div>
+    <div class="pub-title">
+      <a href="https://proceedings.mlr.press/v162/fan22c.html">Generalized Data Distribution Iteration</a>
+      <a class="pub-project" href="/projects/gdi/">Project Page</a>
+    </div>
     <div class="pub-authors"><strong>J. Fan*</strong>, C. Xiao</div>
     <div class="pub-desc">GDI: optimizing the data distribution is the key to superhuman RL efficiency. Unified framework for diverse RL algorithms.</div>
     <div class="pub-hl">📈 Agent57 beaten with 500× less data &amp; 2× avg performance</div>

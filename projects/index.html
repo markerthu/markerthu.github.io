@@ -6,7 +6,7 @@ layout: null
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Projects — Jiajun Fan</title>
+<title>Research Projects — Jiajun Fan</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -16,30 +16,36 @@ a{text-decoration:none}
 .topnav{background:#0d1b2a;padding:12px 24px;display:flex;align-items:center;gap:12px;font-size:0.84em}
 .topnav a{color:#7eb8f7;font-weight:600}
 .topnav span{color:#4a6280}
-.hero{background:linear-gradient(135deg,#0d1b2a,#1a3a5c);padding:48px 24px 40px;text-align:center}
-.hero h1{font-size:2em;font-weight:800;color:#fff;margin-bottom:10px}
+.hero{background:linear-gradient(135deg,#0d1b2a,#1a3a5c);padding:52px 24px 44px;text-align:center}
+.hero h1{font-size:2.1em;font-weight:800;color:#fff;margin-bottom:10px}
 .hero p{color:#90caf9;font-size:0.95em}
-.container{max-width:900px;margin:0 auto;padding:40px 24px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px}
-.project-card{background:#fff;border-radius:14px;border:1.5px solid #e0e8f0;overflow:hidden;transition:transform .2s,box-shadow .2s}
+.container{max-width:960px;margin:0 auto;padding:40px 24px}
+.year-group h3{font-size:0.78em;font-weight:800;color:#888;text-transform:uppercase;letter-spacing:.1em;margin:32px 0 14px;padding-bottom:6px;border-bottom:1px solid #e0e0e0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;margin-bottom:4px}
+.project-card{background:#fff;border-radius:14px;border:1.5px solid #e0e8f0;overflow:hidden;transition:transform .2s,box-shadow .2s;display:flex;flex-direction:column}
 .project-card:hover{transform:translateY(-4px);box-shadow:0 8px 28px rgba(21,101,192,.15)}
-.card-header{padding:20px;border-bottom:1px solid #f0f4ff}
-.venue-tag{display:inline-block;padding:3px 10px;border-radius:20px;font-size:0.72em;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px}
-.vt-iclr{background:#1565c0;color:#fff}
-.vt-neurips{background:#6a1b9a;color:#fff}
-.vt-oral{background:#1b5e20;color:#fff}
-.card-header h2{font-size:0.95em;font-weight:800;color:#1a1a2e;line-height:1.35;margin-bottom:8px}
-.card-header .authors{font-size:0.78em;color:#888}
+.card-header{padding:18px 20px 14px;flex:1}
+.venue-tag{display:inline-block;padding:3px 10px;border-radius:20px;font-size:0.7em;font-weight:800;letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px}
+.vt-iclr26{background:#1565c0;color:#fff}
+.vt-neurips25{background:#6a1b9a;color:#fff}
+.vt-iclr25{background:#1976d2;color:#fff}
+.vt-icml22{background:#b71c1c;color:#fff}
+.vt-iclr23{background:#1b5e20;color:#fff}
+.vt-oral{display:inline-block;background:#ffd700;color:#3a2800;padding:2px 7px;border-radius:8px;font-size:.72em;font-weight:900;margin-left:5px}
+.vt-preprint{background:#546e7a;color:#fff}
+.card-header h2{font-size:0.92em;font-weight:800;color:#1a1a2e;line-height:1.4;margin-bottom:7px}
+.card-header .authors{font-size:0.76em;color:#888}
 .card-header .authors strong{color:#555}
-.card-body{padding:16px 20px}
-.card-body p{font-size:0.83em;color:#555;line-height:1.55;margin-bottom:12px}
-.highlight-tag{display:inline-block;background:#fff8e1;color:#5a4000;padding:2px 8px;border-radius:4px;font-size:0.76em;font-weight:700;border-left:2px solid #ffa000;margin-bottom:12px}
-.card-links{display:flex;gap:8px;flex-wrap:wrap}
-.cl{padding:5px 12px;border-radius:6px;font-size:0.78em;font-weight:700;transition:opacity .2s}
+.card-body{padding:0 20px 16px}
+.hl-tag{display:inline-block;background:#fff8e1;color:#5a4000;padding:2px 8px;border-radius:4px;font-size:0.75em;font-weight:700;border-left:2px solid #ffa000;margin-bottom:10px;line-height:1.5}
+.card-body p{font-size:0.82em;color:#555;line-height:1.5;margin-bottom:12px}
+.card-links{display:flex;gap:7px;flex-wrap:wrap}
+.cl{padding:5px 13px;border-radius:6px;font-size:0.77em;font-weight:700;transition:opacity .2s}
 .cl:hover{opacity:.8}
 .cl-project{background:#1565c0;color:#fff}
 .cl-paper{background:#e3f2fd;color:#0d47a1}
-footer{background:#0d1b2a;color:#6a9fc8;text-align:center;padding:24px;font-size:0.84em}
+.cl-arxiv{background:#fce4ec;color:#c62828}
+footer{background:#0d1b2a;color:#6a9fc8;text-align:center;padding:24px;font-size:.84em}
 footer a{color:#7eb8f7}
 @media(max-width:520px){.grid{grid-template-columns:1fr}}
 </style>
@@ -48,83 +54,130 @@ footer a{color:#7eb8f7}
 <div class="topnav">
   <a href="/">← Jiajun Fan</a>
   <span>/</span>
+  <a href="/publications/">Publications</a>
+  <span>/</span>
   <span style="color:#b0c8e8;">Projects</span>
 </div>
 <div class="hero">
   <h1>Research Projects</h1>
-  <p>Selected project pages for recent publications</p>
+  <p>Project pages for selected publications — with method overview, results, and BibTeX</p>
 </div>
 <div class="container">
-  <div class="grid">
 
-    <div class="project-card">
-      <div class="card-header">
-        <span class="venue-tag vt-iclr">ICLR 2026</span>
-        <h2>CESAR: Audio LLM Reasoning via Process Rewards</h2>
-        <div class="authors"><strong>J. Fan*</strong>, R. Ren, J. Li, et al.</div>
-      </div>
-      <div class="card-body">
-        <div class="highlight-tag">🏆 SOTA MMAU · Beats Gemini 2.5 Pro</div>
-        <p>Resolves test-time inverse scaling in Audio LLMs by rewarding the reasoning process, not just outcomes.</p>
-        <div class="card-links">
-          <a class="cl cl-project" href="/projects/cesar/">Project Page</a>
-          <a class="cl cl-paper" href="https://openreview.net/forum?id=DUr48hxO2h">Paper</a>
-        </div>
+<div class="year-group"><h3>2026</h3></div>
+<div class="grid">
+  <div class="project-card">
+    <div class="card-header">
+      <span class="venue-tag vt-iclr26">ICLR 2026</span>
+      <h2>CESAR: Audio LLM Reasoning via Process Rewards</h2>
+      <div class="authors"><strong>J. Fan*</strong>, R. Ren, J. Li, R. Pandey, P.G. Shivakumar, Y. Gu, A. Gandhe, G. Liu, I. Bulyko</div>
+    </div>
+    <div class="card-body">
+      <div class="hl-tag">🏆 SOTA MMAU · Beats Gemini 2.5 Pro &amp; GPT-4o Audio</div>
+      <p>Resolves test-time inverse scaling in Audio LLMs by rewarding the reasoning process.</p>
+      <div class="card-links">
+        <a class="cl cl-project" href="/projects/cesar/">Project Page</a>
+        <a class="cl cl-paper" href="https://openreview.net/forum?id=DUr48hxO2h">OpenReview</a>
+        <a class="cl cl-arxiv" href="https://arxiv.org/abs/2510.20867">arXiv</a>
       </div>
     </div>
-
-    <div class="project-card">
-      <div class="card-header">
-        <span class="venue-tag vt-neurips">NeurIPS 2025</span>
-        <h2>ADRPO: Adaptive Divergence for Generative Models</h2>
-        <div class="authors"><strong>J. Fan*</strong>, T. Wei, C. Cheng, Y. Chen, G. Liu</div>
-      </div>
-      <div class="card-body">
-        <div class="highlight-tag">🚀 2B model surpasses 4.8B & 12B models</div>
-        <p>Sample-level adaptive KL control — high-value samples explore more, poor samples stay constrained.</p>
-        <div class="card-links">
-          <a class="cl cl-project" href="/projects/adrpo/">Project Page</a>
-          <a class="cl cl-paper" href="https://openreview.net/forum?id=aXO0xg0ttW">Paper</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="project-card">
-      <div class="card-header">
-        <span class="venue-tag vt-iclr">ICLR 2025</span>
-        <h2>ORW-CFM-W2: Flow Matching Self-Evolution</h2>
-        <div class="authors"><strong>J. Fan*</strong>, S. Shen, C. Cheng, Y. Chen, C. Liang, G. Liu</div>
-      </div>
-      <div class="card-body">
-        <div class="highlight-tag">✨ First online RLHF for flow matching</div>
-        <p>No human-collected data, no mode collapse. W2 regularization keeps generation diverse throughout fine-tuning.</p>
-        <div class="card-links">
-          <a class="cl cl-project" href="/projects/orw-cfm-w2/">Project Page</a>
-          <a class="cl cl-paper" href="https://openreview.net/forum?id=2IoFFexvuw">Paper</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="project-card">
-      <div class="card-header">
-        <span class="venue-tag vt-oral">ICLR 2023 Oral ⭐</span>
-        <h2>LBC: Breaking 24 Atari World Records</h2>
-        <div class="authors"><strong>J. Fan*</strong>, Y. Zhuang, Y. Liu, J. Hao, et al.</div>
-      </div>
-      <div class="card-body">
-        <div class="highlight-tag">🏅 Ranked 5/4176 · 10,077% HNS · 500× data efficient</div>
-        <p>Learnable behavior control via hybrid policy mapping + bandit meta-controller. Superhuman RL with a fraction of the data.</p>
-        <div class="card-links">
-          <a class="cl cl-project" href="/projects/lbc/">Project Page</a>
-          <a class="cl cl-paper" href="https://openreview.net/forum?id=FeWvD0L_a4">Paper</a>
-        </div>
-      </div>
-    </div>
-
   </div>
 </div>
+
+<div class="year-group"><h3>2025</h3></div>
+<div class="grid">
+  <div class="project-card">
+    <div class="card-header">
+      <span class="venue-tag vt-neurips25">NeurIPS 2025</span>
+      <h2>ADRPO: Adaptive Divergence for Generative Models</h2>
+      <div class="authors"><strong>J. Fan*</strong>, T. Wei, C. Cheng, Y. Chen, G. Liu</div>
+    </div>
+    <div class="card-body">
+      <div class="hl-tag">🚀 2B SD3 surpasses 4.8B &amp; 12B models</div>
+      <p>Sample-level adaptive KL — high-value samples explore freely, poor samples stay constrained.</p>
+      <div class="card-links">
+        <a class="cl cl-project" href="/projects/adrpo/">Project Page</a>
+        <a class="cl cl-paper" href="https://openreview.net/forum?id=aXO0xg0ttW">OpenReview</a>
+        <a class="cl cl-arxiv" href="https://arxiv.org/abs/2510.18053">arXiv</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="project-card">
+    <div class="card-header">
+      <span class="venue-tag vt-iclr25">ICLR 2025</span>
+      <h2>ORW-CFM-W2: Flow Matching Self-Evolution</h2>
+      <div class="authors"><strong>J. Fan*</strong>, S. Shen, C. Cheng, Y. Chen, C. Liang, G. Liu</div>
+    </div>
+    <div class="card-body">
+      <div class="hl-tag">✨ First online RLHF for flow matching models</div>
+      <p>No human data, no mode collapse. W2 regularization preserves generation diversity.</p>
+      <div class="card-links">
+        <a class="cl cl-project" href="/projects/orw-cfm-w2/">Project Page</a>
+        <a class="cl cl-paper" href="https://openreview.net/forum?id=2IoFFexvuw">OpenReview</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="project-card">
+    <div class="card-header">
+      <span class="venue-tag vt-preprint">Preprint 2025</span>
+      <h2>AC-Flow: Actor-Critic for Flow Matching</h2>
+      <div class="authors"><strong>J. Fan*</strong>, C. Cheng, S. Shen, X. Zhou, G. Liu</div>
+    </div>
+    <div class="card-body">
+      <div class="hl-tag">📝 Under Review</div>
+      <p>Intermediate feedback + dual-stability for robust flow matching fine-tuning on SD3.</p>
+      <div class="card-links">
+        <a class="cl cl-project" href="/projects/ac-flow/">Project Page</a>
+        <a class="cl cl-arxiv" href="https://arxiv.org/abs/2510.18072">arXiv</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="year-group"><h3>2023</h3></div>
+<div class="grid">
+  <div class="project-card">
+    <div class="card-header">
+      <span class="venue-tag vt-iclr23">ICLR 2023</span>
+      <span class="vt-oral">⭐ Oral · 5/4176</span>
+      <h2 style="margin-top:8px;">LBC: Breaking 24 Atari World Records</h2>
+      <div class="authors"><strong>J. Fan*</strong>, Y. Zhuang, Y. Liu, J. Hao, B. Wang, J. Zhu, H. Wang, S.-T. Xia</div>
+    </div>
+    <div class="card-body">
+      <div class="hl-tag">🏅 10,077% HNS · 24 records · 500× data efficient</div>
+      <p>Learnable behavior control via hybrid policy mapping + bandit meta-controller.</p>
+      <div class="card-links">
+        <a class="cl cl-project" href="/projects/lbc/">Project Page</a>
+        <a class="cl cl-paper" href="https://openreview.net/forum?id=FeWvD0L_a4">OpenReview</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="year-group"><h3>2022</h3></div>
+<div class="grid">
+  <div class="project-card">
+    <div class="card-header">
+      <span class="venue-tag vt-icml22">ICML 2022</span>
+      <h2>GDI: Generalized Data Distribution Iteration</h2>
+      <div class="authors"><strong>J. Fan*</strong>, C. Xiao</div>
+    </div>
+    <div class="card-body">
+      <div class="hl-tag">📈 22 world records · 9,620% HNS · 500× vs Agent57</div>
+      <p>Unified RL framework showing data distribution is the key to superhuman efficiency.</p>
+      <div class="card-links">
+        <a class="cl cl-project" href="/projects/gdi/">Project Page</a>
+        <a class="cl cl-paper" href="https://proceedings.mlr.press/v162/fan22c.html">PMLR</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
 <footer>
-  <p><a href="/">Jiajun Fan</a> · UIUC · jiajunfan.com</p>
+  <p><a href="/">Jiajun Fan</a> · UIUC · <a href="/publications/">All Publications</a></p>
 </footer>
 </body>
 </html>
