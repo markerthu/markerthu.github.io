@@ -3,9 +3,9 @@ title: "Variational Supervised Contrastive Learning"
 collection: publications
 permalink: /publication/2025-06-02-VSCL-NeurIPS2025
 date: 2025-06-02
-venue: 'The Thirty-Ninth Annual Conference on Neural Information Processing Systems 2025 (NeurIPS 2025)'
-paperurl: ''
-citation: 'Wang, Z., Jiajun Fan, et al. &quot;Variational Supervised Contrastive Learning.&quot; NeurIPS 2025.'
+venue: 'The Thirty-Ninth Annual Conference on Neural Information Processing Systems (<strong>NeurIPS 2025</strong>)'
+paperurl: 'https://openreview.net/forum?id=uOOlHOq500'
+citation: 'Ziwen Wang, Jiajun Fan, Thao Nguyen, Heng Ji, Ge Liu. &quot;Variational Supervised Contrastive Learning.&quot; NeurIPS 2025.'
 ---
 
-We propose a variational framework for supervised contrastive learning that provides principled uncertainty estimates while maintaining strong discriminative performance.
+We propose VarCon, reformulating supervised contrastive learning as variational inference over latent class variables. Achieves SOTA 79.36% Top-1 on ImageNet-1K with ResNet-50, with superior embedding space organization and few-shot robustness.

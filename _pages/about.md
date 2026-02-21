@@ -43,43 +43,43 @@ I am a Computer Science Ph.D. student at the **University of Illinois Urbana-Cha
 
 <div class="pub-entry">
 <span class="pub-badge badge-conf">ICLR 2026</span>
-<strong>Incentivizing Consistent, Effective and Scalable Reasoning Capability in Audio LLMs via Reasoning Process Rewards</strong><br>
+<strong><a href="https://openreview.net/forum?id=DUr48hxO2h">Incentivizing Consistent, Effective and Scalable Reasoning Capability in Audio LLMs via Reasoning Process Rewards</a></strong><br>
 <span class="venue">J. Fan*, R. Ren, J. Li, R. Pandey, P.G. Shivakumar, Y. Gu, A. Gandhe, G. Liu, I. Bulyko &nbsp;·&nbsp; ICLR 2026</span><br>
 Proposed CESAR: online RL with multi-faceted process rewards that resolves test-time inverse scaling in Audio LLMs. Achieves SOTA on MMAU, outperforming Gemini 2.5 Pro and GPT-4o Audio.
 </div>
 
 <div class="pub-entry">
 <span class="pub-badge badge-conf">NeurIPS 2025</span>
-<strong>Adaptive Divergence Regularized Policy Optimization for Fine-tuning Generative Models</strong><br>
-<span class="venue">J. Fan*, et al. &nbsp;·&nbsp; NeurIPS 2025</span><br>
-Adaptive KL control for collapse-free, continuous post-training of generative models — no manual divergence tuning required.
+<strong><a href="https://openreview.net/forum?id=aXO0xg0ttW">Adaptive Divergence Regularized Policy Optimization for Fine-tuning Generative Models</a></strong><br>
+<span class="venue">J. Fan*, T. Wei, C. Cheng, Y. Chen, G. Liu &nbsp;·&nbsp; NeurIPS 2025</span><br>
+Adaptive KL control for collapse-free, continuous post-training of generative models. Enables a 2B SD3 model to surpass 4.8B/12B models; generalizes to LLMs and multimodal reasoning.
 </div>
 
 <div class="pub-entry">
 <span class="pub-badge badge-conf">ICLR 2025</span>
-<strong>Online Reward-Weighted Fine-Tuning of Flow Matching with Wasserstein Regularization</strong><br>
-<span class="venue">J. Fan*, et al. &nbsp;·&nbsp; ICLR 2025</span><br>
+<strong><a href="https://openreview.net/forum?id=2IoFFexvuw">Online Reward-Weighted Fine-Tuning of Flow Matching with Wasserstein Regularization</a></strong><br>
+<span class="venue">J. Fan*, S. Shen, C. Cheng, Y. Chen, C. Liang, G. Liu &nbsp;·&nbsp; ICLR 2025</span><br>
 First theoretically-grounded framework for continuous self-evolution of flow matching models. Enables training without human-collected data; validated on Stable Diffusion 3.
 </div>
 
 <div class="pub-entry">
 <span class="pub-badge badge-journal">TPAMI 2025</span>
-<strong>PRANCE: Joint Token-Optimization and Structural Channel-Pruning for Adaptive ViT Inference</strong><br>
+<strong><a href="https://arxiv.org/abs/2407.05010">PRANCE: Joint Token-Optimization and Structural Channel-Pruning for Adaptive ViT Inference</a></strong><br>
 <span class="venue">Y. Li, C. Tang, Y. Meng, J. Fan, et al. &nbsp;·&nbsp; IEEE TPAMI 2025</span>
 </div>
 
 <div class="pub-entry">
 <span class="pub-badge badge-oral">ICLR 2023 Oral</span>
-<strong>Learnable Behavior Control: Breaking Atari Human World Records via Sample-Efficient Behavior Selection</strong><br>
-<span class="venue">J. Fan*, et al. &nbsp;·&nbsp; ICLR 2023 — Oral Presentation (Top 5 / 4176)</span><br>
-First demonstration of MoE advantages in RL. Broke 24 human world records with 500× less data than prior SOTA.
+<strong><a href="https://openreview.net/forum?id=FeWvD0L_a4">Learnable Behavior Control: Breaking Atari Human World Records via Sample-Efficient Behavior Selection</a></strong><br>
+<span class="venue">J. Fan*, Y. Zhuang, Y. Liu, J. Hao, B. Wang, J. Zhu, H. Wang, S.-T. Xia &nbsp;·&nbsp; ICLR 2023 — Notable Top 5%</span><br>
+Broke 24 human world records; 10077% mean human normalized score within 1B frames with exceptional sample efficiency.
 </div>
 
 <div class="pub-entry">
 <span class="pub-badge badge-conf">ICML 2022</span>
-<strong>Generalized Data Distribution Iteration</strong><br>
+<strong><a href="https://proceedings.mlr.press/v162/fan22c.html">Generalized Data Distribution Iteration</a></strong><br>
 <span class="venue">J. Fan*, C. Xiao &nbsp;·&nbsp; ICML 2022</span><br>
-First theoretical proof of the importance of data distribution optimization in RL. Outperformed Agent57 with 500× less data.
+First theoretical proof of the importance of data distribution optimization in RL. Outperformed Agent57 with 500× less data and 2× average performance.
 </div>
 
 ---

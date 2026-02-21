@@ -3,9 +3,9 @@ title: "Learnable Behavior Control: Breaking Atari Human World Records via Sampl
 collection: publications
 permalink: /publication/2023-01-01-Learnable-Behavior-Control
 date: 2023-01-01
-venue: 'International Conference on Learning Representations 2023 (ICLR 2023), <strong>Oral Presentation (Top 5/4176)</strong>'
-paperurl: 'https://openreview.net/forum?id=9mrF3MPEDk9'
-citation: 'Jiajun Fan, et al. &quot;Learnable Behavior Control: Breaking Atari Human World Records via Sample-Efficient Behavior Selection.&quot; ICLR 2023, <em>oral presentation</em>, ranked 5/4176.'
+venue: 'International Conference on Learning Representations 2023 (<strong>ICLR 2023, Oral — Notable Top 5%</strong>)'
+paperurl: 'https://openreview.net/forum?id=FeWvD0L_a4'
+citation: 'Jiajun Fan, Yuzheng Zhuang, Yuecheng Liu, Jianye Hao, Bin Wang, Jiangcheng Zhu, Hao Wang, Shu-Tao Xia. &quot;Learnable Behavior Control: Breaking Atari Human World Records via Sample-Efficient Behavior Selection.&quot; ICLR 2023, oral (ranked 5/4176).'
 ---
 
-We introduce a unified framework called LBC (Learnable Behavior Control) to achieve behavior control in RL. LBC surpassed 24 human world records and attained the pinnacle of performance among reinforcement learning algorithms across most tasks.
+We propose LBC (Learnable Behavior Control), a unified framework enabling significantly enlarged behavior selection space via a hybrid behavior mapping. Our agents achieved 10077.52% mean human normalized score and surpassed 24 human world records within 1B training frames, demonstrating SOTA performance with exceptional sample efficiency.
