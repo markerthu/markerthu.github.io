@@ -86,9 +86,15 @@ redirect_from:
 /* ── Research interest cards ── */
 .research-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 14px;
   margin-bottom: 1.5em;
+}
+@media (max-width: 760px) {
+  .research-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) {
+  .research-grid { grid-template-columns: 1fr; }
 }
 .research-card {
   background: #fff;
@@ -204,14 +210,18 @@ redirect_from:
   .stats-row { gap: 8px; }
   .stat-card { flex: 1 1 100px; padding: 10px 12px; }
   .stat-number { font-size: 1.5em; }
-  .research-grid { grid-template-columns: 1fr 1fr; }
   .pub-entry { flex-direction: column; gap: 6px; }
   .pub-left { flex-direction: row; }
+}
+@media (max-width: 600px) {
+  div[style*="grid-template-columns:1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
 }
 </style>
 
 <p class="tagline">
-I am a Computer Science Ph.D. student at the <strong>University of Illinois Urbana-Champaign (UIUC)</strong>, advised by Prof. <a href="https://illinois.edu/">Ge Liu</a>. My research sits at the frontier of <strong>autonomous RL post-training for large generative models</strong> — spanning diffusion/flow models and multi-modal reasoning LLMs. The central thread: <em>progressively eliminating human intervention</em> from the post-training pipeline while keeping models stable, diverse, and continuously self-improving.
+I am a Computer Science Ph.D. student at the <strong>University of Illinois Urbana-Champaign (UIUC)</strong>, advised by Prof. <a href="https://geliu.cs.illinois.edu/">Ge Liu</a>. My research sits at the frontier of <strong>autonomous RL post-training for large generative models</strong> — spanning diffusion/flow models and multi-modal reasoning LLMs. The central goal: <em>progressively eliminating human intervention</em> from the AI training pipeline while keeping models stable, diverse, and continuously self-improving. Previously, I pushed RL to <strong>superhuman performance</strong>, breaking 24 Atari world records and outperforming Agent57 with 500× less data.
 </p>
 
 <div class="internship-banner">
@@ -245,6 +255,10 @@ I am a Computer Science Ph.D. student at the <strong>University of Illinois Urba
     <div class="stat-number">4.0</div>
     <div class="stat-label">GPA at UIUC<br><em>Ph.D. Computer Science</em></div>
   </div>
+  <div class="stat-card">
+    <div class="stat-number">200+</div>
+    <div class="stat-label">Google Scholar Citations<br><em>and growing</em></div>
+  </div>
 </div>
 
 <!-- ── Research Interests ── -->
@@ -267,9 +281,9 @@ I am a Computer Science Ph.D. student at the <strong>University of Illinois Urba
     <div class="rc-desc">Autonomous online learning loops that continuously improve without human-collected data — from diffusion models to proteins (ProteinZero).</div>
   </div>
   <div class="research-card">
-    <div class="rc-icon">📐</div>
-    <div class="rc-title">Theoretical RL Foundations</div>
-    <div class="rc-desc">Rigorous mathematical guarantees for convergence, diversity preservation, and data-efficiency in deep RL and RLHF (GDI, W2-bounds).</div>
+    <div class="rc-icon">🎮</div>
+    <div class="rc-title">Superhuman-Level Deep RL</div>
+    <div class="rc-desc">Sample-efficient RL that achieves and exceeds human performance — broke 24 Atari world records with 500× less data than prior SOTA (LBC, GDI).</div>
   </div>
 </div>
 
@@ -374,7 +388,7 @@ I am a Computer Science Ph.D. student at the <strong>University of Illinois Urba
   <div class="pub-right">
     <div class="pub-title"><a href="https://openreview.net/forum?id=2IoFFexvuw">Online Reward-Weighted Fine-Tuning of Flow Matching with Wasserstein Regularization</a></div>
     <div class="pub-authors"><strong>J. Fan*</strong>, S. Shen, C. Cheng, Y. Chen, C. Liang, G. Liu</div>
-    <div class="pub-desc">ORW-CFM-W2: first theoretically-grounded framework for online RLHF of flow matching models. Derives tractable W2-bound guaranteeing collapse-free policy evolution without human-collected data.</div>
+    <div class="pub-desc">ORW-CFM-W2: first online RLHF framework for flow matching models — no human-collected data, no likelihood calculations, no mode collapse. Successfully fine-tunes Stable Diffusion 3 for spatial &amp; compositional tasks.</div>
   </div>
 </div>
 
@@ -411,32 +425,56 @@ I am a Computer Science Ph.D. student at the <strong>University of Illinois Urba
   <div class="pub-right">
     <div class="pub-title"><a href="https://proceedings.mlr.press/v162/fan22c.html">Generalized Data Distribution Iteration</a></div>
     <div class="pub-authors"><strong>J. Fan*</strong>, C. Xiao</div>
-    <div class="pub-desc">GDI: first theoretical demonstration that optimizing data distribution is key to RL efficiency. Provides unified perspective on diverse RL algorithms.</div>
+    <div class="pub-desc">GDI: a new RL paradigm showing that <em>optimizing data distribution</em> is the key to superhuman efficiency — unifying diverse RL algorithms under one framework.</div>
     <div class="pub-highlight">📈 Outperformed Agent57 with 500× less data and 2× average performance</div>
   </div>
 </div>
 
 </div>
 
-<!-- ── Research Philosophy ── -->
-<div class="section-header">💡 Research Philosophy</div>
+<!-- ── Research Vision ── -->
+<div class="section-header">💡 Research Vision</div>
 
 <blockquote style="background:#f8f4ff; border-left:4px solid #7c4dff; border-radius:0 8px 8px 0; padding:16px 20px; color:#333; font-style:normal;">
-<p style="margin:0 0 8px 0; font-weight:700; color:#4a148c;">The Grand Challenge I'm Working On</p>
+<p style="margin:0 0 8px 0; font-weight:700; color:#4a148c;">Making AI Systems That Improve Themselves</p>
 <p style="margin:0; font-size:0.95em; line-height:1.7;">
-Modern AI systems are frozen after training — they can't improve on their own. My research builds the theoretical and algorithmic foundations for <strong>autonomous self-evolution</strong>: AI that continuously learns from its environment, refines its own capabilities, and corrects its own mistakes — without requiring humans to collect new data or hand-craft rewards at every step. The path I'm tracing: <em>from online RL that eliminates human data (ORW-CFM-W2) → adaptive divergence control without KL tuning (ADRPO) → process rewards without annotated reasoning paths (CESAR) → fully self-critiquing models (ongoing)</em>.
+Today's AI is frozen after training. My work pushes toward <strong>AI that never stops getting better</strong> — learning continuously from its environment without humans collecting new data or designing rewards by hand. I'm systematically removing every bottleneck in the post-training pipeline: <em>eliminate human-collected data (ORW-CFM-W2) → remove manual KL tuning (ADRPO) → drop hand-crafted process rewards (CESAR) → fully autonomous self-critique (ongoing)</em>. Each step makes AI more capable and less dependent on human scaffolding.
 </p>
 </blockquote>
+
+<!-- ── Awards & Service ── -->
+<div class="section-header">🏅 Awards &amp; Academic Service</div>
+
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:1.5em;">
+  <div>
+    <p style="font-weight:700; margin-bottom:8px; color:#1a2332;">🎖 Selected Awards</p>
+    <ul style="font-size:0.88em; color:#444; line-height:1.9; padding-left:1.2em; margin:0;">
+      <li>National Scholarship ×2 (Top 1%) — Nankai University</li>
+      <li>Ranked <strong>1st / 83</strong> in major — Nankai University</li>
+      <li>Outstanding Graduates (Top 1%) — Nankai University</li>
+      <li>Tang Lixin Scholarship (Top 1%) — Nankai University</li>
+      <li>GPA <strong>4.0/4.0</strong> — UIUC Ph.D. (ongoing)</li>
+      <li>GPA <strong>3.97/4.0</strong>, Top 1.3% — Tsinghua M.Eng.</li>
+    </ul>
+  </div>
+  <div>
+    <p style="font-weight:700; margin-bottom:8px; color:#1a2332;">🔍 Reviewer</p>
+    <ul style="font-size:0.88em; color:#444; line-height:1.9; padding-left:1.2em; margin:0;">
+      <li>ICLR 2024 · 2025 · <strong>2026</strong></li>
+      <li>NeurIPS 2022 · 2023 · 2024 · <strong>2025</strong></li>
+      <li>ICML 2023 · 2024 · <strong>2025 · 2026</strong></li>
+      <li>CVPR <strong>2026</strong></li>
+      <li>AAAI 2025 · AISTATS 2025 · KDD 2024</li>
+    </ul>
+  </div>
+</div>
 
 <!-- ── Contact ── -->
 <div class="section-header">📬 Contact</div>
 
-<p>
-  📧 <a href="mailto:jiajunf3@illinois.edu">jiajunf3@illinois.edu</a> &nbsp;·&nbsp;
-  🏛 Thomas M. Siebel Center for CS, UIUC, Urbana IL &nbsp;·&nbsp;
-  <a href="files/CV.pdf">CV</a> &nbsp;·&nbsp;
-  <a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&hl=en">Google Scholar</a> &nbsp;·&nbsp;
-  <a href="https://github.com/markerthu">GitHub</a> &nbsp;·&nbsp;
-  <a href="https://www.linkedin.com/in/jiajun-fan-57b12b26b">LinkedIn</a> &nbsp;·&nbsp;
-  <a href="https://orcid.org/0000-0002-0263-2103">ORCID</a>
+<p style="font-size:0.95em;">
+  I'm always happy to discuss research, potential collaborations, or internship opportunities.<br>
+  📧 <a href="mailto:jiajunf3@illinois.edu"><strong>jiajunf3@illinois.edu</strong></a> &nbsp;·&nbsp;
+  🏛 Thomas M. Siebel Center for CS, UIUC &nbsp;·&nbsp;
+  <a href="files/CV.pdf"><strong>CV (PDF)</strong></a>
 </p>
