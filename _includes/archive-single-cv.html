@@ -1,42 +1,27 @@
 {% include base_path %}
 
-{% if post.header.teaser %}
-  {% capture teaser %}{{ post.header.teaser }}{% endcapture %}
-{% else %}
-  {% assign teaser = site.teaser %}
-{% endif %}
-
 {% if post.id %}
   {% assign title = post.title | markdownify | remove: "<p>" | remove: "</p>" %}
 {% else %}
   {% assign title = post.title %}
 {% endif %}
 
-<div class="{{ include.type | default: "list" }}__item">
+<div class="list__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    <li>
-    {% if include.type == "grid" and teaser %}
-      <div class="archive__item-teaser">
-        <img src=
-          {% if teaser contains "://" %}
-            "{{ teaser }}"
-          {% else %}
-            "{{ teaser | prepend: "/images/" | prepend: base_path }}"
-          {% endif %}
-          alt="">
-      </div>
-    {% endif %}
-    <h3 class="archive__item-title" itemprop="headline">
-      {% if post.link %}
-        <a href="{{ post.link }}">{{ title }}</a> <a href="{{ base_path }}{{ post.url }}" rel="permalink"><i class="fa fa-link" aria-hidden="true" title="permalink"></i><span class="sr-only">Permalink</span></a>
-      {% else %}
-        <a href="{{ base_path }}{{ post.url }}" rel="permalink">{{ title }}</a>
+    <li style="list-style:none; margin-bottom:10px; padding:12px 14px; border-left:3px solid #1565c0; background:#f8faff; border-radius:0 8px 8px 0;">
+      <span style="font-weight:700; font-size:0.97em; line-height:1.4;">
+        {% if post.paperurl %}
+          <a href="{{ post.paperurl }}" style="color:#1565c0; text-decoration:none;">{{ title }}</a>
+        {% else %}
+          <a href="{{ base_path }}{{ post.url }}" rel="permalink" style="color:#1565c0; text-decoration:none;">{{ title }}</a>
+        {% endif %}
+      </span>
+      {% if post.venue %}
+        <br><span style="font-size:0.82em; color:#555; font-style:italic;">{{ post.venue }}</span>
       {% endif %}
-    </h3>
-    {% if post.read_time %}
-      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> {% include read-time.html %}</p>
-    {% endif %}
-    {% if post.venue%}<p class="archive__item-excerpt" itemprop="description">{{ post.citation }}</p> {% endif %}
+      {% if post.citation %}
+        <br><span style="font-size:0.80em; color:#777;">{{ post.citation }}</span>
+      {% endif %}
     </li>
- </article>
+  </article>
 </div>
