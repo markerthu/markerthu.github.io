@@ -43,57 +43,130 @@
 
 <style>
   /* ── Typography upgrade ── */
-  body, .page__content, .sidebar {
+  body, .page__content, .sidebar, .author__bio, .author__urls {
     font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
   }
 
   /* ── Author sidebar polished ── */
   .author__avatar img {
     border-radius: 50%;
-    border: 3px solid #4a90d9;
-    box-shadow: 0 4px 16px rgba(74,144,217,0.18);
-    transition: transform 0.3s;
+    border: 3px solid #1565c0;
+    box-shadow: 0 4px 20px rgba(21,101,192,0.22);
+    transition: transform 0.3s, box-shadow 0.3s;
   }
-  .author__avatar img:hover { transform: scale(1.04); }
-  .author__name { font-size: 1.15em; font-weight: 700; letter-spacing: -0.01em; }
-  .author__bio { font-size: 0.92em; color: #555; line-height: 1.5; }
-  .author__urls a { font-size: 0.85em; }
+  .author__avatar img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 28px rgba(21,101,192,0.3);
+  }
+  .author__name {
+    font-size: 1.18em;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #1a2332;
+  }
+  .author__bio {
+    font-size: 0.88em;
+    color: #444;
+    line-height: 1.6;
+    margin-top: 6px;
+  }
+  .author__urls-wrapper .btn {
+    font-size: 0.82em;
+    padding: 4px 8px;
+  }
+  .author__urls a {
+    font-size: 0.84em;
+    color: #1565c0 !important;
+    transition: color 0.2s;
+  }
+  .author__urls a:hover { color: #0d47a1 !important; }
 
   /* ── Masthead / nav ── */
-  .masthead { border-bottom: 2px solid #4a90d9; }
+  .masthead {
+    border-bottom: 3px solid #1565c0;
+    background: #fff;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
   .masthead__inner-wrap { max-width: 1280px; }
-  .greedy-nav a { font-weight: 500; }
-  .greedy-nav a:hover { color: #4a90d9 !important; }
+  .site-title {
+    font-weight: 800 !important;
+    letter-spacing: -0.02em;
+    color: #1a2332 !important;
+  }
+  .greedy-nav a {
+    font-weight: 600;
+    font-size: 0.9em;
+    letter-spacing: 0.01em;
+    color: #333 !important;
+    transition: color 0.2s;
+  }
+  .greedy-nav a:hover { color: #1565c0 !important; }
+  .greedy-nav .visible-links a::before {
+    background: #1565c0;
+  }
 
-  /* ── Page content ── */
-  .page__content h2 { font-weight: 700; margin-top: 1.8em; }
-  .page__content h3 { font-weight: 600; }
-  .page__content a { color: #2a6db5; }
+  /* ── Page layout ── */
+  .page__content {
+    font-size: 0.95em;
+    line-height: 1.7;
+  }
+  .page__content h2 {
+    font-weight: 800;
+    font-size: 1.3em;
+    color: #1a2332;
+    margin-top: 1.8em;
+    letter-spacing: -0.01em;
+  }
+  .page__content h3 { font-weight: 700; color: #1a2332; }
+  .page__content a { color: #1565c0; }
   .page__content a:hover { text-decoration: underline; }
+  .page__content p { margin-bottom: 1em; }
 
-  /* ── Publications archive ── */
-  .archive__item-title { font-size: 1.0em; font-weight: 600; }
-  .archive__item-excerpt { font-size: 0.88em; color: #555; }
-  .list__item { border-bottom: 1px solid #eee; padding: 10px 0; }
+  /* ── Publications archive page ── */
+  .archive__item-title {
+    font-size: 0.98em;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+  .archive__item-title a { color: #1565c0; }
+  .archive__item-excerpt {
+    font-size: 0.85em;
+    color: #555;
+    line-height: 1.5;
+    margin-top: 4px;
+  }
+  .list__item {
+    border-bottom: 1px solid #eef0f3;
+    padding: 12px 0;
+  }
 
-  /* ── Blockquote callout ── */
+  /* ── Blockquote ── */
   .page__content blockquote {
-    background: #f0f7ff;
-    border-left: 4px solid #4a90d9;
-    border-radius: 0 6px 6px 0;
-    padding: 12px 18px;
+    background: #f0f4ff;
+    border-left: 4px solid #1565c0;
+    border-radius: 0 8px 8px 0;
+    padding: 14px 20px;
     color: #333;
     font-size: 0.95em;
+    font-style: normal;
   }
 
   /* ── Footer ── */
-  .page__footer { background: #1a2332; color: #aaa; }
-  .page__footer a { color: #7eb8f7; }
-
-  /* ── Responsive tweaks ── */
-  @media (max-width: 768px) {
-    .pub-entry { margin-bottom: 10px; }
+  .page__footer {
+    background: #0d1b2a;
+    color: #8899aa;
+    border-top: 3px solid #1565c0;
   }
+  .page__footer a { color: #7eb8f7; }
+  .page__footer-follow .social-icons .fa { color: #7eb8f7; }
+
+  /* ── Sidebar wider on xl ── */
+  @media (min-width: 80em) {
+    .sidebar.sticky { padding-top: 2em; }
+  }
+
+  /* ── Smooth scrolling ── */
+  html { scroll-behavior: smooth; }
 </style>
 
 <!-- end custom head snippets -->
