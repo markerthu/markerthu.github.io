@@ -1,0 +1,201 @@
+---
+layout: null
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ADRPO — Adaptive Divergence | NeurIPS 2025</title>
+<meta name="description" content="Adaptive Divergence Regularized Policy Optimization for Fine-tuning Generative Models. NeurIPS 2025.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#fff;color:#1a1a2e;line-height:1.7}
+a{color:#6a1b9a;text-decoration:none}a:hover{text-decoration:underline}
+
+.topnav{background:#1a0030;padding:12px 24px;display:flex;align-items:center;gap:12px;font-size:0.84em}
+.topnav a{color:#ce93d8;font-weight:600}
+.topnav span{color:#4a2060}
+
+.hero{background:linear-gradient(135deg,#1a0030 0%,#4a0080 50%,#1a0050 100%);padding:64px 24px 56px;text-align:center}
+.venue-badge{display:inline-block;background:#7b1fa2;color:#fff;padding:6px 18px;border-radius:24px;font-size:0.82em;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:20px}
+.hero h1{font-size:clamp(1.5em,4vw,2.4em);font-weight:800;color:#fff;line-height:1.25;max-width:800px;margin:0 auto 14px}
+.hero .short{font-size:1.05em;color:#ce93d8;margin-bottom:28px;font-weight:500}
+.authors{font-size:0.88em;color:#c9a8e0;max-width:660px;margin:0 auto 20px;line-height:1.9}
+.authors strong{color:#fff;font-weight:700}
+.affil{font-size:0.8em;color:#9c6fc0;margin-bottom:28px}
+.btn-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:9px 20px;border-radius:8px;font-size:0.85em;font-weight:700;transition:opacity .2s}
+.btn-paper{background:#fff;color:#1a0030}
+.btn-arxiv{background:#e53935;color:#fff}
+.btn-home{background:#37474f;color:#fff}
+.btn:hover{opacity:.85}
+
+.container{max-width:860px;margin:0 auto;padding:0 24px}
+section{padding:52px 0 40px}
+section+section{border-top:1px solid #f0f0f0}
+h2{font-size:1.42em;font-weight:800;color:#1a1a2e;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+h2::after{content:'';flex:1;height:2px;background:linear-gradient(to right,#7b1fa2,transparent);border-radius:1px}
+p{color:#333;margin-bottom:14px;font-size:0.97em}
+
+.tldr{background:#f3e5f5;border-left:4px solid #7b1fa2;border-radius:0 10px 10px 0;padding:16px 22px}
+.tldr strong{color:#4a148c;font-weight:800}
+
+/* Key insight visual */
+.insight-box{background:linear-gradient(135deg,#f3e5f5,#e1bee7);border-radius:12px;padding:20px 24px;margin:20px 0;display:flex;gap:20px;align-items:flex-start}
+.insight-icon{font-size:2.2em;flex-shrink:0}
+.insight-text h3{font-size:0.95em;font-weight:800;color:#4a148c;margin-bottom:6px}
+.insight-text p{font-size:0.87em;color:#444;margin:0;line-height:1.6}
+
+/* Comparison */
+.vs-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0}
+.vs-card{border-radius:10px;padding:18px}
+.vs-bad{background:#fff3e0;border:2px solid #ffcc80}
+.vs-good{background:#e8f5e9;border:2px solid #a5d6a7}
+.vs-card h3{font-size:0.88em;font-weight:800;margin-bottom:8px}
+.vs-bad h3{color:#e65100}
+.vs-good h3{color:#2e7d32}
+.vs-card ul{font-size:0.82em;color:#444;padding-left:1.2em;line-height:1.9;margin:0}
+
+/* Results */
+.results-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;margin:20px 0}
+.result-card{background:linear-gradient(135deg,#4a148c,#7b1fa2);border-radius:12px;padding:16px;text-align:center}
+.result-card .rnum{font-size:1.7em;font-weight:900;color:#fff;line-height:1.1}
+.result-card .rdesc{font-size:0.75em;color:#e1bee7;margin-top:6px;line-height:1.4}
+
+.tag{display:inline-block;padding:2px 10px;border-radius:20px;font-size:0.78em;font-weight:700;margin:3px 3px 0 0}
+.tag-gen{background:#e1bee7;color:#4a148c}
+.tag-llm{background:#e3f2fd;color:#0d47a1}
+.tag-audio{background:#e8f5e9;color:#2e7d32}
+
+footer{background:#1a0030;color:#9c6fc0;text-align:center;padding:28px 24px;font-size:0.84em}
+footer a{color:#ce93d8}
+
+@media(max-width:600px){.vs-grid{grid-template-columns:1fr}.results-grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+
+<div class="topnav">
+  <a href="/">← Jiajun Fan</a>
+  <span>/</span>
+  <a href="/publications/">Publications</a>
+  <span>/</span>
+  <span style="color:#c9a8e0;">ADRPO</span>
+</div>
+
+<div class="hero">
+  <div class="venue-badge">🎉 NeurIPS 2025</div>
+  <h1>Adaptive Divergence Regularized Policy Optimization for Fine-tuning Generative Models</h1>
+  <p class="short"><strong>ADRPO</strong>: Sample-level adaptive KL control — no manual tuning required</p>
+  <div class="authors">
+    <strong>Jiajun Fan</strong>&thinsp;<sup>1</sup>,
+    Tong Wei&thinsp;<sup>1</sup>,
+    Chaoran Cheng&thinsp;<sup>1</sup>,
+    Yuxin Chen&thinsp;<sup>1</sup>,
+    Ge Liu&thinsp;<sup>1</sup>
+  </div>
+  <div class="affil"><sup>1</sup>University of Illinois Urbana-Champaign</div>
+  <div class="btn-row">
+    <a class="btn btn-paper" href="https://openreview.net/forum?id=aXO0xg0ttW">📄 Paper (OpenReview)</a>
+    <a class="btn btn-arxiv" href="https://arxiv.org/abs/2510.18053">arXiv</a>
+    <a class="btn btn-home" href="/">🏠 Author Homepage</a>
+  </div>
+</div>
+
+<div class="container">
+
+<section>
+  <div class="tldr">
+    <strong>TL;DR</strong> — Fixed KL regularization in RLHF creates a dilemma: strong regularization preserves diversity but limits alignment; weak regularization enables better alignment but risks collapse. ADRPO <strong>automatically adapts</strong> the regularization strength at the sample level based on advantage estimates — high-quality samples get freedom to explore, poor samples get stronger constraints.
+  </div>
+</section>
+
+<section>
+  <h2>💡 Key Insight</h2>
+  <div class="insight-box">
+    <div class="insight-icon">⚖️</div>
+    <div class="insight-text">
+      <h3>Not all samples should be treated equally</h3>
+      <p>Existing RLHF methods apply the same divergence regularization to every sample. ADRPO observes that <strong>high-advantage samples</strong> (clearly better than baseline) deserve <strong>less regularization</strong> to fully exploit their quality, while <strong>low-advantage samples</strong> need <strong>stronger regularization</strong> to prevent harmful policy updates. This simple principle unlocks significantly better exploration-exploitation trade-offs.</p>
+    </div>
+  </div>
+  <div class="vs-grid">
+    <div class="vs-card vs-bad">
+      <h3>❌ Fixed KL (ORW-CFM-W2 / PPO)</h3>
+      <ul>
+        <li>Same regularization for all samples</li>
+        <li>Strong KL → conservative, slow progress</li>
+        <li>Weak KL → reward hacking / collapse</li>
+        <li>Manual KL coefficient tuning required</li>
+      </ul>
+    </div>
+    <div class="vs-card vs-good">
+      <h3>✅ ADRPO (Ours)</h3>
+      <ul>
+        <li>Adaptive KL based on advantage estimates</li>
+        <li>High-value samples explore more freely</li>
+        <li>Poor samples kept on a short leash</li>
+        <li>Plug-and-play — no extra networks</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>🌐 Generalization</h2>
+  <p>ADRPO is a universal plug-in that generalizes across <strong>different model types and modalities</strong>:</p>
+  <p>
+    <span class="tag tag-gen">🌊 Flow/Diffusion Models (SD3)</span>
+    <span class="tag tag-llm">🧠 Text LLMs (GRPO)</span>
+    <span class="tag tag-audio">🎵 Audio LLMs</span>
+  </p>
+  <p style="margin-top:14px;">In LLM fine-tuning, ADRPO shows an <strong>emergent ability to escape local optima</strong> through active exploration. In multimodal audio reasoning, it outperforms GRPO through superior step-by-step reasoning.</p>
+</section>
+
+<section>
+  <h2>📊 Results</h2>
+  <div class="results-grid">
+    <div class="result-card">
+      <div class="rnum">2B</div>
+      <div class="rdesc">SD3 model surpasses<br>4.8B &amp; 12B models</div>
+    </div>
+    <div class="result-card">
+      <div class="rnum">&gt;DPO</div>
+      <div class="rdesc">Beats offline DPO<br>in alignment &amp; diversity</div>
+    </div>
+    <div class="result-card">
+      <div class="rnum">&gt;ORW</div>
+      <div class="rdesc">Beats ORW-CFM-W2<br>(fixed regularization)</div>
+    </div>
+    <div class="result-card">
+      <div class="rnum">0</div>
+      <div class="rdesc">Extra networks needed<br>(plug-and-play)</div>
+    </div>
+  </div>
+  <p style="font-size:0.88em;color:#666;">Evaluated on text-to-image generation tasks: attribute binding, semantic consistency, artistic style transfer, and compositional control.</p>
+</section>
+
+<section>
+  <h2>📖 BibTeX</h2>
+  <pre style="background:#f9f5ff;border-radius:8px;padding:16px;font-size:0.82em;overflow-x:auto;border:1px solid #e1bee7;"><code>@inproceedings{fan2025adaptive,
+  title={Adaptive Divergence Regularized Policy Optimization
+         for Fine-tuning Generative Models},
+  author={Jiajun Fan and Tong Wei and Chaoran Cheng
+          and Yuxin Chen and Ge Liu},
+  booktitle={The Thirty-ninth Annual Conference on
+             Neural Information Processing Systems},
+  year={2025},
+  url={https://openreview.net/forum?id=aXO0xg0ttW}
+}</code></pre>
+</section>
+
+</div>
+
+<footer>
+  <p>ADRPO · NeurIPS 2025 &nbsp;|&nbsp; <a href="/">Jiajun Fan</a> · UIUC &nbsp;|&nbsp; <a href="https://openreview.net/forum?id=aXO0xg0ttW">Paper</a></p>
+</footer>
+</body>
+</html>

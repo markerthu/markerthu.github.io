@@ -1,0 +1,196 @@
+---
+layout: null
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ORW-CFM-W2 — Flow Matching RLHF | ICLR 2025</title>
+<meta name="description" content="Online Reward-Weighted Fine-Tuning of Flow Matching with Wasserstein Regularization. ICLR 2025.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#fff;color:#1a1a2e;line-height:1.7}
+a{color:#0277bd;text-decoration:none}a:hover{text-decoration:underline}
+
+.topnav{background:#00162b;padding:12px 24px;display:flex;align-items:center;gap:12px;font-size:0.84em}
+.topnav a{color:#80cbc4;font-weight:600}
+.topnav span{color:#1e4060}
+
+.hero{background:linear-gradient(135deg,#002171 0%,#0d47a1 40%,#00838f 100%);padding:64px 24px 56px;text-align:center}
+.venue-badge{display:inline-block;background:#01579b;color:#fff;padding:6px 18px;border-radius:24px;font-size:0.82em;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:20px}
+.hero h1{font-size:clamp(1.4em,3.8vw,2.3em);font-weight:800;color:#fff;line-height:1.3;max-width:800px;margin:0 auto 12px}
+.hero .short{font-size:1em;color:#80deea;margin-bottom:26px;font-weight:500}
+.authors{font-size:0.88em;color:#b3e5fc;max-width:660px;margin:0 auto 20px;line-height:1.9}
+.authors strong{color:#fff;font-weight:700}
+.affil{font-size:0.8em;color:#5baac8;margin-bottom:28px}
+.btn-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:9px 20px;border-radius:8px;font-size:0.85em;font-weight:700;transition:opacity .2s}
+.btn-paper{background:#fff;color:#002171}
+.btn-arxiv{background:#e53935;color:#fff}
+.btn-home{background:#37474f;color:#fff}
+.btn:hover{opacity:.85}
+
+.container{max-width:860px;margin:0 auto;padding:0 24px}
+section{padding:52px 0 40px}
+section+section{border-top:1px solid #f0f0f0}
+h2{font-size:1.42em;font-weight:800;color:#1a1a2e;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+h2::after{content:'';flex:1;height:2px;background:linear-gradient(to right,#0277bd,transparent);border-radius:1px}
+p{color:#333;margin-bottom:14px;font-size:0.97em}
+
+.tldr{background:#e1f5fe;border-left:4px solid #0277bd;border-radius:0 10px 10px 0;padding:16px 22px}
+.tldr strong{color:#01579b;font-weight:800}
+
+/* Challenges grid */
+.challenge-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:20px 0}
+.challenge-card{background:#fff3e0;border:2px solid #ffb74d;border-radius:10px;padding:16px}
+.challenge-card h3{font-size:0.85em;font-weight:800;color:#e65100;margin-bottom:6px}
+.challenge-card p{font-size:0.8em;color:#555;margin:0;line-height:1.5}
+
+/* Three contributions */
+.contrib-list{counter-reset:contrib;margin:20px 0}
+.contrib-item{display:flex;gap:16px;margin-bottom:18px;align-items:flex-start}
+.contrib-num{width:36px;height:36px;background:linear-gradient(135deg,#0277bd,#00838f);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1em;flex-shrink:0}
+.contrib-text h3{font-size:0.92em;font-weight:800;color:#01579b;margin-bottom:4px}
+.contrib-text p{font-size:0.84em;color:#444;margin:0;line-height:1.6}
+
+/* Results */
+.results-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;margin:20px 0}
+.result-card{background:linear-gradient(135deg,#002171,#0277bd);border-radius:12px;padding:16px;text-align:center}
+.result-card .rnum{font-size:1.6em;font-weight:900;color:#fff;line-height:1.1}
+.result-card .rdesc{font-size:0.75em;color:#b3e5fc;margin-top:6px;line-height:1.4}
+
+footer{background:#00162b;color:#5baac8;text-align:center;padding:28px 24px;font-size:0.84em}
+footer a{color:#80cbc4}
+
+@media(max-width:600px){.challenge-grid{grid-template-columns:1fr}.results-grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+
+<div class="topnav">
+  <a href="/">← Jiajun Fan</a>
+  <span>/</span>
+  <a href="/publications/">Publications</a>
+  <span>/</span>
+  <span style="color:#b3e5fc;">ORW-CFM-W2</span>
+</div>
+
+<div class="hero">
+  <div class="venue-badge">✅ ICLR 2025</div>
+  <h1>Online Reward-Weighted Fine-Tuning of Flow Matching with Wasserstein Regularization</h1>
+  <p class="short"><strong>ORW-CFM-W2</strong>: First online RLHF framework for flow matching models — no human data, no collapse</p>
+  <div class="authors">
+    <strong>Jiajun Fan</strong>&thinsp;<sup>1</sup>,
+    Shuaike Shen&thinsp;<sup>1</sup>,
+    Chaoran Cheng&thinsp;<sup>1</sup>,
+    Yuxin Chen&thinsp;<sup>1</sup>,
+    Chumeng Liang&thinsp;<sup>2</sup>,
+    Ge Liu&thinsp;<sup>1</sup>
+  </div>
+  <div class="affil"><sup>1</sup>University of Illinois Urbana-Champaign &nbsp;&nbsp; <sup>2</sup>CMU</div>
+  <div class="btn-row">
+    <a class="btn btn-paper" href="https://openreview.net/forum?id=2IoFFexvuw">📄 Paper (OpenReview)</a>
+    <a class="btn btn-home" href="/">🏠 Author Homepage</a>
+  </div>
+</div>
+
+<div class="container">
+
+<section>
+  <div class="tldr">
+    <strong>TL;DR</strong> — RL fine-tuning of diffusion models is well-studied, but <strong>flow matching</strong> models (Stable Diffusion 3, Flux) remain underexplored due to unique challenges: no likelihood, policy collapse risk, high compute. ORW-CFM-W2 solves all three — online reward-weighting for alignment, Wasserstein-2 regularization for diversity, and a tractable bound that makes it efficient.
+  </div>
+</section>
+
+<section>
+  <h2>🚧 Why Flow Matching Is Hard to Fine-Tune</h2>
+  <div class="challenge-grid">
+    <div class="challenge-card">
+      <h3>No Likelihood</h3>
+      <p>Unlike diffusion models, flow matching has no tractable likelihood — standard KL regularization cannot be computed directly.</p>
+    </div>
+    <div class="challenge-card">
+      <h3>Policy Collapse</h3>
+      <p>Without diversity constraints, reward maximization causes the model to collapse onto a few high-reward modes, losing generative quality.</p>
+    </div>
+    <div class="challenge-card">
+      <h3>No Human Data</h3>
+      <p>Existing fine-tuning methods require expensive human-curated datasets or preference annotations. ORW-CFM-W2 needs neither.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>⚙️ Three Key Contributions</h2>
+  <div class="contrib-list">
+    <div class="contrib-item">
+      <div class="contrib-num">1</div>
+      <div class="contrib-text">
+        <h3>Online Reward-Weighted Mechanism</h3>
+        <p>Integrates RL into flow matching via reward weighting — guides the model to prioritize high-reward regions in data space, without requiring reward gradients or filtered datasets.</p>
+      </div>
+    </div>
+    <div class="contrib-item">
+      <div class="contrib-num">2</div>
+      <div class="contrib-text">
+        <h3>Wasserstein-2 Regularization</h3>
+        <p>Derives a tractable upper bound for W2 distance in flow matching models — prevents policy collapse and maintains generation diversity throughout continuous optimization.</p>
+      </div>
+    </div>
+    <div class="contrib-item">
+      <div class="contrib-num">3</div>
+      <div class="contrib-text">
+        <h3>Unified RL Perspective</h3>
+        <p>Establishes a connection between flow matching fine-tuning and traditional KL-regularized RL, enabling controllable reward-diversity trade-offs and deeper understanding of the learning behavior.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>📊 Experiments</h2>
+  <div class="results-grid">
+    <div class="result-card">
+      <div class="rnum">SD3</div>
+      <div class="rdesc">Successfully fine-tunes<br>Stable Diffusion 3</div>
+    </div>
+    <div class="result-card">
+      <div class="rnum">0</div>
+      <div class="rdesc">Human-collected data<br>required</div>
+    </div>
+    <div class="result-card">
+      <div class="rnum">✓</div>
+      <div class="rdesc">Spatial understanding<br>&amp; compositional tasks</div>
+    </div>
+    <div class="result-card">
+      <div class="rnum">SOTA</div>
+      <div class="rdesc">Orders of magnitude<br>less data than baselines</div>
+    </div>
+  </div>
+  <p style="font-size:0.88em;color:#666;margin-top:8px;">Tasks: target image generation, image compression, text-image alignment. Consistently achieves optimal policy convergence while allowing controllable diversity-reward trade-offs.</p>
+</section>
+
+<section>
+  <h2>📖 BibTeX</h2>
+  <pre style="background:#e1f5fe;border-radius:8px;padding:16px;font-size:0.82em;overflow-x:auto;border:1px solid #b3e5fc;"><code>@inproceedings{fan2025online,
+  title={Online Reward-Weighted Fine-Tuning of Flow Matching
+         with Wasserstein Regularization},
+  author={Jiajun Fan and Shuaike Shen and Chaoran Cheng
+          and Yuxin Chen and Chumeng Liang and Ge Liu},
+  booktitle={The Thirteenth International Conference on
+             Learning Representations},
+  year={2025},
+  url={https://openreview.net/forum?id=2IoFFexvuw}
+}</code></pre>
+</section>
+
+</div>
+
+<footer>
+  <p>ORW-CFM-W2 · ICLR 2025 &nbsp;|&nbsp; <a href="/">Jiajun Fan</a> · UIUC &nbsp;|&nbsp; <a href="https://openreview.net/forum?id=2IoFFexvuw">Paper</a></p>
+</footer>
+</body>
+</html>

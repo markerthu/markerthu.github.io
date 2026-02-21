@@ -1,0 +1,225 @@
+---
+layout: null
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LBC — 24 Atari World Records | ICLR 2023 Oral</title>
+<meta name="description" content="Learnable Behavior Control: Breaking Atari Human World Records. ICLR 2023 Oral, Top 5/4176.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#fff;color:#1a1a2e;line-height:1.7}
+a{color:#1b5e20;text-decoration:none}a:hover{text-decoration:underline}
+
+.topnav{background:#0a1a0a;padding:12px 24px;display:flex;align-items:center;gap:12px;font-size:0.84em}
+.topnav a{color:#a5d6a7;font-weight:600}
+.topnav span{color:#2a4a2a}
+
+.hero{background:linear-gradient(135deg,#0a1a0a 0%,#1b5e20 40%,#004d40 100%);padding:64px 24px 56px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'🏆';position:absolute;font-size:15em;opacity:0.04;top:-20px;right:-40px;pointer-events:none}
+.venue-badge{display:inline-flex;align-items:center;gap:8px;background:#1b5e20;color:#fff;padding:6px 18px;border-radius:24px;font-size:0.82em;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:20px}
+.oral-star{background:#ffd700;color:#3a2800;padding:2px 10px;border-radius:12px;font-size:0.85em;font-weight:900;margin-left:4px}
+.hero h1{font-size:clamp(1.5em,4vw,2.4em);font-weight:800;color:#fff;line-height:1.25;max-width:800px;margin:0 auto 12px}
+.hero .short{font-size:1em;color:#a5d6a7;margin-bottom:26px;font-weight:500}
+.authors{font-size:0.88em;color:#c8e6c9;max-width:680px;margin:0 auto 20px;line-height:1.9}
+.authors strong{color:#fff;font-weight:700}
+.affil{font-size:0.8em;color:#66bb6a;margin-bottom:28px}
+.btn-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:9px 20px;border-radius:8px;font-size:0.85em;font-weight:700;transition:opacity .2s}
+.btn-paper{background:#fff;color:#0a1a0a}
+.btn-home{background:#37474f;color:#fff}
+.btn:hover{opacity:.85}
+
+/* Records wall */
+.records-wall{background:linear-gradient(135deg,#1b5e20,#004d40);border-radius:16px;padding:28px;margin:24px 0;text-align:center}
+.records-title{color:#a5d6a7;font-size:0.85em;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:16px}
+.records-number{font-size:5em;font-weight:900;color:#ffd700;line-height:1;text-shadow:0 0 40px rgba(255,215,0,0.4)}
+.records-sub{color:#c8e6c9;font-size:1.1em;margin-top:8px;font-weight:600}
+.stats-mini{display:flex;justify-content:center;gap:32px;margin-top:20px;flex-wrap:wrap}
+.sm{text-align:center}
+.sm-num{font-size:1.8em;font-weight:900;color:#fff}
+.sm-label{font-size:0.75em;color:#81c784;margin-top:2px}
+
+.container{max-width:860px;margin:0 auto;padding:0 24px}
+section{padding:52px 0 40px}
+section+section{border-top:1px solid #f0f0f0}
+h2{font-size:1.42em;font-weight:800;color:#1a1a2e;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+h2::after{content:'';flex:1;height:2px;background:linear-gradient(to right,#2e7d32,transparent);border-radius:1px}
+p{color:#333;margin-bottom:14px;font-size:0.97em}
+
+.tldr{background:#e8f5e9;border-left:4px solid #2e7d32;border-radius:0 10px 10px 0;padding:16px 22px}
+.tldr strong{color:#1b5e20;font-weight:800}
+
+/* Method */
+.method-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0}
+.method-card{background:#f1f8e9;border:2px solid #a5d6a7;border-radius:10px;padding:18px}
+.method-card h3{font-size:0.9em;font-weight:800;color:#2e7d32;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.method-card p{font-size:0.82em;color:#444;margin:0;line-height:1.6}
+
+/* Compare table */
+.compare-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:0.87em}
+.compare-table th{background:#1b5e20;color:#fff;padding:10px 14px;text-align:left;font-weight:700}
+.compare-table td{padding:9px 14px;border-bottom:1px solid #e8f5e9}
+.compare-table tr:hover td{background:#f9fbe7}
+.compare-table .highlight td{background:#e8f5e9;font-weight:800;color:#1b5e20}
+.badge-win{background:#e8f5e9;color:#1b5e20;padding:2px 8px;border-radius:4px;font-weight:800;font-size:0.85em}
+.badge-record{background:#ffd700;color:#3a2800;padding:2px 8px;border-radius:4px;font-weight:900;font-size:0.8em}
+
+/* Atari games */
+.games-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px;margin:16px 0}
+.game-pill{background:#e8f5e9;border:1.5px solid #a5d6a7;border-radius:20px;padding:5px 10px;text-align:center;font-size:0.78em;font-weight:700;color:#2e7d32}
+
+footer{background:#0a1a0a;color:#4a7a4a;text-align:center;padding:28px 24px;font-size:0.84em}
+footer a{color:#a5d6a7}
+
+@media(max-width:600px){.method-grid{grid-template-columns:1fr}.stats-mini{gap:20px}}
+</style>
+</head>
+<body>
+
+<div class="topnav">
+  <a href="/">← Jiajun Fan</a>
+  <span>/</span>
+  <a href="/publications/">Publications</a>
+  <span>/</span>
+  <span style="color:#c8e6c9;">LBC</span>
+</div>
+
+<div class="hero">
+  <div class="venue-badge">
+    ICLR 2023
+    <span class="oral-star">⭐ Oral · Ranked 5/4176</span>
+  </div>
+  <h1>Learnable Behavior Control: Breaking Atari Human World Records via Sample-Efficient Behavior Selection</h1>
+  <p class="short">LBC: A unified framework for behavior control in deep RL — superhuman performance with a fraction of the data</p>
+  <div class="authors">
+    <strong>Jiajun Fan</strong>&thinsp;<sup>1</sup>,
+    Yuzheng Zhuang&thinsp;<sup>1</sup>,
+    Yuecheng Liu&thinsp;<sup>1</sup>,
+    Jianye Hao&thinsp;<sup>1</sup>,
+    Bin Wang&thinsp;<sup>1</sup>,
+    Jiangcheng Zhu&thinsp;<sup>1</sup>,
+    Hao Wang&thinsp;<sup>2</sup>,
+    Shu-Tao Xia&thinsp;<sup>1</sup>
+  </div>
+  <div class="affil"><sup>1</sup>Tsinghua University / Huawei Noah's Ark Lab &nbsp;&nbsp; <sup>2</sup>Rutgers University</div>
+  <div class="btn-row">
+    <a class="btn btn-paper" href="https://openreview.net/forum?id=FeWvD0L_a4">📄 Paper (OpenReview)</a>
+    <a class="btn btn-home" href="/">🏠 Author Homepage</a>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- Records wall -->
+<section style="padding-top:40px;">
+  <div class="records-wall">
+    <div class="records-title">World Records Broken</div>
+    <div class="records-number">24</div>
+    <div class="records-sub">Atari Human World Records</div>
+    <div class="stats-mini">
+      <div class="sm"><div class="sm-num">10,077%</div><div class="sm-label">Mean Human-Normalized Score</div></div>
+      <div class="sm"><div class="sm-num">500×</div><div class="sm-label">More Sample-Efficient than Agent57</div></div>
+      <div class="sm"><div class="sm-num">1B</div><div class="sm-label">Training Frames (vs 78B for Agent57)</div></div>
+    </div>
+  </div>
+
+  <div class="tldr">
+    <strong>TL;DR</strong> — Population-based RL methods improve exploration by running diverse policies, but are <em>fundamentally limited by a fixed, predefined population</em>. LBC breaks this limitation by learning a hybrid behavior mapping over all policies, enabling a dramatically enlarged behavior space — and achieves superhuman performance with 500× less data.
+  </div>
+</section>
+
+<section>
+  <h2>🧩 The Core Idea</h2>
+  <p>Population-based methods fix a set of exploratory policies and select between them. LBC instead constructs a <strong>continuous, learnable behavior mapping space</strong> that blends all policies, then uses a <strong>bandit-based meta-controller</strong> to learn which behaviors to select at each moment:</p>
+  <div class="method-grid">
+    <div class="method-card">
+      <h3>📐 Hybrid Behavior Mapping</h3>
+      <p>Instead of selecting from a fixed population, LBC parameterizes a <em>convex combination space</em> over all policies — infinite diversity from a finite set of base agents.</p>
+    </div>
+    <div class="method-card">
+      <h3>🎰 Bandit Meta-Controller</h3>
+      <p>A lightweight bandit algorithm learns which behavior mapping to activate for each episode, balancing exploration across the behavior space with exploitation of known good behaviors.</p>
+    </div>
+    <div class="method-card">
+      <h3>🔗 Off-Policy Integration</h3>
+      <p>LBC is integrated into distributed off-policy actor-critic methods — compatible with existing RL infrastructure without major architectural changes.</p>
+    </div>
+    <div class="method-card">
+      <h3>📊 Unified Perspective</h3>
+      <p>Provides a unified view of diverse RL algorithms as special cases of behavior control, opening new directions for understanding exploration in deep RL.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>🏆 24 World Records Broken</h2>
+  <p>LBC broke <strong>24 Atari human world records</strong> within just 1 billion training frames:</p>
+  <div class="games-grid">
+    <div class="game-pill">Alien 👾</div>
+    <div class="game-pill">Amidar</div>
+    <div class="game-pill">Assault 🔫</div>
+    <div class="game-pill">Asterix ⭐</div>
+    <div class="game-pill">Atlantis 🌊</div>
+    <div class="game-pill">Battle Zone</div>
+    <div class="game-pill">Beam Rider</div>
+    <div class="game-pill">Centipede 🐛</div>
+    <div class="game-pill">Gopher</div>
+    <div class="game-pill">Kangaroo 🦘</div>
+    <div class="game-pill">Krull</div>
+    <div class="game-pill">Ms. Pac-Man</div>
+    <div class="game-pill">Phoenix</div>
+    <div class="game-pill">Q*bert</div>
+    <div class="game-pill">Road Runner 🏎</div>
+    <div class="game-pill">Seaquest 🐠</div>
+    <div class="game-pill">Tutankham</div>
+    <div class="game-pill">Up'n Down</div>
+    <div class="game-pill">Video Pinball</div>
+    <div class="game-pill">Wizard of Wor</div>
+    <div class="game-pill">Yars Revenge</div>
+    <div class="game-pill">Zaxxon</div>
+    <div class="game-pill">+ 2 more</div>
+  </div>
+
+  <table class="compare-table" style="margin-top:20px;">
+    <thead>
+      <tr><th>Method</th><th>Human-Norm. Score</th><th>Frames Used</th><th>World Records</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Agent57 (DeepMind)</td><td>~1,079%</td><td>78 Billion</td><td>0</td></tr>
+      <tr><td>NGU (DeepMind)</td><td>~1,698%</td><td>10 Billion</td><td>0</td></tr>
+      <tr><td>R2D2 (DeepMind)</td><td>~4,421%</td><td>10 Billion</td><td>~3</td></tr>
+      <tr class="highlight">
+        <td><strong>LBC (Ours) 🏆</strong></td>
+        <td><strong>10,077% <span class="badge-win">Best</span></strong></td>
+        <td><strong>1 Billion <span class="badge-win">78× less</span></strong></td>
+        <td><strong>24 <span class="badge-record">Records!</span></strong></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>📖 BibTeX</h2>
+  <pre style="background:#e8f5e9;border-radius:8px;padding:16px;font-size:0.82em;overflow-x:auto;border:1px solid #a5d6a7;"><code>@inproceedings{fan2023learnable,
+  title={Learnable Behavior Control: Breaking Atari Human World Records
+         via Sample-Efficient Behavior Selection},
+  author={Jiajun Fan and Yuzheng Zhuang and Yuecheng Liu and Jianye HAO
+          and Bin Wang and Jiangcheng Zhu and Hao Wang and Shu-Tao Xia},
+  booktitle={The Eleventh International Conference on Learning Representations},
+  year={2023},
+  url={https://openreview.net/forum?id=FeWvD0L_a4}
+}</code></pre>
+</section>
+
+</div>
+
+<footer>
+  <p>LBC · ICLR 2023 Oral (Notable Top 5%, Ranked 5/4176) &nbsp;|&nbsp; <a href="/">Jiajun Fan</a> &nbsp;|&nbsp; <a href="https://openreview.net/forum?id=FeWvD0L_a4">Paper</a></p>
+</footer>
+</body>
+</html>

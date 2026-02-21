@@ -1,0 +1,130 @@
+---
+layout: null
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects — Jiajun Fan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#f8faff;color:#1a1a2e;line-height:1.7}
+a{text-decoration:none}
+.topnav{background:#0d1b2a;padding:12px 24px;display:flex;align-items:center;gap:12px;font-size:0.84em}
+.topnav a{color:#7eb8f7;font-weight:600}
+.topnav span{color:#4a6280}
+.hero{background:linear-gradient(135deg,#0d1b2a,#1a3a5c);padding:48px 24px 40px;text-align:center}
+.hero h1{font-size:2em;font-weight:800;color:#fff;margin-bottom:10px}
+.hero p{color:#90caf9;font-size:0.95em}
+.container{max-width:900px;margin:0 auto;padding:40px 24px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px}
+.project-card{background:#fff;border-radius:14px;border:1.5px solid #e0e8f0;overflow:hidden;transition:transform .2s,box-shadow .2s}
+.project-card:hover{transform:translateY(-4px);box-shadow:0 8px 28px rgba(21,101,192,.15)}
+.card-header{padding:20px;border-bottom:1px solid #f0f4ff}
+.venue-tag{display:inline-block;padding:3px 10px;border-radius:20px;font-size:0.72em;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px}
+.vt-iclr{background:#1565c0;color:#fff}
+.vt-neurips{background:#6a1b9a;color:#fff}
+.vt-oral{background:#1b5e20;color:#fff}
+.card-header h2{font-size:0.95em;font-weight:800;color:#1a1a2e;line-height:1.35;margin-bottom:8px}
+.card-header .authors{font-size:0.78em;color:#888}
+.card-header .authors strong{color:#555}
+.card-body{padding:16px 20px}
+.card-body p{font-size:0.83em;color:#555;line-height:1.55;margin-bottom:12px}
+.highlight-tag{display:inline-block;background:#fff8e1;color:#5a4000;padding:2px 8px;border-radius:4px;font-size:0.76em;font-weight:700;border-left:2px solid #ffa000;margin-bottom:12px}
+.card-links{display:flex;gap:8px;flex-wrap:wrap}
+.cl{padding:5px 12px;border-radius:6px;font-size:0.78em;font-weight:700;transition:opacity .2s}
+.cl:hover{opacity:.8}
+.cl-project{background:#1565c0;color:#fff}
+.cl-paper{background:#e3f2fd;color:#0d47a1}
+footer{background:#0d1b2a;color:#6a9fc8;text-align:center;padding:24px;font-size:0.84em}
+footer a{color:#7eb8f7}
+@media(max-width:520px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="topnav">
+  <a href="/">← Jiajun Fan</a>
+  <span>/</span>
+  <span style="color:#b0c8e8;">Projects</span>
+</div>
+<div class="hero">
+  <h1>Research Projects</h1>
+  <p>Selected project pages for recent publications</p>
+</div>
+<div class="container">
+  <div class="grid">
+
+    <div class="project-card">
+      <div class="card-header">
+        <span class="venue-tag vt-iclr">ICLR 2026</span>
+        <h2>CESAR: Audio LLM Reasoning via Process Rewards</h2>
+        <div class="authors"><strong>J. Fan*</strong>, R. Ren, J. Li, et al.</div>
+      </div>
+      <div class="card-body">
+        <div class="highlight-tag">🏆 SOTA MMAU · Beats Gemini 2.5 Pro</div>
+        <p>Resolves test-time inverse scaling in Audio LLMs by rewarding the reasoning process, not just outcomes.</p>
+        <div class="card-links">
+          <a class="cl cl-project" href="/projects/cesar/">Project Page</a>
+          <a class="cl cl-paper" href="https://openreview.net/forum?id=DUr48hxO2h">Paper</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="card-header">
+        <span class="venue-tag vt-neurips">NeurIPS 2025</span>
+        <h2>ADRPO: Adaptive Divergence for Generative Models</h2>
+        <div class="authors"><strong>J. Fan*</strong>, T. Wei, C. Cheng, Y. Chen, G. Liu</div>
+      </div>
+      <div class="card-body">
+        <div class="highlight-tag">🚀 2B model surpasses 4.8B & 12B models</div>
+        <p>Sample-level adaptive KL control — high-value samples explore more, poor samples stay constrained.</p>
+        <div class="card-links">
+          <a class="cl cl-project" href="/projects/adrpo/">Project Page</a>
+          <a class="cl cl-paper" href="https://openreview.net/forum?id=aXO0xg0ttW">Paper</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="card-header">
+        <span class="venue-tag vt-iclr">ICLR 2025</span>
+        <h2>ORW-CFM-W2: Flow Matching Self-Evolution</h2>
+        <div class="authors"><strong>J. Fan*</strong>, S. Shen, C. Cheng, Y. Chen, C. Liang, G. Liu</div>
+      </div>
+      <div class="card-body">
+        <div class="highlight-tag">✨ First online RLHF for flow matching</div>
+        <p>No human-collected data, no mode collapse. W2 regularization keeps generation diverse throughout fine-tuning.</p>
+        <div class="card-links">
+          <a class="cl cl-project" href="/projects/orw-cfm-w2/">Project Page</a>
+          <a class="cl cl-paper" href="https://openreview.net/forum?id=2IoFFexvuw">Paper</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="card-header">
+        <span class="venue-tag vt-oral">ICLR 2023 Oral ⭐</span>
+        <h2>LBC: Breaking 24 Atari World Records</h2>
+        <div class="authors"><strong>J. Fan*</strong>, Y. Zhuang, Y. Liu, J. Hao, et al.</div>
+      </div>
+      <div class="card-body">
+        <div class="highlight-tag">🏅 Ranked 5/4176 · 10,077% HNS · 500× data efficient</div>
+        <p>Learnable behavior control via hybrid policy mapping + bandit meta-controller. Superhuman RL with a fraction of the data.</p>
+        <div class="card-links">
+          <a class="cl cl-project" href="/projects/lbc/">Project Page</a>
+          <a class="cl cl-paper" href="https://openreview.net/forum?id=FeWvD0L_a4">Paper</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<footer>
+  <p><a href="/">Jiajun Fan</a> · UIUC · jiajunfan.com</p>
+</footer>
+</body>
+</html>

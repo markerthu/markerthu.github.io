@@ -1,0 +1,229 @@
+---
+layout: null
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CESAR — Audio LLM Reasoning | ICLR 2026</title>
+<meta name="description" content="CESAR: Consistent, Effective, and Scalable Audio Reasoners. ICLR 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#fff;color:#1a1a2e;line-height:1.7}
+a{color:#1565c0;text-decoration:none}a:hover{text-decoration:underline}
+
+/* ── Nav ── */
+.topnav{background:#0d1b2a;padding:12px 24px;display:flex;align-items:center;gap:12px;font-size:0.84em}
+.topnav a{color:#7eb8f7;font-weight:600}
+.topnav span{color:#4a6280}
+
+/* ── Hero ── */
+.hero{background:linear-gradient(135deg,#0d1b2a 0%,#1a3a5c 50%,#0d2a4a 100%);padding:64px 24px 56px;text-align:center}
+.venue-badge{display:inline-block;background:#1565c0;color:#fff;padding:6px 18px;border-radius:24px;font-size:0.82em;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:20px}
+.hero h1{font-size:clamp(1.5em,4vw,2.5em);font-weight:800;color:#fff;line-height:1.25;max-width:800px;margin:0 auto 14px}
+.hero .short{font-size:1.1em;color:#90caf9;margin-bottom:28px;font-weight:500}
+.authors{font-size:0.88em;color:#b0c8e8;max-width:700px;margin:0 auto 24px;line-height:1.9}
+.authors strong{color:#fff;font-weight:700}
+.affil{font-size:0.8em;color:#6a9fc8;margin-bottom:28px}
+.btn-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:9px 20px;border-radius:8px;font-size:0.85em;font-weight:700;transition:opacity .2s}
+.btn-paper{background:#fff;color:#0d1b2a}
+.btn-arxiv{background:#e53935;color:#fff}
+.btn-home{background:#37474f;color:#fff}
+.btn:hover{opacity:.85}
+
+/* ── Content ── */
+.container{max-width:860px;margin:0 auto;padding:0 24px}
+section{padding:52px 0 40px}
+section+section{border-top:1px solid #f0f0f0}
+h2{font-size:1.45em;font-weight:800;color:#1a1a2e;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+h2::after{content:'';flex:1;height:2px;background:linear-gradient(to right,#1565c0,transparent);border-radius:1px}
+p{color:#333;margin-bottom:14px;font-size:0.97em}
+
+/* ── TL;DR ── */
+.tldr{background:#e3f2fd;border-left:4px solid #1565c0;border-radius:0 10px 10px 0;padding:16px 22px;margin-bottom:0}
+.tldr strong{color:#0d47a1;font-weight:800}
+
+/* ── Problem visualization ── */
+.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:20px 0}
+.problem-card{background:#fff5f5;border:2px solid #ef9a9a;border-radius:10px;padding:18px}
+.problem-card h3{font-size:0.9em;font-weight:800;color:#c62828;margin-bottom:8px}
+.solution-card{background:#f1f8e9;border:2px solid #a5d6a7;border-radius:10px;padding:18px}
+.solution-card h3{font-size:0.9em;font-weight:800;color:#2e7d32;margin-bottom:8px}
+.problem-card p,.solution-card p{font-size:0.85em;color:#444;margin:0;line-height:1.6}
+
+/* ── Method ── */
+.method-steps{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px;margin:20px 0}
+.step{background:#f8f9ff;border:1.5px solid #c5cae9;border-radius:10px;padding:16px;text-align:center}
+.step .step-num{width:32px;height:32px;background:#1565c0;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:0.9em;margin:0 auto 10px}
+.step h4{font-size:0.84em;font-weight:800;color:#1a237e;margin-bottom:6px}
+.step p{font-size:0.78em;color:#555;margin:0;line-height:1.5}
+
+/* ── Results ── */
+.results-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px;margin:20px 0}
+.result-card{background:linear-gradient(135deg,#1a237e,#1565c0);border-radius:12px;padding:18px;text-align:center}
+.result-card .rnum{font-size:2em;font-weight:900;color:#fff;line-height:1}
+.result-card .rdesc{font-size:0.76em;color:#90caf9;margin-top:6px;line-height:1.4}
+
+.compare-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:0.88em}
+.compare-table th{background:#1a237e;color:#fff;padding:10px 14px;text-align:left;font-weight:700}
+.compare-table td{padding:9px 14px;border-bottom:1px solid #e8eaf6}
+.compare-table tr:hover td{background:#f5f7ff}
+.compare-table .highlight td{background:#e3f2fd;font-weight:700;color:#0d47a1}
+.badge-win{background:#e8f5e9;color:#2e7d32;padding:2px 8px;border-radius:4px;font-weight:800;font-size:0.85em}
+
+/* ── Footer ── */
+footer{background:#0d1b2a;color:#6a9fc8;text-align:center;padding:28px 24px;font-size:0.84em}
+footer a{color:#7eb8f7}
+
+@media(max-width:600px){
+  .problem-grid{grid-template-columns:1fr}
+  .results-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="topnav">
+  <a href="/">← Jiajun Fan</a>
+  <span>/</span>
+  <a href="/publications/">Publications</a>
+  <span>/</span>
+  <span style="color:#b0c8e8;">CESAR</span>
+</div>
+
+<div class="hero">
+  <div class="venue-badge">🏆 ICLR 2026</div>
+  <h1>Incentivizing Consistent, Effective and Scalable Reasoning Capability in Audio LLMs via Reasoning Process Rewards</h1>
+  <p class="short">CESAR: <strong>C</strong>onsistent, <strong>E</strong>ffective, and <strong>S</strong>calable <strong>A</strong>udio <strong>R</strong>easoners</p>
+  <div class="authors">
+    <strong>Jiajun Fan</strong>&thinsp;<sup>1,2</sup>,
+    Roger Ren&thinsp;<sup>2</sup>,
+    Jingyuan Li&thinsp;<sup>2</sup>,
+    Rahul Pandey&thinsp;<sup>2</sup>,
+    Prashanth G. Shivakumar&thinsp;<sup>2</sup>,
+    Yile Gu&thinsp;<sup>2</sup>,
+    Ankur Gandhe&thinsp;<sup>2</sup>,
+    Ge Liu&thinsp;<sup>1</sup>,
+    Ivan Bulyko&thinsp;<sup>2</sup>
+  </div>
+  <div class="affil"><sup>1</sup>University of Illinois Urbana-Champaign &nbsp;&nbsp; <sup>2</sup>Amazon</div>
+  <div class="btn-row">
+    <a class="btn btn-paper" href="https://openreview.net/forum?id=DUr48hxO2h">📄 Paper (OpenReview)</a>
+    <a class="btn btn-arxiv" href="https://arxiv.org/abs/2510.20867">arXiv</a>
+    <a class="btn btn-home" href="/">🏠 Author Homepage</a>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- TL;DR -->
+<section>
+  <div class="tldr">
+    <strong>TL;DR</strong> — Audio LLMs trained only on outcome rewards produce <em>hallucinatory, inconsistent, and unscalable</em> reasoning chains. CESAR shifts to <strong>rewarding the reasoning process itself</strong> via online RL (GRPO), resolving test-time inverse scaling and achieving SOTA on MMAU — outperforming Gemini 2.5 Pro and GPT-4o Audio.
+  </div>
+</section>
+
+<!-- Problem -->
+<section>
+  <h2>🔍 The Problem</h2>
+  <p>Adding chain-of-thought reasoning to Audio LLMs often <em>degrades</em> performance — a phenomenon we term <strong>test-time inverse scaling</strong>. Longer reasoning chains yield progressively worse results. Why?</p>
+  <div class="problem-grid">
+    <div class="problem-card">
+      <h3>❌ Without CESAR</h3>
+      <p>Models without guidance for the reasoning <em>process</em> produce hallucinatory, inconsistent reasoning that accumulates errors over longer chains. Outcome-only rewards cannot fix this.</p>
+    </div>
+    <div class="solution-card">
+      <h3>✅ With CESAR</h3>
+      <p>Process rewards incentivize consistency, structured analytical patterns, causal reasoning, and calibrated depth — transforming reasoning from a liability into a genuine capability.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Method -->
+<section>
+  <h2>⚙️ Method</h2>
+  <p>CESAR uses <strong>Group Relative Policy Optimization (GRPO)</strong> with a multi-faceted reward suite that goes beyond simple correctness:</p>
+  <div class="method-steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h4>Correctness Reward</h4>
+      <p>Standard outcome reward — is the final answer right?</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h4>Consistency Reward</h4>
+      <p>Does the reasoning chain stay internally consistent?</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h4>Structure Reward</h4>
+      <p>Does the reasoning follow structured analytical patterns and causal logic?</p>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <h4>Depth Calibration</h4>
+      <p>Is the reasoning depth calibrated to task complexity? Avoid over- and under-thinking.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Results -->
+<section>
+  <h2>📊 Results</h2>
+  <div class="results-grid">
+    <div class="result-card">
+      <div class="rnum">SOTA</div>
+      <div class="rdesc">MMAU Test-mini<br>benchmark</div>
+    </div>
+    <div class="result-card">
+      <div class="rnum">&gt; 2.5 Pro</div>
+      <div class="rdesc">Outperforms<br>Gemini 2.5 Pro</div>
+    </div>
+    <div class="result-card">
+      <div class="rnum">&gt; GPT-4o</div>
+      <div class="rdesc">Outperforms<br>GPT-4o Audio</div>
+    </div>
+    <div class="result-card">
+      <div class="rnum">✓ Scale</div>
+      <div class="rdesc">Reasoning scales<br>positively at test time</div>
+    </div>
+  </div>
+
+  <table class="compare-table">
+    <thead><tr><th>Model</th><th>MMAU Test-mini</th><th>Reasoning Scaling</th></tr></thead>
+    <tbody>
+      <tr><td>GPT-4o Audio</td><td>~65%</td><td>❌ Inverse scaling</td></tr>
+      <tr><td>Gemini 2.5 Pro</td><td>~68%</td><td>❌ Inverse scaling</td></tr>
+      <tr><td>Baseline (outcome-only RL)</td><td>~63%</td><td>❌ Inverse scaling</td></tr>
+      <tr class="highlight"><td><strong>CESAR (Ours)</strong></td><td><strong>SOTA <span class="badge-win">Best</span></strong></td><td><strong>✅ Positive scaling</strong></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- BibTeX -->
+<section>
+  <h2>📖 BibTeX</h2>
+  <pre style="background:#f5f7ff;border-radius:8px;padding:16px;font-size:0.82em;overflow-x:auto;border:1px solid #e8eaf6;"><code>@inproceedings{fan2026incentivizing,
+  title={Incentivizing Consistent, Effective and Scalable Reasoning
+         Capability in Audio {LLM}s via Reasoning Process Rewards},
+  author={Jiajun Fan and Roger Ren and Jingyuan Li and Rahul Pandey and
+          Prashanth Gurunath Shivakumar and Yile Gu and Ankur Gandhe
+          and Ge Liu and Ivan Bulyko},
+  booktitle={The Fourteenth International Conference on Learning Representations},
+  year={2026},
+  url={https://openreview.net/forum?id=DUr48hxO2h}
+}</code></pre>
+</section>
+
+</div>
+
+<footer>
+  <p>CESAR · ICLR 2026 &nbsp;|&nbsp; <a href="/">Jiajun Fan</a> · UIUC &amp; Amazon &nbsp;|&nbsp; <a href="https://openreview.net/forum?id=DUr48hxO2h">Paper</a></p>
+</footer>
+
+</body>
+</html>
