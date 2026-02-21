@@ -220,6 +220,15 @@ redirect_from:
 }
 </style>
 
+<nav style="background:#f0f4ff; border-radius:8px; padding:10px 16px; margin-bottom:1.4em; font-size:0.85em; display:flex; flex-wrap:wrap; gap:6px 18px; align-items:center;">
+  <span style="font-weight:700; color:#1565c0; margin-right:4px;">Jump to:</span>
+  <a href="#news" style="color:#1565c0; text-decoration:none;">📰 News</a>
+  <a href="#publications" style="color:#1565c0; text-decoration:none;">📄 Publications</a>
+  <a href="#research" style="color:#1565c0; text-decoration:none;">🔬 Research</a>
+  <a href="#awards" style="color:#1565c0; text-decoration:none;">🏅 Awards</a>
+  <a href="files/CV.pdf" style="color:#1565c0; text-decoration:none;">📋 CV</a>
+</nav>
+
 <p class="tagline">
 I am a Computer Science Ph.D. student at the <strong>University of Illinois Urbana-Champaign (UIUC)</strong>, advised by Prof. <a href="https://geliu.cs.illinois.edu/">Ge Liu</a>. My research sits at the frontier of <strong>autonomous RL post-training for large generative models</strong> — spanning diffusion/flow models and multi-modal reasoning LLMs. The central goal: <em>progressively eliminating human intervention</em> from the AI training pipeline while keeping models stable, diverse, and continuously self-improving. Previously, I pushed RL to <strong>superhuman performance</strong>, breaking 24 Atari world records and outperforming Agent57 with 500× less data.
 </p>
@@ -262,7 +271,7 @@ I am a Computer Science Ph.D. student at the <strong>University of Illinois Urba
 </div>
 
 <!-- ── Research Interests ── -->
-<div class="section-header">🔬 Research Interests</div>
+<div class="section-header" id="research">🔬 Research Interests</div>
 
 <div class="research-grid">
   <div class="research-card">
@@ -288,7 +297,7 @@ I am a Computer Science Ph.D. student at the <strong>University of Illinois Urba
 </div>
 
 <!-- ── Latest News ── -->
-<div class="section-header">📰 Latest News</div>
+<div class="section-header" id="news">📰 Latest News</div>
 
 <ul class="news-list">
   <li>
@@ -322,7 +331,7 @@ I am a Computer Science Ph.D. student at the <strong>University of Illinois Urba
 </ul>
 
 <!-- ── Selected Publications ── -->
-<div class="section-header">📄 Selected Publications</div>
+<div class="section-header" id="publications">📄 Selected Publications</div>
 
 <p style="font-size:0.85em; color:#888; margin-top:-0.5em;">* = first author &nbsp;·&nbsp; Full list: <a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&hl=en">Google Scholar</a> &nbsp;/&nbsp; <a href="/publications/">Publications page</a></p>
 
@@ -443,7 +452,7 @@ Today's AI is frozen after training. My work pushes toward <strong>AI that never
 </blockquote>
 
 <!-- ── Awards & Service ── -->
-<div class="section-header">🏅 Awards &amp; Academic Service</div>
+<div class="section-header" id="awards">🏅 Awards &amp; Academic Service</div>
 
 <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:1.5em;">
   <div>
