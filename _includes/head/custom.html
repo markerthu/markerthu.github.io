@@ -36,4 +36,64 @@
 </script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML' async></script>
 
+<!-- Custom global styles for modern academic look -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  /* ── Typography upgrade ── */
+  body, .page__content, .sidebar {
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  }
+
+  /* ── Author sidebar polished ── */
+  .author__avatar img {
+    border-radius: 50%;
+    border: 3px solid #4a90d9;
+    box-shadow: 0 4px 16px rgba(74,144,217,0.18);
+    transition: transform 0.3s;
+  }
+  .author__avatar img:hover { transform: scale(1.04); }
+  .author__name { font-size: 1.15em; font-weight: 700; letter-spacing: -0.01em; }
+  .author__bio { font-size: 0.92em; color: #555; line-height: 1.5; }
+  .author__urls a { font-size: 0.85em; }
+
+  /* ── Masthead / nav ── */
+  .masthead { border-bottom: 2px solid #4a90d9; }
+  .masthead__inner-wrap { max-width: 1280px; }
+  .greedy-nav a { font-weight: 500; }
+  .greedy-nav a:hover { color: #4a90d9 !important; }
+
+  /* ── Page content ── */
+  .page__content h2 { font-weight: 700; margin-top: 1.8em; }
+  .page__content h3 { font-weight: 600; }
+  .page__content a { color: #2a6db5; }
+  .page__content a:hover { text-decoration: underline; }
+
+  /* ── Publications archive ── */
+  .archive__item-title { font-size: 1.0em; font-weight: 600; }
+  .archive__item-excerpt { font-size: 0.88em; color: #555; }
+  .list__item { border-bottom: 1px solid #eee; padding: 10px 0; }
+
+  /* ── Blockquote callout ── */
+  .page__content blockquote {
+    background: #f0f7ff;
+    border-left: 4px solid #4a90d9;
+    border-radius: 0 6px 6px 0;
+    padding: 12px 18px;
+    color: #333;
+    font-size: 0.95em;
+  }
+
+  /* ── Footer ── */
+  .page__footer { background: #1a2332; color: #aaa; }
+  .page__footer a { color: #7eb8f7; }
+
+  /* ── Responsive tweaks ── */
+  @media (max-width: 768px) {
+    .pub-entry { margin-bottom: 10px; }
+  }
+</style>
+
 <!-- end custom head snippets -->
