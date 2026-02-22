@@ -26,7 +26,11 @@ a:hover{text-decoration:underline}
 .topnav .pdf-btn:hover{background:#1976d2}
 
 /* ── Hero header ── */
-@keyframes gradientShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes gradientShift{
+  0%   { background-position: 0% 50%;   }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%;   }
+}
 .cv-hero{
   background:linear-gradient(-45deg,#0d1b2a,#1a3a5c,#1565c0,#0a2540);
   background-size:400% 400%;
