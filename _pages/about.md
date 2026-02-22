@@ -872,8 +872,8 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
   </div>
   <div class="rt-item">
     <div class="rt-year">Step 3 — ICLR 2026</div>
-    <div class="rt-title">Drop hand-crafted process rewards</div>
-    <div class="rt-desc">CESAR: the model learns to evaluate its own reasoning process — no manually designed reward signals required.</div>
+    <div class="rt-title">Reward the reasoning process, not just outcomes</div>
+    <div class="rt-desc">CESAR: process-level rewards resolve test-time inverse scaling in Audio LLMs — reasoning finally helps instead of hurts, achieving SOTA on MMAU.</div>
   </div>
   <div class="rt-item" style="opacity:0.7;">
     <div class="rt-year" style="color:#e65100;">Step 4 — Ongoing</div>
