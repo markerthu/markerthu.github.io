@@ -18,6 +18,17 @@
     margin-left: auto;
     margin-right: auto;
 
+    /* ── Lede: first paragraph gets slightly larger treatment ── */
+    > p:first-of-type {
+      font-size: 1.08em;
+      color: #1a202c;
+      line-height: 1.9;
+      font-weight: 400;
+    }
+
+    /* ── Section counter badges on h2 ── */
+    counter-reset: section-counter;
+
     /* Paragraphs */
     p {
       margin-bottom: 1.2em;
@@ -40,6 +51,27 @@
       font-size: 1.42em;
       padding-bottom: 0.4em;
       border-bottom: 2px solid #e2e8f0;
+      counter-increment: section-counter;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      /* Numbered circle badge */
+      &::before {
+        content: counter(section-counter);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #1565c0, #7c4dff);
+        color: #fff;
+        font-size: 0.65em;
+        font-weight: 900;
+        letter-spacing: 0;
+      }
     }
 
     h3 {
@@ -241,39 +273,56 @@
     }
   }
 
-  /* ── Table of Contents (toc) ── */
+  /* ── Table of Contents ── */
   nav[id="markdown-toc"] {
-    background: #f7faff;
-    border: 1.5px solid #bee3f8;
-    border-radius: 10px;
-    padding: 14px 20px;
-    margin-bottom: 2em;
+    background: #f8fbff;
+    border-left: 4px solid #1565c0;
+    border-radius: 0 10px 10px 0;
+    padding: 16px 22px;
+    margin-bottom: 2.4em;
     max-width: 760px;
     margin-left: auto;
     margin-right: auto;
-    font-size: 0.88em;
+    font-size: 0.87em;
 
     &::before {
-      content: '📋 Table of Contents';
+      content: 'Contents';
       display: block;
       font-weight: 800;
-      color: #2b6cb0;
-      margin-bottom: 8px;
-      font-size: 0.92em;
+      color: #1565c0;
+      margin-bottom: 10px;
+      font-size: 0.82em;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
-    li {
-      line-height: 1.6;
-      color: #3182ce;
+    /* top-level items */
+    > li, > ul > li {
+      line-height: 1.65;
+      list-style: none;
     }
+
+    ul { padding-left: 1.2em; }
+
+    li::marker { display: none; }
 
     a {
-      color: #3182ce;
+      color: #2d3748;
       border-bottom: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+
+      &::before {
+        content: '▸';
+        color: #1565c0;
+        font-size: 0.7em;
+        flex-shrink: 0;
+      }
 
       &:hover {
-        color: #2b6cb0;
-        text-decoration: underline;
+        color: #1565c0;
+        text-decoration: none;
       }
     }
   }
