@@ -656,7 +656,7 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>, advised by Prof.
     <img class="featured-img" loading="lazy" src="/projects/adrpo/images/teaser.png" alt="ADRPO">
     <div class="featured-body">
       <span class="featured-venue fv-neurips">NeurIPS 2025</span>
-      <div class="featured-title">ADRPO: Adaptive KL for Generative Model RLHF</div>
+      <div class="featured-title">ADRPO: Adaptive Regularization for Generative Model RLHF</div>
       <div class="featured-desc">Sample-level adaptive divergence regularization — 2B model outperforms 12B competitors.</div>
       <div class="featured-stat">🚀 2B SD3 &gt; FLUX 12B &amp; SANA 4.8B</div>
     </div>
