@@ -5,7 +5,8 @@
 
 /* ── Load Inter font (added in head/custom.html) ─────────────────────────── */
 
-/* ── Wide-layout post: override page width to use full space cleanly ──────── */
+/* ── Blog post full-width layout (page--post added via single.html when page.date exists) ── */
+.page--post,
 .page--wide {
 
   .page__content {
