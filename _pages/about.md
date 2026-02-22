@@ -296,6 +296,76 @@ redirect_from:
 /* ── Smooth scroll ── */
 html { scroll-behavior: smooth; }
 
+/* ── Scroll-to-top button ── */
+.scroll-top {
+  position: fixed; bottom: 28px; right: 28px; z-index: 999;
+  width: 40px; height: 40px; border-radius: 50%;
+  background: #1565c0; color: #fff; border: none; cursor: pointer;
+  font-size: 1.1em; display: none; align-items: center; justify-content: center;
+  box-shadow: 0 4px 14px rgba(21,101,192,.35);
+  transition: opacity .3s, transform .3s;
+}
+.scroll-top:hover { transform: scale(1.1); }
+.scroll-top.show { display: flex; }
+
+/* ── News toggle ── */
+.news-hidden { display: none; }
+.news-toggle {
+  background: none; border: 1px solid #ddd; border-radius: 6px;
+  padding: 5px 14px; font-size: 0.82em; color: #1565c0;
+  cursor: pointer; font-weight: 700; margin-top: 6px;
+  transition: background .15s;
+}
+.news-toggle:hover { background: #e3f2fd; }
+
+/* ── Footer ── */
+.site-footer {
+  margin-top: 3em; padding: 24px 0 16px;
+  border-top: 2px solid #e0e8f0;
+  text-align: center; font-size: 0.82em; color: #999;
+}
+.site-footer a { color: #1565c0; }
+.footer-links { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 8px; }
+.footer-links a { font-weight: 700; }
+
+/* ── Image comparison slider ── */
+.img-compare {
+  position: relative; overflow: hidden; border-radius: 12px;
+  border: 1.5px solid #e0e8f0; cursor: ew-resize;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+.img-compare img { display: block; width: 100%; }
+.img-compare .img-overlay {
+  position: absolute; top: 0; left: 0; width: 50%; height: 100%;
+  overflow: hidden;
+}
+.img-compare .img-overlay img { width: 200%; max-width: none; }
+.img-compare .slider-line {
+  position: absolute; top: 0; left: 50%; width: 3px; height: 100%;
+  background: #fff; box-shadow: 0 0 8px rgba(0,0,0,0.3); z-index: 2;
+  transform: translateX(-50%);
+}
+.img-compare .slider-handle {
+  position: absolute; top: 50%; left: 50%; width: 36px; height: 36px;
+  background: #fff; border-radius: 50%; z-index: 3;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.7em; color: #333; font-weight: 800;
+}
+
+/* ── Hover glow on featured cards ── */
+.featured-card::after {
+  content: ''; position: absolute; inset: 0;
+  border-radius: 12px;
+  opacity: 0;
+  background: linear-gradient(135deg, rgba(21,101,192,0.06), transparent);
+  transition: opacity .3s;
+  pointer-events: none;
+}
+.featured-card { position: relative; }
+.featured-card:hover::after { opacity: 1; }
+
 /* ── Responsive ── */
 @media(max-width:760px) {
   .research-grid { grid-template-columns: 1fr 1fr; }
@@ -372,19 +442,26 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>, advised by Prof.
     <span class="news-date">Feb 2025</span>
     <span><span class="nbadge nb-accept">Accept</span>Paper accepted at <strong>ICLR 2025</strong>: ORW-CFM-W2 (Flow Matching self-evolution).</span>
   </li>
-  <li>
+  <li class="news-hidden" id="news-extra-1">
     <span class="news-date">Jan 2025</span>
     <span><span class="nbadge nb-service">Service</span>Area reviewer: ICLR 2025, NeurIPS 2024, CVPR 2026, AAAI 2025, AISTATS 2025.</span>
   </li>
-  <li>
+  <li class="news-hidden" id="news-extra-2">
     <span class="news-date">Aug 2024</span>
     <span>🎓 Started Ph.D. at <strong>UIUC CS</strong> (GPA 4.0/4.0).</span>
   </li>
-  <li>
+  <li class="news-hidden" id="news-extra-3">
     <span class="news-date">Jan 2023</span>
     <span><span class="nbadge nb-top">Oral · Top 5%</span>LBC at <strong>ICLR 2023</strong>, ranked <strong>5/4176</strong> — broke 24 Atari world records.</span>
   </li>
 </ul>
+<button class="news-toggle" id="news-toggle" onclick="
+  var extras = document.querySelectorAll('.news-hidden');
+  var btn = document.getElementById('news-toggle');
+  var showing = extras[0].style.display === 'flex';
+  extras.forEach(function(e){ e.style.display = showing ? 'none' : 'flex'; });
+  btn.textContent = showing ? '▼ Show more news' : '▲ Show less';
+">▼ Show more news</button>
 
 <!-- ═══════════════════════════════ FEATURED ═══════════════════════════ -->
 <div class="section-header" id="featured">🔥 Featured Research</div>
@@ -664,3 +741,26 @@ Happy to discuss research, internships, or collaborations. Best reached by email
 🏛 Siebel Center for CS, UIUC &nbsp;·&nbsp;
 <a href="files/CV.pdf"><strong>CV (PDF)</strong></a>
 </p>
+
+<!-- Footer -->
+<div class="site-footer">
+  <div class="footer-links">
+    <a href="mailto:jiajunf3@illinois.edu">✉️ Email</a>
+    <a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&hl=en">🎓 Scholar</a>
+    <a href="https://openreview.net/profile?id=~Jiajun_Fan1">📝 OpenReview</a>
+    <a href="https://github.com/markerthu">💻 GitHub</a>
+    <a href="/cv/">📋 CV</a>
+    <a href="/projects/">🔬 Projects</a>
+  </div>
+  <p>© 2026 Jiajun Fan · CS Ph.D. @ UIUC · Built with ☕ and curiosity</p>
+</div>
+
+<!-- Scroll-to-top button -->
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<script>
+window.addEventListener('scroll', function(){
+  var btn = document.getElementById('scrollTop');
+  if(window.scrollY > 500) btn.classList.add('show');
+  else btn.classList.remove('show');
+});
+</script>
