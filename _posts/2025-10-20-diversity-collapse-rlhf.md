@@ -1,170 +1,223 @@
 ---
-title: 'Why Your Fine-Tuned Model Keeps Collapsing: The Exploration-Exploitation Dilemma in RLHF'
+title: 'The Exploration-Exploitation Dilemma in RLHF for Generative Models'
 date: 2025-10-20
 permalink: /posts/2025/10/diversity-collapse-rlhf/
 tags:
   - reinforcement learning
   - RLHF
   - generative models
-  - exploration-exploitation
-  - NeurIPS 2025
-excerpt: "RLHF fine-tuning of generative models faces a fundamental dilemma: push too hard for reward and you get mode collapse; regularize too much and the model barely improves. Fixed regularization can't solve this because different samples need different treatment. ADRPO introduces sample-level adaptive control."
+  - flow matching
+excerpt: "A deep dive into why fixed regularization in RLHF leads to diversity collapse, and how adaptive sample-level control resolves the exploration-exploitation dilemma."
 ---
 
-*This post explains the diversity collapse problem in RLHF fine-tuning and how adaptive divergence regularization (ADRPO, NeurIPS 2025) addresses it. We walk through the math, the intuition, and why this matters for anyone training generative models.*
+> RLHF fine-tuning of generative models faces a fundamental tension: you want to maximize reward (make outputs better), but doing so aggressively destroys the diversity of what the model can produce. This post explains why this happens, why it's hard to fix with a single hyperparameter, and how advantage-based adaptive regularization provides a principled solution.
 
----
+## Table of Contents
+{: .no_toc}
 
-## The Problem: Why Does RLHF Break Diversity?
-
-You have a powerful pre-trained generative model — say, Stable Diffusion 3 for image generation, or a large language model like Qwen. You want to fine-tune it with reinforcement learning to produce outputs that score higher on some reward function (e.g., human preference, CLIP score, task accuracy).
-
-The standard RLHF objective looks deceptively simple:
-
-$$J(\theta) = \mathbb{E}_{x \sim \pi_\theta}[R(x, c)] - \beta \cdot D(\pi_\theta, \pi_{\text{ref}})$$
-
-where \\(R(x, c)\\) is the reward, \\(D(\pi_\theta, \pi_{\text{ref}})\\) is a divergence measure between your fine-tuned model and the original pre-trained model, and \\(\beta\\) controls the trade-off.
-
-**The first term** pushes the model toward high-reward outputs. **The second term** keeps it from straying too far from the pre-trained distribution.
-
-Sounds reasonable. So what goes wrong?
-
-### The Collapse Mechanism
-
-Consider what happens during online RL training. The model generates samples, gets rewards, and updates its policy. Without any regularization (\\(\beta = 0\\)):
-
-1. The model finds a few high-reward outputs early in training
-2. It concentrates more probability mass on those outputs
-3. With more mass concentrated, it generates similar outputs more often
-4. Those outputs get reinforced further
-5. **Result: the model collapses to generating essentially the same output** regardless of the input prompt
-
-This is **mode collapse** or **diversity collapse**. In image generation, your model might produce the same "perfect" image for every prompt. In language, it might always generate the same response pattern.
-
-Mathematically, without regularization, the optimal policy converges to a delta distribution:
-
-$$\pi^*(x|c) \to \delta(x - x^*_c)$$
-
-where \\(x^*_c = \arg\max_x R(x, c)\\). All diversity is lost.
-
-### The Fixed Regularization Dilemma
-
-The standard fix is to add divergence regularization with a fixed coefficient \\(\beta\\). For flow matching models, this typically uses Wasserstein-2 (W2) distance:
-
-$$\mathcal{L} = \mathcal{L}_{\text{RL}} + \beta \cdot \mathbb{E}_{c,t,x_t}\left[\|\mathbf{v}_\theta(x_t, t, c) - \mathbf{v}_{\text{ref}}(x_t, t, c)\|^2\right]$$
-
-For LLMs, it uses KL divergence:
-
-$$\mathcal{L} = \mathcal{L}_{\text{PG}} + \beta \cdot D_{\text{KL}}(\pi_\theta \| \pi_{\text{ref}})$$
-
-**But fixed \\(\beta\\) creates an inherent dilemma:**
-
-| \\(\beta\\) too high | \\(\beta\\) too low |
-|:---|:---|
-| Model barely moves from pre-trained weights | Risk of mode collapse |
-| Limited reward improvement | Reward hacking |
-| Safe but underperforming | Unstable training |
-| Diversity preserved but alignment poor | Good alignment but diversity lost |
-
-There is no single \\(\beta\\) that works well for all samples. Consider two scenarios during training:
-
-- **Sample A** has a high reward (advantage \\(A > 0\\)) — the model has found a promising direction. Here, you *want* to exploit this finding with less regularization.
-- **Sample B** has a low reward (advantage \\(A < 0\\)) — the model is in a poor region. Here, you *want* stronger regularization to pull it back toward the stable pre-trained distribution.
-
-Fixed \\(\beta\\) treats both samples identically. This is fundamentally suboptimal.
+- TOC
+{:toc}
 
 ---
 
-## ADRPO: Adaptive Divergence Regularized Policy Optimization
+## Background: The RLHF Objective
 
-The key insight in ADRPO is simple but powerful: **make the regularization strength depend on sample quality.**
+Suppose you have a pre-trained generative model \\(\pi_{\text{ref}}\\) — a text-to-image model like Stable Diffusion 3, or a language model like Qwen. You want to fine-tune it so that its outputs score higher on some reward function \\(R(x, c)\\), where \\(x\\) is the generated output and \\(c\\) is the conditioning context (e.g., a text prompt).
 
-### The Core Formula
+The standard approach formulates this as a regularized optimization problem:
 
-$$\mathcal{L}_{\text{ADRPO}}(\theta) = \mathcal{L}_{\text{RL}}(\theta) + (\beta_0 - A) \cdot \mathcal{L}_{\text{D}}(\theta)$$
+$$J(\theta) = \underbrace{\mathbb{E}_{x \sim \pi_\theta, c \sim p(c)}[R(x, c)]}_{\text{maximize reward}} - \underbrace{\beta \cdot D(\pi_\theta, \pi_{\text{ref}})}_{\text{stay close to pre-trained model}}$$
 
-where \\(A\\) is the advantage estimate for the current sample, and \\(\beta_0\\) is a baseline regularization coefficient.
+The first term says "produce high-reward outputs." The second term says "don't stray too far from the original model." The coefficient \\(\beta\\) controls this trade-off, and \\(D\\) is some divergence measure — KL divergence for language models, Wasserstein-2 (W2) distance for flow matching models.
 
-The effective regularization coefficient becomes \\(\beta_{\text{eff}} = \beta_0 - A\\), which adapts automatically:
+This is clean and intuitive. But in practice, getting \\(\beta\\) right is surprisingly hard — and the consequences of getting it wrong are severe.
 
-| Sample Quality | Advantage \\(A\\) | Effective \\(\beta\\) | Behavior |
-|:---|:---|:---|:---|
-| High reward | \\(A > 0\\) | \\(\beta_0 - A\\) (lower) | **Exploit**: less regularization, more freedom to optimize |
-| Average | \\(A \approx 0\\) | \\(\approx \beta_0\\) | Standard regularization |
-| Low reward | \\(A < 0\\) | \\(\beta_0 - A\\) (higher) | **Explore conservatively**: stronger pull toward reference |
+## The Diversity Collapse Problem
 
-### Why This Works: Intuition
+### What happens without regularization
 
-Think of it like portfolio management:
+Let's start with the extreme case: \\(\beta = 0\\), no regularization at all. The model is free to do whatever maximizes reward.
 
-- **Winning trades** (high-advantage samples): Let them run. Reduce the hedging.
-- **Losing trades** (low-advantage samples): Cut losses quickly. Increase the hedging.
-- **Average trades**: Apply standard risk management.
+In online RL, the model generates samples, gets rewards, and updates itself. Without any constraint:
 
-Fixed \\(\beta\\) is like applying the same hedge ratio to every position regardless of whether it's winning or losing. No rational trader would do this, yet it's exactly what standard RLHF does.
+1. Early in training, the model discovers a few high-reward outputs
+2. It shifts probability mass toward those outputs
+3. Now it generates similar outputs more often → they get reinforced further
+4. This positive feedback loop concentrates all probability mass on a narrow region
 
-### For Flow Matching Models (SD3)
+The equilibrium is a **delta distribution**: the model always generates the same output for a given prompt, regardless of the diversity of valid responses.
 
-ADRPO with W2 regularization for flow matching:
+$$\pi^*_{\beta=0}(x|c) \to \delta(x - x^*_c), \quad \text{where } x^*_c = \arg\max_x R(x, c)$$
 
-$$\mathcal{L}_{\text{ADRPO-FM}}(\theta) = \mathbb{E}\left[A(x_1,c) \cdot \|\mathbf{v}_\theta - \mathbf{u}_t\|^2\right] + (\beta_0 - A(x_1,c)) \cdot \mathbb{E}\left[\|\mathbf{v}_\theta - \mathbf{v}_{\text{ref}}\|^2\right]$$
+In image generation, this means every prompt produces essentially the same "optimal" image — perhaps technically high-scoring but boring and unusable. In language, the model repeats the same phrasing over and over.
 
-Note the advantage \\(A\\) also appears in the RL loss — samples with positive advantage strengthen the velocity field match, while negative advantage *reverses* the gradient direction, actively pushing the model away from poor generations. This is fundamentally different from reward-weighting approaches (like ORW-CFM-W2) which can only down-weight bad samples but cannot actively suppress them.
+This is **mode collapse** (or **diversity collapse**), and it's the central failure mode of unconstrained RLHF.
 
-### For LLMs (GRPO)
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:1.5em 0">
+<figure style="margin:0;text-align:center">
+<img src="/images/blog/mnist_collapse.png" style="width:100%;border-radius:8px;border:1px solid #e0e8f0" />
+<figcaption style="font-size:0.82em;color:#666;margin-top:6px"><b>Mode collapse (α=0)</b>: model generates identical digits, maximizing reward but destroying diversity.</figcaption>
+</figure>
+<figure style="margin:0;text-align:center">
+<img src="/images/blog/mnist_balanced.png" style="width:100%;border-radius:8px;border:1px solid #e0e8f0" />
+<figcaption style="font-size:0.82em;color:#666;margin-top:6px"><b>Balanced (α=0.3)</b>: with proper regularization, the model improves quality while preserving digit variety.</figcaption>
+</figure>
+</div>
 
-ADRPO integrated with GRPO:
+### Why diversity matters
 
-$$\mathcal{L}_{\text{ADRPO-GRPO}}(\theta) = \mathcal{L}_{\text{PG}}(\theta) + (\beta_0 - A_{\text{GRPO}}) \cdot D_{\text{KL}}(\pi_\theta \| \pi_{\text{ref}})$$
+One might ask: if the goal is to maximize reward, who cares about diversity? Several reasons:
 
-The advantage \\(A_{\text{GRPO}}\\) comes from GRPO's group-based estimation: within each group of responses to the same prompt, compare each response's reward to the group mean.
+1. **Reward functions are imperfect proxies.** They approximate human preferences, not capture them fully. A collapsed model that exploits quirks in the reward function (reward hacking) produces outputs that score high but look terrible to humans.
 
----
+2. **Generalization.** A diverse model handles novel prompts gracefully. A collapsed model performs well only on prompts similar to its training distribution.
 
-## What Happens in Practice?
+3. **Downstream utility.** In creative applications (art, writing, brainstorming), diversity is itself valuable. A model that always gives the same answer is useless for creative tasks.
 
-### The Pareto Front
+4. **Training stability.** Once the model concentrates on a narrow manifold, gradient signals become noisy and training destabilizes.
 
-The reward-diversity trade-off can be visualized as a Pareto front. ADRPO achieves a **dominant Pareto frontier** — at any given diversity level, it achieves higher reward than fixed-regularization methods. Conversely, at any given reward level, it preserves more diversity.
+### The standard fix: fixed regularization
 
-This isn't marginal improvement. With ADRPO, a 2B parameter SD3 model surpasses models with 4.8B (SANA-1.5) and 12B (FLUX.1-Dev) parameters in attribute binding, semantic consistency, and compositional control.
+The conventional solution is to set \\(\beta > 0\\). For flow matching models, we typically use a W2 regularization term:
 
-### Emergent Exploration in LLMs
+$$\mathcal{L}_{\text{ORW-CFM-W2}} = \underbrace{\mathcal{L}_{\text{ORW}}(\theta)}_{\text{reward-weighted flow matching}} + \beta \cdot \underbrace{\mathbb{E}_{c,t,x_t}\left[\|\mathbf{v}_\theta(x_t, t, c) - \mathbf{v}_{\text{ref}}(x_t, t, c)\|^2\right]}_{\text{W2 regularization}}$$
 
-Perhaps the most surprising finding is an **emergent exploration ability** in LLM fine-tuning. When ADRPO is applied to GRPO for training language models, the adaptive regularization allows the model to escape local optima that fixed-regularization methods get trapped in.
+For language models with GRPO:
 
-When the model is stuck in a poor solution (low advantages everywhere), ADRPO *increases* regularization globally, effectively "resetting" the exploration. When it finds a promising direction, it *decreases* regularization to exploit it. This creates a natural curriculum that fixed methods cannot replicate.
+$$\mathcal{L}_{\text{GRPO}} = \mathcal{L}_{\text{PG}}(\theta) + \beta \cdot D_{\text{KL}}(\pi_\theta \| \pi_{\text{ref}})$$
 
----
+This works — to a point. But it creates a fundamental dilemma.
 
-## Why Does Diversity Matter?
+## The Fixed-β Dilemma
 
-One might ask: if the goal is to maximize reward, why preserve diversity at all?
+Here's the core problem: **different samples need different levels of regularization.**
 
-1. **Reward functions are imperfect.** They approximate human preferences, not capture them fully. A collapsed model that exploits reward function quirks (reward hacking) produces outputs that score high but look terrible to humans.
+Consider two samples generated during training for the same prompt:
 
-2. **Generalization.** A diverse model handles varied prompts. A collapsed model may perform well on prompts similar to its training distribution but fail catastrophically on novel inputs.
+| | Sample A (high reward) | Sample B (low reward) |
+|:---|:---|:---|
+| **Advantage** | \\(A > 0\\) (better than average) | \\(A < 0\\) (worse than average) |
+| **What we want** | Exploit: push further in this direction | Explore cautiously: pull back toward reference |
+| **Ideal \\(\beta\\)** | Low (give freedom to optimize) | High (enforce stability) |
+| **What fixed \\(\beta\\) does** | Same constraint as bad sample | Same constraint as good sample |
 
-3. **Downstream utility.** In many applications (creative image generation, diverse text responses), diversity is itself a desirable property.
+Fixed \\(\beta\\) applies the same regularization pressure to every sample regardless of quality. If \\(\beta\\) is high enough to prevent collapse on bad samples, it also unnecessarily constrains good samples. If \\(\beta\\) is low enough to exploit good samples, it fails to stabilize bad samples.
 
-4. **Training stability.** Mode collapse often destabilizes further training — once the model concentrates on a narrow manifold, gradient signals become noisy and uninformative.
+This is not a tuning problem — no single value of \\(\beta\\) is optimal for all samples simultaneously.
 
----
+<figure style="margin:1.5em 0">
+<img src="/images/blog/adrpo_reward_diversity.png" style="width:100%;border-radius:10px;border:1px solid #e0e8f0" />
+<figcaption style="font-size:0.82em;color:#666;margin-top:8px;text-align:center"><b>Fig 1.</b> Reward vs. diversity Pareto front on SD3 text-to-image. Adaptive regularization (ADRPO) achieves a dominant frontier — higher reward at every diversity level compared to fixed-β methods like DPO and ORW-CFM-W2.</figcaption>
+</figure>
 
-## Summary
+## Adaptive Divergence Regularized Policy Optimization (ADRPO)
 
-The exploration-exploitation dilemma in RLHF is fundamental: no single regularization strength works for all samples. ADRPO resolves this by making \\(\beta\\) a function of advantage:
+### Core idea
+
+The insight is simple: **make regularization strength a function of sample quality.** High-quality samples get less regularization (exploit); low-quality samples get more (explore safely).
+
+The general ADRPO objective:
+
+$$\boxed{\mathcal{L}_{\text{ADRPO}}(\theta) = \mathcal{L}_{\text{RL}}(\theta) + (\beta_0 - A) \cdot \mathcal{L}_D(\theta)}$$
+
+where \\(A\\) is the advantage estimate for the current sample, \\(\beta_0\\) is a baseline coefficient, and \\(\mathcal{L}_D\\) is the divergence regularization loss.
+
+The effective regularization coefficient becomes:
 
 $$\beta_{\text{eff}} = \beta_0 - A$$
 
-This one-line change — making regularization adaptive at the sample level — enables:
-- **Better Pareto frontiers** in reward vs. diversity
-- **Smaller models outperforming larger ones** (2B SD3 > 12B FLUX)
-- **Emergent exploration** in LLM fine-tuning
-- **Plug-and-play integration** with existing methods (W2, KL, GRPO, PPO)
+| Sample quality | Advantage \\(A\\) | Effective \\(\beta\\) | Effect |
+|:---|:---|:---|:---|
+| High reward | \\(A > 0\\) | \\(\beta_0 - A\\) ↓ | Less regularization → exploit |
+| Average | \\(A \approx 0\\) | \\(\approx \beta_0\\) | Standard regularization |
+| Low reward | \\(A < 0\\) | \\(\beta_0 - A\\) ↑ | More regularization → stabilize |
 
-No additional networks, no complex architecture changes, no manual tuning of \\(\beta\\).
+This is a one-line modification to existing RLHF objectives. No new networks, no complex architecture changes.
+
+### For flow matching models
+
+For flow matching models like SD3, ADRPO combines advantage-weighted flow matching with adaptive W2 regularization:
+
+$$\mathcal{L}_{\text{ADRPO-FM}}(\theta) = \underbrace{\mathbb{E}\left[A(x_1,c) \cdot \|\mathbf{v}_\theta(x_t, t, c) - \mathbf{u}_t\|^2\right]}_{\text{advantage-weighted flow matching}} + \underbrace{(\beta_0 - A(x_1,c)) \cdot \mathbb{E}\left[\|\mathbf{v}_\theta - \mathbf{v}_{\text{ref}}\|^2\right]}_{\text{adaptive W2 regularization}}$$
+
+Notice that \\(A\\) appears in *both* terms. In the first term, the advantage provides *bidirectional* learning signals:
+
+- \\(A > 0\\): gradient encourages matching the target velocity (strengthen good generation)
+- \\(A < 0\\): gradient *reverses*, actively pushing the model *away* from bad generation
+
+This is fundamentally different from reward-weighting (ORW-CFM-W2), which can only down-weight bad samples with non-negative weights but never actively suppress them. In high-dimensional spaces like image generation, where bad regions vastly outnumber good ones, this difference is critical.
+
+The advantage is estimated simply as:
+
+$$A(x_1, c) = R(x_1, c) - V(c), \quad \text{where } V(c) = \frac{1}{|\mathcal{B}|}\sum_{x \in \mathcal{B}} R(x, c)$$
+
+i.e., the reward minus the batch-average reward for the same prompt.
+
+### For language models
+
+For LLMs, ADRPO integrates with GRPO by making the KL coefficient advantage-dependent:
+
+$$\mathcal{L}_{\text{ADRPO-GRPO}}(\theta) = \mathcal{L}_{\text{PG}}(\theta) + (\beta_0 - A_{\text{GRPO}}) \cdot D_{\text{KL}}(\pi_\theta \| \pi_{\text{ref}})$$
+
+where \\(A_{\text{GRPO}}\\) is the group-level advantage from GRPO (reward minus group mean, normalized).
+
+<figure style="margin:1.5em 0">
+<img src="/images/blog/adrpo_reward_kl.png" style="width:100%;border-radius:10px;border:1px solid #e0e8f0" />
+<figcaption style="font-size:0.82em;color:#666;margin-top:8px;text-align:center"><b>Fig 2.</b> Reward vs. KL divergence on SD3. ADRPO reaches the same reward level at lower KL divergence — more efficient policy improvement.</figcaption>
+</figure>
+
+## What Emerges in Practice
+
+### Smaller models outperform larger ones
+
+With ADRPO, a **2B parameter SD3** model outperforms **FLUX.1-Dev (12B)** and **SANA-1.5 (4.8B)** in attribute binding, semantic consistency, and compositional control. The adaptive regularization extracts more from each parameter by allocating exploration budget where it matters most.
+
+### Emergent exploration in LLMs
+
+When applied to LLM fine-tuning, ADRPO exhibits an unexpected emergent behavior: **the ability to escape local optima.**
+
+<figure style="margin:1.5em 0">
+<img src="/images/blog/adrpo_llm_entropy.png" style="width:100%;border-radius:10px;border:1px solid #e0e8f0" />
+<figcaption style="font-size:0.82em;color:#666;margin-top:8px;text-align:center"><b>Fig 3.</b> Reward vs. entropy on LLM fine-tuning (Qwen2). ADRPO achieves higher reward while maintaining generation diversity. The adaptive mechanism allows the model to escape local optima that trap fixed-β methods.</figcaption>
+</figure>
+
+When the model is stuck in a poor solution (all advantages near zero or negative), the adaptive coefficient \\(\beta_0 - A\\) increases globally, pulling the model back toward the pre-trained distribution — effectively "resetting" exploration. When it finds a promising direction (high advantages), regularization drops, allowing rapid exploitation. This creates a natural curriculum that no fixed coefficient can replicate.
+
+### Cross-domain generality
+
+ADRPO is not limited to one modality or one divergence measure. It has been validated across:
+
+- **Flow matching** (SD3) with W2 regularization
+- **Text LLMs** (Qwen2, Qwen3) with KL divergence
+- **Audio reasoning LLMs** with GRPO
+
+The same principle — advantage-based adaptive regularization — provides consistent improvement regardless of the underlying architecture.
+
+## Summary
+
+The exploration-exploitation dilemma in RLHF is fundamental: **no single regularization coefficient is optimal for all samples.** ADRPO resolves this by making \\(\beta\\) a function of advantage:
+
+$$\beta_{\text{eff}} = \beta_0 - A$$
+
+One line of math; dramatic practical consequences. For details, see [the paper (NeurIPS 2025)](https://openreview.net/forum?id=aXO0xg0ttW).
+
+## References
+
+[1] Fan et al. "Adaptive Divergence Regularized Policy Optimization for Fine-tuning Generative Models." NeurIPS 2025. [Paper](https://openreview.net/forum?id=aXO0xg0ttW)
+
+[2] Fan et al. "Online Reward-Weighted Fine-Tuning of Flow Matching with Wasserstein Regularization." ICLR 2025. [Paper](https://openreview.net/forum?id=2IoFFexvuw)
+
+[3] Shao et al. "DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models." 2024. (GRPO)
+
+[4] Esser et al. "Scaling Rectified Flow Transformers for High-Resolution Image Synthesis." ICML 2024. (Stable Diffusion 3)
+
+[5] Rafailov et al. "Direct Preference Optimization: Your Language Model is Secretly a Reward Model." NeurIPS 2023. (DPO)
 
 ---
 
-*For full details, see our paper: [Adaptive Divergence Regularized Policy Optimization for Fine-tuning Generative Models](https://openreview.net/forum?id=aXO0xg0ttW) (NeurIPS 2025). Check out the [project page](/projects/adrpo/) for qualitative results.*
+*Cited as:*
+
+```
+Fan, Jiajun. "The Exploration-Exploitation Dilemma in RLHF for Generative Models."
+jiajunfan.com (2025).
+```

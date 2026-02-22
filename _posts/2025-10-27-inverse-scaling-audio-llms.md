@@ -1,5 +1,5 @@
 ---
-title: 'Test-Time Inverse Scaling: Why Reasoning Hurts Audio LLMs (And How Process Rewards Fix It)'
+title: 'Test-Time Inverse Scaling in Audio LLMs'
 date: 2025-10-27
 permalink: /posts/2025/10/inverse-scaling-audio-llms/
 tags:
@@ -7,191 +7,206 @@ tags:
   - audio LLMs
   - reasoning
   - test-time scaling
-  - ICLR 2026
-excerpt: "Chain-of-thought reasoning has transformed text LLMs, but in Audio LLMs it often backfires — longer reasoning chains degrade performance. We term this test-time inverse scaling and trace it to outcome-only reward training. Process rewards resolve it."
+excerpt: "Chain-of-thought reasoning helps text LLMs but hurts Audio LLMs. This post explains why — and how process rewards fix it."
 ---
 
-*This post explains why reasoning hurts Audio LLMs, the phenomenon of test-time inverse scaling, and how process-oriented rewards (CESAR, ICLR 2026) transform reasoning from a liability into a scalable capability.*
+> Chain-of-thought prompting has transformed text-based LLMs. Models like OpenAI o1 and DeepSeek-R1 show that explicit reasoning dramatically improves performance. But something counterintuitive happens in Audio LLMs: **more reasoning makes things worse.** This post explains why, what's actually going wrong inside the reasoning chains, and how process-level rewards resolve the issue.
 
----
+## Table of Contents
+{: .no_toc}
 
-## The Paradox: More Thinking = Worse Performance?
-
-Chain-of-thought (CoT) reasoning has been transformative for text-based LLMs. Models like OpenAI's o1 and DeepSeek-R1 show that explicit reasoning dramatically improves performance on complex tasks. The recipe seems clear: teach models to "think step by step."
-
-But something unexpected happens when you apply this recipe to Audio LLMs. **More reasoning often makes things worse.**
-
-We observed this systematically across multiple Audio LLM architectures and termed it **test-time inverse scaling**: as you increase the maximum allowed reasoning length \\(L_{\text{max\_think}}\\), performance *decreases*:
-
-$$\frac{\partial P(L_{\text{max\_think}})}{\partial L_{\text{max\_think}}} < 0$$
-
-where \\(P(L)\\) is accuracy at maximum thinking length \\(L\\). This is the opposite of what happens in text LLMs, where more reasoning tokens generally help.
-
-This isn't a subtle effect. Models that achieve 70%+ accuracy with direct answers can drop to 60% or lower when forced to reason. **The reasoning itself is actively harmful.**
+- TOC
+{:toc}
 
 ---
 
-## What Goes Wrong? Three Failure Modes
+## The Scaling Paradox
 
-We traced test-time inverse scaling to three specific failure modes in how current Audio LLMs reason:
+In text LLMs, there's a reliable pattern: allocating more compute to reasoning at inference time (longer chain-of-thought, more tokens to "think") tends to improve performance. This is the foundation of test-time scaling — the principle behind reasoning models like o1, R1, and QwQ.
 
-### 1. Hallucinatory Reasoning
+Audio LLMs tell a different story. When you allow an Audio LLM to reason before answering, performance often *degrades*. When you let it reason *longer*, it gets *even worse*:
 
-When Audio LLMs are trained only to get the right final answer (outcome-only rewards), their reasoning chains are essentially unsupervised. The model learns that *having* a reasoning chain is necessary (format reward), but never learns *what constitutes good reasoning*.
+$$\frac{\partial P(L_{\text{max}})}{\partial L_{\text{max}}} < 0$$
 
-Result: the model generates plausible-sounding but factually incorrect analysis. In audio tasks, this manifests as:
-- Describing instruments that aren't present in the audio
-- Inventing acoustic properties that contradict the signal
-- Confabulating music theory that doesn't apply
+where \\(P(L_{\text{max}})\\) is accuracy when the model is allowed up to \\(L_{\text{max}}\\) reasoning tokens.
 
-As reasoning chains get longer, more hallucinations accumulate and compound.
+We call this **test-time inverse scaling**: the more the model "thinks," the worse it performs.
 
-### 2. Reasoning-Answer Inconsistency
+<figure style="margin:1.5em 0">
+<img src="/images/blog/cesar_scaling.png" style="width:100%;border-radius:10px;border:1px solid #e0e8f0" />
+<figcaption style="font-size:0.82em;color:#666;margin-top:8px;text-align:center"><b>Fig 1.</b> Test-time scaling curves. Baseline models (outcome-only RL) show inverse scaling — performance degrades as maximum reasoning length increases. CESAR maintains positive scaling.</figcaption>
+</figure>
 
-A particularly insidious failure: the model's reasoning says one thing, but the final answer says another. For example:
+This isn't subtle. Models that achieve 70%+ accuracy with direct answers can drop to below 60% when forced to reason. The reasoning itself is actively harmful.
 
-> *"The audio contains a clear piano melody in the key of C major... therefore the answer is **jazz saxophone**."*
+The natural conclusion might be: "reasoning just doesn't work for audio." But that's wrong. The problem isn't reasoning itself — it's how models are trained to reason.
 
-With outcome-only rewards, the model can learn to generate correct answers *despite* wrong reasoning. The reasoning becomes decorative — it looks like thinking but contributes nothing to the answer. When you increase reasoning length, you amplify noise that was already disconnected from the answer.
+## Why Reasoning Goes Wrong
 
-### 3. Unstructured, Circular Reasoning
+### The training gap
 
-Without explicit guidance on *how* to reason, models develop random reasoning patterns:
-- Repeating the same observation multiple times
-- Circular logic that goes nowhere
-- Tangential elaboration unrelated to the question
-- No systematic analytical structure
-
-Each additional token of unstructured reasoning is another opportunity for error accumulation.
-
----
-
-## Why Outcome-Only Rewards Can't Fix This
-
-Current RL-based approaches for Audio LLMs (like R1-AQA and Ke-Omni-R) use outcome-only verifiable rewards:
+Current RL approaches for Audio LLMs use **outcome-only rewards**:
 
 $$R_{\text{RLVR}}(s_i) = \mathbb{I}[\hat{y}_i = y_i] + \mathbb{I}[\text{ValidFormat}(s_i)]$$
 
-This reward says: "Is the final answer correct?" and "Is the output in the right format?" That's it. The entire reasoning chain \\(t_i\\) is invisible to the reward.
+The reward checks two things: "Is the final answer correct?" and "Is the output properly formatted?" That's all. The entire reasoning chain \\(t_i\\) — which could be hundreds of tokens — is completely invisible to the reward function.
 
-The model gets the same reward whether its reasoning is brilliant or nonsensical, as long as the final answer is right. This creates a fundamental problem: **the model has no gradient signal to improve its reasoning quality.** Good reasoning and bad reasoning are both equally rewarded if they happen to produce the same answer.
+This means the model gets the same reward whether its reasoning is:
 
-Worse, because reasoning adds tokens that increase the chance of format errors or attention degradation, there's actually an implicit *penalty* for longer reasoning. The model learns that shorter reasoning is safer, and when forced to reason longer, it fills space with noise.
+```
+"The audio contains a clear piano melody in the major key, with a tempo around 
+120 BPM. The harmonic structure suggests classical rather than jazz..."  → Answer: B
+```
 
----
+or:
 
-## CESAR: Rewarding the Process, Not Just the Outcome
+```
+"Let me think about this. I think the answer might be something. Actually let me 
+reconsider. The sound is interesting. Maybe it could be several things..."  → Answer: B
+```
 
-CESAR (Consistent, Effective, and Scalable Audio Reasoners) addresses this by introducing **process rewards** — explicit signals that evaluate reasoning quality, not just answer correctness.
+As long as the final answer is correct, both receive identical reward. **The model has zero gradient signal to improve reasoning quality.**
 
-### The Multi-Faceted Reward Suite
+### Three failure modes
 
-The total reward decomposes into verifiable and process components:
+Without supervision of the reasoning process, three specific pathologies emerge:
 
-$$R_{\text{total}}(s_i) = \underbrace{\alpha_1 R_{\text{acc}} + \alpha_2 R_{\text{format}}}_{\text{Verifiable (existing)}} + \underbrace{\alpha_3 R_{\text{consistency}} + \alpha_4 R_{\text{keywords}} + \alpha_5 R_{\text{overthinking}}}_{\text{Process Rewards (new)}}$$
+**1. Hallucinatory reasoning.** The model generates plausible-sounding but factually wrong analysis — describing instruments that aren't present, inventing acoustic properties, confabulating music theory. Each additional reasoning token is another opportunity to introduce a hallucination, and hallucinations compound across the chain.
 
-Let's examine each process reward:
+**2. Reasoning-answer inconsistency.** The reasoning says one thing, but the answer says another. Example:
 
-### Reasoning Consistency Reward
+> *"The audio clearly contains a piano solo... therefore the answer is **drums**."*
+
+With outcome-only rewards, the model can learn to produce correct answers *despite* wrong reasoning. The reasoning becomes decorative noise disconnected from the answer. Longer chains amplify this noise.
+
+**3. Unstructured, circular reasoning.** Without guidance on *how* to reason, models develop rambling patterns: repeating observations, circular logic, tangential elaboration. No systematic analysis structure (elimination, comparison, deduction) emerges.
+
+### Why doesn't reasoning emerge naturally?
+
+In text LLMs, reasoning *does* emerge somewhat naturally from outcome-only training (though process rewards still help). Why is audio different?
+
+The key difference is the **modality gap**. Text reasoning can leverage massive amounts of pre-training data that already contains reasoning patterns (textbooks, proofs, tutorials). The model has seen millions of examples of structured argumentation.
+
+Audio reasoning has no such foundation. Pre-training on audio-text pairs teaches the model to *describe* audio, not to *reason about* it. When you then ask it to reason via RL, it has no templates to draw from — so it generates text that *looks* like reasoning but isn't grounded in actual audio analysis.
+
+## Process Rewards: Supervising How the Model Thinks
+
+The fix is to reward not just the final answer, but the reasoning process itself. CESAR introduces a **multi-faceted reward suite**:
+
+$$R_{\text{total}}(s_i) = \underbrace{\alpha_1 R_{\text{acc}} + \alpha_2 R_{\text{format}}}_{\text{outcome (existing)}} + \underbrace{\alpha_3 R_{\text{consistency}} + \alpha_4 R_{\text{keywords}} + \alpha_5 R_{\text{overthinking}}}_{\text{process (new)}}$$
+
+Each process reward targets a specific failure mode:
+
+<figure style="margin:1.5em 0">
+<img src="/images/blog/cesar_framework.png" style="width:100%;border-radius:10px;border:1px solid #e0e8f0" />
+<figcaption style="font-size:0.82em;color:#666;margin-top:8px;text-align:center"><b>Fig 2.</b> CESAR framework. Left: existing outcome-only methods reward only final answer correctness. Right: CESAR adds process rewards for reasoning consistency, structure, and depth.</figcaption>
+</figure>
+
+### Reasoning consistency reward
 
 $$R_{\text{consistency}}(s_i) = \text{Sim}(t_i, \hat{y}_i) + \text{Sim}(t_i, Q_i)$$
 
 This measures semantic alignment in two directions:
-- **Reasoning ↔ Answer**: Does the reasoning actually support the conclusion?
-- **Reasoning ↔ Question**: Is the reasoning about the right topic?
 
-Implemented via concept overlap:
+- **Reasoning ↔ Answer** (\\(\text{Sim}(t_i, \hat{y}_i)\\)): Does the reasoning logically lead to the chosen answer? This directly combats reasoning-answer inconsistency.
 
-$$\text{Sim}(x, y) = \frac{\text{ConceptOverlap}(x, y)}{\max(|\text{Concepts}(x)|, |\text{Concepts}(y)|)}$$
+- **Reasoning ↔ Question** (\\(\text{Sim}(t_i, Q_i)\\)): Is the reasoning actually about the question asked? This prevents hallucination — the model can't ramble about unrelated topics.
 
-This directly combats reasoning-answer inconsistency (Failure Mode 2). The model can no longer get away with generating irrelevant reasoning followed by a lucky correct answer — the reasoning must semantically relate to both the question and the answer.
+Similarity is computed via concept overlap:
 
-### Structured Reasoning Keywords
+$$\text{Sim}(x, y) = \frac{|\text{Concepts}(x) \cap \text{Concepts}(y)|}{\max(|\text{Concepts}(x)|, |\text{Concepts}(y)|)}$$
 
-$$R_{\text{keywords}}(s_i) = R_{\text{pattern}} + R_{\text{logic}} + R_{\text{domain}}$$
+This is deliberately simple — no learned model, no LLM judge, just lexical overlap of key concepts. The simplicity is a feature: it provides a stable, deterministic gradient signal without introducing the complexity and variance of learned reward models.
 
-Three components:
+### Structured reasoning keywords
 
-**Analytical patterns** (\\(R_{\text{pattern}}\\)): Rewards structured reasoning architectures — sequential analysis, comparative evaluation, systematic elimination. Detects whether the model uses organized thinking rather than stream-of-consciousness.
+$$R_{\text{keywords}} = R_{\text{pattern}} + R_{\text{logic}} + R_{\text{domain}}$$
 
-**Logical rigor** (\\(R_{\text{logic}}\\)): Rewards linguistic markers of genuine reasoning — causal connectives ("therefore", "because"), hypothetical reasoning ("if...then"), evidential conclusions. Promotes logical progression from premises to conclusions.
+Three components that serve as cognitive scaffolding:
 
-**Domain knowledge** (\\(R_{\text{domain}}\\)): Rewards audio-specific expertise — acoustic terminology, musical concepts, speech analysis terms. Prevents the model from using generic reasoning patterns that ignore the audio signal.
+**Analytical patterns** (\\(R_{\text{pattern}}\\)): Detects and rewards structured reasoning strategies — elimination ("Option A is unlikely because..."), comparison ("Comparing the tempo to..."), step-by-step analysis ("First, I'll analyze the frequency spectrum..."). These patterns don't emerge reliably from outcome-only training.
 
-### Overthinking Penalty
+**Logical connectives** (\\(R_{\text{logic}}\\)): Rewards markers of genuine logical reasoning — causal chains ("therefore," "because"), hypotheticals ("if the tempo were..."), evidence-based conclusions ("based on the harmonic content..."). Promotes coherent logical progression rather than stream-of-consciousness.
 
-$$R_{\text{overthinking}}(s_i) = 1 - \frac{|t_i|}{L_{\text{max\_output}}}$$
+**Domain vocabulary** (\\(R_{\text{domain}}\\)): Rewards audio-specific terminology — acoustic properties (timbre, frequency, amplitude), musical concepts (tempo, key, chord progression), speech features (prosody, formants). This grounds reasoning in the actual audio signal rather than generic text patterns.
 
-A linear penalty that increases with reasoning length. This is the critical counterpart to structured reasoning rewards — it prevents the model from gaming the keyword reward by producing verbose, repetitive reasoning. The model must be *concise and effective*.
+### Overthinking penalty
 
----
+$$R_{\text{overthinking}}(s_i) = 1 - \frac{|t_i|}{L_{\text{max}}}$$
 
-## The "Reasoning Sweet Spot"
+A linear penalty on reasoning length. This is the essential counterpart to keyword rewards — without it, the model could game the keyword reward by producing verbose, repetitive reasoning stuffed with trigger words.
 
-With process rewards, something remarkable happens: test-time inverse scaling reverses. Performance now *increases* with reasoning length — up to a point.
+The penalty forces the model to be *concise*. Combined with the keyword reward, the optimization pressure becomes: "reason in a structured, domain-grounded, logically coherent way — and do it efficiently."
 
-CESAR discovers model-specific **"reasoning sweet spots"** — optimal reasoning depths where performance peaks:
+## The Reasoning Sweet Spot
 
-$$L_{\text{sweet}} = \arg\max_{L} P(L)$$
+With process rewards, test-time inverse scaling reverses. Performance now *increases* with reasoning length, up to a model-specific optimum:
 
-This means:
-1. Too little reasoning: the model doesn't have enough analytical depth
-2. Sweet spot: optimal reasoning depth for the task
-3. Too much reasoning: diminishing returns (but NOT degradation, unlike baselines)
+$$L_{\text{sweet}} = \arg\max_L P(L)$$
 
-For CESAR, the sweet spot provides substantial improvement over direct answering. For baseline models without process rewards, there is no sweet spot — performance only degrades with more reasoning.
+CESAR discovers "reasoning sweet spots" where the model achieves peak performance. Below this point, the model lacks sufficient analytical depth. Beyond it, returns diminish (but don't degrade — a critical difference from baselines).
 
----
+<figure style="margin:1.5em 0">
+<img src="/images/blog/cesar_slope.png" style="width:100%;border-radius:10px;border:1px solid #e0e8f0" />
+<figcaption style="font-size:0.82em;color:#666;margin-top:8px;text-align:center"><b>Fig 3.</b> Scaling slopes. CESAR is the only method with consistently positive slope — reasoning genuinely helps. Baselines show negative or flat slopes.</figcaption>
+</figure>
 
-## Results: What Process Rewards Enable
+The **scaling slope** — whether performance increases or decreases with more reasoning — is perhaps the most important metric. A positive slope means the model has genuinely learned to reason. A negative slope means it's just generating noise that happens to sometimes contain correct answers.
 
-### State-of-the-Art on MMAU
+## Beyond Reasoning: Synergistic Effects
 
-CESAR achieves state-of-the-art results on MMAU Test-mini, the standard benchmark for audio understanding and reasoning. It substantially outperforms:
-- **GPT-4o Audio**: which exhibits inverse scaling
-- **Gemini 2.5 Pro**: which also exhibits inverse scaling
-- **Ke-Omni-R** (outcome-only RL): severe inverse scaling
+An unexpected finding: improving reasoning quality also improves **perception** capabilities. Models trained with process rewards become better at basic audio understanding tasks (identifying instruments, recognizing speakers, detecting events) — even though these tasks don't require explicit reasoning.
 
-### Positive Test-Time Scaling
+<figure style="margin:1.5em 0">
+<img src="/images/blog/cesar_radar.png" style="width:100%;border-radius:10px;border:1px solid #e0e8f0" />
+<figcaption style="font-size:0.82em;color:#666;margin-top:8px;text-align:center"><b>Fig 4.</b> Multi-dimensional evaluation radar. CESAR improves not just reasoning quality but also perception accuracy across audio understanding tasks.</figcaption>
+</figure>
 
-The key result: CESAR is the only method where reasoning *genuinely helps*. The scaling slope (how performance changes with reasoning length) is **consistently positive** for CESAR and **negative or flat** for all baselines.
+This suggests that reasoning and perception are deeply entangled in multimodal models. Learning to reason *about* audio signals forces the model to develop better internal representations *of* those signals. The process rewards act as an implicit regularizer that shapes how the model attends to and processes audio features.
 
-### Synergistic Effects
+## Broader Lessons
 
-Enhanced reasoning creates a surprising bonus: it simultaneously improves **perception** capabilities. Better reasoning about audio signals leads to better understanding of the audio itself. This suggests that reasoning quality and perception quality are deeply intertwined in multimodal models.
+### 1. Process supervision matters
 
----
+The parallel to education is direct. If you only grade students on final exam answers, some will learn the material and some will learn to guess well. If you also evaluate their work (proofs, derivations, reasoning steps), you select for genuine understanding. Outcome-only rewards are like grading only final answers.
 
-## The Broader Lesson
+### 2. More compute is not automatically better
 
-The test-time inverse scaling phenomenon teaches us something important about how LLMs learn to reason:
+Test-time inverse scaling is a cautionary tale for the "just scale it" mentality. Without proper training, additional inference-time compute is wasted or harmful. The bottleneck is not compute — it's the quality of what the model does with that compute.
 
-1. **Reasoning doesn't emerge for free.** Outcome-only rewards assume that correct answers imply correct reasoning. They don't. Models can learn shortcuts that bypass genuine reasoning entirely.
+### 3. Simple rewards can be powerful
 
-2. **Process supervision matters.** Just as students need feedback on their *work* (not just their final answers), models need feedback on their reasoning process.
-
-3. **More compute isn't always better.** Without proper training, additional test-time compute (more reasoning tokens) can be actively harmful. The solution isn't more compute — it's better-trained reasoning.
-
-4. **Audio is different from text.** The modality gap means that reasoning strategies that work for text don't automatically transfer. Audio reasoning requires domain-specific grounding that pure text-based training cannot provide.
-
----
+CESAR's process rewards are deliberately simple — concept overlap, keyword detection, length penalty. No learned reward models, no LLM judges, no complex architectures. The power comes from providing *any* gradient signal on reasoning quality, where previously there was none. Going from zero supervision to basic supervision of the reasoning process is the critical step.
 
 ## Summary
 
-Test-time inverse scaling in Audio LLMs has a clear cause: **outcome-only rewards produce hallucinatory, inconsistent, unstructured reasoning** that accumulates errors with length.
-
-CESAR's process rewards fix this by providing granular feedback on reasoning quality:
-
-| Component | What It Rewards | What It Prevents |
+| Problem | Cause | Solution |
 |:---|:---|:---|
-| Consistency | Reasoning-answer alignment | Disconnected reasoning |
-| Keywords (pattern) | Structured analysis | Stream-of-consciousness |
-| Keywords (logic) | Causal reasoning | Logical fallacies |
-| Keywords (domain) | Audio expertise | Generic reasoning |
-| Overthinking penalty | Conciseness | Verbose rambling |
+| Hallucinatory reasoning | No feedback on reasoning content | Consistency reward (reasoning ↔ question) |
+| Reasoning-answer disconnect | Reward ignores reasoning chain | Consistency reward (reasoning ↔ answer) |
+| Unstructured thinking | No template for audio reasoning | Keyword rewards (pattern + logic + domain) |
+| Verbose rambling | No length pressure | Overthinking penalty |
+| Test-time inverse scaling | All of the above compounding | Multi-faceted process rewards |
 
-The result: reasoning becomes a **controllable, scalable capability** — the first Audio LLM where more thinking genuinely produces better answers.
+The key insight: **test-time inverse scaling is a training problem, not a fundamental limitation of reasoning in audio.** Process rewards resolve it by providing the gradient signal that outcome-only rewards lack.
+
+## References
+
+[1] Fan et al. "Incentivizing Consistent, Effective and Scalable Reasoning Capability in Audio LLMs via Reasoning Process Rewards." ICLR 2026. [Paper](https://openreview.net/forum?id=DUr48hxO2h)
+
+[2] Shao et al. "DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models." 2024. (GRPO)
+
+[3] Wei et al. "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models." NeurIPS 2022.
+
+[4] OpenAI. "Learning to Reason with LLMs." 2024. (o1)
+
+[5] DeepSeek-AI. "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning." 2025.
 
 ---
 
-*For full details, see our paper: [Incentivizing Consistent, Effective and Scalable Reasoning Capability in Audio LLMs via Reasoning Process Rewards](https://openreview.net/forum?id=DUr48hxO2h) (ICLR 2026). Check out the [project page](/projects/cesar/) for figures and analysis.*
+*Cited as:*
+
+```
+Fan, Jiajun. "Test-Time Inverse Scaling in Audio LLMs."
+jiajunfan.com (2025).
+```
