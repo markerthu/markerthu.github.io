@@ -167,6 +167,37 @@
 
   /* ── Smooth scrolling ── */
   html { scroll-behavior: smooth; }
+
+  /* ── Anti-flash: apply dark background before body loads ── */
+  html.dark-mode-pending { background: #0d1117; }
+  /* ── Global Dark Mode (applied from homepage toggle, persisted in localStorage) ── */
+  body.dark-mode { background: #0d1117 !important; color: #c9d1d9 !important; }
+  body.dark-mode .page__content { color: #c9d1d9 !important; }
+  body.dark-mode .masthead { background: #161b22 !important; border-bottom-color: #21262d !important; box-shadow: 0 1px 8px rgba(0,0,0,0.4) !important; }
+  body.dark-mode .site-title { color: #e6edf3 !important; }
+  body.dark-mode .greedy-nav, body.dark-mode .greedy-nav a { background: #161b22 !important; color: #8b949e !important; }
+  body.dark-mode .greedy-nav a:hover { color: #58a6ff !important; }
+  body.dark-mode .sidebar { background: #0d1117 !important; }
+  body.dark-mode .author__name { color: #e6edf3 !important; }
+  body.dark-mode .author__bio { color: #8b949e !important; }
+  body.dark-mode .author__urls a { color: #58a6ff !important; }
+  body.dark-mode .page__title { color: #e6edf3 !important; }
+  body.dark-mode .page__content h2, body.dark-mode .page__content h3 { color: #e6edf3 !important; }
+  body.dark-mode .page__content a { color: #58a6ff !important; }
+  body.dark-mode .page__content p { color: #8b949e !important; }
+  body.dark-mode .page__footer { background: #010409 !important; border-top-color: #21262d !important; }
+  body.dark-mode .page__footer a { color: #58a6ff !important; }
+  body.dark-mode .page__inner-wrap, body.dark-mode #main, body.dark-mode .page { background: #0d1117 !important; }
+  body.dark-mode .list__item { border-bottom-color: #21262d !important; }
+  body.dark-mode .archive__item-title a { color: #58a6ff !important; }
+  body.dark-mode .archive__item-excerpt { color: #8b949e !important; }
 </style>
+<script>
+  /* Apply dark mode on page load (before paint) to prevent flash */
+  if(localStorage.getItem('darkMode')==='true') document.documentElement.classList.add('dark-mode-pending');
+  document.addEventListener('DOMContentLoaded', function(){
+    if(localStorage.getItem('darkMode')==='true') document.body.classList.add('dark-mode');
+  });
+</script>
 
 <!-- end custom head snippets -->

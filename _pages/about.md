@@ -381,59 +381,136 @@ html { scroll-behavior: smooth; }
 .dark-toggle {
   position: fixed; bottom: 28px; right: 78px; z-index: 999;
   width: 40px; height: 40px; border-radius: 50%;
-  background: #1a2332; color: #ffd54f; border: none; cursor: pointer;
-  font-size: 1.1em; display: flex; align-items: center; justify-content: center;
+  background: #1a2332; color: #ffd54f; border: 2px solid rgba(255,255,255,0.1);
+  cursor: pointer; font-size: 1.1em;
+  display: flex; align-items: center; justify-content: center;
   box-shadow: 0 4px 14px rgba(0,0,0,.25);
-  transition: background .3s, transform .3s;
+  transition: all .3s;
 }
-.dark-toggle:hover { transform: scale(1.1); }
-body.dark-mode .dark-toggle { background: #ffd54f; color: #1a2332; }
+.dark-toggle:hover { transform: scale(1.1); box-shadow: 0 6px 20px rgba(0,0,0,.35); }
+body.dark-mode .dark-toggle { background: #ffd54f; color: #1a2332; border-color: #ffd54f; }
 
-body.dark-mode,
-body.dark-mode .page__content,
-body.dark-mode .masthead,
-body.dark-mode .sidebar {
-  background: #0d1117 !important; color: #c9d1d9 !important;
+/* ── Dark mode: Base ── */
+body.dark-mode { background: #0d1117 !important; color: #c9d1d9 !important; }
+body.dark-mode .page__content { color: #c9d1d9 !important; }
+
+/* ── Dark mode: Masthead / Nav ── */
+body.dark-mode .masthead {
+  background: #161b22 !important;
+  border-bottom: 2px solid #21262d !important;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.4) !important;
 }
-body.dark-mode .hero-banner {
-  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-}
+body.dark-mode .site-title { color: #e6edf3 !important; }
+body.dark-mode .greedy-nav { background: #161b22 !important; }
+body.dark-mode .greedy-nav a { color: #8b949e !important; }
+body.dark-mode .greedy-nav a:hover { color: #58a6ff !important; }
+body.dark-mode .greedy-nav .visible-links a::before { background: #58a6ff !important; }
+
+/* ── Dark mode: Sidebar ── */
+body.dark-mode .sidebar { background: #0d1117 !important; }
+body.dark-mode .author__name { color: #e6edf3 !important; }
+body.dark-mode .author__bio, body.dark-mode .author__bio span { color: #8b949e !important; }
+body.dark-mode .author__bio a { color: #58a6ff !important; }
+body.dark-mode .author__avatar img { border-color: #388bfd !important; box-shadow: 0 4px 20px rgba(56,139,253,0.2) !important; }
+body.dark-mode .author__urls a { color: #58a6ff !important; }
+body.dark-mode .author__urls-wrapper .btn { background: #21262d !important; color: #c9d1d9 !important; border-color: #30363d !important; }
+
+/* ── Dark mode: Page Title ── */
+body.dark-mode .page__title { color: #e6edf3 !important; }
+
+/* ── Dark mode: Hero ── */
+body.dark-mode .hero-banner { box-shadow: 0 8px 32px rgba(0,0,0,0.5) !important; }
+
+/* ── Dark mode: Cards & Sections ── */
 body.dark-mode .featured-card,
 body.dark-mode .research-card,
 body.dark-mode .stat-card {
-  background: #161b22 !important; border-color: #30363d !important;
-  color: #c9d1d9 !important;
+  background: #161b22 !important; border-color: #30363d !important; color: #c9d1d9 !important;
 }
 body.dark-mode .featured-card:hover,
 body.dark-mode .research-card:hover,
 body.dark-mode .stat-card:hover {
-  box-shadow: 0 6px 18px rgba(56,139,253,.2) !important;
+  border-color: #388bfd !important; box-shadow: 0 6px 18px rgba(56,139,253,.15) !important;
 }
+body.dark-mode .featured-img { border-bottom-color: #30363d !important; }
+
+/* ── Dark mode: Section Headers ── */
 body.dark-mode .section-header { color: #e6edf3 !important; }
 body.dark-mode .section-header::after { background: linear-gradient(to right, #388bfd, transparent) !important; }
+
+/* ── Dark mode: Text ── */
 body.dark-mode .pub-title, body.dark-mode .pub-title a,
 body.dark-mode .rc-title, body.dark-mode .featured-title,
 body.dark-mode .rt-title { color: #e6edf3 !important; }
 body.dark-mode .pub-desc, body.dark-mode .rc-desc,
 body.dark-mode .featured-desc, body.dark-mode .rt-desc,
-body.dark-mode .tagline { color: #8b949e !important; }
-body.dark-mode .pub-authors { color: #8b949e !important; }
+body.dark-mode .tagline, body.dark-mode p { color: #8b949e !important; }
+body.dark-mode .pub-authors { color: #6e7681 !important; }
 body.dark-mode .pub-authors strong { color: #e6edf3 !important; }
+body.dark-mode a { color: #58a6ff !important; }
+
+/* ── Dark mode: Borders ── */
 body.dark-mode .pub-entry { border-bottom-color: #21262d !important; }
 body.dark-mode .news-list li { border-bottom-color: #21262d !important; }
-body.dark-mode .quick-nav { background: #161b22 !important; }
-body.dark-mode .quick-nav a { color: #388bfd !important; }
-body.dark-mode .internship-banner { background: #161b22 !important; border-color: #388bfd !important; }
 body.dark-mode .pub-thumb-wrap { border-color: #30363d !important; }
-body.dark-mode .site-footer { border-top-color: #21262d !important; color: #484f58 !important; }
-body.dark-mode .page__footer { background: #010409 !important; }
-body.dark-mode .author__name { color: #e6edf3 !important; }
-body.dark-mode .author__bio { color: #8b949e !important; }
-body.dark-mode .site-title { color: #e6edf3 !important; }
-body.dark-mode .greedy-nav a { color: #c9d1d9 !important; }
-body.dark-mode .masthead { border-bottom-color: #388bfd !important; box-shadow: 0 2px 12px rgba(0,0,0,0.3) !important; }
+
+/* ── Dark mode: Quick Nav & Banners ── */
+body.dark-mode .quick-nav { background: #161b22 !important; }
+body.dark-mode .quick-nav a { color: #58a6ff !important; }
+body.dark-mode .quick-nav span { color: #58a6ff !important; }
+body.dark-mode .internship-banner { background: linear-gradient(135deg,#161b22,#1c2333) !important; border-color: #30363d !important; color: #c9d1d9 !important; }
+body.dark-mode .internship-banner a { color: #58a6ff !important; }
+
+/* ── Dark mode: Badges & Highlights ── */
+body.dark-mode .pub-hl { background: #1c1e21 !important; color: #ffd54f !important; border-left-color: #d29922 !important; }
 body.dark-mode .stat-number { color: #58a6ff !important; }
-body.dark-mode .pub-hl { background: #1c1e21 !important; color: #ffd54f !important; border-left-color: #ffa000 !important; }
+body.dark-mode .stat-label { color: #6e7681 !important; }
+body.dark-mode .stat-label em { color: #6e7681 !important; }
+body.dark-mode .pub-project { background: #1c2333 !important; color: #58a6ff !important; }
+body.dark-mode .pub-link.pl-paper { background: #1c2333 !important; color: #58a6ff !important; }
+body.dark-mode .pub-link.pl-project { background: #122117 !important; color: #3fb950 !important; }
+
+/* ── Dark mode: News badges ── */
+body.dark-mode .nbadge.nb-accept { background: #122117 !important; color: #3fb950 !important; }
+body.dark-mode .nbadge.nb-top { background: #2d2000 !important; color: #ffd54f !important; }
+body.dark-mode .nbadge.nb-service { background: #21262d !important; color: #8b949e !important; }
+body.dark-mode .news-date { color: #484f58 !important; }
+body.dark-mode .news-toggle { border-color: #30363d !important; color: #58a6ff !important; }
+body.dark-mode .news-toggle:hover { background: #161b22 !important; }
+
+/* ── Dark mode: Research Vision ── */
+body.dark-mode blockquote { background: #161b22 !important; border-left-color: #8957e5 !important; color: #c9d1d9 !important; }
+body.dark-mode blockquote p { color: #c9d1d9 !important; }
+body.dark-mode .rt-year { color: #58a6ff !important; }
+body.dark-mode .research-timeline::before { background: linear-gradient(to bottom, #388bfd, #8957e5, #3fb950) !important; }
+body.dark-mode .rt-item::before { border-color: #388bfd !important; background: #0d1117 !important; }
+
+/* ── Dark mode: Awards ── */
+body.dark-mode ul li { color: #8b949e !important; }
+body.dark-mode ul li strong { color: #e6edf3 !important; }
+
+/* ── Dark mode: Footer ── */
+body.dark-mode .site-footer { border-top-color: #21262d !important; color: #484f58 !important; }
+body.dark-mode .site-footer a { color: #58a6ff !important; }
+body.dark-mode .page__footer { background: #010409 !important; border-top-color: #21262d !important; }
+body.dark-mode .page__footer a { color: #58a6ff !important; }
+body.dark-mode .page__footer-follow .social-icons .fa { color: #58a6ff !important; }
+body.dark-mode .page__footer-copyright { color: #484f58 !important; }
+
+/* ── Dark mode: Scroll-top ── */
+body.dark-mode .scroll-top { background: #388bfd !important; box-shadow: 0 4px 14px rgba(56,139,253,.3) !important; }
+
+/* ── Dark mode: Featured stat ── */
+body.dark-mode .featured-stat { background: #1c1e21 !important; color: #ffd54f !important; border-left-color: #d29922 !important; }
+body.dark-mode .featured-venue { opacity: 0.9; }
+
+/* ── Dark mode: Misc ── */
+body.dark-mode .page__content h2 { color: #e6edf3 !important; }
+body.dark-mode .page__content h3 { color: #e6edf3 !important; }
+body.dark-mode .page__content blockquote { background: #161b22 !important; }
+body.dark-mode .page__inner-wrap { background: #0d1117 !important; }
+body.dark-mode #main { background: #0d1117 !important; }
+body.dark-mode .page { background: #0d1117 !important; }
 
 /* ── Animated counters ── */
 .stat-number[data-target] { transition: none; }
@@ -612,7 +689,7 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>, advised by Prof.
       <a href="https://openreview.net/forum?id=DUr48hxO2h">Incentivizing Consistent, Effective and Scalable Reasoning Capability in Audio LLMs via Reasoning Process Rewards</a>
       <a class="pub-project" href="/projects/cesar/">Project Page</a>
     </div>
-    <div class="pub-authors"><strong>J. Fan*</strong>, R. Ren, J. Li, R. Pandey, P.G. Shivakumar, Y. Gu, A. Gandhe, G. Liu, I. Bulyko</div>
+    <div class="pub-authors"><strong>J. Fan*</strong>, R. Ren, J. Li, R. Pandey, P.G. Shivakumar, A. Gandhe, G. Liu, Y. Gu, I. Bulyko</div>
     <div class="pub-desc">CESAR: process-reward RL (GRPO) resolving test-time inverse scaling in Audio LLMs — models produce hallucinatory reasoning without proper guidance; CESAR rewrites that.</div>
     <div class="pub-hl">🏆 SOTA on MMAU Test-mini · Outperforms Gemini 2.5 Pro &amp; GPT-4o Audio</div>
     <div class="pub-links">
