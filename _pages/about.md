@@ -60,24 +60,35 @@ redirect_from:
 /* ── Publication list ── */
 .pub-list { margin: 0; padding: 0; }
 .pub-entry {
-  display: flex; gap: 14px; padding: 14px 0;
-  border-bottom: 1px solid #f0f0f0; align-items: flex-start;
+  display: grid;
+  grid-template-columns: 92px 1fr;
+  gap: 16px;
+  padding: 18px 0;
+  border-bottom: 1px solid #f0f0f0;
+  align-items: start;
 }
 .pub-entry:last-child { border-bottom: none; }
 .pub-left {
-  min-width: 88px; display: flex; flex-direction: column;
+  display: flex; flex-direction: column;
   gap: 4px; align-items: flex-start; padding-top: 2px;
 }
-/* Publication thumbnail */
-.pub-thumb {
-  width: 110px; min-width: 110px; height: 70px;
-  object-fit: cover; border-radius: 7px;
+/* Publication thumbnail — now INSIDE pub-right, full-width banner */
+.pub-thumb-wrap {
+  width: 100%; margin-bottom: 10px;
+  border-radius: 8px; overflow: hidden;
   border: 1px solid #e0e8f0;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-  transition: transform .2s, box-shadow .2s;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  transition: box-shadow .2s;
 }
-.pub-thumb:hover { transform: scale(1.04); box-shadow: 0 4px 16px rgba(21,101,192,0.18); }
-@media(max-width:560px){ .pub-thumb { display: none; } }
+.pub-thumb-wrap:hover { box-shadow: 0 4px 18px rgba(21,101,192,0.15); }
+.pub-thumb-wrap img {
+  width: 100%; height: auto; display: block;
+  max-height: 160px; object-fit: cover; object-position: center top;
+}
+@media(max-width:560px){
+  .pub-entry { grid-template-columns: 1fr; }
+  .pub-left { flex-direction: row; gap: 8px; }
+}
 .pb { /* pub badge */
   display: inline-block; padding: 3px 8px; border-radius: 5px;
   font-size: 0.70em; font-weight: 900; letter-spacing: 0.02em; white-space: nowrap; line-height: 1.4;
@@ -507,8 +518,8 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>, advised by Prof.
 
 <div class="pub-entry">
   <div class="pub-left"><span class="pb pb-iclr">ICLR 2026</span><span class="pub-year">2026</span></div>
-  <img class="pub-thumb" src="/projects/cesar/images/teaser.png" alt="CESAR framework overview">
   <div class="pub-right">
+    <div class="pub-thumb-wrap"><img src="/projects/cesar/images/framework.png" alt="CESAR framework"></div>
     <div class="pub-title">
       <a href="https://openreview.net/forum?id=DUr48hxO2h">Incentivizing Consistent, Effective and Scalable Reasoning Capability in Audio LLMs via Reasoning Process Rewards</a>
       <a class="pub-project" href="/projects/cesar/">Project Page</a>
@@ -535,8 +546,8 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>, advised by Prof.
 
 <div class="pub-entry">
   <div class="pub-left"><span class="pb pb-neurips">NeurIPS 2025</span><span class="pub-year">2025</span></div>
-  <img class="pub-thumb" src="/projects/adrpo/images/teaser.png" alt="ADRPO qualitative results">
   <div class="pub-right">
+    <div class="pub-thumb-wrap"><img src="/projects/adrpo/images/compare_models.png" alt="ADRPO qualitative results"></div>
     <div class="pub-title">
       <a href="https://openreview.net/forum?id=aXO0xg0ttW">Adaptive Divergence Regularized Policy Optimization for Fine-tuning Generative Models</a>
       <a class="pub-project" href="/projects/adrpo/">Project Page</a>
@@ -563,8 +574,8 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>, advised by Prof.
 
 <div class="pub-entry">
   <div class="pub-left"><span class="pb pb-iclr">ICLR 2025</span><span class="pub-year">2025</span></div>
-  <img class="pub-thumb" src="/projects/orw-cfm-w2/images/method.png" alt="ORW-CFM-W2 method architecture">
   <div class="pub-right">
+    <div class="pub-thumb-wrap"><img src="/projects/orw-cfm-w2/images/main_figure.png" alt="ORW-CFM-W2 method"></div>
     <div class="pub-title">
       <a href="https://openreview.net/forum?id=2IoFFexvuw">Online Reward-Weighted Fine-Tuning of Flow Matching with Wasserstein Regularization</a>
       <a class="pub-project" href="/projects/orw-cfm-w2/">Project Page</a>
