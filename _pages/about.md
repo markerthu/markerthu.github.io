@@ -218,11 +218,93 @@ redirect_from:
 .stat-card:nth-child(5) { animation-delay: .33s; }
 .stat-card:nth-child(6) { animation-delay: .40s; }
 
+/* ── Featured projects grid ── */
+.featured-grid {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 1.8em;
+}
+.featured-card {
+  border-radius: 12px; overflow: hidden;
+  border: 1.5px solid #e0e8f0;
+  background: #fff;
+  transition: transform .25s, box-shadow .25s;
+  text-decoration: none !important; color: inherit;
+  display: flex; flex-direction: column;
+}
+.featured-card:hover { transform: translateY(-5px); box-shadow: 0 8px 30px rgba(21,101,192,.18); }
+.featured-img {
+  width: 100%; height: 130px; object-fit: cover; object-position: top;
+  border-bottom: 1px solid #e0e8f0;
+}
+.featured-body { padding: 14px 16px; flex: 1; display: flex; flex-direction: column; }
+.featured-venue {
+  display: inline-block; padding: 2px 8px; border-radius: 4px;
+  font-size: 0.68em; font-weight: 800; margin-bottom: 6px; width: fit-content;
+}
+.fv-iclr26 { background: #1565c0; color: #fff; }
+.fv-neurips { background: #6a1b9a; color: #fff; }
+.fv-iclr25 { background: #1976d2; color: #fff; }
+.featured-title { font-weight: 800; font-size: 0.88em; color: #1a2332; line-height: 1.4; margin-bottom: 6px; }
+.featured-desc { font-size: 0.78em; color: #555; line-height: 1.5; flex: 1; }
+.featured-stat {
+  margin-top: 8px; font-size: 0.74em; font-weight: 700;
+  color: #5a4000; background: #fff8e1;
+  padding: 3px 8px; border-radius: 4px; border-left: 3px solid #ffa000;
+  width: fit-content;
+}
+
+/* ── Pub link buttons ── */
+.pub-links { display: flex; gap: 5px; margin-top: 5px; flex-wrap: wrap; }
+.pub-link {
+  display: inline-flex; align-items: center; gap: 3px;
+  font-size: 0.72em; font-weight: 700;
+  padding: 2px 8px; border-radius: 4px;
+  text-decoration: none !important;
+  transition: background .15s;
+}
+.pl-paper { background: #e3f2fd; color: #0d47a1; }
+.pl-paper:hover { background: #bbdefb; }
+.pl-project { background: #e8f5e9; color: #1b5e20; }
+.pl-project:hover { background: #c8e6c9; }
+.pl-code { background: #fce4ec; color: #880e4f; }
+.pl-code:hover { background: #f8bbd0; }
+
+/* ── Research timeline ── */
+.research-timeline {
+  position: relative; padding-left: 28px; margin: 1em 0 1.6em;
+}
+.research-timeline::before {
+  content: ''; position: absolute; left: 8px; top: 0; bottom: 0;
+  width: 3px; background: linear-gradient(to bottom, #1565c0, #7c4dff, #00897b);
+  border-radius: 2px;
+}
+.rt-item {
+  position: relative; padding: 10px 0 18px; font-size: 0.88em;
+}
+.rt-item::before {
+  content: ''; position: absolute; left: -24px; top: 14px;
+  width: 11px; height: 11px; border-radius: 50%;
+  background: #fff; border: 3px solid #1565c0;
+  z-index: 1;
+}
+.rt-item:nth-child(2)::before { border-color: #7c4dff; }
+.rt-item:nth-child(3)::before { border-color: #00897b; }
+.rt-item:nth-child(4)::before { border-color: #e65100; }
+.rt-year { font-weight: 800; color: #1565c0; font-size: 0.82em; }
+.rt-title { font-weight: 700; color: #1a2332; margin-top: 2px; }
+.rt-desc { color: #555; font-size: 0.92em; line-height: 1.6; margin-top: 2px; }
+
+/* ── Smooth scroll ── */
+html { scroll-behavior: smooth; }
+
 /* ── Responsive ── */
-@media(max-width:760px) { .research-grid { grid-template-columns: 1fr 1fr; } }
+@media(max-width:760px) {
+  .research-grid { grid-template-columns: 1fr 1fr; }
+  .featured-grid { grid-template-columns: 1fr 1fr; }
+}
 @media(max-width:480px) {
   .hero-name { font-size: 1.65em; }
   .research-grid { grid-template-columns: 1fr; }
+  .featured-grid { grid-template-columns: 1fr; }
   .pub-entry { flex-direction: column; gap: 6px; }
   .pub-left  { flex-direction: row; }
   .stat-card { flex: 1 1 100px; padding: 10px 12px; }
@@ -251,6 +333,7 @@ redirect_from:
 <div class="quick-nav">
   <span style="font-weight:800;color:#1565c0;">↓ Jump to:</span>
   <a href="#news">📰 News</a>
+  <a href="#featured">🔥 Featured</a>
   <a href="#publications">📄 Publications</a>
   <a href="#research">🔬 Research</a>
   <a href="#awards">🏅 Awards</a>
@@ -303,6 +386,39 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>, advised by Prof.
   </li>
 </ul>
 
+<!-- ═══════════════════════════════ FEATURED ═══════════════════════════ -->
+<div class="section-header" id="featured">🔥 Featured Research</div>
+
+<div class="featured-grid">
+  <a class="featured-card" href="/projects/cesar/">
+    <img class="featured-img" src="/projects/cesar/images/teaser.png" alt="CESAR">
+    <div class="featured-body">
+      <span class="featured-venue fv-iclr26">ICLR 2026</span>
+      <div class="featured-title">CESAR: Process Rewards for Audio LLM Reasoning</div>
+      <div class="featured-desc">First to show test-time inverse scaling in Audio LLMs — and fix it with process rewards via online RL.</div>
+      <div class="featured-stat">🏆 SOTA MMAU · Beats Gemini 2.5 Pro</div>
+    </div>
+  </a>
+  <a class="featured-card" href="/projects/adrpo/">
+    <img class="featured-img" src="/projects/adrpo/images/teaser.png" alt="ADRPO">
+    <div class="featured-body">
+      <span class="featured-venue fv-neurips">NeurIPS 2025</span>
+      <div class="featured-title">ADRPO: Adaptive KL for Generative Model RLHF</div>
+      <div class="featured-desc">Sample-level adaptive divergence regularization — 2B model outperforms 12B competitors.</div>
+      <div class="featured-stat">🚀 2B SD3 &gt; FLUX 12B &amp; SANA 4.8B</div>
+    </div>
+  </a>
+  <a class="featured-card" href="/projects/orw-cfm-w2/">
+    <img class="featured-img" src="/projects/orw-cfm-w2/images/method.png" alt="ORW-CFM-W2">
+    <div class="featured-body">
+      <span class="featured-venue fv-iclr25">ICLR 2025</span>
+      <div class="featured-title">ORW-CFM-W2: Online RLHF for Flow Matching</div>
+      <div class="featured-desc">First collapse-free online RL framework for flow matching models with W2 regularization.</div>
+      <div class="featured-stat">✨ First online RLHF for flow matching</div>
+    </div>
+  </a>
+</div>
+
 <!-- ═══════════════════════════════ PUBLICATIONS ═══════════════════════ -->
 <div class="section-header" id="publications">📄 Selected Publications</div>
 
@@ -323,6 +439,10 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>, advised by Prof.
     <div class="pub-authors"><strong>J. Fan*</strong>, R. Ren, J. Li, R. Pandey, P.G. Shivakumar, Y. Gu, A. Gandhe, G. Liu, I. Bulyko</div>
     <div class="pub-desc">CESAR: process-reward RL (GRPO) resolving test-time inverse scaling in Audio LLMs — models produce hallucinatory reasoning without proper guidance; CESAR rewrites that.</div>
     <div class="pub-hl">🏆 SOTA on MMAU Test-mini · Outperforms Gemini 2.5 Pro &amp; GPT-4o Audio</div>
+    <div class="pub-links">
+      <a class="pub-link pl-paper" href="https://openreview.net/forum?id=DUr48hxO2h">📄 Paper</a>
+      <a class="pub-link pl-project" href="/projects/cesar/">🔗 Project</a>
+    </div>
   </div>
 </div>
 
@@ -347,6 +467,10 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>, advised by Prof.
     <div class="pub-authors"><strong>J. Fan*</strong>, T. Wei, C. Cheng, Y. Chen, G. Liu</div>
     <div class="pub-desc">ADRPO: sample-level adaptive KL — high-value samples get more freedom, poor samples get stronger constraint. Plug-and-play on top of any RLHF method.</div>
     <div class="pub-hl">🚀 2B SD3 surpasses 4.8B &amp; 12B models · Generalizes to LLMs &amp; audio reasoning</div>
+    <div class="pub-links">
+      <a class="pub-link pl-paper" href="https://openreview.net/forum?id=aXO0xg0ttW">📄 Paper</a>
+      <a class="pub-link pl-project" href="/projects/adrpo/">🔗 Project</a>
+    </div>
   </div>
 </div>
 
@@ -475,12 +599,35 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>, advised by Prof.
 <!-- ═══════════════════════════════ VISION ════════════════════════════ -->
 <div class="section-header">💡 Research Vision</div>
 
-<blockquote style="background:#f8f4ff;border-left:4px solid #7c4dff;border-radius:0 8px 8px 0;padding:14px 20px;color:#333;font-style:normal;">
+<blockquote style="background:#f8f4ff;border-left:4px solid #7c4dff;border-radius:0 8px 8px 0;padding:14px 20px;color:#333;font-style:normal;margin-bottom:1em;">
 <p style="margin:0 0 6px;font-weight:800;color:#4a148c;font-size:1em;">Making AI Systems That Improve Themselves</p>
 <p style="margin:0;font-size:0.92em;line-height:1.75;">
-Today's AI is frozen after training. I work to change that: AI that <strong>never stops getting better</strong>, with less and less human scaffolding at each step. The roadmap: <em>eliminate human-collected data (ORW-CFM-W2) → remove manual KL tuning (ADRPO) → drop hand-crafted process rewards (CESAR) → fully autonomous self-critique (ongoing).</em>
+Today's AI is frozen after training. I work to change that: AI that <strong>never stops getting better</strong>, with progressively less human scaffolding.
 </p>
 </blockquote>
+
+<div class="research-timeline">
+  <div class="rt-item">
+    <div class="rt-year">Step 1 — ICLR 2025</div>
+    <div class="rt-title">Eliminate human-collected preference data</div>
+    <div class="rt-desc">ORW-CFM-W2: online reward-weighted training lets models improve from their own generations — no paired human data needed.</div>
+  </div>
+  <div class="rt-item">
+    <div class="rt-year">Step 2 — NeurIPS 2025</div>
+    <div class="rt-title">Remove manual KL tuning</div>
+    <div class="rt-desc">ADRPO: adaptive divergence control eliminates the need for hand-tuned regularization — each sample gets its own constraint.</div>
+  </div>
+  <div class="rt-item">
+    <div class="rt-year">Step 3 — ICLR 2026</div>
+    <div class="rt-title">Drop hand-crafted process rewards</div>
+    <div class="rt-desc">CESAR: the model learns to evaluate its own reasoning process — no manually designed reward signals required.</div>
+  </div>
+  <div class="rt-item" style="opacity:0.7;">
+    <div class="rt-year" style="color:#e65100;">Step 4 — Ongoing</div>
+    <div class="rt-title">Fully autonomous self-critique</div>
+    <div class="rt-desc">The endgame: models that design their own training curriculum, evaluate their own outputs, and improve without any human oversight.</div>
+  </div>
+</div>
 
 <!-- ═══════════════════════════════ AWARDS ════════════════════════════ -->
 <div class="section-header" id="awards">🏅 Awards &amp; Academic Service</div>
