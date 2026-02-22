@@ -192,7 +192,19 @@ footer a{color:#ce93d8}
     <img src="images/comparison.png" alt="ADRPO vs other RL methods"
          style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 4px 24px rgba(0,0,0,0.10)">
     <figcaption style="text-align:center;font-size:0.82em;color:#666;margin-top:12px;line-height:1.6">
-      <strong>Figure 2.</strong> Comparison with RL fine-tuning baselines (DPO, ORW-CFM-W2). ADRPO achieves superior style fidelity, spatial reasoning, and attribute binding — demonstrating that adaptive divergence control outperforms fixed regularization across all tasks.
+      <strong>Figure 2.</strong> Comparison with RL fine-tuning baselines (DPO, ORW-CFM-W2). ADRPO achieves superior style fidelity, spatial reasoning, and attribute binding.
+    </figcaption>
+  </figure>
+</section>
+
+<!-- Reward-KL Tradeoff -->
+<section>
+  <h2>📈 Reward–Diversity Tradeoff</h2>
+  <figure style="margin:0">
+    <img src="images/reward_kl.png" alt="Reward vs KL tradeoff"
+         style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 4px 20px rgba(0,0,0,0.08)">
+    <figcaption style="text-align:center;font-size:0.82em;color:#666;margin-top:10px;line-height:1.6">
+      <strong>Figure 3.</strong> Reward vs. KL divergence tradeoff. ADRPO achieves <em>higher reward at lower KL</em> than fixed-regularization baselines — demonstrating that adaptive control finds a better exploration–exploitation balance.
     </figcaption>
   </figure>
 </section>

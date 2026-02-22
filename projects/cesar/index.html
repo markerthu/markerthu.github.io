@@ -215,6 +215,39 @@ footer a{color:#7eb8f7}
   </table>
 </section>
 
+<!-- Scaling Curves -->
+<section>
+  <h2>📈 Test-Time Scaling Analysis</h2>
+  <figure style="margin:0 0 24px">
+    <img src="images/scaling.png" alt="Test-time scaling curves"
+         style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 4px 20px rgba(0,0,0,0.08)">
+    <figcaption style="text-align:center;font-size:0.82em;color:#666;margin-top:10px;line-height:1.6">
+      <strong>Figure 2.</strong> Test-time scaling curves. Baseline models exhibit <em>inverse scaling</em> — more reasoning tokens degrade performance. CESAR resolves this: reasoning genuinely improves results as test-time compute increases.
+    </figcaption>
+  </figure>
+</section>
+
+<!-- Radar + Training -->
+<section>
+  <h2>🎯 Detailed Analysis</h2>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:16px">
+    <figure style="margin:0">
+      <img src="images/radar.png" alt="Performance radar chart"
+           style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
+      <figcaption style="text-align:center;font-size:0.78em;color:#666;margin-top:8px">
+        <strong>Figure 3.</strong> Multi-dimensional performance comparison across reasoning quality dimensions.
+      </figcaption>
+    </figure>
+    <figure style="margin:0">
+      <img src="images/training_curve.png" alt="Training curves"
+           style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
+      <figcaption style="text-align:center;font-size:0.78em;color:#666;margin-top:8px">
+        <strong>Figure 4.</strong> Training curves showing stable convergence of CESAR's process rewards.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
 <!-- Journey -->
 <section>
   <h2>📅 Publication Journey</h2>

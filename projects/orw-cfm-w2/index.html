@@ -184,6 +184,44 @@ footer a{color:#80cbc4}
   <p style="font-size:0.88em;color:#666;margin-top:8px;">Tasks: target image generation, image compression, text-image alignment. Consistently achieves optimal policy convergence while allowing controllable diversity-reward trade-offs.</p>
 </section>
 
+<!-- Visual Results -->
+<section>
+  <h2>🎨 Visual Results on SD3</h2>
+
+  <figure style="margin:0 0 24px">
+    <img src="images/positional.png" alt="Positional understanding results"
+         style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 4px 20px rgba(0,0,0,0.08)">
+    <figcaption style="text-align:center;font-size:0.82em;color:#666;margin-top:10px;line-height:1.6">
+      <strong>Figure 2.</strong> Spatial/positional understanding. ORW-CFM-W2 enables SD3 to correctly handle complex positional prompts that the base model fails on.
+    </figcaption>
+  </figure>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
+    <figure style="margin:0">
+      <img src="images/multi_baseline.png" alt="Multi-baseline comparison"
+           style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
+      <figcaption style="text-align:center;font-size:0.78em;color:#666;margin-top:8px">
+        <strong>Figure 3.</strong> Comparison with multiple baselines on target image generation.
+      </figcaption>
+    </figure>
+    <figure style="margin:0">
+      <img src="images/multi_reward.png" alt="Multi-reward optimization"
+           style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
+      <figcaption style="text-align:center;font-size:0.78em;color:#666;margin-top:8px">
+        <strong>Figure 4.</strong> Multi-reward optimization across diverse prompts and reward signals.
+      </figcaption>
+    </figure>
+  </div>
+
+  <figure style="margin:24px 0 0">
+    <img src="images/semantic.png" alt="Semantic detail enhancement"
+         style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 4px 20px rgba(0,0,0,0.08)">
+    <figcaption style="text-align:center;font-size:0.82em;color:#666;margin-top:10px;line-height:1.6">
+      <strong>Figure 5.</strong> Semantic detail enhancement. Fine-tuned SD3 generates images with richer detail and better semantic correspondence.
+    </figcaption>
+  </figure>
+</section>
+
 <section>
   <h2>📅 Publication Journey</h2>
   <div style="position:relative;padding-left:24px;margin:8px 0">

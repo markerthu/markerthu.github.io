@@ -447,20 +447,6 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>, advised by Prof.
 </div>
 
 <div class="pub-entry">
-  <div class="pub-left"><span class="pb pb-arxiv">Preprint</span><span class="pub-year">2026</span></div>
-  <img class="pub-thumb" src="/projects/sear/images/teaser.png" alt="SEAR framework">
-  <div class="pub-right">
-    <div class="pub-title">
-      <a href="#">Self-Evolving Audio Reasoners: When Reasoning Models Become Their Own Critics</a>
-      <a class="pub-project" href="/projects/sear/">Project Page</a>
-    </div>
-    <div class="pub-authors"><strong>J. Fan*</strong>, R. Ren, J. Li, R.V. Swaminathan, Y.S. Gu, G. Liu, I. Bulyko</div>
-    <div class="pub-desc">SEAR: the model becomes its own critic — fully autonomous self-evolving RL with zero hand-crafted rewards.</div>
-    <div class="pub-hl">🧠 Autonomous self-critique · Successor to CESAR</div>
-  </div>
-</div>
-
-<div class="pub-entry">
   <div class="pub-left"><span class="pb pb-iclr">ICLR 2026</span><span class="pub-year">2026</span></div>
   <div class="pub-right">
     <div class="pub-title"><a href="https://openreview.net/forum?id=RwdGIIjPlC">SP-VLA: A Joint Model Scheduling and Token Pruning Approach for VLA Model Acceleration</a></div>
