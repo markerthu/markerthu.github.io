@@ -377,6 +377,91 @@ html { scroll-behavior: smooth; }
 .featured-card { position: relative; }
 .featured-card:hover::after { opacity: 1; }
 
+/* ── Dark mode ── */
+.dark-toggle {
+  position: fixed; bottom: 28px; right: 78px; z-index: 999;
+  width: 40px; height: 40px; border-radius: 50%;
+  background: #1a2332; color: #ffd54f; border: none; cursor: pointer;
+  font-size: 1.1em; display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 14px rgba(0,0,0,.25);
+  transition: background .3s, transform .3s;
+}
+.dark-toggle:hover { transform: scale(1.1); }
+body.dark-mode .dark-toggle { background: #ffd54f; color: #1a2332; }
+
+body.dark-mode,
+body.dark-mode .page__content,
+body.dark-mode .masthead,
+body.dark-mode .sidebar {
+  background: #0d1117 !important; color: #c9d1d9 !important;
+}
+body.dark-mode .hero-banner {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+body.dark-mode .featured-card,
+body.dark-mode .research-card,
+body.dark-mode .stat-card {
+  background: #161b22 !important; border-color: #30363d !important;
+  color: #c9d1d9 !important;
+}
+body.dark-mode .featured-card:hover,
+body.dark-mode .research-card:hover,
+body.dark-mode .stat-card:hover {
+  box-shadow: 0 6px 18px rgba(56,139,253,.2) !important;
+}
+body.dark-mode .section-header { color: #e6edf3 !important; }
+body.dark-mode .section-header::after { background: linear-gradient(to right, #388bfd, transparent) !important; }
+body.dark-mode .pub-title, body.dark-mode .pub-title a,
+body.dark-mode .rc-title, body.dark-mode .featured-title,
+body.dark-mode .rt-title { color: #e6edf3 !important; }
+body.dark-mode .pub-desc, body.dark-mode .rc-desc,
+body.dark-mode .featured-desc, body.dark-mode .rt-desc,
+body.dark-mode .tagline { color: #8b949e !important; }
+body.dark-mode .pub-authors { color: #8b949e !important; }
+body.dark-mode .pub-authors strong { color: #e6edf3 !important; }
+body.dark-mode .pub-entry { border-bottom-color: #21262d !important; }
+body.dark-mode .news-list li { border-bottom-color: #21262d !important; }
+body.dark-mode .quick-nav { background: #161b22 !important; }
+body.dark-mode .quick-nav a { color: #388bfd !important; }
+body.dark-mode .internship-banner { background: #161b22 !important; border-color: #388bfd !important; }
+body.dark-mode .pub-thumb-wrap { border-color: #30363d !important; }
+body.dark-mode .site-footer { border-top-color: #21262d !important; color: #484f58 !important; }
+body.dark-mode .page__footer { background: #010409 !important; }
+body.dark-mode .author__name { color: #e6edf3 !important; }
+body.dark-mode .author__bio { color: #8b949e !important; }
+body.dark-mode .site-title { color: #e6edf3 !important; }
+body.dark-mode .greedy-nav a { color: #c9d1d9 !important; }
+body.dark-mode .masthead { border-bottom-color: #388bfd !important; box-shadow: 0 2px 12px rgba(0,0,0,0.3) !important; }
+body.dark-mode .stat-number { color: #58a6ff !important; }
+body.dark-mode .pub-hl { background: #1c1e21 !important; color: #ffd54f !important; border-left-color: #ffa000 !important; }
+
+/* ── Animated counters ── */
+.stat-number[data-target] { transition: none; }
+
+/* ── Particle canvas ── */
+.hero-banner { position: relative; overflow: hidden; }
+.hero-particles {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+}
+.hero-banner > *:not(.hero-particles) { position: relative; z-index: 1; }
+
+/* ── Typing cursor ── */
+.typing-cursor {
+  display: inline-block; width: 2px; height: 1em;
+  background: #90caf9; margin-left: 2px;
+  animation: blink 0.8s step-end infinite;
+  vertical-align: text-bottom;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+/* ── Image lazy-load fade ── */
+img[loading="lazy"] {
+  opacity: 0; transition: opacity 0.4s;
+}
+img[loading="lazy"].loaded, img[loading="lazy"][complete] {
+  opacity: 1;
+}
+
 /* ── Responsive ── */
 @media(max-width:760px) {
   .research-grid { grid-template-columns: 1fr 1fr; }
@@ -390,13 +475,16 @@ html { scroll-behavior: smooth; }
   .pub-left  { flex-direction: row; }
   .stat-card { flex: 1 1 100px; padding: 10px 12px; }
   .stat-number { font-size: 1.5em; }
+  .dark-toggle { bottom: 76px; right: 16px; }
+  .scroll-top { right: 16px; }
 }
 </style>
 
 <!-- Hero banner -->
 <div class="hero-banner">
+  <canvas class="hero-particles" id="particles"></canvas>
   <div class="hero-name">Jiajun Fan</div>
-  <div class="hero-subtitle">CS Ph.D. Student · University of Illinois Urbana-Champaign</div>
+  <div class="hero-subtitle" id="hero-typed"></div>
   <div class="hero-pills">
     <span class="hero-pill">🌊 RL Post-Training for Generative Models</span>
     <span class="hero-pill">🧠 Multimodal Reasoning LLMs</span>
@@ -479,7 +567,7 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>, advised by Prof.
 
 <div class="featured-grid">
   <a class="featured-card" href="/projects/cesar/">
-    <img class="featured-img" src="/projects/cesar/images/teaser.png" alt="CESAR">
+    <img class="featured-img" loading="lazy" src="/projects/cesar/images/teaser.png" alt="CESAR">
     <div class="featured-body">
       <span class="featured-venue fv-iclr26">ICLR 2026</span>
       <div class="featured-title">CESAR: Process Rewards for Audio LLM Reasoning</div>
@@ -488,7 +576,7 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>, advised by Prof.
     </div>
   </a>
   <a class="featured-card" href="/projects/adrpo/">
-    <img class="featured-img" src="/projects/adrpo/images/teaser.png" alt="ADRPO">
+    <img class="featured-img" loading="lazy" src="/projects/adrpo/images/teaser.png" alt="ADRPO">
     <div class="featured-body">
       <span class="featured-venue fv-neurips">NeurIPS 2025</span>
       <div class="featured-title">ADRPO: Adaptive KL for Generative Model RLHF</div>
@@ -497,7 +585,7 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>, advised by Prof.
     </div>
   </a>
   <a class="featured-card" href="/projects/orw-cfm-w2/">
-    <img class="featured-img" src="/projects/orw-cfm-w2/images/method.png" alt="ORW-CFM-W2">
+    <img class="featured-img" loading="lazy" src="/projects/orw-cfm-w2/images/method.png" alt="ORW-CFM-W2">
     <div class="featured-body">
       <span class="featured-venue fv-iclr25">ICLR 2025</span>
       <div class="featured-title">ORW-CFM-W2: Online RLHF for Flow Matching</div>
@@ -519,7 +607,7 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>, advised by Prof.
 <div class="pub-entry">
   <div class="pub-left"><span class="pb pb-iclr">ICLR 2026</span><span class="pub-year">2026</span></div>
   <div class="pub-right">
-    <div class="pub-thumb-wrap"><img src="/projects/cesar/images/framework.png" alt="CESAR framework"></div>
+    <div class="pub-thumb-wrap"><img loading="lazy" src="/projects/cesar/images/framework.png" alt="CESAR framework"></div>
     <div class="pub-title">
       <a href="https://openreview.net/forum?id=DUr48hxO2h">Incentivizing Consistent, Effective and Scalable Reasoning Capability in Audio LLMs via Reasoning Process Rewards</a>
       <a class="pub-project" href="/projects/cesar/">Project Page</a>
@@ -547,7 +635,7 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>, advised by Prof.
 <div class="pub-entry">
   <div class="pub-left"><span class="pb pb-neurips">NeurIPS 2025</span><span class="pub-year">2025</span></div>
   <div class="pub-right">
-    <div class="pub-thumb-wrap"><img src="/projects/adrpo/images/compare_models.png" alt="ADRPO qualitative results"></div>
+    <div class="pub-thumb-wrap"><img loading="lazy" src="/projects/adrpo/images/compare_models.png" alt="ADRPO qualitative results"></div>
     <div class="pub-title">
       <a href="https://openreview.net/forum?id=aXO0xg0ttW">Adaptive Divergence Regularized Policy Optimization for Fine-tuning Generative Models</a>
       <a class="pub-project" href="/projects/adrpo/">Project Page</a>
@@ -575,7 +663,7 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>, advised by Prof.
 <div class="pub-entry">
   <div class="pub-left"><span class="pb pb-iclr">ICLR 2025</span><span class="pub-year">2025</span></div>
   <div class="pub-right">
-    <div class="pub-thumb-wrap"><img src="/projects/orw-cfm-w2/images/main_figure.png" alt="ORW-CFM-W2 method"></div>
+    <div class="pub-thumb-wrap"><img loading="lazy" src="/projects/orw-cfm-w2/images/main_figure.png" alt="ORW-CFM-W2 method"></div>
     <div class="pub-title">
       <a href="https://openreview.net/forum?id=2IoFFexvuw">Online Reward-Weighted Fine-Tuning of Flow Matching with Wasserstein Regularization</a>
       <a class="pub-project" href="/projects/orw-cfm-w2/">Project Page</a>
@@ -659,15 +747,15 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>, advised by Prof.
 
 <div class="stats-row">
   <div class="stat-card">
-    <div class="stat-number">9+</div>
+    <div class="stat-number" data-target="9" data-suffix="+">0</div>
     <div class="stat-label">Top Venue Papers<br><em>ICLR · NeurIPS · ICML · TPAMI</em></div>
   </div>
   <div class="stat-card">
-    <div class="stat-number">24</div>
+    <div class="stat-number" data-target="24">0</div>
     <div class="stat-label">Atari World Records<br><em>broken by LBC (ICLR'23 Oral)</em></div>
   </div>
   <div class="stat-card">
-    <div class="stat-number">500×</div>
+    <div class="stat-number" data-target="500" data-suffix="×">0</div>
     <div class="stat-label">More Data-Efficient<br><em>than Agent57</em></div>
   </div>
   <div class="stat-card">
@@ -675,7 +763,7 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>, advised by Prof.
     <div class="stat-label">MMAU Audio Reasoning<br><em>Beats Gemini 2.5 Pro</em></div>
   </div>
   <div class="stat-card">
-    <div class="stat-number">200+</div>
+    <div class="stat-number" data-target="200" data-suffix="+">0</div>
     <div class="stat-label">Google Scholar Citations</div>
   </div>
   <div class="stat-card">
@@ -766,12 +854,129 @@ Happy to discuss research, internships, or collaborations. Best reached by email
   <p>© 2026 Jiajun Fan · CS Ph.D. @ UIUC · Built with ☕ and curiosity</p>
 </div>
 
-<!-- Scroll-to-top button -->
+<!-- Scroll-to-top + Dark mode buttons -->
 <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<button class="dark-toggle" id="darkToggle" title="Toggle dark mode">🌙</button>
+
 <script>
+/* ── Scroll-to-top ── */
 window.addEventListener('scroll', function(){
   var btn = document.getElementById('scrollTop');
   if(window.scrollY > 500) btn.classList.add('show');
   else btn.classList.remove('show');
+});
+
+/* ── Dark mode toggle ── */
+(function(){
+  var btn = document.getElementById('darkToggle');
+  var saved = localStorage.getItem('darkMode');
+  if(saved === 'true') { document.body.classList.add('dark-mode'); btn.textContent = '☀️'; }
+  btn.addEventListener('click', function(){
+    document.body.classList.toggle('dark-mode');
+    var on = document.body.classList.contains('dark-mode');
+    btn.textContent = on ? '☀️' : '🌙';
+    localStorage.setItem('darkMode', on);
+  });
+})();
+
+/* ── Typing effect ── */
+(function(){
+  var el = document.getElementById('hero-typed');
+  if(!el) return;
+  var texts = [
+    'CS Ph.D. Student · University of Illinois Urbana-Champaign',
+    'RL Post-Training for Generative Models',
+    'Making AI Systems That Improve Themselves'
+  ];
+  var ti=0, ci=0, deleting=false, pause=0;
+  function tick(){
+    var t = texts[ti];
+    if(!deleting){
+      el.innerHTML = t.substring(0,ci) + '<span class="typing-cursor"></span>';
+      ci++;
+      if(ci > t.length){ pause++; if(pause > 30){ deleting=true; pause=0; } }
+    } else {
+      ci--;
+      el.innerHTML = t.substring(0,ci) + '<span class="typing-cursor"></span>';
+      if(ci === 0){ deleting=false; ti=(ti+1) % texts.length; }
+    }
+    setTimeout(tick, deleting ? 25 : (ci===t.length ? 60 : 45));
+  }
+  tick();
+})();
+
+/* ── Animated counters ── */
+(function(){
+  var animated = false;
+  function animateCounters(){
+    if(animated) return;
+    var els = document.querySelectorAll('.stat-number[data-target]');
+    var rect = els[0] && els[0].getBoundingClientRect();
+    if(!rect || rect.top > window.innerHeight) return;
+    animated = true;
+    els.forEach(function(el){
+      var target = parseInt(el.getAttribute('data-target'));
+      var suffix = el.getAttribute('data-suffix') || '';
+      var dur = 1200, start = performance.now();
+      function step(now){
+        var p = Math.min((now-start)/dur, 1);
+        p = 1 - Math.pow(1-p, 3); /* easeOutCubic */
+        el.textContent = Math.round(target * p) + suffix;
+        if(p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    });
+  }
+  window.addEventListener('scroll', animateCounters);
+  animateCounters();
+})();
+
+/* ── Particle canvas ── */
+(function(){
+  var c = document.getElementById('particles');
+  if(!c) return;
+  var ctx = c.getContext('2d');
+  var pts = [];
+  function resize(){
+    c.width = c.parentElement.offsetWidth;
+    c.height = c.parentElement.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+  for(var i=0;i<40;i++){
+    pts.push({
+      x: Math.random()*c.width, y: Math.random()*c.height,
+      vx: (Math.random()-0.5)*0.4, vy: (Math.random()-0.5)*0.4,
+      r: Math.random()*2+1
+    });
+  }
+  function draw(){
+    ctx.clearRect(0,0,c.width,c.height);
+    ctx.fillStyle = 'rgba(255,255,255,0.25)';
+    for(var i=0;i<pts.length;i++){
+      var p=pts[i];
+      p.x+=p.vx; p.y+=p.vy;
+      if(p.x<0||p.x>c.width) p.vx*=-1;
+      if(p.y<0||p.y>c.height) p.vy*=-1;
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();
+      /* draw lines between nearby particles */
+      for(var j=i+1;j<pts.length;j++){
+        var q=pts[j], dx=p.x-q.x, dy=p.y-q.y, d=Math.sqrt(dx*dx+dy*dy);
+        if(d<120){
+          ctx.strokeStyle='rgba(255,255,255,'+(0.12*(1-d/120))+')';
+          ctx.lineWidth=0.8;
+          ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(q.x,q.y); ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ── Lazy load fade-in ── */
+document.querySelectorAll('img[loading="lazy"]').forEach(function(img){
+  if(img.complete) img.classList.add('loaded');
+  else img.addEventListener('load', function(){ img.classList.add('loaded'); });
 });
 </script>
