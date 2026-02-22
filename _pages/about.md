@@ -147,33 +147,35 @@ redirect_from:
 .stat-label  { font-size: 0.77em; color: #666; margin-top: 4px; line-height: 1.35; }
 
 /* ── Animated hero banner ── */
-@keyframes gradientShift {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
 .hero-banner {
-  background: linear-gradient(-45deg, #0d1b2a, #1a3a5c, #1565c0, #0a2540, #0d47a1);
-  background-size: 400% 400%;
-  animation: gradientShift 14s ease infinite;
+  background: #f8fbff;
+  border: 1.5px solid #e0e8f0;
   border-radius: 14px;
   padding: 36px 28px 30px;
   margin-bottom: 1.6em;
   text-align: center;
-  color: #fff;
-  box-shadow: 0 8px 32px rgba(21,101,192,0.18);
+  position: relative;
+  overflow: hidden;
+}
+.hero-banner::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(to right, #1565c0, #7c4dff, #00897b);
+  border-radius: 14px 14px 0 0;
 }
 .hero-name {
   font-size: 2.1em;
   font-weight: 900;
-  color: #fff;
+  color: #1a2332;
   margin-bottom: 6px;
   letter-spacing: -0.02em;
   line-height: 1.15;
 }
 .hero-subtitle {
   font-size: 0.96em;
-  color: #90caf9;
+  color: #555;
   margin-bottom: 18px;
   font-weight: 500;
 }
@@ -184,37 +186,15 @@ redirect_from:
   justify-content: center;
   margin-bottom: 20px;
 }
-.hero-pill {
-  background: rgba(255,255,255,0.10);
-  border: 1px solid rgba(255,255,255,0.18);
-  color: #e3f2fd;
-  padding: 4px 13px;
-  border-radius: 20px;
-  font-size: 0.80em;
-  font-weight: 600;
-  backdrop-filter: blur(4px);
-}
+.hero-pill {background: rgba(21,101,192,0.08); border: 1px solid rgba(21,101,192,0.2); color: #1565c0; padding: 4px 13px; border-radius: 20px; font-size: 0.80em; font-weight: 600;}
 .hero-links {
   display: flex;
   gap: 8px;
   justify-content: center;
   flex-wrap: wrap;
 }
-.hero-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  background: rgba(255,255,255,0.13);
-  border: 1px solid rgba(255,255,255,0.22);
-  color: #fff !important;
-  padding: 6px 15px;
-  border-radius: 8px;
-  font-size: 0.82em;
-  font-weight: 700;
-  text-decoration: none !important;
-  transition: background .2s, transform .15s;
-}
-.hero-link:hover { background: rgba(255,255,255,0.22); transform: translateY(-1px); }
+.hero-link {display: inline-flex; align-items: center; gap: 5px; background: #1565c0; border: none; color: #fff !important; padding: 6px 15px; border-radius: 8px; font-size: 0.82em; font-weight: 700; text-decoration: none !important; transition: background .2s, transform .15s;}
+.hero-link:hover { background: #0d47a1; transform: translateY(-1px); }
 
 /* ── Stat card animation ── */
 @keyframes fadeUp {
@@ -419,7 +399,8 @@ body.dark-mode .author__urls-wrapper .btn { background: #21262d !important; colo
 body.dark-mode .page__title { color: #e6edf3 !important; }
 
 /* ── Dark mode: Hero ── */
-body.dark-mode .hero-banner { box-shadow: 0 8px 32px rgba(0,0,0,0.5) !important; }
+body.dark-mode .hero-banner { background: #161b22 !important; border-color: #30363d !important; }
+body.dark-mode .hero-banner::before { background: linear-gradient(to right, #388bfd, #8957e5, #3fb950) !important; }
 
 /* ── Dark mode: Cards & Sections ── */
 body.dark-mode .featured-card,
@@ -516,12 +497,6 @@ body.dark-mode .page { background: #0d1117 !important; }
 .stat-number[data-target] { transition: none; }
 
 /* ── Particle canvas ── */
-.hero-banner { position: relative; overflow: hidden; }
-.hero-particles {
-  position: absolute; inset: 0; z-index: 0; pointer-events: none;
-}
-.hero-banner > *:not(.hero-particles) { position: relative; z-index: 1; }
-
 /* ── Typing cursor ── */
 .typing-cursor {
   display: inline-block; width: 2px; height: 1em;
@@ -559,7 +534,6 @@ img[loading="lazy"].loaded, img[loading="lazy"][complete] {
 
 <!-- Hero banner -->
 <div class="hero-banner">
-  <canvas class="hero-particles" id="particles"></canvas>
   <div class="hero-name">Jiajun Fan</div>
   <div class="hero-subtitle" id="hero-typed"></div>
   <div class="hero-pills">
@@ -1008,49 +982,6 @@ window.addEventListener('scroll', function(){
   }
   window.addEventListener('scroll', animateCounters);
   animateCounters();
-})();
-
-/* ── Particle canvas ── */
-(function(){
-  var c = document.getElementById('particles');
-  if(!c) return;
-  var ctx = c.getContext('2d');
-  var pts = [];
-  function resize(){
-    c.width = c.parentElement.offsetWidth;
-    c.height = c.parentElement.offsetHeight;
-  }
-  resize();
-  window.addEventListener('resize', resize);
-  for(var i=0;i<40;i++){
-    pts.push({
-      x: Math.random()*c.width, y: Math.random()*c.height,
-      vx: (Math.random()-0.5)*0.4, vy: (Math.random()-0.5)*0.4,
-      r: Math.random()*2+1
-    });
-  }
-  function draw(){
-    ctx.clearRect(0,0,c.width,c.height);
-    ctx.fillStyle = 'rgba(255,255,255,0.25)';
-    for(var i=0;i<pts.length;i++){
-      var p=pts[i];
-      p.x+=p.vx; p.y+=p.vy;
-      if(p.x<0||p.x>c.width) p.vx*=-1;
-      if(p.y<0||p.y>c.height) p.vy*=-1;
-      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();
-      /* draw lines between nearby particles */
-      for(var j=i+1;j<pts.length;j++){
-        var q=pts[j], dx=p.x-q.x, dy=p.y-q.y, d=Math.sqrt(dx*dx+dy*dy);
-        if(d<120){
-          ctx.strokeStyle='rgba(255,255,255,'+(0.12*(1-d/120))+')';
-          ctx.lineWidth=0.8;
-          ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(q.x,q.y); ctx.stroke();
-        }
-      }
-    }
-    requestAnimationFrame(draw);
-  }
-  draw();
 })();
 
 /* ── Lazy load fade-in ── */
