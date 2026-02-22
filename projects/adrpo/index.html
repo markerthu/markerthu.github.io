@@ -19,7 +19,12 @@ a{color:#6a1b9a;text-decoration:none}a:hover{text-decoration:underline}
 .topnav a{color:#ce93d8;font-weight:600}
 .topnav span{color:#4a2060}
 
-.hero{background:linear-gradient(135deg,#1a0030 0%,#4a0080 50%,#1a0050 100%);padding:64px 24px 56px;text-align:center}
+@keyframes heroShift{
+  0%   { background-position: 0% 50%;   }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%;   }
+}
+.hero{background:linear-gradient(-45deg,#1a0030,#4a0080,#7b1fa2,#1a0050);background-size:300% 300%;animation:heroShift 16s ease infinite;padding:64px 24px 56px;text-align:center}
 .venue-badge{display:inline-block;background:#7b1fa2;color:#fff;padding:6px 18px;border-radius:24px;font-size:0.82em;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:20px}
 .hero h1{font-size:clamp(1.5em,4vw,2.4em);font-weight:800;color:#fff;line-height:1.25;max-width:800px;margin:0 auto 14px}
 .hero .short{font-size:1.05em;color:#ce93d8;margin-bottom:28px;font-weight:500}
