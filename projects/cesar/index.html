@@ -223,57 +223,110 @@ footer a{color:#7eb8f7}
   </table>
 </section>
 
-<!-- Scaling Curves -->
+<!-- Framework with Scale -->
 <section>
-  <h2>📈 Test-Time Scaling Analysis</h2>
+  <h2>🏗️ Framework Architecture</h2>
   <figure style="margin:0 0 24px">
-    <img src="images/scaling.png" alt="Test-time scaling curves"
-         style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 4px 20px rgba(0,0,0,0.08)">
+    <img src="images/framework_large.png" alt="CESAR framework with scaling"
+         style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 4px 24px rgba(0,0,0,0.10)">
     <figcaption style="text-align:center;font-size:0.82em;color:#666;margin-top:10px;line-height:1.6">
-      <strong>Figure 2.</strong> Test-time scaling curves. Baseline models exhibit <em>inverse scaling</em> — more reasoning tokens degrade performance. CESAR resolves this: reasoning genuinely improves results as test-time compute increases.
+      <strong>Figure 2.</strong> Complete CESAR training pipeline with scaling analysis. Process rewards decompose reasoning quality into consistency, structure, and depth calibration — enabling stable, scalable reasoning improvement.
     </figcaption>
   </figure>
 </section>
 
-<!-- Radar + Training -->
+<!-- Scaling Curves -->
 <section>
-  <h2>🎯 Detailed Analysis</h2>
+  <h2>📈 Test-Time Scaling Analysis</h2>
   <div class="fig-grid-2">
     <figure style="margin:0">
-      <img src="images/radar.png" alt="Performance radar chart"
+      <img src="images/scaling_curves.png" alt="Test-time scaling curves"
            style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
       <figcaption style="text-align:center;font-size:0.78em;color:#666;margin-top:8px">
-        <strong>Figure 3.</strong> Multi-dimensional performance comparison across reasoning quality dimensions.
+        <strong>Figure 3.</strong> Test-time scaling curves. Baselines exhibit inverse scaling; CESAR maintains positive scaling as reasoning tokens increase.
       </figcaption>
     </figure>
     <figure style="margin:0">
-      <img src="images/training_curve.png" alt="Training curves"
+      <img src="images/scale_win_rate.png" alt="Win rate at different scales"
            style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
       <figcaption style="text-align:center;font-size:0.78em;color:#666;margin-top:8px">
-        <strong>Figure 4.</strong> Training curves showing stable convergence of CESAR's process rewards.
+        <strong>Figure 4.</strong> Win rate analysis at different reasoning token budgets — CESAR's advantage grows with more compute.
       </figcaption>
     </figure>
   </div>
 </section>
 
-<!-- Win Rate & Slope -->
+<!-- Radar Charts -->
 <section>
-  <h2>🏆 Win Rate & Scaling Slope</h2>
+  <h2>🎯 Multi-Dimensional Evaluation</h2>
   <div class="fig-grid-2">
+    <figure style="margin:0">
+      <img src="images/radar.png" alt="Performance radar chart"
+           style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
+      <figcaption style="text-align:center;font-size:0.78em;color:#666;margin-top:8px">
+        <strong>Figure 5.</strong> Multi-dimensional performance radar showing CESAR's balanced improvement across all reasoning quality dimensions.
+      </figcaption>
+    </figure>
+    <figure style="margin:0">
+      <img src="images/radar_token.png" alt="Token-level radar chart"
+           style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
+      <figcaption style="text-align:center;font-size:0.78em;color:#666;margin-top:8px">
+        <strong>Figure 6.</strong> Token-level radar comparison showing how CESAR improves reasoning quality even at the individual token level.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- Training + Win Rate -->
+<section>
+  <h2>📉 Training Dynamics & Win Rate</h2>
+  <div class="fig-grid-2">
+    <figure style="margin:0">
+      <img src="images/training_curve.png" alt="Training curves"
+           style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
+      <figcaption style="text-align:center;font-size:0.78em;color:#666;margin-top:8px">
+        <strong>Figure 7.</strong> Training reward curves showing stable convergence of CESAR's multi-faceted process rewards.
+      </figcaption>
+    </figure>
     <figure style="margin:0">
       <img src="images/win_rate.png" alt="AI Judge win rate analysis"
            style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
       <figcaption style="text-align:center;font-size:0.78em;color:#666;margin-top:8px">
-        <strong>Figure 5.</strong> AI judge win rate analysis showing CESAR's superiority over baselines across multiple evaluation dimensions.
+        <strong>Figure 8.</strong> AI judge win rates — CESAR consistently wins across multiple evaluation dimensions and prompts.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- Slope Analysis -->
+<section>
+  <h2>📐 Scaling Slope Ablation</h2>
+  <p>The <em>scaling slope</em> measures whether additional reasoning tokens help or hurt. A positive slope means more thinking = better results.</p>
+  <div class="fig-grid-2">
+    <figure style="margin:0">
+      <img src="images/slope.png" alt="CESAR scaling slope"
+           style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
+      <figcaption style="text-align:center;font-size:0.78em;color:#666;margin-top:8px">
+        <strong>Figure 9.</strong> CESAR achieves consistent <strong>positive</strong> scaling slope — the only method where reasoning genuinely helps.
       </figcaption>
     </figure>
     <figure style="margin:0">
-      <img src="images/slope.png" alt="Scaling slope analysis"
+      <img src="images/slope_ablation.png" alt="Slope ablation"
            style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
       <figcaption style="text-align:center;font-size:0.78em;color:#666;margin-top:8px">
-        <strong>Figure 6.</strong> Scaling slope — CESAR exhibits consistent positive test-time scaling, while baselines show inverse or flat scaling.
+        <strong>Figure 10.</strong> Ablation: removing the overthinking penalty degrades slope — every component in CESAR's reward suite matters.
       </figcaption>
     </figure>
+  </div>
+  <div class="fig-grid-2">
+    <figure style="margin:0">
+      <img src="images/slope_qwen.png" alt="Qwen baseline slope"
+           style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
+      <figcaption style="text-align:center;font-size:0.78em;color:#666;margin-top:8px">
+        <strong>Figure 11.</strong> Qwen2.5-Omni baseline shows flat/negative scaling — without process rewards, reasoning doesn't scale.
+      </figcaption>
+    </figure>
+    <figure style="margin:0"></figure>
   </div>
 </section>
 

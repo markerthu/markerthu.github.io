@@ -855,8 +855,10 @@ Happy to discuss research, internships, or collaborations. Best reached by email
 </div>
 
 <!-- Scroll-to-top + Dark mode buttons -->
-<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<div style="display:contents">
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo(0,0)">↑</button>
 <button class="dark-toggle" id="darkToggle" title="Toggle dark mode">🌙</button>
+</div>
 
 <script>
 /* ── Scroll-to-top ── */

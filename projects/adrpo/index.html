@@ -78,7 +78,8 @@ p{color:#333;margin-bottom:14px;font-size:0.97em}
 footer{background:#1a0030;color:#9c6fc0;text-align:center;padding:28px 24px;font-size:0.84em}
 footer a{color:#ce93d8}
 
-@media(max-width:600px){.vs-grid{grid-template-columns:1fr}.results-grid{grid-template-columns:1fr 1fr}}
+.fig-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+@media(max-width:600px){.vs-grid{grid-template-columns:1fr}.results-grid{grid-template-columns:1fr 1fr}.fig-grid-2{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -214,6 +215,28 @@ footer a{color:#ce93d8}
   </figure>
 </section>
 
+<!-- Reward-Diversity Analysis -->
+<section>
+  <h2>⚖️ Reward vs. Diversity Analysis</h2>
+  <p style="font-size:0.88em;color:#555;margin-bottom:16px;">The core insight: fixed-KL methods force a single regularization strength across all samples. ADRPO adaptively adjusts — easy samples get tighter control, hard samples get more freedom.</p>
+  <div class="fig-grid-2">
+    <figure style="margin:0">
+      <img src="images/reward_vs_diversity.png" alt="Reward vs diversity"
+           style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
+      <figcaption style="text-align:center;font-size:0.78em;color:#666;margin-top:8px">
+        <strong>Figure 4.</strong> Reward vs. diversity Pareto front. ADRPO achieves <strong>higher reward at any given diversity level</strong>.
+      </figcaption>
+    </figure>
+    <figure style="margin:0">
+      <img src="images/reward_vs_kl.png" alt="Reward vs KL"
+           style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
+      <figcaption style="text-align:center;font-size:0.78em;color:#666;margin-top:8px">
+        <strong>Figure 5.</strong> Reward vs. KL divergence. ADRPO achieves the same reward at <strong>lower KL</strong> — more efficient exploration.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
 <!-- More Qualitative Results -->
 <section>
   <h2>🎨 More Qualitative Results</h2>
@@ -236,13 +259,23 @@ footer a{color:#ce93d8}
 <!-- LLM Generalization -->
 <section>
   <h2>🧠 Generalization to LLMs</h2>
-  <figure style="margin:0">
-    <img src="images/llm_reward_entropy.png" alt="LLM reward vs entropy"
-         style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 4px 20px rgba(0,0,0,0.08)">
-    <figcaption style="text-align:center;font-size:0.82em;color:#666;margin-top:10px;line-height:1.6">
-      <strong>Figure 6.</strong> ADRPO applied to LLM fine-tuning (Qwen2). Reward vs. entropy curves show ADRPO achieves higher reward while maintaining better generation diversity than fixed-KL baselines.
-    </figcaption>
-  </figure>
+  <p style="font-size:0.88em;color:#555;margin-bottom:16px;">ADRPO is not limited to image generation — it generalizes to LLM fine-tuning tasks. Tested on Qwen2 and Qwen3:</p>
+  <div class="fig-grid-2">
+    <figure style="margin:0">
+      <img src="images/llm_reward_entropy.png" alt="LLM reward vs entropy (Qwen2)"
+           style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
+      <figcaption style="text-align:center;font-size:0.78em;color:#666;margin-top:8px">
+        <strong>Figure 8.</strong> Qwen2: ADRPO achieves higher reward while maintaining generation diversity.
+      </figcaption>
+    </figure>
+    <figure style="margin:0">
+      <img src="images/llm_qwen3_entropy.png" alt="LLM reward vs entropy (Qwen3)"
+           style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
+      <figcaption style="text-align:center;font-size:0.78em;color:#666;margin-top:8px">
+        <strong>Figure 9.</strong> Qwen3: consistent advantage — ADRPO's adaptive KL generalizes across model families.
+      </figcaption>
+    </figure>
+  </div>
 </section>
 
 <section>
