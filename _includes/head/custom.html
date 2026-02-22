@@ -220,18 +220,6 @@
   });
 </script>
 
-{% unless page.url == "/" %}
-<!-- Gradient accent strip at top of every page except homepage -->
-<style>
-  #main::before {
-    content: '';
-    display: block;
-    height: 3px;
-    background: linear-gradient(to right, #1565c0 0%, #7c4dff 50%, #00897b 100%);
-  }
-</style>
-{% endunless %}
-
 {% if page.date %}
 <!-- Reading progress bar + code copy buttons (blog posts only) -->
 <script>
