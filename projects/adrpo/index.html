@@ -39,8 +39,9 @@ a{color:#6a1b9a;text-decoration:none}a:hover{text-decoration:underline}
 .btn:hover{opacity:.85}
 
 .container{max-width:860px;margin:0 auto;padding:0 24px}
-section{padding:52px 0 40px}
+section{padding:56px 0 44px}
 section+section{border-top:1px solid #f0f0f0}
+section p{text-align:justify}
 h2{font-size:1.42em;font-weight:800;color:#1a1a2e;margin-bottom:18px;display:flex;align-items:center;gap:10px}
 h2::after{content:'';flex:1;height:2px;background:linear-gradient(to right,#7b1fa2,transparent);border-radius:1px}
 p{color:#333;margin-bottom:14px;font-size:0.97em}
@@ -97,11 +98,11 @@ footer a{color:#ce93d8}
   <h1>Adaptive Divergence Regularized Policy Optimization for Fine-tuning Generative Models</h1>
   <p class="short"><strong>ADRPO</strong>: Sample-level adaptive KL control — no manual tuning required</p>
   <div class="authors">
-    <strong>Jiajun Fan</strong>&thinsp;<sup>1</sup>,
-    Tong Wei&thinsp;<sup>1</sup>,
-    Chaoran Cheng&thinsp;<sup>1</sup>,
-    Yuxin Chen&thinsp;<sup>1</sup>,
-    Ge Liu&thinsp;<sup>1</sup>
+    <strong><a href="/" style="color:#fff">Jiajun Fan</a></strong>&thinsp;<sup>1</sup>,
+    <a href="#" style="color:#c9a8e0">Tong Wei</a>&thinsp;<sup>1</sup>,
+    <a href="#" style="color:#c9a8e0">Chaoran Cheng</a>&thinsp;<sup>1</sup>,
+    <a href="#" style="color:#c9a8e0">Yuxin Chen</a>&thinsp;<sup>1</sup>,
+    <a href="https://geliu.web.illinois.edu/" style="color:#c9a8e0">Ge Liu</a>&thinsp;<sup>1</sup>
   </div>
   <div class="affil"><sup>1</sup>University of Illinois Urbana-Champaign</div>
   <div class="btn-row">
@@ -123,7 +124,7 @@ footer a{color:#ce93d8}
 <section style="padding:20px 0 30px;border:none">
   <figure style="margin:0">
     <img src="images/teaser.png" alt="ADRPO Qualitative Results — 2B vs 12B"
-         style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 4px 24px rgba(0,0,0,0.10)">
+         style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
     <figcaption style="text-align:center;font-size:0.82em;color:#666;margin-top:12px;line-height:1.6">
       <strong>Figure 1.</strong> Qualitative comparison. Our 2B SD3 model fine-tuned with ADRPO matches or outperforms FLUX.1-Dev (12B) and SANA-1.5 (4.8B) on artistic style rendering, attribute binding, coloring, and compositional control — with 2–6× fewer parameters.
     </figcaption>
@@ -196,7 +197,7 @@ footer a{color:#ce93d8}
 
   <figure style="margin:24px 0 0">
     <img src="images/comparison.png" alt="ADRPO vs other RL methods"
-         style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 4px 24px rgba(0,0,0,0.10)">
+         style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
     <figcaption style="text-align:center;font-size:0.82em;color:#666;margin-top:12px;line-height:1.6">
       <strong>Figure 2.</strong> Comparison with RL fine-tuning baselines (DPO, ORW-CFM-W2). ADRPO achieves superior style fidelity, spatial reasoning, and attribute binding.
     </figcaption>
@@ -208,7 +209,7 @@ footer a{color:#ce93d8}
   <h2>📈 Reward–Diversity Tradeoff</h2>
   <figure style="margin:0">
     <img src="images/reward_kl.png" alt="Reward vs KL tradeoff"
-         style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 4px 20px rgba(0,0,0,0.08)">
+         style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
     <figcaption style="text-align:center;font-size:0.82em;color:#666;margin-top:10px;line-height:1.6">
       <strong>Figure 3.</strong> Reward vs. KL divergence tradeoff. ADRPO achieves <em>higher reward at lower KL</em> than fixed-regularization baselines — demonstrating that adaptive control finds a better exploration–exploitation balance.
     </figcaption>
@@ -242,14 +243,14 @@ footer a{color:#ce93d8}
   <h2>🎨 More Qualitative Results</h2>
   <figure style="margin:0 0 20px">
     <img src="images/app_compare_models.png" alt="Extended comparison with larger models"
-         style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 4px 20px rgba(0,0,0,0.08)">
+         style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
     <figcaption style="text-align:center;font-size:0.82em;color:#666;margin-top:10px;line-height:1.6">
       <strong>Figure 4.</strong> Extended comparison — ADRPO's 2B SD3 vs. FLUX.1-Dev (12B) and SANA-1.5 (4.8B) on additional prompts. ADRPO consistently matches or outperforms models with 2–6× more parameters.
     </figcaption>
   </figure>
   <figure style="margin:0 0 20px">
     <img src="images/app_compare_methods.png" alt="Extended comparison with RL methods"
-         style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 4px 20px rgba(0,0,0,0.08)">
+         style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
     <figcaption style="text-align:center;font-size:0.82em;color:#666;margin-top:10px;line-height:1.6">
       <strong>Figure 5.</strong> Extended RL method comparison — ADRPO vs. DPO and ORW-CFM-W2 on diverse T2I tasks.
     </figcaption>

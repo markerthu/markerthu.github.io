@@ -42,8 +42,9 @@ a{color:#1565c0;text-decoration:none}a:hover{text-decoration:underline}
 
 /* ── Content ── */
 .container{max-width:860px;margin:0 auto;padding:0 24px}
-section{padding:52px 0 40px}
+section{padding:56px 0 44px}
 section+section{border-top:1px solid #f0f0f0}
+section p{text-align:justify}
 h2{font-size:1.45em;font-weight:800;color:#1a1a2e;margin-bottom:18px;display:flex;align-items:center;gap:10px}
 h2::after{content:'';flex:1;height:2px;background:linear-gradient(to right,#1565c0,transparent);border-radius:1px}
 p{color:#333;margin-bottom:14px;font-size:0.97em}
@@ -108,15 +109,15 @@ footer a{color:#7eb8f7}
   <h1>Incentivizing Consistent, Effective and Scalable Reasoning Capability in Audio LLMs via Reasoning Process Rewards</h1>
   <p class="short">CESAR: <strong>C</strong>onsistent, <strong>E</strong>ffective, and <strong>S</strong>calable <strong>A</strong>udio <strong>R</strong>easoners</p>
   <div class="authors">
-    <strong>Jiajun Fan</strong>&thinsp;<sup>1,2</sup>,
-    Roger Ren&thinsp;<sup>2</sup>,
-    Jingyuan Li&thinsp;<sup>2</sup>,
-    Rahul Pandey&thinsp;<sup>2</sup>,
-    Prashanth G. Shivakumar&thinsp;<sup>2</sup>,
-    Ankur Gandhe&thinsp;<sup>2</sup>,
-    Ge Liu&thinsp;<sup>1</sup>,
-    Yile Gu&thinsp;<sup>2</sup>,
-    Ivan Bulyko&thinsp;<sup>2</sup>
+    <strong><a href="/" style="color:#fff">Jiajun Fan</a></strong>&thinsp;<sup>1,2</sup>,
+    <a href="#" style="color:#b0c8e8">Roger Ren</a>&thinsp;<sup>2</sup>,
+    <a href="#" style="color:#b0c8e8">Jingyuan Li</a>&thinsp;<sup>2</sup>,
+    <a href="#" style="color:#b0c8e8">Rahul Pandey</a>&thinsp;<sup>2</sup>,
+    <a href="#" style="color:#b0c8e8">Prashanth G. Shivakumar</a>&thinsp;<sup>2</sup>,
+    <a href="#" style="color:#b0c8e8">Ankur Gandhe</a>&thinsp;<sup>2</sup>,
+    <a href="https://geliu.web.illinois.edu/" style="color:#b0c8e8">Ge Liu</a>&thinsp;<sup>1</sup>,
+    <a href="#" style="color:#b0c8e8">Yile Gu</a>&thinsp;<sup>2</sup>,
+    <a href="#" style="color:#b0c8e8">Ivan Bulyko</a>&thinsp;<sup>2</sup>
   </div>
   <div class="affil"><sup>1</sup>University of Illinois Urbana-Champaign &nbsp;&nbsp; <sup>2</sup>Amazon</div>
   <div class="btn-row">
@@ -139,7 +140,7 @@ footer a{color:#7eb8f7}
 <section style="padding:20px 0 30px;border:none">
   <figure style="margin:0">
     <img src="images/teaser.png" alt="CESAR Framework Overview"
-         style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 4px 24px rgba(0,0,0,0.10)">
+         style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
     <figcaption style="text-align:center;font-size:0.82em;color:#666;margin-top:12px;line-height:1.6">
       <strong>Figure 1.</strong> General framework comparison of different training paradigms for Audio LLMs. CESAR's process rewards incentivize consistency, structured analytical reasoning, and calibrated depth — resolving <em>test-time inverse scaling</em> and enabling reasoning to genuinely help performance.
     </figcaption>
@@ -228,7 +229,7 @@ footer a{color:#7eb8f7}
   <h2>🏗️ Framework Architecture</h2>
   <figure style="margin:0 0 24px">
     <img src="images/framework_large.png" alt="CESAR framework with scaling"
-         style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 4px 24px rgba(0,0,0,0.10)">
+         style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
     <figcaption style="text-align:center;font-size:0.82em;color:#666;margin-top:10px;line-height:1.6">
       <strong>Figure 2.</strong> Complete CESAR training pipeline with scaling analysis. Process rewards decompose reasoning quality into consistency, structure, and depth calibration — enabling stable, scalable reasoning improvement.
     </figcaption>
