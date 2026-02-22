@@ -68,6 +68,16 @@ redirect_from:
   min-width: 88px; display: flex; flex-direction: column;
   gap: 4px; align-items: flex-start; padding-top: 2px;
 }
+/* Publication thumbnail */
+.pub-thumb {
+  width: 110px; min-width: 110px; height: 70px;
+  object-fit: cover; border-radius: 7px;
+  border: 1px solid #e0e8f0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  transition: transform .2s, box-shadow .2s;
+}
+.pub-thumb:hover { transform: scale(1.04); box-shadow: 0 4px 16px rgba(21,101,192,0.18); }
+@media(max-width:560px){ .pub-thumb { display: none; } }
 .pb { /* pub badge */
   display: inline-block; padding: 3px 8px; border-radius: 5px;
   font-size: 0.70em; font-weight: 900; letter-spacing: 0.02em; white-space: nowrap; line-height: 1.4;
@@ -125,9 +135,93 @@ redirect_from:
 .stat-number { font-size: 1.85em; font-weight: 900; color: #1565c0; line-height: 1.1; }
 .stat-label  { font-size: 0.77em; color: #666; margin-top: 4px; line-height: 1.35; }
 
+/* ── Animated hero banner ── */
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.hero-banner {
+  background: linear-gradient(-45deg, #0d1b2a, #1a3a5c, #1565c0, #0a2540, #0d47a1);
+  background-size: 400% 400%;
+  animation: gradientShift 14s ease infinite;
+  border-radius: 14px;
+  padding: 36px 28px 30px;
+  margin-bottom: 1.6em;
+  text-align: center;
+  color: #fff;
+  box-shadow: 0 8px 32px rgba(21,101,192,0.18);
+}
+.hero-name {
+  font-size: 2.1em;
+  font-weight: 900;
+  color: #fff;
+  margin-bottom: 6px;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+.hero-subtitle {
+  font-size: 0.96em;
+  color: #90caf9;
+  margin-bottom: 18px;
+  font-weight: 500;
+}
+.hero-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.hero-pill {
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
+  color: #e3f2fd;
+  padding: 4px 13px;
+  border-radius: 20px;
+  font-size: 0.80em;
+  font-weight: 600;
+  backdrop-filter: blur(4px);
+}
+.hero-links {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.hero-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255,255,255,0.13);
+  border: 1px solid rgba(255,255,255,0.22);
+  color: #fff !important;
+  padding: 6px 15px;
+  border-radius: 8px;
+  font-size: 0.82em;
+  font-weight: 700;
+  text-decoration: none !important;
+  transition: background .2s, transform .15s;
+}
+.hero-link:hover { background: rgba(255,255,255,0.22); transform: translateY(-1px); }
+
+/* ── Stat card animation ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.stat-card { animation: fadeUp .5s ease both; }
+.stat-card:nth-child(1) { animation-delay: .05s; }
+.stat-card:nth-child(2) { animation-delay: .12s; }
+.stat-card:nth-child(3) { animation-delay: .19s; }
+.stat-card:nth-child(4) { animation-delay: .26s; }
+.stat-card:nth-child(5) { animation-delay: .33s; }
+.stat-card:nth-child(6) { animation-delay: .40s; }
+
 /* ── Responsive ── */
 @media(max-width:760px) { .research-grid { grid-template-columns: 1fr 1fr; } }
 @media(max-width:480px) {
+  .hero-name { font-size: 1.65em; }
   .research-grid { grid-template-columns: 1fr; }
   .pub-entry { flex-direction: column; gap: 6px; }
   .pub-left  { flex-direction: row; }
@@ -135,6 +229,23 @@ redirect_from:
   .stat-number { font-size: 1.5em; }
 }
 </style>
+
+<!-- Hero banner -->
+<div class="hero-banner">
+  <div class="hero-name">Jiajun Fan</div>
+  <div class="hero-subtitle">CS Ph.D. Student · University of Illinois Urbana-Champaign</div>
+  <div class="hero-pills">
+    <span class="hero-pill">🌊 RL Post-Training for Generative Models</span>
+    <span class="hero-pill">🧠 Multimodal Reasoning LLMs</span>
+    <span class="hero-pill">🎮 Superhuman Deep RL</span>
+  </div>
+  <div class="hero-links">
+    <a class="hero-link" href="files/CV.pdf">📋 CV</a>
+    <a class="hero-link" href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&hl=en">🎓 Google Scholar</a>
+    <a class="hero-link" href="mailto:jiajunf3@illinois.edu">✉️ Email</a>
+    <a class="hero-link" href="https://openreview.net/profile?id=~Jiajun_Fan1">📝 OpenReview</a>
+  </div>
+</div>
 
 <!-- Quick nav -->
 <div class="quick-nav">
@@ -203,6 +314,7 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>, advised by Prof.
 
 <div class="pub-entry">
   <div class="pub-left"><span class="pb pb-iclr">ICLR 2026</span><span class="pub-year">2026</span></div>
+  <img class="pub-thumb" src="/projects/cesar/images/teaser.png" alt="CESAR framework overview">
   <div class="pub-right">
     <div class="pub-title">
       <a href="https://openreview.net/forum?id=DUr48hxO2h">Incentivizing Consistent, Effective and Scalable Reasoning Capability in Audio LLMs via Reasoning Process Rewards</a>
@@ -226,6 +338,7 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>, advised by Prof.
 
 <div class="pub-entry">
   <div class="pub-left"><span class="pb pb-neurips">NeurIPS 2025</span><span class="pub-year">2025</span></div>
+  <img class="pub-thumb" src="/projects/adrpo/images/teaser.png" alt="ADRPO qualitative results">
   <div class="pub-right">
     <div class="pub-title">
       <a href="https://openreview.net/forum?id=aXO0xg0ttW">Adaptive Divergence Regularized Policy Optimization for Fine-tuning Generative Models</a>
@@ -249,6 +362,7 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>, advised by Prof.
 
 <div class="pub-entry">
   <div class="pub-left"><span class="pb pb-iclr">ICLR 2025</span><span class="pub-year">2025</span></div>
+  <img class="pub-thumb" src="/projects/orw-cfm-w2/images/method.png" alt="ORW-CFM-W2 method architecture">
   <div class="pub-right">
     <div class="pub-title">
       <a href="https://openreview.net/forum?id=2IoFFexvuw">Online Reward-Weighted Fine-Tuning of Flow Matching with Wasserstein Regularization</a>
