@@ -1,0 +1,327 @@
+/* ==========================================================================
+   Blog Post — Distill-style clean academic typography
+   Inspired by diffusionflow.github.io
+   ========================================================================== */
+
+/* ── Load Inter font (added in head/custom.html) ─────────────────────────── */
+
+/* ── Wide-layout post: override page width to use full space cleanly ──────── */
+.page--wide {
+
+  .page__content {
+    font-family: 'Inter', 'Segoe UI', -apple-system, Arial, sans-serif;
+    font-size: 1.04em;
+    line-height: 1.85;
+    color: #2d3748;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+
+    /* Paragraphs */
+    p {
+      margin-bottom: 1.2em;
+      font-size: 1em;
+      line-height: 1.85;
+      color: #2d3748;
+    }
+
+    /* ── Headings ── */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Inter', 'Segoe UI', -apple-system, Arial, sans-serif;
+      font-weight: 800;
+      line-height: 1.3;
+      color: #1a202c;
+      margin-top: 2.2em;
+      margin-bottom: 0.7em;
+    }
+
+    h2 {
+      font-size: 1.42em;
+      padding-bottom: 0.4em;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    h3 {
+      font-size: 1.15em;
+      color: #2d3748;
+      border-bottom: none;
+    }
+
+    h4 {
+      font-size: 1.0em;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #718096;
+    }
+
+    /* ── Abstract / intro blockquote ── */
+    blockquote {
+      background: #f7faff;
+      border-left: 4px solid #4299e1;
+      border-radius: 0 10px 10px 0;
+      padding: 16px 22px;
+      margin: 1.4em 0;
+      font-size: 0.97em;
+      color: #2d3748;
+      font-style: normal;
+
+      p {
+        margin-bottom: 0;
+        line-height: 1.75;
+        color: #2d3748;
+      }
+    }
+
+    /* ── Code blocks ── */
+    pre {
+      background: #f6f8fa;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 16px 20px;
+      overflow-x: auto;
+      font-size: 0.88em;
+      line-height: 1.6;
+      margin: 1.4em 0;
+    }
+
+    code {
+      font-family: 'JetBrains Mono', 'Fira Code', 'Monaco', 'Consolas', monospace;
+      font-size: 0.88em;
+      background: #edf2f7;
+      color: #2d3748;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    pre code {
+      background: transparent;
+      padding: 0;
+      color: #24292e;
+      font-size: 1em;
+    }
+
+    /* ── Images ── */
+    img {
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      max-width: 100%;
+    }
+
+    figure {
+      margin: 1.6em 0;
+      text-align: center;
+    }
+
+    figcaption {
+      font-size: 0.84em;
+      color: #718096;
+      margin-top: 8px;
+      line-height: 1.5;
+      font-style: italic;
+    }
+
+    /* ── Lists ── */
+    ul, ol {
+      padding-left: 1.6em;
+      margin-bottom: 1.2em;
+    }
+
+    li {
+      font-size: 1em;
+      line-height: 1.75;
+      color: #2d3748;
+      margin-bottom: 0.3em;
+    }
+
+    /* ── Tables ── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.6em 0;
+      font-size: 0.92em;
+    }
+
+    th {
+      background: #2b6cb0;
+      color: #fff;
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 700;
+    }
+
+    td {
+      padding: 9px 14px;
+      border-bottom: 1px solid #e2e8f0;
+      color: #2d3748;
+    }
+
+    tr:hover td {
+      background: #f7fafc;
+    }
+
+    /* ── Links ── */
+    a {
+      color: #3182ce;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(49,130,206,0.3);
+      transition: border-color 0.15s;
+
+      &:hover {
+        color: #2b6cb0;
+        border-bottom-color: #2b6cb0;
+        text-decoration: none;
+      }
+    }
+
+    /* ── Math equations ── */
+    .MathJax_Display, mjx-container[display="true"] {
+      margin: 1.2em 0;
+      overflow-x: auto;
+    }
+
+    /* ── Horizontal rule ── */
+    hr {
+      border: none;
+      border-top: 2px solid #e2e8f0;
+      margin: 2.5em 0;
+    }
+
+    /* ── Inline figure grid (from blog posts) ── */
+    > div[style*="display:grid"] {
+      border-radius: 10px;
+      overflow: hidden;
+    }
+  }
+
+  /* ── Post title ── */
+  .page__title {
+    font-family: 'Inter', 'Segoe UI', -apple-system, Arial, sans-serif;
+    font-size: 2.0em;
+    font-weight: 900;
+    color: #1a202c;
+    line-height: 1.25;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0.2em;
+  }
+
+  /* ── Post meta (date, read-time) ── */
+  .page__meta {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85em;
+    color: #a0aec0;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0.6em;
+  }
+
+  .page__date {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85em;
+    color: #a0aec0;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ── Page inner wrap ── */
+  .page__inner-wrap {
+    header {
+      max-width: 760px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 2em;
+      padding-bottom: 1.2em;
+      border-bottom: 2px solid #e2e8f0;
+    }
+  }
+
+  /* ── Table of Contents (toc) ── */
+  nav[id="markdown-toc"] {
+    background: #f7faff;
+    border: 1.5px solid #bee3f8;
+    border-radius: 10px;
+    padding: 14px 20px;
+    margin-bottom: 2em;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 0.88em;
+
+    &::before {
+      content: '📋 Table of Contents';
+      display: block;
+      font-weight: 800;
+      color: #2b6cb0;
+      margin-bottom: 8px;
+      font-size: 0.92em;
+    }
+
+    li {
+      line-height: 1.6;
+      color: #3182ce;
+    }
+
+    a {
+      color: #3182ce;
+      border-bottom: none;
+
+      &:hover {
+        color: #2b6cb0;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  /* ── Post footer (tags) ── */
+  .page__footer-follow,
+  .page__taxonomy {
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ── Tag badges ── */
+  .page__taxonomy-item a {
+    background: #ebf8ff;
+    color: #2b6cb0;
+    border: 1px solid #bee3f8;
+    border-radius: 20px;
+    padding: 3px 12px;
+    font-size: 0.78em;
+    font-weight: 700;
+    text-decoration: none;
+    border-bottom: none;
+
+    &:hover {
+      background: #bee3f8;
+    }
+  }
+
+  /* ── Mobile responsive ── */
+  @media (max-width: 600px) {
+    .page__content {
+      font-size: 0.97em;
+    }
+
+    .page__title {
+      font-size: 1.6em;
+    }
+  }
+}
+
+/* ── Post card on archive/list pages ── */
+.archive__item-title {
+  font-family: 'Inter', sans-serif;
+}
+
+.archive__item-excerpt {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9em;
+  color: #555;
+  line-height: 1.6;
+}
