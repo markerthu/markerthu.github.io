@@ -96,7 +96,7 @@ footer a{color:#ce93d8}
 <div class="hero">
   <div class="venue-badge">🎉 NeurIPS 2025</div>
   <h1>Adaptive Divergence Regularized Policy Optimization for Fine-tuning Generative Models</h1>
-  <p class="short"><strong>ADRPO</strong>: Sample-level adaptive KL control — no manual tuning required</p>
+  <p class="short"><strong>ADRPO</strong>: Sample-level adaptive divergence control — no manual tuning required</p>
   <div class="authors">
     <strong><a href="/" style="color:#fff">Jiajun Fan</a></strong>&thinsp;<sup>1</sup>,
     <a href="#" style="color:#c9a8e0">Tong Wei</a>&thinsp;<sup>1</sup>,
@@ -116,7 +116,7 @@ footer a{color:#ce93d8}
 
 <section>
   <div class="tldr">
-    <strong>TL;DR</strong> — Fixed KL regularization in RLHF creates a dilemma: strong regularization preserves diversity but limits alignment; weak regularization enables better alignment but risks collapse. ADRPO <strong>automatically adapts</strong> the regularization strength at the sample level based on advantage estimates — high-quality samples get freedom to explore, poor samples get stronger constraints.
+    <strong>TL;DR</strong> — Fixed divergence regularization in RLHF creates a dilemma: strong regularization preserves diversity but limits alignment; weak regularization enables better alignment but risks collapse. ADRPO <strong>automatically adapts</strong> the regularization strength at the sample level based on advantage estimates — high-quality samples get freedom to explore, poor samples get stronger constraints. Works with W2 (flow matching) and KL (LLMs).
   </div>
 </section>
 
@@ -142,7 +142,7 @@ footer a{color:#ce93d8}
   </div>
   <div class="vs-grid">
     <div class="vs-card vs-bad">
-      <h3>❌ Fixed KL (ORW-CFM-W2 / PPO)</h3>
+      <h3>❌ Fixed Regularization (ORW-CFM-W2 / PPO)</h3>
       <ul>
         <li>Same regularization for all samples</li>
         <li>Strong KL → conservative, slow progress</li>

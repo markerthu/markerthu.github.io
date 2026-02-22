@@ -718,7 +718,7 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>, advised by Prof.
       <a class="pub-project" href="/projects/adrpo/">Project Page</a>
     </div>
     <div class="pub-authors"><strong>J. Fan*</strong>, T. Wei, C. Cheng, Y. Chen, G. Liu</div>
-    <div class="pub-desc">ADRPO: sample-level adaptive KL — high-value samples get more freedom, poor samples get stronger constraint. Plug-and-play on top of any RLHF method.</div>
+    <div class="pub-desc">ADRPO: sample-level adaptive divergence regularization — high-value samples get more freedom, poor samples get stronger constraint. Plug-and-play on top of any RLHF method.</div>
     <div class="pub-hl">🚀 2B SD3 surpasses 4.8B &amp; 12B models · Generalizes to LLMs &amp; audio reasoning</div>
     <div class="pub-links">
       <a class="pub-link pl-paper" href="https://openreview.net/forum?id=aXO0xg0ttW">📄 Paper</a>
@@ -805,7 +805,7 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>, advised by Prof.
   <div class="research-card">
     <div class="rc-icon">🌊</div>
     <div class="rc-title">RL Post-Training for Generative Models</div>
-    <div class="rc-desc">Collapse-free online RLHF for flow/diffusion models. No human-collected data needed — the model rewards itself (ORW-CFM-W2, ADRPO, AC-Flow).</div>
+    <div class="rc-desc">Collapse-free online RLHF for flow/diffusion models. No human-collected preference data needed — models improve from their own generations (ORW-CFM-W2, ADRPO, AC-Flow).</div>
   </div>
   <div class="research-card">
     <div class="rc-icon">🧠</div>
@@ -877,8 +877,8 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
   </div>
   <div class="rt-item" style="opacity:0.7;">
     <div class="rt-year" style="color:#e65100;">Step 4 — Ongoing</div>
-    <div class="rt-title">Fully autonomous self-critique</div>
-    <div class="rt-desc">The endgame: models that design their own training curriculum, evaluate their own outputs, and improve without any human oversight.</div>
+    <div class="rt-title">Fully autonomous self-improvement</div>
+    <div class="rt-desc">The endgame: generative models that continuously improve with progressively less human intervention — from data collection to reward design to training itself.</div>
   </div>
 </div>
 
