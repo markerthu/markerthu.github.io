@@ -16,11 +16,11 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1a1a2e;line-height:1.
 a{color:#0d47a1;text-decoration:none}a:hover{text-decoration:underline}
 .topnav{background:#fff;border-bottom:1.5px solid #e0e8f0;padding:12px 24px;display:flex;align-items:center;gap:12px;font-size:0.84em;box-shadow:0 1px 4px rgba(0,0,0,0.05)}
 .topnav a{color:#1565c0;font-weight:600}.topnav span{color:#bbb}
-.hero{background:#f8fbff;border-bottom:1.5px solid #e0e8f0;padding:52px 24px 44px;text-align:center;position:relative;overflow:hidden}.hero::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(to right,#0d47a1,#006064)}
+.hero{background:#f8fbff;border-bottom:1.5px solid #e0e8f0;padding:52px 0 44px;text-align:left;position:relative;overflow:hidden}.hero::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(to right,#0d47a1,#006064)}
 .venue-badge{display:inline-block;background:#1565c0;color:#fff;padding:6px 18px;border-radius:24px;font-size:.82em;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin-bottom:20px}
-.hero h1{font-size:clamp(1.5em,4vw,2.4em);font-weight:800;color:#1a2332;line-height:1.25;max-width:800px;margin:0 auto 12px}
+.hero h1{font-size:clamp(1.5em,4vw,2.4em);font-weight:800;color:#1a2332;line-height:1.25;max-width:800px;margin:0 0 14px}
 .hero .short{font-size:1em;color:#555;margin-bottom:26px;font-weight:500}
-.authors{font-size:.88em;color:#444;max-width:700px;margin:0 auto 20px;line-height:2}
+.authors{font-size:.88em;color:#444;max-width:700px;margin:0 0 20px;line-height:2}
 .authors strong{color:#1a2332;font-weight:700}
 .affil{font-size:.8em;color:#666;margin-bottom:28px}
 .btn-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
@@ -63,7 +63,7 @@ footer a{color:#1565c0}
   <a href="/projects/">Projects</a><span>/</span>
   <span style="color:#b3e5fc;">SP-VLA</span>
 </div>
-<div class="hero">
+<div class="hero"><div class="hero-inner" style="max-width:860px;margin:0 auto;padding:0 32px;">
   <div class="venue-badge">✅ ICLR 2026</div>
   <h1>SP-VLA: A Joint Model Scheduling and Token Pruning Approach for VLA Model Acceleration</h1>
   <p class="short">Unified framework for real-time VLA inference — model scheduling + token pruning</p>
@@ -82,7 +82,7 @@ footer a{color:#1565c0}
 <section>
   <div class="tldr">
     <strong>TL;DR</strong> — VLA models are powerful but too slow for real-time robotics. SP-VLA jointly addresses temporal redundancy (via action-aware model scheduling) and spatial redundancy (via spatio-semantic token pruning), achieving significant speedup while maintaining or improving task performance.
-  </div>
+  </div></div>
 </section>
 
 <section>
