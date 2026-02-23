@@ -620,7 +620,7 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>, advised by Prof.
   </li>
   <li class="news-hidden" id="news-extra-1">
     <span class="news-date">Jan 2025</span>
-    <span><span class="nbadge nb-service">Service</span>Area reviewer: ICLR 2025, NeurIPS 2024, CVPR 2026, AAAI 2025, AISTATS 2025.</span>
+    <span><span class="nbadge nb-service">Service</span>Reviewer: ICLR 2025, NeurIPS 2024, CVPR 2026, AAAI 2025, AISTATS 2025.</span>
   </li>
   <li class="news-hidden" id="news-extra-2">
     <span class="news-date">Aug 2024</span>
