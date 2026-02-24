@@ -223,15 +223,37 @@
 {% if page.date %}
 <!-- Blog post specific styles -->
 <style>
+  /* ── Full page background: #90A5A7 steel-teal ── */
+  html, body {
+    background: #90A5A7 !important;
+  }
+  /* Content card: white on teal background */
+  #main, .page__inner-wrap, .page__content-wrapper {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 28px rgba(0,0,0,0.13);
+    padding: 28px 36px !important;
+    margin-top: 16px;
+    margin-bottom: 24px;
+  }
+  /* Sidebar on teal background */
+  .sidebar.sticky {
+    background: rgba(255,255,255,0.85) !important;
+    border-radius: 12px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.10);
+    padding: 16px 12px;
+    margin-top: 16px;
+  }
+  /* Masthead stays white, slight shadow */
+  .masthead {
+    box-shadow: 0 2px 16px rgba(0,0,0,0.14) !important;
+  }
+
   /* H2 accent bar using #90A5A7 */
   .page--post .page__content h2 {
     border-left: 4px solid #90A5A7;
     padding-left: 14px;
     color: #1a2332;
-  }
-  body.dark-mode .page--post .page__content h2 {
-    color: #e6edf3 !important;
-    border-left-color: #90A5A7 !important;
   }
 
   /* Constrain overly tall images (e.g. square radar charts) so they don't
@@ -246,14 +268,23 @@
     margin: 0 auto;
   }
 
-  /* Subtle tinted background for blog content area */
-  .page--post .page__inner-wrap {
-    background: #f8fafa;
-    border-radius: 10px;
-    padding: 4px 2px;
-  }
-  body.dark-mode .page--post .page__inner-wrap {
+  /* ── Dark mode overrides for blog ── */
+  body.dark-mode {
     background: #0d1117 !important;
+  }
+  body.dark-mode #main,
+  body.dark-mode .page__inner-wrap,
+  body.dark-mode .page__content-wrapper {
+    background: #161b22 !important;
+    box-shadow: 0 4px 28px rgba(0,0,0,0.4) !important;
+  }
+  body.dark-mode .sidebar.sticky {
+    background: rgba(22,27,34,0.92) !important;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.3) !important;
+  }
+  body.dark-mode .page--post .page__content h2 {
+    color: #e6edf3 !important;
+    border-left-color: #90A5A7 !important;
   }
 </style>
 
