@@ -82,8 +82,8 @@ redirect_from:
 }
 .pub-thumb-wrap:hover { box-shadow: 0 4px 18px rgba(21,101,192,0.15); }
 .pub-thumb-wrap img {
-  width: 100%; height: auto; display: block;
-  max-height: 160px; object-fit: cover; object-position: center top;
+  width: 100%; height: 160px; display: block;
+  object-fit: cover; object-position: center top;
 }
 @media(max-width:560px){
   .pub-entry { grid-template-columns: 1fr; }
@@ -278,6 +278,8 @@ redirect_from:
 .pl-project:hover { background: #c8e6c9; }
 .pl-code { background: #fce4ec; color: #880e4f; }
 .pl-code:hover { background: #f8bbd0; }
+.pl-arxiv { background: #fff3e0; color: #bf360c; }
+.pl-arxiv:hover { background: #ffe0b2; }
 
 /* ── Research timeline ── */
 .research-timeline {
@@ -695,6 +697,7 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>, advised by Prof.
     <div class="pub-links">
       <a class="pub-link pl-paper" href="https://openreview.net/forum?id=DUr48hxO2h">📄 Paper</a>
       <a class="pub-link pl-project" href="/projects/cesar/">🔗 Project</a>
+      <a class="pub-link pl-arxiv" href="https://arxiv.org/abs/2510.20867">📎 arXiv</a>
     </div>
   </div>
 </div>
@@ -723,6 +726,7 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>, advised by Prof.
     <div class="pub-links">
       <a class="pub-link pl-paper" href="https://openreview.net/forum?id=aXO0xg0ttW">📄 Paper</a>
       <a class="pub-link pl-project" href="/projects/adrpo/">🔗 Project</a>
+      <a class="pub-link pl-arxiv" href="https://arxiv.org/abs/2510.18053">📎 arXiv</a>
     </div>
   </div>
 </div>
