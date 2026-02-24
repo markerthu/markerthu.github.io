@@ -221,43 +221,107 @@
 </script>
 
 {% if page.date %}
-<!-- Blog post specific styles -->
+<!-- Blog post specific styles — academic grade, eye-protective -->
 <style>
-  /* ── Full page background: #90A5A7 steel-teal ── */
+  /*
+   * Color rationale (护眼 / ICLR-grade):
+   *   Page bg   #eef1f1  — 10% tint of #90A5A7, removes harsh glare
+   *   Content   #ffffff  — pure white card, crisp contrast for reading
+   *   Text      #2d3748  — dark slate (not pure black), reduces eye strain
+   *   Accent    #90A5A7  — muted steel-teal for decorative elements
+   *   Links     #2c6e8a  — desaturated academic blue-teal, not jarring
+   */
+
+  /* ── Page background: soft warm teal tint ── */
   html, body {
-    background: #90A5A7 !important;
-  }
-  /* Content card: white on teal background */
-  #main, .page__inner-wrap, .page__content-wrapper {
-    background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 28px rgba(0,0,0,0.13);
-    padding: 28px 36px !important;
-    margin-top: 16px;
-    margin-bottom: 24px;
-  }
-  /* Sidebar on teal background */
-  .sidebar.sticky {
-    background: rgba(255,255,255,0.85) !important;
-    border-radius: 12px;
-    box-shadow: 0 2px 16px rgba(0,0,0,0.10);
-    padding: 16px 12px;
-    margin-top: 16px;
-  }
-  /* Masthead stays white, slight shadow */
-  .masthead {
-    box-shadow: 0 2px 16px rgba(0,0,0,0.14) !important;
+    background: #eef1f1 !important;
   }
 
-  /* H2 accent bar using #90A5A7 */
+  /* ── Content card: white on tinted bg, gentle shadow ── */
+  .page__inner-wrap {
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(144,165,167,0.15), 0 6px 32px rgba(144,165,167,0.18);
+    overflow: hidden;
+  }
+
+  /* ── Sidebar: white card, matching radius ── */
+  .sidebar.sticky {
+    background: #ffffff !important;
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(144,165,167,0.12), 0 4px 18px rgba(144,165,167,0.14);
+    padding: 18px 14px;
+    margin-top: 8px;
+  }
+
+  /* ── Body text: dark slate (softer than #000) ── */
+  .page--post .page__content,
+  .page--post .page__content p,
+  .page--post .page__content li {
+    color: #2d3748;
+    line-height: 1.78;
+    font-size: 0.96em;
+  }
+
+  /* ── Headings ── */
   .page--post .page__content h2 {
     border-left: 4px solid #90A5A7;
     padding-left: 14px;
     color: #1a2332;
+    font-weight: 800;
+    margin-top: 2em;
+  }
+  .page--post .page__content h3 {
+    color: #2d3748;
+    font-weight: 700;
+    margin-top: 1.6em;
   }
 
-  /* Constrain overly tall images (e.g. square radar charts) so they don't
-     dominate the layout. Landscape images are unaffected at typical widths. */
+  /* ── Links: muted academic teal-blue ── */
+  .page--post .page__content a {
+    color: #2c6e8a;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(44,110,138,0.25);
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .page--post .page__content a:hover {
+    color: #1a4f66;
+    border-bottom-color: rgba(26,79,102,0.6);
+  }
+
+  /* ── Blockquote: teal-tinted, scholarly ── */
+  .page--post .page__content blockquote {
+    background: #f2f6f6;
+    border-left: 4px solid #90A5A7;
+    border-radius: 0 8px 8px 0;
+    padding: 14px 20px;
+    color: #3d5461;
+    font-style: normal;
+    font-size: 0.95em;
+  }
+
+  /* ── Code: neutral background ── */
+  .page--post .page__content pre,
+  .page--post .page__content code {
+    background: #f4f7f7;
+    border: 1px solid #dce5e6;
+    border-radius: 5px;
+    font-size: 0.875em;
+    color: #2d3748;
+  }
+  .page--post .page__content pre code {
+    border: none;
+    background: transparent;
+  }
+
+  /* ── Horizontal rules: subtle teal tint ── */
+  .page--post .page__content hr {
+    border: none;
+    border-top: 2px solid #dce5e6;
+    margin: 2em 0;
+  }
+
+  /* ── Images: constrain tall ones (e.g. square radar charts) ── */
   .page--post .page__content figure img,
   .page--post .page__content p img {
     max-height: 440px;
@@ -266,26 +330,48 @@
     height: auto;
     display: block;
     margin: 0 auto;
+    border-radius: 6px;
   }
 
-  /* ── Dark mode overrides for blog ── */
+  /* ── Reading progress bar: #90A5A7 teal gradient ── */
+  #reading-progress {
+    background: linear-gradient(to right, #90A5A7, #607d8b, #90A5A7) !important;
+  }
+
+  /* ─────────────── Dark mode ─────────────── */
   body.dark-mode {
     background: #0d1117 !important;
   }
-  body.dark-mode #main,
-  body.dark-mode .page__inner-wrap,
-  body.dark-mode .page__content-wrapper {
+  body.dark-mode .page__inner-wrap {
     background: #161b22 !important;
-    box-shadow: 0 4px 28px rgba(0,0,0,0.4) !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3), 0 6px 32px rgba(0,0,0,0.35) !important;
   }
   body.dark-mode .sidebar.sticky {
-    background: rgba(22,27,34,0.92) !important;
-    box-shadow: 0 2px 16px rgba(0,0,0,0.3) !important;
+    background: #161b22 !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.25), 0 4px 18px rgba(0,0,0,0.3) !important;
   }
+  body.dark-mode .page--post .page__content,
+  body.dark-mode .page--post .page__content p,
+  body.dark-mode .page--post .page__content li { color: #b5c2c8 !important; }
   body.dark-mode .page--post .page__content h2 {
-    color: #e6edf3 !important;
+    color: #e2eaec !important;
     border-left-color: #90A5A7 !important;
   }
+  body.dark-mode .page--post .page__content h3 { color: #c8d6da !important; }
+  body.dark-mode .page--post .page__content a { color: #7cb9ca !important; border-bottom-color: rgba(124,185,202,0.3) !important; }
+  body.dark-mode .page--post .page__content a:hover { color: #a8d4e0 !important; }
+  body.dark-mode .page--post .page__content blockquote {
+    background: #1c2b30 !important;
+    color: #8faab1 !important;
+    border-left-color: #90A5A7 !important;
+  }
+  body.dark-mode .page--post .page__content pre,
+  body.dark-mode .page--post .page__content code {
+    background: #1c2428 !important;
+    border-color: #2d3f45 !important;
+    color: #b5c2c8 !important;
+  }
+  body.dark-mode .page--post .page__content hr { border-top-color: #2a3f47 !important; }
 </style>
 
 <!-- Reading progress bar + code copy buttons (blog posts only) -->
