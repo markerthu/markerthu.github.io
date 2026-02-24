@@ -321,13 +321,11 @@
     margin: 2em 0;
   }
 
-  /* ── Images: constrain tall ones (e.g. square radar charts) ── */
+  /* ── Images: preserve natural aspect ratio, never overflow ── */
   .page--post .page__content figure img,
   .page--post .page__content p img {
-    max-height: 440px;
-    object-fit: contain;
-    width: 100%;
-    height: auto;
+    max-width: 100%;   /* prevent overflow, but never force-stretch */
+    height: auto;      /* always preserve aspect ratio */
     display: block;
     margin: 0 auto;
     border-radius: 6px;
