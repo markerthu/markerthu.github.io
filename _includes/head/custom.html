@@ -237,20 +237,18 @@
     background: #eef1f1 !important;
   }
 
-  /* ── Content card: white on tinted bg, gentle shadow ── */
-  .page__inner-wrap {
-    background: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 1px 3px rgba(144,165,167,0.15), 0 6px 32px rgba(144,165,167,0.18);
+  /* ── Content area: matches page background, no card effect ── */
+  .page__inner-wrap,
+  #main, .page, .initial-content,
+  .page__content-wrapper {
+    background: #eef1f1 !important;
+    box-shadow: none !important;
   }
 
-  /* ── Sidebar: white card, matching radius ── */
+  /* ── Sidebar: same background ── */
   .sidebar.sticky {
-    background: #ffffff !important;
-    border-radius: 10px;
-    box-shadow: 0 1px 3px rgba(144,165,167,0.12), 0 4px 18px rgba(144,165,167,0.14);
-    padding: 18px 14px;
-    margin-top: 8px;
+    background: #eef1f1 !important;
+    box-shadow: none !important;
   }
 
   /* ── Body text: dark slate (softer than #000) ── */
@@ -288,9 +286,9 @@
     border-bottom-color: rgba(26,79,102,0.6);
   }
 
-  /* ── Blockquote: teal-tinted, scholarly ── */
+  /* ── Blockquote: slightly darker than page bg ── */
   .page--post .page__content blockquote {
-    background: #f2f6f6;
+    background: #dde8e8;
     border-left: 4px solid #90A5A7;
     border-radius: 0 8px 8px 0;
     padding: 14px 20px;
@@ -301,17 +299,17 @@
 
   /* ── Inline code ── */
   .page--post .page__content code {
-    background: #eef2f2;
-    border: 1px solid #d4dede;
+    background: #ffffff;
+    border: 1px solid #c8d8d8;
     border-radius: 4px;
     font-size: 0.875em;
     color: #2d5a6b;
     padding: 1px 5px;
   }
-  /* ── Code block ── */
+  /* ── Code block: white to stand out on teal-tinted bg ── */
   .page--post .page__content pre {
-    background: #f6f8f8;
-    border: 1px solid #d4dede;
+    background: #ffffff;
+    border: 1px solid #c8d8d8;
     border-top: 3px solid #90A5A7;  /* accent top bar */
     border-radius: 0 0 8px 8px;
     overflow-x: auto;               /* horizontal scroll, never clip */
@@ -384,13 +382,17 @@
   body.dark-mode {
     background: #0d1117 !important;
   }
-  body.dark-mode .page__inner-wrap {
-    background: #161b22 !important;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.3), 0 6px 32px rgba(0,0,0,0.35) !important;
+  body.dark-mode .page__inner-wrap,
+  body.dark-mode #main,
+  body.dark-mode .page,
+  body.dark-mode .initial-content,
+  body.dark-mode .page__content-wrapper {
+    background: #0d1117 !important;
+    box-shadow: none !important;
   }
   body.dark-mode .sidebar.sticky {
-    background: #161b22 !important;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.25), 0 4px 18px rgba(0,0,0,0.3) !important;
+    background: #0d1117 !important;
+    box-shadow: none !important;
   }
   body.dark-mode .page--post .page__content,
   body.dark-mode .page--post .page__content p,
