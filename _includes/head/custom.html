@@ -300,19 +300,64 @@
     font-size: 0.95em;
   }
 
-  /* ── Code: neutral background ── */
-  .page--post .page__content pre,
+  /* ── Inline code ── */
   .page--post .page__content code {
-    background: #f4f7f7;
-    border: 1px solid #dce5e6;
-    border-radius: 5px;
+    background: #eef2f2;
+    border: 1px solid #d4dede;
+    border-radius: 4px;
+    font-size: 0.875em;
+    color: #2d5a6b;
+    padding: 1px 5px;
+  }
+  /* ── Code block ── */
+  .page--post .page__content pre {
+    background: #f6f8f8;
+    border: 1px solid #d4dede;
+    border-top: 3px solid #90A5A7;  /* accent top bar */
+    border-radius: 0 0 8px 8px;
+    overflow-x: auto;               /* horizontal scroll, never clip */
+    white-space: pre;
+    padding: 14px 18px;
+    margin: 1.2em 0;
+    position: relative;
     font-size: 0.875em;
     color: #2d3748;
+    line-height: 1.6;
   }
   .page--post .page__content pre code {
     border: none;
     background: transparent;
+    padding: 0;
+    font-size: inherit;
+    color: inherit;
   }
+  /* Copy button toolbar */
+  .code-wrap {
+    position: relative;
+    margin: 1.2em 0;
+  }
+  .code-wrap pre {
+    margin: 0 !important;
+  }
+  .code-copy-btn {
+    position: absolute;
+    top: -1px;
+    right: 0;
+    background: #90A5A7;
+    color: #fff;
+    border: none;
+    border-radius: 0 0 0 6px;
+    padding: 2px 11px;
+    font-size: 0.72em;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    transition: background 0.15s;
+    z-index: 10;
+  }
+  .code-copy-btn:hover { background: #6e8e90; }
+  .code-copy-btn.copied { background: #4caf7d; }
 
   /* ── Horizontal rules: subtle teal tint ── */
   .page--post .page__content hr {
@@ -363,12 +408,19 @@
     color: #8faab1 !important;
     border-left-color: #90A5A7 !important;
   }
-  body.dark-mode .page--post .page__content pre,
   body.dark-mode .page--post .page__content code {
     background: #1c2428 !important;
     border-color: #2d3f45 !important;
+    color: #7fb3bf !important;
+  }
+  body.dark-mode .page--post .page__content pre {
+    background: #131d21 !important;
+    border-color: #2d3f45 !important;
+    border-top-color: #90A5A7 !important;
     color: #b5c2c8 !important;
   }
+  body.dark-mode .code-copy-btn { background: #3a5c63 !important; }
+  body.dark-mode .code-copy-btn:hover { background: #4e7880 !important; }
   body.dark-mode .page--post .page__content hr { border-top-color: #2a3f47 !important; }
 </style>
 
@@ -384,28 +436,27 @@
       bar.style.width = (total > 0 ? (window.scrollY / total * 100) : 0) + '%';
     }, { passive: true });
 
-    /* Code block copy buttons */
-    document.querySelectorAll('pre').forEach(function(pre) {
+    /* Code block copy buttons — toolbar above code, never overlaps content */
+    document.querySelectorAll('.page__content pre').forEach(function(pre) {
+      /* wrap in .code-wrap */
       var wrap = document.createElement('div');
-      wrap.style.cssText = 'position:relative;';
+      wrap.className = 'code-wrap';
       pre.parentNode.insertBefore(wrap, pre);
       wrap.appendChild(pre);
 
+      /* Copy button anchored to top-right corner of the accent border */
       var btn = document.createElement('button');
       btn.textContent = 'Copy';
-      btn.style.cssText = [
-        'position:absolute', 'top:8px', 'right:10px',
-        'background:rgba(255,255,255,0.9)', 'border:1px solid #e2e8f0',
-        'border-radius:5px', 'padding:2px 10px', 'font-size:0.75em',
-        'cursor:pointer', 'color:#555', 'font-family:Inter,sans-serif',
-        'transition:all 0.15s', 'z-index:10'
-      ].join(';');
+      btn.className = 'code-copy-btn';
       btn.addEventListener('click', function() {
-        var code = pre.querySelector('code') || pre;
-        navigator.clipboard.writeText(code.innerText).then(function() {
+        var src = (pre.querySelector('code') || pre).innerText;
+        navigator.clipboard.writeText(src).then(function() {
           btn.textContent = '✓ Copied';
-          btn.style.color = '#00897b';
-          setTimeout(function() { btn.textContent = 'Copy'; btn.style.color = '#555'; }, 1800);
+          btn.classList.add('copied');
+          setTimeout(function() {
+            btn.textContent = 'Copy';
+            btn.classList.remove('copied');
+          }, 1800);
         });
       });
       wrap.appendChild(btn);
