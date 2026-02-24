@@ -571,9 +571,11 @@ img[loading="lazy"].loaded, img[loading="lazy"][complete] {
   </div>
   <div class="hero-links">
     <a class="hero-link" href="files/CV.pdf">📋 CV</a>
-    <a class="hero-link" href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&hl=en">🎓 Google Scholar</a>
+    <a class="hero-link" href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&hl=en">🎓 Scholar</a>
     <a class="hero-link" href="mailto:jiajunf3@illinois.edu">✉️ Email</a>
     <a class="hero-link" href="https://openreview.net/profile?id=~Jiajun_Fan1">📝 OpenReview</a>
+    <a class="hero-link" href="https://github.com/markerthu">💻 GitHub</a>
+    <a class="hero-link" href="https://www.linkedin.com/in/jiajun-fan-57b12b26b">💼 LinkedIn</a>
   </div>
 </div>
 
@@ -585,6 +587,7 @@ img[loading="lazy"].loaded, img[loading="lazy"][complete] {
   <a href="#publications">📄 Publications</a>
   <a href="#research">🔬 Research</a>
   <a href="#awards">🏅 Awards</a>
+  <a href="/year-archive/">✍️ Blog</a>
   <a href="files/CV.pdf">📋 CV</a>
 </div>
 
