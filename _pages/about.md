@@ -593,7 +593,7 @@ img[loading="lazy"].loaded, img[loading="lazy"][complete] {
 
 <!-- Intro -->
 <p class="tagline">
-I am a Computer Science Ph.D. student at <strong>UIUC</strong>, advised by Prof. <a href="https://geliu.web.illinois.edu/">Ge Liu</a>. My research focuses on <strong>autonomous RL post-training for large generative models</strong> — making diffusion/flow models and multi-modal reasoning LLMs continuously self-improve with less and less human intervention. Previously, I pushed RL to <strong>superhuman performance</strong>: breaking 24 Atari world records and outperforming Agent57 with 500× less data.
+I am a Computer Science Ph.D. student at <strong>UIUC</strong>. My research focuses on <strong>autonomous RL post-training for large generative models</strong> — making diffusion/flow models and multi-modal reasoning LLMs continuously self-improve with less and less human intervention. Previously, I pushed RL to <strong>superhuman performance</strong>: breaking 24 Atari world records and outperforming Agent57 with 500× less data.
 </p>
 
 <div class="internship-banner">
