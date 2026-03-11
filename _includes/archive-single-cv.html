@@ -8,20 +8,16 @@
 
 <div class="list__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    <li style="list-style:none; margin-bottom:10px; padding:12px 14px; border-left:3px solid #1565c0; background:#f8faff; border-radius:0 8px 8px 0;">
-      <span style="font-weight:700; font-size:0.97em; line-height:1.4;">
+    <div class="pub-cv-entry">
+      {% if post.venue %}<span class="pub-cv-venue">{{ post.venue }}</span>{% endif %}
+      <div class="pub-cv-title">
         {% if post.paperurl %}
-          <a href="{{ post.paperurl }}" style="color:#1565c0; text-decoration:none;">{{ title }}</a>
+          <a href="{{ post.paperurl }}">{{ title }}</a>
         {% else %}
-          <a href="{{ base_path }}{{ post.url }}" rel="permalink" style="color:#1565c0; text-decoration:none;">{{ title }}</a>
+          <a href="{{ base_path }}{{ post.url }}" rel="permalink">{{ title }}</a>
         {% endif %}
-      </span>
-      {% if post.venue %}
-        <br><span style="font-size:0.82em; color:#555; font-style:italic;">{{ post.venue }}</span>
-      {% endif %}
-      {% if post.citation %}
-        <br><span style="font-size:0.80em; color:#777;">{{ post.citation }}</span>
-      {% endif %}
-    </li>
+      </div>
+      {% if post.citation %}<div class="pub-cv-authors">{{ post.citation }}</div>{% endif %}
+    </div>
   </article>
 </div>

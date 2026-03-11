@@ -237,11 +237,12 @@ redirect_from:
   border-radius: 12px; overflow: hidden;
   border: 1.5px solid #e0e8f0;
   background: #fff;
-  transition: transform .25s, box-shadow .25s;
+  transition: transform .18s ease, box-shadow .18s ease;
   text-decoration: none !important; color: inherit;
   display: flex; flex-direction: column;
+  will-change: transform; transform-style: preserve-3d;
 }
-.featured-card:hover { transform: translateY(-5px); box-shadow: 0 8px 30px rgba(21,101,192,.18); }
+.featured-card:hover { box-shadow: 0 12px 36px rgba(21,101,192,.22); }
 .featured-img {
   width: 100%; height: 130px; object-fit: cover; object-position: top;
   border-bottom: 1px solid #e0e8f0;
@@ -518,6 +519,13 @@ body.dark-mode .page { background: #0d1117 !important; }
 .stat-number[data-target] { transition: none; }
 
 /* ── Particle canvas ── */
+/* ── Reading progress bar ── */
+#read-progress {
+  position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+  background: linear-gradient(90deg, #2563eb 0%, #7c3aed 60%, #059669 100%);
+  z-index: 9999; transition: width .08s linear;
+  pointer-events: none;
+}
 .hero-banner { position: relative; overflow: hidden; }
 .hero-particles {
   position: absolute; inset: 0; z-index: 0; pointer-events: none;
@@ -662,6 +670,7 @@ body.dark-mode .gl-item { color: #8b949e; }
 </style>
 
 <!-- Hero banner -->
+<div id="read-progress"></div>
 <div class="hero-banner">
   <canvas class="hero-particles" id="particles"></canvas>
   <div class="hero-name">Jiajun Fan</div>
@@ -1088,9 +1097,10 @@ window.addEventListener('scroll', function(){
   var el = document.getElementById('hero-typed');
   if(!el) return;
   var texts = [
-    'CS Ph.D. Student · University of Illinois Urbana-Champaign',
-    'RL Post-Training for Generative Models',
-    'Making AI Systems That Improve Themselves'
+    'Reinforcement Learning · Post-Training',
+    'Self-Improvement for Generative Models',
+    'Multimodal & Audio Reasoning',
+    'CS Ph.D. Student @ UIUC'
   ];
   var ti=0, ci=0, deleting=false, pause=0;
   function tick(){
@@ -1185,6 +1195,30 @@ window.addEventListener('scroll', function(){
 document.querySelectorAll('img[loading="lazy"]').forEach(function(img){
   if(img.complete) img.classList.add('loaded');
   else img.addEventListener('load', function(){ img.classList.add('loaded'); });
+});
+
+/* ── ③ Reading progress bar ── */
+(function(){
+  var bar = document.getElementById('read-progress');
+  if(!bar) return;
+  window.addEventListener('scroll', function(){
+    var st = document.documentElement.scrollTop || document.body.scrollTop;
+    var sh = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    bar.style.width = (sh > 0 ? Math.min(st / sh * 100, 100) : 0) + '%';
+  }, {passive: true});
+})();
+
+/* ── ② Featured card 3D tilt ── */
+document.querySelectorAll('.featured-card').forEach(function(card){
+  card.addEventListener('mousemove', function(e){
+    var r = card.getBoundingClientRect();
+    var x = (e.clientX - r.left - r.width / 2) / r.width;
+    var y = (e.clientY - r.top - r.height / 2) / r.height;
+    card.style.transform = 'perspective(700px) rotateY(' + (x * 10) + 'deg) rotateX(' + (-y * 8) + 'deg) translateY(-5px)';
+  });
+  card.addEventListener('mouseleave', function(){
+    card.style.transform = '';
+  });
 });
 
 
