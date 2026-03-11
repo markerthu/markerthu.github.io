@@ -3,7 +3,7 @@ name: Update Citation Counts
 on:
   schedule:
     - cron: '0 6 * * 1'   # Every Monday 6:00 UTC
-  workflow_dispatch:        # Allow manual trigger
+  workflow_dispatch:
 
 jobs:
   update-citations:
@@ -14,67 +14,85 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Fetch citation counts from Semantic Scholar
+      - name: Fetch citations from Google Scholar profile
         run: |
           python3 << 'PYEOF'
-          import json, urllib.request, time, os
+          import json, urllib.request, re, datetime, time
 
-          # Paper IDs: arXiv IDs or Semantic Scholar paper IDs
-          papers = {
-            "CESAR":       {"id": "ArXiv:2510.20867", "key": "2510.20867"},
-            "ADRPO":       {"id": "ArXiv:2510.18053", "key": "2510.18053"},
-            "AC-Flow":     {"id": "ArXiv:2510.18072", "key": "2510.18072"},
-            "PRANCE":      {"id": "ArXiv:2407.05010", "key": "2407.05010"},
-            "LBC":         {"id": "ArXiv:2302.01411", "key": "LBC"},
-            "ORW-CFM-W2":  {"id": "ArXiv:2410.03304", "key": "ORW-CFM-W2"},
-            "GDI":         {"id": "ArXiv:2106.06232", "key": "GDI"},
+          SCHOLAR_ID = "EjmzseUAAAAJ"
+          URL = f"https://scholar.google.com/citations?user={SCHOLAR_ID}&hl=en&sortby=pubdate&cstart=0&pagesize=100"
+
+          headers = {
+            "User-Agent": "Mozilla/5.0 (compatible; academic-citation-bot/1.0)"
           }
-
-          ids = [p["id"] for p in papers.values()]
-          payload = json.dumps({"ids": ids}).encode()
-
-          req = urllib.request.Request(
-            "https://api.semanticscholar.org/graph/v1/paper/batch?fields=citationCount,title",
-            data=payload,
-            headers={"Content-Type": "application/json"}
-          )
+          req = urllib.request.Request(URL, headers=headers)
 
           try:
             with urllib.request.urlopen(req, timeout=30) as resp:
-              data = json.loads(resp.read())
+              html = resp.read().decode("utf-8", errors="ignore")
           except Exception as e:
-            print(f"API error: {e}")
-            data = []
+            print(f"Fetch error: {e}")
+            exit(0)
 
-          result = {}
-          paper_list = list(papers.values())
-          for i, item in enumerate(data):
-            if item and item.get("citationCount") is not None:
-              key = paper_list[i]["key"]
-              result[key] = item["citationCount"]
-              print(f"  {key}: {item['citationCount']} citations")
+          # Map paper title keywords → citation key
+          paper_map = {
+            "Incentivizing Consistent": "2510.20867",   # CESAR
+            "Adaptive Divergence":      "2510.18053",   # ADRPO
+            "Fine-tuning Flow Matching Generative Models with Intermediate": "2510.18072",  # AC-Flow
+            "Prance":                   "2407.05010",   # PRANCE
+            "Online Reward-Weighted":   "ORW-CFM-W2",  # ORW-CFM-W2
+            "Learnable Behavior Control": "LBC",        # LBC
+            "Generalized Data Distribution Iteration": "GDI",   # GDI
+            "Variational Supervised Contrastive": "VarCon",     # VarCon
+            "Sp-vla":                   "SP-VLA",       # SP-VLA
+          }
 
-          # Load existing file to preserve manually set values
+          # Each paper block: title cell followed by citation count cell
+          # Pattern: data-title="..." ... <a ...>(\d+)</a>.*?cites=
+          results = {}
+          # Find all citation rows: look for title+cited-by count pairs
+          rows = re.findall(
+            r'<tr[^>]*class="[^"]*gsc_a_tr[^"]*"[^>]*>(.*?)</tr>',
+            html, re.DOTALL
+          )
+          for row in rows:
+            title_m = re.search(r'class="gsc_a_at"[^>]*>(.*?)</a>', row, re.DOTALL)
+            cite_m  = re.search(r'class="gsc_a_ac[^"]*"[^>]*>(?:<a[^>]*>)?(\d+)', row, re.DOTALL)
+            if not title_m or not cite_m:
+              continue
+            title = re.sub(r'<[^>]+>', '', title_m.group(1)).strip()
+            count = int(cite_m.group(1))
+            for keyword, key in paper_map.items():
+              if keyword.lower() in title.lower():
+                results[key] = count
+                print(f"  {key} ({title[:50]}...): {count}")
+                break
+
+          if not results:
+            print("No results parsed — Scholar may have blocked; keeping existing file")
+            exit(0)
+
           citations_path = "_data/citations.json"
-          existing = {}
-          if os.path.exists(citations_path):
+          try:
             with open(citations_path) as f:
               existing = json.load(f)
+          except:
+            existing = {}
 
-          # Merge: new API results override existing auto values
-          existing.update(result)
-          existing["_updated"] = __import__("datetime").datetime.utcnow().strftime("%Y-%m-%d")
+          existing.update(results)
+          existing["_updated"] = datetime.datetime.utcnow().strftime("%Y-%m-%d")
+          existing["_source"] = "Google Scholar (EjmzseUAAAAJ)"
 
           with open(citations_path, "w") as f:
             json.dump(existing, f, indent=2)
 
-          print(f"\nSaved {len(result)} citation counts to {citations_path}")
+          print(f"\nUpdated {len(results)} papers in {citations_path}")
           PYEOF
 
-      - name: Commit updated citations
+      - name: Commit if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add _data/citations.json
-          git diff --staged --quiet || git commit -m "chore: auto-update citation counts [skip ci]"
+          git diff --staged --quiet || git commit -m "chore: auto-update citations from Google Scholar [skip ci]"
           git push
