@@ -1038,8 +1038,8 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>. My research focu
   </div>
 </div>
 
-<div class="pub-entry" data-venue="TPAMI" data-year="2025" data-arxiv="2407.05010" data-abstract="PRANCE jointly optimizes token pruning and structural channel pruning for adaptive ViT inference, achieving significant speedup while maintaining accuracy.">
-  <div class="pub-left"><span class="pb pb-journal">TPAMI 2025</span><span class="pub-year">2025</span></div>
+<div class="pub-entry" data-venue="TPAMI" data-year="2026" data-arxiv="2407.05010" data-abstract="PRANCE jointly optimizes token pruning and structural channel pruning for adaptive ViT inference, achieving significant speedup while maintaining accuracy.">
+  <div class="pub-left"><span class="pb pb-journal">TPAMI 2026</span><span class="pub-year">2026</span></div>
   <div class="pub-right">
     <div class="pub-title"><a href="https://arxiv.org/abs/2407.05010">PRANCE: Joint Token-Optimization and Structural Channel-Pruning for Adaptive ViT Inference</a><div class="pub-abstract-preview">PRANCE jointly optimizes token pruning and structural channel pruning for adaptive ViT inference, achieving significant speedup while maintaining accuracy.</div></div>
     <div class="pub-authors">Y. Li, C. Tang, Y. Meng, <strong>J. Fan</strong>, Z. Chai, X. Ma, Z. Wang, W. Zhu &nbsp;·&nbsp; <em>IEEE TPAMI</em></div>
@@ -1255,7 +1255,7 @@ Happy to discuss research, internships, or collaborations. Best reached by email
     { kw:['ac-flow','actor critic','intermediate feedback','dual-stability','sd3'],
       a:"AC-Flow (preprint) introduces actor-critic with intermediate timestep feedback for flow matching. The dual-stability mechanism combines advantage clipping with critic warm-up, enabling robust SD3 fine-tuning without reward hacking." },
     { kw:['prance','token pruning','channel pruning','vit','tpami','efficient inference'],
-      a:"PRANCE (IEEE TPAMI 2025) jointly optimizes token pruning and structural channel pruning for adaptive ViT inference — ~50% FLOP reduction, retaining only ~10% tokens with lossless Top-1 accuracy." },
+      a:"PRANCE (IEEE TPAMI 2026, Vol. 48) jointly optimizes token pruning and structural channel pruning for adaptive ViT inference — ~50% FLOP reduction, retaining only ~10% tokens with lossless Top-1 accuracy." },
     { kw:['sp-vla','vla','robot','vision language action','token pruning acceleration'],
       a:"SP-VLA (ICLR 2026) accelerates Vision-Language-Action models via action-aware model scheduling and spatio-semantic token pruning — 1.5× lossless speedup on LIBERO and 2.4× speedup on SimplerEnv." },
     { kw:['phd','uiuc','illinois','university','where study','school','student'],
@@ -1664,7 +1664,7 @@ function drawGraph(container) {
   var nodes = [
     {id:'GDI',        label:'GDI',        venue:'ICML 2022',    col:'1', fy:0.40, r:22, clr:'#ea580c', url:'/projects/gdi/'},
     {id:'LBC',        label:'LBC',        venue:'ICLR 2023',    col:'1', fy:0.72, r:20, clr:'#ea580c', url:'/projects/lbc/'},
-    {id:'PRANCE',     label:'PRANCE',     venue:'TPAMI 2025',   col:'2', fy:0.14, r:18, clr:'#0891b2', url:'https://arxiv.org/abs/2407.05010'},
+    {id:'PRANCE',     label:'PRANCE',     venue:'TPAMI 2026',   col:'2', fy:0.14, r:18, clr:'#0891b2', url:'https://arxiv.org/abs/2407.05010'},
     {id:'ORW-CFM-W2', label:'ORW-CFM-W2', venue:'ICLR 2025',  col:'3', fy:0.40, r:22, clr:'#2563eb', url:'/projects/orw-cfm-w2/'},
     {id:'VarCon',     label:'VarCon',     venue:'NeurIPS 2025', col:'3', fy:0.72, r:18, clr:'#be185d', url:''},
     {id:'ADRPO',      label:'ADRPO',      venue:'NeurIPS 2025', col:'4', fy:0.16, r:20, clr:'#2563eb', url:'/projects/adrpo/'},
