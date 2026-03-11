@@ -1045,13 +1045,6 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
   </div>
 </div>
 
-<!-- ══════════════════ ARXIV TEASER ══════════════════ -->
-<div class="section-header">📡 What's Happening in My Field</div>
-<p style="font-size:0.9em;color:#555;margin-bottom:16px;">
-  I track recent arXiv papers in RL post-training, reasoning, self-improvement, and multimodal LLMs — updated weekly.
-  <a href="/blog/reading-papers/" style="color:#1565c0;font-weight:600;margin-left:6px;">Browse the feed →</a>
-</p>
-
 <!-- ══════════════════ GLOBE ══════════════════ -->
 <div class="section-header">🌍 Global Research Community</div>
 <p style="font-size:0.84em;color:#666;margin-bottom:14px;">ML research hubs where work related to mine is being done.</p>
