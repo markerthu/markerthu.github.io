@@ -841,12 +841,12 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>. My research focu
 
 <div class="pub-filter-bar">
   <input class="filter-search" id="pubSearch" type="text" placeholder="🔍  Search papers…" aria-label="Search publications" oninput="filterPubs()">
-  <button class="filter-btn active" onclick="filterByVenue(this,'all')">All</button>
-  <button class="filter-btn" onclick="filterByVenue(this,'ICLR')">ICLR</button>
-  <button class="filter-btn" onclick="filterByVenue(this,'NeurIPS')">NeurIPS</button>
-  <button class="filter-btn" onclick="filterByVenue(this,'ICML')">ICML</button>
-  <button class="filter-btn" onclick="filterByVenue(this,'TPAMI')">TPAMI</button>
-  <button class="filter-btn" onclick="filterByVenue(this,'Preprint')">Preprint</button>
+  <button class="filter-btn active" aria-label="Show all papers" onclick="filterByVenue(this,'all')">All</button>
+  <button class="filter-btn" aria-label="Filter by ICLR papers" onclick="filterByVenue(this,'ICLR')">ICLR</button>
+  <button class="filter-btn" aria-label="Filter by NeurIPS papers" onclick="filterByVenue(this,'NeurIPS')">NeurIPS</button>
+  <button class="filter-btn" aria-label="Filter by ICML papers" onclick="filterByVenue(this,'ICML')">ICML</button>
+  <button class="filter-btn" aria-label="Filter by TPAMI papers" onclick="filterByVenue(this,'TPAMI')">TPAMI</button>
+  <button class="filter-btn" aria-label="Filter by preprints" onclick="filterByVenue(this,'Preprint')">Preprint</button>
 </div>
 
 <div class="pub-list">
