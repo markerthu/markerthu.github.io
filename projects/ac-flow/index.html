@@ -136,6 +136,13 @@ figcaption{font-size:0.83em;color:#6b7280;margin-top:12px;text-align:center;line
 .timeline-desc{font-size:0.83em;color:#6b7280;line-height:1.6}
 
 /* ── BibTeX ── */
+
+.bib-copy-btn{display:inline-flex;align-items:center;gap:6px;margin-bottom:10px;
+  padding:6px 16px;border-radius:8px;border:none;cursor:pointer;font-size:0.82em;
+  font-weight:700;background:#334155;color:#e2e8f0;transition:background .18s;}
+.bib-copy-btn:hover{background:#475569;}
+.bib-copy-btn.copied{background:#16a34a;color:#fff;}
+
 .bibtex-block{background:#1e293b;color:#e2e8f0;border-radius:12px;padding:22px 24px;overflow-x:auto;font-family:'JetBrains Mono',monospace;font-size:0.82em;line-height:1.7}
 
 /* ── Footer ── */
@@ -233,6 +240,7 @@ footer a{color:var(--accent);font-weight:600}
 
 <section>
   <h2>📖 Cite This Paper</h2>
+  <button class="bib-copy-btn">📋 Copy BibTeX</button>
   <pre class="bibtex-block"><code>@misc{fan2025finetuningflowmatchinggenerative,
   title={Fine-tuning Flow Matching Generative Models with Intermediate Feedback},
   author={Jiajun Fan and Chaoran Cheng and Shuaike Shen and Xiangxin Zhou and Ge Liu},
@@ -247,5 +255,19 @@ footer a{color:var(--accent);font-weight:600}
 <footer>
   <p>AC-Flow · arXiv 2025 (Under Review) &nbsp;|&nbsp; <a href="/">Jiajun Fan</a> · UIUC &nbsp;|&nbsp; <a href="https://arxiv.org/abs/2510.18072">arXiv</a></p>
  &nbsp;|&nbsp; <a href="#">↑ Back to top</a></footer>
+
+<script>
+document.querySelectorAll('.bib-copy-btn').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    var pre=btn.nextElementSibling;
+    var text=pre?pre.innerText||pre.textContent:'';
+    navigator.clipboard.writeText(text).then(function(){
+      btn.textContent='✅ Copied!';btn.classList.add('copied');
+      setTimeout(function(){btn.textContent='📋 Copy BibTeX';btn.classList.remove('copied');},2000);
+    });
+  });
+});
+</script>
+
 </body>
 </html>
