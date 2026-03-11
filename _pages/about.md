@@ -882,6 +882,13 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>. My research focu
         {label:'Abstract',         date:'2025-11-07', passed:true},
         {label:'Paper Submission', date:'2025-11-13', passed:true},
       ]},
+    { name:'ICLR 2026', abbr:'ICLR', type:'ML', color:'#7c3aed',
+      location:'Rio de Janeiro, Brazil', conf:'Apr 23–27, 2026', url:'https://iclr.cc/Conferences/2026',
+      deadlines:[
+        {label:'Submission',       date:'2025-09-24', passed:true},
+        {label:'Notification',     date:'2026-01-25', passed:true},
+        {label:'Conference',       date:'2026-04-23'},
+      ]},
     { name:'NeurIPS 2026', abbr:'NeurIPS', type:'ML', color:'#2563eb',
       location:'TBA', conf:'Dec 6–12, 2026', url:'https://neurips.cc/Conferences/2026',
       deadlines:[
