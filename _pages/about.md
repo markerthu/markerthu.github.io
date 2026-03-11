@@ -1354,8 +1354,8 @@ function drawGraph(container) {
     {id:'AC-Flow',    label:'AC-Flow',    venue:'arXiv 2025',  topics:['RL Training','Flow Matching'],  url:'/projects/ac-flow/',     ix:W*0.88, iy:H*0.48},
     {id:'CESAR',      label:'CESAR',      venue:'ICLR 2026',   topics:['RL Training','Audio Reasoning'],url:'/projects/cesar/',       ix:W*0.33, iy:H*0.22},
     {id:'VarCon',     label:'VarCon',     venue:'NeurIPS 2025',topics:['Representation','RL Training'], url:'https://openreview.net/forum?id=uOOlHOq500', ix:W*0.82, iy:H*0.88},
-    {id:'PRANCE',     label:'PRANCE',     venue:'TPAMI 2025',  topics:['Efficiency'],                   url:'https://arxiv.org/abs/2407.05010',           ix:W*0.08, iy:H*0.58},
-    {id:'SP-VLA',     label:'SP-VLA',     venue:'ICLR 2026',   topics:['Efficiency'],                   url:'https://openreview.net/forum?id=RwdGIIjPlC', ix:W*0.18, iy:H*0.88},
+    {id:'PRANCE',     label:'PRANCE',     venue:'TPAMI 2025',  topics:['RL Training','Efficiency'],         url:'https://arxiv.org/abs/2407.05010',           ix:W*0.08, iy:H*0.58},
+    {id:'SP-VLA',     label:'SP-VLA',     venue:'ICLR 2026',   topics:['RL Training','Efficiency'],         url:'https://openreview.net/forum?id=RwdGIIjPlC', ix:W*0.18, iy:H*0.88},
   ];
 
   /* ── Narrative edges: show research evolution chain ── */
