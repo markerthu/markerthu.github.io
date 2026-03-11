@@ -1146,9 +1146,10 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
         {label:'Conference',       date:'2026-04-23'},
       ]},
     { name:'NeurIPS 2026', abbr:'NeurIPS', type:'ML', color:'#2563eb',
-      location:'TBA', conf:'Dec 6–12, 2026', url:'https://neurips.cc/Conferences/2026',
+      location:'San Diego, CA, USA', conf:'Dec 6–12, 2026', url:'https://neurips.cc/Conferences/2026',
       deadlines:[
-        {label:'Paper Submission', date:null},
+        {label:'Abstract',         date:'2026-05-05'},
+        {label:'Paper Submission', date:'2026-05-07'},
       ]},
     { name:'ICLR 2027', abbr:'ICLR', type:'ML', color:'#7c3aed',
       location:'TBA', conf:'TBA', url:'https://iclr.cc/',
