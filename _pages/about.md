@@ -796,7 +796,7 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>. My research focu
   var showing = extras[0].style.display === 'flex';
   extras.forEach(function(e){ e.style.display = showing ? 'none' : 'flex'; });
   btn.textContent = showing ? '▼ Show more news' : '▲ Show less';
-">▼ Show more news</button>
+" aria-label="Show more news">▼ Show more news</button>
 
 <!-- ═══════════════════════════════ FEATURED ═══════════════════════════ -->
 <div class="section-header" id="featured">🔥 Featured Research</div>
@@ -1201,8 +1201,8 @@ Happy to discuss research, internships, or collaborations. Best reached by email
 
 <!-- Scroll-to-top + Dark mode buttons -->
 <div style="display:contents">
-<button class="scroll-top" id="scrollTop" onclick="window.scrollTo(0,0)">↑</button>
-<button class="dark-toggle" id="darkToggle" title="Toggle dark mode">🌙</button>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo(0,0)" aria-label="Back to top">↑</button>
+<button class="dark-toggle" id="darkToggle" title="Toggle dark mode" aria-label="Toggle dark mode">🌙</button>
 </div>
 
 <!-- ══════════════════ AI RESEARCH ASSISTANT ══════════════════ -->
@@ -1210,7 +1210,7 @@ Happy to discuss research, internships, or collaborations. Best reached by email
 <div id="ra-panel" class="ra-panel">
   <div class="ra-header">
     <span>🤖 Research Assistant</span>
-    <button onclick="raClose()" class="ra-close">✕</button>
+    <button onclick="raClose()" class="ra-close" aria-label="Close chat widget">✕</button>
   </div>
   <div id="ra-msgs" class="ra-msgs"></div>
   <div id="ra-chips" class="ra-chips">
@@ -1223,7 +1223,7 @@ Happy to discuss research, internships, or collaborations. Best reached by email
   </div>
   <div class="ra-input-row">
     <input id="ra-input" class="ra-input" type="text" placeholder="Ask about my research…" onkeydown="if(event.key==='Enter')raSend()">
-    <button onclick="raSend()" class="ra-send">↵</button>
+    <button onclick="raSend()" class="ra-send" aria-label="Send message">↵</button>
   </div>
 </div>
 
