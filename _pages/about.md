@@ -534,6 +534,24 @@ body.dark-mode .page { background: #0d1117 !important; }
 .stat-number[data-target] { transition: none; }
 
 /* ── Particle canvas ── */
+/* ── Conference Deadline Widget ── */
+.conf-ddl-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 1.8em; }
+@media(max-width:700px){ .conf-ddl-grid { grid-template-columns: 1fr 1fr; } }
+@media(max-width:450px){ .conf-ddl-grid { grid-template-columns: 1fr; } }
+.ddl-card { border-radius: 10px; border: 1.5px solid #e5e7eb; border-left: 4px solid #2563eb; background: #fff; padding: 12px 14px; transition: box-shadow .2s, transform .15s; }
+.ddl-card:hover { box-shadow: 0 4px 18px rgba(0,0,0,.1); transform: translateY(-2px); }
+.ddl-top { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
+.ddl-abbr { font-size: 1em; font-weight: 800; letter-spacing: -.01em; }
+.ddl-type { font-size: 0.68em; font-weight: 700; padding: 1px 7px; border-radius: 20px; letter-spacing: .05em; }
+.ddl-name { font-size: 0.85em; font-weight: 700; margin-bottom: 4px; }
+.ddl-name a { color: #1a2332; text-decoration: none; }
+.ddl-name a:hover { color: #2563eb; text-decoration: underline; }
+.ddl-meta { font-size: 0.74em; color: #6b7280; margin-bottom: 8px; line-height: 1.5; }
+.ddl-chip { display: inline-block; font-size: 0.74em; font-weight: 700; padding: 2px 8px; border-radius: 20px; border: 1px solid; white-space: nowrap; }
+body.dark-mode .ddl-card { background: #161b22 !important; border-color: #30363d !important; }
+body.dark-mode .ddl-name a { color: #c9d1d9 !important; }
+body.dark-mode .ddl-meta { color: #8b949e !important; }
+
 /* ── Reading progress bar ── */
 #read-progress {
   position: fixed; top: 0; left: 0; height: 3px; width: 0%;
@@ -802,6 +820,89 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>. My research focu
     </div>
   </a>
 </div>
+
+<!-- ══════════════════ CONFERENCE DEADLINES ══════════════════ -->
+<div class="section-header" id="deadlines">📅 Conference Deadlines</div>
+<p style="font-size:0.84em;color:#666;margin-bottom:14px;">Key AI/ML venue deadlines I track — updated manually as dates are announced.</p>
+<div id="conf-ddl-grid" class="conf-ddl-grid"></div>
+
+<script>
+(function(){
+  var CONF = [
+    { name:'ECCV 2026', abbr:'ECCV', type:'CV', color:'#059669',
+      location:'Malmö, Sweden', conf:'Sep 8–13, 2026', url:'https://eccv.ecva.net/Conferences/2026',
+      deadlines:[
+        {label:'Paper Submission', date:'2026-03-05', passed:true},
+        {label:'Supplemental',     date:'2026-03-12'},
+        {label:'Rebuttal',         date:'2026-05-11'},
+        {label:'Decisions',        date:'2026-06-17'},
+      ]},
+    { name:'ICML 2026', abbr:'ICML', type:'ML', color:'#2563eb',
+      location:'Seoul, South Korea', conf:'Jul 6–11, 2026', url:'https://icml.cc/Conferences/2026',
+      deadlines:[
+        {label:'Abstract',         date:'2026-01-23', passed:true},
+        {label:'Paper Submission', date:'2026-01-28', passed:true},
+        {label:'Notification',     date:'2026-04-30'},
+      ]},
+    { name:'CVPR 2026', abbr:'CVPR', type:'CV', color:'#059669',
+      location:'Nashville, TN, USA', conf:'Jun 3–7, 2026', url:'https://cvpr.thecvf.com/Conferences/2026',
+      deadlines:[
+        {label:'Abstract',         date:'2025-11-07', passed:true},
+        {label:'Paper Submission', date:'2025-11-13', passed:true},
+      ]},
+    { name:'NeurIPS 2026', abbr:'NeurIPS', type:'ML', color:'#2563eb',
+      location:'TBA', conf:'Dec 6–12, 2026', url:'https://neurips.cc/Conferences/2026',
+      deadlines:[
+        {label:'Paper Submission', date:null},
+      ]},
+    { name:'ICLR 2027', abbr:'ICLR', type:'ML', color:'#7c3aed',
+      location:'TBA', conf:'TBA', url:'https://iclr.cc/',
+      deadlines:[
+        {label:'Abstract',         date:null},
+        {label:'Paper Submission', date:null},
+      ]},
+  ];
+
+  var grid = document.getElementById('conf-ddl-grid');
+  if (!grid) return;
+  var now = new Date();
+
+  CONF.forEach(function(c) {
+    var next = null;
+    for (var i = 0; i < c.deadlines.length; i++) {
+      var d = c.deadlines[i];
+      if (!d.date) break;
+      if (d.passed) continue;
+      var dt = new Date(d.date); dt.setHours(23, 59, 59);
+      if (dt >= now) { next = {label: d.label, dt: dt}; break; }
+    }
+
+    var chip = '';
+    if (next) {
+      var diff = Math.ceil((next.dt - now) / 86400000);
+      var urgency = diff <= 2 ? '#dc2626' : diff <= 14 ? '#ea580c' : diff <= 60 ? '#d97706' : '#6b7280';
+      chip = '<span class="ddl-chip" style="background:' + urgency + '20;color:' + urgency + ';border-color:' + urgency + '40">'
+           + next.label + ' · ' + (diff <= 0 ? 'Today!' : diff + 'd') + '</span>';
+    } else if (c.deadlines[0].date === null) {
+      chip = '<span class="ddl-chip" style="background:#f1f5f9;color:#94a3b8;border-color:#e2e8f0">Submission TBA</span>';
+    } else {
+      chip = '<span class="ddl-chip" style="background:#f0fdf4;color:#16a34a;border-color:#bbf7d0">Under review / Done</span>';
+    }
+
+    var card = document.createElement('div');
+    card.className = 'ddl-card';
+    card.style.borderLeftColor = c.color;
+    card.innerHTML = '<div class="ddl-top">'
+      + '<span class="ddl-abbr" style="color:' + c.color + '">' + c.abbr + '</span>'
+      + '<span class="ddl-type" style="background:' + c.color + '15;color:' + c.color + '">' + c.type + '</span>'
+      + '</div>'
+      + '<div class="ddl-name"><a href="' + c.url + '" target="_blank">' + c.name + '</a></div>'
+      + '<div class="ddl-meta">📍 ' + c.location + ' &nbsp;·&nbsp; 🗓 ' + c.conf + '</div>'
+      + chip;
+    grid.appendChild(card);
+  });
+})();
+</script>
 
 <!-- ═══════════════════════════════ PUBLICATIONS ═══════════════════════ -->
 <div class="section-header" id="publications">📄 Selected Publications</div>
