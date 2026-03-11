@@ -554,6 +554,11 @@ body.dark-mode .page { background: #0d1117 !important; }
 .ra-typing span:nth-child(2) { animation-delay: .2s; }
 .ra-typing span:nth-child(3) { animation-delay: .4s; }
 @keyframes ra-dot { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-5px)} }
+.ra-chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 8px 10px 4px; border-top: 1.5px solid #e5e7eb; }
+.ra-chip { background: #eff6ff; color: #1d4ed8; border: 1.5px solid #bfdbfe; border-radius: 999px; padding: 3px 11px; font-size: 0.75em; font-weight: 700; cursor: pointer; transition: background .15s, transform .1s; white-space: nowrap; }
+.ra-chip:hover { background: #dbeafe; transform: translateY(-1px); }
+.ra-chips.hidden { display: none; }
+body.dark-mode .ra-chip { background: #1c2333 !important; color: #58a6ff !important; border-color: #1f3a6e !important; }
 .ra-input-row { display: flex; border-top: 1.5px solid #e5e7eb; padding: 8px 10px; gap: 6px; }
 .ra-input { flex: 1; border: 1.5px solid #e5e7eb; border-radius: 8px; padding: 7px 10px; font-size: 0.83em; outline: none; font-family: inherit; }
 .ra-input:focus { border-color: #2563eb; }
@@ -1208,6 +1213,14 @@ Happy to discuss research, internships, or collaborations. Best reached by email
     <button onclick="raClose()" class="ra-close">✕</button>
   </div>
   <div id="ra-msgs" class="ra-msgs"></div>
+  <div id="ra-chips" class="ra-chips">
+    <button class="ra-chip" onclick="raAsk(this)">🎯 Latest papers</button>
+    <button class="ra-chip" onclick="raAsk(this)">🔬 Research focus</button>
+    <button class="ra-chip" onclick="raAsk(this)">🏅 Awards</button>
+    <button class="ra-chip" onclick="raAsk(this)">📬 Contact</button>
+    <button class="ra-chip" onclick="raAsk(this)">💼 Internship</button>
+    <button class="ra-chip" onclick="raAsk(this)">🎮 Hobbies</button>
+  </div>
   <div class="ra-input-row">
     <input id="ra-input" class="ra-input" type="text" placeholder="Ask about my research…" onkeydown="if(event.key==='Enter')raSend()">
     <button onclick="raSend()" class="ra-send">↵</button>
@@ -1337,6 +1350,13 @@ Happy to discuss research, internships, or collaborations. Best reached by email
     var el = document.getElementById('ra-typing-indicator');
     if (el) el.parentNode.removeChild(el);
   }
+
+  window.raAsk = function(btn) {
+    var text = btn.textContent.replace(/^[^\w]+/, '').trim();
+    document.getElementById('ra-chips').classList.add('hidden');
+    document.getElementById('ra-input').value = text;
+    raSend();
+  };
 
   window.raOpen = function() {
     var panel = document.getElementById('ra-panel');
