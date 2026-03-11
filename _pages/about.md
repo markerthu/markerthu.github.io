@@ -630,34 +630,7 @@ img[loading="lazy"].loaded, img[loading="lazy"][complete] {
   .scroll-top { right: 16px; }
 }
 
-/* ── arXiv Feed ── */
-.arxiv-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 1.8em;
-}
-@media(max-width:700px){ .arxiv-grid { grid-template-columns: 1fr; } }
-.arxiv-card {
-  display: block; padding: 12px 14px; border-radius: 10px;
-  border: 1.5px solid #e5e7eb; background: #fff;
-  text-decoration: none; color: inherit;
-  transition: transform .15s, box-shadow .15s;
-}
-.arxiv-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,.1); border-color: #1565c0; text-decoration: none; }
-.arxiv-tag {
-  display: inline-block; font-size: 0.7em; font-weight: 800;
-  padding: 2px 9px; border-radius: 999px; margin-bottom: 7px;
-}
-.arxiv-tag-rl-training    { background: #dbeafe; color: #1d4ed8; }
-.arxiv-tag-flow-matching  { background: #d1fae5; color: #065f46; }
-.arxiv-tag-audio-reasoning{ background: #ede9fe; color: #5b21b6; }
-.arxiv-tag-reasoning      { background: #fce7f3; color: #9d174d; }
-.arxiv-tag-self-improvement{ background: #fef3c7; color: #92400e; }
-.arxiv-tag-multimodal     { background: #e0f2fe; color: #0369a1; }
-.arxiv-title { font-size: 0.82em; font-weight: 700; color: #1a2332; line-height: 1.4; margin-bottom: 5px; }
-.arxiv-authors { font-size: 0.74em; color: #888; margin-bottom: 3px; }
-.arxiv-date { font-size: 0.72em; color: #aaa; }
-body.dark-mode .arxiv-card { background: #161b22; border-color: #30363d; }
-body.dark-mode .arxiv-card:hover { border-color: #388bfd; }
-body.dark-mode .arxiv-title { color: #e6edf3; }
+
 
 
 
@@ -862,7 +835,7 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>. My research focu
 <a href="/publications/">Publications page</a></p>
 
 <div class="pub-filter-bar">
-  <input class="filter-search" id="pubSearch" type="text" placeholder="🔍  Search papers…" oninput="filterPubs()">
+  <input class="filter-search" id="pubSearch" type="text" placeholder="🔍  Search papers…" aria-label="Search publications" oninput="filterPubs()">
   <button class="filter-btn active" onclick="filterByVenue(this,'all')">All</button>
   <button class="filter-btn" onclick="filterByVenue(this,'ICLR')">ICLR</button>
   <button class="filter-btn" onclick="filterByVenue(this,'NeurIPS')">NeurIPS</button>
@@ -1264,6 +1237,8 @@ Happy to discuss research, internships, or collaborations. Best reached by email
       a:"AC-Flow (preprint) introduces actor-critic with intermediate timestep feedback for flow matching. The dual-stability mechanism combines advantage clipping with critic warm-up, enabling robust SD3 fine-tuning without reward hacking." },
     { kw:['prance','token pruning','channel pruning','vit','tpami','efficient inference'],
       a:"PRANCE (IEEE TPAMI 2026, Vol. 48) jointly optimizes token pruning and structural channel pruning for adaptive ViT inference — ~50% FLOP reduction, retaining only ~10% tokens with lossless Top-1 accuracy." },
+    { kw:['varcon','variational contrastive','supervised contrastive','imagenet','resnet'],
+      a:"VarCon (NeurIPS 2025) reformulates supervised contrastive learning as variational inference, introducing a principled probabilistic framework. Achieves SOTA 79.36% Top-1 accuracy on ImageNet-1K with ResNet-50." },
     { kw:['sp-vla','vla','robot','vision language action','token pruning acceleration'],
       a:"SP-VLA (ICLR 2026) accelerates Vision-Language-Action models via action-aware model scheduling and spatio-semantic token pruning — 1.5× lossless speedup on LIBERO and 2.4× speedup on SimplerEnv." },
     { kw:['phd','uiuc','illinois','university','where study','school','student'],
