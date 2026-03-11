@@ -1277,6 +1277,8 @@ Happy to discuss research, internships, or collaborations. Best reached by email
       a:"This site is built with Jekyll + Minimal Mistakes theme, hosted on GitHub Pages. Custom features include a D3 paper network graph, live citation counts from Google Scholar, a conference deadline tracker, and this chat widget — all running client-side with no backend." },
     { kw:['summer','intern 2026','looking for','open position','2026 internship'],
       a:"I'm open to summer 2026 research internships in RL post-training, generative models, and LLM reasoning. Feel free to reach out at jiajunf3@illinois.edu!" },
+    { kw:['hobby','hobbies','outside research','free time','personal','fun','enjoy','game design','game','creative','interest besides'],
+      a:"Outside of research, I love designing games and building creative AI agents — things that have interesting emergent behaviors or unexpected dynamics. There's a natural overlap with my research: designing reward functions for RL feels a lot like designing game mechanics." },
     { kw:['thank','thanks','great','awesome','cool','helpful','nice'],
       a:"Glad I could help! Feel free to ask more questions, or reach out directly at jiajunf3 [at] illinois.edu for deeper discussions." },
   ];
