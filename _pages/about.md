@@ -1216,52 +1216,7 @@ document.querySelectorAll('img[loading="lazy"]').forEach(function(img){
   else img.addEventListener('load', function(){ img.classList.add('loaded'); });
 });
 
-/* ══════════════════════════════════════════════════
-   🌍 GLOBE (cobe.js) — async, non-blocking
-══════════════════════════════════════════════════ */
-(function(){
-  var canvas = document.getElementById('globe-canvas');
-  if(!canvas) return;
-  function loadCobe(){
-    var wrap = canvas.parentElement;
-    /* Use container dimensions — canvas is 100% of parent */
-    var W = wrap.offsetWidth || 700, H = wrap.offsetHeight || 280;
-    var s = document.createElement('script');
-    s.src = 'https://cdn.jsdelivr.net/npm/cobe@0.6.3/dist/cobe.umd.js';
-    s.async = true;
-    s.onload = function(){
-      if(canvas._cobeGlobe) return;
-      var phi = 0;
-      canvas._cobeGlobe = createGlobe(canvas, {
-        devicePixelRatio: Math.min(window.devicePixelRatio, 2),
-        width: W * 2, height: H * 2,
-        phi: 0, theta: 0.3, dark: 1, diffuse: 1.2,
-        mapSamples: 16000, mapBrightness: 6,
-        baseColor: [0.1, 0.15, 0.3], markerColor: [0.4, 0.7, 1], glowColor: [0.2, 0.4, 0.8],
-        markers: [
-          {location:[40.102,-88.227],size:0.06},{location:[37.427,-122.169],size:0.05},
-          {location:[42.360,-71.094],size:0.05},{location:[40.443,-79.943],size:0.04},
-          {location:[37.872,-122.259],size:0.05},{location:[45.501,-73.567],size:0.04},
-          {location:[37.422,-122.084],size:0.05},{location:[51.507,-0.127],size:0.05},
-          {location:[47.376,8.541],size:0.04},{location:[40.000,116.319],size:0.06},
-          {location:[31.230,121.473],size:0.05},{location:[1.296,103.776],size:0.04},
-          {location:[35.712,139.730],size:0.04},{location:[37.566,126.978],size:0.04},
-        ],
-        onRender: function(state){ state.phi = phi; phi += 0.003; }
-      });
-    };
-    document.head.appendChild(s);
-  }
-  /* Defer until globe-wrap is in the viewport so offsetWidth is real */
-  if('IntersectionObserver' in window){
-    var io = new IntersectionObserver(function(entries){
-      if(entries[0].isIntersecting){ io.disconnect(); loadCobe(); }
-    }, {threshold: 0.1});
-    io.observe(canvas);
-  } else {
-    loadCobe();
-  }
-})();
+/* Globe initialized via ES module below — see <script type="module"> after </script> */
 
 
 /* ══════════════════════════════════════════════════
@@ -1512,5 +1467,45 @@ function drawGraph(container) {
   container.appendChild(leg);
 }
 
+</script>
+
+<!-- Globe: cobe is ESM-only (no UMD); use type=module + esm.sh -->
+<script type="module">
+import createGlobe from 'https://esm.sh/cobe@0.6.3';
+(function(){
+  var canvas = document.getElementById('globe-canvas');
+  if(!canvas || canvas._cobeGlobe) return;
+  function initGlobe(){
+    var wrap = canvas.parentElement;
+    var W = Math.max(wrap.offsetWidth, 400);
+    var H = Math.max(wrap.offsetHeight, 280);
+    var phi = 0;
+    canvas._cobeGlobe = createGlobe(canvas, {
+      devicePixelRatio: Math.min(window.devicePixelRatio, 2),
+      width: W * 2, height: H * 2,
+      phi: 0, theta: 0.3, dark: 1, diffuse: 1.2,
+      mapSamples: 16000, mapBrightness: 6,
+      baseColor: [0.1, 0.15, 0.3], markerColor: [0.4, 0.7, 1], glowColor: [0.2, 0.4, 0.8],
+      markers: [
+        {location:[40.102,-88.227],size:0.06},{location:[37.427,-122.169],size:0.05},
+        {location:[42.360,-71.094],size:0.05},{location:[40.443,-79.943],size:0.04},
+        {location:[37.872,-122.259],size:0.05},{location:[45.501,-73.567],size:0.04},
+        {location:[37.422,-122.084],size:0.05},{location:[51.507,-0.127],size:0.05},
+        {location:[47.376,8.541],size:0.04},{location:[40.000,116.319],size:0.06},
+        {location:[31.230,121.473],size:0.05},{location:[1.296,103.776],size:0.04},
+        {location:[35.712,139.730],size:0.04},{location:[37.566,126.978],size:0.04},
+      ],
+      onRender: function(state){ state.phi = phi; phi += 0.003; }
+    });
+  }
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      if(entries[0].isIntersecting){ io.disconnect(); requestAnimationFrame(initGlobe); }
+    }, {threshold: 0.1});
+    io.observe(canvas);
+  } else {
+    setTimeout(initGlobe, 300);
+  }
+})();
 </script>
 
