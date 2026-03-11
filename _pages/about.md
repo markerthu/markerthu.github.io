@@ -1263,7 +1263,7 @@ Happy to discuss research, internships, or collaborations. Best reached by email
     { kw:['contact','email','reach','collaborate','talk','message'],
       a:"You can reach me at jiajunf3 [at] illinois.edu. I'm open to research discussions and collaboration, especially around RL post-training, generative models, and multimodal reasoning." },
     { kw:['publication','paper','published','conference','venue','list','all papers'],
-      a:"I've published at ICLR (2023 Oral, 2025, 2026), NeurIPS (2025), ICML (2022), and IEEE TPAMI (2025), with ongoing preprints. Full list on Google Scholar (EjmzseUAAAAJ)." },
+      a:"I've published at ICLR (2023 Oral, 2025, 2026), NeurIPS (2025), ICML (2022), and IEEE TPAMI (2026), with ongoing preprints. Full list on Google Scholar (EjmzseUAAAAJ)." },
     { kw:['citation','cited','impact','scholar','h-index','how many'],
       a:"My work has 290+ citations. LBC (ICLR 2023 Oral) leads with 26 citations, followed by GDI (ICML 2022) with 21. Full profile: Google Scholar EjmzseUAAAAJ." },
     { kw:['self-improve','self-play','autonomous','annotation-free','human supervision'],
