@@ -851,7 +851,7 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>. My research focu
 
 <!-- ══════════════════ CONFERENCE DEADLINES ══════════════════ -->
 <div class="section-header" id="deadlines">📅 Conference Deadlines</div>
-<p style="font-size:0.84em;color:#666;margin-bottom:14px;">Key AI/ML venue deadlines I track — updated manually as dates are announced.</p>
+<p style="font-size:0.84em;color:#666;margin-bottom:14px;">Key AI/ML venue deadlines I track — for the full list see <a href="https://ccfddl.com/" target="_blank">ccfddl.com</a>.</p>
 <div id="conf-ddl-grid" class="conf-ddl-grid"></div>
 
 <script>
