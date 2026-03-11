@@ -1427,7 +1427,7 @@ function filterByVenue(btn, venue) {
 
 function drawGraph(container) {
   var isDark = document.body.classList.contains('dark-mode');
-  var W = container.offsetWidth, H = 460;
+  var W = container.offsetWidth || 700, H = 500;
 
   var topicColors = {
     'RL Training':     '#2563eb',
@@ -1438,126 +1438,180 @@ function drawGraph(container) {
     'Representation':  '#be185d',
   };
 
+  /* ── Topic nodes: FIXED positions to anchor the layout ── */
+  var topicPos = {
+    'RL Training':     {fx: W*0.50, fy: H*0.42},
+    'Flow Matching':   {fx: W*0.78, fy: H*0.28},
+    'Audio Reasoning': {fx: W*0.22, fy: H*0.35},
+    'Deep RL':         {fx: W*0.42, fy: H*0.78},
+    'Efficiency':      {fx: W*0.12, fy: H*0.72},
+    'Representation':  {fx: W*0.82, fy: H*0.72},
+  };
+
+  /* ── Papers: initial positions near their primary topic ── */
   var papers = [
-    {id:'CESAR',      label:'CESAR',      venue:'ICLR 2026',   topics:['RL Training','Audio Reasoning'], url:'/projects/cesar/'},
-    {id:'SP-VLA',     label:'SP-VLA',     venue:'ICLR 2026',   topics:['Efficiency'], url:'https://openreview.net/forum?id=RwdGIIjPlC'},
-    {id:'ADRPO',      label:'ADRPO',      venue:'NeurIPS 2025',topics:['RL Training','Flow Matching'], url:'/projects/adrpo/'},
-    {id:'VarCon',     label:'VarCon',     venue:'NeurIPS 2025',topics:['Representation'], url:'https://openreview.net/forum?id=uOOlHOq500'},
-    {id:'ORW-CFM-W2', label:'ORW-CFM-W2', venue:'ICLR 2025',   topics:['RL Training','Flow Matching'], url:'/projects/orw-cfm-w2/'},
-    {id:'AC-Flow',    label:'AC-Flow',    venue:'arXiv 2025',  topics:['RL Training','Flow Matching'], url:'/projects/ac-flow/'},
-    {id:'PRANCE',     label:'PRANCE',     venue:'TPAMI 2025',  topics:['Efficiency'], url:'https://arxiv.org/abs/2407.05010'},
-    {id:'LBC',        label:'LBC',        venue:'ICLR 2023',   topics:['Deep RL'], url:'/projects/lbc/'},
-    {id:'GDI',        label:'GDI',        venue:'ICML 2022',   topics:['Deep RL','RL Training'], url:'/projects/gdi/'},
+    {id:'GDI',        label:'GDI',        venue:'ICML 2022',   topics:['Deep RL','RL Training'],        url:'/projects/gdi/',         ix:W*0.38, iy:H*0.90},
+    {id:'LBC',        label:'LBC',        venue:'ICLR 2023',   topics:['Deep RL'],                      url:'/projects/lbc/',         ix:W*0.55, iy:H*0.90},
+    {id:'ORW-CFM-W2', label:'ORW-CFM-W2', venue:'ICLR 2025',   topics:['RL Training','Flow Matching'],  url:'/projects/orw-cfm-w2/',  ix:W*0.70, iy:H*0.48},
+    {id:'ADRPO',      label:'ADRPO',      venue:'NeurIPS 2025',topics:['RL Training','Flow Matching'],  url:'/projects/adrpo/',       ix:W*0.65, iy:H*0.28},
+    {id:'AC-Flow',    label:'AC-Flow',    venue:'arXiv 2025',  topics:['RL Training','Flow Matching'],  url:'/projects/ac-flow/',     ix:W*0.88, iy:H*0.48},
+    {id:'CESAR',      label:'CESAR',      venue:'ICLR 2026',   topics:['RL Training','Audio Reasoning'],url:'/projects/cesar/',       ix:W*0.33, iy:H*0.22},
+    {id:'VarCon',     label:'VarCon',     venue:'NeurIPS 2025',topics:['Representation','RL Training'], url:'https://openreview.net/forum?id=uOOlHOq500', ix:W*0.82, iy:H*0.88},
+    {id:'PRANCE',     label:'PRANCE',     venue:'TPAMI 2025',  topics:['Efficiency'],                   url:'https://arxiv.org/abs/2407.05010',           ix:W*0.08, iy:H*0.58},
+    {id:'SP-VLA',     label:'SP-VLA',     venue:'ICLR 2026',   topics:['Efficiency'],                   url:'https://openreview.net/forum?id=RwdGIIjPlC', ix:W*0.18, iy:H*0.88},
   ];
 
-  /* Build nodes: papers + topic clusters */
-  var topicList = Object.keys(topicColors);
-  var nodes = topicList.map(function(t){ return {id:'topic-'+t, label:t, type:'topic', color:topicColors[t], r:22}; });
+  /* ── Narrative edges: show research evolution chain ── */
+  var narrativeLinks = [
+    {source:'GDI',        target:'LBC',        label:'evolved →'},
+    {source:'GDI',        target:'ORW-CFM-W2', label:'RL → Generative'},
+    {source:'ORW-CFM-W2', target:'ADRPO',      label:'step 2 →'},
+    {source:'ADRPO',      target:'AC-Flow',    label:'step 3 →'},
+    {source:'ADRPO',      target:'CESAR',      label:'RL → Reasoning'},
+    {source:'PRANCE',     target:'SP-VLA',     label:'efficiency →'},
+    {source:'VarCon',     target:'CESAR',      label:'repr → reward'},
+  ];
+
+  /* ── Build node/link arrays ── */
+  var nodes = Object.entries(topicColors).map(function(kv){
+    var pos = topicPos[kv[0]];
+    return {id:'topic-'+kv[0], label:kv[0], type:'topic', color:kv[1], r:24, fx:pos.fx, fy:pos.fy};
+  });
   papers.forEach(function(p){
-    var c = topicColors[p.topics[0]] || '#888';
-    nodes.push({id:p.id, label:p.label, venue:p.venue, type:'paper', color:c, r:14, topics:p.topics, url:p.url});
+    nodes.push({id:p.id, label:p.label, venue:p.venue, type:'paper',
+      color:topicColors[p.topics[0]]||'#888', r:15, topics:p.topics, url:p.url,
+      x:p.ix, y:p.iy});
   });
 
-  /* Build links: paper → its topics */
-  var links = [];
+  var topicLinks = [];
   papers.forEach(function(p){
     p.topics.forEach(function(t){
-      links.push({source:'topic-'+t, target:p.id});
+      topicLinks.push({source:'topic-'+t, target:p.id, kind:'topic'});
     });
   });
+  narrativeLinks.forEach(function(l){ l.kind = 'narrative'; });
+  var links = topicLinks.concat(narrativeLinks);
 
-  var svg = d3.select(container).append('svg')
-    .attr('width', W).attr('height', H);
-
-  /* Gradient bg */
-  svg.append('rect').attr('width', W).attr('height', H)
+  /* ── SVG setup ── */
+  var svg = d3.select(container).append('svg').attr('width', W).attr('height', H);
+  svg.append('rect').attr('width',W).attr('height',H)
     .attr('fill', isDark ? '#0d1117' : '#fafbff');
 
+  /* Arrow marker for narrative links */
+  svg.append('defs').append('marker')
+    .attr('id','arrowhead').attr('viewBox','0 -4 8 8')
+    .attr('refX',22).attr('refY',0)
+    .attr('markerWidth',6).attr('markerHeight',6)
+    .attr('orient','auto')
+    .append('path').attr('d','M0,-4L8,0L0,4').attr('fill','#94a3b8');
+
+  /* ── Force simulation ── */
   var sim = d3.forceSimulation(nodes)
-    .force('link', d3.forceLink(links).id(function(d){ return d.id; }).distance(function(l){
-      return l.source.type === 'topic' ? 90 : 60;
-    }).strength(0.6))
-    .force('charge', d3.forceManyBody().strength(-220))
-    .force('center', d3.forceCenter(W/2, H/2))
-    .force('collision', d3.forceCollide().radius(function(d){ return d.r + 8; }));
+    .force('link', d3.forceLink(links).id(function(d){return d.id;})
+      .distance(function(l){
+        return l.kind==='narrative' ? 120 : l.source.type==='topic' ? 85 : 70;
+      }).strength(function(l){ return l.kind==='narrative' ? 0.4 : 0.7; }))
+    .force('charge', d3.forceManyBody().strength(-180))
+    .force('center', d3.forceCenter(W/2, H/2).strength(0.04))
+    .force('collision', d3.forceCollide().radius(function(d){return d.r+10;}));
 
-  var link = svg.append('g').selectAll('line').data(links).enter()
-    .append('line').attr('class', 'graph-link').attr('stroke-width', 1.5);
+  /* ── Draw topic-links (gray thin) ── */
+  var topicLinkEl = svg.append('g').selectAll('line')
+    .data(topicLinks).enter().append('line')
+    .attr('stroke', isDark ? '#2d3748' : '#e2e8f0')
+    .attr('stroke-width', 1.2).attr('stroke-dasharray','4,3');
 
-  var node = svg.append('g').selectAll('g').data(nodes).enter()
-    .append('g').attr('class', 'graph-node')
+  /* ── Draw narrative-links (colored, with arrows) ── */
+  var narrativeLinkEl = svg.append('g').selectAll('line')
+    .data(narrativeLinks).enter().append('line')
+    .attr('stroke', function(l){
+      var src = nodes.find(function(n){return n.id===l.source||n.id===(l.source&&l.source.id);});
+      return src ? src.color : '#94a3b8';
+    })
+    .attr('stroke-width', 2).attr('stroke-opacity', 0.55)
+    .attr('marker-end','url(#arrowhead)');
+
+  /* ── Nodes ── */
+  var nodeEl = svg.append('g').selectAll('g').data(nodes).enter()
+    .append('g').attr('class','graph-node')
     .call(d3.drag()
-      .on('start', function(event, d){
-        if(!event.active) sim.alphaTarget(0.3).restart();
-        d.fx = d.x; d.fy = d.y;
-      })
-      .on('drag', function(event, d){ d.fx = event.x; d.fy = event.y; })
-      .on('end', function(event, d){
-        if(!event.active) sim.alphaTarget(0);
-        d.fx = null; d.fy = null;
-      })
+      .on('start',function(ev,d){if(!ev.active)sim.alphaTarget(0.3).restart();d.fx=d.x;d.fy=d.y;})
+      .on('drag', function(ev,d){if(d.type!=='topic'){d.fx=ev.x;d.fy=ev.y;}})
+      .on('end',  function(ev,d){if(!ev.active)sim.alphaTarget(0);if(d.type!=='topic'){d.fx=null;d.fy=null;}})
     )
-    .on('click', function(event, d){
-      if(d.url) window.location.href = d.url;
-    })
-    .on('mouseover', function(event, d){
-      /* dim unrelated links and nodes */
-      var connectedIds = new Set([d.id]);
+    .on('click',function(ev,d){if(d.url)window.open(d.url,'_blank');})
+    .on('mouseover',function(ev,d){
+      var conn=new Set([d.id]);
       links.forEach(function(l){
-        if(l.source.id===d.id) connectedIds.add(l.target.id);
-        if(l.target.id===d.id) connectedIds.add(l.source.id);
+        var sid=l.source.id||l.source, tid=l.target.id||l.target;
+        if(sid===d.id)conn.add(tid); if(tid===d.id)conn.add(sid);
       });
-      link.attr('stroke-opacity', function(l){
-        return (l.source.id===d.id || l.target.id===d.id) ? 1 : 0.08;
-      }).attr('stroke-width', function(l){
-        return (l.source.id===d.id || l.target.id===d.id) ? 2.5 : 1.5;
+      topicLinkEl.attr('stroke-opacity',function(l){
+        var s=l.source.id||l.source,t=l.target.id||l.target;
+        return(conn.has(s)&&conn.has(t))?0.7:0.08;
       });
-      node.attr('opacity', function(n){ return connectedIds.has(n.id) ? 1 : 0.2; });
+      narrativeLinkEl.attr('stroke-opacity',function(l){
+        var s=l.source.id||l.source,t=l.target.id||l.target;
+        return(conn.has(s)&&conn.has(t))?1:0.06;
+      });
+      nodeEl.attr('opacity',function(n){return conn.has(n.id)?1:0.18;});
     })
-    .on('mouseout', function(){
-      link.attr('stroke-opacity', 0.5).attr('stroke-width', 1.5);
-      node.attr('opacity', 1);
+    .on('mouseout',function(){
+      topicLinkEl.attr('stroke-opacity',0.6);
+      narrativeLinkEl.attr('stroke-opacity',0.55);
+      nodeEl.attr('opacity',1);
     });
 
-  node.append('circle')
-    .attr('r', function(d){ return d.r; })
-    .attr('fill', function(d){ return d.color; })
-    .attr('fill-opacity', function(d){ return d.type==='topic' ? 0.2 : 0.9; })
-    .attr('stroke', function(d){ return d.color; })
-    .attr('stroke-width', function(d){ return d.type==='topic' ? 2.5 : 1.5; });
+  nodeEl.append('circle')
+    .attr('r',function(d){return d.r;})
+    .attr('fill',function(d){return d.type==='topic'?'transparent':d.color;})
+    .attr('fill-opacity',function(d){return d.type==='paper'?0.9:1;})
+    .attr('stroke',function(d){return d.color;})
+    .attr('stroke-width',function(d){return d.type==='topic'?2.5:0;});
 
-  node.filter(function(d){ return d.type==='topic'; })
-    .append('text').text(function(d){ return d.label; })
+  /* Topic labels inside ring */
+  nodeEl.filter(function(d){return d.type==='topic';})
+    .append('text').text(function(d){return d.label;})
     .attr('text-anchor','middle').attr('dy','0.35em')
-    .attr('font-size', 9).attr('font-weight', 700)
-    .attr('fill', function(d){ return d.color; });
+    .attr('font-size',9).attr('font-weight',800)
+    .attr('fill',function(d){return d.color;});
 
-  node.filter(function(d){ return d.type==='paper'; })
-    .append('text').text(function(d){ return d.label; })
-    .attr('text-anchor','middle').attr('dy', function(d){ return d.r + 11; })
-    .attr('font-size', 10).attr('font-weight', 600)
-    .attr('fill', isDark ? '#c9d1d9' : '#1a2332');
+  /* Paper labels below dot */
+  nodeEl.filter(function(d){return d.type==='paper';})
+    .append('text').text(function(d){return d.label;})
+    .attr('text-anchor','middle').attr('dy',function(d){return d.r+12;})
+    .attr('font-size',10).attr('font-weight',700)
+    .attr('fill',isDark?'#c9d1d9':'#1a2332');
 
-  node.filter(function(d){ return d.type==='paper'; })
-    .append('title').text(function(d){ return d.label + ' — ' + d.venue; });
+  nodeEl.filter(function(d){return d.type==='paper';})
+    .append('text').text(function(d){return d.venue;})
+    .attr('text-anchor','middle').attr('dy',function(d){return d.r+23;})
+    .attr('font-size',8).attr('fill',isDark?'#6e7681':'#9ca3af');
 
-  sim.on('tick', function(){
-    link
-      .attr('x1', function(d){ return d.source.x; }).attr('y1', function(d){ return d.source.y; })
-      .attr('x2', function(d){ return d.target.x; }).attr('y2', function(d){ return d.target.y; });
-    node.attr('transform', function(d){
-      d.x = Math.max(d.r+5, Math.min(W-d.r-5, d.x));
-      d.y = Math.max(d.r+5, Math.min(H-d.r-5, d.y));
+  /* Tooltip */
+  nodeEl.append('title').text(function(d){return d.label+(d.venue?' — '+d.venue:'');});
+
+  /* ── Tick ── */
+  sim.on('tick',function(){
+    topicLinkEl
+      .attr('x1',function(d){return d.source.x;}).attr('y1',function(d){return d.source.y;})
+      .attr('x2',function(d){return d.target.x;}).attr('y2',function(d){return d.target.y;});
+    narrativeLinkEl
+      .attr('x1',function(d){return d.source.x;}).attr('y1',function(d){return d.source.y;})
+      .attr('x2',function(d){return d.target.x;}).attr('y2',function(d){return d.target.y;});
+    nodeEl.attr('transform',function(d){
+      d.x=Math.max(d.r+4,Math.min(W-d.r-4,d.x));
+      d.y=Math.max(d.r+4,Math.min(H-d.r-24,d.y));
       return 'translate('+d.x+','+d.y+')';
     });
   });
 
   /* Legend */
-  var leg = document.createElement('div');
-  leg.className = 'graph-legend';
+  var leg=document.createElement('div'); leg.className='graph-legend';
   Object.entries(topicColors).forEach(function(kv){
-    leg.innerHTML += '<div class="gl-item"><div class="gl-dot" style="background:'+kv[1]+'"></div>'+kv[0]+'</div>';
+    leg.innerHTML+='<div class="gl-item"><div class="gl-dot" style="background:'+kv[1]+'"></div>'+kv[0]+'</div>';
   });
+  leg.innerHTML+='<div class="gl-item" style="margin-left:10px;opacity:.7"><div class="gl-dot" style="background:#94a3b8"></div>Research evolution →</div>';
   container.appendChild(leg);
 }
 
