@@ -600,17 +600,6 @@ body.dark-mode .arxiv-title { color: #e6edf3; }
 }
 .gl2-item { font-size: 0.76em; color: rgba(255,255,255,0.6); font-weight: 600; }
 
-/* ── Citation Tree ── */
-#citation-tree-wrap {
-  width: 100%; border-radius: 14px; border: 1.5px solid #e5e7eb;
-  background: #fafbff; overflow: hidden; margin-bottom: 1.8em;
-}
-#citation-tree { width: 100%; height: 480px; }
-body.dark-mode #citation-tree-wrap { background: #0d1117; border-color: #30363d; }
-.ctree-node circle { cursor: pointer; }
-.ctree-node text { font-size: 11px; font-family: Inter, sans-serif; pointer-events: none; }
-.ctree-link { fill: none; stroke: #cbd5e1; stroke-width: 1.5; }
-body.dark-mode .ctree-link { stroke: #334155; }
 
 /* ── ① Citation count badge ── */
 .cite-badge {
@@ -1077,13 +1066,6 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
   </div>
 </div>
 
-<!-- ══════════════════ CITATION TREE ══════════════════ -->
-<div class="section-header">🌳 Citation Family Tree</div>
-<p style="font-size:0.84em;color:#666;margin-bottom:14px;">Papers that cite my work — auto-updated weekly via Semantic Scholar. Hover nodes for details.</p>
-<div id="citation-tree-wrap">
-  <div id="citation-tree"></div>
-</div>
-
 <!-- ═══════════════════════════════ CONTACT ══════════════════════════ -->
 <div class="section-header">📬 Contact</div>
 <p style="font-size:0.94em;">
@@ -1290,84 +1272,6 @@ document.querySelectorAll('img[loading="lazy"]').forEach(function(img){
   document.head.appendChild(s);
 })();
 
-/* ══════════════════════════════════════════════════
-   🌳 CITATION FAMILY TREE (D3)
-══════════════════════════════════════════════════ */
-(function(){
-  var wrap = document.getElementById('citation-tree');
-  if(!wrap) return;
-  var treeData = {{ site.data.citation_tree | jsonify }};
-  if(!treeData || !treeData.nodes) return;
-
-  var s = document.createElement('script');
-  s.src = 'https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js';
-  s.onload = function(){ drawCitationTree(wrap, treeData); };
-  document.head.appendChild(s);
-})();
-
-function drawCitationTree(container, data) {
-  /* Build adjacency for D3 hierarchy from flat nodes+links */
-  var nodeMap = {};
-  data.nodes.forEach(function(n){ nodeMap[n.id] = Object.assign({}, n, {children:[]}); });
-  data.links.forEach(function(l){
-    var src = nodeMap[l.source], tgt = nodeMap[l.target];
-    if(src && tgt) src.children.push(tgt);
-  });
-  var root = nodeMap['root'];
-  if(!root) return;
-
-  var isDark = document.body.classList.contains('dark-mode');
-  var W = container.offsetWidth || 700;
-  var H = 480;
-
-  var hierarchy = d3.hierarchy(root);
-  var treeLayout = d3.tree().size([H - 60, W - 220]);
-  treeLayout(hierarchy);
-
-  var svg = d3.select(container).append('svg')
-    .attr('width', W).attr('height', H)
-    .append('g').attr('transform', 'translate(110,30)');
-
-  /* Background */
-  d3.select(container).select('svg').insert('rect','g')
-    .attr('width', W).attr('height', H)
-    .attr('fill', isDark ? '#0d1117' : '#fafbff');
-
-  /* Links */
-  svg.selectAll('.ctree-link').data(hierarchy.links()).enter()
-    .append('path').attr('class','ctree-link')
-    .attr('d', d3.linkHorizontal().x(function(d){return d.y;}).y(function(d){return d.x;}));
-
-  /* Nodes */
-  var node = svg.selectAll('.ctree-node').data(hierarchy.descendants()).enter()
-    .append('g').attr('class','ctree-node')
-    .attr('transform',function(d){return 'translate('+d.y+','+d.x+')';});
-
-  node.append('circle')
-    .attr('r', function(d){
-      if(d.data.type==='author') return 14;
-      if(d.data.type==='paper')  return 10;
-      return 6;
-    })
-    .attr('fill', function(d){ return d.data.color || '#888'; })
-    .attr('fill-opacity', function(d){ return d.data.type==='citing' ? 0.5 : 0.9; })
-    .attr('stroke', function(d){ return d.data.color || '#888'; })
-    .attr('stroke-width', 1.5);
-
-  node.append('text')
-    .attr('dx', function(d){ return d.children && d.children.length ? -18 : 14; })
-    .attr('dy', '0.35em')
-    .attr('text-anchor', function(d){ return d.children && d.children.length ? 'end' : 'start'; })
-    .attr('font-size', function(d){ return d.data.type==='author' ? 13 : d.data.type==='paper' ? 11 : 10; })
-    .attr('font-weight', function(d){ return d.data.type==='citing' ? 400 : 700; })
-    .attr('fill', isDark ? '#c9d1d9' : '#1a2332')
-    .text(function(d){ return d.data.label; });
-
-  node.filter(function(d){ return d.data.type==='citing'; })
-    .append('title').text(function(d){
-      return (d.data.full_title || d.data.label) + (d.data.year ? ' ('+d.data.year+')' : '') + (d.data.authors ? '\n'+d.data.authors : '');
-    });
-}
 
 /* ══════════════════════════════════════════════════
    ② PUBLICATION FILTER / SEARCH
