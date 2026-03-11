@@ -929,7 +929,7 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>. My research focu
     <div class="stat-label">MMAU Audio Reasoning<br><em>Beats Gemini 2.5 Pro</em></div>
   </div>
   <div class="stat-card">
-    <div class="stat-number" data-target="200" data-suffix="+">0</div>
+    <div class="stat-number" data-target="{{ site.data.citations._total | default: 291 }}">0</div>
     <div class="stat-label">Google Scholar Citations</div>
   </div>
   <div class="stat-card">

@@ -68,6 +68,12 @@ jobs:
                 print(f"  {key} ({title[:50]}...): {count}")
                 break
 
+          # Also grab total citation count from stats table
+          total_m = re.search(r'gsc_rsb_std[^>]*>(\d+)<', html)
+          if total_m:
+            results["_total"] = int(total_m.group(1))
+            print(f"  Total citations: {results['_total']}")
+
           if not results:
             print("No results parsed — Scholar may have blocked; keeping existing file")
             exit(0)
