@@ -136,6 +136,21 @@ a:hover{text-decoration:underline}
 
 footer{background:#0d1b2a;color:#6a9fc8;text-align:center;padding:22px;font-size:0.83em}
 footer a{color:#7eb8f7}
+@media print {
+  body { background: #fff !important; color: #000 !important; font-size: 11pt; }
+  .cv-topbar, .cv-cta, .topnav { display: none !important; }
+  .cv-layout { flex-direction: column !important; gap: 0 !important; }
+  .cv-sidebar { width: 100% !important; background: none !important; border: none !important;
+    padding: 0 !important; margin-bottom: 12pt; border-bottom: 1pt solid #ccc; }
+  .cv-main { padding: 0 !important; }
+  .main-section { break-inside: avoid; margin-bottom: 14pt; }
+  .pub-item { break-inside: avoid; padding: 4pt 0; border-bottom: 0.5pt solid #eee; }
+  .pub-badge { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  a { color: #000 !important; text-decoration: none !important; }
+  a[href]::after { content: ""; } /* suppress URL printing */
+  .pub-hl { font-size: 9pt; color: #444 !important; }
+  h1, h2, h3 { page-break-after: avoid; }
+}
 </style>
 </head>
 <body>
