@@ -1223,7 +1223,37 @@ document.querySelectorAll('img[loading="lazy"]').forEach(function(img){
   else img.addEventListener('load', function(){ img.classList.add('loaded'); });
 });
 
-/* Globe is initialized via cobe <script> onload tag below the main script block */
+/* ══════════════════════════════════════════════════
+   🌍 GLOBE (cobe.js) — async, non-blocking
+══════════════════════════════════════════════════ */
+(function(){
+  var canvas = document.getElementById('globe-canvas');
+  if(!canvas) return;
+  var s = document.createElement('script');
+  s.src = 'https://cdn.jsdelivr.net/npm/cobe@0.6.3/dist/cobe.umd.js';
+  s.async = true;
+  s.onload = function(){
+    var phi = 0;
+    canvas._cobeGlobe = createGlobe(canvas, {
+      devicePixelRatio: Math.min(window.devicePixelRatio, 2),
+      width: canvas.offsetWidth * 2, height: canvas.offsetHeight * 2,
+      phi: 0, theta: 0.3, dark: 1, diffuse: 1.2,
+      mapSamples: 16000, mapBrightness: 6,
+      baseColor: [0.1, 0.15, 0.3], markerColor: [0.4, 0.7, 1], glowColor: [0.2, 0.4, 0.8],
+      markers: [
+        {location:[40.102,-88.227],size:0.06},{location:[37.427,-122.169],size:0.05},
+        {location:[42.360,-71.094],size:0.05},{location:[40.443,-79.943],size:0.04},
+        {location:[37.872,-122.259],size:0.05},{location:[45.501,-73.567],size:0.04},
+        {location:[37.422,-122.084],size:0.05},{location:[51.507,-0.127],size:0.05},
+        {location:[47.376,8.541],size:0.04},{location:[40.000,116.319],size:0.06},
+        {location:[31.230,121.473],size:0.05},{location:[1.296,103.776],size:0.04},
+        {location:[35.712,139.730],size:0.04},{location:[37.566,126.978],size:0.04},
+      ],
+      onRender: function(state){ state.phi = phi; phi += 0.003; }
+    });
+  };
+  document.head.appendChild(s);
+})();
 
 
 /* ══════════════════════════════════════════════════
@@ -1276,16 +1306,12 @@ function filterByVenue(btn, venue) {
   if(!container) return;
 
   /* Load D3 then draw */
-  /* D3 is pre-loaded via <script> tag below — call directly */
-  if(typeof d3 !== 'undefined') {
-    drawGraph(container);
-  } else {
-    /* fallback if somehow d3 not yet ready */
-    var s = document.createElement('script');
-    s.src = 'https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js';
-    s.onload = function(){ drawGraph(container); };
-    document.head.appendChild(s);
-  }
+  /* Load D3 asynchronously — non-blocking */
+  var s = document.createElement('script');
+  s.src = 'https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js';
+  s.async = true;
+  s.onload = function(){ drawGraph(container); };
+  document.head.appendChild(s);
 })();
 
 function drawGraph(container) {
@@ -1479,6 +1505,4 @@ function drawGraph(container) {
 }
 
 </script>
-<!-- Pre-load D3 + cobe synchronously so inline scripts can call them immediately -->
-<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/cobe@0.6.3/dist/cobe.umd.js" onload="(function(){var c=document.getElementById('globe-canvas');if(c&&c._cobeGlobe)return;if(c&&!c._cobeGlobe&&typeof createGlobe!=='undefined'){var phi=0;c._cobeGlobe=createGlobe(c,{devicePixelRatio:Math.min(window.devicePixelRatio,2),width:c.offsetWidth*2,height:c.offsetHeight*2,phi:0,theta:0.3,dark:1,diffuse:1.2,mapSamples:16000,mapBrightness:6,baseColor:[0.1,0.15,0.3],markerColor:[0.4,0.7,1],glowColor:[0.2,0.4,0.8],markers:[{location:[40.102,-88.227],size:0.06},{location:[37.427,-122.169],size:0.05},{location:[42.360,-71.094],size:0.05},{location:[40.443,-79.943],size:0.04},{location:[37.872,-122.259],size:0.05},{location:[45.501,-73.567],size:0.04},{location:[37.422,-122.084],size:0.05},{location:[51.507,-0.127],size:0.05},{location:[51.754,-1.254],size:0.04},{location:[47.376,8.541],size:0.04},{location:[40.000,116.319],size:0.06},{location:[31.230,121.473],size:0.05},{location:[1.296,103.776],size:0.04},{location:[35.712,139.730],size:0.04},{location:[37.566,126.978],size:0.04}],onRender:function(s){s.phi=phi;phi+=0.003;}});}})()"></script>
+
