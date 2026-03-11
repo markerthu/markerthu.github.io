@@ -587,18 +587,7 @@ body.dark-mode .arxiv-card { background: #161b22; border-color: #30363d; }
 body.dark-mode .arxiv-card:hover { border-color: #388bfd; }
 body.dark-mode .arxiv-title { color: #e6edf3; }
 
-/* ── Globe ── */
-#globe-wrap {
-  width: 100%; height: 380px; border-radius: 14px; border: 1.5px solid #e5e7eb;
-  background: radial-gradient(ellipse at center, #0f172a 0%, #020817 100%);
-  position: relative; overflow: hidden; margin-bottom: 1.8em;
-}
-#globe-canvas { width: 100% !important; height: 100% !important; }
-#globe-legend {
-  position: absolute; bottom: 14px; left: 16px;
-  display: flex; gap: 14px; flex-wrap: wrap;
-}
-.gl2-item { font-size: 0.76em; color: rgba(255,255,255,0.6); font-weight: 600; }
+
 
 
 /* ── Thumbnail placeholder: hide empty wrapper until image loads ── */
@@ -1045,17 +1034,6 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
   </div>
 </div>
 
-<!-- ══════════════════ GLOBE ══════════════════ -->
-<div class="section-header">🌍 Global Research Community</div>
-<p style="font-size:0.84em;color:#666;margin-bottom:14px;">ML research hubs where work related to mine is being done.</p>
-<div id="globe-wrap">
-  <canvas id="globe-canvas"></canvas>
-  <div id="globe-legend">
-    <div class="gl2-item">🔵 Research institutions</div>
-    <div class="gl2-item">⚪ Major ML labs</div>
-  </div>
-</div>
-
 <!-- ═══════════════════════════════ CONTACT ══════════════════════════ -->
 <div class="section-header">📬 Contact</div>
 <p style="font-size:0.94em;">
@@ -1209,7 +1187,7 @@ document.querySelectorAll('img[loading="lazy"]').forEach(function(img){
   else img.addEventListener('load', function(){ img.classList.add('loaded'); });
 });
 
-/* Globe initialized via ES module tag below (type=module, after this block) */
+
 
 
 /* ══════════════════════════════════════════════════
@@ -1441,43 +1419,5 @@ function drawGraph(container) {
 
 </script>
 
-<!-- Globe: cobe is ESM-only (no UMD); use type=module + esm.sh -->
-<script type="module">
-import createGlobe from 'https://esm.sh/cobe@0.6.3';
-(function(){
-  var canvas = document.getElementById('globe-canvas');
-  if(!canvas || canvas._cobeGlobe) return;
-  function initGlobe(){
-    var wrap = canvas.parentElement;
-    var W = Math.max(wrap.offsetWidth, 400);
-    var H = Math.max(wrap.offsetHeight, 280);
-    var phi = 0;
-    canvas._cobeGlobe = createGlobe(canvas, {
-      devicePixelRatio: Math.min(window.devicePixelRatio, 2),
-      width: W * 2, height: H * 2,
-      phi: 0, theta: 0.3, dark: 1, diffuse: 1.2,
-      mapSamples: 16000, mapBrightness: 6,
-      baseColor: [0.1, 0.15, 0.3], markerColor: [0.4, 0.7, 1], glowColor: [0.2, 0.4, 0.8],
-      markers: [
-        {location:[40.102,-88.227],size:0.06},{location:[37.427,-122.169],size:0.05},
-        {location:[42.360,-71.094],size:0.05},{location:[40.443,-79.943],size:0.04},
-        {location:[37.872,-122.259],size:0.05},{location:[45.501,-73.567],size:0.04},
-        {location:[37.422,-122.084],size:0.05},{location:[51.507,-0.127],size:0.05},
-        {location:[47.376,8.541],size:0.04},{location:[40.000,116.319],size:0.06},
-        {location:[31.230,121.473],size:0.05},{location:[1.296,103.776],size:0.04},
-        {location:[35.712,139.730],size:0.04},{location:[37.566,126.978],size:0.04},
-      ],
-      onRender: function(state){ state.phi = phi; phi += 0.003; }
-    });
-  }
-  if('IntersectionObserver' in window){
-    var io = new IntersectionObserver(function(entries){
-      if(entries[0].isIntersecting){ io.disconnect(); requestAnimationFrame(initGlobe); }
-    }, {threshold: 0.1});
-    io.observe(canvas);
-  } else {
-    setTimeout(initGlobe, 300);
-  }
-})();
-</script>
+
 
