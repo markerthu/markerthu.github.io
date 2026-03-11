@@ -1209,7 +1209,7 @@ document.querySelectorAll('img[loading="lazy"]').forEach(function(img){
   else img.addEventListener('load', function(){ img.classList.add('loaded'); });
 });
 
-/* Globe initialized via ES module below — see <script type="module"> after </script> */
+/* Globe initialized via ES module tag below (type=module, after this block) */
 
 
 /* ══════════════════════════════════════════════════
