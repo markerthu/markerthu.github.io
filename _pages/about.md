@@ -27,8 +27,9 @@ redirect_from:
   padding: 9px 16px; margin-bottom: 1.4em;
   font-size: 0.84em; display: flex; flex-wrap: wrap; gap: 5px 16px; align-items: center;
 }
-.quick-nav a { color: #1565c0; text-decoration: none; }
-.quick-nav a:hover { text-decoration: underline; }
+.quick-nav a { color: #1565c0; text-decoration: none; padding: 2px 6px; border-radius: 5px; transition: background .15s, color .15s; }
+.quick-nav a:hover { background: #e8effe; }
+.quick-nav a.qn-active { background: #1565c0; color: #fff !important; }
 
 /* ── Section headers ── */
 .section-header {
@@ -460,6 +461,8 @@ body.dark-mode .pub-thumb-wrap { border-color: #30363d !important; }
 /* ── Dark mode: Quick Nav & Banners ── */
 body.dark-mode .quick-nav { background: #161b22 !important; }
 body.dark-mode .quick-nav a { color: #58a6ff !important; }
+body.dark-mode .quick-nav a:hover { background: #21262d !important; }
+body.dark-mode .quick-nav a.qn-active { background: #388bfd !important; color: #fff !important; }
 body.dark-mode .quick-nav span { color: #58a6ff !important; }
 body.dark-mode .internship-banner { background: linear-gradient(135deg,#161b22,#1c2333) !important; border-color: #30363d !important; color: #c9d1d9 !important; }
 body.dark-mode .internship-banner a { color: #58a6ff !important; }
@@ -755,11 +758,11 @@ body.dark-mode .gl-item { color: #8b949e; }
 <!-- Quick nav -->
 <div class="quick-nav">
   <span style="font-weight:800;color:#1565c0;">↓ Jump to:</span>
-  <a href="#news">📰 News</a>
-  <a href="#featured">🔥 Featured</a>
-  <a href="#publications">📄 Publications</a>
-  <a href="#research">🔬 Research</a>
-  <a href="#awards">🏅 Awards</a>
+  <a href="#news"         data-qn="news">📰 News</a>
+  <a href="#featured"     data-qn="featured">🔥 Featured</a>
+  <a href="#publications" data-qn="publications">📄 Publications</a>
+  <a href="#research"     data-qn="research">🔬 Research</a>
+  <a href="#awards"       data-qn="awards">🏅 Awards</a>
   <a href="/year-archive/">✍️ Blog</a>
   <a href="files/CV.pdf">📋 CV</a>
 </div>
@@ -1812,6 +1815,30 @@ function drawGraph(container) {
     lx += item.l.length * 6 + 16;
   });
 }
+
+/* ══════════════════════════════════════════════════
+   ⑨ QUICK NAV SCROLL HIGHLIGHT
+══════════════════════════════════════════════════ */
+(function(){
+  var sections = ['news','featured','deadlines','publications','research-graph-section','awards'];
+  var navLinks = document.querySelectorAll('.quick-nav a[data-qn]');
+  if (!navLinks.length || !window.IntersectionObserver) return;
+
+  var current = '';
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) current = e.target.id;
+    });
+    navLinks.forEach(function(a) {
+      a.classList.toggle('qn-active', a.dataset.qn === current);
+    });
+  }, { rootMargin: '-15% 0px -75% 0px', threshold: 0 });
+
+  sections.forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) obs.observe(el);
+  });
+})();
 
 </script>
 
