@@ -1045,19 +1045,12 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
   </div>
 </div>
 
-<!-- ══════════════════ ARXIV FEED ══════════════════ -->
+<!-- ══════════════════ ARXIV TEASER ══════════════════ -->
 <div class="section-header">📡 What's Happening in My Field</div>
-<p style="font-size:0.84em;color:#666;margin-bottom:14px;">Recent arXiv papers in RL post-training · reasoning · self-improvement · multimodal — auto-updated weekly · <span style="color:#aaa;">{{ site.data.arxiv_feed.updated }}</span></p>
-<div class="arxiv-grid">
-{% for p in site.data.arxiv_feed.papers %}
-<a class="arxiv-card" href="{{ p.url }}" target="_blank" rel="noopener">
-  <span class="arxiv-tag arxiv-tag-{{ p.tag | downcase | replace: ' ', '-' | replace: '/', '' }}">{{ p.tag }}</span>
-  <div class="arxiv-title">{{ p.title }}</div>
-  <div class="arxiv-authors">{{ p.authors }}</div>
-  <div class="arxiv-date">{{ p.date }}</div>
-</a>
-{% endfor %}
-</div>
+<p style="font-size:0.9em;color:#555;margin-bottom:16px;">
+  I track recent arXiv papers in RL post-training, reasoning, self-improvement, and multimodal LLMs — updated weekly.
+  <a href="/blog/reading-papers/" style="color:#1565c0;font-weight:600;margin-left:6px;">Browse the feed →</a>
+</p>
 
 <!-- ══════════════════ GLOBE ══════════════════ -->
 <div class="section-header">🌍 Global Research Community</div>
@@ -1229,30 +1222,45 @@ document.querySelectorAll('img[loading="lazy"]').forEach(function(img){
 (function(){
   var canvas = document.getElementById('globe-canvas');
   if(!canvas) return;
-  var s = document.createElement('script');
-  s.src = 'https://cdn.jsdelivr.net/npm/cobe@0.6.3/dist/cobe.umd.js';
-  s.async = true;
-  s.onload = function(){
-    var phi = 0;
-    canvas._cobeGlobe = createGlobe(canvas, {
-      devicePixelRatio: Math.min(window.devicePixelRatio, 2),
-      width: canvas.offsetWidth * 2, height: canvas.offsetHeight * 2,
-      phi: 0, theta: 0.3, dark: 1, diffuse: 1.2,
-      mapSamples: 16000, mapBrightness: 6,
-      baseColor: [0.1, 0.15, 0.3], markerColor: [0.4, 0.7, 1], glowColor: [0.2, 0.4, 0.8],
-      markers: [
-        {location:[40.102,-88.227],size:0.06},{location:[37.427,-122.169],size:0.05},
-        {location:[42.360,-71.094],size:0.05},{location:[40.443,-79.943],size:0.04},
-        {location:[37.872,-122.259],size:0.05},{location:[45.501,-73.567],size:0.04},
-        {location:[37.422,-122.084],size:0.05},{location:[51.507,-0.127],size:0.05},
-        {location:[47.376,8.541],size:0.04},{location:[40.000,116.319],size:0.06},
-        {location:[31.230,121.473],size:0.05},{location:[1.296,103.776],size:0.04},
-        {location:[35.712,139.730],size:0.04},{location:[37.566,126.978],size:0.04},
-      ],
-      onRender: function(state){ state.phi = phi; phi += 0.003; }
-    });
-  };
-  document.head.appendChild(s);
+  function loadCobe(){
+    var wrap = canvas.parentElement;
+    /* Use container dimensions — canvas is 100% of parent */
+    var W = wrap.offsetWidth || 700, H = wrap.offsetHeight || 280;
+    var s = document.createElement('script');
+    s.src = 'https://cdn.jsdelivr.net/npm/cobe@0.6.3/dist/cobe.umd.js';
+    s.async = true;
+    s.onload = function(){
+      if(canvas._cobeGlobe) return;
+      var phi = 0;
+      canvas._cobeGlobe = createGlobe(canvas, {
+        devicePixelRatio: Math.min(window.devicePixelRatio, 2),
+        width: W * 2, height: H * 2,
+        phi: 0, theta: 0.3, dark: 1, diffuse: 1.2,
+        mapSamples: 16000, mapBrightness: 6,
+        baseColor: [0.1, 0.15, 0.3], markerColor: [0.4, 0.7, 1], glowColor: [0.2, 0.4, 0.8],
+        markers: [
+          {location:[40.102,-88.227],size:0.06},{location:[37.427,-122.169],size:0.05},
+          {location:[42.360,-71.094],size:0.05},{location:[40.443,-79.943],size:0.04},
+          {location:[37.872,-122.259],size:0.05},{location:[45.501,-73.567],size:0.04},
+          {location:[37.422,-122.084],size:0.05},{location:[51.507,-0.127],size:0.05},
+          {location:[47.376,8.541],size:0.04},{location:[40.000,116.319],size:0.06},
+          {location:[31.230,121.473],size:0.05},{location:[1.296,103.776],size:0.04},
+          {location:[35.712,139.730],size:0.04},{location:[37.566,126.978],size:0.04},
+        ],
+        onRender: function(state){ state.phi = phi; phi += 0.003; }
+      });
+    };
+    document.head.appendChild(s);
+  }
+  /* Defer until globe-wrap is in the viewport so offsetWidth is real */
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      if(entries[0].isIntersecting){ io.disconnect(); loadCobe(); }
+    }, {threshold: 0.1});
+    io.observe(canvas);
+  } else {
+    loadCobe();
+  }
 })();
 
 
@@ -1327,14 +1335,14 @@ function drawGraph(container) {
     'Representation':  '#be185d',
   };
 
-  /* ── Topic nodes: FIXED positions to anchor the layout ── */
+  /* ── Topic nodes: FIXED positions — pushed to periphery to avoid paper overlap ── */
   var topicPos = {
-    'RL Training':     {fx: W*0.50, fy: H*0.42},
-    'Flow Matching':   {fx: W*0.78, fy: H*0.28},
-    'Audio Reasoning': {fx: W*0.22, fy: H*0.35},
-    'Deep RL':         {fx: W*0.42, fy: H*0.78},
-    'Efficiency':      {fx: W*0.12, fy: H*0.72},
-    'Representation':  {fx: W*0.82, fy: H*0.72},
+    'RL Training':     {fx: W*0.28, fy: H*0.18},   /* top-left */
+    'Flow Matching':   {fx: W*0.88, fy: H*0.18},   /* top-right */
+    'Audio Reasoning': {fx: W*0.05, fy: H*0.38},   /* far left */
+    'Deep RL':         {fx: W*0.42, fy: H*0.90},   /* bottom-center */
+    'Efficiency':      {fx: W*0.08, fy: H*0.75},   /* bottom-left */
+    'Representation':  {fx: W*0.88, fy: H*0.80},   /* bottom-right */
   };
 
   /* ── Papers: initial positions near their primary topic ── */
