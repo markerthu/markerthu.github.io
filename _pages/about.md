@@ -534,6 +534,34 @@ body.dark-mode .page { background: #0d1117 !important; }
 .stat-number[data-target] { transition: none; }
 
 /* ── Particle canvas ── */
+/* ── AI Research Assistant chat widget ── */
+.ra-btn { position: fixed; bottom: 68px; right: 22px; width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg,#2563eb,#7c3aed); color: #fff; font-size: 1.3em; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 16px rgba(37,99,235,.4); z-index: 9990; transition: transform .2s, box-shadow .2s; user-select: none; }
+.ra-btn:hover { transform: scale(1.1); box-shadow: 0 6px 22px rgba(37,99,235,.5); }
+.ra-panel { position: fixed; bottom: 120px; right: 22px; width: 320px; height: 440px; background: #fff; border-radius: 16px; box-shadow: 0 12px 48px rgba(0,0,0,.18); display: flex; flex-direction: column; z-index: 9991; transform: scale(0.85) translateY(20px); opacity: 0; pointer-events: none; transition: transform .2s, opacity .2s; transform-origin: bottom right; border: 1.5px solid #e5e7eb; }
+.ra-panel.show { transform: scale(1) translateY(0); opacity: 1; pointer-events: all; }
+.ra-header { background: linear-gradient(135deg,#2563eb,#7c3aed); color: #fff; padding: 12px 14px; border-radius: 14px 14px 0 0; display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 0.9em; }
+.ra-close { background: rgba(255,255,255,.2); border: none; color: #fff; width: 24px; height: 24px; border-radius: 50%; cursor: pointer; font-size: 0.85em; display: flex; align-items: center; justify-content: center; }
+.ra-close:hover { background: rgba(255,255,255,.35); }
+.ra-msgs { flex: 1; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+.ra-msg { max-width: 85%; padding: 8px 12px; border-radius: 12px; font-size: 0.82em; line-height: 1.5; word-break: break-word; }
+.ra-user { align-self: flex-end; background: #2563eb; color: #fff; border-radius: 12px 12px 2px 12px; }
+.ra-bot { align-self: flex-start; background: #f1f5f9; color: #1e293b; border-radius: 12px 12px 12px 2px; }
+.ra-typing { display: flex; gap: 4px; align-items: center; padding: 10px 14px; }
+.ra-typing span { width: 7px; height: 7px; border-radius: 50%; background: #94a3b8; animation: ra-dot 1.2s infinite; }
+.ra-typing span:nth-child(2) { animation-delay: .2s; }
+.ra-typing span:nth-child(3) { animation-delay: .4s; }
+@keyframes ra-dot { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-5px)} }
+.ra-input-row { display: flex; border-top: 1.5px solid #e5e7eb; padding: 8px 10px; gap: 6px; }
+.ra-input { flex: 1; border: 1.5px solid #e5e7eb; border-radius: 8px; padding: 7px 10px; font-size: 0.83em; outline: none; font-family: inherit; }
+.ra-input:focus { border-color: #2563eb; }
+.ra-send { background: #2563eb; color: #fff; border: none; border-radius: 8px; padding: 7px 12px; cursor: pointer; font-size: 0.9em; font-weight: 700; transition: background .15s; }
+.ra-send:hover { background: #1d4ed8; }
+body.dark-mode .ra-panel { background: #161b22 !important; border-color: #30363d !important; }
+body.dark-mode .ra-bot { background: #21262d !important; color: #c9d1d9 !important; }
+body.dark-mode .ra-input { background: #0d1117 !important; border-color: #30363d !important; color: #c9d1d9 !important; }
+body.dark-mode .ra-input-row { border-color: #30363d !important; }
+@media(max-width:400px){ .ra-panel { width: calc(100vw - 32px); right: 16px; } }
+
 /* ── Conference Deadline Widget ── */
 .conf-ddl-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 1.8em; }
 @media(max-width:700px){ .conf-ddl-grid { grid-template-columns: 1fr 1fr; } }
@@ -1186,6 +1214,156 @@ Happy to discuss research, internships, or collaborations. Best reached by email
 <button class="scroll-top" id="scrollTop" onclick="window.scrollTo(0,0)">↑</button>
 <button class="dark-toggle" id="darkToggle" title="Toggle dark mode">🌙</button>
 </div>
+
+<!-- ══════════════════ AI RESEARCH ASSISTANT ══════════════════ -->
+<div id="ra-btn" class="ra-btn" onclick="raOpen()" title="Ask about my research">💬</div>
+<div id="ra-panel" class="ra-panel">
+  <div class="ra-header">
+    <span>🤖 Research Assistant</span>
+    <button onclick="raClose()" class="ra-close">✕</button>
+  </div>
+  <div id="ra-msgs" class="ra-msgs"></div>
+  <div class="ra-input-row">
+    <input id="ra-input" class="ra-input" type="text" placeholder="Ask about my research…" onkeydown="if(event.key==='Enter')raSend()">
+    <button onclick="raSend()" class="ra-send">↵</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  var QA = [
+    { kw:['hello','hi','hey','who are you','what are you','start'],
+      a:"Hi! I'm a static assistant pre-trained on Jiajun's research. Ask me about any of his papers, research topics, or background — e.g. \"What is CESAR?\" or \"Tell me about LBC\"." },
+    { kw:['research','focus','interest','direction','work on','studying','topic','about you'],
+      a:"My research focuses on autonomous RL post-training for large generative models — making diffusion models, flow matching models, and multimodal LLMs continuously self-improve with minimal human supervision." },
+    { kw:['cesar','audio','mmau','audio llm','process reward','test-time inverse','reasoning process'],
+      a:"CESAR (ICLR 2026) resolves test-time inverse scaling in Audio LLMs — a paradox where longer reasoning chains hurt accuracy. We use process-level reward signals (GRPO) to guide reasoning quality, achieving SOTA on MMAU and outperforming Gemini 2.5 Pro & GPT-4o Audio." },
+    { kw:['test-time','inverse scaling','longer reasoning','reasoning length'],
+      a:"Test-time inverse scaling is when giving a model more reasoning steps actually hurts accuracy. In Audio LLMs, standard RL leads to verbose, irrelevant chains. CESAR fixes this with process-level rewards that reward correct intermediate steps, not just final answers." },
+    { kw:['lbc','atari','world record','behavior control','exploration','bandit'],
+      a:"LBC (ICLR 2023, Oral — Ranked 5/4176) broke 24 Atari human world records using 500× less data than Agent57. Key idea: a learnable hybrid behavior mapping + bandit meta-controller for exploration that dramatically enlarges the effective policy space." },
+    { kw:['gdi','generalized data','distribution iteration','icml 2022'],
+      a:"GDI (ICML 2022) shows that optimizing the training data distribution is the key lever for superhuman RL efficiency. We achieve 9620% mean HNS on Atari ALE with 200M frames, comparable to Agent57 but 500× more data-efficient." },
+    { kw:['adrpo','adaptive divergence','adaptive regularization','neurips 2025'],
+      a:"ADRPO (NeurIPS 2025) adapts divergence regularization at the sample level — high-value samples get more exploration freedom, low-value samples get stronger KL constraints. Our 2B SD3 surpasses 12B FLUX and 4.8B SANA." },
+    { kw:['orw','cfm','wasserstein','flow matching','iclr 2025','online rlhf'],
+      a:"ORW-CFM-W2 (ICLR 2025) is the first online RLHF framework for flow matching generative models. No human data needed — just a differentiable reward. Wasserstein-2 regularization prevents mode collapse while maintaining diversity." },
+    { kw:['ac-flow','actor critic','intermediate feedback','dual-stability','sd3'],
+      a:"AC-Flow (preprint) introduces actor-critic with intermediate timestep feedback for flow matching. The dual-stability mechanism combines advantage clipping with critic warm-up, enabling robust SD3 fine-tuning without reward hacking." },
+    { kw:['prance','token pruning','channel pruning','vit','tpami','efficient inference'],
+      a:"PRANCE (IEEE TPAMI 2025) jointly optimizes token pruning and structural channel pruning for adaptive ViT inference — ~50% FLOP reduction, retaining only ~10% tokens with lossless Top-1 accuracy." },
+    { kw:['sp-vla','vla','robot','vision language action','token pruning acceleration'],
+      a:"SP-VLA (ICLR 2026) accelerates Vision-Language-Action models via action-aware model scheduling and spatio-semantic token pruning — 1.5× lossless speedup on LIBERO and 2.4× speedup on SimplerEnv." },
+    { kw:['phd','uiuc','illinois','university','where study','school','student'],
+      a:"I'm a CS PhD student at the University of Illinois Urbana-Champaign (UIUC), one of the top CS programs globally." },
+    { kw:['contact','email','reach','collaborate','talk','message'],
+      a:"You can reach me at jiajunf3 [at] illinois.edu. I'm open to research discussions and collaboration, especially around RL post-training, generative models, and multimodal reasoning." },
+    { kw:['publication','paper','published','conference','venue','list','all papers'],
+      a:"I've published at ICLR (2023 Oral, 2025, 2026), NeurIPS (2025), ICML (2022), and IEEE TPAMI (2025), with ongoing preprints. Full list on Google Scholar (EjmzseUAAAAJ)." },
+    { kw:['citation','cited','impact','scholar','h-index','how many'],
+      a:"My work has 290+ citations. LBC (ICLR 2023 Oral) leads with 26 citations, followed by GDI (ICML 2022) with 21. Full profile: Google Scholar EjmzseUAAAAJ." },
+    { kw:['self-improve','self-play','autonomous','annotation-free','human supervision'],
+      a:"My long-term vision: generative models that self-improve autonomously — learning from environment feedback and their own outputs, with minimal human annotation. This drives my work on process rewards, actor-critic methods, and online RL post-training." },
+    { kw:['flow matching','diffusion','generative','score','ode','trajectory'],
+      a:"Flow matching is a generative modeling framework that learns straight interpolation paths between noise and data distributions, often more training-stable than diffusion. My work (ORW-CFM-W2, AC-Flow) applies RL fine-tuning to flow matching models like SD3 and FLUX." },
+    { kw:['github','code','open source','repository','implementation'],
+      a:"My GitHub is @markerthu. Several projects have open-source code — check the individual project pages for repository links." },
+    { kw:['blog','arxiv','reading','papers','feed','recent papers'],
+      a:"I track recent arXiv papers in RL post-training, reasoning, self-improvement, and multimodal LLMs — updated weekly. Browse at /blog/reading-papers/." },
+    { kw:['intern','job','position','opportunity','hiring','open to'],
+      a:"I'm primarily focused on my PhD research. I'm open to discussing research collaborations and internship opportunities at companies working on frontier RL, post-training, or generative AI." },
+    { kw:['thank','thanks','great','awesome','cool','helpful','nice'],
+      a:"Glad I could help! Feel free to ask more questions, or reach out directly at jiajunf3 [at] illinois.edu for deeper discussions." },
+  ];
+
+  var DEFAULT = "I'm not sure about that specific question. Try asking about a paper (CESAR, LBC, GDI, ADRPO…) or topic (RL, flow matching, audio reasoning). For anything else, email jiajunf3 [at] illinois.edu.";
+
+  function findAnswer(q) {
+    q = q.toLowerCase();
+    var best = null, bestScore = 0;
+    QA.forEach(function(qa) {
+      var score = 0;
+      qa.kw.forEach(function(k) { if (q.indexOf(k) >= 0) score++; });
+      if (score > bestScore) { bestScore = score; best = qa; }
+    });
+    return bestScore > 0 ? best.a : DEFAULT;
+  }
+
+  function addMsg(text, role) {
+    var msgs = document.getElementById('ra-msgs');
+    var div = document.createElement('div');
+    div.className = 'ra-msg ra-' + role;
+    div.textContent = text;
+    msgs.appendChild(div);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  function typeMsg(text) {
+    var msgs = document.getElementById('ra-msgs');
+    var div = document.createElement('div');
+    div.className = 'ra-msg ra-bot';
+    msgs.appendChild(div);
+    msgs.scrollTop = msgs.scrollHeight;
+    var i = 0;
+    function tick() {
+      if (i <= text.length) {
+        div.textContent = text.substring(0, i);
+        msgs.scrollTop = msgs.scrollHeight;
+        i++;
+        setTimeout(tick, i < 20 ? 8 : 3);
+      }
+    }
+    tick();
+  }
+
+  function showTyping() {
+    var msgs = document.getElementById('ra-msgs');
+    var div = document.createElement('div');
+    div.className = 'ra-msg ra-bot ra-typing';
+    div.id = 'ra-typing-indicator';
+    div.innerHTML = '<span></span><span></span><span></span>';
+    msgs.appendChild(div);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  function removeTyping() {
+    var el = document.getElementById('ra-typing-indicator');
+    if (el) el.parentNode.removeChild(el);
+  }
+
+  window.raOpen = function() {
+    var panel = document.getElementById('ra-panel');
+    var btn = document.getElementById('ra-btn');
+    panel.classList.add('show');
+    btn.style.display = 'none';
+    var msgs = document.getElementById('ra-msgs');
+    if (!msgs.children.length) {
+      setTimeout(function() {
+        typeMsg("Hi! I'm a research assistant for Jiajun's work. Ask me about any paper or research topic!");
+      }, 200);
+    }
+    setTimeout(function() { document.getElementById('ra-input').focus(); }, 300);
+  };
+
+  window.raClose = function() {
+    document.getElementById('ra-panel').classList.remove('show');
+    document.getElementById('ra-btn').style.display = 'flex';
+  };
+
+  window.raSend = function() {
+    var inp = document.getElementById('ra-input');
+    var q = inp.value.trim();
+    if (!q) return;
+    inp.value = '';
+    addMsg(q, 'user');
+    showTyping();
+    setTimeout(function() {
+      removeTyping();
+      typeMsg(findAnswer(q));
+    }, 600 + Math.random() * 400);
+  };
+})();
+</script>
 
 <script>
 /* ── Scroll-to-top ── */
