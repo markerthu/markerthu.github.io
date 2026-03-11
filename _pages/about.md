@@ -909,7 +909,7 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>. My research focu
   </div>
 </div>
 
-<div class="pub-entry" data-venue="ICLR" data-year="2025" data-abstract="ORW-CFM-W2 is the first online RLHF method for flow matching — no human data, no likelihood estimation. Wasserstein regularization maintains generation diversity.">
+<div class="pub-entry" data-venue="ICLR" data-year="2025" data-arxiv="ORW-CFM-W2" data-abstract="ORW-CFM-W2 is the first online RLHF method for flow matching — no human data, no likelihood estimation. Wasserstein regularization maintains generation diversity.">
   <div class="pub-left"><span class="pb pb-iclr">ICLR 2025</span><span class="pub-year">2025</span></div>
   <div class="pub-right">
     <div class="pub-thumb-wrap"><img loading="lazy" src="/projects/orw-cfm-w2/images/main_figure.png" alt="ORW-CFM-W2 method"></div>
@@ -942,7 +942,7 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>. My research focu
   </div>
 </div>
 
-<div class="pub-entry" data-venue="ICLR" data-year="2023" data-abstract="LBC introduces a learnable hybrid behavior mapping and bandit meta-controller for exploration control in deep RL, breaking 24 Atari human world records with 500× less data than prior SOTA.">
+<div class="pub-entry" data-venue="ICLR" data-year="2023" data-arxiv="LBC" data-abstract="LBC introduces a learnable hybrid behavior mapping and bandit meta-controller for exploration control in deep RL, breaking 24 Atari human world records with 500× less data than prior SOTA.">
   <div class="pub-left"><span class="pb pb-oral">ICLR 2023<br>Oral</span><span class="pub-year">2023</span></div>
   <div class="pub-right">
     <div class="pub-title">
@@ -955,7 +955,7 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>. My research focu
   </div>
 </div>
 
-<div class="pub-entry" data-venue="ICML" data-year="2022" data-abstract="GDI shows that optimizing the training data distribution is the key lever for superhuman RL efficiency. Provides a unified framework that subsumes diverse RL algorithms as special cases.">
+<div class="pub-entry" data-venue="ICML" data-year="2022" data-arxiv="GDI" data-abstract="GDI shows that optimizing the training data distribution is the key lever for superhuman RL efficiency. Provides a unified framework that subsumes diverse RL algorithms as special cases.">
   <div class="pub-left"><span class="pb pb-icml">ICML 2022</span><span class="pub-year">2022</span></div>
   <div class="pub-right">
     <div class="pub-title">
