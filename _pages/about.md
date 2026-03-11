@@ -601,6 +601,10 @@ body.dark-mode .arxiv-title { color: #e6edf3; }
 .gl2-item { font-size: 0.76em; color: rgba(255,255,255,0.6); font-weight: 600; }
 
 
+/* ── Thumbnail placeholder: hide empty wrapper until image loads ── */
+.pub-thumb-wrap img { opacity: 0; transition: opacity .3s; }
+.pub-thumb-wrap img.loaded { opacity: 1; }
+
 /* ── ① Citation count badge ── */
 .cite-badge {
   display: inline-flex; align-items: center; gap: 4px;
@@ -1141,30 +1145,33 @@ window.addEventListener('scroll', function(){
   tick();
 })();
 
-/* ── Animated counters ── */
+/* ── Animated counters (IntersectionObserver — fires reliably on scroll-into-view) ── */
 (function(){
-  var animated = false;
-  function animateCounters(){
-    if(animated) return;
-    var els = document.querySelectorAll('.stat-number[data-target]');
-    var rect = els[0] && els[0].getBoundingClientRect();
-    if(!rect || rect.top > window.innerHeight) return;
-    animated = true;
-    els.forEach(function(el){
-      var target = parseInt(el.getAttribute('data-target'));
-      var suffix = el.getAttribute('data-suffix') || '';
-      var dur = 1200, start = performance.now();
-      function step(now){
-        var p = Math.min((now-start)/dur, 1);
-        p = 1 - Math.pow(1-p, 3); /* easeOutCubic */
-        el.textContent = Math.round(target * p) + suffix;
-        if(p < 1) requestAnimationFrame(step);
-      }
-      requestAnimationFrame(step);
-    });
+  var els = document.querySelectorAll('.stat-number[data-target]');
+  if(!els.length) return;
+  function runCounter(el) {
+    if(el._counted) return;
+    el._counted = true;
+    var target = parseInt(el.getAttribute('data-target')) || 0;
+    var suffix = el.getAttribute('data-suffix') || '';
+    var dur = 1400, start = performance.now();
+    function step(now){
+      var p = Math.min((now - start) / dur, 1);
+      p = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(target * p) + suffix;
+      if(p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
   }
-  window.addEventListener('scroll', animateCounters);
-  animateCounters();
+  if('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting) runCounter(e.target); });
+    }, {threshold: 0.3});
+    els.forEach(function(el){ io.observe(el); });
+  } else {
+    /* fallback for old browsers */
+    els.forEach(function(el){ runCounter(el); });
+  }
 })();
 
 /* ── Particle canvas ── */
@@ -1216,61 +1223,7 @@ document.querySelectorAll('img[loading="lazy"]').forEach(function(img){
   else img.addEventListener('load', function(){ img.classList.add('loaded'); });
 });
 
-/* ══════════════════════════════════════════════════
-   🌍 GLOBE (cobe.js)
-══════════════════════════════════════════════════ */
-(function(){
-  var canvas = document.getElementById('globe-canvas');
-  if(!canvas) return;
-  var s = document.createElement('script');
-  s.src = 'https://cdn.jsdelivr.net/npm/cobe@0.6.3/dist/cobe.umd.js';
-  s.onload = function(){
-    var markers = [
-      // North America
-      {location:[40.1020,-88.2272],size:0.06},  // UIUC
-      {location:[37.4275,-122.1697],size:0.05},  // Stanford
-      {location:[42.3601,-71.0942],size:0.05},   // MIT
-      {location:[40.4433,-79.9436],size:0.04},   // CMU
-      {location:[37.8724,-122.2595],size:0.05},  // UC Berkeley
-      {location:[47.6553,-122.3035],size:0.04},  // UW
-      {location:[45.5017,-73.5673],size:0.04},   // Mila Montreal
-      {location:[37.4220,-122.0841],size:0.05},  // Google
-      {location:[37.4847,-122.1477],size:0.04},  // Meta
-      // Europe
-      {location:[51.5074,-0.1278],size:0.05},    // DeepMind London
-      {location:[51.7548,-1.2544],size:0.04},    // Oxford
-      {location:[52.2054,0.1132],size:0.04},     // Cambridge
-      {location:[47.3769,8.5417],size:0.04},     // ETH Zurich
-      {location:[48.8566,2.3522],size:0.04},     // Paris / INRIA
-      // Asia
-      {location:[40.0000,116.3196],size:0.06},   // Tsinghua Beijing
-      {location:[31.2304,121.4737],size:0.05},   // Shanghai AI Lab
-      {location:[1.2966,103.7764],size:0.04},    // NUS Singapore
-      {location:[35.7128,139.7307],size:0.04},   // Tokyo
-      {location:[37.5665,126.9780],size:0.04},   // Seoul / Samsung
-      {location:[22.3120,39.1019],size:0.03},    // KAUST
-    ];
-    var phi = 0;
-    var globe = window.createGlobe(canvas, {
-      devicePixelRatio: Math.min(window.devicePixelRatio, 2),
-      width: canvas.offsetWidth * 2,
-      height: canvas.offsetHeight * 2,
-      phi: 0, theta: 0.3,
-      dark: 1, diffuse: 1.2,
-      mapSamples: 16000, mapBrightness: 6,
-      baseColor: [0.1, 0.15, 0.3],
-      markerColor: [0.4, 0.7, 1],
-      glowColor: [0.2, 0.4, 0.8],
-      markers: markers,
-      onRender: function(state){
-        state.phi = phi;
-        phi += 0.003;
-      }
-    });
-    canvas._cobeGlobe = globe;
-  };
-  document.head.appendChild(s);
-})();
+/* Globe is initialized via cobe <script> onload tag below the main script block */
 
 
 /* ══════════════════════════════════════════════════
@@ -1323,10 +1276,16 @@ function filterByVenue(btn, venue) {
   if(!container) return;
 
   /* Load D3 then draw */
-  var s = document.createElement('script');
-  s.src = 'https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js';
-  s.onload = function(){ drawGraph(container); };
-  document.head.appendChild(s);
+  /* D3 is pre-loaded via <script> tag below — call directly */
+  if(typeof d3 !== 'undefined') {
+    drawGraph(container);
+  } else {
+    /* fallback if somehow d3 not yet ready */
+    var s = document.createElement('script');
+    s.src = 'https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js';
+    s.onload = function(){ drawGraph(container); };
+    document.head.appendChild(s);
+  }
 })();
 
 function drawGraph(container) {
@@ -1520,3 +1479,6 @@ function drawGraph(container) {
 }
 
 </script>
+<!-- Pre-load D3 + cobe synchronously so inline scripts can call them immediately -->
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/cobe@0.6.3/dist/cobe.umd.js" onload="(function(){var c=document.getElementById('globe-canvas');if(c&&c._cobeGlobe)return;if(c&&!c._cobeGlobe&&typeof createGlobe!=='undefined'){var phi=0;c._cobeGlobe=createGlobe(c,{devicePixelRatio:Math.min(window.devicePixelRatio,2),width:c.offsetWidth*2,height:c.offsetHeight*2,phi:0,theta:0.3,dark:1,diffuse:1.2,mapSamples:16000,mapBrightness:6,baseColor:[0.1,0.15,0.3],markerColor:[0.4,0.7,1],glowColor:[0.2,0.4,0.8],markers:[{location:[40.102,-88.227],size:0.06},{location:[37.427,-122.169],size:0.05},{location:[42.360,-71.094],size:0.05},{location:[40.443,-79.943],size:0.04},{location:[37.872,-122.259],size:0.05},{location:[45.501,-73.567],size:0.04},{location:[37.422,-122.084],size:0.05},{location:[51.507,-0.127],size:0.05},{location:[51.754,-1.254],size:0.04},{location:[47.376,8.541],size:0.04},{location:[40.000,116.319],size:0.06},{location:[31.230,121.473],size:0.05},{location:[1.296,103.776],size:0.04},{location:[35.712,139.730],size:0.04},{location:[37.566,126.978],size:0.04}],onRender:function(s){s.phi=phi;phi+=0.003;}});}})()"></script>
