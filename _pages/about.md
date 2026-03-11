@@ -1171,31 +1171,23 @@ function filterByVenue(btn, venue) {
 }
 
 /* ══════════════════════════════════════════════════
-   ① CITATION COUNTS (Semantic Scholar, no key needed)
+   ① CITATION COUNTS — from _data/citations.json
+   (auto-updated weekly by GitHub Actions)
 ══════════════════════════════════════════════════ */
 (function(){
-  var entries = document.querySelectorAll('.pub-entry[data-arxiv]');
-  if(!entries.length) return;
-  var ids = Array.from(entries).map(function(el){ return 'ArXiv:' + el.dataset.arxiv; });
-  fetch('https://api.semanticscholar.org/graph/v1/paper/batch?fields=citationCount', {
-    method: 'POST',
-    headers: {'Content-Type':'application/json'},
-    body: JSON.stringify({ids: ids})
-  })
-  .then(function(r){ return r.json(); })
-  .then(function(data){
-    data.forEach(function(paper, i){
-      if(!paper || paper.citationCount == null) return;
-      var el = entries[i];
-      var links = el.querySelector('.pub-links') || el.querySelector('.pub-right');
-      if(!links) return;
-      var badge = document.createElement('span');
-      badge.className = 'cite-badge';
-      badge.innerHTML = '📊 ' + paper.citationCount + ' citations';
-      links.appendChild(badge);
-    });
-  })
-  .catch(function(){});
+  /* Jekyll injects citation data at build time */
+  var citations = {{ site.data.citations | jsonify }};
+  document.querySelectorAll('.pub-entry[data-arxiv]').forEach(function(el){
+    var key = el.dataset.arxiv;
+    var count = citations[key];
+    if(count == null || count === 0) return;
+    var links = el.querySelector('.pub-links') || el.querySelector('.pub-right');
+    if(!links) return;
+    var badge = document.createElement('span');
+    badge.className = 'cite-badge';
+    badge.innerHTML = '📊 ' + count + ' citations';
+    links.appendChild(badge);
+  });
 })();
 
 /* ══════════════════════════════════════════════════
