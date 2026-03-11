@@ -557,6 +557,72 @@ img[loading="lazy"].loaded, img[loading="lazy"][complete] {
   .dark-toggle { bottom: 76px; right: 16px; }
   .scroll-top { right: 16px; }
 }
+
+/* ── ① Citation count badge ── */
+.cite-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: #f0f9ff; color: #0369a1;
+  border: 1px solid #bae6fd; border-radius: 999px;
+  padding: 1px 9px; font-size: 0.74em; font-weight: 700;
+  margin-left: 6px; vertical-align: middle; white-space: nowrap;
+}
+body.dark-mode .cite-badge { background: #0c2340; color: #7dd3fc; border-color: #1e4976; }
+
+/* ── ② Filter bar ── */
+.pub-filter-bar {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+  margin-bottom: 18px; padding: 14px 16px;
+  background: #f8faff; border: 1px solid #e5e7eb; border-radius: 12px;
+}
+.filter-search {
+  flex: 1; min-width: 180px; padding: 7px 14px;
+  border: 1.5px solid #e5e7eb; border-radius: 8px;
+  font-size: 0.88em; outline: none; font-family: inherit;
+  background: #fff; color: #111;
+}
+.filter-search:focus { border-color: #1565c0; }
+.filter-btn {
+  padding: 5px 14px; border-radius: 999px; font-size: 0.8em; font-weight: 700;
+  border: 1.5px solid #e5e7eb; background: #fff; color: #555; cursor: pointer;
+  transition: all .15s;
+}
+.filter-btn.active, .filter-btn:hover { background: #1565c0; color: #fff; border-color: #1565c0; }
+body.dark-mode .pub-filter-bar { background: #161b22; border-color: #30363d; }
+body.dark-mode .filter-search { background: #0d1117; color: #e6edf3; border-color: #30363d; }
+body.dark-mode .filter-btn { background: #21262d; color: #8b949e; border-color: #30363d; }
+body.dark-mode .filter-btn.active, body.dark-mode .filter-btn:hover { background: #388bfd; color: #fff; border-color: #388bfd; }
+.pub-entry.hidden { display: none !important; }
+
+/* ── ④ Abstract tooltip ── */
+.pub-title { position: relative; cursor: default; }
+.pub-abstract-preview {
+  display: none; position: absolute; top: calc(100% + 8px); left: 0; right: 0; z-index: 50;
+  background: #fff; border: 1.5px solid #e5e7eb; border-radius: 10px;
+  padding: 14px 16px; font-size: 0.84em; color: #374151; line-height: 1.65;
+  box-shadow: 0 8px 28px rgba(0,0,0,.12); max-width: 520px; min-width: 280px;
+  pointer-events: none;
+}
+.pub-entry:hover .pub-abstract-preview { display: block; }
+body.dark-mode .pub-abstract-preview { background: #161b22; border-color: #30363d; color: #b5c2c8; box-shadow: 0 8px 28px rgba(0,0,0,.4); }
+
+/* ── ⑧ Research graph ── */
+#research-graph-section { margin-top: 0; }
+#research-graph {
+  width: 100%; height: 460px; border-radius: 14px; border: 1.5px solid #e5e7eb;
+  background: #fafbff; overflow: hidden; position: relative;
+}
+body.dark-mode #research-graph { background: #0d1117; border-color: #30363d; }
+#research-graph svg { width: 100%; height: 100%; }
+.graph-node circle { cursor: pointer; transition: r .15s; }
+.graph-node:hover circle { filter: brightness(1.15); }
+.graph-node text { font-size: 10px; font-family: Inter, sans-serif; pointer-events: none; }
+.graph-link { stroke: #cbd5e1; stroke-opacity: 0.6; }
+body.dark-mode .graph-link { stroke: #334155; }
+.graph-legend { position: absolute; bottom: 12px; left: 14px; display: flex; flex-wrap: wrap; gap: 8px; }
+.gl-item { display: flex; align-items: center; gap: 5px; font-size: 0.74em; font-weight: 600; color: #444; }
+.gl-dot { width: 10px; height: 10px; border-radius: 50%; }
+body.dark-mode .gl-item { color: #8b949e; }
+
 </style>
 
 <!-- Hero banner -->
@@ -684,16 +750,26 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>. My research focu
 <a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&hl=en">Full list on Google Scholar</a> &nbsp;/&nbsp;
 <a href="/publications/">Publications page</a></p>
 
+<div class="pub-filter-bar">
+  <input class="filter-search" id="pubSearch" type="text" placeholder="🔍  Search papers…" oninput="filterPubs()">
+  <button class="filter-btn active" onclick="filterByVenue(this,'all')">All</button>
+  <button class="filter-btn" onclick="filterByVenue(this,'ICLR')">ICLR</button>
+  <button class="filter-btn" onclick="filterByVenue(this,'NeurIPS')">NeurIPS</button>
+  <button class="filter-btn" onclick="filterByVenue(this,'ICML')">ICML</button>
+  <button class="filter-btn" onclick="filterByVenue(this,'TPAMI')">TPAMI</button>
+  <button class="filter-btn" onclick="filterByVenue(this,'Preprint')">Preprint</button>
+</div>
+
 <div class="pub-list">
 
-<div class="pub-entry">
+<div class="pub-entry" data-venue="ICLR" data-year="2026" data-arxiv="2510.20867" data-abstract="CESAR resolves test-time inverse scaling in Audio LLMs by rewarding the reasoning process via GRPO, achieving SOTA on MMAU — outperforming Gemini 2.5 Pro and GPT-4o Audio.">
   <div class="pub-left"><span class="pb pb-iclr">ICLR 2026</span><span class="pub-year">2026</span></div>
   <div class="pub-right">
     <div class="pub-thumb-wrap"><img loading="lazy" src="/projects/cesar/images/framework.png" alt="CESAR framework"></div>
     <div class="pub-title">
       <a href="https://openreview.net/forum?id=DUr48hxO2h">Incentivizing Consistent, Effective and Scalable Reasoning Capability in Audio LLMs via Reasoning Process Rewards</a>
       <a class="pub-project" href="/projects/cesar/">Project Page</a>
-    </div>
+    <div class="pub-abstract-preview">CESAR resolves test-time inverse scaling in Audio LLMs by rewarding the reasoning process via GRPO, achieving SOTA on MMAU — outperforming Gemini 2.5 Pro and GPT-4o Audio.</div></div>
     <div class="pub-authors"><strong>J. Fan*</strong>, R. Ren, J. Li, R. Pandey, P.G. Shivakumar, A. Gandhe, G. Liu, Y. Gu, I. Bulyko</div>
     <div class="pub-desc">CESAR: process-reward RL (GRPO) resolving test-time inverse scaling in Audio LLMs — models produce hallucinatory reasoning without proper guidance; CESAR rewrites that.</div>
     <div class="pub-hl">🏆 SOTA on MMAU Test-mini · Outperforms Gemini 2.5 Pro &amp; GPT-4o Audio</div>
@@ -705,24 +781,24 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>. My research focu
   </div>
 </div>
 
-<div class="pub-entry">
+<div class="pub-entry" data-venue="ICLR" data-year="2026" data-abstract="SP-VLA introduces action-aware model scheduling and spatio-semantic token pruning for VLA model acceleration, achieving 1.5× lossless speedup on LIBERO and 2.4× speedup on SimplerEnv.">
   <div class="pub-left"><span class="pb pb-iclr">ICLR 2026</span><span class="pub-year">2026</span></div>
   <div class="pub-right">
-    <div class="pub-title"><a href="https://openreview.net/forum?id=RwdGIIjPlC">SP-VLA: A Joint Model Scheduling and Token Pruning Approach for VLA Model Acceleration</a></div>
+    <div class="pub-title"><a href="https://openreview.net/forum?id=RwdGIIjPlC">SP-VLA: A Joint Model Scheduling and Token Pruning Approach for VLA Model Acceleration</a><div class="pub-abstract-preview">SP-VLA introduces action-aware model scheduling and spatio-semantic token pruning for VLA model acceleration, achieving 1.5× lossless speedup on LIBERO and 2.4× speedup on SimplerEnv.</div></div>
     <div class="pub-authors">Y. Li, Y. Meng, Z. Sun, K. Ji, C. Tang, <strong>J. Fan</strong>, X. Ma, S.-T. Xia, Z. Wang, W. Zhu</div>
     <div class="pub-desc">Action-aware model scheduling + spatio-semantic token pruning for VLA acceleration.</div>
     <div class="pub-hl">⚡ 1.5× lossless speedup (LIBERO) · 2.4× speedup (SimplerEnv)</div>
   </div>
 </div>
 
-<div class="pub-entry">
+<div class="pub-entry" data-venue="NeurIPS" data-year="2025" data-arxiv="2510.18053" data-abstract="ADRPO introduces sample-level adaptive divergence regularization for RLHF — high-value samples get more freedom, poor samples get stronger constraints. Plug-and-play on any RL method.">
   <div class="pub-left"><span class="pb pb-neurips">NeurIPS 2025</span><span class="pub-year">2025</span></div>
   <div class="pub-right">
     <div class="pub-thumb-wrap"><img loading="lazy" src="/projects/adrpo/images/compare_models.png" alt="ADRPO qualitative results"></div>
     <div class="pub-title">
       <a href="https://openreview.net/forum?id=aXO0xg0ttW">Adaptive Divergence Regularized Policy Optimization for Fine-tuning Generative Models</a>
       <a class="pub-project" href="/projects/adrpo/">Project Page</a>
-    </div>
+    <div class="pub-abstract-preview">ADRPO introduces sample-level adaptive divergence regularization for RLHF — high-value samples get more freedom, poor samples get stronger constraints. Plug-and-play on any RL method.</div></div>
     <div class="pub-authors"><strong>J. Fan*</strong>, T. Wei, C. Cheng, Y. Chen, G. Liu</div>
     <div class="pub-desc">ADRPO: sample-level adaptive divergence regularization — high-value samples get more freedom, poor samples get stronger constraint. Plug-and-play on top of any RLHF method.</div>
     <div class="pub-hl">🚀 2B SD3 surpasses 4.8B &amp; 12B models · Generalizes to LLMs &amp; audio reasoning</div>
@@ -734,69 +810,69 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>. My research focu
   </div>
 </div>
 
-<div class="pub-entry">
+<div class="pub-entry" data-venue="NeurIPS" data-year="2025" data-abstract="VarCon reformulates supervised contrastive learning as variational inference, achieving SOTA 79.36% Top-1 accuracy on ImageNet-1K with ResNet-50.">
   <div class="pub-left"><span class="pb pb-neurips">NeurIPS 2025</span><span class="pub-year">2025</span></div>
   <div class="pub-right">
-    <div class="pub-title"><a href="https://openreview.net/forum?id=uOOlHOq500">Variational Supervised Contrastive Learning</a></div>
+    <div class="pub-title"><a href="https://openreview.net/forum?id=uOOlHOq500">Variational Supervised Contrastive Learning</a><div class="pub-abstract-preview">VarCon reformulates supervised contrastive learning as variational inference, achieving SOTA 79.36% Top-1 accuracy on ImageNet-1K with ResNet-50.</div></div>
     <div class="pub-authors">Z. Wang, <strong>J. Fan</strong>, T. Nguyen, H. Ji, G. Liu</div>
     <div class="pub-desc">VarCon: supervised contrastive learning as variational inference — posterior-weighted ELBO replaces pairwise comparisons.</div>
     <div class="pub-hl">📊 SOTA 79.36% Top-1 on ImageNet-1K (ResNet-50)</div>
   </div>
 </div>
 
-<div class="pub-entry">
+<div class="pub-entry" data-venue="ICLR" data-year="2025" data-abstract="ORW-CFM-W2 is the first online RLHF method for flow matching — no human data, no likelihood estimation. Wasserstein regularization maintains generation diversity.">
   <div class="pub-left"><span class="pb pb-iclr">ICLR 2025</span><span class="pub-year">2025</span></div>
   <div class="pub-right">
     <div class="pub-thumb-wrap"><img loading="lazy" src="/projects/orw-cfm-w2/images/main_figure.png" alt="ORW-CFM-W2 method"></div>
     <div class="pub-title">
       <a href="https://openreview.net/forum?id=2IoFFexvuw">Online Reward-Weighted Fine-Tuning of Flow Matching with Wasserstein Regularization</a>
       <a class="pub-project" href="/projects/orw-cfm-w2/">Project Page</a>
-    </div>
+    <div class="pub-abstract-preview">ORW-CFM-W2 is the first online RLHF method for flow matching — no human data, no likelihood estimation. Wasserstein regularization maintains generation diversity.</div></div>
     <div class="pub-authors"><strong>J. Fan*</strong>, S. Shen, C. Cheng, Y. Chen, C. Liang, G. Liu</div>
     <div class="pub-desc">ORW-CFM-W2: first online RLHF for flow matching — no human data, no likelihood, no collapse. W2 regularization keeps generation diverse.</div>
   </div>
 </div>
 
-<div class="pub-entry">
+<div class="pub-entry" data-venue="Preprint" data-year="2025" data-arxiv="2510.18072" data-abstract="AC-Flow introduces actor-critic with intermediate feedback for flow matching — reward shaping + dual-stability mechanism + Wasserstein regularization enables robust SD3 fine-tuning without collapse.">
   <div class="pub-left"><span class="pb pb-arxiv">Preprint</span><span class="pub-year">2025</span></div>
   <div class="pub-right">
     <div class="pub-title">
       <a href="https://arxiv.org/abs/2510.18072">Fine-tuning Flow Matching Generative Models with Intermediate Feedback</a>
       <a class="pub-project" href="/projects/ac-flow/">Project Page</a>
-    </div>
+    <div class="pub-abstract-preview">AC-Flow introduces actor-critic with intermediate feedback for flow matching — reward shaping + dual-stability mechanism + Wasserstein regularization enables robust SD3 fine-tuning without collapse.</div></div>
     <div class="pub-authors"><strong>J. Fan*</strong>, C. Cheng, S. Shen, X. Zhou, G. Liu &nbsp;·&nbsp; <em>Under Review</em></div>
     <div class="pub-desc">AC-Flow: actor-critic with intermediate feedback for flow matching — reward shaping + dual-stability + Wasserstein regularization. Robust fine-tuning on SD3 without collapse.</div>
   </div>
 </div>
 
-<div class="pub-entry">
+<div class="pub-entry" data-venue="TPAMI" data-year="2025" data-arxiv="2407.05010" data-abstract="PRANCE jointly optimizes token pruning and structural channel pruning for adaptive ViT inference, achieving significant speedup while maintaining accuracy.">
   <div class="pub-left"><span class="pb pb-journal">TPAMI 2025</span><span class="pub-year">2025</span></div>
   <div class="pub-right">
-    <div class="pub-title"><a href="https://arxiv.org/abs/2407.05010">PRANCE: Joint Token-Optimization and Structural Channel-Pruning for Adaptive ViT Inference</a></div>
+    <div class="pub-title"><a href="https://arxiv.org/abs/2407.05010">PRANCE: Joint Token-Optimization and Structural Channel-Pruning for Adaptive ViT Inference</a><div class="pub-abstract-preview">PRANCE jointly optimizes token pruning and structural channel pruning for adaptive ViT inference, achieving significant speedup while maintaining accuracy.</div></div>
     <div class="pub-authors">Y. Li, C. Tang, Y. Meng, <strong>J. Fan</strong>, Z. Chai, X. Ma, Z. Wang, W. Zhu &nbsp;·&nbsp; <em>IEEE TPAMI</em></div>
   </div>
 </div>
 
-<div class="pub-entry">
+<div class="pub-entry" data-venue="ICLR" data-year="2023" data-abstract="LBC introduces a learnable hybrid behavior mapping and bandit meta-controller for exploration control in deep RL, breaking 24 Atari human world records with 500× less data than prior SOTA.">
   <div class="pub-left"><span class="pb pb-oral">ICLR 2023<br>Oral</span><span class="pub-year">2023</span></div>
   <div class="pub-right">
     <div class="pub-title">
       <a href="https://openreview.net/forum?id=FeWvD0L_a4">Learnable Behavior Control: Breaking Atari Human World Records via Sample-Efficient Behavior Selection</a>
       <a class="pub-project" href="/projects/lbc/">Project Page</a>
-    </div>
+    <div class="pub-abstract-preview">LBC introduces a learnable hybrid behavior mapping and bandit meta-controller for exploration control in deep RL, breaking 24 Atari human world records with 500× less data than prior SOTA.</div></div>
     <div class="pub-authors"><strong>J. Fan*</strong>, Y. Zhuang, Y. Liu, J. Hao, B. Wang, J. Zhu, H. Wang, S.-T. Xia</div>
     <div class="pub-desc">LBC: learnable hybrid behavior mapping + bandit meta-controller. Unified framework for exploration control in deep RL.</div>
     <div class="pub-hl">🏅 Ranked 5/4176 · 10,077% mean human score · 24 world records · 500× data efficiency</div>
   </div>
 </div>
 
-<div class="pub-entry">
+<div class="pub-entry" data-venue="ICML" data-year="2022" data-abstract="GDI shows that optimizing the training data distribution is the key lever for superhuman RL efficiency. Provides a unified framework that subsumes diverse RL algorithms as special cases.">
   <div class="pub-left"><span class="pb pb-icml">ICML 2022</span><span class="pub-year">2022</span></div>
   <div class="pub-right">
     <div class="pub-title">
       <a href="https://proceedings.mlr.press/v162/fan22c.html">Generalized Data Distribution Iteration</a>
       <a class="pub-project" href="/projects/gdi/">Project Page</a>
-    </div>
+    <div class="pub-abstract-preview">GDI shows that optimizing the training data distribution is the key lever for superhuman RL efficiency. Provides a unified framework that subsumes diverse RL algorithms as special cases.</div></div>
     <div class="pub-authors"><strong>J. Fan*</strong>, C. Xiao</div>
     <div class="pub-desc">GDI: optimizing the data distribution is the key to superhuman RL efficiency. Unified framework for diverse RL algorithms.</div>
     <div class="pub-hl">📈 Agent57 beaten with 500× less data &amp; 2× avg performance</div>
@@ -804,6 +880,12 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>. My research focu
 </div>
 
 </div>
+
+
+<!-- ════════════ RESEARCH GRAPH ════════════ -->
+<div class="section-header" id="research-graph-section">🕸️ Research Paper Network</div>
+<p style="font-size:0.88em;color:#666;margin-bottom:14px;">Hover a node to highlight connections. Papers are grouped by research theme.</p>
+<div id="research-graph"></div>
 
 <!-- ═══════════════════════════════ RESEARCH ═══════════════════════════ -->
 <div class="section-header" id="research">🔬 Research Interests</div>
@@ -1065,4 +1147,205 @@ document.querySelectorAll('img[loading="lazy"]').forEach(function(img){
   if(img.complete) img.classList.add('loaded');
   else img.addEventListener('load', function(){ img.classList.add('loaded'); });
 });
+
+/* ══════════════════════════════════════════════════
+   ② PUBLICATION FILTER / SEARCH
+══════════════════════════════════════════════════ */
+var _activeVenue = 'all';
+function filterPubs() {
+  var q = (document.getElementById('pubSearch').value || '').toLowerCase();
+  document.querySelectorAll('.pub-list .pub-entry').forEach(function(el) {
+    var venue = (el.dataset.venue || '').toLowerCase();
+    var title = el.querySelector('.pub-title') ? el.querySelector('.pub-title').textContent.toLowerCase() : '';
+    var authors = el.querySelector('.pub-authors') ? el.querySelector('.pub-authors').textContent.toLowerCase() : '';
+    var venueOk = _activeVenue === 'all' || venue === _activeVenue.toLowerCase();
+    var searchOk = !q || title.includes(q) || authors.includes(q) || venue.includes(q);
+    el.classList.toggle('hidden', !(venueOk && searchOk));
+  });
+}
+function filterByVenue(btn, venue) {
+  _activeVenue = venue;
+  document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  filterPubs();
+}
+
+/* ══════════════════════════════════════════════════
+   ① CITATION COUNTS (Semantic Scholar, no key needed)
+══════════════════════════════════════════════════ */
+(function(){
+  var entries = document.querySelectorAll('.pub-entry[data-arxiv]');
+  if(!entries.length) return;
+  var ids = Array.from(entries).map(function(el){ return 'ArXiv:' + el.dataset.arxiv; });
+  fetch('https://api.semanticscholar.org/graph/v1/paper/batch?fields=citationCount', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({ids: ids})
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(data){
+    data.forEach(function(paper, i){
+      if(!paper || paper.citationCount == null) return;
+      var el = entries[i];
+      var links = el.querySelector('.pub-links') || el.querySelector('.pub-right');
+      if(!links) return;
+      var badge = document.createElement('span');
+      badge.className = 'cite-badge';
+      badge.innerHTML = '📊 ' + paper.citationCount + ' citations';
+      links.appendChild(badge);
+    });
+  })
+  .catch(function(){});
+})();
+
+/* ══════════════════════════════════════════════════
+   ⑧ RESEARCH PAPER NETWORK (D3.js)
+══════════════════════════════════════════════════ */
+(function(){
+  var container = document.getElementById('research-graph');
+  if(!container) return;
+
+  /* Load D3 then draw */
+  var s = document.createElement('script');
+  s.src = 'https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js';
+  s.onload = function(){ drawGraph(container); };
+  document.head.appendChild(s);
+})();
+
+function drawGraph(container) {
+  var isDark = document.body.classList.contains('dark-mode');
+  var W = container.offsetWidth, H = 460;
+
+  var topicColors = {
+    'RL Training':     '#2563eb',
+    'Flow Matching':   '#059669',
+    'Audio Reasoning': '#7c3aed',
+    'Deep RL':         '#ea580c',
+    'Efficiency':      '#0891b2',
+    'Representation':  '#be185d',
+  };
+
+  var papers = [
+    {id:'CESAR',      label:'CESAR',      venue:'ICLR 2026',   topics:['RL Training','Audio Reasoning'], url:'/projects/cesar/'},
+    {id:'SP-VLA',     label:'SP-VLA',     venue:'ICLR 2026',   topics:['Efficiency'], url:'https://openreview.net/forum?id=RwdGIIjPlC'},
+    {id:'ADRPO',      label:'ADRPO',      venue:'NeurIPS 2025',topics:['RL Training','Flow Matching'], url:'/projects/adrpo/'},
+    {id:'VarCon',     label:'VarCon',     venue:'NeurIPS 2025',topics:['Representation'], url:'https://openreview.net/forum?id=uOOlHOq500'},
+    {id:'ORW-CFM-W2', label:'ORW-CFM-W2', venue:'ICLR 2025',   topics:['RL Training','Flow Matching'], url:'/projects/orw-cfm-w2/'},
+    {id:'AC-Flow',    label:'AC-Flow',    venue:'arXiv 2025',  topics:['RL Training','Flow Matching'], url:'/projects/ac-flow/'},
+    {id:'PRANCE',     label:'PRANCE',     venue:'TPAMI 2025',  topics:['Efficiency'], url:'https://arxiv.org/abs/2407.05010'},
+    {id:'LBC',        label:'LBC',        venue:'ICLR 2023',   topics:['Deep RL'], url:'/projects/lbc/'},
+    {id:'GDI',        label:'GDI',        venue:'ICML 2022',   topics:['Deep RL','RL Training'], url:'/projects/gdi/'},
+  ];
+
+  /* Build nodes: papers + topic clusters */
+  var topicList = Object.keys(topicColors);
+  var nodes = topicList.map(function(t){ return {id:'topic-'+t, label:t, type:'topic', color:topicColors[t], r:22}; });
+  papers.forEach(function(p){
+    var c = topicColors[p.topics[0]] || '#888';
+    nodes.push({id:p.id, label:p.label, venue:p.venue, type:'paper', color:c, r:14, topics:p.topics, url:p.url});
+  });
+
+  /* Build links: paper → its topics */
+  var links = [];
+  papers.forEach(function(p){
+    p.topics.forEach(function(t){
+      links.push({source:'topic-'+t, target:p.id});
+    });
+  });
+
+  var svg = d3.select(container).append('svg')
+    .attr('width', W).attr('height', H);
+
+  /* Gradient bg */
+  svg.append('rect').attr('width', W).attr('height', H)
+    .attr('fill', isDark ? '#0d1117' : '#fafbff');
+
+  var sim = d3.forceSimulation(nodes)
+    .force('link', d3.forceLink(links).id(function(d){ return d.id; }).distance(function(l){
+      return l.source.type === 'topic' ? 90 : 60;
+    }).strength(0.6))
+    .force('charge', d3.forceManyBody().strength(-220))
+    .force('center', d3.forceCenter(W/2, H/2))
+    .force('collision', d3.forceCollide().radius(function(d){ return d.r + 8; }));
+
+  var link = svg.append('g').selectAll('line').data(links).enter()
+    .append('line').attr('class', 'graph-link').attr('stroke-width', 1.5);
+
+  var node = svg.append('g').selectAll('g').data(nodes).enter()
+    .append('g').attr('class', 'graph-node')
+    .call(d3.drag()
+      .on('start', function(event, d){
+        if(!event.active) sim.alphaTarget(0.3).restart();
+        d.fx = d.x; d.fy = d.y;
+      })
+      .on('drag', function(event, d){ d.fx = event.x; d.fy = event.y; })
+      .on('end', function(event, d){
+        if(!event.active) sim.alphaTarget(0);
+        d.fx = null; d.fy = null;
+      })
+    )
+    .on('click', function(event, d){
+      if(d.url) window.location.href = d.url;
+    })
+    .on('mouseover', function(event, d){
+      /* dim unrelated links and nodes */
+      var connectedIds = new Set([d.id]);
+      links.forEach(function(l){
+        if(l.source.id===d.id) connectedIds.add(l.target.id);
+        if(l.target.id===d.id) connectedIds.add(l.source.id);
+      });
+      link.attr('stroke-opacity', function(l){
+        return (l.source.id===d.id || l.target.id===d.id) ? 1 : 0.08;
+      }).attr('stroke-width', function(l){
+        return (l.source.id===d.id || l.target.id===d.id) ? 2.5 : 1.5;
+      });
+      node.attr('opacity', function(n){ return connectedIds.has(n.id) ? 1 : 0.2; });
+    })
+    .on('mouseout', function(){
+      link.attr('stroke-opacity', 0.5).attr('stroke-width', 1.5);
+      node.attr('opacity', 1);
+    });
+
+  node.append('circle')
+    .attr('r', function(d){ return d.r; })
+    .attr('fill', function(d){ return d.color; })
+    .attr('fill-opacity', function(d){ return d.type==='topic' ? 0.2 : 0.9; })
+    .attr('stroke', function(d){ return d.color; })
+    .attr('stroke-width', function(d){ return d.type==='topic' ? 2.5 : 1.5; });
+
+  node.filter(function(d){ return d.type==='topic'; })
+    .append('text').text(function(d){ return d.label; })
+    .attr('text-anchor','middle').attr('dy','0.35em')
+    .attr('font-size', 9).attr('font-weight', 700)
+    .attr('fill', function(d){ return d.color; });
+
+  node.filter(function(d){ return d.type==='paper'; })
+    .append('text').text(function(d){ return d.label; })
+    .attr('text-anchor','middle').attr('dy', function(d){ return d.r + 11; })
+    .attr('font-size', 10).attr('font-weight', 600)
+    .attr('fill', isDark ? '#c9d1d9' : '#1a2332');
+
+  node.filter(function(d){ return d.type==='paper'; })
+    .append('title').text(function(d){ return d.label + ' — ' + d.venue; });
+
+  sim.on('tick', function(){
+    link
+      .attr('x1', function(d){ return d.source.x; }).attr('y1', function(d){ return d.source.y; })
+      .attr('x2', function(d){ return d.target.x; }).attr('y2', function(d){ return d.target.y; });
+    node.attr('transform', function(d){
+      d.x = Math.max(d.r+5, Math.min(W-d.r-5, d.x));
+      d.y = Math.max(d.r+5, Math.min(H-d.r-5, d.y));
+      return 'translate('+d.x+','+d.y+')';
+    });
+  });
+
+  /* Legend */
+  var leg = document.createElement('div');
+  leg.className = 'graph-legend';
+  Object.entries(topicColors).forEach(function(kv){
+    leg.innerHTML += '<div class="gl-item"><div class="gl-dot" style="background:'+kv[1]+'"></div>'+kv[0]+'</div>';
+  });
+  container.appendChild(leg);
+}
+
 </script>
