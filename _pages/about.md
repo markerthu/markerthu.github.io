@@ -473,6 +473,21 @@ body.dark-mode .pub-project { background: #1c2333 !important; color: #58a6ff !im
 body.dark-mode .pub-link.pl-paper { background: #1c2333 !important; color: #58a6ff !important; }
 body.dark-mode .pub-link.pl-project { background: #122117 !important; color: #3fb950 !important; }
 
+/* ── BibTeX cite button & popup ── */
+.pl-cite { background: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0; cursor: pointer; font-family: inherit; font-size: 0.78em; font-weight: 600; padding: 3px 9px; border-radius: 20px; transition: background .15s, color .15s; }
+.pl-cite:hover { background: #dcfce7; }
+.bib-popup { position: absolute; z-index: 9990; display: none; background: #fff; border: 1.5px solid #e5e7eb; border-radius: 10px; padding: 14px 16px; box-shadow: 0 8px 32px rgba(0,0,0,.14); }
+.bib-popup.show { display: block; }
+.bib-pre { background: #f8fafc; border-radius: 6px; padding: 10px 12px; font-size: 0.76em; overflow-x: auto; white-space: pre; color: #1e293b; border: 1px solid #e2e8f0; margin: 0 0 10px; }
+.bib-actions { display: flex; gap: 8px; }
+.bib-copy { background: #2563eb; color: #fff; border: none; padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 0.83em; font-weight: 600; transition: background .15s; }
+.bib-copy:hover { background: #1d4ed8; }
+.bib-close { background: #f1f5f9; color: #64748b; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.83em; font-weight: 600; }
+.bib-close:hover { background: #e2e8f0; }
+body.dark-mode .pl-cite { background: #0f3d2e !important; color: #3fb950 !important; border-color: #1a7f45 !important; }
+body.dark-mode .bib-popup { background: #161b22 !important; border-color: #30363d !important; }
+body.dark-mode .bib-pre { background: #0d1117 !important; color: #c9d1d9 !important; border-color: #30363d !important; }
+
 /* ── Dark mode: News badges ── */
 body.dark-mode .nbadge.nb-accept { background: #122117 !important; color: #3fb950 !important; }
 body.dark-mode .nbadge.nb-top { background: #2d2000 !important; color: #ffd54f !important; }
@@ -1221,8 +1236,75 @@ document.querySelectorAll('.featured-card').forEach(function(card){
   });
 });
 
+/* ── ⑤ BibTeX one-click copy ── */
+(function(){
+  var BIB = {
+    'FeWvD0L_a4': '@inproceedings{fan2023lbc,\n  title     = {Learnable Behavior Control: Breaking Atari Human World Records via Sample-Efficient Behavior Selection},\n  author    = {Fan, Jiajun and Zhuang, Yuzheng and Liu, Yuecheng and Hao, Jianye and Wang, Bin and Zhu, Jiangcheng and Wang, Hao and Xia, Shu-Tao},\n  booktitle = {International Conference on Learning Representations},\n  year      = {2023},\n  url       = {https://openreview.net/forum?id=FeWvD0L_a4},\n}',
+    'DUr48hxO2h': '@inproceedings{fan2026cesar,\n  title     = {Incentivizing Consistent, Effective and Scalable Reasoning Capability in Audio {LLMs} via Reasoning Process Rewards},\n  author    = {Fan, Jiajun and Ren, Roger and Li, Jingyuan and Pandey, Rahul and Shivakumar, Prashanth G. and Gandhe, Ankur and Liu, Ge and Gu, Yile and Bulyko, Ivan},\n  booktitle = {International Conference on Learning Representations},\n  year      = {2026},\n  url       = {https://openreview.net/forum?id=DUr48hxO2h},\n}',
+    'aXO0xg0ttW': '@inproceedings{fan2025adrpo,\n  title     = {Adaptive Divergence Regularized Policy Optimization for Fine-tuning Generative Models},\n  author    = {Fan, Jiajun and Wei, Tong and Cheng, Chaoran and Chen, Yuxin and Liu, Ge},\n  booktitle = {Advances in Neural Information Processing Systems},\n  year      = {2025},\n  url       = {https://openreview.net/forum?id=aXO0xg0ttW},\n}',
+    'uOOlHOq500': '@inproceedings{wang2025varcon,\n  title     = {Variational Supervised Contrastive Learning},\n  author    = {Wang, Ziwen and Fan, Jiajun and Nguyen, Thao and Ji, Heng and Liu, Ge},\n  booktitle = {Advances in Neural Information Processing Systems},\n  year      = {2025},\n  url       = {https://openreview.net/forum?id=uOOlHOq500},\n}',
+    '2IoFFexvuw': '@inproceedings{fan2025orwcfm,\n  title     = {Online Reward-Weighted Fine-Tuning of Flow Matching with Wasserstein Regularization},\n  author    = {Fan, Jiajun and Shen, Shuaike and Cheng, Chaoran and Chen, Yuxin and Liang, Chumeng and Liu, Ge},\n  booktitle = {International Conference on Learning Representations},\n  year      = {2025},\n  url       = {https://openreview.net/forum?id=2IoFFexvuw},\n}',
+    'RwdGIIjPlC': '@inproceedings{li2026spvla,\n  title     = {{SP-VLA}: A Joint Model Scheduling and Token Pruning Approach for {VLA} Model Acceleration},\n  author    = {Li, Ye and Meng, Yuan and Sun, Zewen and Ji, Kangye and Tang, Chen and Fan, Jiajun and Ma, Xinzhu and Xia, Shu-Tao and Wang, Zhi and Zhu, Wenwu},\n  booktitle = {International Conference on Learning Representations},\n  year      = {2026},\n  url       = {https://openreview.net/forum?id=RwdGIIjPlC},\n}',
+    '2510.18072': '@article{fan2025acflow,\n  title   = {Fine-tuning Flow Matching Generative Models with Intermediate Feedback},\n  author  = {Fan, Jiajun and Cheng, Chaoran and Shen, Shuaike and Zhou, Xiangxin and Liu, Ge},\n  journal = {arXiv preprint arXiv:2510.18072},\n  year    = {2025},\n  url     = {https://arxiv.org/abs/2510.18072},\n}',
+    '2407.05010': '@article{li2025prance,\n  title   = {{PRANCE}: Joint Token-Optimization and Structural Channel-Pruning for Adaptive {ViT} Inference},\n  author  = {Li, Ye and Tang, Chen and Meng, Yuan and Fan, Jiajun and Chai, Zenghao and Ma, Xinzhu and Wang, Zhi and Zhu, Wenwu},\n  journal = {IEEE Transactions on Pattern Analysis and Machine Intelligence},\n  year    = {2025},\n  url     = {https://arxiv.org/abs/2407.05010},\n}',
+    'fan22c': '@InProceedings{pmlr-v162-fan22c,\n  title     = {Generalized Data Distribution Iteration},\n  author    = {Fan, Jiajun and Xiao, Changnan},\n  booktitle = {Proceedings of the 39th International Conference on Machine Learning},\n  pages     = {6103--6184},\n  year      = {2022},\n  volume    = {162},\n  series    = {Proceedings of Machine Learning Research},\n  publisher = {PMLR},\n  url       = {https://proceedings.mlr.press/v162/fan22c.html},\n}',
+  };
 
+  var popup = document.createElement('div');
+  popup.className = 'bib-popup';
+  popup.innerHTML = '<pre class="bib-pre"></pre><div class="bib-actions"><button class="bib-copy">&#x1F4CB; Copy BibTeX</button><button class="bib-close">&#x2715; Close</button></div>';
+  document.body.appendChild(popup);
 
+  var activeEntry = null;
+  popup.querySelector('.bib-copy').addEventListener('click', function(){
+    var btn = this;
+    navigator.clipboard.writeText(popup.querySelector('.bib-pre').textContent).then(function(){
+      btn.textContent = '\u2713 Copied!'; btn.style.background = '#059669';
+      setTimeout(function(){ btn.textContent = '\uD83D\uDCCB Copy BibTeX'; btn.style.background = ''; }, 2000);
+    });
+  });
+  popup.querySelector('.bib-close').addEventListener('click', function(){ popup.classList.remove('show'); activeEntry = null; });
+  document.addEventListener('click', function(e){
+    if (!popup.contains(e.target) && !(activeEntry && activeEntry.contains(e.target))) {
+      popup.classList.remove('show'); activeEntry = null;
+    }
+  });
+
+  document.querySelectorAll('.pub-entry').forEach(function(entry){
+    var bib = null;
+    var ax = entry.dataset.arxiv;
+    if (ax && BIB[ax]) bib = BIB[ax];
+    if (!bib) {
+      [].forEach.call(entry.querySelectorAll('a[href]'), function(a){
+        if (bib) return;
+        Object.keys(BIB).forEach(function(k){ if (a.href && a.href.indexOf(k) >= 0) bib = BIB[k]; });
+      });
+    }
+    if (!bib) return;
+    var linksDiv = entry.querySelector('.pub-links');
+    if (!linksDiv) {
+      linksDiv = document.createElement('div'); linksDiv.className = 'pub-links';
+      var pr = entry.querySelector('.pub-right'); if (pr) pr.appendChild(linksDiv);
+    }
+    var btn = document.createElement('button');
+    btn.className = 'pub-link pl-cite'; btn.textContent = '\uD83D\uDCCB Cite';
+    var captured = bib;
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      if (activeEntry === entry && popup.classList.contains('show')) {
+        popup.classList.remove('show'); activeEntry = null; return;
+      }
+      popup.querySelector('.bib-pre').textContent = captured;
+      var rect = entry.getBoundingClientRect();
+      var scrollY = window.scrollY || window.pageYOffset;
+      popup.style.top = (rect.bottom + scrollY + 6) + 'px';
+      popup.style.left = Math.max(rect.left, 8) + 'px';
+      popup.style.maxWidth = Math.min(rect.width, window.innerWidth - 16) + 'px';
+      popup.classList.add('show'); activeEntry = entry;
+    });
+    linksDiv.appendChild(btn);
+  });
+})();
 
 /* ══════════════════════════════════════════════════
    ② PUBLICATION FILTER / SEARCH
