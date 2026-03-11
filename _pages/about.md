@@ -558,6 +558,60 @@ img[loading="lazy"].loaded, img[loading="lazy"][complete] {
   .scroll-top { right: 16px; }
 }
 
+/* ── arXiv Feed ── */
+.arxiv-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 1.8em;
+}
+@media(max-width:700px){ .arxiv-grid { grid-template-columns: 1fr; } }
+.arxiv-card {
+  display: block; padding: 12px 14px; border-radius: 10px;
+  border: 1.5px solid #e5e7eb; background: #fff;
+  text-decoration: none; color: inherit;
+  transition: transform .15s, box-shadow .15s;
+}
+.arxiv-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,.1); border-color: #1565c0; text-decoration: none; }
+.arxiv-tag {
+  display: inline-block; font-size: 0.7em; font-weight: 800;
+  padding: 2px 9px; border-radius: 999px; margin-bottom: 7px;
+}
+.arxiv-tag-rl-training    { background: #dbeafe; color: #1d4ed8; }
+.arxiv-tag-flow-matching  { background: #d1fae5; color: #065f46; }
+.arxiv-tag-audio-reasoning{ background: #ede9fe; color: #5b21b6; }
+.arxiv-tag-reasoning      { background: #fce7f3; color: #9d174d; }
+.arxiv-tag-self-improvement{ background: #fef3c7; color: #92400e; }
+.arxiv-tag-multimodal     { background: #e0f2fe; color: #0369a1; }
+.arxiv-title { font-size: 0.82em; font-weight: 700; color: #1a2332; line-height: 1.4; margin-bottom: 5px; }
+.arxiv-authors { font-size: 0.74em; color: #888; margin-bottom: 3px; }
+.arxiv-date { font-size: 0.72em; color: #aaa; }
+body.dark-mode .arxiv-card { background: #161b22; border-color: #30363d; }
+body.dark-mode .arxiv-card:hover { border-color: #388bfd; }
+body.dark-mode .arxiv-title { color: #e6edf3; }
+
+/* ── Globe ── */
+#globe-wrap {
+  width: 100%; height: 380px; border-radius: 14px; border: 1.5px solid #e5e7eb;
+  background: radial-gradient(ellipse at center, #0f172a 0%, #020817 100%);
+  position: relative; overflow: hidden; margin-bottom: 1.8em;
+}
+#globe-canvas { width: 100% !important; height: 100% !important; }
+#globe-legend {
+  position: absolute; bottom: 14px; left: 16px;
+  display: flex; gap: 14px; flex-wrap: wrap;
+}
+.gl2-item { font-size: 0.76em; color: rgba(255,255,255,0.6); font-weight: 600; }
+
+/* ── Citation Tree ── */
+#citation-tree-wrap {
+  width: 100%; border-radius: 14px; border: 1.5px solid #e5e7eb;
+  background: #fafbff; overflow: hidden; margin-bottom: 1.8em;
+}
+#citation-tree { width: 100%; height: 480px; }
+body.dark-mode #citation-tree-wrap { background: #0d1117; border-color: #30363d; }
+.ctree-node circle { cursor: pointer; }
+.ctree-node text { font-size: 11px; font-family: Inter, sans-serif; pointer-events: none; }
+.ctree-link { fill: none; stroke: #cbd5e1; stroke-width: 1.5; }
+body.dark-mode .ctree-link { stroke: #334155; }
+
 /* ── ① Citation count badge ── */
 .cite-badge {
   display: inline-flex; align-items: center; gap: 4px;
@@ -998,6 +1052,38 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
   </div>
 </div>
 
+<!-- ══════════════════ ARXIV FEED ══════════════════ -->
+<div class="section-header">📡 What's Happening in My Field</div>
+<p style="font-size:0.84em;color:#666;margin-bottom:14px;">Recent arXiv papers in RL post-training · reasoning · self-improvement · multimodal — auto-updated weekly · <span style="color:#aaa;">{{ site.data.arxiv_feed.updated }}</span></p>
+<div class="arxiv-grid">
+{% for p in site.data.arxiv_feed.papers %}
+<a class="arxiv-card" href="{{ p.url }}" target="_blank" rel="noopener">
+  <span class="arxiv-tag arxiv-tag-{{ p.tag | downcase | replace: ' ', '-' | replace: '/', '' }}">{{ p.tag }}</span>
+  <div class="arxiv-title">{{ p.title }}</div>
+  <div class="arxiv-authors">{{ p.authors }}</div>
+  <div class="arxiv-date">{{ p.date }}</div>
+</a>
+{% endfor %}
+</div>
+
+<!-- ══════════════════ GLOBE ══════════════════ -->
+<div class="section-header">🌍 Global Research Community</div>
+<p style="font-size:0.84em;color:#666;margin-bottom:14px;">ML research hubs where work related to mine is being done.</p>
+<div id="globe-wrap">
+  <canvas id="globe-canvas"></canvas>
+  <div id="globe-legend">
+    <div class="gl2-item">🔵 Research institutions</div>
+    <div class="gl2-item">⚪ Major ML labs</div>
+  </div>
+</div>
+
+<!-- ══════════════════ CITATION TREE ══════════════════ -->
+<div class="section-header">🌳 Citation Family Tree</div>
+<p style="font-size:0.84em;color:#666;margin-bottom:14px;">Papers that cite my work — auto-updated weekly via Semantic Scholar. Hover nodes for details.</p>
+<div id="citation-tree-wrap">
+  <div id="citation-tree"></div>
+</div>
+
 <!-- ═══════════════════════════════ CONTACT ══════════════════════════ -->
 <div class="section-header">📬 Contact</div>
 <p style="font-size:0.94em;">
@@ -1147,6 +1233,141 @@ document.querySelectorAll('img[loading="lazy"]').forEach(function(img){
   if(img.complete) img.classList.add('loaded');
   else img.addEventListener('load', function(){ img.classList.add('loaded'); });
 });
+
+/* ══════════════════════════════════════════════════
+   🌍 GLOBE (cobe.js)
+══════════════════════════════════════════════════ */
+(function(){
+  var canvas = document.getElementById('globe-canvas');
+  if(!canvas) return;
+  var s = document.createElement('script');
+  s.src = 'https://cdn.jsdelivr.net/npm/cobe@0.6.3/dist/cobe.umd.js';
+  s.onload = function(){
+    var markers = [
+      // North America
+      {location:[40.1020,-88.2272],size:0.06},  // UIUC
+      {location:[37.4275,-122.1697],size:0.05},  // Stanford
+      {location:[42.3601,-71.0942],size:0.05},   // MIT
+      {location:[40.4433,-79.9436],size:0.04},   // CMU
+      {location:[37.8724,-122.2595],size:0.05},  // UC Berkeley
+      {location:[47.6553,-122.3035],size:0.04},  // UW
+      {location:[45.5017,-73.5673],size:0.04},   // Mila Montreal
+      {location:[37.4220,-122.0841],size:0.05},  // Google
+      {location:[37.4847,-122.1477],size:0.04},  // Meta
+      // Europe
+      {location:[51.5074,-0.1278],size:0.05},    // DeepMind London
+      {location:[51.7548,-1.2544],size:0.04},    // Oxford
+      {location:[52.2054,0.1132],size:0.04},     // Cambridge
+      {location:[47.3769,8.5417],size:0.04},     // ETH Zurich
+      {location:[48.8566,2.3522],size:0.04},     // Paris / INRIA
+      // Asia
+      {location:[40.0000,116.3196],size:0.06},   // Tsinghua Beijing
+      {location:[31.2304,121.4737],size:0.05},   // Shanghai AI Lab
+      {location:[1.2966,103.7764],size:0.04},    // NUS Singapore
+      {location:[35.7128,139.7307],size:0.04},   // Tokyo
+      {location:[37.5665,126.9780],size:0.04},   // Seoul / Samsung
+      {location:[22.3120,39.1019],size:0.03},    // KAUST
+    ];
+    var phi = 0;
+    var globe = window.createGlobe(canvas, {
+      devicePixelRatio: Math.min(window.devicePixelRatio, 2),
+      width: canvas.offsetWidth * 2,
+      height: canvas.offsetHeight * 2,
+      phi: 0, theta: 0.3,
+      dark: 1, diffuse: 1.2,
+      mapSamples: 16000, mapBrightness: 6,
+      baseColor: [0.1, 0.15, 0.3],
+      markerColor: [0.4, 0.7, 1],
+      glowColor: [0.2, 0.4, 0.8],
+      markers: markers,
+      onRender: function(state){
+        state.phi = phi;
+        phi += 0.003;
+      }
+    });
+    canvas._cobeGlobe = globe;
+  };
+  document.head.appendChild(s);
+})();
+
+/* ══════════════════════════════════════════════════
+   🌳 CITATION FAMILY TREE (D3)
+══════════════════════════════════════════════════ */
+(function(){
+  var wrap = document.getElementById('citation-tree');
+  if(!wrap) return;
+  var treeData = {{ site.data.citation_tree | jsonify }};
+  if(!treeData || !treeData.nodes) return;
+
+  var s = document.createElement('script');
+  s.src = 'https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js';
+  s.onload = function(){ drawCitationTree(wrap, treeData); };
+  document.head.appendChild(s);
+})();
+
+function drawCitationTree(container, data) {
+  /* Build adjacency for D3 hierarchy from flat nodes+links */
+  var nodeMap = {};
+  data.nodes.forEach(function(n){ nodeMap[n.id] = Object.assign({}, n, {children:[]}); });
+  data.links.forEach(function(l){
+    var src = nodeMap[l.source], tgt = nodeMap[l.target];
+    if(src && tgt) src.children.push(tgt);
+  });
+  var root = nodeMap['root'];
+  if(!root) return;
+
+  var isDark = document.body.classList.contains('dark-mode');
+  var W = container.offsetWidth || 700;
+  var H = 480;
+
+  var hierarchy = d3.hierarchy(root);
+  var treeLayout = d3.tree().size([H - 60, W - 220]);
+  treeLayout(hierarchy);
+
+  var svg = d3.select(container).append('svg')
+    .attr('width', W).attr('height', H)
+    .append('g').attr('transform', 'translate(110,30)');
+
+  /* Background */
+  d3.select(container).select('svg').insert('rect','g')
+    .attr('width', W).attr('height', H)
+    .attr('fill', isDark ? '#0d1117' : '#fafbff');
+
+  /* Links */
+  svg.selectAll('.ctree-link').data(hierarchy.links()).enter()
+    .append('path').attr('class','ctree-link')
+    .attr('d', d3.linkHorizontal().x(function(d){return d.y;}).y(function(d){return d.x;}));
+
+  /* Nodes */
+  var node = svg.selectAll('.ctree-node').data(hierarchy.descendants()).enter()
+    .append('g').attr('class','ctree-node')
+    .attr('transform',function(d){return 'translate('+d.y+','+d.x+')';});
+
+  node.append('circle')
+    .attr('r', function(d){
+      if(d.data.type==='author') return 14;
+      if(d.data.type==='paper')  return 10;
+      return 6;
+    })
+    .attr('fill', function(d){ return d.data.color || '#888'; })
+    .attr('fill-opacity', function(d){ return d.data.type==='citing' ? 0.5 : 0.9; })
+    .attr('stroke', function(d){ return d.data.color || '#888'; })
+    .attr('stroke-width', 1.5);
+
+  node.append('text')
+    .attr('dx', function(d){ return d.children && d.children.length ? -18 : 14; })
+    .attr('dy', '0.35em')
+    .attr('text-anchor', function(d){ return d.children && d.children.length ? 'end' : 'start'; })
+    .attr('font-size', function(d){ return d.data.type==='author' ? 13 : d.data.type==='paper' ? 11 : 10; })
+    .attr('font-weight', function(d){ return d.data.type==='citing' ? 400 : 700; })
+    .attr('fill', isDark ? '#c9d1d9' : '#1a2332')
+    .text(function(d){ return d.data.label; });
+
+  node.filter(function(d){ return d.data.type==='citing'; })
+    .append('title').text(function(d){
+      return (d.data.full_title || d.data.label) + (d.data.year ? ' ('+d.data.year+')' : '') + (d.data.authors ? '\n'+d.data.authors : '');
+    });
+}
 
 /* ══════════════════════════════════════════════════
    ② PUBLICATION FILTER / SEARCH

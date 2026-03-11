@@ -1,0 +1,86 @@
+{
+  "updated": "2026-03-10",
+  "papers": [
+    {
+      "id": "2603.09203",
+      "title": "Evaluate-as-Action: Self-Evaluated Process Rewards for Retrieval-Augmented Agents",
+      "authors": "Jiangming Shu, Yuxiang Zhang, Ye Ma et al.",
+      "summary": "Retrieval-augmented agents can query external evidence, yet their reliability in multi-step reasoning remains limited: noisy retrieval may derail multi-hop question answering, whil…",
+      "date": "2026-03-10",
+      "tag": "Reasoning",
+      "url": "https://arxiv.org/abs/2603.09203"
+    },
+    {
+      "id": "2603.08095",
+      "title": "DC-W2S: Dual-Consensus Weak-to-Strong Training for Reliable Process Reward Modeling in Biological Reasoning",
+      "authors": "Chi-Min Chan, Ehsan Hajiramezanali, Xiner Li et al.",
+      "summary": "In scientific reasoning tasks, the veracity of the reasoning process is as critical as the final outcome. While Process Reward Models (PRMs) offer a solution to the coarse-grained …",
+      "date": "2026-03-09",
+      "tag": "Reasoning",
+      "url": "https://arxiv.org/abs/2603.08095"
+    },
+    {
+      "id": "2603.06333",
+      "title": "SAHOO: Safeguarded Alignment for High-Order Optimization Objectives in Recursive Self-Improvement",
+      "authors": "Subramanyam Sahoo, Aman Chadha, Vinija Jain et al.",
+      "summary": "Recursive self-improvement is moving from theory to practice: modern systems can critique, revise, and evaluate their own outputs, yet iterative self-modification risks subtle alig…",
+      "date": "2026-03-06",
+      "tag": "Self-Improvement",
+      "url": "https://arxiv.org/abs/2603.06333"
+    },
+    {
+      "id": "2603.05659",
+      "title": "When Rubrics Fail: Error Enumeration as Reward in Reference-Free RL Post-Training for Virtual Try-On",
+      "authors": "Wisdom Ikezogwo, Mehmet Saygin Seyfioglu, Ranjay Krishna et al.",
+      "summary": "Reinforcement learning with verifiable rewards (RLVR) and Rubrics as Rewards (RaR) have driven strong gains in domains with clear correctness signals and even in subjective domains…",
+      "date": "2026-03-05",
+      "tag": "RL Training",
+      "url": "https://arxiv.org/abs/2603.05659"
+    },
+    {
+      "id": "2603.03855",
+      "title": "A Sensitivity Analysis of Multi-Event Audio Grounding in Audio LLMs",
+      "authors": "Taehan Lee, Jaehan Jung, Hyukjun Lee",
+      "summary": "Audio LLMs have shown a strong ability to understand audio samples, yet their reliability in complex acoustic scenes remains under-explored. Unlike prior work limited to small scal…",
+      "date": "2026-03-04",
+      "tag": "Audio Reasoning",
+      "url": "https://arxiv.org/abs/2603.03855"
+    },
+    {
+      "id": "2603.02556",
+      "title": "Through the Lens of Contrast: Self-Improving Visual Reasoning in VLMs",
+      "authors": "Zhiyu Pan, Yizheng Wu, Jiashen Hua et al.",
+      "summary": "Reasoning has emerged as a key capability of large language models. In linguistic tasks, this capability can be enhanced by self-improving techniques that refine reasoning paths fo…",
+      "date": "2026-03-03",
+      "tag": "Self-Improvement",
+      "url": "https://arxiv.org/abs/2603.02556"
+    },
+    {
+      "id": "2603.02479",
+      "title": "PRISM: Pushing the Frontier of Deep Think via Process Reward Model-Guided Inference",
+      "authors": "Rituraj Sharma, Weiyuan Chen, Noah Provenzano et al.",
+      "summary": "DEEPTHINK methods improve reasoning by generating, refining, and aggregating populations of candidate solutions, which enables strong performance on complex mathematical and scient…",
+      "date": "2026-03-03",
+      "tag": "Reasoning",
+      "url": "https://arxiv.org/abs/2603.02479"
+    },
+    {
+      "id": "2603.01335",
+      "title": "Provable and Practical In-Context Policy Optimization for Self-Improvement",
+      "authors": "Tianrun Yu, Yuxiao Yang, Zhaoyang Wang et al.",
+      "summary": "We study test-time scaling, where a model improves its answer through multi-round self-reflection at inference. We introduce In-Context Policy Optimization (ICPO), in which an agen…",
+      "date": "2026-03-02",
+      "tag": "Self-Improvement",
+      "url": "https://arxiv.org/abs/2603.01335"
+    },
+    {
+      "id": "2602.23440",
+      "title": "Truncated Step-Level Sampling with Process Rewards for Retrieval-Augmented Reasoning",
+      "authors": "Chris Samarinas, Haw-Shiuan Chang, Hamed Zamani",
+      "summary": "Training large language models to reason with search engines via reinforcement learning is hindered by a fundamental credit assignment problem: existing methods such as Search-R1 p…",
+      "date": "2026-02-26",
+      "tag": "Reasoning",
+      "url": "https://arxiv.org/abs/2602.23440"
+    }
+  ]
+}

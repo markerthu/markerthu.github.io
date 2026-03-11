@@ -1,0 +1,97 @@
+name: Update Citation Tree
+
+on:
+  schedule:
+    - cron: '0 8 * * 1'   # Every Monday 8:00 UTC
+  workflow_dispatch:
+
+jobs:
+  update-tree:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch citing papers from Semantic Scholar
+        run: |
+          python3 << 'PYEOF'
+          import json, urllib.request, datetime, time
+
+          # Papers with Semantic Scholar IDs or arXiv IDs
+          MY_PAPERS = [
+            {"key": "LBC",         "id": "arXiv:2302.01411", "title": "LBC", "venue": "ICLR 2023", "color": "#ea580c"},
+            {"key": "GDI",         "id": "arXiv:2106.06232", "title": "GDI", "venue": "ICML 2022", "color": "#ea580c"},
+            {"key": "ORW-CFM-W2",  "id": "arXiv:2410.03304", "title": "ORW-CFM-W2", "venue": "ICLR 2025", "color": "#2563eb"},
+            {"key": "ADRPO",       "id": "arXiv:2510.18053", "title": "ADRPO", "venue": "NeurIPS 2025", "color": "#2563eb"},
+            {"key": "CESAR",       "id": "arXiv:2510.20867", "title": "CESAR", "venue": "ICLR 2026", "color": "#7c3aed"},
+          ]
+
+          def fetch_citations(paper_id, limit=8):
+            url = f"https://api.semanticscholar.org/graph/v1/paper/{paper_id}/citations?fields=title,year,venue,authors&limit={limit}"
+            try:
+              with urllib.request.urlopen(url, timeout=20) as r:
+                data = json.loads(r.read())
+              return data.get("data", [])
+            except Exception as e:
+              print(f"  Error for {paper_id}: {e}")
+              return []
+
+          nodes = [{"id": "root", "label": "Jiajun Fan", "type": "author", "color": "#1565c0"}]
+          links = []
+
+          for paper in MY_PAPERS:
+            nodes.append({
+              "id": paper["key"],
+              "label": paper["title"],
+              "venue": paper["venue"],
+              "type": "paper",
+              "color": paper["color"]
+            })
+            links.append({"source": "root", "target": paper["key"]})
+
+            print(f"Fetching citations for {paper['key']}...")
+            citations = fetch_citations(paper["id"], limit=6)
+
+            for c in citations:
+              cp = c.get("citingPaper", {})
+              if not cp.get("title"):
+                continue
+              cid = f"cite-{paper['key']}-{cp.get('paperId', '')[:8]}"
+              authors = cp.get("authors", [])
+              author_str = authors[0]["name"].split(" ")[-1] if authors else "?"
+              if len(authors) > 1:
+                author_str += " et al."
+              nodes.append({
+                "id": cid,
+                "label": cp["title"][:40] + ("…" if len(cp["title"]) > 40 else ""),
+                "full_title": cp["title"],
+                "year": cp.get("year", ""),
+                "venue": cp.get("venue", ""),
+                "authors": author_str,
+                "type": "citing",
+                "color": paper["color"] + "99"
+              })
+              links.append({"source": paper["key"], "target": cid})
+
+            time.sleep(1)
+
+          out = {
+            "updated": datetime.datetime.utcnow().strftime("%Y-%m-%d"),
+            "nodes": nodes,
+            "links": links
+          }
+          with open("_data/citation_tree.json", "w") as f:
+            json.dump(out, f, indent=2, ensure_ascii=False)
+
+          print(f"\nSaved {len(nodes)} nodes, {len(links)} links")
+          PYEOF
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add _data/citation_tree.json
+          git diff --staged --quiet || git commit -m "chore: weekly citation tree update [skip ci]"
+          git push
