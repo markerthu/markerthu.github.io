@@ -1,86 +1,86 @@
 {
-  "updated": "2026-03-10",
+  "updated": "2026-03-16",
   "papers": [
+    {
+      "id": "2603.12893",
+      "title": "Finite Difference Flow Optimization for RL Post-Training of Text-to-Image Models",
+      "authors": "David McAllister, Miika Aittala, Tero Karras et al.",
+      "summary": "Reinforcement learning (RL) has become a standard technique for post-training diffusion-based image synthesis models, as it enables learning from reward signals to explicitly improve desirable aspects…",
+      "date": "2026-03-13",
+      "tag": "Flow Matching",
+      "url": "https://arxiv.org/abs/2603.12893"
+    },
+    {
+      "id": "2603.13131",
+      "title": "Steve-Evolving: Open-World Embodied Self-Evolution via Fine-Grained Diagnosis and Dual-Track Knowledge Distillation",
+      "authors": "Zhengwei Xie, Zhisheng Chen, Ziyan Weng et al.",
+      "summary": "Open-world embodied agents must solve long-horizon tasks where the main bottleneck is not single-step planning quality but how interaction experience is organized and evolved. To this end, we present …",
+      "date": "2026-03-13",
+      "tag": "RL Training",
+      "url": "https://arxiv.org/abs/2603.13131"
+    },
+    {
+      "id": "2603.13099",
+      "title": "Beyond Final Answers: CRYSTAL Benchmark for Transparent Multimodal Reasoning Evaluation",
+      "authors": "Wayner Barrios, SouYoung Jin",
+      "summary": "We introduce **CRYSTAL** (*__C__lear __R__easoning via __Y__ielded __S__teps, __T__raceability and __L__ogic*), a diagnostic benchmark with 6,372 instances that evaluates multimodal reasoning through …",
+      "date": "2026-03-13",
+      "tag": "Multimodal",
+      "url": "https://arxiv.org/abs/2603.13099"
+    },
+    {
+      "id": "2603.12305",
+      "title": "HCP-DCNet: A Hierarchical Causal Primitive Dynamic Composition Network for Self-Improving Causal Understanding",
+      "authors": "Ming Lei, Shufan Wu, Christophe Baehr",
+      "summary": "The ability to understand and reason about cause and effect -- encompassing interventions, counterfactuals, and underlying mechanisms -- is a cornerstone of robust artificial intelligence. While deep …",
+      "date": "2026-03-12",
+      "tag": "Self-Improvement",
+      "url": "https://arxiv.org/abs/2603.12305"
+    },
+    {
+      "id": "2603.11653",
+      "title": "Simple Recipe Works: Vision-Language-Action Models are Natural Continual Learners with Reinforcement Learning",
+      "authors": "Jiaheng Hu, Jay Shim, Chen Tang et al.",
+      "summary": "Continual Reinforcement Learning (CRL) for Vision-Language-Action (VLA) models is a promising direction toward self-improving embodied agents that can adapt in openended, evolving environments. Howeve…",
+      "date": "2026-03-12",
+      "tag": "Multimodal",
+      "url": "https://arxiv.org/abs/2603.11653"
+    },
+    {
+      "id": "2603.10600",
+      "title": "Trajectory-Informed Memory Generation for Self-Improving Agent Systems",
+      "authors": "Gaodan Fang, Vatche Isahagian, K. R. Jayaram et al.",
+      "summary": "LLM-powered agents face a persistent challenge: learning from their execution experiences to improve future performance. While agents can successfully complete many tasks, they often repeat inefficien…",
+      "date": "2026-03-11",
+      "tag": "Self-Improvement",
+      "url": "https://arxiv.org/abs/2603.10600"
+    },
+    {
+      "id": "2603.10370",
+      "title": "GeoSense: Internalizing Geometric Necessity Perception for Multimodal Reasoning",
+      "authors": "Ruiheng Liu, Haihong Hao, Mingfei Han et al.",
+      "summary": "Advancing towards artificial superintelligence requires rich and intelligent perceptual capabilities. A critical frontier in this pursuit is overcoming the limited spatial understanding of Multimodal …",
+      "date": "2026-03-11",
+      "tag": "Multimodal",
+      "url": "https://arxiv.org/abs/2603.10370"
+    },
     {
       "id": "2603.09203",
       "title": "Evaluate-as-Action: Self-Evaluated Process Rewards for Retrieval-Augmented Agents",
       "authors": "Jiangming Shu, Yuxiang Zhang, Ye Ma et al.",
-      "summary": "Retrieval-augmented agents can query external evidence, yet their reliability in multi-step reasoning remains limited: noisy retrieval may derail multi-hop question answering, whil…",
+      "summary": "Retrieval-augmented agents can query external evidence, yet their reliability in multi-step reasoning remains limited: noisy retrieval may derail multi-hop question answering, while outcome-only reinf…",
       "date": "2026-03-10",
       "tag": "Reasoning",
       "url": "https://arxiv.org/abs/2603.09203"
     },
     {
-      "id": "2603.08095",
-      "title": "DC-W2S: Dual-Consensus Weak-to-Strong Training for Reliable Process Reward Modeling in Biological Reasoning",
-      "authors": "Chi-Min Chan, Ehsan Hajiramezanali, Xiner Li et al.",
-      "summary": "In scientific reasoning tasks, the veracity of the reasoning process is as critical as the final outcome. While Process Reward Models (PRMs) offer a solution to the coarse-grained …",
+      "id": "2603.08403",
+      "title": "SPIRAL: A Closed-Loop Framework for Self-Improving Action World Models via Reflective Planning Agents",
+      "authors": "Yu Yang, Yue Liao, Jianbiao Mei et al.",
+      "summary": "We introduce SPIRAL, a self-improving planning and iterative reflective action world modeling closed-loop framework that enables controllable long-horizon video generation conditioned on high-level se…",
       "date": "2026-03-09",
-      "tag": "Reasoning",
-      "url": "https://arxiv.org/abs/2603.08095"
-    },
-    {
-      "id": "2603.06333",
-      "title": "SAHOO: Safeguarded Alignment for High-Order Optimization Objectives in Recursive Self-Improvement",
-      "authors": "Subramanyam Sahoo, Aman Chadha, Vinija Jain et al.",
-      "summary": "Recursive self-improvement is moving from theory to practice: modern systems can critique, revise, and evaluate their own outputs, yet iterative self-modification risks subtle alig…",
-      "date": "2026-03-06",
       "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2603.06333"
-    },
-    {
-      "id": "2603.05659",
-      "title": "When Rubrics Fail: Error Enumeration as Reward in Reference-Free RL Post-Training for Virtual Try-On",
-      "authors": "Wisdom Ikezogwo, Mehmet Saygin Seyfioglu, Ranjay Krishna et al.",
-      "summary": "Reinforcement learning with verifiable rewards (RLVR) and Rubrics as Rewards (RaR) have driven strong gains in domains with clear correctness signals and even in subjective domains…",
-      "date": "2026-03-05",
-      "tag": "RL Training",
-      "url": "https://arxiv.org/abs/2603.05659"
-    },
-    {
-      "id": "2603.03855",
-      "title": "A Sensitivity Analysis of Multi-Event Audio Grounding in Audio LLMs",
-      "authors": "Taehan Lee, Jaehan Jung, Hyukjun Lee",
-      "summary": "Audio LLMs have shown a strong ability to understand audio samples, yet their reliability in complex acoustic scenes remains under-explored. Unlike prior work limited to small scal…",
-      "date": "2026-03-04",
-      "tag": "Audio Reasoning",
-      "url": "https://arxiv.org/abs/2603.03855"
-    },
-    {
-      "id": "2603.02556",
-      "title": "Through the Lens of Contrast: Self-Improving Visual Reasoning in VLMs",
-      "authors": "Zhiyu Pan, Yizheng Wu, Jiashen Hua et al.",
-      "summary": "Reasoning has emerged as a key capability of large language models. In linguistic tasks, this capability can be enhanced by self-improving techniques that refine reasoning paths fo…",
-      "date": "2026-03-03",
-      "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2603.02556"
-    },
-    {
-      "id": "2603.02479",
-      "title": "PRISM: Pushing the Frontier of Deep Think via Process Reward Model-Guided Inference",
-      "authors": "Rituraj Sharma, Weiyuan Chen, Noah Provenzano et al.",
-      "summary": "DEEPTHINK methods improve reasoning by generating, refining, and aggregating populations of candidate solutions, which enables strong performance on complex mathematical and scient…",
-      "date": "2026-03-03",
-      "tag": "Reasoning",
-      "url": "https://arxiv.org/abs/2603.02479"
-    },
-    {
-      "id": "2603.01335",
-      "title": "Provable and Practical In-Context Policy Optimization for Self-Improvement",
-      "authors": "Tianrun Yu, Yuxiao Yang, Zhaoyang Wang et al.",
-      "summary": "We study test-time scaling, where a model improves its answer through multi-round self-reflection at inference. We introduce In-Context Policy Optimization (ICPO), in which an agen…",
-      "date": "2026-03-02",
-      "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2603.01335"
-    },
-    {
-      "id": "2602.23440",
-      "title": "Truncated Step-Level Sampling with Process Rewards for Retrieval-Augmented Reasoning",
-      "authors": "Chris Samarinas, Haw-Shiuan Chang, Hamed Zamani",
-      "summary": "Training large language models to reason with search engines via reinforcement learning is hindered by a fundamental credit assignment problem: existing methods such as Search-R1 p…",
-      "date": "2026-02-26",
-      "tag": "Reasoning",
-      "url": "https://arxiv.org/abs/2602.23440"
+      "url": "https://arxiv.org/abs/2603.08403"
     }
   ]
 }
