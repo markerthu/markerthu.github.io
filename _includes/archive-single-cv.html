@@ -12,10 +12,11 @@
       {% if post.venue %}<span class="pub-cv-venue">{{ post.venue }}</span>{% endif %}
       <div class="pub-cv-title">
         {% if post.paperurl %}
-          <a href="{{ post.paperurl }}">{{ title }}</a>
+          <a href="{{ post.paperurl }}" target="_blank" rel="noopener noreferrer">{{ title }}</a>
         {% else %}
           <a href="{{ base_path }}{{ post.url }}" rel="permalink">{{ title }}</a>
         {% endif %}
+        {% if post.projectpage %}<a href="{{ post.projectpage }}" style="margin-left:6px;font-size:0.78em;font-weight:700;color:#1565c0;background:#dbeafe;border-radius:10px;padding:1px 8px;white-space:nowrap;text-decoration:none;" target="_blank" rel="noopener">🔗 Project</a>{% endif %}
       </div>
       {% if post.citation %}<div class="pub-cv-authors">{{ post.citation }}</div>{% endif %}
     </div>

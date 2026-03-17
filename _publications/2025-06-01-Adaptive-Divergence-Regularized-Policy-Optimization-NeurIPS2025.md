@@ -2,6 +2,7 @@
 title: "Adaptive Divergence Regularized Policy Optimization for Fine-tuning Generative Models"
 collection: publications
 permalink: /publication/2025-06-01-ADRPO-NeurIPS2025
+projectpage: "/projects/adrpo/"
 date: 2025-06-01
 venue: 'The Thirty-Ninth Annual Conference on Neural Information Processing Systems (<strong>NeurIPS 2025</strong>)'
 paperurl: 'https://openreview.net/forum?id=aXO0xg0ttW'

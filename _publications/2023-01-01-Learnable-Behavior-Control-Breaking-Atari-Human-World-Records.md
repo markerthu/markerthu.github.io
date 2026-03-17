@@ -2,6 +2,7 @@
 title: "Learnable Behavior Control: Breaking Atari Human World Records via Sample-Efficient Behavior Selection"
 collection: publications
 permalink: /publication/2023-01-01-Learnable-Behavior-Control
+projectpage: "/projects/lbc/"
 date: 2023-01-01
 venue: 'International Conference on Learning Representations 2023 (<strong>ICLR 2023, Oral — Notable Top 5%</strong>)'
 paperurl: 'https://openreview.net/forum?id=FeWvD0L_a4'

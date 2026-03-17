@@ -2,6 +2,7 @@
 title: "Incentivizing Consistent, Effective and Scalable Reasoning Capability in Audio LLMs via Reasoning Process Rewards"
 collection: publications
 permalink: /publication/2026-01-01-CESAR-ICLR2026
+projectpage: "/projects/cesar/"
 date: 2026-01-01
 venue: 'International Conference on Learning Representations 2026 (<strong>ICLR 2026</strong>)'
 paperurl: 'https://openreview.net/forum?id=DUr48hxO2h'

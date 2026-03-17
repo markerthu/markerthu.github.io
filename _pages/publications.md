@@ -32,11 +32,23 @@ author_profile: true
 .pub-cv-title a { color: #1a2332; text-decoration: none; }
 .pub-cv-title a:hover { color: #2563eb; text-decoration: underline; }
 .pub-cv-authors { font-size: 0.80em; color: #6b7280; margin-top: 5px; line-height: 1.5; }
+/* Dark mode overrides */
+body.dark-mode .pub-cv-entry { background: #161b22 !important; border-color: #30363d !important; }
+body.dark-mode .pub-cv-title a { color: #e6edf3 !important; }
+body.dark-mode .pub-cv-authors { color: #8b949e !important; }
+body.dark-mode .pub-cv-venue { background: #1e3a5f !important; color: #7dd3fc !important; }
+body.dark-mode .scholar-link { background: #388bfd !important; }
 </style>
 
 <a class="scholar-link" href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&hl=en" target="_blank">
   📚 View full profile on Google Scholar
 </a>
+
+<div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:1.2em;">
+  <span style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:20px;padding:3px 12px;font-size:0.83em;font-weight:700;color:#0369a1;">📊 295+ Citations</span>
+  <span style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:20px;padding:3px 12px;font-size:0.83em;font-weight:700;color:#065f46;">🎯 h-index 8</span>
+  <span style="background:#fef3c7;border:1px solid #fde68a;border-radius:20px;padding:3px 12px;font-size:0.83em;font-weight:700;color:#92400e;">🏅 ICLR 2023 Oral</span>
+</div>
 
 > Publications are listed in reverse chronological order. **\*** denotes first authorship.
 

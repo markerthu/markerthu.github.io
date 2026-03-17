@@ -2,6 +2,7 @@
 title: "Fine-tuning Flow Matching Generative Models with Intermediate Feedback"
 collection: publications
 permalink: /publication/2025-10-01-AC-Flow
+projectpage: "/projects/ac-flow/"
 date: 2025-10-01
 venue: 'arXiv preprint (Under Review), 2025'
 paperurl: 'https://arxiv.org/abs/2510.18072'

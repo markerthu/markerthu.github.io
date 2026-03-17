@@ -242,6 +242,15 @@ footer a{color:var(--accent);font-weight:600}
     <li><strong>Exploration-exploitation</strong> → fine-grained adaptive control of sampling distribution</li>
   </ul>
   <p>GDI integrates this into <strong>Generalized Policy Iteration (GPI)</strong>, providing operator-based versions of well-known RL methods from DQN to Agent57 — all as special cases of GDI.</p>
+  <p>The key formula: <em>Generalized Bellman Operator</em> with a <strong>data distribution operator D(·)</strong> that is jointly optimized with the value function — turning the data collection strategy itself into a learnable parameter.</p>
+
+  <h3 style="font-size:0.95em;font-weight:800;color:#ea580c;margin:18px 0 10px;">Unified RL Algorithms as GDI Special Cases</h3>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:0.83em;margin-bottom:14px;">
+    <div style="background:#fff7ed;border-radius:8px;padding:10px 12px;border:1px solid #fed7aa;"><strong>DQN</strong> — uniform replay buffer (D = uniform)</div>
+    <div style="background:#fff7ed;border-radius:8px;padding:10px 12px;border:1px solid #fed7aa;"><strong>PER</strong> — priority-weighted replay (D = prioritized)</div>
+    <div style="background:#fff7ed;border-radius:8px;padding:10px 12px;border:1px solid #fed7aa;"><strong>R2D2</strong> — recurrent replay with retrace (D = LSTM)</div>
+    <div style="background:#fff7ed;border-radius:8px;padding:10px 12px;border:1px solid #fed7aa;"><strong>Agent57</strong> — population-based explore (D = meta-controller)</div>
+  </div>
 </section>
 
 <section>
