@@ -285,7 +285,31 @@ footer a{color:var(--accent);font-weight:600}
 </section>
 
 <section>
-  <h2>📖 Cite This Paper</h2>
+  <h2>📊 Key Claims</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:16px 0 24px;">
+  <div style="background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:10px;padding:14px;text-align:center;">
+    <div style="font-size:0.85em;font-weight:800;color:#065f46;">⚙️ Actor-Critic</div>
+    <div style="font-size:0.76em;color:#166534;margin-top:4px;">Step-level rewards via<br>intermediate feedback</div>
+  </div>
+  <div style="background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:10px;padding:14px;text-align:center;">
+    <div style="font-size:0.85em;font-weight:800;color:#065f46;">🛡️ Collapse-Free</div>
+    <div style="font-size:0.76em;color:#166534;margin-top:4px;">Wasserstein reg +<br>dual-stability mechanism</div>
+  </div>
+  <div style="background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:10px;padding:14px;text-align:center;">
+    <div style="font-size:0.85em;font-weight:800;color:#065f46;">🎯 SD3 Fine-Tuning</div>
+    <div style="font-size:0.76em;color:#166534;margin-top:4px;">Stable fine-tuning without<br>mode collapse</div>
+  </div>
+</div>
+
+<h2>🔗 Related Work in This Series</h2>
+<p>AC-Flow builds on the online RLHF series for generative models:</p>
+<ul>
+  <li><strong><a href="/projects/orw-cfm-w2/">ORW-CFM-W2 (ICLR 2025)</a></strong> — First online RLHF for flow matching</li>
+  <li><strong><a href="/projects/adrpo/">ADRPO (NeurIPS 2025)</a></strong> — Adaptive sample-level regularization for RLHF</li>
+  <li><strong>AC-Flow (This work)</strong> — Actor-critic with intermediate step-level rewards</li>
+</ul>
+
+<h2>📖 Cite This Paper</h2>
   <button class="bib-copy-btn">📋 Copy BibTeX</button>
   <pre class="bibtex-block"><code>@misc{fan2025finetuningflowmatchinggenerative,
   title={Fine-tuning Flow Matching Generative Models with Intermediate Feedback},
