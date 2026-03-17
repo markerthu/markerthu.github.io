@@ -43,7 +43,8 @@ redirect_from:
   display: flex; align-items: center; gap: 10px;
   margin: 2em 0 1em; font-size: 1.18em; font-weight: 800; color: #1a2332;
   letter-spacing: -0.01em;
-}
+
+  scroll-margin-top: 80px;}
 .section-header::after {
   content: ''; flex: 1; height: 2px;
   background: linear-gradient(to right, #1565c0, transparent); border-radius: 1px;
@@ -467,10 +468,10 @@ body.dark-mode .news-list li { border-bottom-color: #21262d !important; }
 body.dark-mode .pub-thumb-wrap { border-color: #30363d !important; }
 
 /* ── Dark mode: Quick Nav & Banners ── */
-body.dark-mode .quick-nav { background: #161b22 !important; }
+body.dark-mode 
 body.dark-mode .quick-nav a { color: #58a6ff !important; }
 body.dark-mode .quick-nav a:hover { background: #21262d !important; }
-body.dark-mode .quick-nav a.qn-active { background: #388bfd !important; color: #fff !important; }
+body.dark-mode .quick-nav a
 body.dark-mode .quick-nav span { color: #58a6ff !important; }
 body.dark-mode .internship-banner-pulse {
   animation: bannerPulse 3s ease-in-out infinite;
@@ -1841,6 +1842,7 @@ function drawGraph(container) {
     {s:'ADRPO', t:'AC-Flow',  bend:22},
     {s:'ADRPO', t:'CESAR',    bend:-18},
     {s:'VarCon', t:'CESAR',   bend:-28},
+    {s:'AC-Flow', t:'CESAR',   bend:0},
   ];
 
   /* ── Build SVG ── */
