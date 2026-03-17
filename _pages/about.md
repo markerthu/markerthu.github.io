@@ -635,9 +635,12 @@ img[loading="lazy"].loaded, img[loading="lazy"][complete] {
 }
 
 /* ── Responsive ── */
+@media(max-width:920px) {
+  .featured-grid { grid-template-columns: 1fr 1fr; }  /* 2-col from 920px down */
+}
 @media(max-width:760px) {
   .research-grid { grid-template-columns: 1fr 1fr; }
-  .featured-grid { grid-template-columns: 1fr 1fr; }  /* 2-col on tablet */
+  .featured-grid { grid-template-columns: 1fr 1fr; }
 }
 @media(max-width:480px) {
   .hero-name { font-size: 1.65em; }
@@ -765,11 +768,11 @@ body.dark-mode .gl-item { color: #8b949e; }
 
 <!-- Intro -->
 <p class="tagline">
-I am a Computer Science Ph.D. student at <strong>UIUC</strong>. My research focuses on <strong>autonomous RL post-training for large generative models</strong> — making diffusion/flow models and multi-modal reasoning LLMs continuously self-improve with less and less human intervention. Previously, I pushed RL to <strong>superhuman performance</strong>: breaking 24 Atari world records and outperforming Agent57 with 500× less data.
+CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training for generative models</strong> — making diffusion/flow models and multimodal reasoning LLMs continuously self-improve with minimal human supervision. Previously: <strong>24 Atari world records</strong>, 500× more data-efficient than Agent57, <strong>ICLR 2023 Oral</strong> (rank 5/4176).
 </p>
 
 <div class="internship-banner internship-banner-pulse">
-🎓 <strong>Seeking research internship — Summer 2026.</strong>
+🎓 <strong>Seeking research internship — Summer/Fall 2026.</strong> RL · Generative Models · Reasoning LLMs
 &nbsp;<a href="files/CV.pdf">[CV]</a>
 &nbsp;<a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">[Scholar]</a>
 &nbsp;<a href="mailto:jiajunf3@illinois.edu">[Email]</a>
