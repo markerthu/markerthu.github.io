@@ -13,6 +13,13 @@ redirect_from:
 .tagline { font-size: 1.05em; line-height: 1.78; color: #333; margin-bottom: 1em; }
 
 /* ── Internship banner ── */
+.internship-banner-pulse {
+  animation: bannerPulse 3s ease-in-out infinite;
+}
+@keyframes bannerPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(21,101,192,0); }
+  50% { box-shadow: 0 0 0 6px rgba(21,101,192,0.12); }
+}
 .internship-banner {
   background: linear-gradient(135deg,#e8f4fd,#f0f7ff);
   border: 1.5px solid #1565c0;
@@ -465,7 +472,14 @@ body.dark-mode .quick-nav a { color: #58a6ff !important; }
 body.dark-mode .quick-nav a:hover { background: #21262d !important; }
 body.dark-mode .quick-nav a.qn-active { background: #388bfd !important; color: #fff !important; }
 body.dark-mode .quick-nav span { color: #58a6ff !important; }
-body.dark-mode .internship-banner { background: linear-gradient(135deg,#161b22,#1c2333) !important; border-color: #30363d !important; color: #c9d1d9 !important; }
+body.dark-mode .internship-banner-pulse {
+  animation: bannerPulse 3s ease-in-out infinite;
+}
+@keyframes bannerPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(21,101,192,0); }
+  50% { box-shadow: 0 0 0 6px rgba(21,101,192,0.12); }
+}
+.internship-banner { background: linear-gradient(135deg,#161b22,#1c2333) !important; border-color: #30363d !important; color: #c9d1d9 !important; }
 body.dark-mode .internship-banner a { color: #58a6ff !important; }
 
 /* ── Dark mode: Badges & Highlights ── */
@@ -690,7 +704,8 @@ body.dark-mode .filter-btn.active, body.dark-mode .filter-btn:hover { background
   box-shadow: 0 8px 28px rgba(0,0,0,.12); max-width: 520px; min-width: 280px;
   pointer-events: none;
 }
-.pub-entry:hover .pub-abstract-preview { display: block; }
+.pub-entry:hover .pub-abstract-preview,
+.pub-entry.abstract-open .pub-abstract-preview { display: block; }
 body.dark-mode .pub-abstract-preview { background: #161b22; border-color: #30363d; color: #b5c2c8; box-shadow: 0 8px 28px rgba(0,0,0,.4); }
 
 /* ── ⑧ Research graph ── */
@@ -752,7 +767,7 @@ body.dark-mode .gl-item { color: #8b949e; }
 I am a Computer Science Ph.D. student at <strong>UIUC</strong>. My research focuses on <strong>autonomous RL post-training for large generative models</strong> — making diffusion/flow models and multi-modal reasoning LLMs continuously self-improve with less and less human intervention. Previously, I pushed RL to <strong>superhuman performance</strong>: breaking 24 Atari world records and outperforming Agent57 with 500× less data.
 </p>
 
-<div class="internship-banner">
+<div class="internship-banner internship-banner-pulse">
 🎓 <strong>Seeking research internship — Summer 2026.</strong>
 &nbsp;<a href="files/CV.pdf">[CV]</a>
 &nbsp;<a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&hl=en">[Scholar]</a>
@@ -908,7 +923,8 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>. My research focu
 <div class="pub-entry" data-venue="NeurIPS" data-year="2025" data-arxiv="VarCon" data-abstract="VarCon reformulates supervised contrastive learning as variational inference, achieving SOTA 79.36% Top-1 accuracy on ImageNet-1K with ResNet-50.">
   <div class="pub-left"><span class="pb pb-neurips">NeurIPS 2025</span><span class="pub-year">2025</span></div>
   <div class="pub-right">
-    <div class="pub-title"><a href="https://openreview.net/forum?id=uOOlHOq500">Variational Supervised Contrastive Learning</a><div class="pub-abstract-preview">VarCon reformulates supervised contrastive learning as variational inference, achieving SOTA 79.36% Top-1 accuracy on ImageNet-1K with ResNet-50.</div></div>
+    <div class="pub-title"><a href="https://openreview.net/forum?id=uOOlHOq500">Variational Supervised Contrastive Learning</a>
+      <div class="pub-hl">📊 SOTA 79.36% Top-1 on ImageNet-1K with ResNet-50</div><div class="pub-abstract-preview">VarCon reformulates supervised contrastive learning as variational inference, achieving SOTA 79.36% Top-1 accuracy on ImageNet-1K with ResNet-50.</div></div>
     <div class="pub-authors">Z. Wang, <strong>J. Fan</strong>, T. Nguyen, H. Ji, G. Liu</div>
     <div class="pub-desc">VarCon: supervised contrastive learning as variational inference — posterior-weighted ELBO replaces pairwise comparisons.</div>
     <div class="pub-hl">📊 SOTA 79.36% Top-1 on ImageNet-1K (ResNet-50)</div>
@@ -922,6 +938,7 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>. My research focu
     <div class="pub-title">
       <a href="https://openreview.net/forum?id=2IoFFexvuw">Online Reward-Weighted Fine-Tuning of Flow Matching with Wasserstein Regularization</a>
       <a class="pub-project" href="/projects/orw-cfm-w2/">Project Page</a>
+      <div class="pub-hl">🥇 First online RLHF for flow matching · Collapse-free W2 regularization</div>
     <div class="pub-abstract-preview">ORW-CFM-W2 is the first online RLHF method for flow matching — no human data, no likelihood estimation. Wasserstein regularization maintains generation diversity.</div></div>
     <div class="pub-authors"><strong>J. Fan*</strong>, S. Shen, C. Cheng, Y. Chen, C. Liang, G. Liu</div>
     <div class="pub-desc">ORW-CFM-W2: first online RLHF for flow matching — no human data, no likelihood, no collapse. W2 regularization keeps generation diverse.</div>
@@ -934,6 +951,7 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>. My research focu
     <div class="pub-title">
       <a href="https://arxiv.org/abs/2510.18072">Fine-tuning Flow Matching Generative Models with Intermediate Feedback</a>
       <a class="pub-project" href="/projects/ac-flow/">Project Page</a>
+      <div class="pub-hl">⚙️ Actor-critic with step-level reward · Stable SD3 fine-tuning without collapse</div>
     <div class="pub-abstract-preview">AC-Flow introduces actor-critic with intermediate feedback for flow matching — reward shaping + dual-stability mechanism + Wasserstein regularization enables robust SD3 fine-tuning without collapse.</div></div>
     <div class="pub-authors"><strong>J. Fan*</strong>, C. Cheng, S. Shen, X. Zhou, G. Liu &nbsp;·&nbsp; <em>Under Review</em></div>
     <div class="pub-desc">AC-Flow: actor-critic with intermediate feedback for flow matching — reward shaping + dual-stability + Wasserstein regularization. Robust fine-tuning on SD3 without collapse.</div>
@@ -943,7 +961,8 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>. My research focu
 <div class="pub-entry" data-venue="TPAMI" data-year="2026" data-arxiv="2407.05010" data-abstract="PRANCE jointly optimizes token pruning and structural channel pruning for adaptive ViT inference, achieving significant speedup while maintaining accuracy.">
   <div class="pub-left"><span class="pb pb-journal">TPAMI 2026</span><span class="pub-year">2026</span></div>
   <div class="pub-right">
-    <div class="pub-title"><a href="https://arxiv.org/abs/2407.05010">PRANCE: Joint Token-Optimization and Structural Channel-Pruning for Adaptive ViT Inference</a><div class="pub-abstract-preview">PRANCE jointly optimizes token pruning and structural channel pruning for adaptive ViT inference, achieving significant speedup while maintaining accuracy.</div></div>
+    <div class="pub-title"><a href="https://arxiv.org/abs/2407.05010">PRANCE: Joint Token-Optimization and Structural Channel-Pruning for Adaptive ViT Inference</a>
+      <div class="pub-hl">⚡ Joint token + channel pruning · Adaptive ViT inference · IEEE TPAMI 2026</div><div class="pub-abstract-preview">PRANCE jointly optimizes token pruning and structural channel pruning for adaptive ViT inference, achieving significant speedup while maintaining accuracy.</div></div>
     <div class="pub-authors">Y. Li, C. Tang, Y. Meng, <strong>J. Fan</strong>, Z. Chai, X. Ma, Z. Wang, W. Zhu &nbsp;·&nbsp; <em>IEEE TPAMI</em></div>
   </div>
 </div>
@@ -1517,6 +1536,17 @@ window.addEventListener('scroll', function(){
   }
   draw();
 })();
+
+/* ── Mobile tap: abstract preview ── */
+document.querySelectorAll('.pub-entry').forEach(function(entry){
+  entry.addEventListener('touchstart', function(e){
+    var isOpen = entry.classList.contains('abstract-open');
+    document.querySelectorAll('.pub-entry.abstract-open').forEach(function(el){
+      el.classList.remove('abstract-open');
+    });
+    if(!isOpen) entry.classList.add('abstract-open');
+  }, {passive: true});
+});
 
 /* ── Lazy load fade-in ── */
 document.querySelectorAll('img[loading="lazy"]').forEach(function(img){
