@@ -57,6 +57,7 @@ redirect_from:
 .nb-top    { background: #ffd700; color: #5a4000; }
 .nb-accept { background: #d4edda; color: #155724; }
 .nb-service{ background: #e2e3e5; color: #383d41; }
+.nb-upcoming{ background: #dbeafe; color: #1e40af; }
 
 /* ── Publication list ── */
 .pub-list { margin: 0; padding: 0; }
@@ -495,6 +496,7 @@ body.dark-mode .bib-pre { background: #0d1117 !important; color: #c9d1d9 !import
 body.dark-mode .nbadge.nb-accept { background: #122117 !important; color: #3fb950 !important; }
 body.dark-mode .nbadge.nb-top { background: #2d2000 !important; color: #ffd54f !important; }
 body.dark-mode .nbadge.nb-service { background: #21262d !important; color: #8b949e !important; }
+body.dark-mode .nbadge.nb-upcoming { background: #0d2137 !important; color: #58a6ff !important; }
 body.dark-mode .news-date { color: #484f58 !important; }
 body.dark-mode .news-toggle { border-color: #30363d !important; color: #58a6ff !important; }
 body.dark-mode .news-toggle:hover { background: #161b22 !important; }
@@ -763,7 +765,7 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>. My research focu
 <ul class="news-list">
   <li>
     <span class="news-date">Apr 2026</span>
-    <span><span class="nbadge nb-top">Upcoming</span>🇧🇷 <strong>ICLR 2026</strong> in Rio de Janeiro, Apr 23–27. Presenting CESAR &amp; SP-VLA.</span>
+    <span><span class="nbadge nb-upcoming">Upcoming</span>🇧🇷 <strong>ICLR 2026</strong> in Rio de Janeiro, Apr 23–27. Presenting CESAR &amp; SP-VLA.</span>
   </li>
   <li>
     <span class="news-date">Jan 2026</span>

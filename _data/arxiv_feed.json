@@ -1,86 +1,89 @@
 {
-  "updated": "2026-03-16T14:02:09Z",
+  "updated": "2026-03-17",
   "papers": [
     {
-      "id": "2603.13099v1",
-      "title": "Beyond Final Answers: CRYSTAL Benchmark for Transparent Multimodal Reasoning Evaluation",
-      "authors": "Wayner Barrios, SouYoung Jin",
-      "summary": "We introduce **CRYSTAL** (*__C__lear __R__easoning via __Y__ielded __S__teps, __T__raceability and __L__ogic*), a diagnostic benchmark with 6,372 instances that evaluates multimodal reasoning through verifiable intermediate steps. We propose two complementary metrics: *Match F1*, which scores step-level precision and recall via semantic similarity matching, and *Ordered Match F1*, which further pe...",
-      "date": "2026-03-13",
-      "tag": "Multimodal",
-      "url": "https://arxiv.org/abs/2603.13099v1"
+      "title": "More Test-Time Compute Can Hurt: Overestimation Bias in LLM Beam Search",
+      "authors": "Gal Dalal, Assaf Hallak, Gal Chechik, Yftach Ziser",
+      "date": "2026-03-16",
+      "url": "https://arxiv.org/abs/2603.15377",
+      "tag": "Reasoning"
     },
     {
-      "id": "2603.12305v1",
+      "title": "SAGE: Multi-Agent Self-Evolution for LLM Reasoning",
+      "authors": "Yulin Peng, Xinxin Zhu, Chenxing Wei, Nianbo Zeng et al.",
+      "date": "2026-03-16",
+      "url": "https://arxiv.org/abs/2603.15255",
+      "tag": "Self-Improvement"
+    },
+    {
+      "title": "Nudging Hidden States: Training-Free Model Steering for Chain-of-Thought Reasoning in Large Audio-Language Models",
+      "authors": "Lok-Lam Ieong, Chia-Chien Chen, Chih-Kai Yang, Yu-Han Huang et al.",
+      "date": "2026-03-15",
+      "url": "https://arxiv.org/abs/2603.14636",
+      "tag": "Audio Reasoning"
+    },
+    {
+      "title": "PARSA-Bench: A Comprehensive Persian Audio-Language Model Benchmark",
+      "authors": "Mohammad Javad Ranjbar Kalahroodi, Mohammad Amini, Parmis Bathayan, Heshaam Faili et al.",
+      "date": "2026-03-15",
+      "url": "https://arxiv.org/abs/2603.14456",
+      "tag": "Audio Reasoning"
+    },
+    {
+      "title": "Localizing and Editing Knowledge in Large Audio-Language Models",
+      "authors": "Sung Kyun Chung, Jiaheng Dong, Qiuchi Hu, Gongping Huang et al.",
+      "date": "2026-03-15",
+      "url": "https://arxiv.org/abs/2603.14343",
+      "tag": "Audio Reasoning"
+    },
+    {
+      "title": "Finite Difference Flow Optimization for RL Post-Training of Text-to-Image Models",
+      "authors": "David McAllister, Miika Aittala, Tero Karras, Janne Hellsten et al.",
+      "date": "2026-03-13",
+      "url": "https://arxiv.org/abs/2603.12893",
+      "tag": "RL Training"
+    },
+    {
+      "title": "Steve-Evolving: Open-World Embodied Self-Evolution via Fine-Grained Diagnosis and Dual-Track Knowledge Distillation",
+      "authors": "Zhengwei Xie, Zhisheng Chen, Ziyan Weng, Tingyu Wu et al.",
+      "date": "2026-03-13",
+      "url": "https://arxiv.org/abs/2603.13131",
+      "tag": "Self-Improvement"
+    },
+    {
       "title": "HCP-DCNet: A Hierarchical Causal Primitive Dynamic Composition Network for Self-Improving Causal Understanding",
       "authors": "Ming Lei, Shufan Wu, Christophe Baehr",
-      "summary": "The ability to understand and reason about cause and effect -- encompassing interventions, counterfactuals, and underlying mechanisms -- is a cornerstone of robust artificial intelligence. While deep learning excels at pattern recognition, it fundamentally lacks a model of causality, making systems brittle under distribution shifts and unable to answer ``what-if'' questions. This paper introduces ...",
       "date": "2026-03-12",
-      "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2603.12305v1"
+      "url": "https://arxiv.org/abs/2603.12305",
+      "tag": "Self-Improvement"
     },
     {
-      "id": "2603.10600v1",
-      "title": "Trajectory-Informed Memory Generation for Self-Improving Agent Systems",
-      "authors": "Gaodan Fang, Vatche Isahagian, K. R. Jayaram et al.",
-      "summary": "LLM-powered agents face a persistent challenge: learning from their execution experiences to improve future performance. While agents can successfully complete many tasks, they often repeat inefficient patterns, fail to recover from similar errors, and miss opportunities to apply successful strategies from past executions. We present a novel framework for automatically extracting actionable learni...",
-      "date": "2026-03-11",
-      "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2603.10600v1"
-    },
-    {
-      "id": "2603.10785v1",
-      "title": "The Quadratic Geometry of Flow Matching: Semantic Granularity Alignment for Text-to-Image Synthesis",
-      "authors": "Zhinan Xiong, Shunqi Yuan",
-      "summary": "In this work, we analyze the optimization dynamics of generative fine-tuning. We observe that under the Flow Matching framework, the standard MSE objective can be formulated as a Quadratic Form governed by a dynamically evolving Neural Tangent Kernel (NTK). This geometric perspective reveals a latent Data Interaction Matrix, where diagonal terms represent independent sample learning and off-diagon...",
-      "date": "2026-03-11",
-      "tag": "Flow Matching",
-      "url": "https://arxiv.org/abs/2603.10785v1"
-    },
-    {
-      "id": "2603.10370v1",
-      "title": "GeoSense: Internalizing Geometric Necessity Perception for Multimodal Reasoning",
-      "authors": "Ruiheng Liu, Haihong Hao, Mingfei Han et al.",
-      "summary": "Advancing towards artificial superintelligence requires rich and intelligent perceptual capabilities. A critical frontier in this pursuit is overcoming the limited spatial understanding of Multimodal Large Language Models (MLLMs), where geometry information is essential. Existing methods often address this by rigidly injecting geometric signals into every input, while ignoring their necessity and ...",
-      "date": "2026-03-11",
-      "tag": "Multimodal",
-      "url": "https://arxiv.org/abs/2603.10370v1"
-    },
-    {
-      "id": "2603.10335v1",
-      "title": "Fuel Gauge: Estimating Chain-of-Thought Length Ahead of Time in Large Multimodal Models",
-      "authors": "Yuedong Yang, Xiwen Wei, Mustafa Munir et al.",
-      "summary": "Reasoning Large Multi-modality Models (LMMs) have become the de facto choice for many applications. However, these models rely on a Chain-of-Thought (CoT) process that is lengthy and unpredictable at runtime, often resulting in inefficient use of computational resources (due to memory fragmentation) and sub-optimal accuracy (due to under- and over-thinking). We observe empirically that the CoT pro...",
-      "date": "2026-03-11",
-      "tag": "Multimodal",
-      "url": "https://arxiv.org/abs/2603.10335v1"
-    },
-    {
-      "id": "2603.09551v1",
-      "title": "GeoSolver: Scaling Test-Time Reasoning in Remote Sensing with Fine-Grained Process Supervision",
-      "authors": "Lang Sun, Ronghao Fu, Zhuoran Duan et al.",
-      "summary": "While Vision-Language Models (VLMs) have significantly advanced remote sensing interpretation, enabling them to perform complex, step-by-step reasoning remains highly challenging. Recent efforts to introduce Chain-of-Thought (CoT) reasoning to this domain have shown promise, yet ensuring the visual faithfulness of these intermediate steps remains a critical bottleneck. To address this, we introduc...",
-      "date": "2026-03-10",
-      "tag": "RL Training",
-      "url": "https://arxiv.org/abs/2603.09551v1"
-    },
-    {
-      "id": "2603.09203v2",
       "title": "Evaluate-as-Action: Self-Evaluated Process Rewards for Retrieval-Augmented Agents",
-      "authors": "Jiangming Shu, Yuxiang Zhang, Ye Ma et al.",
-      "summary": "Retrieval-augmented agents can query external evidence, yet their reliability in multi-step reasoning remains limited: noisy retrieval may derail multi-hop question answering, while outcome-only reinforcement learning provides credit signals that are too coarse to optimize intermediate steps. We propose \\textsc{EvalAct} (Evaluate-as-Action), which converts implicit retrieval quality assessment int...",
+      "authors": "Jiangming Shu, Yuxiang Zhang, Ye Ma, Xueyuan Lin et al.",
       "date": "2026-03-10",
-      "tag": "RL Training",
-      "url": "https://arxiv.org/abs/2603.09203v2"
+      "url": "https://arxiv.org/abs/2603.09203",
+      "tag": "Reasoning"
     },
     {
-      "id": "2603.09556v1",
-      "title": "ALARM: Audio-Language Alignment for Reasoning Models",
-      "authors": "Petr Grinberg, Hassan Shahmohammadi",
-      "summary": "Large audio language models (ALMs) extend LLMs with auditory understanding. A common approach freezes the LLM and trains only an adapter on self-generated targets. However, this fails for reasoning LLMs (RLMs) whose built-in chain-of-thought traces expose the textual surrogate input, yielding unnatural responses. We propose self-rephrasing, converting self-generated responses into audio-understand...",
-      "date": "2026-03-10",
-      "tag": "Audio Reasoning",
-      "url": "https://arxiv.org/abs/2603.09556v1"
+      "title": "DC-W2S: Dual-Consensus Weak-to-Strong Training for Reliable Process Reward Modeling in Biological Reasoning",
+      "authors": "Chi-Min Chan, Ehsan Hajiramezanali, Xiner Li, Edward De Brouwer et al.",
+      "date": "2026-03-09",
+      "url": "https://arxiv.org/abs/2603.08095",
+      "tag": "Reasoning"
+    },
+    {
+      "title": "When Rubrics Fail: Error Enumeration as Reward in Reference-Free RL Post-Training for Virtual Try-On",
+      "authors": "Wisdom Ikezogwo, Mehmet Saygin Seyfioglu, Ranjay Krishna, Karim Bouyarmane",
+      "date": "2026-03-05",
+      "url": "https://arxiv.org/abs/2603.05659",
+      "tag": "RL Training"
+    },
+    {
+      "title": "Actor-Curator: Co-adaptive Curriculum Learning via Policy-Improvement Bandits for RL Post-Training",
+      "authors": "Zhengyao Gu, Jonathan Light, Raul Astudillo, Ziyu Ye et al.",
+      "date": "2026-02-24",
+      "url": "https://arxiv.org/abs/2602.20532",
+      "tag": "RL Training"
     }
   ]
 }
