@@ -742,11 +742,11 @@ body.dark-mode .gl-item { color: #8b949e; }
   </div>
   <div class="hero-links">
     <a class="hero-link" href="files/CV.pdf">📋 CV</a>
-    <a class="hero-link" href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&hl=en">🎓 Scholar</a>
+    <a class="hero-link" href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">🎓 Scholar</a>
     <a class="hero-link" href="mailto:jiajunf3@illinois.edu">✉️ Email</a>
-    <a class="hero-link" href="https://openreview.net/profile?id=~Jiajun_Fan1">📝 OpenReview</a>
-    <a class="hero-link" href="https://github.com/markerthu">💻 GitHub</a>
-    <a class="hero-link" href="https://www.linkedin.com/in/jiajun-fan-57b12b26b">💼 LinkedIn</a>
+    <a class="hero-link" href="https://openreview.net/profile?id=~Jiajun_Fan1" target="_blank" rel="noopener noreferrer">📝 OpenReview</a>
+    <a class="hero-link" href="https://github.com/markerthu" target="_blank" rel="noopener noreferrer">💻 GitHub</a>
+    <a class="hero-link" href="https://www.linkedin.com/in/jiajun-fan-57b12b26b" target="_blank" rel="noopener noreferrer">💼 LinkedIn</a>
   </div>
 </div>
 
@@ -770,7 +770,7 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>. My research focu
 <div class="internship-banner internship-banner-pulse">
 🎓 <strong>Seeking research internship — Summer 2026.</strong>
 &nbsp;<a href="files/CV.pdf">[CV]</a>
-&nbsp;<a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&hl=en">[Scholar]</a>
+&nbsp;<a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">[Scholar]</a>
 &nbsp;<a href="mailto:jiajunf3@illinois.edu">[Email]</a>
 </div>
 
@@ -857,7 +857,7 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>. My research focu
 <div class="section-header" id="publications">📄 Selected Publications</div>
 
 <p style="font-size:0.83em;color:#999;margin-top:-0.6em;">* = first/co-first author &nbsp;·&nbsp;
-<a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&hl=en">Full list on Google Scholar</a> &nbsp;/&nbsp;
+<a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">Full list on Google Scholar</a> &nbsp;/&nbsp;
 <a href="/publications/">Publications page</a></p>
 
 <div class="pub-filter-bar">
@@ -877,16 +877,16 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>. My research focu
   <div class="pub-right">
     <div class="pub-thumb-wrap"><img loading="lazy" src="/projects/cesar/images/framework.png" alt="CESAR framework"></div>
     <div class="pub-title">
-      <a href="https://openreview.net/forum?id=DUr48hxO2h">Incentivizing Consistent, Effective and Scalable Reasoning Capability in Audio LLMs via Reasoning Process Rewards</a>
+      <a href="https://openreview.net/forum?id=DUr48hxO2h" target="_blank" rel="noopener noreferrer">Incentivizing Consistent, Effective and Scalable Reasoning Capability in Audio LLMs via Reasoning Process Rewards</a>
       <a class="pub-project" href="/projects/cesar/">Project Page</a>
     <div class="pub-abstract-preview">CESAR resolves test-time inverse scaling in Audio LLMs by rewarding the reasoning process via GRPO, achieving SOTA on MMAU — outperforming Gemini 2.5 Pro and GPT-4o Audio.</div></div>
     <div class="pub-authors"><strong>J. Fan*</strong>, R. Ren, J. Li, R. Pandey, P.G. Shivakumar, A. Gandhe, G. Liu, Y. Gu, I. Bulyko</div>
     <div class="pub-desc">CESAR: process-reward RL (GRPO) resolving test-time inverse scaling in Audio LLMs — models produce hallucinatory reasoning without proper guidance; CESAR rewrites that.</div>
     <div class="pub-hl">🏆 SOTA on MMAU Test-mini · Outperforms Gemini 2.5 Pro &amp; GPT-4o Audio</div>
     <div class="pub-links">
-      <a class="pub-link pl-paper" href="https://openreview.net/forum?id=DUr48hxO2h">📄 Paper</a>
+      <a class="pub-link pl-paper" href="https://openreview.net/forum?id=DUr48hxO2h" target="_blank" rel="noopener noreferrer">📄 Paper</a>
       <a class="pub-link pl-project" href="/projects/cesar/">🔗 Project</a>
-      <a class="pub-link pl-arxiv" href="https://arxiv.org/abs/2510.20867">📎 arXiv</a>
+      <a class="pub-link pl-arxiv" href="https://arxiv.org/abs/2510.20867" target="_blank" rel="noopener noreferrer">📎 arXiv</a>
     </div>
   </div>
 </div>
@@ -894,7 +894,7 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>. My research focu
 <div class="pub-entry" data-venue="ICLR" data-year="2026" data-arxiv="SP-VLA" data-abstract="SP-VLA introduces action-aware model scheduling and spatio-semantic token pruning for VLA model acceleration, achieving 1.5× lossless speedup on LIBERO and 2.4× speedup on SimplerEnv.">
   <div class="pub-left"><span class="pb pb-iclr">ICLR 2026</span><span class="pub-year">2026</span></div>
   <div class="pub-right">
-    <div class="pub-title"><a href="https://openreview.net/forum?id=RwdGIIjPlC">SP-VLA: A Joint Model Scheduling and Token Pruning Approach for VLA Model Acceleration</a><div class="pub-abstract-preview">SP-VLA introduces action-aware model scheduling and spatio-semantic token pruning for VLA model acceleration, achieving 1.5× lossless speedup on LIBERO and 2.4× speedup on SimplerEnv.</div></div>
+    <div class="pub-title"><a href="https://openreview.net/forum?id=RwdGIIjPlC" target="_blank" rel="noopener noreferrer">SP-VLA: A Joint Model Scheduling and Token Pruning Approach for VLA Model Acceleration</a><div class="pub-abstract-preview">SP-VLA introduces action-aware model scheduling and spatio-semantic token pruning for VLA model acceleration, achieving 1.5× lossless speedup on LIBERO and 2.4× speedup on SimplerEnv.</div></div>
     <div class="pub-authors">Y. Li, Y. Meng, Z. Sun, K. Ji, C. Tang, <strong>J. Fan</strong>, X. Ma, S.-T. Xia, Z. Wang, W. Zhu</div>
     <div class="pub-desc">Action-aware model scheduling + spatio-semantic token pruning for VLA acceleration.</div>
     <div class="pub-hl">⚡ 1.5× lossless speedup (LIBERO) · 2.4× speedup (SimplerEnv)</div>
@@ -906,16 +906,16 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>. My research focu
   <div class="pub-right">
     <div class="pub-thumb-wrap"><img loading="lazy" src="/projects/adrpo/images/compare_models.png" alt="ADRPO qualitative results"></div>
     <div class="pub-title">
-      <a href="https://openreview.net/forum?id=aXO0xg0ttW">Adaptive Divergence Regularized Policy Optimization for Fine-tuning Generative Models</a>
+      <a href="https://openreview.net/forum?id=aXO0xg0ttW" target="_blank" rel="noopener noreferrer">Adaptive Divergence Regularized Policy Optimization for Fine-tuning Generative Models</a>
       <a class="pub-project" href="/projects/adrpo/">Project Page</a>
     <div class="pub-abstract-preview">ADRPO introduces sample-level adaptive divergence regularization for RLHF — high-value samples get more freedom, poor samples get stronger constraints. Plug-and-play on any RL method.</div></div>
     <div class="pub-authors"><strong>J. Fan*</strong>, T. Wei, C. Cheng, Y. Chen, G. Liu</div>
     <div class="pub-desc">ADRPO: sample-level adaptive divergence regularization — high-value samples get more freedom, poor samples get stronger constraint. Plug-and-play on top of any RLHF method.</div>
     <div class="pub-hl">🚀 2B SD3 surpasses 4.8B &amp; 12B models · Generalizes to LLMs &amp; audio reasoning</div>
     <div class="pub-links">
-      <a class="pub-link pl-paper" href="https://openreview.net/forum?id=aXO0xg0ttW">📄 Paper</a>
+      <a class="pub-link pl-paper" href="https://openreview.net/forum?id=aXO0xg0ttW" target="_blank" rel="noopener noreferrer">📄 Paper</a>
       <a class="pub-link pl-project" href="/projects/adrpo/">🔗 Project</a>
-      <a class="pub-link pl-arxiv" href="https://arxiv.org/abs/2510.18053">📎 arXiv</a>
+      <a class="pub-link pl-arxiv" href="https://arxiv.org/abs/2510.18053" target="_blank" rel="noopener noreferrer">📎 arXiv</a>
     </div>
   </div>
 </div>
@@ -923,7 +923,7 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>. My research focu
 <div class="pub-entry" data-venue="NeurIPS" data-year="2025" data-arxiv="VarCon" data-abstract="VarCon reformulates supervised contrastive learning as variational inference, achieving SOTA 79.36% Top-1 accuracy on ImageNet-1K with ResNet-50.">
   <div class="pub-left"><span class="pb pb-neurips">NeurIPS 2025</span><span class="pub-year">2025</span></div>
   <div class="pub-right">
-    <div class="pub-title"><a href="https://openreview.net/forum?id=uOOlHOq500">Variational Supervised Contrastive Learning</a>
+    <div class="pub-title"><a href="https://openreview.net/forum?id=uOOlHOq500" target="_blank" rel="noopener noreferrer">Variational Supervised Contrastive Learning</a>
       <div class="pub-hl">📊 SOTA 79.36% Top-1 on ImageNet-1K with ResNet-50</div><div class="pub-abstract-preview">VarCon reformulates supervised contrastive learning as variational inference, achieving SOTA 79.36% Top-1 accuracy on ImageNet-1K with ResNet-50.</div></div>
     <div class="pub-authors">Z. Wang, <strong>J. Fan</strong>, T. Nguyen, H. Ji, G. Liu</div>
     <div class="pub-desc">VarCon: supervised contrastive learning as variational inference — posterior-weighted ELBO replaces pairwise comparisons.</div>
@@ -936,7 +936,7 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>. My research focu
   <div class="pub-right">
     <div class="pub-thumb-wrap"><img loading="lazy" src="/projects/orw-cfm-w2/images/main_figure.png" alt="ORW-CFM-W2 method"></div>
     <div class="pub-title">
-      <a href="https://openreview.net/forum?id=2IoFFexvuw">Online Reward-Weighted Fine-Tuning of Flow Matching with Wasserstein Regularization</a>
+      <a href="https://openreview.net/forum?id=2IoFFexvuw" target="_blank" rel="noopener noreferrer">Online Reward-Weighted Fine-Tuning of Flow Matching with Wasserstein Regularization</a>
       <a class="pub-project" href="/projects/orw-cfm-w2/">Project Page</a>
       <div class="pub-hl">🥇 First online RLHF for flow matching · Collapse-free W2 regularization</div>
     <div class="pub-abstract-preview">ORW-CFM-W2 is the first online RLHF method for flow matching — no human data, no likelihood estimation. Wasserstein regularization maintains generation diversity.</div></div>
@@ -949,7 +949,7 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>. My research focu
   <div class="pub-left"><span class="pb pb-arxiv">Preprint</span><span class="pub-year">2025</span></div>
   <div class="pub-right">
     <div class="pub-title">
-      <a href="https://arxiv.org/abs/2510.18072">Fine-tuning Flow Matching Generative Models with Intermediate Feedback</a>
+      <a href="https://arxiv.org/abs/2510.18072" target="_blank" rel="noopener noreferrer">Fine-tuning Flow Matching Generative Models with Intermediate Feedback</a>
       <a class="pub-project" href="/projects/ac-flow/">Project Page</a>
       <div class="pub-hl">⚙️ Actor-critic with step-level reward · Stable SD3 fine-tuning without collapse</div>
     <div class="pub-abstract-preview">AC-Flow introduces actor-critic with intermediate feedback for flow matching — reward shaping + dual-stability mechanism + Wasserstein regularization enables robust SD3 fine-tuning without collapse.</div></div>
@@ -961,7 +961,7 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>. My research focu
 <div class="pub-entry" data-venue="TPAMI" data-year="2026" data-arxiv="2407.05010" data-abstract="PRANCE jointly optimizes token pruning and structural channel pruning for adaptive ViT inference, achieving significant speedup while maintaining accuracy.">
   <div class="pub-left"><span class="pb pb-journal">TPAMI 2026</span><span class="pub-year">2026</span></div>
   <div class="pub-right">
-    <div class="pub-title"><a href="https://arxiv.org/abs/2407.05010">PRANCE: Joint Token-Optimization and Structural Channel-Pruning for Adaptive ViT Inference</a>
+    <div class="pub-title"><a href="https://arxiv.org/abs/2407.05010" target="_blank" rel="noopener noreferrer">PRANCE: Joint Token-Optimization and Structural Channel-Pruning for Adaptive ViT Inference</a>
       <div class="pub-hl">⚡ Joint token + channel pruning · Adaptive ViT inference · IEEE TPAMI 2026</div><div class="pub-abstract-preview">PRANCE jointly optimizes token pruning and structural channel pruning for adaptive ViT inference, achieving significant speedup while maintaining accuracy.</div></div>
     <div class="pub-authors">Y. Li, C. Tang, Y. Meng, <strong>J. Fan</strong>, Z. Chai, X. Ma, Z. Wang, W. Zhu &nbsp;·&nbsp; <em>IEEE TPAMI</em></div>
   </div>
@@ -971,7 +971,7 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>. My research focu
   <div class="pub-left"><span class="pb pb-oral">ICLR 2023<br>Oral</span><span class="pub-year">2023</span></div>
   <div class="pub-right">
     <div class="pub-title">
-      <a href="https://openreview.net/forum?id=FeWvD0L_a4">Learnable Behavior Control: Breaking Atari Human World Records via Sample-Efficient Behavior Selection</a>
+      <a href="https://openreview.net/forum?id=FeWvD0L_a4" target="_blank" rel="noopener noreferrer">Learnable Behavior Control: Breaking Atari Human World Records via Sample-Efficient Behavior Selection</a>
       <a class="pub-project" href="/projects/lbc/">Project Page</a>
     <div class="pub-abstract-preview">LBC introduces a learnable hybrid behavior mapping and bandit meta-controller for exploration control in deep RL, breaking 24 Atari human world records with 500× less data than prior SOTA.</div></div>
     <div class="pub-authors"><strong>J. Fan*</strong>, Y. Zhuang, Y. Liu, J. Hao, B. Wang, J. Zhu, H. Wang, S.-T. Xia</div>
@@ -984,7 +984,7 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>. My research focu
   <div class="pub-left"><span class="pb pb-icml">ICML 2022</span><span class="pub-year">2022</span></div>
   <div class="pub-right">
     <div class="pub-title">
-      <a href="https://proceedings.mlr.press/v162/fan22c.html">Generalized Data Distribution Iteration</a>
+      <a href="https://proceedings.mlr.press/v162/fan22c.html" target="_blank" rel="noopener noreferrer">Generalized Data Distribution Iteration</a>
       <a class="pub-project" href="/projects/gdi/">Project Page</a>
     <div class="pub-abstract-preview">GDI shows that optimizing the training data distribution is the key lever for superhuman RL efficiency. Provides a unified framework that subsumes diverse RL algorithms as special cases.</div></div>
     <div class="pub-authors"><strong>J. Fan*</strong>, C. Xiao</div>
@@ -1115,7 +1115,7 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
 
 <!-- ═══════════════════════════════ CONTACT ══════════════════════════ -->
 <div class="section-header" id="deadlines">📅 Conference Deadlines</div>
-<p style="font-size:0.84em;color:#666;margin-bottom:14px;">Key AI/ML venue deadlines I track — for the full list see <a href="https://ccfddl.com/" target="_blank">ccfddl.com</a>.</p>
+<p style="font-size:0.84em;color:#666;margin-bottom:14px;">Key AI/ML venue deadlines I track — for the full list see <a href="https://ccfddl.com/" target="_blank" rel="noopener noreferrer">ccfddl.com</a>.</p>
 <div id="conf-ddl-grid" class="conf-ddl-grid"></div>
 
 <script>
@@ -1216,9 +1216,9 @@ Happy to discuss research, internships, or collaborations. Best reached by email
 <div class="site-footer">
   <div class="footer-links">
     <a href="mailto:jiajunf3@illinois.edu">✉️ Email</a>
-    <a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&hl=en">🎓 Scholar</a>
-    <a href="https://openreview.net/profile?id=~Jiajun_Fan1">📝 OpenReview</a>
-    <a href="https://github.com/markerthu">💻 GitHub</a>
+    <a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">🎓 Scholar</a>
+    <a href="https://openreview.net/profile?id=~Jiajun_Fan1" target="_blank" rel="noopener noreferrer">📝 OpenReview</a>
+    <a href="https://github.com/markerthu" target="_blank" rel="noopener noreferrer">💻 GitHub</a>
     <a href="/cv/">📋 CV</a>
     <a href="/projects/">🔬 Projects</a>
   </div>
