@@ -762,6 +762,10 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>. My research focu
 
 <ul class="news-list">
   <li>
+    <span class="news-date">Apr 2026</span>
+    <span><span class="nbadge nb-top">Upcoming</span>🇧🇷 <strong>ICLR 2026</strong> in Rio de Janeiro, Apr 23–27. Presenting CESAR &amp; SP-VLA.</span>
+  </li>
+  <li>
     <span class="news-date">Jan 2026</span>
     <span><span class="nbadge nb-accept">Accept</span><strong>2 papers at ICLR 2026</strong> — CESAR &amp; SP-VLA. See you in Rio 🇧🇷</span>
   </li>
@@ -779,7 +783,7 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>. My research focu
   </li>
   <li class="news-hidden" id="news-extra-1">
     <span class="news-date">Jan 2025</span>
-    <span><span class="nbadge nb-service">Service</span>Reviewer: ICLR 2025, NeurIPS 2024, CVPR 2026, AAAI 2025, AISTATS 2025.</span>
+    <span><span class="nbadge nb-service">Service</span>Reviewer: ICLR 2025–26, NeurIPS 2024–25, ICML 2025–26, CVPR 2026, AAAI 2025, AISTATS 2025.</span>
   </li>
   <li class="news-hidden" id="news-extra-2">
     <span class="news-date">Aug 2024</span>
@@ -812,7 +816,7 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>. My research focu
     </div>
   </a>
   <a class="featured-card" href="/projects/adrpo/">
-    <img class="featured-img" loading="lazy" src="/projects/adrpo/images/teaser.png" alt="ADRPO">
+    <img class="featured-img" loading="lazy" src="/projects/adrpo/images/compare_models.png" alt="ADRPO">
     <div class="featured-body">
       <span class="featured-venue fv-neurips">NeurIPS 2025</span>
       <div class="featured-title">ADRPO: Adaptive Regularization for Generative Model RLHF</div>
@@ -870,7 +874,7 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>. My research focu
   </div>
 </div>
 
-<div class="pub-entry" data-venue="ICLR" data-year="2026" data-abstract="SP-VLA introduces action-aware model scheduling and spatio-semantic token pruning for VLA model acceleration, achieving 1.5× lossless speedup on LIBERO and 2.4× speedup on SimplerEnv.">
+<div class="pub-entry" data-venue="ICLR" data-year="2026" data-arxiv="SP-VLA" data-abstract="SP-VLA introduces action-aware model scheduling and spatio-semantic token pruning for VLA model acceleration, achieving 1.5× lossless speedup on LIBERO and 2.4× speedup on SimplerEnv.">
   <div class="pub-left"><span class="pb pb-iclr">ICLR 2026</span><span class="pub-year">2026</span></div>
   <div class="pub-right">
     <div class="pub-title"><a href="https://openreview.net/forum?id=RwdGIIjPlC">SP-VLA: A Joint Model Scheduling and Token Pruning Approach for VLA Model Acceleration</a><div class="pub-abstract-preview">SP-VLA introduces action-aware model scheduling and spatio-semantic token pruning for VLA model acceleration, achieving 1.5× lossless speedup on LIBERO and 2.4× speedup on SimplerEnv.</div></div>
@@ -899,7 +903,7 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>. My research focu
   </div>
 </div>
 
-<div class="pub-entry" data-venue="NeurIPS" data-year="2025" data-abstract="VarCon reformulates supervised contrastive learning as variational inference, achieving SOTA 79.36% Top-1 accuracy on ImageNet-1K with ResNet-50.">
+<div class="pub-entry" data-venue="NeurIPS" data-year="2025" data-arxiv="VarCon" data-abstract="VarCon reformulates supervised contrastive learning as variational inference, achieving SOTA 79.36% Top-1 accuracy on ImageNet-1K with ResNet-50.">
   <div class="pub-left"><span class="pb pb-neurips">NeurIPS 2025</span><span class="pub-year">2025</span></div>
   <div class="pub-right">
     <div class="pub-title"><a href="https://openreview.net/forum?id=uOOlHOq500">Variational Supervised Contrastive Learning</a><div class="pub-abstract-preview">VarCon reformulates supervised contrastive learning as variational inference, achieving SOTA 79.36% Top-1 accuracy on ImageNet-1K with ResNet-50.</div></div>
@@ -1018,7 +1022,7 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>. My research focu
     <div class="stat-label">MMAU Audio Reasoning<br><em>Beats Gemini 2.5 Pro</em></div>
   </div>
   <div class="stat-card">
-    <div class="stat-number" data-target="{{ site.data.citations._total | default: 291 }}">0</div>
+    <div class="stat-number" data-target="{{ site.data.citations._total | default: 295 }}">0</div>
     <div class="stat-label">Google Scholar Citations</div>
   </div>
   <div class="stat-card">
@@ -1110,11 +1114,11 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
         {label:'Paper Submission', date:'2026-01-28', passed:true},
         {label:'Notification',     date:'2026-04-30'},
       ]},
-    { name:'CVPR 2026', abbr:'CVPR', type:'CV', color:'#059669',
-      location:'Nashville, TN, USA', conf:'Jun 3–7, 2026', url:'https://cvpr.thecvf.com/Conferences/2026',
+    { name:'CVPR 2027', abbr:'CVPR', type:'CV', color:'#059669',
+      location:'Nashville, TN, USA', conf:'Jun 2027', url:'https://cvpr.thecvf.com/',
       deadlines:[
-        {label:'Abstract',         date:'2025-11-07', passed:true},
-        {label:'Paper Submission', date:'2025-11-13', passed:true},
+        {label:'Abstract',         date:'2026-11-06'},
+        {label:'Paper Submission', date:'2026-11-13'},
       ]},
     { name:'ICLR 2026', abbr:'ICLR', type:'ML', color:'#7c3aed',
       location:'Rio de Janeiro, Brazil', conf:'Apr 23–27, 2026', url:'https://iclr.cc/Conferences/2026',
@@ -1689,9 +1693,9 @@ function drawGraph(container) {
     {id:'LBC',        label:'LBC',        venue:'ICLR 2023',    col:'1', fy:0.72, r:20, clr:'#ea580c', url:'/projects/lbc/'},
     {id:'PRANCE',     label:'PRANCE',     venue:'TPAMI 2026',   col:'2', fy:0.14, r:18, clr:'#0891b2', url:'https://arxiv.org/abs/2407.05010'},
     {id:'ORW-CFM-W2', label:'ORW-CFM-W2', venue:'ICLR 2025',  col:'3', fy:0.40, r:22, clr:'#2563eb', url:'/projects/orw-cfm-w2/'},
-    {id:'VarCon',     label:'VarCon',     venue:'NeurIPS 2025', col:'3', fy:0.72, r:18, clr:'#be185d', url:''},
+    {id:'VarCon',     label:'VarCon',     venue:'NeurIPS 2025', col:'3', fy:0.72, r:18, clr:'#be185d', url:'https://openreview.net/forum?id=uOOlHOq500'},
     {id:'ADRPO',      label:'ADRPO',      venue:'NeurIPS 2025', col:'4', fy:0.16, r:20, clr:'#2563eb', url:'/projects/adrpo/'},
-    {id:'SP-VLA',     label:'SP-VLA',     venue:'ICLR 2026',    col:'4', fy:0.60, r:18, clr:'#0891b2', url:''},
+    {id:'SP-VLA',     label:'SP-VLA',     venue:'ICLR 2026',    col:'4', fy:0.60, r:18, clr:'#0891b2', url:'https://openreview.net/forum?id=RwdGIIjPlC'},
     {id:'AC-Flow',    label:'AC-Flow',    venue:'arXiv 2025',   col:'5', fy:0.48, r:18, clr:'#059669', url:'/projects/ac-flow/'},
     {id:'CESAR',      label:'CESAR',      venue:'ICLR 2026',    col:'5', fy:0.13, r:24, clr:'#7c3aed', url:'/projects/cesar/'},
   ];
