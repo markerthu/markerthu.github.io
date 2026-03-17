@@ -730,6 +730,12 @@ body.dark-mode .graph-link { stroke: #334155; }
 .gl-item { display: flex; align-items: center; gap: 5px; font-size: 0.74em; font-weight: 600; color: #444; }
 .gl-dot { width: 10px; height: 10px; border-radius: 50%; }
 body.dark-mode .gl-item { color: #8b949e; }
+/* ── Dark mode: Hero pills ── */
+body.dark-mode .hero-pill { background: rgba(255,255,255,0.12) !important; color: rgba(255,255,255,0.85) !important; border-color: rgba(255,255,255,0.2) !important; }
+/* ── Dark mode: Awards grid text ── */
+body.dark-mode #awards + div ul { color: #8b949e !important; }
+body.dark-mode #awards + div li { color: #8b949e !important; }
+body.dark-mode #awards + div p[style] { color: #c9d1d9 !important; }
 
 </style>
 
