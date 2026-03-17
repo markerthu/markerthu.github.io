@@ -1353,8 +1353,7 @@ Happy to discuss research, internships, or collaborations. Best reached by email
       a:"SP-VLA (ICLR 2026) accelerates Vision-Language-Action models via joint model scheduling and spatio-semantic token pruning. It achieves 1.5× lossless speedup on LIBERO and 2.4× on SimplerEnv. Co-first author with Zhuoran Li et al." },
     { kw:['varcon','variational contrastive','supervised contrastive','imagenet','resnet'],
       a:"VarCon (NeurIPS 2025) reformulates supervised contrastive learning as variational inference, introducing a principled probabilistic framework. Achieves SOTA 79.36% Top-1 accuracy on ImageNet-1K with ResNet-50." },
-    { kw:['sp-vla','vla','robot','vision language action','token pruning acceleration'],
-      a:"SP-VLA (ICLR 2026) accelerates Vision-Language-Action models via action-aware model scheduling and spatio-semantic token pruning — 1.5× lossless speedup on LIBERO and 2.4× speedup on SimplerEnv." },
+
     { kw:['phd','uiuc','illinois','university','where study','school','student'],
       a:"I'm a CS PhD student at the University of Illinois Urbana-Champaign (UIUC), one of the top CS programs globally." },
     { kw:['contact','email','reach','collaborate','talk','message'],
