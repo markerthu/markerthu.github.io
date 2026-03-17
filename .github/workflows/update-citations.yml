@@ -85,6 +85,17 @@ jobs:
           except:
             existing = {}
 
+          # Sanity check: _total must be >= sum of tracked paper citations
+          tracked_sum = sum(v for k, v in results.items() if not k.startswith("_"))
+          if "_total" in results:
+            if results["_total"] < tracked_sum:
+              print(f"WARN: Scholar returned total={results['_total']} < tracked_sum={tracked_sum}; discarding bad total")
+              del results["_total"]
+            else:
+              print(f"  Total sanity check passed: {results['_total']} >= {tracked_sum}")
+          else:
+            print(f"  No total from Scholar (bot-blocked?); keeping existing _total={existing.get('_total','?')}")
+
           existing.update(results)
           existing["_updated"] = datetime.datetime.utcnow().strftime("%Y-%m-%d")
           existing["_source"] = "Google Scholar (EjmzseUAAAAJ)"
