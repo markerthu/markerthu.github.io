@@ -1097,6 +1097,7 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
       <li>Outstanding Graduates (Top 1%) — Nankai Univ.</li>
       <li>Tang Lixin Scholarship (Top 1%)</li>
       <li>GPA <strong>4.0/4.0</strong> — UIUC Ph.D.</li>
+      <li>ICLR 2023 Oral (Top 1.2%, <strong>5/4176</strong>) — LBC paper</li>
       <li>GPA <strong>3.97/4.0</strong>, Top 1.3% — Tsinghua M.Eng.</li>
     </ul>
   </div>
@@ -1721,13 +1722,13 @@ function drawGraph(container) {
 
   /* ── Papers: fixed fractional y in working area [0.0–1.0] ── */
   var nodes = [
-    {id:'GDI',        label:'GDI',        venue:'ICML 2022',    col:'1', fy:0.40, r:22, clr:'#ea580c', url:'/projects/gdi/'},
-    {id:'LBC',        label:'LBC',        venue:'ICLR 2023',    col:'1', fy:0.72, r:20, clr:'#ea580c', url:'/projects/lbc/'},
+    {id:'GDI',        label:'GDI',        venue:'ICML 2022',    col:'1', fy:0.40, r:21, clr:'#ea580c', url:'/projects/gdi/'},
+    {id:'LBC',        label:'LBC',        venue:'ICLR 2023',    col:'1', fy:0.72, r:24, clr:'#ea580c', url:'/projects/lbc/'},
     {id:'PRANCE',     label:'PRANCE',     venue:'TPAMI 2026',   col:'2', fy:0.14, r:18, clr:'#0891b2', url:'https://arxiv.org/abs/2407.05010'},
     {id:'ORW-CFM-W2', label:'ORW-CFM-W2', venue:'ICLR 2025',  col:'3', fy:0.40, r:22, clr:'#2563eb', url:'/projects/orw-cfm-w2/'},
     {id:'VarCon',     label:'VarCon',     venue:'NeurIPS 2025', col:'3', fy:0.72, r:18, clr:'#be185d', url:'https://openreview.net/forum?id=uOOlHOq500'},
     {id:'ADRPO',      label:'ADRPO',      venue:'NeurIPS 2025', col:'4', fy:0.16, r:20, clr:'#2563eb', url:'/projects/adrpo/'},
-    {id:'SP-VLA',     label:'SP-VLA',     venue:'ICLR 2026',    col:'4', fy:0.60, r:18, clr:'#0891b2', url:'https://openreview.net/forum?id=RwdGIIjPlC'},
+    {id:'SP-VLA',     label:'SP-VLA',     venue:'ICLR 2026',    col:'4', fy:0.60, r:22, clr:'#0891b2', url:'https://openreview.net/forum?id=RwdGIIjPlC'},
     {id:'AC-Flow',    label:'AC-Flow',    venue:'arXiv 2025',   col:'5', fy:0.48, r:18, clr:'#059669', url:'/projects/ac-flow/'},
     {id:'CESAR',      label:'CESAR',      venue:'ICLR 2026',    col:'5', fy:0.13, r:24, clr:'#7c3aed', url:'/projects/cesar/'},
   ];
