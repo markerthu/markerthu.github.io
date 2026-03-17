@@ -929,10 +929,8 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 <div class="pub-entry" role="article" data-venue="ICLR" data-year="2026" data-arxiv="SP-VLA" data-abstract="SP-VLA introduces action-aware model scheduling and spatio-semantic token pruning for VLA model acceleration, achieving 1.5× lossless speedup on LIBERO and 2.4× speedup on SimplerEnv.">
   <div class="pub-left">
     <div class="pub-thumb-wrap">
-      <div class="pub-thumb" style="background:linear-gradient(135deg,#0369a1,#0891b2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border-radius:6px;">
-        <span style="font-size:1.3em;">🤖</span>
-        <span style="font-size:0.55em;font-weight:800;color:#fff;letter-spacing:.03em;text-align:center;line-height:1.2;">ICLR
-2026</span>
+      <div class="pub-thumb" style="background:linear-gradient(135deg,#0369a1,#0891b2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;border-radius:6px;">
+        <span style="font-size:1.8em;">🤖</span>
       </div>
     </div>
     <span class="pb pb-iclr">ICLR 2026</span><span class="pub-year">2026</span></div>
@@ -967,10 +965,8 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 <div class="pub-entry" role="article" data-venue="NeurIPS" data-year="2025" data-arxiv="VarCon" data-abstract="VarCon reformulates supervised contrastive learning as variational inference, achieving SOTA 79.36% Top-1 accuracy on ImageNet-1K with ResNet-50.">
   <div class="pub-left">
     <div class="pub-thumb-wrap">
-      <div class="pub-thumb" style="background:linear-gradient(135deg,#9d174d,#be185d);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border-radius:6px;">
-        <span style="font-size:1.3em;">📊</span>
-        <span style="font-size:0.55em;font-weight:800;color:#fff;letter-spacing:.03em;text-align:center;line-height:1.2;">NeurIPS
-2025</span>
+      <div class="pub-thumb" style="background:linear-gradient(135deg,#9d174d,#be185d);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;border-radius:6px;">
+        <span style="font-size:1.8em;">📊</span>
       </div>
     </div>
     <span class="pb pb-neurips">NeurIPS 2025</span><span class="pub-year">2025</span></div>
@@ -1000,10 +996,8 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 <div class="pub-entry" role="article" data-venue="Preprint" data-year="2025" data-arxiv="2510.18072" data-abstract="AC-Flow introduces actor-critic with intermediate feedback for flow matching — reward shaping + dual-stability mechanism + Wasserstein regularization enables robust SD3 fine-tuning without collapse.">
   <div class="pub-left">
     <div class="pub-thumb-wrap">
-      <div class="pub-thumb" style="background:linear-gradient(135deg,#065f46,#059669);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border-radius:6px;">
-        <span style="font-size:1.3em;">⚙️</span>
-        <span style="font-size:0.55em;font-weight:800;color:#fff;letter-spacing:.03em;text-align:center;line-height:1.2;">arXiv
-2025</span>
+      <div class="pub-thumb" style="background:linear-gradient(135deg,#065f46,#059669);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;border-radius:6px;">
+        <span style="font-size:1.8em;">⚙️</span>
       </div>
     </div>
     <span class="pb pb-arxiv">Preprint</span><span class="pub-year">2025</span></div>
@@ -1022,10 +1016,8 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 <div class="pub-entry" role="article" data-venue="TPAMI" data-year="2026" data-arxiv="2407.05010" data-abstract="PRANCE jointly optimizes token pruning and structural channel pruning for adaptive ViT inference, achieving significant speedup while maintaining accuracy.">
   <div class="pub-left">
     <div class="pub-thumb-wrap">
-      <div class="pub-thumb" style="background:linear-gradient(135deg,#1e40af,#2563eb);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border-radius:6px;">
-        <span style="font-size:1.3em;">⚡</span>
-        <span style="font-size:0.55em;font-weight:800;color:#fff;letter-spacing:.03em;text-align:center;line-height:1.2;">TPAMI
-2026</span>
+      <div class="pub-thumb" style="background:linear-gradient(135deg,#1e40af,#2563eb);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;border-radius:6px;">
+        <span style="font-size:1.8em;">⚡</span>
       </div>
     </div>
     <span class="pb pb-journal">TPAMI 2026</span><span class="pub-year">2026</span></div>
@@ -1039,10 +1031,8 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 <div class="pub-entry" role="article" data-venue="ICLR" data-year="2023" data-arxiv="LBC" data-abstract="LBC introduces a learnable hybrid behavior mapping and bandit meta-controller for exploration control in deep RL, breaking 24 Atari human world records with 500× less data than prior SOTA.">
   <div class="pub-left">
     <div class="pub-thumb-wrap">
-      <div class="pub-thumb" style="background:linear-gradient(135deg,#4c1d95,#7c3aed);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border-radius:6px;">
-        <span style="font-size:1.3em;">🏅</span>
-        <span style="font-size:0.55em;font-weight:800;color:#fff;letter-spacing:.03em;text-align:center;line-height:1.2;">ICLR
-2023</span>
+      <div class="pub-thumb" style="background:linear-gradient(135deg,#4c1d95,#7c3aed);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;border-radius:6px;">
+        <span style="font-size:1.8em;">🏅</span>
       </div>
     </div>
     <span class="pb pb-oral">ICLR 2023<br>Oral</span><span class="pub-year">2023</span></div>
@@ -1061,10 +1051,8 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 <div class="pub-entry" role="article" data-venue="ICML" data-year="2022" data-arxiv="GDI" data-abstract="GDI shows that optimizing the training data distribution is the key lever for superhuman RL efficiency. Provides a unified framework that subsumes diverse RL algorithms as special cases.">
   <div class="pub-left">
     <div class="pub-thumb-wrap">
-      <div class="pub-thumb" style="background:linear-gradient(135deg,#7c2d12,#ea580c);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border-radius:6px;">
-        <span style="font-size:1.3em;">🔬</span>
-        <span style="font-size:0.55em;font-weight:800;color:#fff;letter-spacing:.03em;text-align:center;line-height:1.2;">ICML
-2022</span>
+      <div class="pub-thumb" style="background:linear-gradient(135deg,#7c2d12,#ea580c);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;border-radius:6px;">
+        <span style="font-size:1.8em;">🔬</span>
       </div>
     </div>
     <span class="pb pb-icml">ICML 2022</span><span class="pub-year">2022</span></div>
