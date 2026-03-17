@@ -250,7 +250,7 @@ footer a{color:var(--accent);font-weight:600}
 <!-- Method Figure -->
 <section>
   <figure style="margin:0">
-    <img src="images/method.png" alt="ORW-CFM-W2 Method Architecture"
+    <img loading="lazy" src="images/method.png" alt="ORW-CFM-W2 Method Architecture"
          style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
     <figcaption style="text-align:center;font-size:0.82em;color:#666;margin-top:12px;line-height:1.6">
       <strong>Figure 1.</strong> ORW-CFM-W2 architecture. Online reward-weighted fine-tuning guides the flow matching model toward high-reward regions, while Wasserstein-2 regularization (W2) prevents policy collapse and maintains generative diversity throughout training.
@@ -331,7 +331,7 @@ footer a{color:var(--accent);font-weight:600}
   <h2>🎨 Visual Results on SD3</h2>
 
   <figure style="margin:0 0 24px">
-    <img src="images/positional.png" alt="Positional understanding results"
+    <img loading="lazy" src="images/positional.png" alt="Positional understanding results"
          style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
     <figcaption style="text-align:center;font-size:0.82em;color:#666;margin-top:10px;line-height:1.6">
       <strong>Figure 2.</strong> Spatial/positional understanding. ORW-CFM-W2 enables SD3 to correctly handle complex positional prompts that the base model fails on.
@@ -340,14 +340,14 @@ footer a{color:var(--accent);font-weight:600}
 
   <div class="fig-grid-2">
     <figure style="margin:0">
-      <img src="images/multi_baseline.png" alt="Multi-baseline comparison"
+      <img loading="lazy" src="images/multi_baseline.png" alt="Multi-baseline comparison"
            style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
       <figcaption style="text-align:center;font-size:0.78em;color:#666;margin-top:8px">
         <strong>Figure 3.</strong> Comparison with multiple baselines on target image generation.
       </figcaption>
     </figure>
     <figure style="margin:0">
-      <img src="images/multi_reward.png" alt="Multi-reward optimization"
+      <img loading="lazy" src="images/multi_reward.png" alt="Multi-reward optimization"
            style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
       <figcaption style="text-align:center;font-size:0.78em;color:#666;margin-top:8px">
         <strong>Figure 4.</strong> Multi-reward optimization across diverse prompts and reward signals.
@@ -356,7 +356,7 @@ footer a{color:var(--accent);font-weight:600}
   </div>
 
   <figure style="margin:24px 0 0">
-    <img src="images/semantic.png" alt="Semantic detail enhancement"
+    <img loading="lazy" src="images/semantic.png" alt="Semantic detail enhancement"
          style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
     <figcaption style="text-align:center;font-size:0.82em;color:#666;margin-top:10px;line-height:1.6">
       <strong>Figure 5.</strong> Semantic detail enhancement. Fine-tuned SD3 generates images with richer detail and better semantic correspondence.
@@ -368,7 +368,7 @@ footer a{color:var(--accent);font-weight:600}
 <section>
   <h2>🔗 Unified RL Framework</h2>
   <figure style="margin:0 0 24px">
-    <img src="images/rl_framework.png" alt="RL framework for flow matching"
+    <img loading="lazy" src="images/rl_framework.png" alt="RL framework for flow matching"
          style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
     <figcaption style="text-align:center;font-size:0.82em;color:#666;margin-top:10px;line-height:1.6">
       <strong>Figure 6.</strong> Unified RL perspective on flow matching fine-tuning. We establish a formal connection between flow matching optimization and KL-regularized reinforcement learning, providing theoretical grounding for reward-diversity trade-offs.
@@ -382,14 +382,14 @@ footer a{color:var(--accent);font-weight:600}
   <p style="font-size:0.88em;color:#555;margin-bottom:16px;">Controlled experiments on MNIST and CIFAR demonstrate the reward-diversity trade-off controlled by the W2 regularization strength α:</p>
   <div class="fig-grid-2">
     <figure style="margin:0">
-      <img src="images/mnist_reward.png" alt="MNIST reward curves"
+      <img loading="lazy" src="images/mnist_reward.png" alt="MNIST reward curves"
            style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
       <figcaption style="text-align:center;font-size:0.78em;color:#666;margin-top:8px">
         <strong>Figure 7.</strong> MNIST reward curves across different α values — higher α preserves more diversity.
       </figcaption>
     </figure>
     <figure style="margin:0">
-      <img src="images/cifar_reward.png" alt="CIFAR reward tradeoff"
+      <img loading="lazy" src="images/cifar_reward.png" alt="CIFAR reward tradeoff"
            style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
       <figcaption style="text-align:center;font-size:0.78em;color:#666;margin-top:8px">
         <strong>Figure 8.</strong> CIFAR reward vs. W2 distance Pareto front — smooth, controllable trade-off.
@@ -398,14 +398,14 @@ footer a{color:var(--accent);font-weight:600}
   </div>
   <div class="fig-grid-2">
     <figure style="margin:0">
-      <img src="images/cifar_w2.png" alt="CIFAR W2 tradeoff"
+      <img loading="lazy" src="images/cifar_w2.png" alt="CIFAR W2 tradeoff"
            style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
       <figcaption style="text-align:center;font-size:0.78em;color:#666;margin-top:8px">
         <strong>Figure 9.</strong> W2 distance evolution during training — regularization effectively prevents mode collapse.
       </figcaption>
     </figure>
     <figure style="margin:0">
-      <img src="images/cifar_text_reward.png" alt="CIFAR text reward"
+      <img loading="lazy" src="images/cifar_text_reward.png" alt="CIFAR text reward"
            style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
       <figcaption style="text-align:center;font-size:0.78em;color:#666;margin-top:8px">
         <strong>Figure 10.</strong> Text-conditional CIFAR: reward improvement with controlled diversity preservation.
@@ -420,34 +420,34 @@ footer a{color:var(--accent);font-weight:600}
   <p style="font-size:0.88em;color:#555;margin-bottom:16px;">The regularization strength α provides a smooth knob between pure reward maximization (α=0) and full diversity preservation (α=1):</p>
   <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px;">
     <figure style="margin:0;text-align:center">
-      <img src="images/mnist_alpha0.png" alt="α=0"
+      <img loading="lazy" src="images/mnist_alpha0.png" alt="α=0"
            style="width:100%;border-radius:8px;border:1px solid #e0e8f0;">
       <figcaption style="font-size:0.75em;color:#666;margin-top:6px"><strong>α = 0</strong><br>Pure reward (mode collapse)</figcaption>
     </figure>
     <figure style="margin:0;text-align:center">
-      <img src="images/mnist_alpha03.png" alt="α=0.3"
+      <img loading="lazy" src="images/mnist_alpha03.png" alt="α=0.3"
            style="width:100%;border-radius:8px;border:1px solid #e0e8f0;">
       <figcaption style="font-size:0.75em;color:#666;margin-top:6px"><strong>α = 0.3</strong><br>Balanced (recommended)</figcaption>
     </figure>
     <figure style="margin:0;text-align:center">
-      <img src="images/mnist_alpha08.png" alt="α=0.8"
+      <img loading="lazy" src="images/mnist_alpha08.png" alt="α=0.8"
            style="width:100%;border-radius:8px;border:1px solid #e0e8f0;">
       <figcaption style="font-size:0.75em;color:#666;margin-top:6px"><strong>α = 0.8</strong><br>High diversity preserved</figcaption>
     </figure>
   </div>
   <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;">
     <figure style="margin:0;text-align:center">
-      <img src="images/dog_base.png" alt="SD3 Base"
+      <img loading="lazy" src="images/dog_base.png" alt="SD3 Base"
            style="width:100%;border-radius:8px;border:1px solid #e0e8f0;">
       <figcaption style="font-size:0.75em;color:#666;margin-top:6px"><strong>SD3 Base</strong><br>Before fine-tuning</figcaption>
     </figure>
     <figure style="margin:0;text-align:center">
-      <img src="images/dog_05.png" alt="α=0.5"
+      <img loading="lazy" src="images/dog_05.png" alt="α=0.5"
            style="width:100%;border-radius:8px;border:1px solid #e0e8f0;">
       <figcaption style="font-size:0.75em;color:#666;margin-top:6px"><strong>α = 0.5</strong><br>Balanced fine-tuning</figcaption>
     </figure>
     <figure style="margin:0;text-align:center">
-      <img src="images/dog_10.png" alt="α=1.0"
+      <img loading="lazy" src="images/dog_10.png" alt="α=1.0"
            style="width:100%;border-radius:8px;border:1px solid #e0e8f0;">
       <figcaption style="font-size:0.75em;color:#666;margin-top:6px"><strong>α = 1.0</strong><br>Full reward optimization</figcaption>
     </figure>

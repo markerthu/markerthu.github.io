@@ -246,7 +246,7 @@ footer a{color:var(--accent);font-weight:600}
 <!-- Teaser Figure -->
 <section>
   <figure style="margin:0">
-    <img src="images/teaser.png" alt="ADRPO Qualitative Results — 2B vs 12B"
+    <img loading="lazy" src="images/teaser.png" alt="ADRPO Qualitative Results — 2B vs 12B"
          style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
     <figcaption style="text-align:center;font-size:0.82em;color:#666;margin-top:12px;line-height:1.6">
       <strong>Figure 1.</strong> Qualitative comparison. Our 2B SD3 model fine-tuned with ADRPO matches or outperforms FLUX.1-Dev (12B) and SANA-1.5 (4.8B) on artistic style rendering, attribute binding, coloring, and compositional control — with 2–6× fewer parameters.
@@ -319,7 +319,7 @@ footer a{color:var(--accent);font-weight:600}
   <p style="font-size:0.88em;color:#666;">Evaluated on text-to-image generation tasks: attribute binding, semantic consistency, artistic style transfer, and compositional control.</p>
 
   <figure style="margin:24px 0 0">
-    <img src="images/comparison.png" alt="ADRPO vs other RL methods"
+    <img loading="lazy" src="images/comparison.png" alt="ADRPO vs other RL methods"
          style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
     <figcaption style="text-align:center;font-size:0.82em;color:#666;margin-top:12px;line-height:1.6">
       <strong>Figure 2.</strong> Comparison with RL fine-tuning baselines (DPO, ORW-CFM-W2). ADRPO achieves superior style fidelity, spatial reasoning, and attribute binding.
@@ -331,7 +331,7 @@ footer a{color:var(--accent);font-weight:600}
 <section>
   <h2>📈 Reward–Diversity Tradeoff</h2>
   <figure style="margin:0">
-    <img src="images/reward_kl.png" alt="Reward vs KL tradeoff"
+    <img loading="lazy" src="images/reward_kl.png" alt="Reward vs KL tradeoff"
          style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
     <figcaption style="text-align:center;font-size:0.82em;color:#666;margin-top:10px;line-height:1.6">
       <strong>Figure 3.</strong> Reward vs. KL divergence tradeoff. ADRPO achieves <em>higher reward at lower KL</em> than fixed-regularization baselines — demonstrating that adaptive control finds a better exploration–exploitation balance.
@@ -345,14 +345,14 @@ footer a{color:var(--accent);font-weight:600}
   <p style="font-size:0.88em;color:#555;margin-bottom:16px;">The core insight: fixed-KL methods force a single regularization strength across all samples. ADRPO adaptively adjusts — easy samples get tighter control, hard samples get more freedom.</p>
   <div class="fig-grid-2">
     <figure style="margin:0">
-      <img src="images/reward_vs_diversity.png" alt="Reward vs diversity"
+      <img loading="lazy" src="images/reward_vs_diversity.png" alt="Reward vs diversity"
            style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
       <figcaption style="text-align:center;font-size:0.78em;color:#666;margin-top:8px">
         <strong>Figure 4.</strong> Reward vs. diversity Pareto front. ADRPO achieves <strong>higher reward at any given diversity level</strong>.
       </figcaption>
     </figure>
     <figure style="margin:0">
-      <img src="images/reward_vs_kl.png" alt="Reward vs KL"
+      <img loading="lazy" src="images/reward_vs_kl.png" alt="Reward vs KL"
            style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
       <figcaption style="text-align:center;font-size:0.78em;color:#666;margin-top:8px">
         <strong>Figure 5.</strong> Reward vs. KL divergence. ADRPO achieves the same reward at <strong>lower KL</strong> — more efficient exploration.
@@ -365,14 +365,14 @@ footer a{color:var(--accent);font-weight:600}
 <section>
   <h2>🎨 More Qualitative Results</h2>
   <figure style="margin:0 0 20px">
-    <img src="images/app_compare_models.png" alt="Extended comparison with larger models"
+    <img loading="lazy" src="images/app_compare_models.png" alt="Extended comparison with larger models"
          style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
     <figcaption style="text-align:center;font-size:0.82em;color:#666;margin-top:10px;line-height:1.6">
       <strong>Figure 4.</strong> Extended comparison — ADRPO's 2B SD3 vs. FLUX.1-Dev (12B) and SANA-1.5 (4.8B) on additional prompts. ADRPO consistently matches or outperforms models with 2–6× more parameters.
     </figcaption>
   </figure>
   <figure style="margin:0 0 20px">
-    <img src="images/app_compare_methods.png" alt="Extended comparison with RL methods"
+    <img loading="lazy" src="images/app_compare_methods.png" alt="Extended comparison with RL methods"
          style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
     <figcaption style="text-align:center;font-size:0.82em;color:#666;margin-top:10px;line-height:1.6">
       <strong>Figure 5.</strong> Extended RL method comparison — ADRPO vs. DPO and ORW-CFM-W2 on diverse T2I tasks.
@@ -386,14 +386,14 @@ footer a{color:var(--accent);font-weight:600}
   <p style="font-size:0.88em;color:#555;margin-bottom:16px;">ADRPO is not limited to image generation — it generalizes to LLM fine-tuning tasks. Tested on Qwen2 and Qwen3:</p>
   <div class="fig-grid-2">
     <figure style="margin:0">
-      <img src="images/llm_reward_entropy.png" alt="LLM reward vs entropy (Qwen2)"
+      <img loading="lazy" src="images/llm_reward_entropy.png" alt="LLM reward vs entropy (Qwen2)"
            style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
       <figcaption style="text-align:center;font-size:0.78em;color:#666;margin-top:8px">
         <strong>Figure 8.</strong> Qwen2: ADRPO achieves higher reward while maintaining generation diversity.
       </figcaption>
     </figure>
     <figure style="margin:0">
-      <img src="images/llm_qwen3_entropy.png" alt="LLM reward vs entropy (Qwen3)"
+      <img loading="lazy" src="images/llm_qwen3_entropy.png" alt="LLM reward vs entropy (Qwen3)"
            style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
       <figcaption style="text-align:center;font-size:0.78em;color:#666;margin-top:8px">
         <strong>Figure 9.</strong> Qwen3: consistent advantage — ADRPO's adaptive regularization generalizes across model families.

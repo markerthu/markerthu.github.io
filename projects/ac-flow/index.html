@@ -260,6 +260,17 @@ footer a{color:var(--accent);font-weight:600}
 </section>
 
 <section>
+  <h2>🧩 Why Intermediate Rewards Matter</h2>
+  <p>Standard RLHF for flow matching gives feedback only at the <strong>end of the denoising chain</strong> — a sparse signal over many steps. AC-Flow instead assigns <em>intermediate rewards</em> at each timestep via an actor-critic formulation:</p>
+  <ul style="font-size:0.88em;color:#444;padding-left:1.4em;line-height:2;margin-bottom:14px;">
+    <li><strong>Denser gradients</strong> → more stable learning, fewer catastrophic updates</li>
+    <li><strong>Critic as a value estimator</strong> → predicts future reward quality at each denoising step</li>
+    <li><strong>Decoupled stability</strong> → advantage clipping handles actor; critic warm-up handles the critic</li>
+  </ul>
+  <p>The result: fine-tuning that <strong>generalizes beyond direct reward optimization</strong> — improvements transfer to unseen LLM and audio tasks (not just image generation).</p>
+</section>
+
+<section>
   <h2>🔄 AC-Flow vs ORW-CFM-W2</h2>
   <div class="compare-cards">
     <div class="cc cc-old">
