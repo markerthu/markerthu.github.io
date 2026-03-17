@@ -240,7 +240,7 @@ redirect_from:
 
 /* ── Featured projects grid ── */
 .featured-grid {
-  display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 1.8em;
+  display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-bottom: 1.8em;
 }
 .featured-card {
   border-radius: 12px; overflow: hidden;
@@ -637,7 +637,7 @@ img[loading="lazy"].loaded, img[loading="lazy"][complete] {
 /* ── Responsive ── */
 @media(max-width:760px) {
   .research-grid { grid-template-columns: 1fr 1fr; }
-  .featured-grid { grid-template-columns: 1fr 1fr; }
+  .featured-grid { grid-template-columns: 1fr 1fr; }  /* 2-col on tablet */
 }
 @media(max-width:480px) {
   .hero-name { font-size: 1.65em; }
@@ -760,6 +760,7 @@ body.dark-mode .gl-item { color: #8b949e; }
   <a href="#awards"       data-qn="awards">🏅 Awards</a>
   <a href="/year-archive/">✍️ Blog</a>
   <a href="files/CV.pdf">📋 CV</a>
+  <a href="#contact">📬 Contact</a>
 </div>
 
 <!-- Intro -->
@@ -850,6 +851,19 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>. My research focu
       <div class="featured-stat">✨ First online RLHF for flow matching</div>
     </div>
   </a>
+  <a class="featured-card" href="/projects/lbc/">
+    <div class="featured-img" style="background:linear-gradient(135deg,#2d1b5e 0%,#7c3aed 45%,#c084fc 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;">
+      <div style="font-size:2.2em;line-height:1;">🏅</div>
+      <div style="font-size:0.75em;font-weight:800;color:#fff;letter-spacing:.05em;text-align:center;">ATARI WORLD<br>RECORDS</div>
+      <div style="font-size:1.4em;font-weight:900;color:#fde68a;">×24</div>
+    </div>
+    <div class="featured-body">
+      <span class="featured-venue" style="background:#7c3aed;color:#fff;font-size:0.68em;font-weight:800;letter-spacing:.04em;border-radius:12px;padding:2px 9px;">ICLR 2023 · Oral</span>
+      <div class="featured-title">LBC: Superhuman Atari — 24 World Records</div>
+      <div class="featured-desc">Breaking 24 Atari human world records with 500× less data than prior SOTA (Agent57).</div>
+      <div class="featured-stat">🏅 Rank 5/4176 · 10,077% mean human performance</div>
+    </div>
+  </a>
 </div>
 
 <!-- ══════════════════ CONFERENCE DEADLINES ══════════════════ -->
@@ -927,7 +941,6 @@ I am a Computer Science Ph.D. student at <strong>UIUC</strong>. My research focu
       <div class="pub-hl">📊 SOTA 79.36% Top-1 on ImageNet-1K with ResNet-50</div><div class="pub-abstract-preview">VarCon reformulates supervised contrastive learning as variational inference, achieving SOTA 79.36% Top-1 accuracy on ImageNet-1K with ResNet-50.</div></div>
     <div class="pub-authors">Z. Wang, <strong>J. Fan</strong>, T. Nguyen, H. Ji, G. Liu</div>
     <div class="pub-desc">VarCon: supervised contrastive learning as variational inference — posterior-weighted ELBO replaces pairwise comparisons.</div>
-    <div class="pub-hl">📊 SOTA 79.36% Top-1 on ImageNet-1K (ResNet-50)</div>
   </div>
 </div>
 
@@ -1533,8 +1546,13 @@ window.addEventListener('scroll', function(){
         }
       }
     }
-    requestAnimationFrame(draw);
+    if(!document.hidden) requestAnimationFrame(draw);
   }
+  var _rafId = null;
+  function startDraw(){ if(!_rafId) _rafId = requestAnimationFrame(draw); }
+  document.addEventListener('visibilitychange', function(){
+    if(document.hidden){ _rafId = null; } else { startDraw(); }
+  });
   draw();
 })();
 
@@ -1698,13 +1716,22 @@ function filterByVenue(btn, venue) {
   var container = document.getElementById('research-graph');
   if(!container) return;
 
-  /* Load D3 then draw */
-  /* Load D3 asynchronously — non-blocking */
-  var s = document.createElement('script');
-  s.src = 'https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js';
-  s.async = true;
-  s.onload = function(){ drawGraph(container); };
-  document.head.appendChild(s);
+  /* Load D3 only when graph section enters viewport */
+  var loaded = false;
+  function loadD3(){
+    if(loaded) return; loaded = true;
+    var s = document.createElement('script');
+    s.src = 'https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js';
+    s.async = true;
+    s.onload = function(){ drawGraph(container); };
+    document.head.appendChild(s);
+  }
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      if(entries[0].isIntersecting){ loadD3(); io.disconnect(); }
+    }, {rootMargin:'200px'});
+    io.observe(container);
+  } else { loadD3(); }
 })();
 
 function drawGraph(container) {
