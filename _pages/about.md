@@ -1039,7 +1039,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 </div>
 
 <!-- ═══════════════════════════════ STATS ═══════════════════════════════ -->
-<div class="section-header">⚡ Impact at a Glance</div>
+<div class="section-header" id="impact">⚡ Impact at a Glance</div>
 
 <div class="stats-row">
   <div class="stat-card">
@@ -1069,7 +1069,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 </div>
 
 <!-- ═══════════════════════════════ VISION ════════════════════════════ -->
-<div class="section-header">💡 Research Vision</div>
+<div class="section-header" id="vision">💡 Research Vision</div>
 
 <blockquote style="background:#f8f4ff;border-left:4px solid #7c4dff;border-radius:0 8px 8px 0;padding:14px 20px;color:#333;font-style:normal;margin-bottom:1em;">
 <p style="margin:0 0 6px;font-weight:800;color:#4a148c;font-size:1em;">Making AI Systems That Improve Themselves</p>
@@ -1220,7 +1220,7 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
 })();
 </script>
 
-<div class="section-header">📬 Contact</div>
+<div class="section-header" id="contact">📬 Contact</div>
 <p style="font-size:0.94em;">
 Happy to discuss research, internships, or collaborations. Best reached by email.<br>
 📧 <a href="mailto:jiajunf3@illinois.edu"><strong>jiajunf3@illinois.edu</strong></a> &nbsp;·&nbsp;
@@ -1292,6 +1292,8 @@ Happy to discuss research, internships, or collaborations. Best reached by email
       a:"AC-Flow (preprint) introduces actor-critic with intermediate timestep feedback for flow matching. The dual-stability mechanism combines advantage clipping with critic warm-up, enabling robust SD3 fine-tuning without reward hacking." },
     { kw:['prance','token pruning','channel pruning','vit','tpami','efficient inference'],
       a:"PRANCE (IEEE TPAMI 2026, Vol. 48) jointly optimizes token pruning and structural channel pruning for adaptive ViT inference — ~50% FLOP reduction, retaining only ~10% tokens with lossless Top-1 accuracy." },
+    { kw:['sp-vla','spvla','sp vla','vla','robot','vision language action','token pruning','model scheduling'],
+      a:"SP-VLA (ICLR 2026) accelerates Vision-Language-Action models via joint model scheduling and spatio-semantic token pruning. It achieves 1.5× lossless speedup on LIBERO and 2.4× on SimplerEnv. Co-first author with Zhuoran Li et al." },
     { kw:['varcon','variational contrastive','supervised contrastive','imagenet','resnet'],
       a:"VarCon (NeurIPS 2025) reformulates supervised contrastive learning as variational inference, introducing a principled probabilistic framework. Achieves SOTA 79.36% Top-1 accuracy on ImageNet-1K with ResNet-50." },
     { kw:['sp-vla','vla','robot','vision language action','token pruning acceleration'],
