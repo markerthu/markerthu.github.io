@@ -8,6 +8,8 @@ tags:
   - generative models
   - flow matching
 excerpt: "A deep dive into why fixed regularization in RLHF leads to diversity collapse, and how adaptive sample-level control resolves the exploration-exploitation dilemma."
+header:
+  og_image: "/images/profile.jpg"
 ---
 
 > RLHF fine-tuning of generative models faces a fundamental tension: you want to maximize reward (make outputs better), but doing so aggressively destroys the diversity of what the model can produce. This post explains why this happens, why it's hard to fix with a single hyperparameter, and how advantage-based adaptive regularization provides a principled solution.

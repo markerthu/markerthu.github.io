@@ -8,6 +8,8 @@ tags:
   - reasoning
   - test-time scaling
 excerpt: "Chain-of-thought reasoning helps text LLMs but hurts Audio LLMs. This post explains why — and how process rewards fix it."
+header:
+  og_image: "/projects/cesar/images/teaser.png"
 ---
 
 > Chain-of-thought prompting has transformed text-based LLMs. Models like OpenAI o1 and DeepSeek-R1 show that explicit reasoning dramatically improves performance. But something counterintuitive happens in Audio LLMs: **more reasoning makes things worse.** This post explains why, what's actually going wrong inside the reasoning chains, and how process-level rewards resolve the issue.

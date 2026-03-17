@@ -28,6 +28,11 @@ author_profile: true
 .contact-card .cc-link { font-size: 0.88em; }
 .contact-card .cc-link a { color: #1565c0; word-break: break-word; }
 @media (max-width: 520px) { .contact-grid { grid-template-columns: 1fr; } }
+/* Dark mode */
+body.dark-mode .contact-card { background: #161b22 !important; border-color: #30363d !important; }
+body.dark-mode .contact-card:hover { border-color: #388bfd !important; box-shadow: 0 4px 14px rgba(56,139,253,0.15) !important; }
+body.dark-mode .cc-title { color: #e6edf3 !important; }
+body.dark-mode .cc-link a { color: #58a6ff !important; }
 </style>
 
 I'm always happy to chat about research, collaborations, or internship opportunities.
@@ -62,6 +67,11 @@ I'm always happy to chat about research, collaborations, or internship opportuni
     <div class="cc-icon">📄</div>
     <div class="cc-title">ORCID</div>
     <div class="cc-link"><a href="https://orcid.org/0000-0002-0263-2103">0000-0002-0263-2103</a></div>
+  </div>
+  <div class="contact-card">
+    <div class="cc-icon">🔬</div>
+    <div class="cc-title">OpenReview</div>
+    <div class="cc-link"><a href="https://openreview.net/profile?id=~Jiajun_Fan1">~Jiajun_Fan1</a></div>
   </div>
 </div>
 
