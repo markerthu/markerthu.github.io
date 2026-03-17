@@ -111,6 +111,15 @@ redirect_from:
 .pb-arxiv  { background: #546e7a; color: #fff; }
 .pub-year  { font-size: 0.77em; color: #bbb; font-weight: 700; }
 .pub-title { font-weight: 700; font-size: 0.95em; color: #1a2332; line-height: 1.4; }
+.pub-abst-btn {
+  display: inline-block; margin-left: 6px; font-size: 0.72em; font-weight: 700;
+  color: #1565c0; cursor: pointer; background: #dbeafe; border-radius: 8px;
+  padding: 1px 7px; vertical-align: middle; user-select: none;
+  transition: background .15s; border: none;
+}
+.pub-abst-btn:hover { background: #bfdbfe; }
+body.dark-mode .pub-abst-btn { background: #1e3a5f; color: #93c5fd; }
+body.dark-mode .pub-abst-btn:hover { background: #1e40af; }
 .pub-title a { color: #1565c0; text-decoration: none; }
 .pub-title a:hover { text-decoration: underline; }
 .pub-authors { font-size: 0.81em; color: #777; margin-top: 3px; }
@@ -904,6 +913,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
     <div class="pub-title">
       <a href="https://openreview.net/forum?id=DUr48hxO2h" target="_blank" rel="noopener noreferrer">Incentivizing Consistent, Effective and Scalable Reasoning Capability in Audio LLMs via Reasoning Process Rewards</a>
       <a class="pub-project" href="/projects/cesar/">Project Page</a>
+    <button class="pub-abst-btn" aria-expanded="false" aria-label="Toggle abstract">▾ Abstract</button>
     <div class="pub-abstract-preview">CESAR resolves test-time inverse scaling in Audio LLMs by rewarding the reasoning process via GRPO, achieving SOTA on MMAU — outperforming Gemini 2.5 Pro and GPT-4o Audio.</div></div>
     <div class="pub-authors"><strong>J. Fan*</strong>, R. Ren, J. Li, R. Pandey, P.G. Shivakumar, A. Gandhe, G. Liu, Y. Gu, I. Bulyko</div>
     <div class="pub-desc">CESAR: process-reward RL (GRPO) resolving test-time inverse scaling in Audio LLMs — models produce hallucinatory reasoning without proper guidance; CESAR rewrites that.</div>
@@ -941,6 +951,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
     <div class="pub-title">
       <a href="https://openreview.net/forum?id=aXO0xg0ttW" target="_blank" rel="noopener noreferrer">Adaptive Divergence Regularized Policy Optimization for Fine-tuning Generative Models</a>
       <a class="pub-project" href="/projects/adrpo/">Project Page</a>
+    <button class="pub-abst-btn" aria-expanded="false" aria-label="Toggle abstract">▾ Abstract</button>
     <div class="pub-abstract-preview">ADRPO introduces sample-level adaptive divergence regularization for RLHF — high-value samples get more freedom, poor samples get stronger constraints. Plug-and-play on any RL method.</div></div>
     <div class="pub-authors"><strong>J. Fan*</strong>, T. Wei, C. Cheng, Y. Chen, G. Liu</div>
     <div class="pub-desc">ADRPO: sample-level adaptive divergence regularization — high-value samples get more freedom, poor samples get stronger constraint. Plug-and-play on top of any RLHF method.</div>
@@ -979,6 +990,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
       <a href="https://openreview.net/forum?id=2IoFFexvuw" target="_blank" rel="noopener noreferrer">Online Reward-Weighted Fine-Tuning of Flow Matching with Wasserstein Regularization</a>
       <a class="pub-project" href="/projects/orw-cfm-w2/">Project Page</a>
       <div class="pub-hl">🥇 First online RLHF for flow matching · Collapse-free W2 regularization</div>
+    <button class="pub-abst-btn" aria-expanded="false" aria-label="Toggle abstract">▾ Abstract</button>
     <div class="pub-abstract-preview">ORW-CFM-W2 is the first online RLHF method for flow matching — no human data, no likelihood estimation. Wasserstein regularization maintains generation diversity.</div></div>
     <div class="pub-authors"><strong>J. Fan*</strong>, S. Shen, C. Cheng, Y. Chen, C. Liang, G. Liu</div>
     <div class="pub-desc">ORW-CFM-W2: first online RLHF for flow matching — no human data, no likelihood, no collapse. W2 regularization keeps generation diverse.</div>
@@ -1000,6 +1012,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
       <a href="https://arxiv.org/abs/2510.18072" target="_blank" rel="noopener noreferrer">Fine-tuning Flow Matching Generative Models with Intermediate Feedback</a>
       <a class="pub-project" href="/projects/ac-flow/">Project Page</a>
       <div class="pub-hl">⚙️ Actor-critic with step-level reward · Stable SD3 fine-tuning without collapse</div>
+    <button class="pub-abst-btn" aria-expanded="false" aria-label="Toggle abstract">▾ Abstract</button>
     <div class="pub-abstract-preview">AC-Flow introduces actor-critic with intermediate feedback for flow matching — reward shaping + dual-stability mechanism + Wasserstein regularization enables robust SD3 fine-tuning without collapse.</div></div>
     <div class="pub-authors"><strong>J. Fan*</strong>, C. Cheng, S. Shen, X. Zhou, G. Liu &nbsp;·&nbsp; <em>Under Review</em></div>
     <div class="pub-desc">AC-Flow: actor-critic with intermediate feedback for flow matching — reward shaping + dual-stability + Wasserstein regularization. Robust fine-tuning on SD3 without collapse.</div>
@@ -1037,6 +1050,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
     <div class="pub-title">
       <a href="https://openreview.net/forum?id=FeWvD0L_a4" target="_blank" rel="noopener noreferrer">Learnable Behavior Control: Breaking Atari Human World Records via Sample-Efficient Behavior Selection</a>
       <a class="pub-project" href="/projects/lbc/">Project Page</a>
+    <button class="pub-abst-btn" aria-expanded="false" aria-label="Toggle abstract">▾ Abstract</button>
     <div class="pub-abstract-preview">LBC introduces a learnable hybrid behavior mapping and bandit meta-controller for exploration control in deep RL, breaking 24 Atari human world records with 500× less data than prior SOTA.</div></div>
     <div class="pub-authors"><strong>J. Fan*</strong>, Y. Zhuang, Y. Liu, J. Hao, B. Wang, J. Zhu, H. Wang, S.-T. Xia</div>
     <div class="pub-desc">LBC: learnable hybrid behavior mapping + bandit meta-controller. Unified framework for exploration control in deep RL.</div>
@@ -1058,6 +1072,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
     <div class="pub-title">
       <a href="https://proceedings.mlr.press/v162/fan22c.html" target="_blank" rel="noopener noreferrer">Generalized Data Distribution Iteration</a>
       <a class="pub-project" href="/projects/gdi/">Project Page</a>
+    <button class="pub-abst-btn" aria-expanded="false" aria-label="Toggle abstract">▾ Abstract</button>
     <div class="pub-abstract-preview">GDI shows that optimizing the training data distribution is the key lever for superhuman RL efficiency. Provides a unified framework that subsumes diverse RL algorithms as special cases.</div></div>
     <div class="pub-authors"><strong>J. Fan*</strong>, C. Xiao</div>
     <div class="pub-desc">GDI: optimizing the data distribution is the key to superhuman RL efficiency. Unified framework for diverse RL algorithms.</div>
@@ -1624,9 +1639,28 @@ document.querySelectorAll('.pub-entry').forEach(function(entry){
     var isOpen = entry.classList.contains('abstract-open');
     document.querySelectorAll('.pub-entry.abstract-open').forEach(function(el){
       el.classList.remove('abstract-open');
+      el.querySelectorAll('.pub-abst-btn').forEach(function(b){ b.textContent = '▾ Abstract'; b.setAttribute('aria-expanded','false'); });
     });
-    if(!isOpen) entry.classList.add('abstract-open');
+    if(!isOpen){
+      entry.classList.add('abstract-open');
+      entry.querySelectorAll('.pub-abst-btn').forEach(function(b){ b.textContent = '▴ Hide'; b.setAttribute('aria-expanded','true'); });
+    }
   }, {passive: true});
+  /* Click toggle for keyboard/mouse users */
+  entry.querySelectorAll('.pub-abst-btn').forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var isOpen = entry.classList.contains('abstract-open');
+      document.querySelectorAll('.pub-entry.abstract-open').forEach(function(el){
+        el.classList.remove('abstract-open');
+        el.querySelectorAll('.pub-abst-btn').forEach(function(b){ b.textContent = '▾ Abstract'; });
+      });
+      if(!isOpen){
+        entry.classList.add('abstract-open');
+        btn.textContent = '▴ Hide';
+      }
+    });
+  });
 });
 
 /* ── Lazy load fade-in ── */
