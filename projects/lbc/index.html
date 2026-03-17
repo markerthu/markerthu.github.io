@@ -344,7 +344,28 @@ footer a{color:var(--accent);font-weight:600}
 </section>
 
 <section>
-  <h2>📅 Publication Journey</h2>
+  <h2>📊 Quantitative Comparison</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:14px 0 20px;font-size:0.84em;">
+  <div style="background:#f5f3ff;border:1.5px solid #ddd6fe;border-radius:10px;padding:12px 14px;">
+    <div style="font-weight:800;color:#4c1d95;margin-bottom:6px;">LBC (Ours)</div>
+    <div>📈 <strong>10,077%</strong> mean human-normalized score</div>
+    <div>🎯 <strong>24</strong> world records</div>
+    <div>⚡ <strong>1B</strong> training frames</div>
+  </div>
+  <div style="background:#f8faff;border:1.5px solid #e5e7eb;border-radius:10px;padding:12px 14px;">
+    <div style="font-weight:800;color:#374151;margin-bottom:6px;">Agent57 (Prior SOTA)</div>
+    <div>📈 <strong>4,359%</strong> mean human-normalized score</div>
+    <div>🎯 <strong>0</strong> world records</div>
+    <div>⚡ <strong>500B+</strong> training frames (500× more)</div>
+  </div>
+  <div style="background:#f8faff;border:1.5px solid #e5e7eb;border-radius:10px;padding:12px 14px;">
+    <div style="font-weight:800;color:#374151;margin-bottom:6px;">R2D2</div>
+    <div>📈 <strong>4,038%</strong> mean human-normalized score</div>
+    <div>⚡ <strong>78B</strong> training frames</div>
+  </div>
+</div>
+
+<h2>📅 Publication Journey</h2>
   <div style="position:relative;padding-left:24px;margin:8px 0">
     <div style="position:absolute;left:8px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,#1565c0,#a5d6a7)"></div>
     <div style="position:relative;margin-bottom:18px;padding-left:4px">
