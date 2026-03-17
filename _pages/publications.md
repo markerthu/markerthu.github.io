@@ -3,6 +3,7 @@ layout: archive
 title: "Publications"
 permalink: /publications/
 author_profile: true
+excerpt: "Full list of publications by Jiajun Fan — ICLR, NeurIPS, ICML, TPAMI papers."
 ---
 
 <style>

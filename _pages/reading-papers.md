@@ -3,6 +3,7 @@ layout: single
 title: "What's Happening in My Field"
 permalink: /blog/reading-papers/
 author_profile: false
+excerpt: "Papers Jiajun Fan is reading — latest arXiv papers in RL post-training, reasoning, and self-improvement."
 ---
 
 <style>
