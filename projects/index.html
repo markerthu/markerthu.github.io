@@ -48,6 +48,24 @@ a{text-decoration:none}
 .cl-arxiv{background:#fce4ec;color:#c62828}
 footer{background:#f5f7fa;color:#666;text-align:center;padding:24px;font-size:.84em;border-top:1px solid #e0e8f0}
 footer a{color:#1565c0}
+
+/* ── Dark mode ── */
+@media(prefers-color-scheme:dark){
+  body{background:#0d1117;color:#e6edf3}
+  .topnav,.hero{background:#161b22;border-color:#30363d}
+  .topnav a{color:#58a6ff}
+  .project-card{background:#161b22;border-color:#30363d}
+  .card-header h2{color:#e6edf3}
+  .card-header .authors{color:#8b949e}
+  .card-body p{color:#8b949e}
+  .cl-paper{background:#1e3a5f;color:#7dd3fc}
+  .cl-arxiv{background:#3b0020;color:#fca5a5}
+  footer{background:#161b22;border-color:#30363d;color:#8b949e}
+  footer a{color:#58a6ff}
+  .hero h1{color:#e6edf3}
+  .hero p{color:#8b949e}
+  .hl-tag{background:#2d2000;color:#fde68a}
+}
 @media(max-width:520px){.grid{grid-template-columns:1fr}}
 </style>
 </head>
