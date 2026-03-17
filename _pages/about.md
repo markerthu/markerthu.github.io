@@ -1280,7 +1280,9 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
 Happy to discuss research, internships, or collaborations. Best reached by email.<br>
 📧 <a href="mailto:jiajunf3@illinois.edu"><strong>jiajunf3@illinois.edu</strong></a> &nbsp;·&nbsp;
 🏛 Siebel Center for CS, UIUC &nbsp;·&nbsp;
-<a href="files/CV.pdf"><strong>CV (PDF)</strong></a>
+<a href="files/CV.pdf"><strong>CV (PDF)</strong></a> &nbsp;·&nbsp;
+<a href="https://www.linkedin.com/in/jiajun-fan-57b12b26b" target="_blank" rel="noopener noreferrer">💼 LinkedIn</a> &nbsp;·&nbsp;
+<a href="https://orcid.org/0000-0002-0263-2103" target="_blank" rel="noopener noreferrer">🔬 ORCID</a>
 </p>
 
 <!-- Footer -->
