@@ -662,6 +662,7 @@ img[loading="lazy"].loaded, img[loading="lazy"][complete] {
 /* ── Thumbnail placeholder: hide empty wrapper until image loads ── */
 .pub-thumb-wrap img { opacity: 0; transition: opacity .3s; }
 .pub-thumb-wrap img.loaded { opacity: 1; }
+.pub-thumb { width: 100%; aspect-ratio: 16/9; min-height: 80px; border-radius: 6px; }
 
 /* ── ① Citation count badge ── */
 .cite-badge {
@@ -909,7 +910,15 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 </div>
 
 <div class="pub-entry" data-venue="ICLR" data-year="2026" data-arxiv="SP-VLA" data-abstract="SP-VLA introduces action-aware model scheduling and spatio-semantic token pruning for VLA model acceleration, achieving 1.5× lossless speedup on LIBERO and 2.4× speedup on SimplerEnv.">
-  <div class="pub-left"><span class="pb pb-iclr">ICLR 2026</span><span class="pub-year">2026</span></div>
+  <div class="pub-left">
+    <div class="pub-thumb-wrap">
+      <div class="pub-thumb" style="background:linear-gradient(135deg,#0369a1,#0891b2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border-radius:6px;">
+        <span style="font-size:1.3em;">🤖</span>
+        <span style="font-size:0.55em;font-weight:800;color:#fff;letter-spacing:.03em;text-align:center;line-height:1.2;">ICLR
+2026</span>
+      </div>
+    </div>
+    <span class="pb pb-iclr">ICLR 2026</span><span class="pub-year">2026</span></div>
   <div class="pub-right">
     <div class="pub-title"><a href="https://openreview.net/forum?id=RwdGIIjPlC" target="_blank" rel="noopener noreferrer">SP-VLA: A Joint Model Scheduling and Token Pruning Approach for VLA Model Acceleration</a><div class="pub-abstract-preview">SP-VLA introduces action-aware model scheduling and spatio-semantic token pruning for VLA model acceleration, achieving 1.5× lossless speedup on LIBERO and 2.4× speedup on SimplerEnv.</div></div>
     <div class="pub-authors">Y. Li, Y. Meng, Z. Sun, K. Ji, C. Tang, <strong>J. Fan</strong>, X. Ma, S.-T. Xia, Z. Wang, W. Zhu</div>
@@ -938,7 +947,15 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 </div>
 
 <div class="pub-entry" data-venue="NeurIPS" data-year="2025" data-arxiv="VarCon" data-abstract="VarCon reformulates supervised contrastive learning as variational inference, achieving SOTA 79.36% Top-1 accuracy on ImageNet-1K with ResNet-50.">
-  <div class="pub-left"><span class="pb pb-neurips">NeurIPS 2025</span><span class="pub-year">2025</span></div>
+  <div class="pub-left">
+    <div class="pub-thumb-wrap">
+      <div class="pub-thumb" style="background:linear-gradient(135deg,#9d174d,#be185d);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border-radius:6px;">
+        <span style="font-size:1.3em;">📊</span>
+        <span style="font-size:0.55em;font-weight:800;color:#fff;letter-spacing:.03em;text-align:center;line-height:1.2;">NeurIPS
+2025</span>
+      </div>
+    </div>
+    <span class="pb pb-neurips">NeurIPS 2025</span><span class="pub-year">2025</span></div>
   <div class="pub-right">
     <div class="pub-title"><a href="https://openreview.net/forum?id=uOOlHOq500" target="_blank" rel="noopener noreferrer">Variational Supervised Contrastive Learning</a>
       <div class="pub-hl">📊 SOTA 79.36% Top-1 on ImageNet-1K with ResNet-50</div><div class="pub-abstract-preview">VarCon reformulates supervised contrastive learning as variational inference, achieving SOTA 79.36% Top-1 accuracy on ImageNet-1K with ResNet-50.</div></div>
@@ -962,7 +979,15 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 </div>
 
 <div class="pub-entry" data-venue="Preprint" data-year="2025" data-arxiv="2510.18072" data-abstract="AC-Flow introduces actor-critic with intermediate feedback for flow matching — reward shaping + dual-stability mechanism + Wasserstein regularization enables robust SD3 fine-tuning without collapse.">
-  <div class="pub-left"><span class="pb pb-arxiv">Preprint</span><span class="pub-year">2025</span></div>
+  <div class="pub-left">
+    <div class="pub-thumb-wrap">
+      <div class="pub-thumb" style="background:linear-gradient(135deg,#065f46,#059669);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border-radius:6px;">
+        <span style="font-size:1.3em;">⚙️</span>
+        <span style="font-size:0.55em;font-weight:800;color:#fff;letter-spacing:.03em;text-align:center;line-height:1.2;">arXiv
+2025</span>
+      </div>
+    </div>
+    <span class="pb pb-arxiv">Preprint</span><span class="pub-year">2025</span></div>
   <div class="pub-right">
     <div class="pub-title">
       <a href="https://arxiv.org/abs/2510.18072" target="_blank" rel="noopener noreferrer">Fine-tuning Flow Matching Generative Models with Intermediate Feedback</a>
@@ -975,7 +1000,15 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 </div>
 
 <div class="pub-entry" data-venue="TPAMI" data-year="2026" data-arxiv="2407.05010" data-abstract="PRANCE jointly optimizes token pruning and structural channel pruning for adaptive ViT inference, achieving significant speedup while maintaining accuracy.">
-  <div class="pub-left"><span class="pb pb-journal">TPAMI 2026</span><span class="pub-year">2026</span></div>
+  <div class="pub-left">
+    <div class="pub-thumb-wrap">
+      <div class="pub-thumb" style="background:linear-gradient(135deg,#1e40af,#2563eb);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border-radius:6px;">
+        <span style="font-size:1.3em;">⚡</span>
+        <span style="font-size:0.55em;font-weight:800;color:#fff;letter-spacing:.03em;text-align:center;line-height:1.2;">TPAMI
+2026</span>
+      </div>
+    </div>
+    <span class="pb pb-journal">TPAMI 2026</span><span class="pub-year">2026</span></div>
   <div class="pub-right">
     <div class="pub-title"><a href="https://arxiv.org/abs/2407.05010" target="_blank" rel="noopener noreferrer">PRANCE: Joint Token-Optimization and Structural Channel-Pruning for Adaptive ViT Inference</a>
       <div class="pub-hl">⚡ Joint token + channel pruning · Adaptive ViT inference · IEEE TPAMI 2026</div><div class="pub-abstract-preview">PRANCE jointly optimizes token pruning and structural channel pruning for adaptive ViT inference, achieving significant speedup while maintaining accuracy.</div></div>
@@ -984,7 +1017,15 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 </div>
 
 <div class="pub-entry" data-venue="ICLR" data-year="2023" data-arxiv="LBC" data-abstract="LBC introduces a learnable hybrid behavior mapping and bandit meta-controller for exploration control in deep RL, breaking 24 Atari human world records with 500× less data than prior SOTA.">
-  <div class="pub-left"><span class="pb pb-oral">ICLR 2023<br>Oral</span><span class="pub-year">2023</span></div>
+  <div class="pub-left">
+    <div class="pub-thumb-wrap">
+      <div class="pub-thumb" style="background:linear-gradient(135deg,#4c1d95,#7c3aed);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border-radius:6px;">
+        <span style="font-size:1.3em;">🏅</span>
+        <span style="font-size:0.55em;font-weight:800;color:#fff;letter-spacing:.03em;text-align:center;line-height:1.2;">ICLR
+2023</span>
+      </div>
+    </div>
+    <span class="pb pb-oral">ICLR 2023<br>Oral</span><span class="pub-year">2023</span></div>
   <div class="pub-right">
     <div class="pub-title">
       <a href="https://openreview.net/forum?id=FeWvD0L_a4" target="_blank" rel="noopener noreferrer">Learnable Behavior Control: Breaking Atari Human World Records via Sample-Efficient Behavior Selection</a>
@@ -997,7 +1038,15 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 </div>
 
 <div class="pub-entry" data-venue="ICML" data-year="2022" data-arxiv="GDI" data-abstract="GDI shows that optimizing the training data distribution is the key lever for superhuman RL efficiency. Provides a unified framework that subsumes diverse RL algorithms as special cases.">
-  <div class="pub-left"><span class="pb pb-icml">ICML 2022</span><span class="pub-year">2022</span></div>
+  <div class="pub-left">
+    <div class="pub-thumb-wrap">
+      <div class="pub-thumb" style="background:linear-gradient(135deg,#7c2d12,#ea580c);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border-radius:6px;">
+        <span style="font-size:1.3em;">🔬</span>
+        <span style="font-size:0.55em;font-weight:800;color:#fff;letter-spacing:.03em;text-align:center;line-height:1.2;">ICML
+2022</span>
+      </div>
+    </div>
+    <span class="pb pb-icml">ICML 2022</span><span class="pub-year">2022</span></div>
   <div class="pub-right">
     <div class="pub-title">
       <a href="https://proceedings.mlr.press/v162/fan22c.html" target="_blank" rel="noopener noreferrer">Generalized Data Distribution Iteration</a>
