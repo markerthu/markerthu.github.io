@@ -486,12 +486,11 @@ body.dark-mode .quick-nav a:hover { background: #21262d !important; }
 body.dark-mode .quick-nav a
 body.dark-mode .quick-nav span { color: #58a6ff !important; }
 body.dark-mode .internship-banner {
-  background: linear-gradient(135deg,#e8f4fd,#f0f7ff) !important;
-  border-color: #1565c0 !important;
-  color: #1a2332 !important;
+  background: linear-gradient(135deg,#161b22,#1c2333) !important;
+  border-color: #30363d !important;
+  color: #c9d1d9 !important;
 }
-body.dark-mode .internship-banner a { color: #1565c0 !important; }
-body.dark-mode .internship-banner strong { color: #1a2332 !important; }
+body.dark-mode .internship-banner a { color: #58a6ff !important; }
 body.dark-mode .internship-banner-pulse {
   animation: bannerPulse 3s ease-in-out infinite;
 }
