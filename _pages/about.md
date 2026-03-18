@@ -22,7 +22,7 @@ redirect_from:
 }
 .internship-banner {
   background: linear-gradient(135deg,#e8f4fd,#f0f7ff);
-  border: 1.5px solid #1565c0;
+  border: 1px solid #bfdbfe;
   border-radius: 8px; padding: 11px 18px;
   margin: 1em 0 1.2em; font-size: 0.93em;
 }
