@@ -98,6 +98,9 @@ redirect_from:
 @media(max-width:560px){
   .pub-entry { grid-template-columns: 1fr; }
   .pub-left { flex-direction: row; gap: 8px; }
+  .stats-row { gap: 8px; }
+  .stat-card { min-width: calc(50% - 4px); flex: 1 1 calc(50% - 4px); }
+  .pub-filter-bar { padding: 10px 12px; }
 }
 .pb { /* pub badge */
   display: inline-block; padding: 3px 8px; border-radius: 5px;
@@ -482,6 +485,13 @@ body.dark-mode .quick-nav a { color: #58a6ff !important; }
 body.dark-mode .quick-nav a:hover { background: #21262d !important; }
 body.dark-mode .quick-nav a
 body.dark-mode .quick-nav span { color: #58a6ff !important; }
+body.dark-mode .internship-banner {
+  background: linear-gradient(135deg,#0d2847,#0a1f3d) !important;
+  border-color: #388bfd !important;
+  color: #e6edf3 !important;
+}
+body.dark-mode .internship-banner a { color: #58a6ff !important; }
+body.dark-mode .internship-banner strong { color: #e6edf3 !important; }
 body.dark-mode .internship-banner-pulse {
   animation: bannerPulse 3s ease-in-out infinite;
 }
@@ -689,7 +699,8 @@ body.dark-mode .cite-badge { background: #0c2340; color: #7dd3fc; border-color: 
   display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
   margin-bottom: 18px; padding: 14px 16px;
   background: #f8faff; border: 1px solid #e5e7eb; border-radius: 12px;
-}
+
+  overflow-x: auto; -webkit-overflow-scrolling: touch;}
 .filter-search {
   flex: 1; min-width: 180px; padding: 7px 14px;
   border: 1.5px solid #e5e7eb; border-radius: 8px;
