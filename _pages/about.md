@@ -21,11 +21,14 @@ redirect_from:
   50% { box-shadow: 0 0 0 6px rgba(21,101,192,0.12); }
 }
 .internship-banner {
-  background: linear-gradient(135deg,#e8f4fd,#f0f7ff);
-  border: 1.5px solid #1565c0;
+  background: linear-gradient(135deg,#e8f4fd,#f0f7ff) !important;
+  border: 1px solid #93c5fd !important;
   border-radius: 8px; padding: 11px 18px;
   margin: 1em 0 1.2em; font-size: 0.93em;
+  color: #1e3a5f !important;
 }
+.internship-banner a { color: #1d4ed8 !important; font-weight:700; }
+.internship-banner strong { color: #1e3a5f !important; }
 .internship-banner a { color: #1565c0; font-weight: 700; }
 
 /* ── Quick nav ── */
@@ -485,12 +488,7 @@ body.dark-mode .quick-nav a { color: #58a6ff !important; }
 body.dark-mode .quick-nav a:hover { background: #21262d !important; }
 body.dark-mode .quick-nav a
 body.dark-mode .quick-nav span { color: #58a6ff !important; }
-body.dark-mode .internship-banner {
-  background: linear-gradient(135deg,#161b22,#1c2333) !important;
-  border-color: #30363d !important;
-  color: #c9d1d9 !important;
-}
-body.dark-mode .internship-banner a { color: #58a6ff !important; }
+/* internship-banner: unified light blue — no dark mode override */
 body.dark-mode .internship-banner-pulse {
   animation: bannerPulse 3s ease-in-out infinite;
 }
