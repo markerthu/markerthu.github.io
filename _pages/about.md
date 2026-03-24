@@ -25,10 +25,17 @@ redirect_from:
   border: 1.5px solid #bfdbfe !important;
   border-radius: 8px; padding: 11px 18px;
   margin: 1em 0 1.2em; font-size: 0.93em;
-  color: #1e3a5f !important;
 }
-.internship-banner a { color: #1d4ed8 !important; font-weight: 700; }
-.internship-banner strong { color: #1e3a5f !important; }
+html body .internship-banner,
+html body.dark-mode .internship-banner {
+  background: linear-gradient(135deg,#e8f4fd,#f0f7ff) !important;
+  color: #1e3a5f !important;
+  border-color: #bfdbfe !important;
+}
+html body .internship-banner a,
+html body.dark-mode .internship-banner a { color: #1d4ed8 !important; font-weight: 700; }
+html body .internship-banner strong,
+html body.dark-mode .internship-banner strong { color: #1e3a5f !important; }
 .internship-banner a { color: #1565c0; font-weight: 700; }
 
 /* ── Quick nav ── */
