@@ -736,7 +736,7 @@ body.dark-mode .pub-abstract-preview { background: #161b22; border-color: #30363
   background: #fafbff; overflow: hidden; position: relative;
 }
 @media(max-width:600px){ #research-graph { height: 320px; } }
-body.dark-mode #research-graph { background: #0d1117; border-color: #30363d; }
+body.dark-mode #research-graph { border-color: #30363d; }
 #research-graph svg { width: 100%; height: 100%; }
 .graph-node circle { cursor: pointer; transition: r .15s; }
 .graph-node:hover circle { filter: brightness(1.15); }
