@@ -25,10 +25,7 @@ redirect_from:
   border: 1px solid #93c5fd !important;
   border-radius: 8px; padding: 11px 18px;
   margin: 1em 0 1.2em; font-size: 0.93em;
-  color: #1e3a5f !important;
 }
-.internship-banner a { color: #1d4ed8 !important; font-weight:700; }
-.internship-banner strong { color: #1e3a5f !important; }
 .internship-banner a { color: #1565c0; font-weight: 700; }
 
 /* ── Quick nav ── */
