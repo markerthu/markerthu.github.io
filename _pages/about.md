@@ -1104,7 +1104,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
     <div class="stat-label">MMAU Audio Reasoning<br><em>Beats Gemini 2.5 Pro</em></div>
   </div>
   <div class="stat-card">
-    <div class="stat-number" data-target="{{ site.data.citations._total | default: 300 }}">0</div>
+    <div class="stat-number" data-target="{{ site.data.citations._total | default: 300 }}" data-suffix="+">0</div>
     <div class="stat-label">Google Scholar Citations</div>
   </div>
   <div class="stat-card">
