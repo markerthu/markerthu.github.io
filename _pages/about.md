@@ -1784,23 +1784,10 @@ function filterByVenue(btn, venue) {
 (function(){
   var container = document.getElementById('research-graph');
   if(!container) return;
-
-  /* Load D3 only when graph section enters viewport */
-  var loaded = false;
-  function loadD3(){
-    if(loaded) return; loaded = true;
-    var s = document.createElement('script');
-    s.src = 'https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js';
-    s.async = true;
-    s.onload = function(){ drawGraph(container); };
-    document.head.appendChild(s);
-  }
-  if('IntersectionObserver' in window){
-    var io = new IntersectionObserver(function(entries){
-      if(entries[0].isIntersecting){ loadD3(); io.disconnect(); }
-    }, {rootMargin:'200px'});
-    io.observe(container);
-  } else { loadD3(); }
+  var s = document.createElement('script');
+  s.src = 'https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js';
+  s.onload = function(){ drawGraph(container); };
+  document.head.appendChild(s);
 })();
 
 function drawGraph(container) {
