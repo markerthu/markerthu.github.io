@@ -1086,7 +1086,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 
 <div class="stats-row">
   <div class="stat-card">
-    <div class="stat-number" data-target="9" data-suffix="+">0</div>
+    <div class="stat-number" data-target="10" data-suffix="+">0</div>
     <div class="stat-label">Top Venue Papers<br><em>ICLR · NeurIPS · ICML · TPAMI</em></div>
   </div>
   <div class="stat-card">
