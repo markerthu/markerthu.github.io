@@ -1499,7 +1499,7 @@ window.addEventListener('scroll', function(){
   btn.addEventListener('click', function(){
     document.body.classList.toggle('dark-mode');
       var gc = document.getElementById('research-graph');
-      if(gc && window.drawGraph) { gc.innerHTML=''; window.drawGraph(gc); }
+      if(gc) { gc.innerHTML=''; drawGraph(gc); }
     var on = document.body.classList.contains('dark-mode');
     btn.textContent = on ? '☀️' : '🌙';
     localStorage.setItem('darkMode', on);
@@ -1807,7 +1807,7 @@ function filterByVenue(btn, venue) {
   } else { loadD3(); }
 })();
 
-window.drawGraph = function drawGraph(container) {
+function drawGraph(container) {
   d3.select(container).selectAll('svg').remove();
   var isDark = document.body.classList.contains('dark-mode');
   var W = Math.max(container.offsetWidth || 700, 520);
