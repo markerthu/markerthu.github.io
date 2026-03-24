@@ -1495,6 +1495,8 @@ window.addEventListener('scroll', function(){
   if(saved === 'true') { document.body.classList.add('dark-mode'); btn.textContent = '☀️'; }
   btn.addEventListener('click', function(){
     document.body.classList.toggle('dark-mode');
+      var gc = document.getElementById('research-graph');
+      if(gc && window.drawGraph) { gc.innerHTML=''; window.drawGraph(gc); }
     var on = document.body.classList.contains('dark-mode');
     btn.textContent = on ? '☀️' : '🌙';
     localStorage.setItem('darkMode', on);
@@ -1802,7 +1804,7 @@ function filterByVenue(btn, venue) {
   } else { loadD3(); }
 })();
 
-function drawGraph(container) {
+window.drawGraph = function drawGraph(container) {
   d3.select(container).selectAll('svg').remove();
   var isDark = document.body.classList.contains('dark-mode');
   var W = Math.max(container.offsetWidth || 700, 520);
@@ -1855,7 +1857,7 @@ function drawGraph(container) {
   var svg = d3.select(container).append('svg')
     .attr('width', W).attr('height', H).style('display','block').style('overflow','visible');
 
-  svg.append('rect').attr('width',W).attr('height',H).attr('fill',bg).attr('rx',14);
+  svg.append('rect').attr('width',W).attr('height',H).attr('fill','transparent').attr('rx',14);
 
   /* Arrowhead marker */
   svg.append('defs').append('marker')
