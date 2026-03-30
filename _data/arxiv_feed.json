@@ -1,129 +1,134 @@
 {
-  "updated": "2026-03-23T14:02:52Z",
+  "updated": "2026-03-30T14:03:12Z",
   "papers": [
     {
-      "id": "2603.20116v1",
-      "title": "Chain-of-Adaptation: Surgical Vision-Language Adaptation with Reinforcement Learning",
+      "id": "2603.26553v1",
+      "title": "HolisticSemGes: Semantic Grounding of Holistic Co-Speech Gesture Generation with Contrastive Flow-Matching",
       "authors": [
-        "Jiajie Li",
-        "Chenhui Xu",
-        "Meihuan Liu",
-        "Jinjun Xiong"
+        "Lanmiao Liu",
+        "Esam Ghaleb",
+        "Aslı Özyürek",
+        "Zerrin Yumak"
       ],
-      "summary": "Conventional fine-tuning on domain-specific datasets can inadvertently alter a model's pretrained multimodal priors, leading to reduced generalization. To address this, we propose Chain-of-Adaptation (CoA), an adaptation framework designed to integrate domain knowledge while maintaining the model's inherent reasoning and perceptual capabilities. CoA introduces a structured reasoning format that enhances domain alignment without sacrificing general multimodal competence by reinforcement learning.",
-      "date": "2026-03-20",
-      "url": "http://arxiv.org/abs/2603.20116v1",
-      "tag": "RL Training"
-    },
-    {
-      "id": "2603.20046v1",
-      "title": "Experience is the Best Teacher: Motivating Effective Exploration in Reinforcement Learning for LLMs",
-      "authors": [
-        "Wenjian Zhang",
-        "Kongcheng Zhang",
-        "Jiaxin Qi",
-        "Baisheng Lai",
-        "Jianqiang Huang"
-      ],
-      "summary": "Reinforcement Learning (RL) with rubric-based rewards has recently shown remarkable progress in enhancing general reasoning capabilities of Large Language Models (LLMs), yet still suffers from ineffective exploration confined to curent policy distribution. In fact, RL optimization can be viewed as steering the policy toward an ideal distribution that maximizes the rewards, while effective exploration should align efforts with desired target. Leveraging this insight, we propose HeRL, a Hindsight ",
-      "date": "2026-03-20",
-      "url": "http://arxiv.org/abs/2603.20046v1",
-      "tag": "Self-Improvement"
-    },
-    {
-      "id": "2603.20148v1",
-      "title": "Can Large Multimodal Models Inspect Buildings? A Hierarchical Benchmark for Structural Pathology Reasoning",
-      "authors": [
-        "Hui Zhong",
-        "Yichun Gao",
-        "Luyan Liu",
-        "Hai Yang",
-        "Wang Wang"
-      ],
-      "summary": "Automated building facade inspection is a critical component of urban resilience and smart city maintenance. Traditionally, this field has relied on specialized discriminative models (e.g., YOLO, Mask R-CNN) that excel at pixel-level localization but are constrained to passive perception and worse generization without the visual understandng to interpret structural topology. Large Multimodal Models (LMMs) promise a paradigm shift toward active reasoning, yet their application in such high-stakes",
-      "date": "2026-03-20",
-      "url": "http://arxiv.org/abs/2603.20148v1",
-      "tag": "Multimodal"
-    },
-    {
-      "id": "2603.20063v1",
-      "title": "Fine-tuning Timeseries Predictors Using Reinforcement Learning",
-      "authors": [
-        "Hugo Cazaux",
-        "Ralph Rudd",
-        "Hlynur Stefánsson",
-        "Sverrir Ólafsson",
-        "Eyjólfur Ingi Ásgeirsson"
-      ],
-      "summary": "This chapter presents three major reinforcement learning algorithms used for fine-tuning financial forecasters. We propose a clear implementation plan for backpropagating the loss of a reinforcement learning task to a model trained using supervised learning, and compare the performance before and after the fine-tuning. We find an increase in performance after fine-tuning, and transfer learning properties to the models, indicating the benefits of fine-tuning. We also highlight the tuning process ",
-      "date": "2026-03-20",
-      "url": "http://arxiv.org/abs/2603.20063v1",
-      "tag": "RL Training"
-    },
-    {
-      "id": "2603.19987v1",
-      "title": "Breaking the Capability Ceiling of LLM Post-Training by Reintroducing Markov States",
-      "authors": [
-        "Yurun Yuan",
-        "Tengyang Xie"
-      ],
-      "summary": "Reinforcement learning (RL) has become a standard paradigm for post-training and aligning Large Language Models (LLMs), yet recent evidence suggests it faces a persistent \"capability ceiling\": unlike classical RL systems that discover novel strategies, RL for LLMs often acts as a mere refiner of patterns already latent in pre-trained weights. In this work, we identify a fundamental structural bottleneck: while classical RL relies on compact, informative Markov states, current LLM post-training f",
-      "date": "2026-03-20",
-      "url": "http://arxiv.org/abs/2603.19987v1",
-      "tag": "RL Training"
-    },
-    {
-      "id": "2603.19968v1",
-      "title": "Interpreting Reinforcement Learning Model Behavior via Koopman with Control",
-      "authors": [
-        "William T. Redman"
-      ],
-      "summary": "Reinforcement learning (RL) models have shown the capability of learning complex behaviors, but quantitatively assessing those behaviors - which is critical for safety assurance and the discovery of novel strategies - is challenging. By viewing RL models as control systems, we hypothesize that data-driven approximations of their associated Koopman operators may provide dynamical information about their behavior, thus enabling greater interpretability. To test this, we apply the Koopman with cont",
-      "date": "2026-03-20",
-      "url": "http://arxiv.org/abs/2603.19968v1",
-      "tag": "RL Training"
-    },
-    {
-      "id": "2603.18859v1",
-      "title": "RewardFlow: Topology-Aware Reward Propagation on State Graphs for Agentic RL with Large Language Models",
-      "authors": [
-        "Xiao Feng",
-        "Bo Han",
-        "Zhanke Zhou",
-        "Jiaqi Fan",
-        "Jiangchao Yao"
-      ],
-      "summary": "Reinforcement learning (RL) holds significant promise for enhancing the agentic reasoning capabilities of large language models (LLMs) with external environments. However, the inherent sparsity of terminal rewards hinders fine-grained, state-level optimization. Although process reward modeling offers a promising alternative, training dedicated reward models often entails substantial computational costs and scaling difficulties. To address these challenges, we introduce RewardFlow, a lightweight ",
-      "date": "2026-03-19",
-      "url": "http://arxiv.org/abs/2603.18859v1",
-      "tag": "RL Training"
-    },
-    {
-      "id": "2603.19218v1",
-      "title": "Rethinking Vector Field Learning for Generative Segmentation",
-      "authors": [
-        "Chaoyang Wang",
-        "Yaobo Liang",
-        "Boci Peng",
-        "Fan Duan",
-        "Jingdong Wang"
-      ],
-      "summary": "Taming diffusion models for generative segmentation has attracted increasing attention. While existing approaches primarily focus on architectural tweaks or training heuristics, there remains a limited understanding of the intrinsic mismatch between continuous flow matching objectives and discrete perception tasks. In this work, we revisit diffusion segmentation from the perspective of vector field learning. We identify two key limitations of the commonly used flow matching objective: gradient v",
-      "date": "2026-03-19",
-      "url": "http://arxiv.org/abs/2603.19218v1",
+      "summary": "While the field of co-speech gesture generation has seen significant advances, producing holistic, semantically grounded gestures remains a challenge. Existing approaches rely on external semantic retrieval methods, which limit their generalisation capability due to dependency on predefined linguistic rules. Flow-matching-based methods produce promising results; however, the network is optimised u...",
+      "date": "2026-03-27",
+      "url": "https://arxiv.org/abs/2603.26553v1",
       "tag": "Flow Matching"
     },
     {
-      "id": "2603.17822v1",
-      "title": "Multi-Source Evidence Fusion for Audio Question Answering",
+      "id": "2603.25108v1",
+      "title": "MSRL: Scaling Generative Multimodal Reward Modeling via Multi-Stage Reinforcement Learning",
       "authors": [
-        "Aivo Olev",
-        "Tanel Alumäe"
+        "Chenglong Wang",
+        "Yifu Huo",
+        "Yang Gan",
+        "Qiaozhi He",
+        "Qi Meng"
       ],
-      "summary": "Large audio language models (LALMs) can answer questions about speech, music, and environmental sounds, yet their internal reasoning is largely opaque and difficult to validate. We describe TalTech's solution to the Agent Track of the Interspeech 2026 Audio Reasoning Challenge, in which systems are evaluated on reasoning process quality, specifically the factual accuracy, logical soundness, and completeness of their reasoning chains. Our multi-source ensemble pipeline uses two LALMs that generat",
-      "date": "2026-03-18",
-      "url": "http://arxiv.org/abs/2603.17822v1",
-      "tag": "Audio Reasoning"
+      "summary": "Recent advances in multimodal reward modeling have been largely driven by a paradigm shift from discriminative to generative approaches. Building on this progress, recent studies have further employed reinforcement learning from verifiable rewards (RLVR) to enhance multimodal reward models (MRMs). Despite their success, RLVR-based training typically relies on labeled multimodal preference data, wh...",
+      "date": "2026-03-26",
+      "url": "https://arxiv.org/abs/2603.25108v1",
+      "tag": "RL Training"
+    },
+    {
+      "id": "2603.24984v1",
+      "title": "MoE-GRPO: Optimizing Mixture-of-Experts via Reinforcement Learning in Vision-Language Models",
+      "authors": [
+        "Dohwan Ko",
+        "Jinyoung Park",
+        "Seoung Choi",
+        "Sanghyeok Lee",
+        "Seohyun Lee"
+      ],
+      "summary": "Mixture-of-Experts (MoE) has emerged as an effective approach to reduce the computational overhead of Transformer architectures by sparsely activating a subset of parameters for each token while preserving high model capacity. This paradigm has recently been extended to Vision-Language Models (VLMs), enabling scalable multi-modal understanding with reduced computational cost. However, the widely a...",
+      "date": "2026-03-26",
+      "url": "https://arxiv.org/abs/2603.24984v1",
+      "tag": "RL Training"
+    },
+    {
+      "id": "2603.25681v1",
+      "title": "Self-Improvement of Large Language Models: A Technical Overview and Future Outlook",
+      "authors": [
+        "Haoyan Yang",
+        "Mario Xerri",
+        "Solha Park",
+        "Huajian Zhang",
+        "Yiyang Feng"
+      ],
+      "summary": "As large language models (LLMs) continue to advance, improving them solely through human supervision is becoming increasingly costly and limited in scalability. As models approach human-level capabilities in certain domains, human feedback may no longer provide sufficiently informative signals for further improvement. At the same time, the growing ability of models to make autonomous decisions and...",
+      "date": "2026-03-26",
+      "url": "https://arxiv.org/abs/2603.25681v1",
+      "tag": "Self-Improvement"
+    },
+    {
+      "id": "2603.25020v1",
+      "title": "GDPO-Listener: Expressive Interactive Head Generation via Auto-Regressive Flow Matching and Group reward-Decoupled Policy Optimization",
+      "authors": [
+        "Zhangyu Jin",
+        "Maksim Siniukov",
+        "Deuksin Kwon",
+        "Ashutosh Chaubey",
+        "Mohammad Soleymani"
+      ],
+      "summary": "Generating realistic 3D head motion for dyadic interactions is a significant challenge in virtual human synthesis. While recent methods achieve impressive results with speaking heads, they frequently suffer from the `Regression-to-the-Mean' problem in listener motions, collapsing into static faces, and lack the parameter space for complex nonverbal motions. In this paper, we propose GDPO-Listener,...",
+      "date": "2026-03-26",
+      "url": "https://arxiv.org/abs/2603.25020v1",
+      "tag": "Flow Matching"
+    },
+    {
+      "id": "2603.24942v1",
+      "title": "BiFM: Bidirectional Flow Matching for Few-Step Image Editing and Generation",
+      "authors": [
+        "Yasong Dai",
+        "Zeeshan Hayder",
+        "David Ahmedt-Aristizabal",
+        "Hongdong Li"
+      ],
+      "summary": "Recent diffusion and flow matching models have demonstrated strong capabilities in image generation and editing by progressively removing noise through iterative sampling. While this enables flexible inversion for semantic-preserving edits, few-step sampling regimes suffer from poor forward process approximation, leading to degraded editing quality. Existing few-step inversion methods often rely o...",
+      "date": "2026-03-26",
+      "url": "https://arxiv.org/abs/2603.24942v1",
+      "tag": "Flow Matching"
+    },
+    {
+      "id": "2603.24883v1",
+      "title": "Learning to Staff: Offline Reinforcement Learning and Fine-Tuned LLMs for Warehouse Staffing Optimization",
+      "authors": [
+        "Kalle Kujanpää",
+        "Yuying Zhu",
+        "Kristina Klinkner",
+        "Shervin Malmasi"
+      ],
+      "summary": "We investigate machine learning approaches for optimizing real-time staffing decisions in semi-automated warehouse sortation systems. Operational decision-making can be supported at different levels of abstraction, with different trade-offs. We evaluate two approaches, each in a matching simulation environment. First, we train custom Transformer-based policies using offline reinforcement learning ...",
+      "date": "2026-03-25",
+      "url": "https://arxiv.org/abs/2603.24883v1",
+      "tag": "RL Training"
+    },
+    {
+      "id": "2603.24361v1",
+      "title": "LATS: Large Language Model Assisted Teacher-Student Framework for Multi-Agent Reinforcement Learning in Traffic Signal Control",
+      "authors": [
+        "Yifeng Zhang",
+        "Peizhuo Li",
+        "Tingguang Zhou",
+        "Mingfeng Fan",
+        "Guillaume Sartoretti"
+      ],
+      "summary": "Adaptive Traffic Signal Control (ATSC) aims to optimize traffic flow and minimize delays by adjusting traffic lights in real time. Recent advances in Multi-agent Reinforcement Learning (MARL) have shown promise for ATSC, yet existing approaches still suffer from limited representational capacity, often leading to suboptimal performance and poor generalization in complex and dynamic traffic environ...",
+      "date": "2026-03-25",
+      "url": "https://arxiv.org/abs/2603.24361v1",
+      "tag": "RL Training"
+    },
+    {
+      "id": "2603.24324v1",
+      "title": "Large Language Model Guided Incentive Aware Reward Design for Cooperative Multi-Agent Reinforcement Learning",
+      "authors": [
+        "Dogan Urgun",
+        "Gokhan Gungor"
+      ],
+      "summary": "Designing effective auxiliary rewards for cooperative multi-agent systems remains a precarious task; misaligned incentives risk inducing suboptimal coordination, especially where sparse task feedback fails to provide sufficient grounding. This study introduces an automated reward design framework that leverages large language models to synthesize executable reward programs from environment instrum...",
+      "date": "2026-03-25",
+      "url": "https://arxiv.org/abs/2603.24324v1",
+      "tag": "RL Training"
     }
   ]
 }
