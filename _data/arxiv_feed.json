@@ -1,134 +1,86 @@
 {
-  "updated": "2026-03-30T14:04:33Z",
+  "updated": "2026-04-06",
   "papers": [
     {
-      "id": "2603.26553v1",
-      "title": "HolisticSemGes: Semantic Grounding of Holistic Co-Speech Gesture Generation with Contrastive Flow-Matching",
-      "authors": [
-        "Lanmiao Liu",
-        "Esam Ghaleb",
-        "Aslı Özyürek",
-        "Zerrin Yumak"
-      ],
-      "summary": "While the field of co-speech gesture generation has seen significant advances, producing holistic, semantically grounded gestures remains a challenge. Existing approaches rely on external semantic retrieval methods, which limit their generalisation capability due to dependency on predefined linguistic rules. Flow-matching-based methods produce promising results; however, the network is optimised u...",
-      "date": "2026-03-27",
-      "url": "https://arxiv.org/abs/2603.26553v1",
-      "tag": "Flow Matching"
+      "id": "2604.03179",
+      "title": "Understanding the Role of Hallucination in Reinforcement Post-Training of Multimodal Reasoning Models",
+      "authors": "Gengwei Zhang, Jie Peng, Zhen Tan et al.",
+      "summary": "The recent success of reinforcement learning (RL) in large reasoning models has inspired the growing adoption of RL for post-training Multimodal Large Language Models (MLLMs) to enhance their visual r…",
+      "date": "2026-04-03",
+      "tag": "Multimodal",
+      "url": "https://arxiv.org/abs/2604.03179"
     },
     {
-      "id": "2603.25108v1",
-      "title": "MSRL: Scaling Generative Multimodal Reward Modeling via Multi-Stage Reinforcement Learning",
-      "authors": [
-        "Chenglong Wang",
-        "Yifu Huo",
-        "Yang Gan",
-        "Qiaozhi He",
-        "Qi Meng"
-      ],
-      "summary": "Recent advances in multimodal reward modeling have been largely driven by a paradigm shift from discriminative to generative approaches. Building on this progress, recent studies have further employed reinforcement learning from verifiable rewards (RLVR) to enhance multimodal reward models (MRMs). Despite their success, RLVR-based training typically relies on labeled multimodal preference data, wh...",
-      "date": "2026-03-26",
-      "url": "https://arxiv.org/abs/2603.25108v1",
-      "tag": "RL Training"
+      "id": "2604.03157",
+      "title": "Chart-RL: Policy Optimization Reinforcement Learning for Enhanced Visual Reasoning in Chart Question Answering with Vision Language Models",
+      "authors": "Yunfei Bai, Amit Dhanda, Shekhar Jain",
+      "summary": "The recent advancements in Vision Language Models (VLMs) have demonstrated progress toward true intelligence requiring robust reasoning capabilities. Beyond pattern recognition, linguistic reasoning m…",
+      "date": "2026-04-03",
+      "tag": "Multimodal",
+      "url": "https://arxiv.org/abs/2604.03157"
     },
     {
-      "id": "2603.24984v1",
-      "title": "MoE-GRPO: Optimizing Mixture-of-Experts via Reinforcement Learning in Vision-Language Models",
-      "authors": [
-        "Dohwan Ko",
-        "Jinyoung Park",
-        "Seoung Choi",
-        "Sanghyeok Lee",
-        "Seohyun Lee"
-      ],
-      "summary": "Mixture-of-Experts (MoE) has emerged as an effective approach to reduce the computational overhead of Transformer architectures by sparsely activating a subset of parameters for each token while preserving high model capacity. This paradigm has recently been extended to Vision-Language Models (VLMs), enabling scalable multi-modal understanding with reduced computational cost. However, the widely a...",
-      "date": "2026-03-26",
-      "url": "https://arxiv.org/abs/2603.24984v1",
-      "tag": "RL Training"
+      "id": "2604.02007",
+      "title": "Apriel-Reasoner: RL Post-Training for General-Purpose and Efficient Reasoning",
+      "authors": "Rafael Pardinas, Ehsan Kamalloo, David Vazquez et al.",
+      "summary": "Building general-purpose reasoning models using reinforcement learning with verifiable rewards (RLVR) across diverse domains has been widely adopted by frontier open-weight models. However, their trai…",
+      "date": "2026-04-02",
+      "tag": "RL Training",
+      "url": "https://arxiv.org/abs/2604.02007"
     },
     {
-      "id": "2603.25681v1",
-      "title": "Self-Improvement of Large Language Models: A Technical Overview and Future Outlook",
-      "authors": [
-        "Haoyan Yang",
-        "Mario Xerri",
-        "Solha Park",
-        "Huajian Zhang",
-        "Yiyang Feng"
-      ],
-      "summary": "As large language models (LLMs) continue to advance, improving them solely through human supervision is becoming increasingly costly and limited in scalability. As models approach human-level capabilities in certain domains, human feedback may no longer provide sufficiently informative signals for further improvement. At the same time, the growing ability of models to make autonomous decisions and...",
-      "date": "2026-03-26",
-      "url": "https://arxiv.org/abs/2603.25681v1",
-      "tag": "Self-Improvement"
+      "id": "2604.01985",
+      "title": "World Action Verifier: Self-Improving World Models via Forward-Inverse Asymmetry",
+      "authors": "Yuejiang Liu, Fan Feng, Lingjing Kong et al.",
+      "summary": "General-purpose world models promise scalable policy evaluation, optimization, and planning, yet achieving the required level of robustness remains challenging. Unlike policy learning, which primarily…",
+      "date": "2026-04-02",
+      "tag": "Self-Improvement",
+      "url": "https://arxiv.org/abs/2604.01985"
     },
     {
-      "id": "2603.25020v1",
-      "title": "GDPO-Listener: Expressive Interactive Head Generation via Auto-Regressive Flow Matching and Group reward-Decoupled Policy Optimization",
-      "authors": [
-        "Zhangyu Jin",
-        "Maksim Siniukov",
-        "Deuksin Kwon",
-        "Ashutosh Chaubey",
-        "Mohammad Soleymani"
-      ],
-      "summary": "Generating realistic 3D head motion for dyadic interactions is a significant challenge in virtual human synthesis. While recent methods achieve impressive results with speaking heads, they frequently suffer from the `Regression-to-the-Mean' problem in listener motions, collapsing into static faces, and lack the parameter space for complex nonverbal motions. In this paper, we propose GDPO-Listener,...",
-      "date": "2026-03-26",
-      "url": "https://arxiv.org/abs/2603.25020v1",
-      "tag": "Flow Matching"
+      "id": "2604.02492",
+      "title": "Token-Efficient Multimodal Reasoning via Image Prompt Packaging",
+      "authors": "Joong Ho Choi, Jiayang Zhao, Avani Appalla et al.",
+      "summary": "Deploying large multimodal language models at scale is constrained by token-based inference costs, yet the cost-performance behavior of visual prompting strategies remains poorly characterized. We int…",
+      "date": "2026-04-02",
+      "tag": "Multimodal",
+      "url": "https://arxiv.org/abs/2604.02492"
     },
     {
-      "id": "2603.24942v1",
-      "title": "BiFM: Bidirectional Flow Matching for Few-Step Image Editing and Generation",
-      "authors": [
-        "Yasong Dai",
-        "Zeeshan Hayder",
-        "David Ahmedt-Aristizabal",
-        "Hongdong Li"
-      ],
-      "summary": "Recent diffusion and flow matching models have demonstrated strong capabilities in image generation and editing by progressively removing noise through iterative sampling. While this enables flexible inversion for semantic-preserving edits, few-step sampling regimes suffer from poor forward process approximation, leading to degraded editing quality. Existing few-step inversion methods often rely o...",
-      "date": "2026-03-26",
-      "url": "https://arxiv.org/abs/2603.24942v1",
-      "tag": "Flow Matching"
+      "id": "2604.00510",
+      "title": "Adaptive Parallel Monte Carlo Tree Search for Efficient Test-time Compute Scaling",
+      "authors": "Hongbeen Kim, Juhyun Lee, Sanghyeon Lee et al.",
+      "summary": "Monte Carlo Tree Search (MCTS) is an effective test-time compute scaling (TTCS) method for improving the reasoning performance of large language models, but its highly variable execution time leads to…",
+      "date": "2026-04-01",
+      "tag": "Reasoning",
+      "url": "https://arxiv.org/abs/2604.00510"
     },
     {
-      "id": "2603.24883v1",
-      "title": "Learning to Staff: Offline Reinforcement Learning and Fine-Tuned LLMs for Warehouse Staffing Optimization",
-      "authors": [
-        "Kalle Kujanpää",
-        "Yuying Zhu",
-        "Kristina Klinkner",
-        "Shervin Malmasi"
-      ],
-      "summary": "We investigate machine learning approaches for optimizing real-time staffing decisions in semi-automated warehouse sortation systems. Operational decision-making can be supported at different levels of abstraction, with different trade-offs. We evaluate two approaches, each in a matching simulation environment. First, we train custom Transformer-based policies using offline reinforcement learning ...",
-      "date": "2026-03-25",
-      "url": "https://arxiv.org/abs/2603.24883v1",
-      "tag": "RL Training"
+      "id": "2603.29292",
+      "title": "Self-Improving Code Generation via Semantic Entropy and Behavioral Consensus",
+      "authors": "Huan Zhang, Wei Cheng, Wei Hu",
+      "summary": "Improving the code generation capabilities of large language models (LLMs) typically relies on supervised fine-tuning or preference optimization, both of which require costly external resources such a…",
+      "date": "2026-03-31",
+      "tag": "Self-Improvement",
+      "url": "https://arxiv.org/abs/2603.29292"
     },
     {
-      "id": "2603.24361v1",
-      "title": "LATS: Large Language Model Assisted Teacher-Student Framework for Multi-Agent Reinforcement Learning in Traffic Signal Control",
-      "authors": [
-        "Yifeng Zhang",
-        "Peizhuo Li",
-        "Tingguang Zhou",
-        "Mingfeng Fan",
-        "Guillaume Sartoretti"
-      ],
-      "summary": "Adaptive Traffic Signal Control (ATSC) aims to optimize traffic flow and minimize delays by adjusting traffic lights in real time. Recent advances in Multi-agent Reinforcement Learning (MARL) have shown promise for ATSC, yet existing approaches still suffer from limited representational capacity, often leading to suboptimal performance and poor generalization in complex and dynamic traffic environ...",
-      "date": "2026-03-25",
-      "url": "https://arxiv.org/abs/2603.24361v1",
-      "tag": "RL Training"
+      "id": "2603.28650",
+      "title": "Information-Theoretic Limits of Safety Verification for Self-Improving Systems",
+      "authors": "Arsenios Scrivens",
+      "summary": "Can a safety gate permit unbounded beneficial self-modification while maintaining bounded cumulative risk? We formalize this question through dual conditions -- requiring sum delta_n < infinity (bound…",
+      "date": "2026-03-30",
+      "tag": "Self-Improvement",
+      "url": "https://arxiv.org/abs/2603.28650"
     },
     {
-      "id": "2603.24324v1",
-      "title": "Large Language Model Guided Incentive Aware Reward Design for Cooperative Multi-Agent Reinforcement Learning",
-      "authors": [
-        "Dogan Urgun",
-        "Gokhan Gungor"
-      ],
-      "summary": "Designing effective auxiliary rewards for cooperative multi-agent systems remains a precarious task; misaligned incentives risk inducing suboptimal coordination, especially where sparse task feedback fails to provide sufficient grounding. This study introduces an automated reward design framework that leverages large language models to synthesize executable reward programs from environment instrum...",
-      "date": "2026-03-25",
-      "url": "https://arxiv.org/abs/2603.24324v1",
-      "tag": "RL Training"
+      "id": "2603.28618",
+      "title": "Seeing with You: Perception-Reasoning Coevolution for Multimodal Reasoning",
+      "authors": "Ziqi Miao, Haonan Jia, Lijun Li et al.",
+      "summary": "Reinforcement learning with verifiable rewards (RLVR) has substantially enhanced the reasoning capabilities of multimodal large language models (MLLMs). However, existing RLVR approaches typically rel…",
+      "date": "2026-03-30",
+      "tag": "Multimodal",
+      "url": "https://arxiv.org/abs/2603.28618"
     }
   ]
 }
