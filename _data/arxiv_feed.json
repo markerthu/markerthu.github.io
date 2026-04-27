@@ -1,86 +1,86 @@
 {
-  "updated": "2026-04-20",
+  "updated": "2026-04-27",
   "papers": [
     {
-      "id": "2604.14989",
-      "title": "Dr.~RTL: Autonomous Agentic RTL Optimization through Tool-Grounded Self-Improvement",
-      "authors": "Wenji Fang, Yao Lu, Shang Liu et al.",
-      "summary": "Recent advances in large language models (LLMs) have sparked growing interest in automatic RTL optimization for better performance, power, and area (PPA). However, existing methods are still far from …",
-      "date": "2026-04-16",
+      "id": "2604.21409",
+      "title": "S1-VL: Scientific Multimodal Reasoning Model with Thinking-with-Images",
+      "authors": "Qingxiao Li, Lifeng Xu, QingLi Wang et al.",
+      "summary": "We present S1-VL, a multimodal reasoning model for scientific domains that natively supports two complementary reasoning paradigms: Scientific Reasoning, which relies on structured chain-of-thought, a…",
+      "date": "2026-04-23",
+      "tag": "Multimodal",
+      "url": "https://arxiv.org/abs/2604.21409"
+    },
+    {
+      "id": "2604.20714",
+      "title": "Learning to Evolve: A Self-Improving Framework for Multi-Agent Systems via Textual Parameter Graph Optimization",
+      "authors": "Shan He, Runze Wang, Zhuoyun Du et al.",
+      "summary": "Designing and optimizing multi-agent systems (MAS) is a complex, labor-intensive process of \"Agent Engineering.\" Existing automatic optimization methods, primarily focused on flat prompt tuning, lack …",
+      "date": "2026-04-22",
       "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2604.14989"
+      "url": "https://arxiv.org/abs/2604.20714"
     },
     {
-      "id": "2604.14820",
-      "title": "SWE-TRACE: Optimizing Long-Horizon SWE Agents Through Rubric Process Reward Models and Heuristic Test-Time Scaling",
-      "authors": "Hao Han, Jin Xie, Xuehao Ma et al.",
-      "summary": "Resolving real-world software engineering (SWE) issues with autonomous agents requires complex, long-horizon reasoning. Current pipelines are bottlenecked by unoptimized demonstration data, sparse exe…",
-      "date": "2026-04-16",
-      "tag": "Reasoning",
-      "url": "https://arxiv.org/abs/2604.14820"
-    },
-    {
-      "id": "2604.14799",
-      "title": "Knowing When Not to Answer: Evaluating Abstention in Multimodal Reasoning Systems",
-      "authors": "Nishanth Madhusudhan, Vikas Yadav, Alexandre Lacoste",
-      "summary": "Effective abstention (EA), recognizing evidence insufficiency and refraining from answering, is critical for reliable multimodal systems. Yet existing evaluation paradigms for vision-language models (…",
-      "date": "2026-04-16",
-      "tag": "Multimodal",
-      "url": "https://arxiv.org/abs/2604.14799"
-    },
-    {
-      "id": "2604.14054",
-      "title": "$π$-Play: Multi-Agent Self-Play via Privileged Self-Distillation without External Data",
-      "authors": "Yaocheng Zhang, Yuanheng Zhu, Wenyue Chong et al.",
-      "summary": "Deep search agents have emerged as a promising paradigm for addressing complex information-seeking tasks, but their training remains challenging due to sparse rewards, weak credit assignment, and limi…",
-      "date": "2026-04-15",
+      "id": "2604.20933",
+      "title": "IRIS: Interpolative Rényi Iterative Self-play for Large Language Model Fine-Tuning",
+      "authors": "Wenjie Liao, Like Wu, Liangjie Zhao et al.",
+      "summary": "Self-play fine-tuning enables large language models to improve beyond supervised fine-tuning without additional human annotations by contrasting annotated responses with self-generated ones. Many exis…",
+      "date": "2026-04-22",
       "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2604.14054"
+      "url": "https://arxiv.org/abs/2604.20933"
     },
     {
-      "id": "2604.13733",
-      "title": "Jump-Start Reinforcement Learning with Vision-Language-Action Regularization",
-      "authors": "Angelo Moroncelli, Roberto Zanetti, Marco Maccarini et al.",
-      "summary": "Reinforcement learning (RL) enables high-frequency, closed-loop control for robotic manipulation, but scaling to long-horizon tasks with sparse or imperfect rewards remains difficult due to inefficien…",
-      "date": "2026-04-15",
+      "id": "2604.20209",
+      "title": "Scaling Self-Play with Self-Guidance",
+      "authors": "Luke Bailey, Kaiyue Wen, Kefan Dong et al.",
+      "summary": "LLM self-play algorithms are notable in that, in principle, nothing bounds their learning: a Conjecturer model creates problems for a Solver, and both improve together. However, in practice, existing …",
+      "date": "2026-04-22",
+      "tag": "Self-Improvement",
+      "url": "https://arxiv.org/abs/2604.20209"
+    },
+    {
+      "id": "2604.20665",
+      "title": "The Expense of Seeing: Attaining Trustworthy Multimodal Reasoning Within the Monolithic Paradigm",
+      "authors": "Karan Goyal, Dikshant Kukreja",
+      "summary": "The rapid proliferation of Vision-Language Models (VLMs) is widely celebrated as the dawn of unified multimodal knowledge discovery but its foundation operates on a dangerous, unquestioned axiom: that…",
+      "date": "2026-04-22",
       "tag": "Multimodal",
-      "url": "https://arxiv.org/abs/2604.13733"
+      "url": "https://arxiv.org/abs/2604.20665"
     },
     {
-      "id": "2604.13491",
-      "title": "Enhanced Text-to-Image Generation by Fine-grained Multimodal Reasoning",
-      "authors": "Yongjin Kim, Yoonjin Oh, Yerin Kim et al.",
-      "summary": "With the rapid progress of Multimodal Large Language Models (MLLMs), unified MLLMs that jointly perform image understanding and generation have advanced significantly. However, despite the inherent re…",
-      "date": "2026-04-15",
+      "id": "2604.20051",
+      "title": "Bootstrapping Post-training Signals for Open-ended Tasks via Rubric-based Self-play on Pre-training Text",
+      "authors": "Chengyu Huang, Sheng-Yen Chou, Zhengxin Zhang et al.",
+      "summary": "Self-play has recently emerged as a promising paradigm to train Large Language Models (LLMs). In self-play, the target LLM creates the task input (e.g., ask a question), which it then addresses itself…",
+      "date": "2026-04-21",
+      "tag": "Self-Improvement",
+      "url": "https://arxiv.org/abs/2604.20051"
+    },
+    {
+      "id": "2604.19064",
+      "title": "The Essence of Balance for Self-Improving Agents in Vision-and-Language Navigation",
+      "authors": "Zhen Liu, Yuhan Liu, Jinjun Wang et al.",
+      "summary": "In vision-and-language navigation (VLN), self-improvement from policy-induced experience, using only standard VLN action supervision, critically depends on balancing behavioral diversity and learning …",
+      "date": "2026-04-21",
+      "tag": "Self-Improvement",
+      "url": "https://arxiv.org/abs/2604.19064"
+    },
+    {
+      "id": "2604.19193",
+      "title": "How Far Are Video Models from True Multimodal Reasoning?",
+      "authors": "Xiaotian Zhang, Jianhui Wei, Yuan Wang et al.",
+      "summary": "Despite remarkable progress toward general-purpose video models, a critical question remains unanswered: how far are these models from achieving true multimodal reasoning? Existing benchmarks fail to …",
+      "date": "2026-04-21",
       "tag": "Multimodal",
-      "url": "https://arxiv.org/abs/2604.13491"
+      "url": "https://arxiv.org/abs/2604.19193"
     },
     {
-      "id": "2604.12527",
-      "title": "Audio-Cogito: Towards Deep Audio Reasoning in Large Audio Language Models",
-      "authors": "Longhao Li, Hongjie Chen, Zehan Li et al.",
-      "summary": "Recent advances in reasoning models have driven significant progress in text and multimodal domains, yet audio reasoning remains relatively limited. Only a few Large Audio Language Models (LALMs) inco…",
-      "date": "2026-04-14",
-      "tag": "Audio Reasoning",
-      "url": "https://arxiv.org/abs/2604.12527"
-    },
-    {
-      "id": "2604.12652",
-      "title": "PromptEcho: Annotation-Free Reward from Vision-Language Models for Text-to-Image Reinforcement Learning",
-      "authors": "Jinlong Liu, Wanggui He, Peng Zhang et al.",
-      "summary": "Reinforcement learning (RL) can improve the prompt following capability of text-to-image (T2I) models, yet obtaining high-quality reward signals remains challenging: CLIP Score is too coarse-grained, …",
-      "date": "2026-04-14",
+      "id": "2604.19081",
+      "title": "Proactive Detection of GUI Defects in Multi-Window Scenarios via Multimodal Reasoning",
+      "authors": "Xinyao Zhang, Rui Wang, Jinhao Cui et al.",
+      "summary": "Multi-window mobile scenarios, such as split-screen and foldable modes, make GUI display defects more likely by forcing applications to adapt to changing window sizes and dynamic layout reflow. Existi…",
+      "date": "2026-04-21",
       "tag": "Multimodal",
-      "url": "https://arxiv.org/abs/2604.12652"
-    },
-    {
-      "id": "2604.11626",
-      "title": "RationalRewards: Reasoning Rewards Scale Visual Generation Both Training and Test Time",
-      "authors": "Haozhe Wang, Cong Wei, Weiming Ren et al.",
-      "summary": "Most reward models for visual generation reduce rich human judgments to a single unexplained score, discarding the reasoning that underlies preference. We show that teaching reward models to produce e…",
-      "date": "2026-04-13",
-      "tag": "RL Training",
-      "url": "https://arxiv.org/abs/2604.11626"
+      "url": "https://arxiv.org/abs/2604.19081"
     }
   ]
 }
