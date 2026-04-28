@@ -1348,7 +1348,7 @@ Happy to discuss research, internships, or collaborations. Best reached by email
     { kw:['publication','paper','published','conference','venue','list','all papers'],
       a:"I've published at ICLR (2023 Oral, 2025, 2026), NeurIPS (2025), ICML (2022), and IEEE TPAMI (2026), with ongoing preprints. Full list on Google Scholar (EjmzseUAAAAJ)." },
     { kw:['citation','cited','impact','scholar','h-index','how many'],
-      a:"My work has 290+ citations. LBC (ICLR 2023 Oral) leads with 26 citations, followed by GDI (ICML 2022) with 21. Full profile: Google Scholar EjmzseUAAAAJ." },
+      a:"My work has 325+ citations. LBC (ICLR 2023 Oral) leads with 26 citations, followed by GDI (ICML 2022) with 21. Full profile: Google Scholar EjmzseUAAAAJ." },
     { kw:['self-improve','self-play','autonomous','annotation-free','human supervision'],
       a:"My long-term vision: generative models that self-improve autonomously — learning from environment feedback and their own outputs, with minimal human annotation. This drives my work on process rewards, actor-critic methods, and online RL post-training." },
     { kw:['flow matching','diffusion','generative','score','ode','trajectory'],
