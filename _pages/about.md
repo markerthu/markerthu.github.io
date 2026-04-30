@@ -808,7 +808,11 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 <ul class="news-list">
   <li>
     <span class="news-date">Apr 2026</span>
-    <span><span class="nbadge nb-upcoming">Upcoming</span>🇧🇷 <strong>ICLR 2026</strong> in Rio de Janeiro, Apr 23–27. Presenting CESAR &amp; SP-VLA.</span>
+    <span><span class="nbadge nb-accept">Accept</span>Several papers accepted at <strong>ICML 2026</strong> — See you in Seoul 🇰🇷 (Jul 6–11).</span>
+  </li>
+  <li>
+    <span class="news-date">Apr 2026</span>
+    <span><span class="nbadge nb-top">Talk</span>🇧🇷 Presented CESAR &amp; SP-VLA at <strong>ICLR 2026</strong>, Rio de Janeiro, Apr 23–27.</span>
   </li>
   <li>
     <span class="news-date">Jan 2026</span>
