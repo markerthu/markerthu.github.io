@@ -809,7 +809,11 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 <ul class="news-list">
   <li>
     <span class="news-date">Apr 2026</span>
-    <span><span class="nbadge nb-upcoming">Upcoming</span>Several papers accepted at <strong>ICML 2026</strong> — See you in Seoul 🇰🇷 (Jul 6–11).</span>
+    <span><span class="nbadge nb-upcoming">Upcoming</span>🇰🇷 <strong>ICML 2026</strong> in Seoul, South Korea, Jul 6–11. See you there!</span>
+  </li>
+  <li>
+    <span class="news-date">Apr 2026</span>
+    <span><span class="nbadge nb-accept">Accept</span>Several papers accepted at <strong>ICML 2026</strong>. See you in Seoul 🇰🇷</span>
   </li>
   <li>
     <span class="news-date">Apr 2026</span>
