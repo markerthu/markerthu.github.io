@@ -71,6 +71,7 @@ html body.dark-mode .internship-banner strong { color: #1e3a5f !important; }
 .nb-accept { background: #d4edda; color: #155724; }
 .nb-service{ background: #e2e3e5; color: #383d41; }
 .nb-upcoming{ background: #dbeafe; color: #1e40af; }
+.nb-finish { background: #e2e8f0; color: #475569; }
 
 /* ── Publication list ── */
 .pub-list { margin: 0; padding: 0; }
@@ -808,11 +809,11 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 <ul class="news-list">
   <li>
     <span class="news-date">Apr 2026</span>
-    <span><span class="nbadge nb-accept">Accept</span>Several papers accepted at <strong>ICML 2026</strong> — See you in Seoul 🇰🇷 (Jul 6–11).</span>
+    <span><span class="nbadge nb-upcoming">Upcoming</span>Several papers accepted at <strong>ICML 2026</strong> — See you in Seoul 🇰🇷 (Jul 6–11).</span>
   </li>
   <li>
     <span class="news-date">Apr 2026</span>
-    <span><span class="nbadge nb-top">Talk</span>🇧🇷 Presented CESAR &amp; SP-VLA at <strong>ICLR 2026</strong>, Rio de Janeiro, Apr 23–27.</span>
+    <span><span class="nbadge nb-finish">Finish</span>🇧🇷 Presented CESAR &amp; SP-VLA at <strong>ICLR 2026</strong>, Rio de Janeiro, Apr 23–27.</span>
   </li>
   <li>
     <span class="news-date">Jan 2026</span>
