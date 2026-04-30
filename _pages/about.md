@@ -71,7 +71,7 @@ html body.dark-mode .internship-banner strong { color: #1e3a5f !important; }
 .nb-accept { background: #d4edda; color: #155724; }
 .nb-service{ background: #e2e3e5; color: #383d41; }
 .nb-upcoming{ background: #dbeafe; color: #1e40af; }
-.nb-finish { background: #e2e8f0; color: #475569; }
+.nb-finish { background: #d4edda; color: #155724; }
 
 /* ── Publication list ── */
 .pub-list { margin: 0; padding: 0; }
