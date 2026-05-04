@@ -1,6 +1,78 @@
 {
-  "updated": "2026-04-27",
+  "updated": "2026-05-04",
   "papers": [
+    {
+      "id": "2604.27644",
+      "title": "ANCORA: Learning to Question via Manifold-Anchored Self-Play for Verifiable Reasoning",
+      "authors": "Chengcao Yang, Jun Chen",
+      "summary": "We propose a paradigm shift from learning to answer to learning to question: can a language model generate verifiable problems, solve them, and turn the resulting feedback into self-improvement withou…",
+      "date": "2026-04-30",
+      "tag": "Self-Improvement",
+      "url": "https://arxiv.org/abs/2604.27644"
+    },
+    {
+      "id": "2604.28011",
+      "title": "Echo-α: Large Agentic Multimodal Reasoning Model for Ultrasound Interpretation",
+      "authors": "Jing Zhang, Wentao Jiang, Tao Huang et al.",
+      "summary": "Ultrasound interpretation requires both precise lesion localization and holistic clinical reasoning, yet existing methods typically excel at only one of these capabilities: specialized detectors offer…",
+      "date": "2026-04-30",
+      "tag": "Multimodal",
+      "url": "https://arxiv.org/abs/2604.28011"
+    },
+    {
+      "id": "2604.26779",
+      "title": "Accelerating RL Post-Training Rollouts via System-Integrated Speculative Decoding",
+      "authors": "Hayate Iso, Tiyasa Mitra, Sudipta Mondal et al.",
+      "summary": "RL post-training of frontier language models is increasingly bottlenecked by autoregressive rollout generation, making rollout acceleration a central systems challenge. Many existing efficiency method…",
+      "date": "2026-04-29",
+      "tag": "RL Training",
+      "url": "https://arxiv.org/abs/2604.26779"
+    },
+    {
+      "id": "2604.26707",
+      "title": "CurEvo: Curriculum-Guided Self-Evolution for Video Understanding",
+      "authors": "Guiyi Zeng, Junqing Yu, Yi-Ping Phoebe Chen et al.",
+      "summary": "Recent advances in self-evolution video understanding frameworks have demonstrated the potential of autonomous learning without human annotations. However, existing methods often suffer from weakly co…",
+      "date": "2026-04-29",
+      "tag": "RL Training",
+      "url": "https://arxiv.org/abs/2604.26707"
+    },
+    {
+      "id": "2604.25819",
+      "title": "Mutual Forcing: Dual-Mode Self-Evolution for Fast Autoregressive Audio-Video Character Generation",
+      "authors": "Yupeng Zhou, Lianghua Huang, Zhifan Wu et al.",
+      "summary": "In this work, we propose Mutual Forcing, a framework for fast autoregressive audio-video generation with long-horizon audio-video synchronization. Our approach addresses two key challenges: joint audi…",
+      "date": "2026-04-28",
+      "tag": "Audio Reasoning",
+      "url": "https://arxiv.org/abs/2604.25819"
+    },
+    {
+      "id": "2604.25067",
+      "title": "Frontier Coding Agents Can Now Implement an AlphaZero Self-Play Machine Learning Pipeline For Connect Four That Performs Comparably to an External Solver",
+      "authors": "Joshua Sherwood, Ben Aybar, Benjamin Kaplan",
+      "summary": "Forecasting when AI systems will become capable of meaningfully accelerating AI research is a central challenge for AI safety. Existing benchmarks measure broad capability growth, but may not provide …",
+      "date": "2026-04-27",
+      "tag": "Self-Improvement",
+      "url": "https://arxiv.org/abs/2604.25067"
+    },
+    {
+      "id": "2604.24819",
+      "title": "Programming with Data: Test-Driven Data Engineering for Self-Improving LLMs from Raw Corpora",
+      "authors": "Chenkai Pan, Xinglong Xu, Yuhang Xu et al.",
+      "summary": "Reliably transferring specialized human knowledge from text into large language models remains a fundamental challenge in artificial intelligence. Fine-tuning on domain corpora has enabled substantial…",
+      "date": "2026-04-27",
+      "tag": "Self-Improvement",
+      "url": "https://arxiv.org/abs/2604.24819"
+    },
+    {
+      "id": "2604.24583",
+      "title": "Improving Vision-language Models with Perception-centric Process Reward Models",
+      "authors": "Yingqian Min, Kun Zhou, Yifan Li et al.",
+      "summary": "Recent advancements in reinforcement learning with verifiable rewards (RLVR) have significantly improved the complex reasoning ability of vision-language models (VLMs). However, its outcome-level supe…",
+      "date": "2026-04-27",
+      "tag": "Reasoning",
+      "url": "https://arxiv.org/abs/2604.24583"
+    },
     {
       "id": "2604.21409",
       "title": "S1-VL: Scientific Multimodal Reasoning Model with Thinking-with-Images",
@@ -9,78 +81,6 @@
       "date": "2026-04-23",
       "tag": "Multimodal",
       "url": "https://arxiv.org/abs/2604.21409"
-    },
-    {
-      "id": "2604.20714",
-      "title": "Learning to Evolve: A Self-Improving Framework for Multi-Agent Systems via Textual Parameter Graph Optimization",
-      "authors": "Shan He, Runze Wang, Zhuoyun Du et al.",
-      "summary": "Designing and optimizing multi-agent systems (MAS) is a complex, labor-intensive process of \"Agent Engineering.\" Existing automatic optimization methods, primarily focused on flat prompt tuning, lack …",
-      "date": "2026-04-22",
-      "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2604.20714"
-    },
-    {
-      "id": "2604.20933",
-      "title": "IRIS: Interpolative Rényi Iterative Self-play for Large Language Model Fine-Tuning",
-      "authors": "Wenjie Liao, Like Wu, Liangjie Zhao et al.",
-      "summary": "Self-play fine-tuning enables large language models to improve beyond supervised fine-tuning without additional human annotations by contrasting annotated responses with self-generated ones. Many exis…",
-      "date": "2026-04-22",
-      "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2604.20933"
-    },
-    {
-      "id": "2604.20209",
-      "title": "Scaling Self-Play with Self-Guidance",
-      "authors": "Luke Bailey, Kaiyue Wen, Kefan Dong et al.",
-      "summary": "LLM self-play algorithms are notable in that, in principle, nothing bounds their learning: a Conjecturer model creates problems for a Solver, and both improve together. However, in practice, existing …",
-      "date": "2026-04-22",
-      "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2604.20209"
-    },
-    {
-      "id": "2604.20665",
-      "title": "The Expense of Seeing: Attaining Trustworthy Multimodal Reasoning Within the Monolithic Paradigm",
-      "authors": "Karan Goyal, Dikshant Kukreja",
-      "summary": "The rapid proliferation of Vision-Language Models (VLMs) is widely celebrated as the dawn of unified multimodal knowledge discovery but its foundation operates on a dangerous, unquestioned axiom: that…",
-      "date": "2026-04-22",
-      "tag": "Multimodal",
-      "url": "https://arxiv.org/abs/2604.20665"
-    },
-    {
-      "id": "2604.20051",
-      "title": "Bootstrapping Post-training Signals for Open-ended Tasks via Rubric-based Self-play on Pre-training Text",
-      "authors": "Chengyu Huang, Sheng-Yen Chou, Zhengxin Zhang et al.",
-      "summary": "Self-play has recently emerged as a promising paradigm to train Large Language Models (LLMs). In self-play, the target LLM creates the task input (e.g., ask a question), which it then addresses itself…",
-      "date": "2026-04-21",
-      "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2604.20051"
-    },
-    {
-      "id": "2604.19064",
-      "title": "The Essence of Balance for Self-Improving Agents in Vision-and-Language Navigation",
-      "authors": "Zhen Liu, Yuhan Liu, Jinjun Wang et al.",
-      "summary": "In vision-and-language navigation (VLN), self-improvement from policy-induced experience, using only standard VLN action supervision, critically depends on balancing behavioral diversity and learning …",
-      "date": "2026-04-21",
-      "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2604.19064"
-    },
-    {
-      "id": "2604.19193",
-      "title": "How Far Are Video Models from True Multimodal Reasoning?",
-      "authors": "Xiaotian Zhang, Jianhui Wei, Yuan Wang et al.",
-      "summary": "Despite remarkable progress toward general-purpose video models, a critical question remains unanswered: how far are these models from achieving true multimodal reasoning? Existing benchmarks fail to …",
-      "date": "2026-04-21",
-      "tag": "Multimodal",
-      "url": "https://arxiv.org/abs/2604.19193"
-    },
-    {
-      "id": "2604.19081",
-      "title": "Proactive Detection of GUI Defects in Multi-Window Scenarios via Multimodal Reasoning",
-      "authors": "Xinyao Zhang, Rui Wang, Jinhao Cui et al.",
-      "summary": "Multi-window mobile scenarios, such as split-screen and foldable modes, make GUI display defects more likely by forcing applications to adapt to changing window sizes and dynamic layout reflow. Existi…",
-      "date": "2026-04-21",
-      "tag": "Multimodal",
-      "url": "https://arxiv.org/abs/2604.19081"
     }
   ]
 }
