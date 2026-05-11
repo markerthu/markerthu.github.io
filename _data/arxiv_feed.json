@@ -1,86 +1,86 @@
 {
-  "updated": "2026-05-04",
+  "updated": "2026-05-11",
   "papers": [
     {
-      "id": "2604.27644",
-      "title": "ANCORA: Learning to Question via Manifold-Anchored Self-Play for Verifiable Reasoning",
-      "authors": "Chengcao Yang, Jun Chen",
-      "summary": "We propose a paradigm shift from learning to answer to learning to question: can a language model generate verifiable problems, solve them, and turn the resulting feedback into self-improvement withou…",
-      "date": "2026-04-30",
-      "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2604.27644"
+      "id": "2605.07316",
+      "title": "Implicit Compression Regularization: Concise Reasoning via Internal Shorter Distributions in RL Post-Training",
+      "authors": "Chen Wang, Hexuan Deng, Yining Zhang et al.",
+      "summary": "Reinforcement learning with verifiable rewards improves LLM reasoning but often induces overthinking, where models generate unnecessarily long reasoning traces. Existing methods mainly rely on length …",
+      "date": "2026-05-08",
+      "tag": "RL Training",
+      "url": "https://arxiv.org/abs/2605.07316"
     },
     {
-      "id": "2604.28011",
-      "title": "Echo-α: Large Agentic Multimodal Reasoning Model for Ultrasound Interpretation",
-      "authors": "Jing Zhang, Wentao Jiang, Tao Huang et al.",
-      "summary": "Ultrasound interpretation requires both precise lesion localization and holistic clinical reasoning, yet existing methods typically excel at only one of these capabilities: specialized detectors offer…",
-      "date": "2026-04-30",
+      "id": "2605.07977",
+      "title": "Self-Play Enhancement via Advantage-Weighted Refinement in Online Federated LLM Fine-Tuning with Real-Time Feedback",
+      "authors": "Seohyun Lee, Wenzhi Fang, Dong-Jun Han et al.",
+      "summary": "Recent works have advanced feedback-based learning systems, whereby a foundation model is able to intake incoming feedback (e.g., a user) to self-improve, creating a self-loop system of training. Howe…",
+      "date": "2026-05-08",
+      "tag": "Self-Improvement",
+      "url": "https://arxiv.org/abs/2605.07977"
+    },
+    {
+      "id": "2605.08031",
+      "title": "Object Hallucination-Free Reinforcement Unlearning for Vision-Language Models",
+      "authors": "Kaidi Jia, Yujie Lin, Chengyi Yang et al.",
+      "summary": "Vision-language models (VLMs) raise growing concerns about privacy, copyright, and bias, motivating machine unlearning to remove sensitive knowledge. However, existing methods primarily fine-tune the …",
+      "date": "2026-05-08",
       "tag": "Multimodal",
-      "url": "https://arxiv.org/abs/2604.28011"
+      "url": "https://arxiv.org/abs/2605.08031"
     },
     {
-      "id": "2604.26779",
-      "title": "Accelerating RL Post-Training Rollouts via System-Integrated Speculative Decoding",
-      "authors": "Hayate Iso, Tiyasa Mitra, Sudipta Mondal et al.",
-      "summary": "RL post-training of frontier language models is increasingly bottlenecked by autoregressive rollout generation, making rollout acceleration a central systems challenge. Many existing efficiency method…",
-      "date": "2026-04-29",
+      "id": "2605.07817",
+      "title": "GazeVLM: Active Vision via Internal Attention Control for Multimodal Reasoning",
+      "authors": "Brown Ebouky, Gabriele Carrino, Niccolo Avogaro et al.",
+      "summary": "Human visual reasoning is governed by active vision, a process where metacognitive control drives top-down goal-directed attention, dynamically routing foveal focus toward task-relevant details while …",
+      "date": "2026-05-08",
+      "tag": "Multimodal",
+      "url": "https://arxiv.org/abs/2605.07817"
+    },
+    {
+      "id": "2605.07274",
+      "title": "Structured Role-Aware Policy Optimization for Multimodal Reasoning",
+      "authors": "Bingqing Jiang, Difan Zou",
+      "summary": "Reinforcement learning from verifiable rewards (RLVR), especially with Group Relative Policy Optimization (GRPO), has shown strong potential for improving the reasoning capabilities of large vision-la…",
+      "date": "2026-05-08",
+      "tag": "Multimodal",
+      "url": "https://arxiv.org/abs/2605.07274"
+    },
+    {
+      "id": "2605.06850",
+      "title": "How to Compress KV Cache in RL Post-Training? Shadow Mask Distillation for Memory-Efficient Alignment",
+      "authors": "Rui Zhu, Weiheng Bai, Qiushi Wu et al.",
+      "summary": "Reinforcement Learning (RL) has emerged as a crucial paradigm for unlocking the advanced reasoning capabilities of Large Language Models (LLMs), encompassing frameworks like RLHF and RLAIF. Regardless…",
+      "date": "2026-05-07",
       "tag": "RL Training",
-      "url": "https://arxiv.org/abs/2604.26779"
+      "url": "https://arxiv.org/abs/2605.06850"
     },
     {
-      "id": "2604.26707",
-      "title": "CurEvo: Curriculum-Guided Self-Evolution for Video Understanding",
-      "authors": "Guiyi Zeng, Junqing Yu, Yi-Ping Phoebe Chen et al.",
-      "summary": "Recent advances in self-evolution video understanding frameworks have demonstrated the potential of autonomous learning without human annotations. However, existing methods often suffer from weakly co…",
-      "date": "2026-04-29",
-      "tag": "RL Training",
-      "url": "https://arxiv.org/abs/2604.26707"
-    },
-    {
-      "id": "2604.25819",
-      "title": "Mutual Forcing: Dual-Mode Self-Evolution for Fast Autoregressive Audio-Video Character Generation",
-      "authors": "Yupeng Zhou, Lianghua Huang, Zhifan Wu et al.",
-      "summary": "In this work, we propose Mutual Forcing, a framework for fast autoregressive audio-video generation with long-horizon audio-video synchronization. Our approach addresses two key challenges: joint audi…",
-      "date": "2026-04-28",
-      "tag": "Audio Reasoning",
-      "url": "https://arxiv.org/abs/2604.25819"
-    },
-    {
-      "id": "2604.25067",
-      "title": "Frontier Coding Agents Can Now Implement an AlphaZero Self-Play Machine Learning Pipeline For Connect Four That Performs Comparably to an External Solver",
-      "authors": "Joshua Sherwood, Ben Aybar, Benjamin Kaplan",
-      "summary": "Forecasting when AI systems will become capable of meaningfully accelerating AI research is a central challenge for AI safety. Existing benchmarks measure broad capability growth, but may not provide …",
-      "date": "2026-04-27",
+      "id": "2605.05963",
+      "title": "TheraAgent: Self-Improving Therapeutic Agent for Precise and Comprehensive Treatment Planning",
+      "authors": "Junkai Li, Yunghwei Lai, Tianyi Zhu et al.",
+      "summary": "Formulating a treatment plan is inherently a complex reasoning and refinement task rather than a simple generation problem. However, existing large language models (LLMs) mainly rely on one-shot outpu…",
+      "date": "2026-05-07",
       "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2604.25067"
+      "url": "https://arxiv.org/abs/2605.05963"
     },
     {
-      "id": "2604.24819",
-      "title": "Programming with Data: Test-Driven Data Engineering for Self-Improving LLMs from Raw Corpora",
-      "authors": "Chenkai Pan, Xinglong Xu, Yuhang Xu et al.",
-      "summary": "Reliably transferring specialized human knowledge from text into large language models remains a fundamental challenge in artificial intelligence. Fine-tuning on domain corpora has enabled substantial…",
-      "date": "2026-04-27",
-      "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2604.24819"
-    },
-    {
-      "id": "2604.24583",
-      "title": "Improving Vision-language Models with Perception-centric Process Reward Models",
-      "authors": "Yingqian Min, Kun Zhou, Yifan Li et al.",
-      "summary": "Recent advancements in reinforcement learning with verifiable rewards (RLVR) have significantly improved the complex reasoning ability of vision-language models (VLMs). However, its outcome-level supe…",
-      "date": "2026-04-27",
+      "id": "2605.06785",
+      "title": "Distributional Process Reward Models: Calibrated Prediction of Future Rewards via Conditional Optimal Transport",
+      "authors": "Rachel Ma, Dylan Hadfield-Menell, Kristjan Greenewald",
+      "summary": "Inference-time scaling methods rely on Process Reward Models (PRMs), which are often poorly calibrated and overestimate success probabilities. We propose, to our knowledge, the first use of conditiona…",
+      "date": "2026-05-07",
       "tag": "Reasoning",
-      "url": "https://arxiv.org/abs/2604.24583"
+      "url": "https://arxiv.org/abs/2605.06785"
     },
     {
-      "id": "2604.21409",
-      "title": "S1-VL: Scientific Multimodal Reasoning Model with Thinking-with-Images",
-      "authors": "Qingxiao Li, Lifeng Xu, QingLi Wang et al.",
-      "summary": "We present S1-VL, a multimodal reasoning model for scientific domains that natively supports two complementary reasoning paradigms: Scientific Reasoning, which relies on structured chain-of-thought, a…",
-      "date": "2026-04-23",
-      "tag": "Multimodal",
-      "url": "https://arxiv.org/abs/2604.21409"
+      "id": "2605.06483",
+      "title": "ReasonSTL: Bridging Natural Language and Signal Temporal Logic via Tool-Augmented Process-Rewarded Learning",
+      "authors": "Bowen Ye, Zhijian Li, Junyue Huang et al.",
+      "summary": "Signal Temporal Logic (STL) is an expressive formal language for specifying spatio-temporal requirements over real-valued, real-time signals. It has been widely used for the verification and synthesis…",
+      "date": "2026-05-07",
+      "tag": "RL Training",
+      "url": "https://arxiv.org/abs/2605.06483"
     }
   ]
 }
