@@ -494,10 +494,6 @@ body.dark-mode .quick-nav span { color: #58a6ff !important; }
 body.dark-mode .internship-banner-pulse {
   animation: bannerPulse 3s ease-in-out infinite;
 }
-@keyframes bannerPulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(21,101,192,0); }
-  50% { box-shadow: 0 0 0 6px rgba(21,101,192,0.12); }
-}
 
 /* ── Dark mode: Badges & Highlights ── */
 body.dark-mode .pub-hl { background: #1c1e21 !important; color: #ffd54f !important; border-left-color: #d29922 !important; }
@@ -663,7 +659,7 @@ img[loading="lazy"].loaded, img[loading="lazy"][complete] {
   .hero-name { font-size: 1.65em; }
   .research-grid { grid-template-columns: 1fr; }
   .featured-grid { grid-template-columns: 1fr; }
-  .pub-entry { flex-direction: column; gap: 6px; }
+  .pub-entry { grid-template-columns: 1fr; gap: 6px; }
   .pub-left  { flex-direction: row; }
   .stat-card { flex: 1 1 100px; padding: 10px 12px; }
   .stat-number { font-size: 1.5em; }
@@ -785,6 +781,8 @@ body.dark-mode #awards + div p[style] { color: #c9d1d9 !important; }
   <a href="#featured"     data-qn="featured">🔥 Featured</a>
   <a href="#publications" data-qn="publications">📄 Publications</a>
   <a href="#research"     data-qn="research">🔬 Research</a>
+  <a href="#vision"       data-qn="vision">💡 Vision</a>
+  <a href="#deadlines"    data-qn="deadlines">📅 Deadlines</a>
   <a href="#awards"       data-qn="awards">🏅 Awards</a>
   <a href="/year-archive/">✍️ Blog</a>
   <a href="files/CV.pdf">📋 CV</a>
@@ -851,9 +849,10 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 <button class="news-toggle" id="news-toggle" onclick="
   var extras = document.querySelectorAll('.news-hidden');
   var btn = document.getElementById('news-toggle');
-  var showing = extras[0].style.display === 'flex';
-  extras.forEach(function(e){ e.style.display = showing ? 'none' : 'flex'; });
-  btn.textContent = showing ? '▼ Show more news' : '▲ Show less';
+  var expanded = btn.getAttribute('data-expanded') === '1';
+  extras.forEach(function(e){ e.style.display = expanded ? 'none' : 'flex'; });
+  btn.setAttribute('data-expanded', expanded ? '0' : '1');
+  btn.textContent = expanded ? '▼ Show more news' : '▲ Show less';
 " aria-label="Show more news">▼ Show more news</button>
 
 <!-- ═══════════════════════════════ FEATURED ═══════════════════════════ -->
@@ -1357,7 +1356,7 @@ Happy to discuss research, internships, or collaborations. Best reached by email
     { kw:['publication','paper','published','conference','venue','list','all papers'],
       a:"I've published at ICLR (2023 Oral, 2025, 2026), NeurIPS (2025), ICML (2022), and IEEE TPAMI (2026), with ongoing preprints. Full list on Google Scholar (EjmzseUAAAAJ)." },
     { kw:['citation','cited','impact','scholar','h-index','how many'],
-      a:"My work has 325+ citations. LBC (ICLR 2023 Oral) leads with 26 citations, followed by GDI (ICML 2022) with 21. Full profile: Google Scholar EjmzseUAAAAJ." },
+      a:"My work has 334+ citations (h-index 9). LBC (ICLR 2023 Oral) leads with 28 citations, followed by GDI (ICML 2022) with 21. Full profile: Google Scholar EjmzseUAAAAJ." },
     { kw:['self-improve','self-play','autonomous','annotation-free','human supervision'],
       a:"My long-term vision: generative models that self-improve autonomously — learning from environment feedback and their own outputs, with minimal human annotation. This drives my work on process rewards, actor-critic methods, and online RL post-training." },
     { kw:['flow matching','diffusion','generative','score','ode','trajectory'],
@@ -1736,9 +1735,15 @@ document.querySelectorAll('.featured-card').forEach(function(card){
       popup.querySelector('.bib-pre').textContent = captured;
       var rect = entry.getBoundingClientRect();
       var scrollY = window.scrollY || window.pageYOffset;
+      var scrollX = window.scrollX || window.pageXOffset;
+      var leftPos = Math.max(rect.left + scrollX, 8);
+      var maxW = Math.min(rect.width, window.innerWidth - 16);
+      if (leftPos + maxW > scrollX + window.innerWidth - 8) {
+        leftPos = scrollX + window.innerWidth - maxW - 8;
+      }
       popup.style.top = (rect.bottom + scrollY + 6) + 'px';
-      popup.style.left = Math.max(rect.left, 8) + 'px';
-      popup.style.maxWidth = Math.min(rect.width, window.innerWidth - 16) + 'px';
+      popup.style.left = leftPos + 'px';
+      popup.style.maxWidth = maxW + 'px';
       popup.classList.add('show'); activeEntry = entry;
     });
     linksDiv.appendChild(btn);
@@ -1796,6 +1801,9 @@ function filterByVenue(btn, venue) {
   var s = document.createElement('script');
   s.src = 'https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js';
   s.onload = function(){ drawGraph(container); };
+  s.onerror = function(){
+    container.innerHTML = '<p style="text-align:center;color:#888;padding:40px 0;">Network error — <a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ" target="_blank">view paper network on Google Scholar</a></p>';
+  };
   document.head.appendChild(s);
 })();
 
