@@ -21,9 +21,16 @@ layout: null
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Inter',sans-serif;background:#f8faff;color:#1a1a2e;line-height:1.7}
 a{text-decoration:none}
-.topnav{background:#fff;border-bottom:1.5px solid #e0e8f0;padding:12px 24px;display:flex;align-items:center;gap:12px;font-size:0.84em;box-shadow:0 1px 4px rgba(0,0,0,0.05)}
-.topnav a{color:#1565c0;font-weight:600}
-.topnav span{color:#bbb}
+/* ── Site masthead (matches jiajunfan.com MM theme) ── */
+.site-masthead{background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.06);position:sticky;top:0;z-index:200}
+.site-masthead::after{content:'';display:block;height:3px;background:linear-gradient(to right,#1565c0 0%,#7c4dff 50%,#00897b 100%)}
+.masthead-inner{max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:56px}
+.masthead-title{font-weight:800;font-size:1.05em;color:#1a2332!important;text-decoration:none!important;letter-spacing:-.02em}
+.masthead-nav{display:flex;gap:2px;align-items:center}
+.masthead-nav a{font-weight:600;font-size:0.88em;color:#333!important;text-decoration:none!important;padding:6px 10px;border-radius:6px;transition:color .2s,background .2s;letter-spacing:.01em}
+.masthead-nav a:hover{color:#1565c0!important;background:#f0f4ff}
+.masthead-nav a.nav-active{color:#1565c0!important;font-weight:700}
+@media(max-width:560px){.masthead-nav a{font-size:0.78em;padding:5px 6px}.masthead-title{font-size:0.95em}}
 .hero{background:#f8fbff;border-bottom:1.5px solid #e0e8f0;padding:52px 24px 44px;text-align:center;position:relative;overflow:hidden}.hero::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(to right,#1565c0,#0d47a1)}
 .hero h1{font-size:2.1em;font-weight:800;color:#1a2332;margin-bottom:10px}
 .hero p{color:#555;font-size:0.95em}
@@ -56,18 +63,21 @@ a{text-decoration:none}
 .cl-arxiv{background:#fce4ec;color:#c62828}
 footer{background:#f5f7fa;color:#666;text-align:center;padding:24px;font-size:.84em;border-top:1px solid #e0e8f0}
 footer a{color:#1565c0}
-
-/* dark mode removed — page uses light theme only */
 </style>
 </head>
 <body>
-<div class="topnav">
-  <a href="/">← Jiajun Fan</a>
-  <span>/</span>
-  <a href="/publications/">Publications</a>
-  <span>/</span>
-  <span style="color:#b0c8e8;">Projects</span>
-</div>
+<header class="site-masthead">
+  <div class="masthead-inner">
+    <a class="masthead-title" href="/">Jiajun Fan</a>
+    <nav class="masthead-nav" aria-label="Site navigation">
+      <a href="/publications/">Publications</a>
+      <a href="/projects/" class="nav-active">Projects</a>
+      <a href="/year-archive/">Blog</a>
+      <a href="/files/CV.pdf">CV</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+  </div>
+</header>
 <div class="hero">
   <h1>Research Projects</h1>
   <p>Project pages for selected publications — with method overview, results, and BibTeX</p>

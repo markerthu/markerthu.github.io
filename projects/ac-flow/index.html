@@ -27,10 +27,16 @@ permalink: /projects/ac-flow/
 body{font-family:'Inter',sans-serif;background:#fff;color:#111827;line-height:1.75;font-size:16px}
 a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 
-/* ── Sticky Nav ── */
-.topnav{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid #e5e7eb;padding:13px 28px;display:flex;align-items:center;gap:10px;font-size:0.84em;box-shadow:0 1px 4px rgba(0,0,0,0.05)}
-.topnav a{color:var(--accent);font-weight:700}
-.topnav span{color:#d1d5db}
+/* ── Site masthead (matches jiajunfan.com MM theme) ── */
+.site-masthead{background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.06);position:sticky;top:0;z-index:200}
+.site-masthead::after{content:'';display:block;height:3px;background:linear-gradient(to right,#1565c0 0%,#7c4dff 50%,#00897b 100%)}
+.masthead-inner{max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:56px}
+.masthead-title{font-weight:800;font-size:1.05em;color:#1a2332!important;text-decoration:none!important;letter-spacing:-.02em}
+.masthead-nav{display:flex;gap:2px;align-items:center}
+.masthead-nav a{font-weight:600;font-size:0.88em;color:#333!important;text-decoration:none!important;padding:6px 10px;border-radius:6px;transition:color .2s,background .2s;letter-spacing:.01em}
+.masthead-nav a:hover{color:#1565c0!important;background:#f0f4ff}
+.masthead-nav a.nav-active{color:#1565c0!important;font-weight:700}
+@media(max-width:560px){.masthead-nav a{font-size:0.78em;padding:5px 6px}.masthead-title{font-size:0.95em}}
 
 /* ── Hero ── */
 .hero{background:linear-gradient(to bottom,#f8faff,#fff);border-top:4px solid var(--accent);padding:56px 24px 44px;text-align:center}
@@ -206,13 +212,18 @@ footer a{color:var(--accent);font-weight:600}
 }</script>
 </head>
 <body>
-<nav class="topnav">
-  <a href="/">← Jiajun Fan</a>
-  <span>/</span>
-  <a href="/projects/">Projects</a>
-  <span>/</span>
-  <span style="color:#b2dfdb;">AC-Flow</span>
-</nav>
+<header class="site-masthead">
+  <div class="masthead-inner">
+    <a class="masthead-title" href="/">Jiajun Fan</a>
+    <nav class="masthead-nav" aria-label="Site navigation">
+      <a href="/publications/">Publications</a>
+      <a href="/projects/" class="nav-active">Projects</a>
+      <a href="/year-archive/">Blog</a>
+      <a href="/files/CV.pdf">CV</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+  </div>
+</header>
 <div class="hero"><div class="hero-inner">
   <div class="venue-badge">📝 Preprint 2025 · Under Review</div>
   <h1>Fine-tuning Flow Matching Generative Models with Intermediate Feedback</h1>
