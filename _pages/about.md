@@ -276,7 +276,7 @@ body.dark-mode .pub-abst-btn:hover { background: #1e40af; }
   text-decoration: none !important; color: inherit;
   display: flex; flex-direction: column;
 }
-.featured-card:hover { box-shadow: 0 12px 36px rgba(21,101,192,.22); }
+.featured-card:hover { box-shadow: 0 12px 36px rgba(21,101,192,.22); border-color: #1565c0; }
 .featured-img {
   width: 100%; height: 130px; object-fit: cover; object-position: top;
   border-bottom: 1px solid #e0e8f0;
@@ -671,6 +671,9 @@ img[loading="lazy"].loaded, img[loading="lazy"][complete] {
 @media(max-width:760px) {
   .research-grid { grid-template-columns: 1fr 1fr; }
 }
+@media(max-width:560px) {
+  .featured-grid { grid-template-columns: 1fr; }  /* 1-col on small phones */
+}
 @media(max-width:480px) {
   .hero-name { font-size: 1.65em; }
   .research-grid { grid-template-columns: 1fr; }
@@ -735,7 +738,6 @@ body.dark-mode .filter-btn.active, body.dark-mode .filter-btn:hover { background
   box-shadow: 0 8px 28px rgba(0,0,0,.12); max-width: 520px; min-width: 280px;
   pointer-events: none;
 }
-.pub-entry:hover .pub-abstract-preview,
 .pub-entry.abstract-open .pub-abstract-preview { display: block; }
 body.dark-mode .pub-abstract-preview { background: #161b22; border-color: #30363d; color: #b5c2c8; box-shadow: 0 8px 28px rgba(0,0,0,.4); }
 
@@ -918,7 +920,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 <!-- ═══════════════════════════════ PUBLICATIONS ═══════════════════════ -->
 <h2 class="section-header" id="publications">📄 Selected Publications</h2>
 
-<p style="font-size:0.83em;color:#999;margin-top:-0.6em;">* = first/co-first author &nbsp;·&nbsp;
+<p style="font-size:0.83em;color:#767676;margin-top:-0.6em;">* = first/co-first author &nbsp;·&nbsp;
 <a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">Full list on Google Scholar</a> &nbsp;/&nbsp;
 <a href="/publications/">Publications page</a></p>
 
@@ -1824,7 +1826,7 @@ function filterByVenue(btn, venue) {
   s.src = 'https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js';
   s.onload = function(){ drawGraph(container); };
   s.onerror = function(){
-    container.innerHTML = '<p style="text-align:center;color:#888;padding:40px 0;">Network error — <a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ" target="_blank">view paper network on Google Scholar</a></p>';
+    container.innerHTML = '<p style="text-align:center;color:#767676;padding:40px 0;">Network error — <a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ" target="_blank" rel="noopener noreferrer">view paper network on Google Scholar</a></p>';
   };
   document.head.appendChild(s);
 })();
