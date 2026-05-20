@@ -502,6 +502,7 @@ body.dark-mode .stat-number { color: #58a6ff !important; }
 body.dark-mode .stat-label { color: #6e7681 !important; }
 body.dark-mode .stat-label em { color: #6e7681 !important; }
 body.dark-mode .pub-project { background: #1c2333 !important; color: #58a6ff !important; }
+body.dark-mode .pub-project:hover { background: #1e3a5f !important; }
 body.dark-mode .pub-link.pl-paper  { background: #1c2333 !important; color: #58a6ff !important; }
 body.dark-mode .pub-link.pl-project{ background: #122117 !important; color: #3fb950 !important; }
 body.dark-mode .pub-link.pl-code   { background: #3d1526 !important; color: #f48fb1 !important; }
@@ -556,9 +557,9 @@ body.dark-mode .scroll-top { background: #388bfd !important; box-shadow: 0 4px 1
 
 /* ── Dark mode: Featured stat ── */
 body.dark-mode .featured-stat { background: #1c1e21 !important; color: #ffd54f !important; border-left-color: #d29922 !important; }
-body.dark-mode .fv-iclr26  { background: #1f4e8c !important; }
-body.dark-mode .fv-neurips { background: #4a1270 !important; }
-body.dark-mode .fv-iclr25  { background: #1a5ba0 !important; }
+body.dark-mode .fv-iclr26  { background: #152d50 !important; color: #79c0ff !important; }
+body.dark-mode .fv-neurips { background: #2d1044 !important; color: #d2a8ff !important; }
+body.dark-mode .fv-iclr25  { background: #152d50 !important; color: #79c0ff !important; }
 
 /* ── Dark mode: Misc ── */
 body.dark-mode .page__content h2 { color: #e6edf3 !important; }
@@ -623,6 +624,22 @@ body.dark-mode .ddl-card { background: #161b22 !important; border-color: #30363d
 body.dark-mode .ddl-name a { color: #c9d1d9 !important; }
 body.dark-mode .ddl-meta { color: #8b949e !important; }
 body.dark-mode .img-compare { border-color: #30363d !important; }
+/* Image compare handle — pure white → muted dark surface with blue accent */
+body.dark-mode .img-compare .slider-line   { background: rgba(88,166,255,0.65) !important; box-shadow: none !important; }
+body.dark-mode .img-compare .slider-handle { background: #21262d !important; border: 2px solid #58a6ff !important; color: #58a6ff !important; box-shadow: 0 2px 8px rgba(0,0,0,0.5) !important; }
+
+/* RA chatbot — mute jarring electric blues */
+body.dark-mode .ra-user   { background: #1c3a6e !important; } /* muted navy, not electric #2563eb */
+body.dark-mode .ra-send   { background: #388bfd !important; }
+body.dark-mode .ra-send:hover { background: #58a6ff !important; }
+body.dark-mode .ra-chip:hover { background: #21262d !important; }
+body.dark-mode .ra-chips  { border-color: #30363d !important; } /* was showing as bright #e5e7eb line */
+body.dark-mode .ra-input:focus { border-color: #58a6ff !important; }
+body.dark-mode .ra-btn { box-shadow: 0 4px 16px rgba(0,0,0,0.5) !important; }
+body.dark-mode .ra-btn:hover { box-shadow: 0 6px 22px rgba(88,166,255,.25) !important; }
+
+/* pub-thumb-wrap hover — neutral shadow, not colored */
+body.dark-mode .pub-thumb-wrap:hover { box-shadow: 0 4px 18px rgba(0,0,0,0.45) !important; }
 
 /* ── Reading progress bar ── */
 #read-progress {
