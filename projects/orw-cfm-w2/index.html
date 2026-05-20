@@ -20,7 +20,11 @@ permalink: /projects/orw-cfm-w2/
 <title>ORW-CFM-W2 — Flow Matching RLHF | ICLR 2025</title>
 <meta name="description" content="Online Reward-Weighted Fine-Tuning of Flow Matching with Wasserstein Regularization. ICLR 2025.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="icon" href="/images/favicon.ico">
+<meta name="robots" content="index,follow">
+<script>if(localStorage.getItem('darkMode')==='true'){document.documentElement.style.background='#0d1117';}</script>
 <style>
 :root { --accent: #2563eb; --accent-light: #eff6ff; }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -492,8 +496,8 @@ footer a{color:var(--accent);font-weight:600}
 
 <section>
   <h2>📖 BibTeX</h2>
-  <button class="bib-copy-btn">📋 Copy BibTeX</button>
-  <pre class="bibtex-block"><code>@inproceedings{fan2025online,
+  <button class="bib-copy-btn" aria-label="Copy BibTeX citation">📋 Copy BibTeX</button>
+  <pre class="bibtex-block" tabindex="0"><code>@inproceedings{fan2025online,
   title={Online Reward-Weighted Fine-Tuning of Flow Matching
          with Wasserstein Regularization},
   author={Jiajun Fan and Shuaike Shen and Chaoran Cheng
@@ -508,18 +512,28 @@ footer a{color:var(--accent);font-weight:600}
 </div>
 
 <footer>
-  <p>ORW-CFM-W2 · ICLR 2025 &nbsp;|&nbsp; <a href="/">Jiajun Fan</a> · UIUC &nbsp;|&nbsp; <a href="https://openreview.net/forum?id=2IoFFexvuw">Paper</a></p>
- &nbsp;|&nbsp; <a href="#">↑ Back to top</a></footer>
+  <p>ORW-CFM-W2 · ICLR 2025 &nbsp;|&nbsp; <a href="/">Jiajun Fan</a> · UIUC &nbsp;|&nbsp; <a href="https://openreview.net/forum?id=2IoFFexvuw">Paper</a> &nbsp;|&nbsp; <a href="/publications/">All Publications</a> &nbsp;|&nbsp; <a href="#">↑ Back to top</a></p>
+</footer>
 
 <script>
+// Dark mode: respect site-wide preference stored in localStorage
+(function(){
+  try { if(localStorage.getItem('darkMode')==='true') document.body.classList.add('dark-mode'); } catch(e){}
+})();
+
 document.querySelectorAll('.bib-copy-btn').forEach(function(btn){
   btn.addEventListener('click',function(){
     var pre=btn.nextElementSibling;
     var text=pre?pre.innerText||pre.textContent:'';
-    navigator.clipboard.writeText(text).then(function(){
-      btn.textContent='✅ Copied!';btn.classList.add('copied');
-      setTimeout(function(){btn.textContent='📋 Copy BibTeX';btn.classList.remove('copied');},2000);
-    });
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){
+        btn.textContent='✅ Copied!';btn.classList.add('copied');
+        setTimeout(function(){btn.textContent='📋 Copy BibTeX';btn.classList.remove('copied');},2000);
+      });
+    } else {
+      btn.textContent='⚠️ Copy not supported';
+      setTimeout(function(){btn.textContent='📋 Copy BibTeX';},2000);
+    }
   });
 });
 </script>

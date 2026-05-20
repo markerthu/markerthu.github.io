@@ -16,7 +16,8 @@ layout: null
 <link rel="canonical" href="https://www.jiajunfan.com/projects/">
 <title>Research Projects — Jiajun Fan</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Inter',sans-serif;background:#f8faff;color:#1a1a2e;line-height:1.7}
@@ -203,5 +204,11 @@ footer a{color:#1565c0}
 <footer>
   <p><a href="/">Jiajun Fan</a> · UIUC · <a href="/publications/">All Publications</a></p>
 </footer>
+<script>
+// Dark mode: respect site-wide preference stored in localStorage
+(function(){
+  try { if(localStorage.getItem('darkMode')==='true') document.body.classList.add('dark-mode'); } catch(e){}
+})();
+</script>
 </body>
 </html>

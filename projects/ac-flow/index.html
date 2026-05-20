@@ -20,7 +20,11 @@ permalink: /projects/ac-flow/
 <title>AC-Flow — Actor-Critic for Flow Matching | Preprint 2025</title>
 <meta name="description" content="Fine-tuning Flow Matching Generative Models with Intermediate Feedback. arXiv 2025.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="icon" href="/images/favicon.ico">
+<meta name="robots" content="index,follow">
+<script>if(localStorage.getItem('darkMode')==='true'){document.documentElement.style.background='#0d1117';}</script>
 <style>
 :root { --accent: #059669; --accent-light: #ecfdf5; }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -240,13 +244,13 @@ footer a{color:var(--accent);font-weight:600}
     <a class="btn btn-primary" href="https://arxiv.org/abs/2510.18072">arXiv:2510.18072</a>
     <a class="btn btn-neutral" href="/">🏠 Homepage</a>
   </div>
-</div>
+</div></div>
 
 <div class="container">
 <section>
   <div class="tldr">
     <strong>TL;DR</strong> — Existing RLHF methods for flow matching only use <em>outcome rewards</em> (ORW-CFM-W2), suffering from credit assignment problems. AC-Flow introduces a full <strong>actor-critic framework</strong> with intermediate feedback — reward shaping + dual-stability + generalized critic weighting — achieving SOTA text-to-image alignment on SD3 without degrading diversity or stability.
-  </div></div>
+  </div>
 </section>
 
 <section>
@@ -332,7 +336,7 @@ footer a{color:var(--accent);font-weight:600}
 </ul>
 
 <h2>📖 Cite This Paper</h2>
-  <button class="bib-copy-btn">📋 Copy BibTeX</button>
+  <button class="bib-copy-btn" aria-label="Copy BibTeX citation">📋 Copy BibTeX</button>
   <pre class="bibtex-block"><code>@misc{fan2025finetuningflowmatchinggenerative,
   title={Fine-tuning Flow Matching Generative Models with Intermediate Feedback},
   author={Jiajun Fan and Chaoran Cheng and Shuaike Shen and Xiangxin Zhou and Ge Liu},
@@ -345,18 +349,28 @@ footer a{color:var(--accent);font-weight:600}
 </section>
 </div>
 <footer>
-  <p>AC-Flow · arXiv 2025 (Under Review) &nbsp;|&nbsp; <a href="/">Jiajun Fan</a> · UIUC &nbsp;|&nbsp; <a href="https://arxiv.org/abs/2510.18072">arXiv</a></p>
- &nbsp;|&nbsp; <a href="#">↑ Back to top</a></footer>
+  <p>AC-Flow · arXiv 2025 (Under Review) &nbsp;|&nbsp; <a href="/">Jiajun Fan</a> · UIUC &nbsp;|&nbsp; <a href="https://arxiv.org/abs/2510.18072">arXiv</a> &nbsp;|&nbsp; <a href="/publications/">All Publications</a> &nbsp;|&nbsp; <a href="#">↑ Back to top</a></p>
+</footer>
 
 <script>
+// Dark mode: respect site-wide preference stored in localStorage
+(function(){
+  try { if(localStorage.getItem('darkMode')==='true') document.body.classList.add('dark-mode'); } catch(e){}
+})();
+
 document.querySelectorAll('.bib-copy-btn').forEach(function(btn){
   btn.addEventListener('click',function(){
     var pre=btn.nextElementSibling;
     var text=pre?pre.innerText||pre.textContent:'';
-    navigator.clipboard.writeText(text).then(function(){
-      btn.textContent='✅ Copied!';btn.classList.add('copied');
-      setTimeout(function(){btn.textContent='📋 Copy BibTeX';btn.classList.remove('copied');},2000);
-    });
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){
+        btn.textContent='✅ Copied!';btn.classList.add('copied');
+        setTimeout(function(){btn.textContent='📋 Copy BibTeX';btn.classList.remove('copied');},2000);
+      });
+    } else {
+      btn.textContent='⚠️ Copy not supported';
+      setTimeout(function(){btn.textContent='📋 Copy BibTeX';},2000);
+    }
   });
 });
 </script>

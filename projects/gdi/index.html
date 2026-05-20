@@ -20,7 +20,8 @@ permalink: /projects/gdi/
 <title>GDI — 22 Atari World Records | ICML 2022</title>
 <meta name="description" content="Generalized Data Distribution Iteration. ICML 2022. Superhuman RL with 500× less data.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
 <style>
 :root { --accent: #ea580c; --accent-light: #fff7ed; }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -354,18 +355,28 @@ footer a{color:var(--accent);font-weight:600}
 <footer>
   <p>GDI · ICML 2022 &nbsp;|&nbsp; <a href="/">Jiajun Fan</a> · Tsinghua University &nbsp;|&nbsp;
   <a href="https://proceedings.mlr.press/v162/fan22c.html">Paper</a> &nbsp;|&nbsp;
-  <a href="https://proceedings.mlr.press/v162/fan22c/fan22c.pdf">PDF</a></p>
- &nbsp;|&nbsp; <a href="#">↑ Back to top</a></footer>
+  <a href="https://proceedings.mlr.press/v162/fan22c/fan22c.pdf">PDF</a> &nbsp;|&nbsp; <a href="/publications/">All Publications</a> &nbsp;|&nbsp; <a href="#">↑ Back to top</a></p>
+</footer>
 
 <script>
+// Dark mode: respect site-wide preference stored in localStorage
+(function(){
+  try { if(localStorage.getItem('darkMode')==='true') document.body.classList.add('dark-mode'); } catch(e){}
+})();
+
 document.querySelectorAll('.bib-copy-btn').forEach(function(btn){
   btn.addEventListener('click',function(){
     var pre=btn.nextElementSibling;
     var text=pre?pre.innerText||pre.textContent:'';
-    navigator.clipboard.writeText(text).then(function(){
-      btn.textContent='✅ Copied!';btn.classList.add('copied');
-      setTimeout(function(){btn.textContent='📋 Copy BibTeX';btn.classList.remove('copied');},2000);
-    });
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){
+        btn.textContent='✅ Copied!';btn.classList.add('copied');
+        setTimeout(function(){btn.textContent='📋 Copy BibTeX';btn.classList.remove('copied');},2000);
+      });
+    } else {
+      btn.textContent='⚠️ Copy not supported';
+      setTimeout(function(){btn.textContent='📋 Copy BibTeX';},2000);
+    }
   });
 });
 </script>

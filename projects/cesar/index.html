@@ -20,7 +20,11 @@ permalink: /projects/cesar/
 <title>CESAR — Audio LLM Reasoning | ICLR 2026</title>
 <meta name="description" content="CESAR: Consistent, Effective, and Scalable Audio Reasoners. ICLR 2026.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="icon" href="/images/favicon.ico">
+<meta name="robots" content="index,follow">
+<script>if(localStorage.getItem('darkMode')==='true'){document.documentElement.style.background='#0d1117';}</script>
 <style>
 :root { --accent: #2563eb; --accent-light: #eff6ff; }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -220,6 +224,7 @@ footer a{color:var(--accent);font-weight:600}
 }</script>
 </head>
 <body>
+<script>if(localStorage.getItem('darkMode')==='true') document.body.classList.add('dark-mode');</script>
 
 <header class="site-masthead">
   <div class="masthead-inner">
@@ -497,8 +502,8 @@ footer a{color:var(--accent);font-weight:600}
 <!-- BibTeX -->
 <section>
   <h2>📖 BibTeX</h2>
-  <button class="bib-copy-btn">📋 Copy BibTeX</button>
-  <pre class="bibtex-block"><code>@inproceedings{fan2026incentivizing,
+  <button class="bib-copy-btn" aria-label="Copy BibTeX citation">📋 Copy BibTeX</button>
+  <pre class="bibtex-block" tabindex="0"><code>@inproceedings{fan2026incentivizing,
   title={Incentivizing Consistent, Effective and Scalable Reasoning
          Capability in Audio {LLM}s via Reasoning Process Rewards},
   author={Jiajun Fan and Roger Ren and Jingyuan Li and Rahul Pandey and
@@ -513,19 +518,29 @@ footer a{color:var(--accent);font-weight:600}
 </div>
 
 <footer>
-  <p>CESAR · ICLR 2026 &nbsp;|&nbsp; <a href="/">Jiajun Fan</a> · UIUC &amp; Amazon &nbsp;|&nbsp; <a href="https://openreview.net/forum?id=DUr48hxO2h">Paper</a></p>
- &nbsp;|&nbsp; <a href="#">↑ Back to top</a></footer>
+  <p>CESAR · ICLR 2026 &nbsp;|&nbsp; <a href="/">Jiajun Fan</a> · UIUC &amp; Amazon &nbsp;|&nbsp; <a href="https://openreview.net/forum?id=DUr48hxO2h">Paper</a> &nbsp;|&nbsp; <a href="/publications/">All Publications</a> &nbsp;|&nbsp; <a href="#">↑ Back to top</a></p>
+</footer>
 
 
 <script>
+// Dark mode: respect site-wide preference stored in localStorage
+(function(){
+  try { if(localStorage.getItem('darkMode')==='true') document.body.classList.add('dark-mode'); } catch(e){}
+})();
+
 document.querySelectorAll('.bib-copy-btn').forEach(function(btn){
   btn.addEventListener('click',function(){
     var pre=btn.nextElementSibling;
     var text=pre?pre.innerText||pre.textContent:'';
-    navigator.clipboard.writeText(text).then(function(){
-      btn.textContent='✅ Copied!';btn.classList.add('copied');
-      setTimeout(function(){btn.textContent='📋 Copy BibTeX';btn.classList.remove('copied');},2000);
-    });
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){
+        btn.textContent='✅ Copied!';btn.classList.add('copied');
+        setTimeout(function(){btn.textContent='📋 Copy BibTeX';btn.classList.remove('copied');},2000);
+      });
+    } else {
+      btn.textContent='⚠️ Copy not supported';
+      setTimeout(function(){btn.textContent='📋 Copy BibTeX';},2000);
+    }
   });
 });
 </script>
