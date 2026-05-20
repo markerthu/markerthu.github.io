@@ -10,6 +10,9 @@ redirect_from:
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CV — Jiajun Fan</title>
+<meta name="description" content="Academic CV of Jiajun Fan — CS Ph.D. at UIUC. Publications, education, awards, and research interests.">
+<link rel="icon" href="/images/favicon.ico">
+<script>if(localStorage.getItem('darkMode')==='true'){document.documentElement.style.background='#0d1117';}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"></noscript>
@@ -19,12 +22,18 @@ body{font-family:'Inter',sans-serif;background:#f7f9fc;color:#1a2332;line-height
 a{color:#1565c0;text-decoration:none}
 a:hover{text-decoration:underline}
 
-/* ── Top nav ── */
-.topnav{background:#0d1b2a;padding:11px 24px;display:flex;align-items:center;gap:12px;font-size:0.84em}
-.topnav a{color:#7eb8f7;font-weight:600}
-.topnav span{color:#4a6280}
-.topnav .pdf-btn{margin-left:auto;background:#1565c0;color:#fff !important;padding:5px 14px;border-radius:6px;font-weight:700;font-size:0.84em;text-decoration:none !important}
-.topnav .pdf-btn:hover{background:#1976d2}
+/* ── Site masthead (matches jiajunfan.com theme) ── */
+.site-masthead{background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.06);position:sticky;top:0;z-index:200}
+.site-masthead::after{content:'';display:block;height:3px;background:linear-gradient(to right,#1565c0 0%,#7c4dff 50%,#00897b 100%)}
+.masthead-inner{max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:56px}
+.masthead-title{font-weight:800;font-size:1.05em;color:#1a2332!important;text-decoration:none!important;letter-spacing:-.02em}
+.masthead-nav{display:flex;gap:2px;align-items:center}
+.masthead-nav a{font-weight:600;font-size:0.88em;color:#333!important;text-decoration:none!important;padding:6px 10px;border-radius:6px;transition:color .2s,background .2s;letter-spacing:.01em}
+.masthead-nav a:hover{color:#1565c0!important;background:#f0f4ff}
+.masthead-nav a.nav-active{color:#1565c0!important;font-weight:700}
+.masthead-nav .pdf-dl{background:#1565c0;color:#fff!important;border-radius:6px;font-weight:700;margin-left:6px}
+.masthead-nav .pdf-dl:hover{background:#1976d2!important;color:#fff!important}
+@media(max-width:560px){.masthead-nav a{font-size:0.78em;padding:5px 6px}.masthead-title{font-size:0.95em}.masthead-nav .pdf-dl{display:none}}
 
 /* ── Hero header ── */
 @keyframes gradientShift{
@@ -156,20 +165,27 @@ footer a{color:#7eb8f7}
 </head>
 <body>
 
-<div class="topnav">
-  <a href="/">← Jiajun Fan</a>
-  <span>/</span>
-  <span style="color:#b0c8e8;">CV</span>
-  <a class="pdf-btn" href="/files/CV.pdf">⬇ PDF</a>
-</div>
+<header class="site-masthead">
+  <div class="masthead-inner">
+    <a class="masthead-title" href="/">Jiajun Fan</a>
+    <nav class="masthead-nav" aria-label="Site navigation">
+      <a href="/publications/">Publications</a>
+      <a href="/projects/">Projects</a>
+      <a href="/year-archive/">Blog</a>
+      <a href="/cv/" class="nav-active">CV</a>
+      <a href="/contact/">Contact</a>
+      <a class="pdf-dl" href="/files/CV.pdf">⬇ PDF</a>
+    </nav>
+  </div>
+</header>
 
 <div class="cv-hero">
   <div class="cv-name">Jiajun Fan</div>
   <div class="cv-role">CS Ph.D. Student · University of Illinois Urbana-Champaign</div>
   <div class="cv-contact">
     <a href="mailto:jiajunf3@illinois.edu">✉️ jiajunf3@illinois.edu</a>
-    <a href="https://jiajunfan.com">🌐 jiajunfan.com</a>
-    <a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&hl=en">🎓 Google Scholar</a>
+    <a href="https://jiajunfan.com" target="_blank" rel="noopener noreferrer">🌐 jiajunfan.com</a>
+    <a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">🎓 Google Scholar</a>
     <a href="/files/CV.pdf">📋 Full CV (PDF)</a>
   </div>
   <div class="cv-badges">
@@ -332,7 +348,7 @@ footer a{color:#7eb8f7}
       <div class="stat-item"><div class="stat-num">24</div><div class="stat-lbl">Atari Records</div></div>
       <div class="stat-item"><div class="stat-num">500×</div><div class="stat-lbl">Data Efficiency vs Agent57</div></div>
       <div class="stat-item"><div class="stat-num">SOTA</div><div class="stat-lbl">MMAU Audio Reasoning</div></div>
-      <div class="stat-item"><div class="stat-num">300+</div><div class="stat-lbl">Scholar Citations</div></div><div class="stat-item"><div class="stat-num">8</div><div class="stat-lbl">h-index</div></div>
+      <div class="stat-item"><div class="stat-num">334+</div><div class="stat-lbl">Scholar Citations</div></div><div class="stat-item"><div class="stat-num">9</div><div class="stat-lbl">h-index</div></div>
       <div class="stat-item"><div class="stat-num">4.0</div><div class="stat-lbl">UIUC Ph.D. GPA</div></div>
     </div>
   </div>
@@ -367,7 +383,7 @@ footer a{color:#7eb8f7}
   <!-- Internship CTA -->
   <div class="sidebar-card" style="background:linear-gradient(135deg,#e8f4fd,#f0f7ff);border-color:#1565c0">
     <div class="sec-title" style="color:#0d47a1">📢 Opportunities</div>
-    <p style="font-size:0.83em;color:#1a2332;line-height:1.6;margin-bottom:12px"><strong>Seeking research internship — Summer 2026.</strong><br>Happy to discuss collaborations on generative model post-training, reasoning LLMs, or RL.</p>
+    <p style="font-size:0.83em;color:#1a2332;line-height:1.6;margin-bottom:12px"><strong>Seeking research internship — Fall 2026 / 2027.</strong><br>Happy to discuss collaborations on generative model post-training, reasoning LLMs, or RL.</p>
     <a href="mailto:jiajunf3@illinois.edu" style="display:block;text-align:center;background:#1565c0;color:#fff !important;padding:8px;border-radius:7px;font-weight:700;font-size:0.84em;text-decoration:none !important">✉️ Get in Touch</a>
   </div>
 
@@ -378,5 +394,6 @@ footer a{color:#7eb8f7}
 <footer>
   <p><a href="/">Jiajun Fan</a> · UIUC CS Ph.D. · <a href="/files/CV.pdf">Download PDF CV</a></p>
 </footer>
+<script>(function(){try{if(localStorage.getItem('darkMode')==='true')document.body.classList.add('dark-mode');}catch(e){}})()</script>
 </body>
 </html>

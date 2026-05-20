@@ -861,7 +861,7 @@ body.dark-mode .hero-pill { background: rgba(255,255,255,0.12) !important; color
     <span class="hero-pill">🎮 Superhuman Deep RL</span>
   </div>
   <div class="hero-links">
-    <a class="hero-link" href="/files/CV.pdf">📋 CV</a>
+    <a class="hero-link" href="/cv/">📋 CV</a>
     <a class="hero-link" href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">🎓 Scholar</a>
     <a class="hero-link" href="mailto:jiajunf3@illinois.edu">✉️ Email</a>
     <a class="hero-link" href="https://openreview.net/profile?id=~Jiajun_Fan1" target="_blank" rel="noopener noreferrer">📝 OpenReview</a>
@@ -882,7 +882,7 @@ body.dark-mode .hero-pill { background: rgba(255,255,255,0.12) !important; color
   <a href="#deadlines"    data-qn="deadlines">📅 Deadlines</a>
   <a href="#awards"       data-qn="awards">🏅 Awards</a>
   <a href="/year-archive/">✍️ Blog</a>
-  <a href="/files/CV.pdf">📋 CV</a>
+  <a href="/cv/">📋 CV</a>
   <a href="#contact">📬 Contact</a>
 </div>
 
@@ -893,7 +893,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 
 <div class="internship-banner internship-banner-pulse">
 🎓 <strong>Seeking research internship — Fall 2026 / 2027.</strong> RL · Generative Models · Reasoning LLMs
-&nbsp;<a href="/files/CV.pdf">[CV]</a>
+&nbsp;<a href="/cv/">[CV]</a>
 &nbsp;<a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">[Scholar]</a>
 &nbsp;<a href="mailto:jiajunf3@illinois.edu">[Email]</a>
 </div>
@@ -1390,7 +1390,7 @@ Happy to discuss research, internships, or collaborations. Best reached by email
     <a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">🎓 Scholar</a>
     <a href="https://openreview.net/profile?id=~Jiajun_Fan1" target="_blank" rel="noopener noreferrer">📝 OpenReview</a>
     <a href="https://github.com/markerthu" target="_blank" rel="noopener noreferrer">💻 GitHub</a>
-    <a href="/files/CV.pdf">📋 CV</a>
+    <a href="/cv/">📋 CV</a>
     <a href="/projects/">🔬 Projects</a>
   </div>
   <p>© {{ site.time | date: '%Y' }} Jiajun Fan · CS Ph.D. @ UIUC · Built with ☕ and curiosity</p>
@@ -1489,7 +1489,7 @@ Happy to discuss research, internships, or collaborations. Best reached by email
     { kw:['advisor','supervisor','pi','lab','group','professor','mentor','guided by'],
       a:"My PhD advisor is Prof. Ge Liu at UIUC. I work in the Natural Language Processing (NLP) group, broadly focusing on RL post-training for large generative models." },
     { kw:['cv','resume','curriculum vitae','download cv'],
-      a:"You can download my CV directly at /files/CV.pdf. It covers my publications, education (Nankai → Tsinghua → UIUC), awards, and research experience." },
+      a:"You can view my full CV at /cv/ — it covers publications, education (Nankai → Tsinghua → UIUC), awards, and research experience. A PDF download is also available from that page." },
     { kw:['news','latest','recent','what\'s new','update','announcement'],
       a:"Latest highlights: CESAR accepted to ICLR 2026, SP-VLA accepted to ICLR 2026, PRANCE accepted to IEEE TPAMI 2026, ADRPO and VarCon accepted to NeurIPS 2025, and a new ICML 2026 accept. Check the News section on this page for the full list!" },
     { kw:['hobby','hobbies','outside research','free time','personal','fun','enjoy','game design','game','creative','interest besides'],
