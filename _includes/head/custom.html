@@ -43,7 +43,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<!-- Inter font — non-render-blocking (media="print" trick defers parse until after first paint) -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"></noscript>
 
 <style>
   /* ── Typography upgrade ── */
@@ -478,14 +480,16 @@
       btn.className = 'code-copy-btn';
       btn.addEventListener('click', function() {
         var src = (pre.querySelector('code') || pre).innerText;
-        navigator.clipboard.writeText(src).then(function() {
-          btn.textContent = '✓ Copied';
-          btn.classList.add('copied');
-          setTimeout(function() {
-            btn.textContent = 'Copy';
-            btn.classList.remove('copied');
-          }, 1800);
-        });
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(src).then(function() {
+            btn.textContent = '✓ Copied';
+            btn.classList.add('copied');
+            setTimeout(function() {
+              btn.textContent = 'Copy';
+              btn.classList.remove('copied');
+            }, 1800);
+          });
+        }
       });
       wrap.appendChild(btn);
     });

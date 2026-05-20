@@ -48,6 +48,8 @@ body.dark-mode .internship-banner strong { color: #90caf9 !important; }
 .quick-nav a { color: #1565c0; text-decoration: none; padding: 2px 6px; border-radius: 5px; transition: background .15s, color .15s; }
 .quick-nav a:hover { background: #e8effe; }
 .quick-nav a.qn-active { background: #1565c0; color: #fff !important; }
+.qn-label { font-weight: 800; color: #1565c0; }
+body.dark-mode .qn-label { color: #58a6ff; }
 
 /* ── Section headers ── */
 .section-header {
@@ -138,7 +140,7 @@ body.dark-mode .pub-abst-btn { background: #1e3a5f; color: #93c5fd; }
 body.dark-mode .pub-abst-btn:hover { background: #1e40af; }
 .pub-title a { color: #1565c0; text-decoration: none; }
 .pub-title a:hover { text-decoration: underline; }
-.pub-authors { font-size: 0.81em; color: #777; margin-top: 3px; }
+.pub-authors { font-size: 0.81em; color: #6b7280; margin-top: 3px; }
 .pub-authors strong { color: #1a2332; font-weight: 700; }
 .pub-desc { font-size: 0.81em; color: #444; margin-top: 4px; line-height: 1.55; }
 .pub-hl {
@@ -424,6 +426,7 @@ body.dark-mode .pub-abst-btn:hover { background: #1e40af; }
   box-shadow: 0 4px 14px rgba(0,0,0,.25);
   transition: all .3s;
 }
+.dark-toggle { transition: transform .3s, box-shadow .3s, background .3s, color .3s, border-color .3s; }
 .dark-toggle:hover { transform: scale(1.1); box-shadow: 0 6px 20px rgba(0,0,0,.35); }
 body.dark-mode .dark-toggle { background: #ffd54f; color: #1a2332; border-color: #ffd54f; }
 
@@ -483,7 +486,7 @@ body.dark-mode .rt-title { color: #e6edf3 !important; }
 body.dark-mode .pub-desc, body.dark-mode .rc-desc,
 body.dark-mode .featured-desc, body.dark-mode .rt-desc,
 body.dark-mode .tagline, body.dark-mode p { color: #8b949e !important; }
-body.dark-mode .pub-authors { color: #6e7681 !important; }
+body.dark-mode .pub-authors { color: #8b949e !important; }
 body.dark-mode .pub-authors strong { color: #e6edf3 !important; }
 body.dark-mode a { color: #58a6ff !important; }
 
@@ -497,15 +500,13 @@ body.dark-mode .quick-nav { background: #1c2333 !important; }
 body.dark-mode .quick-nav a,
 body.dark-mode .quick-nav span { color: #58a6ff !important; }
 body.dark-mode .quick-nav a:hover { background: #21262d !important; }
-body.dark-mode .internship-banner-pulse {
-  animation: bannerPulse 3s ease-in-out infinite;
-}
+/* banner-pulse dark mode needs no re-declaration — animation already inherited */
 
 /* ── Dark mode: Badges & Highlights ── */
 body.dark-mode .pub-hl { background: #1c1e21 !important; color: #ffd54f !important; border-left-color: #d29922 !important; }
 body.dark-mode .stat-number { color: #58a6ff !important; }
-body.dark-mode .stat-label { color: #6e7681 !important; }
-body.dark-mode .stat-label em { color: #6e7681 !important; }
+body.dark-mode .stat-label { color: #8b949e !important; }
+body.dark-mode .stat-label em { color: #8b949e !important; }
 body.dark-mode .pub-project { background: #1c2333 !important; color: #58a6ff !important; }
 body.dark-mode .pub-project:hover { background: #1e3a5f !important; }
 body.dark-mode .pub-link.pl-paper  { background: #1c2333 !important; color: #58a6ff !important; }
@@ -538,7 +539,7 @@ body.dark-mode .nbadge.nb-finish { background: #122117 !important; color: #3fb95
 body.dark-mode .nbadge.nb-top { background: #2d2000 !important; color: #ffd54f !important; }
 body.dark-mode .nbadge.nb-service { background: #21262d !important; color: #8b949e !important; }
 body.dark-mode .nbadge.nb-upcoming { background: #0d2137 !important; color: #58a6ff !important; }
-body.dark-mode .news-date { color: #6e7681 !important; }
+body.dark-mode .news-date { color: #8b949e !important; }
 body.dark-mode .news-toggle { border-color: #30363d !important; color: #58a6ff !important; }
 body.dark-mode .news-toggle:hover { background: #161b22 !important; }
 
@@ -552,17 +553,61 @@ body.dark-mode .rt-item::before { border-color: #388bfd !important; background: 
 /* ── Awards grid responsive ── */
 @media(max-width:560px){ .awards-grid { grid-template-columns: 1fr !important; } }
 
+/* ── Vision blockquote ── */
+.vision-quote {
+  background: #f8f4ff; border-left: 4px solid #7c4dff;
+  border-radius: 0 8px 8px 0; padding: 14px 20px;
+  color: #333; font-style: normal; margin-bottom: 1em;
+}
+.vision-quote-title {
+  margin: 0 0 6px; font-weight: 800; color: #4a148c; font-size: 1em;
+}
+.vision-quote-body { margin: 0; font-size: 0.92em; line-height: 1.75; }
+body.dark-mode .vision-quote { background: #161b22 !important; border-left-color: #8957e5 !important; }
+body.dark-mode .vision-quote-title { color: #c9d1d9 !important; }
+body.dark-mode .vision-quote-body { color: #8b949e !important; }
+
+/* ── Global focus ring (WCAG 2.4.7) ── */
+a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-visible {
+  outline: 2px solid #1565c0; outline-offset: 2px; border-radius: 4px;
+}
+body.dark-mode a:focus-visible,
+body.dark-mode button:focus-visible,
+body.dark-mode input:focus-visible { outline-color: #58a6ff; }
+
+/* ── Placeholder text ── */
+.filter-search::placeholder, .ra-input::placeholder { color: #9aa0a6; }
+body.dark-mode .filter-search::placeholder,
+body.dark-mode .ra-input::placeholder { color: #8b949e; }
+
+/* ── Input / button appearance reset (iOS Safari) ── */
+.filter-search, .ra-input, .filter-btn, .news-toggle {
+  -webkit-appearance: none; appearance: none;
+}
+
+/* ── Print styles ── */
+@media print {
+  .scroll-top, .dark-toggle, .ra-btn, .ra-panel, .quick-nav,
+  #read-progress, .hero-particles, .pub-filter-bar { display: none !important; }
+  .hero-banner { background: none !important; color: #000 !important; box-shadow: none !important; }
+  .hero-name, .hero-subtitle { color: #000 !important; }
+  body, .page__content { color: #000 !important; background: #fff !important; }
+  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.8em; }
+  .pub-entry, .featured-card { break-inside: avoid; }
+  .hero-pills, .hero-links { display: none !important; }
+}
+
 /* ── Dark mode: Awards ── */
 body.dark-mode ul li { color: #8b949e !important; }
 body.dark-mode ul li strong { color: #e6edf3 !important; }
 
 /* ── Dark mode: Footer ── */
-body.dark-mode .site-footer { border-top-color: #21262d !important; color: #6e7681 !important; }
+body.dark-mode .site-footer { border-top-color: #21262d !important; color: #8b949e !important; }
 body.dark-mode .site-footer a { color: #58a6ff !important; }
 body.dark-mode .page__footer { background: #010409 !important; border-top-color: #21262d !important; }
 body.dark-mode .page__footer a { color: #58a6ff !important; }
 body.dark-mode .page__footer-follow .social-icons .fa { color: #58a6ff !important; }
-body.dark-mode .page__footer-copyright { color: #6e7681 !important; }
+body.dark-mode .page__footer-copyright { color: #8b949e !important; }
 
 /* ── Dark mode: Scroll-top ── */
 body.dark-mode .scroll-top { background: #388bfd !important; box-shadow: 0 4px 14px rgba(56,139,253,.3) !important; }
@@ -594,7 +639,7 @@ body.dark-mode .page { background: #0d1117 !important; }
 .ra-close { background: rgba(255,255,255,.2); border: none; color: #fff; width: 24px; height: 24px; border-radius: 50%; cursor: pointer; font-size: 0.85em; display: flex; align-items: center; justify-content: center; }
 .ra-close:hover { background: rgba(255,255,255,.35); }
 .ra-msgs { flex: 1; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 8px; }
-.ra-msg { max-width: 85%; padding: 8px 12px; border-radius: 12px; font-size: 0.82em; line-height: 1.5; word-break: break-word; }
+.ra-msg { max-width: 85%; padding: 8px 12px; border-radius: 12px; font-size: 0.82em; line-height: 1.5; overflow-wrap: anywhere; }
 .ra-user { align-self: flex-end; background: #2563eb; color: #fff; border-radius: 12px 12px 2px 12px; }
 .ra-bot { align-self: flex-start; background: #f1f5f9; color: #1e293b; border-radius: 12px 12px 12px 2px; }
 .ra-typing { display: flex; gap: 4px; align-items: center; padding: 10px 14px; }
@@ -679,7 +724,7 @@ body.dark-mode .pub-thumb-wrap:hover { box-shadow: 0 4px 18px rgba(0,0,0,0.45) !
 img[loading="lazy"] {
   opacity: 0; transition: opacity 0.4s;
 }
-img[loading="lazy"].loaded, img[loading="lazy"][complete] {
+img[loading="lazy"].loaded {
   opacity: 1;
 }
 
@@ -711,9 +756,17 @@ img[loading="lazy"].loaded, img[loading="lazy"][complete] {
   .pub-left  { flex-direction: row; }
   .stat-card { flex: 1 1 100px; padding: 10px 12px; }
   .stat-number { font-size: 1.5em; }
-  .dark-toggle { bottom: 76px; right: 16px; }
-  .scroll-top { right: 16px; }
+  /* Stack fixed controls to avoid collision */
+  .ra-btn      { bottom: 16px;  right: 16px; }
+  .scroll-top  { bottom: 74px;  right: 16px; }
+  .dark-toggle { bottom: 122px; right: 16px; }
 }
+
+/* ── Dark mode scrollbar ── */
+body.dark-mode { scrollbar-color: #30363d #0d1117; }
+body.dark-mode .ra-msgs::-webkit-scrollbar { width: 8px; }
+body.dark-mode .ra-msgs::-webkit-scrollbar-thumb { background: #30363d; border-radius: 4px; }
+body.dark-mode .ra-msgs::-webkit-scrollbar-track { background: #0d1117; }
 
 
 
@@ -751,11 +804,13 @@ body.dark-mode .cite-badge { background: #0c2340; color: #7dd3fc; border-color: 
   border: 1.5px solid #e5e7eb; background: #fff; color: #555; cursor: pointer;
   transition: all .15s;
 }
-.filter-btn.active, .filter-btn:hover { background: #1565c0; color: #fff; border-color: #1565c0; }
+.filter-btn:hover { background: #e8effe; color: #1565c0; border-color: #1565c0; }
+.filter-btn.active { background: #1565c0; color: #fff; border-color: #1565c0; }
 body.dark-mode .pub-filter-bar { background: #161b22; border-color: #30363d; }
 body.dark-mode .filter-search { background: #0d1117; color: #e6edf3; border-color: #30363d; }
 body.dark-mode .filter-btn { background: #21262d; color: #8b949e; border-color: #30363d; }
-body.dark-mode .filter-btn.active, body.dark-mode .filter-btn:hover { background: #388bfd; color: #fff; border-color: #388bfd; }
+body.dark-mode .filter-btn:hover { background: #1c2333; color: #58a6ff; border-color: #388bfd; }
+body.dark-mode .filter-btn.active { background: #388bfd; color: #fff; border-color: #388bfd; }
 .pub-entry.hidden { display: none !important; }
 
 /* ── ④ Abstract tooltip ── */
@@ -765,7 +820,6 @@ body.dark-mode .filter-btn.active, body.dark-mode .filter-btn:hover { background
   background: #fff; border: 1.5px solid #e5e7eb; border-radius: 10px;
   padding: 14px 16px; font-size: 0.84em; color: #374151; line-height: 1.65;
   box-shadow: 0 8px 28px rgba(0,0,0,.12); max-width: 520px; min-width: 280px;
-  pointer-events: none;
 }
 .pub-entry.abstract-open .pub-abstract-preview { display: block; }
 body.dark-mode .pub-abstract-preview { background: #161b22; border-color: #30363d; color: #b5c2c8; box-shadow: 0 8px 28px rgba(0,0,0,.4); }
@@ -802,7 +856,7 @@ body.dark-mode #awards + div p[style] { color: #c9d1d9 !important; }
 <div id="read-progress"></div>
 <div class="hero-banner">
   <canvas class="hero-particles" id="particles"></canvas>
-  <h1 class="hero-name">Jiajun Fan</h1>
+  <div class="hero-name">Jiajun Fan</div>
   <div class="hero-subtitle" id="hero-typed"></div>
   <div class="hero-pills">
     <span class="hero-pill">🌊 RL Post-Training for Generative Models</span>
@@ -821,7 +875,7 @@ body.dark-mode #awards + div p[style] { color: #c9d1d9 !important; }
 
 <!-- Quick nav -->
 <div class="quick-nav">
-  <span style="font-weight:800;color:#1565c0;">↓ Jump to:</span>
+  <span class="qn-label">↓ Jump to:</span>
   <a href="#news"         data-qn="news">📰 News</a>
   <a href="#featured"     data-qn="featured">🔥 Featured</a>
   <a href="#publications" data-qn="publications">📄 Publications</a>
@@ -840,7 +894,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 </p>
 
 <div class="internship-banner internship-banner-pulse">
-🎓 <strong>Seeking research internship — Summer/Fall 2026.</strong> RL · Generative Models · Reasoning LLMs
+🎓 <strong>Seeking research internship — Fall 2026 / 2027.</strong> RL · Generative Models · Reasoning LLMs
 &nbsp;<a href="files/CV.pdf">[CV]</a>
 &nbsp;<a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">[Scholar]</a>
 &nbsp;<a href="mailto:jiajunf3@illinois.edu">[Email]</a>
@@ -852,11 +906,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 <ul class="news-list">
   <li>
     <span class="news-date">Apr 2026</span>
-    <span><span class="nbadge nb-upcoming">Upcoming</span>🇰🇷 <strong>ICML 2026</strong> in Seoul, South Korea, Jul 6–11. See you there!</span>
-  </li>
-  <li>
-    <span class="news-date">Apr 2026</span>
-    <span><span class="nbadge nb-accept">Accept</span>Several papers accepted at <strong>ICML 2026</strong>. See you in Seoul 🇰🇷</span>
+    <span><span class="nbadge nb-accept">Accept</span>Several papers accepted at <strong>ICML 2026</strong> (Seoul, Jul 6–11). See you in Seoul 🇰🇷</span>
   </li>
   <li>
     <span class="news-date">Apr 2026</span>
@@ -891,12 +941,13 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
     <span><span class="nbadge nb-top">Oral · Top 5%</span>LBC at <strong>ICLR 2023</strong>, ranked <strong>5/4176</strong> — broke 24 Atari world records.</span>
   </li>
 </ul>
-<button class="news-toggle" id="news-toggle" onclick="
+<button class="news-toggle" id="news-toggle" aria-expanded="false" onclick="
   var extras = document.querySelectorAll('.news-hidden');
   var btn = document.getElementById('news-toggle');
   var expanded = btn.getAttribute('data-expanded') === '1';
   extras.forEach(function(e){ e.style.display = expanded ? 'none' : 'flex'; });
   btn.setAttribute('data-expanded', expanded ? '0' : '1');
+  btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
   btn.textContent = expanded ? '▼ Show more news' : '▲ Show less';
 " aria-label="Show more news">▼ Show more news</button>
 
@@ -1172,9 +1223,9 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 <!-- ═══════════════════════════════ VISION ════════════════════════════ -->
 <h2 class="section-header" id="vision">💡 Research Vision</h2>
 
-<blockquote style="background:#f8f4ff;border-left:4px solid #7c4dff;border-radius:0 8px 8px 0;padding:14px 20px;color:#333;font-style:normal;margin-bottom:1em;">
-<p style="margin:0 0 6px;font-weight:800;color:#4a148c;font-size:1em;">Making AI Systems That Improve Themselves</p>
-<p style="margin:0;font-size:0.92em;line-height:1.75;">
+<blockquote class="vision-quote">
+<p class="vision-quote-title">Making AI Systems That Improve Themselves</p>
+<p class="vision-quote-body">
 Today's AI is frozen after training. I work to change that: AI that <strong>never stops getting better</strong>, with progressively less human scaffolding.
 </p>
 </blockquote>
@@ -1341,7 +1392,7 @@ Happy to discuss research, internships, or collaborations. Best reached by email
     <a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">🎓 Scholar</a>
     <a href="https://openreview.net/profile?id=~Jiajun_Fan1" target="_blank" rel="noopener noreferrer">📝 OpenReview</a>
     <a href="https://github.com/markerthu" target="_blank" rel="noopener noreferrer">💻 GitHub</a>
-    <a href="/cv/">📋 CV</a>
+    <a href="files/CV.pdf">📋 CV</a>
     <a href="/projects/">🔬 Projects</a>
   </div>
   <p>© {{ site.time | date: '%Y' }} Jiajun Fan · CS Ph.D. @ UIUC · Built with ☕ and curiosity</p>
@@ -1353,7 +1404,7 @@ Happy to discuss research, internships, or collaborations. Best reached by email
 
 <!-- ══════════════════ AI RESEARCH ASSISTANT ══════════════════ -->
 <button id="ra-btn" class="ra-btn" onclick="raOpen()" aria-label="Open research assistant chat" aria-expanded="false" title="Ask about my research">💬</button>
-<div id="ra-panel" class="ra-panel" role="dialog" aria-modal="true" aria-label="Research Assistant">
+<div id="ra-panel" class="ra-panel" role="dialog" aria-modal="true" aria-label="Research Assistant" aria-hidden="true">
   <div class="ra-header">
     <span>🤖 Research Assistant</span>
     <button onclick="raClose()" class="ra-close" aria-label="Close chat widget">✕</button>
@@ -1408,7 +1459,7 @@ Happy to discuss research, internships, or collaborations. Best reached by email
     { kw:['publication','paper','published','conference','venue','list','all papers'],
       a:"I've published at ICLR (2023 Oral, 2025, 2026), NeurIPS (2025), ICML (2022), and IEEE TPAMI (2026), with ongoing preprints. Full list on Google Scholar (EjmzseUAAAAJ)." },
     { kw:['citation','cited','impact','scholar','h-index','how many'],
-      a:"My work has 334+ citations (h-index 9). LBC (ICLR 2023 Oral) leads with 28 citations, followed by GDI (ICML 2022) with 21. Full profile: Google Scholar EjmzseUAAAAJ." },
+      a:"My work has 334+ citations (h-index 9). LBC (ICLR 2023 Oral) leads with 28 citations, followed by SP-VLA (ICLR 2026) with 27, then GDI (ICML 2022) with 21. Full profile: Google Scholar EjmzseUAAAAJ." },
     { kw:['self-improve','self-play','autonomous','annotation-free','human supervision'],
       a:"My long-term vision: generative models that self-improve autonomously — learning from environment feedback and their own outputs, with minimal human annotation. This drives my work on process rewards, actor-critic methods, and online RL post-training." },
     { kw:['flow matching','diffusion','generative','score','ode','trajectory'],
@@ -1416,7 +1467,7 @@ Happy to discuss research, internships, or collaborations. Best reached by email
     { kw:['github','code','open source','repository','implementation'],
       a:"My GitHub is @markerthu. Several projects have open-source code — check the individual project pages for repository links." },
     { kw:['blog','arxiv','reading','papers','feed','recent papers'],
-      a:"I track recent arXiv papers in RL post-training, reasoning, self-improvement, and multimodal LLMs — updated weekly. Browse at /blog/reading-papers/." },
+      a:"I track recent arXiv papers in RL post-training, reasoning, self-improvement, and multimodal LLMs — updated weekly. Browse at /year-archive/." },
     { kw:['intern','job','position','opportunity','hiring','open to'],
       a:"I'm primarily focused on my PhD research. I'm open to discussing research collaborations and internship opportunities at companies working on frontier RL, post-training, or generative AI." },
     { kw:['education','background','undergrad','bachelor','nankai','tsinghua','master','before uiuc','degree'],
@@ -1435,8 +1486,14 @@ Happy to discuss research, internships, or collaborations. Best reached by email
       a:"The Research Paper Network below the publications section shows how my papers connect thematically — from early RL theory (GDI/LBC) to RLHF for generative models (ORW-CFM-W2, ADRPO, AC-Flow) to process reward reasoning (CESAR). Hover to highlight connections." },
     { kw:['website','this site','built','how made','jekyll','github pages','tech stack'],
       a:"This site is built with Jekyll + Minimal Mistakes theme, hosted on GitHub Pages. Custom features include a D3 paper network graph, live citation counts from Google Scholar, a conference deadline tracker, and this chat widget — all running client-side with no backend." },
-    { kw:['summer','intern 2026','looking for','open position','2026 internship'],
-      a:"I'm open to summer 2026 research internships in RL post-training, generative models, and LLM reasoning. Feel free to reach out at jiajunf3@illinois.edu!" },
+    { kw:['summer','intern 2026','looking for','open position','2026 internship','internship'],
+      a:"I'm open to Fall 2026 / 2027 research internships in RL post-training, generative models, and LLM reasoning. Feel free to reach out at jiajunf3@illinois.edu!" },
+    { kw:['advisor','supervisor','pi','lab','group','professor','mentor','guided by'],
+      a:"My PhD advisor is Prof. Ge Liu at UIUC. I work in the Natural Language Processing (NLP) group, broadly focusing on RL post-training for large generative models." },
+    { kw:['cv','resume','curriculum vitae','download cv'],
+      a:"You can download my CV directly at /files/CV.pdf. It covers my publications, education (Nankai → Tsinghua → UIUC), awards, and research experience." },
+    { kw:['news','latest','recent','what\'s new','update','announcement'],
+      a:"Latest highlights: CESAR accepted to ICLR 2026, SP-VLA accepted to ICLR 2026, PRANCE accepted to IEEE TPAMI 2026, ADRPO and VarCon accepted to NeurIPS 2025, and a new ICML 2026 accept. Check the News section on this page for the full list!" },
     { kw:['hobby','hobbies','outside research','free time','personal','fun','enjoy','game design','game','creative','interest besides'],
       a:"Outside of research, I love designing games and building creative AI agents — things that have interesting emergent behaviors or unexpected dynamics. There's a natural overlap with my research: designing reward functions for RL feels a lot like designing game mechanics." },
     { kw:['thank','thanks','great','awesome','cool','helpful','nice'],
@@ -1484,6 +1541,7 @@ Happy to discuss research, internships, or collaborations. Best reached by email
   }
 
   function showTyping() {
+    if(document.getElementById('ra-typing-indicator')) return; /* idempotent */
     var msgs = document.getElementById('ra-msgs');
     var div = document.createElement('div');
     div.className = 'ra-msg ra-bot ra-typing';
@@ -1495,7 +1553,7 @@ Happy to discuss research, internships, or collaborations. Best reached by email
 
   function removeTyping() {
     var el = document.getElementById('ra-typing-indicator');
-    if (el) el.parentNode.removeChild(el);
+    if (el && el.parentNode) el.parentNode.removeChild(el);
   }
 
   window.raAsk = function(btn) {
@@ -1509,6 +1567,7 @@ Happy to discuss research, internships, or collaborations. Best reached by email
     var panel = document.getElementById('ra-panel');
     var btn = document.getElementById('ra-btn');
     panel.classList.add('show');
+    panel.setAttribute('aria-hidden', 'false');
     btn.style.display = 'none';
     btn.setAttribute('aria-expanded', 'true');
     var msgs = document.getElementById('ra-msgs');
@@ -1521,7 +1580,9 @@ Happy to discuss research, internships, or collaborations. Best reached by email
   };
 
   window.raClose = function() {
-    document.getElementById('ra-panel').classList.remove('show');
+    var panel = document.getElementById('ra-panel');
+    panel.classList.remove('show');
+    panel.setAttribute('aria-hidden', 'true');
     var btn = document.getElementById('ra-btn');
     btn.style.display = 'flex';
     btn.setAttribute('aria-expanded', 'false');
@@ -1577,7 +1638,7 @@ Happy to discuss research, internships, or collaborations. Best reached by email
     document.body.classList.toggle('dark-mode');
     var on = document.body.classList.contains('dark-mode');
     var gc = document.getElementById('research-graph');
-    if(gc && typeof d3 !== 'undefined') { gc.innerHTML=''; drawGraph(gc); }
+    if(gc && typeof d3 !== 'undefined') { drawGraph(gc); }
     btn.textContent = on ? '☀️' : '🌙';
     localStorage.setItem('darkMode', on);
   });
@@ -1593,6 +1654,10 @@ Happy to discuss research, internships, or collaborations. Best reached by email
     'Multimodal & Audio Reasoning',
     'CS Ph.D. Student @ UIUC'
   ];
+  /* Respect prefers-reduced-motion: show static text, skip the animation loop */
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    el.textContent = texts[0]; return;
+  }
   var ti=0, ci=0, deleting=false, pause=0;
   function tick(){
     var t = texts[ti];
@@ -1614,11 +1679,14 @@ Happy to discuss research, internships, or collaborations. Best reached by email
 (function(){
   var els = document.querySelectorAll('.stat-number[data-target]');
   if(!els.length) return;
+  var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function runCounter(el) {
     if(el._counted) return;
     el._counted = true;
-    var target = parseInt(el.getAttribute('data-target')) || 0;
+    var target = parseInt(el.getAttribute('data-target'), 10) || 0;
     var suffix = el.getAttribute('data-suffix') || '';
+    /* Skip animation for users who prefer reduced motion */
+    if(reducedMotion){ el.textContent = target + suffix; return; }
     var dur = 1400, start = performance.now();
     function step(now){
       var p = Math.min((now - start) / dur, 1);
@@ -1641,6 +1709,7 @@ Happy to discuss research, internships, or collaborations. Best reached by email
 
 /* ── Particle canvas ── */
 (function(){
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   var c = document.getElementById('particles');
   if(!c) return;
   var ctx = c.getContext('2d');
@@ -1709,7 +1778,10 @@ document.querySelectorAll('.pub-entry').forEach(function(entry){
 /* ── Lazy load fade-in ── */
 document.querySelectorAll('img[loading="lazy"]').forEach(function(img){
   if(img.complete) img.classList.add('loaded');
-  else img.addEventListener('load', function(){ img.classList.add('loaded'); });
+  else {
+    img.addEventListener('load', function(){ img.classList.add('loaded'); });
+    img.addEventListener('error', function(){ img.classList.add('loaded'); });
+  }
 });
 
 /* ── ③ Reading progress bar ── */
@@ -1848,7 +1920,7 @@ function filterByVenue(btn, venue) {
 ══════════════════════════════════════════════════ */
 (function(){
   /* Jekyll injects citation data at build time */
-  var citations = {{ site.data.citations | jsonify }} || {};
+  var citations = ({{ site.data.citations | jsonify }}) || {};
   document.querySelectorAll('.pub-entry[data-arxiv]').forEach(function(el){
     var key = el.dataset.arxiv;
     var count = citations[key];
@@ -1878,6 +1950,7 @@ function filterByVenue(btn, venue) {
 })();
 
 function drawGraph(container) {
+  if(typeof d3 === 'undefined' || !container) return;
   d3.select(container).selectAll('svg').remove();
   var isDark = document.body.classList.contains('dark-mode');
   var W = Math.max(container.offsetWidth || 700, 520);
@@ -2054,6 +2127,7 @@ function drawGraph(container) {
   var obs = new IntersectionObserver(function(entries) {
     entries.forEach(function(e) {
       if (e.isIntersecting) current = e.target.id;
+      else if (current === e.target.id) current = '';
     });
     navLinks.forEach(function(a) {
       a.classList.toggle('qn-active', a.dataset.qn === current);
