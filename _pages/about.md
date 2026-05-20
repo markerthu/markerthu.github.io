@@ -304,6 +304,17 @@ body.dark-mode .pub-abst-btn:hover { background: #1e40af; }
   width: fit-content;
 }
 
+/* ── LBC featured card placeholder ── */
+.featured-img-lbc {
+  background: linear-gradient(135deg,#2d1b5e 0%,#7c3aed 45%,#c084fc 100%);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+}
+.lbc-medal { font-size: 2.2em; line-height: 1; }
+.lbc-label { font-size: 0.75em; font-weight: 800; color: #fff; letter-spacing: .05em; text-align: center; }
+.lbc-count { font-size: 1.4em; font-weight: 900; color: #fde68a; }
+.fv-iclr23oral { background: #7c3aed; color: #fff; }
+body.dark-mode .fv-iclr23oral { background: #5b21b6 !important; color: #e9d5ff !important; }
+
 /* ── Pub link buttons ── */
 .pub-links { display: flex; gap: 5px; margin-top: 5px; flex-wrap: wrap; }
 .pub-link {
@@ -346,6 +357,10 @@ body.dark-mode .pub-abst-btn:hover { background: #1e40af; }
 .rt-year { font-weight: 800; color: #1565c0; font-size: 0.82em; }
 .rt-title { font-weight: 700; color: #1a2332; margin-top: 2px; }
 .rt-desc { color: #555; font-size: 0.92em; line-height: 1.6; margin-top: 2px; }
+.rt-item-ongoing { opacity: 0.7; }
+.rt-year-ongoing { color: #e65100; }
+body.dark-mode .rt-year-ongoing { color: #fb923c !important; }
+body.dark-mode .rt-desc { color: #8b949e !important; }
 
 /* ── Scroll-to-top button ── */
 .scroll-top {
@@ -424,9 +439,8 @@ body.dark-mode .pub-abst-btn:hover { background: #1e40af; }
   cursor: pointer; font-size: 1.1em;
   display: flex; align-items: center; justify-content: center;
   box-shadow: 0 4px 14px rgba(0,0,0,.25);
-  transition: all .3s;
+  transition: transform .3s, box-shadow .3s, background .3s, color .3s, border-color .3s;
 }
-.dark-toggle { transition: transform .3s, box-shadow .3s, background .3s, color .3s, border-color .3s; }
 .dark-toggle:hover { transform: scale(1.1); box-shadow: 0 6px 20px rgba(0,0,0,.35); }
 body.dark-mode .dark-toggle { background: #ffd54f; color: #1a2332; border-color: #ffd54f; }
 
@@ -597,9 +611,19 @@ body.dark-mode .ra-input::placeholder { color: #8b949e; }
   .hero-pills, .hero-links { display: none !important; }
 }
 
+/* ── Awards section headings ── */
+.awards-col-title {
+  font-weight: 800; margin-bottom: 8px; color: #1a2332;
+}
+.awards-col-list {
+  font-size: 0.87em; color: #444; line-height: 2; padding-left: 1.2em; margin: 0;
+}
+
 /* ── Dark mode: Awards ── */
 body.dark-mode ul li { color: #8b949e !important; }
 body.dark-mode ul li strong { color: #e6edf3 !important; }
+body.dark-mode .awards-col-title { color: #e6edf3 !important; }
+body.dark-mode .awards-col-list { color: #8b949e !important; }
 
 /* ── Dark mode: Footer ── */
 body.dark-mode .site-footer { border-top-color: #21262d !important; color: #8b949e !important; }
@@ -864,7 +888,7 @@ body.dark-mode #awards + div p[style] { color: #c9d1d9 !important; }
     <span class="hero-pill">🎮 Superhuman Deep RL</span>
   </div>
   <div class="hero-links">
-    <a class="hero-link" href="files/CV.pdf">📋 CV</a>
+    <a class="hero-link" href="/files/CV.pdf">📋 CV</a>
     <a class="hero-link" href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">🎓 Scholar</a>
     <a class="hero-link" href="mailto:jiajunf3@illinois.edu">✉️ Email</a>
     <a class="hero-link" href="https://openreview.net/profile?id=~Jiajun_Fan1" target="_blank" rel="noopener noreferrer">📝 OpenReview</a>
@@ -884,7 +908,7 @@ body.dark-mode #awards + div p[style] { color: #c9d1d9 !important; }
   <a href="#deadlines"    data-qn="deadlines">📅 Deadlines</a>
   <a href="#awards"       data-qn="awards">🏅 Awards</a>
   <a href="/year-archive/">✍️ Blog</a>
-  <a href="files/CV.pdf">📋 CV</a>
+  <a href="/files/CV.pdf">📋 CV</a>
   <a href="#contact">📬 Contact</a>
 </div>
 
@@ -895,7 +919,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 
 <div class="internship-banner internship-banner-pulse">
 🎓 <strong>Seeking research internship — Fall 2026 / 2027.</strong> RL · Generative Models · Reasoning LLMs
-&nbsp;<a href="files/CV.pdf">[CV]</a>
+&nbsp;<a href="/files/CV.pdf">[CV]</a>
 &nbsp;<a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">[Scholar]</a>
 &nbsp;<a href="mailto:jiajunf3@illinois.edu">[Email]</a>
 </div>
@@ -983,13 +1007,13 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
     </div>
   </a>
   <a class="featured-card" href="/projects/lbc/">
-    <div class="featured-img" style="background:linear-gradient(135deg,#2d1b5e 0%,#7c3aed 45%,#c084fc 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;">
-      <div style="font-size:2.2em;line-height:1;">🏅</div>
-      <div style="font-size:0.75em;font-weight:800;color:#fff;letter-spacing:.05em;text-align:center;">ATARI WORLD<br>RECORDS</div>
-      <div style="font-size:1.4em;font-weight:900;color:#fde68a;">×24</div>
+    <div class="featured-img featured-img-lbc">
+      <div class="lbc-medal">🏅</div>
+      <div class="lbc-label">ATARI WORLD<br>RECORDS</div>
+      <div class="lbc-count">×24</div>
     </div>
     <div class="featured-body">
-      <span class="featured-venue" style="background:#7c3aed;color:#fff;font-size:0.68em;font-weight:800;letter-spacing:.04em;border-radius:12px;padding:2px 9px;">ICLR 2023 · Oral</span>
+      <span class="featured-venue fv-iclr23oral">ICLR 2023 · Oral</span>
       <div class="featured-title">LBC: Superhuman Atari — 24 World Records</div>
       <div class="featured-desc">Breaking 24 Atari human world records with 500× less data than prior SOTA (Agent57).</div>
       <div class="featured-stat">🏅 Rank 5/4176 · 10,077% mean human performance</div>
@@ -1246,8 +1270,8 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
     <div class="rt-title">Reward the reasoning process, not just outcomes</div>
     <div class="rt-desc">CESAR: process-level rewards resolve test-time inverse scaling in Audio LLMs — reasoning finally helps instead of hurts, achieving SOTA on MMAU.</div>
   </div>
-  <div class="rt-item" style="opacity:0.7;">
-    <div class="rt-year" style="color:#e65100;">Step 4 — Ongoing</div>
+  <div class="rt-item rt-item-ongoing">
+    <div class="rt-year rt-year-ongoing">Step 4 — Ongoing</div>
     <div class="rt-title">Fully autonomous self-improvement</div>
     <div class="rt-desc">The endgame: generative models that continuously improve with progressively less human intervention — from data collection to reward design to training itself.</div>
   </div>
@@ -1258,8 +1282,8 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
 
 <div class="awards-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:1.5em;">
   <div>
-    <p style="font-weight:800;margin-bottom:8px;color:#1a2332;">🎖 Selected Awards</p>
-    <ul style="font-size:0.87em;color:#444;line-height:2;padding-left:1.2em;margin:0;">
+    <p class="awards-col-title">🎖 Selected Awards</p>
+    <ul class="awards-col-list">
       <li>National Scholarship ×2, Top 1% — Nankai Univ.</li>
       <li>Ranked <strong>1st / 83</strong> in major — Nankai Univ.</li>
       <li>Outstanding Graduates (Top 1%) — Nankai Univ.</li>
@@ -1270,8 +1294,8 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
     </ul>
   </div>
   <div>
-    <p style="font-weight:800;margin-bottom:8px;color:#1a2332;">🔍 Reviewer</p>
-    <ul style="font-size:0.87em;color:#444;line-height:2;padding-left:1.2em;margin:0;">
+    <p class="awards-col-title">🔍 Reviewer</p>
+    <ul class="awards-col-list">
       <li>ICLR 2024 · 2025 · <strong>2026</strong></li>
       <li>NeurIPS 2022–2024 · <strong>2025</strong></li>
       <li>ICML 2023–2024 · <strong>2025 · 2026</strong></li>
@@ -1380,7 +1404,7 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
 Happy to discuss research, internships, or collaborations. Best reached by email.<br>
 📧 <a href="mailto:jiajunf3@illinois.edu"><strong>jiajunf3@illinois.edu</strong></a> &nbsp;·&nbsp;
 🏛 Siebel Center for CS, UIUC &nbsp;·&nbsp;
-<a href="files/CV.pdf"><strong>CV (PDF)</strong></a> &nbsp;·&nbsp;
+<a href="/files/CV.pdf"><strong>CV (PDF)</strong></a> &nbsp;·&nbsp;
 <a href="https://www.linkedin.com/in/jiajun-fan-57b12b26b" target="_blank" rel="noopener noreferrer">💼 LinkedIn</a> &nbsp;·&nbsp;
 <a href="https://orcid.org/0000-0002-0263-2103" target="_blank" rel="noopener noreferrer">🔬 ORCID</a>
 </p>
@@ -1392,7 +1416,7 @@ Happy to discuss research, internships, or collaborations. Best reached by email
     <a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">🎓 Scholar</a>
     <a href="https://openreview.net/profile?id=~Jiajun_Fan1" target="_blank" rel="noopener noreferrer">📝 OpenReview</a>
     <a href="https://github.com/markerthu" target="_blank" rel="noopener noreferrer">💻 GitHub</a>
-    <a href="files/CV.pdf">📋 CV</a>
+    <a href="/files/CV.pdf">📋 CV</a>
     <a href="/projects/">🔬 Projects</a>
   </div>
   <p>© {{ site.time | date: '%Y' }} Jiajun Fan · CS Ph.D. @ UIUC · Built with ☕ and curiosity</p>
@@ -2119,7 +2143,7 @@ function drawGraph(container) {
    ⑨ QUICK NAV SCROLL HIGHLIGHT
 ══════════════════════════════════════════════════ */
 (function(){
-  var sections = ['news','featured','publications','research','vision','deadlines','awards'];
+  var sections = ['news','featured','publications','research','impact','vision','deadlines','awards','contact'];
   var navLinks = document.querySelectorAll('.quick-nav a[data-qn]');
   if (!navLinks.length || !window.IntersectionObserver) return;
 

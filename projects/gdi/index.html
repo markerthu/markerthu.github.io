@@ -22,6 +22,9 @@ permalink: /projects/gdi/
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="icon" href="/images/favicon.ico">
+<meta name="robots" content="index,follow">
+<script>if(localStorage.getItem('darkMode')==='true'){document.documentElement.style.background='#0d1117';}</script>
 <style>
 :root { --accent: #ea580c; --accent-light: #fff7ed; }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -321,8 +324,8 @@ footer a{color:var(--accent);font-weight:600}
 
 <section>
   <h2>📖 Cite This Paper</h2>
-  <button class="bib-copy-btn">📋 Copy BibTeX</button>
-  <pre class="bibtex-block">@InProceedings{pmlr-v162-fan22c,
+  <button class="bib-copy-btn" aria-label="Copy BibTeX citation">📋 Copy BibTeX</button>
+  <pre class="bibtex-block" tabindex="0">@InProceedings{pmlr-v162-fan22c,
 
   title     = {Generalized Data Distribution Iteration},
 
