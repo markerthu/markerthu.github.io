@@ -483,11 +483,10 @@ body.dark-mode .news-list li { border-bottom-color: #21262d !important; }
 body.dark-mode .pub-thumb-wrap { border-color: #30363d !important; }
 
 /* ── Dark mode: Quick Nav & Banners ── */
-body.dark-mode 
-body.dark-mode .quick-nav a { color: #58a6ff !important; }
-body.dark-mode .quick-nav a:hover { background: #21262d !important; }
-body.dark-mode .quick-nav a
+body.dark-mode .quick-nav { background: #1c2333 !important; }
+body.dark-mode .quick-nav a,
 body.dark-mode .quick-nav span { color: #58a6ff !important; }
+body.dark-mode .quick-nav a:hover { background: #21262d !important; }
 body.dark-mode .internship-banner-pulse {
   animation: bannerPulse 3s ease-in-out infinite;
 }
@@ -518,6 +517,7 @@ body.dark-mode .bib-pre { background: #0d1117 !important; color: #c9d1d9 !import
 
 /* ── Dark mode: News badges ── */
 body.dark-mode .nbadge.nb-accept { background: #122117 !important; color: #3fb950 !important; }
+body.dark-mode .nbadge.nb-finish { background: #122117 !important; color: #3fb950 !important; }
 body.dark-mode .nbadge.nb-top { background: #2d2000 !important; color: #ffd54f !important; }
 body.dark-mode .nbadge.nb-service { background: #21262d !important; color: #8b949e !important; }
 body.dark-mode .nbadge.nb-upcoming { background: #0d2137 !important; color: #58a6ff !important; }
@@ -666,12 +666,7 @@ img[loading="lazy"].loaded, img[loading="lazy"][complete] {
 
 
 
-
-
-
-/* ── Thumbnail placeholder: hide empty wrapper until image loads ── */
-.pub-thumb-wrap img { opacity: 0; transition: opacity .3s; }
-.pub-thumb-wrap img.loaded { opacity: 1; }
+/* ── Thumbnail placeholder (fade handled by img[loading="lazy"] rule above) ── */
 .pub-thumb { width: 100%; aspect-ratio: 16/9; min-height: 80px; border-radius: 6px; }
 
 /* ── ① Citation count badge ── */
@@ -1291,10 +1286,8 @@ Happy to discuss research, internships, or collaborations. Best reached by email
 </div>
 
 <!-- Scroll-to-top + Dark mode buttons -->
-<div style="display:contents">
 <button class="scroll-top" id="scrollTop" onclick="window.scrollTo(0,0)" aria-label="Back to top">↑</button>
 <button class="dark-toggle" id="darkToggle" title="Toggle dark mode" aria-label="Toggle dark mode">🌙</button>
-</div>
 
 <!-- ══════════════════ AI RESEARCH ASSISTANT ══════════════════ -->
 <div id="ra-btn" class="ra-btn" onclick="raOpen()" title="Ask about my research">💬</div>
