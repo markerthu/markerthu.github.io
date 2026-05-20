@@ -335,9 +335,6 @@ body.dark-mode .pub-abst-btn:hover { background: #1e40af; }
 .rt-title { font-weight: 700; color: #1a2332; margin-top: 2px; }
 .rt-desc { color: #555; font-size: 0.92em; line-height: 1.6; margin-top: 2px; }
 
-/* ── Smooth scroll ── */
-html { scroll-behavior: smooth; }
-
 /* ── Scroll-to-top button ── */
 .scroll-top {
   position: fixed; bottom: 28px; right: 28px; z-index: 999;
