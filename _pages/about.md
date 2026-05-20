@@ -394,31 +394,7 @@ body.dark-mode .rt-desc { color: #8b949e !important; }
 .footer-links { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 8px; }
 .footer-links a { font-weight: 700; }
 
-/* ── Image comparison slider ── */
-.img-compare {
-  position: relative; overflow: hidden; border-radius: 12px;
-  border: 1.5px solid #e0e8f0; cursor: ew-resize;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-}
-.img-compare img { display: block; width: 100%; }
-.img-compare .img-overlay {
-  position: absolute; top: 0; left: 0; width: 50%; height: 100%;
-  overflow: hidden;
-}
-.img-compare .img-overlay img { width: 200%; max-width: none; }
-.img-compare .slider-line {
-  position: absolute; top: 0; left: 50%; width: 3px; height: 100%;
-  background: #fff; box-shadow: 0 0 8px rgba(0,0,0,0.3); z-index: 2;
-  transform: translateX(-50%);
-}
-.img-compare .slider-handle {
-  position: absolute; top: 50%; left: 50%; width: 36px; height: 36px;
-  background: #fff; border-radius: 50%; z-index: 3;
-  transform: translate(-50%, -50%);
-  box-shadow: 0 2px 10px rgba(0,0,0,0.25);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 0.7em; color: #333; font-weight: 800;
-}
+/* ── Image comparison slider (reserved for future use) ── */
 
 /* ── Hover glow on featured cards ── */
 .featured-card::after {
@@ -564,8 +540,11 @@ body.dark-mode .rt-year { color: #58a6ff !important; }
 body.dark-mode .research-timeline::before { background: linear-gradient(to bottom, #388bfd, #8957e5, #3fb950) !important; }
 body.dark-mode .rt-item::before { border-color: #388bfd !important; background: #0d1117 !important; }
 
-/* ── Awards grid responsive ── */
-@media(max-width:560px){ .awards-grid { grid-template-columns: 1fr !important; } }
+/* ── Awards grid ── */
+.awards-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 1.5em;
+}
+@media(max-width:560px){ .awards-grid { grid-template-columns: 1fr; } }
 
 /* ── Vision blockquote ── */
 .vision-quote {
@@ -704,10 +683,6 @@ body.dark-mode .ra-input-row { border-color: #30363d !important; }
 body.dark-mode .ddl-card { background: #161b22 !important; border-color: #30363d !important; }
 body.dark-mode .ddl-name a { color: #c9d1d9 !important; }
 body.dark-mode .ddl-meta { color: #8b949e !important; }
-body.dark-mode .img-compare { border-color: #30363d !important; }
-/* Image compare handle — pure white → muted dark surface with blue accent */
-body.dark-mode .img-compare .slider-line   { background: rgba(88,166,255,0.65) !important; box-shadow: none !important; }
-body.dark-mode .img-compare .slider-handle { background: #21262d !important; border: 2px solid #58a6ff !important; color: #58a6ff !important; box-shadow: 0 2px 8px rgba(0,0,0,0.5) !important; }
 
 /* RA chatbot — mute jarring electric blues */
 body.dark-mode .ra-user   { background: #1c3a6e !important; } /* muted navy, not electric #2563eb */
@@ -870,14 +845,12 @@ body.dark-mode .graph-node text { fill: #c9d1d9 !important; }
 /* ── Dark mode: Hero pills ── */
 body.dark-mode .hero-pill { background: rgba(255,255,255,0.12) !important; color: rgba(255,255,255,0.85) !important; border-color: rgba(255,255,255,0.2) !important; }
 /* ── Dark mode: Awards grid text ── */
-body.dark-mode #awards + div ul { color: #8b949e !important; }
-body.dark-mode #awards + div li { color: #8b949e !important; }
-body.dark-mode #awards + div p[style] { color: #c9d1d9 !important; }
+/* dead selectors removed — replaced by .awards-col-title / .awards-col-list classes */
 
 </style>
 
 <!-- Hero banner -->
-<div id="read-progress"></div>
+<div id="read-progress" aria-hidden="true"></div>
 <div class="hero-banner">
   <canvas class="hero-particles" id="particles"></canvas>
   <div class="hero-name">Jiajun Fan</div>
@@ -904,6 +877,7 @@ body.dark-mode #awards + div p[style] { color: #c9d1d9 !important; }
   <a href="#featured"     data-qn="featured">🔥 Featured</a>
   <a href="#publications" data-qn="publications">📄 Publications</a>
   <a href="#research"     data-qn="research">🔬 Research</a>
+  <a href="#impact"       data-qn="impact">⚡ Impact</a>
   <a href="#vision"       data-qn="vision">💡 Vision</a>
   <a href="#deadlines"    data-qn="deadlines">📅 Deadlines</a>
   <a href="#awards"       data-qn="awards">🏅 Awards</a>
@@ -1280,7 +1254,7 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
 <!-- ═══════════════════════════════ AWARDS ════════════════════════════ -->
 <h2 class="section-header" id="awards">🏅 Awards &amp; Academic Service</h2>
 
-<div class="awards-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:1.5em;">
+<div class="awards-grid">
   <div>
     <p class="awards-col-title">🎖 Selected Awards</p>
     <ul class="awards-col-list">
@@ -2143,7 +2117,7 @@ function drawGraph(container) {
    ⑨ QUICK NAV SCROLL HIGHLIGHT
 ══════════════════════════════════════════════════ */
 (function(){
-  var sections = ['news','featured','publications','research','impact','vision','deadlines','awards','contact'];
+  var sections = ['news','featured','publications','research','impact','vision','deadlines','awards'];
   var navLinks = document.querySelectorAll('.quick-nav a[data-qn]');
   if (!navLinks.length || !window.IntersectionObserver) return;
 
