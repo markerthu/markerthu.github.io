@@ -20,24 +20,30 @@ redirect_from:
   0%, 100% { box-shadow: 0 0 0 0 rgba(21,101,192,0); }
   50% { box-shadow: 0 0 0 6px rgba(21,101,192,0.12); }
 }
-html body .internship-banner,
-html body.dark-mode .internship-banner {
+html body .internship-banner {
   background: linear-gradient(135deg,#e8f4fd,#f0f7ff) !important;
   border: 1px solid #bfdbfe !important;
   border-radius: 8px; padding: 11px 18px;
   margin: 1em 0 1.2em; font-size: 0.93em;
   color: #1e3a5f !important;
 }
-html body .internship-banner a,
-html body.dark-mode .internship-banner a { color: #1d4ed8 !important; font-weight: 700; }
-html body .internship-banner strong,
-html body.dark-mode .internship-banner strong { color: #1e3a5f !important; }
+html body .internship-banner a { color: #1d4ed8 !important; font-weight: 700; }
+html body .internship-banner strong { color: #1e3a5f !important; }
+body.dark-mode .internship-banner {
+  background: linear-gradient(135deg,#13243a,#0f1d30) !important;
+  border-color: #1f3a5f !important;
+  color: #90caf9 !important;
+}
+body.dark-mode .internship-banner a { color: #58a6ff !important; }
+body.dark-mode .internship-banner strong { color: #90caf9 !important; }
 
 /* ── Quick nav ── */
 .quick-nav {
   background: #f0f4ff; border-radius: 8px;
   padding: 9px 16px; margin-bottom: 1.4em;
   font-size: 0.84em; display: flex; flex-wrap: wrap; gap: 5px 16px; align-items: center;
+  position: sticky; top: 0; z-index: 90;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
 .quick-nav a { color: #1565c0; text-decoration: none; padding: 2px 6px; border-radius: 5px; transition: background .15s, color .15s; }
 .quick-nav a:hover { background: #e8effe; }
@@ -46,10 +52,10 @@ html body.dark-mode .internship-banner strong { color: #1e3a5f !important; }
 /* ── Section headers ── */
 .section-header {
   display: flex; align-items: center; gap: 10px;
-  margin: 2em 0 1em; font-size: 1.18em; font-weight: 800; color: #1a2332;
-  letter-spacing: -0.01em;
-
-  scroll-margin-top: 80px;}
+  margin: 2em 0 1em; padding: 0; font-size: 1.18em; font-weight: 800; color: #1a2332;
+  letter-spacing: -0.01em; scroll-margin-top: 80px;
+  border: none; background: none;
+}
 .section-header::after {
   content: ''; flex: 1; height: 2px;
   background: linear-gradient(to right, #1565c0, transparent); border-radius: 1px;
@@ -62,7 +68,7 @@ html body.dark-mode .internship-banner strong { color: #1e3a5f !important; }
   padding: 9px 0; border-bottom: 1px solid #f0f0f0; font-size: 0.91em;
 }
 .news-list li:last-child { border-bottom: none; }
-.news-date { min-width: 78px; color: #aaa; font-size: 0.84em; font-weight: 700; padding-top: 2px; }
+.news-date { min-width: 78px; color: #767676; font-size: 0.84em; font-weight: 700; padding-top: 2px; }
 .nbadge {
   display: inline-block; padding: 1px 7px; border-radius: 4px;
   font-size: 0.74em; font-weight: 800; margin-right: 5px; vertical-align: middle;
@@ -118,7 +124,7 @@ html body.dark-mode .internship-banner strong { color: #1e3a5f !important; }
 .pb-icml   { background: #b71c1c; color: #fff; }
 .pb-journal{ background: #e65100; color: #fff; }
 .pb-arxiv  { background: #546e7a; color: #fff; }
-.pub-year  { font-size: 0.77em; color: #bbb; font-weight: 700; }
+.pub-year  { font-size: 0.77em; color: #767676; font-weight: 700; }
 .pub-title { font-weight: 700; font-size: 0.95em; color: #1a2332; line-height: 1.4; }
 .pub-abst-btn {
   display: inline-block; margin-left: 6px; font-size: 0.72em; font-weight: 700;
@@ -265,10 +271,10 @@ body.dark-mode .pub-abst-btn:hover { background: #1e40af; }
   border-radius: 12px; overflow: hidden;
   border: 1.5px solid #e0e8f0;
   background: #fff;
-  transition: transform .18s ease, box-shadow .18s ease;
+  position: relative;
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s;
   text-decoration: none !important; color: inherit;
   display: flex; flex-direction: column;
-  will-change: transform; transform-style: preserve-3d;
 }
 .featured-card:hover { box-shadow: 0 12px 36px rgba(21,101,192,.22); }
 .featured-img {
@@ -361,7 +367,7 @@ body.dark-mode .pub-abst-btn:hover { background: #1e40af; }
 .site-footer {
   margin-top: 3em; padding: 24px 0 16px;
   border-top: 2px solid #e0e8f0;
-  text-align: center; font-size: 0.82em; color: #999;
+  text-align: center; font-size: 0.82em; color: #767676;
 }
 .site-footer a { color: #1565c0; }
 .footer-links { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 8px; }
@@ -402,7 +408,6 @@ body.dark-mode .pub-abst-btn:hover { background: #1e40af; }
   transition: opacity .3s;
   pointer-events: none;
 }
-.featured-card { position: relative; }
 .featured-card:hover::after { opacity: 1; }
 
 /* ── Dark mode ── */
@@ -497,13 +502,15 @@ body.dark-mode .stat-number { color: #58a6ff !important; }
 body.dark-mode .stat-label { color: #6e7681 !important; }
 body.dark-mode .stat-label em { color: #6e7681 !important; }
 body.dark-mode .pub-project { background: #1c2333 !important; color: #58a6ff !important; }
-body.dark-mode .pub-link.pl-paper { background: #1c2333 !important; color: #58a6ff !important; }
-body.dark-mode .pub-link.pl-project { background: #122117 !important; color: #3fb950 !important; }
+body.dark-mode .pub-link.pl-paper  { background: #1c2333 !important; color: #58a6ff !important; }
+body.dark-mode .pub-link.pl-project{ background: #122117 !important; color: #3fb950 !important; }
+body.dark-mode .pub-link.pl-code   { background: #3d1526 !important; color: #f48fb1 !important; }
+body.dark-mode .pub-link.pl-arxiv  { background: #3d2410 !important; color: #ffb74d !important; }
 
 /* ── BibTeX cite button & popup ── */
 .pl-cite { background: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0; cursor: pointer; font-family: inherit; font-size: 0.78em; font-weight: 600; padding: 3px 9px; border-radius: 20px; transition: background .15s, color .15s; }
 .pl-cite:hover { background: #dcfce7; }
-.bib-popup { position: absolute; z-index: 9990; display: none; background: #fff; border: 1.5px solid #e5e7eb; border-radius: 10px; padding: 14px 16px; box-shadow: 0 8px 32px rgba(0,0,0,.14); }
+.bib-popup { position: absolute; z-index: 9995; display: none; background: #fff; border: 1.5px solid #e5e7eb; border-radius: 10px; padding: 14px 16px; box-shadow: 0 8px 32px rgba(0,0,0,.14); }
 .bib-popup.show { display: block; }
 .bib-pre { background: #f8fafc; border-radius: 6px; padding: 10px 12px; font-size: 0.76em; overflow-x: auto; white-space: pre; color: #1e293b; border: 1px solid #e2e8f0; margin: 0 0 10px; }
 .bib-actions { display: flex; gap: 8px; }
@@ -549,7 +556,9 @@ body.dark-mode .scroll-top { background: #388bfd !important; box-shadow: 0 4px 1
 
 /* ── Dark mode: Featured stat ── */
 body.dark-mode .featured-stat { background: #1c1e21 !important; color: #ffd54f !important; border-left-color: #d29922 !important; }
-body.dark-mode .featured-venue { opacity: 0.9; }
+body.dark-mode .fv-iclr26  { background: #1f4e8c !important; }
+body.dark-mode .fv-neurips { background: #4a1270 !important; }
+body.dark-mode .fv-iclr25  { background: #1a5ba0 !important; }
 
 /* ── Dark mode: Misc ── */
 body.dark-mode .page__content h2 { color: #e6edf3 !important; }
@@ -613,6 +622,7 @@ body.dark-mode .ra-input-row { border-color: #30363d !important; }
 body.dark-mode .ddl-card { background: #161b22 !important; border-color: #30363d !important; }
 body.dark-mode .ddl-name a { color: #c9d1d9 !important; }
 body.dark-mode .ddl-meta { color: #8b949e !important; }
+body.dark-mode .img-compare { border-color: #30363d !important; }
 
 /* ── Reading progress bar ── */
 #read-progress {
@@ -644,13 +654,22 @@ img[loading="lazy"].loaded, img[loading="lazy"][complete] {
   opacity: 1;
 }
 
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+
 /* ── Responsive ── */
 @media(max-width:920px) {
   .featured-grid { grid-template-columns: 1fr 1fr; }  /* 2-col from 920px down */
 }
 @media(max-width:760px) {
   .research-grid { grid-template-columns: 1fr 1fr; }
-  .featured-grid { grid-template-columns: 1fr 1fr; }
 }
 @media(max-width:480px) {
   .hero-name { font-size: 1.65em; }
@@ -667,7 +686,9 @@ img[loading="lazy"].loaded, img[loading="lazy"][complete] {
 
 
 /* ── Thumbnail placeholder (fade handled by img[loading="lazy"] rule above) ── */
-.pub-thumb { width: 100%; aspect-ratio: 16/9; min-height: 80px; border-radius: 6px; }
+.pub-thumb { width: 100%; aspect-ratio: 16/9; min-height: 80px; border-radius: 6px;
+  background: #eef0f3; }
+body.dark-mode .pub-thumb { background: #161b22; }
 
 /* ── ① Citation count badge ── */
 .cite-badge {
@@ -725,7 +746,7 @@ body.dark-mode .pub-abstract-preview { background: #161b22; border-color: #30363
   background: #fafbff; overflow: hidden; position: relative;
 }
 @media(max-width:600px){ #research-graph { height: 320px; } }
-body.dark-mode #research-graph { border-color: #30363d; }
+body.dark-mode #research-graph { border-color: #30363d; background: #0d1117 !important; }
 #research-graph svg { width: 100%; height: 100%; }
 .graph-node circle { cursor: pointer; transition: r .15s; }
 .graph-node:hover circle { filter: brightness(1.15); }
@@ -794,7 +815,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 </div>
 
 <!-- ═══════════════════════════════ NEWS ═══════════════════════════════ -->
-<div class="section-header" id="news">📰 Latest News</div>
+<h2 class="section-header" id="news">📰 Latest News</h2>
 
 <ul class="news-list">
   <li>
@@ -848,7 +869,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 " aria-label="Show more news">▼ Show more news</button>
 
 <!-- ═══════════════════════════════ FEATURED ═══════════════════════════ -->
-<div class="section-header" id="featured">🔥 Featured Research</div>
+<h2 class="section-header" id="featured">🔥 Featured Research</h2>
 
 <div class="featured-grid">
   <a class="featured-card" href="/projects/cesar/">
@@ -895,7 +916,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 
 <!-- ══════════════════ CONFERENCE DEADLINES ══════════════════ -->
 <!-- ═══════════════════════════════ PUBLICATIONS ═══════════════════════ -->
-<div class="section-header" id="publications">📄 Selected Publications</div>
+<h2 class="section-header" id="publications">📄 Selected Publications</h2>
 
 <p style="font-size:0.83em;color:#999;margin-top:-0.6em;">* = first/co-first author &nbsp;·&nbsp;
 <a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">Full list on Google Scholar</a> &nbsp;/&nbsp;
@@ -1055,12 +1076,12 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 
 
 <!-- ════════════ RESEARCH GRAPH ════════════ -->
-<div class="section-header" id="research-graph-section">🕸️ Research Paper Network</div>
+<h2 class="section-header" id="research-graph-section">🕸️ Research Paper Network</h2>
 <p style="font-size:0.88em;color:#666;margin-bottom:14px;">Hover a node to highlight connections. Papers are grouped by research theme.</p>
 <div id="research-graph"></div>
 
 <!-- ═══════════════════════════════ RESEARCH ═══════════════════════════ -->
-<div class="section-header" id="research">🔬 Research Interests</div>
+<h2 class="section-header" id="research">🔬 Research Interests</h2>
 
 <div class="research-grid">
   <div class="research-card">
@@ -1081,7 +1102,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 </div>
 
 <!-- ═══════════════════════════════ STATS ═══════════════════════════════ -->
-<div class="section-header" id="impact">⚡ Impact at a Glance</div>
+<h2 class="section-header" id="impact">⚡ Impact at a Glance</h2>
 
 <div class="stats-row">
   <div class="stat-card">
@@ -1111,7 +1132,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 </div>
 
 <!-- ═══════════════════════════════ VISION ════════════════════════════ -->
-<div class="section-header" id="vision">💡 Research Vision</div>
+<h2 class="section-header" id="vision">💡 Research Vision</h2>
 
 <blockquote style="background:#f8f4ff;border-left:4px solid #7c4dff;border-radius:0 8px 8px 0;padding:14px 20px;color:#333;font-style:normal;margin-bottom:1em;">
 <p style="margin:0 0 6px;font-weight:800;color:#4a148c;font-size:1em;">Making AI Systems That Improve Themselves</p>
@@ -1144,7 +1165,7 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
 </div>
 
 <!-- ═══════════════════════════════ AWARDS ════════════════════════════ -->
-<div class="section-header" id="awards">🏅 Awards &amp; Academic Service</div>
+<h2 class="section-header" id="awards">🏅 Awards &amp; Academic Service</h2>
 
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:1.5em;">
   <div>
@@ -1172,7 +1193,7 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
 </div>
 
 <!-- ═══════════════════════════════ CONTACT ══════════════════════════ -->
-<div class="section-header" id="deadlines">📅 Conference Deadlines</div>
+<h2 class="section-header" id="deadlines">📅 Conference Deadlines</h2>
 <p style="font-size:0.84em;color:#666;margin-bottom:14px;">Key AI/ML venue deadlines I track — for the full list see <a href="https://ccfddl.com/" target="_blank" rel="noopener noreferrer">ccfddl.com</a>.</p>
 <div id="conf-ddl-grid" class="conf-ddl-grid"></div>
 
@@ -1231,7 +1252,8 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
       var d = c.deadlines[i];
       if (!d.date) break;
       if (d.passed) continue;
-      var dt = new Date(d.date); dt.setHours(23, 59, 59);
+      var p = d.date.split('-');
+      var dt = new Date(+p[0], +p[1]-1, +p[2], 23, 59, 59);
       if (dt >= now) { next = {label: d.label, dt: dt}; break; }
     }
 
@@ -1242,9 +1264,11 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
       chip = '<span class="ddl-chip" style="background:' + urgency + '20;color:' + urgency + ';border-color:' + urgency + '40">'
            + next.label + ' · ' + (diff <= 0 ? 'Today!' : diff + 'd') + '</span>';
     } else if (c.deadlines[0].date === null) {
-      chip = '<span class="ddl-chip" style="background:#f1f5f9;color:#94a3b8;border-color:#e2e8f0">Submission TBA</span>';
+      var isDk = document.body.classList.contains('dark-mode');
+      chip = '<span class="ddl-chip" style="background:'+(isDk?'#21262d':'#f1f5f9')+';color:'+(isDk?'#8b949e':'#6b7280')+';border-color:'+(isDk?'#30363d':'#e2e8f0')+'">Submission TBA</span>';
     } else {
-      chip = '<span class="ddl-chip" style="background:#f0fdf4;color:#16a34a;border-color:#bbf7d0">Under review / Done</span>';
+      var isDk2 = document.body.classList.contains('dark-mode');
+      chip = '<span class="ddl-chip" style="background:'+(isDk2?'#122117':'#f0fdf4')+';color:'+(isDk2?'#3fb950':'#16a34a')+';border-color:'+(isDk2?'#1a7f45':'#bbf7d0')+'">Done ✓</span>';
     }
 
     var card = document.createElement('div');
@@ -1254,7 +1278,7 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
       + '<span class="ddl-abbr" style="color:' + c.color + '">' + c.abbr + '</span>'
       + '<span class="ddl-type" style="background:' + c.color + '15;color:' + c.color + '">' + c.type + '</span>'
       + '</div>'
-      + '<div class="ddl-name"><a href="' + c.url + '" target="_blank">' + c.name + '</a></div>'
+      + '<div class="ddl-name"><a href="' + c.url + '" target="_blank" rel="noopener noreferrer">' + c.name + '</a></div>'
       + '<div class="ddl-meta">📍 ' + c.location + ' &nbsp;·&nbsp; 🗓 ' + c.conf + '</div>'
       + chip;
     grid.appendChild(card);
@@ -1262,7 +1286,7 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
 })();
 </script>
 
-<div class="section-header" id="contact">📬 Contact</div>
+<h2 class="section-header" id="contact">📬 Contact</h2>
 <p style="font-size:0.94em;">
 Happy to discuss research, internships, or collaborations. Best reached by email.<br>
 📧 <a href="mailto:jiajunf3@illinois.edu"><strong>jiajunf3@illinois.edu</strong></a> &nbsp;·&nbsp;
@@ -1282,7 +1306,7 @@ Happy to discuss research, internships, or collaborations. Best reached by email
     <a href="/cv/">📋 CV</a>
     <a href="/projects/">🔬 Projects</a>
   </div>
-  <p>© 2026 Jiajun Fan · CS Ph.D. @ UIUC · Built with ☕ and curiosity</p>
+  <p>© {{ site.time | date: '%Y' }} Jiajun Fan · CS Ph.D. @ UIUC · Built with ☕ and curiosity</p>
 </div>
 
 <!-- Scroll-to-top + Dark mode buttons -->
@@ -1290,8 +1314,8 @@ Happy to discuss research, internships, or collaborations. Best reached by email
 <button class="dark-toggle" id="darkToggle" title="Toggle dark mode" aria-label="Toggle dark mode">🌙</button>
 
 <!-- ══════════════════ AI RESEARCH ASSISTANT ══════════════════ -->
-<div id="ra-btn" class="ra-btn" onclick="raOpen()" title="Ask about my research">💬</div>
-<div id="ra-panel" class="ra-panel">
+<button id="ra-btn" class="ra-btn" onclick="raOpen()" aria-label="Open research assistant chat" aria-expanded="false" title="Ask about my research">💬</button>
+<div id="ra-panel" class="ra-panel" role="dialog" aria-modal="true" aria-label="Research Assistant">
   <div class="ra-header">
     <span>🤖 Research Assistant</span>
     <button onclick="raClose()" class="ra-close" aria-label="Close chat widget">✕</button>
@@ -1306,7 +1330,7 @@ Happy to discuss research, internships, or collaborations. Best reached by email
     <button class="ra-chip" onclick="raAsk(this)">🎮 Hobbies</button>
   </div>
   <div class="ra-input-row">
-    <input id="ra-input" class="ra-input" type="text" placeholder="Ask about my research…" onkeydown="if(event.key==='Enter')raSend()">
+    <input id="ra-input" class="ra-input" type="text" placeholder="Ask about my research…" aria-label="Ask about my research" onkeydown="if(event.key==='Enter')raSend()">
     <button onclick="raSend()" class="ra-send" aria-label="Send message">↵</button>
   </div>
 </div>
@@ -1366,7 +1390,7 @@ Happy to discuss research, internships, or collaborations. Best reached by email
     { kw:['vision','goal','future','long-term','endgame','plan','dream','aspire'],
       a:"My long-term goal: generative models that self-improve autonomously — progressing from process rewards → actor-critic RL → fully self-referential training loops, with progressively less human intervention at every step." },
     { kw:['deadline','submission deadline','next conference','when submit','upcoming conference'],
-      a:"There's a 📅 Conference Deadlines tracker at the bottom of this page — ECCV, ICML, CVPR, ICLR 2026 (Apr 23, Rio), NeurIPS 2026 (May 7), and ICLR 2027. Full list at ccfddl.com." },
+      a:"There's a 📅 Conference Deadlines tracker at the bottom of this page — ECCV, ICML, CVPR, ICLR 2026 (Apr 23, Rio), NeurIPS 2026 (full paper May 6), and ICLR 2027. Full list at ccfddl.com." },
     { kw:['dark mode','night mode','theme','light dark','toggle','appearance'],
       a:"Yes, this site supports dark mode! Click the 🌙 button in the bottom-right corner to switch. Your preference is saved for next visit." },
     { kw:['paper network','graph','visualization','map','network','research graph','timeline'],
@@ -1448,6 +1472,7 @@ Happy to discuss research, internships, or collaborations. Best reached by email
     var btn = document.getElementById('ra-btn');
     panel.classList.add('show');
     btn.style.display = 'none';
+    btn.setAttribute('aria-expanded', 'true');
     var msgs = document.getElementById('ra-msgs');
     if (!msgs.children.length) {
       setTimeout(function() {
@@ -1459,7 +1484,9 @@ Happy to discuss research, internships, or collaborations. Best reached by email
 
   window.raClose = function() {
     document.getElementById('ra-panel').classList.remove('show');
-    document.getElementById('ra-btn').style.display = 'flex';
+    var btn = document.getElementById('ra-btn');
+    btn.style.display = 'flex';
+    btn.setAttribute('aria-expanded', 'false');
   };
 
   window.raSend = function() {
@@ -1479,22 +1506,25 @@ Happy to discuss research, internships, or collaborations. Best reached by email
 
 <script>
 /* ── Scroll-to-top ── */
-window.addEventListener('scroll', function(){
+(function(){
   var btn = document.getElementById('scrollTop');
-  if(window.scrollY > 500) btn.classList.add('show');
-  else btn.classList.remove('show');
-});
+  if(!btn) return;
+  window.addEventListener('scroll', function(){
+    btn.classList.toggle('show', window.scrollY > 500);
+  }, {passive:true});
+})();
 
 /* ── Dark mode toggle ── */
 (function(){
   var btn = document.getElementById('darkToggle');
+  if(!btn) return;
   var saved = localStorage.getItem('darkMode');
   if(saved === 'true') { document.body.classList.add('dark-mode'); btn.textContent = '☀️'; }
   btn.addEventListener('click', function(){
     document.body.classList.toggle('dark-mode');
-      var gc = document.getElementById('research-graph');
-      if(gc) { gc.innerHTML=''; drawGraph(gc); }
     var on = document.body.classList.contains('dark-mode');
+    var gc = document.getElementById('research-graph');
+    if(gc && typeof d3 !== 'undefined') { gc.innerHTML=''; drawGraph(gc); }
     btn.textContent = on ? '☀️' : '🌙';
     localStorage.setItem('darkMode', on);
   });
@@ -1547,7 +1577,7 @@ window.addEventListener('scroll', function(){
   }
   if('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){ if(e.isIntersecting) runCounter(e.target); });
+      entries.forEach(function(e){ if(e.isIntersecting){ runCounter(e.target); io.unobserve(e.target); } });
     }, {threshold: 0.3});
     els.forEach(function(el){ io.observe(el); });
   } else {
@@ -1624,11 +1654,12 @@ document.querySelectorAll('.pub-entry').forEach(function(entry){
       var isOpen = entry.classList.contains('abstract-open');
       document.querySelectorAll('.pub-entry.abstract-open').forEach(function(el){
         el.classList.remove('abstract-open');
-        el.querySelectorAll('.pub-abst-btn').forEach(function(b){ b.textContent = '▾ Abstract'; });
+        el.querySelectorAll('.pub-abst-btn').forEach(function(b){ b.textContent = '▾ Abstract'; b.setAttribute('aria-expanded','false'); });
       });
       if(!isOpen){
         entry.classList.add('abstract-open');
         btn.textContent = '▴ Hide';
+        btn.setAttribute('aria-expanded','true');
       }
     });
   });
@@ -1689,7 +1720,7 @@ document.querySelectorAll('.featured-card').forEach(function(card){
     navigator.clipboard.writeText(popup.querySelector('.bib-pre').textContent).then(function(){
       btn.textContent = '\u2713 Copied!'; btn.style.background = '#059669';
       setTimeout(function(){ btn.textContent = '\uD83D\uDCCB Copy BibTeX'; btn.style.background = ''; }, 2000);
-    });
+    }).catch(function(){ btn.textContent = 'Select + copy manually'; setTimeout(function(){ btn.textContent = '\uD83D\uDCCB Copy BibTeX'; }, 2000); });
   });
   popup.querySelector('.bib-close').addEventListener('click', function(){ popup.classList.remove('show'); activeEntry = null; });
   document.addEventListener('click', function(e){
@@ -1745,7 +1776,8 @@ document.querySelectorAll('.featured-card').forEach(function(card){
 ══════════════════════════════════════════════════ */
 var _activeVenue = 'all';
 function filterPubs() {
-  var q = (document.getElementById('pubSearch').value || '').toLowerCase();
+  var box = document.getElementById('pubSearch');
+  var q = (box && box.value || '').toLowerCase();
   document.querySelectorAll('.pub-list .pub-entry').forEach(function(el) {
     var venue = (el.dataset.venue || '').toLowerCase();
     var title = el.querySelector('.pub-title') ? el.querySelector('.pub-title').textContent.toLowerCase() : '';
@@ -1768,7 +1800,7 @@ function filterByVenue(btn, venue) {
 ══════════════════════════════════════════════════ */
 (function(){
   /* Jekyll injects citation data at build time */
-  var citations = {{ site.data.citations | jsonify }};
+  var citations = {{ site.data.citations | jsonify }} || {};
   document.querySelectorAll('.pub-entry[data-arxiv]').forEach(function(el){
     var key = el.dataset.arxiv;
     var count = citations[key];
@@ -1905,12 +1937,7 @@ function drawGraph(container) {
           var paths = links.filter(function(l){ return l.s===d.id||l.t===d.id; });
           return paths.length ? 0.18 : 0.65;
         });
-        lGroup.selectAll('path').filter(function(){ return true; }).each(function(_,i,arr){
-          var el = d3.select(arr[i]);
-          var pathD = el.attr('d');
-          /* highlight if connected */
-        });
-        /* Simpler highlight: just brighten connected links */
+        /* Highlight connected links */
         links.forEach(function(l,i){
           if(l.s===d.id||l.t===d.id){
             lGroup.selectAll('path').filter(function(_,j){ return j===i; })
@@ -1971,7 +1998,7 @@ function drawGraph(container) {
    ⑨ QUICK NAV SCROLL HIGHLIGHT
 ══════════════════════════════════════════════════ */
 (function(){
-  var sections = ['news','featured','deadlines','publications','research-graph-section','awards'];
+  var sections = ['news','featured','publications','research','vision','deadlines','awards'];
   var navLinks = document.querySelectorAll('.quick-nav a[data-qn]');
   if (!navLinks.length || !window.IntersectionObserver) return;
 
