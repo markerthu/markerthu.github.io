@@ -961,7 +961,9 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
     
     <span class="pb pb-iclr">ICLR 2026</span><span class="pub-year">2026</span></div>
   <div class="pub-right">
-    <div class="pub-title"><a href="https://openreview.net/forum?id=RwdGIIjPlC" target="_blank" rel="noopener noreferrer">SP-VLA: A Joint Model Scheduling and Token Pruning Approach for VLA Model Acceleration</a><div class="pub-abstract-preview">SP-VLA introduces action-aware model scheduling and spatio-semantic token pruning for VLA model acceleration, achieving 1.5× lossless speedup on LIBERO and 2.4× speedup on SimplerEnv.</div></div>
+    <div class="pub-title"><a href="https://openreview.net/forum?id=RwdGIIjPlC" target="_blank" rel="noopener noreferrer">SP-VLA: A Joint Model Scheduling and Token Pruning Approach for VLA Model Acceleration</a>
+    <button class="pub-abst-btn" aria-expanded="false" aria-label="Toggle abstract">▾ Abstract</button>
+    <div class="pub-abstract-preview">SP-VLA introduces action-aware model scheduling and spatio-semantic token pruning for VLA model acceleration, achieving 1.5× lossless speedup on LIBERO and 2.4× speedup on SimplerEnv.</div></div>
     <div class="pub-authors">Y. Li, Y. Meng, Z. Sun, K. Ji, C. Tang, <strong>J. Fan</strong>, X. Ma, S.-T. Xia, Z. Wang, W. Zhu</div>
     <div class="pub-desc">Action-aware model scheduling + spatio-semantic token pruning for VLA acceleration.</div>
     <div class="pub-hl">⚡ 1.5× lossless speedup (LIBERO) · 2.4× speedup (SimplerEnv)</div>
@@ -994,7 +996,9 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
     <span class="pb pb-neurips">NeurIPS 2025</span><span class="pub-year">2025</span></div>
   <div class="pub-right">
     <div class="pub-title"><a href="https://openreview.net/forum?id=uOOlHOq500" target="_blank" rel="noopener noreferrer">Variational Supervised Contrastive Learning</a>
-      <div class="pub-hl">📊 SOTA 79.36% Top-1 on ImageNet-1K with ResNet-50</div><div class="pub-abstract-preview">VarCon reformulates supervised contrastive learning as variational inference, achieving SOTA 79.36% Top-1 accuracy on ImageNet-1K with ResNet-50.</div></div>
+      <button class="pub-abst-btn" aria-expanded="false" aria-label="Toggle abstract">▾ Abstract</button>
+      <div class="pub-hl">📊 SOTA 79.36% Top-1 on ImageNet-1K with ResNet-50</div>
+      <div class="pub-abstract-preview">VarCon reformulates supervised contrastive learning as variational inference, achieving SOTA 79.36% Top-1 accuracy on ImageNet-1K with ResNet-50.</div></div>
     <div class="pub-authors">Z. Wang, <strong>J. Fan</strong>, T. Nguyen, H. Ji, G. Liu</div>
     <div class="pub-desc">VarCon: supervised contrastive learning as variational inference — posterior-weighted ELBO replaces pairwise comparisons.</div>
   </div>
@@ -1489,7 +1493,22 @@ Happy to discuss research, internships, or collaborations. Best reached by email
     var btn = document.getElementById('ra-btn');
     btn.style.display = 'flex';
     btn.setAttribute('aria-expanded', 'false');
+    btn.focus(); /* return focus to trigger button */
   };
+
+  /* Escape closes the panel; Trap focus inside panel when open */
+  document.addEventListener('keydown', function(e){
+    var panel = document.getElementById('ra-panel');
+    if(!panel.classList.contains('show')) return;
+    if(e.key === 'Escape'){ raClose(); return; }
+    if(e.key === 'Tab'){
+      var focusable = panel.querySelectorAll('button,input,[tabindex]:not([tabindex="-1"])');
+      if(!focusable.length) return;
+      var first = focusable[0], last = focusable[focusable.length-1];
+      if(e.shiftKey){ if(document.activeElement===first){ e.preventDefault(); last.focus(); } }
+      else          { if(document.activeElement===last) { e.preventDefault(); first.focus(); } }
+    }
+  });
 
   window.raSend = function() {
     var inp = document.getElementById('ra-input');
@@ -1636,20 +1655,8 @@ Happy to discuss research, internships, or collaborations. Best reached by email
   draw();
 })();
 
-/* ── Mobile tap: abstract preview ── */
+/* ── Abstract toggle (click/tap on button) ── */
 document.querySelectorAll('.pub-entry').forEach(function(entry){
-  entry.addEventListener('touchstart', function(e){
-    var isOpen = entry.classList.contains('abstract-open');
-    document.querySelectorAll('.pub-entry.abstract-open').forEach(function(el){
-      el.classList.remove('abstract-open');
-      el.querySelectorAll('.pub-abst-btn').forEach(function(b){ b.textContent = '▾ Abstract'; b.setAttribute('aria-expanded','false'); });
-    });
-    if(!isOpen){
-      entry.classList.add('abstract-open');
-      entry.querySelectorAll('.pub-abst-btn').forEach(function(b){ b.textContent = '▴ Hide'; b.setAttribute('aria-expanded','true'); });
-    }
-  }, {passive: true});
-  /* Click toggle for keyboard/mouse users */
   entry.querySelectorAll('.pub-abst-btn').forEach(function(btn){
     btn.addEventListener('click', function(e){
       e.stopPropagation();
@@ -1951,7 +1958,7 @@ function drawGraph(container) {
         d3.select(this).select('circle.main').transition().duration(120).attr('r', d.r);
         lGroup.selectAll('path').attr('opacity',0.65).attr('stroke-width',1.5).attr('stroke',edgeClr);
       });
-    if(d.url) g.on('click', function(){ window.open(d.url,'_blank'); });
+    if(d.url) g.on('click', function(){ window.open(d.url,'_blank','noopener,noreferrer'); });
 
     /* Glow */
     g.append('circle').attr('cx',d.x).attr('cy',d.y).attr('r',d.r+8)
