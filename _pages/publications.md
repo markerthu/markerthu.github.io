@@ -41,7 +41,7 @@ body.dark-mode .pub-cv-venue { background: #1e3a5f !important; color: #7dd3fc !i
 body.dark-mode .scholar-link { background: #388bfd !important; }
 </style>
 
-<a class="scholar-link" href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&hl=en" target="_blank">
+<a class="scholar-link" href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">
   📚 View full profile on Google Scholar
 </a>
 

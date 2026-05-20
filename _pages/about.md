@@ -53,7 +53,7 @@ body.dark-mode .internship-banner strong { color: #90caf9 !important; }
 .section-header {
   display: flex; align-items: center; gap: 10px;
   margin: 2em 0 1em; padding: 0; font-size: 1.18em; font-weight: 800; color: #1a2332;
-  letter-spacing: -0.01em; scroll-margin-top: 80px;
+  letter-spacing: -0.01em; scroll-margin-top: 120px;
   border: none; background: none;
 }
 .section-header::after {
@@ -131,6 +131,7 @@ body.dark-mode .internship-banner strong { color: #90caf9 !important; }
   color: #1565c0; cursor: pointer; background: #dbeafe; border-radius: 8px;
   padding: 1px 7px; vertical-align: middle; user-select: none;
   transition: background .15s; border: none;
+  -webkit-user-select: none;
 }
 .pub-abst-btn:hover { background: #bfdbfe; }
 body.dark-mode .pub-abst-btn { background: #1e3a5f; color: #93c5fd; }
@@ -201,9 +202,11 @@ body.dark-mode .pub-abst-btn:hover { background: #1e40af; }
   font-size: 2.1em;
   font-weight: 900;
   color: #fff;
-  margin-bottom: 6px;
+  margin: 0 0 6px;
+  padding: 0;
   letter-spacing: -0.02em;
   line-height: 1.15;
+  border: none;
 }
 .hero-subtitle {
   font-size: 0.96em;
@@ -227,6 +230,7 @@ body.dark-mode .pub-abst-btn:hover { background: #1e40af; }
   font-size: 0.80em;
   font-weight: 600;
   backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
 }
 .hero-links {
   display: flex;
@@ -465,6 +469,7 @@ body.dark-mode .research-card:hover,
 body.dark-mode .stat-card:hover {
   border-color: #388bfd !important; box-shadow: 0 6px 18px rgba(56,139,253,.15) !important;
 }
+body.dark-mode .stat-card { box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important; }
 body.dark-mode .featured-img { border-bottom-color: #30363d !important; }
 
 /* ── Dark mode: Section Headers ── */
@@ -522,6 +527,10 @@ body.dark-mode .pub-link.pl-arxiv  { background: #3d2410 !important; color: #ffb
 body.dark-mode .pl-cite { background: #0f3d2e !important; color: #3fb950 !important; border-color: #1a7f45 !important; }
 body.dark-mode .bib-popup { background: #161b22 !important; border-color: #30363d !important; }
 body.dark-mode .bib-pre { background: #0d1117 !important; color: #c9d1d9 !important; border-color: #30363d !important; }
+body.dark-mode .bib-copy { background: #1f6feb !important; color: #fff !important; }
+body.dark-mode .bib-copy:hover { background: #388bfd !important; }
+body.dark-mode .bib-close { background: #21262d !important; color: #8b949e !important; }
+body.dark-mode .bib-close:hover { background: #30363d !important; color: #c9d1d9 !important; }
 
 /* ── Dark mode: News badges ── */
 body.dark-mode .nbadge.nb-accept { background: #122117 !important; color: #3fb950 !important; }
@@ -529,7 +538,7 @@ body.dark-mode .nbadge.nb-finish { background: #122117 !important; color: #3fb95
 body.dark-mode .nbadge.nb-top { background: #2d2000 !important; color: #ffd54f !important; }
 body.dark-mode .nbadge.nb-service { background: #21262d !important; color: #8b949e !important; }
 body.dark-mode .nbadge.nb-upcoming { background: #0d2137 !important; color: #58a6ff !important; }
-body.dark-mode .news-date { color: #484f58 !important; }
+body.dark-mode .news-date { color: #6e7681 !important; }
 body.dark-mode .news-toggle { border-color: #30363d !important; color: #58a6ff !important; }
 body.dark-mode .news-toggle:hover { background: #161b22 !important; }
 
@@ -540,17 +549,20 @@ body.dark-mode .rt-year { color: #58a6ff !important; }
 body.dark-mode .research-timeline::before { background: linear-gradient(to bottom, #388bfd, #8957e5, #3fb950) !important; }
 body.dark-mode .rt-item::before { border-color: #388bfd !important; background: #0d1117 !important; }
 
+/* ── Awards grid responsive ── */
+@media(max-width:560px){ .awards-grid { grid-template-columns: 1fr !important; } }
+
 /* ── Dark mode: Awards ── */
 body.dark-mode ul li { color: #8b949e !important; }
 body.dark-mode ul li strong { color: #e6edf3 !important; }
 
 /* ── Dark mode: Footer ── */
-body.dark-mode .site-footer { border-top-color: #21262d !important; color: #484f58 !important; }
+body.dark-mode .site-footer { border-top-color: #21262d !important; color: #6e7681 !important; }
 body.dark-mode .site-footer a { color: #58a6ff !important; }
 body.dark-mode .page__footer { background: #010409 !important; border-top-color: #21262d !important; }
 body.dark-mode .page__footer a { color: #58a6ff !important; }
 body.dark-mode .page__footer-follow .social-icons .fa { color: #58a6ff !important; }
-body.dark-mode .page__footer-copyright { color: #484f58 !important; }
+body.dark-mode .page__footer-copyright { color: #6e7681 !important; }
 
 /* ── Dark mode: Scroll-top ── */
 body.dark-mode .scroll-top { background: #388bfd !important; box-shadow: 0 4px 14px rgba(56,139,253,.3) !important; }
@@ -574,9 +586,9 @@ body.dark-mode .page { background: #0d1117 !important; }
 
 /* ── Particle canvas ── */
 /* ── AI Research Assistant chat widget ── */
-.ra-btn { position: fixed; bottom: 68px; right: 22px; width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg,#2563eb,#7c3aed); color: #fff; font-size: 1.3em; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 16px rgba(37,99,235,.4); z-index: 9990; transition: transform .2s, box-shadow .2s; user-select: none; }
+.ra-btn { position: fixed; bottom: 68px; right: 22px; width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg,#2563eb,#7c3aed); color: #fff; font-size: 1.3em; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 16px rgba(37,99,235,.4); z-index: 9990; transition: transform .2s, box-shadow .2s; user-select: none; -webkit-user-select: none; }
 .ra-btn:hover { transform: scale(1.1); box-shadow: 0 6px 22px rgba(37,99,235,.5); }
-.ra-panel { position: fixed; bottom: 120px; right: 22px; width: 320px; height: 440px; background: #fff; border-radius: 16px; box-shadow: 0 12px 48px rgba(0,0,0,.18); display: flex; flex-direction: column; z-index: 9991; transform: scale(0.85) translateY(20px); opacity: 0; pointer-events: none; transition: transform .2s, opacity .2s; transform-origin: bottom right; border: 1.5px solid #e5e7eb; }
+.ra-panel { position: fixed; bottom: 120px; right: 22px; width: 320px; height: 440px; max-height: calc(100vh - 140px); background: #fff; border-radius: 16px; box-shadow: 0 12px 48px rgba(0,0,0,.18); display: flex; flex-direction: column; z-index: 9991; transform: scale(0.85) translateY(20px); opacity: 0; pointer-events: none; transition: transform .2s, opacity .2s; transform-origin: bottom right; border: 1.5px solid #e5e7eb; }
 .ra-panel.show { transform: scale(1) translateY(0); opacity: 1; pointer-events: all; }
 .ra-header { background: linear-gradient(135deg,#2563eb,#7c3aed); color: #fff; padding: 12px 14px; border-radius: 14px 14px 0 0; display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 0.9em; }
 .ra-close { background: rgba(255,255,255,.2); border: none; color: #fff; width: 24px; height: 24px; border-radius: 50%; cursor: pointer; font-size: 0.85em; display: flex; align-items: center; justify-content: center; }
@@ -776,6 +788,7 @@ body.dark-mode .graph-link { stroke: #334155; }
 .gl-item { display: flex; align-items: center; gap: 5px; font-size: 0.74em; font-weight: 600; color: #444; }
 .gl-dot { width: 10px; height: 10px; border-radius: 50%; }
 body.dark-mode .gl-item { color: #8b949e; }
+body.dark-mode .graph-node text { fill: #c9d1d9 !important; }
 /* ── Dark mode: Hero pills ── */
 body.dark-mode .hero-pill { background: rgba(255,255,255,0.12) !important; color: rgba(255,255,255,0.85) !important; border-color: rgba(255,255,255,0.2) !important; }
 /* ── Dark mode: Awards grid text ── */
@@ -789,7 +802,7 @@ body.dark-mode #awards + div p[style] { color: #c9d1d9 !important; }
 <div id="read-progress"></div>
 <div class="hero-banner">
   <canvas class="hero-particles" id="particles"></canvas>
-  <div class="hero-name">Jiajun Fan</div>
+  <h1 class="hero-name">Jiajun Fan</h1>
   <div class="hero-subtitle" id="hero-typed"></div>
   <div class="hero-pills">
     <span class="hero-pill">🌊 RL Post-Training for Generative Models</span>
@@ -798,7 +811,7 @@ body.dark-mode #awards + div p[style] { color: #c9d1d9 !important; }
   </div>
   <div class="hero-links">
     <a class="hero-link" href="files/CV.pdf">📋 CV</a>
-    <a class="hero-link" href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">🎓 Scholar</a>
+    <a class="hero-link" href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">🎓 Scholar</a>
     <a class="hero-link" href="mailto:jiajunf3@illinois.edu">✉️ Email</a>
     <a class="hero-link" href="https://openreview.net/profile?id=~Jiajun_Fan1" target="_blank" rel="noopener noreferrer">📝 OpenReview</a>
     <a class="hero-link" href="https://github.com/markerthu" target="_blank" rel="noopener noreferrer">💻 GitHub</a>
@@ -829,7 +842,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 <div class="internship-banner internship-banner-pulse">
 🎓 <strong>Seeking research internship — Summer/Fall 2026.</strong> RL · Generative Models · Reasoning LLMs
 &nbsp;<a href="files/CV.pdf">[CV]</a>
-&nbsp;<a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">[Scholar]</a>
+&nbsp;<a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">[Scholar]</a>
 &nbsp;<a href="mailto:jiajunf3@illinois.edu">[Email]</a>
 </div>
 
@@ -892,7 +905,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 
 <div class="featured-grid">
   <a class="featured-card" href="/projects/cesar/">
-    <img class="featured-img" loading="lazy" src="/projects/cesar/images/teaser.png" alt="CESAR">
+    <img class="featured-img" loading="lazy" src="/projects/cesar/images/teaser.png" alt="CESAR process-reward framework for Audio LLM reasoning">
     <div class="featured-body">
       <span class="featured-venue fv-iclr26">ICLR 2026</span>
       <div class="featured-title">CESAR: Process Rewards for Audio LLM Reasoning</div>
@@ -901,7 +914,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
     </div>
   </a>
   <a class="featured-card" href="/projects/adrpo/">
-    <img class="featured-img" loading="lazy" src="/projects/adrpo/images/compare_models.png" alt="ADRPO">
+    <img class="featured-img" loading="lazy" src="/projects/adrpo/images/compare_models.png" alt="ADRPO adaptive divergence regularization results">
     <div class="featured-body">
       <span class="featured-venue fv-neurips">NeurIPS 2025</span>
       <div class="featured-title">ADRPO: Adaptive Regularization for Generative Model RLHF</div>
@@ -910,7 +923,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
     </div>
   </a>
   <a class="featured-card" href="/projects/orw-cfm-w2/">
-    <img class="featured-img" loading="lazy" src="/projects/orw-cfm-w2/images/method.png" alt="ORW-CFM-W2">
+    <img class="featured-img" loading="lazy" src="/projects/orw-cfm-w2/images/method.png" alt="ORW-CFM-W2 online reward-weighted flow matching">
     <div class="featured-body">
       <span class="featured-venue fv-iclr25">ICLR 2025</span>
       <div class="featured-title">ORW-CFM-W2: Online RLHF for Flow Matching</div>
@@ -938,7 +951,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 <h2 class="section-header" id="publications">📄 Selected Publications</h2>
 
 <p style="font-size:0.83em;color:#767676;margin-top:-0.6em;">* = first/co-first author &nbsp;·&nbsp;
-<a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">Full list on Google Scholar</a> &nbsp;/&nbsp;
+<a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Full list on Google Scholar</a> &nbsp;/&nbsp;
 <a href="/publications/">Publications page</a></p>
 
 <div class="pub-filter-bar">
@@ -1058,7 +1071,9 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
     <span class="pb pb-journal">TPAMI 2026</span><span class="pub-year">2026</span></div>
   <div class="pub-right">
     <div class="pub-title"><a href="https://arxiv.org/abs/2407.05010" target="_blank" rel="noopener noreferrer">PRANCE: Joint Token-Optimization and Structural Channel-Pruning for Adaptive ViT Inference</a>
-      <div class="pub-hl">⚡ Joint token + channel pruning · Adaptive ViT inference · IEEE TPAMI 2026</div><div class="pub-abstract-preview">PRANCE jointly optimizes token pruning and structural channel pruning for adaptive ViT inference, achieving significant speedup while maintaining accuracy.</div></div>
+      <button class="pub-abst-btn" aria-expanded="false" aria-label="Toggle abstract">▾ Abstract</button>
+      <div class="pub-hl">⚡ Joint token + channel pruning · Adaptive ViT inference · IEEE TPAMI 2026</div>
+      <div class="pub-abstract-preview">PRANCE jointly optimizes token pruning and structural channel pruning for adaptive ViT inference, achieving significant speedup while maintaining accuracy.</div></div>
     <div class="pub-authors">Y. Li, C. Tang, Y. Meng, <strong>J. Fan</strong>, Z. Chai, X. Ma, Z. Wang, W. Zhu &nbsp;·&nbsp; <em>IEEE TPAMI</em></div>
   </div>
 </div>
@@ -1190,7 +1205,7 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
 <!-- ═══════════════════════════════ AWARDS ════════════════════════════ -->
 <h2 class="section-header" id="awards">🏅 Awards &amp; Academic Service</h2>
 
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:1.5em;">
+<div class="awards-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:1.5em;">
   <div>
     <p style="font-weight:800;margin-bottom:8px;color:#1a2332;">🎖 Selected Awards</p>
     <ul style="font-size:0.87em;color:#444;line-height:2;padding-left:1.2em;margin:0;">
@@ -1227,8 +1242,8 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
       location:'Malmö, Sweden', conf:'Sep 8–13, 2026', url:'https://eccv.ecva.net/Conferences/2026',
       deadlines:[
         {label:'Paper Submission', date:'2026-03-05', passed:true},
-        {label:'Supplemental',     date:'2026-03-12'},
-        {label:'Rebuttal',         date:'2026-05-11'},
+        {label:'Supplemental',     date:'2026-03-12', passed:true},
+        {label:'Rebuttal',         date:'2026-05-11', passed:true},
         {label:'Decisions',        date:'2026-06-17'},
       ]},
     { name:'ICML 2026', abbr:'ICML', type:'ML', color:'#2563eb',
@@ -1236,7 +1251,7 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
       deadlines:[
         {label:'Abstract',         date:'2026-01-23', passed:true},
         {label:'Paper Submission', date:'2026-01-28', passed:true},
-        {label:'Notification',     date:'2026-04-30'},
+        {label:'Notification',     date:'2026-04-30', passed:true},
       ]},
     { name:'CVPR 2027', abbr:'CVPR', type:'CV', color:'#059669',
       location:'Nashville, TN, USA', conf:'Jun 2027', url:'https://cvpr.thecvf.com/',
@@ -1249,13 +1264,13 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
       deadlines:[
         {label:'Submission',       date:'2025-09-24', passed:true},
         {label:'Notification',     date:'2026-01-25', passed:true},
-        {label:'Conference',       date:'2026-04-23'},
+        {label:'Conference',       date:'2026-04-23', passed:true},
       ]},
     { name:'NeurIPS 2026', abbr:'NeurIPS', type:'ML', color:'#2563eb',
       location:'San Diego, CA, USA', conf:'Dec 6–12, 2026', url:'https://neurips.cc/Conferences/2026',
       deadlines:[
-        {label:'Abstract',         date:'2026-05-04'},
-        {label:'Full Paper',       date:'2026-05-06'},
+        {label:'Abstract',         date:'2026-05-04', passed:true},
+        {label:'Full Paper',       date:'2026-05-06', passed:true},
       ]},
     { name:'ICLR 2027', abbr:'ICLR', type:'ML', color:'#7c3aed',
       location:'TBA', conf:'TBA', url:'https://iclr.cc/',
@@ -1286,7 +1301,7 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
       var urgency = diff <= 2 ? '#dc2626' : diff <= 14 ? '#ea580c' : diff <= 60 ? '#d97706' : '#6b7280';
       chip = '<span class="ddl-chip" style="background:' + urgency + '20;color:' + urgency + ';border-color:' + urgency + '40">'
            + next.label + ' · ' + (diff <= 0 ? 'Today!' : diff + 'd') + '</span>';
-    } else if (c.deadlines[0].date === null) {
+    } else if (c.deadlines.length && c.deadlines[0].date === null) {
       var isDk = document.body.classList.contains('dark-mode');
       chip = '<span class="ddl-chip" style="background:'+(isDk?'#21262d':'#f1f5f9')+';color:'+(isDk?'#8b949e':'#6b7280')+';border-color:'+(isDk?'#30363d':'#e2e8f0')+'">Submission TBA</span>';
     } else {
@@ -1323,7 +1338,7 @@ Happy to discuss research, internships, or collaborations. Best reached by email
 <div class="site-footer">
   <div class="footer-links">
     <a href="mailto:jiajunf3@illinois.edu">✉️ Email</a>
-    <a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">🎓 Scholar</a>
+    <a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">🎓 Scholar</a>
     <a href="https://openreview.net/profile?id=~Jiajun_Fan1" target="_blank" rel="noopener noreferrer">📝 OpenReview</a>
     <a href="https://github.com/markerthu" target="_blank" rel="noopener noreferrer">💻 GitHub</a>
     <a href="/cv/">📋 CV</a>
@@ -1370,7 +1385,7 @@ Happy to discuss research, internships, or collaborations. Best reached by email
     { kw:['test-time','inverse scaling','longer reasoning','reasoning length'],
       a:"Test-time inverse scaling is when giving a model more reasoning steps actually hurts accuracy. In Audio LLMs, standard RL leads to verbose, irrelevant chains. CESAR fixes this with process-level rewards that reward correct intermediate steps, not just final answers." },
     { kw:['lbc','atari','world record','behavior control','exploration','bandit'],
-      a:"LBC (ICLR 2023, Oral — Ranked 5/4176) broke 24 Atari human world records using 500× less data than Agent57. Key idea: a learnable hybrid behavior mapping + bandit meta-controller for exploration that dramatically enlarges the effective policy space." },
+      a:"LBC (ICLR 2023 Notable Top-5% Oral, Rank 5 among oral presentations) broke 24 Atari human world records using 500× less data than Agent57. Key idea: a learnable hybrid behavior mapping + bandit meta-controller for exploration that dramatically enlarges the effective policy space." },
     { kw:['gdi','generalized data','distribution iteration','icml 2022'],
       a:"GDI (ICML 2022) shows that optimizing the training data distribution is the key lever for superhuman RL efficiency. We achieve 9620% mean HNS on Atari ALE with 200M frames, comparable to Agent57 but 500× more data-efficient." },
     { kw:['adrpo','adaptive divergence','adaptive regularization','neurips 2025'],
@@ -1382,7 +1397,7 @@ Happy to discuss research, internships, or collaborations. Best reached by email
     { kw:['prance','token pruning','channel pruning','vit','tpami','efficient inference'],
       a:"PRANCE (IEEE TPAMI 2026, Vol. 48) jointly optimizes token pruning and structural channel pruning for adaptive ViT inference — ~50% FLOP reduction, retaining only ~10% tokens with lossless Top-1 accuracy." },
     { kw:['sp-vla','spvla','sp vla','vla','robot','vision language action','token pruning','model scheduling'],
-      a:"SP-VLA (ICLR 2026) accelerates Vision-Language-Action models via joint model scheduling and spatio-semantic token pruning. It achieves 1.5× lossless speedup on LIBERO and 2.4× on SimplerEnv. Co-first author with Zhuoran Li et al." },
+      a:"SP-VLA (ICLR 2026) accelerates Vision-Language-Action models via joint model scheduling and spatio-semantic token pruning. It achieves 1.5× lossless speedup on LIBERO and 2.4× on SimplerEnv. Co-first author with Ye Li et al." },
     { kw:['varcon','variational contrastive','supervised contrastive','imagenet','resnet'],
       a:"VarCon (NeurIPS 2025) reformulates supervised contrastive learning as variational inference, introducing a principled probabilistic framework. Achieves SOTA 79.36% Top-1 accuracy on ImageNet-1K with ResNet-50." },
 
@@ -1516,7 +1531,7 @@ Happy to discuss research, internships, or collaborations. Best reached by email
   /* Escape closes the panel; Trap focus inside panel when open */
   document.addEventListener('keydown', function(e){
     var panel = document.getElementById('ra-panel');
-    if(!panel.classList.contains('show')) return;
+    if(!panel || !panel.classList.contains('show')) return;
     if(e.key === 'Escape'){ raClose(); return; }
     if(e.key === 'Tab'){
       var focusable = panel.querySelectorAll('button,input,[tabindex]:not([tabindex="-1"])');
@@ -1643,6 +1658,7 @@ Happy to discuss research, internships, or collaborations. Best reached by email
       r: Math.random()*2+1
     });
   }
+  var _rafId = null;
   function draw(){
     ctx.clearRect(0,0,c.width,c.height);
     ctx.fillStyle = 'rgba(255,255,255,0.25)';
@@ -1662,14 +1678,13 @@ Happy to discuss research, internships, or collaborations. Best reached by email
         }
       }
     }
-    if(!document.hidden) requestAnimationFrame(draw);
+    if(!document.hidden) _rafId = requestAnimationFrame(draw);
   }
-  var _rafId = null;
-  function startDraw(){ if(!_rafId) _rafId = requestAnimationFrame(draw); }
   document.addEventListener('visibilitychange', function(){
-    if(document.hidden){ _rafId = null; } else { startDraw(); }
+    if(document.hidden){ cancelAnimationFrame(_rafId); _rafId = null; }
+    else if(!_rafId){ _rafId = requestAnimationFrame(draw); }
   });
-  draw();
+  _rafId = requestAnimationFrame(draw);
 })();
 
 /* ── Abstract toggle (click/tap on button) ── */
@@ -1743,10 +1758,16 @@ document.querySelectorAll('.featured-card').forEach(function(card){
   var activeEntry = null;
   popup.querySelector('.bib-copy').addEventListener('click', function(){
     var btn = this;
-    navigator.clipboard.writeText(popup.querySelector('.bib-pre').textContent).then(function(){
-      btn.textContent = '\u2713 Copied!'; btn.style.background = '#059669';
-      setTimeout(function(){ btn.textContent = '\uD83D\uDCCB Copy BibTeX'; btn.style.background = ''; }, 2000);
-    }).catch(function(){ btn.textContent = 'Select + copy manually'; setTimeout(function(){ btn.textContent = '\uD83D\uDCCB Copy BibTeX'; }, 2000); });
+    var text = popup.querySelector('.bib-pre').textContent;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function(){
+        btn.textContent = '\u2713 Copied!'; btn.style.background = '#059669';
+        setTimeout(function(){ btn.textContent = '\uD83D\uDCCB Copy BibTeX'; btn.style.background = ''; }, 2000);
+      }).catch(function(){ btn.textContent = 'Select + copy manually'; setTimeout(function(){ btn.textContent = '\uD83D\uDCCB Copy BibTeX'; }, 2000); });
+    } else {
+      btn.textContent = 'Select + copy manually';
+      setTimeout(function(){ btn.textContent = '\uD83D\uDCCB Copy BibTeX'; }, 2000);
+    }
   });
   popup.querySelector('.bib-close').addEventListener('click', function(){ popup.classList.remove('show'); activeEntry = null; });
   document.addEventListener('click', function(e){
@@ -1806,7 +1827,8 @@ function filterPubs() {
   var q = (box && box.value || '').toLowerCase();
   document.querySelectorAll('.pub-list .pub-entry').forEach(function(el) {
     var venue = (el.dataset.venue || '').toLowerCase();
-    var title = el.querySelector('.pub-title') ? el.querySelector('.pub-title').textContent.toLowerCase() : '';
+    var titleEl = el.querySelector('.pub-title > a');
+    var title = titleEl ? titleEl.textContent.toLowerCase() : '';
     var authors = el.querySelector('.pub-authors') ? el.querySelector('.pub-authors').textContent.toLowerCase() : '';
     var venueOk = _activeVenue === 'all' || venue === _activeVenue.toLowerCase();
     var searchOk = !q || title.includes(q) || authors.includes(q) || venue.includes(q);
@@ -1835,7 +1857,7 @@ function filterByVenue(btn, venue) {
     if(!links) return;
     var badge = document.createElement('span');
     badge.className = 'cite-badge';
-    badge.innerHTML = '📊 ' + count + ' citations';
+    badge.textContent = '📊 ' + count + ' citations';
     links.appendChild(badge);
   });
 })();
