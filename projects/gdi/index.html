@@ -171,6 +171,13 @@ figcaption{font-size:0.83em;color:#6b7280;margin-top:12px;text-align:center;line
 footer{background:#f8f9fa;color:#6b7280;text-align:center;padding:28px 24px;font-size:.84em;border-top:1px solid #e5e7eb}
 footer a{color:var(--accent);font-weight:600}
 
+/* ── Publication Journey ── */
+.journey{display:flex;flex-direction:column;gap:16px;margin:20px 0}
+.journey-step{padding:16px 20px;background:var(--accent-light);border-left:4px solid var(--accent);border-radius:0 10px 10px 0}
+.journey-date{font-size:0.78em;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--accent);margin-bottom:4px}
+.journey-title{font-weight:700;font-size:0.95em;color:#111;margin-bottom:6px}
+.journey-desc{font-size:0.84em;color:#6b7280;line-height:1.65}
+
 /* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
   *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;scroll-behavior:auto !important}
@@ -228,7 +235,9 @@ body.dark-mode section p[style*="color:#555"],
 body.dark-mode section p[style*="color:#444"],
 body.dark-mode p[style*="color:#666"]{color:#adbac7 !important}
 body.dark-mode div[style*="color:#555"]{color:#adbac7 !important}
-
+body.dark-mode .journey-step{background:#161b22;border-color:var(--accent)}
+body.dark-mode .journey-title{color:#e6edf3}
+body.dark-mode .journey-desc{color:#8b949e}
 
 /* ── Responsive ── */
 @media(max-width:640px){
@@ -237,6 +246,9 @@ body.dark-mode div[style*="color:#555"]{color:#adbac7 !important}
   .diff-boxes{grid-template-columns:1fr}
   .method-grid{grid-template-columns:1fr 1fr}
   .results-grid{grid-template-columns:1fr 1fr}
+}
+@media print {
+  .site-masthead { display: none !important; }
 }
 </style>
 <script type="application/ld+json">{

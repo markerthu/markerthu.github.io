@@ -1522,6 +1522,11 @@ Happy to discuss research, internships, or collaborations. Best reached by email
     div.className = 'ra-msg ra-bot';
     msgs.appendChild(div);
     msgs.scrollTop = msgs.scrollHeight;
+    /* Respect prefers-reduced-motion — show text instantly */
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      div.textContent = text;
+      return;
+    }
     var i = 0;
     function tick() {
       if (i <= text.length) {
