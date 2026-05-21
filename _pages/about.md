@@ -829,16 +829,7 @@ body.dark-mode .pub-abstract-preview { background: #161b22; border-color: #30363
 @media(max-width:600px){ #research-graph { height: 320px; } }
 body.dark-mode #research-graph { border-color: #30363d; background: #0d1117 !important; }
 #research-graph svg { width: 100%; height: 100%; }
-.graph-node circle { cursor: pointer; transition: r .15s; }
-.graph-node:hover circle { filter: brightness(1.15); }
-.graph-node text { font-size: 10px; font-family: Inter, sans-serif; pointer-events: none; }
-.graph-link { stroke: #cbd5e1; stroke-opacity: 0.6; }
-body.dark-mode .graph-link { stroke: #334155; }
-.graph-legend { position: absolute; bottom: 12px; left: 14px; display: flex; flex-wrap: wrap; gap: 8px; }
-.gl-item { display: flex; align-items: center; gap: 5px; font-size: 0.74em; font-weight: 600; color: #444; }
-.gl-dot { width: 10px; height: 10px; border-radius: 50%; }
-body.dark-mode .gl-item { color: #8b949e; }
-body.dark-mode .graph-node text { fill: #c9d1d9 !important; }
+/* Graph nodes/links/legend are drawn as raw SVG by drawGraph() — no extra CSS classes needed. */
 /* ── Dark mode: Hero pills ── */
 body.dark-mode .hero-pill { background: rgba(255,255,255,0.12) !important; color: rgba(255,255,255,0.85) !important; border-color: rgba(255,255,255,0.2) !important; }
 /* ── Dark mode: Awards grid text ── */
@@ -849,7 +840,7 @@ body.dark-mode .hero-pill { background: rgba(255,255,255,0.12) !important; color
 <!-- Hero banner -->
 <div id="read-progress" aria-hidden="true"></div>
 <div class="hero-banner">
-  <canvas class="hero-particles" id="particles"></canvas>
+  <canvas class="hero-particles" id="particles" aria-hidden="true"></canvas>
   <div class="hero-name">Jiajun Fan</div>
   <div class="hero-subtitle" id="hero-typed"></div>
   <div class="hero-pills">
@@ -925,7 +916,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
   </li>
   <li class="news-hidden" id="news-extra-1">
     <span class="news-date">Jan 2025</span>
-    <span><span class="nbadge nb-service">Service</span>Reviewer: ICLR 2025–26, NeurIPS 2024–25, ICML 2025–26, CVPR 2026, AAAI 2025, AISTATS 2025.</span>
+    <span><span class="nbadge nb-service">Service</span>Reviewer: ICLR 2024–26, NeurIPS 2022–25, ICML 2023–26, CVPR 2026, AAAI 2025, AISTATS 2025, KDD 2024.</span>
   </li>
   <li class="news-hidden" id="news-extra-2">
     <span class="news-date">Aug 2024</span>
@@ -944,7 +935,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
   btn.setAttribute('data-expanded', expanded ? '0' : '1');
   btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
   btn.textContent = expanded ? '▼ Show more news' : '▲ Show less';
-" aria-label="Show more news">▼ Show more news</button>
+">▼ Show more news</button>
 
 <!-- ═══════════════════════════════ FEATURED ═══════════════════════════ -->
 <h2 class="section-header" id="featured">🔥 Featured Research</h2>
@@ -1022,7 +1013,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
     <button class="pub-abst-btn" aria-expanded="false" aria-label="Toggle abstract">▾ Abstract</button>
     <div class="pub-abstract-preview">CESAR resolves test-time inverse scaling in Audio LLMs by rewarding the reasoning process via GRPO, achieving SOTA on MMAU — outperforming Gemini 2.5 Pro and GPT-4o Audio.</div></div>
     <div class="pub-authors"><strong>J. Fan*</strong>, R. Ren, J. Li, R. Pandey, P.G. Shivakumar, I. Bulyko, A. Gandhe, G. Liu, Y. Gu</div>
-    <div class="pub-desc">CESAR: process-reward RL (GRPO) resolving test-time inverse scaling in Audio LLMs — models produce hallucinatory reasoning without proper guidance; CESAR rewrites that.</div>
+    <div class="pub-desc">CESAR: process-reward RL (GRPO) resolving test-time inverse scaling in Audio LLMs — models produce hallucinatory reasoning without proper guidance; CESAR fixes that.</div>
     <div class="pub-hl">🏆 SOTA on MMAU Test-mini · Outperforms Gemini 2.5 Pro &amp; GPT-4o Audio</div>
     <div class="pub-links">
       <a class="pub-link pl-paper" href="https://openreview.net/forum?id=DUr48hxO2h" target="_blank" rel="noopener noreferrer">📄 Paper</a>
@@ -1156,13 +1147,15 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
   </div>
 </div>
 
+<p id="pub-empty-state" style="display:none;text-align:center;color:#767676;padding:24px 0;font-size:0.9em;">No publications match your search. <a href="/publications/">Browse the full list →</a></p>
+
 </div>
 
 
 <!-- ════════════ RESEARCH GRAPH ════════════ -->
 <h2 class="section-header" id="research-graph-section">🕸️ Research Paper Network</h2>
 <p style="font-size:0.88em;color:#666;margin-bottom:14px;">Hover a node to highlight connections. Papers are grouped by research theme.</p>
-<div id="research-graph"></div>
+<div id="research-graph" role="img" aria-label="Network graph showing how Jiajun Fan's papers connect by research theme: from Deep RL (GDI, LBC) to RL training and flow matching for generative models (ORW-CFM-W2, ADRPO, AC-Flow) to audio reasoning (CESAR)."></div>
 
 <!-- ═══════════════════════════════ RESEARCH ═══════════════════════════ -->
 <h2 class="section-header" id="research">🔬 Research Interests</h2>
@@ -1260,7 +1253,7 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
       <li>Outstanding Graduates (Top 1%) — Nankai Univ.</li>
       <li>Tang Lixin Scholarship (Top 1%)</li>
       <li>GPA <strong>4.0/4.0</strong> — UIUC Ph.D.</li>
-      <li>ICLR 2023 Oral (Top 1.2%, <strong>5/4176</strong>) — LBC paper</li>
+      <li>ICLR 2023 Oral (Top 0.12%, <strong>5/4176</strong>) — LBC paper</li>
       <li>GPA <strong>3.97/4.0</strong>, Top 1.3% — Tsinghua M.Eng.</li>
     </ul>
   </div>
@@ -1298,6 +1291,7 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
         {label:'Abstract',         date:'2026-01-23', passed:true},
         {label:'Paper Submission', date:'2026-01-28', passed:true},
         {label:'Notification',     date:'2026-04-30', passed:true},
+        {label:'Conference',       date:'2026-07-06'},
       ]},
     { name:'CVPR 2027', abbr:'CVPR', type:'CV', color:'#059669',
       location:'Nashville, TN, USA', conf:'Jun 2027', url:'https://cvpr.thecvf.com/',
@@ -1317,6 +1311,8 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
       deadlines:[
         {label:'Abstract',         date:'2026-05-04', passed:true},
         {label:'Full Paper',       date:'2026-05-06', passed:true},
+        {label:'Notification',     date:'2026-09-18'},
+        {label:'Conference',       date:'2026-12-06'},
       ]},
     { name:'ICLR 2027', abbr:'ICLR', type:'ML', color:'#7c3aed',
       location:'TBA', conf:'TBA', url:'https://iclr.cc/',
@@ -1334,7 +1330,7 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
     var next = null;
     for (var i = 0; i < c.deadlines.length; i++) {
       var d = c.deadlines[i];
-      if (!d.date) break;
+      if (!d.date) continue;
       if (d.passed) continue;
       var p = d.date.split('-');
       var dt = new Date(+p[0], +p[1]-1, +p[2], 23, 59, 59);
@@ -1498,18 +1494,20 @@ Happy to discuss research, internships, or collaborations. Best reached by email
   var DEFAULT = "I'm not sure about that specific question. Try asking about a paper (CESAR, LBC, GDI, ADRPO…) or topic (RL, flow matching, audio reasoning). For anything else, email jiajunf3 [at] illinois.edu.";
 
   function findAnswer(q) {
-    q = q.toLowerCase();
+    q = (q || '').toLowerCase();
+    if (!q) return DEFAULT;
     var best = null, bestScore = 0;
     QA.forEach(function(qa) {
       var score = 0;
       qa.kw.forEach(function(k) { if (q.indexOf(k) >= 0) score++; });
       if (score > bestScore) { bestScore = score; best = qa; }
     });
-    return bestScore > 0 ? best.a : DEFAULT;
+    return (bestScore > 0 && best) ? best.a : DEFAULT;
   }
 
   function addMsg(text, role) {
     var msgs = document.getElementById('ra-msgs');
+    if (!msgs) return;
     var div = document.createElement('div');
     div.className = 'ra-msg ra-' + role;
     div.textContent = text;
@@ -1519,6 +1517,7 @@ Happy to discuss research, internships, or collaborations. Best reached by email
 
   function typeMsg(text) {
     var msgs = document.getElementById('ra-msgs');
+    if (!msgs) return;
     var div = document.createElement('div');
     div.className = 'ra-msg ra-bot';
     msgs.appendChild(div);
@@ -1538,6 +1537,7 @@ Happy to discuss research, internships, or collaborations. Best reached by email
   function showTyping() {
     if(document.getElementById('ra-typing-indicator')) return; /* idempotent */
     var msgs = document.getElementById('ra-msgs');
+    if (!msgs) return;
     var div = document.createElement('div');
     div.className = 'ra-msg ra-bot ra-typing';
     div.id = 'ra-typing-indicator';
@@ -1552,36 +1552,43 @@ Happy to discuss research, internships, or collaborations. Best reached by email
   }
 
   window.raAsk = function(btn) {
+    if (!btn) return;
     var text = btn.textContent.replace(/^[^\w]+/, '').trim();
-    document.getElementById('ra-chips').classList.add('hidden');
-    document.getElementById('ra-input').value = text;
+    var chips = document.getElementById('ra-chips');
+    var input = document.getElementById('ra-input');
+    if (chips) chips.classList.add('hidden');
+    if (input) input.value = text;
     raSend();
   };
 
   window.raOpen = function() {
     var panel = document.getElementById('ra-panel');
     var btn = document.getElementById('ra-btn');
+    if (!panel || !btn) return;
     panel.classList.add('show');
     panel.setAttribute('aria-hidden', 'false');
     btn.style.display = 'none';
     btn.setAttribute('aria-expanded', 'true');
     var msgs = document.getElementById('ra-msgs');
-    if (!msgs.children.length) {
+    if (msgs && !msgs.children.length) {
       setTimeout(function() {
         typeMsg("Hi! I'm a research assistant for Jiajun's work. Ask me about any paper or research topic!");
       }, 200);
     }
-    setTimeout(function() { document.getElementById('ra-input').focus(); }, 300);
+    setTimeout(function() { var i = document.getElementById('ra-input'); if (i) i.focus(); }, 300);
   };
 
   window.raClose = function() {
     var panel = document.getElementById('ra-panel');
+    if (!panel) return;
     panel.classList.remove('show');
     panel.setAttribute('aria-hidden', 'true');
     var btn = document.getElementById('ra-btn');
-    btn.style.display = 'flex';
-    btn.setAttribute('aria-expanded', 'false');
-    btn.focus(); /* return focus to trigger button */
+    if (btn) {
+      btn.style.display = 'flex';
+      btn.setAttribute('aria-expanded', 'false');
+      btn.focus(); /* return focus to trigger button */
+    }
   };
 
   /* Escape closes the panel; Trap focus inside panel when open */
@@ -1600,6 +1607,7 @@ Happy to discuss research, internships, or collaborations. Best reached by email
 
   window.raSend = function() {
     var inp = document.getElementById('ra-input');
+    if (!inp) return;
     var q = inp.value.trim();
     if (!q) return;
     inp.value = '';
@@ -1892,6 +1900,7 @@ var _activeVenue = 'all';
 function filterPubs() {
   var box = document.getElementById('pubSearch');
   var q = (box && box.value || '').toLowerCase();
+  var visible = 0;
   document.querySelectorAll('.pub-list .pub-entry').forEach(function(el) {
     var venue = (el.dataset.venue || '').toLowerCase();
     var titleEl = el.querySelector('.pub-title > a');
@@ -1899,13 +1908,17 @@ function filterPubs() {
     var authors = el.querySelector('.pub-authors') ? el.querySelector('.pub-authors').textContent.toLowerCase() : '';
     var venueOk = _activeVenue === 'all' || venue === _activeVenue.toLowerCase();
     var searchOk = !q || title.includes(q) || authors.includes(q) || venue.includes(q);
-    el.classList.toggle('hidden', !(venueOk && searchOk));
+    var show = venueOk && searchOk;
+    el.classList.toggle('hidden', !show);
+    if (show) visible++;
   });
+  var empty = document.getElementById('pub-empty-state');
+  if (empty) empty.style.display = visible === 0 ? 'block' : 'none';
 }
 function filterByVenue(btn, venue) {
   _activeVenue = venue;
   document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
-  btn.classList.add('active');
+  if (btn) btn.classList.add('active');
   filterPubs();
 }
 
@@ -2008,8 +2021,8 @@ function drawGraph(container) {
     .attr('orient','auto')
     .append('path').attr('d','M0,1 L7,4 L0,7 Z').attr('fill',edgeClr);
 
-  /* Year labels at top */
-  [{t:'2022',cx:CX['1']},{t:'2024–25',cx:(CX['2']+CX['3'])/2},{t:'2025',cx:CX['4']},{t:'2026',cx:CX['5']}]
+  /* Year labels at top — span reflects the papers in each column */
+  [{t:'2022–23',cx:CX['1']},{t:'2025–26',cx:(CX['2']+CX['3'])/2},{t:'2025–26',cx:CX['4']},{t:'2025–26',cx:CX['5']}]
   .forEach(function(d){
     svg.append('text').attr('x',d.cx*W).attr('y',18)
       .attr('text-anchor','middle').attr('font-size','10px')
