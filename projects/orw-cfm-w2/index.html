@@ -24,7 +24,7 @@ permalink: /projects/orw-cfm-w2/
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
 <link rel="icon" href="/images/favicon.ico">
 <meta name="robots" content="index,follow">
-<script>if(localStorage.getItem('darkMode')==='true'){document.documentElement.style.background='#0d1117';}</script>
+<script>try{if(localStorage.getItem('darkMode')==='true'){document.documentElement.style.background='#0d1117';}}catch(e){}</script>
 <style>
 :root { --accent: #2563eb; --accent-light: #eff6ff; }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -171,6 +171,20 @@ figcaption{font-size:0.83em;color:#6b7280;margin-top:12px;text-align:center;line
 footer{background:#f8f9fa;color:#6b7280;text-align:center;padding:28px 24px;font-size:.84em;border-top:1px solid #e5e7eb}
 footer a{color:var(--accent);font-weight:600}
 
+
+/* ── Challenge Grid ── */
+.challenge-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin:20px 0}
+.challenge-card{background:#fff;border:1.5px solid #e5e7eb;border-radius:14px;padding:20px 18px;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+.challenge-card h3{font-size:0.9em;font-weight:800;color:#0f172a;margin-bottom:8px}
+.challenge-card p{font-size:0.83em;color:#6b7280;line-height:1.65;margin:0}
+
+/* ── Contribution List ── */
+.contrib-list{display:flex;flex-direction:column;gap:14px;margin:20px 0}
+.contrib-item{display:flex;gap:16px;align-items:flex-start;padding:16px 20px;background:#fff;border:1.5px solid #e5e7eb;border-radius:14px;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+.contrib-num{width:36px;height:36px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1em;flex-shrink:0}
+.contrib-text h3{font-size:0.95em;font-weight:800;color:#0f172a;margin-bottom:6px}
+.contrib-text p{font-size:0.85em;color:#374151;line-height:1.7;margin:0}
+
 /* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
   *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;scroll-behavior:auto !important}
@@ -228,6 +242,13 @@ body.dark-mode section p[style*="color:#555"],
 body.dark-mode section p[style*="color:#444"],
 body.dark-mode p[style*="color:#666"]{color:#adbac7 !important}
 body.dark-mode div[style*="color:#555"]{color:#adbac7 !important}
+
+body.dark-mode .challenge-card{background:#161b22;border-color:#30363d}
+body.dark-mode .challenge-card h3{color:#e6edf3}
+body.dark-mode .challenge-card p{color:#8b949e}
+body.dark-mode .contrib-item{background:#161b22;border-color:#30363d}
+body.dark-mode .contrib-text h3{color:#e6edf3}
+body.dark-mode .contrib-text p{color:#adbac7}
 
 
 /* ── Responsive ── */

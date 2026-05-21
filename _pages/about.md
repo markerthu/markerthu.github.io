@@ -1154,7 +1154,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 
 <!-- ════════════ RESEARCH GRAPH ════════════ -->
 <h2 class="section-header" id="research-graph-section">🕸️ Research Paper Network</h2>
-<p style="font-size:0.88em;color:#666;margin-bottom:14px;">Hover a node to highlight connections. Papers are grouped by research theme.</p>
+<p style="font-size:0.88em;color:#595959;margin-bottom:14px;">Hover a node to highlight connections. Papers are grouped by research theme.</p>
 <div id="research-graph" role="img" aria-label="Network graph showing how Jiajun Fan's papers connect by research theme: from Deep RL (GDI, LBC) to RL training and flow matching for generative models (ORW-CFM-W2, ADRPO, AC-Flow) to audio reasoning (CESAR)."></div>
 
 <!-- ═══════════════════════════════ RESEARCH ═══════════════════════════ -->
@@ -1271,7 +1271,7 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
 
 <!-- ═══════════════════════════════ CONTACT ══════════════════════════ -->
 <h2 class="section-header" id="deadlines">📅 Conference Deadlines</h2>
-<p style="font-size:0.84em;color:#666;margin-bottom:14px;">Key AI/ML venue deadlines I track — for the full list see <a href="https://ccfddl.com/" target="_blank" rel="noopener noreferrer">ccfddl.com</a>.</p>
+<p style="font-size:0.84em;color:#595959;margin-bottom:14px;">Key AI/ML venue deadlines I track — for the full list see <a href="https://ccfddl.com/" target="_blank" rel="noopener noreferrer">ccfddl.com</a>.</p>
 <div id="conf-ddl-grid" class="conf-ddl-grid"></div>
 
 <script>
@@ -1371,7 +1371,7 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
 Happy to discuss research, internships, or collaborations. Best reached by email.<br>
 📧 <a href="mailto:jiajunf3@illinois.edu"><strong>jiajunf3@illinois.edu</strong></a> &nbsp;·&nbsp;
 🏛 Siebel Center for CS, UIUC &nbsp;·&nbsp;
-<a href="/files/CV.pdf"><strong>CV (PDF)</strong></a> &nbsp;·&nbsp;
+<a href="/cv/"><strong>CV</strong></a> &nbsp;·&nbsp;
 <a href="https://www.linkedin.com/in/jiajun-fan-57b12b26b" target="_blank" rel="noopener noreferrer">💼 LinkedIn</a> &nbsp;·&nbsp;
 <a href="https://orcid.org/0000-0002-0263-2103" target="_blank" rel="noopener noreferrer">🔬 ORCID</a>
 </p>
@@ -1640,15 +1640,17 @@ Happy to discuss research, internships, or collaborations. Best reached by email
 (function(){
   var btn = document.getElementById('darkToggle');
   if(!btn) return;
-  var saved = localStorage.getItem('darkMode');
-  if(saved === 'true') { document.body.classList.add('dark-mode'); btn.textContent = '☀️'; }
+  try {
+    var saved = localStorage.getItem('darkMode');
+    if(saved === 'true') { document.body.classList.add('dark-mode'); btn.textContent = '☀️'; }
+  } catch(e) {}
   btn.addEventListener('click', function(){
     document.body.classList.toggle('dark-mode');
     var on = document.body.classList.contains('dark-mode');
     var gc = document.getElementById('research-graph');
     if(gc && typeof d3 !== 'undefined') { drawGraph(gc); }
     btn.textContent = on ? '☀️' : '🌙';
-    localStorage.setItem('darkMode', on);
+    try { localStorage.setItem('darkMode', on); } catch(e) {}
   });
 })();
 

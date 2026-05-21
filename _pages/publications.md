@@ -33,12 +33,16 @@ excerpt: "Full list of publications by Jiajun Fan — ICLR, NeurIPS, ICML, TPAMI
 .pub-cv-title a { color: #1a2332; text-decoration: none; }
 .pub-cv-title a:hover { color: #2563eb; text-decoration: underline; }
 .pub-cv-authors { font-size: 0.80em; color: #6b7280; margin-top: 5px; line-height: 1.5; }
+/* Project page badge */
+.project-badge { margin-left:6px; font-size:0.78em; font-weight:700; color:#1565c0; background:#dbeafe; border-radius:10px; padding:1px 8px; white-space:nowrap; text-decoration:none !important; display:inline-block; }
+.project-badge:hover { background:#bfdbfe; }
 /* Dark mode overrides */
 body.dark-mode .pub-cv-entry { background: #161b22 !important; border-color: #30363d !important; }
 body.dark-mode .pub-cv-title a { color: #e6edf3 !important; }
 body.dark-mode .pub-cv-authors { color: #8b949e !important; }
 body.dark-mode .pub-cv-venue { background: #1e3a5f !important; color: #7dd3fc !important; }
 body.dark-mode .scholar-link { background: #388bfd !important; }
+body.dark-mode .project-badge { background: #1e3a5f !important; color: #7dd3fc !important; }
 </style>
 
 <a class="scholar-link" href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">

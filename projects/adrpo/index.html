@@ -24,7 +24,7 @@ permalink: /projects/adrpo/
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
 <link rel="icon" href="/images/favicon.ico">
 <meta name="robots" content="index,follow">
-<script>if(localStorage.getItem('darkMode')==='true'){document.documentElement.style.background='#0d1117';}</script>
+<script>try{if(localStorage.getItem('darkMode')==='true'){document.documentElement.style.background='#0d1117';}}catch(e){}</script>
 <style>
 :root { --accent: #7c3aed; --accent-light: #f5f3ff; }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -171,6 +171,28 @@ figcaption{font-size:0.83em;color:#6b7280;margin-top:12px;text-align:center;line
 footer{background:#f8f9fa;color:#6b7280;text-align:center;padding:28px 24px;font-size:.84em;border-top:1px solid #e5e7eb}
 footer a{color:var(--accent);font-weight:600}
 
+
+/* ── Key Insight Box ── */
+.insight-box{display:flex;gap:16px;align-items:flex-start;background:var(--accent-light);border:1.5px solid var(--accent);border-radius:12px;padding:18px 22px;margin:20px 0}
+.insight-icon{font-size:1.8em;line-height:1;flex-shrink:0;margin-top:2px}
+.insight-text h3{font-size:1em;font-weight:800;color:#0f172a;margin-bottom:8px}
+.insight-text p{font-size:0.9em;color:#374151;margin:0;line-height:1.7}
+
+/* ── Vs Grid (two-column comparison) ── */
+.vs-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:20px 0}
+.vs-card{border-radius:12px;padding:18px 20px}
+.vs-bad{background:#fef2f2;border:1.5px solid #fca5a5}
+.vs-bad h3{font-size:0.88em;font-weight:800;color:#dc2626;margin-bottom:8px}
+.vs-good{background:#f0fdf4;border:1.5px solid #86efac}
+.vs-good h3{font-size:0.88em;font-weight:800;color:#16a34a;margin-bottom:8px}
+.vs-card ul{padding-left:16px;font-size:0.84em;color:#374151;line-height:1.8}
+
+/* ── Generalization Tags ── */
+.tag{display:inline-block;border-radius:999px;padding:4px 12px;font-size:0.8em;font-weight:700;margin:3px 4px;line-height:1.4}
+.tag-gen{background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe}
+.tag-llm{background:#f5f3ff;color:#6d28d9;border:1px solid #ddd6fe}
+.tag-audio{background:#fdf4ff;color:#a21caf;border:1px solid #f5d0fe}
+
 /* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
   *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;scroll-behavior:auto !important}
@@ -228,6 +250,18 @@ body.dark-mode section p[style*="color:#555"],
 body.dark-mode section p[style*="color:#444"],
 body.dark-mode p[style*="color:#666"]{color:#adbac7 !important}
 body.dark-mode div[style*="color:#555"]{color:#adbac7 !important}
+
+body.dark-mode .insight-box{background:#161b22;border-color:var(--accent)}
+body.dark-mode .insight-text h3{color:#e6edf3}
+body.dark-mode .insight-text p{color:#adbac7}
+body.dark-mode .vs-bad{background:#2d1518;border-color:#5c2626}
+body.dark-mode .vs-bad h3{color:#fca5a5}
+body.dark-mode .vs-good{background:#13261a;border-color:#265c33}
+body.dark-mode .vs-good h3{color:#86efac}
+body.dark-mode .vs-card ul{color:#c9d1d9}
+body.dark-mode .tag-gen{background:#1e3a5f;color:#7dd3fc;border-color:#1d4ed8}
+body.dark-mode .tag-llm{background:#2e1065;color:#c4b5fd;border-color:#6d28d9}
+body.dark-mode .tag-audio{background:#4a044e;color:#f0abfc;border-color:#a21caf}
 
 
 /* ── Responsive ── */
@@ -446,14 +480,14 @@ body.dark-mode div[style*="color:#555"]{color:#adbac7 !important}
     <img loading="lazy" src="images/app_compare_models.png" alt="Extended comparison with larger models"
          style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
     <figcaption style="text-align:center;font-size:0.82em;color:#666;margin-top:10px;line-height:1.6">
-      <strong>Figure 4.</strong> Extended comparison — ADRPO's 2B SD3 vs. FLUX.1-Dev (12B) and SANA-1.5 (4.8B) on additional prompts. ADRPO consistently matches or outperforms models with 2–6× more parameters.
+      <strong>Figure 6.</strong> Extended comparison — ADRPO's 2B SD3 vs. FLUX.1-Dev (12B) and SANA-1.5 (4.8B) on additional prompts. ADRPO consistently matches or outperforms models with 2–6× more parameters.
     </figcaption>
   </figure>
   <figure style="margin:0 0 20px">
     <img loading="lazy" src="images/app_compare_methods.png" alt="Extended comparison with RL methods"
          style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
     <figcaption style="text-align:center;font-size:0.82em;color:#666;margin-top:10px;line-height:1.6">
-      <strong>Figure 5.</strong> Extended RL method comparison — ADRPO vs. DPO and ORW-CFM-W2 on diverse T2I tasks.
+      <strong>Figure 7.</strong> Extended RL method comparison — ADRPO vs. DPO and ORW-CFM-W2 on diverse T2I tasks.
     </figcaption>
   </figure>
 </section>
