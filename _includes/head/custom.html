@@ -210,7 +210,7 @@
   body.dark-mode .page__title { color: #e6edf3 !important; }
   body.dark-mode .page__content h2, body.dark-mode .page__content h3 { color: #e6edf3 !important; }
   body.dark-mode .page__content a { color: #58a6ff !important; }
-  body.dark-mode .page__content p { color: #8b949e !important; }
+  /* paragraphs inherit #c9d1d9 from .page__content — no dim override */
   body.dark-mode .page__footer { background: #010409 !important; border-top-color: #21262d !important; }
   body.dark-mode .page__footer a { color: #58a6ff !important; }
   body.dark-mode .page__inner-wrap, body.dark-mode #main, body.dark-mode .page { background: #0d1117 !important; }
@@ -509,6 +509,11 @@
 <meta property="og:image" content="{{ site.url }}/images/profile.jpg">
 {% endunless %}
 
+<!-- noindex for non-content pages (404, redirect stubs) — MM seo.html never emits a robots meta -->
+{% if page.sitemap == false %}
+<meta name="robots" content="noindex, nofollow">
+{% endif %}
+
 <!-- JSON-LD: Person schema — helps Google show rich researcher profile in search results -->
 {% if page.url == "/" or page.url == "/about/" or page.url == "" %}
 <script type="application/ld+json">
@@ -528,7 +533,7 @@
     {"@type": "EducationalOrganization", "name": "Tsinghua University"},
     {"@type": "EducationalOrganization", "name": "Nankai University"}
   ],
-  "award": ["ICLR 2023 Oral (Top 1.2%, Rank 5/4176)", "NeurIPS 2025", "ICML 2022"],
+  "award": ["ICLR 2023 Oral (Top 1.2%, Rank 5/4176)", "NeurIPS 2025", "ICLR 2026", "ICML 2022", "IEEE TPAMI 2026"],
   "description": "{{ site.description }}",
   "sameAs": [
     "https://scholar.google.com/citations?user=EjmzseUAAAAJ",

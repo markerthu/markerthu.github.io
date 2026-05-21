@@ -13,7 +13,7 @@ permalink: /portfolio/
 <title>Redirecting…</title>
 </head>
 <body>
-<p>This page has moved. <a href="/projects/">Go to homepage →</a></p>
+<p>This page has moved. <a href="/projects/">Go to Projects →</a></p>
 <script>window.location.replace("/projects/");</script>
 </body>
 </html>
