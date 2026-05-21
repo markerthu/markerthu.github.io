@@ -127,7 +127,7 @@ body.dark-mode .qn-label { color: #58a6ff; }
 .pb-journal{ background: #e65100; color: #fff; }
 .pb-arxiv  { background: #546e7a; color: #fff; }
 .pub-year  { font-size: 0.77em; color: #767676; font-weight: 700; }
-.pub-title { font-weight: 700; font-size: 0.95em; color: #1a2332; line-height: 1.4; }
+.pub-title { font-weight: 700; font-size: 0.95em; color: #1a2332; line-height: 1.4; position: relative; cursor: default; }
 .pub-abst-btn {
   display: inline-block; margin-left: 6px; font-size: 0.72em; font-weight: 700;
   color: #1565c0; cursor: pointer; background: #dbeafe; border-radius: 8px;
@@ -178,10 +178,11 @@ body.dark-mode .pub-abst-btn:hover { background: #1e40af; }
   padding: 14px 16px; text-align: center;
   box-shadow: 0 2px 8px rgba(21,101,192,.07);
   transition: transform .2s, box-shadow .2s;
+  animation: fadeUp .5s ease both;
 }
 .stat-card:hover { transform: translateY(-3px); box-shadow: 0 6px 18px rgba(21,101,192,.15); }
 .stat-number { font-size: 1.85em; font-weight: 900; color: #1565c0; line-height: 1.1; }
-.stat-label  { font-size: 0.77em; color: #666; margin-top: 4px; line-height: 1.35; }
+.stat-label  { font-size: 0.77em; color: #595959; margin-top: 4px; line-height: 1.35; }
 
 /* ── Animated hero banner ── */
 @keyframes gradientShift {
@@ -199,6 +200,7 @@ body.dark-mode .pub-abst-btn:hover { background: #1e40af; }
   text-align: center;
   color: #fff;
   box-shadow: 0 8px 32px rgba(21,101,192,0.18);
+  position: relative; overflow: hidden;
 }
 .hero-name {
   font-size: 2.1em;
@@ -261,7 +263,6 @@ body.dark-mode .pub-abst-btn:hover { background: #1e40af; }
   from { opacity: 0; transform: translateY(12px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-.stat-card { animation: fadeUp .5s ease both; }
 .stat-card:nth-child(1) { animation-delay: .05s; }
 .stat-card:nth-child(2) { animation-delay: .12s; }
 .stat-card:nth-child(3) { animation-delay: .19s; }
@@ -497,6 +498,11 @@ body.dark-mode .pub-hl { background: #1c1e21 !important; color: #ffd54f !importa
 body.dark-mode .stat-number { color: #58a6ff !important; }
 body.dark-mode .stat-label { color: #8b949e !important; }
 body.dark-mode .stat-label em { color: #8b949e !important; }
+/* Override inline-styled secondary text colors that fail contrast on dark bg */
+body.dark-mode p[style*="color:#767676"],
+body.dark-mode p[style*="color:#595959"],
+body.dark-mode li[style*="color:#767676"],
+body.dark-mode span[style*="color:#767676"] { color: #8b949e !important; }
 body.dark-mode .pub-project { background: #1c2333 !important; color: #58a6ff !important; }
 body.dark-mode .pub-project:hover { background: #1e3a5f !important; }
 body.dark-mode .pub-link.pl-paper  { background: #1c2333 !important; color: #58a6ff !important; }
@@ -704,7 +710,7 @@ body.dark-mode .pub-thumb-wrap:hover { box-shadow: 0 4px 18px rgba(0,0,0,0.45) !
   z-index: 9999; transition: width .08s linear;
   pointer-events: none;
 }
-.hero-banner { position: relative; overflow: hidden; }
+/* .hero-banner: position/overflow merged into primary definition above */
 .hero-particles {
   position: absolute; inset: 0; z-index: 0; pointer-events: none;
 }
@@ -810,7 +816,7 @@ body.dark-mode .filter-btn.active { background: #388bfd; color: #fff; border-col
 .pub-entry.hidden { display: none !important; }
 
 /* ── ④ Abstract tooltip ── */
-.pub-title { position: relative; cursor: default; }
+/* .pub-title: position/cursor merged into primary definition above */
 .pub-abstract-preview {
   display: none; position: absolute; top: calc(100% + 8px); left: 0; right: 0; z-index: 50;
   background: #fff; border: 1.5px solid #e5e7eb; border-radius: 10px;
