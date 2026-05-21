@@ -12,6 +12,7 @@ redirect_from:
 <title>CV — Jiajun Fan</title>
 <meta name="description" content="Academic CV of Jiajun Fan — CS Ph.D. at UIUC. Publications, education, awards, and research interests.">
 <link rel="icon" href="/images/favicon.ico">
+<meta name="robots" content="index,follow">
 <script>if(localStorage.getItem('darkMode')==='true'){document.documentElement.style.background='#0d1117';}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" media="print" onload="this.media='all'">
@@ -89,7 +90,7 @@ a:hover{text-decoration:underline}
 .edu-card:hover{box-shadow:0 4px 18px rgba(21,101,192,.10)}
 .edu-school{font-weight:800;font-size:1.0em;color:#1a2332}
 .edu-degree{font-size:0.87em;color:#333;margin-top:2px}
-.edu-meta{font-size:0.78em;color:#888;margin-top:2px;display:flex;gap:12px;flex-wrap:wrap}
+.edu-meta{font-size:0.78em;color:#595959;margin-top:2px;display:flex;gap:12px;flex-wrap:wrap}
 .edu-gpa{display:inline-block;background:#e3f2fd;color:#0d47a1;padding:1px 8px;border-radius:4px;font-weight:700;font-size:0.85em}
 .edu-notes{font-size:0.82em;color:#555;margin-top:8px;line-height:1.6;padding-left:1em}
 .edu-notes li{margin-bottom:2px}
@@ -110,19 +111,24 @@ a:hover{text-decoration:underline}
 .pb-arxiv{background:#546e7a;color:#fff}
 .pub-title{font-weight:700;font-size:0.91em;color:#1a2332;line-height:1.4}
 .pub-title a{color:#1565c0}
-.pub-authors{font-size:0.79em;color:#777;margin-top:2px}
+.pub-authors{font-size:0.79em;color:#6b7280;margin-top:2px}
 .pub-authors strong{color:#1a2332;font-weight:700}
 .pub-hl{display:inline-block;background:#fff8e1;border-left:3px solid #ffa000;padding:1px 8px;border-radius:0 4px 4px 0;font-size:0.75em;color:#5a4000;margin-top:5px;font-weight:700}
 
 /* ── Sidebar ── */
 .sidebar-card{background:#fff;border-radius:12px;border:1.5px solid #e0e8f0;padding:18px 20px;margin-bottom:18px}
 .sidebar-card .sec-title{font-size:0.68em}
+.research-blurb{font-size:0.83em;color:#444;margin-bottom:10px;line-height:1.6}
+.cta-card{background:linear-gradient(135deg,#e8f4fd,#f0f7ff);border-color:#1565c0}
+.cta-title{color:#0d47a1}
+.cta-text{font-size:0.83em;color:#1a2332;line-height:1.6;margin-bottom:12px}
+.cta-btn{display:block;text-align:center;background:#1565c0;color:#fff !important;padding:8px;border-radius:7px;font-weight:700;font-size:0.84em;text-decoration:none !important}
 
 /* Stats */
 .stat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:10px}
 .stat-item{text-align:center;background:#f0f4ff;border-radius:8px;padding:12px 8px}
 .stat-num{font-size:1.5em;font-weight:900;color:#1565c0;line-height:1}
-.stat-lbl{font-size:0.70em;color:#666;margin-top:4px;line-height:1.35}
+.stat-lbl{font-size:0.70em;color:#595959;margin-top:4px;line-height:1.35}
 
 /* Service */
 .service-list{margin:0;padding:0;list-style:none}
@@ -146,6 +152,53 @@ a:hover{text-decoration:underline}
 
 footer{background:#0d1b2a;color:#6a9fc8;text-align:center;padding:22px;font-size:0.83em}
 footer a{color:#7eb8f7}
+
+/* ── Reduced motion: disable animated hero gradient ── */
+@media (prefers-reduced-motion: reduce) {
+  *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
+  .cv-hero{animation:none !important}
+}
+
+/* ── Dark mode ── */
+body.dark-mode{background:#0d1117;color:#c9d1d9}
+body.dark-mode a{color:#58a6ff}
+body.dark-mode .site-masthead{background:#161b22;box-shadow:0 2px 12px rgba(0,0,0,.4)}
+body.dark-mode .masthead-title{color:#e6edf3 !important}
+body.dark-mode .masthead-nav a{color:#c9d1d9 !important}
+body.dark-mode .masthead-nav a:hover{color:#58a6ff !important;background:#21262d}
+body.dark-mode .masthead-nav a.nav-active{color:#58a6ff !important}
+body.dark-mode .masthead-nav a:hover.pdf-dl,body.dark-mode .masthead-nav .pdf-dl{color:#fff !important}
+body.dark-mode .sec-title{color:#58a6ff;border-bottom-color:#388bfd}
+body.dark-mode .edu-card,
+body.dark-mode .sidebar-card,
+body.dark-mode .main-section{background:#161b22;border-color:#30363d}
+body.dark-mode .edu-card:hover{box-shadow:0 4px 18px rgba(0,0,0,.5)}
+body.dark-mode .edu-school,
+body.dark-mode .pub-title,
+body.dark-mode .pub-authors strong{color:#e6edf3}
+body.dark-mode .edu-degree{color:#c9d1d9}
+body.dark-mode .edu-meta{color:#8b949e}
+body.dark-mode .edu-notes{color:#adbac7}
+body.dark-mode .edu-gpa{background:#0d2137;color:#79c0ff}
+body.dark-mode .pub-item{border-bottom-color:#30363d}
+body.dark-mode .pub-title a{color:#58a6ff}
+body.dark-mode .pub-authors{color:#8b949e}
+body.dark-mode .pub-hl{background:#2d2400;border-left-color:#d29922;color:#e3b341}
+body.dark-mode .stat-item{background:#0d2137}
+body.dark-mode .stat-num{color:#58a6ff}
+body.dark-mode .stat-lbl{color:#8b949e}
+body.dark-mode .service-list li{color:#adbac7;border-bottom-color:#21262d}
+body.dark-mode .s-venue{color:#58a6ff}
+body.dark-mode .interest-tag{background:#0d2137;color:#79c0ff;border-color:#1f6feb}
+body.dark-mode .award-item{border-bottom-color:#21262d}
+body.dark-mode .award-year{color:#58a6ff}
+body.dark-mode .award-name{color:#c9d1d9}
+body.dark-mode .award-top{background:#2d2400;color:#e3b341}
+body.dark-mode .research-blurb{color:#adbac7}
+body.dark-mode .cta-card{background:linear-gradient(135deg,#0d2137,#161b22);border-color:#1f6feb}
+body.dark-mode .cta-title{color:#79c0ff}
+body.dark-mode .cta-text{color:#c9d1d9}
+
 @media print {
   body { background: #fff !important; color: #000 !important; font-size: 11pt; }
   .cv-topbar, .cv-cta, .topnav, .site-masthead { display: none !important; }
@@ -235,7 +288,7 @@ footer a{color:#7eb8f7}
 
   <!-- Publications -->
   <div class="main-section">
-    <div class="sec-title">📄 Selected Publications <span style="font-size:0.85em;font-weight:400;color:#999;text-transform:none;letter-spacing:0">* = first / co-first author</span></div>
+    <div class="sec-title">📄 Selected Publications <span style="font-size:0.85em;font-weight:400;color:#6b7280;text-transform:none;letter-spacing:0">* = first / co-first author</span></div>
 
     <div class="pub-item">
       <span class="pub-badge pb-iclr">ICLR<br>2026</span>
@@ -356,7 +409,7 @@ footer a{color:#7eb8f7}
   <!-- Research Interests -->
   <div class="sidebar-card">
     <div class="sec-title">🔬 Research</div>
-    <p style="font-size:0.83em;color:#444;margin-bottom:10px;line-height:1.6">Making AI systems that <strong>never stop improving themselves</strong> — progressively removing human scaffolding from RL post-training.</p>
+    <p class="research-blurb">Making AI systems that <strong>never stop improving themselves</strong> — progressively removing human scaffolding from RL post-training.</p>
     <div>
       <span class="interest-tag">🤖 RL Post-Training</span>
     <span class="interest-tag">🌊 Flow/Diffusion RLHF</span>
@@ -381,10 +434,10 @@ footer a{color:#7eb8f7}
   </div>
 
   <!-- Internship CTA -->
-  <div class="sidebar-card" style="background:linear-gradient(135deg,#e8f4fd,#f0f7ff);border-color:#1565c0">
-    <div class="sec-title" style="color:#0d47a1">📢 Opportunities</div>
-    <p style="font-size:0.83em;color:#1a2332;line-height:1.6;margin-bottom:12px"><strong>Seeking research internship — Fall 2026 / 2027.</strong><br>Happy to discuss collaborations on generative model post-training, reasoning LLMs, or RL.</p>
-    <a href="mailto:jiajunf3@illinois.edu" style="display:block;text-align:center;background:#1565c0;color:#fff !important;padding:8px;border-radius:7px;font-weight:700;font-size:0.84em;text-decoration:none !important">✉️ Get in Touch</a>
+  <div class="sidebar-card cta-card">
+    <div class="sec-title cta-title">📢 Opportunities</div>
+    <p class="cta-text"><strong>Seeking research internship — Fall 2026 / 2027.</strong><br>Happy to discuss collaborations on generative model post-training, reasoning LLMs, or RL.</p>
+    <a href="mailto:jiajunf3@illinois.edu" class="cta-btn">✉️ Get in Touch</a>
   </div>
 
 </div><!-- /sidebar-col -->

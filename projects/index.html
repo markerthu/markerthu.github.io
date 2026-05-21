@@ -38,7 +38,7 @@ a{text-decoration:none}
 .hero h1{font-size:2.1em;font-weight:800;color:#1a2332;margin-bottom:10px}
 .hero p{color:#555;font-size:0.95em}
 .container{max-width:960px;margin:0 auto;padding:40px 24px}
-.year-group h3{font-size:0.78em;font-weight:800;color:#888;text-transform:uppercase;letter-spacing:.1em;margin:32px 0 14px;padding-bottom:6px;border-bottom:1px solid #e0e0e0}
+.year-group h3{font-size:0.78em;font-weight:800;color:#595959;text-transform:uppercase;letter-spacing:.1em;margin:32px 0 14px;padding-bottom:6px;border-bottom:1px solid #e0e0e0}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;margin-bottom:4px}
 .project-card{background:#fff;border-radius:14px;border:1.5px solid #e0e8f0;overflow:hidden;transition:transform .2s,box-shadow .2s;display:flex;flex-direction:column}
 .project-card:hover{transform:translateY(-4px);box-shadow:0 8px 28px rgba(21,101,192,.15)}
@@ -53,8 +53,8 @@ a{text-decoration:none}
 .vt-oral{display:inline-block;background:#ffd700;color:#3a2800;padding:2px 7px;border-radius:8px;font-size:.72em;font-weight:900;margin-left:5px}
 .vt-preprint{background:#546e7a;color:#fff}
 .card-header h2{font-size:0.92em;font-weight:800;color:#1a1a2e;line-height:1.4;margin-bottom:7px}
-.card-header .authors{font-size:0.76em;color:#888}
-.card-header .authors strong{color:#555}
+.card-header .authors{font-size:0.76em;color:#595959}
+.card-header .authors strong{color:#1a1a2e}
 .card-body{padding:0 20px 16px}
 .hl-tag{display:inline-block;background:#fff8e1;color:#5a4000;padding:2px 8px;border-radius:4px;font-size:0.75em;font-weight:700;border-left:2px solid #ffa000;margin-bottom:10px;line-height:1.5}
 .card-body p{font-size:0.82em;color:#555;line-height:1.5;margin-bottom:12px}
@@ -64,8 +64,38 @@ a{text-decoration:none}
 .cl-project{background:#1565c0;color:#fff}
 .cl-paper{background:#e3f2fd;color:#0d47a1}
 .cl-arxiv{background:#fce4ec;color:#c62828}
-footer{background:#f5f7fa;color:#666;text-align:center;padding:24px;font-size:.84em;border-top:1px solid #e0e8f0}
+footer{background:#f5f7fa;color:#595959;text-align:center;padding:24px;font-size:.84em;border-top:1px solid #e0e8f0}
 footer a{color:#1565c0}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
+}
+
+/* ── Dark mode ── */
+body.dark-mode{background:#0d1117;color:#c9d1d9}
+body.dark-mode a{color:#58a6ff}
+body.dark-mode .site-masthead{background:#161b22;box-shadow:0 2px 12px rgba(0,0,0,.4)}
+body.dark-mode .masthead-title{color:#e6edf3 !important}
+body.dark-mode .masthead-nav a{color:#c9d1d9 !important}
+body.dark-mode .masthead-nav a:hover{color:#58a6ff !important;background:#21262d}
+body.dark-mode .masthead-nav a.nav-active{color:#58a6ff !important}
+body.dark-mode .hero{background:#161b22;border-bottom-color:#30363d}
+body.dark-mode .hero h1{color:#e6edf3}
+body.dark-mode .hero p{color:#adbac7}
+body.dark-mode .year-group h3{color:#8b949e;border-bottom-color:#30363d}
+body.dark-mode .project-card{background:#161b22;border-color:#30363d}
+body.dark-mode .project-card:hover{box-shadow:0 8px 28px rgba(0,0,0,.5)}
+body.dark-mode .card-thumb{border-bottom-color:#30363d}
+body.dark-mode .card-header h2{color:#e6edf3}
+body.dark-mode .card-header .authors{color:#8b949e}
+body.dark-mode .card-header .authors strong{color:#c9d1d9}
+body.dark-mode .card-body p{color:#adbac7}
+body.dark-mode .hl-tag{background:#2d2400;color:#e3b341;border-left-color:#d29922}
+body.dark-mode .cl-paper{background:#0d2137;color:#79c0ff}
+body.dark-mode .cl-arxiv{background:#3d1f25;color:#f7a8b8}
+body.dark-mode footer{background:#161b22;color:#8b949e;border-top-color:#30363d}
+body.dark-mode footer a{color:#58a6ff}
 </style>
 </head>
 <body>
@@ -94,7 +124,7 @@ footer a{color:#1565c0}
     <div class="card-header">
       <span class="venue-tag vt-iclr26">ICLR 2026</span>
       <h2>CESAR: Audio LLM Reasoning via Process Rewards</h2>
-      <div class="authors"><strong>J. Fan*</strong>, R. Ren, J. Li, R. Pandey, P.G. Shivakumar, Y. Gu, A. Gandhe, G. Liu, I. Bulyko</div>
+      <div class="authors"><strong>J. Fan*</strong>, R. Ren, J. Li, R. Pandey, P.G. Shivakumar, I. Bulyko, A. Gandhe, G. Liu, Y. Gu</div>
     </div>
     <div class="card-body">
       <div class="hl-tag">🏆 SOTA MMAU · Beats Gemini 2.5 Pro &amp; GPT-4o Audio</div>

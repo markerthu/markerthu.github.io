@@ -50,6 +50,7 @@ a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 .hero .short{font-size:1.05em;color:#4b5563;margin-bottom:22px;font-weight:500}
 .authors{font-size:0.9em;color:#4b5563;max-width:720px;margin:0 auto 10px;line-height:2}
 .authors .me{font-weight:800;color:#111}
+.co-author{color:inherit}
 .affil{font-size:0.82em;color:#6b7280;margin-bottom:30px;line-height:1.6}
 .btn-row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
 .btn{display:inline-flex;align-items:center;gap:7px;padding:10px 26px;border-radius:999px;font-size:0.88em;font-weight:700;transition:opacity .18s,transform .18s;letter-spacing:0.01em}
@@ -170,6 +171,65 @@ figcaption{font-size:0.83em;color:#6b7280;margin-top:12px;text-align:center;line
 footer{background:#f8f9fa;color:#6b7280;text-align:center;padding:28px 24px;font-size:.84em;border-top:1px solid #e5e7eb}
 footer a{color:var(--accent);font-weight:600}
 
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;scroll-behavior:auto !important}
+}
+
+/* ── Dark mode ── */
+body.dark-mode{background:#0d1117;color:#c9d1d9}
+body.dark-mode a{color:#58a6ff}
+body.dark-mode .site-masthead{background:#161b22;box-shadow:0 2px 12px rgba(0,0,0,.4)}
+body.dark-mode .masthead-title{color:#e6edf3 !important}
+body.dark-mode .masthead-nav a{color:#c9d1d9 !important}
+body.dark-mode .masthead-nav a:hover{color:#58a6ff !important;background:#21262d}
+body.dark-mode .masthead-nav a.nav-active{color:#58a6ff !important}
+body.dark-mode .hero{background:linear-gradient(to bottom,#161b22,#0d1117)}
+body.dark-mode .hero h1{color:#e6edf3}
+body.dark-mode .hero .short{color:#adbac7}
+body.dark-mode .authors{color:#adbac7}
+body.dark-mode .authors .me{color:#e6edf3}
+body.dark-mode .affil{color:#8b949e}
+body.dark-mode .btn-secondary{background:#161b22}
+body.dark-mode .btn-neutral{background:#21262d}
+body.dark-mode section:nth-child(even){background:#161b22}
+body.dark-mode section p{color:#adbac7}
+body.dark-mode h2,body.dark-mode h3,body.dark-mode h4{color:#e6edf3}
+body.dark-mode .tldr{background:#161b22;color:#c9d1d9}
+body.dark-mode .key-insight{background:#161b22}
+body.dark-mode .key-insight p{color:#c9d1d9}
+body.dark-mode .result-card,
+body.dark-mode .method-card,
+body.dark-mode .step{background:#161b22;border-color:#30363d}
+body.dark-mode .method-card p,
+body.dark-mode .step p,
+body.dark-mode .result-card .rdesc{color:#8b949e}
+body.dark-mode .compare-table th{background:#21262d;color:#c9d1d9;border-bottom-color:#30363d}
+body.dark-mode .compare-table td{color:#adbac7;border-bottom-color:#21262d}
+body.dark-mode figure img{border-color:#30363d}
+body.dark-mode figcaption{color:#8b949e}
+body.dark-mode .game-pill{background:#21262d;border-color:#30363d;color:#c9d1d9}
+body.dark-mode .records-wall{background:linear-gradient(135deg,#161b22,#1e293b)}
+body.dark-mode .timeline-desc,
+body.dark-mode .timeline-title{color:#c9d1d9}
+body.dark-mode .problem-card{background:#2d1518;border-color:#5c2626}
+body.dark-mode .solution-card,
+body.dark-mode .diff-box.new{background:#13261a;border-color:#265c33}
+body.dark-mode .diff-box.old{background:#2d1518;border-color:#5c2626}
+body.dark-mode .problem-card p,
+body.dark-mode .solution-card p,
+body.dark-mode .diff-box ul{color:#c9d1d9}
+body.dark-mode footer{background:#161b22;color:#8b949e;border-top-color:#30363d}
+body.dark-mode ul li{color:#adbac7}
+body.dark-mode figure figcaption,
+body.dark-mode figcaption{color:#8b949e !important}
+body.dark-mode .records-number,body.dark-mode .records-sub{color:#fff !important}
+body.dark-mode section p[style*="color:#555"],
+body.dark-mode section p[style*="color:#444"],
+body.dark-mode p[style*="color:#666"]{color:#adbac7 !important}
+body.dark-mode div[style*="color:#555"]{color:#adbac7 !important}
+
+
 /* ── Responsive ── */
 @media(max-width:640px){
   .fig-grid-2{grid-template-columns:1fr}
@@ -216,7 +276,7 @@ footer a{color:var(--accent);font-weight:600}
   "citationCount": 1
 }</script>
 </head>
-<body>
+<body id="top">
 
 <header class="site-masthead">
   <div class="masthead-inner">
@@ -237,9 +297,9 @@ footer a{color:var(--accent);font-weight:600}
   <p class="short"><strong>ADRPO</strong>: Sample-level adaptive divergence control — no manual tuning required</p>
   <div class="authors">
     <a href="/" class="me">Jiajun Fan</a>&thinsp;<sup>1</sup>,
-    <a href="#" style="color:#7b1fa2">Tong Wei</a>&thinsp;<sup>1</sup>,
-    <a href="#" style="color:#7b1fa2">Chaoran Cheng</a>&thinsp;<sup>1</sup>,
-    <a href="#" style="color:#7b1fa2">Yuxin Chen</a>&thinsp;<sup>1</sup>,
+    <span class="co-author">Tong Wei</span>&thinsp;<sup>1</sup>,
+    <span class="co-author">Chaoran Cheng</span>&thinsp;<sup>1</sup>,
+    <span class="co-author">Yuxin Chen</span>&thinsp;<sup>1</sup>,
     <a href="https://geliu.web.illinois.edu/" style="color:#7b1fa2">Ge Liu</a>&thinsp;<sup>1</sup>
   </div>
   <div class="affil"><sup>1</sup>University of Illinois Urbana-Champaign</div>
@@ -428,16 +488,16 @@ footer a{color:var(--accent);font-weight:600}
       <div style='font-size:.83em;color:#555'>Submitted to The Thirty-ninth Annual Conference on Neural Information Processing Systems.</div>
     </div>
     <div style="position:relative;margin-bottom:18px;padding-left:4px">
-      <div style="position:absolute;left:-20px;top:5px;width:12px;height:12px;background:#e53935;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 2px #e53935"></div>
-      <div style="font-size:.78em;font-weight:800;color:#e53935;text-transform:uppercase;letter-spacing:.05em">Oct 2025</div>
-      <div style="font-weight:700;font-size:.93em">arXiv preprint released (arXiv:2510.18053)</div>
-      
-    </div>
-    <div style="position:relative;margin-bottom:18px;padding-left:4px">
       <div style="position:absolute;left:-20px;top:5px;width:12px;height:12px;background:#1b5e20;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 2px #1b5e20"></div>
       <div style="font-size:.78em;font-weight:800;color:#1b5e20;text-transform:uppercase;letter-spacing:.05em">Sep 2025</div>
       <div style="font-weight:700;font-size:.93em">✅ Accepted at NeurIPS 2025 (Poster)</div>
       <div style='font-size:.83em;color:#555'>Accepted. <a href="https://openreview.net/forum?id=aXO0xg0ttW">OpenReview</a></div>
+    </div>
+    <div style="position:relative;margin-bottom:18px;padding-left:4px">
+      <div style="position:absolute;left:-20px;top:5px;width:12px;height:12px;background:#e53935;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 2px #e53935"></div>
+      <div style="font-size:.78em;font-weight:800;color:#e53935;text-transform:uppercase;letter-spacing:.05em">Oct 2025</div>
+      <div style="font-weight:700;font-size:.93em">arXiv preprint released (arXiv:2510.18053)</div>
+
     </div>
     <div style="position:relative;margin-bottom:18px;padding-left:4px">
       <div style="position:absolute;left:-20px;top:5px;width:12px;height:12px;background:#1b5e20;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 2px #1b5e20"></div>
@@ -466,7 +526,7 @@ footer a{color:var(--accent);font-weight:600}
 </div>
 
 <footer>
-  <p>ADRPO · NeurIPS 2025 &nbsp;|&nbsp; <a href="/">Jiajun Fan</a> · UIUC &nbsp;|&nbsp; <a href="https://openreview.net/forum?id=aXO0xg0ttW">Paper</a> &nbsp;|&nbsp; <a href="/publications/">All Publications</a> &nbsp;|&nbsp; <a href="#">↑ Back to top</a></p>
+  <p>ADRPO · NeurIPS 2025 &nbsp;|&nbsp; <a href="/">Jiajun Fan</a> · UIUC &nbsp;|&nbsp; <a href="https://openreview.net/forum?id=aXO0xg0ttW">Paper</a> &nbsp;|&nbsp; <a href="/publications/">All Publications</a> &nbsp;|&nbsp; <a href="#top">↑ Back to top</a></p>
 </footer>
 
 <script>

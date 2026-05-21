@@ -7,13 +7,13 @@ permalink: /projects/cesar/
 <head>
 <meta charset="UTF-8">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="CESAR: Incentivizing Consistent, Effective and Scalable R1-style Reasoning in Audio LLMs — ICLR 2026">
+  <meta property="og:title" content="CESAR: Incentivizing Consistent, Effective and Scalable Reasoning in Audio LLMs via Reasoning Process Rewards — ICLR 2026">
   <meta property="og:description" content="First to identify test-time inverse scaling in Audio LLMs. CESAR uses process-level rewards (GRPO) to guide reasoning quality, achieving SOTA on MMAU — outperforming Gemini 2.5 Pro and GPT-4o Audio.">
   <meta property="og:image" content="https://www.jiajunfan.com/projects/cesar/images/teaser.png">
   <meta property="og:url" content="https://www.jiajunfan.com/projects/cesar/">
   <link rel="canonical" href="https://www.jiajunfan.com/projects/cesar/">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="CESAR: Incentivizing Consistent, Effective and Scalable R1-style Reasoning in Audio LLMs — ICLR 2026">
+  <meta name="twitter:title" content="CESAR: Incentivizing Consistent, Effective and Scalable Reasoning in Audio LLMs via Reasoning Process Rewards — ICLR 2026">
   <meta name="twitter:description" content="First to identify test-time inverse scaling in Audio LLMs. CESAR uses process-level rewards (GRPO) to guide reasoning quality, achieving SOTA on MMAU — outperforming Gemini 2.5 Pro and GPT-4o Audio.">
   <meta name="twitter:image" content="https://www.jiajunfan.com/projects/cesar/images/teaser.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -50,6 +50,7 @@ a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 .hero .short{font-size:1.05em;color:#4b5563;margin-bottom:22px;font-weight:500}
 .authors{font-size:0.9em;color:#4b5563;max-width:720px;margin:0 auto 10px;line-height:2}
 .authors .me{font-weight:800;color:#111}
+.co-author{color:inherit}
 .affil{font-size:0.82em;color:#6b7280;margin-bottom:30px;line-height:1.6}
 .btn-row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
 .btn{display:inline-flex;align-items:center;gap:7px;padding:10px 26px;border-radius:999px;font-size:0.88em;font-weight:700;transition:opacity .18s,transform .18s;letter-spacing:0.01em}
@@ -170,6 +171,65 @@ figcaption{font-size:0.83em;color:#6b7280;margin-top:12px;text-align:center;line
 footer{background:#f8f9fa;color:#6b7280;text-align:center;padding:28px 24px;font-size:.84em;border-top:1px solid #e5e7eb}
 footer a{color:var(--accent);font-weight:600}
 
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;scroll-behavior:auto !important}
+}
+
+/* ── Dark mode ── */
+body.dark-mode{background:#0d1117;color:#c9d1d9}
+body.dark-mode a{color:#58a6ff}
+body.dark-mode .site-masthead{background:#161b22;box-shadow:0 2px 12px rgba(0,0,0,.4)}
+body.dark-mode .masthead-title{color:#e6edf3 !important}
+body.dark-mode .masthead-nav a{color:#c9d1d9 !important}
+body.dark-mode .masthead-nav a:hover{color:#58a6ff !important;background:#21262d}
+body.dark-mode .masthead-nav a.nav-active{color:#58a6ff !important}
+body.dark-mode .hero{background:linear-gradient(to bottom,#161b22,#0d1117)}
+body.dark-mode .hero h1{color:#e6edf3}
+body.dark-mode .hero .short{color:#adbac7}
+body.dark-mode .authors{color:#adbac7}
+body.dark-mode .authors .me{color:#e6edf3}
+body.dark-mode .affil{color:#8b949e}
+body.dark-mode .btn-secondary{background:#161b22}
+body.dark-mode .btn-neutral{background:#21262d}
+body.dark-mode section:nth-child(even){background:#161b22}
+body.dark-mode section p{color:#adbac7}
+body.dark-mode h2,body.dark-mode h3,body.dark-mode h4{color:#e6edf3}
+body.dark-mode .tldr{background:#161b22;color:#c9d1d9}
+body.dark-mode .key-insight{background:#161b22}
+body.dark-mode .key-insight p{color:#c9d1d9}
+body.dark-mode .result-card,
+body.dark-mode .method-card,
+body.dark-mode .step{background:#161b22;border-color:#30363d}
+body.dark-mode .method-card p,
+body.dark-mode .step p,
+body.dark-mode .result-card .rdesc{color:#8b949e}
+body.dark-mode .compare-table th{background:#21262d;color:#c9d1d9;border-bottom-color:#30363d}
+body.dark-mode .compare-table td{color:#adbac7;border-bottom-color:#21262d}
+body.dark-mode figure img{border-color:#30363d}
+body.dark-mode figcaption{color:#8b949e}
+body.dark-mode .game-pill{background:#21262d;border-color:#30363d;color:#c9d1d9}
+body.dark-mode .records-wall{background:linear-gradient(135deg,#161b22,#1e293b)}
+body.dark-mode .timeline-desc,
+body.dark-mode .timeline-title{color:#c9d1d9}
+body.dark-mode .problem-card{background:#2d1518;border-color:#5c2626}
+body.dark-mode .solution-card,
+body.dark-mode .diff-box.new{background:#13261a;border-color:#265c33}
+body.dark-mode .diff-box.old{background:#2d1518;border-color:#5c2626}
+body.dark-mode .problem-card p,
+body.dark-mode .solution-card p,
+body.dark-mode .diff-box ul{color:#c9d1d9}
+body.dark-mode footer{background:#161b22;color:#8b949e;border-top-color:#30363d}
+body.dark-mode ul li{color:#adbac7}
+body.dark-mode figure figcaption,
+body.dark-mode figcaption{color:#8b949e !important}
+body.dark-mode .records-number,body.dark-mode .records-sub{color:#fff !important}
+body.dark-mode section p[style*="color:#555"],
+body.dark-mode section p[style*="color:#444"],
+body.dark-mode p[style*="color:#666"]{color:#adbac7 !important}
+body.dark-mode div[style*="color:#555"]{color:#adbac7 !important}
+
+
 /* ── Responsive ── */
 @media(max-width:640px){
   .fig-grid-2{grid-template-columns:1fr}
@@ -223,7 +283,7 @@ footer a{color:var(--accent);font-weight:600}
   "citationCount": 2
 }</script>
 </head>
-<body>
+<body id="top">
 <script>if(localStorage.getItem('darkMode')==='true') document.body.classList.add('dark-mode');</script>
 
 <header class="site-masthead">
@@ -245,14 +305,14 @@ footer a{color:var(--accent);font-weight:600}
   <p class="short">CESAR: <strong>C</strong>onsistent, <strong>E</strong>ffective, and <strong>S</strong>calable <strong>A</strong>udio <strong>R</strong>easoners</p>
   <div class="authors">
     <a href="/" class="me">Jiajun Fan</a>&thinsp;<sup>1,2</sup>,
-    <a href="#" style="color:#2b6cb0">Roger Ren</a>&thinsp;<sup>2</sup>,
-    <a href="#" style="color:#2b6cb0">Jingyuan Li</a>&thinsp;<sup>2</sup>,
-    <a href="#" style="color:#2b6cb0">Rahul Pandey</a>&thinsp;<sup>2</sup>,
-    <a href="#" style="color:#2b6cb0">Prashanth G. Shivakumar</a>&thinsp;<sup>2</sup>,
-    <a href="#" style="color:#2b6cb0">Ivan Bulyko</a>&thinsp;<sup>2</sup>,
-    <a href="#" style="color:#2b6cb0">Ankur Gandhe</a>&thinsp;<sup>2</sup>,
+    <span class="co-author">Roger Ren</span>&thinsp;<sup>2</sup>,
+    <span class="co-author">Jingyuan Li</span>&thinsp;<sup>2</sup>,
+    <span class="co-author">Rahul Pandey</span>&thinsp;<sup>2</sup>,
+    <span class="co-author">Prashanth G. Shivakumar</span>&thinsp;<sup>2</sup>,
+    <span class="co-author">Ivan Bulyko</span>&thinsp;<sup>2</sup>,
+    <span class="co-author">Ankur Gandhe</span>&thinsp;<sup>2</sup>,
     <a href="https://geliu.web.illinois.edu/" style="color:#2b6cb0">Ge Liu</a>&thinsp;<sup>1</sup>,
-    <a href="#" style="color:#2b6cb0">Yile Gu</a>&thinsp;<sup>2</sup>
+    <span class="co-author">Yile Gu</span>&thinsp;<sup>2</sup>
   </div>
   <div class="affil"><sup>1</sup>University of Illinois Urbana-Champaign &nbsp;&nbsp; <sup>2</sup>Amazon</div>
   <div class="btn-row">
@@ -518,7 +578,7 @@ footer a{color:var(--accent);font-weight:600}
 </div>
 
 <footer>
-  <p>CESAR · ICLR 2026 &nbsp;|&nbsp; <a href="/">Jiajun Fan</a> · UIUC &amp; Amazon &nbsp;|&nbsp; <a href="https://openreview.net/forum?id=DUr48hxO2h">Paper</a> &nbsp;|&nbsp; <a href="/publications/">All Publications</a> &nbsp;|&nbsp; <a href="#">↑ Back to top</a></p>
+  <p>CESAR · ICLR 2026 &nbsp;|&nbsp; <a href="/">Jiajun Fan</a> · UIUC &amp; Amazon &nbsp;|&nbsp; <a href="https://openreview.net/forum?id=DUr48hxO2h">Paper</a> &nbsp;|&nbsp; <a href="/publications/">All Publications</a> &nbsp;|&nbsp; <a href="#top">↑ Back to top</a></p>
 </footer>
 
 
