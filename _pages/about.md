@@ -457,13 +457,13 @@ body.dark-mode .featured-card,
 body.dark-mode .research-card,
 body.dark-mode .stat-card {
   background: #161b22 !important; border-color: #30363d !important; color: #c9d1d9 !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
 }
 body.dark-mode .featured-card:hover,
 body.dark-mode .research-card:hover,
 body.dark-mode .stat-card:hover {
   border-color: #388bfd !important; box-shadow: 0 6px 18px rgba(56,139,253,.15) !important;
 }
-body.dark-mode .stat-card { box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important; }
 body.dark-mode .featured-img { border-bottom-color: #30363d !important; }
 
 /* ── Dark mode: Section Headers ── */

@@ -1,4 +1,5 @@
 ---
+layout: single
 permalink: /contact/
 title: "Contact"
 excerpt: "Contact Jiajun Fan"
