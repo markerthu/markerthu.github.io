@@ -769,10 +769,7 @@ body.dark-mode .ra-msgs::-webkit-scrollbar-track { background: #0d1117; }
 
 
 
-/* ── Thumbnail placeholder (fade handled by img[loading="lazy"] rule above) ── */
-.pub-thumb { width: 100%; aspect-ratio: 16/9; min-height: 80px; border-radius: 6px;
-  background: #eef0f3; }
-body.dark-mode .pub-thumb { background: #161b22; }
+/* ── Thumbnail placeholder (no longer used — class removed from HTML) ── */
 
 /* ── ① Citation count badge ── */
 .cite-badge {
