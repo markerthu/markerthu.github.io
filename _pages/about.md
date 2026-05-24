@@ -735,6 +735,11 @@ img[loading="lazy"].loaded {
   opacity: 1;
 }
 
+/* ── Hero pills: allow wrap on very narrow viewports to prevent overflow ── */
+@media (max-width: 380px) {
+  .hero-pill { white-space: normal; font-size: 0.74em; }
+}
+
 /* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto !important; }

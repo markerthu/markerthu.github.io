@@ -46,7 +46,7 @@ excerpt: "Full list of publications by Jiajun Fan — ICLR, NeurIPS, ICML, TPAMI
 .pub-bib-btn:hover { border-color: #2563eb; color: #2563eb; }
 .pub-bib-block {
   display: none; position: relative; margin-top: 6px;
-  background: #1e293b; border-radius: 8px; padding: 14px 16px 10px;
+  background: #1e293b; border-radius: 10px; padding: 18px 18px 12px;
 }
 .pub-bib-block.open { display: block; }
 .pub-bib-block pre {
@@ -80,7 +80,7 @@ body.dark-mode .pub-bib-btn:hover { border-color: #58a6ff !important; color: #58
   <span style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:20px;padding:3px 12px;font-size:0.83em;font-weight:700;color:#0369a1;">📊 {{ site.data.citations._total | default: 334 }}+ Citations</span>
   <span style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:20px;padding:3px 12px;font-size:0.83em;font-weight:700;color:#065f46;">🎯 h-index 9</span>
   <span style="background:#fef3c7;border:1px solid #fde68a;border-radius:20px;padding:3px 12px;font-size:0.83em;font-weight:700;color:#92400e;">🏅 ICLR 2023 Oral</span>
-  <span style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:20px;padding:3px 12px;font-size:0.83em;font-weight:700;color:#065f46;">🎯 ICML 2026 Accept</span>
+  <span style="background:#fce7f3;border:1px solid #fbcfe8;border-radius:20px;padding:3px 12px;font-size:0.83em;font-weight:700;color:#9d174d;">✅ ICML 2026 Accept</span>
 </div>
 
 > Publications are listed in reverse chronological order. **\*** denotes first authorship.
