@@ -411,6 +411,7 @@ body.dark-mode div[style*="color:#555"]{color:#adbac7 !important}
     </div>
   </div>
 
+  <div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
   <table class="compare-table">
     <thead><tr><th>Model</th><th>MMAU Test-mini</th><th>Reasoning Scaling</th></tr></thead>
     <tbody>
@@ -420,6 +421,7 @@ body.dark-mode div[style*="color:#555"]{color:#adbac7 !important}
       <tr class="highlight"><td><strong>CESAR (Ours)</strong></td><td><strong>SOTA <span class="badge-win">Best</span></strong></td><td><strong>✅ Positive scaling</strong></td></tr>
     </tbody>
   </table>
+  </div>
 </section>
 
 <!-- Framework with Scale -->
@@ -517,16 +519,13 @@ body.dark-mode div[style*="color:#555"]{color:#adbac7 !important}
       </figcaption>
     </figure>
   </div>
-  <div class="fig-grid-2">
-    <figure style="margin:0">
-      <img loading="lazy" src="images/slope_qwen.png" alt="Qwen baseline slope"
-           style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
-      <figcaption style="text-align:center;font-size:0.78em;color:#666;margin-top:8px">
-        <strong>Figure 11.</strong> Qwen2.5-Omni baseline shows flat/negative scaling — without process rewards, reasoning doesn't scale.
-      </figcaption>
-    </figure>
-    <figure style="margin:0"></figure>
-  </div>
+  <figure style="margin:0 auto;max-width:560px">
+    <img loading="lazy" src="images/slope_qwen.png" alt="Qwen baseline slope"
+         style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
+    <figcaption style="text-align:center;font-size:0.82em;color:#666;margin-top:8px;line-height:1.6">
+      <strong>Figure 11.</strong> Qwen2.5-Omni baseline shows flat/negative scaling — without process rewards, reasoning doesn't scale.
+    </figcaption>
+  </figure>
 </section>
 
 <!-- Journey -->

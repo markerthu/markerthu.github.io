@@ -223,7 +223,8 @@ body.dark-mode .pub-abst-btn:hover { background: #1e40af; }
   flex-wrap: wrap;
   gap: 7px;
   justify-content: center;
-  margin-bottom: 20px;
+  max-width: 560px;
+  margin: 0 auto 20px;
 }
 .hero-pill {
   background: rgba(255,255,255,0.10);
@@ -235,6 +236,7 @@ body.dark-mode .pub-abst-btn:hover { background: #1e40af; }
   font-weight: 600;
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
+  white-space: nowrap;
 }
 .hero-links {
   display: flex;
@@ -874,8 +876,8 @@ body.dark-mode .hero-pill { background: rgba(255,255,255,0.12) !important; color
   <a href="#research"     data-qn="research">🔬 Research</a>
   <a href="#impact"       data-qn="impact">⚡ Impact</a>
   <a href="#vision"       data-qn="vision">💡 Vision</a>
-  <a href="#deadlines"    data-qn="deadlines">📅 Deadlines</a>
   <a href="#awards"       data-qn="awards">🏅 Awards</a>
+  <a href="#deadlines"    data-qn="deadlines">📅 Deadlines</a>
   <a href="/year-archive/">✍️ Blog</a>
   <a href="/cv/">📋 CV</a>
   <a href="#contact">📬 Contact</a>
@@ -887,7 +889,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 </p>
 
 <div class="internship-banner internship-banner-pulse">
-🎓 <strong>Seeking research internship — Fall 2026 / 2027.</strong> RL · Generative Models · Reasoning LLMs
+🎓 <strong>Seeking research internship — Fall 2026 / 2027.</strong> RL · Generative Models · Reasoning LLMs · Agentic RL
 &nbsp;<a href="/cv/">[CV]</a>
 &nbsp;<a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">[Scholar]</a>
 &nbsp;<a href="mailto:jiajunf3@illinois.edu">[Email]</a>
@@ -1669,6 +1671,7 @@ Happy to discuss research, internships, or collaborations. Best reached by email
     'Reinforcement Learning · Post-Training',
     'Self-Improvement for Generative Models',
     'Multimodal & Audio Reasoning',
+    'Agentic RL',
     'CS Ph.D. Student @ UIUC'
   ];
   /* Respect prefers-reduced-motion: show static text, skip the animation loop */
