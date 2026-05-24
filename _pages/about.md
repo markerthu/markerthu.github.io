@@ -853,6 +853,7 @@ body.dark-mode .hero-pill { background: rgba(255,255,255,0.12) !important; color
     <span class="hero-pill">🌊 RL Post-Training for Generative Models</span>
     <span class="hero-pill">🧠 Multimodal Reasoning LLMs</span>
     <span class="hero-pill">🎮 Superhuman Deep RL</span>
+    <span class="hero-pill">🤖 Agentic RL</span>
   </div>
   <div class="hero-links">
     <a class="hero-link" href="/cv/">📋 CV</a>
