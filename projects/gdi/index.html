@@ -238,13 +238,17 @@ body.dark-mode div[style*="color:#555"]{color:#adbac7 !important}
 body.dark-mode .journey-step{background:#161b22;border-color:var(--accent)}
 body.dark-mode .journey-title{color:#e6edf3}
 body.dark-mode .journey-desc{color:#8b949e}
+/* Key Results stat cards: inline styles need class-level override */
+body.dark-mode .kr-stat-card{background:#1f1510 !important;border-color:#7c3800 !important}
+body.dark-mode .kr-stat-num{color:#fb923c !important}
+body.dark-mode .kr-stat-label{color:#fdba74 !important}
 
 /* ── Responsive ── */
 @media(max-width:640px){
   .fig-grid-2{grid-template-columns:1fr}
   .problem-grid{grid-template-columns:1fr}
   .diff-boxes{grid-template-columns:1fr}
-  .method-grid{grid-template-columns:1fr 1fr}
+  .method-grid{grid-template-columns:1fr}
   .results-grid{grid-template-columns:1fr 1fr}
 }
 @media print {
@@ -344,21 +348,21 @@ body.dark-mode .journey-desc{color:#8b949e}
 <section>
   <h2>📊 Key Results</h2>
 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:16px 0 24px;">
-  <div style="background:#fff7ed;border:1.5px solid #fed7aa;border-radius:10px;padding:14px;text-align:center;">
-    <div style="font-size:1.9em;font-weight:900;color:#ea580c;">22</div>
-    <div style="font-size:0.78em;color:#7c2d12;font-weight:700;">Atari World Records</div>
+  <div class="kr-stat-card" style="background:#fff7ed;border:1.5px solid #fed7aa;border-radius:10px;padding:14px;text-align:center;">
+    <div class="kr-stat-num" style="font-size:1.9em;font-weight:900;color:#ea580c;">22</div>
+    <div class="kr-stat-label" style="font-size:0.78em;color:#7c2d12;font-weight:700;">Atari World Records</div>
   </div>
-  <div style="background:#fff7ed;border:1.5px solid #fed7aa;border-radius:10px;padding:14px;text-align:center;">
-    <div style="font-size:1.9em;font-weight:900;color:#ea580c;">9,620%</div>
-    <div style="font-size:0.78em;color:#7c2d12;font-weight:700;">Mean Human Score</div>
+  <div class="kr-stat-card" style="background:#fff7ed;border:1.5px solid #fed7aa;border-radius:10px;padding:14px;text-align:center;">
+    <div class="kr-stat-num" style="font-size:1.9em;font-weight:900;color:#ea580c;">9,620%</div>
+    <div class="kr-stat-label" style="font-size:0.78em;color:#7c2d12;font-weight:700;">Mean Human Score</div>
   </div>
-  <div style="background:#fff7ed;border:1.5px solid #fed7aa;border-radius:10px;padding:14px;text-align:center;">
-    <div style="font-size:1.9em;font-weight:900;color:#ea580c;">500×</div>
-    <div style="font-size:0.78em;color:#7c2d12;font-weight:700;">More Sample-Efficient<br>than Agent57</div>
+  <div class="kr-stat-card" style="background:#fff7ed;border:1.5px solid #fed7aa;border-radius:10px;padding:14px;text-align:center;">
+    <div class="kr-stat-num" style="font-size:1.9em;font-weight:900;color:#ea580c;">500×</div>
+    <div class="kr-stat-label" style="font-size:0.78em;color:#7c2d12;font-weight:700;">More Sample-Efficient<br>than Agent57</div>
   </div>
-  <div style="background:#fff7ed;border:1.5px solid #fed7aa;border-radius:10px;padding:14px;text-align:center;">
-    <div style="font-size:1.9em;font-weight:900;color:#ea580c;">200M</div>
-    <div style="font-size:0.78em;color:#7c2d12;font-weight:700;">Training Frames<br>(Agent57 uses 78B)</div>
+  <div class="kr-stat-card" style="background:#fff7ed;border:1.5px solid #fed7aa;border-radius:10px;padding:14px;text-align:center;">
+    <div class="kr-stat-num" style="font-size:1.9em;font-weight:900;color:#ea580c;">200M</div>
+    <div class="kr-stat-label" style="font-size:0.78em;color:#7c2d12;font-weight:700;">Training Frames<br>(Agent57 uses 78B)</div>
   </div>
 </div>
 

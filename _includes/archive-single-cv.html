@@ -39,7 +39,7 @@
             }
             var btn=this;btn.textContent='✓ Copied';setTimeout(function(){btn.textContent='Copy';},2000);
           ">Copy</button>
-          <pre>{{ post.bibtex }}</pre>
+          <pre>{{ post.bibtex | escape }}</pre>
         </div>
       </div>
       {% endif %}

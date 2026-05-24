@@ -57,7 +57,8 @@ excerpt: "Full list of publications by Jiajun Fan — ICLR, NeurIPS, ICML, TPAMI
 .pub-bib-copy {
   position: absolute; top: 8px; right: 10px;
   background: #334155; border: none; border-radius: 5px;
-  color: #94a3b8; font-size: 0.72em; font-weight: 600;
+  /* #adb5bd on #334155 = 5.14:1 WCAG AA pass (previously #94a3b8 = 4.04:1, fail) */
+  color: #adb5bd; font-size: 0.72em; font-weight: 600;
   padding: 3px 10px; cursor: pointer; transition: background .15s, color .15s;
 }
 .pub-bib-copy:hover { background: #2563eb; color: #fff; }
@@ -66,10 +67,20 @@ body.dark-mode .pub-cv-entry { background: #161b22 !important; border-color: #30
 body.dark-mode .pub-cv-title a { color: #e6edf3 !important; }
 body.dark-mode .pub-cv-authors { color: #8b949e !important; }
 body.dark-mode .pub-cv-venue { background: #1e3a5f !important; color: #7dd3fc !important; }
-body.dark-mode .scholar-link { background: #388bfd !important; }
+/* #1565c0 dark: white on #1565c0 = 5.75:1 WCAG AA pass */
+body.dark-mode .scholar-link { background: #1565c0 !important; }
 body.dark-mode .project-badge { background: #1e3a5f !important; color: #7dd3fc !important; }
 body.dark-mode .pub-bib-btn { border-color: #30363d !important; color: #8b949e !important; }
 body.dark-mode .pub-bib-btn:hover { border-color: #58a6ff !important; color: #58a6ff !important; }
+/* Stats badges */
+.stat-badge-cite { background:#f0f9ff;border:1px solid #bae6fd;border-radius:20px;padding:3px 12px;font-size:0.83em;font-weight:700;color:#0369a1; }
+.stat-badge-h    { background:#f0fdf4;border:1px solid #bbf7d0;border-radius:20px;padding:3px 12px;font-size:0.83em;font-weight:700;color:#065f46; }
+.stat-badge-oral { background:#fef3c7;border:1px solid #fde68a;border-radius:20px;padding:3px 12px;font-size:0.83em;font-weight:700;color:#92400e; }
+.stat-badge-icml { background:#fce7f3;border:1px solid #fbcfe8;border-radius:20px;padding:3px 12px;font-size:0.83em;font-weight:700;color:#9d174d; }
+body.dark-mode .stat-badge-cite { background:#0c2044 !important; border-color:#1e3a5f !important; color:#7dd3fc !important; }
+body.dark-mode .stat-badge-h    { background:#052e16 !important; border-color:#14532d !important; color:#86efac !important; }
+body.dark-mode .stat-badge-oral { background:#2d1a00 !important; border-color:#6b3a00 !important; color:#fcd34d !important; }
+body.dark-mode .stat-badge-icml { background:#2d0a1a !important; border-color:#7c1a3a !important; color:#f9a8d4 !important; }
 </style>
 
 <a class="scholar-link" href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">
@@ -77,10 +88,10 @@ body.dark-mode .pub-bib-btn:hover { border-color: #58a6ff !important; color: #58
 </a>
 
 <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:1.2em;">
-  <span style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:20px;padding:3px 12px;font-size:0.83em;font-weight:700;color:#0369a1;">📊 {{ site.data.citations._total | default: 334 }}+ Citations</span>
-  <span style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:20px;padding:3px 12px;font-size:0.83em;font-weight:700;color:#065f46;">🎯 h-index 9</span>
-  <span style="background:#fef3c7;border:1px solid #fde68a;border-radius:20px;padding:3px 12px;font-size:0.83em;font-weight:700;color:#92400e;">🏅 ICLR 2023 Oral</span>
-  <span style="background:#fce7f3;border:1px solid #fbcfe8;border-radius:20px;padding:3px 12px;font-size:0.83em;font-weight:700;color:#9d174d;">✅ ICML 2026 Accept</span>
+  <span class="stat-badge-cite">📊 {{ site.data.citations._total | default: 334 }}+ Citations</span>
+  <span class="stat-badge-h">🎯 h-index 9</span>
+  <span class="stat-badge-oral">🏅 ICLR 2023 Oral</span>
+  <span class="stat-badge-icml">✅ ICML 2026 Accept</span>
 </div>
 
 > Publications are listed in reverse chronological order. **\*** denotes first authorship.

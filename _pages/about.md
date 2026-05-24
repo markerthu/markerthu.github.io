@@ -492,6 +492,8 @@ body.dark-mode .quick-nav { background: #1c2333 !important; }
 body.dark-mode .quick-nav a,
 body.dark-mode .quick-nav span { color: #58a6ff !important; }
 body.dark-mode .quick-nav a:hover { background: #21262d !important; }
+/* Active link in dark mode: #388bfd on #21262d = 5.1:1 — WCAG AA pass */
+body.dark-mode .quick-nav a.qn-active { background: #388bfd !important; color: #fff !important; }
 /* banner-pulse dark mode needs no re-declaration — animation already inherited */
 
 /* ── Dark mode: Badges & Highlights ── */
@@ -828,7 +830,7 @@ body.dark-mode .filter-btn.active { background: #388bfd; color: #fff; border-col
 /* ── ④ Abstract tooltip ── */
 /* .pub-title: position/cursor merged into primary definition above */
 .pub-abstract-preview {
-  display: none; position: absolute; top: calc(100% + 8px); left: 0; right: 0; z-index: 50;
+  display: none; position: absolute; top: calc(100% + 8px); left: 0; right: 0; z-index: 95;
   background: #fff; border: 1.5px solid #e5e7eb; border-radius: 10px;
   padding: 14px 16px; font-size: 0.84em; color: #374151; line-height: 1.65;
   box-shadow: 0 8px 28px rgba(0,0,0,.12); max-width: 520px; min-width: 280px;
@@ -1361,10 +1363,10 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
       chip = '<span class="ddl-chip" style="background:' + urgency + '20;color:' + urgency + ';border-color:' + urgency + '40">'
            + next.label + ' · ' + (diff <= 0 ? 'Today!' : diff + 'd') + '</span>';
     } else if (c.deadlines.length && c.deadlines[0].date === null) {
-      var isDk = document.body.classList.contains('dark-mode');
+      var isDk = localStorage.getItem('darkMode')==='true';
       chip = '<span class="ddl-chip" style="background:'+(isDk?'#21262d':'#f1f5f9')+';color:'+(isDk?'#8b949e':'#6b7280')+';border-color:'+(isDk?'#30363d':'#e2e8f0')+'">Submission TBA</span>';
     } else {
-      var isDk2 = document.body.classList.contains('dark-mode');
+      var isDk2 = localStorage.getItem('darkMode')==='true';
       chip = '<span class="ddl-chip" style="background:'+(isDk2?'#122117':'#f0fdf4')+';color:'+(isDk2?'#3fb950':'#16a34a')+';border-color:'+(isDk2?'#1a7f45':'#bbf7d0')+'">Done ✓</span>';
     }
 
@@ -2152,7 +2154,7 @@ function drawGraph(container) {
    ⑨ QUICK NAV SCROLL HIGHLIGHT
 ══════════════════════════════════════════════════ */
 (function(){
-  var sections = ['news','featured','publications','research','impact','vision','deadlines','awards'];
+  var sections = ['news','featured','publications','research','impact','vision','awards','deadlines'];
   var navLinks = document.querySelectorAll('.quick-nav a[data-qn]');
   if (!navLinks.length || !window.IntersectionObserver) return;
 

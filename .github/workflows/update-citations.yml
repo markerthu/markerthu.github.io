@@ -45,6 +45,13 @@ jobs:
             "Generalized Data Distribution Iteration": "GDI",   # GDI
             "Variational Supervised Contrastive": "VarCon",     # VarCon
             "Sp-vla":                   "SP-VLA",       # SP-VLA
+            "ProteinZero":              "ProteinZero",  # ProteinZero
+            "Optimal Transport for Treatment Effect": "OT-Treat", # OT-Treat
+            "Entire Space Counterfactual": "ES-CF",     # Entire Space CF
+            "Entropy Regularization Free": "ERF",       # Entropy Reg Free
+            "Critic PI2":               "CriticPI2",    # Critic PI2
+            "Casa":                     "CASA",         # CASA (both versions)
+            "Efficient Design":         "EffDesign",    # Efficient Design NeurIPS24
           }
 
           # Each paper block: title cell followed by citation count cell

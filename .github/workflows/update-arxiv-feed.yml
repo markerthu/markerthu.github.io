@@ -24,11 +24,11 @@ jobs:
           # Research topics: RL post-training, self-improvement, reasoning, multimodal
           QUERIES = [
             'ti:"rl post-training" OR ti:"reinforcement learning post-training"',
-            'ti:"self-improving" OR ti:"self-evolution" OR ti:"self-play" AND cat:cs.LG',
+            '(ti:"self-improving" OR ti:"self-evolution" OR ti:"self-play") AND cat:cs.LG',
             'ti:"process reward" OR ti:"reasoning reward" OR ti:"test-time compute scaling"',
             'ti:"flow matching" AND (ti:"fine-tuning" OR ti:"rlhf" OR ti:"reward")',
             'ti:"audio llm" OR ti:"audio reasoning" OR ti:"speech reasoning"',
-            'ti:"multimodal reasoning" OR ti:"vision language" AND ti:"reinforcement"',
+            '(ti:"multimodal reasoning" OR ti:"vision language") AND ti:"reinforcement"',
           ]
 
           seen = set()
