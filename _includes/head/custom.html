@@ -407,6 +407,13 @@
   }
 
   /* ─────────────── Dark mode ─────────────── */
+  /* html needs its own !important rule here — the blog-post `html { background: #eef1f1 !important }` above
+     would otherwise win over the inline style set by the anti-flash script.
+     html.dark-mode-pending covers page-load; html:has(body.dark-mode) covers runtime toggle. */
+  html.dark-mode-pending,
+  html:has(body.dark-mode) {
+    background: #0d1117 !important;
+  }
   body.dark-mode {
     background: #0d1117 !important;
   }

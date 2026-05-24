@@ -114,7 +114,6 @@ body.dark-mode .qn-label { color: #58a6ff; }
   .pub-left { flex-direction: row; gap: 8px; }
   .stats-row { gap: 8px; }
   .stat-card { min-width: calc(50% - 4px); flex: 1 1 calc(50% - 4px); }
-  .pub-filter-bar { padding: 10px 12px; }
 }
 .pb { /* pub badge */
   display: inline-block; padding: 3px 8px; border-radius: 5px;
@@ -214,7 +213,7 @@ body.dark-mode .pub-abst-btn:hover { background: #1e40af; }
 }
 .hero-subtitle {
   font-size: 0.96em;
-  color: #90caf9;
+  color: #f0f7ff;
   margin-bottom: 18px;
   font-weight: 500;
 }
@@ -521,7 +520,7 @@ body.dark-mode .pub-link.pl-arxiv  { background: #3d2410 !important; color: #ffb
 .bib-actions { display: flex; gap: 8px; }
 .bib-copy { background: #2563eb; color: #fff; border: none; padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 0.83em; font-weight: 600; transition: background .15s; }
 .bib-copy:hover { background: #1d4ed8; }
-.bib-close { background: #f1f5f9; color: #64748b; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.83em; font-weight: 600; }
+.bib-close { background: #f1f5f9; color: #4a5568; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.83em; font-weight: 600; }
 .bib-close:hover { background: #e2e8f0; }
 body.dark-mode .pl-cite { background: #0f3d2e !important; color: #3fb950 !important; border-color: #1a7f45 !important; }
 body.dark-mode .bib-popup { background: #161b22 !important; border-color: #30363d !important; }
@@ -577,7 +576,7 @@ body.dark-mode button:focus-visible,
 body.dark-mode input:focus-visible { outline-color: #58a6ff; }
 
 /* ── Placeholder text ── */
-.filter-search::placeholder, .ra-input::placeholder { color: #9aa0a6; }
+.filter-search::placeholder, .ra-input::placeholder { color: #767676; }
 body.dark-mode .filter-search::placeholder,
 body.dark-mode .ra-input::placeholder { color: #8b949e; }
 
@@ -800,7 +799,11 @@ body.dark-mode .cite-badge { background: #0c2340; color: #7dd3fc; border-color: 
   margin-bottom: 18px; padding: 14px 16px;
   background: #f8faff; border: 1px solid #e5e7eb; border-radius: 12px;
 
-  overflow-x: auto; -webkit-overflow-scrolling: touch;}
+  overflow-x: auto; -webkit-overflow-scrolling: touch;
+}
+@media(max-width:560px){
+  .pub-filter-bar { padding: 10px 12px; }
+}
 .filter-search {
   flex: 1; min-width: 180px; padding: 7px 14px;
   border: 1.5px solid #e5e7eb; border-radius: 8px;
