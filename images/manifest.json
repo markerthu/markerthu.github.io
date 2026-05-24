@@ -1,5 +1,14 @@
+---
+layout: null
+---
 {
-	"name": "Minimal Mistakes",
+	"name": "{{ site.title | escape }}",
+	"short_name": "{{ site.title | truncate: 12, '' | escape }}",
+	"description": "{{ site.description | escape }}",
+	"start_url": "/",
+	"display": "standalone",
+	"background_color": "#0d1117",
+	"theme_color": "#1565c0",
 	"icons": [
 		{
 			"src": "\/images\/android-chrome-36x36.png?v=M44lzPylqQ",

@@ -36,6 +36,31 @@ excerpt: "Full list of publications by Jiajun Fan — ICLR, NeurIPS, ICML, TPAMI
 /* Project page badge */
 .project-badge { margin-left:6px; font-size:0.78em; font-weight:700; color:#1565c0; background:#dbeafe; border-radius:10px; padding:1px 8px; white-space:nowrap; text-decoration:none !important; display:inline-block; }
 .project-badge:hover { background:#bfdbfe; }
+/* BibTeX toggle block */
+.pub-bib-wrap { margin-top: 6px; }
+.pub-bib-btn {
+  background: none; border: 1px solid #d1d5db; border-radius: 6px;
+  color: #6b7280; font-size: 0.75em; font-weight: 600; padding: 2px 8px;
+  cursor: pointer; transition: border-color .15s, color .15s;
+}
+.pub-bib-btn:hover { border-color: #2563eb; color: #2563eb; }
+.pub-bib-block {
+  display: none; position: relative; margin-top: 6px;
+  background: #1e293b; border-radius: 8px; padding: 14px 16px 10px;
+}
+.pub-bib-block.open { display: block; }
+.pub-bib-block pre {
+  margin: 0; font-size: 0.78em; line-height: 1.65;
+  color: #e2e8f0; font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  white-space: pre; overflow-x: auto;
+}
+.pub-bib-copy {
+  position: absolute; top: 8px; right: 10px;
+  background: #334155; border: none; border-radius: 5px;
+  color: #94a3b8; font-size: 0.72em; font-weight: 600;
+  padding: 3px 10px; cursor: pointer; transition: background .15s, color .15s;
+}
+.pub-bib-copy:hover { background: #2563eb; color: #fff; }
 /* Dark mode overrides */
 body.dark-mode .pub-cv-entry { background: #161b22 !important; border-color: #30363d !important; }
 body.dark-mode .pub-cv-title a { color: #e6edf3 !important; }
@@ -43,6 +68,8 @@ body.dark-mode .pub-cv-authors { color: #8b949e !important; }
 body.dark-mode .pub-cv-venue { background: #1e3a5f !important; color: #7dd3fc !important; }
 body.dark-mode .scholar-link { background: #388bfd !important; }
 body.dark-mode .project-badge { background: #1e3a5f !important; color: #7dd3fc !important; }
+body.dark-mode .pub-bib-btn { border-color: #30363d !important; color: #8b949e !important; }
+body.dark-mode .pub-bib-btn:hover { border-color: #58a6ff !important; color: #58a6ff !important; }
 </style>
 
 <a class="scholar-link" href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">

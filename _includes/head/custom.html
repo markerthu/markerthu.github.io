@@ -241,10 +241,10 @@
   body.dark-mode .notfound-btn.secondary { background: #21262d !important; color: #58a6ff !important; }
 </style>
 <script>
-  /* Apply dark mode on page load (before paint) to prevent flash */
-  if(localStorage.getItem('darkMode')==='true') document.documentElement.classList.add('dark-mode-pending');
+  /* Apply dark-mode class to body at DOMContentLoaded
+     (the background flash prevention is handled earlier in head.html) */
   document.addEventListener('DOMContentLoaded', function(){
-    if(localStorage.getItem('darkMode')==='true') document.body.classList.add('dark-mode');
+    try{ if(localStorage.getItem('darkMode')==='true') document.body.classList.add('dark-mode'); }catch(e){}
   });
 </script>
 
