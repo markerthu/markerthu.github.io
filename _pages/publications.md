@@ -98,6 +98,6 @@ body.dark-mode .stat-badge-icml { background:#2d0a1a !important; border-color:#7
 
 {% include base_path %}
 
-<ul style="padding:0; margin:0;">{% for post in site.publications reversed %}
+<div style="padding:0; margin:0;">{% for post in site.publications reversed %}
   {% include archive-single-cv.html %}
-{% endfor %}</ul>
+{% endfor %}</div>

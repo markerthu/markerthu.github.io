@@ -1083,8 +1083,8 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
   <div class="pub-right">
     <div class="pub-title"><a href="https://openreview.net/forum?id=uOOlHOq500" target="_blank" rel="noopener noreferrer">Variational Supervised Contrastive Learning</a>
       <button class="pub-abst-btn" aria-expanded="false" aria-label="Toggle abstract">▾ Abstract</button>
-      <div class="pub-hl">📊 SOTA 79.36% Top-1 on ImageNet-1K with ResNet-50</div>
       <div class="pub-abstract-preview">VarCon reformulates supervised contrastive learning as variational inference, achieving SOTA 79.36% Top-1 accuracy on ImageNet-1K with ResNet-50.</div></div>
+    <div class="pub-hl">📊 SOTA 79.36% Top-1 on ImageNet-1K with ResNet-50</div>
     <div class="pub-authors">Z. Wang, <strong>J. Fan</strong>, T. Nguyen, H. Ji, G. Liu</div>
     <div class="pub-desc">VarCon: supervised contrastive learning as variational inference — posterior-weighted ELBO replaces pairwise comparisons.</div>
   </div>
@@ -1097,9 +1097,9 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
     <div class="pub-title">
       <a href="https://openreview.net/forum?id=2IoFFexvuw" target="_blank" rel="noopener noreferrer">Online Reward-Weighted Fine-Tuning of Flow Matching with Wasserstein Regularization</a>
       <a class="pub-project" href="/projects/orw-cfm-w2/">Project Page</a>
-      <div class="pub-hl">🥇 First online RLHF for flow matching · Collapse-free W2 regularization</div>
-    <button class="pub-abst-btn" aria-expanded="false" aria-label="Toggle abstract">▾ Abstract</button>
-    <div class="pub-abstract-preview">ORW-CFM-W2 is the first online RLHF method for flow matching — no human data, no likelihood estimation. Wasserstein regularization maintains generation diversity.</div></div>
+      <button class="pub-abst-btn" aria-expanded="false" aria-label="Toggle abstract">▾ Abstract</button>
+      <div class="pub-abstract-preview">ORW-CFM-W2 is the first online RLHF method for flow matching — no human data, no likelihood estimation. Wasserstein regularization maintains generation diversity.</div></div>
+    <div class="pub-hl">🥇 First online RLHF for flow matching · Collapse-free W2 regularization</div>
     <div class="pub-authors"><strong>J. Fan*</strong>, S. Shen, C. Cheng, Y. Chen, C. Liang, G. Liu</div>
     <div class="pub-desc">ORW-CFM-W2: first online RLHF for flow matching — no human data, no likelihood, no collapse. W2 regularization keeps generation diverse.</div>
   </div>
@@ -1113,9 +1113,9 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
     <div class="pub-title">
       <a href="https://arxiv.org/abs/2510.18072" target="_blank" rel="noopener noreferrer">Fine-tuning Flow Matching Generative Models with Intermediate Feedback</a>
       <a class="pub-project" href="/projects/ac-flow/">Project Page</a>
-      <div class="pub-hl">⚙️ Actor-critic with step-level reward · Stable SD3 fine-tuning without collapse</div>
-    <button class="pub-abst-btn" aria-expanded="false" aria-label="Toggle abstract">▾ Abstract</button>
-    <div class="pub-abstract-preview">AC-Flow introduces actor-critic with intermediate feedback for flow matching — reward shaping + dual-stability mechanism + Wasserstein regularization enables robust SD3 fine-tuning without collapse.</div></div>
+      <button class="pub-abst-btn" aria-expanded="false" aria-label="Toggle abstract">▾ Abstract</button>
+      <div class="pub-abstract-preview">AC-Flow introduces actor-critic with intermediate feedback for flow matching — reward shaping + dual-stability mechanism + Wasserstein regularization enables robust SD3 fine-tuning without collapse.</div></div>
+    <div class="pub-hl">⚙️ Actor-critic with step-level reward · Stable SD3 fine-tuning without collapse</div>
     <div class="pub-authors"><strong>J. Fan*</strong>, C. Cheng, S. Shen, X. Zhou, G. Liu &nbsp;·&nbsp; <em>Under Review</em></div>
     <div class="pub-desc">AC-Flow: actor-critic with intermediate feedback for flow matching — reward shaping + dual-stability + Wasserstein regularization. Robust fine-tuning on SD3 without collapse.</div>
   </div>
@@ -1128,8 +1128,8 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
   <div class="pub-right">
     <div class="pub-title"><a href="https://arxiv.org/abs/2407.05010" target="_blank" rel="noopener noreferrer">PRANCE: Joint Token-Optimization and Structural Channel-Pruning for Adaptive ViT Inference</a>
       <button class="pub-abst-btn" aria-expanded="false" aria-label="Toggle abstract">▾ Abstract</button>
-      <div class="pub-hl">⚡ Joint token + channel pruning · Adaptive ViT inference · IEEE TPAMI 2026</div>
       <div class="pub-abstract-preview">PRANCE jointly optimizes token pruning and structural channel pruning for adaptive ViT inference, achieving significant speedup while maintaining accuracy.</div></div>
+    <div class="pub-hl">⚡ Joint token + channel pruning · Adaptive ViT inference · IEEE TPAMI 2026</div>
     <div class="pub-authors">Y. Li, C. Tang, Y. Meng, <strong>J. Fan</strong>, Z. Chai, X. Ma, Z. Wang, W. Zhu &nbsp;·&nbsp; <em>IEEE TPAMI</em></div>
   </div>
 </div>

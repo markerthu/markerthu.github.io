@@ -238,10 +238,12 @@ body.dark-mode div[style*="color:#555"]{color:#adbac7 !important}
 body.dark-mode .journey-step{background:#161b22;border-color:var(--accent)}
 body.dark-mode .journey-title{color:#e6edf3}
 body.dark-mode .journey-desc{color:#8b949e}
-/* Key Results stat cards: inline styles need class-level override */
+/* Key Results stat cards */
 body.dark-mode .kr-stat-card{background:#1f1510 !important;border-color:#7c3800 !important}
 body.dark-mode .kr-stat-num{color:#fb923c !important}
 body.dark-mode .kr-stat-label{color:#fdba74 !important}
+/* Unified RL algo boxes */
+body.dark-mode .algo-box{background:#1f1510 !important;border-color:#7c3800 !important;color:#c9d1d9}
 
 /* ── Responsive ── */
 @media(max-width:640px){
@@ -337,10 +339,10 @@ body.dark-mode .kr-stat-label{color:#fdba74 !important}
 
   <h3 style="font-size:0.95em;font-weight:800;color:#ea580c;margin:18px 0 10px;">Unified RL Algorithms as GDI Special Cases</h3>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:0.83em;margin-bottom:14px;">
-    <div style="background:#fff7ed;border-radius:8px;padding:10px 12px;border:1px solid #fed7aa;"><strong>DQN</strong> — uniform replay buffer (D = uniform)</div>
-    <div style="background:#fff7ed;border-radius:8px;padding:10px 12px;border:1px solid #fed7aa;"><strong>PER</strong> — priority-weighted replay (D = prioritized)</div>
-    <div style="background:#fff7ed;border-radius:8px;padding:10px 12px;border:1px solid #fed7aa;"><strong>R2D2</strong> — recurrent replay with retrace (D = LSTM)</div>
-    <div style="background:#fff7ed;border-radius:8px;padding:10px 12px;border:1px solid #fed7aa;"><strong>Agent57</strong> — population-based explore (D = meta-controller)</div>
+    <div class="algo-box" style="background:#fff7ed;border-radius:8px;padding:10px 12px;border:1px solid #fed7aa;"><strong>DQN</strong> — uniform replay buffer (D = uniform)</div>
+    <div class="algo-box" style="background:#fff7ed;border-radius:8px;padding:10px 12px;border:1px solid #fed7aa;"><strong>PER</strong> — priority-weighted replay (D = prioritized)</div>
+    <div class="algo-box" style="background:#fff7ed;border-radius:8px;padding:10px 12px;border:1px solid #fed7aa;"><strong>R2D2</strong> — recurrent replay with retrace (D = LSTM)</div>
+    <div class="algo-box" style="background:#fff7ed;border-radius:8px;padding:10px 12px;border:1px solid #fed7aa;"><strong>Agent57</strong> — population-based explore (D = meta-controller)</div>
   </div>
 </section>
 
