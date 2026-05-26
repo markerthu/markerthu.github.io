@@ -254,7 +254,10 @@ body.dark-mode .cc-old h3{color:#fca5a5}
 body.dark-mode .cc-new{background:#13261a;border-color:#265c33}
 body.dark-mode .cc-new h3{color:#86efac}
 body.dark-mode .cc ul{color:#c9d1d9}
-
+/* Key Claims green cards */
+body.dark-mode .kc-card{background:#052e16 !important;border-color:#14532d !important}
+body.dark-mode .kc-title{color:#86efac !important}
+body.dark-mode .kc-desc{color:#4ade80 !important}
 
 /* ── Responsive ── */
 @media(max-width:640px){
@@ -403,17 +406,17 @@ body.dark-mode .cc ul{color:#c9d1d9}
 <section>
   <h2>📊 Key Claims</h2>
 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:16px 0 24px;">
-  <div style="background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:10px;padding:14px;text-align:center;">
-    <div style="font-size:0.85em;font-weight:800;color:#065f46;">⚙️ Actor-Critic</div>
-    <div style="font-size:0.76em;color:#166534;margin-top:4px;">Step-level rewards via<br>intermediate feedback</div>
+  <div class="kc-card" style="background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:10px;padding:14px;text-align:center;">
+    <div class="kc-title" style="font-size:0.85em;font-weight:800;color:#065f46;">⚙️ Actor-Critic</div>
+    <div class="kc-desc" style="font-size:0.76em;color:#166534;margin-top:4px;">Step-level rewards via<br>intermediate feedback</div>
   </div>
-  <div style="background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:10px;padding:14px;text-align:center;">
-    <div style="font-size:0.85em;font-weight:800;color:#065f46;">🛡️ Collapse-Free</div>
-    <div style="font-size:0.76em;color:#166534;margin-top:4px;">Wasserstein reg +<br>dual-stability mechanism</div>
+  <div class="kc-card" style="background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:10px;padding:14px;text-align:center;">
+    <div class="kc-title" style="font-size:0.85em;font-weight:800;color:#065f46;">🛡️ Collapse-Free</div>
+    <div class="kc-desc" style="font-size:0.76em;color:#166534;margin-top:4px;">Wasserstein reg +<br>dual-stability mechanism</div>
   </div>
-  <div style="background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:10px;padding:14px;text-align:center;">
-    <div style="font-size:0.85em;font-weight:800;color:#065f46;">🎯 SD3 Fine-Tuning</div>
-    <div style="font-size:0.76em;color:#166534;margin-top:4px;">Stable fine-tuning without<br>mode collapse</div>
+  <div class="kc-card" style="background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:10px;padding:14px;text-align:center;">
+    <div class="kc-title" style="font-size:0.85em;font-weight:800;color:#065f46;">🎯 SD3 Fine-Tuning</div>
+    <div class="kc-desc" style="font-size:0.76em;color:#166534;margin-top:4px;">Stable fine-tuning without<br>mode collapse</div>
   </div>
 </div>
 

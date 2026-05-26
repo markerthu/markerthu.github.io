@@ -11,7 +11,7 @@
     <div class="pub-cv-entry">
       {% if post.venue %}<span class="pub-cv-venue">{{ post.venue }}</span>{% endif %}
       <div class="pub-cv-title">
-        {% if post.paperurl %}
+        {% if post.paperurl != blank %}
           <a href="{{ post.paperurl }}" target="_blank" rel="noopener noreferrer">{{ title }}</a>
         {% else %}
           <a href="{{ base_path }}{{ post.url }}" rel="permalink">{{ title }}</a>
