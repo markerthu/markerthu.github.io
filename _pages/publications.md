@@ -64,6 +64,7 @@ excerpt: "Full list of publications by Jiajun Fan — ICLR, NeurIPS, ICML, TPAMI
 .pub-bib-copy:hover { background: #2563eb; color: #fff; }
 /* Dark mode overrides */
 body.dark-mode .pub-cv-entry { background: #161b22 !important; border-color: #30363d !important; }
+body.dark-mode .pub-cv-entry:hover { border-color: #58a6ff !important; box-shadow: 0 4px 16px rgba(88,166,255,.15); }
 body.dark-mode .pub-cv-title a { color: #e6edf3 !important; }
 body.dark-mode .pub-cv-authors { color: #8b949e !important; }
 body.dark-mode .pub-cv-venue { background: #1e3a5f !important; color: #7dd3fc !important; }

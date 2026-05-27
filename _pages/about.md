@@ -689,6 +689,9 @@ body.dark-mode .ra-input-row { border-color: #30363d !important; }
 .ddl-name a:hover { color: #2563eb; text-decoration: underline; }
 .ddl-meta { font-size: 0.74em; color: #6b7280; margin-bottom: 8px; line-height: 1.5; }
 .ddl-chip { display: inline-block; font-size: 0.74em; font-weight: 700; padding: 2px 8px; border-radius: 20px; border: 1px solid; white-space: nowrap; }
+/* ddl-chip: override inline styles when dark mode toggled after load */
+body.dark-mode .ddl-chip[style*="#f1f5f9"] { background: #21262d !important; color: #8b949e !important; border-color: #30363d !important; }
+body.dark-mode .ddl-chip[style*="#f0fdf4"] { background: #122117 !important; color: #3fb950 !important; border-color: #1a7f45 !important; }
 body.dark-mode .ddl-card { background: #161b22 !important; border-color: #30363d !important; }
 body.dark-mode .ddl-name a { color: #c9d1d9 !important; }
 body.dark-mode .ddl-meta { color: #8b949e !important; }
@@ -1700,7 +1703,7 @@ Happy to discuss research, internships, or collaborations. Best reached by email
       el.innerHTML = t.substring(0,ci) + '<span class="typing-cursor"></span>';
       if(ci === 0){ deleting=false; ti=(ti+1) % texts.length; }
     }
-    setTimeout(tick, deleting ? 25 : (ci===t.length ? 60 : 45));
+    setTimeout(tick, deleting ? 25 : (ci > t.length ? 60 : 45));
   }
   tick();
 })();
