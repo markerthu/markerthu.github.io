@@ -362,7 +362,6 @@ body.dark-mode .fv-iclr23oral { background: #5b21b6 !important; color: #e9d5ff !
 .rt-item-ongoing { opacity: 0.7; }
 .rt-year-ongoing { color: #e65100; }
 body.dark-mode .rt-year-ongoing { color: #fb923c !important; }
-body.dark-mode .rt-desc { color: #8b949e !important; }
 
 /* ── Scroll-to-top button ── */
 .scroll-top {
@@ -698,6 +697,8 @@ body.dark-mode .ddl-chip[style*="#ea580c"] { background: rgba(234,88,12,.25) !im
 body.dark-mode .ddl-chip[style*="#d97706"] { background: rgba(217,119,6,.25) !important; color: #fcd34d !important; border-color: rgba(217,119,6,.5) !important; }
 body.dark-mode .ddl-chip[style*="#6b7280"] { background: #21262d !important; color: #8b949e !important; border-color: #30363d !important; }
 body.dark-mode .ddl-card { background: #161b22 !important; border-color: #30363d !important; }
+body.dark-mode .ddl-abbr { color: #58a6ff !important; }
+body.dark-mode .ddl-type { background: #1e3a5f !important; color: #79c0ff !important; }
 body.dark-mode .ddl-name a { color: #c9d1d9 !important; }
 body.dark-mode .ddl-meta { color: #8b949e !important; }
 
