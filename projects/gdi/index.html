@@ -246,6 +246,7 @@ body.dark-mode .kr-stat-label{color:#fdba74 !important}
 /* Unified RL algo boxes */
 body.dark-mode .algo-box{background:#1f1510 !important;border-color:#7c3800 !important;color:#c9d1d9}
 
+.algo-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 /* ── Responsive ── */
 @media(max-width:640px){
   .fig-grid-2{grid-template-columns:1fr}
@@ -254,6 +255,7 @@ body.dark-mode .algo-box{background:#1f1510 !important;border-color:#7c3800 !imp
   .method-grid{grid-template-columns:1fr}
   .method-steps{grid-template-columns:1fr}
   .results-grid{grid-template-columns:1fr 1fr}
+  .algo-grid-2{grid-template-columns:1fr}
 }
 @media print {
   .site-masthead { display: none !important; }
@@ -284,6 +286,7 @@ body.dark-mode .algo-box{background:#1f1510 !important;border-color:#7c3800 !imp
 }</script>
 </head>
 <body id="top">
+<script>try{if(localStorage.getItem('darkMode')==='true')document.body.classList.add('dark-mode');}catch(e){}</script>
 <header class="site-masthead">
   <div class="masthead-inner">
     <a class="masthead-title" href="/">Jiajun Fan</a>
@@ -340,7 +343,7 @@ body.dark-mode .algo-box{background:#1f1510 !important;border-color:#7c3800 !imp
   <p>The key formula: <em>Generalized Bellman Operator</em> with a <strong>data distribution operator D(·)</strong> that is jointly optimized with the value function — turning the data collection strategy itself into a learnable parameter.</p>
 
   <h3 style="font-size:0.95em;font-weight:800;color:#ea580c;margin:18px 0 10px;">Unified RL Algorithms as GDI Special Cases</h3>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:0.83em;margin-bottom:14px;">
+  <div class="algo-grid-2" style="font-size:0.83em;margin-bottom:14px;">
     <div class="algo-box" style="background:#fff7ed;border-radius:8px;padding:10px 12px;border:1px solid #fed7aa;"><strong>DQN</strong> — uniform replay buffer (D = uniform)</div>
     <div class="algo-box" style="background:#fff7ed;border-radius:8px;padding:10px 12px;border:1px solid #fed7aa;"><strong>PER</strong> — priority-weighted replay (D = prioritized)</div>
     <div class="algo-box" style="background:#fff7ed;border-radius:8px;padding:10px 12px;border:1px solid #fed7aa;"><strong>R2D2</strong> — recurrent replay with retrace (D = LSTM)</div>

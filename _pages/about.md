@@ -691,6 +691,9 @@ body.dark-mode .ra-input-row { border-color: #30363d !important; }
 /* ddl-chip: override inline styles when dark mode toggled after load */
 body.dark-mode .ddl-chip[style*="#f1f5f9"] { background: #21262d !important; color: #8b949e !important; border-color: #30363d !important; }
 body.dark-mode .ddl-chip[style*="#f0fdf4"] { background: #122117 !important; color: #3fb950 !important; border-color: #1a7f45 !important; }
+/* light-mode restore: if page loaded in dark mode then toggled to light, undo dark inline styles */
+body:not(.dark-mode) .ddl-chip[style*="#122117"] { background: #f0fdf4 !important; color: #16a34a !important; border-color: #bbf7d0 !important; }
+body:not(.dark-mode) .ddl-chip[style*="#21262d"] { background: #f1f5f9 !important; color: #6b7280 !important; border-color: #e2e8f0 !important; }
 /* urgency chips — inline style uses urgency+'20'/'40' hex suffixes */
 body.dark-mode .ddl-chip[style*="#dc2626"] { background: rgba(220,38,38,.25) !important; color: #fca5a5 !important; border-color: rgba(220,38,38,.5) !important; }
 body.dark-mode .ddl-chip[style*="#ea580c"] { background: rgba(234,88,12,.25) !important; color: #fdba74 !important; border-color: rgba(234,88,12,.5) !important; }
