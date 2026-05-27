@@ -22,7 +22,7 @@ redirect_from:
 <meta name="twitter:description" content="Academic CV of Jiajun Fan — CS Ph.D. at UIUC. Publications, education, awards, and research interests.">
 <link rel="icon" href="/images/favicon.ico">
 <meta name="robots" content="index,follow">
-<script>try{if(localStorage.getItem('darkMode')==='true'){document.documentElement.style.background='#0d1117';}}catch(e){}</script>
+<script>try{if(localStorage.getItem('darkMode')==='true'){document.documentElement.style.background='#0d1117';document.documentElement.classList.add('dark-mode-pending');}}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"></noscript>
@@ -170,7 +170,7 @@ footer a{color:#7eb8f7}
 
 /* ── Theme toggle icon: CSS-driven to avoid FOUC ── */
 #theme-toggle::before { content: '🌙'; }
-body.dark-mode #theme-toggle::before { content: '☀'; }
+body.dark-mode #theme-toggle::before { content: '☀️'; }
 #theme-toggle { color: #333; border-color: rgba(0,0,0,0.2); }
 body.dark-mode #theme-toggle { color: #fff !important; border-color: rgba(255,255,255,0.3) !important; }
 
@@ -467,6 +467,6 @@ body.dark-mode .sec-title span[style*="color:#6b7280"]{color:#8b949e !important}
 <footer>
   <p><a href="/">Jiajun Fan</a> · UIUC CS Ph.D. · <a href="/files/CV.pdf">Download PDF CV</a></p>
 </footer>
-<script>(function(){try{if(localStorage.getItem('darkMode')==='true')document.body.classList.add('dark-mode');}catch(e){}})()</script>
+
 </body>
 </html>

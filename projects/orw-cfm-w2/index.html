@@ -242,6 +242,9 @@ body.dark-mode section p[style*="color:#555"],
 body.dark-mode section p[style*="color:#444"],
 body.dark-mode p[style*="color:#666"]{color:#adbac7 !important}
 body.dark-mode div[style*="color:#555"]{color:#adbac7 !important}
+body.dark-mode div[style*="color:#0277bd"]{color:#60a5fa !important}
+body.dark-mode div[style*="color:#1b5e20"]{color:#4ade80 !important}
+body.dark-mode .compare-table .highlight td{background:#1e3a5f !important;color:#e6edf3 !important}
 
 body.dark-mode .challenge-card{background:#161b22;border-color:#30363d}
 body.dark-mode .challenge-card h3{color:#e6edf3}
@@ -251,13 +254,16 @@ body.dark-mode .contrib-text h3{color:#e6edf3}
 body.dark-mode .contrib-text p{color:#adbac7}
 
 
+.alpha-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 /* ── Responsive ── */
 @media(max-width:640px){
   .fig-grid-2{grid-template-columns:1fr}
   .problem-grid{grid-template-columns:1fr}
   .diff-boxes{grid-template-columns:1fr}
   .method-grid{grid-template-columns:1fr 1fr}
+  .method-steps{grid-template-columns:1fr}
   .results-grid{grid-template-columns:1fr 1fr}
+  .alpha-grid{grid-template-columns:1fr}
 }
 @media print {
   .site-masthead { display: none !important; }
@@ -517,7 +523,7 @@ body.dark-mode .contrib-text p{color:#adbac7}
 <section>
   <h2>🎛️ Alpha Control: Reward–Diversity Knob</h2>
   <p style="font-size:0.88em;color:#555;margin-bottom:16px;">The regularization strength α provides a smooth knob between pure reward maximization (α=0) and full diversity preservation (α=1):</p>
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px;">
+  <div class="alpha-grid" style="margin-bottom:16px;">
     <figure style="margin:0;text-align:center">
       <img loading="lazy" src="images/mnist_alpha0.png" alt="α=0"
            style="width:100%;border-radius:8px;border:1px solid #e0e8f0;">
@@ -534,7 +540,7 @@ body.dark-mode .contrib-text p{color:#adbac7}
       <figcaption style="font-size:0.75em;color:#666;margin-top:6px"><strong>α = 0.8</strong><br>High diversity preserved</figcaption>
     </figure>
   </div>
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;">
+  <div class="alpha-grid">
     <figure style="margin:0;text-align:center">
       <img loading="lazy" src="images/dog_base.png" alt="SD3 Base"
            style="width:100%;border-radius:8px;border:1px solid #e0e8f0;">
