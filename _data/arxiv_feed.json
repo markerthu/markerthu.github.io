@@ -1,6 +1,42 @@
 {
-  "updated": "2026-05-25",
+  "updated": "2026-06-01",
   "papers": [
+    {
+      "id": "2605.29888",
+      "title": "LaRA: Layer-wise Representation Analysis for Detecting Data Contamination in RL Post-Training",
+      "authors": "Minju Gwak, Minseo Kwak, Dongseok Lee et al.",
+      "summary": "Reinforcement learning (RL) post-training has shown to improve reasoning in large language models (LLMs). However, there has been little exploration on the problem of data contamination in RL post-tra…",
+      "date": "2026-05-28",
+      "tag": "RL Training",
+      "url": "https://arxiv.org/abs/2605.29888"
+    },
+    {
+      "id": "2605.26606",
+      "title": "Spend Your Rollouts Where It Counts: Rollout Allocation for Group-Based RL Post-Training",
+      "authors": "Woojeong Kim, Ziyi Yang, Jing Nathan Yan et al.",
+      "summary": "Reinforcement learning (RL) is the dominant paradigm for post-training large language models. However, in the online, on-policy setting, rollout generation dominates the computational cost of training…",
+      "date": "2026-05-26",
+      "tag": "RL Training",
+      "url": "https://arxiv.org/abs/2605.26606"
+    },
+    {
+      "id": "2605.26184",
+      "title": "GAC: Noise-Aware Adaptive Mixing for Hybrid SFT-RL Post-Training",
+      "authors": "Yuelin Hu, Zhenbo Yu, Zhengxue Cheng et al.",
+      "summary": "Hybrid post-training usually combines supervised fine-tuning and reinforcement learning, but fixed mixing schedules cannot adapt when the relative noise of the two signals changes over time. We propos…",
+      "date": "2026-05-25",
+      "tag": "RL Training",
+      "url": "https://arxiv.org/abs/2605.26184"
+    },
+    {
+      "id": "2605.25477",
+      "title": "EXPO-FT: Sample-Efficient Reinforcement Learning Finetuning for Vision-Language-Action Models",
+      "authors": "Perry Dong, Kuo-Han Hung, Tian Gao et al.",
+      "summary": "The ability to efficiently and reliably learn new tasks has been a foundational challenge in robotics. Vision-Language-Action (VLA) models have demonstrated strong generalization across diverse manipu…",
+      "date": "2026-05-25",
+      "tag": "Multimodal",
+      "url": "https://arxiv.org/abs/2605.25477"
+    },
     {
       "id": "2605.23522",
       "title": "Precise: SDE-Consistent Stochastic Sampling for RL Post-Training of Flow-Matching Models",
@@ -9,51 +45,6 @@
       "date": "2026-05-22",
       "tag": "Flow Matching",
       "url": "https://arxiv.org/abs/2605.23522"
-    },
-    {
-      "id": "2605.23491",
-      "title": "CoSPlay: Cooperative Self-Play at Test-Time with Self-Generated Code and Unit Test",
-      "authors": "Zhangyi Hu, Chenhui Liu, Tian Huang et al.",
-      "summary": "Recently, Reinforcement Learning with Verifiable Rewards (RLVR) and Test-Time Scaling (TTS) have advanced LLM code generation through executable verification. Yet Ground-Truth Unit Tests (GT UTs) rema…",
-      "date": "2026-05-22",
-      "tag": "Reasoning",
-      "url": "https://arxiv.org/abs/2605.23491"
-    },
-    {
-      "id": "2605.23180",
-      "title": "Self-Improving In-Context Learning",
-      "authors": "Baturay Saglam, Dionysis Kalogerias",
-      "summary": "We propose to improve in-context learning (ICL) by optimizing the continuous embeddings of a fixed few-shot prompt at test time. The key observation is that the log-probabilities a model assigns to it…",
-      "date": "2026-05-22",
-      "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2605.23180"
-    },
-    {
-      "id": "2605.23019",
-      "title": "PACE: Two-Timescale Self-Evolution for Small Language Model Agents",
-      "authors": "Chen Ling, Pei Chen, Albert Guan et al.",
-      "summary": "Deploying language-model agents in production often requires substantial compute and human effort to tune prompts, parsers, validators, and other components of the agent pipeline. Self-evolution offer…",
-      "date": "2026-05-21",
-      "tag": "RL Training",
-      "url": "https://arxiv.org/abs/2605.23019"
-    },
-    {
-      "id": "2605.22794",
-      "title": "MOSS: Self-Evolution through Source-Level Rewriting in Autonomous Agent Systems",
-      "authors": "Qianshu Cai, Yonggang Zhang, Xianzhang Jia et al.",
-      "summary": "Autonomous agentic systems are largely static after deployment: they do not learn from user interactions, and recurring failures persist until the next human-driven update ships a fix. Self-evolving a…",
-      "date": "2026-05-21",
-      "tag": "RL Training",
-      "url": "https://arxiv.org/abs/2605.22794"
-    },
-    {
-      "id": "2605.22217",
-      "title": "Survive or Collapse: The Asymmetric Roles of Data Gating and Reward Grounding in Self-Play RL",
-      "authors": "Sophia Xiao Pu, Zhaotian Weng, Chengzhi Liu et al.",
-      "summary": "Self-play reinforcement learning trains language models on their own generated tasks, co-evolving a proposer and solver without human labels. Recent systems report strong reasoning gains, but collapse…",
-      "date": "2026-05-21",
-      "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2605.22217"
     },
     {
       "id": "2605.22072",
@@ -65,22 +56,31 @@
       "url": "https://arxiv.org/abs/2605.22072"
     },
     {
-      "id": "2605.21008",
-      "title": "A Survey of Audio Reasoning in Multimodal Foundation Models",
-      "authors": "Zhihan Guo, Wenqian Cui, Guan-Ting Lin et al.",
-      "summary": "Reasoning has become a defining capability of modern foundation models, yet its development in the audio modality remains limited. Audio poses challenges that are distinct from those of text and visio…",
-      "date": "2026-05-20",
-      "tag": "Audio Reasoning",
-      "url": "https://arxiv.org/abs/2605.21008"
+      "id": "2605.17003",
+      "title": "Learning-Zone Energy: Online Data Selection for Efficient RL Post-Training",
+      "authors": "Peng Cui, Boyao Yang, Jun Zhu",
+      "summary": "Reinforcement Learning (RL) post-training has emerged as the dominant paradigm for eliciting mathematical reasoning in Large Language Models (LLMs), yet prevailing techniques such as GRPO and DAPO dis…",
+      "date": "2026-05-16",
+      "tag": "RL Training",
+      "url": "https://arxiv.org/abs/2605.17003"
     },
     {
-      "id": "2605.19739",
-      "title": "FlowErase-RL: Rethinking Concept Erasure as Reward Optimization in Flow Matching Models",
-      "authors": "Yi Sun, Zhiqi Zhang, Xinhao Zhong et al.",
-      "summary": "Recent advances in flow matching models have significantly improved text-to-image generation quality, but also introduce growing safety risks due to the generation of harmful or undesirable content. E…",
-      "date": "2026-05-19",
-      "tag": "Flow Matching",
-      "url": "https://arxiv.org/abs/2605.19739"
+      "id": "2605.13276",
+      "title": "D-VLA: A High-Concurrency Distributed Asynchronous Reinforcement Learning Framework for Vision-Language-Action Models",
+      "authors": "Yucheng Guo, Yongjian Guo, Zhong Guan et al.",
+      "summary": "The rapid evolution of Embodied AI has enabled Vision-Language-Action (VLA) models to excel in multimodal perception and task execution. However, applying Reinforcement Learning (RL) to these massive …",
+      "date": "2026-05-13",
+      "tag": "Multimodal",
+      "url": "https://arxiv.org/abs/2605.13276"
+    },
+    {
+      "id": "2605.09262",
+      "title": "Reinforcing Multimodal Reasoning Against Visual Degradation",
+      "authors": "Rui Liu, Dian Yu, Haolin Liu et al.",
+      "summary": "Reinforcement Learning has significantly advanced the reasoning capabilities of Multimodal Large Language Models (MLLMs), yet the resulting policies remain brittle against real-world visual degradatio…",
+      "date": "2026-05-10",
+      "tag": "Multimodal",
+      "url": "https://arxiv.org/abs/2605.09262"
     }
   ]
 }
