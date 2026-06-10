@@ -185,7 +185,7 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
     { id:'hobby', kw:['hobby','hobbies','outside research','free time','personal','fun','game design','game','creative','enjoy'],
       a:["Outside research I design games and build creative AI agents — anything with emergent behavior. Honestly, designing RL reward functions and designing game mechanics are the same craft.",
          "Games, mostly — designing them more than playing. There's real overlap with my research: a good reward function and a good game mechanic are both about shaping behavior you can't script directly."] },
-    { id:'site', kw:['website','this site','built','how made','jekyll','github pages','tech stack','this agent','are you human','are you real','chatbot'],
+    { id:'site', kw:['website','this site','built','how made','jekyll','github pages','tech stack','this agent','are you human','are you real','human','robot','are you ai','chatbot'],
       a:["Full transparency: I'm a hand-written conversational engine running entirely in your browser — fuzzy retrieval, topic memory, and human-paced typing, but no LLM and no server. Jiajun wrote the algorithm. The rest of the site is Jekyll on GitHub Pages."] }
   ];
 
@@ -215,13 +215,18 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
   /* ════════ RETRIEVAL: char-bigram Dice similarity + phrase/keyword scoring ════════ */
   function norm(s){ return (s||'').toLowerCase().replace(/[^a-z0-9一-鿿\s-]/g,' ').replace(/\s+/g,' ').trim(); }
   function bigrams(s){ var b=[],i; for(i=0;i<s.length-1;i++) b.push(s.substr(i,2)); return b; }
-  function dice(a,b){
+  function diceRaw(a,b){
     if(a===b) return 1;
     if(a.length<2||b.length<2) return 0;
     var A=bigrams(a), B=bigrams(b), map={}, hit=0, i;
     for(i=0;i<A.length;i++) map[A[i]]=(map[A[i]]||0)+1;
     for(i=0;i<B.length;i++) if(map[B[i]]>0){ map[B[i]]--; hit++; }
     return 2*hit/(A.length+B.length);
+  }
+  /* max of unpadded (inner typos) and space-padded (boundary typos) similarity */
+  function dice(a,b){
+    var r1=diceRaw(a,b), r2=diceRaw(' '+a+' ',' '+b+' ');
+    return r1>r2 ? r1 : r2;
   }
   function scoreEntry(entry, q, qTokens){
     var s=0, j, k, kn, t, best, sim;
