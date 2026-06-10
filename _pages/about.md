@@ -2554,7 +2554,9 @@ function drawGraph(container) {
       return;
     }
     if(!isOpen) return;
-    if(e.key === 'Escape'){ e.stopPropagation(); cmdkClose(); }
+    if(e.isComposing) return; /* don't act on IME composition (CJK input) */
+    if(e.key === 'Tab'){ e.preventDefault(); input.focus(); } /* focus trap: input is the only focusable */
+    else if(e.key === 'Escape'){ e.stopPropagation(); cmdkClose(); }
     else if(e.key === 'ArrowDown'){ e.preventDefault(); if(filtered.length){ sel = (sel + 1) % filtered.length; render(); } }
     else if(e.key === 'ArrowUp'){ e.preventDefault(); if(filtered.length){ sel = (sel - 1 + filtered.length) % filtered.length; render(); } }
     else if(e.key === 'Enter'){ e.preventDefault(); if(filtered[sel]) exec(filtered[sel]); }
