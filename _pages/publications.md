@@ -102,3 +102,5 @@ body.dark-mode .stat-badge-icml { background:#2d0a1a !important; border-color:#7
 <div style="padding:0; margin:0;">{% for post in site.publications reversed %}
   {% include archive-single-cv.html %}
 {% endfor %}</div>
+
+{% include ai-agent.html %}
