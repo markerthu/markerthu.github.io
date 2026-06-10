@@ -1064,7 +1064,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 
 <div class="featured-grid">
   <a class="featured-card" href="/projects/cesar/">
-    <img class="featured-img" loading="lazy" src="/projects/cesar/images/teaser.png" alt="CESAR process-reward framework for Audio LLM reasoning">
+    <img class="featured-img" loading="lazy" src="/images/thumbs/cesar-teaser.jpg" width="800" height="441" alt="CESAR process-reward framework for Audio LLM reasoning">
     <div class="featured-body">
       <span class="featured-venue fv-iclr26">ICLR 2026</span>
       <div class="featured-title">CESAR: Process Rewards for Audio LLM Reasoning</div>
@@ -1073,7 +1073,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
     </div>
   </a>
   <a class="featured-card" href="/projects/adrpo/">
-    <img class="featured-img" loading="lazy" src="/projects/adrpo/images/compare_models.png" alt="ADRPO adaptive divergence regularization results">
+    <img class="featured-img" loading="lazy" src="/images/thumbs/adrpo-compare.jpg" width="800" height="459" alt="ADRPO adaptive divergence regularization results">
     <div class="featured-body">
       <span class="featured-venue fv-neurips">NeurIPS 2025</span>
       <div class="featured-title">ADRPO: Adaptive Regularization for Generative Model RLHF</div>
@@ -1082,7 +1082,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
     </div>
   </a>
   <a class="featured-card" href="/projects/orw-cfm-w2/">
-    <img class="featured-img" loading="lazy" src="/projects/orw-cfm-w2/images/method.png" alt="ORW-CFM-W2 online reward-weighted flow matching">
+    <img class="featured-img" loading="lazy" src="/images/thumbs/orw-method.jpg" width="800" height="475" alt="ORW-CFM-W2 online reward-weighted flow matching">
     <div class="featured-body">
       <span class="featured-venue fv-iclr25">ICLR 2025</span>
       <div class="featured-title">ORW-CFM-W2: Online RLHF for Flow Matching</div>
@@ -1128,7 +1128,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 <div class="pub-entry" role="article" data-venue="ICLR" data-year="2026" data-arxiv="2510.20867" data-abstract="CESAR resolves test-time inverse scaling in Audio LLMs by rewarding the reasoning process via GRPO, achieving SOTA on MMAU — outperforming Gemini 2.5 Pro and GPT-4o Audio.">
   <div class="pub-left"><span class="pb pb-iclr">ICLR 2026</span><span class="pub-year">2026</span></div>
   <div class="pub-right">
-    <div class="pub-thumb-wrap"><img loading="lazy" src="/projects/cesar/images/framework.png" alt="CESAR framework"></div>
+    <div class="pub-thumb-wrap"><img loading="lazy" src="/images/thumbs/cesar-framework.jpg" width="800" height="441" alt="CESAR framework"></div>
     <div class="pub-title">
       <a href="https://openreview.net/forum?id=DUr48hxO2h" target="_blank" rel="noopener noreferrer">Incentivizing Consistent, Effective and Scalable Reasoning Capability in Audio LLMs via Reasoning Process Rewards</a>
       <a class="pub-project" href="/projects/cesar/">Project Page</a>
@@ -1162,7 +1162,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 <div class="pub-entry" role="article" data-venue="NeurIPS" data-year="2025" data-arxiv="2510.18053" data-abstract="ADRPO introduces sample-level adaptive divergence regularization for RLHF — high-value samples get more freedom, poor samples get stronger constraints. Plug-and-play on any RL method.">
   <div class="pub-left"><span class="pb pb-neurips">NeurIPS 2025</span><span class="pub-year">2025</span></div>
   <div class="pub-right">
-    <div class="pub-thumb-wrap"><img loading="lazy" src="/projects/adrpo/images/compare_models.png" alt="ADRPO qualitative results"></div>
+    <div class="pub-thumb-wrap"><img loading="lazy" src="/images/thumbs/adrpo-compare.jpg" width="800" height="459" alt="ADRPO qualitative results"></div>
     <div class="pub-title">
       <a href="https://openreview.net/forum?id=aXO0xg0ttW" target="_blank" rel="noopener noreferrer">Adaptive Divergence Regularized Policy Optimization for Fine-tuning Generative Models</a>
       <a class="pub-project" href="/projects/adrpo/">Project Page</a>
@@ -1196,7 +1196,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 <div class="pub-entry" role="article" data-venue="ICLR" data-year="2025" data-arxiv="ORW-CFM-W2" data-abstract="ORW-CFM-W2 is the first online RLHF method for flow matching — no human data, no likelihood estimation. Wasserstein regularization maintains generation diversity.">
   <div class="pub-left"><span class="pb pb-iclr">ICLR 2025</span><span class="pub-year">2025</span></div>
   <div class="pub-right">
-    <div class="pub-thumb-wrap"><img loading="lazy" src="/projects/orw-cfm-w2/images/main_figure.png" alt="ORW-CFM-W2 method"></div>
+    <div class="pub-thumb-wrap"><img loading="lazy" src="/images/thumbs/orw-main.jpg" width="800" height="475" alt="ORW-CFM-W2 method"></div>
     <div class="pub-title">
       <a href="https://openreview.net/forum?id=2IoFFexvuw" target="_blank" rel="noopener noreferrer">Online Reward-Weighted Fine-Tuning of Flow Matching with Wasserstein Regularization</a>
       <a class="pub-project" href="/projects/orw-cfm-w2/">Project Page</a>
@@ -2114,13 +2114,27 @@ function filterByVenue(btn, venue) {
 (function(){
   var container = document.getElementById('research-graph');
   if(!container) return;
-  var s = document.createElement('script');
-  s.src = 'https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js';
-  s.onload = function(){ drawGraph(container); };
-  s.onerror = function(){
-    container.innerHTML = '<p style="text-align:center;color:#767676;padding:40px 0;">Network error — <a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ" target="_blank" rel="noopener noreferrer">view paper network on Google Scholar</a></p>';
-  };
-  document.head.appendChild(s);
+  var loaded = false;
+  function loadD3(){
+    if(loaded) return;
+    loaded = true;
+    var s = document.createElement('script');
+    s.src = 'https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js';
+    s.onload = function(){ drawGraph(container); };
+    s.onerror = function(){
+      container.innerHTML = '<p style="text-align:center;color:#767676;padding:40px 0;">Network error — <a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ" target="_blank" rel="noopener noreferrer">view paper network on Google Scholar</a></p>';
+    };
+    document.head.appendChild(s);
+  }
+  /* Lazy: only fetch d3 (~280KB) when the graph approaches the viewport */
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ io.disconnect(); loadD3(); } });
+    }, { rootMargin: '600px 0px' });
+    io.observe(container);
+  } else {
+    loadD3();
+  }
 })();
 
 function drawGraph(container) {
