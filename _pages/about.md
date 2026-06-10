@@ -1008,7 +1008,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
     <div class="featured-body">
       <span class="featured-venue fv-iclr23oral">ICLR 2023 · Oral</span>
       <div class="featured-title">LBC: Superhuman Atari — 24 World Records</div>
-      <div class="featured-desc">Breaking 24 Atari human world records with 500× less data than prior SOTA (Agent57).</div>
+      <div class="featured-desc">Breaking 24 Atari human world records with 78× less data than prior SOTA (Agent57).</div>
       <div class="featured-stat">🏅 Rank 5/4176 · 10,077% mean human performance</div>
     </div>
   </a>
@@ -1146,7 +1146,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
   </div>
 </div>
 
-<div class="pub-entry" role="article" data-venue="ICLR" data-year="2023" data-arxiv="LBC" data-abstract="LBC introduces a learnable hybrid behavior mapping and bandit meta-controller for exploration control in deep RL, breaking 24 Atari human world records with 500× less data than prior SOTA.">
+<div class="pub-entry" role="article" data-venue="ICLR" data-year="2023" data-arxiv="LBC" data-abstract="LBC introduces a learnable hybrid behavior mapping and bandit meta-controller for exploration control in deep RL, breaking 24 Atari human world records with 78× less data than prior SOTA.">
   <div class="pub-left">
     
     <span class="pb pb-oral">ICLR 2023<br>Oral</span><span class="pub-year">2023</span></div>
@@ -1155,10 +1155,10 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
       <a href="https://openreview.net/forum?id=FeWvD0L_a4" target="_blank" rel="noopener noreferrer">Learnable Behavior Control: Breaking Atari Human World Records via Sample-Efficient Behavior Selection</a>
       <a class="pub-project" href="/projects/lbc/">Project Page</a>
     <button class="pub-abst-btn" aria-expanded="false" aria-label="Toggle abstract">▾ Abstract</button>
-    <div class="pub-abstract-preview">LBC introduces a learnable hybrid behavior mapping and bandit meta-controller for exploration control in deep RL, breaking 24 Atari human world records with 500× less data than prior SOTA.</div></div>
+    <div class="pub-abstract-preview">LBC introduces a learnable hybrid behavior mapping and bandit meta-controller for exploration control in deep RL, breaking 24 Atari human world records with 78× less data than prior SOTA.</div></div>
     <div class="pub-authors"><strong>J. Fan*</strong>, Y. Zhuang, Y. Liu, J. Hao, B. Wang, J. Zhu, H. Wang, S.-T. Xia</div>
     <div class="pub-desc">LBC: learnable hybrid behavior mapping + bandit meta-controller. Unified framework for exploration control in deep RL.</div>
-    <div class="pub-hl">🏅 Ranked 5/4176 · 10,077% mean human score · 24 world records · 500× data efficiency</div>
+    <div class="pub-hl">🏅 Ranked 5/4176 · 10,077% mean human score · 24 world records · 78× data efficiency</div>
   </div>
 </div>
 
@@ -1458,7 +1458,7 @@ Happy to discuss research, internships, or collaborations. Best reached by email
     { kw:['test-time','inverse scaling','longer reasoning','reasoning length'],
       a:"Test-time inverse scaling is when giving a model more reasoning steps actually hurts accuracy. In Audio LLMs, standard RL leads to verbose, irrelevant chains. CESAR fixes this with process-level rewards that reward correct intermediate steps, not just final answers." },
     { kw:['lbc','atari','world record','behavior control','exploration','bandit'],
-      a:"LBC (ICLR 2023 Notable Top-5% Oral, Rank 5 among oral presentations) broke 24 Atari human world records using 500× less data than Agent57. Key idea: a learnable hybrid behavior mapping + bandit meta-controller for exploration that dramatically enlarges the effective policy space." },
+      a:"LBC (ICLR 2023 Notable Top-5% Oral, Rank 5 among oral presentations) broke 24 Atari human world records using 78× less data than Agent57. Key idea: a learnable hybrid behavior mapping + bandit meta-controller for exploration that dramatically enlarges the effective policy space." },
     { kw:['gdi','generalized data','distribution iteration','icml 2022'],
       a:"GDI (ICML 2022) shows that optimizing the training data distribution is the key lever for superhuman RL efficiency. We achieve 9620% mean HNS on Atari ALE with 200M frames, comparable to Agent57 but 500× more data-efficient." },
     { kw:['adrpo','adaptive divergence','adaptive regularization','neurips 2025'],
