@@ -948,6 +948,70 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
 body.dark-mode .ra-act { background: #1c2333 !important; color: #58a6ff !important; border-color: #1f3a6e !important; }
 .ra-btn.ra-quiet::after { animation: none; opacity: 0; }
 
+/* ── ⌘K Command Palette ── */
+.qn-cmdk {
+  margin-left: auto; background: #fff; border: 1.5px solid #c7d7f5; border-radius: 7px;
+  padding: 2px 10px; font-size: 0.86em; font-weight: 800; color: #1565c0;
+  cursor: pointer; letter-spacing: .02em; transition: background .15s, transform .1s;
+}
+.qn-cmdk:hover { background: #e8effe; transform: translateY(-1px); }
+body.dark-mode .qn-cmdk { background: #21262d !important; border-color: #30363d !important; color: #58a6ff !important; }
+#cmdk-overlay {
+  position: fixed; inset: 0; z-index: 10050; display: none;
+  background: rgba(15,23,42,0.42); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px);
+}
+#cmdk-overlay.open { display: block; }
+#cmdk {
+  position: absolute; top: 14vh; left: 50%; transform: translateX(-50%);
+  width: min(560px, calc(100vw - 32px));
+  background: rgba(255,255,255,0.96); border: 1px solid #e2e8f0; border-radius: 16px;
+  box-shadow: 0 24px 80px rgba(2,6,23,.35); overflow: hidden;
+  animation: cmdkIn .18s cubic-bezier(.16,1,.3,1);
+}
+@keyframes cmdkIn { from { opacity: 0; transform: translateX(-50%) translateY(-8px) scale(.98); } to { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); } }
+@media (prefers-reduced-motion: reduce) { #cmdk { animation: none; } }
+#cmdk-input {
+  width: 100%; border: none; outline: none; background: transparent;
+  padding: 16px 18px; font-size: 1.02em; font-weight: 600; color: #0f172a;
+  border-bottom: 1px solid #e2e8f0; box-sizing: border-box;
+}
+#cmdk-list { max-height: 46vh; overflow-y: auto; padding: 6px; margin: 0; list-style: none; }
+.cmdk-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 12px; border-radius: 9px; cursor: pointer;
+  font-size: 0.88em; color: #1e293b;
+}
+.cmdk-item .ck-icon { width: 22px; text-align: center; flex-shrink: 0; }
+.cmdk-item .ck-hint { margin-left: auto; font-size: 0.76em; color: #94a3b8; font-weight: 700; }
+.cmdk-item.active { background: #eff6ff; color: #0d47a1; }
+.cmdk-item.active .ck-hint { color: #60a5fa; }
+.cmdk-empty { padding: 22px 12px; text-align: center; color: #94a3b8; font-size: 0.86em; }
+.cmdk-foot {
+  display: flex; gap: 14px; padding: 8px 14px; border-top: 1px solid #e2e8f0;
+  font-size: 0.72em; color: #94a3b8; font-weight: 600;
+}
+.cmdk-foot kbd { background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 4px; padding: 0 5px; font-family: inherit; }
+body.dark-mode #cmdk { background: rgba(22,27,34,0.97); border-color: #30363d; }
+body.dark-mode #cmdk-input { color: #e6edf3; border-bottom-color: #30363d; }
+body.dark-mode .cmdk-item { color: #c9d1d9; }
+body.dark-mode .cmdk-item.active { background: #1c2333; color: #79c0ff; }
+body.dark-mode .cmdk-foot { border-top-color: #30363d; color: #8b949e; }
+body.dark-mode .cmdk-foot kbd { background: #21262d; border-color: #30363d; }
+
+/* ── Cursor glow on cards (desktop, hover-capable only) ── */
+@media (hover: hover) and (pointer: fine) {
+  .research-card, .stat-card { position: relative; overflow: hidden; }
+  .research-card::after, .stat-card::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0;
+    background: radial-gradient(220px circle at var(--mx, 50%) var(--my, 50%), rgba(21,101,192,0.10), transparent 65%);
+    transition: opacity .25s;
+  }
+  .research-card:hover::after, .stat-card:hover::after { opacity: 1; }
+  body.dark-mode .research-card::after, body.dark-mode .stat-card::after {
+    background: radial-gradient(220px circle at var(--mx, 50%) var(--my, 50%), rgba(88,166,255,0.12), transparent 65%);
+  }
+}
+
 /* Print safety for polish pack */
 @media print {
   .sr { opacity: 1 !important; transform: none !important; }
@@ -994,6 +1058,7 @@ body.dark-mode .ra-act { background: #1c2333 !important; color: #58a6ff !importa
   <a href="/year-archive/">✍️ Blog</a>
   <a href="/cv/">📋 CV</a>
   <a href="#contact">📬 Contact</a>
+  <button class="qn-cmdk" onclick="cmdkOpen()" aria-label="Open command palette (Cmd+K)" title="Command palette">⌘K</button>
 </div>
 
 <!-- Intro -->
@@ -1514,6 +1579,15 @@ Happy to discuss research, internships, or collaborations. Best reached by email
 <!-- Scroll-to-top + Dark mode buttons -->
 <button class="scroll-top" id="scrollTop" onclick="window.scrollTo(0,0)" aria-label="Back to top">↑</button>
 <button class="dark-toggle" id="darkToggle" title="Toggle dark mode" aria-label="Toggle dark mode">🌙</button>
+
+<!-- ══════════════════ COMMAND PALETTE (⌘K) ══════════════════ -->
+<div id="cmdk-overlay" role="dialog" aria-modal="true" aria-label="Command palette" aria-hidden="true">
+  <div id="cmdk">
+    <input id="cmdk-input" type="text" placeholder="Search papers, sections, actions…" aria-label="Command palette search" autocomplete="off">
+    <ul id="cmdk-list" role="listbox"></ul>
+    <div class="cmdk-foot"><span><kbd>↑↓</kbd> navigate</span><span><kbd>↵</kbd> select</span><span><kbd>esc</kbd> close</span></div>
+  </div>
+</div>
 
 <!-- ══════════════════ AI RESEARCH ASSISTANT ══════════════════ -->
 <button id="ra-btn" class="ra-btn" onclick="raOpen()" aria-label="Open AI agent chat" aria-expanded="false" title="Ask my AI agent">💬</button>
@@ -2369,5 +2443,133 @@ function drawGraph(container) {
     setTimeout(function(){ tip.classList.add('show'); }, 2600);
     setTimeout(function(){ tip.classList.remove('show'); }, 9000);
   }
+})();
+</script>
+
+<script>
+/* ── ⌘K Command Palette ── */
+(function(){
+  var ITEMS = [
+    {i:'📰', t:'News', k:'news latest updates', h:'#news', hint:'Section'},
+    {i:'🔥', t:'Featured Research', k:'featured highlights best', h:'#featured', hint:'Section'},
+    {i:'📄', t:'Publications', k:'papers publications list', h:'#publications', hint:'Section'},
+    {i:'🔬', t:'Research Areas', k:'research focus areas', h:'#research', hint:'Section'},
+    {i:'⚡', t:'Impact & Stats', k:'impact statistics citations', h:'#impact', hint:'Section'},
+    {i:'💡', t:'Vision', k:'vision roadmap future', h:'#vision', hint:'Section'},
+    {i:'🏅', t:'Awards', k:'awards honors scholarship', h:'#awards', hint:'Section'},
+    {i:'📅', t:'Conference Deadlines', k:'deadlines conferences ddl', h:'#deadlines', hint:'Section'},
+    {i:'📬', t:'Contact', k:'contact email reach', h:'#contact', hint:'Section'},
+    {i:'🎧', t:'CESAR — Audio LLM Reasoning', k:'cesar audio mmau process reward iclr 2026', h:'/projects/cesar/', hint:'ICLR 2026'},
+    {i:'🤖', t:'SP-VLA — VLA Acceleration', k:'sp-vla vla robot token pruning iclr 2026', h:'https://openreview.net/forum?id=RwdGIIjPlC', hint:'ICLR 2026'},
+    {i:'🎯', t:'ADRPO — Adaptive Regularization RLHF', k:'adrpo adaptive divergence neurips 2025', h:'/projects/adrpo/', hint:'NeurIPS 2025'},
+    {i:'🌊', t:'ORW-CFM-W2 — Online RLHF for Flow Matching', k:'orw flow matching wasserstein iclr 2025', h:'/projects/orw-cfm-w2/', hint:'ICLR 2025'},
+    {i:'⚙️', t:'AC-Flow — Intermediate Feedback', k:'ac-flow actor critic flow', h:'/projects/ac-flow/', hint:'Preprint'},
+    {i:'🖼️', t:'PRANCE — Adaptive ViT Inference', k:'prance vit pruning tpami', h:'https://arxiv.org/abs/2407.05010', hint:'TPAMI'},
+    {i:'🏅', t:'LBC — 24 Atari World Records', k:'lbc atari world records iclr 2023 oral', h:'/projects/lbc/', hint:'ICLR 2023 Oral'},
+    {i:'📊', t:'GDI — Generalized Data Distribution Iteration', k:'gdi data distribution icml 2022', h:'/projects/gdi/', hint:'ICML 2022'},
+    {i:'📋', t:'Open CV', k:'cv resume curriculum vitae', h:'/cv/', hint:'Page'},
+    {i:'⬇️', t:'Download CV (PDF)', k:'cv pdf download resume', h:'/files/CV.pdf', hint:'File'},
+    {i:'🗂️', t:'All Projects', k:'projects pages portfolio', h:'/projects/', hint:'Page'},
+    {i:'✍️', t:'Blog', k:'blog posts writing', h:'/year-archive/', hint:'Page'},
+    {i:'🎓', t:'Google Scholar', k:'scholar citations profile', h:'https://scholar.google.com/citations?user=EjmzseUAAAAJ', hint:'External'},
+    {i:'💻', t:'GitHub', k:'github code repos', h:'https://github.com/markerthu', hint:'External'},
+    {i:'💼', t:'LinkedIn', k:'linkedin profile', h:'https://www.linkedin.com/in/jiajun-fan-57b12b26b', hint:'External'},
+    {i:'✉️', t:'Email Jiajun', k:'email contact mail', h:'mailto:jiajunf3@illinois.edu', hint:'Action'},
+    {i:'🌙', t:'Toggle Dark Mode', k:'dark mode theme light toggle', act:'dark', hint:'Action'},
+    {i:'💬', t:'Ask the AI Agent', k:'ai agent chat assistant ask', act:'agent', hint:'Action'}
+  ];
+  var overlay = document.getElementById('cmdk-overlay');
+  var input = document.getElementById('cmdk-input');
+  var list = document.getElementById('cmdk-list');
+  if(!overlay || !input || !list) return;
+  var filtered = ITEMS, sel = 0, lastFocus = null;
+
+  function render(){
+    list.innerHTML = '';
+    if(!filtered.length){
+      var li = document.createElement('li');
+      li.className = 'cmdk-empty';
+      li.textContent = 'No results — try \u201ccesar\u201d, \u201ccv\u201d or \u201cdark\u201d';
+      list.appendChild(li);
+      return;
+    }
+    filtered.forEach(function(it, idx){
+      var li = document.createElement('li');
+      li.className = 'cmdk-item' + (idx === sel ? ' active' : '');
+      li.setAttribute('role','option');
+      li.innerHTML = '<span class="ck-icon"></span><span class="ck-t"></span><span class="ck-hint"></span>';
+      li.children[0].textContent = it.i;
+      li.children[1].textContent = it.t;
+      li.children[2].textContent = it.hint || '';
+      li.addEventListener('click', function(){ exec(it); });
+      li.addEventListener('mousemove', function(){ if(sel !== idx){ sel = idx; render(); } });
+      list.appendChild(li);
+    });
+    var act = list.children[sel];
+    if(act && act.scrollIntoView) act.scrollIntoView({ block: 'nearest' });
+  }
+
+  function filter(){
+    var q = input.value.trim().toLowerCase();
+    filtered = !q ? ITEMS : ITEMS.filter(function(it){
+      return (it.t + ' ' + it.k).toLowerCase().indexOf(q) >= 0;
+    });
+    sel = 0;
+    render();
+  }
+
+  function exec(it){
+    cmdkClose();
+    if(it.act === 'dark'){ var d = document.getElementById('darkToggle'); if(d) d.click(); return; }
+    if(it.act === 'agent'){ if(window.raOpen) window.raOpen(); return; }
+    if(it.h.charAt(0) === '#'){
+      var el = document.querySelector(it.h);
+      if(el) el.scrollIntoView({ behavior: 'smooth' });
+      return;
+    }
+    if(/^(https?:|mailto:)/.test(it.h)){ window.open(it.h, it.h.indexOf('mailto:')===0 ? '_self' : '_blank', 'noopener'); return; }
+    window.location.href = it.h;
+  }
+
+  window.cmdkOpen = function(){
+    lastFocus = document.activeElement;
+    overlay.classList.add('open');
+    overlay.setAttribute('aria-hidden','false');
+    input.value = ''; filter();
+    setTimeout(function(){ input.focus(); }, 30);
+  };
+  function cmdkClose(){
+    overlay.classList.remove('open');
+    overlay.setAttribute('aria-hidden','true');
+    if(lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  input.addEventListener('input', filter);
+  overlay.addEventListener('mousedown', function(e){ if(e.target === overlay) cmdkClose(); });
+  document.addEventListener('keydown', function(e){
+    var isOpen = overlay.classList.contains('open');
+    if((e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K')){
+      e.preventDefault();
+      if(isOpen) cmdkClose(); else window.cmdkOpen();
+      return;
+    }
+    if(!isOpen) return;
+    if(e.key === 'Escape'){ e.stopPropagation(); cmdkClose(); }
+    else if(e.key === 'ArrowDown'){ e.preventDefault(); if(filtered.length){ sel = (sel + 1) % filtered.length; render(); } }
+    else if(e.key === 'ArrowUp'){ e.preventDefault(); if(filtered.length){ sel = (sel - 1 + filtered.length) % filtered.length; render(); } }
+    else if(e.key === 'Enter'){ e.preventDefault(); if(filtered[sel]) exec(filtered[sel]); }
+  }, true);
+})();
+
+/* ── Cursor glow tracking on cards ── */
+(function(){
+  if(!(window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches)) return;
+  document.addEventListener('mousemove', function(e){
+    var card = e.target.closest && e.target.closest('.research-card, .stat-card');
+    if(!card) return;
+    var r = card.getBoundingClientRect();
+    card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+    card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+  }, { passive: true });
 })();
 </script>

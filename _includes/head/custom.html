@@ -187,6 +187,14 @@
 
   /* ── Anti-flash: apply dark background before body loads ── */
   html.dark-mode-pending { background: #0d1117; }
+
+  /* ── Cross-document View Transitions: smooth fade between pages (progressive; Chrome 126+) ── */
+  @view-transition { navigation: auto; }
+  ::view-transition-old(root) { animation-duration: .18s; }
+  ::view-transition-new(root) { animation-duration: .18s; }
+  @media (prefers-reduced-motion: reduce) {
+    ::view-transition-old(root), ::view-transition-new(root) { animation: none !important; }
+  }
   /* ── Global Dark Mode (applied from homepage toggle, persisted in localStorage) ── */
   body.dark-mode { background: #0d1117 !important; color: #c9d1d9 !important; }
   body.dark-mode .page__content { color: #c9d1d9 !important; }
