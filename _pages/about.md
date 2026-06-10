@@ -644,8 +644,8 @@ body.dark-mode .page { background: #0d1117 !important; }
 /* ── AI Research Assistant chat widget ── */
 .ra-btn { position: fixed; bottom: 68px; right: 22px; width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg,#2563eb,#7c3aed); color: #fff; font-size: 1.3em; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 16px rgba(37,99,235,.4); z-index: 9990; transition: transform .2s, box-shadow .2s; user-select: none; -webkit-user-select: none; }
 .ra-btn:hover { transform: scale(1.1); box-shadow: 0 6px 22px rgba(37,99,235,.5); }
-.ra-panel { position: fixed; bottom: 120px; right: 22px; width: 320px; height: 440px; max-height: calc(100vh - 140px); background: #fff; border-radius: 16px; box-shadow: 0 12px 48px rgba(0,0,0,.18); display: flex; flex-direction: column; z-index: 9991; transform: scale(0.85) translateY(20px); opacity: 0; pointer-events: none; transition: transform .2s, opacity .2s; transform-origin: bottom right; border: 1.5px solid #e5e7eb; }
-.ra-panel.show { transform: scale(1) translateY(0); opacity: 1; pointer-events: all; }
+.ra-panel { position: fixed; bottom: 120px; right: 22px; width: 320px; height: 440px; max-height: calc(100vh - 140px); background: #fff; border-radius: 16px; box-shadow: 0 12px 48px rgba(0,0,0,.18); display: flex; flex-direction: column; z-index: 9991; transform: scale(0.85) translateY(20px); opacity: 0; visibility: hidden; pointer-events: none; transition: transform .2s, opacity .2s, visibility .2s; transform-origin: bottom right; border: 1.5px solid #e5e7eb; }
+.ra-panel.show { transform: scale(1) translateY(0); opacity: 1; visibility: visible; pointer-events: all; }
 .ra-header { background: linear-gradient(135deg,#2563eb,#7c3aed); color: #fff; padding: 12px 14px; border-radius: 14px 14px 0 0; display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 0.9em; }
 .ra-close { background: rgba(255,255,255,.2); border: none; color: #fff; width: 24px; height: 24px; border-radius: 50%; cursor: pointer; font-size: 0.85em; display: flex; align-items: center; justify-content: center; }
 .ra-close:hover { background: rgba(255,255,255,.35); }
@@ -1833,7 +1833,7 @@ Happy to discuss research, internships, or collaborations. Best reached by email
     if(!panel || !panel.classList.contains('show')) return;
     if(e.key === 'Escape'){ raClose(); return; }
     if(e.key === 'Tab'){
-      var focusable = panel.querySelectorAll('button,input,[tabindex]:not([tabindex="-1"])');
+      var focusable = panel.querySelectorAll('button,input,a[href],[tabindex]:not([tabindex="-1"])');
       if(!focusable.length) return;
       var first = focusable[0], last = focusable[focusable.length-1];
       if(e.shiftKey){ if(document.activeElement===first){ e.preventDefault(); last.focus(); } }
