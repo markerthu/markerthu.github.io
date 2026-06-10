@@ -1,7 +1,8 @@
 <!-- ══════════════════ SITE-WIDE AI AGENT (self-contained: CSS + HTML + JS) ══════════════════
-     Used on project pages and the CV page. The homepage (_pages/about.md) carries its own
-     embedded copy of this widget with homepage-specific anchors — if you update the QA
-     knowledge base here, mirror the change in about.md (search for "var QA = [").       -->
+     Single source of truth — included on the homepage, all project pages, /projects/, /cv/
+     and /publications/. Conversational engine: fuzzy retrieval (char-bigram Dice), dialogue
+     state (topic memory, follow-ups), human-like delivery (variable thinking time,
+     punctuation-paced typing, multi-bubble replies, phrasing variation).                  -->
 <style>
 .ra-btn { position: fixed; bottom: 68px; right: 22px; width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg,#2563eb,#7c3aed); color: #fff; font-size: 1.3em; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 16px rgba(37,99,235,.4); z-index: 9990; transition: transform .2s, box-shadow .2s; user-select: none; -webkit-user-select: none; border: none; }
 .ra-btn:hover { transform: scale(1.1); box-shadow: 0 6px 22px rgba(37,99,235,.5); }
@@ -69,255 +70,397 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
     <button class="ra-chip" onclick="raAsk(this)">🎮 Hobbies</button>
   </div>
   <div class="ra-input-row">
-    <input id="ra-input" class="ra-input" type="text" placeholder="Ask about my research…" aria-label="Ask about my research" onkeydown="if(event.key==='Enter')raSend()">
+    <input id="ra-input" class="ra-input" type="text" placeholder="Ask about my research…" aria-label="Ask about my research" onkeydown="if(event.key==='Enter'&&!event.isComposing)raSend()">
     <button onclick="raSend()" class="ra-send" aria-label="Send message">↵</button>
   </div>
 </div>
 
 <script>
 (function(){
-  /* On non-homepage pages, section anchors live on the homepage — prefix with "/". */
-  var QA = [
-    { kw:['hello','hi','hey','who are you','what are you','start'],
-      a:"Hi! I'm a static assistant pre-trained on Jiajun's research. Ask me about any of his papers, research topics, or background — e.g. \"What is CESAR?\" or \"Tell me about LBC\"." },
-    { kw:['research','focus','interest','direction','work on','studying','topic','about you'],
-      a:"My research focuses on autonomous RL post-training for large generative models — making diffusion models, flow matching models, and multimodal LLMs continuously self-improve with minimal human supervision." },
-    { kw:['cesar','audio','mmau','audio llm','process reward','test-time inverse','reasoning process'],
-      a:"CESAR (ICLR 2026) resolves test-time inverse scaling in Audio LLMs — a paradox where longer reasoning chains hurt accuracy. We use process-level reward signals (GRPO) to guide reasoning quality, achieving SOTA on MMAU and outperforming Gemini 2.5 Pro & GPT-4o Audio.",
+  'use strict';
+
+  /* ════════ KNOWLEDGE BASE ════════
+     id      stable topic id (used by rel/follow-ups)
+     kw      retrieval keywords (phrases allowed)
+     a       answer variants (one is picked; never the same twice in a row)
+     more    deeper detail served on "tell me more / why / how"
+     rel     related topic ids the agent may proactively offer
+     act     action chips rendered under the reply                       */
+  var KB = [
+    { id:'focus', kw:['research','focus','interest','direction','work on','studying','topic','about you','what do you do'],
+      a:["My research is about autonomous RL post-training for large generative models — making diffusion models, flow matching models, and multimodal LLMs continuously self-improve with minimal human supervision.",
+         "In one line: I teach big generative models to improve themselves. Concretely — RL post-training for diffusion/flow models and multimodal reasoning LLMs, with as little human supervision as possible."],
+      more:"The thread that connects everything: who supplies the learning signal when humans step away? My answers so far — reward-weighted matching (ORW-CFM-W2), adaptive regularization (ADRPO), intermediate feedback (AC-Flow), and process rewards for reasoning (CESAR).",
+      rel:['cesar','orw'] },
+    { id:'cesar', kw:['cesar','audio','mmau','audio llm','process reward','test-time inverse','reasoning process'],
+      a:["CESAR (ICLR 2026) tackles a paradox we found in Audio LLMs: longer reasoning chains can actually hurt accuracy — test-time inverse scaling. We fix it with process-level rewards (GRPO) that grade the reasoning itself, not just the answer. Result: SOTA on MMAU, ahead of Gemini 2.5 Pro and GPT-4o Audio.",
+         "That's our ICLR 2026 paper. Audio LLMs get worse when they think longer — we measured it, named it (test-time inverse scaling), and fixed it by rewarding the reasoning process instead of only outcomes. SOTA on MMAU."],
+      more:"The key insight: outcome-only RL teaches models to ramble — verbose chains that drift off-task. Process rewards grade each intermediate step, so the model learns to think usefully. That's also why it scales: more test-time compute finally helps instead of hurting.",
+      rel:['focus','adrpo'],
       act:[{t:'🔗 CESAR project page', h:'/projects/cesar/'},{t:'📎 arXiv', h:'https://arxiv.org/abs/2510.20867'}] },
-    { kw:['lbc','atari','world record','behavior control','exploration','bandit'],
-      a:"LBC (ICLR 2023 Notable Top-5% Oral, Rank 5 among oral presentations) broke 24 Atari human world records using 78× less data than Agent57. Key idea: a learnable hybrid behavior mapping + bandit meta-controller for exploration that dramatically enlarges the effective policy space.",
+    { id:'lbc', kw:['lbc','atari','world record','record','superhuman','behavior control','exploration','bandit'],
+      a:["LBC (ICLR 2023 Oral, rank 5/4176) broke 24 Atari human world records with 1B frames — 78× less data than Agent57. The trick: a learnable hybrid behavior mapping plus a bandit meta-controller, which massively enlarges the space of behaviors the agent can explore.",
+         "My favorite to talk about — LBC got an ICLR 2023 Oral (top 5%). We broke 24 Atari human world records using 78× less data than Agent57, by making behavior selection itself learnable instead of hand-designed."],
+      more:"Why it works: population-based methods like Agent57 pick from a fixed, hand-designed set of policies. LBC instead learns a hybrid mapping over ALL policies and lets a bandit meta-controller choose — the effective behavior space explodes, and exploration quality with it. 10,077% mean human-normalized score.",
+      rel:['gdi'],
       act:[{t:'🔗 LBC project page', h:'/projects/lbc/'},{t:'📎 arXiv', h:'https://arxiv.org/abs/2305.05239'}] },
-    { kw:['gdi','generalized data','distribution iteration','icml 2022'],
-      a:"GDI (ICML 2022) shows that optimizing the training data distribution is the key lever for superhuman RL efficiency. We achieve 9620% mean HNS on Atari ALE with 200M frames, comparable to Agent57 but 500× more data-efficient.",
+    { id:'gdi', kw:['gdi','generalized data','distribution iteration','icml 2022'],
+      a:["GDI (ICML 2022) makes one claim: the training data distribution is THE lever for RL efficiency. Optimize it directly and you get 9,620% mean human-normalized score on Atari with just 200M frames — about 500× less data than Agent57.",
+         "GDI is the theory piece — it shows DQN through Agent57 are all special cases of one operator view, and that actively optimizing the data distribution is what really buys sample efficiency. 9,620% mean HNS at 200M frames."],
+      more:"GDI frames RL as alternating between improving the policy and improving the DATA the policy learns from. Most algorithms only do the first implicitly. Making the second explicit — choosing what experience to learn from — is where the 500× efficiency comes from. LBC builds directly on this.",
+      rel:['lbc'],
       act:[{t:'🔗 GDI project page', h:'/projects/gdi/'},{t:'📎 arXiv', h:'https://arxiv.org/abs/2206.03192'}] },
-    { kw:['adrpo','adaptive divergence','adaptive regularization','neurips 2025'],
-      a:"ADRPO (NeurIPS 2025) adapts divergence regularization at the sample level — high-value samples get more exploration freedom, low-value samples get stronger KL constraints. Our 2B SD3 surpasses 12B FLUX and 4.8B SANA.",
+    { id:'adrpo', kw:['adrpo','adaptive divergence','adaptive regularization','neurips 2025'],
+      a:["ADRPO (NeurIPS 2025) makes KL regularization adaptive at the sample level — good samples get freedom to explore, bad ones get pulled back hard. With it, our 2B SD3 beats 12B FLUX and 4.8B SANA.",
+         "The one-line pitch for ADRPO: stop regularizing every sample equally. Modulate the divergence penalty by sample value, and a 2B model out-generates 12B competitors. NeurIPS 2025, plug-and-play on any RL method."],
+      more:"Fixed KL strength is always wrong in both directions — too tight kills exploration on promising samples, too loose lets bad samples drift into reward hacking. Sample-level adaptation resolves the dilemma, and it transfers across modalities (we show it on flow models and LLMs).",
+      rel:['orw','acflow'],
       act:[{t:'🔗 ADRPO project page', h:'/projects/adrpo/'},{t:'📎 arXiv', h:'https://arxiv.org/abs/2510.18053'}] },
-    { kw:['orw','cfm','wasserstein','flow matching','iclr 2025','online rlhf'],
-      a:"ORW-CFM-W2 (ICLR 2025) is the first online RLHF framework for flow matching generative models. No human data needed — just a differentiable reward. Wasserstein-2 regularization prevents mode collapse while maintaining diversity.",
+    { id:'orw', kw:['orw','cfm','wasserstein','flow matching rlhf','iclr 2025','online rlhf'],
+      a:["ORW-CFM-W2 (ICLR 2025) is the first online RLHF framework for flow matching models. No human data, no reward gradients — just a reward function, with Wasserstein-2 regularization to prevent collapse while keeping diversity.",
+         "That's where my generative-model line started — ICLR 2025. Online reward-weighted fine-tuning for flow matching, with a tractable W2 bound that keeps the model from collapsing onto a single high-reward mode."],
+      more:"The hard part was the W2 term: exact Wasserstein-2 between continuous flows is intractable, so we derived a tractable upper bound inside the flow matching objective. That bound is what balances exploitation (chase reward) against exploration (stay diverse).",
+      rel:['adrpo','acflow'],
       act:[{t:'🔗 ORW-CFM-W2 project page', h:'/projects/orw-cfm-w2/'},{t:'📎 arXiv', h:'https://arxiv.org/abs/2502.06061'}] },
-    { kw:['ac-flow','actor critic','intermediate feedback','dual-stability','sd3'],
-      a:"AC-Flow (preprint) introduces actor-critic with intermediate timestep feedback for flow matching. The dual-stability mechanism combines advantage clipping with critic warm-up, enabling robust SD3 fine-tuning without reward hacking.",
+    { id:'acflow', kw:['ac-flow','acflow','actor critic','intermediate feedback','dual-stability'],
+      a:["AC-Flow brings actor-critic RL to flow matching: a critic provides feedback at intermediate timesteps, not just the final image. Dual-stability (advantage clipping + critic warm-up) keeps SD3 fine-tuning robust against reward hacking."],
+      more:"Final-output rewards waste most of the trajectory — the model only hears 'good/bad' at the end. A critic at intermediate steps densifies the signal dramatically, which is why training is both faster and more stable.",
+      rel:['orw','adrpo'],
       act:[{t:'🔗 AC-Flow project page', h:'/projects/ac-flow/'},{t:'📎 arXiv', h:'https://arxiv.org/abs/2510.18072'}] },
-    { kw:['prance','token pruning','channel pruning','vit','tpami','efficient inference'],
-      a:"PRANCE (IEEE TPAMI 2026, Vol. 48) jointly optimizes token pruning and structural channel pruning for adaptive ViT inference — ~50% FLOP reduction, retaining only ~10% tokens with lossless Top-1 accuracy.",
+    { id:'prance', kw:['prance','token pruning','channel pruning','vit','tpami','efficient inference'],
+      a:["PRANCE (IEEE TPAMI 2026) jointly optimizes token pruning and channel pruning for ViTs — about 50% FLOPs cut, keeping only ~10% of tokens, with lossless Top-1 accuracy."],
+      rel:['spvla'],
       act:[{t:'📎 arXiv', h:'https://arxiv.org/abs/2407.05010'}] },
-    { kw:['sp-vla','spvla','sp vla','vla','robot','vision language action','model scheduling'],
-      a:"SP-VLA (ICLR 2026) accelerates Vision-Language-Action models via joint model scheduling and spatio-semantic token pruning. It achieves 1.5× lossless speedup on LIBERO and 2.4× on SimplerEnv. Co-first author with Ye Li et al." },
-    { kw:['varcon','variational contrastive','supervised contrastive','imagenet','resnet'],
-      a:"VarCon (NeurIPS 2025) reformulates supervised contrastive learning as variational inference, introducing a principled probabilistic framework. Achieves SOTA 79.36% Top-1 accuracy on ImageNet-1K with ResNet-50." },
-    { kw:['phd','uiuc','illinois','university','where study','school','student'],
-      a:"I'm a CS PhD student at the University of Illinois Urbana-Champaign (UIUC), one of the top CS programs globally." },
-    { kw:['contact','email','reach','collaborate','talk','message'],
-      a:"You can reach me at jiajunf3 [at] illinois.edu. I'm open to research discussions and collaboration, especially around RL post-training, generative models, and multimodal reasoning.",
+    { id:'spvla', kw:['sp-vla','spvla','sp vla','vla','robot','vision language action','model scheduling'],
+      a:["SP-VLA (ICLR 2026) speeds up Vision-Language-Action models with joint model scheduling and spatio-semantic token pruning — 1.5× lossless on LIBERO, 2.4× on SimplerEnv. Co-first author with Ye Li et al."],
+      rel:['prance'] },
+    { id:'varcon', kw:['varcon','variational contrastive','supervised contrastive','imagenet','resnet'],
+      a:["VarCon (NeurIPS 2025) recasts supervised contrastive learning as variational inference — a principled probabilistic framing that reaches 79.36% Top-1 on ImageNet-1K with ResNet-50."] },
+    { id:'uiuc', kw:['phd','uiuc','illinois','university','where study','school','student'],
+      a:["I'm a CS PhD student at the University of Illinois Urbana-Champaign — 4.0/4.0 so far. Advised by Prof. Ge Liu."],
+      rel:['edu','advisor'] },
+    { id:'contact', kw:['contact','email','reach','collaborate','talk','message'],
+      a:["Easiest way is email: jiajunf3 [at] illinois.edu. Always happy to talk RL post-training, generative models, or multimodal reasoning.",
+         "Drop me an email — jiajunf3 [at] illinois.edu. I read everything, and research conversations are the best part of my day."],
       act:[{t:'✉️ Email Jiajun', h:'mailto:jiajunf3@illinois.edu'},{t:'💼 LinkedIn', h:'https://www.linkedin.com/in/jiajun-fan-57b12b26b'}] },
-    { kw:['publication','paper','published','conference','venue','list','all papers'],
-      a:"I've published at ICLR (2023 Oral, 2025, 2026), NeurIPS (2025), ICML (2022), and IEEE TPAMI (2026), with ongoing preprints. Full list on Google Scholar (EjmzseUAAAAJ).",
+    { id:'pubs', kw:['publication','paper','published','conference','venue','list','all papers','latest papers'],
+      a:["The headline list: ICLR 2023 Oral (LBC), ICML 2022 (GDI), ICLR 2025 (ORW-CFM-W2), NeurIPS 2025 ×2 (ADRPO, VarCon), ICLR 2026 ×2 (CESAR, SP-VLA), IEEE TPAMI 2026 (PRANCE) — plus active preprints.",
+         "Recent ones first: CESAR and SP-VLA at ICLR 2026, ADRPO and VarCon at NeurIPS 2025, PRANCE in TPAMI. Earlier: ORW-CFM-W2 (ICLR'25), LBC (ICLR'23 Oral), GDI (ICML'22)."],
+      rel:['cesar','adrpo'],
       act:[{t:'📄 Publications', h:'/publications/'},{t:'🎓 Google Scholar', h:'https://scholar.google.com/citations?user=EjmzseUAAAAJ'}] },
-    { kw:['citation','cited','impact','scholar','h-index','how many'],
-      a:"My work has 343+ citations (h-index 9). LBC (ICLR 2023 Oral) leads with 28 citations, followed by SP-VLA (ICLR 2026) with 27, then GDI (ICML 2022) with 21. Full profile: Google Scholar EjmzseUAAAAJ." },
-    { kw:['self-improve','self-play','autonomous','annotation-free','human supervision'],
-      a:"My long-term vision: generative models that self-improve autonomously — learning from environment feedback and their own outputs, with minimal human annotation. This drives my work on process rewards, actor-critic methods, and online RL post-training." },
-    { kw:['flow','diffusion','generative','score','ode','trajectory'],
-      a:"Flow matching is a generative modeling framework that learns straight interpolation paths between noise and data distributions, often more training-stable than diffusion. My work (ORW-CFM-W2, AC-Flow) applies RL fine-tuning to flow matching models like SD3 and FLUX." },
-    { kw:['github','code','open source','repository','implementation'],
-      a:"My GitHub is @markerthu. Several projects have open-source code — check the individual project pages for repository links.",
+    { id:'cites', kw:['citation','cited','impact','scholar','h-index','how many'],
+      a:["343+ citations, h-index 9 and climbing. LBC leads with 28, then SP-VLA at 27 and GDI at 21. Live numbers are on Google Scholar (EjmzseUAAAAJ)."] },
+    { id:'vision', kw:['self-improve','self-play','autonomous','annotation-free','human supervision','vision','goal','future','long-term','dream'],
+      a:["The long game: generative models that improve themselves — learning from environment feedback and their own outputs, with humans stepping back at every stage. Process rewards, actor-critic loops, and online RL post-training are the stepping stones."],
+      more:"I think of it as a ladder: first replace human labels with reward models (done), then replace outcome rewards with process rewards (CESAR), then let the model generate its own curriculum (next). Each rung removes one human from the loop.",
+      rel:['focus'] },
+    { id:'flow', kw:['flow matching','diffusion','generative model','score','ode','trajectory'],
+      a:["Flow matching learns straight paths from noise to data — often more stable to train than diffusion. My angle (ORW-CFM-W2, AC-Flow) is fine-tuning these models with RL on top of SD3 and FLUX."],
+      rel:['orw','acflow'] },
+    { id:'code', kw:['github','code','open source','repository','implementation'],
+      a:["GitHub is @markerthu — several projects ship code, and each project page links its repo."],
       act:[{t:'💻 GitHub', h:'https://github.com/markerthu'}] },
-    { kw:['intern','job','position','opportunity','hiring','open to','internship','2026'],
-      a:"I'm open to Fall 2026 / 2027 research internships in RL post-training, generative models, and LLM reasoning. Feel free to reach out at jiajunf3@illinois.edu!",
+    { id:'intern', kw:['intern','internship','job','position','opportunity','hiring','open to','2026','2027'],
+      a:["Yes — I'm looking for a research internship for Fall 2026 / 2027, in RL post-training, generative models, or LLM reasoning. Email me at jiajunf3@illinois.edu and let's talk.",
+         "Good timing: I'm open for Fall 2026 / 2027 research internships. If your team works on frontier RL, post-training, or generative AI, I'd love to chat — jiajunf3@illinois.edu."],
       act:[{t:'✉️ Reach out', h:'mailto:jiajunf3@illinois.edu'},{t:'📋 View CV', h:'/cv/'}] },
-    { kw:['education','background','undergrad','bachelor','nankai','tsinghua','master','before uiuc','degree'],
-      a:"I did my B.Eng. at Nankai University (ranked 1st/83 in my major, GPA top 1%) and M.Eng. at Tsinghua University (GPA 3.97/4.0, top 1.3%). I'm now a CS Ph.D. student at UIUC with a 4.0/4.0 GPA." },
-    { kw:['award','scholarship','gpa','rank','prize','honor','national scholarship','outstanding'],
-      a:"Academic highlights: National Scholarship ×2 and Outstanding Graduates (top 1%) from Nankai; Tang Lixin Scholarship; ranked 1st/83 in my CS major; GPA 3.97/4.0 at Tsinghua; 4.0/4.0 at UIUC Ph.D." },
-    { kw:['reviewer','review','service','program committee','pc member','area chair','conference service'],
-      a:"I serve as a reviewer for ICLR (2024–2026), NeurIPS (2022–2025), ICML (2023–2026), CVPR (2026), AAAI 2025, AISTATS 2025, and KDD 2024." },
-    { kw:['advisor','supervisor','pi','lab','group','professor','mentor','guided by'],
-      a:"My PhD advisor is Prof. Ge Liu at UIUC. I work in the Natural Language Processing (NLP) group, broadly focusing on RL post-training for large generative models." },
-    { kw:['cv','resume','curriculum vitae','download cv'],
-      a:"You can view my full CV at /cv/ — it covers publications, education (Nankai → Tsinghua → UIUC), awards, and research experience. A PDF download is also available from that page.",
+    { id:'edu', kw:['education','background','undergrad','bachelor','nankai','tsinghua','master','before uiuc','degree'],
+      a:["Nankai for undergrad (ranked 1st/83 in major, top 1%), Tsinghua for my M.Eng (3.97/4.0, top 1.3%), and now the CS PhD at UIUC (4.0/4.0)."],
+      rel:['awards'] },
+    { id:'awards', kw:['award','scholarship','gpa','rank','prize','honor','national scholarship','outstanding'],
+      a:["Highlights: National Scholarship ×2, Outstanding Graduate (top 1%) at Nankai, Tang Lixin Scholarship at Tsinghua, 1st/83 major rank — and a 4.0/4.0 at UIUC."],
+      rel:['edu'] },
+    { id:'service', kw:['reviewer','review','service','program committee','pc member','area chair'],
+      a:["I review for ICLR (2024–26), NeurIPS (2022–25), ICML (2023–26), CVPR 2026, AAAI 2025, AISTATS 2025 and KDD 2024."] },
+    { id:'advisor', kw:['advisor','supervisor','pi','lab','group','professor','mentor','guided by'],
+      a:["My advisor is Prof. Ge Liu at UIUC — I work in the NLP group on RL post-training for large generative models."],
+      rel:['uiuc'] },
+    { id:'cv', kw:['cv','resume','curriculum vitae','download cv'],
+      a:["The full CV lives at /cv/ — education, papers, awards, the lot. There's a PDF download on that page too."],
       act:[{t:'📋 Open CV', h:'/cv/'},{t:'⬇️ Download PDF', h:'/files/CV.pdf'}] },
-    { kw:['news','latest','recent','update','announcement'],
-      a:"Latest highlights: CESAR accepted to ICLR 2026, SP-VLA accepted to ICLR 2026, PRANCE accepted to IEEE TPAMI 2026, ADRPO and VarCon accepted to NeurIPS 2025, and a new ICML 2026 accept.",
+    { id:'news', kw:['news','latest','recent','update','announcement','what is new'],
+      a:["Fresh off the press: papers accepted at ICML 2026, CESAR + SP-VLA at ICLR 2026, PRANCE in TPAMI, and ADRPO + VarCon at NeurIPS 2025."],
+      rel:['cesar'],
       act:[{t:'📰 News on homepage', h:'/#news'}] },
-    { kw:['hobby','hobbies','outside research','free time','personal','fun','enjoy','game design','game','creative','interest besides'],
-      a:"Outside of research, I love designing games and building creative AI agents — things that have interesting emergent behaviors or unexpected dynamics. There's a natural overlap with my research: designing reward functions for RL feels a lot like designing game mechanics." },
-    { kw:['thank','thanks','great','awesome','cool','helpful','nice'],
-      a:"Glad I could help! Feel free to ask more questions, or reach out directly at jiajunf3 [at] illinois.edu for deeper discussions." }
+    { id:'hobby', kw:['hobby','hobbies','outside research','free time','personal','fun','game design','game','creative','enjoy'],
+      a:["Outside research I design games and build creative AI agents — anything with emergent behavior. Honestly, designing RL reward functions and designing game mechanics are the same craft.",
+         "Games, mostly — designing them more than playing. There's real overlap with my research: a good reward function and a good game mechanic are both about shaping behavior you can't script directly."] },
+    { id:'site', kw:['website','this site','built','how made','jekyll','github pages','tech stack','this agent','are you human','are you real','chatbot'],
+      a:["Full transparency: I'm a hand-written conversational engine running entirely in your browser — fuzzy retrieval, topic memory, and human-paced typing, but no LLM and no server. Jiajun wrote the algorithm. The rest of the site is Jekyll on GitHub Pages."] }
   ];
 
-  var DEFAULT = "I'm not sure about that specific question. Try asking about a paper (CESAR, LBC, GDI, ADRPO…) or topic (RL, flow matching, audio reasoning). For anything else, email jiajunf3 [at] illinois.edu.";
+  var NAME = { cesar:'CESAR', lbc:'LBC', gdi:'GDI', adrpo:'ADRPO', orw:'ORW-CFM-W2', acflow:'AC-Flow',
+               prance:'PRANCE', spvla:'SP-VLA', focus:'my research focus', edu:'my education',
+               awards:'awards', uiuc:'UIUC', advisor:'my advisor', vision:'the long-term vision' };
 
-  function findAnswer(q) {
-    q = (q || '').toLowerCase();
-    var fallback = { a: DEFAULT, act: [{t:'📄 Browse papers', h:'/publications/'},{t:'✉️ Email Jiajun', h:'mailto:jiajunf3@illinois.edu'}] };
-    if (!q) return fallback;
-    var best = null, bestScore = 0;
-    QA.forEach(function(qa) {
-      var score = 0;
-      qa.kw.forEach(function(k) { if (q.indexOf(k) >= 0) score++; });
-      if (score > bestScore) { bestScore = score; best = qa; }
-    });
-    return (bestScore > 0 && best) ? best : fallback;
+  /* ════════ INTENTS (social / dialogue moves) ════════ */
+  var GREET_RE = /^(hi|hello|hey|yo|hiya|howdy|good (morning|afternoon|evening)|你好|您好|哈喽|嗨)[!. ]*$/i;
+  var THANKS_RE = /\b(thank|thanks|thx|appreciate|谢谢|感谢)\b/i;
+  var BYE_RE = /^(bye|goodbye|see you|cya|later|再见|拜拜)[!. ]*$/i;
+  var MORE_RE = /\b(more|else|detail|details|deeper|elaborate|continue|go on|why|how come|how does|how do|expand|具体|为什么|细节|展开)\b/i;
+  var YES_RE = /^(yes|yeah|yep|sure|ok|okay|sounds good|please|do it|好|好的|可以|行)[!. ]*$/i;
+
+  var GREETS = ["Hey! What would you like to know — a paper, the research direction, or something about Jiajun's background?",
+                "Hi there 👋 Ask me anything about Jiajun's work. The papers are my favorite subject.",
+                "Hello! I know Jiajun's research inside out — fire away."];
+  var THANKS_R = ["Anytime! Ask away if anything else comes to mind.",
+                  "Happy to help. For deeper discussions, jiajunf3 [at] illinois.edu is the way.",
+                  "You're welcome! I'm here whenever."];
+  var BYES = ["See you around! 👋", "Take care — and check out the papers if you haven't!", "Bye! Come back anytime."];
+  var OPENERS = ["", "", "", "Good question — ", "Ah, ", "Sure — ", "Right, so — ", "Oh, that one's fun. "];
+  var FOLLOWUP = ["Want me to go deeper on {T}?", "Curious how this relates to {T}?", "I can also tell you about {T} if you're interested."];
+  var FALLBACKS = ["Hmm, I don't have a confident answer for that one. Try a paper name (CESAR, LBC, GDI, ADRPO…) or a topic like flow matching or audio reasoning — or email jiajunf3 [at] illinois.edu directly.",
+                   "That's outside what I know well, honestly. I'm strongest on the papers and Jiajun's background — or you can reach the human at jiajunf3 [at] illinois.edu."];
+
+  /* ════════ RETRIEVAL: char-bigram Dice similarity + phrase/keyword scoring ════════ */
+  function norm(s){ return (s||'').toLowerCase().replace(/[^a-z0-9一-鿿\s-]/g,' ').replace(/\s+/g,' ').trim(); }
+  function bigrams(s){ var b=[],i; for(i=0;i<s.length-1;i++) b.push(s.substr(i,2)); return b; }
+  function dice(a,b){
+    if(a===b) return 1;
+    if(a.length<2||b.length<2) return 0;
+    var A=bigrams(a), B=bigrams(b), map={}, hit=0, i;
+    for(i=0;i<A.length;i++) map[A[i]]=(map[A[i]]||0)+1;
+    for(i=0;i<B.length;i++) if(map[B[i]]>0){ map[B[i]]--; hit++; }
+    return 2*hit/(A.length+B.length);
+  }
+  function scoreEntry(entry, q, qTokens){
+    var s=0, j, k, kn, t, best, sim;
+    for(j=0;j<entry.kw.length;j++){
+      k=entry.kw[j]; kn=norm(k);
+      var w = kn.length>=8 ? 2.2 : (kn.length>=5 ? 1.5 : 1);
+      if(q.indexOf(kn)>=0){ s += 2*w; continue; }        /* exact phrase hit */
+      best=0;
+      for(t=0;t<qTokens.length;t++){                      /* fuzzy token hit (typo-tolerant) */
+        sim=dice(qTokens[t],kn);
+        if(sim>best) best=sim;
+      }
+      if(best>=0.72) s += best*w;
+    }
+    return s;
+  }
+  function retrieve(qRaw){
+    var q=norm(qRaw), qTokens=q.split(' ').filter(function(x){return x.length>1;});
+    var best=null, bestS=0, i, s;
+    for(i=0;i<KB.length;i++){
+      s=scoreEntry(KB[i],q,qTokens);
+      if(s>bestS){ bestS=s; best=KB[i]; }
+    }
+    return bestS>=0.9 ? best : null;
   }
 
-  function addMsg(text, role) {
-    var msgs = document.getElementById('ra-msgs');
-    if (!msgs) return;
-    var div = document.createElement('div');
-    div.className = 'ra-msg ra-' + role;
-    div.textContent = text;
+  /* ════════ DIALOGUE STATE ════════ */
+  var state = { lastTopic:null, offered:null, lastOpener:-1, lastVariant:{}, visited:{} };
+  function pick(arr, lastKey){
+    if(arr.length===1) return arr[0];
+    var i, tries=0;
+    do { i=Math.floor(Math.random()*arr.length); tries++; }
+    while(lastKey!==undefined && i===state.lastVariant[lastKey] && tries<5);
+    if(lastKey!==undefined) state.lastVariant[lastKey]=i;
+    return arr[i];
+  }
+  function opener(){
+    var i, tries=0;
+    do { i=Math.floor(Math.random()*OPENERS.length); tries++; } while(i===state.lastOpener && tries<5);
+    state.lastOpener=i;
+    return OPENERS[i];
+  }
+  function followupFor(entry){
+    if(!entry.rel || !entry.rel.length) return null;
+    var candidates = entry.rel.filter(function(id){ return !state.visited[id]; });
+    if(!candidates.length) return null;
+    var id = candidates[Math.floor(Math.random()*candidates.length)];
+    state.offered = id;
+    return pick(FOLLOWUP).replace('{T}', NAME[id]||id);
+  }
+  function entryById(id){ for(var i=0;i<KB.length;i++) if(KB[i].id===id) return KB[i]; return null; }
+
+  function respond(qRaw){
+    var q=norm(qRaw);
+    /* social intents first */
+    if(GREET_RE.test(qRaw.trim()))  return { text:pick(GREETS,'greet') };
+    if(BYE_RE.test(qRaw.trim()))    return { text:pick(BYES,'bye') };
+    if(THANKS_RE.test(q))           return { text:pick(THANKS_R,'thanks') };
+    /* accepting an offered follow-up */
+    if(YES_RE.test(qRaw.trim()) && state.offered){
+      var off=entryById(state.offered); state.offered=null;
+      if(off) return answerFrom(off, true);
+    }
+    /* "tell me more" about current topic */
+    if(MORE_RE.test(q) && state.lastTopic){
+      var t=state.lastTopic;
+      if(t.more && !t._moreServed){
+        t._moreServed=true;
+        var fu=followupFor(t);
+        return { text:t.more + (fu ? '||'+fu : ''), act:t.act };
+      }
+      var fu2=followupFor(t);
+      if(fu2) return { text:"I've told you the best parts of that one! "+fu2 };
+    }
+    /* content retrieval */
+    var hit=retrieve(qRaw);
+    if(hit) return answerFrom(hit, false);
+    state.offered=null;
+    return { text:pick(FALLBACKS,'fb'), act:[{t:'📄 Browse papers', h:'/publications/'},{t:'✉️ Email Jiajun', h:'mailto:jiajunf3@illinois.edu'}] };
+  }
+  function answerFrom(entry, accepted){
+    state.lastTopic=entry; state.visited[entry.id]=true; state.offered=null;
+    var body=pick(entry.a, entry.id);
+    var pre = accepted ? pick(["Alright — ","Here goes: ",""]) : opener();
+    if(pre && /[,—] $/.test(pre) && /^[A-Z][a-z]/.test(body)) body = body.charAt(0).toLowerCase() + body.slice(1);
+    var fu = (Math.random()<0.6) ? followupFor(entry) : null;
+    return { text: pre+body + (fu ? '||'+fu : ''), act:entry.act };
+  }
+
+  /* ════════ HUMAN-PACED DELIVERY ════════
+     - thinking time scales with answer length (+jitter)
+     - per-char typing speed varies; pauses at punctuation
+     - '||' splits a reply into separate bubbles, with a typing
+       indicator between them — like a person sending two messages   */
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function el(id){ return document.getElementById(id); }
+  function addMsg(text, role){
+    var msgs=el('ra-msgs'); if(!msgs) return;
+    var div=document.createElement('div');
+    div.className='ra-msg ra-'+role;
+    div.textContent=text;
     msgs.appendChild(div);
-    msgs.scrollTop = msgs.scrollHeight;
+    msgs.scrollTop=msgs.scrollHeight;
   }
-
-  function appendActs(acts) {
-    if (!acts || !acts.length) return;
-    var msgs = document.getElementById('ra-msgs');
-    if (!msgs) return;
-    var wrap = document.createElement('div');
-    wrap.className = 'ra-acts';
-    acts.forEach(function(ac) {
-      var a = document.createElement('a');
-      a.className = 'ra-act';
-      a.textContent = ac.t;
-      a.href = ac.h;
-      if (/^https?:/.test(ac.h)) { a.target = '_blank'; a.rel = 'noopener noreferrer'; }
+  function appendActs(acts){
+    if(!acts||!acts.length) return;
+    var msgs=el('ra-msgs'); if(!msgs) return;
+    var wrap=document.createElement('div');
+    wrap.className='ra-acts';
+    acts.forEach(function(ac){
+      var a=document.createElement('a');
+      a.className='ra-act'; a.textContent=ac.t; a.href=ac.h;
+      if(/^https?:/.test(ac.h)){ a.target='_blank'; a.rel='noopener noreferrer'; }
+      if(ac.h.indexOf('/#')===0 && location.pathname==='/'){
+        a.addEventListener('click', function(ev){
+          ev.preventDefault(); raClose();
+          var sec=document.querySelector(ac.h.substring(1));
+          if(sec) sec.scrollIntoView({behavior:'smooth'});
+        });
+      }
       wrap.appendChild(a);
     });
     msgs.appendChild(wrap);
-    msgs.scrollTop = msgs.scrollHeight;
+    msgs.scrollTop=msgs.scrollHeight;
   }
-
-  function typeMsg(text, acts) {
-    var msgs = document.getElementById('ra-msgs');
-    if (!msgs) return;
-    var div = document.createElement('div');
-    div.className = 'ra-msg ra-bot';
-    msgs.appendChild(div);
-    msgs.scrollTop = msgs.scrollHeight;
-    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      div.textContent = text;
-      appendActs(acts);
-      return;
-    }
-    var i = 0;
-    function tick() {
-      if (i <= text.length) {
-        div.textContent = text.substring(0, i);
-        msgs.scrollTop = msgs.scrollHeight;
+  function showTyping(){
+    if(el('ra-typing-indicator')) return;
+    var msgs=el('ra-msgs'); if(!msgs) return;
+    var div=document.createElement('div');
+    div.className='ra-msg ra-bot ra-typing'; div.id='ra-typing-indicator';
+    div.innerHTML='<span></span><span></span><span></span>';
+    msgs.appendChild(div); msgs.scrollTop=msgs.scrollHeight;
+  }
+  function removeTyping(){
+    var x=el('ra-typing-indicator');
+    if(x&&x.parentNode) x.parentNode.removeChild(x);
+  }
+  function charDelay(ch, prev){
+    if(prev==='.'||prev==='!'||prev==='?') return 180+Math.random()*140;  /* breath after sentence */
+    if(prev===','||prev===';'||prev==='—') return 70+Math.random()*70;   /* mini-pause */
+    return 6+Math.random()*16;                                            /* normal burst */
+  }
+  function typeBubble(text, done){
+    var msgs=el('ra-msgs'); if(!msgs){ if(done) done(); return; }
+    var div=document.createElement('div');
+    div.className='ra-msg ra-bot';
+    msgs.appendChild(div); msgs.scrollTop=msgs.scrollHeight;
+    if(reduced){ div.textContent=text; if(done) done(); return; }
+    var i=0;
+    (function tick(){
+      if(i<=text.length){
+        div.textContent=text.substring(0,i);
+        msgs.scrollTop=msgs.scrollHeight;
         i++;
-        setTimeout(tick, i < 20 ? 8 : 3);
-      } else {
-        appendActs(acts);
-      }
+        setTimeout(tick, charDelay(text[i-1]||'', text[i-2]||''));
+      } else if(done) done();
+    })();
+  }
+  function deliver(reply){
+    var parts=reply.text.split('||').map(function(p){return p.trim();}).filter(Boolean);
+    var idx=0;
+    function next(){
+      if(idx>=parts.length){ appendActs(reply.act); return; }
+      var part=parts[idx++];
+      var think = idx===1
+        ? Math.min(420+part.length*2.2, 1700)+Math.random()*380   /* reading + thinking */
+        : 380+Math.random()*520;                                   /* gap between bubbles */
+      showTyping();
+      setTimeout(function(){ removeTyping(); typeBubble(part, next); }, reduced?60:think);
     }
-    tick();
+    next();
   }
 
-  function showTyping() {
-    if (document.getElementById('ra-typing-indicator')) return;
-    var msgs = document.getElementById('ra-msgs');
-    if (!msgs) return;
-    var div = document.createElement('div');
-    div.className = 'ra-msg ra-bot ra-typing';
-    div.id = 'ra-typing-indicator';
-    div.innerHTML = '<span></span><span></span><span></span>';
-    msgs.appendChild(div);
-    msgs.scrollTop = msgs.scrollHeight;
-  }
-
-  function removeTyping() {
-    var el = document.getElementById('ra-typing-indicator');
-    if (el && el.parentNode) el.parentNode.removeChild(el);
-  }
-
-  window.raAsk = function(btn) {
-    if (!btn) return;
-    var text = btn.textContent.replace(/^[^\w]+/, '').trim();
-    var chips = document.getElementById('ra-chips');
-    var input = document.getElementById('ra-input');
-    if (chips) chips.classList.add('hidden');
-    if (input) input.value = text;
+  /* ════════ PUBLIC API (open/close/send) ════════ */
+  window.raAsk=function(btn){
+    if(!btn) return;
+    var text=btn.textContent.replace(/^[^\w]+/,'').trim();
+    var chips=el('ra-chips'); var input=el('ra-input');
+    if(chips) chips.classList.add('hidden');
+    if(input) input.value=text;
     raSend();
   };
-
-  window.raOpen = function() {
-    var panel = document.getElementById('ra-panel');
-    var btn = document.getElementById('ra-btn');
-    if (!panel || !btn) return;
+  window.raOpen=function(){
+    var panel=el('ra-panel'); var btn=el('ra-btn');
+    if(!panel||!btn) return;
     panel.classList.add('show');
-    panel.setAttribute('aria-hidden', 'false');
-    btn.style.display = 'none';
-    btn.setAttribute('aria-expanded', 'true');
-    var msgs = document.getElementById('ra-msgs');
-    if (msgs && !msgs.children.length) {
-      setTimeout(function() {
-        typeMsg("Hi! I'm Jiajun's AI agent ✨ Ask me anything about his research — or let me take you somewhere:", [{t:'🏠 Homepage', h:'/'},{t:'📄 Publications', h:'/publications/'},{t:'✉️ Contact', h:'mailto:jiajunf3@illinois.edu'}]);
-      }, 200);
+    panel.setAttribute('aria-hidden','false');
+    btn.style.display='none';
+    btn.setAttribute('aria-expanded','true');
+    var msgs=el('ra-msgs');
+    if(msgs&&!msgs.children.length){
+      setTimeout(function(){
+        deliver({ text:"Hey, welcome 👋 I'm Jiajun's site agent — I know every paper here cold.||Ask me anything, or tap a topic below.",
+                  act:[{t:'🏠 Homepage', h:'/'},{t:'📄 Publications', h:'/publications/'},{t:'✉️ Contact', h:'mailto:jiajunf3@illinois.edu'}] });
+      },200);
     }
-    setTimeout(function() { var i = document.getElementById('ra-input'); if (i) i.focus(); }, 300);
+    setTimeout(function(){ var i=el('ra-input'); if(i) i.focus(); },300);
   };
-
-  window.raClose = function() {
-    var panel = document.getElementById('ra-panel');
-    if (!panel) return;
+  window.raClose=function(){
+    var panel=el('ra-panel'); if(!panel) return;
     panel.classList.remove('show');
-    panel.setAttribute('aria-hidden', 'true');
-    var btn = document.getElementById('ra-btn');
-    if (btn) {
-      btn.style.display = 'flex';
-      btn.setAttribute('aria-expanded', 'false');
-      btn.focus();
-    }
+    panel.setAttribute('aria-hidden','true');
+    var btn=el('ra-btn');
+    if(btn){ btn.style.display='flex'; btn.setAttribute('aria-expanded','false'); btn.focus(); }
   };
-
   document.addEventListener('keydown', function(e){
-    var panel = document.getElementById('ra-panel');
-    if (!panel || !panel.classList.contains('show')) return;
-    if (e.key === 'Escape') { raClose(); return; }
-    if (e.key === 'Tab') {
-      var focusable = panel.querySelectorAll('button,input,a[href],[tabindex]:not([tabindex="-1"])');
-      if (!focusable.length) return;
-      var first = focusable[0], last = focusable[focusable.length - 1];
-      if (e.shiftKey) { if (document.activeElement === first) { e.preventDefault(); last.focus(); } }
-      else            { if (document.activeElement === last)  { e.preventDefault(); first.focus(); } }
+    var panel=el('ra-panel');
+    if(!panel||!panel.classList.contains('show')) return;
+    if(e.key==='Escape'){ raClose(); return; }
+    if(e.key==='Tab'){
+      var f=panel.querySelectorAll('button,input,a[href],[tabindex]:not([tabindex="-1"])');
+      if(!f.length) return;
+      var first=f[0], last=f[f.length-1];
+      if(e.shiftKey){ if(document.activeElement===first){ e.preventDefault(); last.focus(); } }
+      else          { if(document.activeElement===last){ e.preventDefault(); first.focus(); } }
     }
   });
-
-  window.raSend = function() {
-    var inp = document.getElementById('ra-input');
-    if (!inp) return;
-    var q = inp.value.trim();
-    if (!q) return;
-    inp.value = '';
-    addMsg(q, 'user');
-    showTyping();
-    setTimeout(function() {
-      removeTyping();
-      var r = findAnswer(q);
-      typeMsg(r.a, r.act);
-    }, 600 + Math.random() * 400);
+  window.raSend=function(){
+    var inp=el('ra-input'); if(!inp) return;
+    var q=inp.value.trim(); if(!q) return;
+    inp.value='';
+    addMsg(q,'user');
+    deliver(respond(q));
   };
 
   /* FAB tooltip (once per session) + pulse quiet after open */
   (function(){
-    var btn = document.getElementById('ra-btn');
-    var tip = document.getElementById('ra-tip');
-    if (!btn) return;
-    function quiet() {
+    var btn=el('ra-btn'); var tip=el('ra-tip');
+    if(!btn) return;
+    function quiet(){
       btn.classList.add('ra-quiet');
-      if (tip) tip.classList.remove('show');
-      try { sessionStorage.setItem('raSeen', '1'); } catch(e) {}
+      if(tip) tip.classList.remove('show');
+      try{ sessionStorage.setItem('raSeen','1'); }catch(e){}
     }
     btn.addEventListener('click', quiet);
-    try {
-      if (sessionStorage.getItem('raSeen') === '1') { btn.classList.add('ra-quiet'); return; }
-    } catch(e) {}
-    if (tip) {
-      setTimeout(function(){ tip.classList.add('show'); }, 2600);
-      setTimeout(function(){ tip.classList.remove('show'); }, 9000);
+    try{ if(sessionStorage.getItem('raSeen')==='1'){ btn.classList.add('ra-quiet'); return; } }catch(e){}
+    if(tip){
+      setTimeout(function(){ tip.classList.add('show'); },2600);
+      setTimeout(function(){ tip.classList.remove('show'); },9000);
     }
   })();
 })();
