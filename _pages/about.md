@@ -865,6 +865,96 @@ body.dark-mode .hero-pill { background: rgba(255,255,255,0.12) !important; color
 /* ── Dark mode: Awards grid text ── */
 /* dead selectors removed — replaced by .awards-col-title / .awards-col-list classes */
 
+/* ══════════════ POLISH PACK: smooth scroll · reveal · hero glow · agent ══════════════ */
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+::selection { background: #1565c0; color: #fff; }
+body.dark-mode ::selection { background: #58a6ff; color: #0d1117; }
+a:focus-visible, button:focus-visible { outline: 2px solid #1565c0; outline-offset: 2px; border-radius: 4px; }
+body.dark-mode a:focus-visible, body.dark-mode button:focus-visible { outline-color: #58a6ff; }
+
+/* Scroll-reveal */
+.sr { opacity: 0; transform: translateY(18px); transition: opacity .6s cubic-bezier(.22,.61,.36,1), transform .6s cubic-bezier(.22,.61,.36,1); will-change: opacity, transform; }
+.sr.sr-in { opacity: 1; transform: none; }
+.sr-d1 { transition-delay: .08s; } .sr-d2 { transition-delay: .16s; } .sr-d3 { transition-delay: .24s; }
+@media (prefers-reduced-motion: reduce) { .sr { opacity: 1; transform: none; transition: none; } }
+
+/* Hero name — animated gradient sheen */
+.hero-name {
+  background: linear-gradient(90deg, #fff 0%, #fff 38%, #93c5fd 50%, #fff 62%, #fff 100%);
+  background-size: 250% 100%;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: heroSheen 5.5s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) { .hero-name { animation: none; -webkit-text-fill-color: #fff; } }
+@keyframes heroSheen { 0%, 60% { background-position: 110% 0; } 90%, 100% { background-position: -60% 0; } }
+
+/* Hero status badge */
+.hero-status {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: rgba(34,197,94,0.14); border: 1px solid rgba(74,222,128,0.45);
+  color: #bbf7d0; font-size: 0.78em; font-weight: 700;
+  padding: 4px 14px; border-radius: 999px; margin: 2px 0 16px;
+}
+.hs-dot { width: 8px; height: 8px; border-radius: 50%; background: #4ade80; box-shadow: 0 0 0 0 rgba(74,222,128,.6); animation: hsPulse 2s ease-out infinite; }
+@media (prefers-reduced-motion: reduce) { .hs-dot { animation: none; } }
+@keyframes hsPulse { 0% { box-shadow: 0 0 0 0 rgba(74,222,128,.55); } 70% { box-shadow: 0 0 0 7px rgba(74,222,128,0); } 100% { box-shadow: 0 0 0 0 rgba(74,222,128,0); } }
+
+/* Featured card — shine sweep on hover */
+.featured-card::before {
+  content: ''; position: absolute; top: 0; left: -80%;
+  width: 50%; height: 100%; z-index: 1; pointer-events: none;
+  background: linear-gradient(105deg, transparent, rgba(255,255,255,0.45), transparent);
+  transform: skewX(-20deg); transition: left .55s ease;
+}
+.featured-card:hover::before { left: 130%; }
+body.dark-mode .featured-card::before { background: linear-gradient(105deg, transparent, rgba(148,197,253,0.18), transparent); }
+
+/* AI Agent — FAB pulse ring + tooltip */
+.ra-btn::after {
+  content: ''; position: absolute; inset: -4px; border-radius: 50%;
+  border: 2px solid rgba(124,58,237,.5);
+  animation: raPulse 2.4s ease-out infinite; pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) { .ra-btn::after { animation: none; opacity: 0; } }
+@keyframes raPulse { 0% { transform: scale(.9); opacity: .9; } 70% { transform: scale(1.35); opacity: 0; } 100% { transform: scale(1.35); opacity: 0; } }
+.ra-tip {
+  position: fixed; bottom: 76px; right: 80px; z-index: 9990;
+  background: #1a2332; color: #fff; font-size: 0.78em; font-weight: 700;
+  padding: 7px 13px; border-radius: 10px 10px 2px 10px;
+  box-shadow: 0 6px 20px rgba(0,0,0,.25);
+  opacity: 0; transform: translateY(6px); pointer-events: none;
+  transition: opacity .4s, transform .4s; white-space: nowrap;
+}
+.ra-tip.show { opacity: 1; transform: none; }
+body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
+
+/* AI Agent — header status */
+.ra-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #4ade80; margin: 0 4px 0 8px; vertical-align: 1px; }
+.ra-status { font-size: 0.78em; font-weight: 600; opacity: .85; }
+
+/* AI Agent — action chips under bot replies */
+.ra-acts { display: flex; flex-wrap: wrap; gap: 5px; margin: 2px 0 4px; max-width: 85%; }
+.ra-act {
+  display: inline-block; background: #eff6ff; color: #1d4ed8 !important;
+  border: 1.5px solid #bfdbfe; border-radius: 999px;
+  padding: 2px 10px; font-size: 0.73em; font-weight: 700;
+  text-decoration: none !important; cursor: pointer;
+  transition: background .15s, transform .1s;
+}
+.ra-act:hover { background: #dbeafe; transform: translateY(-1px); }
+body.dark-mode .ra-act { background: #1c2333 !important; color: #58a6ff !important; border-color: #1f3a6e !important; }
+.ra-btn.ra-quiet::after { animation: none; opacity: 0; }
+
+/* Print safety for polish pack */
+@media print {
+  .sr { opacity: 1 !important; transform: none !important; }
+  .hero-name { background: none; -webkit-text-fill-color: #000; animation: none; }
+  .ra-btn, .ra-tip, .ra-panel { display: none !important; }
+}
+
 </style>
 
 <!-- Hero banner -->
@@ -873,6 +963,7 @@ body.dark-mode .hero-pill { background: rgba(255,255,255,0.12) !important; color
   <canvas class="hero-particles" id="particles" aria-hidden="true"></canvas>
   <div class="hero-name">Jiajun Fan</div>
   <div class="hero-subtitle" id="hero-typed"></div>
+  <div class="hero-status"><span class="hs-dot" aria-hidden="true"></span>Open to Research Internships — Fall 2026 / 2027</div>
   <div class="hero-pills">
     <span class="hero-pill">🌊 RL Post-Training for Generative Models</span>
     <span class="hero-pill">🧠 Multimodal Reasoning LLMs</span>
@@ -1425,10 +1516,11 @@ Happy to discuss research, internships, or collaborations. Best reached by email
 <button class="dark-toggle" id="darkToggle" title="Toggle dark mode" aria-label="Toggle dark mode">🌙</button>
 
 <!-- ══════════════════ AI RESEARCH ASSISTANT ══════════════════ -->
-<button id="ra-btn" class="ra-btn" onclick="raOpen()" aria-label="Open research assistant chat" aria-expanded="false" title="Ask about my research">💬</button>
-<div id="ra-panel" class="ra-panel" role="dialog" aria-modal="true" aria-label="Research Assistant" aria-hidden="true">
+<button id="ra-btn" class="ra-btn" onclick="raOpen()" aria-label="Open AI agent chat" aria-expanded="false" title="Ask my AI agent">💬</button>
+<span id="ra-tip" class="ra-tip" aria-hidden="true">Ask my AI agent ✨</span>
+<div id="ra-panel" class="ra-panel" role="dialog" aria-modal="true" aria-label="AI Agent" aria-hidden="true">
   <div class="ra-header">
-    <span>🤖 Research Assistant</span>
+    <span>🤖 Jiajun's AI Agent<span class="ra-dot" aria-hidden="true"></span><span class="ra-status">online</span></span>
     <button onclick="raClose()" class="ra-close" aria-label="Close chat widget">✕</button>
   </div>
   <div id="ra-msgs" class="ra-msgs"></div>
@@ -1454,19 +1546,25 @@ Happy to discuss research, internships, or collaborations. Best reached by email
     { kw:['research','focus','interest','direction','work on','studying','topic','about you'],
       a:"My research focuses on autonomous RL post-training for large generative models — making diffusion models, flow matching models, and multimodal LLMs continuously self-improve with minimal human supervision." },
     { kw:['cesar','audio','mmau','audio llm','process reward','test-time inverse','reasoning process'],
-      a:"CESAR (ICLR 2026) resolves test-time inverse scaling in Audio LLMs — a paradox where longer reasoning chains hurt accuracy. We use process-level reward signals (GRPO) to guide reasoning quality, achieving SOTA on MMAU and outperforming Gemini 2.5 Pro & GPT-4o Audio." },
+      a:"CESAR (ICLR 2026) resolves test-time inverse scaling in Audio LLMs — a paradox where longer reasoning chains hurt accuracy. We use process-level reward signals (GRPO) to guide reasoning quality, achieving SOTA on MMAU and outperforming Gemini 2.5 Pro & GPT-4o Audio.",
+      act:[{t:'🔗 CESAR project page', h:'/projects/cesar/'},{t:'📎 arXiv', h:'https://arxiv.org/abs/2510.20867'}] },
     { kw:['test-time','inverse scaling','longer reasoning','reasoning length'],
       a:"Test-time inverse scaling is when giving a model more reasoning steps actually hurts accuracy. In Audio LLMs, standard RL leads to verbose, irrelevant chains. CESAR fixes this with process-level rewards that reward correct intermediate steps, not just final answers." },
     { kw:['lbc','atari','world record','behavior control','exploration','bandit'],
-      a:"LBC (ICLR 2023 Notable Top-5% Oral, Rank 5 among oral presentations) broke 24 Atari human world records using 78× less data than Agent57. Key idea: a learnable hybrid behavior mapping + bandit meta-controller for exploration that dramatically enlarges the effective policy space." },
+      a:"LBC (ICLR 2023 Notable Top-5% Oral, Rank 5 among oral presentations) broke 24 Atari human world records using 78× less data than Agent57. Key idea: a learnable hybrid behavior mapping + bandit meta-controller for exploration that dramatically enlarges the effective policy space.",
+      act:[{t:'🔗 LBC project page', h:'/projects/lbc/'},{t:'📎 arXiv', h:'https://arxiv.org/abs/2305.05239'}] },
     { kw:['gdi','generalized data','distribution iteration','icml 2022'],
-      a:"GDI (ICML 2022) shows that optimizing the training data distribution is the key lever for superhuman RL efficiency. We achieve 9620% mean HNS on Atari ALE with 200M frames, comparable to Agent57 but 500× more data-efficient." },
+      a:"GDI (ICML 2022) shows that optimizing the training data distribution is the key lever for superhuman RL efficiency. We achieve 9620% mean HNS on Atari ALE with 200M frames, comparable to Agent57 but 500× more data-efficient.",
+      act:[{t:'🔗 GDI project page', h:'/projects/gdi/'},{t:'📎 arXiv', h:'https://arxiv.org/abs/2206.03192'}] },
     { kw:['adrpo','adaptive divergence','adaptive regularization','neurips 2025'],
-      a:"ADRPO (NeurIPS 2025) adapts divergence regularization at the sample level — high-value samples get more exploration freedom, low-value samples get stronger KL constraints. Our 2B SD3 surpasses 12B FLUX and 4.8B SANA." },
+      a:"ADRPO (NeurIPS 2025) adapts divergence regularization at the sample level — high-value samples get more exploration freedom, low-value samples get stronger KL constraints. Our 2B SD3 surpasses 12B FLUX and 4.8B SANA.",
+      act:[{t:'🔗 ADRPO project page', h:'/projects/adrpo/'},{t:'📎 arXiv', h:'https://arxiv.org/abs/2510.18053'}] },
     { kw:['orw','cfm','wasserstein','flow matching','iclr 2025','online rlhf'],
-      a:"ORW-CFM-W2 (ICLR 2025) is the first online RLHF framework for flow matching generative models. No human data needed — just a differentiable reward. Wasserstein-2 regularization prevents mode collapse while maintaining diversity." },
+      a:"ORW-CFM-W2 (ICLR 2025) is the first online RLHF framework for flow matching generative models. No human data needed — just a differentiable reward. Wasserstein-2 regularization prevents mode collapse while maintaining diversity.",
+      act:[{t:'🔗 ORW-CFM-W2 project page', h:'/projects/orw-cfm-w2/'},{t:'📎 arXiv', h:'https://arxiv.org/abs/2502.06061'}] },
     { kw:['ac-flow','actor critic','intermediate feedback','dual-stability','sd3'],
-      a:"AC-Flow (preprint) introduces actor-critic with intermediate timestep feedback for flow matching. The dual-stability mechanism combines advantage clipping with critic warm-up, enabling robust SD3 fine-tuning without reward hacking." },
+      a:"AC-Flow (preprint) introduces actor-critic with intermediate timestep feedback for flow matching. The dual-stability mechanism combines advantage clipping with critic warm-up, enabling robust SD3 fine-tuning without reward hacking.",
+      act:[{t:'🔗 AC-Flow project page', h:'/projects/ac-flow/'},{t:'📎 arXiv', h:'https://arxiv.org/abs/2510.18072'}] },
     { kw:['prance','token pruning','channel pruning','vit','tpami','efficient inference'],
       a:"PRANCE (IEEE TPAMI 2026, Vol. 48) jointly optimizes token pruning and structural channel pruning for adaptive ViT inference — ~50% FLOP reduction, retaining only ~10% tokens with lossless Top-1 accuracy." },
     { kw:['sp-vla','spvla','sp vla','vla','robot','vision language action','token pruning','model scheduling'],
@@ -1477,9 +1575,11 @@ Happy to discuss research, internships, or collaborations. Best reached by email
     { kw:['phd','uiuc','illinois','university','where study','school','student'],
       a:"I'm a CS PhD student at the University of Illinois Urbana-Champaign (UIUC), one of the top CS programs globally." },
     { kw:['contact','email','reach','collaborate','talk','message'],
-      a:"You can reach me at jiajunf3 [at] illinois.edu. I'm open to research discussions and collaboration, especially around RL post-training, generative models, and multimodal reasoning." },
+      a:"You can reach me at jiajunf3 [at] illinois.edu. I'm open to research discussions and collaboration, especially around RL post-training, generative models, and multimodal reasoning.",
+      act:[{t:'✉️ Email Jiajun', h:'mailto:jiajunf3@illinois.edu'},{t:'💼 LinkedIn', h:'https://www.linkedin.com/in/jiajun-fan-57b12b26b'}] },
     { kw:['publication','paper','published','conference','venue','list','all papers'],
-      a:"I've published at ICLR (2023 Oral, 2025, 2026), NeurIPS (2025), ICML (2022), and IEEE TPAMI (2026), with ongoing preprints. Full list on Google Scholar (EjmzseUAAAAJ)." },
+      a:"I've published at ICLR (2023 Oral, 2025, 2026), NeurIPS (2025), ICML (2022), and IEEE TPAMI (2026), with ongoing preprints. Full list on Google Scholar (EjmzseUAAAAJ).",
+      act:[{t:'📄 Publications on this page', h:'#publications'},{t:'🎓 Google Scholar', h:'https://scholar.google.com/citations?user=EjmzseUAAAAJ'}] },
     { kw:['citation','cited','impact','scholar','h-index','how many'],
       a:"My work has 343+ citations (h-index 9). LBC (ICLR 2023 Oral) leads with 28 citations, followed by SP-VLA (ICLR 2026) with 27, then GDI (ICML 2022) with 21. Full profile: Google Scholar EjmzseUAAAAJ." },
     { kw:['self-improve','self-play','autonomous','annotation-free','human supervision'],
@@ -1509,13 +1609,16 @@ Happy to discuss research, internships, or collaborations. Best reached by email
     { kw:['website','this site','built','how made','jekyll','github pages','tech stack'],
       a:"This site is built with Jekyll + Minimal Mistakes theme, hosted on GitHub Pages. Custom features include a D3 paper network graph, live citation counts from Google Scholar, a conference deadline tracker, and this chat widget — all running client-side with no backend." },
     { kw:['summer','intern 2026','looking for','open position','2026 internship','internship'],
-      a:"I'm open to Fall 2026 / 2027 research internships in RL post-training, generative models, and LLM reasoning. Feel free to reach out at jiajunf3@illinois.edu!" },
+      a:"I'm open to Fall 2026 / 2027 research internships in RL post-training, generative models, and LLM reasoning. Feel free to reach out at jiajunf3@illinois.edu!",
+      act:[{t:'✉️ Reach out', h:'mailto:jiajunf3@illinois.edu'},{t:'📋 View CV', h:'/cv/'}] },
     { kw:['advisor','supervisor','pi','lab','group','professor','mentor','guided by'],
       a:"My PhD advisor is Prof. Ge Liu at UIUC. I work in the Natural Language Processing (NLP) group, broadly focusing on RL post-training for large generative models." },
     { kw:['cv','resume','curriculum vitae','download cv'],
-      a:"You can view my full CV at /cv/ — it covers publications, education (Nankai → Tsinghua → UIUC), awards, and research experience. A PDF download is also available from that page." },
+      a:"You can view my full CV at /cv/ — it covers publications, education (Nankai → Tsinghua → UIUC), awards, and research experience. A PDF download is also available from that page.",
+      act:[{t:'📋 Open CV', h:'/cv/'},{t:'⬇️ Download PDF', h:'/files/CV.pdf'}] },
     { kw:['news','latest','recent','what\'s new','update','announcement'],
-      a:"Latest highlights: CESAR accepted to ICLR 2026, SP-VLA accepted to ICLR 2026, PRANCE accepted to IEEE TPAMI 2026, ADRPO and VarCon accepted to NeurIPS 2025, and a new ICML 2026 accept. Check the News section on this page for the full list!" },
+      a:"Latest highlights: CESAR accepted to ICLR 2026, SP-VLA accepted to ICLR 2026, PRANCE accepted to IEEE TPAMI 2026, ADRPO and VarCon accepted to NeurIPS 2025, and a new ICML 2026 accept. Check the News section on this page for the full list!",
+      act:[{t:'📰 Jump to News', h:'#news'}] },
     { kw:['hobby','hobbies','outside research','free time','personal','fun','enjoy','game design','game','creative','interest besides'],
       a:"Outside of research, I love designing games and building creative AI agents — things that have interesting emergent behaviors or unexpected dynamics. There's a natural overlap with my research: designing reward functions for RL feels a lot like designing game mechanics." },
     { kw:['thank','thanks','great','awesome','cool','helpful','nice'],
@@ -1526,14 +1629,15 @@ Happy to discuss research, internships, or collaborations. Best reached by email
 
   function findAnswer(q) {
     q = (q || '').toLowerCase();
-    if (!q) return DEFAULT;
+    var fallback = { a: DEFAULT, act: [{t:'📄 Browse papers', h:'#publications'},{t:'✉️ Email Jiajun', h:'mailto:jiajunf3@illinois.edu'}] };
+    if (!q) return fallback;
     var best = null, bestScore = 0;
     QA.forEach(function(qa) {
       var score = 0;
       qa.kw.forEach(function(k) { if (q.indexOf(k) >= 0) score++; });
       if (score > bestScore) { bestScore = score; best = qa; }
     });
-    return (bestScore > 0 && best) ? best.a : DEFAULT;
+    return (bestScore > 0 && best) ? best : fallback;
   }
 
   function addMsg(text, role) {
@@ -1546,7 +1650,26 @@ Happy to discuss research, internships, or collaborations. Best reached by email
     msgs.scrollTop = msgs.scrollHeight;
   }
 
-  function typeMsg(text) {
+  function appendActs(acts) {
+    if (!acts || !acts.length) return;
+    var msgs = document.getElementById('ra-msgs');
+    if (!msgs) return;
+    var wrap = document.createElement('div');
+    wrap.className = 'ra-acts';
+    acts.forEach(function(ac) {
+      var a = document.createElement('a');
+      a.className = 'ra-act';
+      a.textContent = ac.t;
+      a.href = ac.h;
+      if (/^https?:/.test(ac.h)) { a.target = '_blank'; a.rel = 'noopener noreferrer'; }
+      if (ac.h.charAt(0) === '#') a.addEventListener('click', function(){ raClose(); });
+      wrap.appendChild(a);
+    });
+    msgs.appendChild(wrap);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  function typeMsg(text, acts) {
     var msgs = document.getElementById('ra-msgs');
     if (!msgs) return;
     var div = document.createElement('div');
@@ -1556,6 +1679,7 @@ Happy to discuss research, internships, or collaborations. Best reached by email
     /* Respect prefers-reduced-motion — show text instantly */
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       div.textContent = text;
+      appendActs(acts);
       return;
     }
     var i = 0;
@@ -1565,6 +1689,8 @@ Happy to discuss research, internships, or collaborations. Best reached by email
         msgs.scrollTop = msgs.scrollHeight;
         i++;
         setTimeout(tick, i < 20 ? 8 : 3);
+      } else {
+        appendActs(acts);
       }
     }
     tick();
@@ -1608,7 +1734,7 @@ Happy to discuss research, internships, or collaborations. Best reached by email
     var msgs = document.getElementById('ra-msgs');
     if (msgs && !msgs.children.length) {
       setTimeout(function() {
-        typeMsg("Hi! I'm a research assistant for Jiajun's work. Ask me about any paper or research topic!");
+        typeMsg("Hi! I'm Jiajun's AI agent \u2728 Ask me anything about his research \u2014 or let me take you somewhere:", [{t:'\ud83d\udd25 Featured work', h:'#featured'},{t:'\ud83d\udcc4 Publications', h:'#publications'},{t:'\u2709\ufe0f Contact', h:'mailto:jiajunf3@illinois.edu'}]);
       }, 200);
     }
     setTimeout(function() { var i = document.getElementById('ra-input'); if (i) i.focus(); }, 300);
@@ -1651,7 +1777,8 @@ Happy to discuss research, internships, or collaborations. Best reached by email
     showTyping();
     setTimeout(function() {
       removeTyping();
-      typeMsg(findAnswer(q));
+      var r = findAnswer(q);
+      typeMsg(r.a, r.act);
     }, 600 + Math.random() * 400);
   };
 })();
@@ -2189,5 +2316,44 @@ function drawGraph(container) {
 
 </script>
 
+<script>
+/* ── Scroll-reveal (polish pack) ── */
+(function(){
+  if(!('IntersectionObserver' in window)) return;
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduced) return;
+  var sel = '.section-header, .featured-card, .pub-entry, .research-card, .rt-item';
+  var els = document.querySelectorAll(sel);
+  if(!els.length) return;
+  els.forEach(function(el, idx){
+    el.classList.add('sr');
+    if(el.classList.contains('featured-card')) el.classList.add('sr-d' + (idx % 3 + 1));
+  });
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('sr-in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+  els.forEach(function(el){ io.observe(el); });
+})();
 
-
+/* ── AI agent FAB tooltip (once per session) + pulse quiet after open ── */
+(function(){
+  var btn = document.getElementById('ra-btn');
+  var tip = document.getElementById('ra-tip');
+  if(!btn) return;
+  function quiet(){
+    btn.classList.add('ra-quiet');
+    if(tip) tip.classList.remove('show');
+    try { sessionStorage.setItem('raSeen','1'); } catch(e) {}
+  }
+  btn.addEventListener('click', quiet);
+  try {
+    if(sessionStorage.getItem('raSeen') === '1') { btn.classList.add('ra-quiet'); return; }
+  } catch(e) {}
+  if(tip){
+    setTimeout(function(){ tip.classList.add('show'); }, 2600);
+    setTimeout(function(){ tip.classList.remove('show'); }, 9000);
+  }
+})();
+</script>
