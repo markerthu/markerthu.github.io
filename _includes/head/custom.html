@@ -508,7 +508,11 @@
 
 <!-- og:image fallback (MM seo.html has no site-level og:image fallback, only Twitter does) -->
 {% unless page.header.image or page.header.overlay_image %}
-<meta property="og:image" content="{{ site.url }}/images/profile.jpg">
+<meta property="og:image" content="{{ site.url }}/images/og-banner.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{{ site.url }}/images/og-banner.png">
 {% endunless %}
 
 <!-- noindex for non-content pages (404, redirect stubs) — MM seo.html never emits a robots meta -->
