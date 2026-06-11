@@ -89,7 +89,7 @@ body.dark-mode .stat-badge-icml { background:#2d0a1a !important; border-color:#7
 </a>
 
 <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:1.2em;">
-  <span class="stat-badge-cite">📊 {{ site.data.citations._total | default: 334 }}+ Citations</span>
+  <span class="stat-badge-cite">📊 {{ site.data.citations._total | default: 360 }}+ Citations</span>
   <span class="stat-badge-h">🎯 h-index 9</span>
   <span class="stat-badge-oral">🏅 ICLR 2023 Oral</span>
   <span class="stat-badge-icml">✅ ICML 2026 Accept</span>
