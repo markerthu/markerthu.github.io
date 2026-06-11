@@ -149,7 +149,7 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
       rel:['cesar','adrpo'],
       act:[{t:'📄 Publications', h:'/publications/'},{t:'🎓 Google Scholar', h:'https://scholar.google.com/citations?user=EjmzseUAAAAJ'}] },
     { id:'cites', kw:['citation','cited','impact','scholar','h-index','how many'],
-      a:["343+ citations, h-index 9 and climbing. LBC leads with 28, then SP-VLA at 27 and GDI at 21. Live numbers are on Google Scholar (EjmzseUAAAAJ)."] },
+      a:["361+ citations, h-index 9 and climbing. LBC leads with 28, then SP-VLA at 27 and GDI at 21. Live numbers are on Google Scholar (EjmzseUAAAAJ)."] },
     { id:'vision', kw:['self-improve','self-play','autonomous','annotation-free','human supervision','vision','goal','future','long-term','dream'],
       a:["The long game: generative models that improve themselves — learning from environment feedback and their own outputs, with humans stepping back at every stage. Process rewards, actor-critic loops, and online RL post-training are the stepping stones."],
       more:"I think of it as a ladder: first replace human labels with reward models (done), then replace outcome rewards with process rewards (CESAR), then let the model generate its own curriculum (next). Each rung removes one human from the loop.",
@@ -199,6 +199,11 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
   var BYE_RE = /^(bye|goodbye|see you|cya|later|再见|拜拜)[!. ]*$/i;
   var MORE_RE = /\b(more|else|detail|details|deeper|elaborate|continue|go on|why|how come|how does|how do|expand|具体|为什么|细节|展开)\b/i;
   var YES_RE = /^(yes|yeah|yep|sure|ok|okay|sounds good|please|do it|好|好的|可以|行)[!. ]*$/i;
+  /* small talk */
+  var HOWRU_RE = /\b(how are you|how's it going|how are things|how do you do|你好吗|怎么样)\b/i;
+  var NAME_RE = /\b(your name|who are you|what are you called|什么名字|你是谁)\b/i;
+  var CANDO_RE = /\b(what can you do|what can you tell me|how can you help|can you help me\??$|你能做什么|能干什么|你会什么)\b/i;
+  var WHOMADE_RE = /\b(who made you|who built you|who created you|who wrote you|谁做的|谁写的)\b/i;
 
   var GREETS = ["Hey! What would you like to know — a paper, the research direction, or something about Jiajun's background?",
                 "Hi there 👋 Ask me anything about Jiajun's work. The papers are my favorite subject.",
@@ -207,6 +212,14 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
                   "Happy to help. For deeper discussions, jiajunf3 [at] illinois.edu is the way.",
                   "You're welcome! I'm here whenever."];
   var BYES = ["See you around! 👋", "Take care — and check out the papers if you haven't!", "Bye! Come back anytime."];
+  var HOWRU_R = ["Doing great, thanks for asking! Always happy to talk research. What's on your mind?",
+                 "I'm good — running smoothly in your browser 😄 What would you like to know?",
+                 "All well on my end! Ask me anything about Jiajun's work."];
+  var NAME_R = ["I'm Jiajun's site agent — a little conversational engine he wrote to answer questions about his research. What can I help with?",
+                "Just \"Jiajun's AI Agent\" 🤖 I live on this site and know his papers cold. Ask away!"];
+  var CANDO_R = ["I can explain any of Jiajun's papers (CESAR, LBC, GDI, ADRPO, ORW-CFM-W2, AC-Flow, PRANCE, SP-VLA, VarCon), summarize his research direction, or point you to his CV, citations, awards, and contact. Try \"what is CESAR?\" or \"tell me about his research\".",
+                 "Lots! Papers, research focus, education, awards, citations, how to get in touch — and I remember context, so you can say \"tell me more\". What are you curious about?"];
+  var WHOMADE_R = ["Jiajun wrote me himself — I'm a hand-coded conversational engine (fuzzy matching + topic memory + human-paced typing), no LLM and no server. Kind of fitting for an RL post-training researcher, right?"];
   var OPENERS = ["", "", "", "Good question — ", "Ah, ", "Sure — ", "Right, so — ", "Oh, that one's fun. "];
   var FOLLOWUP = ["Want me to go deeper on {T}?", "Curious how this relates to {T}?", "I can also tell you about {T} if you're interested."];
   var FALLBACKS = ["Hmm, I don't have a confident answer for that one. Try a paper name (CESAR, LBC, GDI, ADRPO…) or a topic like flow matching or audio reasoning — or email jiajunf3 [at] illinois.edu directly.",
@@ -279,12 +292,23 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
   }
   function entryById(id){ for(var i=0;i<KB.length;i++) if(KB[i].id===id) return KB[i]; return null; }
 
+  function timeHello(){
+    var h=new Date().getHours();
+    if(h<5)  return "Up late! 🌙";
+    if(h<12) return "Good morning! ☀️";
+    if(h<18) return "Good afternoon! 👋";
+    return "Good evening! 🌆";
+  }
   function respond(qRaw){
     var q=norm(qRaw);
     /* social intents first */
-    if(GREET_RE.test(qRaw.trim()))  return { text:pick(GREETS,'greet') };
+    if(GREET_RE.test(qRaw.trim()))  return { text:timeHello()+" "+pick(GREETS,'greet') };
     if(BYE_RE.test(qRaw.trim()))    return { text:pick(BYES,'bye') };
     if(THANKS_RE.test(q))           return { text:pick(THANKS_R,'thanks') };
+    if(HOWRU_RE.test(q))            return { text:pick(HOWRU_R,'howru') };
+    if(NAME_RE.test(q))             return { text:pick(NAME_R,'name') };
+    if(WHOMADE_RE.test(q))          return { text:pick(WHOMADE_R,'whomade') };
+    if(CANDO_RE.test(q))            return { text:pick(CANDO_R,'cando'), act:[{t:'🎧 What is CESAR?', h:'/projects/cesar/'},{t:'📄 Publications', h:'/publications/'}] };
     /* accepting an offered follow-up */
     if(YES_RE.test(qRaw.trim()) && state.offered){
       var off=entryById(state.offered); state.offered=null;
