@@ -190,32 +190,38 @@ body.dark-mode .pub-abst-btn:hover { background: #1e40af; }
   100% { background-position: 0% 50%; }
 }
 .hero-banner {
-  background: linear-gradient(-45deg, #0d1b2a, #1a3a5c, #1565c0, #0a2540, #0d47a1);
+  background: linear-gradient(-45deg, #0a1626, #16345a, #1565c0, #0a2540, #0d47a1);
   background-size: 400% 400%;
-  animation: gradientShift 14s ease infinite;
-  border-radius: 14px;
-  padding: 36px 28px 30px;
-  margin-bottom: 1.6em;
+  animation: gradientShift 16s ease infinite;
+  border-radius: 18px;
+  padding: 46px 32px 38px;
+  margin-bottom: 1.8em;
   text-align: center;
   color: #fff;
-  box-shadow: 0 8px 32px rgba(21,101,192,0.18);
+  box-shadow: 0 10px 40px rgba(13,40,90,0.28), inset 0 1px 0 rgba(255,255,255,0.08);
   position: relative; overflow: hidden;
 }
+/* soft radial vignette for depth */
+.hero-banner::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  background: radial-gradient(120% 90% at 50% 0%, rgba(255,255,255,0.10), transparent 55%);
+}
 .hero-name {
-  font-size: 2.1em;
+  font-size: 2.45em;
   font-weight: 900;
   color: #fff;
-  margin: 0 0 6px;
+  margin: 0 0 8px;
   padding: 0;
-  letter-spacing: -0.02em;
-  line-height: 1.15;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
   border: none;
 }
 .hero-subtitle {
-  font-size: 0.96em;
-  color: #f0f7ff;
-  margin-bottom: 18px;
+  font-size: 1em;
+  color: #dbeafe;
+  margin-bottom: 16px;
   font-weight: 500;
+  letter-spacing: 0.01em;
 }
 .hero-pills {
   display: flex;
@@ -227,37 +233,44 @@ body.dark-mode .pub-abst-btn:hover { background: #1e40af; }
 }
 .hero-pill {
   background: rgba(255,255,255,0.10);
-  border: 1px solid rgba(255,255,255,0.18);
-  color: #e3f2fd;
-  padding: 4px 13px;
+  border: 1px solid rgba(255,255,255,0.20);
+  color: #eaf3ff;
+  padding: 5px 14px;
   border-radius: 20px;
   font-size: 0.80em;
   font-weight: 600;
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   white-space: nowrap;
+  transition: background .2s, border-color .2s, transform .15s;
 }
+.hero-pill:hover { background: rgba(255,255,255,0.17); border-color: rgba(255,255,255,0.4); transform: translateY(-1px); }
 .hero-links {
   display: flex;
-  gap: 8px;
+  gap: 9px;
   justify-content: center;
   flex-wrap: wrap;
 }
 .hero-link {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  background: rgba(255,255,255,0.13);
+  gap: 6px;
+  background: rgba(255,255,255,0.12);
   border: 1px solid rgba(255,255,255,0.22);
   color: #fff !important;
-  padding: 6px 15px;
-  border-radius: 8px;
+  padding: 7px 16px;
+  border-radius: 9px;
   font-size: 0.82em;
   font-weight: 700;
   text-decoration: none !important;
-  transition: background .2s, transform .15s;
+  transition: background .2s, transform .15s, box-shadow .2s, border-color .2s;
 }
-.hero-link:hover { background: rgba(255,255,255,0.22); transform: translateY(-1px); }
+.hero-link:hover {
+  background: rgba(255,255,255,0.92); color: #0d47a1 !important;
+  border-color: rgba(255,255,255,0.92);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.22);
+}
 
 /* ── Stat card animation ── */
 @keyframes fadeUp {
