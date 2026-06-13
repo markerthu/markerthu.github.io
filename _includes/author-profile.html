@@ -120,8 +120,67 @@
   {% endif %}
 
     </ul>
-    <div style="text-align:center;padding:12px 0 4px;">
-      <script type="text/javascript" id="mapmyvisitors" src="//mapmyvisitors.com/map.js?d=rm753rwupA6UHa26bOIiChUOW8JBdRWgNGPCYKwaJuc&cl=ffffff&w=a"></script>
+    <!-- Visitor map: MapMyVisitors real data, with self-hosted globe fallback if it fails/blocked -->
+    <div id="vmap-zone" style="text-align:center;padding:12px 0 4px;">
+      <div id="vmap-real">
+        <script type="text/javascript" id="mapmyvisitors" src="//mapmyvisitors.com/map.js?d=rm753rwupA6UHa26bOIiChUOW8JBdRWgNGPCYKwaJuc&cl=ffffff&w=a"></script>
+      </div>
+      <div id="vmap-globe" style="display:none;">
+        <canvas id="jf-globe" width="200" height="200" style="width:170px;height:170px;display:inline-block;"></canvas>
+        <div style="font-size:.72em;color:#6b7280;font-weight:700;margin-top:2px;display:flex;align-items:center;justify-content:center;gap:6px;"><span style="width:7px;height:7px;border-radius:50%;background:#22c55e;display:inline-block;"></span>Visitors worldwide</div>
+      </div>
     </div>
+    <style>body.dark-mode #vmap-globe div{color:#8b949e !important;}</style>
+    <script>
+    (function(){
+      var FALLBACK_MS=6000;
+      function realRendered(){
+        var z=document.getElementById('vmap-real'); if(!z) return false;
+        if(z.querySelector('img, canvas, a[href*="mapmyvisitors.com/web"]')) return true;
+        return /Pageview|Visit/i.test(z.textContent||'');
+      }
+      function startGlobe(){
+        var c=document.getElementById('jf-globe'); if(!c||!c.getContext) return;
+        var ctx=c.getContext('2d'), DPR=Math.min(window.devicePixelRatio||1,2), S=200;
+        c.width=S*DPR; c.height=S*DPR; ctx.scale(DPR,DPR);
+        var R=82, cx=S/2, cy=S/2, pts=[];
+        for(var la=-80;la<=80;la+=9){
+          var ring=Math.max(4,Math.round(Math.cos(la*Math.PI/180)*36));
+          for(var k=0;k<ring;k++){var lng=-180+k*360/ring,phi=la*Math.PI/180,th=lng*Math.PI/180;pts.push([Math.cos(phi)*Math.cos(th),Math.sin(phi),Math.cos(phi)*Math.sin(th)]);}
+        }
+        var hubs=[[40,-88],[37,-122],[51,0],[35,139],[1.3,103],[-23,-46],[52,13],[31,121],[28,77]];
+        var mk=hubs.map(function(h){var phi=h[0]*Math.PI/180,th=h[1]*Math.PI/180;return [Math.cos(phi)*Math.cos(th),Math.sin(phi),Math.cos(phi)*Math.sin(th)];});
+        var dark=function(){return document.body.classList.contains('dark-mode');};
+        var rot=0, reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches, raf;
+        function frame(){
+          ctx.clearRect(0,0,S,S);
+          var sn=Math.sin(rot),cs=Math.cos(rot),base=dark()?'88,166,255':'21,101,192';
+          for(var i=0;i<pts.length;i++){
+            var x=pts[i][0]*cs-pts[i][2]*sn, z=pts[i][0]*sn+pts[i][2]*cs, y=pts[i][1];
+            var depth=(z+1)/2, px=cx+x*R, py=cy-y*R;
+            ctx.beginPath(); ctx.arc(px,py,0.6+depth*1.2,0,Math.PI*2);
+            ctx.fillStyle='rgba('+base+','+(0.12+depth*0.55)+')'; ctx.fill();
+          }
+          var t=(Date.now()%2000)/2000;
+          for(var m=0;m<mk.length;m++){
+            var mx=mk[m][0]*cs-mk[m][2]*sn, mz=mk[m][0]*sn+mk[m][2]*cs, my=mk[m][1];
+            if(mz<0.05) continue;
+            var qx=cx+mx*R, qy=cy-my*R;
+            ctx.beginPath(); ctx.arc(qx,qy,2.4,0,Math.PI*2); ctx.fillStyle=dark()?'#7CFC7C':'#16a34a'; ctx.fill();
+            ctx.beginPath(); ctx.arc(qx,qy,2.4+t*5,0,Math.PI*2); ctx.strokeStyle='rgba(34,197,94,'+(0.5*(1-t))+')'; ctx.lineWidth=1; ctx.stroke();
+          }
+          if(!reduce&&!document.hidden){ rot+=0.006; }
+          raf=requestAnimationFrame(frame);
+        }
+        raf=requestAnimationFrame(frame);
+      }
+      setTimeout(function(){
+        if(realRendered()) return;            /* MapMyVisitors worked — keep it */
+        var r=document.getElementById('vmap-real'); if(r) r.style.display='none';
+        var g=document.getElementById('vmap-globe'); if(g) g.style.display='block';
+        startGlobe();
+      }, FALLBACK_MS);
+    })();
+    </script>
   </div>
 </div>
