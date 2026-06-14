@@ -1142,7 +1142,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 
 <div class="featured-grid">
   <a class="featured-card" href="/projects/cesar/">
-    <img class="featured-img" loading="lazy" src="/images/thumbs/cesar-teaser.jpg" width="800" height="441" alt="CESAR process-reward framework for Audio LLM reasoning">
+    <img class="featured-img" loading="lazy" src="/images/featured/cesar-ai.jpg" width="800" height="450" alt="CESAR: soundwaves transforming into a process-reward reasoning chain">
     <div class="featured-body">
       <span class="featured-venue fv-iclr26">ICLR 2026</span>
       <div class="featured-title">CESAR: Process Rewards for Audio LLM Reasoning</div>
@@ -1151,7 +1151,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
     </div>
   </a>
   <a class="featured-card" href="/projects/adrpo/">
-    <img class="featured-img" loading="lazy" src="/images/thumbs/adrpo-compare.jpg" width="800" height="459" alt="ADRPO adaptive divergence regularization results">
+    <img class="featured-img" loading="lazy" src="/images/featured/adrpo-ai.jpg" width="800" height="450" alt="ADRPO: particles tethered by springs of adaptive tension">
     <div class="featured-body">
       <span class="featured-venue fv-neurips">NeurIPS 2025</span>
       <div class="featured-title">ADRPO: Adaptive Regularization for Generative Model RLHF</div>
@@ -1160,7 +1160,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
     </div>
   </a>
   <a class="featured-card" href="/projects/orw-cfm-w2/">
-    <img class="featured-img" loading="lazy" src="/images/thumbs/orw-method.jpg" width="800" height="475" alt="ORW-CFM-W2 online reward-weighted flow matching">
+    <img class="featured-img" loading="lazy" src="/images/featured/orw-ai.jpg" width="800" height="450" alt="ORW-CFM-W2: noise flowing into diverse data clusters via flow matching">
     <div class="featured-body">
       <span class="featured-venue fv-iclr25">ICLR 2025</span>
       <div class="featured-title">ORW-CFM-W2: Online RLHF for Flow Matching</div>
@@ -1169,11 +1169,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
     </div>
   </a>
   <a class="featured-card" href="/projects/lbc/">
-    <div class="featured-img featured-img-lbc">
-      <div class="lbc-medal">🏅</div>
-      <div class="lbc-label">ATARI WORLD<br>RECORDS</div>
-      <div class="lbc-count">×24</div>
-    </div>
+    <img class="featured-img" loading="lazy" src="/images/featured/lbc-ai.jpg" width="800" height="450" alt="LBC: game controller and rising bars breaking the human world-record line">
     <div class="featured-body">
       <span class="featured-venue fv-iclr23oral">ICLR 2023 · Oral</span>
       <div class="featured-title">LBC: Superhuman Atari — 24 World Records</div>
