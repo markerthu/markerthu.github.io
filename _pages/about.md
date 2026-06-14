@@ -1224,7 +1224,6 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
     
     <span class="pb pb-iclr">ICLR 2026</span><span class="pub-year">2026</span></div>
   <div class="pub-right">
-    <div class="pub-thumb-wrap"><img loading="lazy" src="/images/featured/spvla-ai.jpg" width="800" height="450" alt="SP-VLA concept: robot arm with pruned token grid"></div>
     <div class="pub-title"><a href="https://openreview.net/forum?id=RwdGIIjPlC" target="_blank" rel="noopener noreferrer">SP-VLA: A Joint Model Scheduling and Token Pruning Approach for VLA Model Acceleration</a>
     <button class="pub-abst-btn" aria-expanded="false" aria-label="Toggle abstract">▾ Abstract</button>
     <div class="pub-abstract-preview">SP-VLA introduces action-aware model scheduling and spatio-semantic token pruning for VLA model acceleration, achieving 1.5× lossless speedup on LIBERO and 2.4× speedup on SimplerEnv.</div></div>
@@ -1259,7 +1258,6 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
     
     <span class="pb pb-neurips">NeurIPS 2025</span><span class="pub-year">2025</span></div>
   <div class="pub-right">
-    <div class="pub-thumb-wrap"><img loading="lazy" src="/images/featured/varcon-ai.jpg" width="800" height="450" alt="VarCon concept: probabilistic contrastive clusters"></div>
     <div class="pub-title"><a href="https://openreview.net/forum?id=uOOlHOq500" target="_blank" rel="noopener noreferrer">Variational Supervised Contrastive Learning</a>
       <button class="pub-abst-btn" aria-expanded="false" aria-label="Toggle abstract">▾ Abstract</button>
       <div class="pub-abstract-preview">VarCon reformulates supervised contrastive learning as variational inference, achieving SOTA 79.36% Top-1 accuracy on ImageNet-1K with ResNet-50.</div></div>
@@ -1289,7 +1287,6 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
     
     <span class="pb pb-arxiv">Preprint</span><span class="pub-year">2025</span></div>
   <div class="pub-right">
-    <div class="pub-thumb-wrap"><img loading="lazy" src="/images/featured/acflow-ai.jpg" width="800" height="450" alt="AC-Flow concept: critic feedback along a flow trajectory"></div>
     <div class="pub-title">
       <a href="https://arxiv.org/abs/2510.18072" target="_blank" rel="noopener noreferrer">Fine-tuning Flow Matching Generative Models with Intermediate Feedback</a>
       <a class="pub-project" href="/projects/ac-flow/">Project Page</a>
@@ -1306,7 +1303,6 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
     
     <span class="pb pb-journal">TPAMI 2026</span><span class="pub-year">2026</span></div>
   <div class="pub-right">
-    <div class="pub-thumb-wrap"><img loading="lazy" src="/images/featured/prance-ai.jpg" width="800" height="450" alt="PRANCE concept: token pruning into thinner network layers"></div>
     <div class="pub-title"><a href="https://arxiv.org/abs/2407.05010" target="_blank" rel="noopener noreferrer">PRANCE: Joint Token-Optimization and Structural Channel-Pruning for Adaptive ViT Inference</a>
       <button class="pub-abst-btn" aria-expanded="false" aria-label="Toggle abstract">▾ Abstract</button>
       <div class="pub-abstract-preview">PRANCE jointly optimizes token pruning and structural channel pruning for adaptive ViT inference, achieving significant speedup while maintaining accuracy.</div></div>
@@ -1320,7 +1316,6 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
     
     <span class="pb pb-oral">ICLR 2023<br>Oral</span><span class="pub-year">2023</span></div>
   <div class="pub-right">
-    <div class="pub-thumb-wrap"><img loading="lazy" src="/images/featured/lbc-ai.jpg" width="800" height="450" alt="LBC concept: controller and bars breaking the record line"></div>
     <div class="pub-title">
       <a href="https://openreview.net/forum?id=FeWvD0L_a4" target="_blank" rel="noopener noreferrer">Learnable Behavior Control: Breaking Atari Human World Records via Sample-Efficient Behavior Selection</a>
       <a class="pub-project" href="/projects/lbc/">Project Page</a>
@@ -1337,7 +1332,6 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
     
     <span class="pb pb-icml">ICML 2022</span><span class="pub-year">2022</span></div>
   <div class="pub-right">
-    <div class="pub-thumb-wrap"><img loading="lazy" src="/images/featured/gdi-ai.jpg" width="800" height="450" alt="GDI concept: data distribution feeding a policy-iteration loop"></div>
     <div class="pub-title">
       <a href="https://proceedings.mlr.press/v162/fan22c.html" target="_blank" rel="noopener noreferrer">Generalized Data Distribution Iteration</a>
       <a class="pub-project" href="/projects/gdi/">Project Page</a>
