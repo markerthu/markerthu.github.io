@@ -1142,8 +1142,8 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 
 <div class="featured-grid">
   <a class="featured-card" href="/projects/cesar/">
-    <img class="featured-img" loading="lazy" src="/images/thumbs/cesar-teaser.jpg" width="800" height="441" alt="CESAR process-reward framework for Audio LLM reasoning">
-    <div class="featured-body">
+    <img class="featured-img" loading="lazy" src="/images/featured/cesar-ai.jpg" width="1000" height="337" alt="CESAR concept: audio LLM, process-reward reasoning chain, accuracy sweet-spot curve">
+  <div class="featured-body">
       <span class="featured-venue fv-iclr26">ICLR 2026</span>
       <div class="featured-title">CESAR: Process Rewards for Audio LLM Reasoning</div>
       <div class="featured-desc">First to show test-time inverse scaling in Audio LLMs — and fix it with process rewards via online RL.</div>
@@ -1151,8 +1151,8 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
     </div>
   </a>
   <a class="featured-card" href="/projects/adrpo/">
-    <img class="featured-img" loading="lazy" src="/images/thumbs/adrpo-compare.jpg" width="800" height="459" alt="ADRPO adaptive divergence regularization results">
-    <div class="featured-body">
+    <img class="featured-img" loading="lazy" src="/images/featured/adrpo-ai.jpg" width="1000" height="337" alt="ADRPO concept: samples on springs of adaptive tension, small model beating big">
+  <div class="featured-body">
       <span class="featured-venue fv-neurips">NeurIPS 2025</span>
       <div class="featured-title">ADRPO: Adaptive Regularization for Generative Model RLHF</div>
       <div class="featured-desc">Sample-level adaptive divergence regularization — 2B model outperforms 12B competitors.</div>
@@ -1160,8 +1160,8 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
     </div>
   </a>
   <a class="featured-card" href="/projects/orw-cfm-w2/">
-    <img class="featured-img" loading="lazy" src="/images/thumbs/orw-method.jpg" width="800" height="475" alt="ORW-CFM-W2 online reward-weighted flow matching">
-    <div class="featured-body">
+    <img class="featured-img" loading="lazy" src="/images/featured/orw-ai.jpg" width="1000" height="337" alt="ORW-CFM-W2 concept: noise flowing into diverse data clusters">
+  <div class="featured-body">
       <span class="featured-venue fv-iclr25">ICLR 2025</span>
       <div class="featured-title">ORW-CFM-W2: Online RLHF for Flow Matching</div>
       <div class="featured-desc">First collapse-free online RL framework for flow matching models with W2 regularization.</div>
@@ -1169,12 +1169,8 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
     </div>
   </a>
   <a class="featured-card" href="/projects/lbc/">
-    <div class="featured-img featured-img-lbc">
-      <div class="lbc-medal">🏅</div>
-      <div class="lbc-label">ATARI WORLD<br>RECORDS</div>
-      <div class="lbc-count">×24</div>
-    </div>
-    <div class="featured-body">
+    <img class="featured-img" loading="lazy" src="/images/featured/lbc-ai.jpg" width="1000" height="337" alt="LBC concept: game controller, behavior selection, bars breaking the human-record line">
+  <div class="featured-body">
       <span class="featured-venue fv-iclr23oral">ICLR 2023 · Oral</span>
       <div class="featured-title">LBC: Superhuman Atari — 24 World Records</div>
       <div class="featured-desc">Breaking 24 Atari human world records with 78× less data than prior SOTA (Agent57).</div>
@@ -1206,7 +1202,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 <div class="pub-entry" role="article" data-venue="ICLR" data-year="2026" data-arxiv="2510.20867" data-abstract="CESAR resolves test-time inverse scaling in Audio LLMs by rewarding the reasoning process via GRPO, achieving SOTA on MMAU — outperforming Gemini 2.5 Pro and GPT-4o Audio.">
   <div class="pub-left"><span class="pb pb-iclr">ICLR 2026</span><span class="pub-year">2026</span></div>
   <div class="pub-right">
-    <div class="pub-thumb-wrap"><img loading="lazy" src="/images/thumbs/cesar-framework.jpg" width="800" height="441" alt="CESAR framework"></div>
+    <div class="pub-thumb-wrap"><img loading="lazy" src="/images/featured/cesar-ai.jpg" width="1000" height="337" alt="CESAR concept banner"></div>
     <div class="pub-title">
       <a href="https://openreview.net/forum?id=DUr48hxO2h" target="_blank" rel="noopener noreferrer">Incentivizing Consistent, Effective and Scalable Reasoning Capability in Audio LLMs via Reasoning Process Rewards</a>
       <a class="pub-project" href="/projects/cesar/">Project Page</a>
@@ -1228,6 +1224,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
     
     <span class="pb pb-iclr">ICLR 2026</span><span class="pub-year">2026</span></div>
   <div class="pub-right">
+    <div class="pub-thumb-wrap"><img loading="lazy" src="/images/featured/spvla-ai.jpg" width="1000" height="337" alt="SPVLA concept banner"></div>
     <div class="pub-title"><a href="https://openreview.net/forum?id=RwdGIIjPlC" target="_blank" rel="noopener noreferrer">SP-VLA: A Joint Model Scheduling and Token Pruning Approach for VLA Model Acceleration</a>
     <button class="pub-abst-btn" aria-expanded="false" aria-label="Toggle abstract">▾ Abstract</button>
     <div class="pub-abstract-preview">SP-VLA introduces action-aware model scheduling and spatio-semantic token pruning for VLA model acceleration, achieving 1.5× lossless speedup on LIBERO and 2.4× speedup on SimplerEnv.</div></div>
@@ -1240,7 +1237,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 <div class="pub-entry" role="article" data-venue="NeurIPS" data-year="2025" data-arxiv="2510.18053" data-abstract="ADRPO introduces sample-level adaptive divergence regularization for RLHF — high-value samples get more freedom, poor samples get stronger constraints. Plug-and-play on any RL method.">
   <div class="pub-left"><span class="pb pb-neurips">NeurIPS 2025</span><span class="pub-year">2025</span></div>
   <div class="pub-right">
-    <div class="pub-thumb-wrap"><img loading="lazy" src="/images/thumbs/adrpo-compare.jpg" width="800" height="459" alt="ADRPO qualitative results"></div>
+    <div class="pub-thumb-wrap"><img loading="lazy" src="/images/featured/adrpo-ai.jpg" width="1000" height="337" alt="ADRPO concept banner"></div>
     <div class="pub-title">
       <a href="https://openreview.net/forum?id=aXO0xg0ttW" target="_blank" rel="noopener noreferrer">Adaptive Divergence Regularized Policy Optimization for Fine-tuning Generative Models</a>
       <a class="pub-project" href="/projects/adrpo/">Project Page</a>
@@ -1262,6 +1259,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
     
     <span class="pb pb-neurips">NeurIPS 2025</span><span class="pub-year">2025</span></div>
   <div class="pub-right">
+    <div class="pub-thumb-wrap"><img loading="lazy" src="/images/featured/varcon-ai.jpg" width="1000" height="337" alt="VARCON concept banner"></div>
     <div class="pub-title"><a href="https://openreview.net/forum?id=uOOlHOq500" target="_blank" rel="noopener noreferrer">Variational Supervised Contrastive Learning</a>
       <button class="pub-abst-btn" aria-expanded="false" aria-label="Toggle abstract">▾ Abstract</button>
       <div class="pub-abstract-preview">VarCon reformulates supervised contrastive learning as variational inference, achieving SOTA 79.36% Top-1 accuracy on ImageNet-1K with ResNet-50.</div></div>
@@ -1274,7 +1272,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 <div class="pub-entry" role="article" data-venue="ICLR" data-year="2025" data-arxiv="ORW-CFM-W2" data-abstract="ORW-CFM-W2 is the first online RLHF method for flow matching — no human data, no likelihood estimation. Wasserstein regularization maintains generation diversity.">
   <div class="pub-left"><span class="pb pb-iclr">ICLR 2025</span><span class="pub-year">2025</span></div>
   <div class="pub-right">
-    <div class="pub-thumb-wrap"><img loading="lazy" src="/images/thumbs/orw-main.jpg" width="800" height="475" alt="ORW-CFM-W2 method"></div>
+    <div class="pub-thumb-wrap"><img loading="lazy" src="/images/featured/orw-ai.jpg" width="1000" height="337" alt="ORW concept banner"></div>
     <div class="pub-title">
       <a href="https://openreview.net/forum?id=2IoFFexvuw" target="_blank" rel="noopener noreferrer">Online Reward-Weighted Fine-Tuning of Flow Matching with Wasserstein Regularization</a>
       <a class="pub-project" href="/projects/orw-cfm-w2/">Project Page</a>
@@ -1291,6 +1289,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
     
     <span class="pb pb-arxiv">Preprint</span><span class="pub-year">2025</span></div>
   <div class="pub-right">
+    <div class="pub-thumb-wrap"><img loading="lazy" src="/images/featured/acflow-ai.jpg" width="1000" height="337" alt="ACFLOW concept banner"></div>
     <div class="pub-title">
       <a href="https://arxiv.org/abs/2510.18072" target="_blank" rel="noopener noreferrer">Fine-tuning Flow Matching Generative Models with Intermediate Feedback</a>
       <a class="pub-project" href="/projects/ac-flow/">Project Page</a>
@@ -1307,6 +1306,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
     
     <span class="pb pb-journal">TPAMI 2026</span><span class="pub-year">2026</span></div>
   <div class="pub-right">
+    <div class="pub-thumb-wrap"><img loading="lazy" src="/images/featured/prance-ai.jpg" width="1000" height="337" alt="PRANCE concept banner"></div>
     <div class="pub-title"><a href="https://arxiv.org/abs/2407.05010" target="_blank" rel="noopener noreferrer">PRANCE: Joint Token-Optimization and Structural Channel-Pruning for Adaptive ViT Inference</a>
       <button class="pub-abst-btn" aria-expanded="false" aria-label="Toggle abstract">▾ Abstract</button>
       <div class="pub-abstract-preview">PRANCE jointly optimizes token pruning and structural channel pruning for adaptive ViT inference, achieving significant speedup while maintaining accuracy.</div></div>
@@ -1320,6 +1320,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
     
     <span class="pb pb-oral">ICLR 2023<br>Oral</span><span class="pub-year">2023</span></div>
   <div class="pub-right">
+    <div class="pub-thumb-wrap"><img loading="lazy" src="/images/featured/lbc-ai.jpg" width="1000" height="337" alt="LBC concept banner"></div>
     <div class="pub-title">
       <a href="https://openreview.net/forum?id=FeWvD0L_a4" target="_blank" rel="noopener noreferrer">Learnable Behavior Control: Breaking Atari Human World Records via Sample-Efficient Behavior Selection</a>
       <a class="pub-project" href="/projects/lbc/">Project Page</a>
@@ -1336,6 +1337,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
     
     <span class="pb pb-icml">ICML 2022</span><span class="pub-year">2022</span></div>
   <div class="pub-right">
+    <div class="pub-thumb-wrap"><img loading="lazy" src="/images/featured/gdi-ai.jpg" width="1000" height="337" alt="GDI concept banner"></div>
     <div class="pub-title">
       <a href="https://proceedings.mlr.press/v162/fan22c.html" target="_blank" rel="noopener noreferrer">Generalized Data Distribution Iteration</a>
       <a class="pub-project" href="/projects/gdi/">Project Page</a>
