@@ -27,7 +27,7 @@ html body .internship-banner {
   margin: 1em 0 1.2em; font-size: 0.93em;
   color: #1e3a5f !important;
 }
-html body .internship-banner a { color: #1d4ed8 !important; font-weight: 700; }
+html body .internship-banner a { color: #0d47a1 !important; font-weight: 700; }
 html body .internship-banner strong { color: #1e3a5f !important; }
 body.dark-mode .internship-banner {
   background: linear-gradient(135deg,#13243a,#0f1d30) !important;
@@ -161,11 +161,10 @@ body.dark-mode .pub-abst-btn:hover { background: #1e40af; }
   display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-bottom: 1.5em;
 }
 .research-card {
-  background: #fff; border: 1.5px solid #e0e8f0; border-radius: 10px;
+  background: #fff; border: 1.5px solid #e0e8f0; border-radius: 12px;
   padding: 16px; transition: border-color .2s, box-shadow .2s;
 }
 .research-card:hover { border-color: #1565c0; box-shadow: 0 4px 14px rgba(21,101,192,.12); }
-.rc-icon { font-size: 1.7em; margin-bottom: 8px; }
 .rc-icon-img { width: 46px; height: 46px; object-fit: contain; margin-bottom: 10px; display: block; }
 .rc-title { font-weight: 800; font-size: 0.93em; color: #1a2332; margin-bottom: 5px; }
 .rc-desc  { font-size: 0.81em; color: #555; line-height: 1.55; }
@@ -174,7 +173,7 @@ body.dark-mode .pub-abst-btn:hover { background: #1e40af; }
 .stats-row { display: flex; flex-wrap: wrap; gap: 12px; margin: 1.2em 0 1.6em; }
 .stat-card {
   flex: 1 1 130px; background: #fff;
-  border: 1.5px solid #e0e8f0; border-radius: 10px;
+  border: 1.5px solid #e0e8f0; border-radius: 12px;
   padding: 14px 16px; text-align: center;
   box-shadow: 0 2px 8px rgba(21,101,192,.07);
   transition: transform .2s, box-shadow .2s;
@@ -321,13 +320,6 @@ body.dark-mode .pub-abst-btn:hover { background: #1e40af; }
 }
 
 /* ── LBC featured card placeholder ── */
-.featured-img-lbc {
-  background: linear-gradient(135deg,#2d1b5e 0%,#7c3aed 45%,#c084fc 100%);
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
-}
-.lbc-medal { font-size: 2.2em; line-height: 1; }
-.lbc-label { font-size: 0.75em; font-weight: 800; color: #fff; letter-spacing: .05em; text-align: center; }
-.lbc-count { font-size: 1.4em; font-weight: 900; color: #fde68a; }
 .fv-iclr23oral { background: #7c3aed; color: #fff; }
 body.dark-mode .fv-iclr23oral { background: #5b21b6 !important; color: #e9d5ff !important; }
 
@@ -533,8 +525,8 @@ body.dark-mode .pub-link.pl-arxiv  { background: #3d2410 !important; color: #ffb
 .bib-popup.show { display: block; }
 .bib-pre { background: #f8fafc; border-radius: 6px; padding: 10px 12px; font-size: 0.76em; overflow-x: auto; white-space: pre; color: #1e293b; border: 1px solid #e2e8f0; margin: 0 0 10px; }
 .bib-actions { display: flex; gap: 8px; }
-.bib-copy { background: #2563eb; color: #fff; border: none; padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 0.83em; font-weight: 600; transition: background .15s; }
-.bib-copy:hover { background: #1d4ed8; }
+.bib-copy { background: #1565c0; color: #fff; border: none; padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 0.83em; font-weight: 600; transition: background .15s; }
+.bib-copy:hover { background: #0d47a1; }
 .bib-close { background: #f1f5f9; color: #4a5568; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.83em; font-weight: 600; }
 .bib-close:hover { background: #e2e8f0; }
 body.dark-mode .pl-cite { background: #0f3d2e !important; color: #3fb950 !important; border-color: #1a7f45 !important; }
@@ -656,16 +648,16 @@ body.dark-mode .page { background: #0d1117 !important; }
 
 /* ── Particle canvas ── */
 /* ── AI Research Assistant chat widget ── */
-.ra-btn { position: fixed; bottom: 68px; right: 22px; width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg,#2563eb,#7c3aed); color: #fff; font-size: 1.3em; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 16px rgba(37,99,235,.4); z-index: 9990; transition: transform .2s, box-shadow .2s; user-select: none; -webkit-user-select: none; }
+.ra-btn { position: fixed; bottom: 68px; right: 22px; width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg,#1565c0,#7c3aed); color: #fff; font-size: 1.3em; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 16px rgba(37,99,235,.4); z-index: 9990; transition: transform .2s, box-shadow .2s; user-select: none; -webkit-user-select: none; }
 .ra-btn:hover { transform: scale(1.1); box-shadow: 0 6px 22px rgba(37,99,235,.5); }
 .ra-panel { position: fixed; bottom: 120px; right: 22px; width: 320px; height: 440px; max-height: calc(100vh - 140px); background: #fff; border-radius: 16px; box-shadow: 0 12px 48px rgba(0,0,0,.18); display: flex; flex-direction: column; z-index: 9991; transform: scale(0.85) translateY(20px); opacity: 0; visibility: hidden; pointer-events: none; transition: transform .2s, opacity .2s, visibility .2s; transform-origin: bottom right; border: 1.5px solid #e5e7eb; }
 .ra-panel.show { transform: scale(1) translateY(0); opacity: 1; visibility: visible; pointer-events: all; }
-.ra-header { background: linear-gradient(135deg,#2563eb,#7c3aed); color: #fff; padding: 12px 14px; border-radius: 14px 14px 0 0; display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 0.9em; }
+.ra-header { background: linear-gradient(135deg,#1565c0,#7c3aed); color: #fff; padding: 12px 14px; border-radius: 14px 14px 0 0; display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 0.9em; }
 .ra-close { background: rgba(255,255,255,.2); border: none; color: #fff; width: 24px; height: 24px; border-radius: 50%; cursor: pointer; font-size: 0.85em; display: flex; align-items: center; justify-content: center; }
 .ra-close:hover { background: rgba(255,255,255,.35); }
 .ra-msgs { flex: 1; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 8px; }
 .ra-msg { max-width: 85%; padding: 8px 12px; border-radius: 12px; font-size: 0.82em; line-height: 1.5; overflow-wrap: anywhere; }
-.ra-user { align-self: flex-end; background: #2563eb; color: #fff; border-radius: 12px 12px 2px 12px; }
+.ra-user { align-self: flex-end; background: #1565c0; color: #fff; border-radius: 12px 12px 2px 12px; }
 .ra-bot { align-self: flex-start; background: #f1f5f9; color: #1e293b; border-radius: 12px 12px 12px 2px; }
 .ra-typing { display: flex; gap: 4px; align-items: center; padding: 10px 14px; }
 .ra-typing span { width: 7px; height: 7px; border-radius: 50%; background: #94a3b8; animation: ra-dot 1.2s infinite; }
@@ -673,15 +665,15 @@ body.dark-mode .page { background: #0d1117 !important; }
 .ra-typing span:nth-child(3) { animation-delay: .4s; }
 @keyframes ra-dot { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-5px)} }
 .ra-chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 8px 10px 4px; border-top: 1.5px solid #e5e7eb; }
-.ra-chip { background: #eff6ff; color: #1d4ed8; border: 1.5px solid #bfdbfe; border-radius: 999px; padding: 3px 11px; font-size: 0.75em; font-weight: 700; cursor: pointer; transition: background .15s, transform .1s; white-space: nowrap; }
+.ra-chip { background: #eff6ff; color: #0d47a1; border: 1.5px solid #bfdbfe; border-radius: 999px; padding: 3px 11px; font-size: 0.75em; font-weight: 700; cursor: pointer; transition: background .15s, transform .1s; white-space: nowrap; }
 .ra-chip:hover { background: #dbeafe; transform: translateY(-1px); }
 .ra-chips.hidden { display: none; }
 body.dark-mode .ra-chip { background: #1c2333 !important; color: #58a6ff !important; border-color: #1f3a6e !important; }
 .ra-input-row { display: flex; border-top: 1.5px solid #e5e7eb; padding: 8px 10px; gap: 6px; }
 .ra-input { flex: 1; border: 1.5px solid #e5e7eb; border-radius: 8px; padding: 7px 10px; font-size: 0.83em; outline: none; font-family: inherit; }
-.ra-input:focus { border-color: #2563eb; }
-.ra-send { background: #2563eb; color: #fff; border: none; border-radius: 8px; padding: 7px 12px; cursor: pointer; font-size: 0.9em; font-weight: 700; transition: background .15s; }
-.ra-send:hover { background: #1d4ed8; }
+.ra-input:focus { border-color: #1565c0; }
+.ra-send { background: #1565c0; color: #fff; border: none; border-radius: 8px; padding: 7px 12px; cursor: pointer; font-size: 0.9em; font-weight: 700; transition: background .15s; }
+.ra-send:hover { background: #0d47a1; }
 body.dark-mode .ra-panel { background: #161b22 !important; border-color: #30363d !important; }
 body.dark-mode .ra-bot { background: #21262d !important; color: #c9d1d9 !important; }
 body.dark-mode .ra-input { background: #0d1117 !important; border-color: #30363d !important; color: #c9d1d9 !important; }
@@ -692,14 +684,14 @@ body.dark-mode .ra-input-row { border-color: #30363d !important; }
 .conf-ddl-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 1.8em; }
 @media(max-width:700px){ .conf-ddl-grid { grid-template-columns: 1fr 1fr; } }
 @media(max-width:450px){ .conf-ddl-grid { grid-template-columns: 1fr; } }
-.ddl-card { border-radius: 10px; border: 1.5px solid #e5e7eb; border-left: 4px solid #2563eb; background: #fff; padding: 12px 14px; transition: box-shadow .2s, transform .15s; }
+.ddl-card { border-radius: 12px; border: 1.5px solid #e5e7eb; border-left: 4px solid #1565c0; background: #fff; padding: 12px 14px; transition: box-shadow .2s, transform .15s; }
 .ddl-card:hover { box-shadow: 0 4px 18px rgba(0,0,0,.1); transform: translateY(-2px); }
 .ddl-top { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
 .ddl-abbr { font-size: 1em; font-weight: 800; letter-spacing: -.01em; }
 .ddl-type { font-size: 0.68em; font-weight: 700; padding: 1px 7px; border-radius: 20px; letter-spacing: .05em; }
 .ddl-name { font-size: 0.85em; font-weight: 700; margin-bottom: 4px; }
 .ddl-name a { color: #1a2332; text-decoration: none; }
-.ddl-name a:hover { color: #2563eb; text-decoration: underline; }
+.ddl-name a:hover { color: #1565c0; text-decoration: underline; }
 .ddl-meta { font-size: 0.74em; color: #6b7280; margin-bottom: 8px; line-height: 1.5; }
 .ddl-chip { display: inline-block; font-size: 0.74em; font-weight: 700; padding: 2px 8px; border-radius: 20px; border: 1px solid; white-space: nowrap; }
 /* ddl-chip: override inline styles when dark mode toggled after load */
@@ -720,7 +712,7 @@ body.dark-mode .ddl-name a { color: #c9d1d9 !important; }
 body.dark-mode .ddl-meta { color: #8b949e !important; }
 
 /* RA chatbot — mute jarring electric blues */
-body.dark-mode .ra-user   { background: #1c3a6e !important; } /* muted navy, not electric #2563eb */
+body.dark-mode .ra-user   { background: #1c3a6e !important; } /* muted navy, not electric #1565c0 */
 body.dark-mode .ra-send   { background: #388bfd !important; }
 body.dark-mode .ra-send:hover { background: #58a6ff !important; }
 body.dark-mode .ra-chip:hover { background: #21262d !important; }
@@ -735,7 +727,7 @@ body.dark-mode .pub-thumb-wrap:hover { box-shadow: 0 4px 18px rgba(0,0,0,0.45) !
 /* ── Reading progress bar ── */
 #read-progress {
   position: fixed; top: 0; left: 0; height: 3px; width: 0%;
-  background: linear-gradient(90deg, #2563eb 0%, #7c3aed 60%, #059669 100%);
+  background: linear-gradient(90deg, #1565c0 0%, #7c3aed 60%, #059669 100%);
   z-index: 9999; transition: width .08s linear;
   pointer-events: none;
 }
@@ -889,8 +881,6 @@ body.dark-mode .hero-pill { background: rgba(255,255,255,0.12) !important; color
 }
 ::selection { background: #1565c0; color: #fff; }
 body.dark-mode ::selection { background: #58a6ff; color: #0d1117; }
-a:focus-visible, button:focus-visible { outline: 2px solid #1565c0; outline-offset: 2px; border-radius: 4px; }
-body.dark-mode a:focus-visible, body.dark-mode button:focus-visible { outline-color: #58a6ff; }
 
 /* Scroll-reveal */
 .sr { opacity: 0; transform: translateY(18px); transition: opacity .6s cubic-bezier(.22,.61,.36,1), transform .6s cubic-bezier(.22,.61,.36,1); will-change: opacity, transform; }
@@ -956,7 +946,7 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
 /* AI Agent — action chips under bot replies */
 .ra-acts { display: flex; flex-wrap: wrap; gap: 5px; margin: 2px 0 4px; max-width: 85%; }
 .ra-act {
-  display: inline-block; background: #eff6ff; color: #1d4ed8 !important;
+  display: inline-block; background: #eff6ff; color: #0d47a1 !important;
   border: 1.5px solid #bfdbfe; border-radius: 999px;
   padding: 2px 10px; font-size: 0.73em; font-weight: 700;
   text-decoration: none !important; cursor: pointer;
@@ -1036,7 +1026,7 @@ body.dark-mode .pillar-intro { color: #adbac7; }
 .pillar-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 1.8em; }
 @media (max-width: 720px) { .pillar-grid { grid-template-columns: 1fr; } }
 .pillar-card {
-  background: #fff; border: 1.5px solid #e0e8f0; border-radius: 14px; overflow: hidden;
+  background: #fff; border: 1.5px solid #e0e8f0; border-radius: 12px; overflow: hidden;
   display: flex; flex-direction: column; transition: transform .18s, box-shadow .18s, border-color .18s;
 }
 .pillar-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(21,101,192,.16); border-color: #1565c0; }
@@ -1551,7 +1541,7 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
         {label:'Rebuttal',         date:'2026-05-11', passed:true},
         {label:'Decisions',        date:'2026-06-17'},
       ]},
-    { name:'ICML 2026', abbr:'ICML', type:'ML', color:'#2563eb',
+    { name:'ICML 2026', abbr:'ICML', type:'ML', color:'#1565c0',
       location:'Seoul, South Korea', conf:'Jul 6–11, 2026', url:'https://icml.cc/Conferences/2026',
       deadlines:[
         {label:'Abstract',         date:'2026-01-23', passed:true},
@@ -1572,7 +1562,7 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
         {label:'Notification',     date:'2026-01-25', passed:true},
         {label:'Conference',       date:'2026-04-23', passed:true},
       ]},
-    { name:'NeurIPS 2026', abbr:'NeurIPS', type:'ML', color:'#2563eb',
+    { name:'NeurIPS 2026', abbr:'NeurIPS', type:'ML', color:'#1565c0',
       location:'San Diego, CA, USA', conf:'Dec 6–12, 2026', url:'https://neurips.cc/Conferences/2026',
       deadlines:[
         {label:'Abstract',         date:'2026-05-04', passed:true},
@@ -2045,9 +2035,9 @@ function drawGraph(container) {
     {id:'GDI',        label:'GDI',        venue:'ICML 2022',    col:'1', fy:0.40, r:21, clr:'#ea580c', url:'/projects/gdi/'},
     {id:'LBC',        label:'LBC',        venue:'ICLR 2023',    col:'1', fy:0.72, r:24, clr:'#ea580c', url:'/projects/lbc/'},
     {id:'PRANCE',     label:'PRANCE',     venue:'TPAMI 2026',   col:'2', fy:0.14, r:18, clr:'#0891b2', url:'https://arxiv.org/abs/2407.05010'},
-    {id:'ORW-CFM-W2', label:'ORW-CFM-W2', venue:'ICLR 2025',  col:'3', fy:0.40, r:22, clr:'#2563eb', url:'/projects/orw-cfm-w2/'},
+    {id:'ORW-CFM-W2', label:'ORW-CFM-W2', venue:'ICLR 2025',  col:'3', fy:0.40, r:22, clr:'#1565c0', url:'/projects/orw-cfm-w2/'},
     {id:'VarCon',     label:'VarCon',     venue:'NeurIPS 2025', col:'3', fy:0.72, r:18, clr:'#be185d', url:'https://openreview.net/forum?id=uOOlHOq500'},
-    {id:'ADRPO',      label:'ADRPO',      venue:'NeurIPS 2025', col:'4', fy:0.16, r:20, clr:'#2563eb', url:'/projects/adrpo/'},
+    {id:'ADRPO',      label:'ADRPO',      venue:'NeurIPS 2025', col:'4', fy:0.16, r:20, clr:'#1565c0', url:'/projects/adrpo/'},
     {id:'SP-VLA',     label:'SP-VLA',     venue:'ICLR 2026',    col:'4', fy:0.60, r:22, clr:'#0891b2', url:'https://openreview.net/forum?id=RwdGIIjPlC'},
     {id:'AC-Flow',    label:'AC-Flow',    venue:'arXiv 2025',   col:'5', fy:0.48, r:18, clr:'#059669', url:'/projects/ac-flow/'},
     {id:'CESAR',      label:'CESAR',      venue:'ICLR 2026',    col:'5', fy:0.13, r:24, clr:'#7c3aed', url:'/projects/cesar/'},
@@ -2189,7 +2179,7 @@ function drawGraph(container) {
 
   /* Legend */
   var legItems = [
-    {c:'#ea580c',l:'Deep RL'},{c:'#2563eb',l:'RL Training'},
+    {c:'#ea580c',l:'Deep RL'},{c:'#1565c0',l:'RL Training'},
     {c:'#059669',l:'Flow Matching'},{c:'#0891b2',l:'Efficiency'},
     {c:'#be185d',l:'Representation'},{c:'#7c3aed',l:'Audio Reasoning'},
     {c:edgeClr,  l:'Research evolution →', dash:true},
