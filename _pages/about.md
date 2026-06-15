@@ -58,6 +58,8 @@ body.dark-mode .qn-label { color: #58a6ff; }
   letter-spacing: -0.01em; scroll-margin-top: 120px;
   border: none; background: none;
 }
+.section-header .sh-icon { width: 22px; height: 22px; object-fit: contain; flex-shrink: 0; }
+body.dark-mode .section-header .sh-icon { filter: brightness(1.55) saturate(1.1); }
 .section-header::after {
   content: ''; flex: 1; height: 2px;
   background: linear-gradient(to right, #1565c0, transparent); border-radius: 1px;
@@ -1107,7 +1109,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 </div>
 
 <!-- ═══════════════════════════════ NEWS ═══════════════════════════════ -->
-<h2 class="section-header" id="news">📰 Latest News</h2>
+<h2 class="section-header" id="news"><img class="sh-icon" src="/images/icons/sh-news.png" alt="">Latest News</h2>
 
 <ul class="news-list">
   <li>
@@ -1158,7 +1160,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 ">▼ Show more news</button>
 
 <!-- ═══════════════════════════════ FEATURED ═══════════════════════════ -->
-<h2 class="section-header" id="featured">🔥 Featured Research</h2>
+<h2 class="section-header" id="featured"><img class="sh-icon" src="/images/icons/sh-featured.png" alt="">Featured Research</h2>
 
 <div class="featured-grid">
   <a class="featured-card" href="/projects/cesar/">
@@ -1201,7 +1203,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 
 <!-- ══════════════════ CONFERENCE DEADLINES ══════════════════ -->
 <!-- ═══════════════════════════════ PUBLICATIONS ═══════════════════════ -->
-<h2 class="section-header" id="publications">📄 Selected Publications</h2>
+<h2 class="section-header" id="publications"><img class="sh-icon" src="/images/icons/sh-pubs.png" alt="">Selected Publications</h2>
 
 <p style="font-size:0.83em;color:#767676;margin-top:-0.6em;">* = first/co-first author &nbsp;·&nbsp;
 <a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Full list on Google Scholar</a> &nbsp;/&nbsp;
@@ -1375,12 +1377,12 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 
 
 <!-- ════════════ RESEARCH GRAPH ════════════ -->
-<h2 class="section-header" id="research-graph-section">🕸️ Research Paper Network</h2>
+<h2 class="section-header" id="research-graph-section"><img class="sh-icon" src="/images/icons/sh-network.png" alt="">Research Paper Network</h2>
 <p style="font-size:0.88em;color:#595959;margin-bottom:14px;">Hover a node to highlight connections. Papers are grouped by research theme.</p>
 <div id="research-graph" role="img" aria-label="Network graph showing how Jiajun Fan's papers connect by research theme: from Deep RL (GDI, LBC) to RL training and flow matching for generative models (ORW-CFM-W2, ADRPO, AC-Flow) to audio reasoning (CESAR)."></div>
 
 <!-- ═══════════════════════════════ NORTH STAR ═══════════════════════════ -->
-<h2 class="section-header" id="northstar">🧭 Research North Star</h2>
+<h2 class="section-header" id="northstar"><img class="sh-icon" src="/images/icons/sh-northstar.png" alt="">Research North Star</h2>
 <p class="pillar-intro">My long-term goal is <strong>AI that improves itself with minimal human supervision</strong>. Everything I build ladders into three autonomous capabilities:</p>
 
 <div class="pillar-grid">
@@ -1414,7 +1416,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 </div>
 
 <!-- ═══════════════════════════════ RESEARCH ═══════════════════════════ -->
-<h2 class="section-header" id="research">🔬 Research Interests</h2>
+<h2 class="section-header" id="research"><img class="sh-icon" src="/images/icons/sh-research.png" alt="">Research Interests</h2>
 
 <div class="research-grid">
   <div class="research-card">
@@ -1435,7 +1437,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 </div>
 
 <!-- ═══════════════════════════════ STATS ═══════════════════════════════ -->
-<h2 class="section-header" id="impact">⚡ Impact at a Glance</h2>
+<h2 class="section-header" id="impact"><img class="sh-icon" src="/images/icons/sh-impact.png" alt="">Impact at a Glance</h2>
 
 <div class="stats-row">
   <div class="stat-card">
@@ -1465,7 +1467,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 </div>
 
 <!-- ═══════════════════════════════ VISION ════════════════════════════ -->
-<h2 class="section-header" id="vision">💡 Research Vision</h2>
+<h2 class="section-header" id="vision"><img class="sh-icon" src="/images/icons/sh-vision.png" alt="">Research Vision</h2>
 
 <blockquote class="vision-quote">
 <p class="vision-quote-title">Making AI Systems That Improve Themselves</p>
@@ -1498,7 +1500,7 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
 </div>
 
 <!-- ═══════════════════════════════ AWARDS ════════════════════════════ -->
-<h2 class="section-header" id="awards">🏅 Awards &amp; Academic Service</h2>
+<h2 class="section-header" id="awards"><img class="sh-icon" src="/images/icons/sh-awards.png" alt="">Awards &amp; Academic Service</h2>
 
 <div class="awards-grid">
   <div>
@@ -1526,7 +1528,7 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
 </div>
 
 <!-- ═══════════════════════════════ CONTACT ══════════════════════════ -->
-<h2 class="section-header" id="deadlines">📅 Conference Deadlines</h2>
+<h2 class="section-header" id="deadlines"><img class="sh-icon" src="/images/icons/sh-deadlines.png" alt="">Conference Deadlines</h2>
 <p style="font-size:0.84em;color:#595959;margin-bottom:14px;">Key AI/ML venue deadlines I track — for the full list see <a href="https://ccfddl.com/" target="_blank" rel="noopener noreferrer">ccfddl.com</a>.</p>
 <div id="conf-ddl-grid" class="conf-ddl-grid"></div>
 
@@ -1622,7 +1624,7 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
 })();
 </script>
 
-<h2 class="section-header" id="contact">📬 Contact</h2>
+<h2 class="section-header" id="contact"><img class="sh-icon" src="/images/icons/sh-contact.png" alt="">Contact</h2>
 <p style="font-size:0.94em;">
 Happy to discuss research, internships, or collaborations. Best reached by email.<br>
 📧 <a href="mailto:jiajunf3@illinois.edu"><strong>jiajunf3@illinois.edu</strong></a> &nbsp;·&nbsp;
