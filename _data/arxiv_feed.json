@@ -1,6 +1,60 @@
 {
-  "updated": "2026-06-08",
+  "updated": "2026-06-15",
   "papers": [
+    {
+      "id": "2606.13507",
+      "title": "Leveraging Audio-LLMs to Filter Speech-to-Speech Training Data",
+      "authors": "Qixu Chen, Satoshi Nakamura",
+      "summary": "Large-scale mined corpora provide abundant training data for end-to-end speech-to-speech translation (S2ST) but may contain noise, misalignment, and semantic errors. Filtering noisy data is crucial to…",
+      "date": "2026-06-11",
+      "tag": "Audio Reasoning",
+      "url": "https://arxiv.org/abs/2606.13507"
+    },
+    {
+      "id": "2606.11867",
+      "title": "Harnessing Routing Foresight for Micro-step-level MoE load balancing in RL Post-training",
+      "authors": "Yuming Zhou, Haoyang Li, Sheng Lin et al.",
+      "summary": "Mixture-of-Experts (MoE) and reinforcement learning (RL) post-training now dominate large language model (LLM) development, yet expert load imbalance remains a critical challenge. Existing load-balanc…",
+      "date": "2026-06-10",
+      "tag": "RL Training",
+      "url": "https://arxiv.org/abs/2606.11867"
+    },
+    {
+      "id": "2606.11182",
+      "title": "EEVEE: Towards Test-time Prompt Learning in the Real World for Self-Improving Agents",
+      "authors": "Weixian Xu, Shilong Liu, Mengdi Wang",
+      "summary": "In this paper, we propose EEVEE, the first multi-dataset test-time prompt learning framework for LLM agents, enabling test-time prompt learning under real-world task streams. Existing methods are larg…",
+      "date": "2026-06-09",
+      "tag": "Reasoning",
+      "url": "https://arxiv.org/abs/2606.11182"
+    },
+    {
+      "id": "2606.11075",
+      "title": "Exploring the Design Space of Reward Backpropagation for Flow Matching",
+      "authors": "Ruoyu Wang, Boye Niu, Xiangxin Zhou et al.",
+      "summary": "Aligning text-to-image flow matching models with human preferences via direct reward backpropagation is sample-efficient but hampered by two well-known pathologies: activations cannot be stored across…",
+      "date": "2026-06-09",
+      "tag": "Flow Matching",
+      "url": "https://arxiv.org/abs/2606.11075"
+    },
+    {
+      "id": "2606.09052",
+      "title": "INFUSER: Influence-Guided Self-Evolution Improves Reasoning",
+      "authors": "Siyu Chen, Miao Lu, Beining Wu et al.",
+      "summary": "Self-evolution offers a scalable path to stronger reasoning: a pretrained language model improves itself with only minimal external supervision. Yet existing methods either depend on extensively curat…",
+      "date": "2026-06-08",
+      "tag": "RL Training",
+      "url": "https://arxiv.org/abs/2606.09052"
+    },
+    {
+      "id": "2606.09078",
+      "title": "The Hidden Bias of Process Reward Models:PRISM for Rewarding the Right Reasoning",
+      "authors": "Aakriti Agrawal, Souradip Chakraborty, Armin Saghafian et al.",
+      "summary": "Process Reward Models (PRMs) improve credit assignment for reasoning by providing step-level feedback. However, we identify a hidden bias in PRMs caused by severe imbalance in step-level training data…",
+      "date": "2026-06-08",
+      "tag": "Reasoning",
+      "url": "https://arxiv.org/abs/2606.09078"
+    },
     {
       "id": "2606.07027",
       "title": "StainFlow: Entity-Stain Tracking and Evidence Linking for Process Rewards in GUI Agents",
@@ -27,60 +81,6 @@
       "date": "2026-06-04",
       "tag": "RL Training",
       "url": "https://arxiv.org/abs/2606.05606"
-    },
-    {
-      "id": "2606.06741",
-      "title": "OpenSkill: Open-World Self-Evolution for LLM Agents",
-      "authors": "Zhiling Yan, Dingjie Song, Hanrong Zhang et al.",
-      "summary": "Self-evolving agents requires adaptation after deployment, but existing approaches assume a usable learning loop, such as curated skills, successful trajectories, or verifier signals. Real open-world …",
-      "date": "2026-06-04",
-      "tag": "RL Training",
-      "url": "https://arxiv.org/abs/2606.06741"
-    },
-    {
-      "id": "2606.04678",
-      "title": "Test-Time Compute Scaling for ASR with Depth-Conditioned Looped Transformers",
-      "authors": "Yacouba Kaloga, Shashi Kumar, Shakeel A. Sheikh et al.",
-      "summary": "End-to-end ASR systems typically use fixed-depth acoustic encoders at inference, making it difficult to trade additional test-time computation for improved recognition without training a larger model.…",
-      "date": "2026-06-03",
-      "tag": "Reasoning",
-      "url": "https://arxiv.org/abs/2606.04678"
-    },
-    {
-      "id": "2606.04579",
-      "title": "SCI-PRM: A Tool Aware Process Reward Model for Scientific Reasoning Verification",
-      "authors": "Xiangyu Zhao, Hengyuan Zhao, Yiheng Wang et al.",
-      "summary": "While Process Reward Models (PRMs) have achieved remarkable success in mathematical reasoning, their application in complex scientific domains-such as biology, chemistry, and physics remains largely u…",
-      "date": "2026-06-03",
-      "tag": "Reasoning",
-      "url": "https://arxiv.org/abs/2606.04579"
-    },
-    {
-      "id": "2606.05468",
-      "title": "FlowPRO: Reward-Free Reinforced Fine-Tuning of Flow-Matching VLAs via Proximalized Preference Optimization",
-      "authors": "Yihao Wu, He Zhang, Junbo Tan et al.",
-      "summary": "Post-training Vision-Language-Action (VLA) models into policies that can be reliably deployed on real robots remains a major bottleneck. SFT and DAgger exploit failure signals only indirectly, and rew…",
-      "date": "2026-06-03",
-      "tag": "Flow Matching",
-      "url": "https://arxiv.org/abs/2606.05468"
-    },
-    {
-      "id": "2606.04986",
-      "title": "Food-R1: A Unified Multi-Task Food Vision-Language Model with Reinforcement Learning",
-      "authors": "Yu Zhu, Yongkang Li, Wenjie Zhu et al.",
-      "summary": "Recent studies have explored Vision-Language Models (VLMs) for food analysis. However, most existing methods rely primarily on supervised fine-tuning (SFT), which often limits reasoning and generaliza…",
-      "date": "2026-06-03",
-      "tag": "Multimodal",
-      "url": "https://arxiv.org/abs/2606.04986"
-    },
-    {
-      "id": "2606.03077",
-      "title": "Libra: Efficient Resource Management for Agentic RL Post-Training",
-      "authors": "Kaiwen Chen, Xin Tan, Jingzong Li et al.",
-      "summary": "Reinforcement learning (RL) has become a standard post-training paradigm for large language models (LLMs), extending beyond preference alignment to complex reasoning and multi-turn agentic behaviors. …",
-      "date": "2026-06-02",
-      "tag": "RL Training",
-      "url": "https://arxiv.org/abs/2606.03077"
     }
   ]
 }
