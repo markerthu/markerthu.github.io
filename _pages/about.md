@@ -45,6 +45,9 @@ body.dark-mode .internship-banner strong { color: #90caf9 !important; }
   position: sticky; top: 0; z-index: 90;
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
+.quick-nav a img.qn-ico { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; margin-right: 5px; }
+.footer-links a img.ft-ico { width: 15px; height: 15px; object-fit: contain; vertical-align: -2px; margin-right: 5px; }
+body.dark-mode .quick-nav a img.qn-ico, body.dark-mode .footer-links a img.ft-ico { filter: brightness(1.5) saturate(1.1); }
 .quick-nav a { color: #1565c0; text-decoration: none; padding: 2px 6px; border-radius: 5px; transition: background .15s, color .15s; }
 .quick-nav a:hover { background: #e8effe; }
 .quick-nav a.qn-active { background: #1565c0; color: #fff !important; }
@@ -1083,18 +1086,18 @@ body.dark-mode .pillar-tag { background: #1c2333; color: #58a6ff; }
 <!-- Quick nav -->
 <div class="quick-nav">
   <span class="qn-label">↓ Jump to:</span>
-  <a href="#news"         data-qn="news">📰 News</a>
-  <a href="#featured"     data-qn="featured">🔥 Featured</a>
-  <a href="#publications" data-qn="publications">📄 Publications</a>
-  <a href="#northstar"    data-qn="northstar">🧭 North Star</a>
-  <a href="#research"     data-qn="research">🔬 Research</a>
-  <a href="#impact"       data-qn="impact">⚡ Impact</a>
-  <a href="#vision"       data-qn="vision">💡 Vision</a>
-  <a href="#awards"       data-qn="awards">🏅 Awards</a>
-  <a href="#deadlines"    data-qn="deadlines">📅 Deadlines</a>
-  <a href="/year-archive/">✍️ Blog</a>
-  <a href="/cv/">📋 CV</a>
-  <a href="#contact">📬 Contact</a>
+  <a href="#news"         data-qn="news"><img class="qn-ico" src="/images/icons/sh-news.png" alt="">News</a>
+  <a href="#featured"     data-qn="featured"><img class="qn-ico" src="/images/icons/sh-featured.png" alt="">Featured</a>
+  <a href="#publications" data-qn="publications"><img class="qn-ico" src="/images/icons/sh-pubs.png" alt="">Publications</a>
+  <a href="#northstar"    data-qn="northstar"><img class="qn-ico" src="/images/icons/sh-northstar.png" alt="">North Star</a>
+  <a href="#research"     data-qn="research"><img class="qn-ico" src="/images/icons/sh-research.png" alt="">Research</a>
+  <a href="#impact"       data-qn="impact"><img class="qn-ico" src="/images/icons/sh-impact.png" alt="">Impact</a>
+  <a href="#vision"       data-qn="vision"><img class="qn-ico" src="/images/icons/sh-vision.png" alt="">Vision</a>
+  <a href="#awards"       data-qn="awards"><img class="qn-ico" src="/images/icons/sh-awards.png" alt="">Awards</a>
+  <a href="#deadlines"    data-qn="deadlines"><img class="qn-ico" src="/images/icons/sh-deadlines.png" alt="">Deadlines</a>
+  <a href="/year-archive/"><img class="qn-ico" src="/images/icons/h-blog.png" alt="">Blog</a>
+  <a href="/cv/"><img class="qn-ico" src="/images/icons/h-cv.png" alt="">CV</a>
+  <a href="#contact"><img class="qn-ico" src="/images/icons/sh-contact.png" alt="">Contact</a>
   <button class="qn-cmdk" onclick="cmdkOpen()" aria-label="Open command palette (Cmd+K)" title="Command palette">⌘K</button>
 </div>
 
@@ -1639,12 +1642,12 @@ Happy to discuss research, internships, or collaborations. Best reached by email
 <!-- Footer -->
 <div class="site-footer">
   <div class="footer-links">
-    <a href="mailto:jiajunf3@illinois.edu">✉️ Email</a>
-    <a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">🎓 Scholar</a>
-    <a href="https://openreview.net/profile?id=~Jiajun_Fan1" target="_blank" rel="noopener noreferrer">📝 OpenReview</a>
-    <a href="https://github.com/markerthu" target="_blank" rel="noopener noreferrer">💻 GitHub</a>
-    <a href="/cv/">📋 CV</a>
-    <a href="/projects/">🔬 Projects</a>
+    <a href="mailto:jiajunf3@illinois.edu"><img class="ft-ico" src="/images/icons/h-email.png" alt="">Email</a>
+    <a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer"><img class="ft-ico" src="/images/icons/h-scholar.png" alt="">Scholar</a>
+    <a href="https://openreview.net/profile?id=~Jiajun_Fan1" target="_blank" rel="noopener noreferrer"><img class="ft-ico" src="/images/icons/h-openreview.png" alt="">OpenReview</a>
+    <a href="https://github.com/markerthu" target="_blank" rel="noopener noreferrer"><img class="ft-ico" src="/images/icons/h-github.png" alt="">GitHub</a>
+    <a href="/cv/"><img class="ft-ico" src="/images/icons/h-cv.png" alt="">CV</a>
+    <a href="/projects/"><img class="ft-ico" src="/images/icons/h-projects.png" alt="">Projects</a>
   </div>
   <p>© {{ site.time | date: '%Y' }} Jiajun Fan · CS Ph.D. @ UIUC · Built with ☕ and curiosity</p>
 </div>
