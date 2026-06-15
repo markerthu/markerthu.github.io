@@ -1025,6 +1025,30 @@ body.dark-mode .cmdk-foot kbd { background: #21262d; border-color: #30363d; }
   }
 }
 
+/* ── Research North-Star pillars ── */
+.pillar-intro { font-size: 0.92em; color: #555; margin: -0.4em 0 1.3em; line-height: 1.7; }
+body.dark-mode .pillar-intro { color: #adbac7; }
+.pillar-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 1.8em; }
+@media (max-width: 720px) { .pillar-grid { grid-template-columns: 1fr; } }
+.pillar-card {
+  background: #fff; border: 1.5px solid #e0e8f0; border-radius: 14px; overflow: hidden;
+  display: flex; flex-direction: column; transition: transform .18s, box-shadow .18s, border-color .18s;
+}
+.pillar-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(21,101,192,.16); border-color: #1565c0; }
+.pillar-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-bottom: 1px solid #e0e8f0; display: block; background: #fafbff; }
+.pillar-body { padding: 15px 17px 18px; flex: 1; }
+.pillar-kicker { font-size: 0.7em; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #0f9d8a; }
+.pillar-title { font-size: 1.02em; font-weight: 800; color: #1a2332; margin: 3px 0 7px; letter-spacing: -.01em; }
+.pillar-desc { font-size: 0.84em; color: #555; line-height: 1.6; }
+.pillar-papers { margin-top: 9px; display: flex; flex-wrap: wrap; gap: 5px; }
+.pillar-tag { font-size: 0.7em; font-weight: 700; background: #eef4ff; color: #1565c0; border-radius: 6px; padding: 2px 7px; }
+body.dark-mode .pillar-card { background: #161b22; border-color: #30363d; }
+body.dark-mode .pillar-img { border-bottom-color: #30363d; }
+body.dark-mode .pillar-title { color: #e6edf3; }
+body.dark-mode .pillar-desc { color: #adbac7; }
+body.dark-mode .pillar-kicker { color: #2dd4bf; }
+body.dark-mode .pillar-tag { background: #1c2333; color: #58a6ff; }
+
 /* Print safety for polish pack */
 @media print {
   .sr { opacity: 1 !important; transform: none !important; }
@@ -1063,6 +1087,7 @@ body.dark-mode .cmdk-foot kbd { background: #21262d; border-color: #30363d; }
   <a href="#news"         data-qn="news">📰 News</a>
   <a href="#featured"     data-qn="featured">🔥 Featured</a>
   <a href="#publications" data-qn="publications">📄 Publications</a>
+  <a href="#northstar"    data-qn="northstar">🧭 North Star</a>
   <a href="#research"     data-qn="research">🔬 Research</a>
   <a href="#impact"       data-qn="impact">⚡ Impact</a>
   <a href="#vision"       data-qn="vision">💡 Vision</a>
@@ -1358,6 +1383,40 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 <h2 class="section-header" id="research-graph-section">🕸️ Research Paper Network</h2>
 <p style="font-size:0.88em;color:#595959;margin-bottom:14px;">Hover a node to highlight connections. Papers are grouped by research theme.</p>
 <div id="research-graph" role="img" aria-label="Network graph showing how Jiajun Fan's papers connect by research theme: from Deep RL (GDI, LBC) to RL training and flow matching for generative models (ORW-CFM-W2, ADRPO, AC-Flow) to audio reasoning (CESAR)."></div>
+
+<!-- ═══════════════════════════════ NORTH STAR ═══════════════════════════ -->
+<h2 class="section-header" id="northstar">🧭 Research North Star</h2>
+<p class="pillar-intro">My long-term goal is <strong>AI that improves itself with minimal human supervision</strong>. Everything I build ladders into three autonomous capabilities:</p>
+
+<div class="pillar-grid">
+  <div class="pillar-card">
+    <img class="pillar-img" loading="lazy" src="/images/featured/pillar-evolve.jpg" alt="Auto self-evolution: a model leveling itself up from its own outputs">
+    <div class="pillar-body">
+      <div class="pillar-kicker">Auto Self-Evolution</div>
+      <div class="pillar-title">Models that improve themselves</div>
+      <div class="pillar-desc">Generative models and reasoning LLMs that self-improve from their own outputs and environment feedback — no human-labeled data. Reward-weighted, collapse-free, process-supervised online RL.</div>
+      <div class="pillar-papers"><span class="pillar-tag">ORW-CFM-W2</span><span class="pillar-tag">ADRPO</span><span class="pillar-tag">AC-Flow</span><span class="pillar-tag">CESAR</span></div>
+    </div>
+  </div>
+  <div class="pillar-card">
+    <img class="pillar-img" loading="lazy" src="/images/featured/pillar-explore.jpg" alt="Auto exploration: an agent autonomously searching a vast space">
+    <div class="pillar-body">
+      <div class="pillar-kicker">Auto Exploration</div>
+      <div class="pillar-title">Agents that explore on their own</div>
+      <div class="pillar-desc">Sample-efficient, self-directed exploration that enlarges what an agent can discover — learnable behavior control and data-distribution optimization that reached superhuman play with orders of magnitude less data.</div>
+      <div class="pillar-papers"><span class="pillar-tag">LBC</span><span class="pillar-tag">GDI</span></div>
+    </div>
+  </div>
+  <div class="pillar-card">
+    <img class="pillar-img" loading="lazy" src="/images/featured/pillar-research.jpg" alt="Auto research: an AI agent running the scientific loop autonomously">
+    <div class="pillar-body">
+      <div class="pillar-kicker">Auto Research</div>
+      <div class="pillar-title">AI that does research</div>
+      <div class="pillar-desc">The horizon: agents that run the full scientific loop — hypothesize, experiment, analyze, refine — autonomously. Agentic RL that turns self-evolution and self-exploration into self-driven discovery.</div>
+      <div class="pillar-papers"><span class="pillar-tag">Agentic RL</span><span class="pillar-tag">Ongoing</span></div>
+    </div>
+  </div>
+</div>
 
 <!-- ═══════════════════════════════ RESEARCH ═══════════════════════════ -->
 <h2 class="section-header" id="research">🔬 Research Interests</h2>
@@ -2132,7 +2191,7 @@ function drawGraph(container) {
    ⑨ QUICK NAV SCROLL HIGHLIGHT
 ══════════════════════════════════════════════════ */
 (function(){
-  var sections = ['news','featured','publications','research','impact','vision','awards','deadlines'];
+  var sections = ['news','featured','publications','northstar','research','impact','vision','awards','deadlines'];
   var navLinks = document.querySelectorAll('.quick-nav a[data-qn]');
   if (!navLinks.length || !window.IntersectionObserver) return;
 
