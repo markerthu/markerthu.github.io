@@ -253,6 +253,8 @@ body.dark-mode .pub-abst-btn:hover { background: #1e40af; }
   justify-content: center;
   flex-wrap: wrap;
 }
+.hero-ico { width: 16px; height: 16px; object-fit: contain; filter: brightness(0) invert(1); flex-shrink: 0; }
+.hero-pill .hero-ico { width: 15px; height: 15px; vertical-align: -3px; margin-right: 5px; }
 .hero-link {
   display: inline-flex;
   align-items: center;
@@ -1063,18 +1065,18 @@ body.dark-mode .pillar-tag { background: #1c2333; color: #58a6ff; }
   <div class="hero-subtitle" id="hero-typed"></div>
   <div class="hero-status"><span class="hs-dot" aria-hidden="true"></span>Open to Research Internships — Fall 2026 / 2027</div>
   <div class="hero-pills">
-    <span class="hero-pill">🌊 RL Post-Training for Generative Models</span>
-    <span class="hero-pill">🧠 Multimodal Reasoning LLMs</span>
-    <span class="hero-pill">🎮 Superhuman Deep RL</span>
-    <span class="hero-pill">🤖 Agentic RL</span>
+    <span class="hero-pill"><img class="hero-ico" src="/images/icons/h-flow.png" alt="">RL Post-Training for Generative Models</span>
+    <span class="hero-pill"><img class="hero-ico" src="/images/icons/h-reason.png" alt="">Multimodal Reasoning LLMs</span>
+    <span class="hero-pill"><img class="hero-ico" src="/images/icons/h-game.png" alt="">Superhuman Deep RL</span>
+    <span class="hero-pill"><img class="hero-ico" src="/images/icons/h-agentic.png" alt="">Agentic RL</span>
   </div>
   <div class="hero-links">
-    <a class="hero-link" href="/cv/">📋 CV</a>
-    <a class="hero-link" href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">🎓 Scholar</a>
-    <a class="hero-link" href="mailto:jiajunf3@illinois.edu">✉️ Email</a>
-    <a class="hero-link" href="https://openreview.net/profile?id=~Jiajun_Fan1" target="_blank" rel="noopener noreferrer">📝 OpenReview</a>
-    <a class="hero-link" href="https://github.com/markerthu" target="_blank" rel="noopener noreferrer">💻 GitHub</a>
-    <a class="hero-link" href="https://www.linkedin.com/in/jiajun-fan-57b12b26b" target="_blank" rel="noopener noreferrer">💼 LinkedIn</a>
+    <a class="hero-link" href="/cv/"><img class="hero-ico" src="/images/icons/h-cv.png" alt="">CV</a>
+    <a class="hero-link" href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer"><img class="hero-ico" src="/images/icons/h-scholar.png" alt="">Scholar</a>
+    <a class="hero-link" href="mailto:jiajunf3@illinois.edu"><img class="hero-ico" src="/images/icons/h-email.png" alt="">Email</a>
+    <a class="hero-link" href="https://openreview.net/profile?id=~Jiajun_Fan1" target="_blank" rel="noopener noreferrer"><img class="hero-ico" src="/images/icons/h-openreview.png" alt="">OpenReview</a>
+    <a class="hero-link" href="https://github.com/markerthu" target="_blank" rel="noopener noreferrer"><img class="hero-ico" src="/images/icons/h-github.png" alt="">GitHub</a>
+    <a class="hero-link" href="https://www.linkedin.com/in/jiajun-fan-57b12b26b" target="_blank" rel="noopener noreferrer"><img class="hero-ico" src="/images/icons/h-linkedin.png" alt="">LinkedIn</a>
   </div>
 </div>
 
