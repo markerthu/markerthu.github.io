@@ -166,6 +166,7 @@ body.dark-mode .pub-abst-btn:hover { background: #1e40af; }
 }
 .research-card:hover { border-color: #1565c0; box-shadow: 0 4px 14px rgba(21,101,192,.12); }
 .rc-icon { font-size: 1.7em; margin-bottom: 8px; }
+.rc-icon-img { width: 46px; height: 46px; object-fit: contain; margin-bottom: 10px; display: block; }
 .rc-title { font-weight: 800; font-size: 0.93em; color: #1a2332; margin-bottom: 5px; }
 .rc-desc  { font-size: 0.81em; color: #555; line-height: 1.55; }
 
@@ -1427,17 +1428,17 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 
 <div class="research-grid">
   <div class="research-card">
-    <div class="rc-icon">🌊</div>
+    <img class="rc-icon-img" loading="lazy" src="/images/icons/ri-flow.png" alt="">
     <div class="rc-title">RL Post-Training for Generative Models</div>
     <div class="rc-desc">Collapse-free online RLHF for flow/diffusion models. No human-collected preference data needed — models improve from their own generations (ORW-CFM-W2, ADRPO, AC-Flow).</div>
   </div>
   <div class="research-card">
-    <div class="rc-icon">🧠</div>
+    <img class="rc-icon-img" loading="lazy" src="/images/icons/ri-reason.png" alt="">
     <div class="rc-title">Reasoning in Multimodal LLMs</div>
     <div class="rc-desc">Process-reward RL for audio/visual LLMs — fixing test-time inverse scaling so reasoning actually helps, not hurts (CESAR).</div>
   </div>
   <div class="research-card">
-    <div class="rc-icon">🎮</div>
+    <img class="rc-icon-img" loading="lazy" src="/images/icons/ri-superhuman.png" alt="">
     <div class="rc-title">Superhuman-Level Deep RL</div>
     <div class="rc-desc">Sample-efficient RL that exceeds human performance. Broke 24 Atari world records with 500× less data than prior SOTA (LBC, GDI).</div>
   </div>
