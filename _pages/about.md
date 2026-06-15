@@ -872,6 +872,10 @@ body.dark-mode .pub-abstract-preview { background: #161b22; border-color: #30363
 @media(max-width:600px){ #research-graph { height: 320px; } }
 body.dark-mode #research-graph { border-color: #30363d; background: #0d1117 !important; }
 #research-graph svg { width: 100%; height: 100%; }
+/* Animated flow along research-evolution links */
+.rg-flow { stroke-dasharray: 2 8; animation: rgFlow 1.0s linear infinite; pointer-events: none; }
+@keyframes rgFlow { to { stroke-dashoffset: -10; } }
+@media (prefers-reduced-motion: reduce) { .rg-flow { animation: none; } }
 /* Graph nodes/links/legend are drawn as raw SVG by drawGraph() — no extra CSS classes needed. */
 /* ── Dark mode: Hero pills ── */
 body.dark-mode .hero-pill { background: rgba(255,255,255,0.12) !important; color: rgba(255,255,255,0.85) !important; border-color: rgba(255,255,255,0.2) !important; }
@@ -2104,8 +2108,10 @@ function drawGraph(container) {
       .attr('stroke-width',1).attr('stroke-dasharray','3,5');
   });
 
-  /* Draw links */
+  /* Draw links: base path (hover/arrow) in lGroup + animated flow overlay in flowGroup */
   var lGroup = svg.append('g');
+  var flowGroup = svg.append('g').attr('pointer-events','none');
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   links.forEach(function(l){
     var s = nodeMap[l.s], t = nodeMap[l.t]; if(!s||!t) return;
     var dx=t.x-s.x, dy=t.y-s.y, dist=Math.sqrt(dx*dx+dy*dy);
@@ -2113,15 +2119,23 @@ function drawGraph(container) {
     var sx=s.x+(dx/dist)*s.r, sy=s.y+(dy/dist)*s.r;
     var ex=t.x-(dx/dist)*(t.r+9), ey=t.y-(dy/dist)*(t.r+9);
     var mx=(sx+ex)/2+nx*(l.bend||0), my=(sy+ey)/2+ny*(l.bend||0);
+    var dPath='M'+sx+','+sy+' Q'+mx+','+my+' '+ex+','+ey;
     lGroup.append('path')
-      .attr('d','M'+sx+','+sy+' Q'+mx+','+my+' '+ex+','+ey)
+      .attr('d',dPath)
       .attr('stroke',edgeClr).attr('stroke-width',1.5)
-      .attr('fill','none').attr('opacity',0.65)
+      .attr('fill','none').attr('opacity',0.55)
       .attr('marker-end','url(#rg-arr)');
+    if(!reduceMotion){
+      flowGroup.append('path')
+        .attr('class','rg-flow')
+        .attr('d',dPath)
+        .attr('stroke', s.clr).attr('stroke-width',2.2)
+        .attr('fill','none').attr('opacity',0.5).attr('stroke-linecap','round');
+    }
   });
 
   /* Draw nodes */
-  nodes.forEach(function(d){
+  nodes.forEach(function(d, ni){
     var g = svg.append('g')
       .attr('cursor', d.url ? 'pointer' : 'default')
       .on('mouseenter', function(){
@@ -2144,14 +2158,23 @@ function drawGraph(container) {
       });
     if(d.url) g.on('click', function(){ window.open(d.url,'_blank','noopener,noreferrer'); });
 
-    /* Glow */
-    g.append('circle').attr('cx',d.x).attr('cy',d.y).attr('r',d.r+8)
-      .attr('fill',d.clr).attr('opacity',0.10);
-    /* Main circle */
-    g.append('circle').attr('class','main')
-      .attr('cx',d.x).attr('cy',d.y).attr('r',d.r)
-      .attr('fill',d.clr).attr('fill-opacity',0.88)
-      .attr('stroke','#fff').attr('stroke-width',2);
+    /* Glow (two-ring soft halo) */
+    g.append('circle').attr('cx',d.x).attr('cy',d.y).attr('r',d.r+12)
+      .attr('fill',d.clr).attr('opacity',0.06);
+    g.append('circle').attr('cx',d.x).attr('cy',d.y).attr('r',d.r+7)
+      .attr('fill',d.clr).attr('opacity',0.12);
+    /* Main circle — entrance scale-in */
+    var main = g.append('circle').attr('class','main')
+      .attr('cx',d.x).attr('cy',d.y)
+      .attr('fill',d.clr).attr('fill-opacity',0.9)
+      .attr('stroke', isDark ? '#161b22' : '#fff').attr('stroke-width',2.5);
+    if(reduceMotion){
+      main.attr('r', d.r);
+    } else {
+      main.attr('r', 0)
+        .transition().delay(ni*55).duration(420).ease(d3.easeBackOut.overshoot(1.5))
+        .attr('r', d.r);
+    }
     /* Label above */
     g.append('text').attr('x',d.x).attr('y',d.y-d.r-7)
       .attr('text-anchor','middle').attr('font-size','11.5px')
