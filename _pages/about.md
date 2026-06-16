@@ -147,6 +147,7 @@ body.dark-mode .pub-abst-btn:hover { background: #1e40af; }
 .pub-authors { font-size: 0.81em; color: #6b7280; margin-top: 3px; }
 .pub-authors strong { color: #1a2332; font-weight: 700; }
 .pub-desc { font-size: 0.81em; color: #444; margin-top: 4px; line-height: 1.55; }
+.lbl-ico{display:inline-block;width:1em;height:1em;vertical-align:-0.14em;margin-right:4px;background-color:currentColor;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;flex-shrink:0;}
 .pub-hl {
   display: inline-block; background: #fff8e1;
   border-left: 3px solid #ffa000; padding: 2px 9px;
@@ -832,7 +833,8 @@ body.dark-mode .cite-badge { background: #0c2340; color: #7dd3fc; border-color: 
   .pub-filter-bar { padding: 10px 12px; }
 }
 .filter-search {
-  flex: 1; min-width: 180px; padding: 7px 14px;
+  flex: 1; min-width: 180px; padding: 7px 14px 7px 34px;
+  background-image: url(/images/icons/h-search.png); background-repeat: no-repeat; background-position: 11px center; background-size: 14px 14px;
   border: 1.5px solid #e5e7eb; border-radius: 8px;
   font-size: 0.88em; outline: none; font-family: inherit;
   background: #fff; color: #111;
@@ -1107,7 +1109,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 </p>
 
 <div class="internship-banner internship-banner-pulse">
-🎓 <strong>Seeking research internship — Fall 2026 / 2027.</strong> RL · Generative Models · Reasoning LLMs · Agentic RL
+<i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-scholar);mask-image:url(/images/icons/h-scholar)"></i><strong>Seeking research internship — Fall 2026 / 2027.</strong> RL · Generative Models · Reasoning LLMs · Agentic RL
 &nbsp;<a href="/cv/">[CV]</a>
 &nbsp;<a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">[Scholar]</a>
 &nbsp;<a href="mailto:jiajunf3@illinois.edu">[Email]</a>
@@ -1147,7 +1149,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
   </li>
   <li class="news-hidden" id="news-extra-2">
     <span class="news-date">Aug 2024</span>
-    <span>🎓 Started Ph.D. at <strong>UIUC CS</strong> (GPA 4.0/4.0).</span>
+    <span><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-scholar);mask-image:url(/images/icons/h-scholar)"></i>Started Ph.D. at <strong>UIUC CS</strong> (GPA 4.0/4.0).</span>
   </li>
   <li class="news-hidden" id="news-extra-3">
     <span class="news-date">Jan 2023</span>
@@ -1174,7 +1176,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
       <span class="featured-venue fv-iclr26">ICLR 2026</span>
       <div class="featured-title">CESAR: Process Rewards for Audio LLM Reasoning</div>
       <div class="featured-desc">First to show test-time inverse scaling in Audio LLMs — and fix it with process rewards via online RL.</div>
-      <div class="featured-stat">🏆 SOTA MMAU · Beats Gemini 2.5 Pro</div>
+      <div class="featured-stat"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>SOTA MMAU · Beats Gemini 2.5 Pro</div>
     </div>
   </a>
   <a class="featured-card" href="/projects/adrpo/">
@@ -1183,7 +1185,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
       <span class="featured-venue fv-neurips">NeurIPS 2025</span>
       <div class="featured-title">ADRPO: Adaptive Regularization for Generative Model RLHF</div>
       <div class="featured-desc">Sample-level adaptive divergence regularization — 2B model outperforms 12B competitors.</div>
-      <div class="featured-stat">🚀 2B SD3 &gt; FLUX 12B &amp; SANA 4.8B</div>
+      <div class="featured-stat"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-rocket.png);mask-image:url(/images/icons/h-rocket.png)"></i>2B SD3 &gt; FLUX 12B &amp; SANA 4.8B</div>
     </div>
   </a>
   <a class="featured-card" href="/projects/orw-cfm-w2/">
@@ -1192,7 +1194,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
       <span class="featured-venue fv-iclr25">ICLR 2025</span>
       <div class="featured-title">ORW-CFM-W2: Online RLHF for Flow Matching</div>
       <div class="featured-desc">First collapse-free online RL framework for flow matching models with W2 regularization.</div>
-      <div class="featured-stat">✨ First online RLHF for flow matching</div>
+      <div class="featured-stat"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-sparkle.png);mask-image:url(/images/icons/h-sparkle.png)"></i>First online RLHF for flow matching</div>
     </div>
   </a>
   <a class="featured-card" href="/projects/lbc/">
@@ -1201,7 +1203,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
       <span class="featured-venue fv-iclr23oral">ICLR 2023 · Oral</span>
       <div class="featured-title">LBC: Superhuman Atari — 24 World Records</div>
       <div class="featured-desc">Breaking 24 Atari human world records with 78× less data than prior SOTA (Agent57).</div>
-      <div class="featured-stat">🏅 Rank 5/4176 · 10,077% mean human performance</div>
+      <div class="featured-stat"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>Rank 5/4176 · 10,077% mean human performance</div>
     </div>
   </a>
 </div>
@@ -1215,7 +1217,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 <a href="/publications/">Publications page</a></p>
 
 <div class="pub-filter-bar">
-  <input class="filter-search" id="pubSearch" type="text" placeholder="🔍  Search papers…" aria-label="Search publications" oninput="filterPubs()">
+  <input class="filter-search" id="pubSearch" type="text" placeholder="Search papers…" aria-label="Search publications" oninput="filterPubs()">
   <button class="filter-btn active" aria-label="Show all papers" onclick="filterByVenue(this,'all')">All</button>
   <button class="filter-btn" aria-label="Filter by ICLR papers" onclick="filterByVenue(this,'ICLR')">ICLR</button>
   <button class="filter-btn" aria-label="Filter by NeurIPS papers" onclick="filterByVenue(this,'NeurIPS')">NeurIPS</button>
@@ -1237,11 +1239,11 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
     <div class="pub-abstract-preview">CESAR resolves test-time inverse scaling in Audio LLMs by rewarding the reasoning process via GRPO, achieving SOTA on MMAU — outperforming Gemini 2.5 Pro and GPT-4o Audio.</div></div>
     <div class="pub-authors"><strong>J. Fan*</strong>, R. Ren, J. Li, R. Pandey, P.G. Shivakumar, I. Bulyko, A. Gandhe, G. Liu, Y. Gu</div>
     <div class="pub-desc">CESAR: process-reward RL (GRPO) resolving test-time inverse scaling in Audio LLMs — models produce hallucinatory reasoning without proper guidance; CESAR fixes that.</div>
-    <div class="pub-hl">🏆 SOTA on MMAU Test-mini · Outperforms Gemini 2.5 Pro &amp; GPT-4o Audio</div>
+    <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>SOTA on MMAU Test-mini · Outperforms Gemini 2.5 Pro &amp; GPT-4o Audio</div>
     <div class="pub-links">
-      <a class="pub-link pl-paper" href="https://openreview.net/forum?id=DUr48hxO2h" target="_blank" rel="noopener noreferrer">📄 Paper</a>
-      <a class="pub-link pl-project" href="/projects/cesar/">🔗 Project</a>
-      <a class="pub-link pl-arxiv" href="https://arxiv.org/abs/2510.20867" target="_blank" rel="noopener noreferrer">📎 arXiv</a>
+      <a class="pub-link pl-paper" href="https://openreview.net/forum?id=DUr48hxO2h" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-pubs.png);mask-image:url(/images/icons/sh-pubs.png)"></i>Paper</a>
+      <a class="pub-link pl-project" href="/projects/cesar/"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-link.png);mask-image:url(/images/icons/h-link.png)"></i>Project</a>
+      <a class="pub-link pl-arxiv" href="https://arxiv.org/abs/2510.20867" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-paperclip.png);mask-image:url(/images/icons/h-paperclip.png)"></i>arXiv</a>
     </div>
   </div>
 </div>
@@ -1272,11 +1274,11 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
     <div class="pub-abstract-preview">ADRPO introduces sample-level adaptive divergence regularization for RLHF — high-value samples get more freedom, poor samples get stronger constraints. Plug-and-play on any RL method.</div></div>
     <div class="pub-authors"><strong>J. Fan*</strong>, T. Wei, C. Cheng, Y. Chen, G. Liu</div>
     <div class="pub-desc">ADRPO: sample-level adaptive divergence regularization — high-value samples get more freedom, poor samples get stronger constraint. Plug-and-play on top of any RLHF method.</div>
-    <div class="pub-hl">🚀 2B SD3 surpasses 4.8B &amp; 12B models · Generalizes to LLMs &amp; audio reasoning</div>
+    <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-rocket.png);mask-image:url(/images/icons/h-rocket.png)"></i>2B SD3 surpasses 4.8B &amp; 12B models · Generalizes to LLMs &amp; audio reasoning</div>
     <div class="pub-links">
-      <a class="pub-link pl-paper" href="https://openreview.net/forum?id=aXO0xg0ttW" target="_blank" rel="noopener noreferrer">📄 Paper</a>
-      <a class="pub-link pl-project" href="/projects/adrpo/">🔗 Project</a>
-      <a class="pub-link pl-arxiv" href="https://arxiv.org/abs/2510.18053" target="_blank" rel="noopener noreferrer">📎 arXiv</a>
+      <a class="pub-link pl-paper" href="https://openreview.net/forum?id=aXO0xg0ttW" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-pubs.png);mask-image:url(/images/icons/sh-pubs.png)"></i>Paper</a>
+      <a class="pub-link pl-project" href="/projects/adrpo/"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-link.png);mask-image:url(/images/icons/h-link.png)"></i>Project</a>
+      <a class="pub-link pl-arxiv" href="https://arxiv.org/abs/2510.18053" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-paperclip.png);mask-image:url(/images/icons/h-paperclip.png)"></i>arXiv</a>
     </div>
   </div>
 </div>
@@ -1290,7 +1292,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
     <div class="pub-title"><a href="https://openreview.net/forum?id=uOOlHOq500" target="_blank" rel="noopener noreferrer">Variational Supervised Contrastive Learning</a>
       <button class="pub-abst-btn" aria-expanded="false" aria-label="Toggle abstract">▾ Abstract</button>
       <div class="pub-abstract-preview">VarCon reformulates supervised contrastive learning as variational inference, achieving SOTA 79.36% Top-1 accuracy on ImageNet-1K with ResNet-50.</div></div>
-    <div class="pub-hl">📊 SOTA 79.36% Top-1 on ImageNet-1K with ResNet-50</div>
+    <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-chart.png);mask-image:url(/images/icons/h-chart.png)"></i>SOTA 79.36% Top-1 on ImageNet-1K with ResNet-50</div>
     <div class="pub-authors">Z. Wang, <strong>J. Fan</strong>, T. Nguyen, H. Ji, G. Liu</div>
     <div class="pub-desc">VarCon: supervised contrastive learning as variational inference — posterior-weighted ELBO replaces pairwise comparisons.</div>
   </div>
@@ -1305,7 +1307,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
       <a class="pub-project" href="/projects/orw-cfm-w2/">Project Page</a>
       <button class="pub-abst-btn" aria-expanded="false" aria-label="Toggle abstract">▾ Abstract</button>
       <div class="pub-abstract-preview">ORW-CFM-W2 is the first online RLHF method for flow matching — no human data, no likelihood estimation. Wasserstein regularization maintains generation diversity.</div></div>
-    <div class="pub-hl">🥇 First online RLHF for flow matching · Collapse-free W2 regularization</div>
+    <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>First online RLHF for flow matching · Collapse-free W2 regularization</div>
     <div class="pub-authors"><strong>J. Fan*</strong>, S. Shen, C. Cheng, Y. Chen, C. Liang, G. Liu</div>
     <div class="pub-desc">ORW-CFM-W2: first online RLHF for flow matching — no human data, no likelihood, no collapse. W2 regularization keeps generation diverse.</div>
   </div>
@@ -1322,7 +1324,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
       <a class="pub-project" href="/projects/ac-flow/">Project Page</a>
       <button class="pub-abst-btn" aria-expanded="false" aria-label="Toggle abstract">▾ Abstract</button>
       <div class="pub-abstract-preview">AC-Flow introduces actor-critic with intermediate feedback for flow matching — reward shaping + dual-stability mechanism + Wasserstein regularization enables robust SD3 fine-tuning without collapse.</div></div>
-    <div class="pub-hl">⚙️ Actor-critic with step-level reward · Stable SD3 fine-tuning without collapse</div>
+    <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-gear.png);mask-image:url(/images/icons/h-gear.png)"></i>Actor-critic with step-level reward · Stable SD3 fine-tuning without collapse</div>
     <div class="pub-authors"><strong>J. Fan*</strong>, C. Cheng, S. Shen, X. Zhou, G. Liu &nbsp;·&nbsp; <em>Under Review</em></div>
     <div class="pub-desc">AC-Flow: actor-critic with intermediate feedback for flow matching — reward shaping + dual-stability + Wasserstein regularization. Robust fine-tuning on SD3 without collapse.</div>
   </div>
@@ -1355,7 +1357,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
     <div class="pub-abstract-preview">LBC introduces a learnable hybrid behavior mapping and bandit meta-controller for exploration control in deep RL, breaking 24 Atari human world records with 78× less data than prior SOTA.</div></div>
     <div class="pub-authors"><strong>J. Fan*</strong>, Y. Zhuang, Y. Liu, J. Hao, B. Wang, J. Zhu, H. Wang, S.-T. Xia</div>
     <div class="pub-desc">LBC: learnable hybrid behavior mapping + bandit meta-controller. Unified framework for exploration control in deep RL.</div>
-    <div class="pub-hl">🏅 Ranked 5/4176 · 10,077% mean human score · 24 world records · 78× data efficiency</div>
+    <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>Ranked 5/4176 · 10,077% mean human score · 24 world records · 78× data efficiency</div>
   </div>
 </div>
 
@@ -1372,7 +1374,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
     <div class="pub-abstract-preview">GDI shows that optimizing the training data distribution is the key lever for superhuman RL efficiency. Provides a unified framework that subsumes diverse RL algorithms as special cases.</div></div>
     <div class="pub-authors"><strong>J. Fan*</strong>, C. Xiao</div>
     <div class="pub-desc">GDI: optimizing the data distribution is the key to superhuman RL efficiency. Unified framework for diverse RL algorithms.</div>
-    <div class="pub-hl">📈 Agent57 beaten with 500× less data &amp; 2× avg performance</div>
+    <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-chart.png);mask-image:url(/images/icons/h-chart.png)"></i>Agent57 beaten with 500× less data &amp; 2× avg performance</div>
   </div>
 </div>
 
@@ -1509,7 +1511,7 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
 
 <div class="awards-grid">
   <div>
-    <p class="awards-col-title">🎖 Selected Awards</p>
+    <p class="awards-col-title"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>Selected Awards</p>
     <ul class="awards-col-list">
       <li>National Scholarship ×2, Top 1% — Nankai Univ.</li>
       <li>Ranked <strong>1st / 83</strong> in major — Nankai Univ.</li>
@@ -1521,7 +1523,7 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
     </ul>
   </div>
   <div>
-    <p class="awards-col-title">🔍 Reviewer</p>
+    <p class="awards-col-title"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-search.png);mask-image:url(/images/icons/h-search.png)"></i>Reviewer</p>
     <ul class="awards-col-list">
       <li>ICLR 2024 · 2025 · <strong>2026</strong></li>
       <li>NeurIPS 2022–2024 · <strong>2025</strong></li>
@@ -1632,10 +1634,10 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
 <h2 class="section-header" id="contact"><img class="sh-icon" src="/images/icons/sh-contact.png" alt="">Contact</h2>
 <p style="font-size:0.94em;">
 Happy to discuss research, internships, or collaborations. Best reached by email.<br>
-📧 <a href="mailto:jiajunf3@illinois.edu"><strong>jiajunf3@illinois.edu</strong></a> &nbsp;·&nbsp;
-🏛 Siebel Center for CS, UIUC &nbsp;·&nbsp;
+<i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-email.png);mask-image:url(/images/icons/h-email.png)"></i><a href="mailto:jiajunf3@illinois.edu"><strong>jiajunf3@illinois.edu</strong></a> &nbsp;·&nbsp;
+<i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-building.png);mask-image:url(/images/icons/h-building.png)"></i>Siebel Center for CS, UIUC &nbsp;·&nbsp;
 <a href="/cv/"><strong>CV</strong></a> &nbsp;·&nbsp;
-<a href="https://www.linkedin.com/in/jiajun-fan-57b12b26b" target="_blank" rel="noopener noreferrer">💼 LinkedIn</a> &nbsp;·&nbsp;
+<a href="https://www.linkedin.com/in/jiajun-fan-57b12b26b" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-linkedin.png);mask-image:url(/images/icons/h-linkedin.png)"></i>LinkedIn</a> &nbsp;·&nbsp;
 <a href="https://orcid.org/0000-0002-0263-2103" target="_blank" rel="noopener noreferrer">🔬 ORCID</a>
 </p>
 
@@ -1649,7 +1651,7 @@ Happy to discuss research, internships, or collaborations. Best reached by email
     <a href="/cv/"><img class="ft-ico" src="/images/icons/h-cv.png" alt="">CV</a>
     <a href="/projects/"><img class="ft-ico" src="/images/icons/h-projects.png" alt="">Projects</a>
   </div>
-  <p>© {{ site.time | date: '%Y' }} Jiajun Fan · CS Ph.D. @ UIUC · Built with ☕ and curiosity</p>
+  <p>© {{ site.time | date: '%Y' }} Jiajun Fan · CS Ph.D. @ UIUC · Built with <i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-coffee.png);mask-image:url(/images/icons/h-coffee.png)"></i>and curiosity</p>
 </div>
 
 <!-- Scroll-to-top + Dark mode buttons -->
@@ -1989,7 +1991,7 @@ function filterByVenue(btn, venue) {
     if(!links) return;
     var badge = document.createElement('span');
     badge.className = 'cite-badge';
-    badge.textContent = '📊 ' + count + ' citations';
+    badge.innerHTML = '<i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-chart.png);mask-image:url(/images/icons/h-chart.png)"></i>' + count + ' citations';
     links.appendChild(badge);
   });
 })();
