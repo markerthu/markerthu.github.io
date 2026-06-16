@@ -7,6 +7,8 @@ author_profile: true
 ---
 
 <style>
+.lbl-ico{display:inline-block;width:1em;height:1em;vertical-align:-0.14em;margin-right:5px;background-color:currentColor;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;flex-shrink:0;}
+.g-ico{display:inline-block;width:1.05em;height:1.05em;object-fit:contain;vertical-align:-0.16em;margin:0 2px;}
 .contact-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -40,37 +42,37 @@ I'm always happy to chat about research, collaborations, or internship opportuni
 
 <div class="contact-grid">
   <div class="contact-card">
-    <div class="cc-icon">📧</div>
+    <div class="cc-icon"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-email.png);mask-image:url(/images/icons/h-email.png)"></i></div>
     <div class="cc-title">Email</div>
     <div class="cc-link"><a href="mailto:jiajunf3@illinois.edu">jiajunf3@illinois.edu</a></div>
   </div>
   <div class="contact-card">
-    <div class="cc-icon">📍</div>
+    <div class="cc-icon"><i class="lbl-ico" style="color:#e11d48;-webkit-mask-image:url(/images/icons/h-pin.png);mask-image:url(/images/icons/h-pin.png)"></i></div>
     <div class="cc-title">Office</div>
     <div class="cc-link">Thomas M. Siebel Center for Computer Science<br>Urbana, IL 61801</div>
   </div>
   <div class="contact-card">
-    <div class="cc-icon">🎓</div>
+    <div class="cc-icon"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-scholar.png);mask-image:url(/images/icons/h-scholar.png)"></i></div>
     <div class="cc-title">Google Scholar</div>
     <div class="cc-link"><a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">author: Jiajun Fan</a></div>
   </div>
   <div class="contact-card">
-    <div class="cc-icon">💼</div>
+    <div class="cc-icon"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-linkedin.png);mask-image:url(/images/icons/h-linkedin.png)"></i></div>
     <div class="cc-title">LinkedIn</div>
     <div class="cc-link"><a href="https://www.linkedin.com/in/jiajun-fan-57b12b26b" target="_blank" rel="noopener noreferrer">jiajun-fan-57b12b26b</a></div>
   </div>
   <div class="contact-card">
-    <div class="cc-icon">🐙</div>
+    <div class="cc-icon"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-github.png);mask-image:url(/images/icons/h-github.png)"></i></div>
     <div class="cc-title">GitHub</div>
     <div class="cc-link"><a href="https://github.com/markerthu" target="_blank" rel="noopener noreferrer">github.com/markerthu</a></div>
   </div>
   <div class="contact-card">
-    <div class="cc-icon">📄</div>
+    <div class="cc-icon"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-pubs.png);mask-image:url(/images/icons/sh-pubs.png)"></i></div>
     <div class="cc-title">ORCID</div>
     <div class="cc-link"><a href="https://orcid.org/0000-0002-0263-2103" target="_blank" rel="noopener noreferrer">0000-0002-0263-2103</a></div>
   </div>
   <div class="contact-card">
-    <div class="cc-icon">🔬</div>
+    <div class="cc-icon"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-research.png);mask-image:url(/images/icons/sh-research.png)"></i></div>
     <div class="cc-title">OpenReview</div>
     <div class="cc-link"><a href="https://openreview.net/profile?id=~Jiajun_Fan1" target="_blank" rel="noopener noreferrer">~Jiajun_Fan1</a></div>
   </div>

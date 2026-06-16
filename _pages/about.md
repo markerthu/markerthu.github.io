@@ -147,6 +147,7 @@ body.dark-mode .pub-abst-btn:hover { background: #1e40af; }
 .pub-authors { font-size: 0.81em; color: #6b7280; margin-top: 3px; }
 .pub-authors strong { color: #1a2332; font-weight: 700; }
 .pub-desc { font-size: 0.81em; color: #444; margin-top: 4px; line-height: 1.55; }
+.dt-ico{display:inline-block;width:1.05em;height:1.05em;background-color:currentColor;-webkit-mask:url(/images/icons/h-moon.png) center/contain no-repeat;mask:url(/images/icons/h-moon.png) center/contain no-repeat;} body.dark-mode .dt-ico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-image:url(/images/icons/h-sun.png);} .g-ico{display:inline-block;width:1.05em;height:1.05em;object-fit:contain;vertical-align:-0.16em;margin:0 2px;}
 .lbl-ico{display:inline-block;width:1em;height:1em;vertical-align:-0.14em;margin-right:4px;background-color:currentColor;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;flex-shrink:0;}
 .pub-hl {
   display: inline-block; background: #fff8e1;
@@ -1121,19 +1122,19 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 <ul class="news-list">
   <li>
     <span class="news-date">Apr 2026</span>
-    <span><span class="nbadge nb-accept">Accept</span>Several papers accepted at <strong>ICML 2026</strong> (Seoul, Jul 6–11). See you in Seoul 🇰🇷</span>
+    <span><span class="nbadge nb-accept">Accept</span>Several papers accepted at <strong>ICML 2026</strong> (Seoul, Jul 6–11). See you in Seoul <img class="g-ico" src="/images/icons/flag-kr.png" alt=""></span>
   </li>
   <li>
     <span class="news-date">Apr 2026</span>
-    <span><span class="nbadge nb-finish">Finish</span>🇧🇷 Presented CESAR &amp; SP-VLA at <strong>ICLR 2026</strong>, Rio de Janeiro, Apr 23–27.</span>
+    <span><span class="nbadge nb-finish">Finish</span><img class="g-ico" src="/images/icons/flag-br.png" alt="">Presented CESAR &amp; SP-VLA at <strong>ICLR 2026</strong>, Rio de Janeiro, Apr 23–27.</span>
   </li>
   <li>
     <span class="news-date">Jan 2026</span>
-    <span><span class="nbadge nb-accept">Accept</span><strong>2 papers at ICLR 2026</strong> — CESAR &amp; SP-VLA. See you in Rio 🇧🇷</span>
+    <span><span class="nbadge nb-accept">Accept</span><strong>2 papers at ICLR 2026</strong> — CESAR &amp; SP-VLA. See you in Rio <img class="g-ico" src="/images/icons/flag-br.png" alt=""></span>
   </li>
   <li>
     <span class="news-date">Sep 2025</span>
-    <span><span class="nbadge nb-accept">Accept</span><strong>2 papers at NeurIPS 2025</strong> — ADRPO &amp; VarCon. See you in San Diego 🌊</span>
+    <span><span class="nbadge nb-accept">Accept</span><strong>2 papers at NeurIPS 2025</strong> — ADRPO &amp; VarCon. See you in San Diego <i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-flow.png);mask-image:url(/images/icons/h-flow.png)"></i></span>
   </li>
   <li>
     <span class="news-date">Jun 2025</span>
@@ -1259,7 +1260,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
     <div class="pub-abstract-preview">SP-VLA introduces action-aware model scheduling and spatio-semantic token pruning for VLA model acceleration, achieving 1.5× lossless speedup on LIBERO and 2.4× speedup on SimplerEnv.</div></div>
     <div class="pub-authors">Y. Li, Y. Meng, Z. Sun, K. Ji, C. Tang, <strong>J. Fan</strong>, X. Ma, S.-T. Xia, Z. Wang, W. Zhu</div>
     <div class="pub-desc">Action-aware model scheduling + spatio-semantic token pruning for VLA acceleration.</div>
-    <div class="pub-hl">⚡ 1.5× lossless speedup (LIBERO) · 2.4× speedup (SimplerEnv)</div>
+    <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-impact.png);mask-image:url(/images/icons/sh-impact.png)"></i>1.5× lossless speedup (LIBERO) · 2.4× speedup (SimplerEnv)</div>
   </div>
 </div>
 
@@ -1339,7 +1340,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
     <div class="pub-title"><a href="https://arxiv.org/abs/2407.05010" target="_blank" rel="noopener noreferrer">PRANCE: Joint Token-Optimization and Structural Channel-Pruning for Adaptive ViT Inference</a>
       <button class="pub-abst-btn" aria-expanded="false" aria-label="Toggle abstract">▾ Abstract</button>
       <div class="pub-abstract-preview">PRANCE jointly optimizes token pruning and structural channel pruning for adaptive ViT inference, achieving significant speedup while maintaining accuracy.</div></div>
-    <div class="pub-hl">⚡ Joint token + channel pruning · Adaptive ViT inference · IEEE TPAMI 2026</div>
+    <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-impact.png);mask-image:url(/images/icons/sh-impact.png)"></i>Joint token + channel pruning · Adaptive ViT inference · IEEE TPAMI 2026</div>
     <div class="pub-authors">Y. Li, C. Tang, Y. Meng, <strong>J. Fan</strong>, Z. Chai, X. Ma, Z. Wang, W. Zhu &nbsp;·&nbsp; <em>IEEE TPAMI</em></div>
   </div>
 </div>
@@ -1613,7 +1614,7 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
       chip = '<span class="ddl-chip" style="background:'+(isDk?'#21262d':'#f1f5f9')+';color:'+(isDk?'#8b949e':'#6b7280')+';border-color:'+(isDk?'#30363d':'#e2e8f0')+'">Submission TBA</span>';
     } else {
       var isDk2 = localStorage.getItem('darkMode')==='true';
-      chip = '<span class="ddl-chip" style="background:'+(isDk2?'#122117':'#f0fdf4')+';color:'+(isDk2?'#3fb950':'#16a34a')+';border-color:'+(isDk2?'#1a7f45':'#bbf7d0')+'">Done ✓</span>';
+      chip = '<span class="ddl-chip" style="background:'+(isDk2?'#122117':'#f0fdf4')+';color:'+(isDk2?'#3fb950':'#16a34a')+';border-color:'+(isDk2?'#1a7f45':'#bbf7d0')+'">Done <i class="lbl-ico" style="color:#16a34a;-webkit-mask-image:url(/images/icons/h-check.png);mask-image:url(/images/icons/h-check.png)"></i></span>';
     }
 
     var card = document.createElement('div');
@@ -1624,7 +1625,7 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
       + '<span class="ddl-type" style="background:' + c.color + '15;color:' + c.color + '">' + c.type + '</span>'
       + '</div>'
       + '<div class="ddl-name"><a href="' + c.url + '" target="_blank" rel="noopener noreferrer">' + c.name + '</a></div>'
-      + '<div class="ddl-meta">📍 ' + c.location + ' &nbsp;·&nbsp; 🗓 ' + c.conf + '</div>'
+      + '<div class="ddl-meta"><i class="lbl-ico" style="color:#e11d48;-webkit-mask-image:url(/images/icons/h-pin.png);mask-image:url(/images/icons/h-pin.png)"></i>' + c.location + ' &nbsp;·&nbsp; <i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-deadlines.png);mask-image:url(/images/icons/sh-deadlines.png)"></i>' + c.conf + '</div>'
       + chip;
     grid.appendChild(card);
   });
@@ -1638,7 +1639,7 @@ Happy to discuss research, internships, or collaborations. Best reached by email
 <i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-building.png);mask-image:url(/images/icons/h-building.png)"></i>Siebel Center for CS, UIUC &nbsp;·&nbsp;
 <a href="/cv/"><strong>CV</strong></a> &nbsp;·&nbsp;
 <a href="https://www.linkedin.com/in/jiajun-fan-57b12b26b" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-linkedin.png);mask-image:url(/images/icons/h-linkedin.png)"></i>LinkedIn</a> &nbsp;·&nbsp;
-<a href="https://orcid.org/0000-0002-0263-2103" target="_blank" rel="noopener noreferrer">🔬 ORCID</a>
+<a href="https://orcid.org/0000-0002-0263-2103" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-research.png);mask-image:url(/images/icons/sh-research.png)"></i>ORCID</a>
 </p>
 
 <!-- Footer -->
@@ -1656,7 +1657,7 @@ Happy to discuss research, internships, or collaborations. Best reached by email
 
 <!-- Scroll-to-top + Dark mode buttons -->
 <button class="scroll-top" id="scrollTop" onclick="window.scrollTo(0,0)" aria-label="Back to top">↑</button>
-<button class="dark-toggle" id="darkToggle" title="Toggle dark mode" aria-label="Toggle dark mode">🌙</button>
+<button class="dark-toggle" id="darkToggle" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="dt-ico"></i></button>
 
 <!-- ══════════════════ COMMAND PALETTE (⌘K) ══════════════════ -->
 <div id="cmdk-overlay" role="dialog" aria-modal="true" aria-label="Command palette" aria-hidden="true">
@@ -1688,14 +1689,13 @@ Happy to discuss research, internships, or collaborations. Best reached by email
   if(!btn) return;
   try {
     var saved = localStorage.getItem('darkMode');
-    if(saved === 'true') { document.body.classList.add('dark-mode'); btn.textContent = '☀️'; }
+    if(saved === 'true') { document.body.classList.add('dark-mode'); }
   } catch(e) {}
   btn.addEventListener('click', function(){
     document.body.classList.toggle('dark-mode');
     var on = document.body.classList.contains('dark-mode');
     var gc = document.getElementById('research-graph');
     if(gc && typeof d3 !== 'undefined') { drawGraph(gc); }
-    btn.textContent = on ? '☀️' : '🌙';
     try { localStorage.setItem('darkMode', on); } catch(e) {}
   });
 })();
@@ -2290,8 +2290,8 @@ function drawGraph(container) {
     {i:'/images/icons/h-github.png', t:'GitHub', k:'github code repos', h:'https://github.com/markerthu', hint:'External'},
     {i:'/images/icons/h-linkedin.png', t:'LinkedIn', k:'linkedin profile', h:'https://www.linkedin.com/in/jiajun-fan-57b12b26b', hint:'External'},
     {i:'/images/icons/h-email.png', t:'Email Jiajun', k:'email contact mail', h:'mailto:jiajunf3@illinois.edu', hint:'Action'},
-    {i:'🌙', t:'Toggle Dark Mode', k:'dark mode theme light toggle', act:'dark', hint:'Action'},
-    {i:'💬', t:'Ask the AI Agent', k:'ai agent chat assistant ask', act:'agent', hint:'Action'}
+    {i:'/images/icons/h-moon.png', t:'Toggle Dark Mode', k:'dark mode theme light toggle', act:'dark', hint:'Action'},
+    {i:'/images/icons/h-agentic.png', t:'Ask the AI Agent', k:'ai agent chat assistant ask', act:'agent', hint:'Action'}
   ];
   var overlay = document.getElementById('cmdk-overlay');
   var input = document.getElementById('cmdk-input');

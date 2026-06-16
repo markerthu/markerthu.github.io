@@ -93,7 +93,7 @@ body.dark-mode .stat-badge-icml { background:#2d0a1a !important; border-color:#7
   <span class="stat-badge-cite"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-chart.png);mask-image:url(/images/icons/h-chart.png)"></i>{{ site.data.citations._total | default: 360 }}+ Citations</span>
   <span class="stat-badge-h"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-target.png);mask-image:url(/images/icons/h-target.png)"></i>h-index 9</span>
   <span class="stat-badge-oral"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>ICLR 2023 Oral</span>
-  <span class="stat-badge-icml">✅ ICML 2026 Accept</span>
+  <span class="stat-badge-icml"><i class="lbl-ico" style="color:#16a34a;-webkit-mask-image:url(/images/icons/h-check.png);mask-image:url(/images/icons/h-check.png)"></i>ICML 2026 Accept</span>
 </div>
 
 > Publications are listed in reverse chronological order. **\*** denotes first authorship.

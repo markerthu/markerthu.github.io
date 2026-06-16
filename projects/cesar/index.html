@@ -356,11 +356,11 @@ body.dark-mode div[style*="color:#555"]{color:#adbac7 !important}
   <p>Adding chain-of-thought reasoning to Audio LLMs often <em>degrades</em> performance — a phenomenon we term <strong>test-time inverse scaling</strong>. Longer reasoning chains yield progressively worse results. Why?</p>
   <div class="problem-grid">
     <div class="problem-card">
-      <h3>❌ Without CESAR</h3>
+      <h3><i class="lbl-ico" style="color:#dc2626;-webkit-mask-image:url(/images/icons/h-cross.png);mask-image:url(/images/icons/h-cross.png)"></i>Without CESAR</h3>
       <p>Models without guidance for the reasoning <em>process</em> produce hallucinatory, inconsistent reasoning that accumulates errors over longer chains. Outcome-only rewards cannot fix this.</p>
     </div>
     <div class="solution-card">
-      <h3>✅ With CESAR</h3>
+      <h3><i class="lbl-ico" style="color:#16a34a;-webkit-mask-image:url(/images/icons/h-check.png);mask-image:url(/images/icons/h-check.png)"></i>With CESAR</h3>
       <p>Process rewards incentivize consistency, structured analytical patterns, causal reasoning, and calibrated depth — transforming reasoning from a liability into a genuine capability.</p>
     </div>
   </div>
@@ -420,10 +420,10 @@ body.dark-mode div[style*="color:#555"]{color:#adbac7 !important}
   <table class="compare-table">
     <thead><tr><th>Model</th><th>MMAU Test-mini</th><th>Reasoning Scaling</th></tr></thead>
     <tbody>
-      <tr><td>GPT-4o Audio</td><td>~65%</td><td>❌ Inverse scaling</td></tr>
-      <tr><td>Gemini 2.5 Pro</td><td>~68%</td><td>❌ Inverse scaling</td></tr>
-      <tr><td>Baseline (outcome-only RL)</td><td>~63%</td><td>❌ Inverse scaling</td></tr>
-      <tr class="highlight"><td><strong>CESAR (Ours)</strong></td><td><strong>SOTA <span class="badge-win">Best</span></strong></td><td><strong>✅ Positive scaling</strong></td></tr>
+      <tr><td>GPT-4o Audio</td><td>~65%</td><td><i class="lbl-ico" style="color:#dc2626;-webkit-mask-image:url(/images/icons/h-cross.png);mask-image:url(/images/icons/h-cross.png)"></i>Inverse scaling</td></tr>
+      <tr><td>Gemini 2.5 Pro</td><td>~68%</td><td><i class="lbl-ico" style="color:#dc2626;-webkit-mask-image:url(/images/icons/h-cross.png);mask-image:url(/images/icons/h-cross.png)"></i>Inverse scaling</td></tr>
+      <tr><td>Baseline (outcome-only RL)</td><td>~63%</td><td><i class="lbl-ico" style="color:#dc2626;-webkit-mask-image:url(/images/icons/h-cross.png);mask-image:url(/images/icons/h-cross.png)"></i>Inverse scaling</td></tr>
+      <tr class="highlight"><td><strong>CESAR (Ours)</strong></td><td><strong>SOTA <span class="badge-win">Best</span></strong></td><td><strong><i class="lbl-ico" style="color:#16a34a;-webkit-mask-image:url(/images/icons/h-check.png);mask-image:url(/images/icons/h-check.png)"></i>Positive scaling</strong></td></tr>
     </tbody>
   </table>
   </div>
@@ -553,7 +553,7 @@ body.dark-mode div[style*="color:#555"]{color:#adbac7 !important}
     <div style="position:relative;margin-bottom:18px;padding-left:4px">
       <div style="position:absolute;left:-20px;top:5px;width:12px;height:12px;background:#1b5e20;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 2px #1b5e20"></div>
       <div style="font-size:.78em;font-weight:800;color:#1b5e20;text-transform:uppercase;letter-spacing:.05em">Jan 2026</div>
-      <div style="font-weight:700;font-size:.93em">✅ Accepted at ICLR 2026 (Poster)</div>
+      <div style="font-weight:700;font-size:.93em"><i class="lbl-ico" style="color:#16a34a;-webkit-mask-image:url(/images/icons/h-check.png);mask-image:url(/images/icons/h-check.png)"></i>Accepted at ICLR 2026 (Poster)</div>
       <div style='font-size:.83em;color:#555'>Accepted. <a href="https://openreview.net/forum?id=DUr48hxO2h">OpenReview</a></div>
     </div>
     <div style="position:relative;margin-bottom:18px;padding-left:4px">
