@@ -437,7 +437,7 @@ body.dark-mode div[style*="color:#374151"]{color:#79c0ff !important}
       <tr><td>NGU (DeepMind)</td><td>~3,421%</td><td>35 Billion</td><td>0</td></tr>
       <tr><td>R2D2 (DeepMind)</td><td>~4,038%</td><td>10 Billion</td><td>~3</td></tr>
       <tr class="highlight">
-        <td><strong>LBC (Ours) 🏆</strong></td>
+        <td><strong>LBC (Ours) <i class="lbl-ico" style="color:#f59e0b;-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i></strong></td>
         <td><strong>10,077% <span class="badge-win">Best</span></strong></td>
         <td><strong>1 Billion <span class="badge-win">78× less</span></strong></td>
         <td><strong>24 <span class="badge-record">Records!</span></strong></td>
@@ -531,12 +531,12 @@ document.querySelectorAll('.bib-copy-btn').forEach(function(btn){
     var text=pre?pre.innerText||pre.textContent:'';
     if(navigator.clipboard && navigator.clipboard.writeText){
       navigator.clipboard.writeText(text).then(function(){
-        btn.textContent='✅ Copied!';btn.classList.add('copied');
-        setTimeout(function(){btn.textContent='📋 Copy BibTeX';btn.classList.remove('copied');},2000);
+        btn.innerHTML='<i class=\"lbl-ico\" style=\"-webkit-mask-image:url(/images/icons/h-check.png);mask-image:url(/images/icons/h-check.png)\"></i> Copied!';btn.classList.add('copied');
+        setTimeout(function(){btn.innerHTML='<i class=\"lbl-ico\" style=\"-webkit-mask-image:url(/images/icons/h-list.png);mask-image:url(/images/icons/h-list.png)\"></i> Copy BibTeX';btn.classList.remove('copied');},2000);
       });
     } else {
-      btn.textContent='⚠️ Copy not supported';
-      setTimeout(function(){btn.textContent='📋 Copy BibTeX';},2000);
+      btn.innerHTML='<i class=\"lbl-ico\" style=\"color:#d97706;-webkit-mask-image:url(/images/icons/h-warning.png);mask-image:url(/images/icons/h-warning.png)\"></i> Copy not supported';
+      setTimeout(function(){btn.innerHTML='<i class=\"lbl-ico\" style=\"-webkit-mask-image:url(/images/icons/h-list.png);mask-image:url(/images/icons/h-list.png)\"></i> Copy BibTeX';},2000);
     }
   });
 });

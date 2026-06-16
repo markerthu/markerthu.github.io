@@ -4,8 +4,10 @@
      state (topic memory, follow-ups), human-like delivery (variable thinking time,
      punctuation-paced typing, multi-bubble replies, phrasing variation).                  -->
 <style>
+.lbl-ico{display:inline-block;width:1em;height:1em;vertical-align:-0.14em;margin-right:5px;background-color:currentColor;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;flex-shrink:0;}
 .ra-btn { position: fixed; bottom: 68px; right: 22px; width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg,#2563eb,#7c3aed); color: #fff; font-size: 1.3em; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 16px rgba(37,99,235,.4); z-index: 9990; transition: transform .2s, box-shadow .2s; user-select: none; -webkit-user-select: none; border: none; }
 .ra-btn:hover { transform: scale(1.1); box-shadow: 0 6px 22px rgba(37,99,235,.5); }
+.ra-launch { width: 24px; height: 24px; margin: 0; }
 .ra-btn::after { content: ''; position: absolute; inset: -4px; border-radius: 50%; border: 2px solid rgba(124,58,237,.5); animation: raPulse 2.4s ease-out infinite; pointer-events: none; }
 .ra-btn.ra-quiet::after { animation: none; opacity: 0; }
 @media (prefers-reduced-motion: reduce) { .ra-btn::after { animation: none; opacity: 0; } }
@@ -53,21 +55,21 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
 @media print { .ra-btn, .ra-tip, .ra-panel { display: none !important; } }
 </style>
 
-<button id="ra-btn" class="ra-btn" onclick="raOpen()" aria-label="Open AI agent chat" aria-expanded="false" title="Ask my AI agent">💬</button>
-<span id="ra-tip" class="ra-tip" aria-hidden="true">Ask my AI agent ✨</span>
+<button id="ra-btn" class="ra-btn" onclick="raOpen()" aria-label="Open AI agent chat" aria-expanded="false" title="Ask my AI agent"><i class="lbl-ico ra-launch" style="-webkit-mask-image:url(/images/icons/h-agentic.png);mask-image:url(/images/icons/h-agentic.png)"></i></button>
+<span id="ra-tip" class="ra-tip" aria-hidden="true">Ask my AI agent <i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-sparkle.png);mask-image:url(/images/icons/h-sparkle.png)"></i></span>
 <div id="ra-panel" class="ra-panel" role="dialog" aria-modal="true" aria-label="AI Agent" aria-hidden="true">
   <div class="ra-header">
-    <span>🤖 Jiajun's AI Agent<span class="ra-dot" aria-hidden="true"></span><span class="ra-status">online</span></span>
-    <button onclick="raClose()" class="ra-close" aria-label="Close chat widget">✕</button>
+    <span><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-agentic.png);mask-image:url(/images/icons/h-agentic.png)"></i>Jiajun's AI Agent<span class="ra-dot" aria-hidden="true"></span><span class="ra-status">online</span></span>
+    <button onclick="raClose()" class="ra-close" aria-label="Close chat widget"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-cross.png);mask-image:url(/images/icons/h-cross.png)"></i></button>
   </div>
   <div id="ra-msgs" class="ra-msgs"></div>
   <div id="ra-chips" class="ra-chips">
-    <button class="ra-chip" onclick="raAsk(this)">🎯 Latest papers</button>
-    <button class="ra-chip" onclick="raAsk(this)">🔬 Research focus</button>
-    <button class="ra-chip" onclick="raAsk(this)">🏅 Awards</button>
-    <button class="ra-chip" onclick="raAsk(this)">📬 Contact</button>
-    <button class="ra-chip" onclick="raAsk(this)">💼 Internship</button>
-    <button class="ra-chip" onclick="raAsk(this)">🎮 Hobbies</button>
+    <button class="ra-chip" onclick="raAsk(this)"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-target.png);mask-image:url(/images/icons/h-target.png)"></i>Latest papers</button>
+    <button class="ra-chip" onclick="raAsk(this)"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-research.png);mask-image:url(/images/icons/sh-research.png)"></i>Research focus</button>
+    <button class="ra-chip" onclick="raAsk(this)"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>Awards</button>
+    <button class="ra-chip" onclick="raAsk(this)"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-contact.png);mask-image:url(/images/icons/sh-contact.png)"></i>Contact</button>
+    <button class="ra-chip" onclick="raAsk(this)"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-linkedin.png);mask-image:url(/images/icons/h-linkedin.png)"></i>Internship</button>
+    <button class="ra-chip" onclick="raAsk(this)"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-game.png);mask-image:url(/images/icons/h-game.png)"></i>Hobbies</button>
   </div>
   <div class="ra-input-row">
     <input id="ra-input" class="ra-input" type="text" placeholder="Ask about my research…" aria-label="Ask about my research" onkeydown="if(event.key==='Enter'&&!event.isComposing)raSend()">
@@ -362,7 +364,16 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
     wrap.className='ra-acts';
     acts.forEach(function(ac){
       var a=document.createElement('a');
-      a.className='ra-act'; a.textContent=ac.t; a.href=ac.h;
+      a.className='ra-act'; a.href=ac.h;
+      (function(){
+        var IM={'🔗':'h-link','📎':'h-paperclip','📄':'sh-pubs','✉️':'h-email','✉':'h-email','🎓':'h-scholar','💻':'h-github','⬇️':'h-cv','⬇':'h-cv','📰':'sh-news','🎧':'h-music','🏠':'h-home','💼':'h-linkedin','📋':'h-list','📬':'sh-contact'};
+        var t=ac.t, key=null;
+        for(var k in IM){ if(t.indexOf(k)===0){ key=k; break; } }
+        if(key){
+          var rest=t.slice(key.length).trim().replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+          a.innerHTML='<i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/'+IM[key]+'.png);mask-image:url(/images/icons/'+IM[key]+'.png)"></i>'+rest;
+        } else { a.textContent=t; }
+      })();
       if(/^https?:/.test(ac.h)){ a.target='_blank'; a.rel='noopener noreferrer'; }
       if(ac.h.indexOf('/#')===0 && location.pathname==='/'){
         a.addEventListener('click', function(ev){

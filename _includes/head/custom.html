@@ -487,7 +487,7 @@
         var src = (pre.querySelector('code') || pre).innerText;
         if (navigator.clipboard && navigator.clipboard.writeText) {
           navigator.clipboard.writeText(src).then(function() {
-            btn.textContent = '✓ Copied';
+            btn.innerHTML = '<i class=\"lbl-ico\" style=\"color:#16a34a;-webkit-mask-image:url(/images/icons/h-check.png);mask-image:url(/images/icons/h-check.png)\"></i> Copied';
             btn.classList.add('copied');
             setTimeout(function() {
               btn.textContent = 'Copy';

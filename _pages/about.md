@@ -1881,7 +1881,7 @@ document.querySelectorAll('.featured-card').forEach(function(card){
 
   var popup = document.createElement('div');
   popup.className = 'bib-popup';
-  popup.innerHTML = '<pre class="bib-pre"></pre><div class="bib-actions"><button class="bib-copy">&#x1F4CB; Copy BibTeX</button><button class="bib-close">&#x2715; Close</button></div>';
+  popup.innerHTML = '<pre class="bib-pre"></pre><div class="bib-actions"><button class="bib-copy"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-list.png);mask-image:url(/images/icons/h-list.png)"></i> Copy BibTeX</button><button class="bib-close">&#x2715; Close</button></div>';
   document.body.appendChild(popup);
 
   var activeEntry = null;
@@ -1890,12 +1890,12 @@ document.querySelectorAll('.featured-card').forEach(function(card){
     var text = popup.querySelector('.bib-pre').textContent;
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(text).then(function(){
-        btn.textContent = '\u2713 Copied!'; btn.style.background = '#059669';
-        setTimeout(function(){ btn.textContent = '\uD83D\uDCCB Copy BibTeX'; btn.style.background = ''; }, 2000);
-      }).catch(function(){ btn.textContent = 'Select + copy manually'; setTimeout(function(){ btn.textContent = '\uD83D\uDCCB Copy BibTeX'; }, 2000); });
+        btn.innerHTML = '<i class=\"lbl-ico\" style=\"-webkit-mask-image:url(/images/icons/h-check.png);mask-image:url(/images/icons/h-check.png)\"></i> Copied!'; btn.style.background = '#059669';
+        setTimeout(function(){ btn.innerHTML = '<i class=\"lbl-ico\" style=\"-webkit-mask-image:url(/images/icons/h-list.png);mask-image:url(/images/icons/h-list.png)\"></i> Copy BibTeX'; btn.style.background = ''; }, 2000);
+      }).catch(function(){ btn.textContent = 'Select + copy manually'; setTimeout(function(){ btn.innerHTML = '<i class=\"lbl-ico\" style=\"-webkit-mask-image:url(/images/icons/h-list.png);mask-image:url(/images/icons/h-list.png)\"></i> Copy BibTeX'; }, 2000); });
     } else {
       btn.textContent = 'Select + copy manually';
-      setTimeout(function(){ btn.textContent = '\uD83D\uDCCB Copy BibTeX'; }, 2000);
+      setTimeout(function(){ btn.innerHTML = '<i class=\"lbl-ico\" style=\"-webkit-mask-image:url(/images/icons/h-list.png);mask-image:url(/images/icons/h-list.png)\"></i> Copy BibTeX'; }, 2000);
     }
   });
   popup.querySelector('.bib-close').addEventListener('click', function(){ popup.classList.remove('show'); activeEntry = null; });

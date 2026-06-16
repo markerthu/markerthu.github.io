@@ -619,12 +619,12 @@ document.querySelectorAll('.bib-copy-btn').forEach(function(btn){
     var text=pre?pre.innerText||pre.textContent:'';
     if(navigator.clipboard && navigator.clipboard.writeText){
       navigator.clipboard.writeText(text).then(function(){
-        btn.textContent='✅ Copied!';btn.classList.add('copied');
-        setTimeout(function(){btn.textContent='📋 Copy BibTeX';btn.classList.remove('copied');},2000);
+        btn.innerHTML='<i class=\"lbl-ico\" style=\"-webkit-mask-image:url(/images/icons/h-check.png);mask-image:url(/images/icons/h-check.png)\"></i> Copied!';btn.classList.add('copied');
+        setTimeout(function(){btn.innerHTML='<i class=\"lbl-ico\" style=\"-webkit-mask-image:url(/images/icons/h-list.png);mask-image:url(/images/icons/h-list.png)\"></i> Copy BibTeX';btn.classList.remove('copied');},2000);
       });
     } else {
-      btn.textContent='⚠️ Copy not supported';
-      setTimeout(function(){btn.textContent='📋 Copy BibTeX';},2000);
+      btn.innerHTML='<i class=\"lbl-ico\" style=\"color:#d97706;-webkit-mask-image:url(/images/icons/h-warning.png);mask-image:url(/images/icons/h-warning.png)\"></i> Copy not supported';
+      setTimeout(function(){btn.innerHTML='<i class=\"lbl-ico\" style=\"-webkit-mask-image:url(/images/icons/h-list.png);mask-image:url(/images/icons/h-list.png)\"></i> Copy BibTeX';},2000);
     }
   });
 });

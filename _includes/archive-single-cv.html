@@ -41,7 +41,7 @@
               window.getSelection().removeAllRanges();window.getSelection().addRange(r);
               document.execCommand('copy');window.getSelection().removeAllRanges();
             }
-            var btn=this;btn.textContent='✓ Copied';setTimeout(function(){btn.textContent='Copy';},2000);
+            var btn=this;btn.innerHTML='<i class=\"lbl-ico\" style=\"color:#16a34a;-webkit-mask-image:url(/images/icons/h-check.png);mask-image:url(/images/icons/h-check.png)\"></i> Copied';setTimeout(function(){btn.textContent='Copy';},2000);
           ">Copy</button>
           <pre>{{ post.bibtex | escape }}</pre>
         </div>
