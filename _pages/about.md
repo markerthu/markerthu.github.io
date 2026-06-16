@@ -2265,31 +2265,31 @@ function drawGraph(container) {
 /* ── ⌘K Command Palette ── */
 (function(){
   var ITEMS = [
-    {i:'📰', t:'News', k:'news latest updates', h:'#news', hint:'Section'},
-    {i:'🔥', t:'Featured Research', k:'featured highlights best', h:'#featured', hint:'Section'},
-    {i:'📄', t:'Publications', k:'papers publications list', h:'#publications', hint:'Section'},
-    {i:'🔬', t:'Research Areas', k:'research focus areas', h:'#research', hint:'Section'},
-    {i:'⚡', t:'Impact & Stats', k:'impact statistics citations', h:'#impact', hint:'Section'},
-    {i:'💡', t:'Vision', k:'vision roadmap future', h:'#vision', hint:'Section'},
-    {i:'🏅', t:'Awards', k:'awards honors scholarship', h:'#awards', hint:'Section'},
-    {i:'📅', t:'Conference Deadlines', k:'deadlines conferences ddl', h:'#deadlines', hint:'Section'},
-    {i:'📬', t:'Contact', k:'contact email reach', h:'#contact', hint:'Section'},
-    {i:'🎧', t:'CESAR — Audio LLM Reasoning', k:'cesar audio mmau process reward iclr 2026', h:'/projects/cesar/', hint:'ICLR 2026'},
-    {i:'🤖', t:'SP-VLA — VLA Acceleration', k:'sp-vla vla robot token pruning iclr 2026', h:'https://openreview.net/forum?id=RwdGIIjPlC', hint:'ICLR 2026'},
-    {i:'🎯', t:'ADRPO — Adaptive Regularization RLHF', k:'adrpo adaptive divergence neurips 2025', h:'/projects/adrpo/', hint:'NeurIPS 2025'},
-    {i:'🌊', t:'ORW-CFM-W2 — Online RLHF for Flow Matching', k:'orw flow matching wasserstein iclr 2025', h:'/projects/orw-cfm-w2/', hint:'ICLR 2025'},
-    {i:'⚙️', t:'AC-Flow — Intermediate Feedback', k:'ac-flow actor critic flow', h:'/projects/ac-flow/', hint:'Preprint'},
-    {i:'🖼️', t:'PRANCE — Adaptive ViT Inference', k:'prance vit pruning tpami', h:'https://arxiv.org/abs/2407.05010', hint:'TPAMI'},
-    {i:'🏅', t:'LBC — 24 Atari World Records', k:'lbc atari world records iclr 2023 oral', h:'/projects/lbc/', hint:'ICLR 2023 Oral'},
-    {i:'📊', t:'GDI — Generalized Data Distribution Iteration', k:'gdi data distribution icml 2022', h:'/projects/gdi/', hint:'ICML 2022'},
-    {i:'📋', t:'Open CV', k:'cv resume curriculum vitae', h:'/cv/', hint:'Page'},
-    {i:'⬇️', t:'Download CV (PDF)', k:'cv pdf download resume', h:'/files/CV.pdf', hint:'File'},
-    {i:'🗂️', t:'All Projects', k:'projects pages portfolio', h:'/projects/', hint:'Page'},
-    {i:'✍️', t:'Blog', k:'blog posts writing', h:'/year-archive/', hint:'Page'},
-    {i:'🎓', t:'Google Scholar', k:'scholar citations profile', h:'https://scholar.google.com/citations?user=EjmzseUAAAAJ', hint:'External'},
-    {i:'💻', t:'GitHub', k:'github code repos', h:'https://github.com/markerthu', hint:'External'},
-    {i:'💼', t:'LinkedIn', k:'linkedin profile', h:'https://www.linkedin.com/in/jiajun-fan-57b12b26b', hint:'External'},
-    {i:'✉️', t:'Email Jiajun', k:'email contact mail', h:'mailto:jiajunf3@illinois.edu', hint:'Action'},
+    {i:'/images/icons/sh-news.png', t:'News', k:'news latest updates', h:'#news', hint:'Section'},
+    {i:'/images/icons/sh-featured.png', t:'Featured Research', k:'featured highlights best', h:'#featured', hint:'Section'},
+    {i:'/images/icons/sh-pubs.png', t:'Publications', k:'papers publications list', h:'#publications', hint:'Section'},
+    {i:'/images/icons/sh-research.png', t:'Research Areas', k:'research focus areas', h:'#research', hint:'Section'},
+    {i:'/images/icons/sh-impact.png', t:'Impact & Stats', k:'impact statistics citations', h:'#impact', hint:'Section'},
+    {i:'/images/icons/sh-vision.png', t:'Vision', k:'vision roadmap future', h:'#vision', hint:'Section'},
+    {i:'/images/icons/sh-awards.png', t:'Awards', k:'awards honors scholarship', h:'#awards', hint:'Section'},
+    {i:'/images/icons/sh-deadlines.png', t:'Conference Deadlines', k:'deadlines conferences ddl', h:'#deadlines', hint:'Section'},
+    {i:'/images/icons/sh-contact.png', t:'Contact', k:'contact email reach', h:'#contact', hint:'Section'},
+    {i:'/images/icons/h-music.png', t:'CESAR — Audio LLM Reasoning', k:'cesar audio mmau process reward iclr 2026', h:'/projects/cesar/', hint:'ICLR 2026'},
+    {i:'/images/icons/h-agentic.png', t:'SP-VLA — VLA Acceleration', k:'sp-vla vla robot token pruning iclr 2026', h:'https://openreview.net/forum?id=RwdGIIjPlC', hint:'ICLR 2026'},
+    {i:'/images/icons/h-target.png', t:'ADRPO — Adaptive Regularization RLHF', k:'adrpo adaptive divergence neurips 2025', h:'/projects/adrpo/', hint:'NeurIPS 2025'},
+    {i:'/images/icons/h-flow.png', t:'ORW-CFM-W2 — Online RLHF for Flow Matching', k:'orw flow matching wasserstein iclr 2025', h:'/projects/orw-cfm-w2/', hint:'ICLR 2025'},
+    {i:'/images/icons/h-gear.png', t:'AC-Flow — Intermediate Feedback', k:'ac-flow actor critic flow', h:'/projects/ac-flow/', hint:'Preprint'},
+    {i:'/images/icons/h-palette.png', t:'PRANCE — Adaptive ViT Inference', k:'prance vit pruning tpami', h:'https://arxiv.org/abs/2407.05010', hint:'TPAMI'},
+    {i:'/images/icons/sh-awards.png', t:'LBC — 24 Atari World Records', k:'lbc atari world records iclr 2023 oral', h:'/projects/lbc/', hint:'ICLR 2023 Oral'},
+    {i:'/images/icons/h-chart.png', t:'GDI — Generalized Data Distribution Iteration', k:'gdi data distribution icml 2022', h:'/projects/gdi/', hint:'ICML 2022'},
+    {i:'/images/icons/h-cv.png', t:'Open CV', k:'cv resume curriculum vitae', h:'/cv/', hint:'Page'},
+    {i:'/images/icons/h-cv.png', t:'Download CV (PDF)', k:'cv pdf download resume', h:'/files/CV.pdf', hint:'File'},
+    {i:'/images/icons/h-projects.png', t:'All Projects', k:'projects pages portfolio', h:'/projects/', hint:'Page'},
+    {i:'/images/icons/h-blog.png', t:'Blog', k:'blog posts writing', h:'/year-archive/', hint:'Page'},
+    {i:'/images/icons/h-scholar.png', t:'Google Scholar', k:'scholar citations profile', h:'https://scholar.google.com/citations?user=EjmzseUAAAAJ', hint:'External'},
+    {i:'/images/icons/h-github.png', t:'GitHub', k:'github code repos', h:'https://github.com/markerthu', hint:'External'},
+    {i:'/images/icons/h-linkedin.png', t:'LinkedIn', k:'linkedin profile', h:'https://www.linkedin.com/in/jiajun-fan-57b12b26b', hint:'External'},
+    {i:'/images/icons/h-email.png', t:'Email Jiajun', k:'email contact mail', h:'mailto:jiajunf3@illinois.edu', hint:'Action'},
     {i:'🌙', t:'Toggle Dark Mode', k:'dark mode theme light toggle', act:'dark', hint:'Action'},
     {i:'💬', t:'Ask the AI Agent', k:'ai agent chat assistant ask', act:'agent', hint:'Action'}
   ];
@@ -2313,7 +2313,11 @@ function drawGraph(container) {
       li.className = 'cmdk-item' + (idx === sel ? ' active' : '');
       li.setAttribute('role','option');
       li.innerHTML = '<span class="ck-icon"></span><span class="ck-t"></span><span class="ck-hint"></span>';
-      li.children[0].textContent = it.i;
+      if (it.i && it.i.charAt(0) === '/') {
+        li.children[0].innerHTML = '<i class="lbl-ico" style="margin:0;width:1.15em;height:1.15em;-webkit-mask-image:url('+it.i+');mask-image:url('+it.i+')"></i>';
+      } else {
+        li.children[0].textContent = it.i;
+      }
       li.children[1].textContent = it.t;
       li.children[2].textContent = it.hint || '';
       li.addEventListener('click', function(){ exec(it); });

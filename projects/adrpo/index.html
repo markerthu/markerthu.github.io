@@ -26,6 +26,7 @@ permalink: /projects/adrpo/
 <meta name="robots" content="index,follow">
 <script>try{if(localStorage.getItem('darkMode')==='true'){document.documentElement.style.background='#0d1117';}}catch(e){}</script>
 <style>
+.lbl-ico{display:inline-block;width:1em;height:1em;vertical-align:-0.14em;margin-right:5px;background-color:currentColor;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;flex-shrink:0;}
 :root { --accent: #7c3aed; --accent-light: #f5f3ff; }
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Inter',sans-serif;background:#fff;color:#111827;line-height:1.75;font-size:16px}
@@ -347,9 +348,9 @@ body.dark-mode .tag-audio{background:#4a044e;color:#f0abfc;border-color:#a21caf}
   </div>
   <div class="affil"><sup>1</sup>University of Illinois Urbana-Champaign</div>
   <div class="btn-row">
-    <a class="btn btn-secondary" href="https://openreview.net/forum?id=aXO0xg0ttW">📄 Paper (OpenReview)</a>
+    <a class="btn btn-secondary" href="https://openreview.net/forum?id=aXO0xg0ttW"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-pubs.png);mask-image:url(/images/icons/sh-pubs.png)"></i>Paper (OpenReview)</a>
     <a class="btn btn-primary" href="https://arxiv.org/abs/2510.18053">arXiv</a>
-    <a class="btn btn-neutral" href="/">🏠 Author Homepage</a>
+    <a class="btn btn-neutral" href="/"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-home.png);mask-image:url(/images/icons/h-home.png)"></i>Author Homepage</a>
   </div>
 </div></div>
 
@@ -373,9 +374,9 @@ body.dark-mode .tag-audio{background:#4a044e;color:#f0abfc;border-color:#a21caf}
 </section>
 
 <section>
-  <h2>💡 Key Insight</h2>
+  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-vision.png);mask-image:url(/images/icons/sh-vision.png)"></i>Key Insight</h2>
   <div class="insight-box">
-    <div class="insight-icon">⚖️</div>
+    <div class="insight-icon"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-balance.png);mask-image:url(/images/icons/h-balance.png)"></i></div>
     <div class="insight-text">
       <h3>Not all samples should be treated equally</h3>
       <p>Existing RLHF methods apply the same divergence regularization to every sample. ADRPO observes that <strong>high-advantage samples</strong> (clearly better than baseline) deserve <strong>less regularization</strong> to fully exploit their quality, while <strong>low-advantage samples</strong> need <strong>stronger regularization</strong> to prevent harmful policy updates. This simple principle unlocks significantly better exploration-exploitation trade-offs.</p>
@@ -404,18 +405,18 @@ body.dark-mode .tag-audio{background:#4a044e;color:#f0abfc;border-color:#a21caf}
 </section>
 
 <section>
-  <h2>🌐 Generalization</h2>
+  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-link.png);mask-image:url(/images/icons/h-link.png)"></i>Generalization</h2>
   <p>ADRPO is a universal plug-in that generalizes across <strong>different model types and modalities</strong>:</p>
   <p>
-    <span class="tag tag-gen">🌊 Flow/Diffusion Models (SD3)</span>
-    <span class="tag tag-llm">🧠 Text LLMs (GRPO)</span>
-    <span class="tag tag-audio">🎵 Audio LLMs</span>
+    <span class="tag tag-gen"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-flow.png);mask-image:url(/images/icons/h-flow.png)"></i>Flow/Diffusion Models (SD3)</span>
+    <span class="tag tag-llm"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-reason.png);mask-image:url(/images/icons/h-reason.png)"></i>Text LLMs (GRPO)</span>
+    <span class="tag tag-audio"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-music.png);mask-image:url(/images/icons/h-music.png)"></i>Audio LLMs</span>
   </p>
   <p style="margin-top:14px;">In LLM fine-tuning, ADRPO shows an <strong>emergent ability to escape local optima</strong> through active exploration. In multimodal audio reasoning, it outperforms GRPO through superior step-by-step reasoning.</p>
 </section>
 
 <section>
-  <h2>📊 Results</h2>
+  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-chart.png);mask-image:url(/images/icons/h-chart.png)"></i>Results</h2>
   <div class="results-grid">
     <div class="result-card">
       <div class="rnum">2B</div>
@@ -447,7 +448,7 @@ body.dark-mode .tag-audio{background:#4a044e;color:#f0abfc;border-color:#a21caf}
 
 <!-- Reward-KL Tradeoff -->
 <section>
-  <h2>📈 Reward–Diversity Tradeoff</h2>
+  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-chart.png);mask-image:url(/images/icons/h-chart.png)"></i>Reward–Diversity Tradeoff</h2>
   <figure style="margin:0">
     <img loading="lazy" src="images/reward_kl.png" alt="Reward vs KL tradeoff"
          style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
@@ -459,7 +460,7 @@ body.dark-mode .tag-audio{background:#4a044e;color:#f0abfc;border-color:#a21caf}
 
 <!-- Reward-Diversity Analysis -->
 <section>
-  <h2>⚖️ Reward vs. Diversity Analysis</h2>
+  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-balance.png);mask-image:url(/images/icons/h-balance.png)"></i>Reward vs. Diversity Analysis</h2>
   <p style="font-size:0.88em;color:#555;margin-bottom:16px;">The core insight: fixed-KL methods force a single regularization strength across all samples. ADRPO adaptively adjusts — easy samples get tighter control, hard samples get more freedom.</p>
   <div class="fig-grid-2">
     <figure style="margin:0">
@@ -481,7 +482,7 @@ body.dark-mode .tag-audio{background:#4a044e;color:#f0abfc;border-color:#a21caf}
 
 <!-- More Qualitative Results -->
 <section>
-  <h2>🎨 More Qualitative Results</h2>
+  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-palette.png);mask-image:url(/images/icons/h-palette.png)"></i>More Qualitative Results</h2>
   <figure style="margin:0 0 20px">
     <img loading="lazy" src="images/app_compare_models.png" alt="Extended comparison with larger models"
          style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
@@ -500,7 +501,7 @@ body.dark-mode .tag-audio{background:#4a044e;color:#f0abfc;border-color:#a21caf}
 
 <!-- LLM Generalization -->
 <section>
-  <h2>🧠 Generalization to LLMs</h2>
+  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-reason.png);mask-image:url(/images/icons/h-reason.png)"></i>Generalization to LLMs</h2>
   <p style="font-size:0.88em;color:#555;margin-bottom:16px;">ADRPO is not limited to image generation — it generalizes to LLM fine-tuning tasks. Tested on Qwen2 and Qwen3:</p>
   <div class="fig-grid-2">
     <figure style="margin:0">
@@ -521,7 +522,7 @@ body.dark-mode .tag-audio{background:#4a044e;color:#f0abfc;border-color:#a21caf}
 </section>
 
 <section>
-  <h2>📅 Publication Journey</h2>
+  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-deadlines.png);mask-image:url(/images/icons/sh-deadlines.png)"></i>Publication Journey</h2>
   <div style="position:relative;padding-left:24px;margin:8px 0">
     <div style="position:absolute;left:8px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,#7b1fa2,#ce93d8)"></div>
     <div style="position:relative;margin-bottom:18px;padding-left:4px">
@@ -552,8 +553,8 @@ body.dark-mode .tag-audio{background:#4a044e;color:#f0abfc;border-color:#a21caf}
 </section>
 
 <section>
-  <h2>📖 BibTeX</h2>
-  <button class="bib-copy-btn" aria-label="Copy BibTeX citation">📋 Copy BibTeX</button>
+  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-book.png);mask-image:url(/images/icons/h-book.png)"></i>BibTeX</h2>
+  <button class="bib-copy-btn" aria-label="Copy BibTeX citation"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-list.png);mask-image:url(/images/icons/h-list.png)"></i>Copy BibTeX</button>
   <pre class="bibtex-block" tabindex="0"><code>@inproceedings{fan2025adaptive,
   title={Adaptive Divergence Regularized Policy Optimization
          for Fine-tuning Generative Models},

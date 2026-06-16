@@ -26,6 +26,7 @@ permalink: /projects/ac-flow/
 <meta name="robots" content="index,follow">
 <script>try{if(localStorage.getItem('darkMode')==='true'){document.documentElement.style.background='#0d1117';}}catch(e){}</script>
 <style>
+.lbl-ico{display:inline-block;width:1em;height:1em;vertical-align:-0.14em;margin-right:5px;background-color:currentColor;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;flex-shrink:0;}
 :root { --accent: #059669; --accent-light: #ecfdf5; }
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Inter',sans-serif;background:#fff;color:#111827;line-height:1.75;font-size:16px}
@@ -325,7 +326,7 @@ body.dark-mode .kc-desc{color:#4ade80 !important}
   </div>
 </header>
 <div class="hero"><div class="hero-inner">
-  <div class="venue-badge">📝 Preprint 2025 · Under Review</div>
+  <div class="venue-badge"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-pubs.png);mask-image:url(/images/icons/sh-pubs.png)"></i>Preprint 2025 · Under Review</div>
   <h1>Fine-tuning Flow Matching Generative Models with Intermediate Feedback</h1>
   <p class="short"><strong>AC-Flow</strong>: Robust actor-critic framework for flow matching — stable intermediate value learning without collapse</p>
   <div class="authors">
@@ -338,7 +339,7 @@ body.dark-mode .kc-desc{color:#4ade80 !important}
   <div class="affil"><sup>1</sup>University of Illinois Urbana-Champaign</div>
   <div class="btn-row">
     <a class="btn btn-primary" href="https://arxiv.org/abs/2510.18072">arXiv:2510.18072</a>
-    <a class="btn btn-neutral" href="/">🏠 Homepage</a>
+    <a class="btn btn-neutral" href="/"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-home.png);mask-image:url(/images/icons/h-home.png)"></i>Homepage</a>
   </div>
 </div></div>
 
@@ -355,7 +356,7 @@ body.dark-mode .kc-desc{color:#4ade80 !important}
 </section>
 
 <section>
-  <h2>🔧 Three Key Innovations</h2>
+  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-gear.png);mask-image:url(/images/icons/h-gear.png)"></i>Three Key Innovations</h2>
   <div class="innovations">
     <div class="inn-card">
       <div class="inn-num">1</div>
@@ -376,7 +377,7 @@ body.dark-mode .kc-desc{color:#4ade80 !important}
 </section>
 
 <section>
-  <h2>🧩 Why Intermediate Rewards Matter</h2>
+  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-puzzle.png);mask-image:url(/images/icons/h-puzzle.png)"></i>Why Intermediate Rewards Matter</h2>
   <figure style="margin:18px 0 6px;text-align:center;">
     <img src="/images/featured/acflow-method.jpg" alt="AC-Flow: a critic gives feedback at intermediate timesteps of the flow-matching trajectory" loading="lazy" style="width:100%;max-width:820px;border-radius:12px;border:1px solid rgba(128,128,128,.22);box-shadow:0 4px 20px rgba(13,40,90,.10);">
     <figcaption style="font-size:0.82em;color:#888;margin-top:8px;">Conceptual illustration of the method.</figcaption>
@@ -391,7 +392,7 @@ body.dark-mode .kc-desc{color:#4ade80 !important}
 </section>
 
 <section>
-  <h2>🔄 AC-Flow vs ORW-CFM-W2</h2>
+  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-refresh.png);mask-image:url(/images/icons/h-refresh.png)"></i>AC-Flow vs ORW-CFM-W2</h2>
   <div class="compare-cards">
     <div class="cc cc-old">
       <h3>ORW-CFM-W2 (ICLR 2025)</h3>
@@ -416,23 +417,23 @@ body.dark-mode .kc-desc{color:#4ade80 !important}
 </section>
 
 <section>
-  <h2>📊 Key Claims</h2>
+  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-chart.png);mask-image:url(/images/icons/h-chart.png)"></i>Key Claims</h2>
 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:16px 0 24px;">
   <div class="kc-card" style="background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:10px;padding:14px;text-align:center;">
-    <div class="kc-title" style="font-size:0.85em;font-weight:800;color:#065f46;">⚙️ Actor-Critic</div>
+    <div class="kc-title" style="font-size:0.85em;font-weight:800;color:#065f46;"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-gear.png);mask-image:url(/images/icons/h-gear.png)"></i>Actor-Critic</div>
     <div class="kc-desc" style="font-size:0.76em;color:#166534;margin-top:4px;">Step-level rewards via<br>intermediate feedback</div>
   </div>
   <div class="kc-card" style="background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:10px;padding:14px;text-align:center;">
-    <div class="kc-title" style="font-size:0.85em;font-weight:800;color:#065f46;">🛡️ Collapse-Free</div>
+    <div class="kc-title" style="font-size:0.85em;font-weight:800;color:#065f46;"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-shield.png);mask-image:url(/images/icons/h-shield.png)"></i>Collapse-Free</div>
     <div class="kc-desc" style="font-size:0.76em;color:#166534;margin-top:4px;">Wasserstein reg +<br>dual-stability mechanism</div>
   </div>
   <div class="kc-card" style="background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:10px;padding:14px;text-align:center;">
-    <div class="kc-title" style="font-size:0.85em;font-weight:800;color:#065f46;">🎯 SD3 Fine-Tuning</div>
+    <div class="kc-title" style="font-size:0.85em;font-weight:800;color:#065f46;"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-target.png);mask-image:url(/images/icons/h-target.png)"></i>SD3 Fine-Tuning</div>
     <div class="kc-desc" style="font-size:0.76em;color:#166534;margin-top:4px;">Stable fine-tuning without<br>mode collapse</div>
   </div>
 </div>
 
-<h2>🔗 Related Work in This Series</h2>
+<h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-link.png);mask-image:url(/images/icons/h-link.png)"></i>Related Work in This Series</h2>
 <p>AC-Flow builds on the online RLHF series for generative models:</p>
 <ul>
   <li><strong><a href="/projects/orw-cfm-w2/">ORW-CFM-W2 (ICLR 2025)</a></strong> — First online RLHF for flow matching</li>
@@ -440,8 +441,8 @@ body.dark-mode .kc-desc{color:#4ade80 !important}
   <li><strong>AC-Flow (This work)</strong> — Actor-critic with intermediate step-level rewards</li>
 </ul>
 
-<h2>📖 Cite This Paper</h2>
-  <button class="bib-copy-btn" aria-label="Copy BibTeX citation">📋 Copy BibTeX</button>
+<h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-book.png);mask-image:url(/images/icons/h-book.png)"></i>Cite This Paper</h2>
+  <button class="bib-copy-btn" aria-label="Copy BibTeX citation"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-list.png);mask-image:url(/images/icons/h-list.png)"></i>Copy BibTeX</button>
   <pre class="bibtex-block" tabindex="0"><code>@misc{fan2025finetuningflowmatchinggenerative,
   title={Fine-tuning Flow Matching Generative Models with Intermediate Feedback},
   author={Jiajun Fan and Chaoran Cheng and Shuaike Shen and Xiangxin Zhou and Ge Liu},

@@ -7,6 +7,7 @@ excerpt: "Full list of publications by Jiajun Fan — ICLR, NeurIPS, ICML, TPAMI
 ---
 
 <style>
+.lbl-ico{display:inline-block;width:1em;height:1em;vertical-align:-0.14em;margin-right:5px;background-color:currentColor;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;flex-shrink:0;}
 .scholar-link {
   display: inline-flex; align-items: center; gap: 6px;
   background: #1565c0; color: #fff !important;
@@ -85,13 +86,13 @@ body.dark-mode .stat-badge-icml { background:#2d0a1a !important; border-color:#7
 </style>
 
 <a class="scholar-link" href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">
-  📚 View full profile on Google Scholar
+  <i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-book.png);mask-image:url(/images/icons/h-book.png)"></i>View full profile on Google Scholar
 </a>
 
 <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:1.2em;">
-  <span class="stat-badge-cite">📊 {{ site.data.citations._total | default: 360 }}+ Citations</span>
-  <span class="stat-badge-h">🎯 h-index 9</span>
-  <span class="stat-badge-oral">🏅 ICLR 2023 Oral</span>
+  <span class="stat-badge-cite"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-chart.png);mask-image:url(/images/icons/h-chart.png)"></i>{{ site.data.citations._total | default: 360 }}+ Citations</span>
+  <span class="stat-badge-h"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-target.png);mask-image:url(/images/icons/h-target.png)"></i>h-index 9</span>
+  <span class="stat-badge-oral"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>ICLR 2023 Oral</span>
   <span class="stat-badge-icml">✅ ICML 2026 Accept</span>
 </div>
 
