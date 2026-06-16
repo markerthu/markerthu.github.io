@@ -1109,7 +1109,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 </p>
 
 <div class="internship-banner internship-banner-pulse">
-<i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-scholar);mask-image:url(/images/icons/h-scholar)"></i><strong>Seeking research internship — Fall 2026 / 2027.</strong> RL · Generative Models · Reasoning LLMs · Agentic RL
+<i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-scholar.png);mask-image:url(/images/icons/h-scholar.png)"></i><strong>Seeking research internship — Fall 2026 / 2027.</strong> RL · Generative Models · Reasoning LLMs · Agentic RL
 &nbsp;<a href="/cv/">[CV]</a>
 &nbsp;<a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">[Scholar]</a>
 &nbsp;<a href="mailto:jiajunf3@illinois.edu">[Email]</a>
@@ -1149,7 +1149,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
   </li>
   <li class="news-hidden" id="news-extra-2">
     <span class="news-date">Aug 2024</span>
-    <span><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-scholar);mask-image:url(/images/icons/h-scholar)"></i>Started Ph.D. at <strong>UIUC CS</strong> (GPA 4.0/4.0).</span>
+    <span><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-scholar.png);mask-image:url(/images/icons/h-scholar.png)"></i>Started Ph.D. at <strong>UIUC CS</strong> (GPA 4.0/4.0).</span>
   </li>
   <li class="news-hidden" id="news-extra-3">
     <span class="news-date">Jan 2023</span>
