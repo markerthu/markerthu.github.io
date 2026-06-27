@@ -103,10 +103,12 @@
     font-weight: 800 !important;
     letter-spacing: -0.02em;
     color: #1a2332 !important;
-    margin-right: auto !important;   /* push nav links to the right */
+    flex: 0 0 auto;
   }
-  .greedy-nav { min-width: 0 !important; background: transparent !important; }
-  .greedy-nav .visible-links { margin-left: auto; }
+  /* greedy-nav keeps full remaining width (so its overflow measurement stays correct
+     and links never collapse into a hamburger), links right-aligned inside it */
+  .greedy-nav { min-width: 0 !important; flex: 1 1 auto !important; background: transparent !important; }
+  .greedy-nav .visible-links { margin-left: auto !important; }
   .greedy-nav a {
     font-weight: 600;
     font-size: 0.88em;
