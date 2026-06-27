@@ -42,7 +42,7 @@ body.dark-mode .internship-banner strong { color: #90caf9 !important; }
   background: #f0f4ff; border-radius: 8px;
   padding: 9px 16px; margin-bottom: 1.4em;
   font-size: 0.84em; display: flex; flex-wrap: wrap; gap: 5px 16px; align-items: center;
-  position: sticky; top: 0; z-index: 90;
+  position: sticky; top: 56px; z-index: 90;
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
 .quick-nav a img.qn-ico { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; margin-right: 5px; }

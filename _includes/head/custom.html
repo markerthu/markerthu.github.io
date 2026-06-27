@@ -86,7 +86,7 @@
   .masthead {
     background: #fff;
     box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-    position: relative;
+    position: sticky; top: 0; z-index: 200;
   }
   .masthead::after {
     content: '';
@@ -95,23 +95,34 @@
     height: 3px;
     background: linear-gradient(to right, #1565c0 0%, #7c4dff 50%, #00897b 100%);
   }
-  .masthead__inner-wrap { max-width: 1280px; }
+  .masthead__inner-wrap {
+    max-width: 1280px; padding-top: 0 !important; padding-bottom: 0 !important;
+    min-height: 56px; display: flex !important; align-items: center;
+  }
   .site-title {
     font-weight: 800 !important;
     letter-spacing: -0.02em;
     color: #1a2332 !important;
+    margin-right: auto !important;   /* push nav links to the right */
   }
+  .greedy-nav { min-width: 0 !important; background: transparent !important; }
+  .greedy-nav .visible-links { margin-left: auto; }
   .greedy-nav a {
     font-weight: 600;
-    font-size: 0.9em;
+    font-size: 0.88em;
     letter-spacing: 0.01em;
     color: #333 !important;
-    transition: color 0.2s;
+    margin: 0 2px !important;
+    padding: 6px 10px !important;
+    border-radius: 6px;
+    transition: color 0.2s, background 0.2s;
   }
-  .greedy-nav a:hover { color: #1565c0 !important; }
-  .greedy-nav .visible-links a::before {
-    background: #1565c0;
-  }
+  .greedy-nav a:hover { color: #1565c0 !important; background: #f0f4ff; }
+  .greedy-nav .visible-links a.nav-active { color: #1565c0 !important; font-weight: 700; }
+  /* remove MM sliding underline to match project-page navbar */
+  .greedy-nav .visible-links a::before { display: none !important; }
+  body.dark-mode .greedy-nav a:hover { background: #21262d !important; }
+  body.dark-mode .greedy-nav .visible-links a.nav-active { color: #58a6ff !important; }
 
   /* ── Page layout ── */
   .page__content {
@@ -567,3 +578,16 @@
 {% endif %}
 
 <!-- end custom head snippets -->
+
+<script>
+/* unify navbar: mark current page active in theme masthead (matches project-page site-masthead) */
+document.addEventListener('DOMContentLoaded', function(){
+  var path = location.pathname.replace(/\/+$/,'') || '/';
+  var links = document.querySelectorAll('.greedy-nav .visible-links a, .greedy-nav .hidden-links a');
+  links.forEach(function(a){
+    var href = (a.getAttribute('href')||'').replace(/\/+$/,'');
+    if(!href || href==='/') return;
+    if(path===href || path.indexOf(href+'/')===0) a.classList.add('nav-active');
+  });
+});
+</script>
