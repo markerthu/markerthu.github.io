@@ -556,8 +556,8 @@ document.addEventListener('DOMContentLoaded', function(){
   var path = location.pathname.replace(/\/+$/,'') || '/';
   var links = document.querySelectorAll('.masthead-nav a');
   links.forEach(function(a){
-    var href = (a.getAttribute('href')||'').replace(/\/+$/,'');
-    if(!href || href==='/') return;
+    var href = (a.pathname || '').replace(/\/+$/,'');
+    if(!href) return;
     if(path===href || path.indexOf(href+'/')===0) a.classList.add('nav-active');
   });
 });
