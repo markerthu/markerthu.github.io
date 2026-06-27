@@ -275,6 +275,12 @@ body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-ima
 .pg-up{width:11px;height:11px;border-top:2.6px solid currentColor;border-right:2.6px solid currentColor;transform:rotate(-45deg) translateY(2px);display:inline-block;}
 @media print{#read-progress,.pg-fab{display:none!important;}}
 @media (prefers-reduced-motion:reduce){#read-progress{transition:none;}.pg-fab{transition:none;}}
+
+/* cross-document view transitions — unify smooth navigation site-wide (matches theme pages) */
+@view-transition { navigation: auto; }
+::view-transition-old(root) { animation-duration: .18s; }
+::view-transition-new(root) { animation-duration: .18s; }
+@media (prefers-reduced-motion: reduce) { ::view-transition-old(root), ::view-transition-new(root) { animation: none !important; } }
 </style>
 <script type="application/ld+json">{
   "@context": "https://schema.org",

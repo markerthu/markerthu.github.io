@@ -234,6 +234,12 @@ body.dark-mode .sec-title span[style*="color:#6b7280"]{color:#8b949e !important}
   .pub-hl { font-size: 9pt; color: #444 !important; }
   h1, h2, h3 { page-break-after: avoid; }
 }
+
+/* cross-document view transitions — unify smooth navigation site-wide (matches theme pages) */
+@view-transition { navigation: auto; }
+::view-transition-old(root) { animation-duration: .18s; }
+::view-transition-new(root) { animation-duration: .18s; }
+@media (prefers-reduced-motion: reduce) { ::view-transition-old(root), ::view-transition-new(root) { animation: none !important; } }
 </style>
 </head>
 <body id="top">

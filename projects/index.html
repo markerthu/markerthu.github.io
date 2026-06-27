@@ -106,6 +106,12 @@ body.dark-mode footer a{color:#58a6ff}
 @media print {
   .site-masthead { display: none !important; }
 }
+
+/* cross-document view transitions — unify smooth navigation site-wide (matches theme pages) */
+@view-transition { navigation: auto; }
+::view-transition-old(root) { animation-duration: .18s; }
+::view-transition-new(root) { animation-duration: .18s; }
+@media (prefers-reduced-motion: reduce) { ::view-transition-old(root), ::view-transition-new(root) { animation: none !important; } }
 </style>
 </head>
 <body id="top">
