@@ -82,49 +82,21 @@
   }
   .author__urls a:hover { color: #0d47a1 !important; }
 
-  /* ── Masthead / nav — gradient underline ── */
-  .masthead {
-    background: #fff;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-    position: sticky; top: 0; z-index: 200;
-  }
-  .masthead::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(to right, #1565c0 0%, #7c4dff 50%, #00897b 100%);
-  }
-  .masthead__inner-wrap {
-    max-width: 1280px; padding-top: 0 !important; padding-bottom: 0 !important;
-    min-height: 56px; display: flex !important; align-items: center;
-  }
-  .site-title {
-    font-weight: 800 !important;
-    letter-spacing: -0.02em;
-    color: #1a2332 !important;
-    flex: 0 0 auto;
-  }
-  /* greedy-nav keeps full remaining width (so its overflow measurement stays correct
-     and links never collapse into a hamburger), links right-aligned inside it */
-  .greedy-nav { min-width: 0 !important; flex: 1 1 auto !important; background: transparent !important; }
-  .greedy-nav .visible-links { margin-left: auto !important; }
-  .greedy-nav a {
-    font-weight: 600;
-    font-size: 0.88em;
-    letter-spacing: 0.01em;
-    color: #333 !important;
-    margin: 0 2px !important;
-    padding: 6px 10px !important;
-    border-radius: 6px;
-    transition: color 0.2s, background 0.2s;
-  }
-  .greedy-nav a:hover { color: #1565c0 !important; background: #f0f4ff; }
-  .greedy-nav .visible-links a.nav-active { color: #1565c0 !important; font-weight: 700; }
-  /* remove MM sliding underline to match project-page navbar */
-  .greedy-nav .visible-links a::before { display: none !important; }
-  body.dark-mode .greedy-nav a:hover { background: #21262d !important; }
-  body.dark-mode .greedy-nav .visible-links a.nav-active { color: #58a6ff !important; }
+  /* ── Unified site navbar (identical markup/style to project-page site-masthead) ── */
+  .site-masthead { background: #fff; box-shadow: 0 2px 12px rgba(0,0,0,.06); position: sticky; top: 0; z-index: 200; }
+  .site-masthead::after { content: ''; display: block; height: 3px; background: linear-gradient(to right, #1565c0 0%, #7c4dff 50%, #00897b 100%); }
+  .masthead-inner { max-width: 1280px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 56px; }
+  .masthead-title { font-weight: 800; font-size: 1.05em; color: #1a2332 !important; text-decoration: none !important; letter-spacing: -.02em; }
+  .masthead-nav { display: flex; gap: 2px; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
+  .masthead-nav a { font-weight: 600; font-size: 0.88em; color: #333 !important; text-decoration: none !important; padding: 6px 10px; border-radius: 6px; transition: color .2s, background .2s; letter-spacing: .01em; }
+  .masthead-nav a:hover { color: #1565c0 !important; background: #f0f4ff; }
+  .masthead-nav a.nav-active { color: #1565c0 !important; font-weight: 700; }
+  @media (max-width: 560px) { .masthead-nav a { font-size: 0.78em; padding: 5px 6px; } .masthead-title { font-size: 0.95em; } .masthead-inner { padding: 0 14px; } }
+  body.dark-mode .site-masthead { background: #161b22; box-shadow: 0 2px 12px rgba(0,0,0,.4); }
+  body.dark-mode .masthead-title { color: #e6edf3 !important; }
+  body.dark-mode .masthead-nav a { color: #c9d1d9 !important; }
+  body.dark-mode .masthead-nav a:hover { color: #58a6ff !important; background: #21262d; }
+  body.dark-mode .masthead-nav a.nav-active { color: #58a6ff !important; }
 
   /* ── Page layout ── */
   .page__content {
@@ -216,9 +188,6 @@
   body.dark-mode .page__content { color: #c9d1d9 !important; }
   body.dark-mode .masthead { background: #161b22 !important; box-shadow: 0 1px 8px rgba(0,0,0,0.4) !important; }
   body.dark-mode .masthead::after { background: linear-gradient(to right, #1565c0 0%, #7c4dff 50%, #00897b 100%) !important; }
-  body.dark-mode .site-title { color: #e6edf3 !important; }
-  body.dark-mode .greedy-nav, body.dark-mode .greedy-nav a { background: #161b22 !important; color: #8b949e !important; }
-  body.dark-mode .greedy-nav a:hover { color: #58a6ff !important; }
   body.dark-mode .sidebar { background: #0d1117 !important; }
   body.dark-mode .author__name { color: #e6edf3 !important; }
   body.dark-mode .author__bio { color: #8b949e !important; }
@@ -585,7 +554,7 @@
 /* unify navbar: mark current page active in theme masthead (matches project-page site-masthead) */
 document.addEventListener('DOMContentLoaded', function(){
   var path = location.pathname.replace(/\/+$/,'') || '/';
-  var links = document.querySelectorAll('.greedy-nav .visible-links a, .greedy-nav .hidden-links a');
+  var links = document.querySelectorAll('.masthead-nav a');
   links.forEach(function(a){
     var href = (a.getAttribute('href')||'').replace(/\/+$/,'');
     if(!href || href==='/') return;
