@@ -1,86 +1,86 @@
 {
-  "updated": "2026-06-29",
+  "updated": "2026-07-06",
   "papers": [
     {
-      "id": "2606.27739",
-      "title": "The Weakest Link Tells It All: Outcome-Supervised Process Reward Modeling via Learnable Credit Assignment",
-      "authors": "Tianyu Jia, Yue Fang, Hongxin Ding et al.",
-      "summary": "Process reward models (PRMs) enhance the reasoning capabilities of large language models (LLMs) by providing fine-grained feedback, yet training PRMs typically requires expensive stepwise annotations.…",
-      "date": "2026-06-26",
-      "tag": "Reasoning",
-      "url": "https://arxiv.org/abs/2606.27739"
+      "id": "2607.02490",
+      "title": "Visually Grounded Self-Reflection for Vision-Language Models via Reinforcement Learning",
+      "authors": "Liyan Tang, Fangcong Yin, Greg Durrett",
+      "summary": "Large vision-language models can reason over multimodal inputs by generating textual chains of thought (CoT). A key capability exhibited in CoT reasoning is self-reflection: revisiting earlier decisio…",
+      "date": "2026-07-02",
+      "tag": "Multimodal",
+      "url": "https://arxiv.org/abs/2607.02490"
     },
     {
-      "id": "2606.27771",
-      "title": "NormGuard: Reward-Preserving Norm Constraints in Flow-Matching Reinforcement Learning",
-      "authors": "Tianlin Pan, Lianyu Pang, Cheng Da et al.",
-      "summary": "Reinforcement learning (RL) post-training improves the reward alignment of flow-based generators, but often degrades perceptual quality in ways that are not captured by the reward proxy. We identify a…",
-      "date": "2026-06-26",
-      "tag": "Flow Matching",
-      "url": "https://arxiv.org/abs/2606.27771"
+      "id": "2607.01721",
+      "title": "CoRe: Combined Rewards with Vision-Language Model Feedback for Preference-Aligned Reinforcement Learning",
+      "authors": "Hexian Ni, Tao Lu, Yinghao Cai",
+      "summary": "Reward design remains a central challenge in reinforcement learning (RL). Hand-crafted rewards are often difficult to specify and may lead to suboptimal policies, while learned rewards from preference…",
+      "date": "2026-07-02",
+      "tag": "Multimodal",
+      "url": "https://arxiv.org/abs/2607.01721"
     },
     {
-      "id": "2606.24525",
-      "title": "VisCritic: Visual State Comparison as Process Reward for GUI Agents",
-      "authors": "Jiachen Qian",
-      "summary": "GUI agents powered by vision-language models show strong potential for automating digital tasks, yet frequently fail in long-horizon scenarios due to the absence of step-level verification. Existing p…",
-      "date": "2026-06-23",
-      "tag": "Reasoning",
-      "url": "https://arxiv.org/abs/2606.24525"
-    },
-    {
-      "id": "2606.23995",
-      "title": "EMAgnet: Parameter-Space EMA Regularization for Policy Gradient Self-Play in Large Games",
-      "authors": "Tristan Maidment, JB Lanier, Chase McDonald et al.",
-      "summary": "Recent work has established that regularized policy gradient methods such as PPO, when used in self-play, can match or exceed specialized game-theoretic algorithms for solving two-player zero-sum impe…",
-      "date": "2026-06-22",
+      "id": "2607.01480",
+      "title": "Procedural Memory Distillation: Online Reflection for Self-Improving Language Models",
+      "authors": "Ye Liu, Srijan Bansal, Bo Pang et al.",
+      "summary": "Reinforcement learning with verifiable rewards (RLVR), along with recent selfdistillation variants such as SDPO, evaluates each rollout against a verifier and updates the policy from that episode-leve…",
+      "date": "2026-07-01",
       "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2606.23995"
+      "url": "https://arxiv.org/abs/2607.01480"
     },
     {
-      "id": "2606.23913",
-      "title": "Closing the Loop: Formally Verified Law as a Reward Signal for Self-Improving Legal AI",
-      "authors": "Armin Heydari, Torben Leowald",
-      "summary": "This article develops an architecture that creates a formally verifiable reward signal to train legal AI, adapting the LLM proposes, verifier disposes paradigm from mathematical AI to the distinctive …",
-      "date": "2026-06-22",
+      "id": "2607.00531",
+      "title": "Active-GRPO: Adaptive Imitation and Self-Improving Reasoning for Molecular Optimization",
+      "authors": "Xuefeng Liu, Mingxuan Cao, Qinan Huang et al.",
+      "summary": "Scientific reasoning is an increasingly important capability of large language models, yet improving the robustness and efficiency of training such reasoning remains a key open challenge. We study thi…",
+      "date": "2026-07-01",
       "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2606.23913"
+      "url": "https://arxiv.org/abs/2607.00531"
     },
     {
-      "id": "2606.23348",
-      "title": "Superhuman AI for Generals.io Using Self-Play Reinforcement Learning",
-      "authors": "Matej Straka, Viliam Lisý, Martin Schmid",
-      "summary": "We present a superhuman AI agent for Generals.io, a real-time strategy game that requires both long-horizon planning and short-term tactics under strong imperfect information. Trained for four days on…",
-      "date": "2026-06-22",
+      "id": "2607.00483",
+      "title": "VLM-AR3L: Vision-Language Models for Absolute and Relative Rewards in Reinforcement Learning",
+      "authors": "Kuan-Chen Chen, Winston Chen, Wei-Fang Sun et al.",
+      "summary": "Designing effective reward functions remains a major challenge in reinforcement learning (RL), particularly in open-ended environments where task goals are abstract and difficult to quantify. In this …",
+      "date": "2026-07-01",
+      "tag": "Multimodal",
+      "url": "https://arxiv.org/abs/2607.00483"
+    },
+    {
+      "id": "2606.31524",
+      "title": "On the Convergence of Self-Improving Online LLM Alignment",
+      "authors": "Xudong Wu, Pangpang Liu, Vaneet Aggarwal et al.",
+      "summary": "The Self-Improving Alignment (SAIL) algorithm addresses distribution shift by reducing a bilevel formulation of the problem to an efficient, single-level method. Empirically, SAIL has demonstrated str…",
+      "date": "2026-06-30",
       "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2606.23348"
+      "url": "https://arxiv.org/abs/2606.31524"
     },
     {
-      "id": "2606.23112",
-      "title": "Self-Evolution for Multi-Turn Tool-Calling Agents via Divergence-Point Preference Learning",
-      "authors": "Jiaqiang Tang",
-      "summary": "Multi-turn tool-using agents must coordinate long-horizon tool sequences while tracking dialogue state and policy constraints. Existing approaches often separate inference-time orchestration from para…",
-      "date": "2026-06-22",
-      "tag": "RL Training",
-      "url": "https://arxiv.org/abs/2606.23112"
+      "id": "2606.31270",
+      "title": "Learning from Failure: Inference-Time Self-Improvement for Computer-Use Agents",
+      "authors": "Xueqiao Sun, Xiaohan Wang, Ludwig Schmidt et al.",
+      "summary": "Computer-use agents, which leverage multimodal large language models (MLLMs) to operate computers and complete tasks, have attracted significant attention for their utility and versatility. A major ch…",
+      "date": "2026-06-30",
+      "tag": "Self-Improvement",
+      "url": "https://arxiv.org/abs/2606.31270"
     },
     {
-      "id": "2606.23640",
-      "title": "Learning Process Rewards via Success Visitation Matching for Efficient RL",
-      "authors": "Raymond Tsao, Andrew Wagenmaker, Sergey Levine",
-      "summary": "In many modern applications of reinforcement learning (RL), the natural reward for a task of interest is inherently sparse: a reward of 0 is given everywhere except when the task is completed, when a …",
-      "date": "2026-06-22",
-      "tag": "Reasoning",
-      "url": "https://arxiv.org/abs/2606.23640"
+      "id": "2606.31846",
+      "title": "Z-1: Efficient Reinforcement Learning for Vision-Language-Action Models",
+      "authors": "Lang Cao, Renhong Chen, Luyi Li et al.",
+      "summary": "Vision-Language-Action (VLA) models offer a promising framework for robotic manipulation by connecting language instructions, visual observations, and continuous control. However, most existing polici…",
+      "date": "2026-06-30",
+      "tag": "Multimodal",
+      "url": "https://arxiv.org/abs/2606.31846"
     },
     {
-      "id": "2606.23190",
-      "title": "FlowTTS-GRPO: Online Reinforcement Learning with Multi-Objective Reward Optimization for Flow-Matching Based Text-to-Speech",
-      "authors": "Haoxu Wang, Biao Tian, Weiqing Li et al.",
-      "summary": "Existing Reinforcement Learning (RL) research for Text-to-Speech (TTS) focuses on large language models (LLMs), leaving Flow-Matching (FM) under-explored. We present FlowTTS-GRPO, an online RL framewo…",
-      "date": "2026-06-22",
-      "tag": "Flow Matching",
-      "url": "https://arxiv.org/abs/2606.23190"
+      "id": "2606.31825",
+      "title": "Breaking Failure Cascades: Step-Aware Reinforcement Learning for Medical Multimodal Reasoning",
+      "authors": "Junha Jung, Minbyul Jeong, Suhyeon Lim et al.",
+      "summary": "Recent multimodal large language models have shown great promise in clinical image reasoning, but existing post-training pipelines remain predominantly outcome-centric, relying on final answer correct…",
+      "date": "2026-06-30",
+      "tag": "Multimodal",
+      "url": "https://arxiv.org/abs/2606.31825"
     }
   ]
 }
