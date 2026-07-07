@@ -178,6 +178,25 @@ body.dark-mode .pub-abst-btn:hover { background: #1e40af; }
 
 /* ── Stats row ── */
 .stats-row { display: flex; flex-wrap: wrap; gap: 12px; margin: 1.2em 0 1.6em; }
+.cit-chart{background:#fff;border:1.5px solid #e0e8f0;border-radius:12px;padding:16px 20px 12px;margin:0 0 1.8em;}
+.cit-chart-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px;margin-bottom:12px;}
+.cit-chart-title{font-weight:800;font-size:0.92em;color:#1a2332;}
+.cit-chart-sub{font-size:0.7em;color:#767676;}
+.cit-bars{display:flex;align-items:stretch;gap:10px;height:170px;}
+.cit-bar{flex:1;display:flex;flex-direction:column;align-items:center;}
+.cit-bar-track{flex:1;width:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;}
+.cit-bar-fill{position:relative;width:100%;max-width:44px;min-height:3px;background:linear-gradient(to top,#1565c0,#5aa9f0);border-radius:5px 5px 0 0;animation:citBarIn .7s ease both;}
+.cit-bar.ytd .cit-bar-fill{background:linear-gradient(to top,#7c4dff,#b39ddb);}
+.cit-bar-val{position:absolute;top:-16px;left:-6px;right:-6px;text-align:center;font-size:0.68em;font-weight:800;color:#1565c0;}
+.cit-bar.ytd .cit-bar-val{color:#7c4dff;}
+.cit-bar-year{margin-top:6px;font-size:0.7em;color:#595959;font-weight:600;white-space:nowrap;}
+.cit-ytd{color:#7c4dff;margin-left:1px;}
+@keyframes citBarIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+body.dark-mode .cit-chart{background:#161b22;border-color:#30363d;}
+body.dark-mode .cit-chart-title{color:#e6edf3;}
+body.dark-mode .cit-bar-year{color:#8b949e;}
+@media (prefers-reduced-motion:reduce){.cit-bar-fill{animation:none;}}
+
 .stat-card {
   flex: 1 1 130px; background: #fff;
   border: 1.5px solid #e0e8f0; border-radius: 12px;
@@ -1473,6 +1492,27 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
     <div class="stat-label">GPA — UIUC Ph.D.<br><em>Computer Science</em></div>
   </div>
 </div>
+
+
+<!-- Citations per year — auto-updated daily via SerpAPI → _data/citations.json (static Liquid render, never a broken widget) -->
+{% assign by_year = site.data.citations._by_year %}
+{% if by_year and by_year.size > 0 %}
+{% assign maxitem = by_year | sort: 'citations' | last %}
+{% assign maxc = maxitem.citations %}
+<div class="cit-chart">
+  <div class="cit-chart-head">
+    <span class="cit-chart-title">Citations per year</span>
+    <span class="cit-chart-sub">Google Scholar &middot; auto-updated daily &middot; {{ site.data.citations._total }} total</span>
+  </div>
+  <div class="cit-bars">
+    {% for yr in by_year %}{% assign hpct = yr.citations | times: 100 | divided_by: maxc %}
+    <div class="cit-bar{% if forloop.last %} ytd{% endif %}" title="{{ yr.year }}{% if forloop.last %} (year-to-date){% endif %}: {{ yr.citations }} citations">
+      <div class="cit-bar-track"><div class="cit-bar-fill" style="height:{{ hpct }}%;animation-delay:{{ forloop.index0 | times: 60 }}ms"><span class="cit-bar-val">{{ yr.citations }}</span></div></div>
+      <div class="cit-bar-year">{{ yr.year }}{% if forloop.last %}<span class="cit-ytd"> ·YTD</span>{% endif %}</div>
+    </div>{% endfor %}
+  </div>
+</div>
+{% endif %}
 
 <!-- ═══════════════════════════════ VISION ════════════════════════════ -->
 <h2 class="section-header" id="vision"><img class="sh-icon" src="/images/icons/sh-vision.png" alt="">Research Vision</h2>
