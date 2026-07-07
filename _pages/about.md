@@ -1502,7 +1502,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 <div class="cit-chart">
   <div class="cit-chart-head">
     <span class="cit-chart-title">Citations per year</span>
-    <span class="cit-chart-sub">Google Scholar &middot; auto-updated daily &middot; {{ site.data.citations._total }} total</span>
+    <span class="cit-chart-sub">Google Scholar &middot; {{ site.data.citations._total }} citations &middot; h-index {{ site.data.citations._h_index | default: 9 }} &middot; i10 {{ site.data.citations._i10_index | default: 9 }} &middot; auto-updated daily</span>
   </div>
   <div class="cit-bars">
     {% for yr in by_year %}{% assign hpct = yr.citations | times: 100 | divided_by: maxc %}
@@ -2018,7 +2018,7 @@ function filterByVenue(btn, venue) {
 
 /* ══════════════════════════════════════════════════
    ① CITATION COUNTS — from _data/citations.json
-   (auto-updated weekly by GitHub Actions)
+   (auto-updated daily by GitHub Actions → scripts/update_citations.py)
 ══════════════════════════════════════════════════ */
 (function(){
   /* Jekyll injects citation data at build time */
