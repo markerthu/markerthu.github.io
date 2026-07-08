@@ -196,6 +196,21 @@ body.dark-mode .cit-chart{background:#161b22;border-color:#30363d;}
 body.dark-mode .cit-chart-title{color:#e6edf3;}
 body.dark-mode .cit-bar-year{color:#8b949e;}
 @media (prefers-reduced-motion:reduce){.cit-bar-fill{animation:none;}}
+.ct-svg{width:100%;height:auto;display:block;overflow:visible;}
+.ct-area{fill:url(#ctArea);opacity:0;animation:ctFade .9s ease .45s forwards;}
+.ct-line{fill:none;stroke:url(#ctLine);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;animation:ctDraw 1.5s cubic-bezier(.4,0,.2,1) forwards;}
+.ct-dot{fill:#1565c0;stroke:#fff;stroke-width:1.5;opacity:0;animation:ctFade .5s ease 1.2s forwards;}
+.ct-dot-last{fill:#7c4dff;}
+.ct-val{fill:#1565c0;font-size:11px;font-weight:800;text-anchor:middle;opacity:0;animation:ctFade .5s ease 1.3s forwards;}
+.ct-val-last{fill:#7c4dff;}
+.ct-year{fill:#64748b;font-size:11px;font-weight:600;text-anchor:middle;}
+@keyframes ctDraw{to{stroke-dashoffset:0;}}
+@keyframes ctFade{to{opacity:1;}}
+body.dark-mode .ct-year{fill:#8b949e;}
+body.dark-mode .ct-dot{stroke:#161b22;}
+body.dark-mode .ct-val{fill:#58a6ff;} body.dark-mode .ct-val-last{fill:#b39ddb;}
+body.dark-mode .ct-dot{fill:#58a6ff;} body.dark-mode .ct-dot-last{fill:#b39ddb;}
+@media (prefers-reduced-motion:reduce){.ct-line{animation:none;stroke-dashoffset:0;}.ct-area,.ct-dot,.ct-val{animation:none;opacity:1;}}
 
 .stat-card {
   flex: 1 1 130px; background: #fff;
@@ -1494,23 +1509,35 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 </div>
 
 
-<!-- Citations per year — auto-updated daily via SerpAPI → _data/citations.json (static Liquid render, never a broken widget) -->
+<!-- Citations over time (cumulative) — auto-updated daily via SerpAPI → _data/citations.json (static Liquid-rendered SVG, never a broken widget) -->
 {% assign by_year = site.data.citations._by_year %}
 {% if by_year and by_year.size > 0 %}
-{% assign maxitem = by_year | sort: 'citations' | last %}
-{% assign maxc = maxitem.citations %}
+{% assign n = by_year.size %}{% assign span = n | minus: 1 %}
+{% assign total = 0 %}{% for y in by_year %}{% assign total = total | plus: y.citations %}{% endfor %}
+{% assign cum = 0 %}{% assign linePts = "" %}
+{% for y in by_year %}{% assign cum = cum | plus: y.citations %}
+  {% assign x = forloop.index0 | times: 680 | divided_by: span | plus: 20 %}
+  {% assign yv = cum | times: 152 | divided_by: total %}{% assign yy = 176 | minus: yv %}
+  {% assign linePts = linePts | append: x | append: ',' | append: yy | append: ' ' %}{% endfor %}
 <div class="cit-chart">
   <div class="cit-chart-head">
-    <span class="cit-chart-title">Citations per year</span>
+    <span class="cit-chart-title">Citations over time</span>
     <span class="cit-chart-sub">Google Scholar &middot; {{ site.data.citations._total }} citations &middot; h-index {{ site.data.citations._h_index | default: 9 }} &middot; i10 {{ site.data.citations._i10_index | default: 9 }} &middot; auto-updated daily</span>
   </div>
-  <div class="cit-bars">
-    {% for yr in by_year %}{% assign hpct = yr.citations | times: 100 | divided_by: maxc %}
-    <div class="cit-bar{% if forloop.last %} ytd{% endif %}" title="{{ yr.year }}{% if forloop.last %} (year-to-date){% endif %}: {{ yr.citations }} citations">
-      <div class="cit-bar-track"><div class="cit-bar-fill" style="height:{{ hpct }}%;animation-delay:{{ forloop.index0 | times: 60 }}ms"><span class="cit-bar-val">{{ yr.citations }}</span></div></div>
-      <div class="cit-bar-year">{{ yr.year }}{% if forloop.last %}<span class="cit-ytd"> ·YTD</span>{% endif %}</div>
-    </div>{% endfor %}
-  </div>
+  <svg class="ct-svg" viewBox="0 0 720 210" preserveAspectRatio="none" role="img" aria-label="Cumulative citations over time">
+    <defs>
+      <linearGradient id="ctLine" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#1565c0"/><stop offset="1" stop-color="#7c4dff"/></linearGradient>
+      <linearGradient id="ctArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1565c0" stop-opacity="0.30"/><stop offset="1" stop-color="#1565c0" stop-opacity="0.02"/></linearGradient>
+    </defs>
+    <polygon class="ct-area" points="{{ linePts }}700,176 20,176"/>
+    <polyline class="ct-line" pathLength="1" points="{{ linePts }}"/>
+    {% assign cum = 0 %}{% for y in by_year %}{% assign cum = cum | plus: y.citations %}
+    {% assign x = forloop.index0 | times: 680 | divided_by: span | plus: 20 %}
+    {% assign yv = cum | times: 152 | divided_by: total %}{% assign yy = 176 | minus: yv %}
+    <circle class="ct-dot{% if forloop.last %} ct-dot-last{% endif %}" cx="{{ x }}" cy="{{ yy }}" r="4"><title>{{ y.year }}: {{ cum }} total</title></circle>
+    <text class="ct-val{% if forloop.last %} ct-val-last{% endif %}" x="{{ x }}" y="{{ yy | minus: 11 }}">{{ cum }}</text>
+    <text class="ct-year" x="{{ x }}" y="197">{{ y.year }}</text>{% endfor %}
+  </svg>
 </div>
 {% endif %}
 
