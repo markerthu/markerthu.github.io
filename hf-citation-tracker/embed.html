@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Citation chart</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<style>
+  :root{ --bg:#fff; --ink:#0f172a; --grid:rgba(100,116,139,.10); --tick:#64748b; }
+  @media (prefers-color-scheme: dark){ :root{ --bg:#0b0f1a; --ink:#e6edf6; --grid:rgba(148,163,184,.14); --tick:#93a4bd; } }
+  html,body{ margin:0; height:100%; font-family:'Inter',system-ui,sans-serif; background:var(--bg); color:var(--ink); }
+  #box{ position:absolute; inset:0; padding:12px 14px; box-sizing:border-box; }
+</style>
+</head>
+<body>
+<div id="box"><canvas id="chart"></canvas></div>
+<script>
+const qs = new URLSearchParams(location.search);
+const p = qs.get('p') || 'total';
+const days = qs.get('days');
+function filterDays(dates, vals){
+  const n = parseInt(days); if(!n) return {dates, vals};
+  const cut = new Date(); cut.setDate(cut.getDate()-n);
+  const d2=[], v2=[]; dates.forEach((x,i)=>{ if(new Date(x+'T00:00:00')>=cut){ d2.push(x); v2.push(vals[i]); } });
+  return {dates:d2, vals:v2};
+}
+fetch('/api/data').then(r=>r.json()).then(d=>{
+  let vals, title;
+  if(p === 'total'){ vals = d.history.total; title = (d.author.name? d.author.name+' — ':'') + 'Total citations'; }
+  else{ vals = d.history.by_paper[p] || [];
+    const pp = d.papers.find(x=>x.paper_id===p);
+    title = pp ? (pp.title.length>60? pp.title.slice(0,60)+'…' : pp.title) : 'Citations'; }
+  const f = filterDays(d.history.dates, vals); const dates = f.dates; vals = f.vals;
+  const css=getComputedStyle(document.documentElement);
+  const ink=css.getPropertyValue('--ink').trim(), grid=css.getPropertyValue('--grid').trim(), tick=css.getPropertyValue('--tick').trim();
+  const ctx=document.getElementById('chart').getContext('2d');
+  const g=ctx.createLinearGradient(0,0,0,300); g.addColorStop(0,'rgba(99,102,241,.34)'); g.addColorStop(1,'rgba(168,85,247,.02)');
+  new Chart(ctx, { type:'line',
+    data:{ labels:dates, datasets:[{ label:title, data:vals, borderColor:'#6366f1',
+      backgroundColor:g, fill:true, tension:.35, pointRadius:0, pointHoverRadius:5, borderWidth:2.5 }]},
+    options:{ responsive:true, maintainAspectRatio:false, interaction:{mode:'index',intersect:false},
+      plugins:{ legend:{display:false},
+        title:{display:true, text:title, color:ink, font:{size:14, weight:'700', family:'Inter'}, padding:{bottom:8}},
+        tooltip:{ backgroundColor:'#0f172a', cornerRadius:10, borderColor:'#6366f1', borderWidth:1, titleColor:'#c7d2fe', bodyColor:'#fff', displayColors:false } },
+      scales:{ y:{ beginAtZero:false, grace:'6%', grid:{color:grid}, ticks:{color:tick} },
+        x:{ grid:{display:false}, ticks:{color:tick, maxTicksLimit:6, maxRotation:0, autoSkip:true} } } } });
+});
+</script>
+</body>
+</html>

@@ -131,6 +131,7 @@ include:
   - "files/*.pdf"
   - "papers/*.pdf"
 exclude:
+  - hf-citation-tracker
   - "*.sublime-project"
   - "*.sublime-workspace"
   - .asset-cache
