@@ -1155,6 +1155,10 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 
 <ul class="news-list">
   <li>
+    <span class="news-date">Jul 2026</span>
+    <span><span class="nbadge nb-accept">Accept</span>Papers accepted at <strong>COLM 2026</strong> (San Francisco, Oct 6–9). See you in San Francisco <img class="g-ico" src="/images/icons/flag-us.png" alt=""></span>
+  </li>
+  <li>
     <span class="news-date">Apr 2026</span>
     <span><span class="nbadge nb-accept">Accept</span>Several papers accepted at <strong>ICML 2026</strong> (Seoul, Jul 6–11). See you in Seoul <img class="g-ico" src="/images/icons/flag-kr.png" alt=""></span>
   </li>
