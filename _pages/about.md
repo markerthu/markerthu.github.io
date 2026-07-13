@@ -9,6 +9,8 @@ redirect_from:
 ---
 
 <style>
+/* hide theme page-title visually (hero shows the name); keep for SEO/a11y */
+.page__title{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
 /* ── Intro ── */
 .tagline { font-size: 1.05em; line-height: 1.78; color: #333; margin-bottom: 1em; }
 
