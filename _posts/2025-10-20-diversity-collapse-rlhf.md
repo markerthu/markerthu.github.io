@@ -57,11 +57,11 @@ This is **mode collapse** (or **diversity collapse**), and it's the central fail
 
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:1.5em 0">
 <figure style="margin:0;text-align:center">
-<img src="/images/blog/mnist_collapse.png" style="width:100%;border-radius:8px;border:1px solid #e0e8f0" />
+<img loading="lazy" src="/images/blog/mnist_collapse.png" style="width:100%;border-radius:8px;border:1px solid #e0e8f0" />
 <figcaption style="font-size:0.82em;color:#666;margin-top:6px"><b>Mode collapse (α=0)</b>: model generates identical digits, maximizing reward but destroying diversity.</figcaption>
 </figure>
 <figure style="margin:0;text-align:center">
-<img src="/images/blog/mnist_balanced.png" style="width:100%;border-radius:8px;border:1px solid #e0e8f0" />
+<img loading="lazy" src="/images/blog/mnist_balanced.png" style="width:100%;border-radius:8px;border:1px solid #e0e8f0" />
 <figcaption style="font-size:0.82em;color:#666;margin-top:6px"><b>Balanced (α=0.3)</b>: with proper regularization, the model improves quality while preserving digit variety.</figcaption>
 </figure>
 </div>
@@ -108,7 +108,7 @@ Fixed \\(\beta\\) applies the same regularization pressure to every sample regar
 This is not a tuning problem — no single value of \\(\beta\\) is optimal for all samples simultaneously.
 
 <figure style="margin:1.5em 0">
-<img src="/images/blog/adrpo_reward_diversity.png" style="width:100%;border-radius:10px;border:1px solid #e0e8f0" />
+<img loading="lazy" src="/images/blog/adrpo_reward_diversity.webp" style="width:100%;border-radius:10px;border:1px solid #e0e8f0" />
 <figcaption style="font-size:0.82em;color:#666;margin-top:8px;text-align:center"><b>Fig 1.</b> Reward vs. diversity Pareto front on SD3 text-to-image. Adaptive regularization (ADRPO) achieves a dominant frontier — higher reward at every diversity level compared to fixed-β methods like DPO and ORW-CFM-W2.</figcaption>
 </figure>
 
@@ -164,7 +164,7 @@ $$\mathcal{L}_{\text{ADRPO-GRPO}}(\theta) = \mathcal{L}_{\text{PG}}(\theta) + (\
 where \\(A_{\text{GRPO}}\\) is the group-level advantage from GRPO (reward minus group mean, normalized).
 
 <figure style="margin:1.5em 0">
-<img src="/images/blog/adrpo_reward_kl.png" style="width:100%;border-radius:10px;border:1px solid #e0e8f0" />
+<img loading="lazy" src="/images/blog/adrpo_reward_kl.webp" style="width:100%;border-radius:10px;border:1px solid #e0e8f0" />
 <figcaption style="font-size:0.82em;color:#666;margin-top:8px;text-align:center"><b>Fig 2.</b> Reward vs. KL divergence on SD3. ADRPO reaches the same reward level at lower KL divergence — more efficient policy improvement.</figcaption>
 </figure>
 
@@ -179,7 +179,7 @@ With ADRPO, a **2B parameter SD3** model outperforms **FLUX.1-Dev (12B)** and **
 When applied to LLM fine-tuning, ADRPO exhibits an unexpected emergent behavior: **the ability to escape local optima.**
 
 <figure style="margin:1.5em 0">
-<img src="/images/blog/adrpo_llm_entropy.png" style="width:100%;border-radius:10px;border:1px solid #e0e8f0" />
+<img loading="lazy" src="/images/blog/adrpo_llm_entropy.webp" style="width:100%;border-radius:10px;border:1px solid #e0e8f0" />
 <figcaption style="font-size:0.82em;color:#666;margin-top:8px;text-align:center"><b>Fig 3.</b> Reward vs. entropy on LLM fine-tuning (Qwen2). ADRPO achieves higher reward while maintaining generation diversity. The adaptive mechanism allows the model to escape local optima that trap fixed-β methods.</figcaption>
 </figure>
 

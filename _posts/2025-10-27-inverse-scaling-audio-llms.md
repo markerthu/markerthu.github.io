@@ -35,7 +35,7 @@ where \\(P(L_{\text{max}})\\) is accuracy when the model is allowed up to \\(L_{
 We call this **test-time inverse scaling**: the more the model "thinks," the worse it performs.
 
 <figure style="margin:1.5em 0">
-<img src="/images/blog/cesar_scaling.png" style="width:100%;border-radius:10px;border:1px solid #e0e8f0" />
+<img loading="lazy" src="/images/blog/cesar_scaling.webp" style="width:100%;border-radius:10px;border:1px solid #e0e8f0" />
 <figcaption style="font-size:0.82em;color:#666;margin-top:8px;text-align:center"><b>Fig 1.</b> Test-time scaling curves. Baseline models (outcome-only RL) show inverse scaling — performance degrades as maximum reasoning length increases. CESAR maintains positive scaling.</figcaption>
 </figure>
 
@@ -100,7 +100,7 @@ $$R_{\text{total}}(s_i) = \underbrace{\alpha_1 R_{\text{acc}} + \alpha_2 R_{\tex
 Each process reward targets a specific failure mode:
 
 <figure style="margin:1.5em 0">
-<img src="/images/blog/cesar_framework.png" style="width:100%;border-radius:10px;border:1px solid #e0e8f0" />
+<img loading="lazy" src="/images/blog/cesar_framework.webp" style="width:100%;border-radius:10px;border:1px solid #e0e8f0" />
 <figcaption style="font-size:0.82em;color:#666;margin-top:8px;text-align:center"><b>Fig 2.</b> CESAR framework. Left: existing outcome-only methods reward only final answer correctness. Right: CESAR adds process rewards for reasoning consistency, structure, and depth.</figcaption>
 </figure>
 
@@ -149,7 +149,7 @@ $$L_{\text{sweet}} = \arg\max_L P(L)$$
 CESAR discovers "reasoning sweet spots" where the model achieves peak performance. Below this point, the model lacks sufficient analytical depth. Beyond it, returns diminish (but don't degrade — a critical difference from baselines).
 
 <figure style="margin:1.5em 0">
-<img src="/images/blog/cesar_slope.png" style="width:100%;border-radius:10px;border:1px solid #e0e8f0" />
+<img loading="lazy" src="/images/blog/cesar_slope.webp" style="width:100%;border-radius:10px;border:1px solid #e0e8f0" />
 <figcaption style="font-size:0.82em;color:#666;margin-top:8px;text-align:center"><b>Fig 3.</b> Scaling slopes. CESAR is the only method with consistently positive slope — reasoning genuinely helps. Baselines show negative or flat slopes.</figcaption>
 </figure>
 
@@ -160,7 +160,7 @@ The **scaling slope** — whether performance increases or decreases with more r
 An unexpected finding: improving reasoning quality also improves **perception** capabilities. Models trained with process rewards become better at basic audio understanding tasks (identifying instruments, recognizing speakers, detecting events) — even though these tasks don't require explicit reasoning.
 
 <figure style="margin:1.5em 0">
-<img src="/images/blog/cesar_radar.png" style="width:100%;border-radius:10px;border:1px solid #e0e8f0" />
+<img loading="lazy" src="/images/blog/cesar_radar.webp" style="width:100%;border-radius:10px;border:1px solid #e0e8f0" />
 <figcaption style="font-size:0.82em;color:#666;margin-top:8px;text-align:center"><b>Fig 4.</b> Multi-dimensional evaluation radar. CESAR improves not just reasoning quality but also perception accuracy across audio understanding tasks.</figcaption>
 </figure>
 
