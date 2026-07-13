@@ -1518,10 +1518,12 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 {% if by_year and by_year.size > 0 %}
 {% assign n = by_year.size %}{% assign span = n | minus: 1 %}
 {% assign total = 0 %}{% for y in by_year %}{% assign total = total | plus: y.citations %}{% endfor %}
+{% comment %} scale/end the curve at the true grand total; Scholar's per-year histogram can miss undated citations {% endcomment %}
+{% assign gt = site.data.citations._total | default: total %}{% if gt < total %}{% assign gt = total %}{% endif %}
 {% assign cum = 0 %}{% assign linePts = "" %}
-{% for y in by_year %}{% assign cum = cum | plus: y.citations %}
+{% for y in by_year %}{% assign cum = cum | plus: y.citations %}{% if forloop.last %}{% assign cum = gt %}{% endif %}
   {% assign x = forloop.index0 | times: 680 | divided_by: span | plus: 20 %}
-  {% assign yv = cum | times: 152 | divided_by: total %}{% assign yy = 176 | minus: yv %}
+  {% assign yv = cum | times: 152 | divided_by: gt %}{% assign yy = 176 | minus: yv %}
   {% assign linePts = linePts | append: x | append: ',' | append: yy | append: ' ' %}{% endfor %}
 <div class="cit-chart">
   <div class="cit-chart-head">
@@ -1535,9 +1537,9 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
     </defs>
     <polygon class="ct-area" points="{{ linePts }}700,176 20,176"/>
     <polyline class="ct-line" pathLength="1" points="{{ linePts }}"/>
-    {% assign cum = 0 %}{% for y in by_year %}{% assign cum = cum | plus: y.citations %}
+    {% assign cum = 0 %}{% for y in by_year %}{% assign cum = cum | plus: y.citations %}{% if forloop.last %}{% assign cum = gt %}{% endif %}
     {% assign x = forloop.index0 | times: 680 | divided_by: span | plus: 20 %}
-    {% assign yv = cum | times: 152 | divided_by: total %}{% assign yy = 176 | minus: yv %}
+    {% assign yv = cum | times: 152 | divided_by: gt %}{% assign yy = 176 | minus: yv %}
     <circle class="ct-dot{% if forloop.last %} ct-dot-last{% endif %}" cx="{{ x }}" cy="{{ yy }}" r="4"><title>{{ y.year }}: {{ cum }} total</title></circle>
     <text class="ct-val{% if forloop.last %} ct-val-last{% endif %}" x="{{ x }}" y="{{ yy | minus: 11 }}">{{ cum }}</text>
     <text class="ct-year" x="{{ x }}" y="197">{{ y.year }}</text>{% endfor %}

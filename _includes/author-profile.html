@@ -17,6 +17,7 @@
   <div class="author__content">
     <h3 class="author__name">{{ author.name }}</h3>
     {% if author.bio %}<p class="author__bio">{{ author.bio }}</p>{% endif %}
+    <p class="author__bio" style="margin-top:2px;"><span style="font-size:0.82em; color:#595959;">{{ site.data.citations._total | default: 378 }}+ Citations &middot; h-index {{ site.data.citations._h_index | default: 9 }} <img src="/images/icons/h-scholar.png" alt="" style="width:1em;height:1em;vertical-align:-0.12em;object-fit:contain;"></span></p>
   </div>
 
   <div class="author__urls-wrapper">
