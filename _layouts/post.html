@@ -112,9 +112,18 @@ body{background:var(--bg);color:var(--body);font-family:var(--serif);-webkit-fon
 body.dark-mode .d-body figure img,body.dark-mode .d-body p img{filter:brightness(.92);}
 .d-body figcaption{font-family:var(--sans);font-size:.86rem;line-height:1.55;color:var(--muted);max-width:660px;margin:.85em auto 0;text-align:center;}
 .d-body figcaption b,.d-body figcaption strong{color:var(--link);font-weight:700;}
-/* side-by-side figure group */
-.d-body .fig-row{width:min(var(--fig),calc(100vw - 40px));max-width:none;margin:3.2em 0 3.2em 50%;transform:translateX(-50%);display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start;}
-.d-body .fig-row figure{width:100%;max-width:100%;margin:0;}
+/* native inline SVG charts — text uses currentColor so the chart follows the theme;
+   sized to sit with the text, not break out huge (overrides the figure breakout) */
+.d-body figure.chart{width:auto;max-width:680px;margin:2.6em auto;transform:none;color:var(--muted);}
+.d-body figure.chart.wide{max-width:850px;}
+.d-body figure.chart.narrow{max-width:460px;}
+.d-body figure.chart svg{display:block;width:100%;height:auto;}
+/* generated-image sample grids (MNIST): transparent digits, invert in dark mode */
+.d-body .mnist-tile{background:transparent!important;box-shadow:none!important;border:1px solid var(--fig-border);border-radius:10px;}
+body.dark-mode .d-body figure .mnist-tile{filter:invert(1);}
+/* side-by-side figure group (kept modest, not a full breakout) */
+.d-body .fig-row{width:auto;max-width:600px;margin:2.6em auto;display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start;}
+.d-body .fig-row figure{width:100%;max-width:100%;margin:0;transform:none;}
 .d-body .fig-row figcaption{max-width:100%;text-align:center;}
 @media(max-width:640px){.d-body .fig-row{grid-template-columns:1fr;gap:12px;}}
 
