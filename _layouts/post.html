@@ -1,0 +1,236 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ page.title | strip_html }} — Jiajun Fan</title>
+<meta name="description" content="{{ page.excerpt | default: page.description | strip_html | strip_newlines | truncate: 160 }}">
+<link rel="canonical" href="https://www.jiajunfan.com{{ page.url }}">
+<meta property="og:type" content="article">
+<meta property="og:title" content="{{ page.title | strip_html }}">
+<meta property="og:description" content="{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}">
+<meta property="og:url" content="https://www.jiajunfan.com{{ page.url }}">
+<meta property="og:image" content="https://www.jiajunfan.com{{ page.header.og_image | default: '/images/og-banner.png' }}">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/images/favicon.ico">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#fdfcfa">
+<meta name="theme-color" content="#0f1216" media="(prefers-color-scheme: dark)">
+<script>try{if(localStorage.getItem('darkMode')==='true'){document.documentElement.style.background='#0f1216';document.documentElement.classList.add('dark-mode-pending');}}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&display=swap"></noscript>
+<style>
+:root{
+  --serif:'Newsreader', Georgia, 'Times New Roman', serif;
+  --sans:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;
+  --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  --bg:#fdfcfa; --band:#f6f3ec; --ink:#1a1815; --body:#2b2823; --muted:#6c6860; --faint:#928d84;
+  --rule:#e8e3d9; --link:#1565c0; --link-h:#0d47a1; --code-bg:#f4f1ea; --fig-border:#e7e2d8; --pill:#f0ede6;
+  --col:706px; --fig:940px;
+}
+:root.dark-mode-pending,body.dark-mode{
+  --bg:#0f1216; --band:#151a20; --ink:#ece8e0; --body:#cdc8be; --muted:#8f8a80; --faint:#6c6860;
+  --rule:#262b33; --link:#6ea8fe; --link-h:#93c0ff; --code-bg:#12161c; --fig-border:#2a2f38; --pill:#1a1f27;
+}
+:root.dark-mode-pending{background:#0f1216;}
+*{box-sizing:border-box;margin:0;padding:0}
+html{overflow-x:hidden;scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--body);font-family:var(--serif);-webkit-font-smoothing:antialiased;transition:background .3s,color .3s;}
+::selection{background:rgba(21,101,192,.16);}
+
+/* ── Site masthead (identical to rest of site) ── */
+.site-masthead{background:var(--bg);box-shadow:0 1px 0 var(--rule);position:sticky;top:0;z-index:200;font-size:16px;font-family:var(--sans);}
+.site-masthead::after{content:'';display:block;height:3px;background:linear-gradient(to right,#1565c0 0%,#7c4dff 50%,#00897b 100%)}
+.masthead-inner{max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:56px}
+.masthead-title{font-weight:800;font-size:1.35em;color:var(--ink)!important;text-decoration:none!important;letter-spacing:-.02em}
+.masthead-nav{display:flex;gap:2px;align-items:center}
+.masthead-nav a{font-weight:600;font-size:0.98em;color:var(--muted)!important;text-decoration:none!important;padding:6px 10px;border-radius:6px;transition:color .2s,background .2s;letter-spacing:.01em}
+.masthead-nav a:hover{color:var(--link)!important;background:rgba(21,101,192,.07)}
+.masthead-nav a.nav-active{color:var(--link)!important}
+@media(max-width:600px){.masthead-inner{flex-wrap:wrap;height:auto;padding:8px 14px 7px;row-gap:1px;justify-content:center}.masthead-title{width:100%;text-align:center;white-space:nowrap}.masthead-nav{width:100%;justify-content:center;flex-wrap:wrap}}
+@media(max-width:560px){.masthead-nav a{font-size:0.86em;padding:5px 8px}.masthead-title{font-size:1.15em}}
+
+/* ── Article shell ── */
+.d-wrap{padding:0 24px;}
+.d-article{max-width:var(--fig);margin:0 auto;padding:56px 0 40px;}
+.d-article > *{max-width:var(--col);margin-left:auto;margin-right:auto;}
+
+/* header block */
+.d-kicker{font-family:var(--sans);text-transform:uppercase;letter-spacing:.145em;font-size:.72rem;font-weight:700;color:var(--link);margin-bottom:1.15em;}
+.d-title{font-family:var(--serif);font-weight:500;font-size:clamp(2.1rem,5.2vw,3.05rem);line-height:1.12;letter-spacing:-.021em;color:var(--ink);margin-bottom:.42em;}
+.d-byline{font-family:var(--sans);font-size:.92rem;color:var(--muted);display:flex;flex-wrap:wrap;align-items:center;gap:.55em;line-height:1.5;}
+.d-byline .sep{color:var(--faint);}
+.d-byline .who{color:var(--ink);font-weight:600;}
+.d-tags{max-width:var(--col);margin:.9em auto 0;display:flex;flex-wrap:wrap;gap:7px;}
+.d-tags a{font-family:var(--sans);font-size:.74rem;font-weight:600;color:var(--muted);background:var(--pill);border:1px solid var(--rule);border-radius:999px;padding:2px 11px;text-decoration:none;transition:.15s;}
+.d-tags a:hover{color:var(--link);border-color:var(--link);}
+.d-hr-head{border:none;border-top:1px solid var(--rule);margin:1.9em auto 1.8em;}
+
+/* ── Body typography ── */
+.d-body{font-family:var(--serif);font-size:1.185rem;line-height:1.72;color:var(--body);}
+.d-body p{margin:0 0 1.35em;}
+.d-body a{color:var(--link);text-decoration:none;border-bottom:1px solid rgba(21,101,192,.3);transition:color .15s,border-color .15s;}
+.d-body a:hover{color:var(--link-h);border-color:currentColor;}
+.d-body strong{color:var(--ink);font-weight:600;}
+.d-body em{font-style:italic;}
+.d-body h2{font-family:var(--sans);font-weight:800;font-size:1.44rem;line-height:1.24;letter-spacing:-.012em;color:var(--ink);margin:2.7em auto .7em;}
+.d-body h3{font-family:var(--sans);font-weight:700;font-size:1.12rem;line-height:1.3;color:var(--ink);margin:2em auto .5em;}
+.d-body h2 + h3{margin-top:1.1em;}
+.d-body ul,.d-body ol{margin:0 auto 1.35em;padding-left:1.4em;}
+.d-body li{margin:.35em 0;padding-left:.2em;}
+.d-body li::marker{color:var(--faint);}
+
+/* abstract = first blockquote */
+.d-body > blockquote:first-child{font-family:var(--serif);font-size:1.28rem;line-height:1.6;color:var(--ink);font-weight:400;border:none;padding:0;margin:.2em auto 1.3em;letter-spacing:-.003em;}
+.d-body > blockquote:first-child p{margin:0;}
+.d-body > blockquote:first-child + hr,.d-body > blockquote:first-child + p{}
+/* pull-quotes = other blockquotes */
+.d-body blockquote{font-family:var(--serif);font-style:italic;font-size:1.16rem;line-height:1.55;color:var(--muted);border-left:3px solid var(--link);padding:.1em 0 .1em 1.15em;margin:1.7em auto;}
+.d-body blockquote p{margin:0;}
+.d-body > blockquote:first-child{font-style:normal;border-left:none;padding-left:0;}
+
+/* asterism divider */
+.d-body hr{border:none;text-align:center;height:auto;margin:2.7em auto;}
+.d-body hr::before{content:'\2217\2003\2217\2003\2217';color:var(--faint);font-family:var(--serif);font-size:1rem;letter-spacing:.1em;}
+
+/* table of contents (kramdown) */
+.d-body h2.no_toc{font-family:var(--sans);font-size:.76rem;text-transform:uppercase;letter-spacing:.14em;font-weight:700;color:var(--muted);margin:2.4em auto .55em;}
+.d-body #markdown-toc{list-style:none;font-family:var(--sans);font-size:.9rem;line-height:1.5;background:var(--band);border:1px solid var(--rule);border-radius:12px;padding:16px 20px;margin:.4em auto 2em;columns:2;column-gap:32px;}
+.d-body #markdown-toc li{margin:.28em 0;padding:0;break-inside:avoid;}
+.d-body #markdown-toc a{color:var(--muted);border:none;}
+.d-body #markdown-toc a:hover{color:var(--link);}
+.d-body #markdown-toc ul{list-style:none;padding-left:14px;margin:.2em 0;}
+.d-body #markdown-toc ul a{color:var(--faint);font-size:.95em;}
+@media(max-width:640px){.d-body #markdown-toc{columns:1;}}
+
+/* figures — break out wider than the text column */
+.d-body figure{width:min(var(--fig),100%);max-width:var(--fig);margin:2.7em auto;padding:0;}
+.d-body figure img,.d-body p img{display:block;width:100%;height:auto;border-radius:10px;border:1px solid var(--fig-border);background:var(--band);box-shadow:0 6px 30px -14px rgba(0,0,0,.28);}
+body.dark-mode .d-body figure img,body.dark-mode .d-body p img{filter:brightness(.92);}
+.d-body figcaption{font-family:var(--sans);font-size:.86rem;line-height:1.55;color:var(--muted);max-width:660px;margin:.85em auto 0;text-align:center;}
+.d-body figcaption b,.d-body figcaption strong{color:var(--link);font-weight:700;}
+/* side-by-side figure group */
+.d-body .fig-row{width:min(var(--fig),100%);max-width:var(--fig);margin:2.7em auto;display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start;}
+.d-body .fig-row figure{width:100%;max-width:100%;margin:0;}
+.d-body .fig-row figcaption{max-width:100%;text-align:center;}
+@media(max-width:640px){.d-body .fig-row{grid-template-columns:1fr;gap:12px;}}
+
+/* tables */
+.d-body table{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:.92rem;margin:1.9em auto;display:block;overflow-x:auto;}
+.d-body thead th{text-align:left;font-weight:700;color:var(--ink);border-bottom:2px solid var(--ink);padding:9px 14px 9px 0;white-space:nowrap;}
+.d-body tbody td{padding:9px 14px 9px 0;border-bottom:1px solid var(--rule);color:var(--body);vertical-align:top;}
+.d-body tbody tr:last-child td{border-bottom:none;}
+
+/* code */
+.d-body pre{background:var(--code-bg);border:1px solid var(--rule);border-radius:10px;padding:14px 16px;margin:1.5em auto;overflow-x:auto;font-family:var(--mono);font-size:.85rem;line-height:1.55;color:var(--body);}
+.d-body pre code{background:none;padding:0;border:none;font-size:inherit;color:inherit;}
+.d-body code{font-family:var(--mono);font-size:.86em;background:var(--code-bg);border:1px solid var(--rule);border-radius:5px;padding:.08em .36em;color:var(--ink);}
+.d-body :is(h2,h3) code{font-size:.82em;}
+
+/* MathJax spacing */
+.d-body .MathJax_Display,.d-body .MJXc-display{margin:1.3em 0!important;overflow-x:auto;overflow-y:hidden;}
+.d-body .MathJax{color:var(--ink)!important;}
+
+/* article footer */
+.d-foot{border-top:1px solid var(--rule);margin:3em auto 0;padding-top:1.6em;font-family:var(--sans);font-size:.92rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center;}
+.d-foot a{color:var(--link);text-decoration:none;font-weight:600;}
+.d-foot a:hover{color:var(--link-h);}
+
+/* ── premium controls (progress + FABs) ── */
+#read-progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,#1565c0,#7c3aed 60%,#059669);z-index:9999;transition:width .08s linear;pointer-events:none;}
+.pg-fab{position:fixed;right:22px;width:42px;height:42px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.18);z-index:9990;transition:transform .2s,opacity .2s,background .2s;}
+.pg-fab:hover{transform:translateY(-2px) scale(1.06);}
+#pg-top{bottom:22px;background:#1565c0;color:#fff;opacity:0;pointer-events:none;}
+#pg-top.show{opacity:1;pointer-events:auto;}
+#pg-dark{bottom:74px;background:#fff;color:#333;border:1.5px solid rgba(0,0,0,.15);}
+body.dark-mode #pg-dark{background:#21262d;color:#fff;border-color:#30363d;}
+.pg-dico{width:20px;height:20px;display:inline-block;background-color:currentColor;-webkit-mask:url(/images/icons/h-moon.png) center/contain no-repeat;mask:url(/images/icons/h-moon.png) center/contain no-repeat;}
+body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-image:url(/images/icons/h-sun.png);}
+.pg-up{width:11px;height:11px;border-top:2.6px solid currentColor;border-right:2.6px solid currentColor;transform:rotate(-45deg) translateY(2px);display:inline-block;}
+@media print{#read-progress,.pg-fab,.site-masthead{display:none!important;}}
+@media (prefers-reduced-motion:reduce){#read-progress,.pg-fab{transition:none;}html{scroll-behavior:auto;}}
+
+@view-transition{navigation:auto;}
+::view-transition-old(root),::view-transition-new(root){animation-duration:.18s;}
+@media (prefers-reduced-motion:reduce){::view-transition-old(root),::view-transition-new(root){animation:none!important;}}
+</style>
+</head>
+<body>
+<header class="site-masthead">
+  <div class="masthead-inner">
+    <a class="masthead-title" href="/">Jiajun Fan</a>
+    <nav class="masthead-nav" aria-label="Site navigation">
+      <a href="/publications/">Publications</a>
+      <a href="/projects/">Projects</a>
+      <a href="/year-archive/" class="nav-active">Blog</a>
+      <a href="/cv/">CV</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<div id="read-progress" aria-hidden="true"></div>
+
+<main class="d-wrap">
+  <article class="d-article">
+    <div class="d-kicker">Research Notes</div>
+    <h1 class="d-title">{{ page.title | strip_html }}</h1>
+    <div class="d-byline">
+      <span class="who">Jiajun Fan</span>
+      <span class="sep">·</span><span>UIUC</span>
+      <span class="sep">·</span><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time>
+      <span class="sep">·</span><span>{{ content | number_of_words | divided_by: 200 | plus: 1 }} min read</span>
+    </div>
+    {% if page.tags %}
+    <div class="d-tags">{% for t in page.tags %}<a href="/year-archive/">{{ t }}</a>{% endfor %}</div>
+    {% endif %}
+    <hr class="d-hr-head">
+
+    <div class="d-body">
+      {{ content }}
+
+      <div class="d-foot">
+        <a href="/year-archive/">&larr; All posts</a>
+        <span>Jiajun Fan &middot; <a href="/">jiajunfan.com</a></span>
+      </div>
+    </div>
+  </article>
+</main>
+
+<button id="pg-dark" class="pg-fab" aria-label="Toggle dark mode" title="Toggle dark mode"><i class="pg-dico"></i></button>
+<button id="pg-top" class="pg-fab" aria-label="Back to top" title="Back to top"><span class="pg-up"></span></button>
+
+<script>
+/* dark mode: respect site-wide preference */
+try{ if(localStorage.getItem('darkMode')==='true') document.body.classList.add('dark-mode'); }catch(e){}
+document.documentElement.classList.remove('dark-mode-pending');
+(function(){
+  var bar=document.getElementById('read-progress'), top=document.getElementById('pg-top'), dk=document.getElementById('pg-dark');
+  function onScroll(){
+    var st=window.scrollY||document.documentElement.scrollTop;
+    var h=document.documentElement.scrollHeight-window.innerHeight;
+    if(bar) bar.style.width=(h>0?(st/h*100):0)+'%';
+    if(top){ if(st>500) top.classList.add('show'); else top.classList.remove('show'); }
+  }
+  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+  if(top) top.addEventListener('click',function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+  if(dk) dk.addEventListener('click',function(){ var on=document.body.classList.toggle('dark-mode'); try{localStorage.setItem('darkMode',on);}catch(e){} });
+})();
+</script>
+
+<!-- MathJax v2 (text-scanning tex2jax handles \( \) inline and $$ display) -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: { inlineMath: [['\\(','\\)']], displayMath: [['$$','$$']], processEscapes: true, ignoreClass: "site-masthead|d-byline|d-tags" },
+  "HTML-CSS": { availableFonts: ["TeX"], linebreaks: { automatic: true }, scale: 100 },
+  SVG: { linebreaks: { automatic: true } },
+  showMathMenu: false, showProcessingMessages: false, messageStyle: "none"
+});
+</script>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</body>
+</html>
