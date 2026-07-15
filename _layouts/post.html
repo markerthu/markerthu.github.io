@@ -191,7 +191,7 @@ body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-ima
       <span class="who">Jiajun Fan</span>
       <span class="sep">·</span><span>UIUC</span>
       <span class="sep">·</span><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time>
-      <span class="sep">·</span><span>{{ content | number_of_words | divided_by: 200 | plus: 1 }} min read</span>
+      <span class="sep">·</span><span>{{ content | strip_html | number_of_words | divided_by: 200 | plus: 1 }} min read</span>
     </div>
     {% if page.tags %}
     <div class="d-tags">{% for t in page.tags %}<a href="/tags/#{{ t | slugify }}">{{ t }}</a>{% endfor %}</div>
