@@ -2,7 +2,8 @@
 layout: archive
 permalink: /year-archive/
 title: "Blog"
-author_profile: true
+author_profile: false
+classes: wide
 redirect_from:
   - /wordpress/blog-posts/
 ---
@@ -10,6 +11,9 @@ redirect_from:
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600&family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
 
 <style>
+/* hide theme's default page title/meta — we render our own editorial header */
+.page__title,.page__meta,.archive .page__lead{display:none!important;}
+.page__hero-caption{display:none!important;}
 .blog-index{
   --bx-serif:'Newsreader',Georgia,serif;
   --bx-sans:'Inter','Segoe UI',system-ui,sans-serif;
