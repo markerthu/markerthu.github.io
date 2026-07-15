@@ -8,27 +8,50 @@ redirect_from:
   - /wordpress/blog-posts/
 ---
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600&family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600&display=swap" media="print" onload="this.media='all'">
 
 <style>
 /* hide theme's default page title/meta — we render our own editorial header */
-.page__title,.page__meta,.archive .page__lead{display:none!important;}
-.page__hero-caption{display:none!important;}
+.page__title,.page__meta,.archive .page__lead,.page__hero-caption{display:none!important;}
+
+/* unify page chrome with the Distill article pages: warm paper, one masthead + one light footer */
+html{overflow-x:hidden;}
+body{background:#fdfcfa!important;}
+.site-masthead{background:#fdfcfa!important;box-shadow:0 1px 0 #e8e3d9!important;}
+.masthead-nav a{color:#6c6860!important;}
+.page__footer{background:#fdfcfa!important;color:#6c6860!important;border-top:1px solid #e8e3d9!important;box-shadow:none!important;margin-top:3.5em;}
+.page__footer a{color:#6c6860!important;}
+.page__footer a:hover{color:#1565c0!important;}
+body.dark-mode{background:#0f1216!important;}
+body.dark-mode .site-masthead{background:#0f1216!important;box-shadow:0 1px 0 #262b33!important;}
+body.dark-mode .masthead-title{color:#ece8e0!important;}
+body.dark-mode .masthead-nav a{color:#8f8a80!important;}
+body.dark-mode .masthead-nav a:hover,body.dark-mode .masthead-nav a.nav-active{color:#6ea8fe!important;}
+body.dark-mode .page__footer{background:#0f1216!important;color:#8f8a80!important;border-top-color:#262b33!important;}
+body.dark-mode .page__footer a{color:#8f8a80!important;}
+
+/* dark-mode FAB — same control the article pages have */
+.pg-fab{position:fixed;right:22px;bottom:22px;width:42px;height:42px;border-radius:50%;border:1.5px solid rgba(0,0,0,.15);background:#fff;color:#333;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.18);z-index:9990;transition:transform .2s;}
+.pg-fab:hover{transform:translateY(-2px) scale(1.06);}
+body.dark-mode .pg-fab{background:#21262d;color:#fff;border-color:#30363d;}
+.pg-dico{width:20px;height:20px;display:inline-block;background-color:currentColor;-webkit-mask:url(/images/icons/h-moon.png) center/contain no-repeat;mask:url(/images/icons/h-moon.png) center/contain no-repeat;}
+body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-image:url(/images/icons/h-sun.png);}
+
 .blog-index{
   --bx-serif:'Newsreader',Georgia,serif;
   --bx-sans:'Inter','Segoe UI',system-ui,sans-serif;
-  --bx-ink:#1a1815; --bx-body:#2b2823; --bx-muted:#6c6860; --bx-faint:#928d84;
+  --bx-ink:#1a1815; --bx-body:#2b2823; --bx-muted:#6c6860; --bx-faint:#787369;
   --bx-rule:#e8e3d9; --bx-link:#1565c0; --bx-band:#f6f3ec;
   max-width:760px;margin:0 auto;
 }
 body.dark-mode .blog-index{
-  --bx-ink:#ece8e0; --bx-body:#cdc8be; --bx-muted:#8f8a80; --bx-faint:#6c6860;
+  --bx-ink:#ece8e0; --bx-body:#cdc8be; --bx-muted:#8f8a80; --bx-faint:#8a857b;
   --bx-rule:#262b33; --bx-link:#6ea8fe; --bx-band:#151a20;
 }
 
 /* ── editorial header ── */
 .bx-head{margin:0 0 1.6em;}
-.bx-kicker{font-family:var(--bx-sans);text-transform:uppercase;letter-spacing:.145em;font-size:.72rem;font-weight:700;color:var(--bx-link);margin-bottom:.7em;}
+.bx-kicker{font-family:var(--bx-sans);text-transform:uppercase;letter-spacing:.145em;font-size:.72rem;font-weight:600;color:var(--bx-muted);margin-bottom:.7em;}
 .bx-h1{font-family:var(--bx-serif)!important;font-weight:500!important;font-size:2.6rem!important;line-height:1.1!important;letter-spacing:-.02em;color:var(--bx-ink)!important;margin:0 0 .28em!important;}
 .bx-sub{font-family:var(--bx-serif);font-size:1.15rem;line-height:1.55;color:var(--bx-muted);margin:0 0 1.2em;max-width:42em;}
 .bx-cta{display:inline-flex;align-items:center;gap:8px;font-family:var(--bx-sans);font-size:.86rem;font-weight:600;color:var(--bx-link)!important;text-decoration:none!important;border:1px solid var(--bx-rule);border-radius:999px;padding:7px 16px;transition:.18s;}
@@ -45,7 +68,7 @@ body.dark-mode .blog-index{
 .bx-entry:hover{background:var(--bx-band);}
 .bx-entry:hover .bx-title{color:var(--bx-link);}
 .bx-title{font-family:var(--bx-serif)!important;font-weight:500!important;font-size:1.5rem!important;line-height:1.24!important;letter-spacing:-.01em;color:var(--bx-ink)!important;margin:0 0 .3em!important;transition:color .15s;}
-.bx-meta{font-family:var(--bx-sans);font-size:.8rem;color:var(--bx-faint);margin:0 0 .5em;letter-spacing:.01em;}
+.bx-meta{font-family:var(--bx-sans);font-size:.8rem;color:var(--bx-muted);margin:0 0 .5em;letter-spacing:.01em;}
 .bx-desc{font-family:var(--bx-serif)!important;font-size:1.08rem!important;line-height:1.55!important;color:var(--bx-muted)!important;margin:0!important;}
 .bx-arrow{font-family:var(--bx-sans);font-size:.82rem;font-weight:600;color:var(--bx-link);margin-top:.55em;opacity:0;transform:translateX(-4px);transition:.18s;}
 .bx-entry:hover .bx-arrow{opacity:1;transform:translateX(0);}
@@ -74,10 +97,19 @@ body.dark-mode .blog-index{
       {% capture written_year %}{{ year }}{% endcapture %}
     {% endif %}
     <a class="bx-entry" href="{{ post.url | relative_url }}">
-      <h3 class="bx-title">{{ post.title | strip_html }}</h3>
+      <h2 class="bx-title">{{ post.title | strip_html }}</h2>
       <div class="bx-meta"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %-d, %Y" }}</time>{% if post.tags %} &nbsp;·&nbsp; {{ post.tags | join: " · " }}{% endif %}</div>
       <p class="bx-desc">{{ post.excerpt | strip_html | strip_newlines | truncate: 190 }}</p>
       <div class="bx-arrow">Read →</div>
     </a>
   {% endfor %}
 </div>
+
+<button id="pg-dark" class="pg-fab" aria-label="Toggle dark mode" title="Toggle dark mode"><i class="pg-dico"></i></button>
+<script>
+(function(){
+  try{ if(localStorage.getItem('darkMode')==='true') document.body.classList.add('dark-mode'); }catch(e){}
+  var dk=document.getElementById('pg-dark');
+  if(dk) dk.addEventListener('click',function(){ var on=document.body.classList.toggle('dark-mode'); try{localStorage.setItem('darkMode',on);}catch(e){} });
+})();
+</script>

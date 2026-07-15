@@ -10,7 +10,7 @@ tags:
   - flow matching
 excerpt: "A deep dive into why fixed regularization in RLHF leads to diversity collapse, and how adaptive sample-level control resolves the exploration-exploitation dilemma."
 header:
-  og_image: "/images/profile.jpg"
+  og_image: "/images/blog/adrpo_reward_diversity.webp"
 ---
 
 > RLHF fine-tuning of generative models faces a fundamental tension: you want to maximize reward (make outputs better), but doing so aggressively destroys the diversity of what the model can produce. This post explains why this happens, why it's hard to fix with a single hyperparameter, and how advantage-based adaptive regularization provides a principled solution.
@@ -58,11 +58,11 @@ This is **mode collapse** (or **diversity collapse**), and it's the central fail
 
 <div class="fig-row">
 <figure>
-<img loading="lazy" src="/images/blog/mnist_collapse.png" />
+<img loading="lazy" src="/images/blog/mnist_collapse.png" width="630" height="630" alt="Grid of generated MNIST digits that are all the same digit, illustrating mode collapse." />
 <figcaption><b>Mode collapse (α=0)</b>: model generates identical digits, maximizing reward but destroying diversity.</figcaption>
 </figure>
 <figure>
-<img loading="lazy" src="/images/blog/mnist_balanced.png" />
+<img loading="lazy" src="/images/blog/mnist_balanced.png" width="630" height="630" alt="Grid of generated MNIST digits spanning many different digits, illustrating preserved diversity." />
 <figcaption><b>Balanced (α=0.3)</b>: with proper regularization, the model improves quality while preserving digit variety.</figcaption>
 </figure>
 </div>
@@ -109,7 +109,7 @@ Fixed \\(\beta\\) applies the same regularization pressure to every sample regar
 This is not a tuning problem — no single value of \\(\beta\\) is optimal for all samples simultaneously.
 
 <figure>
-<img loading="lazy" src="/images/blog/adrpo_reward_diversity.webp" />
+<img loading="lazy" src="/images/blog/adrpo_reward_diversity.webp" width="982" height="716" alt="Reward-versus-diversity Pareto front on SD3 where ADRPO's frontier dominates DPO and ORW-CFM-W2." />
 <figcaption><b>Fig 1.</b> Reward vs. diversity Pareto front on SD3 text-to-image. Adaptive regularization (ADRPO) achieves a dominant frontier — higher reward at every diversity level compared to fixed-β methods like DPO and ORW-CFM-W2.</figcaption>
 </figure>
 
@@ -165,7 +165,7 @@ $$\mathcal{L}_{\text{ADRPO-GRPO}}(\theta) = \mathcal{L}_{\text{PG}}(\theta) + (\
 where \\(A_{\text{GRPO}}\\) is the group-level advantage from GRPO (reward minus group mean, normalized).
 
 <figure>
-<img loading="lazy" src="/images/blog/adrpo_reward_kl.webp" />
+<img loading="lazy" src="/images/blog/adrpo_reward_kl.webp" width="995" height="722" alt="Reward versus KL divergence on SD3: ADRPO reaches the target reward at much lower KL than fixed-beta methods." />
 <figcaption><b>Fig 2.</b> Reward vs. KL divergence on SD3. ADRPO reaches the same reward level at lower KL divergence — more efficient policy improvement.</figcaption>
 </figure>
 
@@ -180,7 +180,7 @@ With ADRPO, a **2B parameter SD3** model outperforms **FLUX.1-Dev (12B)** and **
 When applied to LLM fine-tuning, ADRPO exhibits an unexpected emergent behavior: **the ability to escape local optima.**
 
 <figure>
-<img loading="lazy" src="/images/blog/adrpo_llm_entropy.webp" />
+<img loading="lazy" src="/images/blog/adrpo_llm_entropy.webp" width="1060" height="716" alt="Reward and policy entropy over training on Qwen2: ADRPO reaches higher reward while maintaining entropy." />
 <figcaption><b>Fig 3.</b> Reward vs. entropy on LLM fine-tuning (Qwen2). ADRPO achieves higher reward while maintaining generation diversity. The adaptive mechanism allows the model to escape local optima that trap fixed-β methods.</figcaption>
 </figure>
 
