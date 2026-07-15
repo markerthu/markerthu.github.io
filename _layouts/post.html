@@ -225,7 +225,7 @@ document.documentElement.classList.remove('dark-mode-pending');
 <!-- MathJax v2 (text-scanning tex2jax handles \( \) inline and $$ display) -->
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
-  tex2jax: { inlineMath: [['\\(','\\)']], displayMath: [['$$','$$']], processEscapes: true, ignoreClass: "site-masthead|d-byline|d-tags" },
+  tex2jax: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]'],['$$','$$']], processEscapes: true, ignoreClass: "site-masthead|d-byline|d-tags" },
   "HTML-CSS": { availableFonts: ["TeX"], linebreaks: { automatic: true }, scale: 100 },
   SVG: { linebreaks: { automatic: true } },
   showMathMenu: false, showProcessingMessages: false, messageStyle: "none"
