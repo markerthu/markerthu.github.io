@@ -162,7 +162,7 @@ An unexpected finding: improving reasoning quality also improves **perception** 
 
 <figure class="chart narrow">
 {% include figures/cesar_radar.svg %}
-<figcaption><b>Fig 4.</b> Per-category MMAU accuracy across audio modalities (Sound / Music / Speech) and overall. CESAR and its no-penalty variant lead the base model (Qwen2.5-Omni-7B) and the outcome-only baseline (Ke-Omni-R) on every category — reasoning quality and perception improve together.</figcaption>
+<figcaption><b>Fig 4.</b> Per-category MMAU accuracy across audio modalities (Sound / Music / Speech) and overall. CESAR leads the base model (Qwen2.5-Omni-7B) and the outcome-only baseline (Ke-Omni-R) on every category; its no-penalty variant does too, except on Music where it matches Ke-Omni-R — reasoning quality and perception improve together.</figcaption>
 </figure>
 
 This suggests that reasoning and perception are deeply entangled in multimodal models. Learning to reason *about* audio signals forces the model to develop better internal representations *of* those signals. The process rewards act as an implicit regularizer that shapes how the model attends to and processes audio features.

@@ -59,11 +59,11 @@ This is **mode collapse** (or **diversity collapse**), and it's the central fail
 <div class="fig-row">
 <figure>
 <img class="mnist-tile" loading="lazy" src="/images/blog/mnist_collapse.png" width="630" height="630" alt="Grid of generated MNIST digits that are all the same digit, illustrating mode collapse." />
-<figcaption><b>Mode collapse (α=0)</b>: model generates identical digits, maximizing reward but destroying diversity.</figcaption>
+<figcaption><b>Mode collapse (no regularization)</b>: model generates identical digits, maximizing reward but destroying diversity.</figcaption>
 </figure>
 <figure>
 <img class="mnist-tile" loading="lazy" src="/images/blog/mnist_balanced.png" width="630" height="630" alt="Grid of generated MNIST digits spanning many different digits, illustrating preserved diversity." />
-<figcaption><b>Balanced (α=0.3)</b>: with proper regularization, the model improves quality while preserving digit variety.</figcaption>
+<figcaption><b>Balanced (with regularization)</b>: with proper regularization, the model improves quality while preserving digit variety.</figcaption>
 </figure>
 </div>
 

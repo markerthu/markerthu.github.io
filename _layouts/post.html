@@ -126,6 +126,10 @@ body.dark-mode .d-body figure .mnist-tile{filter:invert(1);}
 .d-body .fig-row figure{width:100%;max-width:100%;margin:0;transform:none;}
 .d-body .fig-row figcaption{max-width:100%;text-align:center;}
 @media(max-width:640px){.d-body .fig-row{grid-template-columns:1fr;gap:12px;}}
+/* wide multi-panel charts: scroll instead of shrinking type below legibility on phones */
+@media(max-width:640px){.d-body figure.chart.wide{overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:6px;}
+.d-body figure.chart.wide svg{min-width:520px;}
+.d-body figure.chart.wide figcaption{position:sticky;left:0;max-width:calc(100vw - 48px);}}
 
 /* tables */
 .d-body table{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:.92rem;margin:1.9em auto;display:block;overflow-x:auto;}
@@ -201,10 +205,10 @@ body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-ima
     <div class="d-body">
       {{ content }}
 
-      <div class="d-foot">
+      <footer class="d-foot">
         <a href="/year-archive/">&larr; All posts</a>
         <span>Jiajun Fan &middot; <a href="/">jiajunfan.com</a></span>
-      </div>
+      </footer>
     </div>
   </article>
 </main>

@@ -103,7 +103,7 @@ strong{font-weight:600;color:var(--ink)}
 .method-steps{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:14px;margin:20px 0}
 .step{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:18px;text-align:center}
 .step .step-num{width:34px;height:34px;background:var(--link);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--sans);font-weight:800;font-size:.9em;margin:0 auto 11px}
-.step h4{font-family:var(--sans);font-size:.86rem;font-weight:700;color:var(--ink);margin-bottom:7px}
+.step h3{font-family:var(--sans);font-size:.86rem;font-weight:700;color:var(--ink);margin-bottom:7px}
 .step p{font-family:var(--sans);font-size:.8rem;color:var(--muted);margin:0;line-height:1.55}
 
 /* ── problem / solution ── */
@@ -158,12 +158,13 @@ footer a{color:var(--link)}
 .pg-fab:hover{transform:translateY(-2px) scale(1.06)}
 #pg-top{bottom:22px;background:var(--link);color:#fff;opacity:0;pointer-events:none}
 #pg-top.show{opacity:1;pointer-events:auto}
-#pg-dark{bottom:74px;background:#fff;color:#333;border:1.5px solid rgba(0,0,0,.15)}
+#pg-dark{bottom:126px;background:#fff;color:#333;border:1.5px solid rgba(0,0,0,.15)}
 body.dark-mode #pg-dark{background:#21262d;color:#fff;border-color:#30363d}
 .pg-dico{width:20px;height:20px;display:inline-block;background-color:currentColor;-webkit-mask:url(/images/icons/h-moon.png) center/contain no-repeat;mask:url(/images/icons/h-moon.png) center/contain no-repeat}
 body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-image:url(/images/icons/h-sun.png)}
 .pg-up{width:11px;height:11px;border-top:2.6px solid currentColor;border-right:2.6px solid currentColor;transform:rotate(-45deg) translateY(2px);display:inline-block}
 
+@media(max-width:640px){figure.chart.wide{overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:6px;}figure.chart.wide svg{min-width:520px;}figure.chart.wide figcaption{position:sticky;left:0;max-width:calc(100vw - 48px);}}
 @media(max-width:640px){.problem-grid{grid-template-columns:1fr}.method-steps{grid-template-columns:1fr 1fr}.results-grid{grid-template-columns:1fr 1fr}.hero h1{font-size:2rem}}
 @media print{.site-masthead,.pg-fab,#read-progress{display:none!important}}
 @media (prefers-reduced-motion:reduce){*{transition-duration:.001ms!important}html{scroll-behavior:auto}}
@@ -216,7 +217,7 @@ body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-ima
   <hr class="hero-rule">
 </div>
 
-<div class="container">
+<div class="container" role="main">
 
 <section>
   <p class="tldr"><strong>TL;DR</strong> — Audio LLMs trained only on outcome rewards produce <em>hallucinatory, inconsistent, and unscalable</em> reasoning chains. CESAR instead <strong>rewards the reasoning process itself</strong> via online RL (GRPO), resolving test-time inverse scaling and reaching SOTA on MMAU — outperforming Gemini 2.5 Pro and GPT-4o Audio.</p>
@@ -241,10 +242,10 @@ body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-ima
   <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-gear.png);mask-image:url(/images/icons/h-gear.png)"></i>Method</h2>
   <p>CESAR uses <strong>Group Relative Policy Optimization (GRPO)</strong> with a multi-faceted reward suite that goes beyond simple correctness — every component targets a specific failure mode of unsupervised reasoning.</p>
   <div class="method-steps">
-    <div class="step"><div class="step-num">1</div><h4>Correctness</h4><p>Standard outcome reward — is the final answer right?</p></div>
-    <div class="step"><div class="step-num">2</div><h4>Consistency</h4><p>Reasoning ↔ question and reasoning ↔ answer alignment.</p></div>
-    <div class="step"><div class="step-num">3</div><h4>Structure</h4><p>Analytical patterns, logical connectives, domain vocabulary.</p></div>
-    <div class="step"><div class="step-num">4</div><h4>Depth</h4><p>Overthinking penalty — calibrate reasoning length to the task.</p></div>
+    <div class="step"><div class="step-num">1</div><h3>Correctness</h3><p>Standard outcome reward — is the final answer right?</p></div>
+    <div class="step"><div class="step-num">2</div><h3>Consistency</h3><p>Reasoning ↔ question and reasoning ↔ answer alignment.</p></div>
+    <div class="step"><div class="step-num">3</div><h3>Structure</h3><p>Analytical patterns, logical connectives, domain vocabulary.</p></div>
+    <div class="step"><div class="step-num">4</div><h3>Depth</h3><p>Overthinking penalty — calibrate reasoning length to the task.</p></div>
   </div>
   <figure class="chart wide">
     {% include figures/cesar_framework.svg %}
@@ -273,7 +274,7 @@ body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-ima
   </div>
   <figure class="chart">
     {% include figures/cesar_radar.svg %}
-    <figcaption><b>Figure 2.</b> Per-category MMAU accuracy. CESAR and its no-penalty variant lead the base model (Qwen2.5-Omni-7B) and the outcome-only baseline (Ke-Omni-R) across Sound, Music, Speech, and overall — process rewards improve perception, not just reasoning.</figcaption>
+    <figcaption><b>Figure 2.</b> Per-category MMAU accuracy. CESAR leads the base model (Qwen2.5-Omni-7B) and the outcome-only baseline (Ke-Omni-R) on Sound, Music, Speech and overall; its no-penalty variant does too, except on Music where it matches Ke-Omni-R — process rewards improve perception, not just reasoning.</figcaption>
   </figure>
 </section>
 

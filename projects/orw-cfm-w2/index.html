@@ -103,7 +103,7 @@ strong{font-weight:600;color:var(--ink)}
 .method-steps{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:14px;margin:20px 0}
 .step{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:18px;text-align:center}
 .step .step-num{width:34px;height:34px;background:var(--link);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--sans);font-weight:800;font-size:.9em;margin:0 auto 11px}
-.step h4{font-family:var(--sans);font-size:.86rem;font-weight:700;color:var(--ink);margin-bottom:7px}
+.step h3{font-family:var(--sans);font-size:.86rem;font-weight:700;color:var(--ink);margin-bottom:7px}
 .step p{font-family:var(--sans);font-size:.8rem;color:var(--muted);margin:0;line-height:1.55}
 
 /* ── problem / solution ── */
@@ -158,7 +158,7 @@ footer a{color:var(--link)}
 .pg-fab:hover{transform:translateY(-2px) scale(1.06)}
 #pg-top{bottom:22px;background:var(--link);color:#fff;opacity:0;pointer-events:none}
 #pg-top.show{opacity:1;pointer-events:auto}
-#pg-dark{bottom:74px;background:#fff;color:#333;border:1.5px solid rgba(0,0,0,.15)}
+#pg-dark{bottom:126px;background:#fff;color:#333;border:1.5px solid rgba(0,0,0,.15)}
 body.dark-mode #pg-dark{background:#21262d;color:#fff;border-color:#30363d}
 .pg-dico{width:20px;height:20px;display:inline-block;background-color:currentColor;-webkit-mask:url(/images/icons/h-moon.png) center/contain no-repeat;mask:url(/images/icons/h-moon.png) center/contain no-repeat}
 body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-image:url(/images/icons/h-sun.png)}
@@ -273,7 +273,7 @@ figure.rimg figcaption{font-family:var(--sans);font-size:.82rem;color:var(--mute
   <hr class="hero-rule">
 </div>
 
-<div class="container">
+<div class="container" role="main">
 
 <section>
   <p class="tldr"><strong>TL;DR</strong> — RL fine-tuning of diffusion models is well-studied, but <strong>flow matching</strong> models (Stable Diffusion 3, Flux) remain underexplored due to unique challenges: no likelihood, policy collapse risk, high compute. ORW-CFM-W2 solves all three — online reward-weighting for alignment, Wasserstein-2 regularization for diversity, and a tractable bound that makes it efficient.</p>
@@ -300,9 +300,9 @@ figure.rimg figcaption{font-family:var(--sans);font-size:.82rem;color:var(--mute
 <section>
   <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-gear.png);mask-image:url(/images/icons/h-gear.png)"></i>Three Key Contributions</h2>
   <div class="method-steps">
-    <div class="step"><div class="step-num">1</div><h4>Online Reward-Weighted Mechanism</h4><p>Integrates RL into flow matching via reward weighting — guides the model to prioritize high-reward regions in data space, without requiring reward gradients or filtered datasets.</p></div>
-    <div class="step"><div class="step-num">2</div><h4>Wasserstein-2 Regularization</h4><p>Derives a tractable upper bound for W2 distance in flow matching models — prevents policy collapse and maintains generation diversity throughout continuous optimization.</p></div>
-    <div class="step"><div class="step-num">3</div><h4>Unified RL Perspective</h4><p>Establishes a connection between flow matching fine-tuning and traditional KL-regularized RL, enabling controllable reward-diversity trade-offs and deeper understanding of the learning behavior.</p></div>
+    <div class="step"><div class="step-num">1</div><h3>Online Reward-Weighted Mechanism</h3><p>Integrates RL into flow matching via reward weighting — guides the model to prioritize high-reward regions in data space, without requiring reward gradients or filtered datasets.</p></div>
+    <div class="step"><div class="step-num">2</div><h3>Wasserstein-2 Regularization</h3><p>Derives a tractable upper bound for W2 distance in flow matching models — prevents policy collapse and maintains generation diversity throughout continuous optimization.</p></div>
+    <div class="step"><div class="step-num">3</div><h3>Unified RL Perspective</h3><p>Establishes a connection between flow matching fine-tuning and traditional KL-regularized RL, enabling controllable reward-diversity trade-offs and deeper understanding of the learning behavior.</p></div>
   </div>
 </section>
 
@@ -329,7 +329,7 @@ figure.rimg figcaption{font-family:var(--sans);font-size:.82rem;color:var(--mute
 
 <section>
   <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-chart.png);mask-image:url(/images/icons/h-chart.png)"></i>Controlled Studies: the &alpha; Trade-off</h2>
-  <p>Controlled experiments on MNIST and CIFAR demonstrate the reward-diversity trade-off controlled by the W2 regularization strength α: higher α preserves more diversity, the CIFAR reward vs. W2 distance Pareto front is smooth and controllable, W2 distance evolution during training shows the regularization effectively prevents mode collapse, and text-conditional CIFAR shows reward improvement with controlled diversity preservation.</p>
+  <p>Controlled experiments on MNIST and CIFAR isolate the reward–diversity trade-off set by the W2 regularization strength α. Raising α preserves more diversity at some cost in reward, and the trade-off is smooth and controllable rather than a cliff — so α behaves as a usable knob. The regularization also prevents the mode collapse that unconstrained reward-weighting falls into, and the same control carries over to text-conditional CIFAR.</p>
 </section>
 
 <section>

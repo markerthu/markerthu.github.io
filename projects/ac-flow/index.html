@@ -103,7 +103,7 @@ strong{font-weight:600;color:var(--ink)}
 .method-steps{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:14px;margin:20px 0}
 .step{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:18px;text-align:center}
 .step .step-num{width:34px;height:34px;background:var(--link);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--sans);font-weight:800;font-size:.9em;margin:0 auto 11px}
-.step h4{font-family:var(--sans);font-size:.86rem;font-weight:700;color:var(--ink);margin-bottom:7px}
+.step h3{font-family:var(--sans);font-size:.86rem;font-weight:700;color:var(--ink);margin-bottom:7px}
 .step p{font-family:var(--sans);font-size:.8rem;color:var(--muted);margin:0;line-height:1.55}
 
 /* ── problem / solution ── */
@@ -158,7 +158,7 @@ footer a{color:var(--link)}
 .pg-fab:hover{transform:translateY(-2px) scale(1.06)}
 #pg-top{bottom:22px;background:var(--link);color:#fff;opacity:0;pointer-events:none}
 #pg-top.show{opacity:1;pointer-events:auto}
-#pg-dark{bottom:74px;background:#fff;color:#333;border:1.5px solid rgba(0,0,0,.15)}
+#pg-dark{bottom:126px;background:#fff;color:#333;border:1.5px solid rgba(0,0,0,.15)}
 body.dark-mode #pg-dark{background:#21262d;color:#fff;border-color:#30363d}
 .pg-dico{width:20px;height:20px;display:inline-block;background-color:currentColor;-webkit-mask:url(/images/icons/h-moon.png) center/contain no-repeat;mask:url(/images/icons/h-moon.png) center/contain no-repeat}
 body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-image:url(/images/icons/h-sun.png)}
@@ -269,7 +269,7 @@ figure.rimg figcaption{font-family:var(--sans);font-size:.82rem;color:var(--mute
   <hr class="hero-rule">
 </div>
 
-<div class="container">
+<div class="container" role="main">
 
 <section>
   <p class="tldr"><strong>TL;DR</strong> — Existing RLHF methods for flow matching only use <em>outcome rewards</em> (ORW-CFM-W2), suffering from credit assignment problems. AC-Flow introduces a full <strong>actor-critic framework</strong> with intermediate feedback — reward shaping + dual-stability + generalized critic weighting — achieving SOTA text-to-image alignment on SD3 without degrading diversity or stability.</p>
@@ -278,9 +278,9 @@ figure.rimg figcaption{font-family:var(--sans);font-size:.82rem;color:var(--mute
 <section>
   <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-gear.png);mask-image:url(/images/icons/h-gear.png)"></i>Three Key Innovations</h2>
   <div class="method-steps">
-    <div class="step"><div class="step-num">1</div><h4>Reward Shaping</h4><p>Provides well-normalized learning signals for stable intermediate value learning and gradient control — enabling the critic to reason about multi-step trajectories.</p></div>
-    <div class="step"><div class="step-num">2</div><h4>Dual-Stability Mechanism</h4><p>Combines <em>advantage clipping</em> (prevents destructive policy updates) with a <em>critic warm-up phase</em> (lets critic mature before guiding the actor).</p></div>
-    <div class="step"><div class="step-num">3</div><h4>Generalized Critic Weighting</h4><p>Extends reward-weighted methods while preserving model diversity via Wasserstein regularization — compatible with ORW-CFM-W2 as a special case.</p></div>
+    <div class="step"><div class="step-num">1</div><h3>Reward Shaping</h3><p>Provides well-normalized learning signals for stable intermediate value learning and gradient control — enabling the critic to reason about multi-step trajectories.</p></div>
+    <div class="step"><div class="step-num">2</div><h3>Dual-Stability Mechanism</h3><p>Combines <em>advantage clipping</em> (prevents destructive policy updates) with a <em>critic warm-up phase</em> (lets critic mature before guiding the actor).</p></div>
+    <div class="step"><div class="step-num">3</div><h3>Generalized Critic Weighting</h3><p>Extends reward-weighted methods while preserving model diversity via Wasserstein regularization — compatible with ORW-CFM-W2 as a special case.</p></div>
   </div>
 </section>
 
