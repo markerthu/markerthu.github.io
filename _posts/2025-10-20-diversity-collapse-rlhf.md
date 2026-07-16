@@ -218,9 +218,16 @@ One line of math; dramatic practical consequences. For details, see [the paper (
 
 ---
 
-*Cited as:*
+**Citation.** This post accompanies our NeurIPS 2025 paper — for academic use, please cite:
 
-```
-Fan, Jiajun. "The Exploration-Exploitation Dilemma in RLHF for Generative Models."
-jiajunfan.com (2025).
+Fan et al., "Adaptive Divergence Regularized Policy Optimization for Fine-tuning Generative Models," *NeurIPS*, 2025.
+
+```bibtex
+@inproceedings{fan2025adaptive,
+  title     = {Adaptive Divergence Regularized Policy Optimization for Fine-tuning Generative Models},
+  author    = {Jiajun Fan and Tong Wei and Chaoran Cheng and Yuxin Chen and Ge Liu},
+  booktitle = {The Thirty-ninth Annual Conference on Neural Information Processing Systems},
+  year      = {2025},
+  url       = {https://openreview.net/forum?id=aXO0xg0ttW}
+}
 ```

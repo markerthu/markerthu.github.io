@@ -207,9 +207,16 @@ The key insight: **test-time inverse scaling is a training problem, not a fundam
 
 ---
 
-*Cited as:*
+**Citation.** This post accompanies our ICLR 2026 paper — for academic use, please cite:
 
-```
-Fan, Jiajun. "Test-Time Inverse Scaling in Audio LLMs."
-jiajunfan.com (2025).
+Fan et al., "Incentivizing Consistent, Effective and Scalable Reasoning Capability in Audio LLMs via Reasoning Process Rewards," *ICLR*, 2026.
+
+```bibtex
+@inproceedings{fan2026incentivizing,
+  title     = {Incentivizing Consistent, Effective and Scalable Reasoning Capability in Audio {LLM}s via Reasoning Process Rewards},
+  author    = {Jiajun Fan and Roger Ren and Jingyuan Li and Rahul Pandey and Prashanth Gurunath Shivakumar and Ivan Bulyko and Ankur Gandhe and Ge Liu and Yile Gu},
+  booktitle = {The Fourteenth International Conference on Learning Representations},
+  year      = {2026},
+  url       = {https://openreview.net/forum?id=DUr48hxO2h}
+}
 ```
