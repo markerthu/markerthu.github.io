@@ -110,7 +110,7 @@ This is not a tuning problem — no single value of \\(\beta\\) is optimal for a
 
 <figure class="chart">
 {% include figures/adrpo_reward_diversity.svg %}
-<figcaption><b>Fig 1.</b> Reward vs. diversity Pareto front on SD3 text-to-image. Adaptive regularization (ADRPO) achieves a dominant frontier — higher reward at every diversity level compared to fixed-β methods like DPO and ORW-CFM-W2.</figcaption>
+<figcaption><b>Fig 1.</b> Final reward vs. diversity on SD3 text-to-image. ADRPO reaches the top-right — the highest reward <em>and</em> the highest diversity — while ORW-CFM-W2 trades away diversity for reward and DPO lands in between.</figcaption>
 </figure>
 
 ## Adaptive Divergence Regularized Policy Optimization (ADRPO)
@@ -166,7 +166,7 @@ where \\(A_{\text{GRPO}}\\) is the group-level advantage from GRPO (reward minus
 
 <figure class="chart">
 {% include figures/adrpo_reward_kl.svg %}
-<figcaption><b>Fig 2.</b> Reward vs. KL divergence on SD3. ADRPO reaches the same reward level at lower KL divergence — more efficient policy improvement.</figcaption>
+<figcaption><b>Fig 2.</b> Reward vs. W2 divergence from the reference on SD3 (flow matching uses W2, not KL). ADRPO attains the highest reward while staying closest to the pre-trained model — the smallest divergence — whereas ORW-CFM-W2 needs far larger divergence for less reward.</figcaption>
 </figure>
 
 ## What Emerges in Practice
@@ -181,7 +181,7 @@ When applied to LLM fine-tuning, ADRPO exhibits an unexpected emergent behavior:
 
 <figure class="chart">
 {% include figures/adrpo_llm_entropy.svg %}
-<figcaption><b>Fig 3.</b> Reward vs. entropy on LLM fine-tuning (Qwen2). ADRPO achieves higher reward while maintaining generation diversity. The adaptive mechanism allows the model to escape local optima that trap fixed-β methods.</figcaption>
+<figcaption><b>Fig 3.</b> Reward over training on Qwen2 (GRPO vs. ADRPO). ADRPO escapes the local optimum GRPO stays trapped in, climbing to roughly 3× the reward — the adaptive coefficient re-opens exploration whenever the model stalls.</figcaption>
 </figure>
 
 When the model is stuck in a poor solution (all advantages near zero or negative), the adaptive coefficient \\(\beta_0 - A\\) increases globally, pulling the model back toward the pre-trained distribution — effectively "resetting" exploration. When it finds a promising direction (high advantages), regularization drops, allowing rapid exploitation. This creates a natural curriculum that no fixed coefficient can replicate.

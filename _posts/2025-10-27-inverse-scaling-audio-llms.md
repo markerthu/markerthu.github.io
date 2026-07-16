@@ -37,7 +37,7 @@ We call this **test-time inverse scaling**: the more the model "thinks," the wor
 
 <figure class="chart wide">
 {% include figures/cesar_scaling.svg %}
-<figcaption><b>Fig 1.</b> Test-time scaling curves. Baseline models (outcome-only RL) show inverse scaling — performance degrades as maximum reasoning length increases. CESAR maintains positive scaling.</figcaption>
+<figcaption><b>Fig 1.</b> Test-time scaling on MMAU Test-mini. The base model Qwen2.5-Omni-7B suffers inverse scaling — accuracy collapses as reasoning length grows — while CESAR (and its no-penalty variant) and the outcome-only baseline Ke-Omni-R stay flat and high.</figcaption>
 </figure>
 
 This isn't subtle. Models that achieve 70%+ accuracy with direct answers can drop to below 60% when forced to reason. The reasoning itself is actively harmful.
@@ -151,7 +151,7 @@ CESAR discovers "reasoning sweet spots" where the model achieves peak performanc
 
 <figure class="chart">
 {% include figures/cesar_slope.svg %}
-<figcaption><b>Fig 3.</b> Scaling slopes. CESAR is the only method with consistently positive slope — reasoning genuinely helps. Baselines show negative or flat slopes.</figcaption>
+<figcaption><b>Fig 3.</b> Fitted scaling slopes (Δaccuracy per reasoning token) on Total Accuracy. Qwen2.5-Omni-7B is strongly negative (−0.51); Ke-Omni-R is flat (−0.007); only CESAR is clearly positive (+0.038) — reasoning genuinely helps.</figcaption>
 </figure>
 
 The **scaling slope** — whether performance increases or decreases with more reasoning — is perhaps the most important metric. A positive slope means the model has genuinely learned to reason. A negative slope means it's just generating noise that happens to sometimes contain correct answers.
@@ -162,7 +162,7 @@ An unexpected finding: improving reasoning quality also improves **perception** 
 
 <figure class="chart narrow">
 {% include figures/cesar_radar.svg %}
-<figcaption><b>Fig 4.</b> Multi-dimensional evaluation radar. CESAR improves not just reasoning quality but also perception accuracy across audio understanding tasks.</figcaption>
+<figcaption><b>Fig 4.</b> Task-wise MMAU comparison across modalities (Sound / Music / Speech) and difficulty (Easy / Medium / Hard). CESAR and its variant dominate the base model and the outcome-only baseline on every axis — reasoning quality and perception improve together.</figcaption>
 </figure>
 
 This suggests that reasoning and perception are deeply entangled in multimodal models. Learning to reason *about* audio signals forces the model to develop better internal representations *of* those signals. The process rewards act as an implicit regularizer that shapes how the model attends to and processes audio features.
