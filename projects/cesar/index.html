@@ -13,302 +13,171 @@ permalink: /projects/cesar/
   <meta property="og:url" content="https://www.jiajunfan.com/projects/cesar/">
   <link rel="canonical" href="https://www.jiajunfan.com/projects/cesar/">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="CESAR: Incentivizing Consistent, Effective and Scalable Reasoning Capability in Audio LLMs via Reasoning Process Rewards — ICLR 2026">
-  <meta name="twitter:description" content="First to identify test-time inverse scaling in Audio LLMs. CESAR uses process-level rewards (GRPO) to guide reasoning quality, achieving SOTA on MMAU — outperforming Gemini 2.5 Pro and GPT-4o Audio.">
+  <meta name="twitter:title" content="CESAR: Audio LLM Reasoning via Reasoning Process Rewards — ICLR 2026">
+  <meta name="twitter:description" content="Process-level rewards (GRPO) resolve test-time inverse scaling in Audio LLMs — SOTA on MMAU, beating Gemini 2.5 Pro and GPT-4o Audio.">
   <meta name="twitter:image" content="https://www.jiajunfan.com/images/featured/cesar-ai.jpg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CESAR — Audio LLM Reasoning | ICLR 2026</title>
 <meta name="description" content="CESAR: Consistent, Effective, and Scalable Audio Reasoners. ICLR 2026.">
+<meta name="theme-color" content="#fdfcfa">
+<meta name="theme-color" content="#0f1216" media="(prefers-color-scheme: dark)">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
 <link rel="icon" href="/images/favicon.ico">
 <meta name="robots" content="index,follow">
-<script>try{if(localStorage.getItem('darkMode')==='true'){document.documentElement.style.background='#0d1117';}}catch(e){}</script>
+<script>try{if(localStorage.getItem('darkMode')==='true'){document.documentElement.style.background='#0f1216';}}catch(e){}</script>
 <style>
+:root{
+  --serif:'Newsreader',Georgia,'Times New Roman',serif;
+  --sans:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+  --bg:#fdfcfa; --band:#f6f3ec; --ink:#1a1815; --body:#2b2823; --muted:#6c6860; --faint:#787369;
+  --rule:#e8e3d9; --link:#1565c0; --link-h:#0d47a1; --card:#ffffff; --fig-border:#e6e0d5;
+  --good:#1b7f4b; --bad:#c0392b;
+}
+body.dark-mode{
+  --bg:#0f1216; --band:#151a20; --ink:#ece8e0; --body:#cdc8be; --muted:#8f8a80; --faint:#8a857b;
+  --rule:#262b33; --link:#6ea8fe; --link-h:#93c0ff; --card:#161a20; --fig-border:#2a2f38;
+  --good:#4ade80; --bad:#f7a8b8;
+}
 .lbl-ico{display:inline-block;width:1em;height:1em;vertical-align:-0.14em;margin-right:5px;background-color:currentColor;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;flex-shrink:0;}
-:root { --accent: #2563eb; --accent-light: #eff6ff; }
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Inter',sans-serif;background:#fff;color:#111827;line-height:1.75;font-size:16px}
-a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+html{overflow-x:hidden;scroll-behavior:smooth;}
+body{font-family:var(--serif);background:var(--bg);color:var(--body);line-height:1.72;font-size:19px;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s;}
+a{color:var(--link);text-decoration:none}a:hover{color:var(--link-h)}
+::selection{background:rgba(21,101,192,.16);}
 
-/* ── Site masthead (matches jiajunfan.com MM theme) ── */
-.site-masthead{background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.06);position:sticky;top:0;z-index:200;font-size:16px}
+/* ── masthead (shared) ── */
+.site-masthead{background:var(--bg);box-shadow:0 1px 0 var(--rule);position:sticky;top:0;z-index:200;font-size:16px;font-family:var(--sans);}
 .site-masthead::after{content:'';display:block;height:3px;background:linear-gradient(to right,#1565c0 0%,#7c4dff 50%,#00897b 100%)}
-@media(max-width:600px){.masthead-inner{flex-wrap:wrap;height:auto;min-height:0;padding:8px 14px 7px;row-gap:1px;justify-content:center}.masthead-title{width:100%;text-align:center;white-space:nowrap}.masthead-nav{width:100%;justify-content:center;flex-wrap:wrap}}
 .masthead-inner{max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:56px}
-.masthead-title{font-weight:800;font-size:1.35em;color:#1a2332!important;text-decoration:none!important;letter-spacing:-.02em}
+.masthead-title{font-weight:800;font-size:1.35em;color:var(--ink)!important;text-decoration:none!important;letter-spacing:-.02em}
 .masthead-nav{display:flex;gap:2px;align-items:center}
-.masthead-nav a{font-weight:600;font-size:0.98em;color:#333!important;text-decoration:none!important;padding:6px 10px;border-radius:6px;transition:color .2s,background .2s;letter-spacing:.01em}
-.masthead-nav a:hover{color:#1565c0!important;background:#f0f4ff}
-.masthead-nav a.nav-active{color:#1565c0!important}
+.masthead-nav a{font-weight:600;font-size:0.98em;color:var(--muted)!important;text-decoration:none!important;padding:6px 10px;border-radius:6px;transition:color .2s,background .2s}
+.masthead-nav a:hover{color:var(--link)!important;background:rgba(21,101,192,.07)}
+.masthead-nav a.nav-active{color:var(--link)!important}
+@media(max-width:600px){.masthead-inner{flex-wrap:wrap;height:auto;padding:8px 14px 7px;row-gap:1px;justify-content:center}.masthead-title{width:100%;text-align:center}.masthead-nav{width:100%;justify-content:center;flex-wrap:wrap}}
 @media(max-width:560px){.masthead-nav a{font-size:0.86em;padding:5px 8px}.masthead-title{font-size:1.15em}}
 
-/* ── Hero ── */
-.hero{background:linear-gradient(to bottom,#f8faff,#fff);border-top:4px solid var(--accent);padding:56px 24px 44px;text-align:center}
-.hero-inner{max-width:860px;margin:0 auto}
-.venue-badge{display:inline-block;background:var(--accent);color:#fff;padding:5px 18px;border-radius:999px;font-size:0.78em;font-weight:800;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:22px}
-.hero h1{font-size:clamp(1.8em,4vw,2.75em);font-weight:900;color:#0f172a;line-height:1.2;max-width:820px;margin:0 auto 18px}
-.hero .short{font-size:1.05em;color:#4b5563;margin-bottom:22px;font-weight:500}
-.authors{font-size:0.9em;color:#4b5563;max-width:720px;margin:0 auto 10px;line-height:2}
-.authors .me{font-weight:800;color:#111}
-.co-author{color:inherit}
-.affil{font-size:0.82em;color:#6b7280;margin-bottom:30px;line-height:1.6}
-.btn-row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
-.btn{display:inline-flex;align-items:center;gap:7px;padding:10px 26px;border-radius:999px;font-size:0.88em;font-weight:700;transition:opacity .18s,transform .18s;letter-spacing:0.01em}
-.btn:hover{opacity:.88;transform:translateY(-1px)}
-.btn-primary{background:var(--accent);color:#fff}
-.btn-secondary{background:#fff;color:var(--accent);border:2px solid var(--accent)}
-.btn-neutral{background:#374151;color:#fff}
+/* ── hero (editorial) ── */
+.hero{max-width:820px;margin:0 auto;padding:52px 24px 8px;text-align:center;}
+.kicker{font-family:var(--sans);text-transform:uppercase;letter-spacing:.145em;font-size:.72rem;font-weight:700;color:var(--link);margin-bottom:1em;}
+.hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.12;letter-spacing:-.015em;color:var(--ink);margin:0 auto .5em;max-width:15em;}
+.hero .short{font-family:var(--serif);font-size:1.2rem;color:var(--muted);margin-bottom:1.3em;}
+.hero .short strong{color:var(--body);font-weight:600;}
+.authors{font-family:var(--sans);font-size:.92rem;color:var(--muted);max-width:720px;margin:0 auto .5em;line-height:1.9}
+.authors .me{font-weight:700;color:var(--ink)}
+.affil{font-family:var(--sans);font-size:.82rem;color:var(--faint);margin-bottom:1.5em;line-height:1.6}
+.btn-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:9px 20px;border-radius:999px;font-family:var(--sans);font-size:.85rem;font-weight:600;transition:.18s;border:1px solid var(--rule);}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:var(--link);color:#fff;border-color:var(--link)}
+.btn-primary:hover{color:#fff}
+.btn-secondary{background:var(--card);color:var(--link)}
+.btn-neutral{background:var(--band);color:var(--body)}
+.hero-rule{max-width:820px;margin:2.2em auto 0;border:none;border-top:1px solid var(--rule);}
 
-/* ── Container & Sections ── */
-.container{max-width:900px;margin:0 auto;padding:0 28px}
-section{padding:60px 0 48px}
-section:nth-child(even){background:#f9fafb}
-section p{color:#374151;margin-bottom:14px;font-size:0.97em;line-height:1.78}
-section p:last-child{margin-bottom:0}
+/* ── layout ── */
+.container{max-width:720px;margin:0 auto;padding:0 24px}
+section{padding:34px 0 8px}
+section p{color:var(--body);margin-bottom:1em;font-size:1.06rem;line-height:1.72}
+h2{font-family:var(--sans);font-size:1.45rem;font-weight:700;color:var(--ink);margin:1.4em 0 .7em;line-height:1.25;letter-spacing:-.01em}
+h2 .lbl-ico{color:var(--link);}
+h3,h4{font-family:var(--sans);color:var(--ink);}
+em{font-style:italic}
+strong{font-weight:600;color:var(--ink)}
 
-/* ── Headings ── */
-h2{font-size:1.45em;font-weight:800;color:#0f172a;margin-bottom:22px;line-height:1.3}
-h3{font-size:1.1em;font-weight:700;color:#1e293b;margin-bottom:10px}
+/* ── abstract / TL;DR ── */
+.tldr{font-family:var(--serif);font-size:1.16rem;line-height:1.6;color:var(--body);border-left:3px solid var(--rule);padding:2px 0 2px 22px;margin:.4em 0 .2em;}
+.tldr strong{color:var(--link);font-weight:600}
 
-/* ── TL;DR ── */
-.tldr{background:var(--accent-light);border-left:4px solid var(--accent);border-radius:0 12px 12px 0;padding:20px 24px;margin-bottom:0;font-size:0.96em;color:#1e293b}
-.tldr strong{color:var(--accent);font-weight:800}
+/* ── stat cards ── */
+.results-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;margin:20px 0}
+.result-card{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:20px 14px;text-align:center}
+.result-card .rnum{font-family:var(--sans);font-size:1.7rem;font-weight:800;color:var(--link);line-height:1.1}
+.result-card .rdesc{font-family:var(--sans);font-size:.76rem;color:var(--muted);margin-top:8px;line-height:1.5}
 
-/* ── Stat/Result Cards ── */
-.results-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:16px;margin:24px 0}
-.result-card{background:#fff;border:1.5px solid #e5e7eb;border-radius:14px;padding:22px 16px;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,0.05)}
-.result-card .rnum{font-size:2.1em;font-weight:900;color:var(--accent);line-height:1.1}
-.result-card .rdesc{font-size:0.77em;color:#6b7280;margin-top:8px;line-height:1.5}
+/* ── method steps ── */
+.method-steps{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:14px;margin:20px 0}
+.step{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:18px;text-align:center}
+.step .step-num{width:34px;height:34px;background:var(--link);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--sans);font-weight:800;font-size:.9em;margin:0 auto 11px}
+.step h4{font-family:var(--sans);font-size:.86rem;font-weight:700;color:var(--ink);margin-bottom:7px}
+.step p{font-family:var(--sans);font-size:.8rem;color:var(--muted);margin:0;line-height:1.55}
 
-/* ── Stat Mini (hero) ── */
-.stats-mini{display:flex;flex-wrap:wrap;gap:24px 40px;justify-content:center;margin-top:16px}
-.sm{text-align:center}
-.sm-num{font-size:2em;font-weight:900;color:var(--accent);line-height:1}
-.sm-label{font-size:0.76em;color:#6b7280;margin-top:4px}
+/* ── problem / solution ── */
+.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0}
+.problem-card,.solution-card{border-radius:12px;padding:18px 20px;background:var(--card);border:1px solid var(--rule)}
+.problem-card{border-left:3px solid var(--bad)} .solution-card{border-left:3px solid var(--good)}
+.problem-card h3,.solution-card h3{font-family:var(--sans);font-size:.86rem;font-weight:700;margin-bottom:8px}
+.problem-card h3{color:var(--bad)} .solution-card h3{color:var(--good)}
+.problem-card p,.solution-card p{font-family:var(--sans);font-size:.86rem;color:var(--body);margin:0;line-height:1.6}
 
-/* ── Records Wall ── */
-.records-wall{background:linear-gradient(135deg,#0f172a,#1e3a5f);border-radius:16px;padding:32px;text-align:center;color:#fff;margin-bottom:24px}
-.records-title{font-size:0.78em;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:#93c5fd;margin-bottom:8px}
-.records-number{font-size:5em;font-weight:900;line-height:1;color:#fff;margin-bottom:4px}
-.records-sub{font-size:0.9em;color:#bfdbfe;margin-bottom:20px}
-
-/* ── Method/Feature Cards ── */
-.method-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin:20px 0}
-.method-card{background:#fff;border:1.5px solid #e5e7eb;border-radius:14px;padding:22px 18px;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
-.method-card h3{font-size:0.9em;font-weight:800;color:#0f172a;margin-bottom:8px}
-.method-card p{font-size:0.83em;color:#6b7280;line-height:1.65;margin:0}
-
-.method-steps{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:16px;margin:20px 0}
-.step{background:#fff;border:1.5px solid #e5e7eb;border-radius:14px;padding:20px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
-.step .step-num{width:36px;height:36px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:0.9em;margin:0 auto 12px}
-.step h4{font-size:0.87em;font-weight:800;color:#0f172a;margin-bottom:7px}
-.step p{font-size:0.8em;color:#6b7280;margin:0;line-height:1.55}
-
-/* ── Problem/Solution Cards ── */
-.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:20px 0}
-.problem-card{background:#fff5f5;border:1.5px solid #fecaca;border-radius:12px;padding:18px}
-.problem-card h3{font-size:0.88em;font-weight:800;color:#dc2626;margin-bottom:8px}
-.solution-card{background:#f0fdf4;border:1.5px solid #86efac;border-radius:12px;padding:18px}
-.solution-card h3{font-size:0.88em;font-weight:800;color:#16a34a;margin-bottom:8px}
-.problem-card p,.solution-card p{font-size:0.84em;color:#374151;margin:0;line-height:1.65}
-
-/* ── Comparison Tables ── */
-.compare-table{width:100%;border-collapse:collapse;margin:22px 0;font-size:0.9em}
-.compare-table th{background:#f1f5f9;color:#374151;padding:12px 16px;text-align:left;font-weight:700;border-bottom:2px solid #e2e8f0;font-size:0.86em;text-transform:uppercase;letter-spacing:.03em}
-.compare-table td{padding:11px 16px;border-bottom:1px solid #f1f5f9;color:#374151}
+/* ── comparison table ── */
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:20px 0}
+.compare-table{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:.9rem}
+.compare-table th{background:var(--band);color:var(--muted);padding:11px 15px;text-align:left;font-weight:600;border-bottom:1px solid var(--rule);font-size:.76rem;text-transform:uppercase;letter-spacing:.04em}
+.compare-table td{padding:11px 15px;border-bottom:1px solid var(--rule);color:var(--body)}
 .compare-table tr:last-child td{border-bottom:none}
-.compare-table .highlight td{background:var(--accent-light);font-weight:700;border-left:3px solid var(--accent)}
-.badge-win{background:#d1fae5;color:#065f46;padding:2px 9px;border-radius:6px;font-weight:800;font-size:0.82em}
-.badge-record{background:#fef3c7;color:#92400e;padding:2px 9px;border-radius:6px;font-weight:800;font-size:0.82em}
+.compare-table .highlight td{background:rgba(21,101,192,.06);font-weight:600;color:var(--ink)}
+.badge-win{background:rgba(27,127,75,.14);color:var(--good);padding:2px 9px;border-radius:6px;font-weight:700;font-size:.82em}
 
-/* ── Key Insight / Callout ── */
-.key-insight{background:var(--accent-light);border:1.5px solid var(--accent);border-radius:12px;padding:18px 22px;margin:20px 0}
-.key-insight p{margin:0;font-size:0.93em;color:#1e293b}
+/* ── figures (native inline SVG charts) ── */
+figure.chart{margin:1.8em auto;color:var(--muted);max-width:640px;}
+figure.chart.wide{max-width:100%;}
+figure.chart.narrow{max-width:460px;}
+figure.chart svg{display:block;width:100%;height:auto;}
+figure.chart figcaption{font-family:var(--sans);font-size:.82rem;color:var(--muted);margin-top:.9em;text-align:center;line-height:1.55;max-width:600px;margin-left:auto;margin-right:auto;}
+figure.chart figcaption b,figure.chart figcaption strong{color:var(--link);font-weight:600}
 
-/* ── Diff boxes (ADRPO style) ── */
-.diff-boxes{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0}
-.diff-box{border-radius:12px;padding:18px 20px}
-.diff-box.old{background:#fef2f2;border:1.5px solid #fca5a5}
-.diff-box.new{background:#f0fdf4;border:1.5px solid #86efac}
-.diff-box h4{font-size:0.83em;font-weight:800;text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px}
-.diff-box.old h4{color:#dc2626}
-.diff-box.new h4{color:#16a34a}
-.diff-box ul{padding-left:16px;font-size:0.84em;color:#374151;line-height:1.8}
-
-/* ── Figures ── */
-figure{margin:0}
-figure img{width:100%;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.07);border:1px solid #e5e7eb}
-figcaption{font-size:0.83em;color:#6b7280;margin-top:12px;text-align:center;line-height:1.6}
-.fig-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-bottom:20px}
-
-/* ── Games Grid ── */
-.games-grid{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
-.game-pill{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:999px;padding:5px 14px;font-size:0.82em;font-weight:600;color:#374151}
-
-/* ── Publication Timeline ── */
-.timeline{position:relative;padding-left:26px;margin:8px 0}
-.timeline-line{position:absolute;left:9px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--accent),#d1d5db)}
-.timeline-item{position:relative;margin-bottom:22px;padding-left:6px}
-.timeline-dot{position:absolute;left:-21px;top:4px;width:14px;height:14px;border-radius:50%;border:2px solid #fff}
-.dot-accepted{background:#16a34a;box-shadow:0 0 0 2px #16a34a}
-.dot-submitted{background:var(--accent);box-shadow:0 0 0 2px var(--accent)}
-.dot-rejected{background:#9ca3af;box-shadow:0 0 0 2px #9ca3af}
-.timeline-date{font-size:0.76em;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--accent);margin-bottom:2px}
-.timeline-title{font-weight:700;font-size:0.93em;color:#111;margin-bottom:3px}
-.timeline-desc{font-size:0.83em;color:#6b7280;line-height:1.6}
+/* ── timeline ── */
+.tl{position:relative;padding-left:24px;margin:10px 0}
+.tl-line{position:absolute;left:8px;top:4px;bottom:4px;width:2px;background:var(--rule)}
+.tl-item{position:relative;margin-bottom:18px}
+.tl-dot{position:absolute;left:-20px;top:5px;width:11px;height:11px;border-radius:50%;background:var(--link);box-shadow:0 0 0 3px var(--bg)}
+.tl-dot.done{background:var(--good)}
+.tl-date{font-family:var(--sans);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--link)}
+.tl-dot.done ~ .tl-date{color:var(--good)}
+.tl-title{font-family:var(--sans);font-weight:600;font-size:.95rem;color:var(--ink);margin:1px 0 2px}
+.tl-desc{font-family:var(--sans);font-size:.84rem;color:var(--muted);line-height:1.55}
 
 /* ── BibTeX ── */
+.bib-copy-btn{display:inline-flex;align-items:center;gap:6px;margin-bottom:10px;padding:6px 15px;border-radius:8px;border:1px solid var(--rule);cursor:pointer;font-family:var(--sans);font-size:.8rem;font-weight:600;background:var(--band);color:var(--body);transition:.18s}
+.bib-copy-btn:hover{border-color:var(--link);color:var(--link)}
+.bib-copy-btn.copied{background:var(--good);color:#fff;border-color:var(--good)}
+.bibtex-block{background:var(--band);color:var(--body);border:1px solid var(--rule);border-radius:12px;padding:18px 20px;overflow-x:auto;font-family:var(--mono);font-size:.8rem;line-height:1.7}
 
-.bib-copy-btn{display:inline-flex;align-items:center;gap:6px;margin-bottom:10px;
-  padding:6px 16px;border-radius:8px;border:none;cursor:pointer;font-size:0.82em;
-  font-weight:700;background:#334155;color:#e2e8f0;transition:background .18s;}
-.bib-copy-btn:hover{background:#475569;}
-.bib-copy-btn.copied{background:#16a34a;color:#fff;}
+/* ── footer ── */
+footer{font-family:var(--sans);background:transparent;color:var(--muted);text-align:center;padding:26px 24px;font-size:.86rem;border-top:1px solid var(--rule);margin-top:2.4em}
+footer a{color:var(--link)}
 
-.bibtex-block{background:#1e293b;color:#e2e8f0;border-radius:12px;padding:22px 24px;overflow-x:auto;font-family:'JetBrains Mono',monospace;font-size:0.82em;line-height:1.7}
+/* ── controls ── */
+#read-progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,#1565c0,#7c3aed 60%,#059669);z-index:9999;transition:width .08s linear;pointer-events:none}
+.pg-fab{position:fixed;right:22px;width:42px;height:42px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.18);z-index:9990;transition:transform .2s,opacity .2s}
+.pg-fab:hover{transform:translateY(-2px) scale(1.06)}
+#pg-top{bottom:22px;background:var(--link);color:#fff;opacity:0;pointer-events:none}
+#pg-top.show{opacity:1;pointer-events:auto}
+#pg-dark{bottom:74px;background:#fff;color:#333;border:1.5px solid rgba(0,0,0,.15)}
+body.dark-mode #pg-dark{background:#21262d;color:#fff;border-color:#30363d}
+.pg-dico{width:20px;height:20px;display:inline-block;background-color:currentColor;-webkit-mask:url(/images/icons/h-moon.png) center/contain no-repeat;mask:url(/images/icons/h-moon.png) center/contain no-repeat}
+body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-image:url(/images/icons/h-sun.png)}
+.pg-up{width:11px;height:11px;border-top:2.6px solid currentColor;border-right:2.6px solid currentColor;transform:rotate(-45deg) translateY(2px);display:inline-block}
 
-/* ── Footer ── */
-footer{background:#f8f9fa;color:#6b7280;text-align:center;padding:28px 24px;font-size:.84em;border-top:1px solid #e5e7eb}
-footer a{color:var(--accent);font-weight:600}
-
-/* ── Reduced motion ── */
-@media (prefers-reduced-motion: reduce) {
-  *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;scroll-behavior:auto !important}
-}
-
-/* ── Dark mode ── */
-body.dark-mode{background:#0d1117;color:#c9d1d9}
-body.dark-mode a{color:#58a6ff !important}
-body.dark-mode .site-masthead{background:#161b22;box-shadow:0 2px 12px rgba(0,0,0,.4)}
-body.dark-mode .masthead-title{color:#e6edf3 !important}
-body.dark-mode .masthead-nav a{color:#c9d1d9 !important}
-body.dark-mode .masthead-nav a:hover{color:#58a6ff !important;background:#21262d}
-body.dark-mode .masthead-nav a.nav-active{color:#58a6ff !important}
-body.dark-mode .hero{background:linear-gradient(to bottom,#161b22,#0d1117)}
-body.dark-mode .hero h1{color:#e6edf3}
-body.dark-mode .hero .short{color:#adbac7}
-body.dark-mode .authors{color:#adbac7}
-body.dark-mode .authors .me{color:#e6edf3}
-body.dark-mode .affil{color:#8b949e}
-body.dark-mode .btn-secondary{background:#161b22}
-body.dark-mode .btn-neutral{background:#21262d}
-body.dark-mode section:nth-child(even){background:#161b22}
-body.dark-mode section p{color:#adbac7}
-body.dark-mode h2,body.dark-mode h3,body.dark-mode h4{color:#e6edf3}
-body.dark-mode .tldr{background:#161b22;color:#c9d1d9}
-body.dark-mode .key-insight{background:#161b22}
-body.dark-mode .key-insight p{color:#c9d1d9}
-body.dark-mode .result-card,
-body.dark-mode .method-card,
-body.dark-mode .step{background:#161b22;border-color:#30363d}
-body.dark-mode .method-card p,
-body.dark-mode .step p,
-body.dark-mode .result-card .rdesc{color:#8b949e}
-body.dark-mode .compare-table th{background:#21262d;color:#c9d1d9;border-bottom-color:#30363d}
-body.dark-mode .compare-table td{color:#adbac7;border-bottom-color:#21262d}
-body.dark-mode .compare-table .highlight td{background:#1e3a5f !important;color:#e6edf3 !important}
-body.dark-mode div[style*="color:#1565c0"]{color:#60a5fa !important}
-body.dark-mode div[style*="color:#1b5e20"]{color:#4ade80 !important}
-body.dark-mode figure img{border-color:#30363d !important}
-body.dark-mode figcaption{color:#8b949e}
-body.dark-mode .game-pill{background:#21262d;border-color:#30363d;color:#c9d1d9}
-body.dark-mode .records-wall{background:linear-gradient(135deg,#161b22,#1e293b)}
-body.dark-mode .timeline-desc,
-body.dark-mode .timeline-title{color:#c9d1d9}
-body.dark-mode .problem-card{background:#2d1518;border-color:#5c2626}
-body.dark-mode .solution-card,
-body.dark-mode .diff-box.new{background:#13261a;border-color:#265c33}
-body.dark-mode .diff-box.old{background:#2d1518;border-color:#5c2626}
-body.dark-mode .problem-card p,
-body.dark-mode .solution-card p,
-body.dark-mode .diff-box ul{color:#c9d1d9}
-body.dark-mode footer{background:#161b22;color:#8b949e;border-top-color:#30363d}
-body.dark-mode ul li{color:#adbac7}
-body.dark-mode figure figcaption,
-body.dark-mode figcaption{color:#8b949e !important}
-body.dark-mode .records-number,body.dark-mode .records-sub{color:#fff !important}
-body.dark-mode section p[style*="color:#555"],
-body.dark-mode section p[style*="color:#444"],
-body.dark-mode p[style*="color:#666"]{color:#adbac7 !important}
-body.dark-mode div[style*="color:#555"]{color:#adbac7 !important}
-
-
-/* ── Responsive ── */
-@media(max-width:640px){
-  .fig-grid-2{grid-template-columns:1fr}
-  .problem-grid{grid-template-columns:1fr}
-  .diff-boxes{grid-template-columns:1fr}
-  .method-grid{grid-template-columns:1fr 1fr}
-  .method-steps{grid-template-columns:1fr}
-  .results-grid{grid-template-columns:1fr 1fr}
-}
-@media print {
-  .site-masthead { display: none !important; }
-}
-
-/* ── premium controls (progress + FABs) ── */
-#read-progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,#1565c0,#7c3aed 60%,#059669);z-index:9999;transition:width .08s linear;pointer-events:none;}
-.pg-fab{position:fixed;right:22px;width:42px;height:42px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.18);z-index:9990;transition:transform .2s,opacity .2s,background .2s;}
-.pg-fab:hover{transform:translateY(-2px) scale(1.06);}
-#pg-top{bottom:22px;background:#1565c0;color:#fff;opacity:0;pointer-events:none;}
-#pg-top.show{opacity:1;pointer-events:auto;}
-#pg-dark{bottom:74px;background:#fff;color:#333;border:1.5px solid rgba(0,0,0,.15);}
-body.dark-mode #pg-dark{background:#21262d;color:#fff;border-color:#30363d;}
-.pg-dico{width:20px;height:20px;display:inline-block;background-color:currentColor;-webkit-mask:url(/images/icons/h-moon.png) center/contain no-repeat;mask:url(/images/icons/h-moon.png) center/contain no-repeat;}
-body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-image:url(/images/icons/h-sun.png);}
-.pg-up{width:11px;height:11px;border-top:2.6px solid currentColor;border-right:2.6px solid currentColor;transform:rotate(-45deg) translateY(2px);display:inline-block;}
-@media print{#read-progress,.pg-fab{display:none!important;}}
-@media (prefers-reduced-motion:reduce){#read-progress{transition:none;}.pg-fab{transition:none;}}
-
-/* cross-document view transitions — unify smooth navigation site-wide (matches theme pages) */
-@view-transition { navigation: auto; }
-::view-transition-old(root) { animation-duration: .18s; }
-::view-transition-new(root) { animation-duration: .18s; }
-@media (prefers-reduced-motion: reduce) { ::view-transition-old(root), ::view-transition-new(root) { animation: none !important; } }
+@media(max-width:640px){.problem-grid{grid-template-columns:1fr}.method-steps{grid-template-columns:1fr 1fr}.results-grid{grid-template-columns:1fr 1fr}.hero h1{font-size:2rem}}
+@media print{.site-masthead,.pg-fab,#read-progress{display:none!important}}
+@media (prefers-reduced-motion:reduce){*{transition-duration:.001ms!important}html{scroll-behavior:auto}}
+@view-transition{navigation:auto}
+::view-transition-old(root),::view-transition-new(root){animation-duration:.18s}
+@media (prefers-reduced-motion:reduce){::view-transition-old(root),::view-transition-new(root){animation:none!important}}
 </style>
 <script type="application/ld+json">{
-  "@context": "https://schema.org",
-  "@type": "ScholarlyArticle",
-  "name": "Incentivizing Consistent, Effective and Scalable Reasoning Capability in Audio LLMs via Reasoning Process Rewards",
-  "author": [
-    {"@type": "Person",
-      "name": "Jiajun Fan"
-    },
-    {"@type": "Person",
-      "name": "Roger Ren"
-    },
-    {"@type": "Person",
-      "name": "Jingyuan Li"
-    },
-    {"@type": "Person",
-      "name": "Rahul Pandey"
-    },
-    {"@type": "Person",
-      "name": "Prashanth Gurunath Shivakumar"
-    },
-    {"@type": "Person",
-      "name": "Ivan Bulyko"
-    },
-    {"@type": "Person",
-      "name": "Ankur Gandhe"
-    },
-    {"@type": "Person",
-      "name": "Ge Liu"
-    },
-    {"@type": "Person",
-      "name": "Yile Gu"
-    }
-  ],
-  "datePublished": "2026",
-  "publisher": {
-    "@type": "Organization",
-    "name": "ICLR 2026"
-  },
-  "url": "https://www.jiajunfan.com/projects/cesar/",
-  "sameAs": "https://arxiv.org/abs/2510.20867",
-  "keywords": "audio LLM, reasoning, GRPO, process reward, test-time scaling, MMAU"
+  "@context":"https://schema.org","@type":"ScholarlyArticle",
+  "name":"Incentivizing Consistent, Effective and Scalable Reasoning Capability in Audio LLMs via Reasoning Process Rewards",
+  "author":[{"@type":"Person","name":"Jiajun Fan"},{"@type":"Person","name":"Roger Ren"},{"@type":"Person","name":"Jingyuan Li"},{"@type":"Person","name":"Rahul Pandey"},{"@type":"Person","name":"Prashanth Gurunath Shivakumar"},{"@type":"Person","name":"Ivan Bulyko"},{"@type":"Person","name":"Ankur Gandhe"},{"@type":"Person","name":"Ge Liu"},{"@type":"Person","name":"Yile Gu"}],
+  "datePublished":"2026","publisher":{"@type":"Organization","name":"ICLR 2026"},
+  "url":"https://www.jiajunfan.com/projects/cesar/","sameAs":"https://arxiv.org/abs/2510.20867",
+  "keywords":"audio LLM, reasoning, GRPO, process reward, test-time scaling, MMAU"
 }</script>
   <script src="https://api.myvisitor.site/tracker.js" data-site-id="8b23ecb8-e05e-41a2-9793-3ac945b62631" data-autostart="true" async></script>
 </head>
@@ -328,310 +197,130 @@ body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-ima
   </div>
 </header>
 
-<div class="hero"><div class="hero-inner">
-  <div class="venue-badge"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>ICLR 2026</div>
+<div class="hero">
+  <div class="kicker">ICLR 2026</div>
   <h1>Incentivizing Consistent, Effective and Scalable Reasoning Capability in Audio LLMs via Reasoning Process Rewards</h1>
   <p class="short">CESAR: <strong>C</strong>onsistent, <strong>E</strong>ffective, and <strong>S</strong>calable <strong>A</strong>udio <strong>R</strong>easoners</p>
   <div class="authors">
-    <a href="/" class="me">Jiajun Fan</a>&thinsp;<sup>1,2</sup>,
-    <span class="co-author">Roger Ren</span>&thinsp;<sup>2</sup>,
-    <span class="co-author">Jingyuan Li</span>&thinsp;<sup>2</sup>,
-    <span class="co-author">Rahul Pandey</span>&thinsp;<sup>2</sup>,
-    <span class="co-author">Prashanth G. Shivakumar</span>&thinsp;<sup>2</sup>,
-    <span class="co-author">Ivan Bulyko</span>&thinsp;<sup>2</sup>,
-    <span class="co-author">Ankur Gandhe</span>&thinsp;<sup>2</sup>,
-    <a href="https://geliu.web.illinois.edu/" style="color:#2b6cb0">Ge Liu</a>&thinsp;<sup>1</sup>,
-    <span class="co-author">Yile Gu</span>&thinsp;<sup>2</sup>
+    <a href="/" class="me">Jiajun Fan</a><sup>1,2</sup>,
+    Roger Ren<sup>2</sup>, Jingyuan Li<sup>2</sup>, Rahul Pandey<sup>2</sup>,
+    Prashanth G. Shivakumar<sup>2</sup>, Ivan Bulyko<sup>2</sup>, Ankur Gandhe<sup>2</sup>,
+    <a href="https://geliu.web.illinois.edu/">Ge Liu</a><sup>1</sup>, Yile Gu<sup>2</sup>
   </div>
   <div class="affil"><sup>1</sup>University of Illinois Urbana-Champaign &nbsp;&nbsp; <sup>2</sup>Amazon</div>
   <div class="btn-row">
-    <a class="btn btn-secondary" href="https://openreview.net/forum?id=DUr48hxO2h"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-pubs.png);mask-image:url(/images/icons/sh-pubs.png)"></i>Paper (OpenReview)</a>
+    <a class="btn btn-secondary" href="https://openreview.net/forum?id=DUr48hxO2h">Paper (OpenReview)</a>
     <a class="btn btn-primary" href="https://arxiv.org/abs/2510.20867">arXiv</a>
-    <a class="btn btn-neutral" href="/"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-home.png);mask-image:url(/images/icons/h-home.png)"></i>Author Homepage</a>
+    <a class="btn btn-neutral" href="/">Author Homepage</a>
   </div>
-</div>
+  <hr class="hero-rule">
 </div>
 
 <div class="container">
 
-<!-- TL;DR -->
 <section>
-  <div class="tldr">
-    <strong>TL;DR</strong> — Audio LLMs trained only on outcome rewards produce <em>hallucinatory, inconsistent, and unscalable</em> reasoning chains. CESAR shifts to <strong>rewarding the reasoning process itself</strong> via online RL (GRPO), resolving test-time inverse scaling and achieving SOTA on MMAU — outperforming Gemini 2.5 Pro and GPT-4o Audio.
+  <p class="tldr"><strong>TL;DR</strong> — Audio LLMs trained only on outcome rewards produce <em>hallucinatory, inconsistent, and unscalable</em> reasoning chains. CESAR instead <strong>rewards the reasoning process itself</strong> via online RL (GRPO), resolving test-time inverse scaling and reaching SOTA on MMAU — outperforming Gemini 2.5 Pro and GPT-4o Audio.</p>
+</section>
+
+<section>
+  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-search.png);mask-image:url(/images/icons/h-search.png)"></i>The problem: test-time inverse scaling</h2>
+  <p>Adding chain-of-thought reasoning to Audio LLMs often <em>degrades</em> performance — a phenomenon we term <strong>test-time inverse scaling</strong>. Longer reasoning chains yield progressively worse results, because outcome-only rewards leave the reasoning <em>process</em> completely unsupervised.</p>
+  <div class="problem-grid">
+    <div class="problem-card">
+      <h3>Without process rewards</h3>
+      <p>The reasoning chain is invisible to the reward. Models produce hallucinatory, inconsistent reasoning that accumulates errors over longer chains — reasoning becomes a liability.</p>
+    </div>
+    <div class="solution-card">
+      <h3>With CESAR</h3>
+      <p>Process rewards score consistency, structured analytical patterns, causal reasoning, and calibrated depth — turning reasoning into a genuine, scalable capability.</p>
+    </div>
   </div>
 </section>
 
-<!-- Teaser Figure -->
 <section>
-  <figure style="margin:0">
-    <img loading="lazy" src="images/teaser.png" alt="CESAR Framework Overview"
-         style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
-    <figcaption style="text-align:center;font-size:0.82em;color:#666;margin-top:12px;line-height:1.6">
-      <strong>Figure 1.</strong> General framework comparison of different training paradigms for Audio LLMs. CESAR's process rewards incentivize consistency, structured analytical reasoning, and calibrated depth — resolving <em>test-time inverse scaling</em> and enabling reasoning to genuinely help performance.
-    </figcaption>
+  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-gear.png);mask-image:url(/images/icons/h-gear.png)"></i>Method</h2>
+  <p>CESAR uses <strong>Group Relative Policy Optimization (GRPO)</strong> with a multi-faceted reward suite that goes beyond simple correctness — every component targets a specific failure mode of unsupervised reasoning.</p>
+  <div class="method-steps">
+    <div class="step"><div class="step-num">1</div><h4>Correctness</h4><p>Standard outcome reward — is the final answer right?</p></div>
+    <div class="step"><div class="step-num">2</div><h4>Consistency</h4><p>Reasoning ↔ question and reasoning ↔ answer alignment.</p></div>
+    <div class="step"><div class="step-num">3</div><h4>Structure</h4><p>Analytical patterns, logical connectives, domain vocabulary.</p></div>
+    <div class="step"><div class="step-num">4</div><h4>Depth</h4><p>Overthinking penalty — calibrate reasoning length to the task.</p></div>
+  </div>
+  <figure class="chart wide">
+    {% include figures/cesar_framework.svg %}
+    <figcaption><b>Figure 1.</b> Outcome-only RL (top) rewards only final-answer correctness and format. CESAR (bottom) adds process rewards — consistency, structure, and an overthinking penalty — on the reasoning chain itself.</figcaption>
   </figure>
 </section>
 
-<!-- Problem -->
-<section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-search.png);mask-image:url(/images/icons/h-search.png)"></i>The Problem</h2>
-  <p>Adding chain-of-thought reasoning to Audio LLMs often <em>degrades</em> performance — a phenomenon we term <strong>test-time inverse scaling</strong>. Longer reasoning chains yield progressively worse results. Why?</p>
-  <div class="problem-grid">
-    <div class="problem-card">
-      <h3><i class="lbl-ico" style="color:#dc2626;-webkit-mask-image:url(/images/icons/h-cross.png);mask-image:url(/images/icons/h-cross.png)"></i>Without CESAR</h3>
-      <p>Models without guidance for the reasoning <em>process</em> produce hallucinatory, inconsistent reasoning that accumulates errors over longer chains. Outcome-only rewards cannot fix this.</p>
-    </div>
-    <div class="solution-card">
-      <h3><i class="lbl-ico" style="color:#16a34a;-webkit-mask-image:url(/images/icons/h-check.png);mask-image:url(/images/icons/h-check.png)"></i>With CESAR</h3>
-      <p>Process rewards incentivize consistency, structured analytical patterns, causal reasoning, and calibrated depth — transforming reasoning from a liability into a genuine capability.</p>
-    </div>
-  </div>
-</section>
-
-<!-- Method -->
-<section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-gear.png);mask-image:url(/images/icons/h-gear.png)"></i>Method</h2>
-  <p>CESAR uses <strong>Group Relative Policy Optimization (GRPO)</strong> with a multi-faceted reward suite that goes beyond simple correctness:</p>
-  <div class="method-steps">
-    <div class="step">
-      <div class="step-num">1</div>
-      <h4>Correctness Reward</h4>
-      <p>Standard outcome reward — is the final answer right?</p>
-    </div>
-    <div class="step">
-      <div class="step-num">2</div>
-      <h4>Consistency Reward</h4>
-      <p>Does the reasoning chain stay internally consistent?</p>
-    </div>
-    <div class="step">
-      <div class="step-num">3</div>
-      <h4>Structure Reward</h4>
-      <p>Does the reasoning follow structured analytical patterns and causal logic?</p>
-    </div>
-    <div class="step">
-      <div class="step-num">4</div>
-      <h4>Depth Calibration</h4>
-      <p>Is the reasoning depth calibrated to task complexity? Avoid over- and under-thinking.</p>
-    </div>
-  </div>
-</section>
-
-<!-- Results -->
 <section>
   <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-chart.png);mask-image:url(/images/icons/h-chart.png)"></i>Results</h2>
   <div class="results-grid">
-    <div class="result-card">
-      <div class="rnum">SOTA</div>
-      <div class="rdesc">MMAU Test-mini<br>benchmark</div>
-    </div>
-    <div class="result-card">
-      <div class="rnum">&gt; 2.5 Pro</div>
-      <div class="rdesc">Outperforms<br>Gemini 2.5 Pro</div>
-    </div>
-    <div class="result-card">
-      <div class="rnum">&gt; GPT-4o</div>
-      <div class="rdesc">Outperforms<br>GPT-4o Audio</div>
-    </div>
-    <div class="result-card">
-      <div class="rnum"><i class="lbl-ico" style="color:#16a34a;-webkit-mask-image:url(/images/icons/h-check.png);mask-image:url(/images/icons/h-check.png)"></i>Scale</div>
-      <div class="rdesc">Reasoning scales<br>positively at test time</div>
-    </div>
+    <div class="result-card"><div class="rnum">SOTA</div><div class="rdesc">MMAU Test-mini</div></div>
+    <div class="result-card"><div class="rnum">&gt; 2.5 Pro</div><div class="rdesc">beats Gemini 2.5 Pro</div></div>
+    <div class="result-card"><div class="rnum">&gt; GPT-4o</div><div class="rdesc">beats GPT-4o Audio</div></div>
+    <div class="result-card"><div class="rnum">+0.038</div><div class="rdesc">positive scaling slope</div></div>
   </div>
-
-  <div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
+  <div class="tbl-wrap">
   <table class="compare-table">
-    <thead><tr><th>Model</th><th>MMAU Test-mini</th><th>Reasoning Scaling</th></tr></thead>
+    <thead><tr><th>Model</th><th>MMAU (total)</th><th>Test-time scaling</th></tr></thead>
     <tbody>
-      <tr><td>GPT-4o Audio</td><td>~65%</td><td><i class="lbl-ico" style="color:#dc2626;-webkit-mask-image:url(/images/icons/h-cross.png);mask-image:url(/images/icons/h-cross.png)"></i>Inverse scaling</td></tr>
-      <tr><td>Gemini 2.5 Pro</td><td>~68%</td><td><i class="lbl-ico" style="color:#dc2626;-webkit-mask-image:url(/images/icons/h-cross.png);mask-image:url(/images/icons/h-cross.png)"></i>Inverse scaling</td></tr>
-      <tr><td>Baseline (outcome-only RL)</td><td>~63%</td><td><i class="lbl-ico" style="color:#dc2626;-webkit-mask-image:url(/images/icons/h-cross.png);mask-image:url(/images/icons/h-cross.png)"></i>Inverse scaling</td></tr>
-      <tr class="highlight"><td><strong>CESAR (Ours)</strong></td><td><strong>SOTA <span class="badge-win">Best</span></strong></td><td><strong><i class="lbl-ico" style="color:#16a34a;-webkit-mask-image:url(/images/icons/h-check.png);mask-image:url(/images/icons/h-check.png)"></i>Positive scaling</strong></td></tr>
+      <tr><td>Qwen2.5-Omni-7B (base)</td><td>65.2%</td><td>Inverse (slope −0.51)</td></tr>
+      <tr><td>Ke-Omni-R (outcome-only RL)</td><td>74.6%</td><td>Flat (slope −0.007)</td></tr>
+      <tr><td>CESAR w/o overthinking penalty</td><td>76.5%</td><td>Positive</td></tr>
+      <tr class="highlight"><td><strong>CESAR (Ours)</strong></td><td><strong>77.1% <span class="badge-win">Best</span></strong></td><td><strong>Positive (slope +0.038)</strong></td></tr>
     </tbody>
   </table>
   </div>
-</section>
-
-<!-- Framework with Scale -->
-<section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-building.png);mask-image:url(/images/icons/h-building.png)"></i>Framework Architecture</h2>
-  <figure style="margin:0 0 24px">
-    <img loading="lazy" src="images/framework_large.png" alt="CESAR framework with scaling"
-         style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
-    <figcaption style="text-align:center;font-size:0.82em;color:#666;margin-top:10px;line-height:1.6">
-      <strong>Figure 2.</strong> Complete CESAR training pipeline with scaling analysis. Process rewards decompose reasoning quality into consistency, structure, and depth calibration — enabling stable, scalable reasoning improvement.
-    </figcaption>
+  <figure class="chart">
+    {% include figures/cesar_radar.svg %}
+    <figcaption><b>Figure 2.</b> Per-category MMAU accuracy. CESAR and its no-penalty variant lead the base model (Qwen2.5-Omni-7B) and the outcome-only baseline (Ke-Omni-R) across Sound, Music, Speech, and overall — process rewards improve perception, not just reasoning.</figcaption>
   </figure>
 </section>
 
-<!-- Scaling Curves -->
 <section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-chart.png);mask-image:url(/images/icons/h-chart.png)"></i>Test-Time Scaling Analysis</h2>
-  <div class="fig-grid-2">
-    <figure style="margin:0">
-      <img loading="lazy" src="images/scaling_curves.png" alt="Test-time scaling curves"
-           style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
-      <figcaption style="text-align:center;font-size:0.78em;color:#666;margin-top:8px">
-        <strong>Figure 3.</strong> Test-time scaling curves. Baselines exhibit inverse scaling; CESAR maintains positive scaling as reasoning tokens increase.
-      </figcaption>
-    </figure>
-    <figure style="margin:0">
-      <img loading="lazy" src="images/scale_win_rate.png" alt="Win rate at different scales"
-           style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
-      <figcaption style="text-align:center;font-size:0.78em;color:#666;margin-top:8px">
-        <strong>Figure 4.</strong> Win rate analysis at different reasoning token budgets — CESAR's advantage grows with more compute.
-      </figcaption>
-    </figure>
-  </div>
-</section>
-
-<!-- Radar Charts -->
-<section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-target.png);mask-image:url(/images/icons/h-target.png)"></i>Multi-Dimensional Evaluation</h2>
-  <div class="fig-grid-2">
-    <figure style="margin:0">
-      <img loading="lazy" src="images/radar.png" alt="Performance radar chart"
-           style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
-      <figcaption style="text-align:center;font-size:0.78em;color:#666;margin-top:8px">
-        <strong>Figure 5.</strong> Multi-dimensional performance radar showing CESAR's balanced improvement across all reasoning quality dimensions.
-      </figcaption>
-    </figure>
-    <figure style="margin:0">
-      <img loading="lazy" src="images/radar_token.png" alt="Token-level radar chart"
-           style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
-      <figcaption style="text-align:center;font-size:0.78em;color:#666;margin-top:8px">
-        <strong>Figure 6.</strong> Token-level radar comparison showing how CESAR improves reasoning quality even at the individual token level.
-      </figcaption>
-    </figure>
-  </div>
-</section>
-
-<!-- Training + Win Rate -->
-<section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-chart.png);mask-image:url(/images/icons/h-chart.png)"></i>Training Dynamics & Win Rate</h2>
-  <div class="fig-grid-2">
-    <figure style="margin:0">
-      <img loading="lazy" src="images/training_curve.png" alt="Training curves"
-           style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
-      <figcaption style="text-align:center;font-size:0.78em;color:#666;margin-top:8px">
-        <strong>Figure 7.</strong> Training reward curves showing stable convergence of CESAR's multi-faceted process rewards.
-      </figcaption>
-    </figure>
-    <figure style="margin:0">
-      <img loading="lazy" src="images/win_rate.png" alt="AI Judge win rate analysis"
-           style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
-      <figcaption style="text-align:center;font-size:0.78em;color:#666;margin-top:8px">
-        <strong>Figure 8.</strong> AI judge win rates — CESAR consistently wins across multiple evaluation dimensions and prompts.
-      </figcaption>
-    </figure>
-  </div>
-</section>
-
-<!-- Slope Analysis -->
-<section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-chart.png);mask-image:url(/images/icons/h-chart.png)"></i>Scaling Slope Ablation</h2>
-  <p>The <em>scaling slope</em> measures whether additional reasoning tokens help or hurt. A positive slope means more thinking = better results.</p>
-  <div class="fig-grid-2">
-    <figure style="margin:0">
-      <img loading="lazy" src="images/slope.png" alt="CESAR scaling slope"
-           style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
-      <figcaption style="text-align:center;font-size:0.78em;color:#666;margin-top:8px">
-        <strong>Figure 9.</strong> CESAR achieves consistent <strong>positive</strong> scaling slope — the only method where reasoning genuinely helps.
-      </figcaption>
-    </figure>
-    <figure style="margin:0">
-      <img loading="lazy" src="images/slope_ablation.png" alt="Slope ablation"
-           style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
-      <figcaption style="text-align:center;font-size:0.78em;color:#666;margin-top:8px">
-        <strong>Figure 10.</strong> Ablation: removing the overthinking penalty degrades slope — every component in CESAR's reward suite matters.
-      </figcaption>
-    </figure>
-  </div>
-  <figure style="margin:0 auto;max-width:560px">
-    <img loading="lazy" src="images/slope_qwen.png" alt="Qwen baseline slope"
-         style="width:100%;border-radius:12px;border:1px solid #e0e8f0;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
-    <figcaption style="text-align:center;font-size:0.82em;color:#666;margin-top:8px;line-height:1.6">
-      <strong>Figure 11.</strong> Qwen2.5-Omni baseline shows flat/negative scaling — without process rewards, reasoning doesn't scale.
-    </figcaption>
+  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-target.png);mask-image:url(/images/icons/h-target.png)"></i>Test-time scaling</h2>
+  <p>With process rewards, more reasoning stops hurting and starts helping. The base model collapses as reasoning length grows; CESAR stays flat-high and even rises.</p>
+  <figure class="chart wide">
+    {% include figures/cesar_scaling.svg %}
+    <figcaption><b>Figure 3.</b> Accuracy vs. average reasoning tokens on MMAU. Qwen2.5-Omni-7B suffers inverse scaling — accuracy collapses — while CESAR, its no-penalty variant, and Ke-Omni-R stay flat and high.</figcaption>
+  </figure>
+  <figure class="chart">
+    {% include figures/cesar_slope.svg %}
+    <figcaption><b>Figure 4.</b> Fitted scaling slopes (Δaccuracy per reasoning token). Qwen2.5-Omni-7B is strongly negative (−0.51); Ke-Omni-R is flat (−0.007); only CESAR is clearly positive (+0.038) — reasoning genuinely helps.</figcaption>
   </figure>
 </section>
 
-<!-- Journey -->
 <section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-deadlines.png);mask-image:url(/images/icons/sh-deadlines.png)"></i>Publication Journey</h2>
-  <div style="position:relative;padding-left:24px;margin:8px 0">
-    <div style="position:absolute;left:8px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,#555,#aaa)"></div>
-    <div style="position:relative;margin-bottom:18px;padding-left:4px">
-      <div style="position:absolute;left:-20px;top:5px;width:12px;height:12px;background:#1565c0;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 2px #1565c0"></div>
-      <div style="font-size:.78em;font-weight:800;color:#1565c0;text-transform:uppercase;letter-spacing:.05em">Oct 2025</div>
-      <div style="font-weight:700;font-size:.93em">arXiv preprint released (arXiv:2510.20867)</div>
-      
-    </div>
-    <div style="position:relative;margin-bottom:18px;padding-left:4px">
-      <div style="position:absolute;left:-20px;top:5px;width:12px;height:12px;background:#1565c0;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 2px #1565c0"></div>
-      <div style="font-size:.78em;font-weight:800;color:#1565c0;text-transform:uppercase;letter-spacing:.05em">Oct 2025</div>
-      <div style="font-weight:700;font-size:.93em">Submitted to ICLR 2026 (Submission #8335)</div>
-      <div style='font-size:.83em;color:#555'>Submitted to The Fourteenth International Conference on Learning Representations.</div>
-    </div>
-    <div style="position:relative;margin-bottom:18px;padding-left:4px">
-      <div style="position:absolute;left:-20px;top:5px;width:12px;height:12px;background:#1b5e20;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 2px #1b5e20"></div>
-      <div style="font-size:.78em;font-weight:800;color:#1b5e20;text-transform:uppercase;letter-spacing:.05em">Jan 2026</div>
-      <div style="font-weight:700;font-size:.93em"><i class="lbl-ico" style="color:#16a34a;-webkit-mask-image:url(/images/icons/h-check.png);mask-image:url(/images/icons/h-check.png)"></i>Accepted at ICLR 2026 (Poster)</div>
-      <div style='font-size:.83em;color:#555'>Accepted. <a href="https://openreview.net/forum?id=DUr48hxO2h">OpenReview</a></div>
-    </div>
-    <div style="position:relative;margin-bottom:18px;padding-left:4px">
-      <div style="position:absolute;left:-20px;top:5px;width:12px;height:12px;background:#1b5e20;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 2px #1b5e20"></div>
-      <div style="font-size:.78em;font-weight:800;color:#1b5e20;text-transform:uppercase;letter-spacing:.05em">Apr 2026</div>
-      <div style="font-weight:700;font-size:.93em">Presented at ICLR 2026 · Rio de Janeiro, Brazil</div>
-      
-    </div>
+  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-deadlines.png);mask-image:url(/images/icons/sh-deadlines.png)"></i>Publication journey</h2>
+  <div class="tl">
+    <div class="tl-line"></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">Oct 2025</div><div class="tl-title">arXiv preprint released</div><div class="tl-desc">arXiv:2510.20867.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">Oct 2025</div><div class="tl-title">Submitted to ICLR 2026</div><div class="tl-desc">The Fourteenth International Conference on Learning Representations (Submission #8335).</div></div>
+    <div class="tl-item"><div class="tl-dot done"></div><div class="tl-date">Jan 2026</div><div class="tl-title">Accepted at ICLR 2026 (Poster)</div><div class="tl-desc"><a href="https://openreview.net/forum?id=DUr48hxO2h">OpenReview</a>.</div></div>
+    <div class="tl-item"><div class="tl-dot done"></div><div class="tl-date">Apr 2026</div><div class="tl-title">Presented · Rio de Janeiro, Brazil</div><div class="tl-desc">ICLR 2026.</div></div>
   </div>
 </section>
 
-<!-- BibTeX -->
 <section>
   <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-book.png);mask-image:url(/images/icons/h-book.png)"></i>BibTeX</h2>
   <button class="bib-copy-btn" aria-label="Copy BibTeX citation"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-list.png);mask-image:url(/images/icons/h-list.png)"></i>Copy BibTeX</button>
   <pre class="bibtex-block" tabindex="0"><code>@inproceedings{fan2026incentivizing,
-  title={Incentivizing Consistent, Effective and Scalable Reasoning
-         Capability in Audio {LLM}s via Reasoning Process Rewards},
-  author={Jiajun Fan and Roger Ren and Jingyuan Li and Rahul Pandey and
-          Prashanth Gurunath Shivakumar and Ivan Bulyko
-          and Ankur Gandhe and Ge Liu and Yile Gu},
-  booktitle={The Fourteenth International Conference on Learning Representations},
-  year={2026},
-  url={https://openreview.net/forum?id=DUr48hxO2h}
+  title     = {Incentivizing Consistent, Effective and Scalable Reasoning
+               Capability in Audio {LLM}s via Reasoning Process Rewards},
+  author    = {Jiajun Fan and Roger Ren and Jingyuan Li and Rahul Pandey and
+               Prashanth Gurunath Shivakumar and Ivan Bulyko and Ankur Gandhe
+               and Ge Liu and Yile Gu},
+  booktitle = {The Fourteenth International Conference on Learning Representations},
+  year      = {2026},
+  url       = {https://openreview.net/forum?id=DUr48hxO2h}
 }</code></pre>
 </section>
 
 </div>
 
 <footer>
-  <p>CESAR · ICLR 2026 &nbsp;|&nbsp; <a href="/">Jiajun Fan</a> · UIUC &amp; Amazon &nbsp;|&nbsp; <a href="https://openreview.net/forum?id=DUr48hxO2h">Paper</a> &nbsp;|&nbsp; <a href="/publications/">All Publications</a> &nbsp;|&nbsp; <a href="#top">↑ Back to top</a></p>
+  <p>CESAR · ICLR 2026 &nbsp;|&nbsp; <a href="/">Jiajun Fan</a> · UIUC &amp; Amazon &nbsp;|&nbsp; <a href="https://openreview.net/forum?id=DUr48hxO2h">Paper</a> &nbsp;|&nbsp; <a href="/projects/">All Projects</a></p>
 </footer>
-
-
-<script>
-// Dark mode: respect site-wide preference stored in localStorage
-(function(){
-  try { if(localStorage.getItem('darkMode')==='true') document.body.classList.add('dark-mode'); } catch(e){}
-})();
-
-document.querySelectorAll('.bib-copy-btn').forEach(function(btn){
-  btn.addEventListener('click',function(){
-    var pre=btn.nextElementSibling;
-    var text=pre?pre.innerText||pre.textContent:'';
-    if(navigator.clipboard && navigator.clipboard.writeText){
-      navigator.clipboard.writeText(text).then(function(){
-        btn.innerHTML='<i class=\"lbl-ico\" style=\"-webkit-mask-image:url(/images/icons/h-check.png);mask-image:url(/images/icons/h-check.png)\"></i> Copied!';btn.classList.add('copied');
-        setTimeout(function(){btn.innerHTML='<i class=\"lbl-ico\" style=\"-webkit-mask-image:url(/images/icons/h-list.png);mask-image:url(/images/icons/h-list.png)\"></i> Copy BibTeX';btn.classList.remove('copied');},2000);
-      });
-    } else {
-      btn.innerHTML='<i class=\"lbl-ico\" style=\"color:#d97706;-webkit-mask-image:url(/images/icons/h-warning.png);mask-image:url(/images/icons/h-warning.png)\"></i> Copy not supported';
-      setTimeout(function(){btn.innerHTML='<i class=\"lbl-ico\" style=\"-webkit-mask-image:url(/images/icons/h-list.png);mask-image:url(/images/icons/h-list.png)\"></i> Copy BibTeX';},2000);
-    }
-  });
-});
-</script>
 
 {% include ai-agent.html %}
 <div id="read-progress" aria-hidden="true"></div>
@@ -639,16 +328,21 @@ document.querySelectorAll('.bib-copy-btn').forEach(function(btn){
 <button id="pg-top" class="pg-fab" aria-label="Back to top" title="Back to top"><span class="pg-up"></span></button>
 <script>
 (function(){
-  var bar=document.getElementById('read-progress'), top=document.getElementById('pg-top'), dk=document.getElementById('pg-dark');
-  function onScroll(){
-    var st=window.scrollY||document.documentElement.scrollTop;
-    var h=document.documentElement.scrollHeight-window.innerHeight;
-    if(bar) bar.style.width=(h>0?(st/h*100):0)+'%';
-    if(top){ if(st>400) top.classList.add('show'); else top.classList.remove('show'); }
-  }
+  try{if(localStorage.getItem('darkMode')==='true')document.body.classList.add('dark-mode');}catch(e){}
+  var bar=document.getElementById('read-progress'),top=document.getElementById('pg-top'),dk=document.getElementById('pg-dark');
+  function onScroll(){var st=window.scrollY||document.documentElement.scrollTop,h=document.documentElement.scrollHeight-window.innerHeight;
+    if(bar)bar.style.width=(h>0?(st/h*100):0)+'%'; if(top){st>400?top.classList.add('show'):top.classList.remove('show');}}
   window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
-  if(top) top.addEventListener('click',function(){ window.scrollTo({top:0,behavior:'smooth'}); });
-  if(dk) dk.addEventListener('click',function(){ var on=document.body.classList.toggle('dark-mode'); try{localStorage.setItem('darkMode',on);}catch(e){} });
+  if(top)top.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
+  if(dk)dk.addEventListener('click',function(){var on=document.body.classList.toggle('dark-mode');try{localStorage.setItem('darkMode',on);}catch(e){}});
+  document.querySelectorAll('.bib-copy-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var pre=btn.nextElementSibling,text=pre?pre.innerText||pre.textContent:'';
+      if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(function(){
+        btn.innerHTML='<i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-check.png);mask-image:url(/images/icons/h-check.png)"></i> Copied!';btn.classList.add('copied');
+        setTimeout(function(){btn.innerHTML='<i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-list.png);mask-image:url(/images/icons/h-list.png)"></i> Copy BibTeX';btn.classList.remove('copied');},2000);});}
+    });
+  });
 })();
 </script>
 </body>
