@@ -1,86 +1,86 @@
 {
-  "updated": "2026-07-13",
+  "updated": "2026-07-20",
   "papers": [
     {
-      "id": "2607.09207",
-      "title": "Bidirectional Resource Scheduling for Disaggregated and Asynchronous RL Post-Training",
-      "authors": "Tan Zhiqiang, Wang Maoxin, Wang Sijie et al.",
-      "summary": "It is well established that the reasoning capabilities of large language models (LLMs) can be improved by applying reinforcement learning (RL) in a post-training stage. In a standard RL iteration, the…",
-      "date": "2026-07-10",
-      "tag": "RL Training",
-      "url": "https://arxiv.org/abs/2607.09207"
+      "id": "2607.15524",
+      "title": "Recursive Harness Self-Improvement",
+      "authors": "Hyunin Lee, Jinglue Xu, Jeffrey Seely et al.",
+      "summary": "Under model--harness co-evolution, harnesses are not merely inference-time scaffolds but data-generating components whose execution traces can shape future foundation models. This motivates harness-in…",
+      "date": "2026-07-17",
+      "tag": "Self-Improvement",
+      "url": "https://arxiv.org/abs/2607.15524"
     },
     {
-      "id": "2607.09153",
-      "title": "KV-PRM: Efficient Process Reward Modeling via KV-Cache Transfer for Multi-Agent Test-Time Scaling",
-      "authors": "Peng Kuang, Haibo Jin, Xiaoyu Han et al.",
-      "summary": "Process Reward Models (PRMs) have been proven to be highly effective in guiding test-time scaling (TTS) methods, which significantly boost the capabilities of LLM-based multi-agent systems. However, e…",
-      "date": "2026-07-10",
+      "id": "2607.15610",
+      "title": "Process Reward Informed Tree Rollout for Effective Multi-Turn RL",
+      "authors": "Xintong Li, Sha Li, Yuwei Zhang et al.",
+      "summary": "Reinforcement learning (RL) has become a key approach for training LLM agents, yet popular methods such as GRPO/RLOO rely on multiple independently sampled complete trajectories for advantage estimati…",
+      "date": "2026-07-17",
       "tag": "Reasoning",
-      "url": "https://arxiv.org/abs/2607.09153"
+      "url": "https://arxiv.org/abs/2607.15610"
     },
     {
-      "id": "2607.07646",
-      "title": "RL Post-Training Builds Compositional Reasoning Strategies",
-      "authors": "Azwar Abdulsalam, Nishil Patel, Andrew Saxe",
-      "summary": "Does RL post-training merely amplify primitive skills already latent in a base model, or can it compose primitive skills into new higher-level strategies? We study this question in a fully observable …",
-      "date": "2026-07-08",
+      "id": "2607.13389",
+      "title": "Where Should RL Post-Training Compute Go? Model Size, Search, Learning, and Feedback",
+      "authors": "Patrick Wilhelm, Odej Kao",
+      "summary": "Reinforcement Learning (RL) post-training is increasingly used to adapt foundation models for reasoning, planning, and feedback-driven robot-learning pipelines, but constrained post-training resources…",
+      "date": "2026-07-15",
       "tag": "RL Training",
-      "url": "https://arxiv.org/abs/2607.07646"
+      "url": "https://arxiv.org/abs/2607.13389"
     },
     {
-      "id": "2607.07993",
-      "title": "Hallucination Self-Play: Bootstrapping Reinforced Detector via Evolved Generator",
-      "authors": "Shiping Yang, Shining Liang, Weihao Liu et al.",
-      "summary": "Identifying faithfulness hallucinations in LLM-generated outputs remains challenging due to the scarcity of high-quality annotated data. Recent work relies on advanced LLMs to synthesize training data…",
-      "date": "2026-07-08",
+      "id": "2607.13395",
+      "title": "Self-Improving is Often Sudden: Enlightenment-style Finetuning for Large-Scale Models",
+      "authors": "Jing-Xiao Liao, Tianwei Zhang, Yu-Hao Jiang et al.",
+      "summary": "The pursuit of autonomously self-improving models has attracted growing interest in the era of large-scale foundation models. Drawing inspiration from the concept of \"enlightenment\" or \"aha moment\" in…",
+      "date": "2026-07-15",
       "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2607.07993"
+      "url": "https://arxiv.org/abs/2607.13395"
     },
     {
-      "id": "2607.06974",
-      "title": "MILES: Modular Instruction Memory with Learnable Selection for Self-Improving LLM Reasoning",
-      "authors": "Ruilin Tong, Dong Gong",
-      "summary": "Large language models (LLMs) increasingly improve their reasoning at test time via additional computation, yet most existing works treat each problem in isolation. When problems arrive sequentially, a…",
-      "date": "2026-07-08",
+      "id": "2607.13501",
+      "title": "LOTAPO: Leave-One-Turn Attribution for Self-Generated Process Rewards in Multi-Turn Search Reasoning",
+      "authors": "Qiang Zhu, Jiajun Wu, Longyi Wang",
+      "summary": "Reinforcement learning for multi-turn search reasoning typically relies on terminal outcome rewards, which cannot distinguish useful, redundant, and harmful intermediate interactions. We propose LOTAP…",
+      "date": "2026-07-15",
+      "tag": "Reasoning",
+      "url": "https://arxiv.org/abs/2607.13501"
+    },
+    {
+      "id": "2607.13028",
+      "title": "TerraZero: Procedural Driving Simulation for Zero-Demonstration Self-Play at Scale",
+      "authors": "Zhouchonghao Wu, Akshay Rangesh, Weixin Li et al.",
+      "summary": "Training robust autonomous driving agents requires a simulator that is fast enough for reinforcement learning at scale, realistic enough to ground behavior in real-world map structure, and diverse eno…",
+      "date": "2026-07-14",
       "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2607.06974"
+      "url": "https://arxiv.org/abs/2607.13028"
     },
     {
-      "id": "2607.05904",
-      "title": "More Convincing, Not More Correct: Self-Play Reward Hacking of Reference-Free LLM Judges",
-      "authors": "Chenyu Zhou",
-      "summary": "Training a language model against its own reference-free judgments (the premise of self-rewarding, self-play, and LLM-as-a-judge pipelines) assumes a model's verdict on a shown answer tracks correctne…",
-      "date": "2026-07-07",
+      "id": "2607.13104",
+      "title": "Self-Improvements in Modern Agentic Systems: A Survey",
+      "authors": "Zhe Ren, Yimeng Chen, Dandan Guo et al.",
+      "summary": "Self-improving autonomous agents are moving from research prototypes to deployed systems. The primary goal is controllable evolution, or adaptation, from experience with minimal or even no human input…",
+      "date": "2026-07-14",
       "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2607.05904"
+      "url": "https://arxiv.org/abs/2607.13104"
     },
     {
-      "id": "2607.05199",
-      "title": "Reason, Reward, Refine: Step-Level Errors Corrections with Structured Feedback for Physics Reasoning in Small Language Models",
-      "authors": "Raj Jaiswal, Dhruv Jain, Rishabh Dhawan et al.",
-      "summary": "Physics reasoning fails structurally in small language models: an error at any step propagates forward, corrupting every inference that follows. Limited domain knowledge, hallucination under multi-ste…",
-      "date": "2026-07-06",
-      "tag": "RL Training",
-      "url": "https://arxiv.org/abs/2607.05199"
+      "id": "2607.12931",
+      "title": "ExToken: Structured Exploration for Efficient Vision-Language-Action Reinforcement Fine-tuning",
+      "authors": "Yilun Kong, Yunpeng Qing, Guozheng Ma et al.",
+      "summary": "Reinforcement Learning (RL) has demonstrated significant potential for improving Vision-Language-Action (VLA) models on complex manipulation tasks. However, its practical scalability remains severely …",
+      "date": "2026-07-14",
+      "tag": "Multimodal",
+      "url": "https://arxiv.org/abs/2607.12931"
     },
     {
-      "id": "2607.03770",
-      "title": "Self-Improving Diffusion Classifiers with Minority Preference Optimization",
-      "authors": "Hyunsoo Kim, Jungmyung Wi, Soobin Um et al.",
-      "summary": "Prior studies have demonstrated that diffusion classifiers achieve robust zero-shot classification performance. However, their effectiveness is strongly tied to the pretraining data distribution: they…",
-      "date": "2026-07-04",
-      "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2607.03770"
-    },
-    {
-      "id": "2607.02998",
-      "title": "CONFLUX: A Latent Diffusion Model for 3D Chest-CT Synthesis with RL Post-Training",
-      "authors": "Max Van Puyvelde, Halil Ibrahim Gulluk, Wim Van Criekinge et al.",
-      "summary": "Controllable generative models of 3D medical images can synthesize volumes with specified clinical attributes, but this demands samples that are simultaneously high-fidelity, natively 3D, and faithful…",
-      "date": "2026-07-03",
-      "tag": "RL Training",
-      "url": "https://arxiv.org/abs/2607.02998"
+      "id": "2607.10139",
+      "title": "LLMs as a Jury: Cross-Model Consensus Can Outperform Process Reward Models for LLM Reasoning",
+      "authors": "Ning Liu",
+      "summary": "Selecting the correct answer from a pool of candidate reasoning chains is the engine of test-time scaling, yet the standard selectors each carry a cost: self-consistency inherits the errors of the sin…",
+      "date": "2026-07-11",
+      "tag": "Reasoning",
+      "url": "https://arxiv.org/abs/2607.10139"
     }
   ]
 }
