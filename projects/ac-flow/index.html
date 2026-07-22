@@ -198,6 +198,9 @@ figure.rimg img{width:100%;border-radius:12px;border:1px solid var(--fig-border)
 body.dark-mode figure.rimg img{filter:brightness(.9)}
 figure.rimg figcaption{font-family:var(--sans);font-size:.82rem;color:var(--muted);margin-top:.8em;text-align:center;line-height:1.5}
 @media(max-width:640px){.vs-grid{grid-template-columns:1fr}.method-grid{grid-template-columns:1fr 1fr}}
+
+/* the AI-agent panel (bottom:120px, z-index:9991) covers this FAB while open — hide it, as the agent does with its own launcher */
+.ra-panel.show ~ #pg-dark{opacity:0;pointer-events:none;}
 </style>
 <script type="application/ld+json">{
   "@context": "https://schema.org",

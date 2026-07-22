@@ -153,6 +153,9 @@ body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-ima
 @view-transition{navigation:auto}
 ::view-transition-old(root),::view-transition-new(root){animation-duration:.18s}
 @media (prefers-reduced-motion:reduce){::view-transition-old(root),::view-transition-new(root){animation:none!important}}
+
+/* the AI-agent panel (bottom:120px, z-index:9991) covers this FAB while open — hide it, as the agent does with its own launcher */
+.ra-panel.show ~ #pg-dark{opacity:0;pointer-events:none;}
 </style>
 <script type="application/ld+json">{
   "@context":"https://schema.org","@type":"ScholarlyArticle",

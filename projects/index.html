@@ -115,6 +115,9 @@ body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-ima
 @view-transition{navigation:auto}
 ::view-transition-old(root),::view-transition-new(root){animation-duration:.18s}
 @media (prefers-reduced-motion:reduce){::view-transition-old(root),::view-transition-new(root){animation:none!important}}
+
+/* the AI-agent panel (bottom:120px, z-index:9991) covers this FAB while open — hide it, as the agent does with its own launcher */
+.ra-panel.show ~ #pg-dark{opacity:0;pointer-events:none;}
 </style>
   <script src="https://api.myvisitor.site/tracker.js" data-site-id="8b23ecb8-e05e-41a2-9793-3ac945b62631" data-autostart="true" async></script>
 </head>
@@ -226,7 +229,7 @@ body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-ima
     <div class="card-header">
       <span class="venue-tag vt-iclr23">ICLR 2023</span>
       <span class="vt-oral">⭐ Oral · 5/4176</span>
-      <h3 style="margin-top:8px;">LBC: Breaking 24 Atari World Records</h3>
+      <h3>LBC: Breaking 24 Atari World Records</h3>
       <div class="authors"><strong>J. Fan*</strong>, Y. Zhuang, Y. Liu, J. Hao, B. Wang, J. Zhu, H. Wang, S.-T. Xia</div>
     </div>
     <div class="card-body">
