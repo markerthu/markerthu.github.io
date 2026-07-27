@@ -1,6 +1,51 @@
 {
-  "updated": "2026-07-20",
+  "updated": "2026-07-27",
   "papers": [
+    {
+      "id": "2607.22511",
+      "title": "CausalForge: A Formally Grounded, Self-Improving Agentic Framework for Automated Research in Causal Inference",
+      "authors": "Jiyuan Tan, Vasilis Syrgkanis",
+      "summary": "Automating theoretical research is constrained not only by the generation of candidate results, but also by their reliable evaluation. A common approach is to close the research loop with a large lang…",
+      "date": "2026-07-24",
+      "tag": "Self-Improvement",
+      "url": "https://arxiv.org/abs/2607.22511"
+    },
+    {
+      "id": "2607.20166",
+      "title": "Audio-Zero: Label-Free Self-Evolution for Fine-Grained Audio Reasoning",
+      "authors": "Siqian Tong, Xuan Li, Chaozhuo Li et al.",
+      "summary": "Large Audio Language models (LALMs) have made rapid progress on acoustic understanding, yet they still struggle with fine-grained audio reasoning (e.g., recognizing event order, repetitions and durati…",
+      "date": "2026-07-22",
+      "tag": "Audio Reasoning",
+      "url": "https://arxiv.org/abs/2607.20166"
+    },
+    {
+      "id": "2607.19592",
+      "title": "Knowledge-Centric Self-Improvement",
+      "authors": "Xuefei Julie Wang, Lauren Hyoseo Yoon, Chengrui Qu et al.",
+      "summary": "Self-improving AI systems typically treat the agent as the object that improves, by optimizing prompts, workflows, harnesses, or even the agent's own code. This agent-centric view can make improvement…",
+      "date": "2026-07-21",
+      "tag": "Self-Improvement",
+      "url": "https://arxiv.org/abs/2607.19592"
+    },
+    {
+      "id": "2607.18973",
+      "title": "Verifiable Self-Evolution for Open-Ended Dialogue Skills via Future-Feedback Prediction",
+      "authors": "ChaoJin Zhao, Xuan Jiang",
+      "summary": "Textual skills provide a lightweight way to improve frozen language-model agents, but their self-evolution normally requires a stable validation signal. Such signals are natural in mathematics or code…",
+      "date": "2026-07-21",
+      "tag": "RL Training",
+      "url": "https://arxiv.org/abs/2607.18973"
+    },
+    {
+      "id": "2607.18358",
+      "title": "A Classifier That Teaches Itself: Self-Improving, Frozen-gate Training (SIFT) for Dynamic Document Classification",
+      "authors": "Bogdan Raduta, Horia Velicu, Alexandru Preda et al.",
+      "summary": "Document classification is a solved problem in the laboratory and an unsolved one in the enterprise. The blocker is rarely model architecture; it is the labeling project that must precede a model and …",
+      "date": "2026-07-20",
+      "tag": "Self-Improvement",
+      "url": "https://arxiv.org/abs/2607.18358"
+    },
     {
       "id": "2607.15524",
       "title": "Recursive Harness Self-Improvement",
@@ -29,15 +74,6 @@
       "url": "https://arxiv.org/abs/2607.13389"
     },
     {
-      "id": "2607.13395",
-      "title": "Self-Improving is Often Sudden: Enlightenment-style Finetuning for Large-Scale Models",
-      "authors": "Jing-Xiao Liao, Tianwei Zhang, Yu-Hao Jiang et al.",
-      "summary": "The pursuit of autonomously self-improving models has attracted growing interest in the era of large-scale foundation models. Drawing inspiration from the concept of \"enlightenment\" or \"aha moment\" in…",
-      "date": "2026-07-15",
-      "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2607.13395"
-    },
-    {
       "id": "2607.13501",
       "title": "LOTAPO: Leave-One-Turn Attribution for Self-Generated Process Rewards in Multi-Turn Search Reasoning",
       "authors": "Qiang Zhu, Jiajun Wu, Longyi Wang",
@@ -45,42 +81,6 @@
       "date": "2026-07-15",
       "tag": "Reasoning",
       "url": "https://arxiv.org/abs/2607.13501"
-    },
-    {
-      "id": "2607.13028",
-      "title": "TerraZero: Procedural Driving Simulation for Zero-Demonstration Self-Play at Scale",
-      "authors": "Zhouchonghao Wu, Akshay Rangesh, Weixin Li et al.",
-      "summary": "Training robust autonomous driving agents requires a simulator that is fast enough for reinforcement learning at scale, realistic enough to ground behavior in real-world map structure, and diverse eno…",
-      "date": "2026-07-14",
-      "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2607.13028"
-    },
-    {
-      "id": "2607.13104",
-      "title": "Self-Improvements in Modern Agentic Systems: A Survey",
-      "authors": "Zhe Ren, Yimeng Chen, Dandan Guo et al.",
-      "summary": "Self-improving autonomous agents are moving from research prototypes to deployed systems. The primary goal is controllable evolution, or adaptation, from experience with minimal or even no human input…",
-      "date": "2026-07-14",
-      "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2607.13104"
-    },
-    {
-      "id": "2607.12931",
-      "title": "ExToken: Structured Exploration for Efficient Vision-Language-Action Reinforcement Fine-tuning",
-      "authors": "Yilun Kong, Yunpeng Qing, Guozheng Ma et al.",
-      "summary": "Reinforcement Learning (RL) has demonstrated significant potential for improving Vision-Language-Action (VLA) models on complex manipulation tasks. However, its practical scalability remains severely …",
-      "date": "2026-07-14",
-      "tag": "Multimodal",
-      "url": "https://arxiv.org/abs/2607.12931"
-    },
-    {
-      "id": "2607.10139",
-      "title": "LLMs as a Jury: Cross-Model Consensus Can Outperform Process Reward Models for LLM Reasoning",
-      "authors": "Ning Liu",
-      "summary": "Selecting the correct answer from a pool of candidate reasoning chains is the engine of test-time scaling, yet the standard selectors each carry a cost: self-consistency inherits the errors of the sin…",
-      "date": "2026-07-11",
-      "tag": "Reasoning",
-      "url": "https://arxiv.org/abs/2607.10139"
     }
   ]
 }
