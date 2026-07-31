@@ -18,3 +18,5 @@ bibtex: |
 ---
 
 We propose CESAR, an online RL framework (GRPO) with multi-faceted reasoning process rewards incentivizing consistency, structured analytical patterns, and calibrated depth. Resolves test-time inverse scaling in Audio LLMs; achieves SOTA on MMAU Test-mini, substantially outperforming Gemini 2.5 Pro and GPT-4o Audio.
+
+Also featured on [Amazon Science](https://www.amazon.science/publications/incentivizing-consistent-effective-and-scalable-reasoning-capability-in-audio-llms-via-reasoning-process-rewards).

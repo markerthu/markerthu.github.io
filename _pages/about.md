@@ -1284,6 +1284,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
     <div class="pub-title">
       <a href="https://openreview.net/forum?id=DUr48hxO2h" target="_blank" rel="noopener noreferrer">Incentivizing Consistent, Effective and Scalable Reasoning Capability in Audio LLMs via Reasoning Process Rewards</a>
       <a class="pub-project" href="/projects/cesar/">Project Page</a>
+      <a class="pub-project" href="https://www.amazon.science/publications/incentivizing-consistent-effective-and-scalable-reasoning-capability-in-audio-llms-via-reasoning-process-rewards" target="_blank" rel="noopener noreferrer">Amazon Science</a>
     <button class="pub-abst-btn" aria-expanded="false" aria-label="Toggle abstract">▾ Abstract</button>
     <div class="pub-abstract-preview">CESAR resolves test-time inverse scaling in Audio LLMs by rewarding the reasoning process via GRPO, achieving SOTA on MMAU — outperforming Gemini 2.5 Pro and GPT-4o Audio.</div></div>
     <div class="pub-authors"><strong>J. Fan*</strong>, R. Ren, J. Li, R. Pandey, P.G. Shivakumar, I. Bulyko, A. Gandhe, G. Liu, Y. Gu</div>
