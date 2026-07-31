@@ -1158,7 +1158,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 <ul class="news-list">
   <li>
     <span class="news-date">Jul 2026</span>
-    <span><span class="nbadge nb-accept">Accept</span>Paper accepted at <strong>TMLR</strong> — self-improving protein generation via online RL.</span>
+    <span><span class="nbadge nb-accept">Accept</span>Paper accepted at <strong>TMLR</strong> — first online-RL framework for self-improving protein generation.</span>
   </li>
   <li>
     <span class="news-date">Jul 2026</span>
