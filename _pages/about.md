@@ -1158,6 +1158,14 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 <ul class="news-list">
   <li>
     <span class="news-date">Jul 2026</span>
+    <span><span class="nbadge nb-accept">Accept</span>Paper accepted at <strong>TMLR</strong> — self-improving protein generation via online RL.</span>
+  </li>
+  <li>
+    <span class="news-date">Jul 2026</span>
+    <span><span class="nbadge nb-upcoming">Feature</span>CESAR is now featured on <a href="https://www.amazon.science/publications/incentivizing-consistent-effective-and-scalable-reasoning-capability-in-audio-llms-via-reasoning-process-rewards"><strong>Amazon Science</strong></a>.</span>
+  </li>
+  <li>
+    <span class="news-date">Jul 2026</span>
     <span><span class="nbadge nb-accept">Accept</span>Papers accepted at <strong>COLM 2026</strong> (San Francisco, Oct 6–9). See you in San Francisco <img class="g-ico" src="/images/icons/flag-us.png" alt=""></span>
   </li>
   <li>
