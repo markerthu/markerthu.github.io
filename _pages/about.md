@@ -1162,7 +1162,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
   </li>
   <li>
     <span class="news-date">Jul 2026</span>
-    <span><span class="nbadge nb-upcoming">Feature</span>CESAR is now featured on <a href="https://www.amazon.science/publications/incentivizing-consistent-effective-and-scalable-reasoning-capability-in-audio-llms-via-reasoning-process-rewards"><strong>Amazon Science</strong></a>.</span>
+    <span><span class="nbadge nb-finish">Feature</span>CESAR is now featured on <a href="https://www.amazon.science/publications/incentivizing-consistent-effective-and-scalable-reasoning-capability-in-audio-llms-via-reasoning-process-rewards"><strong>Amazon Science</strong></a>.</span>
   </li>
   <li>
     <span class="news-date">Jul 2026</span>
