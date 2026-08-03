@@ -1,6 +1,69 @@
 {
-  "updated": "2026-07-27",
+  "updated": "2026-08-03",
   "papers": [
+    {
+      "id": "2607.29613",
+      "title": "WCM: A World Critic Model for Vision-Language-Action Reinforcement Learning",
+      "authors": "Senyu Fei, Xiaopeng Yu, Siyin Wang et al.",
+      "summary": "Reinforcement learning (RL) post-training of Vision-Language-Action (VLA) models has shown strong promise for robotic manipulation. Among RL methods, critic-based approaches rely on a value estimator …",
+      "date": "2026-07-31",
+      "tag": "Multimodal",
+      "url": "https://arxiv.org/abs/2607.29613"
+    },
+    {
+      "id": "2607.28301",
+      "title": "HARGO: Heterogeneity-Aware Reward-Guided Optimization for RL Post-Training of LLMs on HPC Tasks",
+      "authors": "Tiangang Li, Xiangbo Tian",
+      "summary": "Supervised fine-tuning (SFT) can equip large language models (LLMs) with domain knowledge for high-performance computing (HPC) tasks such as data race detection and benchmark question answering. Howev…",
+      "date": "2026-07-30",
+      "tag": "RL Training",
+      "url": "https://arxiv.org/abs/2607.28301"
+    },
+    {
+      "id": "2607.26515",
+      "title": "HiFloat4 Format for End-To-End Reinforcement Learning Post-Training of Large Language Models",
+      "authors": "Hei Yi Mak, Shadan Golestan, Hoang Le et al.",
+      "summary": "We present, to our knowledge, the first end-to-end FP4 RL post-training, in which both the rollout and training policies, including their forward and backward passes, operate at 4-bit precision. A sys…",
+      "date": "2026-07-29",
+      "tag": "RL Training",
+      "url": "https://arxiv.org/abs/2607.26515"
+    },
+    {
+      "id": "2607.26722",
+      "title": "DREvo: Distilling Recalibrated Historical Experience for Harness Self-Evolution",
+      "authors": "Hanghui Guo, Weijie Shi, Zhangze Chen et al.",
+      "summary": "Harness plays a critical role in large language model agent performance, and building a high-performing harness requires substantial expert effort. Therefore, recent research has increasingly explored…",
+      "date": "2026-07-29",
+      "tag": "RL Training",
+      "url": "https://arxiv.org/abs/2607.26722"
+    },
+    {
+      "id": "2607.26643",
+      "title": "Rethinking Self-Evolution: A Constrained Exploration-Exploitation Process for Mitigating Skill Overfitting",
+      "authors": "Hongqiang Lin, Chao Liu, Xiaofan Bai et al.",
+      "summary": "Enabling large language model (LLM) agents to accumulate and reuse experience from past interactions remains a central challenge in real-world applications. A promising solution is to treat skills as …",
+      "date": "2026-07-29",
+      "tag": "RL Training",
+      "url": "https://arxiv.org/abs/2607.26643"
+    },
+    {
+      "id": "2607.26541",
+      "title": "Prosody-driven Jailbreaks in Audio LLMs: A Controlled Study and Mechanistic Analysis",
+      "authors": "Jiachen Qian, Junyu Li",
+      "summary": "Audio-capable foundation models enable end-to-end spoken interaction, but they also introduce safety risks beyond transcript content. It remains unclear how much jailbreak capability can arise from ma…",
+      "date": "2026-07-29",
+      "tag": "Audio Reasoning",
+      "url": "https://arxiv.org/abs/2607.26541"
+    },
+    {
+      "id": "2607.26115",
+      "title": "GPT-Red: Automated Red Teaming via Self-Play at Scale",
+      "authors": "Eric Wallace, Christopher A. Choquette-Choo, Nikhil Kandpal et al.",
+      "summary": "We introduce \\textbf{GPT-Red}, an automated red-teaming agent that is trained to discover novel prompt injection attacks against frontier LLMs. The goal of this model is to evaluate and improve the ro…",
+      "date": "2026-07-28",
+      "tag": "Self-Improvement",
+      "url": "https://arxiv.org/abs/2607.26115"
+    },
     {
       "id": "2607.22511",
       "title": "CausalForge: A Formally Grounded, Self-Improving Agentic Framework for Automated Research in Causal Inference",
@@ -18,69 +81,6 @@
       "date": "2026-07-22",
       "tag": "Audio Reasoning",
       "url": "https://arxiv.org/abs/2607.20166"
-    },
-    {
-      "id": "2607.19592",
-      "title": "Knowledge-Centric Self-Improvement",
-      "authors": "Xuefei Julie Wang, Lauren Hyoseo Yoon, Chengrui Qu et al.",
-      "summary": "Self-improving AI systems typically treat the agent as the object that improves, by optimizing prompts, workflows, harnesses, or even the agent's own code. This agent-centric view can make improvement…",
-      "date": "2026-07-21",
-      "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2607.19592"
-    },
-    {
-      "id": "2607.18973",
-      "title": "Verifiable Self-Evolution for Open-Ended Dialogue Skills via Future-Feedback Prediction",
-      "authors": "ChaoJin Zhao, Xuan Jiang",
-      "summary": "Textual skills provide a lightweight way to improve frozen language-model agents, but their self-evolution normally requires a stable validation signal. Such signals are natural in mathematics or code…",
-      "date": "2026-07-21",
-      "tag": "RL Training",
-      "url": "https://arxiv.org/abs/2607.18973"
-    },
-    {
-      "id": "2607.18358",
-      "title": "A Classifier That Teaches Itself: Self-Improving, Frozen-gate Training (SIFT) for Dynamic Document Classification",
-      "authors": "Bogdan Raduta, Horia Velicu, Alexandru Preda et al.",
-      "summary": "Document classification is a solved problem in the laboratory and an unsolved one in the enterprise. The blocker is rarely model architecture; it is the labeling project that must precede a model and …",
-      "date": "2026-07-20",
-      "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2607.18358"
-    },
-    {
-      "id": "2607.15524",
-      "title": "Recursive Harness Self-Improvement",
-      "authors": "Hyunin Lee, Jinglue Xu, Jeffrey Seely et al.",
-      "summary": "Under model--harness co-evolution, harnesses are not merely inference-time scaffolds but data-generating components whose execution traces can shape future foundation models. This motivates harness-in…",
-      "date": "2026-07-17",
-      "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2607.15524"
-    },
-    {
-      "id": "2607.15610",
-      "title": "Process Reward Informed Tree Rollout for Effective Multi-Turn RL",
-      "authors": "Xintong Li, Sha Li, Yuwei Zhang et al.",
-      "summary": "Reinforcement learning (RL) has become a key approach for training LLM agents, yet popular methods such as GRPO/RLOO rely on multiple independently sampled complete trajectories for advantage estimati…",
-      "date": "2026-07-17",
-      "tag": "Reasoning",
-      "url": "https://arxiv.org/abs/2607.15610"
-    },
-    {
-      "id": "2607.13389",
-      "title": "Where Should RL Post-Training Compute Go? Model Size, Search, Learning, and Feedback",
-      "authors": "Patrick Wilhelm, Odej Kao",
-      "summary": "Reinforcement Learning (RL) post-training is increasingly used to adapt foundation models for reasoning, planning, and feedback-driven robot-learning pipelines, but constrained post-training resources…",
-      "date": "2026-07-15",
-      "tag": "RL Training",
-      "url": "https://arxiv.org/abs/2607.13389"
-    },
-    {
-      "id": "2607.13501",
-      "title": "LOTAPO: Leave-One-Turn Attribution for Self-Generated Process Rewards in Multi-Turn Search Reasoning",
-      "authors": "Qiang Zhu, Jiajun Wu, Longyi Wang",
-      "summary": "Reinforcement learning for multi-turn search reasoning typically relies on terminal outcome rewards, which cannot distinguish useful, redundant, and harmful intermediate interactions. We propose LOTAP…",
-      "date": "2026-07-15",
-      "tag": "Reasoning",
-      "url": "https://arxiv.org/abs/2607.13501"
     }
   ]
 }
