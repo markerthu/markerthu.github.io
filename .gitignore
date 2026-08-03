@@ -7,3 +7,7 @@ _site/
 # macOS
 .DS_Store
 **/.DS_Store
+
+# Python bytecode cache
+__pycache__/
+*.pyc
