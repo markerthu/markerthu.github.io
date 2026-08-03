@@ -121,26 +121,26 @@
   {% endif %}
 
     </ul>
-    <!-- Visitor map: MapMyVisitors real data, with self-hosted globe fallback if it fails/blocked -->
+    <!-- Visitors: decorative rotating globe + live pageview count (GoatCounter — open-source, no cookies) -->
     <div id="vmap-zone" style="text-align:center;padding:12px 0 4px;">
-      <div id="vmap-real">
-        <script type="text/javascript" id="mapmyvisitors" src="//mapmyvisitors.com/map.js?d=rm753rwupA6UHa26bOIiChUOW8JBdRWgNGPCYKwaJuc&cl=ffffff&w=a"></script>
-      </div>
-      <div id="vmap-globe" style="display:none;">
-        <canvas id="jf-globe" width="200" height="200" style="width:170px;height:170px;display:inline-block;"></canvas>
-        <div style="font-size:.72em;color:#6b7280;font-weight:700;margin-top:2px;display:flex;align-items:center;justify-content:center;gap:6px;"><span style="width:7px;height:7px;border-radius:50%;background:#22c55e;display:inline-block;"></span>Visitors worldwide</div>
-      </div>
+      <canvas id="jf-globe" width="200" height="200" style="width:170px;height:170px;display:inline-block;"></canvas>
+      <div id="gc-label" style="font-size:.72em;color:#6b7280;font-weight:700;margin-top:2px;display:flex;align-items:center;justify-content:center;gap:6px;"><span style="width:7px;height:7px;border-radius:50%;background:#22c55e;display:inline-block;"></span><span id="gc-text">Visitors worldwide</span></div>
     </div>
-    <style>body.dark-mode #vmap-globe div{color:#8b949e !important;}</style>
+    <style>body.dark-mode #gc-label{color:#8b949e !important;}</style>
     <script>
     (function(){
-      var FALLBACK_MS=6000;
-      function realRendered(){
-        var z=document.getElementById('vmap-real'); if(!z) return false;
-        if(z.querySelector('img, canvas, a[href*="mapmyvisitors.com/web"]')) return true;
-        return /Pageview|Visit/i.test(z.textContent||'');
-      }
-      function startGlobe(){
+      /* live total pageviews — GoatCounter public counter endpoint (no token, CORS-enabled) */
+      try{
+        fetch('https://jiajunfan.goatcounter.com/counter/TOTAL.json')
+          .then(function(r){return r.ok?r.json():null;})
+          .then(function(d){
+            if(!d||d.count==null) return;
+            var n=parseInt((''+d.count).replace(/[^0-9]/g,''),10)||0;
+            if(n>0){var t=document.getElementById('gc-text'); if(t) t.textContent=n.toLocaleString('en-US')+' pageviews';}
+          }).catch(function(){});
+      }catch(e){}
+      /* decorative rotating dot-globe (illustrative, not visitor coordinates) */
+      (function startGlobe(){
         var c=document.getElementById('jf-globe'); if(!c||!c.getContext) return;
         var ctx=c.getContext('2d'), DPR=Math.min(window.devicePixelRatio||1,2), S=200;
         c.width=S*DPR; c.height=S*DPR; ctx.scale(DPR,DPR);
@@ -174,13 +174,7 @@
           raf=requestAnimationFrame(frame);
         }
         raf=requestAnimationFrame(frame);
-      }
-      setTimeout(function(){
-        if(realRendered()) return;            /* MapMyVisitors worked — keep it */
-        var r=document.getElementById('vmap-real'); if(r) r.style.display='none';
-        var g=document.getElementById('vmap-globe'); if(g) g.style.display='block';
-        startGlobe();
-      }, FALLBACK_MS);
+      })();
     })();
     </script>
   </div>
