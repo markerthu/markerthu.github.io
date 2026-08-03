@@ -54,18 +54,26 @@ def main():
         cur = json.load(f)
     cur["_updated"] = datetime.date.today().isoformat()
     cur["_source"]  = "Google Scholar (%s) via SerpAPI" % AUTHOR_ID
-    cur["_total"]   = int(total)
-    if h_index: cur["_h_index"] = int(h_index)
-    if i10:     cur["_i10_index"] = int(i10)
-    if by_year: cur["_by_year"] = by_year
+    # Monotonic guard: citation counts don't go down. SerpAPI's cached Scholar
+    # data can lag the live profile by days, so never let a stale (lower) fetch
+    # regress the stored numbers. Once SerpAPI catches up (>= stored), it wins.
+    cur["_total"] = max(int(total), int(cur.get("_total") or 0))
+    if h_index: cur["_h_index"]   = max(int(h_index), int(cur.get("_h_index") or 0))
+    if i10:     cur["_i10_index"] = max(int(i10),     int(cur.get("_i10_index") or 0))
+    if by_year:
+        # adopt the fetched histogram only if it's at least as fresh as stored
+        fetched_sum = sum((y.get("citations") or 0) for y in by_year)
+        stored_sum  = sum((y.get("citations") or 0) for y in cur.get("_by_year", []))
+        if fetched_sum >= stored_sum:
+            cur["_by_year"] = by_year
 
-    # per-paper counts (keep old value if a paper isn't matched)
+    # per-paper counts (monotonic; keep old value if a paper isn't matched)
     arts = d.get("articles", [])
     def cites(a): return (a.get("cited_by", {}) or {}).get("value") or 0
     for k, sub in PAPER_MATCH.items():
         hit = next((a for a in arts if sub in (a.get("title", "").lower())), None)
         if hit is not None:
-            cur[k] = int(cites(hit))
+            cur[k] = max(int(cites(hit)), int(cur.get(k) or 0))
 
     with open(CIT, "w", encoding="utf-8") as f:
         json.dump(cur, f, indent=2, ensure_ascii=False); f.write("\n")

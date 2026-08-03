@@ -1514,7 +1514,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
     <div class="stat-label">MMAU Audio Reasoning<br><em>Beats Gemini 2.5 Pro</em></div>
   </div>
   <div class="stat-card">
-    <div class="stat-number" data-target="{{ site.data.citations._total | default: 360 }}" data-suffix="+">0</div>
+    <div class="stat-number" data-target="{{ site.data.citations._total | default: 437 }}" data-suffix="+">0</div>
     <div class="stat-label">Google Scholar Citations</div>
   </div>
   <div class="stat-card">
@@ -1539,7 +1539,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 <div class="cit-chart">
   <div class="cit-chart-head">
     <span class="cit-chart-title">Citations over time</span>
-    <span class="cit-chart-sub">Google Scholar &middot; {{ site.data.citations._total }} citations &middot; h-index {{ site.data.citations._h_index | default: 9 }} &middot; i10 {{ site.data.citations._i10_index | default: 9 }} &middot; auto-updated daily</span>
+    <span class="cit-chart-sub">Google Scholar &middot; {{ site.data.citations._total }} citations &middot; h-index {{ site.data.citations._h_index | default: 11 }} &middot; i10 {{ site.data.citations._i10_index | default: 12 }} &middot; auto-updated daily</span>
   </div>
   <svg class="ct-svg" viewBox="0 0 720 210" preserveAspectRatio="none" role="img" aria-label="Cumulative citations over time">
     <defs>
