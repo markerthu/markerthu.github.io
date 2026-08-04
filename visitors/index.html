@@ -73,7 +73,8 @@ tbody td{padding:9px 10px;border-bottom:1px solid var(--rule);color:var(--body);
 tbody tr:hover{background:var(--band)}
 td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 td.n{color:var(--ink);font-weight:600}
-.bar{height:5px;border-radius:3px;background:var(--link);opacity:.28;min-width:2px}
+.track{height:6px;border-radius:3px;background:var(--rule);overflow:hidden;margin-top:5px}
+.bar{height:6px;border-radius:3px;background:var(--link);opacity:.45;min-width:3px}
 .mono{font-family:var(--mono);font-size:12.5px}
 .dim{color:var(--faint)}
 .pill{display:inline-block;font-family:var(--sans);font-size:10.5px;font-weight:700;letter-spacing:.04em;padding:1px 7px;border-radius:99px;background:var(--band);color:var(--muted);border:1px solid var(--rule)}
@@ -129,9 +130,9 @@ body.dark-mode #pg-dark{background:#21262d;color:#fff;border-color:#30363d}
   </div>
 
   <div class="statrow">
-    <div class="stat"><div class="n" id="v-total">{{ v._total | default: 0 }}</div><div class="l">Pageviews &middot; all time</div></div>
-    <div class="stat"><div class="n">{{ v._total | default: 0 }}</div><div class="l">Last {{ v._days | default: 30 }} days</div></div>
+    <div class="stat"><div class="n">{{ v._total | default: 0 }}</div><div class="l">Views &middot; last {{ v._days | default: 30 }} days</div></div>
     <div class="stat"><div class="n">{{ v.countries | size }}</div><div class="l">Countries</div></div>
+    <div class="stat"><div class="n">{{ v.regions | size }}</div><div class="l">States &amp; provinces</div></div>
     <div class="stat"><div class="n">{{ v.pages | size }}</div><div class="l">Pages visited</div></div>
   </div>
 
@@ -144,10 +145,15 @@ body.dark-mode #pg-dark{background:#21262d;color:#fff;border-color:#30363d}
   <h2 class="sec">Recent visits</h2>
   {%- assign nrecent = v.recent | size -%}
   {% if nrecent > 0 %}
-  <p class="sec-note">The latest {{ nrecent }} pageviews, newest first, in UTC. There is no IP column because GoatCounter never stores IP addresses &mdash; location is derived at collection time and the address is discarded.</p>
+  {%- assign screens = v.recent | map: "screen" | join: "" -%}
+  <p class="sec-note">
+    Every visit recorded so far, newest first, in UTC &mdash; {{ nrecent }} so far, and this list holds the most recent 30.
+    Per-visit logging started on 4 Aug 2026; visits before that survive only as the totals further down.
+    There is no IP column: GoatCounter resolves the location when the request arrives and never stores the address.
+  </p>
   <div class="tablewrap">
     <table>
-      <thead><tr><th>When</th><th>From</th><th>Page</th><th>Came via</th><th>Browser</th><th>System</th><th>Screen</th></tr></thead>
+      <thead><tr><th>When</th><th>From</th><th>Page</th><th>Came via</th><th>Browser</th><th>System</th>{% if screens != "" %}<th>Screen</th>{% endif %}</tr></thead>
       <tbody>
       {% for r in v.recent %}
         <tr>
@@ -157,7 +163,7 @@ body.dark-mode #pg-dark{background:#21262d;color:#fff;border-color:#30363d}
           <td class="dim">{% if r.ref and r.ref != "" %}{{ r.ref }}{% else %}direct{% endif %}</td>
           <td>{{ r.browser | default: "—" }}</td>
           <td>{{ r.system | default: "—" }}</td>
-          <td class="dim mono">{{ r.screen | default: "—" }}</td>
+          {% if screens != "" %}<td class="dim mono">{{ r.screen | default: "—" }}</td>{% endif %}
         </tr>
       {% endfor %}
       </tbody>
@@ -181,7 +187,7 @@ body.dark-mode #pg-dark{background:#21262d;color:#fff;border-color:#30363d}
           <td class="n">{{ r.name }}{% unless r.located %} <span class="pill">no map dot</span>{% endunless %}</td>
           <td class="dim">{{ r.country_name }} <span class="mono">{{ r.country }}</span></td>
           <td class="num">{{ r.count }}</td>
-          <td><div class="bar" style="width:{{ r.count | times: 100 | divided_by: topr.count }}%"></div></td>
+          <td><div class="track"><div class="bar" style="width:{{ r.count | times: 100 | divided_by: topr.count }}%"></div></div></td>
         </tr>
       {% endfor %}
       </tbody>
@@ -200,7 +206,7 @@ body.dark-mode #pg-dark{background:#21262d;color:#fff;border-color:#30363d}
         <tr>
           <td class="n">{{ c.name }} <span class="dim mono">{{ c.code }}</span></td>
           <td class="num">{{ c.count }}</td>
-          <td><div class="bar" style="width:{{ c.count | times: 100 | divided_by: topc.count }}%"></div></td>
+          <td><div class="track"><div class="bar" style="width:{{ c.count | times: 100 | divided_by: topc.count }}%"></div></div></td>
         </tr>
       {% endfor %}
       </tbody>
@@ -280,17 +286,6 @@ body.dark-mode #pg-dark{background:#21262d;color:#fff;border-color:#30363d}
     var on=document.body.classList.toggle('dark-mode');
     try{localStorage.setItem('darkMode',on?'true':'false');}catch(e){}
   });
-  /* live total pageviews from GoatCounter's public counter endpoint */
-  try{
-    fetch('https://jiajunfan.goatcounter.com/counter/TOTAL.json')
-      .then(function(r){return r.ok?r.json():null;})
-      .then(function(d){
-        if(!d||d.count==null) return;
-        var n=parseInt((''+d.count).replace(/[^0-9]/g,''),10)||0;
-        var el=document.getElementById('v-total');
-        if(n>0&&el) el.textContent=n.toLocaleString('en-US');
-      }).catch(function(){});
-  }catch(e){}
 })();
 </script>
 <script data-goatcounter="https://jiajunfan.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>

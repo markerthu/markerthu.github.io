@@ -182,7 +182,7 @@ def try_export(prev_rows):
         """Field lookup that tolerates CSV strings and JSON bools/ints, any casing."""
         for n in names:
             for k in row:
-                if k and str(k).strip().lower().replace("_", "") == n:
+                if k and str(k).strip().lower().replace("_", "").replace(" ", "") == n:
                     v = row[k]
                     if v is None or v is False:
                         return ""
