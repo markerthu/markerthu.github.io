@@ -201,6 +201,17 @@ def try_export(prev_rows):
         except Exception:
             rnames = {}
 
+    def pretty_screen(raw):
+        """GoatCounter stores 'width,height,scale'; height is often 0 (not reported)."""
+        parts = [p.strip() for p in (raw or "").split(",")]
+        try:
+            w = int(parts[0]); h = int(parts[1]) if len(parts) > 1 else 0
+        except (ValueError, IndexError):
+            return ""
+        if w <= 0:
+            return ""
+        return "%d×%d" % (w, h) if h > 0 else "%dpx" % w
+
     def pretty_loc(code):
         """'US-WA' -> 'Washington, US'; 'US' -> 'United States'; '' -> ''."""
         code = (code or "").strip().upper()
@@ -227,7 +238,7 @@ def try_export(prev_rows):
             "ref": g(row, "referrer", "ref"),
             "browser": g(row, "browser", "useragentheader"),
             "system": g(row, "system"),
-            "screen": g(row, "screensize", "size"),
+            "screen": pretty_screen(g(row, "screensize", "size")),
             "first": g(row, "firstvisit").lower() in ("1", "true"),
         })
     if rows and isinstance(rows[0], dict):
