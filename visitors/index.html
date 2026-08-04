@@ -1,0 +1,273 @@
+---
+layout: null
+permalink: /visitors/
+sitemap: false
+---
+{%- assign v = site.data.visitors -%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Visitors &mdash; Jiajun Fan</title>
+<meta name="description" content="Where visitors to jiajunfan.com come from. Privacy-friendly analytics: no cookies, no IP addresses, country level only.">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://www.jiajunfan.com/visitors/">
+<script>try{if(localStorage.getItem('darkMode')==='true'){document.documentElement.style.background='#0f1216';}}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="icon" href="/images/favicon.ico">
+<style>
+:root{
+  --serif:'Newsreader',Georgia,'Times New Roman',serif;
+  --sans:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+  --bg:#fdfcfa; --band:#f6f3ec; --ink:#1a1815; --body:#2b2823; --muted:#6c6860; --faint:#787369;
+  --rule:#e8e3d9; --link:#1565c0; --link-h:#0d47a1; --card:#ffffff; --fig-border:#e6e0d5;
+  --sea:#3b7ea3; --land:#ffffff; --dot:#e8262d;
+}
+body.dark-mode{
+  --bg:#0f1216; --band:#151a20; --ink:#ece8e0; --body:#cdc8be; --muted:#8f8a80; --faint:#8a857b;
+  --rule:#262b33; --link:#6ea8fe; --link-h:#93c0ff; --card:#161a20; --fig-border:#2a2f38;
+  --sea:#2b5f7d; --land:#e9eef2; --dot:#ff6b6b;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:var(--serif);background:var(--bg);color:var(--body);line-height:1.72;font-size:19px;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s}
+a{color:var(--link);text-decoration:none}a:hover{color:var(--link-h)}
+
+.site-masthead{background:var(--bg);box-shadow:0 1px 0 var(--rule);position:sticky;top:0;z-index:200;font-size:16px;font-family:var(--sans)}
+.site-masthead::after{content:'';display:block;height:3px;background:linear-gradient(to right,#1565c0 0%,#7c4dff 50%,#00897b 100%)}
+.masthead-inner{max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:56px}
+.masthead-title{font-weight:800;letter-spacing:-.02em;color:var(--ink);font-size:19px}
+.masthead-nav a{color:var(--muted);margin-left:22px;font-weight:500}
+.masthead-nav a:hover{color:var(--link)}
+
+.wrap{max-width:960px;margin:0 auto;padding:0 24px}
+.hero{padding:54px 0 26px;border-bottom:1px solid var(--rule)}
+.kicker{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:14px}
+h1{font-family:var(--serif);font-weight:600;font-size:44px;line-height:1.14;letter-spacing:-.015em;color:var(--ink);margin:0 0 12px}
+.sub{font-size:20px;color:var(--muted);margin:0 0 6px;max-width:60ch}
+.meta{font-family:var(--sans);font-size:13px;color:var(--faint);margin-top:14px}
+
+.statrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:30px 0 26px}
+.stat{background:var(--card);border:1px solid var(--fig-border);border-radius:10px;padding:15px 16px}
+.stat .n{font-family:var(--sans);font-size:27px;font-weight:800;color:var(--ink);letter-spacing:-.02em;line-height:1.1}
+.stat .l{font-family:var(--sans);font-size:11.5px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--faint);margin-top:5px}
+
+.mapcard{background:var(--sea);border-radius:12px;padding:16px 14px 14px;margin:8px 0 34px}
+.mapcard h2{margin:0 0 3px;font-family:var(--sans);font-size:17px;font-weight:700;color:#fff;text-align:center;letter-spacing:-.01em}
+.mapcard .r{text-align:center;color:#fff;opacity:.8;font-family:var(--sans);font-size:12px;margin-bottom:11px}
+.vmap-svg{display:block;width:100%;height:auto}
+.vmap-land{fill:var(--land);stroke:var(--sea);stroke-width:.7;stroke-linejoin:round}
+.vmap-dot{fill:var(--dot);stroke:#fff;stroke-width:.5}
+
+h2.sec{font-family:var(--serif);font-weight:600;font-size:27px;color:var(--ink);letter-spacing:-.01em;margin:40px 0 4px}
+.sec-note{font-family:var(--sans);font-size:13.5px;color:var(--faint);margin:0 0 16px}
+
+table{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:14px}
+thead th{text-align:left;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);border-bottom:1px solid var(--rule);padding:0 10px 8px}
+tbody td{padding:9px 10px;border-bottom:1px solid var(--rule);color:var(--body);vertical-align:top}
+tbody tr:hover{background:var(--band)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+td.n{color:var(--ink);font-weight:600}
+.bar{height:5px;border-radius:3px;background:var(--link);opacity:.28;min-width:2px}
+.mono{font-family:var(--mono);font-size:12.5px}
+.dim{color:var(--faint)}
+.pill{display:inline-block;font-family:var(--sans);font-size:10.5px;font-weight:700;letter-spacing:.04em;padding:1px 7px;border-radius:99px;background:var(--band);color:var(--muted);border:1px solid var(--rule)}
+.pill.new{background:rgba(27,127,75,.12);color:#1b7f4b;border-color:rgba(27,127,75,.3)}
+body.dark-mode .pill.new{background:rgba(74,222,128,.14);color:#4ade80;border-color:rgba(74,222,128,.3)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:34px}
+.tablewrap{overflow-x:auto}
+.empty{font-family:var(--sans);font-size:14px;color:var(--faint);background:var(--band);border:1px dashed var(--rule);border-radius:10px;padding:16px 18px}
+
+footer.pg{border-top:1px solid var(--rule);margin-top:56px;padding:24px 0 60px;font-family:var(--sans);font-size:13px;color:var(--faint)}
+footer.pg a{color:var(--muted)}
+
+.pg-fab{position:fixed;right:22px;width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:9990;box-shadow:0 4px 14px rgba(0,0,0,.18);border:0;transition:opacity .2s}
+#pg-dark{bottom:22px;background:#fff;color:#333;border:1.5px solid rgba(0,0,0,.15)}
+body.dark-mode #pg-dark{background:#21262d;color:#fff;border-color:#30363d}
+.pg-dico{width:20px;height:20px;display:inline-block;background-color:currentColor;-webkit-mask:url(/images/icons/h-moon.png) center/contain no-repeat;mask:url(/images/icons/h-moon.png) center/contain no-repeat}
+@media print{.pg-fab{display:none}}
+@media(max-width:700px){
+  h1{font-size:33px}
+  .wrap{padding:0 18px}
+  .grid2{grid-template-columns:1fr;gap:8px}
+  body{font-size:18px}
+}
+</style>
+</head>
+<body>
+<script>try{if(localStorage.getItem('darkMode')==='true')document.body.classList.add('dark-mode');}catch(e){}</script>
+
+<header class="site-masthead">
+  <div class="masthead-inner">
+    <a class="masthead-title" href="/">Jiajun Fan</a>
+    <nav class="masthead-nav" aria-label="Site navigation">
+      <a href="/publications/">Publications</a>
+      <a href="/projects/">Projects</a>
+      <a href="/year-archive/">Blog</a>
+      <a href="/cv/">CV</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <div class="kicker">Site analytics</div>
+    <h1>Who stops by</h1>
+    <p class="sub">Where readers of this site come from, what they read, and how they got here.</p>
+    <div class="meta">
+      Measured with <a href="https://www.goatcounter.com" rel="noopener">GoatCounter</a>, an open-source analytics tool.
+      No cookies, no tracking across sites, and no IP addresses are stored &mdash; location is country level only.
+      Last updated {{ v._updated }}.
+    </div>
+  </div>
+
+  <div class="statrow">
+    <div class="stat"><div class="n" id="v-total">{{ v._total | default: 0 }}</div><div class="l">Pageviews</div></div>
+    <div class="stat"><div class="n">{{ v.countries | size }}</div><div class="l">Countries</div></div>
+    <div class="stat"><div class="n">{{ v.pages | size }}</div><div class="l">Pages visited</div></div>
+    <div class="stat"><div class="n">{{ v._days | default: 30 }}</div><div class="l">Day window</div></div>
+  </div>
+
+  <div class="mapcard">
+    <h2>{{ v._total | default: 0 }} Pageviews</h2>
+    <div class="r">{{ v._range }}</div>
+    {% include visitor-map-svg.html %}
+  </div>
+
+  <h2 class="sec">Recent visits</h2>
+  {%- assign nrecent = v.recent | size -%}
+  {% if nrecent > 0 %}
+  <p class="sec-note">The latest {{ nrecent }} pageviews, newest first. Times are UTC.</p>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>When</th><th>From</th><th>Page</th><th>Came via</th><th>Browser</th><th>System</th></tr></thead>
+      <tbody>
+      {% for r in v.recent %}
+        <tr>
+          <td class="mono dim">{{ r.date }}</td>
+          <td class="n">{{ r.loc | default: "—" }}{% if r.first %} <span class="pill new">new</span>{% endif %}</td>
+          <td class="mono">{{ r.path }}</td>
+          <td class="dim">{% if r.ref and r.ref != "" %}{{ r.ref }}{% else %}direct{% endif %}</td>
+          <td>{{ r.browser | default: "—" }}</td>
+          <td>{{ r.system | default: "—" }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <p class="empty">Individual visits are not available yet &mdash; GoatCounter builds this list from a background export that runs at most once an hour. It will fill in on the next daily update. The country totals below are live.</p>
+  {% endif %}
+
+  <h2 class="sec">Countries</h2>
+  <p class="sec-note">Every country a visit came from, in the last {{ v._days | default: 30 }} days.</p>
+  {%- assign topc = v.countries | first -%}
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Country</th><th class="num">Views</th><th style="width:38%"></th></tr></thead>
+      <tbody>
+      {% for c in v.countries %}
+        <tr>
+          <td class="n">{{ c.name }} <span class="dim mono">{{ c.code }}</span></td>
+          <td class="num">{{ c.count }}</td>
+          <td><div class="bar" style="width:{{ c.count | times: 100 | divided_by: topc.count }}%"></div></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grid2">
+    <div>
+      <h2 class="sec">Most-read pages</h2>
+      <p class="sec-note">&nbsp;</p>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Page</th><th class="num">Views</th></tr></thead>
+          <tbody>
+          {% for p in v.pages %}
+            <tr><td><a class="mono" href="{{ p.path }}">{{ p.path }}</a></td><td class="num">{{ p.count }}</td></tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div>
+      <h2 class="sec">How they got here</h2>
+      <p class="sec-note">&nbsp;</p>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Referrer</th><th class="num">Views</th></tr></thead>
+          <tbody>
+          {% for r in v.referrers %}
+            <tr><td>{{ r.name }}</td><td class="num">{{ r.count }}</td></tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div>
+      <h2 class="sec">Browsers</h2>
+      <p class="sec-note">&nbsp;</p>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Browser</th><th class="num">Views</th></tr></thead>
+          <tbody>
+          {% for b in v.browsers %}<tr><td>{{ b.name }}</td><td class="num">{{ b.count }}</td></tr>{% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div>
+      <h2 class="sec">Systems</h2>
+      <p class="sec-note">&nbsp;</p>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>System</th><th class="num">Views</th></tr></thead>
+          <tbody>
+          {% for s in v.systems %}<tr><td>{{ s.name }}</td><td class="num">{{ s.count }}</td></tr>{% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <footer class="pg">
+    <a href="/">&larr; Back to the site</a> &nbsp;&middot;&nbsp;
+    Data from GoatCounter, refreshed daily. Aggregate counts only &mdash; nothing here identifies a person.
+  </footer>
+</main>
+
+<button id="pg-dark" class="pg-fab" aria-label="Toggle dark mode" title="Toggle dark mode"><i class="pg-dico"></i></button>
+<script>
+(function(){
+  var dk=document.getElementById('pg-dark');
+  if(dk) dk.addEventListener('click',function(){
+    var on=document.body.classList.toggle('dark-mode');
+    try{localStorage.setItem('darkMode',on?'true':'false');}catch(e){}
+  });
+  /* live total pageviews from GoatCounter's public counter endpoint */
+  try{
+    fetch('https://jiajunfan.goatcounter.com/counter/TOTAL.json')
+      .then(function(r){return r.ok?r.json():null;})
+      .then(function(d){
+        if(!d||d.count==null) return;
+        var n=parseInt((''+d.count).replace(/[^0-9]/g,''),10)||0;
+        var el=document.getElementById('v-total');
+        if(n>0&&el) el.textContent=n.toLocaleString('en-US');
+      }).catch(function(){});
+  }catch(e){}
+})();
+</script>
+<script data-goatcounter="https://jiajunfan.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

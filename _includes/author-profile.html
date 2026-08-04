@@ -126,7 +126,9 @@
       {% include visitor-map.html %}
     </div>
     <style>
-    .vmap{background:#3b7ea3;border-radius:6px;padding:8px 6px 7px;overflow:hidden}
+    .vmap{display:block;text-decoration:none;color:inherit;cursor:pointer;background:#3b7ea3;border-radius:6px;padding:8px 6px 7px;overflow:hidden;transition:filter .18s,transform .18s}
+    .vmap:hover{filter:brightness(1.06)}
+    .vmap:focus-visible{outline:2px solid #1565c0;outline-offset:2px}
     body.dark-mode .vmap{background:#2b5f7d}
     .vmap-hd{text-align:center;color:#fff;line-height:1.25;margin-bottom:5px}
     .vmap-n{font-size:12.5px;font-weight:700}
