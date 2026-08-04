@@ -72,8 +72,9 @@ def clean(rows, top=TOP_N):
 def try_export(prev_rows):
     """Individual pageviews via the async export API. Returns (rows, note)."""
     start = datetime.datetime.utcnow() - datetime.timedelta(days=DAYS)
+    # start_from_day is only accepted for JSON exports, and needs a full RFC3339 stamp.
     code, body = call("/api/v0/export", {
-        "format": "csv",
+        "format": "json",
         "start_from_day": start.strftime("%Y-%m-%dT00:00:00Z"),
     })
     if code not in (200, 202):
@@ -106,9 +107,20 @@ def try_export(prev_rows):
     except Exception:
         text = raw.decode("utf-8", "replace")
 
+    # JSON exports are newline-delimited objects; fall back to CSV if it looks tabular.
+    rows = []
+    stripped = text.lstrip()
     try:
-        rdr = csv.DictReader(io.StringIO(text))
-        rows = list(rdr)
+        if stripped.startswith("{") or stripped.startswith("["):
+            if stripped.startswith("["):
+                rows = json.loads(stripped)
+            else:
+                for line in text.splitlines():
+                    line = line.strip()
+                    if line:
+                        rows.append(json.loads(line))
+        else:
+            rows = list(csv.DictReader(io.StringIO(text)))
     except Exception as e:
         return prev_rows, "export parse failed: %s" % e
 
