@@ -73,8 +73,11 @@ def clean(rows, top=TOP_N):
 def try_export(prev_rows):
     """Individual pageviews via the async export API. Returns (rows, note)."""
     # Only the CSV export contains individual pageviews; the JSON export ships
-    # lookup tables and per-day aggregates instead. CSV paginates by hit id.
-    code, body = call("/api/v0/export", {"format": "csv", "start_from_hit_id": 0})
+    # lookup tables and per-day aggregates instead.
+    code, body = call("/api/v0/export", {"format": "csv"})
+    if code not in (200, 202):
+        # older/newer builds may require the pagination cursor
+        code, body = call("/api/v0/export", {"format": "csv", "start_from_hit_id": 0})
     if code not in (200, 202):
         return prev_rows, "export unavailable (%s): %s" % (code, body[:90])
 
@@ -83,6 +86,7 @@ def try_export(prev_rows):
     except Exception:
         return prev_rows, "export: no id in response"
 
+    st = {}
     for _ in range(20):
         time.sleep(6)
         code, body = call("/api/v0/export/%s" % eid)
@@ -96,6 +100,12 @@ def try_export(prev_rows):
             break
     else:
         return prev_rows, "export did not finish in time"
+    print("  export status: num_rows=%s size=%s last_hit_id=%s"
+          % (st.get("num_rows"), st.get("size"), st.get("last_hit_id")))
+    if not st.get("num_rows"):
+        return prev_rows, ("export finished with 0 rows — GoatCounter only records "
+                           "individual pageviews after 'Individual pageviews' is enabled, "
+                           "and only for visits from that moment on")
 
     code, raw = call("/api/v0/export/%s/download" % eid, raw=True, timeout=120)
     if code != 200 or not isinstance(raw, bytes):
