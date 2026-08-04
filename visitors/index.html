@@ -165,6 +165,28 @@ body.dark-mode #pg-dark{background:#21262d;color:#fff;border-color:#30363d}
   <p class="empty">Individual visits are not available yet &mdash; GoatCounter builds this list from a background export that runs at most once an hour. It will fill in on the next daily update. The country totals below are live.</p>
   {% endif %}
 
+  {%- assign nreg = v.regions | size -%}
+  {% if nreg > 0 %}
+  <h2 class="sec">Regions</h2>
+  <p class="sec-note">States and provinces, where the country reports them. Each located region gets its own dot on the map above.</p>
+  {%- assign topr = v.regions | first -%}
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Region</th><th>Country</th><th class="num">Views</th><th style="width:32%"></th></tr></thead>
+      <tbody>
+      {% for r in v.regions %}
+        <tr>
+          <td class="n">{{ r.name }}{% unless r.located %} <span class="pill">no map dot</span>{% endunless %}</td>
+          <td class="dim">{{ r.country_name }} <span class="mono">{{ r.country }}</span></td>
+          <td class="num">{{ r.count }}</td>
+          <td><div class="bar" style="width:{{ r.count | times: 100 | divided_by: topr.count }}%"></div></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endif %}
+
   <h2 class="sec">Countries</h2>
   <p class="sec-note">Every country a visit came from, in the last {{ v._days | default: 30 }} days.</p>
   {%- assign topc = v.countries | first -%}

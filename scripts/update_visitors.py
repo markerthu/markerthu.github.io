@@ -12,12 +12,13 @@ the aggregates are the important part and must never fail because of the export.
 
 Token is read from env GOATCOUNTER_TOKEN (never hardcoded).
 """
-import os, sys, io, csv, json, gzip, time, datetime, urllib.request, urllib.error
+import os, sys, io, csv, json, gzip, zipfile, time, datetime, urllib.request, urllib.error
 
 SITE = os.environ.get("GOATCOUNTER_SITE", "https://jiajunfan.goatcounter.com").rstrip("/")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "_data", "visitors.json")
 CENTROIDS = os.path.join(ROOT, "scripts", "country_centroids.json")
+REGIONS = os.path.join(ROOT, "scripts", "region_centroids.json")
 PROJ = os.path.join(ROOT, "scripts", "map_projection.json")
 
 DAYS = 30          # window for the aggregate stats
@@ -102,10 +103,40 @@ def try_export(prev_rows):
     code, raw = call("/api/v0/export/%s/download" % eid, raw=True, timeout=120)
     if code != 200 or not isinstance(raw, bytes):
         return prev_rows, "export download failed (%s)" % code
-    try:
-        text = gzip.GzipFile(fileobj=io.BytesIO(raw)).read().decode("utf-8", "replace")
-    except Exception:
-        text = raw.decode("utf-8", "replace")
+
+    # JSON exports arrive as a ZIP holding info.json / paths.jsonl / hits.jsonl.
+    # CSV exports are plain gzip. Handle both.
+    text = ""
+    if raw[:2] == b"PK":
+        try:
+            zf = zipfile.ZipFile(io.BytesIO(raw))
+            names = zf.namelist()
+            hits = [n for n in names if n.endswith(".jsonl") and "path" not in n.lower()]
+            if not hits:
+                return prev_rows, "export zip has no hits file: %s" % names[:6]
+            text = zf.read(hits[0]).decode("utf-8", "replace")
+            # paths.jsonl maps path_id -> path/title; join it so rows show real URLs
+            pmap = {}
+            for pn in [n for n in names if "path" in n.lower() and n.endswith(".jsonl")]:
+                for line in zf.read(pn).decode("utf-8", "replace").splitlines():
+                    line = line.strip()
+                    if not line:
+                        continue
+                    try:
+                        o = json.loads(line)
+                    except Exception:
+                        continue
+                    pid = o.get("id") or o.get("ID") or o.get("path_id")
+                    if pid is not None:
+                        pmap[str(pid)] = o.get("path") or o.get("Path") or ""
+            try_export.pathmap = pmap
+        except Exception as e:
+            return prev_rows, "export zip read failed: %s" % e
+    else:
+        try:
+            text = gzip.GzipFile(fileobj=io.BytesIO(raw)).read().decode("utf-8", "replace")
+        except Exception:
+            text = raw.decode("utf-8", "replace")
 
     # GoatCounter may hand back newline-delimited JSON, a JSON array, or CSV.
     # Try each; CSV needs newline='' so quoted fields containing newlines survive.
@@ -142,23 +173,28 @@ def try_export(prev_rows):
                         return v
         return ""
 
+    pathmap = getattr(try_export, "pathmap", {})
     out = []
     for row in rows:
         if not isinstance(row, dict):
             continue
         if g(row, "bot").lower() not in ("", "0", "false"):
             continue
+        path = g(row, "path")
+        if not path:
+            path = pathmap.get(g(row, "pathid", "path_id"), "") or "/"
         out.append({
-            "date": g(row, "date", "createdat")[:16].replace("T", " "),
+            "date": g(row, "date", "createdat", "createdatutc")[:16].replace("T", " "),
             "loc": g(row, "location"),
-            "path": g(row, "path") or "/",
+            "path": path,
             "ref": g(row, "referrer", "ref"),
-            "browser": g(row, "browser"),
+            "browser": g(row, "browser", "useragentheader"),
             "system": g(row, "system"),
             "first": g(row, "firstvisit").lower() in ("1", "true"),
         })
+    out = [r for r in out if r["date"]]          # drop rows we could not read a time from
     out.sort(key=lambda r: r["date"], reverse=True)
-    return out[:MAX_ROWS], "ok (%d rows)" % len(out)
+    return out[:MAX_ROWS], "ok (%d of %d rows usable)" % (len(out), len(rows))
 
 
 def main():
@@ -191,7 +227,14 @@ def main():
         return (round((lon - LON0) / (LON1 - LON0) * W, 1),
                 round((LAT1 - lat) / (LAT1 - LAT0) * H, 1))
 
-    dots, countries, total, nocent = [], [], 0, []
+    reg_cent = {}
+    if os.path.exists(REGIONS):
+        try:
+            reg_cent = json.load(open(REGIONS, encoding="utf-8"))
+        except Exception:
+            reg_cent = {}
+
+    dots, countries, regions, total, nocent = [], [], [], 0, []
     for row in locations:
         code = (row.get("id") or "").upper()
         name = row.get("name") or code or "(unknown)"
@@ -200,13 +243,41 @@ def main():
         if n <= 0:
             continue
         countries.append({"code": code, "name": name, "count": n})
-        if code not in cent:
-            nocent.append(code or name)
-            continue
-        lat, lon = cent[code]
-        cx, cy = xy(lon, lat)
-        dots.append({"code": code, "name": name, "count": n, "cx": cx, "cy": cy,
-                     "r": round(2.0 + (n ** 0.5) * 1.0, 1)})
+
+        # Drill into regions (states / provinces). GoatCounter only collects these
+        # for the countries listed in the site's settings; elsewhere the name is "".
+        placed = False
+        rcode, rbody = call("/api/v0/stats/locations/%s?%s&limit=100" % (code, qs))
+        if rcode == 200:
+            try:
+                rstats = json.loads(rbody).get("stats", []) or []
+            except Exception:
+                rstats = []
+            for r in rstats:
+                rname = (r.get("name") or "").strip()
+                rn = int(r.get("count") or 0)
+                if not rname or rn <= 0:
+                    continue
+                key = "%s|%s" % (code, rname.lower())
+                ll = reg_cent.get(key)
+                regions.append({"country": code, "country_name": name,
+                                "name": rname, "count": rn, "located": bool(ll)})
+                if ll:
+                    cx, cy = xy(ll[1], ll[0])
+                    dots.append({"code": code, "name": "%s, %s" % (rname, code),
+                                 "count": rn, "cx": cx, "cy": cy,
+                                 "r": round(2.0 + (rn ** 0.5) * 1.0, 1)})
+                    placed = True
+
+        # No usable region breakdown -> one dot at the country centroid.
+        if not placed:
+            if code not in cent:
+                nocent.append(code or name)
+                continue
+            lat, lon = cent[code]
+            cx, cy = xy(lon, lat)
+            dots.append({"code": code, "name": name, "count": n, "cx": cx, "cy": cy,
+                         "r": round(2.0 + (n ** 0.5) * 1.0, 1)})
 
     countries.sort(key=lambda c: -c["count"])
     dots.sort(key=lambda d: -d["count"])
@@ -243,6 +314,7 @@ def main():
         "_range": "%s - %s" % (fmt(start), fmt(end)),
         "locations": dots,
         "countries": countries[:TOP_N],
+        "regions": sorted(regions, key=lambda r: -r["count"])[:TOP_N],
         "pages": pages,
         "referrers": clean(stats("toprefs", qs)),
         "browsers": clean(stats("browsers", qs)),
@@ -254,8 +326,13 @@ def main():
         json.dump(out, f, indent=2, ensure_ascii=False)
         f.write("\n")
 
-    print("Updated: %d countries (%d dots), %d pageviews, %d pages, %d referrers, %d recent rows"
-          % (len(countries), len(dots), total, len(pages), len(out["referrers"]), len(recent)))
+    print("Updated: %d countries, %d regions, %d dots, %d pageviews, %d pages, %d referrers, %d recent rows"
+          % (len(countries), len(regions), len(dots), total, len(pages),
+             len(out["referrers"]), len(recent)))
+    unplaced = [r["name"] for r in regions if not r["located"]]
+    if unplaced:
+        print("  regions without a centroid (kept in table, no dot): %s"
+              % ", ".join(sorted(set(unplaced))[:12]))
     if nocent:
         print("  no centroid (dot skipped): %s" % ", ".join(sorted(set(nocent))))
 
