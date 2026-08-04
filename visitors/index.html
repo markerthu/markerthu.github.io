@@ -144,10 +144,10 @@ body.dark-mode #pg-dark{background:#21262d;color:#fff;border-color:#30363d}
   <h2 class="sec">Recent visits</h2>
   {%- assign nrecent = v.recent | size -%}
   {% if nrecent > 0 %}
-  <p class="sec-note">The latest {{ nrecent }} pageviews, newest first. Times are UTC.</p>
+  <p class="sec-note">The latest {{ nrecent }} pageviews, newest first, in UTC. There is no IP column because GoatCounter never stores IP addresses &mdash; location is derived at collection time and the address is discarded.</p>
   <div class="tablewrap">
     <table>
-      <thead><tr><th>When</th><th>From</th><th>Page</th><th>Came via</th><th>Browser</th><th>System</th></tr></thead>
+      <thead><tr><th>When</th><th>From</th><th>Page</th><th>Came via</th><th>Browser</th><th>System</th><th>Screen</th></tr></thead>
       <tbody>
       {% for r in v.recent %}
         <tr>
@@ -157,6 +157,7 @@ body.dark-mode #pg-dark{background:#21262d;color:#fff;border-color:#30363d}
           <td class="dim">{% if r.ref and r.ref != "" %}{{ r.ref }}{% else %}direct{% endif %}</td>
           <td>{{ r.browser | default: "—" }}</td>
           <td>{{ r.system | default: "—" }}</td>
+          <td class="dim mono">{{ r.screen | default: "—" }}</td>
         </tr>
       {% endfor %}
       </tbody>
@@ -266,7 +267,8 @@ body.dark-mode #pg-dark{background:#21262d;color:#fff;border-color:#30363d}
 
   <footer class="pg">
     <a href="/">&larr; Back to the site</a> &nbsp;&middot;&nbsp;
-    Data from GoatCounter, refreshed daily. Aggregate counts only &mdash; nothing here identifies a person.
+    <a href="https://jiajunfan.goatcounter.com" target="_blank" rel="noopener">Full dashboard</a> &nbsp;&middot;&nbsp;
+    Refreshed daily from GoatCounter. No cookies, no IP addresses, nothing here identifies a person.
   </footer>
 </main>
 

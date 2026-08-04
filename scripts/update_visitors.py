@@ -19,11 +19,13 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "_data", "visitors.json")
 CENTROIDS = os.path.join(ROOT, "scripts", "country_centroids.json")
 REGIONS = os.path.join(ROOT, "scripts", "region_centroids.json")
+REGION_NAMES = os.path.join(ROOT, "scripts", "region_names.json")
 PROJ = os.path.join(ROOT, "scripts", "map_projection.json")
 
 DAYS = 30          # window for the aggregate stats
 MAX_DOTS = 60      # dots drawn on the map
-MAX_ROWS = 200     # individual visits kept for the /visitors/ table
+MAX_ROWS = 30      # individual visits shown on the /visitors/ table
+COUNTRY_NAMES = {}  # ISO_A2 -> full name, filled from the locations API
 TOP_N = 25         # rows kept per aggregate table
 
 
@@ -192,6 +194,23 @@ def try_export(prev_rows):
         return ""
 
     pathmap = getattr(try_export, "pathmap", {})
+    rnames = {}
+    if os.path.exists(REGION_NAMES):
+        try:
+            rnames = json.load(open(REGION_NAMES, encoding="utf-8"))
+        except Exception:
+            rnames = {}
+
+    def pretty_loc(code):
+        """'US-WA' -> 'Washington, US'; 'US' -> 'United States'; '' -> ''."""
+        code = (code or "").strip().upper()
+        if not code:
+            return ""
+        if "-" in code:
+            country = code.split("-")[0]
+            return "%s, %s" % (rnames.get(code, code.split("-")[-1]), country)
+        return COUNTRY_NAMES.get(code, code)
+
     out = []
     for row in rows:
         if not isinstance(row, dict):
@@ -203,11 +222,12 @@ def try_export(prev_rows):
             path = pathmap.get(g(row, "pathid", "path_id"), "") or "/"
         out.append({
             "date": g(row, "date", "createdat", "createdatutc")[:16].replace("T", " "),
-            "loc": g(row, "location"),
+            "loc": pretty_loc(g(row, "location")),
             "path": path,
             "ref": g(row, "referrer", "ref"),
             "browser": g(row, "browser", "useragentheader"),
             "system": g(row, "system"),
+            "screen": g(row, "screensize", "size"),
             "first": g(row, "firstvisit").lower() in ("1", "true"),
         })
     if rows and isinstance(rows[0], dict):
@@ -319,6 +339,9 @@ def main():
             pass
     pages.sort(key=lambda p: -p["count"])
     pages = pages[:TOP_N]
+
+    global COUNTRY_NAMES
+    COUNTRY_NAMES = {c["code"]: c["name"] for c in countries if c.get("code")}
 
     recent, note = try_export(prev.get("recent") or [])
     print("  export: %s" % note)
