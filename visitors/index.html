@@ -128,10 +128,10 @@ body.dark-mode #pg-dark{background:#21262d;color:#fff;border-color:#30363d}
   </div>
 
   <div class="statrow">
-    <div class="stat"><div class="n" id="v-total">{{ v._total | default: 0 }}</div><div class="l">Pageviews</div></div>
+    <div class="stat"><div class="n" id="v-total">{{ v._total | default: 0 }}</div><div class="l">Pageviews &middot; all time</div></div>
+    <div class="stat"><div class="n">{{ v._total | default: 0 }}</div><div class="l">Last {{ v._days | default: 30 }} days</div></div>
     <div class="stat"><div class="n">{{ v.countries | size }}</div><div class="l">Countries</div></div>
     <div class="stat"><div class="n">{{ v.pages | size }}</div><div class="l">Pages visited</div></div>
-    <div class="stat"><div class="n">{{ v._days | default: 30 }}</div><div class="l">Day window</div></div>
   </div>
 
   <div class="mapcard">
