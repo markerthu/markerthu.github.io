@@ -107,44 +107,55 @@ def try_export(prev_rows):
     except Exception:
         text = raw.decode("utf-8", "replace")
 
-    # JSON exports are newline-delimited objects; fall back to CSV if it looks tabular.
+    # GoatCounter may hand back newline-delimited JSON, a JSON array, or CSV.
+    # Try each; CSV needs newline='' so quoted fields containing newlines survive.
+    text = text.lstrip("﻿").strip()
     rows = []
-    stripped = text.lstrip()
-    try:
-        if stripped.startswith("{") or stripped.startswith("["):
-            if stripped.startswith("["):
-                rows = json.loads(stripped)
+    if text[:1] in ("{", "["):
+        try:
+            if text[:1] == "[":
+                rows = json.loads(text)
             else:
-                for line in text.splitlines():
-                    line = line.strip()
-                    if line:
-                        rows.append(json.loads(line))
-        else:
-            rows = list(csv.DictReader(io.StringIO(text)))
-    except Exception as e:
-        return prev_rows, "export parse failed: %s" % e
+                rows = [json.loads(l) for l in text.splitlines() if l.strip()]
+        except Exception as e:
+            return prev_rows, "export JSON parse failed: %s (head=%r)" % (e, text[:120])
+    else:
+        try:
+            rows = list(csv.DictReader(io.StringIO(text, newline="")))
+        except Exception as e:
+            return prev_rows, "export CSV parse failed: %s (head=%r)" % (e, text[:120])
+    if not rows:
+        return prev_rows, "export returned no rows (head=%r)" % text[:120]
 
     def g(row, *names):
+        """Field lookup that tolerates CSV strings and JSON bools/ints, any casing."""
         for n in names:
             for k in row:
-                if k and k.strip().lower() == n:
-                    v = (row[k] or "").strip()
+                if k and str(k).strip().lower().replace("_", "") == n:
+                    v = row[k]
+                    if v is None or v is False:
+                        return ""
+                    if v is True:
+                        return "true"
+                    v = str(v).strip()
                     if v:
                         return v
         return ""
 
     out = []
     for row in rows:
-        if (g(row, "bot") or "0") not in ("0", "", "false"):
+        if not isinstance(row, dict):
+            continue
+        if g(row, "bot").lower() not in ("", "0", "false"):
             continue
         out.append({
-            "date": g(row, "date", "created_at")[:16].replace("T", " "),
+            "date": g(row, "date", "createdat")[:16].replace("T", " "),
             "loc": g(row, "location"),
             "path": g(row, "path") or "/",
             "ref": g(row, "referrer", "ref"),
             "browser": g(row, "browser"),
             "system": g(row, "system"),
-            "first": g(row, "firstvisit", "first_visit") in ("1", "true", "TRUE"),
+            "first": g(row, "firstvisit").lower() in ("1", "true"),
         })
     out.sort(key=lambda r: r["date"], reverse=True)
     return out[:MAX_ROWS], "ok (%d rows)" % len(out)
