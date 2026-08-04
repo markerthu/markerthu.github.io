@@ -3,7 +3,7 @@
 
 Feeds two things:
   * _includes/visitor-map.html  -> the sidebar map (dots from `locations`)
-  * _pages/visitors.html        -> the full /visitors/ page (everything else)
+  * visitors/index.html         -> the full /visitors/ page (everything else)
 
 Individual pageviews come from the async export API, which GoatCounter rate-limits
 to roughly one export per hour. If the export is unavailable (429 / disabled /
