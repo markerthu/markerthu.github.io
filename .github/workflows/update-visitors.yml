@@ -1,0 +1,36 @@
+name: Update visitor map
+# Daily GoatCounter location refresh -> _data/visitors.json (drives the sidebar visitor map).
+# The API token lives ONLY in the encrypted Actions secret GOATCOUNTER_TOKEN, never in the repo.
+
+on:
+  schedule:
+    - cron: '20 5 * * *'   # 05:20 UTC daily (after the citation job at 05:00)
+  workflow_dispatch: {}    # allow manual run from the Actions tab
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-visitors
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch & update visitor locations
+        env:
+          GOATCOUNTER_TOKEN: ${{ secrets.GOATCOUNTER_TOKEN }}
+        run: python3 scripts/update_visitors.py
+      - name: Commit if changed
+        run: |
+          if [ -n "$(git status --porcelain _data/visitors.json)" ]; then
+            git config user.name  "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add _data/visitors.json
+            git commit -m "chore: daily visitor map update [skip ci]"
+            git push
+          else
+            echo "No visitor changes today."
+          fi
