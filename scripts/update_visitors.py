@@ -72,12 +72,9 @@ def clean(rows, top=TOP_N):
 
 def try_export(prev_rows):
     """Individual pageviews via the async export API. Returns (rows, note)."""
-    start = datetime.datetime.utcnow() - datetime.timedelta(days=DAYS)
-    # start_from_day is only accepted for JSON exports, and needs a full RFC3339 stamp.
-    code, body = call("/api/v0/export", {
-        "format": "json",
-        "start_from_day": start.strftime("%Y-%m-%dT00:00:00Z"),
-    })
+    # Only the CSV export contains individual pageviews; the JSON export ships
+    # lookup tables and per-day aggregates instead. CSV paginates by hit id.
+    code, body = call("/api/v0/export", {"format": "csv", "start_from_hit_id": 0})
     if code not in (200, 202):
         return prev_rows, "export unavailable (%s): %s" % (code, body[:90])
 
