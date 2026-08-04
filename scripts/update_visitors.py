@@ -111,10 +111,21 @@ def try_export(prev_rows):
         try:
             zf = zipfile.ZipFile(io.BytesIO(raw))
             names = zf.namelist()
-            hits = [n for n in names if n.endswith(".jsonl") and "path" not in n.lower()]
-            if not hits:
+            # pick the .jsonl with the most lines that is not the path lookup table
+            best, best_n, sizes = None, -1, []
+            for n in names:
+                if not n.endswith(".jsonl"):
+                    continue
+                body = zf.read(n).decode("utf-8", "replace")
+                cnt = sum(1 for l in body.splitlines() if l.strip())
+                sizes.append("%s=%d" % (n.split("/")[-1], cnt))
+                if "path" in n.lower():
+                    continue
+                if cnt > best_n:
+                    best, best_n, text = n, cnt, body
+            print("  export zip: %s | files: %s" % (names[:1], ", ".join(sizes)))
+            if best is None:
                 return prev_rows, "export zip has no hits file: %s" % names[:6]
-            text = zf.read(hits[0]).decode("utf-8", "replace")
             # paths.jsonl maps path_id -> path/title; join it so rows show real URLs
             pmap = {}
             for pn in [n for n in names if "path" in n.lower() and n.endswith(".jsonl")]:
@@ -192,6 +203,9 @@ def try_export(prev_rows):
             "system": g(row, "system"),
             "first": g(row, "firstvisit").lower() in ("1", "true"),
         })
+    if rows and isinstance(rows[0], dict):
+        print("  export row keys: %s" % sorted(rows[0].keys())[:14])
+        print("  export sample  : %s" % json.dumps(rows[0])[:260])
     out = [r for r in out if r["date"]]          # drop rows we could not read a time from
     out.sort(key=lambda r: r["date"], reverse=True)
     return out[:MAX_ROWS], "ok (%d of %d rows usable)" % (len(out), len(rows))
