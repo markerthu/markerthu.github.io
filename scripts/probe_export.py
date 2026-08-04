@@ -56,8 +56,12 @@ except Exception:
 print()
 print("=" * 70)
 print("B) individual pageview export (the 'one row per visit' list)")
-code, body = call("/api/v0/export", {"start": start.isoformat()})
-print("  POST /api/v0/export ->", code, body.replace("\n", " ")[:220])
+code, body = call("/api/v0/export",
+                  {"format": "json", "start_from_day": start.isoformat()})
+print("  POST /api/v0/export (json) ->", code, body.replace("\n", " ")[:220])
+if code not in (200, 202):
+    code, body = call("/api/v0/export", {"format": "csv", "start_from_hit_id": 0})
+    print("  POST /api/v0/export (csv)  ->", code, body.replace("\n", " ")[:220])
 if code not in (200, 202):
     print("  EXPORT NOT AVAILABLE -> the /visitors/ page must use aggregates only.")
     sys.exit(0)
