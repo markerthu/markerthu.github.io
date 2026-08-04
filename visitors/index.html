@@ -162,7 +162,7 @@ body.dark-mode #pg-dark{background:#21262d;color:#fff;border-color:#30363d}
     </table>
   </div>
   {% else %}
-  <p class="empty">Individual visits are not available yet &mdash; GoatCounter builds this list from a background export that runs at most once an hour. It will fill in on the next daily update. The country totals below are live.</p>
+  <p class="empty">No per-visit rows yet. GoatCounter only keeps individual pageviews when &ldquo;Individual pageviews&rdquo; is enabled under Settings &rarr; Data collection, and it applies from that point forward &mdash; earlier visits are only ever kept as the aggregate counts you see below.</p>
   {% endif %}
 
   {%- assign nreg = v.regions | size -%}
