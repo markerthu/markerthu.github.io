@@ -151,13 +151,8 @@ body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-ima
   {%- assign pubs = site.publications | sort: 'date' | reverse -%}
   {%- assign lastyear = '' -%}
   {% for post in pubs %}
-    {%- comment -%} group by the year the venue announces, not the file's date {%- endcomment -%}
+    {%- comment -%} each entry's date year matches its venue year, so this groups cleanly {%- endcomment -%}
     {%- assign y = post.date | date: '%Y' -%}
-    {%- assign vy = post.venue | strip_html | split: ' ' -%}
-    {%- for w in vy -%}
-      {%- assign digits = w | replace: ')', '' | replace: ',', '' -%}
-      {%- if digits.size == 4 and digits >= '1990' and digits <= '2099' -%}{%- assign y = digits -%}{%- endif -%}
-    {%- endfor -%}
     {% if y != lastyear %}<div class="year-head">{{ y }}</div>{% assign lastyear = y %}{% endif %}
     {%- comment -%} the <strong> inside `venue` holds the short label, e.g. "ICLR 2026" {%- endcomment -%}
     {%- assign vfull = post.venue | strip_html | strip -%}
