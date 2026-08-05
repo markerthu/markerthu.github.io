@@ -47,15 +47,21 @@ def call(path, data=None, raw=False, timeout=60):
 
 
 def stats(page, qs):
-    """GET /api/v0/stats/<page> -> list of {id,name,count}. [] on any failure."""
+    """GET /api/v0/stats/<page>.
+
+    Returns a list on success (possibly empty, meaning "no data in this window"),
+    or None when the fetch itself failed. The caller must keep the previous value
+    on None — writing [] would silently blank a section of the live page.
+    """
     code, body = call("/api/v0/stats/%s?%s&limit=100" % (page, qs))
     if code != 200:
-        print("  warn: stats/%s -> %s %s" % (page, code, body[:120]), file=sys.stderr)
-        return []
+        print("  warn: stats/%s failed -> %s %s" % (page, code, body[:120]), file=sys.stderr)
+        return None
     try:
         return json.loads(body).get("stats", []) or []
-    except Exception:
-        return []
+    except Exception as e:
+        print("  warn: stats/%s unparseable -> %s" % (page, e), file=sys.stderr)
+        return None
 
 
 def clean(rows, top=TOP_N):
@@ -246,6 +252,7 @@ def try_export(prev_rows):
         print("  export sample  : %s" % json.dumps(rows[0])[:260])
     out = [r for r in out if r["date"]]          # drop rows we could not read a time from
     out.sort(key=lambda r: r["date"], reverse=True)
+    try_export.total_rows = len(out)
     return out[:MAX_ROWS], "ok (%d of %d rows usable)" % (len(out), len(rows))
 
 
@@ -259,8 +266,12 @@ def main():
     qs = "start=%s&end=%s" % (start.isoformat(), end.isoformat())
 
     locations = stats("locations", qs)
+    if locations is None:
+        print("ERROR: locations fetch failed; leaving _data/visitors.json unchanged.",
+              file=sys.stderr)
+        sys.exit(1)
     if not locations:
-        print("No location rows returned; leaving _data/visitors.json unchanged.")
+        print("No visits in this window; leaving _data/visitors.json unchanged.")
         return
 
     prev = {}
@@ -336,7 +347,7 @@ def main():
     dots = dots[:MAX_DOTS]
 
     # most-visited pages
-    pages = []
+    pages, pages_ok = [], False
     code, body = call("/api/v0/stats/hits?%s&limit=100" % qs)
     if code == 200:
         try:
@@ -346,20 +357,40 @@ def main():
                     pages.append({"path": h.get("path") or "/",
                                   "title": (h.get("title") or "").strip(),
                                   "count": c})
-        except Exception:
-            pass
-    pages.sort(key=lambda p: -p["count"])
-    pages = pages[:TOP_N]
+            pages_ok = True
+        except Exception as e:
+            print("  warn: stats/hits unparseable -> %s" % e, file=sys.stderr)
+    else:
+        print("  warn: stats/hits failed -> %s %s" % (code, body[:120]), file=sys.stderr)
+    if pages_ok:
+        pages.sort(key=lambda p: -p["count"])
+        pages = pages[:TOP_N]
+    else:
+        pages = prev.get("pages") or []
 
     global COUNTRY_NAMES
     COUNTRY_NAMES = {c["code"]: c["name"] for c in countries if c.get("code")}
 
     recent, note = try_export(prev.get("recent") or [])
     print("  export: %s" % note)
+    # the true number of recorded visits, before MAX_ROWS truncation
+    recent_total = getattr(try_export, "total_rows", None)
+    if recent_total is None:
+        recent_total = prev.get("_recent_total") or len(recent)
+
+    kept = []
+
+    def keep(key, fetched):
+        """Never let a failed fetch blank a section: fall back to the previous file."""
+        if fetched is None:
+            kept.append(key)
+            return prev.get(key) or []
+        return clean(fetched)
 
     def fmt(dt):
-        return dt.strftime("%b. %d") + {1: "st", 2: "nd", 3: "rd"}.get(
-            dt.day if dt.day not in (11, 12, 13) else 0, "th")
+        d = dt.day
+        suffix = "th" if 11 <= d % 100 <= 13 else {1: "st", 2: "nd", 3: "rd"}.get(d % 10, "th")
+        return "%s. %d%s" % (dt.strftime("%b"), d, suffix)
 
     out = {
         "_updated": end.isoformat(),
@@ -371,11 +402,12 @@ def main():
         "countries": countries[:TOP_N],
         "regions": sorted(regions, key=lambda r: -r["count"])[:TOP_N],
         "pages": pages,
-        "referrers": clean(stats("toprefs", qs)),
-        "browsers": clean(stats("browsers", qs)),
-        "systems": clean(stats("systems", qs)),
-        "sizes": clean(stats("sizes", qs)),
+        "referrers": keep("referrers", stats("toprefs", qs)),
+        "browsers": keep("browsers", stats("browsers", qs)),
+        "systems": keep("systems", stats("systems", qs)),
         "recent": recent,
+        "_recent_total": recent_total,
+        "_recent_shown": len(recent),
     }
     with open(OUT, "w", encoding="utf-8") as f:
         json.dump(out, f, indent=2, ensure_ascii=False)
@@ -388,6 +420,8 @@ def main():
     if unplaced:
         print("  regions without a centroid (kept in table, no dot): %s"
               % ", ".join(sorted(set(unplaced))[:12]))
+    if kept:
+        print("  kept previous data for (fetch failed): %s" % ", ".join(kept))
     if nocent:
         print("  no centroid (dot skipped): %s" % ", ".join(sorted(set(nocent))))
 

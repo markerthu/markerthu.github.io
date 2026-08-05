@@ -147,8 +147,10 @@ body.dark-mode #pg-dark{background:#21262d;color:#fff;border-color:#30363d}
   {% if nrecent > 0 %}
   {%- assign screens = v.recent | map: "screen" | join: "" -%}
   <p class="sec-note">
-    Every visit recorded so far, newest first, in UTC &mdash; {{ nrecent }} so far, and this list holds the most recent 30.
-    Per-visit logging started on 4 Aug 2026; visits before that survive only as the totals further down.
+    {%- assign rtotal = v._recent_total | default: nrecent -%}
+    Every visit since per-visit logging began, newest first, in UTC &mdash; {{ rtotal }} recorded{% if rtotal > nrecent %}, showing the {{ nrecent }} most recent{% endif %}.
+    Logging of individual visits started on 4 Aug 2026, so this list covers everything since then &mdash;
+    the tables below instead cover a rolling {{ v._days | default: 30 }}-day window, which is why the two do not add up.
     There is no IP column: GoatCounter resolves the location when the request arrives and never stores the address.
   </p>
   <div class="tablewrap">
@@ -158,12 +160,12 @@ body.dark-mode #pg-dark{background:#21262d;color:#fff;border-color:#30363d}
       {% for r in v.recent %}
         <tr>
           <td class="mono dim">{{ r.date }}</td>
-          <td class="n">{{ r.loc | default: "—" }}{% if r.first %} <span class="pill new">new</span>{% endif %}</td>
-          <td class="mono">{{ r.path }}</td>
-          <td class="dim">{% if r.ref and r.ref != "" %}{{ r.ref }}{% else %}direct{% endif %}</td>
-          <td>{{ r.browser | default: "—" }}</td>
-          <td>{{ r.system | default: "—" }}</td>
-          {% if screens != "" %}<td class="dim mono">{{ r.screen | default: "—" }}</td>{% endif %}
+          <td class="n">{% if r.loc and r.loc != "" %}{{ r.loc | escape }}{% else %}—{% endif %}{% if r.first %} <span class="pill new">new</span>{% endif %}</td>
+          <td class="mono">{{ r.path | escape }}</td>
+          <td class="dim">{% if r.ref and r.ref != "" %}{{ r.ref | escape }}{% else %}direct{% endif %}</td>
+          <td>{% if r.browser and r.browser != "" %}{{ r.browser | escape }}{% else %}—{% endif %}</td>
+          <td>{% if r.system and r.system != "" %}{{ r.system | escape }}{% else %}—{% endif %}</td>
+          {% if screens != "" %}<td class="dim mono">{% if r.screen and r.screen != "" %}{{ r.screen | escape }}{% else %}—{% endif %}</td>{% endif %}
         </tr>
       {% endfor %}
       </tbody>
@@ -184,8 +186,8 @@ body.dark-mode #pg-dark{background:#21262d;color:#fff;border-color:#30363d}
       <tbody>
       {% for r in v.regions %}
         <tr>
-          <td class="n">{{ r.name }}{% unless r.located %} <span class="pill">no map dot</span>{% endunless %}</td>
-          <td class="dim">{{ r.country_name }} <span class="mono">{{ r.country }}</span></td>
+          <td class="n">{{ r.name | escape }}{% unless r.located %} <span class="pill">no map dot</span>{% endunless %}</td>
+          <td class="dim">{{ r.country_name | escape }} <span class="mono">{{ r.country | escape }}</span></td>
           <td class="num">{{ r.count }}</td>
           <td><div class="track"><div class="bar" style="width:{{ r.count | times: 100 | divided_by: topr.count }}%"></div></div></td>
         </tr>
@@ -204,7 +206,7 @@ body.dark-mode #pg-dark{background:#21262d;color:#fff;border-color:#30363d}
       <tbody>
       {% for c in v.countries %}
         <tr>
-          <td class="n">{{ c.name }} <span class="dim mono">{{ c.code }}</span></td>
+          <td class="n">{{ c.name | escape }} <span class="dim mono">{{ c.code | escape }}</span></td>
           <td class="num">{{ c.count }}</td>
           <td><div class="track"><div class="bar" style="width:{{ c.count | times: 100 | divided_by: topc.count }}%"></div></div></td>
         </tr>
@@ -217,30 +219,34 @@ body.dark-mode #pg-dark{background:#21262d;color:#fff;border-color:#30363d}
     <div>
       <h2 class="sec">Most-read pages</h2>
       <p class="sec-note">&nbsp;</p>
-      <div class="tablewrap">
+      {% if v.pages and v.pages.size > 0 %}
+<div class="tablewrap">
         <table>
           <thead><tr><th>Page</th><th class="num">Views</th></tr></thead>
           <tbody>
           {% for p in v.pages %}
-            <tr><td><a class="mono" href="{{ p.path }}">{{ p.path }}</a></td><td class="num">{{ p.count }}</td></tr>
+            <tr><td><a class="mono" href="{{ p.path | escape }}">{{ p.path | escape }}</a></td><td class="num">{{ p.count }}</td></tr>
           {% endfor %}
           </tbody>
         </table>
       </div>
+{% else %}<p class="empty">No data for this window.</p>{% endif %}
     </div>
     <div>
       <h2 class="sec">How they got here</h2>
       <p class="sec-note">&nbsp;</p>
-      <div class="tablewrap">
+      {% if v.referrers and v.referrers.size > 0 %}
+<div class="tablewrap">
         <table>
           <thead><tr><th>Referrer</th><th class="num">Views</th></tr></thead>
           <tbody>
           {% for r in v.referrers %}
-            <tr><td>{{ r.name }}</td><td class="num">{{ r.count }}</td></tr>
+            <tr><td>{{ r.name | escape }}</td><td class="num">{{ r.count }}</td></tr>
           {% endfor %}
           </tbody>
         </table>
       </div>
+{% else %}<p class="empty">No data for this window.</p>{% endif %}
     </div>
   </div>
 
@@ -248,26 +254,30 @@ body.dark-mode #pg-dark{background:#21262d;color:#fff;border-color:#30363d}
     <div>
       <h2 class="sec">Browsers</h2>
       <p class="sec-note">&nbsp;</p>
-      <div class="tablewrap">
+      {% if v.browsers and v.browsers.size > 0 %}
+<div class="tablewrap">
         <table>
           <thead><tr><th>Browser</th><th class="num">Views</th></tr></thead>
           <tbody>
-          {% for b in v.browsers %}<tr><td>{{ b.name }}</td><td class="num">{{ b.count }}</td></tr>{% endfor %}
+          {% for b in v.browsers %}<tr><td>{{ b.name | escape }}</td><td class="num">{{ b.count }}</td></tr>{% endfor %}
           </tbody>
         </table>
       </div>
+{% else %}<p class="empty">No data for this window.</p>{% endif %}
     </div>
     <div>
       <h2 class="sec">Systems</h2>
       <p class="sec-note">&nbsp;</p>
-      <div class="tablewrap">
+      {% if v.systems and v.systems.size > 0 %}
+<div class="tablewrap">
         <table>
           <thead><tr><th>System</th><th class="num">Views</th></tr></thead>
           <tbody>
-          {% for s in v.systems %}<tr><td>{{ s.name }}</td><td class="num">{{ s.count }}</td></tr>{% endfor %}
+          {% for s in v.systems %}<tr><td>{{ s.name | escape }}</td><td class="num">{{ s.count }}</td></tr>{% endfor %}
           </tbody>
         </table>
       </div>
+{% else %}<p class="empty">No data for this window.</p>{% endif %}
     </div>
   </div>
 
