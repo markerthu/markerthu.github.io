@@ -163,10 +163,10 @@ body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-ima
     {%- endif -%}
     {%- assign vmain = vshort | split: ',' | first | strip -%}
     <article class="pub">
-      {% if vmain != blank %}<span class="pub-venue" title="{{ vfull | escape }}">{{ vmain | escape }}</span>{% endif %}
+      {% if vmain and vmain != '' %}<span class="pub-venue" title="{{ vfull | escape }}">{{ vmain | escape }}</span>{% endif %}
       {% if vshort contains 'Oral' %}<span class="pub-venue is-oral">Oral · Top 5%</span>{% endif %}
       <h2 class="pub-title">
-        {% if post.paperurl != blank %}
+        {% if post.paperurl and post.paperurl != '' %}
           <a href="{{ post.paperurl }}" target="_blank" rel="noopener noreferrer">{{ post.title }}</a>
         {% else %}
           <span>{{ post.title }}</span>
@@ -175,7 +175,7 @@ body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-ima
       {% if post.citation %}<div class="pub-authors">{{ post.citation | replace: "Jiajun Fan", "<strong>Jiajun Fan</strong>" | replace: "J. Fan", "<strong>J. Fan</strong>" }}</div>{% endif %}
       <div class="pub-actions">
         {% if post.projectpage %}<a class="act act-project" href="{{ post.projectpage }}">Project page</a>{% endif %}
-        {% if post.paperurl != blank %}<a class="act" href="{{ post.paperurl }}" target="_blank" rel="noopener noreferrer">Paper</a>{% endif %}
+        {% if post.paperurl and post.paperurl != '' %}<a class="act" href="{{ post.paperurl }}" target="_blank" rel="noopener noreferrer">Paper</a>{% endif %}
         {% if post.bibtex %}
         <button class="bib-btn" aria-expanded="false" onclick="
           var b=this.parentNode.parentNode.querySelector('.bib-block');
