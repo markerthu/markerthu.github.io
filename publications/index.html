@@ -1,0 +1,210 @@
+---
+layout: null
+permalink: /publications/
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Publications by Jiajun Fan — ICLR, NeurIPS, ICML, COLM, TMLR and TPAMI papers on reinforcement learning, generative models and reasoning LLMs.">
+<meta property="og:title" content="Publications — Jiajun Fan">
+<meta property="og:description" content="Peer-reviewed work on RL post-training, agentic RL, generative models and multimodal reasoning.">
+<meta property="og:url" content="https://www.jiajunfan.com/publications/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://www.jiajunfan.com/images/og-banner.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Publications — Jiajun Fan">
+<meta name="twitter:description" content="Peer-reviewed work on RL post-training, agentic RL, generative models and multimodal reasoning.">
+<link rel="canonical" href="https://www.jiajunfan.com/publications/">
+<title>Publications — Jiajun Fan</title>
+<link rel="icon" href="/images/favicon.ico">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#fdfcfa">
+<meta name="theme-color" content="#0f1216" media="(prefers-color-scheme: dark)">
+<script>try{if(localStorage.getItem('darkMode')==='true'){document.documentElement.style.background='#0f1216';}}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"></noscript>
+<style>
+:root{
+  --serif:'Newsreader',Georgia,'Times New Roman',serif;
+  --sans:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+  --bg:#fdfcfa; --band:#f6f3ec; --ink:#1a1815; --body:#2b2823; --muted:#6c6860; --faint:#787369;
+  --rule:#e8e3d9; --link:#1565c0; --link-h:#0d47a1; --card:#ffffff; --pill:#f0ede6;
+}
+body.dark-mode{
+  --bg:#0f1216; --band:#151a20; --ink:#ece8e0; --body:#cdc8be; --muted:#8f8a80; --faint:#8a857b;
+  --rule:#262b33; --link:#6ea8fe; --link-h:#93c0ff; --card:#161a20; --pill:#1a1f27;
+}
+.lbl-ico{display:inline-block;width:1em;height:1em;vertical-align:-0.14em;margin-right:5px;background-color:currentColor;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;flex-shrink:0;}
+*{box-sizing:border-box;margin:0;padding:0}
+html{overflow-x:hidden;scroll-behavior:smooth}
+body{font-family:var(--serif);background:var(--bg);color:var(--body);line-height:1.7;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s}
+a{text-decoration:none}
+::selection{background:rgba(21,101,192,.16)}
+
+/* ── masthead (shared with projects/blog) ── */
+.site-masthead{background:var(--bg);box-shadow:0 1px 0 var(--rule);position:sticky;top:0;z-index:200;font-size:16px;font-family:var(--sans)}
+.site-masthead::after{content:'';display:block;height:3px;background:linear-gradient(to right,#1565c0 0%,#7c4dff 50%,#00897b 100%)}
+.masthead-inner{max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:56px}
+.masthead-title{font-weight:800;font-size:1.35em;color:var(--ink)!important;letter-spacing:-.02em}
+.masthead-nav{display:flex;gap:2px;align-items:center}
+.masthead-nav a{font-weight:600;font-size:0.98em;color:var(--muted)!important;padding:6px 10px;border-radius:6px;transition:color .2s,background .2s}
+.masthead-nav a:hover{color:var(--link)!important;background:rgba(21,101,192,.07)}
+.masthead-nav a.nav-active{color:var(--link)!important}
+@media(max-width:600px){.masthead-inner{flex-wrap:wrap;height:auto;padding:8px 14px 7px;row-gap:1px;justify-content:center}.masthead-title{width:100%;text-align:center;white-space:nowrap}.masthead-nav{width:100%;justify-content:center;flex-wrap:wrap}}
+@media(max-width:560px){.masthead-nav a{font-size:0.86em;padding:5px 8px}.masthead-title{font-size:1.15em}}
+
+/* ── editorial header ── */
+.p-head{max-width:860px;margin:0 auto;padding:54px 24px 0}
+.p-kicker{font-family:var(--sans);text-transform:uppercase;letter-spacing:.145em;font-size:.72rem;font-weight:600;color:var(--muted);margin-bottom:.7em}
+.p-title{font-family:var(--serif);font-weight:500;font-size:2.7rem;line-height:1.1;letter-spacing:-.02em;color:var(--ink);margin-bottom:.24em}
+.p-sub{font-family:var(--serif);font-size:1.16rem;line-height:1.55;color:var(--muted);max-width:46em}
+.p-rule{border:none;border-top:1px solid var(--rule);margin:1.7em 0 .2em}
+
+/* ── stat strip ── */
+.stats{display:flex;flex-wrap:wrap;gap:9px;margin:1.5em 0 .2em;font-family:var(--sans)}
+.stat{display:inline-flex;align-items:center;background:var(--band);border:1px solid var(--rule);border-radius:20px;padding:4px 13px;font-size:.8rem;font-weight:600;color:var(--body)}
+.stat b{color:var(--ink);font-weight:800;margin-right:4px}
+.scholar-cta{display:inline-flex;align-items:center;background:var(--link);color:#fff!important;border-radius:20px;padding:5px 15px;font-size:.8rem;font-weight:700;font-family:var(--sans);transition:background .2s,transform .15s}
+.scholar-cta:hover{background:var(--link-h);transform:translateY(-1px)}
+
+/* ── list ── */
+.container{max-width:860px;margin:0 auto;padding:8px 24px 40px}
+.year-head{font-family:var(--sans);font-size:.74rem;font-weight:700;color:var(--faint);text-transform:uppercase;letter-spacing:.14em;margin:2.4em 0 .3em;padding-bottom:.5em;border-bottom:1px solid var(--rule)}
+.pub{padding:19px 0;border-bottom:1px solid var(--rule)}
+.pub:last-child{border-bottom:none}
+.pub-venue{display:inline-block;font-family:var(--sans);font-size:.66rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--link);background:var(--pill);border:1px solid var(--rule);border-radius:20px;padding:2px 10px;margin-bottom:9px}
+.pub-venue.is-oral{color:#8a6100;background:#fdf3d7;border-color:#f0e0b0}
+body.dark-mode .pub-venue.is-oral{color:#f3cf6b;background:#2b2310;border-color:#4d3f1c}
+.pub-title{font-family:var(--serif);font-size:1.24rem;font-weight:600;line-height:1.32;letter-spacing:-.01em;margin-bottom:7px}
+.pub-title a{color:var(--ink)}
+.pub-title a:hover{color:var(--link)}
+.pub-authors{font-family:var(--sans);font-size:.83rem;color:var(--muted);line-height:1.55}
+.pub-actions{display:flex;gap:7px;flex-wrap:wrap;align-items:center;margin-top:11px}
+.act{font-family:var(--sans);font-size:.75rem;font-weight:600;padding:4px 11px;border-radius:7px;border:1px solid var(--rule);background:var(--pill);color:var(--link);transition:background .18s,border-color .18s}
+.act:hover{border-color:var(--link);background:rgba(21,101,192,.08)}
+.act-project{background:var(--link);color:#fff;border-color:var(--link)}
+.act-project:hover{background:var(--link-h);border-color:var(--link-h)}
+.bib-btn{cursor:pointer;font-family:var(--sans);font-size:.75rem;font-weight:600;padding:4px 11px;border-radius:7px;border:1px solid var(--rule);background:transparent;color:var(--muted);transition:border-color .18s,color .18s}
+.bib-btn:hover{border-color:var(--link);color:var(--link)}
+.bib-block{display:none;position:relative;margin-top:10px;background:#1e242c;border-radius:10px;padding:16px 16px 12px}
+.bib-block.open{display:block}
+.bib-block pre{margin:0;font-family:var(--mono);font-size:.74rem;line-height:1.7;color:#e2e8f0;white-space:pre;overflow-x:auto}
+.bib-copy{position:absolute;top:8px;right:10px;background:#39424e;border:none;border-radius:5px;color:#c7ced8;font-family:var(--sans);font-size:.7rem;font-weight:600;padding:3px 10px;cursor:pointer;transition:background .15s,color .15s}
+.bib-copy:hover{background:var(--link);color:#fff}
+
+.note{font-family:var(--sans);font-size:.84rem;color:var(--faint);margin-top:1.4em;padding-left:13px;border-left:2px solid var(--rule)}
+
+footer{color:var(--muted);text-align:center;padding:26px 24px;font-family:var(--sans);font-size:.86em;border-top:1px solid var(--rule);margin-top:2em}
+footer a{color:var(--link)}
+footer a:hover{color:var(--link-h)}
+
+.pg-fab{position:fixed;right:22px;bottom:126px;width:42px;height:42px;border-radius:50%;border:1.5px solid rgba(0,0,0,.15);background:#fff;color:#333;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.18);z-index:9990;transition:transform .2s}
+.pg-fab:hover{transform:translateY(-2px) scale(1.06)}
+body.dark-mode .pg-fab{background:#21262d;color:#fff;border-color:#30363d}
+.pg-dico{width:20px;height:20px;display:inline-block;background-color:currentColor;-webkit-mask:url(/images/icons/h-moon.png) center/contain no-repeat;mask:url(/images/icons/h-moon.png) center/contain no-repeat}
+body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-image:url(/images/icons/h-sun.png)}
+.ra-panel.show ~ #pg-dark{opacity:0;pointer-events:none}
+
+@media(max-width:640px){.p-title{font-size:2.1rem}.pub-title{font-size:1.12rem}}
+@media print{.site-masthead,.pg-fab,.bib-btn{display:none!important}}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;transition-duration:.001ms!important}html{scroll-behavior:auto}}
+</style>
+<script data-goatcounter="https://jiajunfan.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body id="top">
+<script>try{if(localStorage.getItem('darkMode')==='true')document.body.classList.add('dark-mode');}catch(e){}</script>
+
+<header class="site-masthead">
+  <div class="masthead-inner">
+    <a class="masthead-title" href="/">Jiajun Fan</a>
+    <nav class="masthead-nav" aria-label="Site navigation">
+      <a href="/publications/" class="nav-active">Publications</a>
+      <a href="/projects/">Projects</a>
+      <a href="/year-archive/">Blog</a>
+      <a href="/cv/">CV</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<div class="p-head">
+  <div class="p-kicker">Publications</div>
+  <h1 class="p-title">Peer-reviewed work</h1>
+  <p class="p-sub">Reinforcement learning for generative models and reasoning LLMs, agentic RL, and efficient inference. Listed newest first; <strong>*</strong> marks first or co-first authorship.</p>
+  <div class="stats">
+    <a class="scholar-cta" href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Google Scholar</a>
+    <span class="stat"><b>{{ site.data.citations._total | default: 440 }}</b> citations</span>
+    <span class="stat"><b>{{ site.data.citations._h_index | default: 11 }}</b> h-index</span>
+    <span class="stat"><b>{{ site.data.citations._i10_index | default: 12 }}</b> i10-index</span>
+    <span class="stat"><b>{{ site.publications | size }}</b> papers</span>
+  </div>
+  <hr class="p-rule">
+</div>
+
+<main class="container">
+  {%- assign pubs = site.publications | sort: 'date' | reverse -%}
+  {%- assign lastyear = '' -%}
+  {% for post in pubs %}
+    {%- assign y = post.date | date: '%Y' -%}
+    {% if y != lastyear %}<div class="year-head">{{ y }}</div>{% assign lastyear = y %}{% endif %}
+    {%- assign venue = post.venue | strip_html -%}
+    <article class="pub">
+      {% if venue != blank %}<span class="pub-venue{% if venue contains 'Oral' %} is-oral{% endif %}">{{ venue }}</span>{% endif %}
+      <h2 class="pub-title">
+        {% if post.paperurl != blank %}
+          <a href="{{ post.paperurl }}" target="_blank" rel="noopener noreferrer">{{ post.title }}</a>
+        {% else %}
+          <span>{{ post.title }}</span>
+        {% endif %}
+      </h2>
+      {% if post.citation %}<div class="pub-authors">{{ post.citation }}</div>{% endif %}
+      <div class="pub-actions">
+        {% if post.projectpage %}<a class="act act-project" href="{{ post.projectpage }}">Project page</a>{% endif %}
+        {% if post.paperurl != blank %}<a class="act" href="{{ post.paperurl }}" target="_blank" rel="noopener noreferrer">Paper</a>{% endif %}
+        {% if post.bibtex %}
+        <button class="bib-btn" aria-expanded="false" onclick="
+          var b=this.parentNode.parentNode.querySelector('.bib-block');
+          var open=b.classList.toggle('open');
+          this.setAttribute('aria-expanded',open);
+          this.textContent=open?'▾ BibTeX':'▸ BibTeX';
+        ">▸ BibTeX</button>
+        {% endif %}
+      </div>
+      {% if post.bibtex %}
+      <div class="bib-block" role="region" aria-label="BibTeX entry">
+        <button class="bib-copy" onclick="
+          var pre=this.parentNode.querySelector('pre'), btn=this;
+          if(navigator.clipboard&amp;&amp;navigator.clipboard.writeText){navigator.clipboard.writeText(pre.textContent);}
+          else{var r=document.createRange();r.selectNode(pre);window.getSelection().removeAllRanges();window.getSelection().addRange(r);document.execCommand('copy');window.getSelection().removeAllRanges();}
+          btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy';},2000);
+        ">Copy</button>
+        <pre>{{ post.bibtex | escape }}</pre>
+      </div>
+      {% endif %}
+    </article>
+  {% endfor %}
+
+  <p class="note">Citation counts update daily from Google Scholar. Preprints and workshop papers are included; see Google Scholar for the complete record.</p>
+</main>
+
+<footer>
+  <a href="/">Home</a> &nbsp;·&nbsp; <a href="/projects/">Projects</a> &nbsp;·&nbsp;
+  <a href="/cv/">CV</a> &nbsp;·&nbsp;
+  <a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Scholar</a>
+</footer>
+
+<button id="pg-dark" class="pg-fab" aria-label="Toggle dark mode" title="Toggle dark mode"><i class="pg-dico"></i></button>
+<script>
+document.getElementById('pg-dark').addEventListener('click',function(){
+  var on=document.body.classList.toggle('dark-mode');
+  try{localStorage.setItem('darkMode',on?'true':'false');}catch(e){}
+});
+</script>
+{% include ai-agent.html %}
+</body>
+</html>
