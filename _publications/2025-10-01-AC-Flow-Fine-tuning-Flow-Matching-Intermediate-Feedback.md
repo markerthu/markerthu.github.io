@@ -4,7 +4,7 @@ collection: publications
 permalink: /publication/2025-10-01-AC-Flow
 projectpage: "/projects/ac-flow/"
 date: 2025-10-01
-venue: 'arXiv preprint (Under Review), 2025'
+venue: '<strong>arXiv</strong> preprint, under review'
 paperurl: 'https://arxiv.org/abs/2510.18072'
 citation: 'Jiajun Fan, Chaoran Cheng, Shuaike Shen, Xiangxin Zhou, Ge Liu. &quot;Fine-tuning Flow Matching Generative Models with Intermediate Feedback.&quot; arXiv:2510.18072, 2025.'
 bibtex: |
