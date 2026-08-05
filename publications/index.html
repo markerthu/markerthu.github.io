@@ -33,11 +33,11 @@ permalink: /publications/
   --sans:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;
   --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
   --bg:#fdfcfa; --band:#f6f3ec; --ink:#1a1815; --body:#2b2823; --muted:#6c6860; --faint:#787369;
-  --rule:#e8e3d9; --link:#1565c0; --link-h:#0d47a1; --card:#ffffff; --pill:#f0ede6;
+  --rule:#e8e3d9; --link:#1565c0; --on-link:#ffffff; --link-h:#0d47a1; --card:#ffffff; --pill:#f0ede6;
 }
 body.dark-mode{
   --bg:#0f1216; --band:#151a20; --ink:#ece8e0; --body:#cdc8be; --muted:#8f8a80; --faint:#8a857b;
-  --rule:#262b33; --link:#6ea8fe; --link-h:#93c0ff; --card:#161a20; --pill:#1a1f27;
+  --rule:#262b33; --link:#6ea8fe; --on-link:#0f1216; --link-h:#93c0ff; --card:#161a20; --pill:#1a1f27;
 }
 .lbl-ico{display:inline-block;width:1em;height:1em;vertical-align:-0.14em;margin-right:5px;background-color:currentColor;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;flex-shrink:0;}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -69,7 +69,7 @@ a{text-decoration:none}
 .stats{display:flex;flex-wrap:wrap;gap:9px;margin:1.5em 0 .2em;font-family:var(--sans)}
 .stat{display:inline-flex;align-items:center;background:var(--band);border:1px solid var(--rule);border-radius:20px;padding:4px 13px;font-size:.8rem;font-weight:600;color:var(--body)}
 .stat b{color:var(--ink);font-weight:800;margin-right:4px}
-.scholar-cta{display:inline-flex;align-items:center;background:var(--link);color:#fff!important;border-radius:20px;padding:5px 15px;font-size:.8rem;font-weight:700;font-family:var(--sans);transition:background .2s,transform .15s}
+.scholar-cta{display:inline-flex;align-items:center;background:var(--link);color:var(--on-link)!important;border-radius:20px;padding:5px 15px;font-size:.8rem;font-weight:700;font-family:var(--sans);transition:background .2s,transform .15s}
 .scholar-cta:hover{background:var(--link-h);transform:translateY(-1px)}
 
 /* ── list ── */
@@ -84,10 +84,11 @@ body.dark-mode .pub-venue.is-oral{color:#f3cf6b;background:#2b2310;border-color:
 .pub-title a{color:var(--ink)}
 .pub-title a:hover{color:var(--link)}
 .pub-authors{font-family:var(--sans);font-size:.83rem;color:var(--muted);line-height:1.55}
+.pub-authors strong{color:var(--body);font-weight:700}
 .pub-actions{display:flex;gap:7px;flex-wrap:wrap;align-items:center;margin-top:11px}
 .act{font-family:var(--sans);font-size:.75rem;font-weight:600;padding:4px 11px;border-radius:7px;border:1px solid var(--rule);background:var(--pill);color:var(--link);transition:background .18s,border-color .18s}
 .act:hover{border-color:var(--link);background:rgba(21,101,192,.08)}
-.act-project{background:var(--link);color:#fff;border-color:var(--link)}
+.act-project{background:var(--link);color:var(--on-link);border-color:var(--link)}
 .act-project:hover{background:var(--link-h);border-color:var(--link-h)}
 .bib-btn{cursor:pointer;font-family:var(--sans);font-size:.75rem;font-weight:600;padding:4px 11px;border-radius:7px;border:1px solid var(--rule);background:transparent;color:var(--muted);transition:border-color .18s,color .18s}
 .bib-btn:hover{border-color:var(--link);color:var(--link)}
@@ -95,7 +96,7 @@ body.dark-mode .pub-venue.is-oral{color:#f3cf6b;background:#2b2310;border-color:
 .bib-block.open{display:block}
 .bib-block pre{margin:0;font-family:var(--mono);font-size:.74rem;line-height:1.7;color:#e2e8f0;white-space:pre;overflow-x:auto}
 .bib-copy{position:absolute;top:8px;right:10px;background:#39424e;border:none;border-radius:5px;color:#c7ced8;font-family:var(--sans);font-size:.7rem;font-weight:600;padding:3px 10px;cursor:pointer;transition:background .15s,color .15s}
-.bib-copy:hover{background:var(--link);color:#fff}
+.bib-copy:hover{background:var(--link);color:var(--on-link)}
 
 .note{font-family:var(--sans);font-size:.84rem;color:var(--faint);margin-top:1.4em;padding-left:13px;border-left:2px solid var(--rule)}
 
@@ -135,7 +136,7 @@ body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-ima
 <div class="p-head">
   <div class="p-kicker">Publications</div>
   <h1 class="p-title">Peer-reviewed work</h1>
-  <p class="p-sub">Reinforcement learning for generative models and reasoning LLMs, agentic RL, and efficient inference. Listed newest first; <strong>*</strong> marks first or co-first authorship.</p>
+  <p class="p-sub">Reinforcement learning for generative models and reasoning LLMs, agentic RL, and efficient inference. Listed newest first; my name is <strong>bold</strong> in each author list.</p>
   <div class="stats">
     <a class="scholar-cta" href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Google Scholar</a>
     <span class="stat"><b>{{ site.data.citations._total | default: 440 }}</b> citations</span>
@@ -150,7 +151,13 @@ body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-ima
   {%- assign pubs = site.publications | sort: 'date' | reverse -%}
   {%- assign lastyear = '' -%}
   {% for post in pubs %}
+    {%- comment -%} group by the year the venue announces, not the file's date {%- endcomment -%}
     {%- assign y = post.date | date: '%Y' -%}
+    {%- assign vy = post.venue | strip_html | split: ' ' -%}
+    {%- for w in vy -%}
+      {%- assign digits = w | replace: ')', '' | replace: ',', '' -%}
+      {%- if digits.size == 4 and digits >= '1990' and digits <= '2099' -%}{%- assign y = digits -%}{%- endif -%}
+    {%- endfor -%}
     {% if y != lastyear %}<div class="year-head">{{ y }}</div>{% assign lastyear = y %}{% endif %}
     {%- comment -%} the <strong> inside `venue` holds the short label, e.g. "ICLR 2026" {%- endcomment -%}
     {%- assign vfull = post.venue | strip_html | strip -%}
@@ -170,7 +177,7 @@ body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-ima
           <span>{{ post.title }}</span>
         {% endif %}
       </h2>
-      {% if post.citation %}<div class="pub-authors">{{ post.citation }}</div>{% endif %}
+      {% if post.citation %}<div class="pub-authors">{{ post.citation | replace: "Jiajun Fan", "<strong>Jiajun Fan</strong>" | replace: "J. Fan", "<strong>J. Fan</strong>" }}</div>{% endif %}
       <div class="pub-actions">
         {% if post.projectpage %}<a class="act act-project" href="{{ post.projectpage }}">Project page</a>{% endif %}
         {% if post.paperurl != blank %}<a class="act" href="{{ post.paperurl }}" target="_blank" rel="noopener noreferrer">Paper</a>{% endif %}

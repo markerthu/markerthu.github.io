@@ -32,11 +32,11 @@ permalink: /contact/
   --serif:'Newsreader',Georgia,'Times New Roman',serif;
   --sans:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;
   --bg:#fdfcfa; --band:#f6f3ec; --ink:#1a1815; --body:#2b2823; --muted:#6c6860; --faint:#787369;
-  --rule:#e8e3d9; --link:#1565c0; --link-h:#0d47a1; --card:#ffffff; --pill:#f0ede6;
+  --rule:#e8e3d9; --link:#1565c0; --on-link:#ffffff; --link-h:#0d47a1; --card:#ffffff; --pill:#f0ede6;
 }
 body.dark-mode{
   --bg:#0f1216; --band:#151a20; --ink:#ece8e0; --body:#cdc8be; --muted:#8f8a80; --faint:#8a857b;
-  --rule:#262b33; --link:#6ea8fe; --link-h:#93c0ff; --card:#161a20; --pill:#1a1f27;
+  --rule:#262b33; --link:#6ea8fe; --on-link:#0f1216; --link-h:#93c0ff; --card:#161a20; --pill:#1a1f27;
 }
 .lbl-ico{display:inline-block;width:1em;height:1em;vertical-align:-0.14em;margin-right:5px;background-color:currentColor;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;flex-shrink:0;}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -72,7 +72,7 @@ a:hover{color:var(--link-h)}
 .primary .val{font-family:var(--serif);font-size:1.55rem;font-weight:600;color:var(--ink);letter-spacing:-.01em;line-height:1.2;word-break:break-word}
 .primary .val a{color:var(--ink)}
 .primary .val a:hover{color:var(--link)}
-.mail-btn{font-family:var(--sans);font-size:.82rem;font-weight:700;background:var(--link);color:#fff!important;border-radius:9px;padding:9px 20px;white-space:nowrap;transition:background .2s,transform .15s}
+.mail-btn{font-family:var(--sans);font-size:.82rem;font-weight:700;background:var(--link);color:var(--on-link)!important;border-radius:9px;padding:9px 20px;white-space:nowrap;transition:background .2s,transform .15s}
 .mail-btn:hover{background:var(--link-h);transform:translateY(-1px)}
 
 /* ── link rows ── */
