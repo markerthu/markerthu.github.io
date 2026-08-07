@@ -12,7 +12,7 @@ the aggregates are the important part and must never fail because of the export.
 
 Token is read from env GOATCOUNTER_TOKEN (never hardcoded).
 """
-import os, sys, io, csv, json, gzip, zipfile, time, datetime, urllib.request, urllib.error
+import os, re, sys, io, csv, json, gzip, zipfile, time, datetime, urllib.request, urllib.error
 
 SITE = os.environ.get("GOATCOUNTER_SITE", "https://jiajunfan.goatcounter.com").rstrip("/")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -167,6 +167,15 @@ def try_export(prev_rows):
     # GoatCounter may hand back newline-delimited JSON, a JSON array, or CSV.
     # Try each; CSV needs newline='' so quoted fields containing newlines survive.
     text = text.lstrip("﻿").strip()
+    # The CSV export carries a format-version marker. Depending on how the bytes land
+    # it arrives either as its own line or glued onto the first header cell ("2Path"),
+    # which silently breaks the path column and makes every row fall back to "/".
+    _lines = text.split("\n")
+    if _lines and re.fullmatch(r"\s*\d+\s*", _lines[0] or ""):
+        text = "\n".join(_lines[1:])
+    elif _lines:
+        _lines[0] = re.sub(r"^\s*\d+(?=[A-Za-z])", "", _lines[0])
+        text = "\n".join(_lines)
     rows = []
     if text[:1] in ("{", "["):
         try:
@@ -265,7 +274,16 @@ def main():
     start = end - datetime.timedelta(days=DAYS - 1)
     qs = "start=%s&end=%s" % (start.isoformat(), end.isoformat())
 
-    locations = stats("locations", qs)
+    locations = None
+    for attempt in range(4):
+        locations = stats("locations", qs)
+        if locations is not None:
+            break
+        if attempt < 3:
+            wait = 10 * (attempt + 1)
+            print("  locations fetch failed; retrying in %ds (%d/3)" % (wait, attempt + 1),
+                  file=sys.stderr)
+            time.sleep(wait)
     if locations is None:
         print("ERROR: locations fetch failed; leaving _data/visitors.json unchanged.",
               file=sys.stderr)
