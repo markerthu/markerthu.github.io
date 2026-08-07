@@ -13,6 +13,10 @@ the aggregates are the important part and must never fail because of the export.
 Token is read from env GOATCOUNTER_TOKEN (never hardcoded).
 """
 import os, re, sys, io, csv, json, gzip, zipfile, time, datetime, urllib.request, urllib.error
+try:
+    from zoneinfo import ZoneInfo
+except ImportError:
+    ZoneInfo = None
 
 SITE = os.environ.get("GOATCOUNTER_SITE", "https://jiajunfan.goatcounter.com").rstrip("/")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -63,6 +67,28 @@ def stats(page, qs):
     except Exception as e:
         print("  warn: stats/%s unparseable -> %s" % (page, e), file=sys.stderr)
         return None
+
+
+def site_timezone():
+    """GoatCounter buckets days in the SITE's timezone, while the Actions runner and the
+    CSV export are both UTC. Mixing the two produced a day-long shortfall and a table
+    whose timestamps disagreed with the chart. Resolve it once, here."""
+    code, body = call("/api/v0/me")
+    name = ""
+    if code == 200:
+        try:
+            me = json.loads(body)
+            for holder in (me.get("user") or {}, me.get("site") or {}):
+                name = ((holder.get("settings") or {}).get("timezone") or "") or name
+        except Exception:
+            pass
+    name = (name or "").split(".", 1)[-1].strip()      # "US.America/Los_Angeles" -> "America/Los_Angeles"
+    if name and ZoneInfo:
+        try:
+            return name, ZoneInfo(name)
+        except Exception:
+            pass
+    return (name or "UTC"), datetime.timezone.utc
 
 
 def clean(rows, top=TOP_N):
@@ -209,6 +235,19 @@ def try_export(prev_rows):
                         return v
         return ""
 
+    def _to_site_time(raw):
+        """Export stamps are UTC; the rest of the page is in the site's timezone."""
+        raw = (raw or "").strip()
+        if not raw:
+            return ""
+        try:
+            dt = datetime.datetime.fromisoformat(raw.replace("Z", "+00:00"))
+            if dt.tzinfo is None:
+                dt = dt.replace(tzinfo=datetime.timezone.utc)
+            return dt.astimezone(try_export.tz).strftime("%Y-%m-%d %H:%M")
+        except Exception:
+            return raw[:16].replace("T", " ")
+
     pathmap = getattr(try_export, "pathmap", {})
     rnames = {}
     if os.path.exists(REGION_NAMES):
@@ -248,7 +287,7 @@ def try_export(prev_rows):
         if not path:
             path = pathmap.get(g(row, "pathid", "path_id"), "") or "/"
         out.append({
-            "date": g(row, "date", "createdat", "createdatutc")[:16].replace("T", " "),
+            "date": _to_site_time(g(row, "date", "createdat", "createdatutc")),
             "loc": pretty_loc(g(row, "location")),
             "path": path,
             "ref": g(row, "referrer", "ref"),
@@ -271,8 +310,10 @@ def main():
         print("ERROR: GOATCOUNTER_TOKEN not set", file=sys.stderr)
         sys.exit(1)
 
-    end = datetime.date.today()
+    tz_name, tz = site_timezone()
+    end = datetime.datetime.now(tz).date()
     start = end - datetime.timedelta(days=DAYS - 1)
+    print("  site timezone: %s (today there is %s)" % (tz_name, end))
     # The API returns buckets up to the day BEFORE `end`, so today never lands in the
     # window. Ask for one extra day; everything is then keyed by date, not position.
     api_end = end + datetime.timedelta(days=1)
@@ -448,6 +489,7 @@ def main():
         "d30_prev": total_of(prev_daily) if prev_daily else 0,
     }
 
+    try_export.tz = tz
     recent, note = try_export(prev.get("recent") or [])
     print("  export: %s" % note)
     # the true number of recorded visits, before MAX_ROWS truncation
@@ -486,6 +528,7 @@ def main():
 
     out = {
         "_updated": (daily[-1]["day"] if daily else end.isoformat()),
+        "_timezone": tz_name,
         "_source": "GoatCounter API (%s)" % SITE,
         "_total": total,
         "_days": DAYS,

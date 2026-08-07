@@ -175,7 +175,7 @@ body.dark-mode #pg-dark{background:#21262d;color:#fff;border-color:#30363d}
   <div class="trend">
     <div class="trend-hd">
       <h2>Audience overview</h2>
-      <span class="rng">{{ v._range }} &middot; peak {{ dmax }}/day{% if v._last_visit %} &middot; last visit {{ v._last_visit }} UTC{% endif %}</span>
+      <span class="rng">{{ v._range }} &middot; peak {{ dmax }}/day{% if v._last_visit %} &middot; last visit {{ v._last_visit }}{% endif %}</span>
     </div>
     <svg class="trend-svg" viewBox="0 0 300 60" preserveAspectRatio="none" role="img"
          aria-label="Daily pageviews over the last {{ dn }} days">
@@ -204,7 +204,7 @@ body.dark-mode #pg-dark{background:#21262d;color:#fff;border-color:#30363d}
   {%- assign screens = v.recent | map: "screen" | join: "" -%}
   <p class="sec-note">
     {%- assign rtotal = v._recent_total | default: nrecent -%}
-    Every visit since per-visit logging began, newest first, in UTC &mdash; {{ rtotal }} recorded{% if rtotal > nrecent %}, showing the {{ nrecent }} most recent{% endif %}.
+    Every visit since per-visit logging began, newest first, in {{ v._timezone | default: "site" }} time (the same clock the chart and the daily figures use) &mdash; {{ rtotal }} recorded{% if rtotal > nrecent %}, showing the {{ nrecent }} most recent{% endif %}.
     Logging of individual visits started on 4 Aug 2026, so this list covers everything since then &mdash;
     the tables below instead cover a rolling {{ v._days | default: 30 }}-day window, which is why the two do not add up.
     There is no IP column: GoatCounter resolves the location when the request arrives and never stores the address.
