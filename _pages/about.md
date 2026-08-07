@@ -832,7 +832,11 @@ img[loading="lazy"].loaded {
   .pub-left  { flex-direction: row; }
   .stat-card { flex: 1 1 100px; padding: 10px 12px; }
   .stat-number { font-size: 1.5em; }
-  /* Stack fixed controls to avoid collision */
+}
+
+/* Stack the fixed controls into one column wherever the screen is narrow enough that
+   they would otherwise sit edge-to-edge (the agent launcher owns 68..116px). */
+@media(max-width:600px) {
   .ra-btn      { bottom: 16px;  right: 16px; }
   .scroll-top  { bottom: 74px;  right: 16px; }
   .dark-toggle { bottom: 122px; right: 16px; }

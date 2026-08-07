@@ -112,7 +112,13 @@ body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-ima
 .ra-panel.show ~ #pg-dark{opacity:0;pointer-events:none}
 
 @media(max-width:640px){.p-title{font-size:2.1rem}.pub-title{font-size:1.12rem}}
-@media print{.site-masthead,.pg-fab,.bib-btn{display:none!important}}
+@media print{
+  /* the page paints through custom properties, so dark mode must be undone for
+     paper or every non-link heading prints near-white on white */
+  body.dark-mode{--bg:#fff;--band:#fff;--card:#fff;--pill:#fff;--ink:#000;--body:#000;
+    --muted:#333;--faint:#444;--rule:#ccc;--link:#000;--link-h:#000;--on-link:#fff;
+    --sea:#fff;--land:#fff;--fig-border:#ccc}
+.site-masthead,.pg-fab,.bib-btn{display:none!important}}
 @media (prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;transition-duration:.001ms!important}html{scroll-behavior:auto}}
 </style>
 <script data-goatcounter="https://jiajunfan.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>

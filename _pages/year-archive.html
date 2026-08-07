@@ -92,7 +92,13 @@ body.dark-mode .blog-index{
   .bx-title{font-size:1.28rem!important;}
   .bx-entry{padding:1.1em .85em;margin:0 -.85em;}
 }
-@media print{.pg-fab{display:none!important;}}
+@media print{
+  /* the page paints through custom properties, so dark mode must be undone for
+     paper or every non-link heading prints near-white on white */
+  body.dark-mode{--bg:#fff;--band:#fff;--card:#fff;--pill:#fff;--ink:#000;--body:#000;
+    --muted:#333;--faint:#444;--rule:#ccc;--link:#000;--link-h:#000;--on-link:#fff;
+    --sea:#fff;--land:#fff;--fig-border:#ccc}
+.pg-fab{display:none!important;}}
 </style>
 
 <div class="blog-index">

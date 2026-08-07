@@ -273,7 +273,10 @@ def main():
 
     end = datetime.date.today()
     start = end - datetime.timedelta(days=DAYS - 1)
-    qs = "start=%s&end=%s" % (start.isoformat(), end.isoformat())
+    # The API returns buckets up to the day BEFORE `end`, so today never lands in the
+    # window. Ask for one extra day; everything is then keyed by date, not position.
+    api_end = end + datetime.timedelta(days=1)
+    qs = "start=%s&end=%s" % (start.isoformat(), api_end.isoformat())
 
     locations = None
     for attempt in range(4):
@@ -398,7 +401,15 @@ def main():
 
     # Daily series + period comparisons — /api/v0/stats/total returns one entry per day.
     def series(a, b):
-        code, body = call("/api/v0/stats/total?start=%s&end=%s" % (a.isoformat(), b.isoformat()))
+        for attempt in range(3):
+            code, body = call("/api/v0/stats/total?start=%s&end=%s"
+                              % (a.isoformat(), b.isoformat()))
+            if code == 200:
+                break
+            print("  warn: stats/total %s..%s -> %s (attempt %d/3)"
+                  % (a, b, code, attempt + 1), file=sys.stderr)
+            if attempt < 2:
+                time.sleep(10 * (attempt + 1))
         if code != 200:
             return None
         try:
@@ -408,9 +419,13 @@ def main():
         return [{"day": x.get("day"), "n": int(x.get("daily") or 0)}
                 for x in (d.get("stats") or []) if x.get("day")]
 
-    daily = series(start, end) or (prev.get("daily") or [])
+    daily, daily_stale = series(start, api_end), False
+    if daily is None:
+        daily, daily_stale = (prev.get("daily") or []), True
+        print("  warn: daily series fetch failed; reusing the previous series",
+              file=sys.stderr)
     prev_start = start - datetime.timedelta(days=DAYS)
-    prev_daily = series(prev_start, start - datetime.timedelta(days=1))
+    prev_daily = series(prev_start, start) or []
 
     def total_of(rows, days=None):
         if not rows:
@@ -418,8 +433,12 @@ def main():
         rows = rows[-days:] if days else rows
         return sum(r["n"] for r in rows)
 
-    today_n = daily[-1]["n"] if daily else 0
-    yday_n = daily[-2]["n"] if len(daily) > 1 else 0
+    by_day = {r["day"]: r["n"] for r in daily if r.get("day")}
+    today_n = by_day.get(end.isoformat(), 0)
+    yday_n = by_day.get((end - datetime.timedelta(days=1)).isoformat(), 0)
+    if daily and daily[-1].get("day") != end.isoformat():
+        print("  warn: daily series ends %s but today is %s"
+              % (daily[-1].get("day"), end.isoformat()), file=sys.stderr)
     periods = {
         "today": today_n,
         "yesterday": yday_n,
@@ -453,7 +472,7 @@ def main():
     # The daily series is the authoritative pageview count for the window; the
     # per-country sum can be lower (hits whose country could not be resolved).
     # Use one number everywhere so the map header, the tile and the chart agree.
-    if daily:
+    if daily and not daily_stale:
         total = periods["d30"]
         # Derive the printed range from the series the API actually returned, so the
         # map header and the chart axis can never disagree by a day.
@@ -466,7 +485,7 @@ def main():
         rng_start, rng_end = start, end
 
     out = {
-        "_updated": end.isoformat(),
+        "_updated": (daily[-1]["day"] if daily else end.isoformat()),
         "_source": "GoatCounter API (%s)" % SITE,
         "_total": total,
         "_days": DAYS,

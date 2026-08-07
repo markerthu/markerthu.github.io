@@ -44,6 +44,7 @@ a{color:var(--link);text-decoration:none}a:hover{color:var(--link-h)}
 .masthead-title{font-weight:800;letter-spacing:-.02em;color:var(--ink);font-size:19px}
 .masthead-nav a{color:var(--muted);margin-left:22px;font-weight:500}
 .masthead-nav a:hover{color:var(--link)}
+@media(max-width:600px){.masthead-inner{flex-wrap:wrap;height:auto;padding:8px 14px 7px;row-gap:1px;justify-content:center}.masthead-title{width:100%;text-align:center;white-space:nowrap}.masthead-nav{width:100%;justify-content:center;flex-wrap:wrap;display:flex}.masthead-nav a{margin:0 6px}}
 
 .wrap{max-width:1000px;margin:0 auto;padding:0 24px}
 .hero{padding:54px 0 26px;border-bottom:1px solid var(--rule)}
@@ -104,7 +105,13 @@ footer.pg a{color:var(--muted)}
 #pg-dark{bottom:22px;background:#fff;color:#333;border:1.5px solid rgba(0,0,0,.15)}
 body.dark-mode #pg-dark{background:#21262d;color:#fff;border-color:#30363d}
 .pg-dico{width:20px;height:20px;display:inline-block;background-color:currentColor;-webkit-mask:url(/images/icons/h-moon.png) center/contain no-repeat;mask:url(/images/icons/h-moon.png) center/contain no-repeat}
-@media print{.pg-fab{display:none}}
+@media print{
+  /* the page paints through custom properties, so dark mode must be undone for
+     paper or every non-link heading prints near-white on white */
+  body.dark-mode{--bg:#fff;--band:#fff;--card:#fff;--pill:#fff;--ink:#000;--body:#000;
+    --muted:#333;--faint:#444;--rule:#ccc;--link:#000;--link-h:#000;--on-link:#fff;
+    --sea:#fff;--land:#fff;--fig-border:#ccc}
+.pg-fab{display:none}}
 @media(max-width:700px){
   h1{font-size:33px}
   .wrap{padding:0 18px}
@@ -174,7 +181,7 @@ body.dark-mode #pg-dark{background:#21262d;color:#fff;border-color:#30363d}
          aria-label="Daily pageviews over the last {{ dn }} days">
       {%- for d in dseries -%}
         {%- assign h = d.n | times: 50 | divided_by: dmax -%}
-        {%- if h < 1 -%}{%- assign h = 1 -%}{%- endif -%}
+        {%- if d.n > 0 and h < 1 -%}{%- assign h = 1 -%}{%- endif -%}
         {%- assign x = forloop.index0 | times: slot -%}
         <rect class="trend-bar" x="{{ x }}" y="{{ 54 | minus: h }}" width="{{ slot | minus: 1 }}" height="{{ h }}" rx="0.6"><title>{{ d.day }}: {{ d.n }}</title></rect>
       {%- endfor -%}
