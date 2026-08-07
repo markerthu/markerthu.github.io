@@ -455,13 +455,22 @@ def main():
     # Use one number everywhere so the map header, the tile and the chart agree.
     if daily:
         total = periods["d30"]
+        # Derive the printed range from the series the API actually returned, so the
+        # map header and the chart axis can never disagree by a day.
+        try:
+            rng_start = datetime.date.fromisoformat(daily[0]["day"])
+            rng_end = datetime.date.fromisoformat(daily[-1]["day"])
+        except Exception:
+            rng_start, rng_end = start, end
+    else:
+        rng_start, rng_end = start, end
 
     out = {
         "_updated": end.isoformat(),
         "_source": "GoatCounter API (%s)" % SITE,
         "_total": total,
         "_days": DAYS,
-        "_range": "%s - %s" % (fmt(start), fmt(end)),
+        "_range": "%s - %s" % (fmt(rng_start), fmt(rng_end)),
         "locations": dots,
         "countries": countries[:TOP_N],
         "regions": sorted(regions, key=lambda r: -r["count"])[:TOP_N],
