@@ -450,6 +450,12 @@ def main():
         suffix = "th" if 11 <= d % 100 <= 13 else {1: "st", 2: "nd", 3: "rd"}.get(d % 10, "th")
         return "%s. %d%s" % (dt.strftime("%b"), d, suffix)
 
+    # The daily series is the authoritative pageview count for the window; the
+    # per-country sum can be lower (hits whose country could not be resolved).
+    # Use one number everywhere so the map header, the tile and the chart agree.
+    if daily:
+        total = periods["d30"]
+
     out = {
         "_updated": end.isoformat(),
         "_source": "GoatCounter API (%s)" % SITE,
