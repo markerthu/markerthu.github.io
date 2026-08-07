@@ -28,7 +28,7 @@ PROJ = os.path.join(ROOT, "scripts", "map_projection.json")
 
 DAYS = 30          # window for the aggregate stats
 MAX_DOTS = 60      # dots drawn on the map
-R_MIN, R_MAX = 2.6, 7.0   # dot radius range in SVG units (viewBox is 360 wide)
+R_MIN, R_MAX = 1.8, 4.2   # dot radius range in SVG units (viewBox is 360 wide)
 MAX_ROWS = 30      # individual visits shown on the /visitors/ table
 COUNTRY_NAMES = {}  # ISO_A2 -> full name, filled from the locations API
 TOP_N = 25         # rows kept per aggregate table
