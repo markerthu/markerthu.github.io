@@ -24,6 +24,7 @@ PROJ = os.path.join(ROOT, "scripts", "map_projection.json")
 
 DAYS = 30          # window for the aggregate stats
 MAX_DOTS = 60      # dots drawn on the map
+R_MIN, R_MAX = 2.6, 7.0   # dot radius range in SVG units (viewBox is 360 wide)
 MAX_ROWS = 30      # individual visits shown on the /visitors/ table
 COUNTRY_NAMES = {}  # ISO_A2 -> full name, filled from the locations API
 TOP_N = 25         # rows kept per aggregate table
@@ -346,8 +347,7 @@ def main():
                 if ll:
                     cx, cy = xy(ll[1], ll[0])
                     dots.append({"code": code, "name": "%s, %s" % (rname, code),
-                                 "count": rn, "cx": cx, "cy": cy,
-                                 "r": round(2.0 + (rn ** 0.5) * 1.0, 1)})
+                                 "count": rn, "cx": cx, "cy": cy})
                     placed = True
 
         # No usable region breakdown -> one dot at the country centroid.
@@ -357,12 +357,19 @@ def main():
                 continue
             lat, lon = cent[code]
             cx, cy = xy(lon, lat)
-            dots.append({"code": code, "name": name, "count": n, "cx": cx, "cy": cy,
-                         "r": round(2.0 + (n ** 0.5) * 1.0, 1)})
+            dots.append({"code": code, "name": name, "count": n, "cx": cx, "cy": cy})
 
     countries.sort(key=lambda c: -c["count"])
     dots.sort(key=lambda d: -d["count"])
     dots = dots[:MAX_DOTS]
+    # Radius is normalised against the busiest dot and capped, so a single hot region
+    # cannot swallow its neighbours; area still scales with the count (sqrt).
+    if dots:
+        top = max(d["count"] for d in dots) or 1
+        for d in dots:
+            d["r"] = round(R_MIN + (R_MAX - R_MIN) * ((d["count"] / top) ** 0.5), 2)
+    # biggest first in document order => smaller dots paint on top and stay visible
+    dots.sort(key=lambda d: -d["r"])
 
     # most-visited pages
     pages, pages_ok = [], False
@@ -388,6 +395,39 @@ def main():
 
     global COUNTRY_NAMES
     COUNTRY_NAMES = {c["code"]: c["name"] for c in countries if c.get("code")}
+
+    # Daily series + period comparisons — /api/v0/stats/total returns one entry per day.
+    def series(a, b):
+        code, body = call("/api/v0/stats/total?start=%s&end=%s" % (a.isoformat(), b.isoformat()))
+        if code != 200:
+            return None
+        try:
+            d = json.loads(body)
+        except Exception:
+            return None
+        return [{"day": x.get("day"), "n": int(x.get("daily") or 0)}
+                for x in (d.get("stats") or []) if x.get("day")]
+
+    daily = series(start, end) or (prev.get("daily") or [])
+    prev_start = start - datetime.timedelta(days=DAYS)
+    prev_daily = series(prev_start, start - datetime.timedelta(days=1))
+
+    def total_of(rows, days=None):
+        if not rows:
+            return 0
+        rows = rows[-days:] if days else rows
+        return sum(r["n"] for r in rows)
+
+    today_n = daily[-1]["n"] if daily else 0
+    yday_n = daily[-2]["n"] if len(daily) > 1 else 0
+    periods = {
+        "today": today_n,
+        "yesterday": yday_n,
+        "d7": total_of(daily, 7),
+        "d7_prev": total_of(daily[:-7], 7) if len(daily) > 7 else 0,
+        "d30": total_of(daily),
+        "d30_prev": total_of(prev_daily) if prev_daily else 0,
+    }
 
     recent, note = try_export(prev.get("recent") or [])
     print("  export: %s" % note)
@@ -423,6 +463,9 @@ def main():
         "referrers": keep("referrers", stats("toprefs", qs)),
         "browsers": keep("browsers", stats("browsers", qs)),
         "systems": keep("systems", stats("systems", qs)),
+        "daily": daily,
+        "periods": periods,
+        "_last_visit": (recent[0]["date"] if recent else (prev.get("_last_visit") or "")),
         "recent": recent,
         "_recent_total": recent_total,
         "_recent_shown": len(recent),
