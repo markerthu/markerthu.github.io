@@ -77,17 +77,34 @@ def site_timezone():
     name = ""
     if code == 200:
         try:
-            me = json.loads(body)
-            for holder in (me.get("user") or {}, me.get("site") or {}):
-                name = ((holder.get("settings") or {}).get("timezone") or "") or name
+            def find_tz(node):
+                """The field moves around between payload shapes (user.site is an int id,
+                not an object), so search rather than guess a path."""
+                if isinstance(node, dict):
+                    for k, v in node.items():
+                        if k.lower() == "timezone" and isinstance(v, str) and v.strip():
+                            return v.strip()
+                        got = find_tz(v)
+                        if got:
+                            return got
+                elif isinstance(node, list):
+                    for v in node:
+                        got = find_tz(v)
+                        if got:
+                            return got
+                return ""
+            name = find_tz(json.loads(body))
         except Exception:
             pass
+    else:
+        print("  warn: /api/v0/me -> %s, falling back to UTC" % code, file=sys.stderr)
     name = (name or "").split(".", 1)[-1].strip()      # "US.America/Los_Angeles" -> "America/Los_Angeles"
     if name and ZoneInfo:
         try:
             return name, ZoneInfo(name)
         except Exception:
             pass
+    print("  warn: no usable timezone found (%r); using UTC" % name, file=sys.stderr)
     return (name or "UTC"), datetime.timezone.utc
 
 
@@ -477,6 +494,10 @@ def main():
     by_day = {r["day"]: r["n"] for r in daily if r.get("day")}
     today_n = by_day.get(end.isoformat(), 0)
     yday_n = by_day.get((end - datetime.timedelta(days=1)).isoformat(), 0)
+    # How far into the current day we are, so the page can say "so far" honestly
+    # instead of showing a near-zero partial count as if the day were over.
+    now_local = datetime.datetime.now(tz)
+    day_frac = round((now_local.hour * 60 + now_local.minute) / 1440.0, 3)
     if daily and daily[-1].get("day") != end.isoformat():
         print("  warn: daily series ends %s but today is %s"
               % (daily[-1].get("day"), end.isoformat()), file=sys.stderr)
@@ -487,6 +508,8 @@ def main():
         "d7_prev": total_of(daily[:-7], 7) if len(daily) > 7 else 0,
         "d30": total_of(daily),
         "d30_prev": total_of(prev_daily) if prev_daily else 0,
+        "day_frac": day_frac,
+        "yesterday_day": (end - datetime.timedelta(days=1)).isoformat(),
     }
 
     try_export.tz = tz

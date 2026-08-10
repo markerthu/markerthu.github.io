@@ -145,7 +145,7 @@ body.dark-mode #pg-dark{background:#21262d;color:#fff;border-color:#30363d}
       Measured with <a href="https://www.goatcounter.com" rel="noopener">GoatCounter</a>, an open-source analytics tool.
       No cookies, no tracking across sites, and no IP addresses are stored. Location is resolved to a country,
       and to a state or province for the few countries that report one &mdash; never to a person.
-      Last updated {{ v._updated }}.
+      Refreshed four times a day; last run covered {{ v._updated }}{% if v._timezone %} ({{ v._timezone }} time){% endif %}, so &ldquo;today so far&rdquo; only counts up to the last refresh.
     </div>
   </div>
 
@@ -153,7 +153,11 @@ body.dark-mode #pg-dark{background:#21262d;color:#fff;border-color:#30363d}
   <div class="statrow">
     <div class="stat">
       <div class="n">{{ pd.today | default: 0 }}</div>
-      <div class="l">Today{% if pd %}{% assign dy = pd.today | minus: pd.yesterday %}{% if dy > 0 %} <span class="delta up">+{{ dy }}</span>{% elsif dy < 0 %} <span class="delta down">{{ dy }}</span>{% endif %}{% endif %}</div>
+      <div class="l">Today so far</div>
+    </div>
+    <div class="stat">
+      <div class="n">{{ pd.yesterday | default: 0 }}</div>
+      <div class="l">Yesterday</div>
     </div>
     <div class="stat">
       <div class="n">{{ pd.d7 | default: 0 }}</div>
