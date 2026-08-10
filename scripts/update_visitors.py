@@ -252,18 +252,27 @@ def try_export(prev_rows):
                         return v
         return ""
 
-    def _to_site_time(raw):
-        """Export stamps are UTC; the rest of the page is in the site's timezone."""
+    def _parse_utc(raw):
         raw = (raw or "").strip()
         if not raw:
-            return ""
+            return None
         try:
             dt = datetime.datetime.fromisoformat(raw.replace("Z", "+00:00"))
-            if dt.tzinfo is None:
-                dt = dt.replace(tzinfo=datetime.timezone.utc)
-            return dt.astimezone(try_export.tz).strftime("%Y-%m-%d %H:%M")
+            return dt.replace(tzinfo=datetime.timezone.utc) if dt.tzinfo is None else dt
         except Exception:
-            return raw[:16].replace("T", " ")
+            return None
+
+    def _to_site_time(raw):
+        """Export stamps are UTC; the page renders them in the site's timezone by
+        default and re-renders client-side for readers in other zones."""
+        dt = _parse_utc(raw)
+        if dt is None:
+            return (raw or "")[:16].replace("T", " ")
+        return dt.astimezone(try_export.tz).strftime("%Y-%m-%d %H:%M")
+
+    def _utc_iso(raw):
+        dt = _parse_utc(raw)
+        return dt.strftime("%Y-%m-%dT%H:%M:%SZ") if dt else ""
 
     pathmap = getattr(try_export, "pathmap", {})
     rnames = {}
@@ -305,6 +314,7 @@ def try_export(prev_rows):
             path = pathmap.get(g(row, "pathid", "path_id"), "") or "/"
         out.append({
             "date": _to_site_time(g(row, "date", "createdat", "createdatutc")),
+            "ts": _utc_iso(g(row, "date", "createdat", "createdatutc")),
             "loc": pretty_loc(g(row, "location")),
             "path": path,
             "ref": g(row, "referrer", "ref"),

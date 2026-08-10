@@ -96,6 +96,11 @@ td.n{color:var(--ink);font-weight:600}
 body.dark-mode .pill.new{background:rgba(74,222,128,.14);color:#4ade80;border-color:rgba(74,222,128,.3)}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:34px}
 .tablewrap{overflow-x:auto}
+.tzbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 12px;font-family:var(--sans);font-size:12px}
+.tzlab{color:var(--faint);font-weight:600;letter-spacing:.04em;text-transform:uppercase;font-size:10.5px}
+.tzbtn{font-family:var(--sans);font-size:12px;font-weight:600;padding:3px 11px;border-radius:99px;border:1px solid var(--rule);background:transparent;color:var(--muted);cursor:pointer;transition:all .15s}
+.tzbtn:hover{border-color:var(--link);color:var(--link)}
+.tzbtn[aria-pressed="true"]{background:var(--link);border-color:var(--link);color:var(--on-link)}
 .empty{font-family:var(--sans);font-size:14px;color:var(--faint);background:var(--band);border:1px dashed var(--rule);border-radius:10px;padding:16px 18px}
 
 footer.pg{border-top:1px solid var(--rule);margin-top:56px;padding:24px 0 60px;font-family:var(--sans);font-size:13px;color:var(--faint)}
@@ -208,20 +213,25 @@ body.dark-mode #pg-dark{background:#21262d;color:#fff;border-color:#30363d}
   {%- assign screens = v.recent | map: "screen" | join: "" -%}
   <p class="sec-note">
     {%- assign rtotal = v._recent_total | default: nrecent -%}
-    Every visit since per-visit logging began, newest first, in {{ v._timezone | default: "site" }} time (the same clock the chart and the daily figures use) &mdash; {{ rtotal }} recorded{% if rtotal > nrecent %}, showing the {{ nrecent }} most recent{% endif %}.
+    Every visit since per-visit logging began, newest first &mdash; {{ rtotal }} recorded{% if rtotal > nrecent %}, showing the {{ nrecent }} most recent{% endif %}.
     Logging of individual visits started on 4 Aug 2026, so this list covers everything since then, while the
     figures above and the tables below cover a rolling {{ v._days | default: 30 }}-day window. GoatCounter also
     counts the two differently &mdash; the aggregates are filtered more strictly than the raw visit log &mdash;
     so treat this list as a feed, not as something that should sum to the totals.
     There is no IP column: GoatCounter resolves the location when the request arrives and never stores the address.
   </p>
+  <div class="tzbar">
+    <span class="tzlab">Times in</span>
+    <button type="button" class="tzbtn" id="tz-local" aria-pressed="true">your time <span id="tz-local-name"></span></button>
+    <button type="button" class="tzbtn" id="tz-site" aria-pressed="false">site time ({{ v._timezone | default: "UTC" }})</button>
+  </div>
   <div class="tablewrap">
     <table>
       <thead><tr><th>When</th><th>From</th><th>Page</th><th>Came via</th><th>Browser</th><th>System</th>{% if screens != "" %}<th>Screen</th>{% endif %}</tr></thead>
       <tbody>
       {% for r in v.recent %}
         <tr>
-          <td class="mono dim">{{ r.date }}</td>
+          <td class="mono dim vtime"{% if r.ts %} data-ts="{{ r.ts }}"{% endif %} data-site="{{ r.date }}">{{ r.date }}</td>
           <td class="n">{% if r.loc and r.loc != "" %}{{ r.loc | escape }}{% else %}—{% endif %}{% if r.first %} <span class="pill new">new</span>{% endif %}</td>
           <td class="mono">{{ r.path | escape }}</td>
           <td class="dim">{% if r.ref and r.ref != "" %}{{ r.ref | escape }}{% else %}direct{% endif %}</td>
@@ -358,6 +368,35 @@ body.dark-mode #pg-dark{background:#21262d;color:#fff;border-color:#30363d}
     var on=document.body.classList.toggle('dark-mode');
     try{localStorage.setItem('darkMode',on?'true':'false');}catch(e){}
   });
+  /* Let the reader see visit times on their own clock. Each cell carries the raw UTC
+     instant, so switching is a re-render rather than a recalculation. */
+  (function(){
+    var cells=[].slice.call(document.querySelectorAll('.vtime'));
+    var bLocal=document.getElementById('tz-local'), bSite=document.getElementById('tz-site');
+    if(!cells.length||!bLocal||!bSite) return;
+    var zone='';
+    try{ zone=Intl.DateTimeFormat().resolvedOptions().timeZone||''; }catch(e){}
+    var nameEl=document.getElementById('tz-local-name');
+    if(nameEl&&zone) nameEl.textContent='('+zone+')';
+    function pad(n){return (n<10?'0':'')+n;}
+    function render(mode){
+      cells.forEach(function(td){
+        var ts=td.getAttribute('data-ts'), site=td.getAttribute('data-site')||'';
+        if(mode==='local'&&ts){
+          var d=new Date(ts);
+          td.textContent=isNaN(d)?site:(d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())+' '+pad(d.getHours())+':'+pad(d.getMinutes()));
+        } else { td.textContent=site; }
+      });
+      bLocal.setAttribute('aria-pressed', mode==='local');
+      bSite.setAttribute('aria-pressed', mode!=='local');
+      try{ localStorage.setItem('visitTz', mode); }catch(e){}
+    }
+    var saved='local';
+    try{ saved=localStorage.getItem('visitTz')||'local'; }catch(e){}
+    render(saved);
+    bLocal.addEventListener('click',function(){render('local');});
+    bSite.addEventListener('click',function(){render('site');});
+  })();
 })();
 </script>
 <script data-goatcounter="https://jiajunfan.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
