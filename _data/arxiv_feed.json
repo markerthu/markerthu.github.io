@@ -1,6 +1,51 @@
 {
-  "updated": "2026-08-03",
+  "updated": "2026-08-10",
   "papers": [
+    {
+      "id": "2608.07314",
+      "title": "TEMPO: Semantic-Action Decoupled RL Post-Training for Vision-Language-Action Models",
+      "authors": "Ziheng Liu, Quantao Yang",
+      "summary": "Vision-language-action (VLA) models are commonly adapted to downstream manipulation tasks via supervised fine-tuning (SFT) or online reinforcement learning (RL) post-training. SFT is prone to distribu…",
+      "date": "2026-08-07",
+      "tag": "Multimodal",
+      "url": "https://arxiv.org/abs/2608.07314"
+    },
+    {
+      "id": "2608.04968",
+      "title": "EvolveNet: Collaborative Harness Evolution for Agent Self-Improvement",
+      "authors": "Jun Nie, Yonggang Zhang, Qianshu Cai et al.",
+      "summary": "The capabilities of an LLM agent depend not only on its model but on the harness: the executable program that constructs context, invokes tools, verifies results, and recovers from failure. Recent wor…",
+      "date": "2026-08-05",
+      "tag": "Self-Improvement",
+      "url": "https://arxiv.org/abs/2608.04968"
+    },
+    {
+      "id": "2608.03872",
+      "title": "EvoHIL: Self-Evolving Reward and Flow-Matched Policy Optimization for Robust Human-in-the-Loop Reinforcement Learning",
+      "authors": "Shuoqin Zhang, Tongtong Cheng, Xiru Gao et al.",
+      "summary": "Human-in-the-loop reinforcement learning (HIL-RL) enables robots to learn contact-rich manipulation from limited real-world interaction, but deployment exposes three coupled limitations: static visual…",
+      "date": "2026-08-04",
+      "tag": "Flow Matching",
+      "url": "https://arxiv.org/abs/2608.03872"
+    },
+    {
+      "id": "2608.02139",
+      "title": "Self-Improving Large Language Models via Progressive Experience Evolution",
+      "authors": "Shijie Ren, Xiting Wang, Meng Li et al.",
+      "summary": "Large language models (LLMs) capable of self-improvement require not only effective policy optimization, but also a principled mechanism for transforming transient interaction experience into persiste…",
+      "date": "2026-08-03",
+      "tag": "Self-Improvement",
+      "url": "https://arxiv.org/abs/2608.02139"
+    },
+    {
+      "id": "2608.01559",
+      "title": "Does the Competitive Component of Adversarial Self-Play Improve Legal Reasoning? A Controlled Negative Result",
+      "authors": "Miseog Shawn Kim",
+      "summary": "Adversarial self-play is an appealing recipe for legal reasoning: have a student model draft an argument, have an adversary attack it, and reward the student when its argument survives the attack. We …",
+      "date": "2026-08-03",
+      "tag": "Self-Improvement",
+      "url": "https://arxiv.org/abs/2608.01559"
+    },
     {
       "id": "2607.29613",
       "title": "WCM: A World Critic Model for Vision-Language-Action Reinforcement Learning",
@@ -36,51 +81,6 @@
       "date": "2026-07-29",
       "tag": "RL Training",
       "url": "https://arxiv.org/abs/2607.26722"
-    },
-    {
-      "id": "2607.26643",
-      "title": "Rethinking Self-Evolution: A Constrained Exploration-Exploitation Process for Mitigating Skill Overfitting",
-      "authors": "Hongqiang Lin, Chao Liu, Xiaofan Bai et al.",
-      "summary": "Enabling large language model (LLM) agents to accumulate and reuse experience from past interactions remains a central challenge in real-world applications. A promising solution is to treat skills as …",
-      "date": "2026-07-29",
-      "tag": "RL Training",
-      "url": "https://arxiv.org/abs/2607.26643"
-    },
-    {
-      "id": "2607.26541",
-      "title": "Prosody-driven Jailbreaks in Audio LLMs: A Controlled Study and Mechanistic Analysis",
-      "authors": "Jiachen Qian, Junyu Li",
-      "summary": "Audio-capable foundation models enable end-to-end spoken interaction, but they also introduce safety risks beyond transcript content. It remains unclear how much jailbreak capability can arise from ma…",
-      "date": "2026-07-29",
-      "tag": "Audio Reasoning",
-      "url": "https://arxiv.org/abs/2607.26541"
-    },
-    {
-      "id": "2607.26115",
-      "title": "GPT-Red: Automated Red Teaming via Self-Play at Scale",
-      "authors": "Eric Wallace, Christopher A. Choquette-Choo, Nikhil Kandpal et al.",
-      "summary": "We introduce \\textbf{GPT-Red}, an automated red-teaming agent that is trained to discover novel prompt injection attacks against frontier LLMs. The goal of this model is to evaluate and improve the ro…",
-      "date": "2026-07-28",
-      "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2607.26115"
-    },
-    {
-      "id": "2607.22511",
-      "title": "CausalForge: A Formally Grounded, Self-Improving Agentic Framework for Automated Research in Causal Inference",
-      "authors": "Jiyuan Tan, Vasilis Syrgkanis",
-      "summary": "Automating theoretical research is constrained not only by the generation of candidate results, but also by their reliable evaluation. A common approach is to close the research loop with a large lang…",
-      "date": "2026-07-24",
-      "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2607.22511"
-    },
-    {
-      "id": "2607.20166",
-      "title": "Audio-Zero: Label-Free Self-Evolution for Fine-Grained Audio Reasoning",
-      "authors": "Siqian Tong, Xuan Li, Chaozhuo Li et al.",
-      "summary": "Large Audio Language models (LALMs) have made rapid progress on acoustic understanding, yet they still struggle with fine-grained audio reasoning (e.g., recognizing event order, repetitions and durati…",
-      "date": "2026-07-22",
-      "tag": "Audio Reasoning",
-      "url": "https://arxiv.org/abs/2607.20166"
     }
   ]
 }
