@@ -101,6 +101,7 @@ body.dark-mode .pill.new{background:rgba(74,222,128,.14);color:#4ade80;border-co
 .tzbtn{font-family:var(--sans);font-size:12px;font-weight:600;padding:3px 11px;border-radius:99px;border:1px solid var(--rule);background:transparent;color:var(--muted);cursor:pointer;transition:all .15s}
 .tzbtn:hover{border-color:var(--link);color:var(--link)}
 .tzbtn[aria-pressed="true"]{background:var(--link);border-color:var(--link);color:var(--on-link)}
+.tzsame{font-family:var(--sans);font-size:12px;font-weight:600;color:var(--muted)}
 .empty{font-family:var(--sans);font-size:14px;color:var(--faint);background:var(--band);border:1px dashed var(--rule);border-radius:10px;padding:16px 18px}
 
 footer.pg{border-top:1px solid var(--rule);margin-top:56px;padding:24px 0 60px;font-family:var(--sans);font-size:13px;color:var(--faint)}
@@ -220,10 +221,11 @@ body.dark-mode #pg-dark{background:#21262d;color:#fff;border-color:#30363d}
     so treat this list as a feed, not as something that should sum to the totals.
     There is no IP column: GoatCounter resolves the location when the request arrives and never stores the address.
   </p>
-  <div class="tzbar">
+  <div class="tzbar" id="tzbar" data-site-tz="{{ v._timezone | default: "UTC" }}">
     <span class="tzlab">Times in</span>
     <button type="button" class="tzbtn" id="tz-local" aria-pressed="true">your time <span id="tz-local-name"></span></button>
     <button type="button" class="tzbtn" id="tz-site" aria-pressed="false">site time ({{ v._timezone | default: "UTC" }})</button>
+    <span class="tzsame" id="tz-same" hidden></span>
   </div>
   <div class="tablewrap">
     <table>
@@ -378,6 +380,21 @@ body.dark-mode #pg-dark{background:#21262d;color:#fff;border-color:#30363d}
     try{ zone=Intl.DateTimeFormat().resolvedOptions().timeZone||''; }catch(e){}
     var nameEl=document.getElementById('tz-local-name');
     if(nameEl&&zone) nameEl.textContent='('+zone+')';
+    var bar=document.getElementById('tzbar'), same=document.getElementById('tz-same');
+    var siteZone=bar?(bar.getAttribute('data-site-tz')||''):'';
+    // Same zone (or merely the same offset today) => the switch would do nothing.
+    var sameZone = zone && siteZone && (zone===siteZone || (function(){
+      try{
+        var probe=new Date();
+        var f=function(z){return new Intl.DateTimeFormat('en',{timeZone:z,timeZoneName:'short'}).format(probe);};
+        return f(zone)===f(siteZone);
+      }catch(e){ return false; }
+    })());
+    if(sameZone){
+      bLocal.hidden=true; bSite.hidden=true;
+      if(same){ same.hidden=false; same.textContent=siteZone+' — the same clock you are on'; }
+      return;   // nothing to switch between
+    }
     function pad(n){return (n<10?'0':'')+n;}
     function render(mode){
       cells.forEach(function(td){
