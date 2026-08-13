@@ -4,9 +4,11 @@ name: Update visitor map
 
 on:
   schedule:
-    # Four times a day. Once a day meant the run always landed at the very start of
+    # Every three hours. Once a day meant the run always landed at the very start of
     # the current day, so the "today" figure was permanently ~0 until the next run.
-    - cron: '20 5,11,17,23 * * *'
+    # Three hours is the practical floor: GoatCounter rate-limits the export that
+    # feeds the per-visit list to roughly one an hour.
+    - cron: '20 2,5,8,11,14,17,20,23 * * *'
   workflow_dispatch: {}    # allow manual run from the Actions tab
 
 permissions:
