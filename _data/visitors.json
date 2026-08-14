@@ -1,10 +1,10 @@
 {
-  "_updated": "2026-08-13",
+  "_updated": "2026-08-14",
   "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 235,
+  "_total": 239,
   "_days": 30,
-  "_range": "Jul. 14th - Aug. 13th",
+  "_range": "Jul. 15th - Aug. 14th",
   "locations": [
     {
       "code": "US",
@@ -17,10 +17,10 @@
     {
       "code": "US",
       "name": "California, US",
-      "count": 20,
+      "count": 22,
       "cx": 60.0,
       "cy": 46.9,
-      "r": 2.72
+      "r": 2.76
     },
     {
       "code": "US",
@@ -41,10 +41,10 @@
     {
       "code": "US",
       "name": "Virginia, US",
-      "count": 7,
+      "count": 8,
       "cx": 101.3,
       "cy": 46.3,
-      "r": 2.34
+      "r": 2.38
     },
     {
       "code": "US",
@@ -215,6 +215,14 @@
       "r": 2.01
     },
     {
+      "code": "TG",
+      "name": "Togo",
+      "count": 1,
+      "cx": 180.9,
+      "cy": 75.1,
+      "r": 2.01
+    },
+    {
       "code": "UG",
       "name": "Uganda",
       "count": 1,
@@ -227,7 +235,7 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 203
+      "count": 206
     },
     {
       "code": "HK",
@@ -300,6 +308,11 @@
       "count": 1
     },
     {
+      "code": "TG",
+      "name": "Togo",
+      "count": 1
+    },
+    {
       "code": "UG",
       "name": "Uganda",
       "count": 1
@@ -317,7 +330,7 @@
       "country": "US",
       "country_name": "United States",
       "name": "California",
-      "count": 20,
+      "count": 22,
       "located": true
     },
     {
@@ -331,7 +344,7 @@
       "country": "US",
       "country_name": "United States",
       "name": "Virginia",
-      "count": 7,
+      "count": 8,
       "located": true
     },
     {
@@ -395,7 +408,7 @@
     {
       "path": "/",
       "title": "Jiajun Fan - Jiajun Fan",
-      "count": 94
+      "count": 96
     },
     {
       "path": "/visitors",
@@ -405,12 +418,12 @@
     {
       "path": "/publications",
       "title": "Publications — Jiajun Fan",
-      "count": 22
+      "count": 23
     },
     {
       "path": "/cv",
       "title": "CV — Jiajun Fan",
-      "count": 21
+      "count": 22
     },
     {
       "path": "/projects",
@@ -477,12 +490,12 @@
     {
       "name": "(unknown)",
       "id": "",
-      "count": 87
+      "count": 89
     },
     {
       "name": "www.jiajunfan.com",
       "id": "www.jiajunfan.com",
-      "count": 74
+      "count": 75
     },
     {
       "name": "www.jiajunfan.com/projects",
@@ -492,7 +505,7 @@
     {
       "name": "Google",
       "id": "Google",
-      "count": 14
+      "count": 15
     },
     {
       "name": "www.jiajunfan.com/publications",
@@ -539,12 +552,12 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 144
+      "count": 147
     },
     {
       "name": "Safari",
       "id": "Safari",
-      "count": 88
+      "count": 89
     },
     {
       "name": "Firefox",
@@ -556,17 +569,17 @@
     {
       "name": "macOS",
       "id": "macOS",
-      "count": 111
+      "count": 113
     },
     {
       "name": "iOS",
       "id": "iOS",
-      "count": 84
+      "count": 85
     },
     {
       "name": "Windows",
       "id": "Windows",
-      "count": 29
+      "count": 30
     },
     {
       "name": "Linux",
@@ -585,10 +598,6 @@
     }
   ],
   "daily": [
-    {
-      "day": "2026-07-14",
-      "n": 0
-    },
     {
       "day": "2026-07-15",
       "n": 0
@@ -708,20 +717,68 @@
     {
       "day": "2026-08-13",
       "n": 15
+    },
+    {
+      "day": "2026-08-14",
+      "n": 4
     }
   ],
   "periods": {
-    "today": 15,
-    "yesterday": 12,
-    "d7": 113,
-    "d7_prev": 122,
-    "d30": 235,
+    "today": 4,
+    "yesterday": 15,
+    "d7": 103,
+    "d7_prev": 136,
+    "d30": 239,
     "d30_prev": 0,
-    "day_frac": 0.992,
-    "yesterday_day": "2026-08-12"
+    "day_frac": 0.104,
+    "yesterday_day": "2026-08-13"
   },
-  "_last_visit": "2026-08-13 19:44",
+  "_last_visit": "2026-08-14 01:59",
   "recent": [
+    {
+      "date": "2026-08-14 01:59",
+      "ts": "2026-08-14T08:59:56Z",
+      "loc": "Virginia, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 26.0",
+      "system": "iOS 18.7",
+      "screen": "1920px",
+      "first": true
+    },
+    {
+      "date": "2026-08-14 01:46",
+      "ts": "2026-08-14T08:46:02Z",
+      "loc": "Togo",
+      "path": "/publications",
+      "ref": "",
+      "browser": "Chrome 148",
+      "system": "Windows 10",
+      "screen": "1366px",
+      "first": true
+    },
+    {
+      "date": "2026-08-14 00:38",
+      "ts": "2026-08-14T07:38:16Z",
+      "loc": "California, US",
+      "path": "/",
+      "ref": "Google",
+      "browser": "Chrome 150",
+      "system": "macOS 10.15",
+      "screen": "1512px",
+      "first": true
+    },
+    {
+      "date": "2026-08-14 00:38",
+      "ts": "2026-08-14T07:38:26Z",
+      "loc": "California, US",
+      "path": "/cv",
+      "ref": "www.jiajunfan.com",
+      "browser": "Chrome 150",
+      "system": "macOS 10.15",
+      "screen": "1512px",
+      "first": true
+    },
     {
       "date": "2026-08-13 19:44",
       "ts": "2026-08-14T02:44:46Z",
@@ -1007,52 +1064,8 @@
       "system": "iOS 26.6",
       "screen": "430px",
       "first": false
-    },
-    {
-      "date": "2026-08-13 01:38",
-      "ts": "2026-08-13T08:38:27Z",
-      "loc": "Washington, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 149",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": false
-    },
-    {
-      "date": "2026-08-13 01:38",
-      "ts": "2026-08-13T08:38:30Z",
-      "loc": "Washington, US",
-      "path": "/visitors",
-      "ref": "www.jiajunfan.com",
-      "browser": "Chrome 149",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": false
-    },
-    {
-      "date": "2026-08-13 01:38",
-      "ts": "2026-08-13T08:38:39Z",
-      "loc": "Washington, US",
-      "path": "/visitors",
-      "ref": "www.jiajunfan.com",
-      "browser": "Chrome 149",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": false
-    },
-    {
-      "date": "2026-08-13 01:32",
-      "ts": "2026-08-13T08:32:05Z",
-      "loc": "Washington, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 149",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": false
     }
   ],
-  "_recent_total": 474,
+  "_recent_total": 478,
   "_recent_shown": 30
 }
