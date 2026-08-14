@@ -72,6 +72,25 @@ a{text-decoration:none}
 .scholar-cta{display:inline-flex;align-items:center;background:var(--link);color:var(--on-link)!important;border-radius:20px;padding:5px 15px;font-size:.8rem;font-weight:700;font-family:var(--sans);transition:background .2s,transform .15s}
 .scholar-cta:hover{background:var(--link-h);transform:translateY(-1px)}
 
+/* ── research overview ── */
+.ro{margin:2.2em 0 .6em}
+.ro-lead{font-family:var(--serif);font-size:1.08rem;line-height:1.62;color:var(--body);max-width:52em;margin-bottom:1.5em}
+.ro-lead strong{color:var(--ink);font-weight:600}
+.ro-rows{display:grid;gap:0}
+.ro-row{display:grid;grid-template-columns:16.5em 1fr;gap:18px;align-items:baseline;
+  padding:13px 0;border-bottom:1px solid var(--rule)}
+.ro-row:last-child{border-bottom:none}
+.ro-dom{font-family:var(--sans);font-size:.86rem;font-weight:700;color:var(--ink);line-height:1.4}
+.ro-dom span{display:block;font-weight:500;font-size:.78rem;color:var(--faint);margin-top:2px}
+.ro-papers{display:flex;flex-wrap:wrap;gap:7px 9px;align-items:center}
+.ro-p{display:inline-flex;align-items:baseline;gap:6px;font-family:var(--sans);font-size:.84rem;
+  font-weight:600;color:var(--body);padding:2px 4px;border-radius:6px}
+a.ro-p:hover{color:var(--link);background:rgba(21,101,192,.07)}
+.ro-v{font-family:var(--sans);font-size:.66rem;font-weight:700;letter-spacing:.04em;
+  color:var(--link);background:var(--pill);border:1px solid var(--rule);border-radius:20px;padding:1px 8px;white-space:nowrap}
+.ro-p.nolink{color:var(--body);cursor:default}
+@media(max-width:700px){.ro-row{grid-template-columns:1fr;gap:7px}.ro-dom span{display:inline;margin-left:6px}}
+
 /* ── list ── */
 .container{max-width:1000px;margin:0 auto;padding:8px 24px 40px}
 .year-head{font-family:var(--sans);font-size:.74rem;font-weight:700;color:var(--faint);text-transform:uppercase;letter-spacing:.14em;margin:2.4em 0 .3em;padding-bottom:.5em;border-bottom:1px solid var(--rule)}
@@ -154,6 +173,73 @@ body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-ima
 </div>
 
 <main class="container">
+  <section class="ro" aria-labelledby="ro-h">
+    <h2 class="sec" id="ro-h" style="margin-top:0">Research overview</h2>
+    <p class="ro-lead">
+      I study how to fine-tune <strong>multimodal large generative models with reinforcement learning</strong>
+      in a way that is <strong>stable</strong> — avoiding the diversity and performance collapse that RL
+      fine-tuning tends to cause — and <strong>progressively autonomous</strong>, steadily removing the human
+      data collection and labelling the pipeline depends on. First-author work across these domains:
+    </p>
+    <div class="ro-rows">
+
+      <div class="ro-row">
+        <div class="ro-dom">Data-distribution optimization<span>game agents</span></div>
+        <div class="ro-papers">
+          <a class="ro-p" href="https://proceedings.mlr.press/v162/fan22c.html" target="_blank" rel="noopener">GDI <span class="ro-v">ICML 2022</span></a>
+          <a class="ro-p" href="https://openreview.net/forum?id=FeWvD0L_a4" target="_blank" rel="noopener">LBC <span class="ro-v">ICLR 2023</span></a>
+        </div>
+      </div>
+
+      <div class="ro-row">
+        <div class="ro-dom">Text-to-image generation<span>flow matching &amp; diffusion</span></div>
+        <div class="ro-papers">
+          <a class="ro-p" href="https://openreview.net/forum?id=2IoFFexvuw" target="_blank" rel="noopener">ORW-CFM-W2 <span class="ro-v">ICLR 2025</span></a>
+          <a class="ro-p" href="https://openreview.net/forum?id=aXO0xg0ttW" target="_blank" rel="noopener">ADRPO <span class="ro-v">NeurIPS 2025</span></a>
+        </div>
+      </div>
+
+      <div class="ro-row">
+        <div class="ro-dom">Audio reasoning LLMs<span>multimodal reasoning</span></div>
+        <div class="ro-papers">
+          <a class="ro-p" href="https://openreview.net/forum?id=DUr48hxO2h" target="_blank" rel="noopener">CESAR <span class="ro-v">ICLR 2026</span></a>
+        </div>
+      </div>
+
+      <div class="ro-row">
+        <div class="ro-dom">Tool-use agents<span>agentic RL</span></div>
+        <div class="ro-papers">
+          <span class="ro-p nolink">Procedure-Aware RL <span class="ro-v">COLM 2026</span></span>
+        </div>
+      </div>
+
+      <div class="ro-row">
+        <div class="ro-dom">Protein generation</div>
+        <div class="ro-papers">
+          <a class="ro-p" href="https://arxiv.org/abs/2506.07459" target="_blank" rel="noopener">ProteinZero <span class="ro-v">TMLR 2026</span></a>
+        </div>
+      </div>
+
+      <div class="ro-row">
+        <div class="ro-dom">Math reasoning<span>token efficiency</span></div>
+        <div class="ro-papers">
+          <a class="ro-p" href="https://openreview.net/forum?id=8Oc3Mx754M" target="_blank" rel="noopener">BCR <span class="ro-v">ICML 2026</span></a>
+          <a class="ro-p" href="https://openreview.net/forum?id=aXO0xg0ttW" target="_blank" rel="noopener">ADRPO <span class="ro-v">NeurIPS 2025</span></a>
+        </div>
+      </div>
+
+      <div class="ro-row">
+        <div class="ro-dom">VLA &amp; robotics<span>efficient inference</span></div>
+        <div class="ro-papers">
+          <a class="ro-p" href="https://openreview.net/forum?id=RwdGIIjPlC" target="_blank" rel="noopener">SP-VLA <span class="ro-v">ICLR 2026</span></a>
+          <a class="ro-p" href="https://arxiv.org/abs/2407.05010" target="_blank" rel="noopener">PRANCE <span class="ro-v">TPAMI 2025</span></a>
+        </div>
+      </div>
+
+    </div>
+    <hr class="p-rule" style="margin:2.2em 0 0">
+  </section>
+
   {%- assign pubs = site.publications | sort: 'date' | reverse -%}
   {%- assign lastyear = '' -%}
   {% for post in pubs %}
