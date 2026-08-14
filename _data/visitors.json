@@ -2,7 +2,7 @@
   "_updated": "2026-08-14",
   "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 245,
+  "_total": 246,
   "_days": 30,
   "_range": "Jul. 15th - Aug. 14th",
   "locations": [
@@ -116,6 +116,14 @@
       "count": 1,
       "cx": 67.2,
       "cy": 49.5,
+      "r": 2.0
+    },
+    {
+      "code": "US",
+      "name": "New Jersey, US",
+      "count": 1,
+      "cx": 105.3,
+      "cy": 43.8,
       "r": 2.0
     },
     {
@@ -235,7 +243,7 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 211
+      "count": 212
     },
     {
       "code": "HK",
@@ -390,6 +398,13 @@
     {
       "country": "US",
       "country_name": "United States",
+      "name": "New Jersey",
+      "count": 1,
+      "located": true
+    },
+    {
+      "country": "US",
+      "country_name": "United States",
       "name": "Ohio",
       "count": 1,
       "located": true
@@ -413,7 +428,7 @@
     {
       "path": "/",
       "title": "Jiajun Fan - Jiajun Fan",
-      "count": 98
+      "count": 99
     },
     {
       "path": "/visitors",
@@ -530,7 +545,7 @@
     {
       "name": "scholar.google.com",
       "id": "scholar.google.com",
-      "count": 5
+      "count": 6
     },
     {
       "name": "www.jiajunfan.com/visitors",
@@ -557,7 +572,7 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 151
+      "count": 152
     },
     {
       "name": "Safari",
@@ -574,7 +589,7 @@
     {
       "name": "macOS",
       "id": "macOS",
-      "count": 116
+      "count": 117
     },
     {
       "name": "iOS",
@@ -725,21 +740,32 @@
     },
     {
       "day": "2026-08-14",
-      "n": 10
+      "n": 11
     }
   ],
   "periods": {
-    "today": 10,
+    "today": 11,
     "yesterday": 15,
-    "d7": 109,
+    "d7": 110,
     "d7_prev": 136,
-    "d30": 245,
+    "d30": 246,
     "d30_prev": 0,
-    "day_frac": 0.465,
+    "day_frac": 0.576,
     "yesterday_day": "2026-08-13"
   },
-  "_last_visit": "2026-08-14 06:20",
+  "_last_visit": "2026-08-14 11:40",
   "recent": [
+    {
+      "date": "2026-08-14 11:40",
+      "ts": "2026-08-14T18:40:47Z",
+      "loc": "New Jersey, US",
+      "path": "/",
+      "ref": "scholar.google.com",
+      "browser": "Chrome 151",
+      "system": "macOS 10.15",
+      "screen": "1470px",
+      "first": true
+    },
     {
       "date": "2026-08-14 06:20",
       "ts": "2026-08-14T13:20:01Z",
@@ -1058,19 +1084,8 @@
       "system": "macOS 10.15",
       "screen": "1512px",
       "first": false
-    },
-    {
-      "date": "2026-08-13 14:12",
-      "ts": "2026-08-13T21:12:59Z",
-      "loc": "Washington, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 149",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": true
     }
   ],
-  "_recent_total": 489,
+  "_recent_total": 490,
   "_recent_shown": 30
 }
