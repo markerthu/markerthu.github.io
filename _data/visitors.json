@@ -2,7 +2,7 @@
   "_updated": "2026-08-17",
   "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 299,
+  "_total": 300,
   "_days": 30,
   "_range": "Jul. 18th - Aug. 17th",
   "locations": [
@@ -103,6 +103,14 @@
       "r": 2.06
     },
     {
+      "code": "KR",
+      "name": "South Korea",
+      "count": 2,
+      "cx": 307.5,
+      "cy": 47.3,
+      "r": 2.06
+    },
+    {
       "code": "SG",
       "name": "Singapore",
       "count": 2,
@@ -199,14 +207,6 @@
       "r": 1.98
     },
     {
-      "code": "KR",
-      "name": "South Korea",
-      "count": 1,
-      "cx": 307.5,
-      "cy": 47.3,
-      "r": 1.98
-    },
-    {
       "code": "PH",
       "name": "Philippines",
       "count": 1,
@@ -266,6 +266,11 @@
       "count": 2
     },
     {
+      "code": "KR",
+      "name": "South Korea",
+      "count": 2
+    },
+    {
       "code": "SG",
       "name": "Singapore",
       "count": 2
@@ -298,11 +303,6 @@
     {
       "code": "HN",
       "name": "Honduras",
-      "count": 1
-    },
-    {
-      "code": "KR",
-      "name": "South Korea",
       "count": 1
     },
     {
@@ -438,7 +438,7 @@
     {
       "path": "/publications",
       "title": "Publications — Jiajun Fan",
-      "count": 34
+      "count": 35
     },
     {
       "path": "/cv",
@@ -553,6 +553,11 @@
       "count": 6
     },
     {
+      "name": "chatgpt.com",
+      "id": "chatgpt.com",
+      "count": 2
+    },
+    {
       "name": "www.jiajunfan.com/visitors",
       "id": "www.jiajunfan.com/visitors",
       "count": 2
@@ -560,11 +565,6 @@
     {
       "name": "www.bing.com",
       "id": "www.bing.com",
-      "count": 1
-    },
-    {
-      "name": "chatgpt.com",
-      "id": "chatgpt.com",
       "count": 1
     },
     {
@@ -750,21 +750,43 @@
     },
     {
       "day": "2026-08-17",
-      "n": 1
+      "n": 2
     }
   ],
   "periods": {
-    "today": 1,
+    "today": 2,
     "yesterday": 13,
-    "d7": 106,
+    "d7": 107,
     "d7_prev": 165,
-    "d30": 299,
+    "d30": 300,
     "d30_prev": 0,
-    "day_frac": 0.198,
+    "day_frac": 0.326,
     "yesterday_day": "2026-08-16"
   },
-  "_last_visit": "2026-08-17 03:57",
+  "_last_visit": "2026-08-17 05:33",
   "recent": [
+    {
+      "date": "2026-08-17 05:33",
+      "ts": "2026-08-17T12:33:49Z",
+      "loc": "South Korea",
+      "path": "/publications",
+      "ref": "chatgpt.com",
+      "browser": "Chrome 151",
+      "system": "Windows 10",
+      "screen": "2560px",
+      "first": false
+    },
+    {
+      "date": "2026-08-17 05:01",
+      "ts": "2026-08-17T12:01:19Z",
+      "loc": "South Korea",
+      "path": "/publications",
+      "ref": "chatgpt.com",
+      "browser": "Chrome 151",
+      "system": "Windows 10",
+      "screen": "2560px",
+      "first": true
+    },
     {
       "date": "2026-08-17 03:57",
       "ts": "2026-08-17T10:57:44Z",
@@ -1072,30 +1094,8 @@
       "system": "iOS 26.6",
       "screen": "430px",
       "first": false
-    },
-    {
-      "date": "2026-08-16 01:25",
-      "ts": "2026-08-16T08:25:48Z",
-      "loc": "Washington, US",
-      "path": "/visitors",
-      "ref": "www.jiajunfan.com",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": false
-    },
-    {
-      "date": "2026-08-16 01:25",
-      "ts": "2026-08-16T08:25:56Z",
-      "loc": "Washington, US",
-      "path": "/visitors",
-      "ref": "www.jiajunfan.com",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": false
     }
   ],
-  "_recent_total": 602,
+  "_recent_total": 604,
   "_recent_shown": 30
 }
