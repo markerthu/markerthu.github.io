@@ -1,86 +1,86 @@
 {
-  "updated": "2026-08-10",
+  "updated": "2026-08-17",
   "papers": [
     {
-      "id": "2608.07314",
-      "title": "TEMPO: Semantic-Action Decoupled RL Post-Training for Vision-Language-Action Models",
-      "authors": "Ziheng Liu, Quantao Yang",
-      "summary": "Vision-language-action (VLA) models are commonly adapted to downstream manipulation tasks via supervised fine-tuning (SFT) or online reinforcement learning (RL) post-training. SFT is prone to distribu…",
-      "date": "2026-08-07",
-      "tag": "Multimodal",
-      "url": "https://arxiv.org/abs/2608.07314"
-    },
-    {
-      "id": "2608.04968",
-      "title": "EvolveNet: Collaborative Harness Evolution for Agent Self-Improvement",
-      "authors": "Jun Nie, Yonggang Zhang, Qianshu Cai et al.",
-      "summary": "The capabilities of an LLM agent depend not only on its model but on the harness: the executable program that constructs context, invokes tools, verifies results, and recovers from failure. Recent wor…",
-      "date": "2026-08-05",
+      "id": "2608.14135",
+      "title": "AgilePE: Autonomous UAV Pursuit-Evasion via Self-Play Reinforcement Learning",
+      "authors": "Wenhao Tang, Tianyang Chen, Zhejun Cui et al.",
+      "summary": "Autonomous pursuit-evasion is a fundamental challenge for Unmanned Aerial Vehicles (UAVs), requiring rapid decision-making under tightly coupled dynamics and continuously changing opponent behaviors. …",
+      "date": "2026-08-14",
       "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2608.04968"
+      "url": "https://arxiv.org/abs/2608.14135"
     },
     {
-      "id": "2608.03872",
-      "title": "EvoHIL: Self-Evolving Reward and Flow-Matched Policy Optimization for Robust Human-in-the-Loop Reinforcement Learning",
-      "authors": "Shuoqin Zhang, Tongtong Cheng, Xiru Gao et al.",
-      "summary": "Human-in-the-loop reinforcement learning (HIL-RL) enables robots to learn contact-rich manipulation from limited real-world interaction, but deployment exposes three coupled limitations: static visual…",
-      "date": "2026-08-04",
+      "id": "2608.12951",
+      "title": "VoxAudio: Vocalized Audio Synthesis via Multi-Reward Autoregressive Flow Matching",
+      "authors": "Wenxiang Guo, Changhao Pan, Ziyue Jiang et al.",
+      "summary": "Vocalized audio synthesis, the task of generating audio in which intelligible speech is embedded within an environmental soundscape, underpins applications such as podcast production and video dubbing…",
+      "date": "2026-08-13",
       "tag": "Flow Matching",
-      "url": "https://arxiv.org/abs/2608.03872"
+      "url": "https://arxiv.org/abs/2608.12951"
     },
     {
-      "id": "2608.02139",
-      "title": "Self-Improving Large Language Models via Progressive Experience Evolution",
-      "authors": "Shijie Ren, Xiting Wang, Meng Li et al.",
-      "summary": "Large language models (LLMs) capable of self-improvement require not only effective policy optimization, but also a principled mechanism for transforming transient interaction experience into persiste…",
-      "date": "2026-08-03",
-      "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2608.02139"
-    },
-    {
-      "id": "2608.01559",
-      "title": "Does the Competitive Component of Adversarial Self-Play Improve Legal Reasoning? A Controlled Negative Result",
-      "authors": "Miseog Shawn Kim",
-      "summary": "Adversarial self-play is an appealing recipe for legal reasoning: have a student model draft an argument, have an adversary attack it, and reward the student when its argument survives the attack. We …",
-      "date": "2026-08-03",
-      "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2608.01559"
-    },
-    {
-      "id": "2607.29613",
-      "title": "WCM: A World Critic Model for Vision-Language-Action Reinforcement Learning",
-      "authors": "Senyu Fei, Xiaopeng Yu, Siyin Wang et al.",
-      "summary": "Reinforcement learning (RL) post-training of Vision-Language-Action (VLA) models has shown strong promise for robotic manipulation. Among RL methods, critic-based approaches rely on a value estimator …",
-      "date": "2026-07-31",
+      "id": "2608.13026",
+      "title": "Temporal GRPO: Beyond Trajectory-Level Credit in Vision-Language-Action Reinforcement Learning",
+      "authors": "Yao Zhou, Hang Gao, Fengge Wu et al.",
+      "summary": "Outcome-driven reinforcement learning offers a scalable way to post-train vision-language-action (VLA) policies from sparse task-success feedback. In common GRPO-based VLA post-training, one rollout-l…",
+      "date": "2026-08-13",
       "tag": "Multimodal",
-      "url": "https://arxiv.org/abs/2607.29613"
+      "url": "https://arxiv.org/abs/2608.13026"
     },
     {
-      "id": "2607.28301",
-      "title": "HARGO: Heterogeneity-Aware Reward-Guided Optimization for RL Post-Training of LLMs on HPC Tasks",
-      "authors": "Tiangang Li, Xiangbo Tian",
-      "summary": "Supervised fine-tuning (SFT) can equip large language models (LLMs) with domain knowledge for high-performance computing (HPC) tasks such as data race detection and benchmark question answering. Howev…",
-      "date": "2026-07-30",
-      "tag": "RL Training",
-      "url": "https://arxiv.org/abs/2607.28301"
+      "id": "2608.12220",
+      "title": "SCOUT: Unlocking Enhanced Spatial Reasoning via Structured Chain-of-Thought and Multi-Objective Process Reward",
+      "authors": "Zile Zhou, Huining Yuan, Weichen Zhang et al.",
+      "summary": "Existing Vision-Language Models (VLMs) exhibits a critical bottleneck in robust spatial reasoning. Recent reinforcement learning (RL) methods aim to close this gap with verifiable outcomes, yet they s…",
+      "date": "2026-08-12",
+      "tag": "Reasoning",
+      "url": "https://arxiv.org/abs/2608.12220"
     },
     {
-      "id": "2607.26515",
-      "title": "HiFloat4 Format for End-To-End Reinforcement Learning Post-Training of Large Language Models",
-      "authors": "Hei Yi Mak, Shadan Golestan, Hoang Le et al.",
-      "summary": "We present, to our knowledge, the first end-to-end FP4 RL post-training, in which both the rollout and training policies, including their forward and backward passes, operate at 4-bit precision. A sys…",
-      "date": "2026-07-29",
+      "id": "2608.10823",
+      "title": "MoE Proxy Models for Low-Cost Failure Reproduction and Diagnosis in LLM RL Post-Training",
+      "authors": "Yikai Wang, Chuansai Zhou, Yuhang Zhou et al.",
+      "summary": "Reinforcement learning (RL) post-training of large language models (LLMs) is computationally intensive and involves complex system pipelines with substantial debugging overhead. In practice, factors s…",
+      "date": "2026-08-11",
       "tag": "RL Training",
-      "url": "https://arxiv.org/abs/2607.26515"
+      "url": "https://arxiv.org/abs/2608.10823"
     },
     {
-      "id": "2607.26722",
-      "title": "DREvo: Distilling Recalibrated Historical Experience for Harness Self-Evolution",
-      "authors": "Hanghui Guo, Weijie Shi, Zhangze Chen et al.",
-      "summary": "Harness plays a critical role in large language model agent performance, and building a high-performing harness requires substantial expert effort. Therefore, recent research has increasingly explored…",
-      "date": "2026-07-29",
+      "id": "2608.09467",
+      "title": "RecoverFly: A Failure-Aware Reinforcement Learning Post-Training Framework for Aerial Vision-Language Navigation",
+      "authors": "Boxiong Wang, Hui Kang, Geng Sun et al.",
+      "summary": "Unmanned aerial vehicle vision-language navigation (UAV-VLN) requires agents to translate visual observations and language instructions into reliable flight actions in complex environments. Although r…",
+      "date": "2026-08-10",
+      "tag": "Multimodal",
+      "url": "https://arxiv.org/abs/2608.09467"
+    },
+    {
+      "id": "2608.09217",
+      "title": "Beyond Solvability: Task Learnability as a Static Prior for LLM RL Post-Training",
+      "authors": "Ting Zhou, Zhenqing Ling, Daoyuan Chen et al.",
+      "summary": "Reinforcement learning (RL) has become a central post-training paradigm for eliciting reasoning capabilities in large language models, yet uniform task sampling allocates compute without regard to dif…",
+      "date": "2026-08-10",
       "tag": "RL Training",
-      "url": "https://arxiv.org/abs/2607.26722"
+      "url": "https://arxiv.org/abs/2608.09217"
+    },
+    {
+      "id": "2608.09819",
+      "title": "Macaron-V1: Towards Open Continual Learning with Self-Improvement and Mixture-of-LoRA",
+      "authors": "Mind Lab,  :, Vin Bo et al.",
+      "summary": "Macaron-V1 is an open agent-model family for experiential intelligence: learning from experience in real environments and continuing to learn after deployment. It is organized around two system goals.…",
+      "date": "2026-08-10",
+      "tag": "Self-Improvement",
+      "url": "https://arxiv.org/abs/2608.09819"
+    },
+    {
+      "id": "2608.08224",
+      "title": "Control-Diverse Reinforcement Fine-Tuning: Decoupling the Shared Control Bottleneck of RL Post-Training",
+      "authors": "Binwen Tan, Jingchao Wang, Dengzhe Hou et al.",
+      "summary": "Reinforcement learning post-training unlocks complex reasoning in LLMs. Yet benchmark scores reveal only whether a model improved, not what changed inside it, nor how it splits finite capability acros…",
+      "date": "2026-08-08",
+      "tag": "RL Training",
+      "url": "https://arxiv.org/abs/2608.08224"
     }
   ]
 }
