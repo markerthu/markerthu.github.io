@@ -878,7 +878,6 @@ body.dark-mode .ra-msgs::-webkit-scrollbar-thumb { background: #30363d; border-r
 body.dark-mode .ra-msgs::-webkit-scrollbar-track { background: #0d1117; }
 
 
-
 /* ── Thumbnail placeholder (no longer used — class removed from HTML) ── */
 
 /* ── ① Citation count badge ── */
@@ -1175,18 +1174,11 @@ body.dark-mode .pillar-tag { background: #1c2333; color: #58a6ff; }
 
 <!-- Intro -->
 <p class="tagline">
-CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training for generative models</strong> — making diffusion/flow models and multimodal reasoning LLMs continuously self-improve with minimal human supervision. Previously: <strong>24 Atari world records</strong>, 500× more data-efficient than Agent57, <strong>ICLR 2023 Oral</strong> (rank 5/4176).
+CS Ph.D. student at <strong>UIUC</strong>. I study how to fine-tune <strong>multimodal large generative models with reinforcement learning</strong> in a way that is <strong>stable</strong> — avoiding the diversity and performance collapse that RL fine-tuning tends to cause — and <strong>progressively autonomous</strong>, steadily removing the human data collection and labelling the pipeline depends on. That work spans these domains:
 </p>
 
-<div class="internship-banner internship-banner-pulse">
-<i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-scholar.png);mask-image:url(/images/icons/h-scholar.png)"></i><strong>Seeking research internship — Fall 2026 / 2027.</strong> RL · Generative Models · Reasoning LLMs · Agentic RL
-&nbsp;<a href="/cv/">[CV]</a>
-&nbsp;<a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">[Scholar]</a>
-&nbsp;<a href="mailto:jiajunf3@illinois.edu">[Email]</a>
-</div>
 
 <div class="ro-home">
-<div class="ro-head">Research areas</div>
 <div class="ro-rows">
   <div class="ro-row">
     <div class="ro-dom">Data-distribution optimization<span>game agents</span></div>
@@ -1237,6 +1229,13 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
     </div>
   </div>
 </div>
+</div>
+
+<div class="internship-banner internship-banner-pulse">
+<i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-scholar.png);mask-image:url(/images/icons/h-scholar.png)"></i><strong>Seeking research internship — Fall 2026 / 2027.</strong> RL · Generative Models · Reasoning LLMs · Agentic RL
+&nbsp;<a href="/cv/">[CV]</a>
+&nbsp;<a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">[Scholar]</a>
+&nbsp;<a href="mailto:jiajunf3@illinois.edu">[Email]</a>
 </div>
 
 <!-- ═══════════════════════════════ NEWS ═══════════════════════════════ -->
@@ -1841,7 +1840,6 @@ Happy to discuss research, internships, or collaborations. Best reached by email
 
 <!-- ══════════════════ AI RESEARCH ASSISTANT ══════════════════ -->
 {% include ai-agent.html %}
-
 
 
 <script>
