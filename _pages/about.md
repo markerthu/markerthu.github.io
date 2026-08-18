@@ -1574,7 +1574,7 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to fine-tune
   <div class="research-card">
     <img class="rc-icon-img" loading="lazy" src="/images/icons/ri-superhuman.png" alt="">
     <div class="rc-title">Superhuman-Level Deep RL</div>
-    <div class="rc-desc">Sample-efficient RL that exceeds human performance. Broke 24 Atari world records with 500× less data than prior SOTA (LBC, GDI).</div>
+    <div class="rc-desc">Sample-efficient RL that exceeds human performance. Broke 24 Atari world records with 78× less data (LBC), and beat Agent57 with 500× less data (GDI).</div>
   </div>
 </div>
 
