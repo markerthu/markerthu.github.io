@@ -1173,7 +1173,7 @@ body.dark-mode .pillar-tag { background: #1c2333; color: #58a6ff; }
 
 <!-- Intro -->
 <p class="tagline">
-I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to fine-tune <strong>multimodal large generative/agentic models with reinforcement learning</strong> in a way that is <strong>stable</strong> (<strong>e.g., life-long learning</strong>) — avoiding the diversity and performance collapse that RL fine-tuning tends to cause — and <strong>progressively autonomous</strong> (<strong>e.g., self-evolving</strong>), steadily removing the human data collection and labelling the pipeline depends on. That work spans these domains:
+I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to fine-tune <strong>multimodal large generative/agentic models with reinforcement learning</strong> in a way that is <strong>stable</strong> (<strong>e.g., lifelong continual learning</strong>) — avoiding the diversity and performance collapse that RL fine-tuning tends to cause — and <strong>progressively autonomous</strong> (<strong>e.g., self-evolving</strong>), steadily removing the human data collection and labelling the pipeline depends on. That work spans these domains:
 </p>
 
 
