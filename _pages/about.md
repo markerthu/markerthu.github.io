@@ -1206,15 +1206,10 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to fine-tune
       <a class="ro-p" href="https://arxiv.org/abs/2605.12975" target="_blank" rel="noopener">PyRAG <span class="ro-v">2026</span></a>
     </div>
   </div>
-  <div class="ro-row">
-    <div class="ro-dom">Protein generation</div>
+    <div class="ro-row">
+    <div class="ro-dom">AI for Science<span>protein &amp; materials design</span></div>
     <div class="ro-papers">
       <a class="ro-p" href="https://arxiv.org/abs/2506.07459" target="_blank" rel="noopener">ProteinZero <span class="ro-v">TMLR 2026</span></a>
-    </div>
-  </div>
-  <div class="ro-row">
-    <div class="ro-dom">Materials discovery<span>design optimization</span></div>
-    <div class="ro-papers">
       <a class="ro-p" href="https://openreview.net/forum?id=stiehhc5y6" target="_blank" rel="noopener">EDiSon <span class="ro-v">AI4Mat 2024</span></a>
     </div>
   </div>
