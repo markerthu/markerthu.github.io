@@ -60,7 +60,7 @@ body.dark-mode .qn-label { color: #58a6ff; }
 .section-header {
   display: flex; align-items: center; gap: 10px;
   margin: 2em 0 1em; padding: 0; font-size: 1.18em; font-weight: 800; color: #1a2332;
-  letter-spacing: -0.01em; scroll-margin-top: 120px;
+  letter-spacing: -0.01em; scroll-margin-top: 150px;
   border: none; background: none;
 }
 .section-header .sh-icon { width: 22px; height: 22px; object-fit: contain; flex-shrink: 0; }
@@ -455,7 +455,7 @@ body.dark-mode .rt-year-ongoing { color: #fb923c !important; }
 .scroll-top.show { display: flex; }
 
 /* ── News toggle ── */
-.news-hidden { display: none; }
+.news-list li.news-hidden { display: none; }  /* must outrank .news-list li{display:flex} */
 .news-toggle {
   background: none; border: 1px solid #ddd; border-radius: 6px;
   padding: 5px 14px; font-size: 0.82em; color: #1565c0;
@@ -667,6 +667,15 @@ body.dark-mode .ra-input::placeholder { color: #8b949e; }
 
 /* ── Print styles ── */
 @media print {
+  /* the page paints through .dark-mode overrides, so a dark-mode visitor would
+     otherwise print white-on-white (mirrors publications/index.html) */
+  body.dark-mode, body.dark-mode .page__content, body.dark-mode p, body.dark-mode li,
+  body.dark-mode .tagline, body.dark-mode .ro-dom, body.dark-mode .ro-dom span,
+  body.dark-mode .ro-p, body.dark-mode .ro-p.nolink {
+    background: #fff !important; color: #000 !important;
+  }
+  body.dark-mode .ro-v { background: #fff !important; color: #000 !important; border-color: #ccc !important; }
+  body.dark-mode .ro-row { border-bottom-color: #ccc !important; }
   .scroll-top, .dark-toggle, .ra-btn, .ra-panel, .quick-nav,
   #read-progress, .hero-particles, .pub-filter-bar { display: none !important; }
   .hero-banner { background: none !important; color: #000 !important; box-shadow: none !important; }
@@ -954,7 +963,7 @@ body.dark-mode .hero-pill { background: rgba(255,255,255,0.12) !important; color
 
 /* ══════════════ POLISH PACK: smooth scroll · reveal · hero glow · agent ══════════════ */
 @media (prefers-reduced-motion: no-preference) {
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; scroll-padding-top: 150px; }
 }
 ::selection { background: #1565c0; color: #fff; }
 body.dark-mode ::selection { background: #58a6ff; color: #0d1117; }
@@ -2136,7 +2145,10 @@ function filterPubs() {
     var title = titleEl ? titleEl.textContent.toLowerCase() : '';
     var authors = el.querySelector('.pub-authors') ? el.querySelector('.pub-authors').textContent.toLowerCase() : '';
     var venueOk = _activeVenue === 'all' || venue === _activeVenue.toLowerCase();
-    var searchOk = !q || title.includes(q) || authors.includes(q) || venue.includes(q);
+    var extra = ((el.dataset.abstract || '') + ' ' +
+      (el.querySelector('.pub-desc') ? el.querySelector('.pub-desc').textContent : '') + ' ' +
+      (el.querySelector('.pub-hl') ? el.querySelector('.pub-hl').textContent : '')).toLowerCase();
+    var searchOk = !q || title.includes(q) || authors.includes(q) || venue.includes(q) || extra.includes(q);
     var show = venueOk && searchOk;
     el.classList.toggle('hidden', !show);
     if (show) visible++;
