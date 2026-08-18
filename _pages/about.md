@@ -1213,6 +1213,12 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to fine-tune
     </div>
   </div>
   <div class="ro-row">
+    <div class="ro-dom">Materials discovery<span>design optimization</span></div>
+    <div class="ro-papers">
+      <a class="ro-p" href="https://openreview.net/forum?id=stiehhc5y6" target="_blank" rel="noopener">EDiSon <span class="ro-v">AI4Mat 2024</span></a>
+    </div>
+  </div>
+  <div class="ro-row">
     <div class="ro-dom">Math reasoning<span>token efficiency</span></div>
     <div class="ro-papers">
       <a class="ro-p" href="https://openreview.net/forum?id=8Oc3Mx754M" target="_blank" rel="noopener">BCR <span class="ro-v">ICML 2026</span></a>
@@ -1220,11 +1226,12 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to fine-tune
     </div>
   </div>
   <div class="ro-row">
-    <div class="ro-dom">VLA &amp; robotics<span>efficient inference</span></div>
+    <div class="ro-dom">VLA &amp; robotics<span>efficient inference &amp; design</span></div>
     <div class="ro-papers">
       <a class="ro-p" href="https://openreview.net/forum?id=RwdGIIjPlC" target="_blank" rel="noopener">SP-VLA <span class="ro-v">ICLR 2026</span></a>
       <a class="ro-p" href="https://arxiv.org/abs/2407.05010" target="_blank" rel="noopener">PRANCE <span class="ro-v">TPAMI 2026</span></a>
       <a class="ro-p" href="https://arxiv.org/abs/2605.29438" target="_blank" rel="noopener">ElegantVLA <span class="ro-v">2026</span></a>
+      <a class="ro-p" href="https://openreview.net/forum?id=stiehhc5y6" target="_blank" rel="noopener">EDiSon <span class="ro-v">AI4Mat 2024</span></a>
     </div>
   </div>
 </div>
