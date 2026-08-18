@@ -188,16 +188,18 @@ body.dark-mode .pub-abst-btn:hover { background: #1e40af; }
 .ro-dom span { display: block; font-weight: 500; font-size: 0.78rem; color: #767676; margin-top: 2px; }
 .ro-papers { display: flex; flex-wrap: wrap; gap: 7px 9px; align-items: center; }
 .ro-p { display: inline-flex; align-items: baseline; gap: 6px; font-size: 0.84rem; font-weight: 600;
-  color: #333; padding: 2px 4px; border-radius: 6px; text-decoration: none !important; }
-a.ro-p:hover { color: #1565c0; background: rgba(21,101,192,.07); }
-.ro-p.nolink { color: #333; cursor: default; }
+  padding: 2px 4px; border-radius: 6px; text-decoration: none !important; }
+/* the theme's `.page__content a` outranks a bare `.ro-p`, which would turn the paper
+   names pure blue; scope it to .ro-home so the name stays dark and only the venue chip is blue */
+.ro-home a.ro-p, .ro-home .ro-p.nolink { color: #333 !important; }
+.ro-home a.ro-p:hover { color: #1565c0 !important; background: rgba(21,101,192,.07); }
 .ro-v { font-size: 0.66rem; font-weight: 700; letter-spacing: .04em; color: #1565c0;
   background: #f1f4f8; border: 1px solid #e0e8f0; border-radius: 20px; padding: 1px 8px; white-space: nowrap; }
 body.dark-mode .ro-row { border-bottom-color: #30363d; }
 body.dark-mode .ro-dom { color: #e6edf3; }
 body.dark-mode .ro-dom span { color: #8b949e; }
-body.dark-mode .ro-p, body.dark-mode .ro-p.nolink { color: #adbac7; }
-body.dark-mode a.ro-p:hover { color: #58a6ff; background: rgba(88,166,255,.10); }
+body.dark-mode .ro-home a.ro-p, body.dark-mode .ro-home .ro-p.nolink { color: #cdd9e5 !important; }
+body.dark-mode .ro-home a.ro-p:hover { color: #58a6ff !important; background: rgba(88,166,255,.10); }
 body.dark-mode .ro-v { color: #58a6ff; background: #161b22; border-color: #30363d; }
 @media (max-width: 820px) {
   .ro-row { grid-template-columns: 1fr; gap: 7px; }
