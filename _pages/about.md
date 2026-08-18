@@ -178,6 +178,35 @@ body.dark-mode .pub-abst-btn:hover { background: #1e40af; }
 .rc-title { font-weight: 800; font-size: 0.93em; color: #1a2332; margin-bottom: 5px; }
 .rc-desc  { font-size: 0.81em; color: #555; line-height: 1.55; }
 
+/* ── Research overview: domain map (mirrors /publications/) ── */
+.ro-home { margin: 0 0 1.7em; }
+.ro-head { font-size: 0.72em; font-weight: 800; letter-spacing: .09em; text-transform: uppercase;
+  color: #767676; margin-bottom: 10px; }
+.ro-rows { display: grid; gap: 0; }
+.ro-row { display: grid; grid-template-columns: 16.5em 1fr; gap: 18px; align-items: baseline;
+  padding: 13px 0; border-bottom: 1px solid #e0e8f0; }
+.ro-row:last-child { border-bottom: none; }
+.ro-dom { font-size: 0.86rem; font-weight: 700; color: #1a2332; line-height: 1.4; }
+.ro-dom span { display: block; font-weight: 500; font-size: 0.78rem; color: #767676; margin-top: 2px; }
+.ro-papers { display: flex; flex-wrap: wrap; gap: 7px 9px; align-items: center; }
+.ro-p { display: inline-flex; align-items: baseline; gap: 6px; font-size: 0.84rem; font-weight: 600;
+  color: #333; padding: 2px 4px; border-radius: 6px; text-decoration: none !important; }
+a.ro-p:hover { color: #1565c0; background: rgba(21,101,192,.07); }
+.ro-p.nolink { color: #333; cursor: default; }
+.ro-v { font-size: 0.66rem; font-weight: 700; letter-spacing: .04em; color: #1565c0;
+  background: #f1f4f8; border: 1px solid #e0e8f0; border-radius: 20px; padding: 1px 8px; white-space: nowrap; }
+body.dark-mode .ro-head { color: #8b949e; }
+body.dark-mode .ro-row { border-bottom-color: #30363d; }
+body.dark-mode .ro-dom { color: #e6edf3; }
+body.dark-mode .ro-dom span { color: #8b949e; }
+body.dark-mode .ro-p, body.dark-mode .ro-p.nolink { color: #adbac7; }
+body.dark-mode a.ro-p:hover { color: #58a6ff; background: rgba(88,166,255,.10); }
+body.dark-mode .ro-v { color: #58a6ff; background: #161b22; border-color: #30363d; }
+@media (max-width: 820px) {
+  .ro-row { grid-template-columns: 1fr; gap: 7px; }
+  .ro-dom span { display: inline; margin-left: 6px; }
+}
+
 /* ── Stats row ── */
 .stats-row { display: flex; flex-wrap: wrap; gap: 12px; margin: 1.2em 0 1.6em; }
 .cit-chart{background:#fff;border:1.5px solid #e0e8f0;border-radius:12px;padding:16px 20px 12px;margin:0 0 1.8em;}
@@ -1154,6 +1183,60 @@ CS Ph.D. student at <strong>UIUC</strong>. I work on <strong>RL post-training fo
 &nbsp;<a href="/cv/">[CV]</a>
 &nbsp;<a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">[Scholar]</a>
 &nbsp;<a href="mailto:jiajunf3@illinois.edu">[Email]</a>
+</div>
+
+<div class="ro-home">
+<div class="ro-head">Research areas</div>
+<div class="ro-rows">
+  <div class="ro-row">
+    <div class="ro-dom">Data-distribution optimization<span>game agents</span></div>
+    <div class="ro-papers">
+      <a class="ro-p" href="https://proceedings.mlr.press/v162/fan22c.html" target="_blank" rel="noopener">GDI <span class="ro-v">ICML 2022</span></a>
+      <a class="ro-p" href="https://openreview.net/forum?id=FeWvD0L_a4" target="_blank" rel="noopener">LBC <span class="ro-v">ICLR 2023</span></a>
+    </div>
+  </div>
+  <div class="ro-row">
+    <div class="ro-dom">Text-to-image generation<span>flow matching &amp; diffusion</span></div>
+    <div class="ro-papers">
+      <a class="ro-p" href="https://openreview.net/forum?id=2IoFFexvuw" target="_blank" rel="noopener">ORW-CFM-W2 <span class="ro-v">ICLR 2025</span></a>
+      <a class="ro-p" href="https://openreview.net/forum?id=aXO0xg0ttW" target="_blank" rel="noopener">ADRPO <span class="ro-v">NeurIPS 2025</span></a>
+    </div>
+  </div>
+  <div class="ro-row">
+    <div class="ro-dom">Audio reasoning LLMs<span>multimodal reasoning</span></div>
+    <div class="ro-papers">
+      <a class="ro-p" href="https://openreview.net/forum?id=DUr48hxO2h" target="_blank" rel="noopener">CESAR <span class="ro-v">ICLR 2026</span></a>
+    </div>
+  </div>
+  <div class="ro-row">
+    <div class="ro-dom">Tool-use agents<span>agentic RL</span></div>
+    <div class="ro-papers">
+      <span class="ro-p nolink">Procedure-Aware RL <span class="ro-v">COLM 2026</span></span>
+      <a class="ro-p" href="https://arxiv.org/abs/2605.12975" target="_blank" rel="noopener">PyRAG <span class="ro-v">2026</span></a>
+    </div>
+  </div>
+  <div class="ro-row">
+    <div class="ro-dom">Protein generation</div>
+    <div class="ro-papers">
+      <a class="ro-p" href="https://arxiv.org/abs/2506.07459" target="_blank" rel="noopener">ProteinZero <span class="ro-v">TMLR 2026</span></a>
+    </div>
+  </div>
+  <div class="ro-row">
+    <div class="ro-dom">Math reasoning<span>token efficiency</span></div>
+    <div class="ro-papers">
+      <a class="ro-p" href="https://openreview.net/forum?id=8Oc3Mx754M" target="_blank" rel="noopener">BCR <span class="ro-v">ICML 2026</span></a>
+      <a class="ro-p" href="https://openreview.net/forum?id=aXO0xg0ttW" target="_blank" rel="noopener">ADRPO <span class="ro-v">NeurIPS 2025</span></a>
+    </div>
+  </div>
+  <div class="ro-row">
+    <div class="ro-dom">VLA &amp; robotics<span>efficient inference</span></div>
+    <div class="ro-papers">
+      <a class="ro-p" href="https://openreview.net/forum?id=RwdGIIjPlC" target="_blank" rel="noopener">SP-VLA <span class="ro-v">ICLR 2026</span></a>
+      <a class="ro-p" href="https://arxiv.org/abs/2407.05010" target="_blank" rel="noopener">PRANCE <span class="ro-v">TPAMI 2026</span></a>
+      <a class="ro-p" href="https://arxiv.org/abs/2605.29438" target="_blank" rel="noopener">ElegantVLA <span class="ro-v">2026</span></a>
+    </div>
+  </div>
+</div>
 </div>
 
 <!-- ═══════════════════════════════ NEWS ═══════════════════════════════ -->
