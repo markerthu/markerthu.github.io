@@ -180,8 +180,6 @@ body.dark-mode .pub-abst-btn:hover { background: #1e40af; }
 
 /* ── Research overview: domain map (mirrors /publications/) ── */
 .ro-home { margin: 0 0 1.7em; }
-.ro-head { font-size: 0.72em; font-weight: 800; letter-spacing: .09em; text-transform: uppercase;
-  color: #767676; margin-bottom: 10px; }
 .ro-rows { display: grid; gap: 0; }
 .ro-row { display: grid; grid-template-columns: 13.4em 1fr; gap: 18px; align-items: baseline;
   padding: 13px 0; border-bottom: 1px solid #e0e8f0; }
@@ -195,8 +193,9 @@ a.ro-p:hover { color: #1565c0; background: rgba(21,101,192,.07); }
 .ro-p.nolink { color: #333; cursor: default; }
 .ro-v { font-size: 0.66rem; font-weight: 700; letter-spacing: .04em; color: #1565c0;
   background: #f1f4f8; border: 1px solid #e0e8f0; border-radius: 20px; padding: 1px 8px; white-space: nowrap; }
-body.dark-mode .ro-head { color: #8b949e; }
-body.dark-mode .ro-row { border-bottom-color: #30363d; }
+.ro-v.is-oral { color: #8a6100; background: #fdf3d7; border-color: #f0e0b0; }
+body.dark-mode .ro-v.is-oral { color: #f3cf6b; background: #2b2310; border-color: #4d3f1c; }
+body.dark-mode body.dark-mode .ro-row { border-bottom-color: #30363d; }
 body.dark-mode .ro-dom { color: #e6edf3; }
 body.dark-mode .ro-dom span { color: #8b949e; }
 body.dark-mode .ro-p, body.dark-mode .ro-p.nolink { color: #adbac7; }
@@ -1184,7 +1183,7 @@ CS Ph.D. student at <strong>UIUC</strong>. I study how to fine-tune <strong>mult
     <div class="ro-dom">Data-distribution optimization<span>game agents</span></div>
     <div class="ro-papers">
       <a class="ro-p" href="https://proceedings.mlr.press/v162/fan22c.html" target="_blank" rel="noopener">GDI <span class="ro-v">ICML 2022</span></a>
-      <a class="ro-p" href="https://openreview.net/forum?id=FeWvD0L_a4" target="_blank" rel="noopener">LBC <span class="ro-v">ICLR 2023</span></a>
+      <a class="ro-p" href="https://openreview.net/forum?id=FeWvD0L_a4" target="_blank" rel="noopener">LBC <span class="ro-v is-oral">ICLR 2023 Oral</span></a>
     </div>
   </div>
   <div class="ro-row">
