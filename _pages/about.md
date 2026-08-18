@@ -183,7 +183,7 @@ body.dark-mode .pub-abst-btn:hover { background: #1e40af; }
 .ro-head { font-size: 0.72em; font-weight: 800; letter-spacing: .09em; text-transform: uppercase;
   color: #767676; margin-bottom: 10px; }
 .ro-rows { display: grid; gap: 0; }
-.ro-row { display: grid; grid-template-columns: 16.5em 1fr; gap: 18px; align-items: baseline;
+.ro-row { display: grid; grid-template-columns: 13.4em 1fr; gap: 18px; align-items: baseline;
   padding: 13px 0; border-bottom: 1px solid #e0e8f0; }
 .ro-row:last-child { border-bottom: none; }
 .ro-dom { font-size: 0.86rem; font-weight: 700; color: #1a2332; line-height: 1.4; }
