@@ -1,15 +1,15 @@
 {
   "_updated": "2026-08-19",
-  "_timezone": "America/Los_Angeles",
+  "_timezone": "UTC",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 347,
+  "_total": 350,
   "_days": 30,
   "_range": "Jul. 20th - Aug. 19th",
   "locations": [
     {
       "code": "US",
       "name": "Washington, US",
-      "count": 202,
+      "count": 203,
       "cx": 58.1,
       "cy": 36.6,
       "r": 4.2
@@ -17,10 +17,10 @@
     {
       "code": "US",
       "name": "California, US",
-      "count": 30,
+      "count": 32,
       "cx": 60.0,
       "cy": 46.9,
-      "r": 2.72
+      "r": 2.75
     },
     {
       "code": "US",
@@ -267,7 +267,7 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 306
+      "count": 309
     },
     {
       "code": "HK",
@@ -370,14 +370,14 @@
       "country": "US",
       "country_name": "United States",
       "name": "Washington",
-      "count": 202,
+      "count": 203,
       "located": true
     },
     {
       "country": "US",
       "country_name": "United States",
       "name": "California",
-      "count": 30,
+      "count": 32,
       "located": true
     },
     {
@@ -469,7 +469,7 @@
     {
       "path": "/",
       "title": "Jiajun Fan - Jiajun Fan",
-      "count": 137
+      "count": 140
     },
     {
       "path": "/visitors",
@@ -559,19 +559,19 @@
   ],
   "referrers": [
     {
+      "name": "(unknown)",
+      "id": "",
+      "count": 121
+    },
+    {
       "name": "www.jiajunfan.com",
       "id": "www.jiajunfan.com",
       "count": 121
     },
     {
-      "name": "(unknown)",
-      "id": "",
-      "count": 120
-    },
-    {
       "name": "Google",
       "id": "Google",
-      "count": 26
+      "count": 28
     },
     {
       "name": "www.jiajunfan.com/projects",
@@ -633,12 +633,12 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 210
+      "count": 212
     },
     {
       "name": "Safari",
       "id": "Safari",
-      "count": 134
+      "count": 135
     },
     {
       "name": "Firefox",
@@ -650,12 +650,12 @@
     {
       "name": "macOS",
       "id": "macOS",
-      "count": 162
+      "count": 164
     },
     {
       "name": "iOS",
       "id": "iOS",
-      "count": 128
+      "count": 129
     },
     {
       "name": "Windows",
@@ -801,23 +801,67 @@
     },
     {
       "day": "2026-08-19",
-      "n": 7
+      "n": 10
     }
   ],
   "periods": {
-    "today": 7,
+    "today": 10,
     "yesterday": 29,
-    "d7": 127,
+    "d7": 130,
     "d7_prev": 122,
-    "d30": 347,
+    "d30": 350,
     "d30_prev": 0,
-    "day_frac": 0.576,
+    "day_frac": 0.987,
     "yesterday_day": "2026-08-18"
   },
-  "_last_visit": "2026-08-19 12:32",
+  "_last_visit": "2026-08-19 23:31",
   "recent": [
     {
-      "date": "2026-08-19 12:32",
+      "date": "2026-08-19 23:31",
+      "ts": "2026-08-19T23:31:57Z",
+      "loc": "Washington, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": true
+    },
+    {
+      "date": "2026-08-19 22:10",
+      "ts": "2026-08-19T22:10:54Z",
+      "loc": "Washington, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Chrome 149",
+      "system": "macOS 10.15",
+      "screen": "1512px",
+      "first": false
+    },
+    {
+      "date": "2026-08-19 21:17",
+      "ts": "2026-08-19T21:17:57Z",
+      "loc": "California, US",
+      "path": "/",
+      "ref": "Google",
+      "browser": "Chrome 151",
+      "system": "macOS 10.15",
+      "screen": "2560px",
+      "first": true
+    },
+    {
+      "date": "2026-08-19 21:08",
+      "ts": "2026-08-19T21:08:19Z",
+      "loc": "California, US",
+      "path": "/",
+      "ref": "Google",
+      "browser": "Chrome 151",
+      "system": "macOS 10.15",
+      "screen": "1920px",
+      "first": true
+    },
+    {
+      "date": "2026-08-19 19:32",
       "ts": "2026-08-19T19:32:10Z",
       "loc": "Washington, US",
       "path": "/",
@@ -828,7 +872,7 @@
       "first": false
     },
     {
-      "date": "2026-08-19 12:32",
+      "date": "2026-08-19 19:32",
       "ts": "2026-08-19T19:32:12Z",
       "loc": "Washington, US",
       "path": "/visitors",
@@ -839,7 +883,7 @@
       "first": false
     },
     {
-      "date": "2026-08-19 12:31",
+      "date": "2026-08-19 19:31",
       "ts": "2026-08-19T19:31:17Z",
       "loc": "Washington, US",
       "path": "/",
@@ -850,7 +894,7 @@
       "first": true
     },
     {
-      "date": "2026-08-19 12:31",
+      "date": "2026-08-19 19:31",
       "ts": "2026-08-19T19:31:23Z",
       "loc": "Washington, US",
       "path": "/visitors",
@@ -861,7 +905,7 @@
       "first": true
     },
     {
-      "date": "2026-08-19 12:31",
+      "date": "2026-08-19 19:31",
       "ts": "2026-08-19T19:31:30Z",
       "loc": "Washington, US",
       "path": "/year-archive",
@@ -872,7 +916,7 @@
       "first": true
     },
     {
-      "date": "2026-08-19 12:31",
+      "date": "2026-08-19 19:31",
       "ts": "2026-08-19T19:31:31Z",
       "loc": "Washington, US",
       "path": "/blog/reading-papers",
@@ -883,7 +927,7 @@
       "first": true
     },
     {
-      "date": "2026-08-19 12:31",
+      "date": "2026-08-19 19:31",
       "ts": "2026-08-19T19:31:49Z",
       "loc": "Washington, US",
       "path": "/visitors",
@@ -894,7 +938,7 @@
       "first": false
     },
     {
-      "date": "2026-08-19 12:31",
+      "date": "2026-08-19 19:31",
       "ts": "2026-08-19T19:31:59Z",
       "loc": "Washington, US",
       "path": "/publications",
@@ -905,7 +949,7 @@
       "first": true
     },
     {
-      "date": "2026-08-19 06:27",
+      "date": "2026-08-19 13:27",
       "ts": "2026-08-19T13:27:52Z",
       "loc": "Illinois, US",
       "path": "/blog/reading-papers",
@@ -916,7 +960,7 @@
       "first": true
     },
     {
-      "date": "2026-08-19 05:14",
+      "date": "2026-08-19 12:14",
       "ts": "2026-08-19T12:14:29Z",
       "loc": "Germany",
       "path": "/publication/2026-07-08-Procedure-Aware-RL",
@@ -927,7 +971,7 @@
       "first": true
     },
     {
-      "date": "2026-08-19 02:43",
+      "date": "2026-08-19 09:43",
       "ts": "2026-08-19T09:43:34Z",
       "loc": "Washington, US",
       "path": "/",
@@ -938,7 +982,7 @@
       "first": false
     },
     {
-      "date": "2026-08-19 02:43",
+      "date": "2026-08-19 09:43",
       "ts": "2026-08-19T09:43:38Z",
       "loc": "Washington, US",
       "path": "/visitors",
@@ -949,7 +993,7 @@
       "first": false
     },
     {
-      "date": "2026-08-19 01:05",
+      "date": "2026-08-19 08:05",
       "ts": "2026-08-19T08:05:21Z",
       "loc": "Washington, US",
       "path": "/",
@@ -960,7 +1004,7 @@
       "first": false
     },
     {
-      "date": "2026-08-19 01:04",
+      "date": "2026-08-19 08:04",
       "ts": "2026-08-19T08:04:15Z",
       "loc": "Washington, US",
       "path": "/",
@@ -971,7 +1015,7 @@
       "first": false
     },
     {
-      "date": "2026-08-19 01:03",
+      "date": "2026-08-19 08:03",
       "ts": "2026-08-19T08:03:52Z",
       "loc": "Washington, US",
       "path": "/",
@@ -982,7 +1026,7 @@
       "first": false
     },
     {
-      "date": "2026-08-18 23:10",
+      "date": "2026-08-19 06:10",
       "ts": "2026-08-19T06:10:19Z",
       "loc": "Washington, US",
       "path": "/posts/2025/10/diversity-collapse-rlhf",
@@ -993,7 +1037,7 @@
       "first": true
     },
     {
-      "date": "2026-08-18 23:09",
+      "date": "2026-08-19 06:09",
       "ts": "2026-08-19T06:09:25Z",
       "loc": "Washington, US",
       "path": "/",
@@ -1004,7 +1048,7 @@
       "first": false
     },
     {
-      "date": "2026-08-18 23:09",
+      "date": "2026-08-19 06:09",
       "ts": "2026-08-19T06:09:26Z",
       "loc": "Washington, US",
       "path": "/visitors",
@@ -1015,7 +1059,7 @@
       "first": true
     },
     {
-      "date": "2026-08-18 23:09",
+      "date": "2026-08-19 06:09",
       "ts": "2026-08-19T06:09:45Z",
       "loc": "Washington, US",
       "path": "/",
@@ -1026,7 +1070,7 @@
       "first": false
     },
     {
-      "date": "2026-08-18 23:09",
+      "date": "2026-08-19 06:09",
       "ts": "2026-08-19T06:09:46Z",
       "loc": "Washington, US",
       "path": "/year-archive",
@@ -1037,7 +1081,7 @@
       "first": true
     },
     {
-      "date": "2026-08-18 23:09",
+      "date": "2026-08-19 06:09",
       "ts": "2026-08-19T06:09:49Z",
       "loc": "Washington, US",
       "path": "/posts/2025/10/inverse-scaling-audio-llms",
@@ -1048,7 +1092,7 @@
       "first": true
     },
     {
-      "date": "2026-08-18 22:49",
+      "date": "2026-08-19 05:49",
       "ts": "2026-08-19T05:49:06Z",
       "loc": "Washington, US",
       "path": "/",
@@ -1059,7 +1103,7 @@
       "first": false
     },
     {
-      "date": "2026-08-18 21:35",
+      "date": "2026-08-19 04:35",
       "ts": "2026-08-19T04:35:45Z",
       "loc": "Washington, US",
       "path": "/",
@@ -1070,7 +1114,7 @@
       "first": false
     },
     {
-      "date": "2026-08-18 21:28",
+      "date": "2026-08-19 04:28",
       "ts": "2026-08-19T04:28:28Z",
       "loc": "Washington, US",
       "path": "/",
@@ -1081,7 +1125,7 @@
       "first": true
     },
     {
-      "date": "2026-08-18 20:28",
+      "date": "2026-08-19 03:28",
       "ts": "2026-08-19T03:28:21Z",
       "loc": "Washington, US",
       "path": "/visitors",
@@ -1092,7 +1136,7 @@
       "first": true
     },
     {
-      "date": "2026-08-18 20:28",
+      "date": "2026-08-19 03:28",
       "ts": "2026-08-19T03:28:22Z",
       "loc": "Washington, US",
       "path": "/",
@@ -1101,52 +1145,8 @@
       "system": "iOS 26.6",
       "screen": "430px",
       "first": true
-    },
-    {
-      "date": "2026-08-18 20:28",
-      "ts": "2026-08-19T03:28:24Z",
-      "loc": "Washington, US",
-      "path": "/visitors",
-      "ref": "www.jiajunfan.com",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": false
-    },
-    {
-      "date": "2026-08-18 20:21",
-      "ts": "2026-08-19T03:21:09Z",
-      "loc": "Washington, US",
-      "path": "/posts/2025/10/diversity-collapse-rlhf",
-      "ref": "www.jiajunfan.com/year-archive",
-      "browser": "Safari 26.6",
-      "system": "iOS 18.7",
-      "screen": "440px",
-      "first": true
-    },
-    {
-      "date": "2026-08-18 20:21",
-      "ts": "2026-08-19T03:21:34Z",
-      "loc": "Washington, US",
-      "path": "/posts/2025/10/inverse-scaling-audio-llms",
-      "ref": "www.jiajunfan.com/year-archive",
-      "browser": "Safari 26.6",
-      "system": "iOS 18.7",
-      "screen": "440px",
-      "first": true
-    },
-    {
-      "date": "2026-08-18 20:20",
-      "ts": "2026-08-19T03:20:28Z",
-      "loc": "Washington, US",
-      "path": "/projects/adrpo",
-      "ref": "www.jiajunfan.com",
-      "browser": "Safari 26.6",
-      "system": "iOS 18.7",
-      "screen": "440px",
-      "first": true
     }
   ],
-  "_recent_total": 706,
+  "_recent_total": 710,
   "_recent_shown": 30
 }
