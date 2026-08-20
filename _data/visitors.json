@@ -1,15 +1,15 @@
 {
   "_updated": "2026-08-20",
-  "_timezone": "America/Los_Angeles",
+  "_timezone": "UTC",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 360,
+  "_total": 365,
   "_days": 30,
   "_range": "Jul. 21st - Aug. 20th",
   "locations": [
     {
       "code": "US",
       "name": "Washington, US",
-      "count": 213,
+      "count": 218,
       "cx": 58.1,
       "cy": 36.6,
       "r": 4.2
@@ -20,7 +20,7 @@
       "count": 32,
       "cx": 60.0,
       "cy": 46.9,
-      "r": 2.73
+      "r": 2.72
     },
     {
       "code": "US",
@@ -28,7 +28,7 @@
       "count": 22,
       "cx": 59.2,
       "cy": 39.7,
-      "r": 2.57
+      "r": 2.56
     },
     {
       "code": "US",
@@ -36,7 +36,7 @@
       "count": 15,
       "cx": 90.8,
       "cy": 44.6,
-      "r": 2.44
+      "r": 2.43
     },
     {
       "code": "HK",
@@ -44,7 +44,7 @@
       "count": 12,
       "cx": 294.2,
       "cy": 61.7,
-      "r": 2.37
+      "r": 2.36
     },
     {
       "code": "US",
@@ -52,7 +52,7 @@
       "count": 8,
       "cx": 101.3,
       "cy": 46.3,
-      "r": 2.27
+      "r": 2.26
     },
     {
       "code": "US",
@@ -60,7 +60,7 @@
       "count": 7,
       "cx": 104.5,
       "cy": 41.4,
-      "r": 2.24
+      "r": 2.23
     },
     {
       "code": "AU",
@@ -267,7 +267,7 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 319
+      "count": 324
     },
     {
       "code": "HK",
@@ -370,7 +370,7 @@
       "country": "US",
       "country_name": "United States",
       "name": "Washington",
-      "count": 213,
+      "count": 218,
       "located": true
     },
     {
@@ -469,12 +469,12 @@
     {
       "path": "/",
       "title": "Jiajun Fan - Jiajun Fan",
-      "count": 145
+      "count": 148
     },
     {
       "path": "/visitors",
       "title": "Visitors — Jiajun Fan",
-      "count": 62
+      "count": 63
     },
     {
       "path": "/publications",
@@ -484,7 +484,7 @@
     {
       "path": "/cv",
       "title": "CV — Jiajun Fan",
-      "count": 35
+      "count": 36
     },
     {
       "path": "/projects",
@@ -561,12 +561,12 @@
     {
       "name": "www.jiajunfan.com",
       "id": "www.jiajunfan.com",
-      "count": 126
+      "count": 128
     },
     {
       "name": "(unknown)",
       "id": "",
-      "count": 124
+      "count": 127
     },
     {
       "name": "Google",
@@ -633,12 +633,12 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 218
+      "count": 219
     },
     {
       "name": "Safari",
       "id": "Safari",
-      "count": 139
+      "count": 143
     },
     {
       "name": "Firefox",
@@ -650,12 +650,12 @@
     {
       "name": "macOS",
       "id": "macOS",
-      "count": 168
+      "count": 169
     },
     {
       "name": "iOS",
       "id": "iOS",
-      "count": 133
+      "count": 137
     },
     {
       "name": "Windows",
@@ -801,23 +801,78 @@
     },
     {
       "day": "2026-08-20",
-      "n": 6
+      "n": 11
     }
   ],
   "periods": {
-    "today": 6,
+    "today": 11,
     "yesterday": 14,
-    "d7": 125,
+    "d7": 130,
     "d7_prev": 113,
-    "d30": 360,
+    "d30": 365,
     "d30_prev": 0,
-    "day_frac": 0.577,
+    "day_frac": 0.99,
     "yesterday_day": "2026-08-19"
   },
-  "_last_visit": "2026-08-20 08:42",
+  "_last_visit": "2026-08-20 23:21",
   "recent": [
     {
-      "date": "2026-08-20 08:42",
+      "date": "2026-08-20 23:21",
+      "ts": "2026-08-20T23:21:08Z",
+      "loc": "Washington, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": true
+    },
+    {
+      "date": "2026-08-20 22:24",
+      "ts": "2026-08-20T22:24:04Z",
+      "loc": "Washington, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Chrome 149",
+      "system": "macOS 10.15",
+      "screen": "1512px",
+      "first": true
+    },
+    {
+      "date": "2026-08-20 21:49",
+      "ts": "2026-08-20T21:49:24Z",
+      "loc": "Washington, US",
+      "path": "/visitors",
+      "ref": "www.jiajunfan.com",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": true
+    },
+    {
+      "date": "2026-08-20 21:47",
+      "ts": "2026-08-20T21:47:27Z",
+      "loc": "Washington, US",
+      "path": "/cv",
+      "ref": "www.jiajunfan.com",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": true
+    },
+    {
+      "date": "2026-08-20 21:29",
+      "ts": "2026-08-20T21:29:35Z",
+      "loc": "Washington, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": true
+    },
+    {
+      "date": "2026-08-20 15:42",
       "ts": "2026-08-20T15:42:00Z",
       "loc": "Washington, US",
       "path": "/cv",
@@ -828,7 +883,7 @@
       "first": true
     },
     {
-      "date": "2026-08-20 08:41",
+      "date": "2026-08-20 15:41",
       "ts": "2026-08-20T15:41:48Z",
       "loc": "Washington, US",
       "path": "/",
@@ -839,7 +894,7 @@
       "first": true
     },
     {
-      "date": "2026-08-20 06:19",
+      "date": "2026-08-20 13:19",
       "ts": "2026-08-20T13:19:11Z",
       "loc": "Washington, US",
       "path": "/",
@@ -850,7 +905,7 @@
       "first": false
     },
     {
-      "date": "2026-08-20 06:19",
+      "date": "2026-08-20 13:19",
       "ts": "2026-08-20T13:19:38Z",
       "loc": "Washington, US",
       "path": "/visitors",
@@ -861,7 +916,7 @@
       "first": false
     },
     {
-      "date": "2026-08-20 06:19",
+      "date": "2026-08-20 13:19",
       "ts": "2026-08-20T13:19:52Z",
       "loc": "Washington, US",
       "path": "/",
@@ -872,7 +927,7 @@
       "first": false
     },
     {
-      "date": "2026-08-20 06:11",
+      "date": "2026-08-20 13:11",
       "ts": "2026-08-20T13:11:53Z",
       "loc": "Washington, US",
       "path": "/",
@@ -883,7 +938,7 @@
       "first": true
     },
     {
-      "date": "2026-08-20 06:11",
+      "date": "2026-08-20 13:11",
       "ts": "2026-08-20T13:11:56Z",
       "loc": "Washington, US",
       "path": "/visitors",
@@ -894,7 +949,7 @@
       "first": true
     },
     {
-      "date": "2026-08-20 04:15",
+      "date": "2026-08-20 11:15",
       "ts": "2026-08-20T11:15:40Z",
       "loc": "Washington, US",
       "path": "/",
@@ -905,7 +960,7 @@
       "first": false
     },
     {
-      "date": "2026-08-20 03:39",
+      "date": "2026-08-20 10:39",
       "ts": "2026-08-20T10:39:32Z",
       "loc": "Washington, US",
       "path": "/",
@@ -916,7 +971,7 @@
       "first": false
     },
     {
-      "date": "2026-08-20 03:36",
+      "date": "2026-08-20 10:36",
       "ts": "2026-08-20T10:36:04Z",
       "loc": "Washington, US",
       "path": "/visitors",
@@ -927,7 +982,7 @@
       "first": false
     },
     {
-      "date": "2026-08-20 03:21",
+      "date": "2026-08-20 10:21",
       "ts": "2026-08-20T10:21:38Z",
       "loc": "Washington, US",
       "path": "/",
@@ -938,7 +993,7 @@
       "first": true
     },
     {
-      "date": "2026-08-20 03:21",
+      "date": "2026-08-20 10:21",
       "ts": "2026-08-20T10:21:45Z",
       "loc": "Washington, US",
       "path": "/visitors",
@@ -949,7 +1004,7 @@
       "first": true
     },
     {
-      "date": "2026-08-20 01:08",
+      "date": "2026-08-20 08:08",
       "ts": "2026-08-20T08:08:44Z",
       "loc": "Washington, US",
       "path": "/",
@@ -960,7 +1015,7 @@
       "first": false
     },
     {
-      "date": "2026-08-20 01:08",
+      "date": "2026-08-20 08:08",
       "ts": "2026-08-20T08:08:50Z",
       "loc": "Washington, US",
       "path": "/",
@@ -971,7 +1026,7 @@
       "first": false
     },
     {
-      "date": "2026-08-20 01:08",
+      "date": "2026-08-20 08:08",
       "ts": "2026-08-20T08:08:54Z",
       "loc": "Washington, US",
       "path": "/visitors",
@@ -982,7 +1037,7 @@
       "first": false
     },
     {
-      "date": "2026-08-19 22:23",
+      "date": "2026-08-20 05:23",
       "ts": "2026-08-20T05:23:19Z",
       "loc": "Washington, US",
       "path": "/",
@@ -993,7 +1048,7 @@
       "first": true
     },
     {
-      "date": "2026-08-19 22:23",
+      "date": "2026-08-20 05:23",
       "ts": "2026-08-20T05:23:19Z",
       "loc": "Washington, US",
       "path": "/visitors",
@@ -1004,7 +1059,7 @@
       "first": true
     },
     {
-      "date": "2026-08-19 21:59",
+      "date": "2026-08-20 04:59",
       "ts": "2026-08-20T04:59:59Z",
       "loc": "Washington, US",
       "path": "/",
@@ -1015,7 +1070,7 @@
       "first": false
     },
     {
-      "date": "2026-08-19 19:09",
+      "date": "2026-08-20 02:09",
       "ts": "2026-08-20T02:09:00Z",
       "loc": "Washington, US",
       "path": "/",
@@ -1026,7 +1081,7 @@
       "first": false
     },
     {
-      "date": "2026-08-19 17:05",
+      "date": "2026-08-20 00:05",
       "ts": "2026-08-20T00:05:09Z",
       "loc": "Washington, US",
       "path": "/visitors",
@@ -1037,7 +1092,7 @@
       "first": true
     },
     {
-      "date": "2026-08-19 17:04",
+      "date": "2026-08-20 00:04",
       "ts": "2026-08-20T00:04:57Z",
       "loc": "Washington, US",
       "path": "/",
@@ -1048,7 +1103,7 @@
       "first": false
     },
     {
-      "date": "2026-08-19 17:02",
+      "date": "2026-08-20 00:02",
       "ts": "2026-08-20T00:02:15Z",
       "loc": "Washington, US",
       "path": "/",
@@ -1059,7 +1114,7 @@
       "first": false
     },
     {
-      "date": "2026-08-19 16:57",
+      "date": "2026-08-19 23:57",
       "ts": "2026-08-19T23:57:29Z",
       "loc": "Washington, US",
       "path": "/",
@@ -1070,7 +1125,7 @@
       "first": true
     },
     {
-      "date": "2026-08-19 16:31",
+      "date": "2026-08-19 23:31",
       "ts": "2026-08-19T23:31:57Z",
       "loc": "Washington, US",
       "path": "/",
@@ -1081,7 +1136,7 @@
       "first": true
     },
     {
-      "date": "2026-08-19 15:10",
+      "date": "2026-08-19 22:10",
       "ts": "2026-08-19T22:10:54Z",
       "loc": "Washington, US",
       "path": "/",
@@ -1090,63 +1145,8 @@
       "system": "macOS 10.15",
       "screen": "1512px",
       "first": false
-    },
-    {
-      "date": "2026-08-19 14:17",
-      "ts": "2026-08-19T21:17:57Z",
-      "loc": "California, US",
-      "path": "/",
-      "ref": "Google",
-      "browser": "Chrome 151",
-      "system": "macOS 10.15",
-      "screen": "2560px",
-      "first": true
-    },
-    {
-      "date": "2026-08-19 14:08",
-      "ts": "2026-08-19T21:08:19Z",
-      "loc": "California, US",
-      "path": "/",
-      "ref": "Google",
-      "browser": "Chrome 151",
-      "system": "macOS 10.15",
-      "screen": "1920px",
-      "first": true
-    },
-    {
-      "date": "2026-08-19 12:32",
-      "ts": "2026-08-19T19:32:10Z",
-      "loc": "Washington, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 149",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": false
-    },
-    {
-      "date": "2026-08-19 12:32",
-      "ts": "2026-08-19T19:32:12Z",
-      "loc": "Washington, US",
-      "path": "/visitors",
-      "ref": "www.jiajunfan.com",
-      "browser": "Chrome 149",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": false
-    },
-    {
-      "date": "2026-08-19 12:31",
-      "ts": "2026-08-19T19:31:17Z",
-      "loc": "Washington, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 149",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": true
     }
   ],
-  "_recent_total": 733,
+  "_recent_total": 738,
   "_recent_shown": 30
 }
