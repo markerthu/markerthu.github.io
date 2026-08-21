@@ -2,7 +2,7 @@
   "_updated": "2026-08-21",
   "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 376,
+  "_total": 378,
   "_days": 30,
   "_range": "Jul. 22nd - Aug. 21st",
   "locations": [
@@ -72,10 +72,26 @@
     },
     {
       "code": "US",
+      "name": "Nevada, US",
+      "count": 3,
+      "cx": 63.9,
+      "cy": 45.3,
+      "r": 2.08
+    },
+    {
+      "code": "US",
       "name": "Texas, US",
       "count": 3,
       "cx": 81.4,
       "cy": 52.8,
+      "r": 2.08
+    },
+    {
+      "code": "IN",
+      "name": "India",
+      "count": 3,
+      "cx": 263.6,
+      "cy": 60.0,
       "r": 2.08
     },
     {
@@ -95,27 +111,11 @@
       "r": 2.03
     },
     {
-      "code": "US",
-      "name": "Nevada, US",
-      "count": 2,
-      "cx": 63.9,
-      "cy": 45.3,
-      "r": 2.03
-    },
-    {
       "code": "DE",
       "name": "Germany",
       "count": 2,
       "cx": 190.7,
       "cy": 33.0,
-      "r": 2.03
-    },
-    {
-      "code": "IN",
-      "name": "India",
-      "count": 2,
-      "cx": 263.6,
-      "cy": 60.0,
       "r": 2.03
     },
     {
@@ -275,7 +275,7 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 333
+      "count": 334
     },
     {
       "code": "HK",
@@ -288,6 +288,11 @@
       "count": 6
     },
     {
+      "code": "IN",
+      "name": "India",
+      "count": 3
+    },
+    {
       "code": "KR",
       "name": "South Korea",
       "count": 3
@@ -295,11 +300,6 @@
     {
       "code": "DE",
       "name": "Germany",
-      "count": 2
-    },
-    {
-      "code": "IN",
-      "name": "India",
       "count": 2
     },
     {
@@ -419,6 +419,13 @@
     {
       "country": "US",
       "country_name": "United States",
+      "name": "Nevada",
+      "count": 3,
+      "located": true
+    },
+    {
+      "country": "US",
+      "country_name": "United States",
       "name": "Texas",
       "count": 3,
       "located": true
@@ -427,13 +434,6 @@
       "country": "US",
       "country_name": "United States",
       "name": "Maryland",
-      "count": 2,
-      "located": true
-    },
-    {
-      "country": "US",
-      "country_name": "United States",
-      "name": "Nevada",
       "count": 2,
       "located": true
     },
@@ -484,7 +484,7 @@
     {
       "path": "/",
       "title": "Jiajun Fan - Jiajun Fan",
-      "count": 151
+      "count": 153
     },
     {
       "path": "/visitors",
@@ -581,7 +581,7 @@
     {
       "name": "(unknown)",
       "id": "",
-      "count": 131
+      "count": 133
     },
     {
       "name": "Google",
@@ -648,7 +648,7 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 221
+      "count": 223
     },
     {
       "name": "Safari",
@@ -685,7 +685,7 @@
     {
       "name": "Android",
       "id": "Android",
-      "count": 4
+      "count": 6
     },
     {
       "name": "Chrome OS",
@@ -816,21 +816,43 @@
     },
     {
       "day": "2026-08-21",
-      "n": 9
+      "n": 11
     }
   ],
   "periods": {
-    "today": 9,
+    "today": 11,
     "yesterday": 13,
-    "d7": 105,
+    "d7": 107,
     "d7_prev": 135,
-    "d30": 376,
+    "d30": 378,
     "d30_prev": 0,
-    "day_frac": 0.451,
+    "day_frac": 0.572,
     "yesterday_day": "2026-08-20"
   },
-  "_last_visit": "2026-08-21 09:57",
+  "_last_visit": "2026-08-21 12:57",
   "recent": [
+    {
+      "date": "2026-08-21 12:57",
+      "ts": "2026-08-21T19:57:31Z",
+      "loc": "Nevada, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Chrome 151",
+      "system": "Android 10",
+      "screen": "364px",
+      "first": true
+    },
+    {
+      "date": "2026-08-21 10:55",
+      "ts": "2026-08-21T17:55:15Z",
+      "loc": "India",
+      "path": "/",
+      "ref": "",
+      "browser": "Chrome 151",
+      "system": "Android 10",
+      "screen": "412px",
+      "first": true
+    },
     {
       "date": "2026-08-21 09:57",
       "ts": "2026-08-21T16:57:39Z",
@@ -1138,30 +1160,8 @@
       "system": "macOS 10.15",
       "screen": "1440px",
       "first": true
-    },
-    {
-      "date": "2026-08-20 06:11",
-      "ts": "2026-08-20T13:11:56Z",
-      "loc": "Washington, US",
-      "path": "/visitors",
-      "ref": "www.jiajunfan.com",
-      "browser": "Chrome 151",
-      "system": "macOS 10.15",
-      "screen": "1440px",
-      "first": true
-    },
-    {
-      "date": "2026-08-20 04:15",
-      "ts": "2026-08-20T11:15:40Z",
-      "loc": "Washington, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": false
     }
   ],
-  "_recent_total": 755,
+  "_recent_total": 757,
   "_recent_shown": 30
 }
