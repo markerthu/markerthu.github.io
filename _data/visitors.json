@@ -1,15 +1,15 @@
 {
-  "_updated": "2026-08-20",
+  "_updated": "2026-08-21",
   "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 365,
+  "_total": 367,
   "_days": 30,
-  "_range": "Jul. 21st - Aug. 20th",
+  "_range": "Jul. 22nd - Aug. 21st",
   "locations": [
     {
       "code": "US",
       "name": "Washington, US",
-      "count": 218,
+      "count": 219,
       "cx": 58.1,
       "cy": 36.6,
       "r": 4.2
@@ -152,6 +152,14 @@
     },
     {
       "code": "US",
+      "name": "Minnesota, US",
+      "count": 1,
+      "cx": 86.3,
+      "cy": 37.4,
+      "r": 1.96
+    },
+    {
+      "code": "US",
       "name": "New Jersey, US",
       "count": 1,
       "cx": 105.3,
@@ -267,7 +275,7 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 324
+      "count": 326
     },
     {
       "code": "HK",
@@ -370,7 +378,7 @@
       "country": "US",
       "country_name": "United States",
       "name": "Washington",
-      "count": 218,
+      "count": 219,
       "located": true
     },
     {
@@ -439,6 +447,13 @@
     {
       "country": "US",
       "country_name": "United States",
+      "name": "Minnesota",
+      "count": 1,
+      "located": true
+    },
+    {
+      "country": "US",
+      "country_name": "United States",
       "name": "New Jersey",
       "count": 1,
       "located": true
@@ -474,7 +489,7 @@
     {
       "path": "/visitors",
       "title": "Visitors — Jiajun Fan",
-      "count": 63
+      "count": 65
     },
     {
       "path": "/publications",
@@ -561,7 +576,7 @@
     {
       "name": "www.jiajunfan.com",
       "id": "www.jiajunfan.com",
-      "count": 128
+      "count": 130
     },
     {
       "name": "(unknown)",
@@ -638,7 +653,7 @@
     {
       "name": "Safari",
       "id": "Safari",
-      "count": 143
+      "count": 145
     },
     {
       "name": "Firefox",
@@ -655,7 +670,7 @@
     {
       "name": "iOS",
       "id": "iOS",
-      "count": 137
+      "count": 139
     },
     {
       "name": "Windows",
@@ -679,10 +694,6 @@
     }
   ],
   "daily": [
-    {
-      "day": "2026-07-21",
-      "n": 0
-    },
     {
       "day": "2026-07-22",
       "n": 0
@@ -801,18 +812,22 @@
     },
     {
       "day": "2026-08-20",
-      "n": 11
+      "n": 13
+    },
+    {
+      "day": "2026-08-21",
+      "n": 0
     }
   ],
   "periods": {
-    "today": 11,
-    "yesterday": 14,
-    "d7": 130,
-    "d7_prev": 113,
-    "d30": 365,
+    "today": 0,
+    "yesterday": 13,
+    "d7": 96,
+    "d7_prev": 135,
+    "d30": 367,
     "d30_prev": 0,
-    "day_frac": 0.953,
-    "yesterday_day": "2026-08-19"
+    "day_frac": 0.085,
+    "yesterday_day": "2026-08-20"
   },
   "_last_visit": "2026-08-20 21:37",
   "recent": [
