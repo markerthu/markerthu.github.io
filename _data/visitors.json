@@ -2,7 +2,7 @@
   "_updated": "2026-08-23",
   "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 399,
+  "_total": 400,
   "_days": 30,
   "_range": "Jul. 24th - Aug. 23rd",
   "locations": [
@@ -71,6 +71,14 @@
       "r": 2.2
     },
     {
+      "code": "TR",
+      "name": "Turkey",
+      "count": 4,
+      "cx": 216.9,
+      "cy": 45.6,
+      "r": 2.12
+    },
+    {
       "code": "US",
       "name": "Nevada, US",
       "count": 3,
@@ -100,14 +108,6 @@
       "count": 3,
       "cx": 307.5,
       "cy": 47.3,
-      "r": 2.08
-    },
-    {
-      "code": "TR",
-      "name": "Turkey",
-      "count": 3,
-      "cx": 216.9,
-      "cy": 45.6,
       "r": 2.08
     },
     {
@@ -288,6 +288,11 @@
       "count": 6
     },
     {
+      "code": "TR",
+      "name": "Turkey",
+      "count": 4
+    },
+    {
       "code": "IN",
       "name": "India",
       "count": 3
@@ -295,11 +300,6 @@
     {
       "code": "KR",
       "name": "South Korea",
-      "count": 3
-    },
-    {
-      "code": "TR",
-      "name": "Turkey",
       "count": 3
     },
     {
@@ -524,7 +524,7 @@
     {
       "path": "/projects/ac-flow",
       "title": "AC-Flow — Actor-Critic for Flow Matching | Preprint 2025",
-      "count": 4
+      "count": 5
     },
     {
       "path": "/projects/adrpo",
@@ -586,7 +586,7 @@
     {
       "name": "Google",
       "id": "Google",
-      "count": 35
+      "count": 36
     },
     {
       "name": "www.jiajunfan.com/projects",
@@ -658,7 +658,7 @@
     {
       "name": "Firefox",
       "id": "Firefox",
-      "count": 4
+      "count": 5
     }
   ],
   "systems": [
@@ -685,7 +685,7 @@
     {
       "name": "Android",
       "id": "Android",
-      "count": 7
+      "count": 8
     },
     {
       "name": "Chrome OS",
@@ -816,21 +816,32 @@
     },
     {
       "day": "2026-08-23",
-      "n": 3
+      "n": 4
     }
   ],
   "periods": {
-    "today": 3,
+    "today": 4,
     "yesterday": 10,
-    "d7": 101,
+    "d7": 102,
     "d7_prev": 128,
-    "d30": 399,
+    "d30": 400,
     "d30_prev": 0,
-    "day_frac": 0.572,
+    "day_frac": 0.694,
     "yesterday_day": "2026-08-22"
   },
-  "_last_visit": "2026-08-23 12:05",
+  "_last_visit": "2026-08-23 13:54",
   "recent": [
+    {
+      "date": "2026-08-23 13:54",
+      "ts": "2026-08-23T20:54:37Z",
+      "loc": "Turkey",
+      "path": "/projects/ac-flow",
+      "ref": "Google",
+      "browser": "Firefox 154",
+      "system": "Android 12",
+      "screen": "396px",
+      "first": true
+    },
     {
       "date": "2026-08-23 12:05",
       "ts": "2026-08-23T19:05:02Z",
@@ -1149,19 +1160,8 @@
       "system": "iOS 26.6",
       "screen": "430px",
       "first": true
-    },
-    {
-      "date": "2026-08-21 22:07",
-      "ts": "2026-08-22T05:07:02Z",
-      "loc": "Washington, US",
-      "path": "/",
-      "ref": "Google",
-      "browser": "Safari 26.6",
-      "system": "iOS 18.7",
-      "screen": "402px",
-      "first": true
     }
   ],
-  "_recent_total": 792,
+  "_recent_total": 793,
   "_recent_shown": 30
 }
