@@ -1,6 +1,51 @@
 {
-  "updated": "2026-08-17",
+  "updated": "2026-08-24",
   "papers": [
+    {
+      "id": "2608.21204",
+      "title": "Beyond Imitation: Self-Improving Robot Policies via Off-Policy Q-Planning",
+      "authors": "Varun Giridhar, Anant Khandelwal, Jeremy A. Collins et al.",
+      "summary": "Behaviour Cloning (BC) has driven remarkable progress in robot manipulation, yet it is fundamentally limited by its inability to self-improve: a policy that fails cannot learn from that failure withou…",
+      "date": "2026-08-21",
+      "tag": "Self-Improvement",
+      "url": "https://arxiv.org/abs/2608.21204"
+    },
+    {
+      "id": "2608.20318",
+      "title": "AI4AI-Bench: Benchmarking LLM Agents in Algorithmic Design for Recursive Self-Improvement",
+      "authors": "Yizhe Chi, Wenyi Li, Deyao Hong et al.",
+      "summary": "Recursive self-improvement (RSI) asks whether an AI system can improve the process that produces AI systems, so that the next system inherits the improvement. That process is the training algorithm: a…",
+      "date": "2026-08-20",
+      "tag": "Self-Improvement",
+      "url": "https://arxiv.org/abs/2608.20318"
+    },
+    {
+      "id": "2608.18066",
+      "title": "On the Fragility of Self-Improving Agents: Variance, Task Order, and Underspecification",
+      "authors": "Qinyuan Ye, Yu Li, Yada Pruksachatkun et al.",
+      "summary": "Memory-based self-improving agents--those that learn from an online stream of tasks and improve over time by maintaining a textual memory bank--have shown great promise in recent literature. However, …",
+      "date": "2026-08-18",
+      "tag": "Self-Improvement",
+      "url": "https://arxiv.org/abs/2608.18066"
+    },
+    {
+      "id": "2608.16080",
+      "title": "DeepOHeat-v2: Self-Improving Operator Learning for Fast and Trustworthy Thermal Optimization in 3D-IC Design",
+      "authors": "Xinling Yu, Yixing Li, Ziyue Liu et al.",
+      "summary": "Thermal-aware optimization of multi-die 3D integrated circuits evaluates many designs, each a costly heat-equation solve. Operator-learning surrogates replace this solve with a fast forward pass, idea…",
+      "date": "2026-08-17",
+      "tag": "Self-Improvement",
+      "url": "https://arxiv.org/abs/2608.16080"
+    },
+    {
+      "id": "2608.15680",
+      "title": "Robo-Dopamine 2.0: History-Conditioned and OOD-Aware Process Reward Modeling for Robotic Manipulation",
+      "authors": "Yijie Xu, Haopeng Jin, Run Zhou et al.",
+      "summary": "Vision-language-action (VLA) models improve robotic manipulation but remain vulnerable to compounding errors, scene changes, and off-trajectory states. Reinforcement learning can refine pretrained VLA…",
+      "date": "2026-08-16",
+      "tag": "Reasoning",
+      "url": "https://arxiv.org/abs/2608.15680"
+    },
     {
       "id": "2608.14135",
       "title": "AgilePE: Autonomous UAV Pursuit-Evasion via Self-Play Reinforcement Learning",
@@ -36,51 +81,6 @@
       "date": "2026-08-12",
       "tag": "Reasoning",
       "url": "https://arxiv.org/abs/2608.12220"
-    },
-    {
-      "id": "2608.10823",
-      "title": "MoE Proxy Models for Low-Cost Failure Reproduction and Diagnosis in LLM RL Post-Training",
-      "authors": "Yikai Wang, Chuansai Zhou, Yuhang Zhou et al.",
-      "summary": "Reinforcement learning (RL) post-training of large language models (LLMs) is computationally intensive and involves complex system pipelines with substantial debugging overhead. In practice, factors s…",
-      "date": "2026-08-11",
-      "tag": "RL Training",
-      "url": "https://arxiv.org/abs/2608.10823"
-    },
-    {
-      "id": "2608.09467",
-      "title": "RecoverFly: A Failure-Aware Reinforcement Learning Post-Training Framework for Aerial Vision-Language Navigation",
-      "authors": "Boxiong Wang, Hui Kang, Geng Sun et al.",
-      "summary": "Unmanned aerial vehicle vision-language navigation (UAV-VLN) requires agents to translate visual observations and language instructions into reliable flight actions in complex environments. Although r…",
-      "date": "2026-08-10",
-      "tag": "Multimodal",
-      "url": "https://arxiv.org/abs/2608.09467"
-    },
-    {
-      "id": "2608.09217",
-      "title": "Beyond Solvability: Task Learnability as a Static Prior for LLM RL Post-Training",
-      "authors": "Ting Zhou, Zhenqing Ling, Daoyuan Chen et al.",
-      "summary": "Reinforcement learning (RL) has become a central post-training paradigm for eliciting reasoning capabilities in large language models, yet uniform task sampling allocates compute without regard to dif…",
-      "date": "2026-08-10",
-      "tag": "RL Training",
-      "url": "https://arxiv.org/abs/2608.09217"
-    },
-    {
-      "id": "2608.09819",
-      "title": "Macaron-V1: Towards Open Continual Learning with Self-Improvement and Mixture-of-LoRA",
-      "authors": "Mind Lab,  :, Vin Bo et al.",
-      "summary": "Macaron-V1 is an open agent-model family for experiential intelligence: learning from experience in real environments and continuing to learn after deployment. It is organized around two system goals.…",
-      "date": "2026-08-10",
-      "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2608.09819"
-    },
-    {
-      "id": "2608.08224",
-      "title": "Control-Diverse Reinforcement Fine-Tuning: Decoupling the Shared Control Bottleneck of RL Post-Training",
-      "authors": "Binwen Tan, Jingchao Wang, Dengzhe Hou et al.",
-      "summary": "Reinforcement learning post-training unlocks complex reasoning in LLMs. Yet benchmark scores reveal only whether a model improved, not what changed inside it, nor how it splits finite capability acros…",
-      "date": "2026-08-08",
-      "tag": "RL Training",
-      "url": "https://arxiv.org/abs/2608.08224"
     }
   ]
 }
