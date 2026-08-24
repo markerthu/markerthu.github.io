@@ -2,7 +2,7 @@
   "_updated": "2026-08-24",
   "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 416,
+  "_total": 417,
   "_days": 30,
   "_range": "Jul. 25th - Aug. 24th",
   "locations": [
@@ -119,6 +119,14 @@
       "r": 2.08
     },
     {
+      "code": "JP",
+      "name": "Japan",
+      "count": 3,
+      "cx": 316.0,
+      "cy": 48.3,
+      "r": 2.08
+    },
+    {
       "code": "KR",
       "name": "South Korea",
       "count": 3,
@@ -148,14 +156,6 @@
       "count": 2,
       "cx": 190.7,
       "cy": 33.0,
-      "r": 2.03
-    },
-    {
-      "code": "JP",
-      "name": "Japan",
-      "count": 2,
-      "cx": 316.0,
-      "cy": 48.3,
       "r": 2.03
     },
     {
@@ -316,6 +316,11 @@
       "count": 3
     },
     {
+      "code": "JP",
+      "name": "Japan",
+      "count": 3
+    },
+    {
       "code": "KR",
       "name": "South Korea",
       "count": 3
@@ -323,11 +328,6 @@
     {
       "code": "DE",
       "name": "Germany",
-      "count": 2
-    },
-    {
-      "code": "JP",
-      "name": "Japan",
       "count": 2
     },
     {
@@ -499,7 +499,7 @@
     {
       "path": "/",
       "title": "Jiajun Fan - Jiajun Fan",
-      "count": 178
+      "count": 179
     },
     {
       "path": "/visitors",
@@ -634,6 +634,11 @@
       "count": 3
     },
     {
+      "name": "www.bing.com",
+      "id": "www.bing.com",
+      "count": 2
+    },
+    {
       "name": "chatgpt.com",
       "id": "chatgpt.com",
       "count": 2
@@ -641,11 +646,6 @@
     {
       "name": "114.114.114.114:9421",
       "id": "114.114.114.114:9421",
-      "count": 1
-    },
-    {
-      "name": "www.bing.com",
-      "id": "www.bing.com",
       "count": 1
     },
     {
@@ -668,7 +668,7 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 245
+      "count": 246
     },
     {
       "name": "Safari",
@@ -695,7 +695,7 @@
     {
       "name": "Windows",
       "id": "Windows",
-      "count": 50
+      "count": 51
     },
     {
       "name": "Linux",
@@ -836,21 +836,32 @@
     },
     {
       "day": "2026-08-24",
-      "n": 6
+      "n": 7
     }
   ],
   "periods": {
-    "today": 6,
+    "today": 7,
     "yesterday": 14,
-    "d7": 105,
+    "d7": 106,
     "d7_prev": 118,
-    "d30": 416,
+    "d30": 417,
     "d30_prev": 0,
-    "day_frac": 0.2,
+    "day_frac": 0.337,
     "yesterday_day": "2026-08-23"
   },
-  "_last_visit": "2026-08-24 02:22",
+  "_last_visit": "2026-08-24 06:15",
   "recent": [
+    {
+      "date": "2026-08-24 06:15",
+      "ts": "2026-08-24T13:15:40Z",
+      "loc": "Japan",
+      "path": "/",
+      "ref": "www.bing.com",
+      "browser": "Chrome 151",
+      "system": "Windows 10",
+      "screen": "1600px",
+      "first": true
+    },
     {
       "date": "2026-08-24 02:22",
       "ts": "2026-08-24T09:22:31Z",
@@ -1169,19 +1180,8 @@
       "system": "macOS 10.15",
       "screen": "1440px",
       "first": false
-    },
-    {
-      "date": "2026-08-22 17:04",
-      "ts": "2026-08-23T00:04:29Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 151",
-      "system": "macOS 10.15",
-      "screen": "1440px",
-      "first": true
     }
   ],
-  "_recent_total": 813,
+  "_recent_total": 814,
   "_recent_shown": 30
 }
