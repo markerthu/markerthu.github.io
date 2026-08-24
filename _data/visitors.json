@@ -2,7 +2,7 @@
   "_updated": "2026-08-24",
   "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 414,
+  "_total": 416,
   "_days": 30,
   "_range": "Jul. 25th - Aug. 24th",
   "locations": [
@@ -71,6 +71,14 @@
       "r": 2.19
     },
     {
+      "code": "SG",
+      "name": "Singapore",
+      "count": 5,
+      "cx": 283.8,
+      "cy": 82.7,
+      "r": 2.16
+    },
+    {
       "code": "TR",
       "name": "Turkey",
       "count": 4,
@@ -116,14 +124,6 @@
       "count": 3,
       "cx": 307.5,
       "cy": 47.3,
-      "r": 2.08
-    },
-    {
-      "code": "SG",
-      "name": "Singapore",
-      "count": 3,
-      "cx": 283.8,
-      "cy": 82.7,
       "r": 2.08
     },
     {
@@ -296,6 +296,11 @@
       "count": 6
     },
     {
+      "code": "SG",
+      "name": "Singapore",
+      "count": 5
+    },
+    {
       "code": "TR",
       "name": "Turkey",
       "count": 4
@@ -313,11 +318,6 @@
     {
       "code": "KR",
       "name": "South Korea",
-      "count": 3
-    },
-    {
-      "code": "SG",
-      "name": "Singapore",
       "count": 3
     },
     {
@@ -499,7 +499,7 @@
     {
       "path": "/",
       "title": "Jiajun Fan - Jiajun Fan",
-      "count": 176
+      "count": 178
     },
     {
       "path": "/visitors",
@@ -591,7 +591,7 @@
     {
       "name": "(unknown)",
       "id": "",
-      "count": 145
+      "count": 147
     },
     {
       "name": "www.jiajunfan.com",
@@ -668,12 +668,12 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 244
+      "count": 245
     },
     {
       "name": "Safari",
       "id": "Safari",
-      "count": 165
+      "count": 166
     },
     {
       "name": "Firefox",
@@ -690,12 +690,12 @@
     {
       "name": "iOS",
       "id": "iOS",
-      "count": 159
+      "count": 160
     },
     {
       "name": "Windows",
       "id": "Windows",
-      "count": 49
+      "count": 50
     },
     {
       "name": "Linux",
@@ -836,21 +836,54 @@
     },
     {
       "day": "2026-08-24",
-      "n": 4
+      "n": 6
     }
   ],
   "periods": {
-    "today": 4,
+    "today": 6,
     "yesterday": 14,
-    "d7": 103,
+    "d7": 105,
     "d7_prev": 118,
-    "d30": 414,
+    "d30": 416,
     "d30_prev": 0,
-    "day_frac": 0.089,
+    "day_frac": 0.2,
     "yesterday_day": "2026-08-23"
   },
-  "_last_visit": "2026-08-24 01:27",
+  "_last_visit": "2026-08-24 02:22",
   "recent": [
+    {
+      "date": "2026-08-24 02:22",
+      "ts": "2026-08-24T09:22:31Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Chrome 151",
+      "system": "macOS 10.15",
+      "screen": "1440px",
+      "first": false
+    },
+    {
+      "date": "2026-08-24 02:11",
+      "ts": "2026-08-24T09:11:11Z",
+      "loc": "Singapore",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 17.4",
+      "system": "iOS 15.0",
+      "screen": "390px",
+      "first": true
+    },
+    {
+      "date": "2026-08-24 02:11",
+      "ts": "2026-08-24T09:11:12Z",
+      "loc": "Singapore",
+      "path": "/",
+      "ref": "",
+      "browser": "Chrome 131",
+      "system": "Windows 10",
+      "screen": "1920px",
+      "first": true
+    },
     {
       "date": "2026-08-24 01:27",
       "ts": "2026-08-24T08:27:45Z",
@@ -1147,41 +1180,8 @@
       "system": "macOS 10.15",
       "screen": "1440px",
       "first": true
-    },
-    {
-      "date": "2026-08-22 16:54",
-      "ts": "2026-08-22T23:54:55Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": true
-    },
-    {
-      "date": "2026-08-22 16:54",
-      "ts": "2026-08-22T23:54:56Z",
-      "loc": "Illinois, US",
-      "path": "/visitors",
-      "ref": "www.jiajunfan.com",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": true
-    },
-    {
-      "date": "2026-08-22 10:40",
-      "ts": "2026-08-22T17:40:18Z",
-      "loc": "New York, US",
-      "path": "/publications",
-      "ref": "",
-      "browser": "Chrome 148",
-      "system": "Windows 10",
-      "screen": "2560px",
-      "first": true
     }
   ],
-  "_recent_total": 810,
+  "_recent_total": 813,
   "_recent_shown": 30
 }
