@@ -134,23 +134,61 @@ header:
 
 <p>This is the result that is hard to get by tuning a constant. Reward-ranked fine-tuning reaches decent alignment by flattening the output distribution &mdash; its diversity falls from 5.08 to <b>1.85</b>, a textbook collapse. Fixed-&beta; W2 regularisation is gentler but still pays 3.86. ADRPO finishes at <b>5.13</b>, <em>above</em> the base model it started from, while posting the highest alignment score in the table.</p>
 
-<div class="panel bleed"><div class="phd"><span class="ttl">Generation diversity after fine-tuning</span><span class="meta">ClipDiversity &middot; mean pairwise distance of CLIP embeddings &middot; base model = 5.08</span></div>
+<figure class="fig bleed"><div class="figscroll">
 
-<div class="brow"><div class="bl">SD3 + ADRPO<i>ours &middot; 2B</i></div><div class="btrack"><div class="bwrap"><span class="bfill aft" style="width:88.5%"></span><span class="bval on">5.13</span></div></div></div>
+<svg viewBox="0 0 940 470" role="img" aria-label="Alignment against diversity for seven text-to-image systems. ADRPO is alone in the upper right: it is the only fine-tuning method that ends with more diversity than the base model it started from.">
+<defs><style>.ax{stroke:var(--rule);stroke-width:1.2}.gr{stroke:var(--rule);stroke-width:1;stroke-dasharray:3 4;opacity:.65}.tk{font-family:var(--mono);font-size:10.5px;fill:var(--muted)}.al{font-family:var(--sans);font-size:12px;font-weight:700;fill:var(--body)}.pl{font-family:var(--sans);font-size:12px;font-weight:600;fill:var(--body)}.ps{font-family:var(--sans);font-size:10.5px;fill:var(--muted)}.hi{font-family:var(--sans);font-size:13.5px;font-weight:800;fill:var(--link)}.zn{font-family:var(--sans);font-size:11px;font-weight:700;fill:var(--muted);letter-spacing:.04em}</style></defs>
+<line class="gr" x1="182.2" y1="400" x2="182.2" y2="56"/>
+<line class="gr" x1="108" y1="99.6" x2="866" y2="99.6"/>
+<rect x="182.2" y="56" width="683.8" height="43.6" fill="var(--link)" opacity=".05"/>
+<text class="zn" x="858.0" y="74" text-anchor="end" fill="var(--link)">better on BOTH axes than the base model</text>
+<line class="ax" x1="108" y1="400" x2="866" y2="400"/>
+<line class="ax" x1="108" y1="400" x2="108" y2="56"/>
+<line class="ax" x1="139.6" y1="400" x2="139.6" y2="405"/>
+<text class="tk" x="139.6" y="419" text-anchor="middle">29</text>
+<line class="ax" x1="297.5" y1="400" x2="297.5" y2="405"/>
+<text class="tk" x="297.5" y="419" text-anchor="middle">30</text>
+<line class="ax" x1="455.4" y1="400" x2="455.4" y2="405"/>
+<text class="tk" x="455.4" y="419" text-anchor="middle">31</text>
+<line class="ax" x1="613.3" y1="400" x2="613.3" y2="405"/>
+<text class="tk" x="613.3" y="419" text-anchor="middle">32</text>
+<line class="ax" x1="771.2" y1="400" x2="771.2" y2="405"/>
+<text class="tk" x="771.2" y="419" text-anchor="middle">33</text>
+<line class="ax" x1="103" y1="358.0" x2="108" y2="358.0"/>
+<text class="tk" x="98" y="362.0" text-anchor="end">2</text>
+<line class="ax" x1="103" y1="274.1" x2="108" y2="274.1"/>
+<text class="tk" x="98" y="278.1" text-anchor="end">3</text>
+<line class="ax" x1="103" y1="190.2" x2="108" y2="190.2"/>
+<text class="tk" x="98" y="194.2" text-anchor="end">4</text>
+<line class="ax" x1="103" y1="106.3" x2="108" y2="106.3"/>
+<text class="tk" x="98" y="110.3" text-anchor="end">5</text>
+<text class="al" x="487" y="440" text-anchor="middle">ClipScore &mdash; prompt alignment &rarr;</text>
+<text class="al" x="26" y="228" text-anchor="middle" transform="rotate(-90 26 228)">ClipDiversity &rarr;</text>
+<circle cx="766.5" cy="95.4" r="16" fill="var(--link)" opacity=".14"/>
+<circle cx="766.5" cy="95.4" r="8.5" fill="var(--link)"/>
+<text class="hi" x="780.5" y="85.4" text-anchor="start">SD3 + ADRPO</text>
+<text class="ps" x="780.5" y="99.4" text-anchor="start">ours &#183; 2B &middot; 32.97 / 5.13</text>
+<circle cx="641.8" cy="164.2" r="5.5" fill="var(--muted)" opacity=".62"/>
+<text class="pl" x="629.8" y="184.2" text-anchor="end">SANA-1.5</text>
+<text class="ps" x="629.8" y="198.2" text-anchor="end">4.8B, no RL &middot; 32.18 / 4.31</text>
+<circle cx="569.1" cy="165.9" r="5.5" fill="var(--muted)" opacity=".62"/>
+<text class="pl" x="581.1" y="181.9" text-anchor="start">FLUX.1-Dev</text>
+<text class="ps" x="581.1" y="195.9" text-anchor="start">12B, no RL &middot; 31.72 / 4.29</text>
+<circle cx="521.7" cy="202.0" r="5.5" fill="var(--muted)" opacity=".62"/>
+<text class="pl" x="533.7" y="206.0" text-anchor="start">SD3 + ORW-CFM-W2</text>
+<text class="ps" x="533.7" y="220.0" text-anchor="start">fixed W2 regularisation &middot; 31.42 / 3.86</text>
+<circle cx="502.8" cy="124.8" r="5.5" fill="var(--muted)" opacity=".62"/>
+<text class="pl" x="490.8" y="112.8" text-anchor="end">SD3 + DPO</text>
+<text class="ps" x="490.8" y="126.8" text-anchor="end">offline preference &middot; 31.30 / 4.78</text>
+<circle cx="194.9" cy="370.6" r="5.5" fill="var(--muted)" opacity=".62"/>
+<text class="pl" x="206.9" y="374.6" text-anchor="start">SD3 + RAFT</text>
+<text class="ps" x="206.9" y="388.6" text-anchor="start">reward-ranked FT &middot; 29.35 / 1.85</text>
+<circle cx="182.2" cy="99.6" r="5.5" fill="var(--muted)" opacity=".62"/>
+<text class="pl" x="170.2" y="87.6" text-anchor="end">SD3</text>
+<text class="ps" x="170.2" y="101.6" text-anchor="end">2B base model &middot; 29.27 / 5.08</text>
+</svg>
 
-<div class="brow"><div class="bl">SD3<i>2B base model</i></div><div class="btrack"><div class="bwrap"><span class="bfill" style="width:87.3%"></span><span class="bval">5.08  &larr; starting point</span></div></div></div>
-
-<div class="brow"><div class="bl">SD3 + DPO<i>offline preference</i></div><div class="btrack"><div class="bwrap"><span class="bfill" style="width:80.0%"></span><span class="bval">4.78</span></div></div></div>
-
-<div class="brow"><div class="bl">SANA-1.5<i>4.8B, no RL</i></div><div class="btrack"><div class="bwrap"><span class="bfill" style="width:68.5%"></span><span class="bval">4.31</span></div></div></div>
-
-<div class="brow"><div class="bl">FLUX.1-Dev<i>12B, no RL</i></div><div class="btrack"><div class="bwrap"><span class="bfill" style="width:68.0%"></span><span class="bval">4.29</span></div></div></div>
-
-<div class="brow"><div class="bl">SD3 + ORW-CFM-W2<i>fixed W2 regularisation</i></div><div class="btrack"><div class="bwrap"><span class="bfill" style="width:57.6%"></span><span class="bval">3.86</span></div></div></div>
-
-<div class="brow"><div class="bl">SD3 + RAFT<i>reward-ranked FT</i></div><div class="btrack"><div class="bwrap"><span class="bfill" style="width:8.5%"></span><span class="bval">1.85</span></div></div></div>
-
-<div class="legend"><span><i class="sw aft"></i>ADRPO &mdash; the only method above the base model</span><span><i class="sw"></i>everything else lost diversity to gain reward</span></div></div>
+</div><figcaption class="cap"><b>Every point is a row of Table 1.</b> Horizontal: prompt alignment. Vertical: generation diversity. The dashed lines mark the un-tuned SD3 base model, so the tinted quadrant is the region where a method improved alignment <em>without</em> paying for it in diversity. Only one point is in it. RAFT shows the failure mode most clearly &mdash; it buys a little alignment by collapsing diversity from 5.08 to 1.85.</figcaption></figure>
 
 <p class="snum">05 &mdash; Language models</p>
 

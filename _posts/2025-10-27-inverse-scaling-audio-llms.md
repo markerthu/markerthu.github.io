@@ -170,7 +170,41 @@ header:
 
 <h2>Trained reasoning has an optimal depth, and finds it</h2>
 
-<p>Sweeping the maximum thinking length from 0 to 250 tokens separates the two regimes cleanly. Baselines either collapse or wander with no reliable gain. Our variant without the overthinking penalty climbs steadily to a <b>76.50%</b> peak. The full method, penalised for rambling, peaks <em>higher</em> at <b>77.1%</b> using a chain of only about <b>35&ndash;40 tokens</b> — better calibrated and roughly six times shorter. The penalty is not a tax on thinking; it is what teaches the model when to stop.</p>
+<p>Sweeping the maximum thinking length from 0 to 250 tokens separates the two regimes cleanly. Baselines either collapse or wander with no reliable gain. Our variant without the overthinking penalty climbs steadily to a <b>76.50%</b> peak. The full method, penalised for rambling, peaks <em>higher</em> at <b>77.1%</b> using a chain of only about <b>35&ndash;40 tokens</b>. The penalty is not a tax on thinking; it is what teaches the model when to stop.</p>
+
+<figure class="fig bleed"><div class="figscroll">
+
+<svg viewBox="0 0 940 300" role="img" aria-label="Reasoning budget swept from 0 to 250 tokens. CESAR peaks at 77.1 percent using only about 35 to 40 tokens; without the overthinking penalty it needs a much longer chain to reach a lower 76.5 percent peak.">
+<defs><style>.ax{stroke:var(--rule);stroke-width:1.2}.tk{font-family:var(--mono);font-size:10.5px;fill:var(--muted)}.al{font-family:var(--sans);font-size:12px;font-weight:700;fill:var(--body)}.pk{font-family:var(--sans);font-size:13px;font-weight:800}.ps{font-family:var(--sans);font-size:11px;fill:var(--muted)}.bd{font-family:var(--sans);font-size:11px;fill:var(--muted)}</style></defs>
+<line class="ax" x1="120" y1="232" x2="850" y2="232"/>
+<line class="ax" x1="120.0" y1="232" x2="120.0" y2="237"/>
+<text class="tk" x="120.0" y="251" text-anchor="middle">0</text>
+<line class="ax" x1="266.0" y1="232" x2="266.0" y2="237"/>
+<text class="tk" x="266.0" y="251" text-anchor="middle">50</text>
+<line class="ax" x1="412.0" y1="232" x2="412.0" y2="237"/>
+<text class="tk" x="412.0" y="251" text-anchor="middle">100</text>
+<line class="ax" x1="558.0" y1="232" x2="558.0" y2="237"/>
+<text class="tk" x="558.0" y="251" text-anchor="middle">150</text>
+<line class="ax" x1="704.0" y1="232" x2="704.0" y2="237"/>
+<text class="tk" x="704.0" y="251" text-anchor="middle">200</text>
+<line class="ax" x1="850.0" y1="232" x2="850.0" y2="237"/>
+<text class="tk" x="850.0" y="251" text-anchor="middle">250</text>
+<text class="al" x="485" y="272" text-anchor="middle">maximum reasoning length swept during evaluation &mdash; tokens</text>
+<rect x="222.2" y="78" width="14.6" height="154" rx="3" fill="var(--link)" opacity=".16"/>
+<line x1="229.5" y1="78" x2="229.5" y2="232" stroke="var(--link)" stroke-width="2.6"/>
+<circle cx="229.5" cy="78" r="6" fill="var(--link)"/>
+<text class="pk" x="250.8" y="76" fill="var(--link)">CESAR &mdash; 77.1%</text>
+<text class="ps" x="250.8" y="92">peak, at a chain of about 35&ndash;40 tokens</text>
+<line x1="178.4" y1="136" x2="850.0" y2="136" stroke="var(--muted)" stroke-width="2.2" stroke-dasharray="6 5" opacity=".8"/>
+<path d="M 850.0 136 l -7 -5 l 0 10 z" fill="var(--muted)" opacity=".8"/>
+<text class="pk" x="184.2" y="124" fill="var(--muted)">CESAR w/o penalty &mdash; 76.5%</text>
+<text class="ps" x="184.2" y="154">climbs steadily; the paper reports a much longer chain for a lower peak</text>
+<path d="M 178.4 194 C 382.8 188, 558.0 218, 850.0 228" fill="none" stroke="#c0504a" stroke-width="2.2" opacity=".85"/>
+<text class="pk" x="184.2" y="180" fill="#c0504a">Baselines</text>
+<text class="ps" x="184.2" y="246">collapse, or wander with no reliable gain from a longer chain</text>
+</svg>
+
+</div><figcaption class="cap"><b>Where each method peaks, on the same swept budget.</b> The paper reports the peak accuracy for both CESAR variants and the chain length at which the full method peaks; the position of the penalty-free peak and the exact baseline curves are shown schematically, not measured off a plot.</figcaption></figure>
 
 <div class="kick">Test-time scaling was never unavailable to Audio LLMs. It was unavailable to <b>untrained</b> reasoning — and it returns the moment the process is supervised.</div>
 
