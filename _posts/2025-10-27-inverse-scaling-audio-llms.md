@@ -19,7 +19,7 @@ header:
 
 <p class="lede">Chain-of-thought is the reflex answer for making a model smarter. In Audio LLMs it backfires: tell the model to think first and it gets <em>worse</em>, and the longer it thinks the worse it gets. This note is about why that happens, why it is not an argument against reasoning, and what changes when you supervise the reasoning process instead of only the final answer.</p>
 
-<figure class="fig"><div class="figscroll">
+<figure class="fig bleed"><div class="figscroll">
 
 <svg viewBox="0 0 940 322" role="img" aria-label="MMAU Test-mini accuracy when each model answers directly versus when it reasons first. The base Qwen2.5-Omni-7B loses 3.40 points by reasoning; CESAR gains exactly 3.40.">
 <defs><style>.gl{stroke:var(--rule);stroke-width:1}.gt{font-family:var(--sans);font-size:11.5px;fill:var(--muted)}.hd{font-family:var(--sans);font-size:12px;font-weight:700;fill:var(--body);letter-spacing:.02em}.nm{font-family:var(--sans);font-size:13px;font-weight:700}.sb{font-family:var(--sans);font-size:11px;fill:var(--muted)}.vl{font-family:var(--mono);font-size:11.5px;fill:var(--muted)}.dl{font-family:var(--mono);font-size:12px;font-weight:700}</style></defs>
