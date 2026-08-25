@@ -166,26 +166,26 @@ header:
 <text class="al" x="26" y="228" text-anchor="middle" transform="rotate(-90 26 228)">ClipDiversity &rarr;</text>
 <circle cx="766.5" cy="95.4" r="16" fill="var(--link)" opacity=".14"/>
 <circle cx="766.5" cy="95.4" r="8.5" fill="var(--link)"/>
-<text class="hi" x="780.5" y="85.4" text-anchor="start">SD3 + ADRPO</text>
-<text class="ps" x="780.5" y="99.4" text-anchor="start">ours &#183; 2B &middot; 32.97 / 5.13</text>
+<text class="hi" x="750.5" y="77.4" text-anchor="end">SD3 + ADRPO</text>
+<text class="ps" x="750.5" y="91.4" text-anchor="end">ours &#183; 2B &middot; 32.97 / 5.13</text>
 <circle cx="641.8" cy="164.2" r="5.5" fill="var(--muted)" opacity=".62"/>
-<text class="pl" x="629.8" y="184.2" text-anchor="end">SANA-1.5</text>
-<text class="ps" x="629.8" y="198.2" text-anchor="end">4.8B, no RL &middot; 32.18 / 4.31</text>
+<text class="pl" x="650.8" y="140.2" text-anchor="start">SANA-1.5</text>
+<text class="ps" x="650.8" y="154.2" text-anchor="start">4.8B, no RL &middot; 32.18 / 4.31</text>
 <circle cx="569.1" cy="165.9" r="5.5" fill="var(--muted)" opacity=".62"/>
-<text class="pl" x="581.1" y="181.9" text-anchor="start">FLUX.1-Dev</text>
-<text class="ps" x="581.1" y="195.9" text-anchor="start">12B, no RL &middot; 31.72 / 4.29</text>
+<text class="pl" x="560.1" y="191.9" text-anchor="end">FLUX.1-Dev</text>
+<text class="ps" x="560.1" y="205.9" text-anchor="end">12B, no RL &middot; 31.72 / 4.29</text>
 <circle cx="521.7" cy="202.0" r="5.5" fill="var(--muted)" opacity=".62"/>
-<text class="pl" x="533.7" y="206.0" text-anchor="start">SD3 + ORW-CFM-W2</text>
-<text class="ps" x="533.7" y="220.0" text-anchor="start">fixed W2 regularisation &middot; 31.42 / 3.86</text>
+<text class="pl" x="531.7" y="222.0" text-anchor="start">SD3 + ORW-CFM-W2</text>
+<text class="ps" x="531.7" y="236.0" text-anchor="start">fixed W2 regularisation &middot; 31.42 / 3.86</text>
 <circle cx="502.8" cy="124.8" r="5.5" fill="var(--muted)" opacity=".62"/>
-<text class="pl" x="490.8" y="112.8" text-anchor="end">SD3 + DPO</text>
-<text class="ps" x="490.8" y="126.8" text-anchor="end">offline preference &middot; 31.30 / 4.78</text>
+<text class="pl" x="490.8" y="110.8" text-anchor="end">SD3 + DPO</text>
+<text class="ps" x="490.8" y="124.8" text-anchor="end">offline preference &middot; 31.30 / 4.78</text>
 <circle cx="194.9" cy="370.6" r="5.5" fill="var(--muted)" opacity=".62"/>
 <text class="pl" x="206.9" y="374.6" text-anchor="start">SD3 + RAFT</text>
 <text class="ps" x="206.9" y="388.6" text-anchor="start">reward-ranked FT &middot; 29.35 / 1.85</text>
 <circle cx="182.2" cy="99.6" r="5.5" fill="var(--muted)" opacity=".62"/>
-<text class="pl" x="170.2" y="87.6" text-anchor="end">SD3</text>
-<text class="ps" x="170.2" y="101.6" text-anchor="end">2B base model &middot; 29.27 / 5.08</text>
+<text class="pl" x="170.2" y="85.6" text-anchor="end">SD3</text>
+<text class="ps" x="170.2" y="99.6" text-anchor="end">2B base model &middot; 29.27 / 5.08</text>
 </svg>
 
 </div><figcaption class="cap"><b>Every point is a row of Table 1.</b> Horizontal: prompt alignment. Vertical: generation diversity. The dashed lines mark the un-tuned SD3 base model, so the tinted quadrant is the region where a method improved alignment <em>without</em> paying for it in diversity. Only one point is in it. RAFT shows the failure mode most clearly &mdash; it buys a little alignment by collapsing diversity from 5.08 to 1.85.</figcaption></figure>
