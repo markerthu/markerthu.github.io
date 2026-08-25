@@ -21,6 +21,11 @@ body.dark-mode .ed{--ed-tint:#2c4450}
 .ed .fig svg{display:block;width:100%;height:auto;overflow:visible}
 .ed .figscroll{overflow-x:auto}
 .ed .figscroll svg{min-width:620px}
+@media(max-width:720px){
+  .ed .figscroll::after{content:"scroll to see the full figure \2192";display:block;
+    font-family:var(--sans);font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;
+    color:var(--muted);padding-top:10px}
+}
 .ed .cap{text-align:left;font-family:var(--sans);font-size:.83rem;line-height:1.58;color:var(--muted);
   margin-top:14px;padding-top:12px;border-top:1px solid var(--rule)}
 .ed .cap b{color:var(--ink);font-weight:600}
