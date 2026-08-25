@@ -10,6 +10,8 @@ body.dark-mode .ed{--ed-tint:#2c4450}
 .ed .snum{font-family:var(--sans);font-size:.7rem;font-weight:800;letter-spacing:.13em;
   text-transform:uppercase;color:var(--ed-accent);margin:3.6em 0 .55em}
 .ed .snum:first-child{margin-top:0}
+/* the layout gives h2 a 3.4em top margin; after a kicker that reads as a hole */
+.ed .snum + h2{margin-top:.15em}
 .ed h2+.lede{margin-top:-.2em}
 .ed .lede{font-size:1.06em;line-height:1.66;color:var(--muted)}
 

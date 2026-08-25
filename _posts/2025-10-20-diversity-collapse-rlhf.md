@@ -8,226 +8,206 @@ tags:
   - RLHF
   - generative models
   - flow matching
-excerpt: "A deep dive into why fixed regularization in RLHF leads to diversity collapse, and how adaptive sample-level control resolves the exploration-exploitation dilemma."
+excerpt: "RL fine-tuning runs on one fixed coefficient that has to both protect the model and get out of its way. Subtracting each sample's advantage lets a 2B model beat a 12B one — without losing diversity."
 header:
   og_image: "/images/blog/adrpo_reward_diversity.webp"
 ---
 
-> RLHF fine-tuning of generative models faces a fundamental tension: you want to maximize reward (make outputs better), but doing so aggressively destroys the diversity of what the model can produce. This post explains why this happens, why it's hard to fix with a single hyperparameter, and how advantage-based adaptive regularization provides a principled solution.
+{% include post-editorial.html %}
 
-## Table of Contents
-{: .no_toc}
+<div class="ed" markdown="0">
 
-- TOC
-{:toc}
+<p class="lede">RL fine-tuning of a generative model runs on one dial. Turn it up and the model keeps its diversity but stops improving; turn it down and it chases reward until it collapses into template output. The dial is a single coefficient applied identically to every sample. This note is about what happens when you stop treating it as a constant.</p>
 
----
+<figure class="fig bleed"><div class="figscroll">
 
-## Background: The RLHF Objective
+<svg viewBox="0 0 940 330" role="img" aria-label="How ADRPO sets regularisation strength. Fixed methods apply one beta to every sample. ADRPO subtracts each sample advantage, so high-advantage samples are regularised less and low-advantage samples more.">
+<defs><style>.t{font-family:var(--sans);font-size:12.5px;fill:var(--body)}.tb{font-family:var(--sans);font-size:13px;font-weight:700;fill:var(--ink)}.tm{font-family:var(--sans);font-size:11px;fill:var(--muted)}.eq{font-family:var(--mono);font-size:15px;font-weight:700;fill:var(--link)}.eqm{font-family:var(--mono);font-size:13px;fill:var(--muted)}.ax{stroke:var(--rule);stroke-width:1.2}</style><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="var(--muted)"/></marker></defs>
+<text class="tb" x="40" y="30">Fixed regularisation</text>
+<text class="tm" x="40" y="48">PPO &middot; GRPO &middot; DPO &middot; ORW-CFM-W2</text>
+<line class="ax" x1="40" y1="248" x2="380" y2="248"/>
+<line class="ax" x1="40" y1="248" x2="40" y2="80"/>
+<text class="tm" x="40" y="268">low advantage</text>
+<text class="tm" x="380" y="268" text-anchor="end">high advantage</text>
+<text class="tm" x="34" y="86" text-anchor="end" transform="rotate(-90 34 86)">regularisation &beta;</text>
+<line x1="40" y1="164" x2="380" y2="164" stroke="var(--muted)" stroke-width="3" stroke-dasharray="7 5"/>
+<text class="t" x="210" y="152" text-anchor="middle" fill="var(--muted)">one &beta; for every sample</text>
+<circle cx="80" cy="164" r="4" fill="var(--muted)" opacity=".75"/>
+<circle cx="150" cy="164" r="4" fill="var(--muted)" opacity=".75"/>
+<circle cx="220" cy="164" r="4" fill="var(--muted)" opacity=".75"/>
+<circle cx="290" cy="164" r="4" fill="var(--muted)" opacity=".75"/>
+<circle cx="355" cy="164" r="4" fill="var(--muted)" opacity=".75"/>
+<text class="tm" x="210" y="296" text-anchor="middle">Good samples are held back. Bad samples are not held back enough.</text>
+<text class="tb" x="560" y="30">ADRPO</text>
+<text class="tm" x="560" y="48">regularisation follows the sample</text>
+<line class="ax" x1="560" y1="248" x2="900" y2="248"/>
+<line class="ax" x1="560" y1="248" x2="560" y2="80"/>
+<text class="tm" x="560" y="268">low advantage</text>
+<text class="tm" x="900" y="268" text-anchor="end">high advantage</text>
+<line x1="560" y1="104" x2="900" y2="224" stroke="var(--link)" stroke-width="3.4" stroke-linecap="round"/>
+<circle cx="600" cy="118.1" r="4.6" fill="var(--link)"/>
+<circle cx="670" cy="142.8" r="4.6" fill="var(--link)"/>
+<circle cx="740" cy="167.5" r="4.6" fill="var(--link)"/>
+<circle cx="810" cy="192.2" r="4.6" fill="var(--link)"/>
+<circle cx="875" cy="215.2" r="4.6" fill="var(--link)"/>
+<text class="t" x="576" y="96" fill="var(--link)">hold back</text>
+<text class="t" x="898" y="240" text-anchor="end" fill="var(--link)">let it run</text>
+<text class="tm" x="730" y="296" text-anchor="middle">Every sample gets the constraint its own quality earns.</text>
+<line x1="470" y1="86" x2="470" y2="252" stroke="var(--rule)" stroke-width="1"/>
+<text class="eq" x="470" y="158" text-anchor="middle">&beta; = &beta;<tspan baseline-shift="sub" font-size="11">0</tspan> &minus; A</text>
+<text class="eqm" x="470" y="180" text-anchor="middle">one term,</text>
+<text class="eqm" x="470" y="196" text-anchor="middle">no new networks</text>
+</svg>
 
-Suppose you have a pre-trained generative model \\(\pi_{\text{ref}}\\) — a text-to-image model like Stable Diffusion 3, or a language model like Qwen. You want to fine-tune it so that its outputs score higher on some reward function \\(R(x, c)\\), where \\(x\\) is the generated output and \\(c\\) is the conditioning context (e.g., a text prompt).
+</div><figcaption class="cap"><b>The whole method is one subtraction.</b> Conventional RL fine-tuning applies a fixed divergence coefficient &beta; to every sample. ADRPO subtracts that sample&rsquo;s own advantage estimate, so a generation the reward model likes is allowed to move further from the reference policy, and a poor one is held closer to it. The advantage is already computed for the policy gradient — the adaptation is free.</figcaption></figure>
 
-The standard approach formulates this as a regularized optimization problem:
+<p class="snum">The short version</p>
 
-$$J(\theta) = \underbrace{\mathbb{E}_{x \sim \pi_\theta, c \sim p(c)}[R(x, c)]}_{\text{maximize reward}} - \underbrace{\beta \cdot D(\pi_\theta, \pi_{\text{ref}})}_{\text{stay close to pre-trained model}}$$
+<h2>Six things one subtraction bought</h2>
 
-The first term says "produce high-reward outputs." The second term says "don't stray too far from the original model." The coefficient \\(\beta\\) controls this trade-off, and \\(D\\) is some divergence measure — KL divergence for language models, Wasserstein-2 (W2) distance for flow matching models.
+<p class="lede">Each is stated with the number that carries it, and shown in full further down.</p>
 
-This is clean and intuitive. But in practice, getting \\(\beta\\) right is surprisingly hard — and the consequences of getting it wrong are severe.
-
-## The Diversity Collapse Problem
-
-### What happens without regularization
-
-Let's start with the extreme case: \\(\beta = 0\\), no regularization at all. The model is free to do whatever maximizes reward.
-
-In online RL, the model generates samples, gets rewards, and updates itself. Without any constraint:
-
-1. Early in training, the model discovers a few high-reward outputs
-2. It shifts probability mass toward those outputs
-3. Now it generates similar outputs more often → they get reinforced further
-4. This positive feedback loop concentrates all probability mass on a narrow region
-
-The equilibrium is a **delta distribution**: the model always generates the same output for a given prompt, regardless of the diversity of valid responses.
-
-$$\pi^*_{\beta=0}(x|c) \to \delta(x - x^*_c), \quad \text{where } x^*_c = \arg\max_x R(x, c)$$
-
-In image generation, this means every prompt produces essentially the same "optimal" image — perhaps technically high-scoring but boring and unusable. In language, the model repeats the same phrasing over and over.
-
-This is **mode collapse** (or **diversity collapse**), and it's the central failure mode of unconstrained RLHF.
-
-<div class="fig-row">
-<figure>
-<img class="mnist-tile" loading="lazy" src="/images/blog/mnist_collapse.png" width="630" height="630" alt="Grid of generated MNIST digits that are all the same digit, illustrating mode collapse." />
-<figcaption><b>Mode collapse (no regularization)</b>: model generates identical digits, maximizing reward but destroying diversity.</figcaption>
-</figure>
-<figure>
-<img class="mnist-tile" loading="lazy" src="/images/blog/mnist_balanced.png" width="630" height="630" alt="Grid of generated MNIST digits spanning many different digits, illustrating preserved diversity." />
-<figcaption><b>Balanced (with regularization)</b>: with proper regularization, the model improves quality while preserving digit variety.</figcaption>
-</figure>
+<div class="fgrid bleed">
+<div class="fcard"><div class="fhead"><div class="fno">1</div><div class="fclaim">One fixed knob cannot serve both jobs</div></div><p class="fev">Strong regularisation protects the pre-trained model but caps the reward. Weak regularisation chases reward and invites collapse or hacking. Every sample gets the same &beta;, whether it deserves it or not.</p><div class="fptr">§01 &middot; the dilemma</div></div>
+<div class="fcard"><div class="fhead"><div class="fno">2</div><div class="fclaim">Let the sample choose its own constraint</div></div><p class="fev">ADRPO sets <b>&beta; = &beta;<sub>0</sub> &minus; A</b>. High-advantage samples are regularised less and exploited harder; low-advantage samples are pulled back toward the reference model. One term, no extra networks, no architecture change.</p><div class="fptr">§02 &middot; the fix</div></div>
+<div class="fcard"><div class="fhead"><div class="fno">3</div><div class="fclaim">Negative advantage does more than down-weight</div></div><p class="fev">Reward-weighting can only give a bad sample a small positive push. An advantage-weighted objective flips the gradient sign and pushes <i>away</i> from it — actively suppressing poor generations instead of politely ignoring them.</p><div class="fptr">§02 &middot; the fix</div></div>
+<div class="fcard"><div class="fhead"><div class="fno">4</div><div class="fclaim">A 2B model beat a 12B one</div></div><p class="fev">Fine-tuned SD3 at <b>2B</b> parameters outscores FLUX.1-Dev (12B) and SANA-1.5 (4.8B) on ClipScore, aesthetics and human preference. Adaptive regularisation bought more than 6&times; the parameters would have.</p><div class="fptr">§03 &middot; text-to-image</div></div>
+<div class="fcard"><div class="fhead"><div class="fno">5</div><div class="fclaim">The only method that raised reward without spending diversity</div></div><p class="fev">Every competing method trades one for the other. ADRPO finishes at <b>5.13</b> diversity against the base model's 5.08 — higher reward <i>and</i> higher diversity than the model it started from.</p><div class="fptr">§04 &middot; the Pareto front</div></div>
+<div class="fcard"><div class="fhead"><div class="fno">6</div><div class="fclaim">It transfers to LLMs and to audio</div></div><p class="fev">On Qwen3, ADRPO escapes a local optimum by deliberately raising entropy and converges at <b>5&times;</b> GRPO's reward. On MMAU a 7B model reaches <b>76.0</b>, past Gemini 2.5 Pro and GPT-4o Audio.</p><div class="fptr">§05 &middot; §06</div></div>
 </div>
 
-### Why diversity matters
+<p class="snum">01 &mdash; The dilemma</p>
 
-One might ask: if the goal is to maximize reward, who cares about diversity? Several reasons:
+<h2>The coefficient that has to be two things at once</h2>
 
-1. **Reward functions are imperfect proxies.** They approximate human preferences, not capture them fully. A collapsed model that exploits quirks in the reward function (reward hacking) produces outputs that score high but look terrible to humans.
+<p>Every mainstream RL fine-tuning objective &mdash; PPO, GRPO, DPO, and W2-regularised flow matching &mdash; carries a divergence penalty scaled by a fixed &beta;. That single number is asked to do two opposing jobs simultaneously: keep the policy near the pre-trained model so it does not forget or collapse, and get out of the way so the policy can actually improve.</p>
 
-2. **Generalization.** A diverse model handles novel prompts gracefully. A collapsed model performs well only on prompts similar to its training distribution.
+<p>The bind is that the right answer differs <em>per sample</em>. A generation the reward model scores highly is a direction worth committing to; holding it back is pure loss. A poor generation is exactly where you want the reference model&rsquo;s pull to be strongest. A constant cannot express that, so practitioners tune &beta; to a compromise that is wrong for both cases.</p>
 
-3. **Downstream utility.** In creative applications (art, writing, brainstorming), diversity is itself valuable. A model that always gives the same answer is useless for creative tasks.
+<div class="knobs bleed">
+<div class="knob"><div class="kcomp">&beta; too high</div><div class="kttl">Capabilities preserved, nothing learned</div><div class="kbody">The penalty dominates. The policy stays close to the reference model, diversity survives, and reward barely moves. Safe and useless.</div></div>
+<div class="knob"><div class="kcomp">&beta; too low</div><div class="kttl">Reward climbs, the model narrows</div><div class="kbody">Constraint effectively removed. Reward optimisation runs unchecked into catastrophic forgetting, <b>mode collapse</b>, or reward hacking — template-like generations that score well and look identical.</div></div>
+</div>
 
-4. **Training stability.** Once the model concentrates on a narrow manifold, gradient signals become noisy and training destabilizes.
+<p class="snum">02 &mdash; The fix</p>
 
-### The standard fix: fixed regularization
+<h2>Subtract the advantage</h2>
 
-The conventional solution is to set \\(\beta > 0\\). For flow matching models, we typically use a W2 regularization term:
+<p>ADRPO replaces the constant with <b>&beta; = &beta;<sub>0</sub> &minus; A</b>, where <i>A</i> is the advantage estimate already being computed for the policy gradient. Nothing is added to the model, no second network is trained, and the objective stays a drop-in for existing methods. What changes is that the constraint now varies inversely with sample quality.</p>
 
-$$\mathcal{L}_{\text{ORW-CFM-W2}} = \underbrace{\mathcal{L}_{\text{ORW}}(\theta)}_{\text{reward-weighted flow matching}} + \beta \cdot \underbrace{\mathbb{E}_{c,t,x_t}\left[\|\mathbf{v}_\theta(x_t, t, c) - \mathbf{v}_{\text{ref}}(x_t, t, c)\|^2\right]}_{\text{W2 regularization}}$$
+<div class="knobs bleed">
+<div class="knob"><div class="kcomp">mechanism</div><div class="kttl">Exploitation where the signal is good</div><div class="kbody">High advantage means low &beta;: the divergence penalty shrinks and the policy is free to commit to a direction the reward model already endorses.</div></div>
+<div class="knob"><div class="kcomp">mechanism</div><div class="kttl">Exploration where it is not</div><div class="kbody">Low or negative advantage means high &beta;: the penalty grows, pulling the update back toward the reference policy and preserving what the pre-trained model knew.</div></div>
+<div class="knob"><div class="kcomp">for flow matching</div><div class="kttl">Advantage-weighted, not reward-weighted</div><div class="kbody">Reward weights are non-negative, so a bad sample can only be down-weighted. Weighting by advantage lets the sign invert, so <b>negative-advantage samples are actively pushed away from</b> rather than quietly ignored — and average samples, where A &asymp; 0, cost almost no gradient at all.</div></div>
+<div class="knob"><div class="kcomp">stability</div><div class="kttl">Clipped, and cheap</div><div class="kbody">Advantages are clipped to [A<sub>min</sub>, A<sub>max</sub>] so the coefficient cannot run away, and training uses LoRA. The overhead over the base method is negligible.</div></div>
+</div>
 
-For language models with GRPO:
+<div class="kick">The exploration&ndash;exploitation trade-off stops being a hyperparameter you guess before training, and becomes something the run resolves <b>per sample, continuously</b>.</div>
 
-$$\mathcal{L}_{\text{GRPO}} = \mathcal{L}_{\text{PG}}(\theta) + \beta \cdot D_{\text{KL}}(\pi_\theta \| \pi_{\text{ref}})$$
+<p class="snum">03 &mdash; Text-to-image</p>
 
-This works — to a point. But it creates a fundamental dilemma.
+<h2>A 2B model past a 12B one</h2>
 
-## The Fixed-β Dilemma
+<p>ADRPO was applied to SD3 (2B parameters) on DrawBench prompts with CLIP score as the reward, against offline DPO, reward-ranked RAFT, fixed-&beta; ORW-CFM-W2, and two much larger models that were never RL-tuned at all. It leads on task metrics, image quality and human preference at the same time.</p>
 
-Here's the core problem: **different samples need different levels of regularization.**
+<div class="panel bleed"><div class="phd"><span class="ttl">Text-to-image &mdash; alignment, quality, preference</span><span class="meta">SD3 backbone &middot; DrawBench &middot; mean of 3 seeds &middot; higher is better</span></div>
 
-Consider two samples generated during training for the same prompt:
+<div class="brow"><div class="bl">SD3 + ADRPO<i>ours &middot; 2B</i></div><div class="btrack"><div class="bwrap"><span class="bfill aft" style="width:89.4%"></span><span class="bval on">32.97 ClipScore</span></div><div class="bwrap"><span class="bfill aft" style="width:89.5%"></span><span class="bval on">6.27 Aesthetic</span></div><div class="bwrap"><span class="bfill aft" style="width:90.5%"></span><span class="bval on">22.78 PicScore</span></div></div></div>
 
-| | Sample A (high reward) | Sample B (low reward) |
-|:---|:---|:---|
-| **Advantage** | \\(A > 0\\) (better than average) | \\(A < 0\\) (worse than average) |
-| **What we want** | Exploit: push further in this direction | Explore cautiously: pull back toward reference |
-| **Ideal \\(\beta\\)** | Low (give freedom to optimize) | High (enforce stability) |
-| **What fixed \\(\beta\\) does** | Same constraint as bad sample | Same constraint as good sample |
+<div class="brow"><div class="bl">SANA-1.5<i>4.8B, no RL</i></div><div class="btrack"><div class="bwrap"><span class="bfill" style="width:73.6%"></span><span class="bval">32.18 ClipScore</span></div><div class="bwrap"><span class="bfill" style="width:72.3%"></span><span class="bval">5.89 Aesthetic</span></div><div class="bwrap"><span class="bfill" style="width:69.3%"></span><span class="bval">21.85 PicScore</span></div></div></div>
 
-Fixed \\(\beta\\) applies the same regularization pressure to every sample regardless of quality. If \\(\beta\\) is high enough to prevent collapse on bad samples, it also unnecessarily constrains good samples. If \\(\beta\\) is low enough to exploit good samples, it fails to stabilize bad samples.
+<div class="brow"><div class="bl">FLUX.1-Dev<i>12B, no RL</i></div><div class="btrack"><div class="bwrap"><span class="bfill" style="width:64.4%"></span><span class="bval">31.72 ClipScore</span></div><div class="bwrap"><span class="bfill" style="width:75.0%"></span><span class="bval">5.95 Aesthetic</span></div><div class="bwrap"><span class="bfill" style="width:68.9%"></span><span class="bval">21.83 PicScore</span></div></div></div>
 
-This is not a tuning problem — no single value of \\(\beta\\) is optimal for all samples simultaneously.
+<div class="brow"><div class="bl">SD3 + ORW-CFM-W2<i>fixed W2 regularisation</i></div><div class="btrack"><div class="bwrap"><span class="bfill" style="width:58.4%"></span><span class="bval">31.42 ClipScore</span></div><div class="bwrap"><span class="bfill" style="width:45.0%"></span><span class="bval">5.29 Aesthetic</span></div><div class="bwrap"><span class="bfill" style="width:49.3%"></span><span class="bval">20.97 PicScore</span></div></div></div>
 
-<figure class="chart">
-{% include figures/adrpo_reward_diversity.svg %}
-<figcaption><b>Fig 1.</b> Final reward vs. diversity on SD3 text-to-image. ADRPO reaches the top-right — the highest reward <em>and</em> the highest diversity — while ORW-CFM-W2 trades away diversity for reward and DPO lands in between.</figcaption>
-</figure>
+<div class="brow"><div class="bl">SD3 + DPO<i>offline preference</i></div><div class="btrack"><div class="bwrap"><span class="bfill" style="width:56.0%"></span><span class="bval">31.30 ClipScore</span></div><div class="bwrap"><span class="bfill" style="width:69.1%"></span><span class="bval">5.82 Aesthetic</span></div><div class="bwrap"><span class="bfill" style="width:57.0%"></span><span class="bval">21.31 PicScore</span></div></div></div>
 
-## Adaptive Divergence Regularized Policy Optimization (ADRPO)
+<div class="brow"><div class="bl">SD3 + RAFT<i>reward-ranked FT</i></div><div class="btrack"><div class="bwrap"><span class="bfill" style="width:17.0%"></span><span class="bval">29.35 ClipScore</span></div><div class="bwrap"><span class="bfill" style="width:10.9%"></span><span class="bval">4.54 Aesthetic</span></div><div class="bwrap"><span class="bfill" style="width:9.3%"></span><span class="bval">19.21 PicScore</span></div></div></div>
 
-### Core idea
+<div class="brow"><div class="bl">SD3<i>2B base model</i></div><div class="btrack"><div class="bwrap"><span class="bfill" style="width:15.4%"></span><span class="bval">29.27 ClipScore</span></div><div class="bwrap"><span class="bfill" style="width:55.9%"></span><span class="bval">5.53 Aesthetic</span></div><div class="bwrap"><span class="bfill" style="width:45.7%"></span><span class="bval">20.81 PicScore</span></div></div></div>
 
-The insight is simple: **make regularization strength a function of sample quality.** High-quality samples get less regularization (exploit); low-quality samples get more (explore safely).
+<div class="legend"><span><i class="sw aft"></i>SD3 + ADRPO (2B, ours)</span><span><i class="sw"></i>baselines and larger models</span><span>three bars per model: ClipScore &middot; Aesthetic &middot; PicScore</span></div></div>
 
-The general ADRPO objective:
+<p class="snum">04 &mdash; The Pareto front</p>
 
-$$\boxed{\mathcal{L}_{\text{ADRPO}}(\theta) = \mathcal{L}_{\text{RL}}(\theta) + (\beta_0 - A) \cdot \mathcal{L}_D(\theta)}$$
+<h2>Reward went up. Diversity did not go down.</h2>
 
-where \\(A\\) is the advantage estimate for the current sample, \\(\beta_0\\) is a baseline coefficient, and \\(\mathcal{L}_D\\) is the divergence regularization loss.
+<p>This is the result that is hard to get by tuning a constant. Reward-ranked fine-tuning reaches decent alignment by flattening the output distribution &mdash; its diversity falls from 5.08 to <b>1.85</b>, a textbook collapse. Fixed-&beta; W2 regularisation is gentler but still pays 3.86. ADRPO finishes at <b>5.13</b>, <em>above</em> the base model it started from, while posting the highest alignment score in the table.</p>
 
-The effective regularization coefficient becomes:
+<div class="panel bleed"><div class="phd"><span class="ttl">Generation diversity after fine-tuning</span><span class="meta">ClipDiversity &middot; mean pairwise distance of CLIP embeddings &middot; base model = 5.08</span></div>
 
-$$\beta_{\text{eff}} = \beta_0 - A$$
+<div class="brow"><div class="bl">SD3 + ADRPO<i>ours &middot; 2B</i></div><div class="btrack"><div class="bwrap"><span class="bfill aft" style="width:88.5%"></span><span class="bval on">5.13</span></div></div></div>
 
-| Sample quality | Advantage \\(A\\) | Effective \\(\beta\\) | Effect |
-|:---|:---|:---|:---|
-| High reward | \\(A > 0\\) | \\(\beta_0 - A\\) ↓ | Less regularization → exploit |
-| Average | \\(A \approx 0\\) | \\(\approx \beta_0\\) | Standard regularization |
-| Low reward | \\(A < 0\\) | \\(\beta_0 - A\\) ↑ | More regularization → stabilize |
+<div class="brow"><div class="bl">SD3<i>2B base model</i></div><div class="btrack"><div class="bwrap"><span class="bfill" style="width:87.3%"></span><span class="bval">5.08  &larr; starting point</span></div></div></div>
 
-This is a one-line modification to existing RLHF objectives. No new networks, no complex architecture changes.
+<div class="brow"><div class="bl">SD3 + DPO<i>offline preference</i></div><div class="btrack"><div class="bwrap"><span class="bfill" style="width:80.0%"></span><span class="bval">4.78</span></div></div></div>
 
-### For flow matching models
+<div class="brow"><div class="bl">SANA-1.5<i>4.8B, no RL</i></div><div class="btrack"><div class="bwrap"><span class="bfill" style="width:68.5%"></span><span class="bval">4.31</span></div></div></div>
 
-For flow matching models like SD3, ADRPO combines advantage-weighted flow matching with adaptive W2 regularization:
+<div class="brow"><div class="bl">FLUX.1-Dev<i>12B, no RL</i></div><div class="btrack"><div class="bwrap"><span class="bfill" style="width:68.0%"></span><span class="bval">4.29</span></div></div></div>
 
-$$\mathcal{L}_{\text{ADRPO-FM}}(\theta) = \underbrace{\mathbb{E}\left[A(x_1,c) \cdot \|\mathbf{v}_\theta(x_t, t, c) - \mathbf{u}_t\|^2\right]}_{\text{advantage-weighted flow matching}} + \underbrace{(\beta_0 - A(x_1,c)) \cdot \mathbb{E}\left[\|\mathbf{v}_\theta - \mathbf{v}_{\text{ref}}\|^2\right]}_{\text{adaptive W2 regularization}}$$
+<div class="brow"><div class="bl">SD3 + ORW-CFM-W2<i>fixed W2 regularisation</i></div><div class="btrack"><div class="bwrap"><span class="bfill" style="width:57.6%"></span><span class="bval">3.86</span></div></div></div>
 
-Notice that \\(A\\) appears in *both* terms. In the first term, the advantage provides *bidirectional* learning signals:
+<div class="brow"><div class="bl">SD3 + RAFT<i>reward-ranked FT</i></div><div class="btrack"><div class="bwrap"><span class="bfill" style="width:8.5%"></span><span class="bval">1.85</span></div></div></div>
 
-- \\(A > 0\\): gradient encourages matching the target velocity (strengthen good generation)
-- \\(A < 0\\): gradient *reverses*, actively pushing the model *away* from bad generation
+<div class="legend"><span><i class="sw aft"></i>ADRPO &mdash; the only method above the base model</span><span><i class="sw"></i>everything else lost diversity to gain reward</span></div></div>
 
-This is fundamentally different from reward-weighting (ORW-CFM-W2), which can only down-weight bad samples with non-negative weights but never actively suppress them. In high-dimensional spaces like image generation, where bad regions vastly outnumber good ones, this difference is critical.
+<p class="snum">05 &mdash; Language models</p>
 
-The advantage is estimated simply as:
+<h2>An emergent willingness to explore</h2>
 
-$$A(x_1, c) = R(x_1, c) - V(c), \quad \text{where } V(c) = \frac{1}{|\mathcal{B}|}\sum_{x \in \mathcal{B}} R(x, c)$$
+<p>The same objective drops into GRPO for LLM fine-tuning by making the KL coefficient advantage-dependent. Tracked in reward&ndash;entropy space on Qwen2 (0.5B) and Qwen3 (0.6B) against RM-Gemma-2B, the two methods take visibly different paths. GRPO holds high entropy throughout and moves sideways &mdash; lots of exploration, little reward found. ADRPO first tightens into a low-entropy region, then <em>deliberately raises entropy again</em> to break out of the local optimum it landed in, and converges at <b>5&times; GRPO&rsquo;s final reward</b>.</p>
 
-i.e., the reward minus the batch-average reward for the same prompt.
+<p>Nobody designed that behaviour. It falls out of the coefficient: once a region stops producing advantage, regularisation rises, the policy loosens, and exploration resumes on its own. The same mechanism explains why GRPO&rsquo;s later checkpoints often score <em>worse</em> than its earlier ones while ADRPO improves monotonically &mdash; no early stopping required.</p>
 
-### For language models
+<p class="snum">06 &mdash; Audio reasoning</p>
 
-For LLMs, ADRPO integrates with GRPO by making the KL coefficient advantage-dependent:
+<h2>And it holds in a third modality</h2>
 
-$$\mathcal{L}_{\text{ADRPO-GRPO}}(\theta) = \mathcal{L}_{\text{PG}}(\theta) + (\beta_0 - A_{\text{GRPO}}) \cdot D_{\text{KL}}(\pi_\theta \| \pi_{\text{ref}})$$
+<p>Continuous flow matching and discrete token generation are different enough that a shared mechanism is worth testing on a third case. Qwen2.5-Omni-7B was fine-tuned on AVQA with verifiable rewards and evaluated on MMAU.</p>
 
-where \\(A_{\text{GRPO}}\\) is the group-level advantage from GRPO (reward minus group mean, normalized).
+<div class="panel bleed"><div class="phd"><span class="ttl">MMAU &mdash; multi-modal audio reasoning</span><span class="meta">accuracy % &middot; sound / music / speech / total</span></div>
 
-<figure class="chart">
-{% include figures/adrpo_reward_kl.svg %}
-<figcaption><b>Fig 2.</b> Reward vs. W2 divergence from the reference on SD3 (flow matching uses W2, not KL). ADRPO attains the highest reward while staying closest to the pre-trained model — the smallest divergence — whereas ORW-CFM-W2 needs far larger divergence for less reward.</figcaption>
-</figure>
+<div class="brow"><div class="bl">ADRPO<i>ours &middot; Qwen2.5-Omni-7B</i></div><div class="btrack"><div class="bwrap"><span class="bfill aft" style="width:87.9%"></span><span class="bval on">81.98 sound</span></div><div class="bwrap"><span class="bfill aft" style="width:40.2%"></span><span class="bval on">70.06 music</span></div><div class="bwrap"><span class="bfill aft" style="width:63.9%"></span><span class="bval on">75.98 speech</span></div><div class="bwrap"><span class="bfill aft" style="width:64.0%"></span><span class="bval on"><b>76.0 total</b></span></div></div></div>
 
-## What Emerges in Practice
+<div class="brow"><div class="bl">GRPO<i>fixed &beta; = 0.04</i></div><div class="btrack"><div class="bwrap"><span class="bfill" style="width:68.7%"></span><span class="bval">77.18 sound</span></div><div class="bwrap"><span class="bfill" style="width:42.6%"></span><span class="bval">70.66 music</span></div><div class="bwrap"><span class="bfill" style="width:59.1%"></span><span class="bval">74.77 speech</span></div><div class="bwrap"><span class="bfill" style="width:56.8%"></span><span class="bval"><b>74.2 total</b></span></div></div></div>
 
-### Smaller models outperform larger ones
+<div class="brow"><div class="bl">Gemini 2.5 Pro<i>proprietary</i></div><div class="btrack"><div class="bwrap"><span class="bfill" style="width:60.3%"></span><span class="bval">75.08 sound</span></div><div class="bwrap"><span class="bfill" style="width:33.0%"></span><span class="bval">68.26 music</span></div><div class="bwrap"><span class="bfill" style="width:45.9%"></span><span class="bval">71.47 speech</span></div><div class="bwrap"><span class="bfill" style="width:46.4%"></span><span class="bval"><b>71.6 total</b></span></div></div></div>
 
-With ADRPO, a **2B parameter SD3** model outperforms **FLUX.1-Dev (12B)** and **SANA-1.5 (4.8B)** in attribute binding, semantic consistency, and compositional control. The adaptive regularization extracts more from each parameter by allocating exploration budget where it matters most.
+<div class="brow"><div class="bl">Qwen2.5-Omni-7B<i>base model</i></div><div class="btrack"><div class="bwrap"><span class="bfill" style="width:49.5%"></span><span class="bval">72.37 sound</span></div><div class="bwrap"><span class="bfill" style="width:17.5%"></span><span class="bval">64.37 music</span></div><div class="bwrap"><span class="bfill" style="width:36.3%"></span><span class="bval">69.07 speech</span></div><div class="bwrap"><span class="bfill" style="width:34.4%"></span><span class="bval"><b>68.6 total</b></span></div></div></div>
 
-### Emergent exploration in LLMs
+<div class="brow"><div class="bl">GPT-4o Audio<i>proprietary</i></div><div class="btrack"><div class="bwrap"><span class="bfill" style="width:18.2%"></span><span class="bval">64.56 sound</span></div><div class="bwrap"><span class="bfill" style="width:1.5%"></span><span class="bval">56.29 music</span></div><div class="bwrap"><span class="bfill" style="width:26.7%"></span><span class="bval">66.67 speech</span></div><div class="bwrap"><span class="bfill" style="width:10.0%"></span><span class="bval"><b>62.5 total</b></span></div></div></div>
 
-When applied to LLM fine-tuning, ADRPO exhibits an unexpected emergent behavior: **the ability to escape local optima.**
+<div class="legend"><span><i class="sw aft"></i>ADRPO (7B)</span><span><i class="sw"></i>GRPO, base model, proprietary systems</span></div></div>
 
-<figure class="chart">
-{% include figures/adrpo_llm_entropy.svg %}
-<figcaption><b>Fig 3.</b> Reward over training on Qwen2 (GRPO vs. ADRPO). ADRPO escapes the local optimum GRPO stays trapped in, climbing to roughly 3× the reward — the adaptive coefficient re-opens exploration whenever the model stalls.</figcaption>
-</figure>
+<div class="stats bleed"><div class="stat"><div class="n">2B <small>&gt; 12B</small></div><div class="l">SD3 + ADRPO outscores FLUX.1-Dev on alignment, aesthetics and human preference</div></div><div class="stat"><div class="n">5.13</div><div class="l">final diversity against the base model&rsquo;s 5.08 — the only method that gained on both axes</div></div><div class="stat"><div class="n">5&times;</div><div class="l">GRPO&rsquo;s final reward on Qwen3 LLM fine-tuning</div></div><div class="stat"><div class="n">76.0<small>%</small></div><div class="l">MMAU total, above Gemini 2.5 Pro (71.6) and GPT-4o Audio (62.5)</div></div></div>
 
-When the model is stuck in a poor solution (all advantages near zero or negative), the adaptive coefficient \\(\beta_0 - A\\) increases globally, pulling the model back toward the pre-trained distribution — effectively "resetting" exploration. When it finds a promising direction (high advantages), regularization drops, allowing rapid exploitation. This creates a natural curriculum that no fixed coefficient can replicate.
+<p class="snum">07 &mdash; Robustness</p>
 
-### Cross-domain generality
+<h2>The one hyperparameter it adds barely matters</h2>
 
-ADRPO is not limited to one modality or one divergence measure. It has been validated across:
+<p>Adaptive regularisation introduces a clipping range for the advantage. If performance were delicately balanced on it, the method would have traded one tuning problem for another. Sweeping it over a 4&times; span moves the total by less than half a point, and every setting still beats fixed-&beta; GRPO.</p>
 
-- **Flow matching** (SD3) with W2 regularization
-- **Text LLMs** (Qwen2, Qwen3) with KL divergence
-- **Audio reasoning LLMs** with GRPO
+<div class="panel bleed"><div class="phd"><span class="ttl">Advantage-clipping ablation</span><span class="meta">MMAU total accuracy % &middot; variation across settings under 0.4 points</span></div>
 
-The same principle — advantage-based adaptive regularization — provides consistent improvement regardless of the underlying architecture.
+<div class="brow"><div class="bl">0.5 &times; &beta;<sub>0</sub><i>&plusmn;0.02</i></div><div class="btrack"><div class="bwrap"><span class="bfill aft" style="width:83.9%"></span><span class="bval on">76.1</span></div></div></div>
 
-## Summary
+<div class="brow"><div class="bl">1 &times; &beta;<sub>0</sub><i>&plusmn;0.04 &middot; recommended</i></div><div class="btrack"><div class="bwrap"><span class="bfill aft" style="width:80.6%"></span><span class="bval on">76.0</span></div></div></div>
 
-The exploration-exploitation dilemma in RLHF is fundamental: **no single regularization coefficient is optimal for all samples.** ADRPO resolves this by making \\(\beta\\) a function of advantage:
+<div class="brow"><div class="bl">2 &times; &beta;<sub>0</sub><i>&plusmn;0.08</i></div><div class="btrack"><div class="bwrap"><span class="bfill aft" style="width:71.0%"></span><span class="bval on">75.7</span></div></div></div>
 
-$$\beta_{\text{eff}} = \beta_0 - A$$
+<div class="brow"><div class="bl">GRPO<i>fixed &beta;, no adaptation</i></div><div class="btrack"><div class="bwrap"><span class="bfill" style="width:22.6%"></span><span class="bval">74.2</span></div></div></div>
 
-One line of math; dramatic practical consequences. For details, see [the paper (NeurIPS 2025)](https://openreview.net/forum?id=aXO0xg0ttW).
+<div class="legend"><span><i class="sw aft"></i>ADRPO, any clipping range</span><span><i class="sw"></i>fixed-&beta; GRPO baseline</span></div></div>
 
-## References
+<p class="snum">08 &mdash; What it means</p>
 
-[1] Fan et al. "Adaptive Divergence Regularized Policy Optimization for Fine-tuning Generative Models." NeurIPS 2025. [Paper](https://openreview.net/forum?id=aXO0xg0ttW)
+<h2>The trade-off was never the problem. Treating it as constant was.</h2>
 
-[2] Fan et al. "Online Reward-Weighted Fine-Tuning of Flow Matching with Wasserstein Regularization." ICLR 2025. [Paper](https://openreview.net/forum?id=2IoFFexvuw)
+<p>Exploration versus exploitation is usually framed as something you resolve before training by picking a coefficient, and live with afterwards. The result here is that the information needed to resolve it properly is already sitting in the training loop: the advantage estimate says, for this particular sample, whether the policy has found something worth committing to. Subtracting it turns a global compromise into a local decision.</p>
 
-[3] Shao et al. "DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models." 2024. (GRPO)
+<p>What makes the result more than a tuning trick is the range it survives. The same one-term change holds across continuous flow matching with a Wasserstein penalty, discrete LLM generation with a KL penalty, and multi-modal audio reasoning — three architectures, three divergence measures, one subtraction, and a 2B model that outperforms a 12B one.</p>
 
-[4] Esser et al. "Scaling Rectified Flow Transformers for High-Resolution Image Synthesis." ICML 2024. (Stable Diffusion 3)
+<div class="chips"><span class="chip on">NeurIPS 2025</span><span class="chip">SD3 &middot; Qwen2 &middot; Qwen3 &middot; Qwen2.5-Omni</span><span class="chip">flow matching &amp; LLMs</span><span class="chip">W2 &amp; KL divergence</span><span class="chip">UIUC</span></div>
 
-[5] Rafailov et al. "Direct Preference Optimization: Your Language Model is Secretly a Reward Model." NeurIPS 2023. (DPO)
-
----
-
-**Citation.** This post accompanies our NeurIPS 2025 paper — for academic use, please cite:
-
-Fan et al., "Adaptive Divergence Regularized Policy Optimization for Fine-tuning Generative Models," *NeurIPS*, 2025.
-
-```bibtex
-@inproceedings{fan2025adaptive,
-  title     = {Adaptive Divergence Regularized Policy Optimization for Fine-tuning Generative Models},
-  author    = {Jiajun Fan and Tong Wei and Chaoran Cheng and Yuxin Chen and Ge Liu},
-  booktitle = {The Thirty-ninth Annual Conference on Neural Information Processing Systems},
-  year      = {2025},
-  url       = {https://openreview.net/forum?id=aXO0xg0ttW}
-}
-```
+</div>
