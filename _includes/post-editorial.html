@@ -13,11 +13,6 @@ body.dark-mode .ed{--ed-tint:#2c4450}
 .ed h2+.lede{margin-top:-.2em}
 .ed .lede{font-size:1.06em;line-height:1.66;color:var(--muted)}
 
-/* ── full-width bleed: same breakout the layout already uses for <figure>,
-      so wide blocks line up with the article's existing figures ── */
-.ed .bleed{width:min(var(--fig),calc(100vw - 40px));max-width:none;
-  margin-left:50%;transform:translateX(-50%)}
-
 /* ── framed figure ── */
 .ed .fig{background:var(--bg);border:1px solid var(--fig-border);border-radius:12px;
   padding:24px 22px 18px;margin:1.9em 0}
@@ -110,6 +105,12 @@ body.dark-mode .ed .turn.bad .txt{color:#f08a82}
 .ed .kick{border-left:3px solid var(--ed-accent);padding:2px 0 2px 16px;margin:1.7em 0;
   font-family:var(--sans);font-size:.95rem;line-height:1.6;color:var(--ink)}
 .ed .kick b{font-weight:700}
+
+/* ── full-width bleed — MUST come after the component rules above, whose
+      `margin` shorthands would otherwise reset margin-left back to 0 ── */
+.ed .bleed{width:min(var(--fig),calc(100vw - 40px));max-width:none;
+  margin-left:50%;transform:translateX(-50%)}
+@media(max-width:1010px){.ed .bleed{width:100%;margin-left:0;transform:none}}
 
 @media print{
   .ed .fcard,.ed .knob,.ed .panel,.ed .fig,.ed .stat{break-inside:avoid}

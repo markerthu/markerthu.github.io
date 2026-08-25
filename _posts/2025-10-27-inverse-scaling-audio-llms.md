@@ -13,63 +13,63 @@ header:
   og_image: "/projects/cesar/images/teaser.png"
 ---
 
-{% include post-editorial.html %}
-
 <div class="ed" markdown="0">
 
 <p class="lede">Chain-of-thought is the reflex answer for making a model smarter. In Audio LLMs it backfires: tell the model to think first and it gets <em>worse</em>, and the longer it thinks the worse it gets. This note is about why that happens, why it is not an argument against reasoning, and what changes when you supervise the reasoning process instead of only the final answer.</p>
 
 <figure class="fig"><div class="figscroll">
 
-<svg viewBox="0 0 940 300" role="img" aria-label="Accuracy on MMAU Test-mini when the model answers directly versus when it reasons first. The base model loses 3.40 points by reasoning; CESAR gains exactly 3.40.">
-<defs><style>.gl{stroke:var(--rule);stroke-width:1}.ax{font-family:var(--sans);font-size:12px;fill:var(--muted)}.nm{font-family:var(--sans);font-size:12.5px;font-weight:600;fill:var(--body)}.sb{font-family:var(--sans);font-size:10.5px;fill:var(--muted)}.vl{font-family:var(--mono);font-size:12px;fill:var(--muted)}.dl{font-family:var(--sans);font-size:12px;font-weight:700}</style></defs>
-<line class="gl" x1="210" y1="215.6" x2="720" y2="215.6"/>
-<text class="ax" x="198" y="219.6" text-anchor="end">65</text>
-<line class="gl" x1="210" y1="158.2" x2="720" y2="158.2"/>
-<text class="ax" x="198" y="162.2" text-anchor="end">70</text>
-<line class="gl" x1="210" y1="100.9" x2="720" y2="100.9"/>
-<text class="ax" x="198" y="104.9" text-anchor="end">75</text>
-<text class="ax" x="210" y="24" text-anchor="middle" font-weight="700">answer directly</text>
-<text class="ax" x="720" y="24" text-anchor="middle" font-weight="700">reason first</text>
+<svg viewBox="0 0 940 322" role="img" aria-label="MMAU Test-mini accuracy when each model answers directly versus when it reasons first. The base Qwen2.5-Omni-7B loses 3.40 points by reasoning; CESAR gains exactly 3.40.">
+<defs><style>.gl{stroke:var(--rule);stroke-width:1}.gt{font-family:var(--sans);font-size:11.5px;fill:var(--muted)}.hd{font-family:var(--sans);font-size:12px;font-weight:700;fill:var(--body);letter-spacing:.02em}.nm{font-family:var(--sans);font-size:13px;font-weight:700}.sb{font-family:var(--sans);font-size:11px;fill:var(--muted)}.vl{font-family:var(--mono);font-size:11.5px;fill:var(--muted)}.dl{font-family:var(--mono);font-size:12px;font-weight:700}</style></defs>
+<line class="gl" x1="250" y1="217.4" x2="660" y2="217.4"/>
+<text class="gt" x="192" y="221.4" text-anchor="end">65</text>
+<line class="gl" x1="250" y1="159.8" x2="660" y2="159.8"/>
+<text class="gt" x="192" y="163.8" text-anchor="end">70</text>
+<line class="gl" x1="250" y1="102.1" x2="660" y2="102.1"/>
+<text class="gt" x="192" y="106.1" text-anchor="end">75</text>
+<text class="hd" x="250" y="26" text-anchor="middle">answer directly</text>
+<text class="hd" x="660" y="26" text-anchor="middle">reason first</text>
+<line class="gl" x1="204" y1="36" x2="706" y2="36"/>
+<text class="gt" x="192" y="62.9" text-anchor="end" font-weight="700">MMAU</text>
+<text class="gt" x="192" y="76.9" text-anchor="end">accuracy %</text>
 <g opacity="1">
-<line x1="210" y1="174.3" x2="720" y2="213.3" stroke="#c0504a" stroke-width="2.6" stroke-linecap="round"/>
-<circle cx="210" cy="174.3" r="4.5" fill="#c0504a"/>
-<circle cx="720" cy="213.3" r="4.5" fill="#c0504a"/>
-<text class="vl" x="164" y="178.3" text-anchor="end">68.60</text>
-<text class="nm" x="736" y="214.3">Qwen2.5-Omni-7B</text>
-<text class="sb" x="736" y="228.3">base model &middot; 65.20</text>
-<text class="dl" x="465" y="184.8" fill="#c0504a" text-anchor="middle">−3.40</text>
+<line x1="250" y1="175.9" x2="660" y2="215.1" stroke="#c0504a" stroke-width="2.8" stroke-linecap="round"/>
+<circle cx="250" cy="175.9" r="4.8" fill="#c0504a"/>
+<circle cx="660" cy="215.1" r="4.8" fill="#c0504a"/>
+<text class="vl" x="236" y="179.9" text-anchor="end">68.60</text>
+<text class="nm" x="686" y="215.1" fill="#c0504a">Qwen2.5-Omni-7B</text>
+<text class="dl" x="812" y="215.1" fill="#c0504a">−3.40</text>
+<text class="sb" x="686" y="230.1">base model &#183; 65.20</text>
 </g>
-<g opacity=".55">
-<line x1="210" y1="106.6" x2="720" y2="105.5" stroke="var(--muted)" stroke-width="1.8" stroke-linecap="round"/>
-<circle cx="210" cy="106.6" r="4.5" fill="var(--muted)"/>
-<circle cx="720" cy="105.5" r="4.5" fill="var(--muted)"/>
-<text class="vl" x="164" y="110.6" text-anchor="end">74.50</text>
-<text class="nm" x="736" y="106.5">Ke-Omni-R</text>
-<text class="sb" x="736" y="120.5">outcome-only RL &middot; 74.60</text>
-<text class="dl" x="465" y="97.0" fill="var(--muted)" text-anchor="middle">+0.10</text>
+<g opacity=".5">
+<line x1="250" y1="107.9" x2="660" y2="106.7" stroke="var(--muted)" stroke-width="1.8" stroke-linecap="round"/>
+<circle cx="250" cy="107.9" r="4.8" fill="var(--muted)"/>
+<circle cx="660" cy="106.7" r="4.8" fill="var(--muted)"/>
+<text class="vl" x="236" y="126.1" text-anchor="end">74.50</text>
+<path d="M 667 106.7 L 675 153.9 L 682 153.9" fill="none" stroke="var(--muted)" stroke-width="1" opacity=".45"/>
+<text class="nm" x="686" y="157.9" fill="var(--muted)">Ke-Omni-R</text>
+<text class="dl" x="766" y="157.9" fill="var(--muted)">+0.10</text>
+<text class="sb" x="686" y="172.9">outcome-only RL &#183; 74.60</text>
+</g>
+<g opacity=".5">
+<line x1="250" y1="102.1" x2="660" y2="84.8" stroke="var(--muted)" stroke-width="1.8" stroke-linecap="round"/>
+<circle cx="250" cy="102.1" r="4.8" fill="var(--muted)"/>
+<circle cx="660" cy="84.8" r="4.8" fill="var(--muted)"/>
+<text class="vl" x="236" y="106.1" text-anchor="end">75.00</text>
+<path d="M 667 84.8 L 675 113.9 L 682 113.9" fill="none" stroke="var(--muted)" stroke-width="1" opacity=".45"/>
+<text class="nm" x="686" y="117.9" fill="var(--muted)">CESAR w/o OP</text>
+<text class="dl" x="789" y="117.9" fill="var(--muted)">+1.50</text>
+<text class="sb" x="686" y="132.9">ours &#183; 76.50</text>
 </g>
 <g opacity="1">
-<line x1="210" y1="100.9" x2="720" y2="83.7" stroke="var(--muted)" stroke-width="1.8" stroke-linecap="round"/>
-<circle cx="210" cy="100.9" r="4.5" fill="var(--muted)"/>
-<circle cx="720" cy="83.7" r="4.5" fill="var(--muted)"/>
-<text class="vl" x="164" y="104.9" text-anchor="end">75.00</text>
-<text class="nm" x="736" y="84.7">CESAR w/o OP</text>
-<text class="sb" x="736" y="98.7">ours &middot; 76.50</text>
-<text class="dl" x="465" y="83.3" fill="var(--muted)" text-anchor="middle">+1.50</text>
+<line x1="250" y1="117.1" x2="660" y2="77.9" stroke="var(--link)" stroke-width="3.4" stroke-linecap="round"/>
+<circle cx="250" cy="117.1" r="4.8" fill="var(--link)"/>
+<circle cx="660" cy="77.9" r="4.8" fill="var(--link)"/>
+<text class="vl" x="236" y="146.1" text-anchor="end">73.70</text>
+<text class="nm" x="686" y="77.9" fill="var(--link)">CESAR</text>
+<text class="dl" x="736" y="77.9" fill="var(--link)">+3.40</text>
+<text class="sb" x="686" y="92.9">ours &#183; 77.10</text>
 </g>
-<g opacity="1">
-<line x1="210" y1="115.8" x2="720" y2="76.8" stroke="var(--link)" stroke-width="3.2" stroke-linecap="round"/>
-<circle cx="210" cy="115.8" r="4.5" fill="var(--link)"/>
-<circle cx="720" cy="76.8" r="4.5" fill="var(--link)"/>
-<text class="vl" x="164" y="119.8" text-anchor="end">73.70</text>
-<text class="nm" x="736" y="77.8">CESAR</text>
-<text class="sb" x="736" y="91.8">ours &middot; 77.10</text>
-<text class="dl" x="465" y="87.3" fill="var(--link)" text-anchor="middle">+3.40</text>
-</g>
-<text class="ax" x="14" y="150.2" font-weight="700">MMAU</text>
-<text class="ax" x="14" y="166.2">Test-mini</text>
-<text class="ax" x="14" y="182.2">accuracy %</text>
 </svg>
 
 </div><figcaption class="cap"><b>The same test, the same model sizes, one instruction apart.</b> Left: the model answers directly. Right: it is asked to reason first. The base model pays 3.40 points for thinking. After training on the reasoning process, CESAR earns 3.40 points for it — the identical margin, with the sign reversed. Numbers are MMAU Test-mini accuracy from Table 1 of the paper.</figcaption></figure>
