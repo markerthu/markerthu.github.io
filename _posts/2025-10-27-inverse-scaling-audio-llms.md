@@ -174,7 +174,7 @@ header:
 
 <figure class="fig bleed"><div class="figscroll">
 
-<svg viewBox="0 0 940 336" role="img" aria-label="Reasoning budget swept from 0 to 250 tokens. CESAR peaks at 77.1 percent using a chain of about 35 to 40 tokens. Without the overthinking penalty it keeps climbing and reaches a lower 76.5 percent peak with a much longer chain. Baselines show no reliable gain anywhere on the axis.">
+<svg viewBox="0 0 940 352" role="img" aria-label="Reasoning budget swept from 0 to 250 tokens. CESAR peaks at 77.1 percent using a chain of about 35 to 40 tokens. Without the overthinking penalty it keeps climbing and reaches a lower 76.5 percent peak with a much longer chain. Baselines show no reliable gain anywhere on the axis.">
 <defs><style>.ax{stroke:var(--rule);stroke-width:1.2}.tk{font-family:var(--mono);font-size:10.5px;fill:var(--muted)}.axl{font-family:var(--sans);font-size:11.5px;font-weight:700;fill:var(--body)}.rl{font-family:var(--sans);font-size:13px;font-weight:800}.rs{font-family:var(--sans);font-size:11px;fill:var(--muted)}</style><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="var(--muted)"/></marker></defs>
 <rect x="252.2" y="66" width="14.6" height="230" rx="3" fill="var(--link)" opacity=".13"/>
 <line x1="259.5" y1="66" x2="259.5" y2="296" stroke="var(--link)" stroke-width="2.4"/>
@@ -200,7 +200,7 @@ header:
 <text class="tk" x="734.0" y="315" text-anchor="middle">200</text>
 <line class="ax" x1="880.0" y1="296" x2="880.0" y2="301"/>
 <text class="tk" x="880.0" y="315" text-anchor="middle">250</text>
-<text class="axl" x="134" y="300" text-anchor="end">maximum reasoning length, tokens &rarr;</text>
+<text class="axl" x="515" y="338" text-anchor="middle">maximum reasoning length swept during evaluation &mdash; tokens</text>
 </svg>
 
 </div><figcaption class="cap"><b>Where each method peaks, on the same swept budget.</b> The paper reports the peak accuracy for both CESAR variants and the chain length at which the full method peaks; the position of the penalty-free peak and the exact baseline curves are shown schematically, not measured off a plot.</figcaption></figure>
