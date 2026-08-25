@@ -39,10 +39,13 @@ body.dark-mode .ed{--ed-tint:#2c4450}
 .ed .bl i{display:block;font-style:normal;font-size:.71rem;color:var(--muted);font-weight:400}
 .ed .btrack{display:flex;flex-direction:column;gap:4px;min-width:0}
 .ed .bwrap{display:flex;align-items:center;gap:8px}
-.ed .bfill{height:13px;border-radius:2px;min-width:2px;background:var(--ed-tint);flex:0 0 auto}
+/* cap the bar so the value beside it never wraps, whatever scale a panel uses */
+.ed .bfill{height:13px;border-radius:2px;min-width:2px;background:var(--ed-tint);
+  flex:0 0 auto;max-width:calc(100% - 104px)}
 .ed .bfill.aft{background:var(--ed-accent)}
 .ed .bfill.neg{background:#c9736c}
-.ed .bval{font-family:var(--mono);font-size:.72rem;font-variant-numeric:tabular-nums;color:var(--muted)}
+.ed .bval{font-family:var(--mono);font-size:.72rem;font-variant-numeric:tabular-nums;
+  color:var(--muted);white-space:nowrap}
 .ed .bval.on{color:var(--ed-accent);font-weight:700}
 .ed .legend{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--sans);font-size:.76rem;
   color:var(--muted);margin-top:16px;padding-top:13px;border-top:1px solid var(--rule);line-height:1.5}
