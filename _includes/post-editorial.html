@@ -3,8 +3,11 @@
      (--serif/--sans/--mono, --ink/--body/--muted/--rule/--link/--pill/--band),
      so light + dark mode and printing are inherited, not re-invented. -->
 <style>
-.ed{--ed-accent:var(--link);--ed-soft:var(--pill);--ed-tint:#bedce5;--ed-bar:var(--rule)}
-body.dark-mode .ed{--ed-tint:#2c4450}
+/* --ed-on-accent: text sitting ON the accent colour. The accent flips to a pale
+   blue in dark mode, so white-on-accent would drop to 2.4:1 — well under AA. */
+.ed{--ed-accent:var(--link);--ed-soft:var(--pill);--ed-tint:#bedce5;--ed-bar:var(--rule);
+  --ed-on-accent:#ffffff}
+body.dark-mode .ed{--ed-tint:#2c4450;--ed-on-accent:#0f1216}
 
 /* ── section kicker ── */
 .ed .snum{font-family:var(--sans);font-size:.7rem;font-weight:800;letter-spacing:.13em;
@@ -66,7 +69,8 @@ body.dark-mode .ed{--ed-tint:#2c4450}
 .ed .fcard.span{grid-column:1/-1}
 .ed .fhead{display:flex;align-items:flex-start;gap:10px}
 .ed .fno{flex:0 0 auto;width:22px;height:22px;border-radius:6px;display:grid;place-items:center;
-  font-family:var(--mono);font-size:.68rem;font-weight:700;background:var(--ed-accent);color:#fff;margin-top:2px}
+  font-family:var(--mono);font-size:.68rem;font-weight:700;background:var(--ed-accent);
+  color:var(--ed-on-accent);margin-top:2px}
 .ed .fclaim{font-family:var(--sans);font-weight:700;font-size:1rem;line-height:1.32;
   letter-spacing:-.012em;color:var(--ink)}
 .ed .fev{font-family:var(--sans);font-size:.86rem;line-height:1.6;color:var(--body);margin:0}
@@ -109,7 +113,7 @@ body.dark-mode .ed .turn.bad .txt{color:#f08a82}
 .ed .chips{display:flex;flex-wrap:wrap;gap:6px;margin:1.2em 0}
 .ed .chip{font-family:var(--sans);font-size:.74rem;font-weight:600;padding:3px 10px;border-radius:14px;
   border:1px solid var(--rule);color:var(--muted);background:var(--bg);white-space:nowrap}
-.ed .chip.on{background:var(--ed-accent);border-color:var(--ed-accent);color:#fff}
+.ed .chip.on{background:var(--ed-accent);border-color:var(--ed-accent);color:var(--ed-on-accent)}
 
 /* ── takeaway rule ── */
 .ed .kick{border-left:3px solid var(--ed-accent);padding:2px 0 2px 16px;margin:1.7em 0;
