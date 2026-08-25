@@ -13,6 +13,8 @@ header:
   og_image: "/projects/cesar/images/teaser.png"
 ---
 
+{% include post-editorial.html %}
+
 <div class="ed" markdown="0">
 
 <p class="lede">Chain-of-thought is the reflex answer for making a model smarter. In Audio LLMs it backfires: tell the model to think first and it gets <em>worse</em>, and the longer it thinks the worse it gets. This note is about why that happens, why it is not an argument against reasoning, and what changes when you supervise the reasoning process instead of only the final answer.</p>
