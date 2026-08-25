@@ -1,0 +1,118 @@
+<!-- Editorial components for research-note posts.
+     Everything is scoped under .ed and built on the post layout's own tokens
+     (--serif/--sans/--mono, --ink/--body/--muted/--rule/--link/--pill/--band),
+     so light + dark mode and printing are inherited, not re-invented. -->
+<style>
+.ed{--ed-accent:var(--link);--ed-soft:var(--pill);--ed-tint:#bedce5;--ed-bar:var(--rule)}
+body.dark-mode .ed{--ed-tint:#2c4450}
+
+/* ── section kicker ── */
+.ed .snum{font-family:var(--sans);font-size:.7rem;font-weight:800;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--ed-accent);margin:3.6em 0 .55em}
+.ed .snum:first-child{margin-top:0}
+.ed h2+.lede{margin-top:-.2em}
+.ed .lede{font-size:1.06em;line-height:1.66;color:var(--muted)}
+
+/* ── full-width bleed: same breakout the layout already uses for <figure>,
+      so wide blocks line up with the article's existing figures ── */
+.ed .bleed{width:min(var(--fig),calc(100vw - 40px));max-width:none;
+  margin-left:50%;transform:translateX(-50%)}
+
+/* ── framed figure ── */
+.ed .fig{background:var(--bg);border:1px solid var(--fig-border);border-radius:12px;
+  padding:24px 22px 18px;margin:1.9em 0}
+.ed .fig svg{display:block;width:100%;height:auto;overflow:visible}
+.ed .figscroll{overflow-x:auto}
+.ed .figscroll svg{min-width:620px}
+.ed .cap{font-family:var(--sans);font-size:.83rem;line-height:1.58;color:var(--muted);
+  margin-top:14px;padding-top:12px;border-top:1px solid var(--rule)}
+.ed .cap b{color:var(--ink);font-weight:600}
+
+/* ── data panel + horizontal bars ── */
+.ed .panel{background:var(--bg);border:1px solid var(--fig-border);border-radius:12px;
+  padding:22px 22px 18px;margin:1.9em 0}
+.ed .phd{display:flex;justify-content:space-between;align-items:baseline;gap:12px;
+  flex-wrap:wrap;margin-bottom:16px}
+.ed .phd .ttl{font-family:var(--sans);font-weight:700;font-size:.92rem;color:var(--ink);letter-spacing:-.008em}
+.ed .phd .meta{font-family:var(--sans);font-size:.74rem;color:var(--muted)}
+.ed .brow{display:grid;grid-template-columns:132px 1fr;gap:10px 12px;align-items:center;margin-bottom:9px}
+.ed .brow:last-of-type{margin-bottom:0}
+.ed .brow.tot{margin-top:11px;padding-top:11px;border-top:1px solid var(--rule)}
+.ed .bl{font-family:var(--sans);font-size:.79rem;font-weight:500;color:var(--body);line-height:1.35}
+.ed .bl i{display:block;font-style:normal;font-size:.71rem;color:var(--muted);font-weight:400}
+.ed .btrack{display:flex;flex-direction:column;gap:4px;min-width:0}
+.ed .bwrap{display:flex;align-items:center;gap:8px}
+.ed .bfill{height:13px;border-radius:2px;min-width:2px;background:var(--ed-tint);flex:0 0 auto}
+.ed .bfill.aft{background:var(--ed-accent)}
+.ed .bfill.neg{background:#c9736c}
+.ed .bval{font-family:var(--mono);font-size:.72rem;font-variant-numeric:tabular-nums;color:var(--muted)}
+.ed .bval.on{color:var(--ed-accent);font-weight:700}
+.ed .legend{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--sans);font-size:.76rem;
+  color:var(--muted);margin-top:16px;padding-top:13px;border-top:1px solid var(--rule);line-height:1.5}
+.ed .legend span{display:flex;align-items:center;gap:6px}
+.ed .sw{width:11px;height:11px;border-radius:2px;flex:0 0 auto;background:var(--ed-tint)}
+.ed .sw.aft{background:var(--ed-accent)}
+
+/* ── numbered finding cards ── */
+.ed .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin:1.7em 0}
+@media(max-width:720px){.ed .fgrid{grid-template-columns:1fr}}
+.ed .fcard{background:var(--band);border:1px solid var(--rule);border-radius:12px;padding:18px 18px 16px;
+  display:flex;flex-direction:column;gap:9px}
+.ed .fcard.span{grid-column:1/-1}
+.ed .fhead{display:flex;align-items:flex-start;gap:10px}
+.ed .fno{flex:0 0 auto;width:22px;height:22px;border-radius:6px;display:grid;place-items:center;
+  font-family:var(--mono);font-size:.68rem;font-weight:700;background:var(--ed-accent);color:#fff;margin-top:2px}
+.ed .fclaim{font-family:var(--sans);font-weight:700;font-size:1rem;line-height:1.32;
+  letter-spacing:-.012em;color:var(--ink)}
+.ed .fev{font-family:var(--sans);font-size:.86rem;line-height:1.6;color:var(--body);margin:0}
+.ed .fev b{color:var(--ink);font-weight:650}
+.ed .fptr{font-family:var(--sans);font-size:.75rem;color:var(--muted);margin-top:auto;
+  padding-top:9px;border-top:1px solid var(--rule)}
+
+/* ── concept cards ── */
+.ed .knobs{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin:1.7em 0}
+@media(max-width:720px){.ed .knobs{grid-template-columns:1fr}}
+.ed .knob{background:var(--band);border:1px solid var(--rule);border-radius:12px;padding:18px}
+.ed .kcomp{font-family:var(--mono);font-size:.66rem;font-weight:700;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--ed-accent);margin-bottom:7px}
+.ed .kttl{font-family:var(--sans);font-weight:700;font-size:1rem;letter-spacing:-.01em;
+  color:var(--ink);margin-bottom:7px}
+.ed .kbody{font-family:var(--sans);font-size:.86rem;line-height:1.6;color:var(--body)}
+.ed .kbody b{color:var(--ink);font-weight:650}
+
+/* ── big-number row ── */
+.ed .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;
+  background:var(--rule);border:1px solid var(--rule);border-radius:12px;overflow:hidden;margin:1.9em 0}
+.ed .stat{background:var(--bg);padding:17px 16px}
+.ed .stat .n{font-family:var(--sans);font-weight:800;font-size:1.5rem;letter-spacing:-.02em;
+  color:var(--ed-accent);line-height:1.1}
+.ed .stat .n small{font-size:.62em;font-weight:700}
+.ed .stat .l{font-family:var(--sans);font-size:.76rem;line-height:1.45;color:var(--muted);margin-top:5px}
+
+/* ── transcript ── */
+.ed .turn{display:flex;gap:11px;align-items:flex-start;margin:0 0 11px;
+  font-family:var(--sans);font-size:.87rem;line-height:1.55}
+.ed .turn:last-child{margin-bottom:0}
+.ed .role{flex:0 0 62px;font-family:var(--mono);font-size:.63rem;font-weight:700;letter-spacing:.07em;
+  text-transform:uppercase;color:var(--muted);padding-top:3px}
+.ed .turn .txt{color:var(--body)}
+.ed .turn .txt b{color:var(--ink);font-weight:650}
+.ed .turn.bad .txt{color:#b8403a}
+body.dark-mode .ed .turn.bad .txt{color:#f08a82}
+
+/* ── chips ── */
+.ed .chips{display:flex;flex-wrap:wrap;gap:6px;margin:1.2em 0}
+.ed .chip{font-family:var(--sans);font-size:.74rem;font-weight:600;padding:3px 10px;border-radius:14px;
+  border:1px solid var(--rule);color:var(--muted);background:var(--bg);white-space:nowrap}
+.ed .chip.on{background:var(--ed-accent);border-color:var(--ed-accent);color:#fff}
+
+/* ── takeaway rule ── */
+.ed .kick{border-left:3px solid var(--ed-accent);padding:2px 0 2px 16px;margin:1.7em 0;
+  font-family:var(--sans);font-size:.95rem;line-height:1.6;color:var(--ink)}
+.ed .kick b{font-weight:700}
+
+@media print{
+  .ed .fcard,.ed .knob,.ed .panel,.ed .fig,.ed .stat{break-inside:avoid}
+  .ed .bfill{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
