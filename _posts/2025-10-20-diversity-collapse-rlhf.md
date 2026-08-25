@@ -184,7 +184,7 @@ header:
 <text class="ps" x="170.2" y="99.6" text-anchor="end">2B base model &#183; 29.27 / 5.08</text>
 </svg>
 
-</div><figcaption class="cap"><b>Every point is a row of Table 1.</b> Horizontal: prompt alignment. Vertical: generation diversity. The dashed lines mark the un-tuned SD3 base model, so the tinted quadrant is the region where a method improved alignment <em>without</em> paying for it in diversity. Only one point is in it. RAFT shows the failure mode most clearly &mdash; it buys a little alignment by collapsing diversity from 5.08 to 1.85.</figcaption></figure>
+</div><figcaption class="cap"><b>Every point is a row of Table 1.</b> Horizontal: prompt alignment. Vertical: generation diversity. The dashed lines mark the un-tuned SD3 base model, so the tinted quadrant is the region where a method improved alignment <em>without</em> paying for it in diversity. Only one point is in it. RAFT shows the failure mode most clearly &mdash; it buys a little alignment by collapsing diversity from 5.08 to 1.85. The unlabelled middle cluster, left to right: DPO 31.30 / 4.78, ORW-CFM-W2 31.42 / 3.86, FLUX.1-Dev 31.72 / 4.29, SANA-1.5 32.18 / 4.31.</figcaption></figure>
 
 <p class="snum">05 &mdash; Language models</p>
 
