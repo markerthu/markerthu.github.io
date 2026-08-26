@@ -141,7 +141,6 @@ header:
 <line class="gr" x1="182.2" y1="400" x2="182.2" y2="56"/>
 <line class="gr" x1="108" y1="99.6" x2="866" y2="99.6"/>
 <rect x="182.2" y="56" width="683.8" height="43.6" fill="var(--link)" opacity=".05"/>
-<text class="zn" x="854.0" y="87.6" text-anchor="end" fill="var(--link)">better on BOTH axes than the base model</text>
 <line class="ax" x1="108" y1="400" x2="866" y2="400"/>
 <line class="ax" x1="108" y1="400" x2="108" y2="56"/>
 <line class="ax" x1="139.6" y1="400" x2="139.6" y2="405"/>
