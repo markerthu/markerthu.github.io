@@ -148,39 +148,6 @@ header:
 
 <p>Sweeping the maximum thinking length from 0 to 250 tokens separates the two regimes cleanly. Baselines either collapse or wander with no reliable gain. Our variant without the overthinking penalty climbs steadily to a <b>76.50%</b> peak. The full method, penalised for rambling, peaks <em>higher</em> at <b>77.1%</b> using a chain of only about <b>35&ndash;40 tokens</b>. The penalty is not a tax on thinking; it is what teaches the model when to stop.</p>
 
-<figure class="fig bleed"><div class="figscroll">
-
-<svg viewBox="0 0 940 352" role="img" aria-label="Reasoning budget swept from 0 to 250 tokens. CESAR peaks at 77.1 percent using a chain of about 35 to 40 tokens. Without the overthinking penalty it keeps climbing and reaches a lower 76.5 percent peak with a much longer chain. Baselines show no reliable gain anywhere on the axis.">
-<defs><style>.ax{stroke:var(--rule);stroke-width:1.2}.tk{font-family:var(--mono);font-size:10.5px;fill:var(--muted)}.axl{font-family:var(--sans);font-size:11.5px;font-weight:700;fill:var(--body)}.rl{font-family:var(--sans);font-size:13px;font-weight:800}.rs{font-family:var(--sans);font-size:11px;fill:var(--muted)}</style><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="var(--muted)"/></marker></defs>
-<rect x="252.2" y="66" width="14.6" height="230" rx="3" fill="var(--link)" opacity=".13"/>
-<line x1="259.5" y1="66" x2="259.5" y2="296" stroke="var(--link)" stroke-width="2.4"/>
-<circle cx="259.5" cy="66" r="6" fill="var(--link)"/>
-<text class="rl" x="282.8" y="54" fill="var(--link)">CESAR &mdash; 77.1% peak</text>
-<text class="rs" x="282.8" y="72">at a chain of about 35&ndash;40 tokens &mdash; the paper&rsquo;s &ldquo;reasoning sweet spot&rdquo;</text>
-<line x1="360.2" y1="150" x2="874.2" y2="150" stroke="var(--muted)" stroke-width="2.2" stroke-dasharray="7 6" opacity=".85" marker-end="url(#ar)"/>
-<text class="rl" x="360.2" y="136" fill="var(--muted)">CESAR w/o penalty &mdash; 76.5% peak</text>
-<text class="rs" x="360.2" y="170">climbs steadily; reported to need a much longer chain for a lower peak</text>
-<path d="M 360.2 230 C 529.6 226, 704.8 248, 874.2 254" fill="none" stroke="#c0504a" stroke-width="2.2" opacity=".85"/>
-<text class="rl" x="360.2" y="216" fill="#c0504a">Baselines</text>
-<text class="rs" x="436.2" y="216">collapse, or wander &mdash; no reliable gain anywhere on this axis</text>
-<line class="ax" x1="150" y1="296" x2="880" y2="296"/>
-<line class="ax" x1="150.0" y1="296" x2="150.0" y2="301"/>
-<text class="tk" x="150.0" y="315" text-anchor="middle">0</text>
-<line class="ax" x1="296.0" y1="296" x2="296.0" y2="301"/>
-<text class="tk" x="296.0" y="315" text-anchor="middle">50</text>
-<line class="ax" x1="442.0" y1="296" x2="442.0" y2="301"/>
-<text class="tk" x="442.0" y="315" text-anchor="middle">100</text>
-<line class="ax" x1="588.0" y1="296" x2="588.0" y2="301"/>
-<text class="tk" x="588.0" y="315" text-anchor="middle">150</text>
-<line class="ax" x1="734.0" y1="296" x2="734.0" y2="301"/>
-<text class="tk" x="734.0" y="315" text-anchor="middle">200</text>
-<line class="ax" x1="880.0" y1="296" x2="880.0" y2="301"/>
-<text class="tk" x="880.0" y="315" text-anchor="middle">250</text>
-<text class="axl" x="515" y="338" text-anchor="middle">maximum reasoning length swept during evaluation &mdash; tokens</text>
-</svg>
-
-</div><figcaption class="cap"><b>Where each method peaks, on the same swept budget.</b> The paper reports the peak accuracy for both CESAR variants and the chain length at which the full method peaks; the position of the penalty-free peak and the exact baseline curves are shown schematically, not measured off a plot.</figcaption></figure>
-
 <div class="kick">Test-time scaling was never unavailable to Audio LLMs. It was unavailable to <b>untrained</b> reasoning — and it returns the moment the process is supervised.</div>
 
 <p class="snum">06 &mdash; The ceiling</p>
