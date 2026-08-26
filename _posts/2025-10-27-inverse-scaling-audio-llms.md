@@ -21,7 +21,7 @@ header:
 
 <figure class="fig bleed"><div class="figscroll">
 
-<svg viewBox="0 0 940 516" role="img" aria-label="What reasoning is worth on MMAU Test-mini. The untrained base model loses 3.40 points by reasoning first; CESAR gains exactly 3.40. Ke-Omni-R gains 0.10 and CESAR without the overthinking penalty gains 1.50.">
+<svg viewBox="0 0 940 508" role="img" aria-label="What reasoning is worth on MMAU Test-mini. The untrained base model loses 3.40 points by reasoning first; CESAR gains exactly 3.40. Ke-Omni-R gains 0.10 and CESAR without the overthinking penalty gains 1.50.">
 <defs><style>.zl{stroke:var(--ink);stroke-width:1.5;opacity:.5}.hd{font-family:var(--sans);font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;fill:var(--muted)}.nm{font-family:var(--sans);font-size:14.5px;font-weight:700;fill:var(--ink)}.sb{font-family:var(--sans);font-size:11.5px;fill:var(--muted)}.dl{font-family:var(--sans);font-size:17px;font-weight:800}.pr{font-family:var(--mono);font-size:12px;fill:var(--muted)}.ft{font-family:var(--sans);font-size:11px;fill:var(--muted)}</style></defs>
 <text class="hd" x="520" y="40" text-anchor="end">&#8592;&#8194;reasoning costs accuracy</text>
 <text class="hd" x="572" y="40">reasoning adds accuracy&#8194;&#8594;</text>
@@ -47,7 +47,7 @@ header:
 <text class="dl" x="753.4" y="384.0" fill="var(--link)" text-anchor="start">+3.40</text>
 <text class="pr" x="934" y="383.0" text-anchor="end">73.70 &#8594; 77.10</text>
 <text class="ft" x="546" y="440" text-anchor="middle">change in MMAU Test-mini accuracy, in points</text>
-<text class="ft" x="934" y="440" text-anchor="end">accuracy answering directly &#8594; reasoning first</text>
+<text class="ft" x="934" y="440" text-anchor="end">before &#8594; after</text>
 </svg>
 
 </div><figcaption class="cap"><b>What one instruction is worth.</b> Each bar is the accuracy a model gains or loses when it is told to reason before answering, instead of answering directly &mdash; same model, same benchmark, same conditions. The untrained base model pays 3.40 points for thinking. After training on the reasoning <em>process</em>, CESAR earns 3.40 for it: the identical margin, mirrored. All values are MMAU Test-mini accuracy from Table 1 of the paper.</figcaption></figure>
