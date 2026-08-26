@@ -21,45 +21,33 @@ header:
 
 <figure class="fig bleed"><div class="figscroll">
 
-<svg viewBox="0 0 940 446" role="img" aria-label="What reasoning is worth on MMAU Test-mini. The untrained base model loses 3.40 points by reasoning first; CESAR gains exactly 3.40. Ke-Omni-R gains 0.10 and CESAR without the overthinking penalty gains 1.50.">
-<defs><style>.zl{stroke:var(--ink);stroke-width:1.4;opacity:.55}.gl{stroke:var(--rule);stroke-width:1}.hd{font-family:var(--sans);font-size:11.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;fill:var(--muted)}.nm{font-family:var(--sans);font-size:14px;font-weight:700;fill:var(--ink)}.sb{font-family:var(--sans);font-size:11.5px;fill:var(--muted)}.dl{font-family:var(--sans);font-size:16px;font-weight:800}.pr{font-family:var(--mono);font-size:12px;fill:var(--muted)}.tk{font-family:var(--mono);font-size:10px;fill:var(--muted)}</style></defs>
-<text class="hd" x="494" y="42" text-anchor="end">&#8592;&#8194;reasoning costs accuracy</text>
-<text class="hd" x="530" y="42">reasoning adds accuracy&#8194;&#8594;</text>
-<line class="gl" x1="353.0" y1="66" x2="353.0" y2="378" opacity=".55"/>
-<text class="tk" x="353.0" y="60" text-anchor="middle">-3</text>
-<line class="gl" x1="406.0" y1="66" x2="406.0" y2="378" opacity=".55"/>
-<text class="tk" x="406.0" y="60" text-anchor="middle">-2</text>
-<line class="gl" x1="459.0" y1="66" x2="459.0" y2="378" opacity=".55"/>
-<text class="tk" x="459.0" y="60" text-anchor="middle">-1</text>
-<line class="gl" x1="565.0" y1="66" x2="565.0" y2="378" opacity=".55"/>
-<text class="tk" x="565.0" y="60" text-anchor="middle">+1</text>
-<line class="gl" x1="618.0" y1="66" x2="618.0" y2="378" opacity=".55"/>
-<text class="tk" x="618.0" y="60" text-anchor="middle">+2</text>
-<line class="gl" x1="671.0" y1="66" x2="671.0" y2="378" opacity=".55"/>
-<text class="tk" x="671.0" y="60" text-anchor="middle">+3</text>
-<line class="zl" x1="512" y1="62" x2="512" y2="378"/>
-<text class="nm" x="236" y="106" text-anchor="end">Qwen2.5-Omni-7B</text>
-<text class="sb" x="236" y="123" text-anchor="end">base model</text>
-<rect x="331.8" y="89.0" width="180.2" height="26" rx="3" fill="#c0504a"/>
-<text class="dl" x="317.8" y="108.0" fill="#c0504a" text-anchor="end">−3.40</text>
-<text class="pr" x="924" y="108.0" text-anchor="end">68.60 &#8594; 65.20</text>
-<text class="nm" x="236" y="180" text-anchor="end">Ke-Omni-R</text>
-<text class="sb" x="236" y="197" text-anchor="end">outcome-only RL</text>
-<rect x="512.0" y="167.0" width="5.3" height="18" rx="3" fill="var(--muted)" opacity=".5"/>
-<text class="dl" x="531.3" y="182.0" fill="var(--muted)" text-anchor="start" opacity=".5">+0.10</text>
-<text class="pr" x="924" y="182.0" text-anchor="end">74.50 &#8594; 74.60</text>
-<text class="nm" x="236" y="254" text-anchor="end">CESAR w/o OP</text>
-<text class="sb" x="236" y="271" text-anchor="end">ours</text>
-<rect x="512.0" y="241.0" width="79.5" height="18" rx="3" fill="var(--muted)" opacity=".5"/>
-<text class="dl" x="605.5" y="256.0" fill="var(--muted)" text-anchor="start" opacity=".5">+1.50</text>
-<text class="pr" x="924" y="256.0" text-anchor="end">75.00 &#8594; 76.50</text>
-<text class="nm" x="236" y="328" text-anchor="end">CESAR</text>
-<text class="sb" x="236" y="345" text-anchor="end">ours</text>
-<rect x="512.0" y="311.0" width="180.2" height="26" rx="3" fill="var(--link)"/>
-<text class="dl" x="706.2" y="330.0" fill="var(--link)" text-anchor="start">+3.40</text>
-<text class="pr" x="924" y="330.0" text-anchor="end">73.70 &#8594; 77.10</text>
-<text class="tk" x="512" y="408" text-anchor="middle">change in MMAU Test-mini accuracy, points</text>
-<text class="tk" x="924" y="408" text-anchor="end">accuracy before &#8594; after</text>
+<svg viewBox="0 0 940 516" role="img" aria-label="What reasoning is worth on MMAU Test-mini. The untrained base model loses 3.40 points by reasoning first; CESAR gains exactly 3.40. Ke-Omni-R gains 0.10 and CESAR without the overthinking penalty gains 1.50.">
+<defs><style>.zl{stroke:var(--ink);stroke-width:1.5;opacity:.5}.hd{font-family:var(--sans);font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;fill:var(--muted)}.nm{font-family:var(--sans);font-size:14.5px;font-weight:700;fill:var(--ink)}.sb{font-family:var(--sans);font-size:11.5px;fill:var(--muted)}.dl{font-family:var(--sans);font-size:17px;font-weight:800}.pr{font-family:var(--mono);font-size:12px;fill:var(--muted)}.ft{font-family:var(--sans);font-size:11px;fill:var(--muted)}</style></defs>
+<text class="hd" x="520" y="40" text-anchor="end">&#8592;&#8194;reasoning costs accuracy</text>
+<text class="hd" x="572" y="40">reasoning adds accuracy&#8194;&#8594;</text>
+<line class="zl" x1="546" y1="72" x2="546" y2="410"/>
+<text class="nm" x="252" y="116" text-anchor="end">Qwen2.5-Omni-7B</text>
+<text class="sb" x="252" y="134" text-anchor="end">base model</text>
+<rect x="355.6" y="105.0" width="190.4" height="30" rx="3" fill="#c0504a"/>
+<text class="dl" x="338.6" y="126.0" fill="#c0504a" text-anchor="end">−3.40</text>
+<text class="pr" x="934" y="125.0" text-anchor="end">68.60 &#8594; 65.20</text>
+<text class="nm" x="252" y="202" text-anchor="end">Ke-Omni-R</text>
+<text class="sb" x="252" y="220" text-anchor="end">outcome-only RL</text>
+<rect x="546.0" y="195.0" width="5.6" height="22" rx="3" fill="var(--muted)" opacity=".45"/>
+<text class="dl" x="568.6" y="212.0" fill="var(--muted)" text-anchor="start" opacity=".45">+0.10</text>
+<text class="pr" x="934" y="211.0" text-anchor="end">74.50 &#8594; 74.60</text>
+<text class="nm" x="252" y="288" text-anchor="end">CESAR w/o OP</text>
+<text class="sb" x="252" y="306" text-anchor="end">ours</text>
+<rect x="546.0" y="281.0" width="84.0" height="22" rx="3" fill="var(--muted)" opacity=".45"/>
+<text class="dl" x="647.0" y="298.0" fill="var(--muted)" text-anchor="start" opacity=".45">+1.50</text>
+<text class="pr" x="934" y="297.0" text-anchor="end">75.00 &#8594; 76.50</text>
+<text class="nm" x="252" y="374" text-anchor="end">CESAR</text>
+<text class="sb" x="252" y="392" text-anchor="end">ours</text>
+<rect x="546.0" y="363.0" width="190.4" height="30" rx="3" fill="var(--link)"/>
+<text class="dl" x="753.4" y="384.0" fill="var(--link)" text-anchor="start">+3.40</text>
+<text class="pr" x="934" y="383.0" text-anchor="end">73.70 &#8594; 77.10</text>
+<text class="ft" x="546" y="440" text-anchor="middle">change in MMAU Test-mini accuracy, in points</text>
+<text class="ft" x="934" y="440" text-anchor="end">accuracy answering directly &#8594; reasoning first</text>
 </svg>
 
 </div><figcaption class="cap"><b>What one instruction is worth.</b> Each bar is the accuracy a model gains or loses when it is told to reason before answering, instead of answering directly &mdash; same model, same benchmark, same conditions. The untrained base model pays 3.40 points for thinking. After training on the reasoning <em>process</em>, CESAR earns 3.40 for it: the identical margin, mirrored. All values are MMAU Test-mini accuracy from Table 1 of the paper.</figcaption></figure>
