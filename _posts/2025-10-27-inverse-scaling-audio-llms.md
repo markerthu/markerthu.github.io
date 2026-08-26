@@ -138,19 +138,7 @@ header:
 
 <h2>The sign flips, and a 7B model clears the proprietary field</h2>
 
-<p>The headline is not that accuracy went up. It is that the <em>relationship between thinking and accuracy</em> inverted. Every model below is measured twice under identical conditions — once answering directly, once reasoning first.</p>
-
-<div class="panel bleed"><div class="phd"><span class="ttl">What reasoning is worth, per model</span><span class="meta">MMAU Test-mini &middot; direct answer &rarr; reason first</span></div>
-
-<div class="brow"><div class="bl">Qwen2.5-Omni-7B<i>base model</i></div><div class="btrack"><div class="bwrap"><span class="bfill" style="width:48.2%"></span><span class="bval">68.60</span></div><div class="bwrap"><span class="bfill neg" style="width:32.7%"></span><span class="bval">65.20  (−3.40)</span></div></div></div>
-
-<div class="brow"><div class="bl">Ke-Omni-R<i>outcome-only RL</i></div><div class="btrack"><div class="bwrap"><span class="bfill" style="width:75.0%"></span><span class="bval">74.50</span></div><div class="bwrap"><span class="bfill" style="width:75.5%"></span><span class="bval">74.60  (+0.10)</span></div></div></div>
-
-<div class="brow"><div class="bl">CESAR w/o OP<i>ours</i></div><div class="btrack"><div class="bwrap"><span class="bfill" style="width:77.3%"></span><span class="bval">75.00</span></div><div class="bwrap"><span class="bfill aft" style="width:84.1%"></span><span class="bval on">76.50  (+1.50)</span></div></div></div>
-
-<div class="brow"><div class="bl">CESAR<i>ours</i></div><div class="btrack"><div class="bwrap"><span class="bfill" style="width:71.4%"></span><span class="bval">73.70</span></div><div class="bwrap"><span class="bfill aft" style="width:86.8%"></span><span class="bval on">77.10  (+3.40)</span></div></div></div>
-
-<div class="legend"><span><i class="sw"></i>answering directly</span><span><i class="sw aft"></i>reasoning first</span></div></div>
+<p>The headline is not that accuracy went up. It is that the <em>relationship between thinking and accuracy</em> inverted — the mirrored bars at the top of this page. What follows from that inversion is the part that matters for anyone choosing a model.</p>
 
 <div class="stats bleed"><div class="stat"><div class="n">77.10<small>%</small></div><div class="l">MMAU Test-mini &mdash; SOTA, above Gemini 2.5 Pro (71.60) and GPT-4o Audio (62.50)</div></div><div class="stat"><div class="n">56.4<small>%</small></div><div class="l">MMAU-Pro average &mdash; best of any 7B model on the in-the-wild benchmark</div></div><div class="stat"><div class="n">+3.40</div><div class="l">points gained from reasoning, against &minus;3.40 for the untrained base model</div></div></div>
 
