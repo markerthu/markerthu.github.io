@@ -180,8 +180,8 @@ header:
 <text class="pl" x="207.9" y="374.6" text-anchor="start">SD3 + RAFT</text>
 <text class="ps" x="207.9" y="388.6" text-anchor="start">reward-ranked FT &#183; 29.35 / 1.85</text>
 <circle cx="182.2" cy="99.6" r="5.5" fill="var(--muted)" opacity=".62"/>
-<text class="pl" x="170.2" y="85.6" text-anchor="end">SD3</text>
-<text class="ps" x="170.2" y="99.6" text-anchor="end">2B base model &#183; 29.27 / 5.08</text>
+<text class="pl" x="195.2" y="83.6" text-anchor="start">SD3</text>
+<text class="ps" x="195.2" y="97.6" text-anchor="start">2B base model &#183; 29.27 / 5.08</text>
 </svg>
 
 </div><figcaption class="cap"><b>Every point is a row of Table 1.</b> Horizontal: prompt alignment. Vertical: generation diversity. The dashed lines mark the un-tuned SD3 base model, so the tinted quadrant is the region where a method improved alignment <em>without</em> paying for it in diversity. Only one point is in it. RAFT shows the failure mode most clearly &mdash; it buys a little alignment by collapsing diversity from 5.08 to 1.85. The unlabelled middle cluster, left to right: DPO 31.30 / 4.78, ORW-CFM-W2 31.42 / 3.86, FLUX.1-Dev 31.72 / 4.29, SANA-1.5 32.18 / 4.31.</figcaption></figure>
