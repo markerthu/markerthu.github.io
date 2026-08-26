@@ -9,8 +9,7 @@ tags:
   - generative models
   - flow matching
 excerpt: "RL fine-tuning runs on one fixed coefficient that has to both protect the model and get out of its way. Subtracting each sample's advantage lets a 2B model beat a 12B one — without losing diversity."
-header:
-  og_image: "/images/blog/adrpo_reward_diversity.webp"
+last_modified_at: 2026-08-25
 ---
 
 {% include post-editorial.html %}
@@ -132,15 +131,15 @@ header:
 
 <h2>Reward went up. Diversity did not go down.</h2>
 
-<p>This is the result that is hard to get by tuning a constant. Reward-ranked fine-tuning reaches decent alignment by flattening the output distribution &mdash; its diversity falls from 5.08 to <b>1.85</b>, a textbook collapse. Fixed-&beta; W2 regularisation is gentler but still pays 3.86. ADRPO finishes at <b>5.13</b>, <em>above</em> the base model it started from, while posting the highest alignment score in the table.</p>
+<p>This is the result that is hard to get by tuning a constant. Reward-ranked fine-tuning reaches decent almost no alignment at all (29.35 against the base model&rsquo;s 29.27) and still flattens the output distribution to pay for it &mdash; diversity falls from 5.08 to <b>1.85</b>, a textbook collapse. Fixed-&beta; W2 regularisation is gentler but still pays 3.86. ADRPO finishes at <b>5.13</b> against the base model&rsquo;s 5.08 &mdash; unchanged to within the reported seed noise (&plusmn;0.47 and &plusmn;0.52) &mdash; while posting the highest alignment score in the table. It is the only row that buys alignment without paying for it.</p>
 
 <figure class="fig bleed"><div class="figscroll">
 
 <svg viewBox="0 0 940 470" role="img" aria-label="Alignment against diversity for seven text-to-image systems. ADRPO is alone in the upper right: it is the only fine-tuning method that ends with more diversity than the base model it started from.">
-<defs><style>.ax{stroke:var(--rule);stroke-width:1.2}.gr{stroke:var(--rule);stroke-width:1;stroke-dasharray:3 4;opacity:.65}.tk{font-family:var(--mono);font-size:10.5px;fill:var(--muted)}.al{font-family:var(--sans);font-size:12px;font-weight:700;fill:var(--body)}.pl{font-family:var(--sans);font-size:12px;font-weight:600;fill:var(--body)}.ps{font-family:var(--sans);font-size:10.5px;fill:var(--muted)}.hi{font-family:var(--sans);font-size:13.5px;font-weight:800;fill:var(--link)}.zn{font-family:var(--sans);font-size:11px;font-weight:700;fill:var(--muted);letter-spacing:.04em}</style></defs>
+<defs><style>.ax{stroke:var(--rule);stroke-width:1.2}.gr{stroke:var(--muted);stroke-width:1.1;stroke-dasharray:4 4}.tk{font-family:var(--mono);font-size:10.5px;fill:var(--muted)}.al{font-family:var(--sans);font-size:12px;font-weight:700;fill:var(--body)}.pl{font-family:var(--sans);font-size:12px;font-weight:600;fill:var(--body)}.ps{font-family:var(--sans);font-size:10.5px;fill:var(--muted)}.hi{font-family:var(--sans);font-size:13.5px;font-weight:800;fill:var(--link)}.zn{font-family:var(--sans);font-size:11px;font-weight:700;fill:var(--muted);letter-spacing:.04em}</style></defs>
 <line class="gr" x1="182.2" y1="400" x2="182.2" y2="56"/>
 <line class="gr" x1="108" y1="99.6" x2="866" y2="99.6"/>
-<rect x="182.2" y="56" width="683.8" height="43.6" fill="var(--link)" opacity=".05"/>
+<rect x="182.2" y="56" width="683.8" height="43.6" fill="var(--link)" opacity=".13"/>
 <line class="ax" x1="108" y1="400" x2="866" y2="400"/>
 <line class="ax" x1="108" y1="400" x2="108" y2="56"/>
 <line class="ax" x1="139.6" y1="400" x2="139.6" y2="405"/>
@@ -183,7 +182,7 @@ header:
 <text class="ps" x="195.2" y="97.6" text-anchor="start">2B base model &#183; 29.27 / 5.08</text>
 </svg>
 
-</div><figcaption class="cap"><b>Every point is a row of Table 1.</b> Horizontal: prompt alignment. Vertical: generation diversity. The dashed lines mark the un-tuned SD3 base model, so the tinted quadrant is the region where a method improved alignment <em>without</em> paying for it in diversity. Only one point is in it. RAFT shows the failure mode most clearly &mdash; it buys a little alignment by collapsing diversity from 5.08 to 1.85. The unlabelled middle cluster, left to right: DPO 31.30 / 4.78, ORW-CFM-W2 31.42 / 3.86, FLUX.1-Dev 31.72 / 4.29, SANA-1.5 32.18 / 4.31.</figcaption></figure>
+</div><figcaption class="cap"><b>Every point is a row of Table 1.</b> Horizontal: prompt alignment. Vertical: generation diversity. The dashed lines mark the un-tuned SD3 base model, so the tinted quadrant is the region where a method improved alignment <em>without</em> paying for it in diversity. Only one point is in it. RAFT shows the failure mode most clearly &mdash; it buys a little alignment by collapsing diversity from 5.08 to 1.85. The middle cluster, in full: DPO 31.30 / 4.78, ORW-CFM-W2 31.42 / 3.86, FLUX.1-Dev 31.72 / 4.29, SANA-1.5 32.18 / 4.31.</figcaption></figure>
 
 <p class="snum">05 &mdash; Language models</p>
 
@@ -191,7 +190,7 @@ header:
 
 <p>The same objective drops into GRPO for LLM fine-tuning by making the KL coefficient advantage-dependent. Tracked in reward&ndash;entropy space on Qwen2 (0.5B) and Qwen3 (0.6B) against RM-Gemma-2B, the two methods take visibly different paths. GRPO holds high entropy throughout and moves sideways &mdash; lots of exploration, little reward found. ADRPO first tightens into a low-entropy region, then <em>deliberately raises entropy again</em> to break out of the local optimum it landed in, and converges at <b>5&times; GRPO&rsquo;s final reward</b>.</p>
 
-<p>Nobody designed that behaviour. It falls out of the coefficient: once a region stops producing advantage, regularisation rises, the policy loosens, and exploration resumes on its own. The same mechanism explains why GRPO&rsquo;s later checkpoints often score <em>worse</em> than its earlier ones while ADRPO improves monotonically &mdash; no early stopping required.</p>
+<p>Nobody designed that behaviour. It falls out of the coefficient: once a region stops producing advantage, regularisation rises, the policy loosens, and exploration resumes on its own. The <em>absence</em> of that mechanism is why GRPO&rsquo;s later checkpoints often score worse than earlier ones while ADRPO improves monotonically &mdash; no early stopping required.</p>
 
 <p class="snum">06 &mdash; Audio reasoning</p>
 
@@ -213,7 +212,7 @@ header:
 
 <div class="legend"><span><i class="sw aft"></i>ADRPO (7B)</span><span><i class="sw"></i>GRPO, base model, proprietary systems</span></div></div>
 
-<div class="stats bleed"><div class="stat"><div class="n">2B <small>&gt; 12B</small></div><div class="l">SD3 + ADRPO outscores FLUX.1-Dev on alignment, aesthetics and human preference</div></div><div class="stat"><div class="n">5.13</div><div class="l">final diversity against the base model&rsquo;s 5.08 — the only method that gained on both axes</div></div><div class="stat"><div class="n">5&times;</div><div class="l">GRPO&rsquo;s final reward on Qwen3 LLM fine-tuning</div></div><div class="stat"><div class="n">76.0<small>%</small></div><div class="l">MMAU total, above Gemini 2.5 Pro (71.6) and GPT-4o Audio (62.5)</div></div></div>
+<div class="stats bleed"><div class="stat"><div class="n">2B <small>&gt; 12B</small></div><div class="l">SD3 + ADRPO outscores FLUX.1-Dev on alignment, aesthetics and human preference</div></div><div class="stat"><div class="n">5.13</div><div class="l">final diversity, level with the base model&rsquo;s 5.08 &mdash; the only method that did not pay for alignment</div></div><div class="stat"><div class="n">5&times;</div><div class="l">GRPO&rsquo;s final reward on Qwen3 LLM fine-tuning</div></div><div class="stat"><div class="n">76.0<small>%</small></div><div class="l">MMAU total, above Gemini 2.5 Pro (71.6) and GPT-4o Audio (62.5)</div></div></div>
 
 <p class="snum">07 &mdash; Robustness</p>
 
@@ -239,8 +238,8 @@ header:
 
 <p>Exploration versus exploitation is usually framed as something you resolve before training by picking a coefficient, and live with afterwards. The result here is that the information needed to resolve it properly is already sitting in the training loop: the advantage estimate says, for this particular sample, whether the policy has found something worth committing to. Subtracting it turns a global compromise into a local decision.</p>
 
-<p>What makes the result more than a tuning trick is the range it survives. The same one-term change holds across continuous flow matching with a Wasserstein penalty, discrete LLM generation with a KL penalty, and multi-modal audio reasoning — three architectures, three divergence measures, one subtraction, and a 2B model that outperforms a 12B one.</p>
+<p>What makes the result more than a tuning trick is the range it survives. The same one-term change holds across continuous flow matching with a Wasserstein penalty, discrete LLM generation with a KL penalty, and multi-modal audio reasoning — three architectures, two divergence measures, one subtraction, and a 2B model that outperforms a 12B one.</p>
 
-<div class="chips"><span class="chip on">NeurIPS 2025</span><span class="chip">SD3 &middot; Qwen2 &middot; Qwen3 &middot; Qwen2.5-Omni</span><span class="chip">flow matching &amp; LLMs</span><span class="chip">W2 &amp; KL divergence</span><span class="chip">UIUC</span></div>
+<div class="chips"><a class="chip on" href="https://openreview.net/forum?id=aXO0xg0ttW" target="_blank" rel="noopener">NeurIPS 2025 &mdash; read the paper &#8594;</a><span class="chip">SD3 &middot; Qwen2 &middot; Qwen3 &middot; Qwen2.5-Omni</span><span class="chip">flow matching &amp; LLMs</span><span class="chip">W2 &amp; KL divergence</span><span class="chip">UIUC</span></div>
 
 </div>

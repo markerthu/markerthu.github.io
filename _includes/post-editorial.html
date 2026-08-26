@@ -5,9 +5,9 @@
 <style>
 /* --ed-on-accent: text sitting ON the accent colour. The accent flips to a pale
    blue in dark mode, so white-on-accent would drop to 2.4:1 — well under AA. */
-.ed{--ed-accent:var(--link);--ed-soft:var(--pill);--ed-tint:#bedce5;--ed-bar:var(--rule);
+.ed{--ed-accent:var(--link);--ed-soft:var(--pill);--ed-tint:#6a9aab;--ed-neg:#b8403a;--ed-bar:var(--rule);
   --ed-on-accent:#ffffff}
-body.dark-mode .ed{--ed-tint:#2c4450;--ed-on-accent:#0f1216}
+body.dark-mode .ed{--ed-tint:#4a7387;--ed-neg:#f08a82;--ed-on-accent:#0f1216}
 
 /* ── section kicker ── */
 .ed .snum{font-family:var(--sans);font-size:.7rem;font-weight:800;letter-spacing:.13em;
@@ -24,8 +24,8 @@ body.dark-mode .ed{--ed-tint:#2c4450;--ed-on-accent:#0f1216}
 .ed .fig svg{display:block;width:100%;height:auto;overflow:visible}
 .ed .figscroll{overflow-x:auto}
 .ed .figscroll svg{min-width:620px}
-@media(max-width:720px){
-  .ed .figscroll::after{content:"scroll to see the full figure \2192";display:block;
+  .ed .figscroll::after{display:none}
+  .ed .figscroll.scrollable::after{content:"scroll to see the full figure \2192";display:block;
     font-family:var(--sans);font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;
     color:var(--muted);padding-top:10px}
 }
@@ -46,10 +46,10 @@ body.dark-mode .ed{--ed-tint:#2c4450;--ed-on-accent:#0f1216}
 .ed .bl{font-family:var(--sans);font-size:.79rem;font-weight:500;color:var(--body);line-height:1.35}
 .ed .bl i{display:block;font-style:normal;font-size:.71rem;color:var(--muted);font-weight:400}
 .ed .btrack{display:flex;flex-direction:column;gap:4px;min-width:0}
-.ed .bwrap{display:flex;align-items:center;gap:8px}
-/* cap the bar so the value beside it never wraps, whatever scale a panel uses */
-.ed .bfill{height:13px;border-radius:2px;min-width:2px;background:var(--ed-tint);
-  flex:0 0 auto;max-width:calc(100% - 104px)}
+  /* grid, not flex: the value occupies exactly what it measures and the bar scales
+     against what is actually left — equal-looking bars can never mean unequal data */
+  .ed .bwrap{display:grid;grid-template-columns:1fr max-content;gap:8px;align-items:center}
+  .ed .bfill{height:13px;border-radius:2px;min-width:2px;background:var(--ed-tint);max-width:100%}
 .ed .bfill.aft{background:var(--ed-accent)}
 .ed .bfill.neg{background:#c9736c}
 .ed .bval{font-family:var(--mono);font-size:.72rem;font-variant-numeric:tabular-nums;
@@ -60,6 +60,7 @@ body.dark-mode .ed{--ed-tint:#2c4450;--ed-on-accent:#0f1216}
 .ed .legend span{display:flex;align-items:center;gap:6px}
 .ed .sw{width:11px;height:11px;border-radius:2px;flex:0 0 auto;background:var(--ed-tint)}
 .ed .sw.aft{background:var(--ed-accent)}
+  .ed .sw.neg{background:#c9736c}
 
 /* ── numbered finding cards ── */
 .ed .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-top:1.7em;margin-bottom:1.7em}
@@ -114,6 +115,8 @@ body.dark-mode .ed .turn.bad .txt{color:#f08a82}
 .ed .chip{font-family:var(--sans);font-size:.74rem;font-weight:600;padding:3px 10px;border-radius:14px;
   border:1px solid var(--rule);color:var(--muted);background:var(--bg);white-space:nowrap}
 .ed .chip.on{background:var(--ed-accent);border-color:var(--ed-accent);color:var(--ed-on-accent)}
+  a.ed-x,.ed a.chip{text-decoration:none}
+  .ed a.chip.on:hover{filter:brightness(1.12)}
 
 /* ── takeaway rule ── */
 .ed .kick{border-left:3px solid var(--ed-accent);padding:2px 0 2px 16px;margin:1.7em 0;
@@ -126,8 +129,33 @@ body.dark-mode .ed .turn.bad .txt{color:#f08a82}
   margin-left:50%;transform:translateX(-50%)}
 @media(max-width:1010px){.ed .bleed{width:100%;margin-left:0;transform:none}}
 
-@media print{
-  .ed .fcard,.ed .knob,.ed .panel,.ed .fig,.ed .stat{break-inside:avoid}
-  .ed .bfill{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  @media print{
+    /* the page paints through dark-mode tokens; without this a dark-mode reader
+       prints near-white ink onto white paper */
+    body.dark-mode, body.dark-mode .ed{
+      --bg:#fff;--band:#f6f3ec;--ink:#1a1815;--body:#2b2823;--muted:#6c6860;
+      --rule:#e8e3d9;--link:#1565c0;--pill:#f0ede6;--fig-border:#e7e2d8;
+      --ed-tint:#6a9aab;--ed-on-accent:#fff}
+    .ed .fcard,.ed .knob,.ed .panel,.ed .fig,.ed .stat{break-inside:avoid}
+    /* every element whose meaning is carried by a background colour */
+    .ed .bfill,.ed .sw,.ed .fno,.ed .chip.on{
+      -webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .ed .figscroll::after{display:none}
+  }
 }
 </style>
+<script>
+/* mark a figure as scrollable only when it really overflows, so the hint never
+   appears where nothing can scroll (and never prints) */
+(function(){
+  function sync(){
+    document.querySelectorAll('.ed .figscroll').forEach(function(el){
+      el.classList.toggle('scrollable', el.scrollWidth > el.clientWidth + 2);
+    });
+  }
+  if (document.readyState !== 'loading') sync();
+  else document.addEventListener('DOMContentLoaded', sync);
+  window.addEventListener('resize', sync);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(sync);
+})();
+</script>

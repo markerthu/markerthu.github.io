@@ -9,6 +9,7 @@ tags:
   - reasoning
   - test-time scaling
 excerpt: "Ask an Audio LLM to think before it answers and it gets worse — and worse the longer it thinks. The culprit is not reasoning; it is reasoning nobody trained. Rewarding the process flips the sign."
+last_modified_at: 2026-08-25
 header:
   og_image: "/projects/cesar/images/teaser.png"
 ---
@@ -28,18 +29,18 @@ header:
 <line class="zl" x1="546" y1="72" x2="546" y2="410"/>
 <text class="nm" x="252" y="116" text-anchor="end">Qwen2.5-Omni-7B</text>
 <text class="sb" x="252" y="134" text-anchor="end">base model</text>
-<rect x="355.6" y="105.0" width="190.4" height="30" rx="3" fill="#c0504a"/>
-<text class="dl" x="338.6" y="126.0" fill="#c0504a" text-anchor="end">−3.40</text>
+<rect x="355.6" y="105.0" width="190.4" height="30" rx="3" fill="var(--ed-neg)"/>
+<text class="dl" x="338.6" y="126.0" fill="var(--ed-neg)" text-anchor="end">−3.40</text>
 <text class="pr" x="934" y="125.0" text-anchor="end">68.60 &#8594; 65.20</text>
 <text class="nm" x="252" y="202" text-anchor="end">Ke-Omni-R</text>
 <text class="sb" x="252" y="220" text-anchor="end">outcome-only RL</text>
-<rect x="546.0" y="195.0" width="5.6" height="22" rx="3" fill="var(--muted)" opacity=".45"/>
-<text class="dl" x="568.6" y="212.0" fill="var(--muted)" text-anchor="start" opacity=".45">+0.10</text>
+<rect x="546.0" y="195.0" width="5.6" height="22" rx="3" fill="var(--muted)" opacity=".7"/>
+<text class="dl" x="568.6" y="212.0" fill="var(--muted)" text-anchor="start">+0.10</text>
 <text class="pr" x="934" y="211.0" text-anchor="end">74.50 &#8594; 74.60</text>
 <text class="nm" x="252" y="288" text-anchor="end">CESAR w/o OP</text>
 <text class="sb" x="252" y="306" text-anchor="end">ours</text>
-<rect x="546.0" y="281.0" width="84.0" height="22" rx="3" fill="var(--muted)" opacity=".45"/>
-<text class="dl" x="647.0" y="298.0" fill="var(--muted)" text-anchor="start" opacity=".45">+1.50</text>
+<rect x="546.0" y="281.0" width="84.0" height="22" rx="3" fill="var(--muted)" opacity=".7"/>
+<text class="dl" x="647.0" y="298.0" fill="var(--muted)" text-anchor="start">+1.50</text>
 <text class="pr" x="934" y="297.0" text-anchor="end">75.00 &#8594; 76.50</text>
 <text class="nm" x="252" y="374" text-anchor="end">CESAR</text>
 <text class="sb" x="252" y="392" text-anchor="end">ours</text>
@@ -71,7 +72,7 @@ header:
 
 <h2>More thinking, less accuracy</h2>
 
-<p>Text LLMs made chain-of-thought look like a free lunch: o1 and DeepSeek-R1 turned longer deliberation into better answers. Carrying the same prompt into audio produces the opposite. Across the leading open Audio LLMs, switching reasoning on costs accuracy, and sweeping the maximum thinking length makes the loss deepen rather than recover. We call it <b>test-time inverse scaling</b>, and it is the first thing a process-level view has to explain.</p>
+<p>Text LLMs made chain-of-thought look like a free lunch: o1 and DeepSeek-R1 turned longer deliberation into better answers. Carrying the same prompt into audio produces the opposite. On the open Audio LLM this work starts from, switching reasoning on costs 3.40 points, and an outcome-only RL baseline recovers only to break-even; sweeping the maximum thinking length makes the loss deepen rather than recover. We call it <b>test-time inverse scaling</b>, and it is the first thing a process-level view has to explain.</p>
 
 <div class="panel bleed"><div class="phd"><span class="ttl">MMAU Test-mini &mdash; total accuracy</span><span class="meta">1k expertly annotated questions &middot; 27 reasoning skills &middot; higher is better</span></div>
 
@@ -95,7 +96,7 @@ header:
 
 <h2>The chains were never trained, only permitted</h2>
 
-<p>It would be easy to read the curve above as evidence that audio reasoning is a dead end. Reading the chains themselves says otherwise. Supervised fine-tuning on CoT data teaches a model to <em>imitate the shape</em> of reasoning; outcome-only RL rewards it only for landing on the right option. Neither ever looks at the middle. Three failure modes follow directly, and all three are visible in the traces.</p>
+<p>It would be easy to read that as evidence that audio reasoning is a dead end. Reading the chains themselves says otherwise. Supervised fine-tuning on CoT data teaches a model to <em>imitate the shape</em> of reasoning; outcome-only RL rewards it only for landing on the right option. Neither ever looks at the middle. Three failure modes follow directly, and all three are visible in the traces.</p>
 
 <div class="knobs bleed">
 <div class="knob"><div class="kcomp">failure mode 01</div><div class="kttl">Reasoning appears at random</div><div class="kbody">Nothing in an outcome-only objective makes a reasoning pattern reliable. Useful analysis shows up when it happens to, and cannot be summoned on demand.</div></div>
@@ -146,19 +147,19 @@ header:
 
 <div class="panel bleed"><div class="phd"><span class="ttl">MMSU &mdash; reasoning vs perception</span><span class="meta">accuracy %, averaged over semantics, phonology and paralinguistics</span></div>
 
-<div class="brow"><div class="bl">Human</div><div class="btrack"><div class="bwrap"><span class="bfill" style="width:86.3%"></span><span class="bval">86.77</span></div><div class="bwrap"><span class="bfill" style="width:93.7%"></span><span class="bval">91.24</span></div></div></div>
+<div class="brow"><div class="bl">Human</div><div class="btrack"><div class="bwrap"><span class="bfill" style="width:86.3%"></span><span class="bval">86.77 reasoning</span></div><div class="bwrap"><span class="bfill" style="width:93.7%"></span><span class="bval">91.24 perception</span></div></div></div>
 
-<div class="brow"><div class="bl">CESAR<i>ours</i></div><div class="btrack"><div class="bwrap"><span class="bfill aft" style="width:76.8%"></span><span class="bval on">81.07</span></div><div class="bwrap"><span class="bfill aft" style="width:22.4%"></span><span class="bval on">48.45</span></div></div></div>
+<div class="brow"><div class="bl">CESAR<i>ours</i></div><div class="btrack"><div class="bwrap"><span class="bfill aft" style="width:76.8%"></span><span class="bval on">81.07 reasoning</span></div><div class="bwrap"><span class="bfill aft" style="width:22.4%"></span><span class="bval on">48.45 perception</span></div></div></div>
 
-<div class="brow"><div class="bl">Qwen2.5-Omni-7B<i>base</i></div><div class="btrack"><div class="bwrap"><span class="bfill" style="width:74.7%"></span><span class="bval">79.83</span></div><div class="bwrap"><span class="bfill" style="width:12.5%"></span><span class="bval">42.50</span></div></div></div>
+<div class="brow"><div class="bl">Qwen2.5-Omni-7B<i>base</i></div><div class="btrack"><div class="bwrap"><span class="bfill" style="width:74.7%"></span><span class="bval">79.83 reasoning</span></div><div class="bwrap"><span class="bfill" style="width:12.5%"></span><span class="bval">42.50 perception</span></div></div></div>
 
-<div class="brow"><div class="bl">Ke-Omni-R<i>outcome-only RL</i></div><div class="btrack"><div class="bwrap"><span class="bfill" style="width:71.8%"></span><span class="bval">78.06</span></div><div class="bwrap"><span class="bfill" style="width:20.2%"></span><span class="bval">47.09</span></div></div></div>
+<div class="brow"><div class="bl">Ke-Omni-R<i>outcome-only RL</i></div><div class="btrack"><div class="bwrap"><span class="bfill" style="width:71.8%"></span><span class="bval">78.06 reasoning</span></div><div class="bwrap"><span class="bfill" style="width:20.2%"></span><span class="bval">47.09 perception</span></div></div></div>
 
-<div class="brow"><div class="bl">Gemini 1.5 Pro<i>proprietary</i></div><div class="btrack"><div class="bwrap"><span class="bfill" style="width:68.6%"></span><span class="bval">76.16</span></div><div class="bwrap"><span class="bfill" style="width:18.9%"></span><span class="bval">46.31</span></div></div></div>
+<div class="brow"><div class="bl">Gemini 1.5 Pro<i>proprietary</i></div><div class="btrack"><div class="bwrap"><span class="bfill" style="width:68.6%"></span><span class="bval">76.16 reasoning</span></div><div class="bwrap"><span class="bfill" style="width:18.5%"></span><span class="bval">46.10 perception</span></div></div></div>
 
-<div class="brow"><div class="bl">GPT-4o Audio<i>proprietary</i></div><div class="btrack"><div class="bwrap"><span class="bfill" style="width:61.6%"></span><span class="bval">71.96</span></div><div class="bwrap"><span class="bfill" style="width:7.8%"></span><span class="bval">39.67</span></div></div></div>
+<div class="brow"><div class="bl">GPT-4o Audio<i>proprietary</i></div><div class="btrack"><div class="bwrap"><span class="bfill" style="width:61.6%"></span><span class="bval">71.96 reasoning</span></div><div class="bwrap"><span class="bfill" style="width:7.8%"></span><span class="bval">39.67 perception</span></div></div></div>
 
-<div class="legend"><span><i class="sw aft"></i>CESAR</span><span><i class="sw"></i>humans, base model, RL baseline, proprietary systems</span><span>upper bar = reasoning &middot; lower bar = perception</span></div></div>
+<div class="legend"><span><i class="sw aft"></i>CESAR</span><span><i class="sw"></i>humans, base model, RL baseline, proprietary systems</span></div></div>
 
 <p class="snum">07 &mdash; The verdict</p>
 
@@ -172,7 +173,7 @@ header:
 
 <div class="brow"><div class="bl">vs Ke-Omni-R<i>outcome-only RL</i></div><div class="btrack"><div class="bwrap"><span class="bfill aft" style="width:63.1%"></span><span class="bval on">63.10% win</span></div><div class="bwrap"><span class="bfill neg" style="width:14.8%"></span><span class="bval">14.80% lose</span></div><div class="bwrap"><span class="bfill" style="width:22.1%"></span><span class="bval">22.10% tie</span></div></div></div>
 
-<div class="legend"><span><i class="sw aft"></i>CESAR preferred</span><span><i class="sw"></i>tie</span><span>the second row is the one that matters: it beats an RL baseline trained on the same data, outcome-only</span></div></div>
+<div class="legend"><span><i class="sw aft"></i>CESAR preferred</span><span><i class="sw neg"></i>baseline preferred</span><span><i class="sw"></i>tie</span><span>the second row is the one that matters: it beats an RL baseline trained on the same data, outcome-only</span></div></div>
 
 <p class="snum">08 &mdash; What it means</p>
 
@@ -182,6 +183,6 @@ header:
 
 <p>The wall it runs into next is not cognitive. It is perceptual: 48.45 against 91.24. The next gain in audio reasoning will not come from thinking harder about what the model heard. It will come from hearing it better.</p>
 
-<div class="chips"><span class="chip on">ICLR 2026</span><span class="chip">Qwen2.5-Omni-7B</span><span class="chip">GRPO</span><span class="chip">MMAU &middot; MMAU-Pro &middot; MMSU</span><span class="chip">UIUC &amp; Amazon AGI Foundations</span></div>
+<div class="chips"><a class="chip on" href="https://openreview.net/forum?id=DUr48hxO2h" target="_blank" rel="noopener">ICLR 2026 &mdash; read the paper &#8594;</a><span class="chip">Qwen2.5-Omni-7B</span><span class="chip">GRPO</span><span class="chip">MMAU &middot; MMAU-Pro &middot; MMSU</span><span class="chip">UIUC &amp; Amazon AGI Foundations</span></div>
 
 </div>
