@@ -206,7 +206,7 @@ body.dark-mode .ed .turn.bad .txt{color:#f08a82}
 /* two-state flip: bars animate between "answer directly" and "reason first".
    Server-rendered markup is already in the "reason first" state, so with JS off
    the figure still shows real, labelled numbers. */
-(function(){
+function initFlip(){
   var wrap = document.getElementById('flipwrap');
   if (!wrap) return;
   var rows = wrap.querySelectorAll('.frow');
@@ -224,10 +224,10 @@ body.dark-mode .ed .turn.bad .txt{color:#f08a82}
   btns.forEach(function(b){
     b.addEventListener('click', function(){ apply(b.dataset.mode); });
   });
-})();
+}
 
 /* advantage slider: beta_tot = beta_0 - A, exactly the paper's one-line change */
-(function(){
+function initAdv(){
   var box = document.getElementById('advfx');
   if (!box) return;
   var sl   = box.querySelector('input[type=range]');
@@ -254,5 +254,12 @@ body.dark-mode .ed .turn.bad .txt{color:#f08a82}
   }
   sl.addEventListener('input', render);
   render();
+}
+
+/* the include renders before the post body, so wait for the DOM */
+(function(){
+  function boot(){ initFlip(); initAdv(); }
+  if (document.readyState !== 'loading') boot();
+  else document.addEventListener('DOMContentLoaded', boot);
 })();
 </script>
