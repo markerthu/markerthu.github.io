@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'One Subtraction Ends the Exploration-Exploitation Trade-off'
+title: 'One Subtraction Ends the Exploration–Exploitation Trade‑off'
 date: 2025-10-20
 permalink: /posts/2025/10/diversity-collapse-rlhf/
 tags:
