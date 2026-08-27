@@ -143,6 +143,50 @@ body.dark-mode .ed .turn.bad .txt{color:#f08a82}
     .ed .figscroll::after{display:none}
   }
 }
+
+  /* ── interactive: two-state toggle ── */
+  .ed .flip{margin:26px 0 8px}
+  .ed .flipbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+  .ed .flipbar .lab{font-family:var(--sans);font-size:.74rem;font-weight:700;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--muted)}
+  .ed .seg{display:inline-flex;border:1px solid var(--rule);border-radius:999px;background:var(--band);padding:3px}
+  .ed .seg button{font-family:var(--sans);font-size:.82rem;font-weight:600;color:var(--muted);
+    background:none;border:0;border-radius:999px;padding:6px 15px;cursor:pointer;transition:background .18s,color .18s}
+  .ed .seg button[aria-pressed="true"]{background:var(--ed-accent);color:var(--ed-on-accent)}
+  .ed .seg button:focus-visible{outline:2px solid var(--ed-accent);outline-offset:2px}
+  .ed .frow{display:grid;grid-template-columns:150px 1fr 82px;gap:10px 14px;align-items:center;margin-bottom:14px}
+  .ed .frow .fl{font-family:var(--sans);font-size:.82rem;font-weight:700;color:var(--ink);line-height:1.3}
+  .ed .frow .fl i{display:block;font-style:normal;font-size:.71rem;color:var(--muted);font-weight:400}
+  .ed .ftrack{position:relative;height:26px;background:var(--band);border-radius:4px;overflow:hidden}
+  .ed .ffill{position:absolute;inset:0 auto 0 0;border-radius:4px;background:var(--ed-tint);
+    transition:width .55s cubic-bezier(.22,.9,.3,1),background .3s}
+  .ed .frow.up .ffill{background:var(--ed-accent)}
+  .ed .frow.down .ffill{background:var(--ed-neg)}
+  .ed .fnum{font-family:var(--mono);font-size:.86rem;font-weight:700;color:var(--ink);
+    font-variant-numeric:tabular-nums;text-align:right}
+  .ed .fdel{font-family:var(--mono);font-size:.72rem;font-weight:700;margin-left:7px;opacity:0;
+    transition:opacity .4s}
+  .ed .flip.on .fdel{opacity:1}
+  .ed .frow.up .fdel{color:var(--ed-accent)} .ed .frow.down .fdel{color:var(--ed-neg)}
+
+  /* ── interactive: formula slider ── */
+  .ed .knobfx{margin:26px 0 8px}
+  .ed .eqn{font-family:var(--mono);font-size:clamp(1.05rem,3.4vw,1.5rem);font-weight:700;color:var(--ink);
+    text-align:center;margin:4px 0 22px;line-height:1.9}
+  .ed .eqn em{font-style:normal;color:var(--ed-accent)}
+  .ed .eqn .box{display:inline-block;min-width:4.6em;padding:2px 10px;border-radius:6px;
+    background:var(--band);border:1px solid var(--rule);transition:background .25s}
+  .ed .sl{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;margin-bottom:18px}
+  .ed .sl label{font-family:var(--sans);font-size:.78rem;color:var(--muted);white-space:nowrap}
+  .ed .sl input[type=range]{width:100%;accent-color:var(--ed-accent)}
+  .ed .sl input[type=range]:focus-visible{outline:2px solid var(--ed-accent);outline-offset:3px}
+  .ed .gauge{height:30px;border-radius:5px;background:var(--band);position:relative;overflow:hidden;margin-bottom:10px}
+  .ed .gfill{position:absolute;inset:0 auto 0 0;background:var(--ed-accent);
+    transition:width .25s ease-out,background .25s}
+  .ed .verdict{font-family:var(--sans);font-size:.92rem;line-height:1.6;color:var(--body);
+    min-height:3.1em;margin-top:12px}
+  .ed .verdict b{color:var(--ink)}
+  @media(max-width:620px){.ed .frow{grid-template-columns:1fr;gap:6px}.ed .frow .fnum{text-align:left}}
 </style>
 <script>
 /* mark a figure as scrollable only when it really overflows, so the hint never
@@ -157,5 +201,58 @@ body.dark-mode .ed .turn.bad .txt{color:#f08a82}
   else document.addEventListener('DOMContentLoaded', sync);
   window.addEventListener('resize', sync);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(sync);
+})();
+
+/* two-state flip: bars animate between "answer directly" and "reason first".
+   Server-rendered markup is already in the "reason first" state, so with JS off
+   the figure still shows real, labelled numbers. */
+(function(){
+  var wrap = document.getElementById('flipwrap');
+  if (!wrap) return;
+  var rows = wrap.querySelectorAll('.frow');
+  var btns = wrap.querySelectorAll('.seg button');
+  function apply(mode){
+    rows.forEach(function(r){
+      var p = r.dataset[mode === 'a' ? 'pa' : 'pb'];
+      var v = r.dataset[mode === 'a' ? 'a'  : 'b'];
+      r.querySelector('.ffill').style.width = p + '%';
+      r.querySelector('.fv').textContent = v;
+    });
+    wrap.classList.toggle('on', mode === 'b');
+    btns.forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.mode === mode)); });
+  }
+  btns.forEach(function(b){
+    b.addEventListener('click', function(){ apply(b.dataset.mode); });
+  });
+})();
+
+/* advantage slider: beta_tot = beta_0 - A, exactly the paper's one-line change */
+(function(){
+  var box = document.getElementById('advfx');
+  if (!box) return;
+  var sl   = box.querySelector('input[type=range]');
+  var bA   = box.querySelector('.vA');
+  var bB   = box.querySelector('.vB');
+  var fill = box.querySelector('.gfill');
+  var say  = box.querySelector('.verdict');
+  var B0   = parseFloat(box.dataset.beta0);
+  function render(){
+    var a = parseFloat(sl.value) / 100;
+    var b = B0 - a;                       // the whole method, on one line
+    bA.textContent = (a >= 0 ? '+' : '\u2212') + Math.abs(a).toFixed(2);
+    bB.textContent = b.toFixed(2);
+    var frac = Math.max(0, Math.min(1, b / (B0 * 2)));
+    fill.style.width = (frac * 100).toFixed(1) + '%';
+    fill.style.background = a > 0.15 ? 'var(--ed-accent)'
+                          : (a < -0.15 ? 'var(--ed-neg)' : 'var(--ed-tint)');
+    var msg;
+    if (a > 0.15)       msg = '<b>Good sample.</b> The advantage is positive, so the penalty shrinks to ' + b.toFixed(2) + '. The policy is allowed to move — this is where the model exploits what is working.';
+    else if (a < -0.15) msg = '<b>Bad sample.</b> The advantage is negative, so the penalty <em>grows</em> to ' + b.toFixed(2) + '. The update is pinned near the reference model — this is what stops the collapse.';
+    else                msg = '<b>Average sample.</b> The advantage is near zero, so the coefficient stays at its baseline ' + b.toFixed(2) + ' and the sample barely moves the policy.';
+    say.innerHTML = msg;
+    sl.setAttribute('aria-valuetext', 'advantage ' + a.toFixed(2) + ', regularisation coefficient ' + b.toFixed(2));
+  }
+  sl.addEventListener('input', render);
+  render();
 })();
 </script>

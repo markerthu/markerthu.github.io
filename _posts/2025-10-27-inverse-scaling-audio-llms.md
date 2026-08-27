@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'Test-Time Inverse Scaling in Audio LLMs'
+title: 'Reasoning Made Audio LLMs Worse. We Flipped the Sign.'
 date: 2025-10-27
 permalink: /posts/2025/10/inverse-scaling-audio-llms/
 tags:
@@ -8,7 +8,7 @@ tags:
   - audio LLMs
   - reasoning
   - test-time scaling
-excerpt: "Ask an Audio LLM to think before it answers and it gets worse — and worse the longer it thinks. The culprit is not reasoning; it is reasoning nobody trained. Rewarding the process flips the sign."
+excerpt: "Telling an Audio LLM to think cost it 3.40 points. Rewarding the reasoning process instead of only the answer earns 3.40 — the same margin, mirrored. That is test-time inverse scaling, solved."
 last_modified_at: 2026-08-25
 header:
   og_image: "/projects/cesar/images/teaser.png"
@@ -20,38 +20,11 @@ header:
 
 <p class="lede">Chain-of-thought is the reflex answer for making a model smarter. In Audio LLMs it backfires: tell the model to think first and it gets <em>worse</em>, and the longer it thinks the worse it gets. This note is about why that happens, why it is not an argument against reasoning, and what changes when you supervise the reasoning process instead of only the final answer.</p>
 
-<figure class="fig bleed"><div class="figscroll">
+<div class="fig bleed">
 
-<svg viewBox="0 0 940 508" role="img" aria-label="What reasoning is worth on MMAU Test-mini. The untrained base model loses 3.40 points by reasoning first; CESAR gains exactly 3.40. Ke-Omni-R gains 0.10 and CESAR without the overthinking penalty gains 1.50.">
-<defs><style>.zl{stroke:var(--ink);stroke-width:1.5;opacity:.5}.hd{font-family:var(--sans);font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;fill:var(--muted)}.nm{font-family:var(--sans);font-size:14.5px;font-weight:700;fill:var(--ink)}.sb{font-family:var(--sans);font-size:11.5px;fill:var(--muted)}.dl{font-family:var(--sans);font-size:17px;font-weight:800}.pr{font-family:var(--mono);font-size:12px;fill:var(--muted)}.ft{font-family:var(--sans);font-size:11px;fill:var(--muted)}</style></defs>
-<text class="hd" x="520" y="40" text-anchor="end">&#8592;&#8194;reasoning costs accuracy</text>
-<text class="hd" x="572" y="40">reasoning adds accuracy&#8194;&#8594;</text>
-<line class="zl" x1="546" y1="72" x2="546" y2="410"/>
-<text class="nm" x="252" y="116" text-anchor="end">Qwen2.5-Omni-7B</text>
-<text class="sb" x="252" y="134" text-anchor="end">base model</text>
-<rect x="355.6" y="105.0" width="190.4" height="30" rx="3" fill="var(--ed-neg)"/>
-<text class="dl" x="338.6" y="126.0" fill="var(--ed-neg)" text-anchor="end">−3.40</text>
-<text class="pr" x="934" y="125.0" text-anchor="end">68.60 &#8594; 65.20</text>
-<text class="nm" x="252" y="202" text-anchor="end">Ke-Omni-R</text>
-<text class="sb" x="252" y="220" text-anchor="end">outcome-only RL</text>
-<rect x="546.0" y="195.0" width="5.6" height="22" rx="3" fill="var(--muted)" opacity=".7"/>
-<text class="dl" x="568.6" y="212.0" fill="var(--muted)" text-anchor="start">+0.10</text>
-<text class="pr" x="934" y="211.0" text-anchor="end">74.50 &#8594; 74.60</text>
-<text class="nm" x="252" y="288" text-anchor="end">CESAR w/o OP</text>
-<text class="sb" x="252" y="306" text-anchor="end">ours</text>
-<rect x="546.0" y="281.0" width="84.0" height="22" rx="3" fill="var(--muted)" opacity=".7"/>
-<text class="dl" x="647.0" y="298.0" fill="var(--muted)" text-anchor="start">+1.50</text>
-<text class="pr" x="934" y="297.0" text-anchor="end">75.00 &#8594; 76.50</text>
-<text class="nm" x="252" y="374" text-anchor="end">CESAR</text>
-<text class="sb" x="252" y="392" text-anchor="end">ours</text>
-<rect x="546.0" y="363.0" width="190.4" height="30" rx="3" fill="var(--link)"/>
-<text class="dl" x="753.4" y="384.0" fill="var(--link)" text-anchor="start">+3.40</text>
-<text class="pr" x="934" y="383.0" text-anchor="end">73.70 &#8594; 77.10</text>
-<text class="ft" x="546" y="440" text-anchor="middle">change in MMAU Test-mini accuracy, in points</text>
-<text class="ft" x="934" y="440" text-anchor="end">before &#8594; after</text>
-</svg>
+<div class="flip on" id="flipwrap"><div class="flipbar"><span class="lab">Same model, same benchmark &mdash; one instruction apart</span><span class="seg" role="group" aria-label="Answering mode"><button type="button" data-mode="a" aria-pressed="false">answer directly</button><button type="button" data-mode="b" aria-pressed="true">reason first</button></span></div><div class="frow down" data-a="68.60" data-b="65.20" data-pa="38.82" data-pb="18.82"><div class="fl">Qwen2.5-Omni-7B<i>base model</i></div><div class="ftrack"><div class="ffill" style="width:18.82%"></div></div><div class="fnum"><span class="fv">65.20</span><span class="fdel">−3.40</span></div></div><div class="frow " data-a="74.50" data-b="74.60" data-pa="73.53" data-pb="74.12"><div class="fl">Ke-Omni-R<i>outcome-only RL</i></div><div class="ftrack"><div class="ffill" style="width:74.12%"></div></div><div class="fnum"><span class="fv">74.60</span><span class="fdel">+0.10</span></div></div><div class="frow up" data-a="75.00" data-b="76.50" data-pa="76.47" data-pb="85.29"><div class="fl">CESAR w/o OP<i>ours</i></div><div class="ftrack"><div class="ffill" style="width:85.29%"></div></div><div class="fnum"><span class="fv">76.50</span><span class="fdel">+1.50</span></div></div><div class="frow up" data-a="73.70" data-b="77.10" data-pa="68.82" data-pb="88.82"><div class="fl">CESAR<i>ours</i></div><div class="ftrack"><div class="ffill" style="width:88.82%"></div></div><div class="fnum"><span class="fv">77.10</span><span class="fdel">+3.40</span></div></div><p class="cap" style="margin-top:18px"><b>Flip the switch.</b> Every number is MMAU Test-mini total accuracy from Table 1 of the paper &mdash; the left state is the model answering directly, the right state is the same model told to reason first. The untrained base model falls 3.40 points for thinking. After training on the reasoning <em>process</em>, CESAR gains 3.40 for it: the same margin, sign reversed. That reversal is what &ldquo;solving test-time inverse scaling&rdquo; means.</p></div>
 
-</div><figcaption class="cap"><b>What one instruction is worth.</b> Each bar is the accuracy a model gains or loses when it is told to reason before answering, instead of answering directly &mdash; same model, same benchmark, same conditions. The untrained base model pays 3.40 points for thinking. After training on the reasoning <em>process</em>, CESAR earns 3.40 for it: the identical margin, mirrored. All values are MMAU Test-mini accuracy from Table 1 of the paper.</figcaption></figure>
+</div>
 
 <p class="snum">The short version</p>
 

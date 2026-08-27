@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'The Exploration-Exploitation Dilemma in RLHF for Generative Models'
+title: 'One Subtraction Ends the Exploration-Exploitation Trade-off'
 date: 2025-10-20
 permalink: /posts/2025/10/diversity-collapse-rlhf/
 tags:
@@ -8,7 +8,7 @@ tags:
   - RLHF
   - generative models
   - flow matching
-excerpt: "RL fine-tuning runs on one fixed coefficient that has to both protect the model and get out of its way. Subtracting each sample's advantage lets a 2B model beat a 12B one — without losing diversity."
+excerpt: "RL post-training runs on one fixed coefficient that has to both protect the model and get out of its way. Subtract each sample's advantage from it — one line — and a 2B model beats a 12B one without losing diversity."
 last_modified_at: 2026-08-25
 ---
 
@@ -17,6 +17,12 @@ last_modified_at: 2026-08-25
 <div class="ed" markdown="0">
 
 <p class="lede">RL fine-tuning of a generative model runs on one dial. Turn it up and the model keeps its diversity but stops improving; turn it down and it chases reward until it collapses into template output. The dial is a single coefficient applied identically to every sample. This note is about what happens when you stop treating it as a constant.</p>
+
+<div class="fig bleed">
+
+<div class="knobfx" id="advfx" data-beta0="1"><div class="flipbar"><span class="lab">Drag the advantage. That is the whole method.</span></div><p class="eqn">&beta;<sub>tot</sub> &nbsp;=&nbsp; &beta;<sub>0</sub> &nbsp;&minus;&nbsp; <em>A</em><span class="box vA">+0.00</span>&nbsp;=&nbsp;<span class="box vB">1.00</span></p><div class="sl"><label for="advsl">worse than average</label><input id="advsl" type="range" min="-100" max="100" step="1" value="0" aria-label="Sample advantage, from minus one to plus one"><label for="advsl">better than average</label></div><div class="gauge"><div class="gfill" style="width:50%"></div></div><p class="verdict"><b>Average sample.</b> The advantage is near zero, so the coefficient stays at its baseline 1.00 and the sample barely moves the policy.</p><p class="cap" style="margin-top:16px"><b>One subtraction, and the dilemma dissolves.</b> Every RL fine-tuning method before this one picks a single &beta; and applies it to every sample: raise it and the model is protected but cannot improve, lower it and it improves until it collapses. ADRPO makes &beta; a function of the sample &mdash; Equation 4 in the paper is literally &beta;<sub>tot</sub> = &beta;<sub>0</sub> &minus; A. Good samples get freedom, bad samples get held down, and nobody has to tune the trade-off. &beta;<sub>0</sub> = 1 with A clipped to [&minus;1, 1] is the paper&rsquo;s text-to-image setting.</p></div>
+
+</div>
 
 <figure class="fig bleed"><div class="figscroll">
 
