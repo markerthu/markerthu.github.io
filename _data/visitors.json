@@ -1,10 +1,10 @@
 {
-  "_updated": "2026-08-27",
-  "_timezone": "America/Los_Angeles",
+  "_updated": "2026-08-28",
+  "_timezone": "UTC",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 520,
+  "_total": 537,
   "_days": 30,
-  "_range": "Jul. 28th - Aug. 27th",
+  "_range": "Jul. 29th - Aug. 28th",
   "locations": [
     {
       "code": "US",
@@ -17,18 +17,18 @@
     {
       "code": "US",
       "name": "Illinois, US",
-      "count": 88,
+      "count": 96,
       "cx": 90.8,
       "cy": 44.6,
-      "r": 3.27
+      "r": 3.34
     },
     {
       "code": "US",
       "name": "California, US",
-      "count": 45,
+      "count": 48,
       "cx": 60.0,
       "cy": 46.9,
-      "r": 2.85
+      "r": 2.89
     },
     {
       "code": "US",
@@ -41,10 +41,10 @@
     {
       "code": "HK",
       "name": "Hong Kong",
-      "count": 15,
+      "count": 16,
       "cx": 294.2,
       "cy": 61.7,
-      "r": 2.41
+      "r": 2.43
     },
     {
       "code": "US",
@@ -85,6 +85,14 @@
       "cx": 313.2,
       "cy": 107.8,
       "r": 2.19
+    },
+    {
+      "code": "JP",
+      "name": "Japan",
+      "count": 5,
+      "cx": 316.0,
+      "cy": 48.3,
+      "r": 2.15
     },
     {
       "code": "SG",
@@ -135,19 +143,19 @@
       "r": 2.07
     },
     {
-      "code": "JP",
-      "name": "Japan",
-      "count": 3,
-      "cx": 316.0,
-      "cy": 48.3,
-      "r": 2.07
-    },
-    {
       "code": "KR",
       "name": "South Korea",
       "count": 3,
       "cx": 307.5,
       "cy": 47.3,
+      "r": 2.07
+    },
+    {
+      "code": "PH",
+      "name": "Philippines",
+      "count": 3,
+      "cx": 301.8,
+      "cy": 68.6,
       "r": 2.07
     },
     {
@@ -180,14 +188,6 @@
       "count": 2,
       "cx": 190.7,
       "cy": 33.0,
-      "r": 2.02
-    },
-    {
-      "code": "PH",
-      "name": "Philippines",
-      "count": 2,
-      "cx": 301.8,
-      "cy": 68.6,
       "r": 2.02
     },
     {
@@ -239,6 +239,14 @@
       "r": 1.96
     },
     {
+      "code": "AE",
+      "name": "United Arab Emirates",
+      "count": 1,
+      "cx": 234.2,
+      "cy": 59.8,
+      "r": 1.96
+    },
+    {
       "code": "BR",
       "name": "Brazil",
       "count": 1,
@@ -252,6 +260,14 @@
       "count": 1,
       "cx": 188.3,
       "cy": 37.2,
+      "r": 1.96
+    },
+    {
+      "code": "CN",
+      "name": "China",
+      "count": 1,
+      "cx": 285.7,
+      "cy": 46.7,
       "r": 1.96
     },
     {
@@ -331,12 +347,12 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 453
+      "count": 464
     },
     {
       "code": "HK",
       "name": "Hong Kong",
-      "count": 15
+      "count": 16
     },
     {
       "code": "CA",
@@ -347,6 +363,11 @@
       "code": "AU",
       "name": "Australia",
       "count": 6
+    },
+    {
+      "code": "JP",
+      "name": "Japan",
+      "count": 5
     },
     {
       "code": "SG",
@@ -369,13 +390,13 @@
       "count": 3
     },
     {
-      "code": "JP",
-      "name": "Japan",
+      "code": "KR",
+      "name": "South Korea",
       "count": 3
     },
     {
-      "code": "KR",
-      "name": "South Korea",
+      "code": "PH",
+      "name": "Philippines",
       "count": 3
     },
     {
@@ -384,9 +405,9 @@
       "count": 2
     },
     {
-      "code": "PH",
-      "name": "Philippines",
-      "count": 2
+      "code": "AE",
+      "name": "United Arab Emirates",
+      "count": 1
     },
     {
       "code": "BR",
@@ -396,6 +417,11 @@
     {
       "code": "CH",
       "name": "Switzerland",
+      "count": 1
+    },
+    {
+      "code": "CN",
+      "name": "China",
       "count": 1
     },
     {
@@ -442,11 +468,6 @@
       "code": "VE",
       "name": "Venezuela",
       "count": 1
-    },
-    {
-      "code": "VN",
-      "name": "Vietnam",
-      "count": 1
     }
   ],
   "regions": [
@@ -461,14 +482,14 @@
       "country": "US",
       "country_name": "United States",
       "name": "Illinois",
-      "count": 88,
+      "count": 96,
       "located": true
     },
     {
       "country": "US",
       "country_name": "United States",
       "name": "California",
-      "count": 45,
+      "count": 48,
       "located": true
     },
     {
@@ -581,22 +602,22 @@
     {
       "path": "/",
       "title": "Jiajun Fan - Jiajun Fan",
-      "count": 216
+      "count": 225
     },
     {
       "path": "/visitors",
       "title": "Visitors — Jiajun Fan",
-      "count": 82
+      "count": 85
     },
     {
       "path": "/cv",
       "title": "CV — Jiajun Fan",
-      "count": 56
+      "count": 57
     },
     {
       "path": "/publications",
       "title": "Publications — Jiajun Fan",
-      "count": 51
+      "count": 53
     },
     {
       "path": "/projects",
@@ -614,19 +635,19 @@
       "count": 11
     },
     {
+      "path": "/projects/cesar",
+      "title": "CESAR — Audio LLM Reasoning | ICLR 2026",
+      "count": 10
+    },
+    {
       "path": "/posts/2025/10/inverse-scaling-audio-llms",
       "title": "Test-Time Inverse Scaling in Audio LLMs — Jiajun Fan",
       "count": 9
     },
     {
-      "path": "/projects/cesar",
-      "title": "CESAR — Audio LLM Reasoning | ICLR 2026",
-      "count": 9
-    },
-    {
       "path": "/posts/2025/10/diversity-collapse-rlhf",
       "title": "The Exploration-Exploitation Dilemma in RLHF for Generative Models — Jiajun Fan",
-      "count": 7
+      "count": 8
     },
     {
       "path": "/projects/ac-flow",
@@ -678,17 +699,17 @@
     {
       "name": "(unknown)",
       "id": "",
-      "count": 181
+      "count": 187
     },
     {
       "name": "www.jiajunfan.com",
       "id": "www.jiajunfan.com",
-      "count": 170
+      "count": 175
     },
     {
       "name": "Google",
       "id": "Google",
-      "count": 49
+      "count": 50
     },
     {
       "name": "www.jiajunfan.com/projects",
@@ -696,14 +717,14 @@
       "count": 26
     },
     {
+      "name": "scholar.google.com",
+      "id": "scholar.google.com",
+      "count": 23
+    },
+    {
       "name": "www.jiajunfan.com/year-archive",
       "id": "www.jiajunfan.com/year-archive",
       "count": 22
-    },
-    {
-      "name": "scholar.google.com",
-      "id": "scholar.google.com",
-      "count": 20
     },
     {
       "name": "www.jiajunfan.com/cv",
@@ -716,18 +737,23 @@
       "count": 19
     },
     {
+      "name": "chatgpt.com",
+      "id": "chatgpt.com",
+      "count": 3
+    },
+    {
       "name": "www.jiajunfan.com/visitors",
       "id": "www.jiajunfan.com/visitors",
       "count": 3
     },
     {
-      "name": "www.bing.com",
-      "id": "www.bing.com",
+      "name": "cn.bing.com",
+      "id": "cn.bing.com",
       "count": 2
     },
     {
-      "name": "chatgpt.com",
-      "id": "chatgpt.com",
+      "name": "www.bing.com",
+      "id": "www.bing.com",
       "count": 2
     },
     {
@@ -738,11 +764,6 @@
     {
       "name": "114.114.114.114:9421",
       "id": "114.114.114.114:9421",
-      "count": 1
-    },
-    {
-      "name": "cn.bing.com",
-      "id": "cn.bing.com",
       "count": 1
     },
     {
@@ -765,12 +786,12 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 314
+      "count": 328
     },
     {
       "name": "Safari",
       "id": "Safari",
-      "count": 201
+      "count": 204
     },
     {
       "name": "Firefox",
@@ -782,17 +803,17 @@
     {
       "name": "macOS",
       "id": "macOS",
-      "count": 233
+      "count": 244
     },
     {
       "name": "iOS",
       "id": "iOS",
-      "count": 195
+      "count": 198
     },
     {
       "name": "Windows",
       "id": "Windows",
-      "count": 70
+      "count": 73
     },
     {
       "name": "Android",
@@ -811,10 +832,6 @@
     }
   ],
   "daily": [
-    {
-      "day": "2026-07-28",
-      "n": 0
-    },
     {
       "day": "2026-07-29",
       "n": 0
@@ -933,46 +950,116 @@
     },
     {
       "day": "2026-08-27",
-      "n": 4
+      "n": 14
+    },
+    {
+      "day": "2026-08-28",
+      "n": 7
     }
   ],
   "periods": {
-    "today": 4,
-    "yesterday": 52,
-    "d7": 153,
-    "d7_prev": 132,
-    "d30": 520,
+    "today": 7,
+    "yesterday": 14,
+    "d7": 151,
+    "d7_prev": 115,
+    "d30": 537,
     "d30_prev": 0,
-    "day_frac": 0.701,
-    "yesterday_day": "2026-08-26"
+    "day_frac": 0.601,
+    "yesterday_day": "2026-08-27"
   },
-  "_last_visit": "2026-08-27 15:13",
+  "_last_visit": "2026-08-28 10:45",
   "recent": [
     {
-      "date": "2026-08-27 15:13",
-      "ts": "2026-08-27T22:13:26Z",
-      "loc": "Venezuela",
-      "path": "/projects",
+      "date": "2026-08-28 10:45",
+      "ts": "2026-08-28T10:45:12Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Chrome 151",
+      "system": "macOS 10.15",
+      "screen": "1440px",
+      "first": true
+    },
+    {
+      "date": "2026-08-28 10:45",
+      "ts": "2026-08-28T10:45:17Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "scholar.google.com",
+      "browser": "Chrome 151",
+      "system": "macOS 10.15",
+      "screen": "1440px",
+      "first": false
+    },
+    {
+      "date": "2026-08-28 10:20",
+      "ts": "2026-08-28T10:20:50Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": false
+    },
+    {
+      "date": "2026-08-28 10:15",
+      "ts": "2026-08-28T10:15:11Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": false
+    },
+    {
+      "date": "2026-08-28 10:15",
+      "ts": "2026-08-28T10:15:12Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": false
+    },
+    {
+      "date": "2026-08-28 10:15",
+      "ts": "2026-08-28T10:15:12Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": false
+    },
+    {
+      "date": "2026-08-28 10:15",
+      "ts": "2026-08-28T10:15:21Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": false
+    },
+    {
+      "date": "2026-08-28 09:43",
+      "ts": "2026-08-28T09:43:16Z",
+      "loc": "Philippines",
+      "path": "/posts/2025/10/diversity-collapse-rlhf",
       "ref": "",
       "browser": "Chrome 137",
       "system": "macOS 10.15",
-      "screen": "1920px",
+      "screen": "2560px",
       "first": true
     },
     {
-      "date": "2026-08-27 09:42",
-      "ts": "2026-08-27T16:42:52Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": true
-    },
-    {
-      "date": "2026-08-27 06:01",
-      "ts": "2026-08-27T13:01:51Z",
+      "date": "2026-08-28 09:25",
+      "ts": "2026-08-28T09:25:20Z",
       "loc": "Illinois, US",
       "path": "/",
       "ref": "",
@@ -982,283 +1069,151 @@
       "first": false
     },
     {
-      "date": "2026-08-27 05:59",
-      "ts": "2026-08-27T12:59:24Z",
-      "loc": "Spain",
-      "path": "/publication/2025-06-03-ProteinZero",
-      "ref": "Google",
+      "date": "2026-08-28 08:57",
+      "ts": "2026-08-28T08:57:17Z",
+      "loc": "California, US",
+      "path": "/",
+      "ref": "www.jiajunfan.com/visitors",
       "browser": "Chrome 151",
       "system": "macOS 10.15",
-      "screen": "1920px",
-      "first": true
-    },
-    {
-      "date": "2026-08-27 04:52",
-      "ts": "2026-08-27T11:52:00Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
+      "screen": "1470px",
       "first": false
     },
     {
-      "date": "2026-08-27 04:52",
-      "ts": "2026-08-27T11:52:02Z",
-      "loc": "Illinois, US",
+      "date": "2026-08-28 08:57",
+      "ts": "2026-08-28T08:57:20Z",
+      "loc": "California, US",
+      "path": "/publications",
+      "ref": "www.jiajunfan.com",
+      "browser": "Chrome 151",
+      "system": "macOS 10.15",
+      "screen": "1470px",
+      "first": true
+    },
+    {
+      "date": "2026-08-28 08:56",
+      "ts": "2026-08-28T08:56:31Z",
+      "loc": "California, US",
       "path": "/visitors",
       "ref": "www.jiajunfan.com",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": false
-    },
-    {
-      "date": "2026-08-27 04:51",
-      "ts": "2026-08-27T11:51:48Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": false
-    },
-    {
-      "date": "2026-08-27 04:51",
-      "ts": "2026-08-27T11:51:49Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": false
-    },
-    {
-      "date": "2026-08-27 01:22",
-      "ts": "2026-08-27T08:22:10Z",
-      "loc": "Taiwan",
-      "path": "/",
-      "ref": "cn.bing.com",
       "browser": "Chrome 151",
-      "system": "Windows 10",
-      "screen": "1423px",
-      "first": false
-    },
-    {
-      "date": "2026-08-27 00:27",
-      "ts": "2026-08-27T07:27:43Z",
-      "loc": "Philippines",
-      "path": "/publications",
-      "ref": "",
-      "browser": "Chrome 151",
-      "system": "Windows 10",
-      "screen": "1366px",
-      "first": true
-    },
-    {
-      "date": "2026-08-26 23:40",
-      "ts": "2026-08-27T06:40:52Z",
-      "loc": "Taiwan",
-      "path": "/",
-      "ref": "cn.bing.com",
-      "browser": "Chrome 151",
-      "system": "Windows 10",
-      "screen": "1423px",
-      "first": true
-    },
-    {
-      "date": "2026-08-26 23:29",
-      "ts": "2026-08-27T06:29:46Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": false
-    },
-    {
-      "date": "2026-08-26 22:46",
-      "ts": "2026-08-27T05:46:27Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": true
-    },
-    {
-      "date": "2026-08-26 22:46",
-      "ts": "2026-08-27T05:46:28Z",
-      "loc": "Illinois, US",
-      "path": "/visitors",
-      "ref": "www.jiajunfan.com",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": true
-    },
-    {
-      "date": "2026-08-26 22:46",
-      "ts": "2026-08-27T05:46:51Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": false
-    },
-    {
-      "date": "2026-08-26 20:27",
-      "ts": "2026-08-27T03:27:29Z",
-      "loc": "Canada",
-      "path": "/projects",
-      "ref": "www.jiajunfan.com/cv",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.5",
-      "screen": "390px",
-      "first": true
-    },
-    {
-      "date": "2026-08-26 20:27",
-      "ts": "2026-08-27T03:27:30Z",
-      "loc": "Canada",
-      "path": "/publications",
-      "ref": "www.jiajunfan.com/projects",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.5",
-      "screen": "390px",
-      "first": true
-    },
-    {
-      "date": "2026-08-26 20:27",
-      "ts": "2026-08-27T03:27:31Z",
-      "loc": "Canada",
-      "path": "/",
-      "ref": "www.jiajunfan.com/publications",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.5",
-      "screen": "390px",
-      "first": false
-    },
-    {
-      "date": "2026-08-26 20:24",
-      "ts": "2026-08-27T03:24:12Z",
-      "loc": "Canada",
-      "path": "/",
-      "ref": "Google",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.5",
-      "screen": "390px",
-      "first": true
-    },
-    {
-      "date": "2026-08-26 20:24",
-      "ts": "2026-08-27T03:24:39Z",
-      "loc": "Canada",
-      "path": "/cv",
-      "ref": "www.jiajunfan.com",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.5",
-      "screen": "390px",
-      "first": true
-    },
-    {
-      "date": "2026-08-26 19:29",
-      "ts": "2026-08-27T02:29:29Z",
-      "loc": "Illinois, US",
-      "path": "/posts/2025/10/inverse-scaling-audio-llms",
-      "ref": "",
-      "browser": "Safari 17.0",
-      "system": "iOS 17.0",
-      "screen": "390px",
-      "first": true
-    },
-    {
-      "date": "2026-08-26 19:29",
-      "ts": "2026-08-27T02:29:36Z",
-      "loc": "Illinois, US",
-      "path": "/posts/2025/10/diversity-collapse-rlhf",
-      "ref": "",
-      "browser": "Safari 17.0",
-      "system": "iOS 17.0",
-      "screen": "390px",
-      "first": false
-    },
-    {
-      "date": "2026-08-26 19:27",
-      "ts": "2026-08-27T02:27:26Z",
-      "loc": "Illinois, US",
-      "path": "/posts/2025/10/inverse-scaling-audio-llms",
-      "ref": "",
-      "browser": "Safari 17.0",
-      "system": "iOS 17.0",
-      "screen": "390px",
-      "first": false
-    },
-    {
-      "date": "2026-08-26 19:27",
-      "ts": "2026-08-27T02:27:33Z",
-      "loc": "Illinois, US",
-      "path": "/posts/2025/10/diversity-collapse-rlhf",
-      "ref": "",
-      "browser": "Safari 17.0",
-      "system": "iOS 17.0",
-      "screen": "390px",
-      "first": false
-    },
-    {
-      "date": "2026-08-26 19:23",
-      "ts": "2026-08-27T02:23:41Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "www.jiajunfan.com/posts/2025/10/inverse-scaling-audio-llms",
-      "browser": "Chrome 149",
       "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": false
+      "screen": "1470px",
+      "first": true
     },
     {
-      "date": "2026-08-26 19:22",
-      "ts": "2026-08-27T02:22:00Z",
-      "loc": "Illinois, US",
-      "path": "/year-archive",
-      "ref": "www.jiajunfan.com",
-      "browser": "Chrome 149",
+      "date": "2026-08-28 08:52",
+      "ts": "2026-08-28T08:52:56Z",
+      "loc": "California, US",
+      "path": "/",
+      "ref": "scholar.google.com",
+      "browser": "Chrome 151",
       "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": false
+      "screen": "1470px",
+      "first": true
     },
     {
-      "date": "2026-08-26 19:22",
-      "ts": "2026-08-27T02:22:03Z",
-      "loc": "Algeria",
+      "date": "2026-08-28 08:27",
+      "ts": "2026-08-28T08:27:24Z",
+      "loc": "United Arab Emirates",
       "path": "/publications",
       "ref": "",
       "browser": "Chrome 148",
-      "system": "macOS 10.15",
-      "screen": "1280px",
+      "system": "Windows 10",
+      "screen": "2736px",
       "first": true
     },
     {
-      "date": "2026-08-26 19:22",
-      "ts": "2026-08-27T02:22:03Z",
-      "loc": "Illinois, US",
-      "path": "/posts/2025/10/inverse-scaling-audio-llms",
-      "ref": "www.jiajunfan.com/year-archive",
-      "browser": "Chrome 149",
+      "date": "2026-08-28 08:06",
+      "ts": "2026-08-28T08:06:11Z",
+      "loc": "Hong Kong",
+      "path": "/cv",
+      "ref": "chatgpt.com",
+      "browser": "Chrome 124",
       "system": "macOS 10.15",
-      "screen": "1512px",
+      "screen": "1920px",
+      "first": true
+    },
+    {
+      "date": "2026-08-28 07:40",
+      "ts": "2026-08-28T07:40:11Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
       "first": false
     },
     {
-      "date": "2026-08-26 19:20",
-      "ts": "2026-08-27T02:20:04Z",
+      "date": "2026-08-28 06:42",
+      "ts": "2026-08-28T06:42:25Z",
+      "loc": "China",
+      "path": "/",
+      "ref": "scholar.google.com",
+      "browser": "Chrome 147",
+      "system": "macOS 10.15",
+      "screen": "1728px",
+      "first": true
+    },
+    {
+      "date": "2026-08-28 04:29",
+      "ts": "2026-08-28T04:29:19Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": false
+    },
+    {
+      "date": "2026-08-28 03:54",
+      "ts": "2026-08-28T03:54:37Z",
+      "loc": "Japan",
+      "path": "/projects/cesar",
+      "ref": "www.jiajunfan.com",
+      "browser": "Chrome 151",
+      "system": "Windows 10",
+      "screen": "2048px",
+      "first": true
+    },
+    {
+      "date": "2026-08-28 03:52",
+      "ts": "2026-08-28T03:52:25Z",
+      "loc": "Japan",
+      "path": "/",
+      "ref": "cn.bing.com",
+      "browser": "Chrome 151",
+      "system": "Windows 10",
+      "screen": "2048px",
+      "first": true
+    },
+    {
+      "date": "2026-08-28 03:48",
+      "ts": "2026-08-28T03:48:39Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": true
+    },
+    {
+      "date": "2026-08-28 03:48",
+      "ts": "2026-08-28T03:48:41Z",
+      "loc": "Illinois, US",
+      "path": "/visitors",
+      "ref": "www.jiajunfan.com",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": true
+    },
+    {
+      "date": "2026-08-28 03:08",
+      "ts": "2026-08-28T03:08:47Z",
       "loc": "Illinois, US",
       "path": "/",
       "ref": "",
@@ -1268,10 +1223,76 @@
       "first": false
     },
     {
-      "date": "2026-08-26 19:20",
-      "ts": "2026-08-27T02:20:04Z",
+      "date": "2026-08-28 03:06",
+      "ts": "2026-08-28T03:06:36Z",
       "loc": "Illinois, US",
-      "path": "/year-archive",
+      "path": "/",
+      "ref": "",
+      "browser": "Chrome 149",
+      "system": "macOS 10.15",
+      "screen": "1512px",
+      "first": false
+    },
+    {
+      "date": "2026-08-28 03:05",
+      "ts": "2026-08-28T03:05:59Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Chrome 149",
+      "system": "macOS 10.15",
+      "screen": "1512px",
+      "first": false
+    },
+    {
+      "date": "2026-08-28 03:00",
+      "ts": "2026-08-28T03:00:38Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Chrome 149",
+      "system": "macOS 10.15",
+      "screen": "1512px",
+      "first": false
+    },
+    {
+      "date": "2026-08-28 02:59",
+      "ts": "2026-08-28T02:59:23Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Chrome 149",
+      "system": "macOS 10.15",
+      "screen": "1512px",
+      "first": false
+    },
+    {
+      "date": "2026-08-28 02:53",
+      "ts": "2026-08-28T02:53:53Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Chrome 149",
+      "system": "macOS 10.15",
+      "screen": "1512px",
+      "first": false
+    },
+    {
+      "date": "2026-08-28 02:52",
+      "ts": "2026-08-28T02:52:04Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Chrome 149",
+      "system": "macOS 10.15",
+      "screen": "1512px",
+      "first": false
+    },
+    {
+      "date": "2026-08-28 02:52",
+      "ts": "2026-08-28T02:52:08Z",
+      "loc": "Illinois, US",
+      "path": "/visitors",
       "ref": "www.jiajunfan.com",
       "browser": "Chrome 149",
       "system": "macOS 10.15",
@@ -1279,6 +1300,6 @@
       "first": true
     }
   ],
-  "_recent_total": 1001,
+  "_recent_total": 1036,
   "_recent_shown": 30
 }
