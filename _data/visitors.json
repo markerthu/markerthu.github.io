@@ -1,8 +1,8 @@
 {
   "_updated": "2026-08-29",
-  "_timezone": "UTC",
+  "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 554,
+  "_total": 555,
   "_days": 30,
   "_range": "Jul. 30th - Aug. 29th",
   "locations": [
@@ -25,10 +25,10 @@
     {
       "code": "US",
       "name": "California, US",
-      "count": 49,
+      "count": 50,
       "cx": 60.0,
       "cy": 46.9,
-      "r": 2.9
+      "r": 2.91
     },
     {
       "code": "US",
@@ -347,7 +347,7 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 477
+      "count": 478
     },
     {
       "code": "HK",
@@ -489,7 +489,7 @@
       "country": "US",
       "country_name": "United States",
       "name": "California",
-      "count": 49,
+      "count": 50,
       "located": true
     },
     {
@@ -602,7 +602,7 @@
     {
       "path": "/",
       "title": "Jiajun Fan - Jiajun Fan",
-      "count": 230
+      "count": 231
     },
     {
       "path": "/visitors",
@@ -709,7 +709,7 @@
     {
       "name": "Google",
       "id": "Google",
-      "count": 53
+      "count": 54
     },
     {
       "name": "www.jiajunfan.com/projects",
@@ -791,7 +791,7 @@
     {
       "name": "Safari",
       "id": "Safari",
-      "count": 206
+      "count": 207
     },
     {
       "name": "Firefox",
@@ -808,7 +808,7 @@
     {
       "name": "iOS",
       "id": "iOS",
-      "count": 200
+      "count": 201
     },
     {
       "name": "Windows",
@@ -954,23 +954,34 @@
     },
     {
       "day": "2026-08-29",
-      "n": 11
+      "n": 12
     }
   ],
   "periods": {
-    "today": 11,
+    "today": 12,
     "yesterday": 13,
-    "d7": 158,
+    "d7": 159,
     "d7_prev": 111,
-    "d30": 554,
+    "d30": 555,
     "d30_prev": 0,
-    "day_frac": 0.653,
+    "day_frac": 0.533,
     "yesterday_day": "2026-08-28"
   },
-  "_last_visit": "2026-08-29 14:27",
+  "_last_visit": "2026-08-29 10:43",
   "recent": [
     {
-      "date": "2026-08-29 14:27",
+      "date": "2026-08-29 10:43",
+      "ts": "2026-08-29T17:43:00Z",
+      "loc": "California, US",
+      "path": "/",
+      "ref": "Google",
+      "browser": "Safari 26.6",
+      "system": "iOS 18.7",
+      "screen": "393px",
+      "first": true
+    },
+    {
+      "date": "2026-08-29 07:27",
       "ts": "2026-08-29T14:27:09Z",
       "loc": "California, US",
       "path": "/publications",
@@ -981,7 +992,7 @@
       "first": true
     },
     {
-      "date": "2026-08-29 14:12",
+      "date": "2026-08-29 07:12",
       "ts": "2026-08-29T14:12:58Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -992,7 +1003,7 @@
       "first": false
     },
     {
-      "date": "2026-08-29 12:38",
+      "date": "2026-08-29 05:38",
       "ts": "2026-08-29T12:38:07Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1003,7 +1014,7 @@
       "first": true
     },
     {
-      "date": "2026-08-29 12:38",
+      "date": "2026-08-29 05:38",
       "ts": "2026-08-29T12:38:16Z",
       "loc": "Illinois, US",
       "path": "/visitors",
@@ -1014,7 +1025,7 @@
       "first": true
     },
     {
-      "date": "2026-08-29 08:42",
+      "date": "2026-08-29 01:42",
       "ts": "2026-08-29T08:42:37Z",
       "loc": "Taiwan",
       "path": "/projects/ac-flow",
@@ -1025,7 +1036,7 @@
       "first": true
     },
     {
-      "date": "2026-08-29 07:13",
+      "date": "2026-08-29 00:13",
       "ts": "2026-08-29T07:13:10Z",
       "loc": "Illinois, US",
       "path": "/posts/2025/10/inverse-scaling-audio-llms",
@@ -1036,7 +1047,7 @@
       "first": false
     },
     {
-      "date": "2026-08-29 07:13",
+      "date": "2026-08-29 00:13",
       "ts": "2026-08-29T07:13:23Z",
       "loc": "Illinois, US",
       "path": "/year-archive",
@@ -1047,7 +1058,7 @@
       "first": false
     },
     {
-      "date": "2026-08-29 07:13",
+      "date": "2026-08-29 00:13",
       "ts": "2026-08-29T07:13:27Z",
       "loc": "Illinois, US",
       "path": "/projects",
@@ -1058,7 +1069,7 @@
       "first": true
     },
     {
-      "date": "2026-08-29 07:13",
+      "date": "2026-08-29 00:13",
       "ts": "2026-08-29T07:13:29Z",
       "loc": "Illinois, US",
       "path": "/publications",
@@ -1069,7 +1080,7 @@
       "first": true
     },
     {
-      "date": "2026-08-29 07:13",
+      "date": "2026-08-29 00:13",
       "ts": "2026-08-29T07:13:34Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1080,7 +1091,7 @@
       "first": false
     },
     {
-      "date": "2026-08-29 07:13",
+      "date": "2026-08-29 00:13",
       "ts": "2026-08-29T07:13:47Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1091,7 +1102,7 @@
       "first": false
     },
     {
-      "date": "2026-08-29 07:12",
+      "date": "2026-08-29 00:12",
       "ts": "2026-08-29T07:12:30Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1102,7 +1113,7 @@
       "first": false
     },
     {
-      "date": "2026-08-29 07:12",
+      "date": "2026-08-29 00:12",
       "ts": "2026-08-29T07:12:31Z",
       "loc": "Illinois, US",
       "path": "/visitors",
@@ -1113,7 +1124,7 @@
       "first": true
     },
     {
-      "date": "2026-08-29 07:12",
+      "date": "2026-08-29 00:12",
       "ts": "2026-08-29T07:12:41Z",
       "loc": "Illinois, US",
       "path": "/year-archive",
@@ -1124,7 +1135,7 @@
       "first": true
     },
     {
-      "date": "2026-08-29 07:12",
+      "date": "2026-08-29 00:12",
       "ts": "2026-08-29T07:12:42Z",
       "loc": "Illinois, US",
       "path": "/posts/2025/10/inverse-scaling-audio-llms",
@@ -1135,7 +1146,7 @@
       "first": true
     },
     {
-      "date": "2026-08-29 07:12",
+      "date": "2026-08-29 00:12",
       "ts": "2026-08-29T07:12:58Z",
       "loc": "Illinois, US",
       "path": "/posts/2025/10/diversity-collapse-rlhf",
@@ -1146,7 +1157,7 @@
       "first": true
     },
     {
-      "date": "2026-08-29 07:11",
+      "date": "2026-08-29 00:11",
       "ts": "2026-08-29T07:11:29Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1157,7 +1168,7 @@
       "first": true
     },
     {
-      "date": "2026-08-29 02:35",
+      "date": "2026-08-28 19:35",
       "ts": "2026-08-29T02:35:12Z",
       "loc": "Hong Kong",
       "path": "/",
@@ -1168,7 +1179,7 @@
       "first": true
     },
     {
-      "date": "2026-08-29 02:35",
+      "date": "2026-08-28 19:35",
       "ts": "2026-08-29T02:35:20Z",
       "loc": "Hong Kong",
       "path": "/cv",
@@ -1179,7 +1190,7 @@
       "first": true
     },
     {
-      "date": "2026-08-29 02:29",
+      "date": "2026-08-28 19:29",
       "ts": "2026-08-29T02:29:53Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1190,7 +1201,7 @@
       "first": true
     },
     {
-      "date": "2026-08-28 19:09",
+      "date": "2026-08-28 12:09",
       "ts": "2026-08-28T19:09:19Z",
       "loc": "Virginia, US",
       "path": "/visitors",
@@ -1201,7 +1212,7 @@
       "first": true
     },
     {
-      "date": "2026-08-28 19:08",
+      "date": "2026-08-28 12:08",
       "ts": "2026-08-28T19:08:46Z",
       "loc": "Virginia, US",
       "path": "/",
@@ -1212,7 +1223,7 @@
       "first": true
     },
     {
-      "date": "2026-08-28 15:37",
+      "date": "2026-08-28 08:37",
       "ts": "2026-08-28T15:37:17Z",
       "loc": "Germany",
       "path": "/projects/cesar",
@@ -1223,7 +1234,7 @@
       "first": true
     },
     {
-      "date": "2026-08-28 10:45",
+      "date": "2026-08-28 03:45",
       "ts": "2026-08-28T10:45:12Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1234,7 +1245,7 @@
       "first": true
     },
     {
-      "date": "2026-08-28 10:45",
+      "date": "2026-08-28 03:45",
       "ts": "2026-08-28T10:45:17Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1245,7 +1256,7 @@
       "first": false
     },
     {
-      "date": "2026-08-28 10:20",
+      "date": "2026-08-28 03:20",
       "ts": "2026-08-28T10:20:50Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1256,7 +1267,7 @@
       "first": false
     },
     {
-      "date": "2026-08-28 10:15",
+      "date": "2026-08-28 03:15",
       "ts": "2026-08-28T10:15:11Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1267,7 +1278,7 @@
       "first": false
     },
     {
-      "date": "2026-08-28 10:15",
+      "date": "2026-08-28 03:15",
       "ts": "2026-08-28T10:15:12Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1278,19 +1289,8 @@
       "first": false
     },
     {
-      "date": "2026-08-28 10:15",
+      "date": "2026-08-28 03:15",
       "ts": "2026-08-28T10:15:12Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": false
-    },
-    {
-      "date": "2026-08-28 10:15",
-      "ts": "2026-08-28T10:15:21Z",
       "loc": "Illinois, US",
       "path": "/",
       "ref": "",
@@ -1300,6 +1300,6 @@
       "first": false
     }
   ],
-  "_recent_total": 1059,
+  "_recent_total": 1060,
   "_recent_shown": 30
 }
