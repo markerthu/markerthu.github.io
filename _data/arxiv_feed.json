@@ -1,6 +1,60 @@
 {
-  "updated": "2026-08-24",
+  "updated": "2026-08-31",
   "papers": [
+    {
+      "id": "2608.27817",
+      "title": "Auditing Generative Audio Calls for Known-Task Audio-LLM Evaluation",
+      "authors": "Mengzhe Geng",
+      "summary": "Speech and audio LLMs are often evaluated by asking whether a waveform prompt beats an automatic speech recognition (ASR) transcript. For known closed-set tasks, that comparison conflates two factors:…",
+      "date": "2026-08-28",
+      "tag": "Audio Reasoning",
+      "url": "https://arxiv.org/abs/2608.27817"
+    },
+    {
+      "id": "2608.25246",
+      "title": "ShuttleArena: Interpretable Self-Play in Physics-Based Badminton",
+      "authors": "Peize Ding",
+      "summary": "Badminton is a compact but challenging domain for game AI: a player must choose a physically feasible shuttle trajectory, anticipate the opponent's interception, and recover to a court position whose …",
+      "date": "2026-08-26",
+      "tag": "Self-Improvement",
+      "url": "https://arxiv.org/abs/2608.25246"
+    },
+    {
+      "id": "2608.24958",
+      "title": "Can We Read the Mind of an Audio LLM? A Verbalizable, Multilingual Middle-Layer Workspace",
+      "authors": "Jiajun Fan, Jingyuan Li, Prashanth Gurunath Shivakumar et al.",
+      "summary": "An audio language model is a black box in a specific way: we see what it says, never what it works out on the way there, and chain-of-thought monitoring helps only if the model writes its reasoning do…",
+      "date": "2026-08-25",
+      "tag": "Audio Reasoning",
+      "url": "https://arxiv.org/abs/2608.24958"
+    },
+    {
+      "id": "2608.24640",
+      "title": "EVEREST:Endogenous Vision-Language Reinforcement Reasoning Exploration for Urban Socio-Semantic Segmentation",
+      "authors": "Qixiu Li, Zhongzhi He, Xiang Zhu et al.",
+      "summary": "Urban socio-semantic segmentation leverages digital and satellite imagery to provide critical spatial semantic information for downstream applications such as urban resource allocation. Although exist…",
+      "date": "2026-08-25",
+      "tag": "Multimodal",
+      "url": "https://arxiv.org/abs/2608.24640"
+    },
+    {
+      "id": "2608.24949",
+      "title": "Demystifying Reinforcement Learning Post-Training of Language Models",
+      "authors": "Donovan Clay, Saket Gollapudi, Sankar Harilal et al.",
+      "summary": "Reinforcement learning (RL) post-training has emerged as a powerful framework for enhancing the capabilities of large language models (LLMs), enabling impressive reasoning, math, and coding capabiliti…",
+      "date": "2026-08-24",
+      "tag": "RL Training",
+      "url": "https://arxiv.org/abs/2608.24949"
+    },
+    {
+      "id": "2608.21871",
+      "title": "The Chase Is the Curriculum, the Capture Anchors the Credit: Pursuit-Evasion Self-Play for Zero-Data LLM Reasoning",
+      "authors": "Jing Yu, Shengchao Chen, Yiyun Tan",
+      "summary": "Reinforcement learning with verifiable rewards has become the dominant recipe for improving large language model reasoning, yet it presumes large human-curated task collections. Zero-data self-play re…",
+      "date": "2026-08-22",
+      "tag": "Self-Improvement",
+      "url": "https://arxiv.org/abs/2608.21871"
+    },
     {
       "id": "2608.21204",
       "title": "Beyond Imitation: Self-Improving Robot Policies via Off-Policy Q-Planning",
@@ -11,6 +65,15 @@
       "url": "https://arxiv.org/abs/2608.21204"
     },
     {
+      "id": "2608.21595",
+      "title": "Perturb the Thought, Not the Pixels: Latent-Space Rollout Diversification for Reinforcement Learning of Vision-Language Models",
+      "authors": "Michael Jerge, Joseph Pelczar, Justin Downes",
+      "summary": "Reinforcement learning with verifiable rewards (RLVR) improves the reasoning ability of vision-language models (VLMs), and diversifying the rollouts within each optimization group amplifies its gains.…",
+      "date": "2026-08-21",
+      "tag": "Multimodal",
+      "url": "https://arxiv.org/abs/2608.21595"
+    },
+    {
       "id": "2608.20318",
       "title": "AI4AI-Bench: Benchmarking LLM Agents in Algorithmic Design for Recursive Self-Improvement",
       "authors": "Yizhe Chi, Wenyi Li, Deyao Hong et al.",
@@ -18,69 +81,6 @@
       "date": "2026-08-20",
       "tag": "Self-Improvement",
       "url": "https://arxiv.org/abs/2608.20318"
-    },
-    {
-      "id": "2608.18066",
-      "title": "On the Fragility of Self-Improving Agents: Variance, Task Order, and Underspecification",
-      "authors": "Qinyuan Ye, Yu Li, Yada Pruksachatkun et al.",
-      "summary": "Memory-based self-improving agents--those that learn from an online stream of tasks and improve over time by maintaining a textual memory bank--have shown great promise in recent literature. However, …",
-      "date": "2026-08-18",
-      "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2608.18066"
-    },
-    {
-      "id": "2608.16080",
-      "title": "DeepOHeat-v2: Self-Improving Operator Learning for Fast and Trustworthy Thermal Optimization in 3D-IC Design",
-      "authors": "Xinling Yu, Yixing Li, Ziyue Liu et al.",
-      "summary": "Thermal-aware optimization of multi-die 3D integrated circuits evaluates many designs, each a costly heat-equation solve. Operator-learning surrogates replace this solve with a fast forward pass, idea…",
-      "date": "2026-08-17",
-      "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2608.16080"
-    },
-    {
-      "id": "2608.15680",
-      "title": "Robo-Dopamine 2.0: History-Conditioned and OOD-Aware Process Reward Modeling for Robotic Manipulation",
-      "authors": "Yijie Xu, Haopeng Jin, Run Zhou et al.",
-      "summary": "Vision-language-action (VLA) models improve robotic manipulation but remain vulnerable to compounding errors, scene changes, and off-trajectory states. Reinforcement learning can refine pretrained VLA…",
-      "date": "2026-08-16",
-      "tag": "Reasoning",
-      "url": "https://arxiv.org/abs/2608.15680"
-    },
-    {
-      "id": "2608.14135",
-      "title": "AgilePE: Autonomous UAV Pursuit-Evasion via Self-Play Reinforcement Learning",
-      "authors": "Wenhao Tang, Tianyang Chen, Zhejun Cui et al.",
-      "summary": "Autonomous pursuit-evasion is a fundamental challenge for Unmanned Aerial Vehicles (UAVs), requiring rapid decision-making under tightly coupled dynamics and continuously changing opponent behaviors. …",
-      "date": "2026-08-14",
-      "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2608.14135"
-    },
-    {
-      "id": "2608.12951",
-      "title": "VoxAudio: Vocalized Audio Synthesis via Multi-Reward Autoregressive Flow Matching",
-      "authors": "Wenxiang Guo, Changhao Pan, Ziyue Jiang et al.",
-      "summary": "Vocalized audio synthesis, the task of generating audio in which intelligible speech is embedded within an environmental soundscape, underpins applications such as podcast production and video dubbing…",
-      "date": "2026-08-13",
-      "tag": "Flow Matching",
-      "url": "https://arxiv.org/abs/2608.12951"
-    },
-    {
-      "id": "2608.13026",
-      "title": "Temporal GRPO: Beyond Trajectory-Level Credit in Vision-Language-Action Reinforcement Learning",
-      "authors": "Yao Zhou, Hang Gao, Fengge Wu et al.",
-      "summary": "Outcome-driven reinforcement learning offers a scalable way to post-train vision-language-action (VLA) policies from sparse task-success feedback. In common GRPO-based VLA post-training, one rollout-l…",
-      "date": "2026-08-13",
-      "tag": "Multimodal",
-      "url": "https://arxiv.org/abs/2608.13026"
-    },
-    {
-      "id": "2608.12220",
-      "title": "SCOUT: Unlocking Enhanced Spatial Reasoning via Structured Chain-of-Thought and Multi-Objective Process Reward",
-      "authors": "Zile Zhou, Huining Yuan, Weichen Zhang et al.",
-      "summary": "Existing Vision-Language Models (VLMs) exhibits a critical bottleneck in robust spatial reasoning. Recent reinforcement learning (RL) methods aim to close this gap with verifiable outcomes, yet they s…",
-      "date": "2026-08-12",
-      "tag": "Reasoning",
-      "url": "https://arxiv.org/abs/2608.12220"
     }
   ]
 }
