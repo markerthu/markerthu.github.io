@@ -581,6 +581,9 @@ function initBrainmap(){
       meta = document.getElementById('bmMeta'),
       tt   = document.getElementById('bmTT'),
       cur  = 0;
+  /* .bleed carries a transform, which makes it the containing block for any
+     position:fixed descendant - the tooltip has to live outside it */
+  if (tt && tt.parentNode !== document.body) document.body.appendChild(tt);
 
   function cvar(n){ return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }
 
@@ -660,6 +663,7 @@ function initTwoMap(){
   var data;
   try { data = JSON.parse(document.getElementById('tmapdata').textContent); } catch(e){ return; }
   var tt = document.getElementById('bmTT');
+  if (tt && tt.parentNode !== document.body) document.body.appendChild(tt);
   var REG = { audio:'var(--ed-accent)', question:'var(--muted)', options:'var(--ed-tint)', other:'transparent' };
 
   data.forEach(function(d, di){
