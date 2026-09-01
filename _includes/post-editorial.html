@@ -804,6 +804,8 @@ function initGal(){
   if (tt && tt.parentNode !== document.body) document.body.appendChild(tt);
 
   var GAL = null, cur = 0, pin = null;
+  function esc(t){ return String(t==null?'':t)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
   var C = { audio:'#cfe0f6', ques:'#e7e3d6', sensory:'#f0f0ee', motor:'#f0f0ee',
             blue:'#1f6fd4', blue3:'#1a5cb0', gold:'#e8590c', muted:'#74746f' };
   function isContent(t){ t=(t||'').trim();
@@ -820,7 +822,7 @@ function initGal(){
       var active = Array.isArray(pin) && pin.length===st.vars.length
                    && pin.every(function(p,k){ return p===st.vars[k].toLowerCase(); });
       return '<button type="button" class="gstep'+(active?' on':'')+(st.answer?' ans':'')
-           + '" data-i="'+i+'">'+(i+1)+'. '+st.label+(st.answer?' &#10003;':'')+'</button>';
+           + '" data-i="'+i+'">'+(i+1)+'. '+esc(st.label)+(st.answer?' &#10003;':'')+'</button>';
     }).join('<span class="garr">&rarr;</span>');
     box.querySelector('#gsteps').innerHTML = chips;
     box.querySelectorAll('#gsteps .gstep').forEach(function(b){
@@ -840,7 +842,7 @@ function initGal(){
     var yb =function(d){ return padT+(nL-1-(d/100*(nL-1)))*ch; };
     var regCol={audio:C.audio, question:C.ques, other:'transparent'};
     var o=['<svg viewBox="0 0 '+W+' '+H+'" style="width:'+W+'px;max-width:none" role="img" aria-label="'
-      +'Whole-brain readout for the '+c.name+' clip: '+nL+' depths by '+np+' input positions.">'];
+      +'Whole-brain readout for the '+esc(c.name)+' clip: '+nL+' depths by '+np+' input positions.">'];
     o.push('<rect x="'+padL+'" y="'+yb(35)+'" width="'+(np*cw)+'" height="'+(yOf(0)+ch-yb(35))+'" fill="'+C.sensory+'"/>');
     o.push('<rect x="'+padL+'" y="'+yb(80)+'" width="'+(np*cw)+'" height="'+(yb(35)-yb(80))+'" fill="'+C.blue+'" opacity="0.09"/>');
     o.push('<rect x="'+padL+'" y="'+padT+'" width="'+(np*cw)+'" height="'+(yb(80)-padT)+'" fill="'+C.motor+'"/>');
@@ -865,7 +867,7 @@ function initGal(){
     o.push('<text x="'+(padL+np*cw+4)+'" y="'+yb(17)+'" font-size="8.5" fill="#888" font-weight="700">SENSORY</text>');
     for(var t=0;t<np;t++){ var lab=c.surface[t]; if(!lab||lab===' ') continue;
       var lx=padL+t*cw+cw/2, ly=H-padB+8;
-      o.push('<text x="'+lx+'" y="'+ly+'" font-size="7" fill="#999" transform="rotate(90 '+lx+' '+ly+')">'+lab+'</text>'); }
+      o.push('<text x="'+lx+'" y="'+ly+'" font-size="7" fill="#999" transform="rotate(90 '+lx+' '+ly+')">'+esc(lab)+'</text>'); }
     var a=c.regions.indexOf('audio'), b=c.regions.lastIndexOf('audio');
     if(a>=0) o.push('<text x="'+(padL+(a+b)/2*cw+cw/2)+'" y="'+(H-2)+'" text-anchor="middle" font-size="9.5" fill="'
       +C.blue3+'" font-weight="700">&#9668; audio (time &rarr;) &#9658;</text>');
@@ -874,9 +876,9 @@ function initGal(){
     host.querySelectorAll('.cc').forEach(function(r){
       r.addEventListener('mousemove', function(e){
         var L=+r.dataset.l, p=+r.dataset.p, toks=c.topk[L][p]||[];
-        tt.innerHTML='<div class="hd">"'+c.surface[p]+'" &middot; L'+L+' &middot; '
+        tt.innerHTML='<div class="hd">"'+esc(c.surface[p])+'"' &middot; L'+L+' &middot; '
           +Math.round(100*L/(c.nL-1))+'%</div>'
-          +toks.map(function(t,i){ return '<div'+(pinMatch(t)?' class="hit"':'')+'>'+(i+1)+'. '+t+'</div>'; }).join('');
+          +toks.map(function(t,i){ return '<div'+(pinMatch(t)?' class="hit"':'')+'>'+(i+1)+'. '+esc(t)+'</div>'; }).join('');
         tt.style.left=Math.min(e.clientX+13, innerWidth-260)+'px';
         tt.style.top =Math.min(e.clientY+13, innerHeight-170)+'px';
         tt.style.opacity=1;
@@ -893,17 +895,17 @@ function initGal(){
     box.querySelectorAll('.gtab').forEach(function(t,k){
       t.classList.toggle('on', k===i); t.setAttribute('aria-pressed', String(k===i)); });
     box.querySelector('#gtask').textContent  = c.task.toUpperCase();
-    box.querySelector('#gaudio').innerHTML   = '<b>audio:</b> ' + c.audio;
+    box.querySelector('#gaudio').innerHTML   = '<b>audio:</b> ' + esc(c.audio);
     box.querySelector('#gq').textContent     = c.question;
     box.querySelector('#gopts').innerHTML    = c.options.map(function(o,k){
-      return '<span class="gopt'+(k===c.gt_i?' ok':'')+'">'+o+(k===c.gt_i?' &#10003;':'')+'</span>'; }).join('');
+      return '<span class="gopt'+(k===c.gt_i?' ok':'')+'">'+esc(o)+(k===c.gt_i?' &#10003;':'')+'</span>'; }).join('');
     box.querySelector('#gexp').innerHTML     = '<b>The thinking chain:</b> ' + c.explain;
     drawPins(); drawGrid();
   }
   fetch('/assets/data/readmind-brainmap.json').then(function(r){ return r.json(); }).then(function(d){
     GAL=d;
     box.querySelector('#gtabs').innerHTML = GAL.map(function(g,i){
-      return '<button type="button" class="gtab" data-i="'+i+'" aria-pressed="false">'+g.name+'</button>'; }).join('');
+      return '<button type="button" class="gtab" data-i="'+i+'" aria-pressed="false">'+esc(g.name)+'</button>'; }).join('');
     box.querySelectorAll('.gtab').forEach(function(t){
       t.addEventListener('click', function(){ selc(+t.dataset.i); }); });
     var w=box.querySelector('#gword');
