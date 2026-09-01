@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'We Mapped an Audio LLM&rsquo;s Brain. It Thinks in Words It Never Says.'
+title: 'For the First Time, We Can See an Audio LLM&rsquo;s Brain Map and Consciousness Space'
 date: 2026-08-25
 last_modified_at: 2026-08-31
 permalink: /posts/2026/08/read-the-mind-audio-llm/
@@ -9,7 +9,7 @@ tags:
   - audio LLMs
   - mechanistic interpretability
   - AI safety
-excerpt: "A speech model answers a spoken question in one word, and writes nothing down on the way. We read its middle layers while it listened - and found the answer already legible, in words it never says, in several languages at once."
+excerpt: "A speech model answers a spoken question in one word and writes nothing down on the way. We read its middle layers while it listened - and the answer was already there, in words it never says, in several languages at once."
 ---
 
 {% include post-editorial.html %}
