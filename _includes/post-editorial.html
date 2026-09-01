@@ -666,7 +666,7 @@ function initTwoMap(){
     var host = document.getElementById('tmap' + di);
     if (!host) return;
     var nL = d.nL, np = d.np;
-    var padL = 34, padT = 16, padB = 40, cw = 4.6, ch = 7.4;
+    var padL = 34, padT = 16, padB = 58, cw = 4.6, ch = 7.4;
     var W = padL + np * cw + 66, H = padT + nL * ch + padB;
     var yOf = function(li){ return padT + (nL - 1 - li) * ch; };
     var dep = function(li){ return 100 * d.layers[li] / (d.layers[nL-1] || 1); };
@@ -715,12 +715,13 @@ function initTwoMap(){
     for (var t2 = 0; t2 < np; t2++) {
       var lab = d.surface[t2];
       if (!lab || lab === ' ') continue;
+      if (lab.indexOf('<|') === 0) continue;          // audio pads repeat, and carry no information
       if (np > 120 && t2 % 2) continue;
       var cx = padL + t2*cw + cw/2;
       o.push('<text x="'+cx+'" y="'+(H-padB+7)+'" font-size="5.6" fill="var(--muted)" opacity=".8" transform="rotate(90 '+cx+' '+(H-padB+7)+')">'+lab+'</text>');
     }
     var ai = d.regions.indexOf('audio'), aj = d.regions.lastIndexOf('audio');
-    if (ai >= 0) o.push('<text x="'+(padL+(ai+aj)/2*cw)+'" y="'+(H-3)+'" text-anchor="middle" font-size="8.5" font-weight="700" fill="var(--ed-accent)">&#9668; audio, in time &#9658;</text>');
+    if (ai >= 0) o.push('<text x="'+(padL+(ai+aj)/2*cw)+'" y="'+(H-4)+'" text-anchor="middle" font-size="9" font-weight="700" fill="var(--ed-accent)">&#9668; audio, in time &#9658;</text>');
     o.push('</svg>');
     host.innerHTML = o.join('');
     host.querySelectorAll('.tmcell').forEach(function(r){
