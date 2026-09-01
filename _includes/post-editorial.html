@@ -450,7 +450,15 @@ body.dark-mode .ed .turn.bad .txt{color:#f08a82}
   .ed .gsw.r-audio{background:#bcd4ee} .ed .gsw.r-question{background:#ded6c4}
   .ed .gsw.r-content{background:#cfd9e6} .ed .gsw.r-pin{background:var(--ed-neg);border-color:var(--ed-neg)}
   .ed .gsw.r-ws{background:var(--ed-soft)}
-  </style>
+  
+  .ed .garr{color:var(--muted);margin:0 3px;font-family:var(--sans)}
+  .ed .gstep.ans{border-color:#0a860a;font-weight:700}
+  .ed .gstep.ans.on{background:#0a860a;border-color:#0a860a;color:#fff}
+  .ed .gstep.on{background:#e8590c;border-color:#e8590c;color:#fff}
+  .ed .ggrid{overflow:visible}
+  .ed .galfx.failed .ggrid::after{content:"The figure could not load.";display:block;
+    font-family:var(--sans);font-size:.82rem;color:var(--muted);padding:20px 0}
+</style>
 <script>
 /* mark a figure as scrollable only when it really overflows, so the hint never
    appears where nothing can scroll (and never prints) */
@@ -787,136 +795,122 @@ function initTwoMap(){
   });
 }
 
-/* whole-brain map, rebuilt from the project's own Finding-1 viewer */
+/* whole-brain map — a direct port of draw_c() from the project's own
+   Finding-1 viewer, same colours, same layers, same hover on every cell */
 function initGal(){
   var box = document.getElementById('galfx');
   if (!box) return;
-  var raw = document.getElementById('galdata');
-  if (!raw) return;
-  var GAL = JSON.parse(raw.textContent);
   var tt = document.getElementById('bmTT');
   if (tt && tt.parentNode !== document.body) document.body.appendChild(tt);
 
-  var CW = 9, CH = 7, GAPX = 0.7, GAPY = 0.7, LEFT = 46, TOP = 16, LABH = 92;
-  var pinned = GAL.map(function(g){ return g.defaultpin; });
-
-  function parsePins(str){
-    var m = {};
-    if (!str) return m;
-    str.split(';').forEach(function(it){
-      var a = it.split('|'); if (a.length === 2) m[a[0]] = +a[1];
-    });
-    return m;
+  var GAL = null, cur = 0, pin = null;
+  var C = { audio:'#cfe0f6', ques:'#e7e3d6', sensory:'#f0f0ee', motor:'#f0f0ee',
+            blue:'#1f6fd4', blue3:'#1a5cb0', gold:'#e8590c', muted:'#74746f' };
+  function isContent(t){ t=(t||'').trim();
+    return t.length>=2 && /[a-zA-Z一-鿿]/.test(t) && t.indexOf('<|')!==0; }
+  function pinMatch(tok){
+    if(!pin) return false;
+    var t=(tok||'').toLowerCase();
+    if(Array.isArray(pin)) return pin.some(function(v){ return t.indexOf(v.toLowerCase())>=0; });
+    return t.indexOf(pin)>=0;
   }
-  function draw(i){
-    var g = GAL[i], word = (pinned[i] || '').toLowerCase();
-    var nL = g.nL, np = g.npos;
-    var W = LEFT + np * (CW + GAPX) + 14, H = TOP + nL * (CH + GAPY) + LABH;
-    var y = function(L){ return TOP + (nL - 1 - L) * (CH + GAPY); };
-    var o = [];
-    o.push('<svg viewBox="0 0 ' + Math.round(W) + ' ' + Math.round(H) + '" role="img" aria-label="'
-      + 'Whole-brain readout for the ' + g.name + ' clip: ' + nL + ' depths by ' + np
-      + ' input positions, with the word ' + (pinned[i] || '') + ' pinned.">');
-    o.push('<defs><style>.gc{shape-rendering:crispEdges}'
-      + '.gax{font-family:var(--mono);font-size:8px;fill:var(--muted)}'
-      + '.gtk{font-family:var(--mono);font-size:7px;fill:var(--muted)}'
-      + '.gbd{font-family:var(--sans);font-size:7.5px;font-weight:700;letter-spacing:.06em;fill:var(--ed-accent)}'
-      + '</style></defs>');
-    // workspace band
-    var yb1 = y(Math.round(nL * 0.80)), yb2 = y(Math.round(nL * 0.35));
-    o.push('<rect x="' + LEFT + '" y="' + yb1.toFixed(1) + '" width="' + (np*(CW+GAPX)).toFixed(1)
-      + '" height="' + (yb2 - yb1 + CH).toFixed(1) + '" fill="var(--ed-soft)" opacity=".55"/>');
-    o.push('<text class="gbd" x="' + (LEFT - 6) + '" y="' + ((yb1 + yb2) / 2 + 3).toFixed(1)
-      + '" text-anchor="end">WS</text>');
-    // region strip along the top
-    var RC = { audio: '#bcd4ee', question: '#ded6c4', options: '#cfe6d4', other: '#e6e3dc' };
-    for (var p = 0; p < np; p++){
-      o.push('<rect class="gc" x="' + (LEFT + p*(CW+GAPX)).toFixed(1) + '" y="' + (TOP - 9)
-        + '" width="' + CW + '" height="5" fill="' + (RC[g.regions[p]] || RC.other) + '"/>');
-    }
-    // the readout itself
-    var pins = parsePins(g.pins[word] || '');
-    for (var L = 0; L < nL; L++){
-      var row = g.content[L];
-      for (var q = 0; q < np; q++){
-        var key = L + '_' + q, rk = pins[key];
-        if (rk !== undefined){
-          var op = [1, .82, .64, .5, .4, .32][rk] || .3;
-          o.push('<rect class="gc gcell" data-k="' + key + '" data-i="' + i + '" x="'
-            + (LEFT + q*(CW+GAPX)).toFixed(1) + '" y="' + y(L).toFixed(1) + '" width="' + CW
-            + '" height="' + CH + '" fill="var(--ed-neg)" opacity="' + op + '"/>');
-        } else if (row.charAt(q) === '1'){
-          o.push('<rect class="gc" x="' + (LEFT + q*(CW+GAPX)).toFixed(1) + '" y="' + y(L).toFixed(1)
-            + '" width="' + CW + '" height="' + CH + '" fill="#cfd9e6" opacity=".5"/>');
-        }
-      }
-    }
-    [0, 50, 100].forEach(function(d){
-      o.push('<text class="gax" x="' + (LEFT - 6) + '" y="'
-        + (y(Math.round((nL-1)*d/100)) + 6).toFixed(1) + '" text-anchor="end">' + d + '%</text>');
+  function drawPins(){
+    var c=GAL[cur];
+    var chips=c.steps.map(function(st,i){
+      var active = Array.isArray(pin) && pin.length===st.vars.length
+                   && pin.every(function(p,k){ return p===st.vars[k].toLowerCase(); });
+      return '<button type="button" class="gstep'+(active?' on':'')+(st.answer?' ans':'')
+           + '" data-i="'+i+'">'+(i+1)+'. '+st.label+(st.answer?' &#10003;':'')+'</button>';
+    }).join('<span class="garr">&rarr;</span>');
+    box.querySelector('#gsteps').innerHTML = chips;
+    box.querySelectorAll('#gsteps .gstep').forEach(function(b){
+      b.addEventListener('click', function(){
+        var st=GAL[cur].steps[+b.dataset.i];
+        pin=st.vars.map(function(v){ return v.toLowerCase(); });
+        var w=box.querySelector('#gword'); if(w) w.value=st.vars.join(' / ');
+        drawPins(); drawGrid();
+      });
     });
-    // token labels, rotated
-    var step = np > 110 ? 2 : 1;
-    for (var t = 0; t < np; t += step){
-      var lx = LEFT + t*(CW+GAPX) + CW/2, ly = TOP + nL*(CH+GAPY) + 8;
-      o.push('<text class="gtk" x="' + lx.toFixed(1) + '" y="' + ly.toFixed(1)
-        + '" transform="rotate(90 ' + lx.toFixed(1) + ' ' + ly.toFixed(1) + ')">' + g.surface[t] + '</text>');
+  }
+  function drawGrid(){
+    var c=GAL[cur], nL=c.nL, np=c.npos;
+    var cw=Math.max(7,Math.min(15,1180/np)), ch=6.4, padL=40, padT=24, padB=54;
+    var W=padL+np*cw+62, H=padT+nL*ch+padB;
+    var yOf=function(L){ return padT+(nL-1-L)*ch; };
+    var yb =function(d){ return padT+(nL-1-(d/100*(nL-1)))*ch; };
+    var regCol={audio:C.audio, question:C.ques, other:'transparent'};
+    var o=['<svg viewBox="0 0 '+W+' '+H+'" style="width:'+W+'px;max-width:none" role="img" aria-label="'
+      +'Whole-brain readout for the '+c.name+' clip: '+nL+' depths by '+np+' input positions.">'];
+    o.push('<rect x="'+padL+'" y="'+yb(35)+'" width="'+(np*cw)+'" height="'+(yOf(0)+ch-yb(35))+'" fill="'+C.sensory+'"/>');
+    o.push('<rect x="'+padL+'" y="'+yb(80)+'" width="'+(np*cw)+'" height="'+(yb(35)-yb(80))+'" fill="'+C.blue+'" opacity="0.09"/>');
+    o.push('<rect x="'+padL+'" y="'+padT+'" width="'+(np*cw)+'" height="'+(yb(80)-padT)+'" fill="'+C.motor+'"/>');
+    for(var p=0;p<np;p++){ var r=c.regions[p];
+      if(r!=='other') o.push('<rect x="'+(padL+p*cw)+'" y="'+(padT-7)+'" width="'+Math.ceil(cw)+'" height="5" fill="'+regCol[r]+'"/>'); }
+    for(var L=0;L<nL;L++){ var dep=100*L/(nL-1), inWS=dep>=35&&dep<=80;
+      for(var q=0;q<np;q++){ var tk=c.topk[L][q]||[];
+        if(isContent(tk[0])) o.push('<rect x="'+(padL+q*cw)+'" y="'+yOf(L)+'" width="'+Math.ceil(cw)
+          +'" height="'+Math.ceil(ch)+'" fill="'+C.blue+'" opacity="'+(inWS?0.22:0.09)+'"/>'); } }
+    for(var L2=0;L2<nL;L2++)for(var p2=0;p2<np;p2++){
+      var toks=c.topk[L2][p2]||[], rk=-1;
+      for(var k=0;k<toks.length;k++){ if(pinMatch(toks[k])){ rk=k; break; } }
+      var op = rk===0?1:(rk>=0&&rk<=2?0.62:(rk>=0?0.34:0));
+      o.push('<rect class="cc" data-l="'+L2+'" data-p="'+p2+'" x="'+(padL+p2*cw)+'" y="'+yOf(L2)
+        +'" width="'+Math.ceil(cw)+'" height="'+Math.ceil(ch)+'" fill="'+(rk>=0?C.gold:'transparent')
+        +'" opacity="'+op+'"/>');
     }
+    [0,50,100].forEach(function(d){ o.push('<text x="'+(padL-4)+'" y="'+(yb(d)+3)
+      +'" text-anchor="end" font-size="9" fill="'+C.muted+'">'+d+'%</text>'); });
+    o.push('<text x="'+(padL+np*cw+4)+'" y="'+yb(90)+'" font-size="8.5" fill="#b5551f" font-weight="700">MOTOR</text>');
+    o.push('<text x="'+(padL+np*cw+4)+'" y="'+yb(57)+'" font-size="8.5" fill="'+C.blue+'" font-weight="700">WORKSPACE</text>');
+    o.push('<text x="'+(padL+np*cw+4)+'" y="'+yb(17)+'" font-size="8.5" fill="#888" font-weight="700">SENSORY</text>');
+    for(var t=0;t<np;t++){ var lab=c.surface[t]; if(!lab||lab===' ') continue;
+      var lx=padL+t*cw+cw/2, ly=H-padB+8;
+      o.push('<text x="'+lx+'" y="'+ly+'" font-size="7" fill="#999" transform="rotate(90 '+lx+' '+ly+')">'+lab+'</text>'); }
+    var a=c.regions.indexOf('audio'), b=c.regions.lastIndexOf('audio');
+    if(a>=0) o.push('<text x="'+(padL+(a+b)/2*cw+cw/2)+'" y="'+(H-2)+'" text-anchor="middle" font-size="9.5" fill="'
+      +C.blue3+'" font-weight="700">&#9668; audio (time &rarr;) &#9658;</text>');
     o.push('</svg>');
-    document.getElementById('ggrid' + i).innerHTML = o.join('');
-    var n = Object.keys(pins).length;
-    document.getElementById('gmeta' + i).innerHTML = n
-      ? '<b>' + (pinned[i] || '') + '</b> is read out in <b>' + n + '</b> of the ' + (nL*np)
-        + ' cells &mdash; ' + nL + ' depths &times; ' + np + ' input positions'
-      : 'No cell reads out <b>' + (pinned[i] || '') + '</b> anywhere in this clip.';
+    var host=box.querySelector('#ggrid'); host.innerHTML=o.join('');
+    host.querySelectorAll('.cc').forEach(function(r){
+      r.addEventListener('mousemove', function(e){
+        var L=+r.dataset.l, p=+r.dataset.p, toks=c.topk[L][p]||[];
+        tt.innerHTML='<div class="hd">"'+c.surface[p]+'" &middot; L'+L+' &middot; '
+          +Math.round(100*L/(c.nL-1))+'%</div>'
+          +toks.map(function(t,i){ return '<div'+(pinMatch(t)?' class="hit"':'')+'>'+(i+1)+'. '+t+'</div>'; }).join('');
+        tt.style.left=Math.min(e.clientX+13, innerWidth-260)+'px';
+        tt.style.top =Math.min(e.clientY+13, innerHeight-170)+'px';
+        tt.style.opacity=1;
+      });
+      r.addEventListener('mouseleave', function(){ tt.style.opacity=0; });
+    });
+    if (window.__edSyncFigscroll) window.__edSyncFigscroll();
   }
-  function setWord(i, w){
-    pinned[i] = w;
-    var pane = box.querySelector('.gpane[data-i="' + i + '"]');
-    pane.querySelectorAll('.gstep').forEach(function(b){
-      b.classList.toggle('on', (b.dataset.w || '').toLowerCase() === (w || '').toLowerCase());
-    });
-    draw(i);
+  function selc(i){
+    cur=i; var c=GAL[i];
+    var st=(c.steps||[]).filter(function(x){ return x.vars[0].toLowerCase()===(c.defaultpin||'').toLowerCase(); })[0]||(c.steps||[])[0];
+    pin = st ? st.vars.map(function(v){ return v.toLowerCase(); }) : null;
+    var w=box.querySelector('#gword'); if(w) w.value = st ? st.vars.join(' / ') : '';
+    box.querySelectorAll('.gtab').forEach(function(t,k){
+      t.classList.toggle('on', k===i); t.setAttribute('aria-pressed', String(k===i)); });
+    box.querySelector('#gtask').textContent  = c.task.toUpperCase();
+    box.querySelector('#gaudio').innerHTML   = '<b>audio:</b> ' + c.audio;
+    box.querySelector('#gq').textContent     = c.question;
+    box.querySelector('#gopts').innerHTML    = c.options.map(function(o,k){
+      return '<span class="gopt'+(k===c.gt_i?' ok':'')+'">'+o+(k===c.gt_i?' &#10003;':'')+'</span>'; }).join('');
+    box.querySelector('#gexp').innerHTML     = '<b>The thinking chain:</b> ' + c.explain;
+    drawPins(); drawGrid();
   }
-  box.querySelectorAll('.gtab').forEach(function(t){
-    t.addEventListener('click', function(){
-      box.querySelectorAll('.gtab').forEach(function(x){
-        x.classList.toggle('on', x === t); x.setAttribute('aria-pressed', String(x === t)); });
-      box.querySelectorAll('.gpane').forEach(function(p){ p.classList.toggle('on', p.dataset.i === t.dataset.i); });
-      draw(+t.dataset.i);
-      if (window.__edSyncFigscroll) window.__edSyncFigscroll();
-    });
-  });
-  box.querySelectorAll('.gstep').forEach(function(b){
-    b.addEventListener('click', function(){
-      setWord(+b.closest('.gpane').dataset.i, b.dataset.w);
-    });
-  });
-  box.querySelectorAll('.gword').forEach(function(inp){
-    inp.addEventListener('input', function(){
-      var i = +inp.closest('.gpane').dataset.i;
-      var v = inp.value.trim();
-      if (v) setWord(i, v); 
-    });
-  });
-  // hover readout
-  box.addEventListener('mousemove', function(e){
-    var c = e.target.closest ? e.target.closest('.gcell') : null;
-    if (!c || !tt){ if (tt) tt.style.opacity = 0; return; }
-    var i = +c.dataset.i, g = GAL[i], k = c.dataset.k;
-    var toks = (g.tips && g.tips[k]) || [];
-    var pr = k.split('_'), L = +pr[0], p = +pr[1];
-    tt.innerHTML = '<div class="hd">L' + L + ' &middot; ' + Math.round(100*L/(g.nL-1))
-      + '% depth &middot; ' + (g.regions[p] === 'audio' ? 'audio' : 'text') + ' position ' + p + '</div>'
-      + toks.map(function(t, n){
-          var hit = t.toLowerCase().indexOf((pinned[i]||'').toLowerCase()) >= 0;
-          return '<div' + (hit ? ' class="hit"' : '') + '>' + (n+1) + '. ' + t + '</div>';
-        }).join('');
-    tt.style.opacity = 1;
-    tt.style.left = Math.min(e.clientX + 14, innerWidth - 250) + 'px';
-    tt.style.top  = Math.min(e.clientY + 14, innerHeight - 150) + 'px';
-  });
-  box.addEventListener('mouseleave', function(){ if (tt) tt.style.opacity = 0; });
-  GAL.forEach(function(_, i){ draw(i); });
+  fetch('/assets/data/readmind-brainmap.json').then(function(r){ return r.json(); }).then(function(d){
+    GAL=d;
+    box.querySelector('#gtabs').innerHTML = GAL.map(function(g,i){
+      return '<button type="button" class="gtab" data-i="'+i+'" aria-pressed="false">'+g.name+'</button>'; }).join('');
+    box.querySelectorAll('.gtab').forEach(function(t){
+      t.addEventListener('click', function(){ selc(+t.dataset.i); }); });
+    var w=box.querySelector('#gword');
+    if(w) w.addEventListener('input', function(){
+      var v=w.value.trim().toLowerCase(); pin = v || null; drawPins(); drawGrid(); });
+    box.classList.add('ready');
+    selc(0);
+  }).catch(function(){ box.classList.add('failed'); });
 }
 </script>
