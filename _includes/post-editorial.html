@@ -876,7 +876,7 @@ function initGal(){
     host.querySelectorAll('.cc').forEach(function(r){
       r.addEventListener('mousemove', function(e){
         var L=+r.dataset.l, p=+r.dataset.p, toks=c.topk[L][p]||[];
-        tt.innerHTML='<div class="hd">"'+esc(c.surface[p])+'"' &middot; L'+L+' &middot; '
+        tt.innerHTML='<div class="hd">"'+esc(c.surface[p])+'" &middot; L'+L+' &middot; '
           +Math.round(100*L/(c.nL-1))+'%</div>'
           +toks.map(function(t,i){ return '<div'+(pinMatch(t)?' class="hit"':'')+'>'+(i+1)+'. '+esc(t)+'</div>'; }).join('');
         tt.style.left=Math.min(e.clientX+13, innerWidth-260)+'px';
