@@ -187,6 +187,51 @@ body.dark-mode .ed .turn.bad .txt{color:#f08a82}
     min-height:3.1em;margin-top:12px}
   .ed .verdict b{color:var(--ink)}
   @media(max-width:620px){.ed .frow{grid-template-columns:1fr;gap:6px}.ed .frow .fnum{text-align:left}}
+
+  /* ── interactive: waveform-swap control ── */
+  .ed .swapfx{margin:26px 0 8px}
+  .ed .swapfx .seg{margin-bottom:22px}
+  .ed .seg .swopt{font-family:var(--sans);font-size:.82rem;font-weight:600;color:var(--muted);
+    background:none;border:0;border-radius:999px;padding:6px 15px;cursor:pointer;transition:background .18s,color .18s}
+  .ed .seg .swopt.on{background:var(--ed-accent);color:var(--ed-on-accent)}
+  .ed .seg .swopt:focus-visible{outline:2px solid var(--ed-accent);outline-offset:2px}
+  .ed .swgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;
+    background:var(--rule);border:1px solid var(--rule);border-radius:10px;overflow:hidden}
+  .ed .swcell{background:var(--bg);padding:18px 18px 16px}
+  .ed .swk{font-family:var(--sans);font-size:.72rem;font-weight:700;letter-spacing:.05em;
+    text-transform:uppercase;color:var(--muted);margin-bottom:9px}
+  .ed .swv{font-family:var(--mono);font-size:1.62rem;font-weight:700;color:var(--ink);
+    font-variant-numeric:tabular-nums;line-height:1.15}
+  .ed .swv small{font-size:.62em;color:var(--muted);margin-left:1px}
+  .ed .swbarw{height:9px;background:var(--band);border-radius:3px;margin-top:11px;overflow:hidden}
+  .ed .swbar{height:100%;background:var(--ed-accent);border-radius:3px;transition:width .45s cubic-bezier(.22,.9,.3,1),background .3s}
+  .ed .swnote{font-family:var(--sans);font-size:.72rem;color:var(--muted);margin-top:8px;line-height:1.45}
+
+  /* ── interactive: depth scrubber ── */
+  .ed .depthfx{margin:26px 0 8px}
+  .ed .dband{display:grid;grid-template-columns:35fr 45fr 20fr;gap:3px;margin:0 0 12px;
+    font-family:var(--sans);font-size:.68rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+  .ed .dband span{padding:5px 8px;border-radius:4px;text-align:center;color:var(--muted);background:var(--band)}
+  .ed .dband .dbw{background:var(--ed-soft);color:var(--ed-accent)}
+  .ed .dcases{margin-bottom:6px}
+  .ed .dcase{display:grid;grid-template-columns:132px 1fr 118px;gap:12px;align-items:center;margin-bottom:11px;
+    opacity:.28;transition:opacity .28s}
+  .ed .dcase.lit{opacity:1}
+  .ed .dcase .dl{font-family:var(--sans);font-size:.82rem;font-weight:700;color:var(--ink);line-height:1.3}
+  .ed .dcase .dl i{display:block;font-style:normal;font-size:.7rem;color:var(--muted);font-weight:400}
+  .ed .dtrack{position:relative;height:10px;background:var(--band);border-radius:3px}
+  .ed .dtrack::before{content:"";position:absolute;top:0;bottom:0;left:35%;width:45%;
+    background:var(--ed-soft);border-radius:3px}
+  .ed .dmark{position:absolute;top:-4px;width:10px;height:18px;border-radius:3px;margin-left:-5px;
+    background:var(--muted);transition:background .28s}
+  .ed .dcase.lit .dmark{background:var(--ed-accent)}
+  .ed .dv{font-family:var(--mono);font-size:.78rem;color:var(--ink);text-align:right;line-height:1.35}
+  .ed .dv .dword{display:block;font-weight:700}
+  .ed .dv .dmeta{display:block;font-size:.68rem;color:var(--muted)}
+  @media(max-width:620px){
+    .ed .dcase{grid-template-columns:1fr;gap:5px}
+    .ed .dv{text-align:left}
+  }
 </style>
 <script>
 /* mark a figure as scrollable only when it really overflows, so the hint never
@@ -258,8 +303,59 @@ function initAdv(){
 
 /* the include renders before the post body, so wait for the DOM */
 (function(){
-  function boot(){ initFlip(); initAdv(); }
+  function boot(){ initFlip(); initAdv(); initSwap(); initDepth(); }
   if (document.readyState !== 'loading') boot();
   else document.addEventListener('DOMContentLoaded', boot);
 })();
+
+/* waveform-swap control: identical text, only the sound changes */
+function initSwap(){
+  var box = document.getElementById('swapfx');
+  if (!box) return;
+  var opts = box.querySelectorAll('.swopt');
+  var hear = box.querySelector('#swHear'),
+      acc  = box.querySelector('#swAcc'),
+      bar  = box.querySelector('#swBar'),
+      rank = box.querySelector('#swRank');
+  function apply(btn){
+    var a = parseFloat(btn.dataset.acc);
+    hear.textContent = btn.textContent;
+    acc.textContent  = a.toFixed(1);
+    rank.textContent = btn.dataset.rank;
+    bar.style.width  = Math.max(0, Math.min(100, (a - 18) / (52 - 18) * 100)).toFixed(1) + '%';
+    bar.style.background = btn.dataset.k === 'real' ? 'var(--ed-accent)'
+                         : (btn.dataset.k === 'sil' ? 'var(--ed-neg)' : 'var(--ed-tint)');
+    opts.forEach(function(o){
+      o.classList.toggle('on', o === btn);
+      o.setAttribute('aria-pressed', String(o === btn));
+    });
+  }
+  opts.forEach(function(o){ o.addEventListener('click', function(){ apply(o); }); });
+}
+
+/* depth scrubber: which concepts have reached rank 1 by this depth */
+function initDepth(){
+  var box = document.getElementById('depthfx');
+  if (!box) return;
+  var sl    = box.querySelector('#dsl'),
+      cases = [].slice.call(box.querySelectorAll('.dcase')),
+      say   = box.querySelector('#dsay');
+  function render(){
+    var d = parseInt(sl.value, 10), lit = 0;
+    cases.forEach(function(c){
+      var on = parseInt(c.dataset.d, 10) <= d;
+      c.classList.toggle('lit', on);
+      if (on) lit++;
+    });
+    var band = d < 35 ? 'the sensory band' : (d <= 80 ? 'the workspace band' : 'the motor band');
+    var msg;
+    if (lit === 0)            msg = '<b>Nothing readable yet.</b> At ' + d + '% depth the encoder has deposited acoustic features, but no answer concept has reached rank 1 &mdash; this is ' + band + '.';
+    else if (lit === cases.length) msg = '<b>All ' + lit + ' readable.</b> By ' + d + '% depth every one of these concepts has reached rank 1 somewhere behind it.';
+    else                      msg = '<b>' + lit + ' of ' + cases.length + ' readable.</b> At ' + d + '% depth &mdash; ' + band + ' &mdash; that many answer concepts have already reached rank 1 at the audio positions.';
+    say.innerHTML = msg;
+    sl.setAttribute('aria-valuetext', d + ' percent depth, ' + lit + ' of ' + cases.length + ' concepts readable');
+  }
+  sl.addEventListener('input', render);
+  render();
+}
 </script>
