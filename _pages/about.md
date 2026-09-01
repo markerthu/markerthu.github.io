@@ -1258,6 +1258,10 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
 
 <ul class="news-list">
   <li>
+    <span class="news-date">Aug 2026</span>
+    <span><span class="nbadge nb-finish">Finding</span>New preprint &mdash; we read a base Audio LLM&rsquo;s middle layers while it listens, and find the answer already legible <em>in words</em> before it speaks. To our knowledge the first evidence that the verbalizable middle-layer <strong>workspace</strong> mapped in text models also exists for audio. <a href="/posts/2026/08/read-the-mind-audio-llm/">Read the write-up</a> &middot; <a href="https://arxiv.org/abs/2608.24958" target="_blank" rel="noopener noreferrer">arXiv</a></span>
+  </li>
+  <li>
     <span class="news-date">Jul 2026</span>
     <span><span class="nbadge nb-accept">Accept</span>Paper accepted at <strong>TMLR</strong> — first online-RL framework for self-improving protein generation.</span>
   </li>
