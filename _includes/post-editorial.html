@@ -384,6 +384,21 @@ body.dark-mode .ed .turn.bad .txt{color:#f08a82}
   .ed .bmmeta{font-family:var(--sans);font-size:.78rem;color:var(--muted);margin-top:10px;line-height:1.5}
   .ed .bmmeta b{color:var(--ink)}
   .ed .sw.bmsw{background:var(--ed-neg)} .ed .sw.bmws{background:var(--ed-soft);border:1px solid var(--rule)}
+
+  /* ── brain map, ported from the project's own viewer ── */
+  .ed .bmhead{font-family:var(--sans);font-size:.82rem;color:var(--body);margin-bottom:12px;line-height:1.5}
+  .ed .bmhead b{color:var(--ink)}
+  .ed #bmGrid svg{width:100%;height:auto;min-width:620px;display:block}
+  .ed .bmcell{cursor:crosshair}
+  .ed .bmtt{position:fixed;z-index:60;pointer-events:none;opacity:0;transition:opacity .12s;
+    background:var(--ink);color:var(--bg);border-radius:8px;padding:9px 11px;max-width:260px;
+    font-family:var(--mono);font-size:.72rem;line-height:1.65;box-shadow:0 6px 24px rgba(0,0,0,.22)}
+  .ed .bmtt .hd{font-family:var(--sans);font-weight:700;font-size:.68rem;letter-spacing:.04em;
+    text-transform:uppercase;opacity:.65;margin-bottom:5px}
+  .ed .bmtt .hit{color:#7fd0a0;font-weight:700}
+  .ed .bmbandlab{font-family:var(--sans);font-size:9px;font-weight:700;letter-spacing:.07em}
+  .ed .bmax{font-family:var(--mono);font-size:9px;fill:var(--muted)}
+  .ed .sw.bmbg{background:var(--band)}
 </style>
 <script>
 /* mark a figure as scrollable only when it really overflows, so the hint never
@@ -543,5 +558,89 @@ function initBrainmap(){
       if (window.__edSyncFigscroll) window.__edSyncFigscroll();
     });
   });
+}
+
+/* brain map - geometry and colour ported from the project's own results viewer */
+function initBrainmap(){
+  var box = document.getElementById('bmfx');
+  if (!box) return;
+  var data;
+  try { data = JSON.parse(document.getElementById('bmdata').textContent); } catch(e){ return; }
+  var tabs = box.querySelectorAll('.bmtab'),
+      grid = document.getElementById('bmGrid'),
+      head = document.getElementById('bmHead'),
+      meta = document.getElementById('bmMeta'),
+      tt   = document.getElementById('bmTT'),
+      cur  = 0;
+
+  function cvar(n){ return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }
+
+  function draw(){
+    var c = data[cur], nL = c.nL, np = c.np;
+    var W = 1000, H = 440, padL = 42, padB = 22, padT = 14;
+    var gw = (W - padL - 78) / np, gh = (H - padT - padB) / nL;
+    var yTop = function(d){ return H - padB - (d / 100) * (H - padT - padB); };
+    var yOf  = function(L){ return H - padB - (L + 1) * gh; };
+    var o = ['<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Brain map for the ' +
+             c.name + ' clip: ' + nL + ' readout depths by ' + np + ' audio positions, ' +
+             c.lit + ' cells lit.">'];
+    var GW = W - padL - 78;
+    // the three functional bands, full width
+    o.push('<rect x="'+padL+'" y="'+yTop(35)+'" width="'+GW+'" height="'+(yTop(0)-yTop(35))+'" fill="var(--band)"/>');
+    o.push('<rect x="'+padL+'" y="'+yTop(80)+'" width="'+GW+'" height="'+(yTop(35)-yTop(80))+'" fill="var(--ed-soft)"/>');
+    o.push('<rect x="'+padL+'" y="'+yTop(100)+'" width="'+GW+'" height="'+(yTop(80)-yTop(100))+'" fill="var(--band)"/>');
+    // lit cells, filling the grid with no gaps
+    var op = {3:'1', 2:'0.62', 1:'0.32'};
+    c.rows.forEach(function(r){
+      var L = r[0];
+      r[1].forEach(function(cell){
+        o.push('<rect class="bmcell" x="'+(padL+cell[0]*gw)+'" y="'+yOf(L)+'" width="'+Math.ceil(gw)+
+               '" height="'+Math.ceil(gh)+'" fill="var(--ed-accent)" opacity="'+op[cell[1]]+
+               '" data-l="'+L+'" data-p="'+cell[0]+'"/>');
+      });
+    });
+    // band labels on the right, like the viewer
+    o.push('<text class="bmbandlab" x="'+(W-6)+'" y="'+(yTop(17)+3)+'" text-anchor="end" fill="var(--muted)">SENSORY</text>');
+    o.push('<text class="bmbandlab" x="'+(W-6)+'" y="'+(yTop(57)+3)+'" text-anchor="end" fill="var(--ed-accent)">WORKSPACE</text>');
+    o.push('<text class="bmbandlab" x="'+(W-6)+'" y="'+(yTop(90)+3)+'" text-anchor="end" fill="var(--muted)">MOTOR</text>');
+    [0,25,50,75,100].forEach(function(d){
+      o.push('<text class="bmax" x="'+(padL-6)+'" y="'+(yTop(d)+3)+'" text-anchor="end">'+d+'%</text>');
+    });
+    o.push('<text class="bmax" x="'+(padL+GW/2)+'" y="'+(H-4)+'" text-anchor="middle">audio positions &#183; start &#8594; end of clip</text>');
+    o.push('<text class="bmax" x="12" y="'+(H/2)+'" transform="rotate(-90 12 '+(H/2)+')" text-anchor="middle">layer depth &#183; input &#8595; output &#8593;</text>');
+    o.push('</svg>');
+    grid.innerHTML = o.join('');
+    head.innerHTML = '<b>' + c.name + '</b> &mdash; ' + c.q;
+    meta.innerHTML = '<b>' + c.lit + '</b> of ' + (nL*np) + ' cells lit &middot; concepts read: ' +
+                     c.concepts.join(', ') + ' &middot; ' + nL + ' depths &times; ' + np + ' audio positions';
+    grid.querySelectorAll('.bmcell').forEach(function(r){
+      r.addEventListener('mousemove', function(e){
+        var L = r.dataset.l, P = r.dataset.p, toks = c.tips[L+'_'+P] || [];
+        tt.innerHTML = '<div class="hd">L' + L + ' &middot; ' + Math.round(100*L/(nL-1)) +
+          '% depth &middot; audio position ' + P + '</div>' +
+          toks.map(function(t,i){
+            var hit = c.concepts.some(function(x){ return t.toLowerCase().indexOf(x.toLowerCase()) >= 0; });
+            return '<span class="' + (hit?'hit':'') + '">' + (i+1) + '. ' + t + '</span>';
+          }).join('<br>');
+        tt.style.left = Math.min(e.clientX + 14, innerWidth - 270) + 'px';
+        tt.style.top  = (e.clientY + 14) + 'px';
+        tt.style.opacity = 1;
+      });
+      r.addEventListener('mouseleave', function(){ tt.style.opacity = 0; });
+    });
+    if (window.__edSyncFigscroll) window.__edSyncFigscroll();
+  }
+
+  tabs.forEach(function(t, i){
+    t.addEventListener('click', function(){
+      cur = i;
+      tabs.forEach(function(x, k){
+        x.classList.toggle('on', k === i);
+        x.setAttribute('aria-pressed', String(k === i));
+      });
+      draw();
+    });
+  });
+  draw();
 }
 </script>
