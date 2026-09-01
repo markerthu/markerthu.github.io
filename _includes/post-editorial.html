@@ -358,6 +358,18 @@ body.dark-mode .ed .turn.bad .txt{color:#f08a82}
     .ed .tmrow{grid-template-columns:1fr;gap:6px}
     .ed .tlrow{grid-template-columns:46px 1fr;gap:9px}
   }
+
+  /* ── the brain map ── */
+  .ed .bmtabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+  .ed .bmtab{font-family:var(--sans);font-size:.79rem;font-weight:600;color:var(--muted);
+    background:var(--band);border:1px solid var(--rule);border-radius:999px;padding:5px 13px;cursor:pointer}
+  .ed .bmtab.on{background:var(--ed-accent);border-color:var(--ed-accent);color:var(--ed-on-accent)}
+  .ed .bmtab:focus-visible{outline:2px solid var(--ed-accent);outline-offset:2px}
+  .ed .bmpane{display:none} .ed .bmpane.on{display:block}
+  .ed .bmpane svg{min-width:520px;width:100%;height:auto}
+  .ed .bmmeta{font-family:var(--sans);font-size:.78rem;color:var(--muted);margin-top:10px;line-height:1.5}
+  .ed .bmmeta b{color:var(--ink)}
+  .ed .sw.bmsw{background:var(--ed-neg)} .ed .sw.bmws{background:var(--ed-soft);border:1px solid var(--rule)}
 </style>
 <script>
 /* mark a figure as scrollable only when it really overflows, so the hint never
@@ -429,7 +441,7 @@ function initAdv(){
 
 /* the include renders before the post body, so wait for the DOM */
 (function(){
-  function boot(){ initFlip(); initAdv(); initSwap(); initDepth(); initChain(); }
+  function boot(){ initFlip(); initAdv(); initSwap(); initDepth(); initChain(); initBrainmap(); }
   if (document.readyState !== 'loading') boot();
   else document.addEventListener('DOMContentLoaded', boot);
 })();
@@ -499,6 +511,19 @@ function initChain(){
         x.setAttribute('aria-pressed', String(x === t));
       });
       panes.forEach(function(p){ p.classList.toggle('on', p.dataset.i === i); });
+    });
+  });
+}
+
+/* the brain map picker */
+function initBrainmap(){
+  var box = document.getElementById('bmfx');
+  if (!box) return;
+  var tabs = box.querySelectorAll('.bmtab'), panes = box.querySelectorAll('.bmpane');
+  tabs.forEach(function(t){
+    t.addEventListener('click', function(){
+      tabs.forEach(function(x){ x.classList.toggle('on', x===t); x.setAttribute('aria-pressed', String(x===t)); });
+      panes.forEach(function(p){ p.classList.toggle('on', p.dataset.i === t.dataset.i); });
     });
   });
 }
