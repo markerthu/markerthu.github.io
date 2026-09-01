@@ -2,7 +2,7 @@
   "_updated": "2026-09-01",
   "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 641,
+  "_total": 643,
   "_days": 30,
   "_range": "Aug. 2nd - Sep. 1st",
   "locations": [
@@ -49,10 +49,10 @@
     {
       "code": "US",
       "name": "Virginia, US",
-      "count": 10,
+      "count": 11,
       "cx": 101.3,
       "cy": 46.3,
-      "r": 2.29
+      "r": 2.31
     },
     {
       "code": "US",
@@ -119,6 +119,14 @@
       "r": 2.15
     },
     {
+      "code": "BR",
+      "name": "Brazil",
+      "count": 4,
+      "cx": 123.1,
+      "cy": 93.7,
+      "r": 2.11
+    },
+    {
       "code": "PH",
       "name": "Philippines",
       "count": 4,
@@ -156,14 +164,6 @@
       "count": 3,
       "cx": 81.4,
       "cy": 52.8,
-      "r": 2.07
-    },
-    {
-      "code": "BR",
-      "name": "Brazil",
-      "count": 3,
-      "cx": 123.1,
-      "cy": 93.7,
       "r": 2.07
     },
     {
@@ -379,7 +379,7 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 554
+      "count": 555
     },
     {
       "code": "HK",
@@ -412,6 +412,11 @@
       "count": 5
     },
     {
+      "code": "BR",
+      "name": "Brazil",
+      "count": 4
+    },
+    {
       "code": "PH",
       "name": "Philippines",
       "count": 4
@@ -425,11 +430,6 @@
       "code": "TR",
       "name": "Turkey",
       "count": 4
-    },
-    {
-      "code": "BR",
-      "name": "Brazil",
-      "count": 3
     },
     {
       "code": "DE",
@@ -535,7 +535,7 @@
       "country": "US",
       "country_name": "United States",
       "name": "Virginia",
-      "count": 10,
+      "count": 11,
       "located": true
     },
     {
@@ -641,7 +641,7 @@
     {
       "path": "/",
       "title": "Jiajun Fan - Jiajun Fan",
-      "count": 263
+      "count": 264
     },
     {
       "path": "/visitors",
@@ -729,6 +729,11 @@
       "count": 2
     },
     {
+      "path": "/publication/2026-05-13-PyRAG",
+      "title": "Retrieval is Cheap, Show Me the Code: Executable Multi-Hop Reasoning for Retrieval-Augmented Generation - Jiajun Fan",
+      "count": 1
+    },
+    {
       "path": "/projects/lbc",
       "title": "LBC — 24 Atari World Records | ICLR 2023 Oral",
       "count": 1
@@ -743,7 +748,7 @@
     {
       "name": "(unknown)",
       "id": "",
-      "count": 223
+      "count": 224
     },
     {
       "name": "www.jiajunfan.com",
@@ -753,7 +758,7 @@
     {
       "name": "Google",
       "id": "Google",
-      "count": 65
+      "count": 66
     },
     {
       "name": "www.jiajunfan.com/projects",
@@ -845,7 +850,7 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 391
+      "count": 393
     },
     {
       "name": "Safari",
@@ -862,7 +867,7 @@
     {
       "name": "macOS",
       "id": "macOS",
-      "count": 284
+      "count": 286
     },
     {
       "name": "iOS",
@@ -1013,21 +1018,43 @@
     },
     {
       "day": "2026-09-01",
-      "n": 13
+      "n": 15
     }
   ],
   "periods": {
-    "today": 13,
+    "today": 15,
     "yesterday": 45,
-    "d7": 177,
+    "d7": 179,
     "d7_prev": 124,
-    "d30": 641,
+    "d30": 643,
     "d30_prev": 0,
-    "day_frac": 0.273,
+    "day_frac": 0.453,
     "yesterday_day": "2026-08-31"
   },
-  "_last_visit": "2026-09-01 06:16",
+  "_last_visit": "2026-09-01 09:16",
   "recent": [
+    {
+      "date": "2026-09-01 09:16",
+      "ts": "2026-09-01T16:16:39Z",
+      "loc": "Virginia, US",
+      "path": "/",
+      "ref": "Google",
+      "browser": "Chrome 151",
+      "system": "macOS 10.15",
+      "screen": "1728px",
+      "first": true
+    },
+    {
+      "date": "2026-09-01 08:29",
+      "ts": "2026-09-01T15:29:35Z",
+      "loc": "Brazil",
+      "path": "/publication/2026-05-13-PyRAG",
+      "ref": "",
+      "browser": "Chrome 137",
+      "system": "macOS 10.15",
+      "screen": "1920px",
+      "first": true
+    },
     {
       "date": "2026-09-01 06:16",
       "ts": "2026-09-01T13:16:01Z",
@@ -1335,30 +1362,8 @@
       "system": "Windows 10",
       "screen": "1920px",
       "first": true
-    },
-    {
-      "date": "2026-09-01 00:05",
-      "ts": "2026-09-01T07:05:07Z",
-      "loc": "United States",
-      "path": "/",
-      "ref": "Google",
-      "browser": "Chrome 151",
-      "system": "Windows 10",
-      "screen": "2048px",
-      "first": true
-    },
-    {
-      "date": "2026-09-01 00:05",
-      "ts": "2026-09-01T07:05:28Z",
-      "loc": "United States",
-      "path": "/publications",
-      "ref": "www.jiajunfan.com",
-      "browser": "Chrome 151",
-      "system": "Windows 10",
-      "screen": "2048px",
-      "first": true
     }
   ],
-  "_recent_total": 1199,
+  "_recent_total": 1201,
   "_recent_shown": 30
 }
