@@ -139,7 +139,7 @@ body.dark-mode .ed .turn.bad .txt{color:#f08a82}
     /* every element whose meaning is carried by a background colour */
     .ed .bfill,.ed .sw,.ed .fno,.ed .chip.on,.ed .abpos,.ed .tlseg,.ed .tlmark,.ed .tmk,.ed .lgb,.ed .swbar,.ed .chstep,.ed .chtab.on,.ed .swopt.on,.ed .bmtab.on,.ed .tband,.ed .bmc,.ed .abL0b{
       -webkit-print-color-adjust:exact;print-color-adjust:exact}
-    .ed .figscroll::after{display:none}
+    .ed .figscroll::after,.ed .figscroll.scrollable::after{display:none}
   }
 
   /* ── interactive: two-state toggle ── */
@@ -509,6 +509,15 @@ body.dark-mode .ed .turn.bad .txt{color:#f08a82}
   .ed .mxseg button{font-family:var(--sans);font-size:.8rem;font-weight:600;color:var(--muted);
     background:none;border:0;border-radius:999px;padding:5px 14px;cursor:pointer;transition:background .18s,color .18s}
   .ed .mxseg button.on{background:var(--ed-accent);color:var(--ed-on-accent)}
+
+  .ed .abcol.help .abbar{background:var(--ed-tint);opacity:.75}
+  .ed .gstep.on{background:#c2460a;border-color:#c2460a}
+  .ed .tlseg.s2,.ed .tlmark.s1{color:var(--ink)}
+  .ed .scatterfx text.ps.hi{fill:var(--body)}
+  @media(max-width:620px){
+    .ed .tmrow{margin-bottom:52px}
+    .ed .tmk.alt i{top:-41px}
+  }
 </style>
 <script>
 /* mark a figure as scrollable only when it really overflows, so the hint never
@@ -765,7 +774,7 @@ function initTwoMap(){
   try { data = JSON.parse(document.getElementById('tmapdata').textContent); } catch(e){ return; }
   var tt = document.getElementById('bmTT');
   if (tt && tt.parentNode !== document.body) document.body.appendChild(tt);
-  var REG = { audio:'var(--ed-accent)', question:'var(--muted)', options:'var(--ed-tint)', other:'transparent' };
+  var REG = { audio:'var(--ed-accent)', caption:'var(--ed-accent)', question:'var(--muted)', options:'var(--ed-tint)', other:'transparent' };
 
   data.forEach(function(d, di){
     var host = document.getElementById('tmap' + di);
@@ -839,7 +848,7 @@ function initTwoMap(){
             return '<span class="'+(hit?'hit':'')+'">'+(i+1)+'. '+t+'</span>';
           }).join('<br>');
         tt.style.left = Math.min(e.clientX+13, innerWidth-260)+'px';
-        tt.style.top = (e.clientY+13)+'px'; tt.style.opacity = 1;
+        tt.style.top = Math.max(4, Math.min(e.clientY+13, innerHeight - tt.offsetHeight - 8))+'px'; tt.style.opacity = 1;
       });
       r.addEventListener('mouseleave', function(){ tt.style.opacity = 0; });
     });
@@ -857,8 +866,16 @@ function initGal(){
   var GAL = null, cur = 0, pin = null;
   function esc(t){ return String(t==null?'':t)
     .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-  var C = { audio:'#cfe0f6', ques:'#e7e3d6', sensory:'#f0f0ee', motor:'#f0f0ee',
-            blue:'#1f6fd4', blue3:'#1a5cb0', gold:'#e8590c', muted:'#74746f' };
+  function cv(n){ return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }
+  var C = {};
+  function palette(){
+    var dark = document.body.classList.contains('dark-mode');
+    C = { audio: dark?'#22364d':'#cfe0f6', ques: dark?'#33302a':'#e7e3d6',
+          sensory: dark?'#171b21':'#f0f0ee', motor: dark?'#171b21':'#f0f0ee',
+          blue: dark?'#5b9bf0':'#1f6fd4', blue3: cv('--ed-accent')||'#1a5cb0',
+          gold: dark?'#f0834a':'#e8590c', muted: cv('--muted')||'#74746f',
+          axis: cv('--muted')||'#74746f' };
+  }
   function isContent(t){ t=(t||'').trim();
     return t.length>=2 && /[a-zA-Z一-鿿]/.test(t) && t.indexOf('<|')!==0; }
   function pinMatch(tok){
@@ -886,9 +903,10 @@ function initGal(){
     });
   }
   function drawGrid(){
+    palette();
     var c=GAL[cur], nL=c.nL, np=c.npos;
     var cw=Math.max(7,Math.min(15,1180/np)), ch=6.4, padL=40, padT=24, padB=54;
-    var W=padL+np*cw+62, H=padT+nL*ch+padB;
+    var W=padL+np*cw+82, H=padT+nL*ch+padB;
     var yOf=function(L){ return padT+(nL-1-L)*ch; };
     var yb =function(d){ return padT+(nL-1-(d/100*(nL-1)))*ch; };
     var regCol={audio:C.audio, question:C.ques, other:'transparent'};
@@ -913,12 +931,15 @@ function initGal(){
     }
     [0,50,100].forEach(function(d){ o.push('<text x="'+(padL-4)+'" y="'+(yb(d)+3)
       +'" text-anchor="end" font-size="9" fill="'+C.muted+'">'+d+'%</text>'); });
-    o.push('<text x="'+(padL+np*cw+4)+'" y="'+yb(90)+'" font-size="8.5" fill="#b5551f" font-weight="700">MOTOR</text>');
+    o.push('<text x="'+(padL+np*cw+4)+'" y="'+yb(90)+'" font-size="8.5" fill="'+C.muted+'" font-weight="700">MOTOR</text>');
     o.push('<text x="'+(padL+np*cw+4)+'" y="'+yb(57)+'" font-size="8.5" fill="'+C.blue+'" font-weight="700">WORKSPACE</text>');
-    o.push('<text x="'+(padL+np*cw+4)+'" y="'+yb(17)+'" font-size="8.5" fill="#888" font-weight="700">SENSORY</text>');
-    for(var t=0;t<np;t++){ var lab=c.surface[t]; if(!lab||lab===' ') continue;
+    o.push('<text x="'+(padL+np*cw+4)+'" y="'+yb(17)+'" font-size="8.5" fill="'+C.muted+'" font-weight="700">SENSORY</text>');
+    for(var t=0;t<np;t++){ var lab=c.surface[t];
+      if(!lab||lab==='\u2423'||String(lab).trim()==='') continue;
+      var short = lab.length>7 ? lab.slice(0,7) : lab;
       var lx=padL+t*cw+cw/2, ly=H-padB+8;
-      o.push('<text x="'+lx+'" y="'+ly+'" font-size="7" fill="#999" transform="rotate(90 '+lx+' '+ly+')">'+esc(lab)+'</text>'); }
+      o.push('<text x="'+lx+'" y="'+ly+'" font-size="8.5" fill="'+C.axis+'" transform="rotate(90 '
+        +lx+' '+ly+')">'+esc(short)+'</text>'); }
     var a=c.regions.indexOf('audio'), b=c.regions.lastIndexOf('audio');
     if(a>=0) o.push('<text x="'+(padL+(a+b)/2*cw+cw/2)+'" y="'+(H-2)+'" text-anchor="middle" font-size="9.5" fill="'
       +C.blue3+'" font-weight="700">&#9668; audio (time &rarr;) &#9658;</text>');
@@ -964,6 +985,8 @@ function initGal(){
       var v=w.value.trim().toLowerCase(); pin = v || null; drawPins(); drawGrid(); });
     box.classList.add('ready');
     selc(0);
+    var dt=document.getElementById('pg-dark');
+    if(dt) dt.addEventListener('click', function(){ setTimeout(drawGrid, 260); });
   }).catch(function(){ box.classList.add('failed'); });
 }
 
