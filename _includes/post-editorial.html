@@ -518,6 +518,18 @@ body.dark-mode .ed .turn.bad .txt{color:#f08a82}
     .ed .tmrow{margin-bottom:52px}
     .ed .tmk.alt i{top:-41px}
   }
+
+  /* ── SpeechGym: cost comparison ── */
+  .ed .cgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1px;
+    background:var(--rule);border:1px solid var(--rule);border-radius:10px;overflow:hidden;margin:18px 0 4px}
+  .ed .ccell{background:var(--bg);padding:16px 18px}
+  .ed .ccell.ours{background:var(--ed-soft)}
+  .ed .ck{font-family:var(--sans);font-size:.74rem;font-weight:700;letter-spacing:.05em;
+    text-transform:uppercase;color:var(--muted);margin-bottom:8px;line-height:1.4}
+  .ed .cv{font-family:var(--mono);font-size:1.7rem;font-weight:800;color:var(--ink);
+    font-variant-numeric:tabular-nums;line-height:1.1}
+  .ed .ccell.ours .cv{color:var(--ed-accent)}
+  .ed .cn{font-family:var(--sans);font-size:.75rem;color:var(--muted);margin-top:7px;line-height:1.45}
 </style>
 <script>
 /* mark a figure as scrollable only when it really overflows, so the hint never
@@ -590,7 +602,7 @@ function initAdv(){
 
 /* the include renders before the post body, so wait for the DOM */
 (function(){
-  function boot(){ initFlip(); initAdv(); initSwap(); initDepth(); initChain(); initBrainmap(); initGal(); initMatrix(); initMetric(); initTwoMap(); }
+  function boot(){ initFlip(); initAdv(); initSwap(); initDepth(); initChain(); initBrainmap(); initGal(); initCost(); initMatrix(); initMetric(); initTwoMap(); }
   if (document.readyState !== 'loading') boot();
   else document.addEventListener('DOMContentLoaded', boot);
 })();
@@ -1065,5 +1077,27 @@ function initMetric(){
   box.querySelectorAll('.mtab').forEach(function(t,k){
     t.addEventListener('click', function(){ mi=k; render(); }); });
   render();
+}
+
+/* SpeechGym: epochs -> two bills */
+function initCost(){
+  var box=document.getElementById('costfx'); if(!box) return;
+  var sl=box.querySelector('#epsl'), api=box.querySelector('#cApi'),
+      loc=box.querySelector('#cLocal'), tm=box.querySelector('#cTime'), say=box.querySelector('#cSay');
+  function fmt(n){ return '$' + n.toLocaleString('en-US'); }
+  function hrs(h){ return h < 48 ? Math.round(h) + ' hr' : Math.round(h/24) + ' days'; }
+  function render(){
+    var e=+sl.value, cost=e*200, t=e*2.8;
+    api.textContent = cost >= 100000 ? '$' + Math.round(cost/1000) + 'k' : fmt(cost);
+    loc.textContent = '$0';
+    tm.textContent  = hrs(t);
+    var word = e===1 ? 'One epoch.' : (e===7 ? 'Seven epochs.' : e.toLocaleString('en-US') + ' epochs.');
+    say.innerHTML = '<b>' + word + '</b> A run that costs ' +
+      (cost >= 100000 ? 'around $' + Math.round(cost/1000) + 'k' : 'over ' + fmt(cost)) +
+      ' in API calls costs nothing here, and the money was never the real obstacle &mdash; the rollout ' +
+      'volume on-policy RL needs simply cannot be bought at that price.';
+    sl.setAttribute('aria-valuetext', e + ' epochs, ' + fmt(cost) + ' through an API, $0 locally');
+  }
+  sl.addEventListener('input', render); render();
 }
 </script>
