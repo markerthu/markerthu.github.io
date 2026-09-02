@@ -1033,7 +1033,7 @@ function initMetric(){
     var best=Math.max.apply(null, D.rows.map(function(r){ return r[m.k]; }));
     box.querySelector('#mtnote').innerHTML='<b>'+m.label+'</b> &mdash; '+m.sub
       +'. ADRPO scores <b>'+(m.k==='blip'?ours.toFixed(3):ours.toFixed(2))+'</b>'
-      +(ours===best?', the best in the table' : '')
+      +(Math.abs(ours-best)<1e-9?', the best in the table' : '')
       +'. The red line marks the un-tuned SD3 base model, so anything left of it is a method that '
       +'went backwards on this metric.';
     box.querySelectorAll('.mtab').forEach(function(t,k){
