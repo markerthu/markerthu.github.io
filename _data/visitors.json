@@ -2,7 +2,7 @@
   "_updated": "2026-09-02",
   "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 662,
+  "_total": 666,
   "_days": 30,
   "_range": "Aug. 3rd - Sep. 2nd",
   "locations": [
@@ -17,18 +17,18 @@
     {
       "code": "US",
       "name": "Illinois, US",
-      "count": 180,
+      "count": 183,
       "cx": 90.8,
       "cy": 44.6,
-      "r": 3.87
+      "r": 3.89
     },
     {
       "code": "US",
       "name": "California, US",
-      "count": 63,
+      "count": 64,
       "cx": 60.0,
       "cy": 46.9,
-      "r": 3.02
+      "r": 3.03
     },
     {
       "code": "US",
@@ -403,7 +403,7 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 594
+      "count": 598
     },
     {
       "code": "HK",
@@ -538,14 +538,14 @@
       "country": "US",
       "country_name": "United States",
       "name": "Illinois",
-      "count": 180,
+      "count": 183,
       "located": true
     },
     {
       "country": "US",
       "country_name": "United States",
       "name": "California",
-      "count": 63,
+      "count": 64,
       "located": true
     },
     {
@@ -672,7 +672,7 @@
     {
       "path": "/",
       "title": "Jiajun Fan - Jiajun Fan",
-      "count": 269
+      "count": 272
     },
     {
       "path": "/visitors",
@@ -687,7 +687,7 @@
     {
       "path": "/cv",
       "title": "CV — Jiajun Fan",
-      "count": 69
+      "count": 70
     },
     {
       "path": "/year-archive",
@@ -784,12 +784,12 @@
     {
       "name": "www.jiajunfan.com",
       "id": "www.jiajunfan.com",
-      "count": 212
+      "count": 213
     },
     {
       "name": "Google",
       "id": "Google",
-      "count": 70
+      "count": 71
     },
     {
       "name": "www.jiajunfan.com/year-archive",
@@ -862,6 +862,16 @@
       "count": 1
     },
     {
+      "name": "weixin110.qq.com",
+      "id": "weixin110.qq.com",
+      "count": 1
+    },
+    {
+      "name": "nvidia.eightfold.ai",
+      "id": "nvidia.eightfold.ai",
+      "count": 1
+    },
+    {
       "name": "www.jiajunfan.com/projects/ac-flow",
       "id": "www.jiajunfan.com/projects/ac-flow",
       "count": 1
@@ -876,12 +886,12 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 430
+      "count": 431
     },
     {
       "name": "Safari",
       "id": "Safari",
-      "count": 250
+      "count": 253
     },
     {
       "name": "Firefox",
@@ -893,17 +903,17 @@
     {
       "name": "macOS",
       "id": "macOS",
-      "count": 323
+      "count": 325
     },
     {
       "name": "iOS",
       "id": "iOS",
-      "count": 241
+      "count": 242
     },
     {
       "name": "Windows",
       "id": "Windows",
-      "count": 94
+      "count": 95
     },
     {
       "name": "Linux",
@@ -1044,21 +1054,87 @@
     },
     {
       "day": "2026-09-02",
-      "n": 9
+      "n": 13
     }
   ],
   "periods": {
-    "today": 9,
+    "today": 13,
     "yesterday": 48,
-    "d7": 169,
+    "d7": 173,
     "d7_prev": 162,
-    "d30": 662,
+    "d30": 666,
     "d30_prev": 23,
-    "day_frac": 0.242,
+    "day_frac": 0.456,
     "yesterday_day": "2026-09-01"
   },
-  "_last_visit": "2026-09-02 04:39",
+  "_last_visit": "2026-09-02 09:49",
   "recent": [
+    {
+      "date": "2026-09-02 09:49",
+      "ts": "2026-09-02T16:49:01Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "weixin110.qq.com",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.5",
+      "screen": "402px",
+      "first": true
+    },
+    {
+      "date": "2026-09-02 09:03",
+      "ts": "2026-09-02T16:03:14Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "Google",
+      "browser": "Safari 18.6",
+      "system": "macOS 10.15",
+      "screen": "1470px",
+      "first": false
+    },
+    {
+      "date": "2026-09-02 09:02",
+      "ts": "2026-09-02T16:02:57Z",
+      "loc": "California, US",
+      "path": "/",
+      "ref": "nvidia.eightfold.ai",
+      "browser": "Chrome 152",
+      "system": "Windows 10",
+      "screen": "1920px",
+      "first": true
+    },
+    {
+      "date": "2026-09-02 08:21",
+      "ts": "2026-09-02T15:21:47Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "Google",
+      "browser": "Safari 18.6",
+      "system": "macOS 10.15",
+      "screen": "1470px",
+      "first": true
+    },
+    {
+      "date": "2026-09-02 08:21",
+      "ts": "2026-09-02T15:21:53Z",
+      "loc": "Illinois, US",
+      "path": "/cv",
+      "ref": "www.jiajunfan.com",
+      "browser": "Safari 18.6",
+      "system": "macOS 10.15",
+      "screen": "1470px",
+      "first": true
+    },
+    {
+      "date": "2026-09-02 06:21",
+      "ts": "2026-09-02T13:21:46Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": false
+    },
     {
       "date": "2026-09-02 04:39",
       "ts": "2026-09-02T11:39:00Z",
@@ -1322,74 +1398,8 @@
       "system": "Windows 10",
       "screen": "1920px",
       "first": true
-    },
-    {
-      "date": "2026-09-01 19:11",
-      "ts": "2026-09-02T02:11:34Z",
-      "loc": "Brazil",
-      "path": "/publications",
-      "ref": "",
-      "browser": "Chrome 148",
-      "system": "Windows 10",
-      "screen": "1920px",
-      "first": true
-    },
-    {
-      "date": "2026-09-01 18:24",
-      "ts": "2026-09-02T01:24:50Z",
-      "loc": "Illinois, US",
-      "path": "/cv",
-      "ref": "www.jiajunfan.com",
-      "browser": "Chrome 151",
-      "system": "macOS 10.15",
-      "screen": "1800px",
-      "first": true
-    },
-    {
-      "date": "2026-09-01 18:23",
-      "ts": "2026-09-02T01:23:55Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 151",
-      "system": "macOS 10.15",
-      "screen": "1800px",
-      "first": true
-    },
-    {
-      "date": "2026-09-01 18:12",
-      "ts": "2026-09-02T01:12:50Z",
-      "loc": "Illinois, US",
-      "path": "/posts/2026/08/read-the-mind-audio-llm",
-      "ref": "",
-      "browser": "Chrome 148",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": true
-    },
-    {
-      "date": "2026-09-01 17:44",
-      "ts": "2026-09-02T00:44:30Z",
-      "loc": "Illinois, US",
-      "path": "/posts/2025/10/inverse-scaling-audio-llms",
-      "ref": "www.jiajunfan.com/year-archive",
-      "browser": "Chrome 149",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": true
-    },
-    {
-      "date": "2026-09-01 17:44",
-      "ts": "2026-09-02T00:44:35Z",
-      "loc": "Illinois, US",
-      "path": "/posts/2025/10/diversity-collapse-rlhf",
-      "ref": "www.jiajunfan.com/year-archive",
-      "browser": "Chrome 149",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": true
     }
   ],
-  "_recent_total": 1263,
+  "_recent_total": 1269,
   "_recent_shown": 30
 }
