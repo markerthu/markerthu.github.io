@@ -458,6 +458,57 @@ body.dark-mode .ed .turn.bad .txt{color:#f08a82}
   .ed .ggrid{overflow:visible}
   .ed .galfx.failed .ggrid::after{content:"The figure could not load.";display:block;
     font-family:var(--sans);font-size:.82rem;color:var(--muted);padding:20px 0}
+
+  /* ── CESAR: track x reasoning-mode matrix ── */
+  .ed .mxtabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+  .ed .mxtab{font-family:var(--sans);font-size:.79rem;font-weight:600;color:var(--muted);
+    background:var(--band);border:1px solid var(--rule);border-radius:999px;padding:5px 13px;cursor:pointer}
+  .ed .mxtab.on{background:var(--ed-accent);border-color:var(--ed-accent);color:var(--ed-on-accent)}
+  .ed .mxtab:focus-visible,.ed .mxseg button:focus-visible{outline:2px solid var(--ed-accent);outline-offset:2px}
+  .ed .mxrow{display:grid;grid-template-columns:158px 1fr 116px;gap:10px 14px;align-items:center;margin-bottom:13px}
+  .ed .mxl{font-family:var(--sans);font-size:.82rem;font-weight:700;color:var(--ink);line-height:1.3}
+  .ed .mxl i{display:block;font-style:normal;font-size:.71rem;color:var(--muted);font-weight:400}
+  .ed .mxtrack{position:relative;height:24px;background:var(--band);border-radius:4px;overflow:hidden}
+  .ed .mxfill{position:absolute;inset:0 auto 0 0;border-radius:4px;background:var(--ed-tint);
+    transition:width .5s cubic-bezier(.22,.9,.3,1),background .3s}
+  .ed .mxrow.ours .mxfill{background:var(--ed-accent)}
+  .ed .mxrow.down .mxfill{background:var(--ed-neg)}
+  .ed .mxrow.fixed .mxfill{background:var(--ed-tint);opacity:.6}
+  .ed .mxv{font-family:var(--mono);font-size:.83rem;font-weight:700;color:var(--ink);
+    font-variant-numeric:tabular-nums;text-align:right}
+  .ed .mxd{font-family:var(--mono);font-size:.71rem;font-weight:700;margin-left:6px}
+  .ed .mxrow.up .mxd{color:var(--ed-accent)} .ed .mxrow.down .mxd{color:var(--ed-neg)}
+  .ed .mxrow.flat .mxd{color:var(--muted)}
+  .ed .mxnote{font-family:var(--sans);font-size:.78rem;color:var(--muted);margin-top:12px;line-height:1.55}
+  .ed .mxnote b{color:var(--ink)}
+
+  /* ── ADRPO: metric-switchable comparison ── */
+  .ed .mtabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+  .ed .mtab{font-family:var(--sans);font-size:.78rem;font-weight:600;color:var(--muted);
+    background:var(--band);border:1px solid var(--rule);border-radius:999px;padding:5px 12px;cursor:pointer;
+    display:flex;flex-direction:column;align-items:flex-start;line-height:1.25}
+  .ed .mtab i{font-style:normal;font-size:.66rem;font-weight:400;opacity:.8}
+  .ed .mtab.on{background:var(--ed-accent);border-color:var(--ed-accent);color:var(--ed-on-accent)}
+  .ed .mtab:focus-visible{outline:2px solid var(--ed-accent);outline-offset:2px}
+  .ed .mrow{display:grid;grid-template-columns:172px 1fr 92px;gap:9px 14px;align-items:center;margin-bottom:11px}
+  .ed .mrow.sep{margin-top:14px;padding-top:13px;border-top:1px solid var(--rule)}
+  .ed .ml{font-family:var(--sans);font-size:.81rem;font-weight:600;color:var(--body);line-height:1.3}
+  .ed .ml i{display:block;font-style:normal;font-size:.7rem;color:var(--muted);font-weight:400}
+  .ed .mrow.ours .ml{font-weight:800;color:var(--ink)}
+  .ed .mtrack{position:relative;height:22px;background:var(--band);border-radius:4px;overflow:hidden}
+  .ed .mfill{position:absolute;inset:0 auto 0 0;border-radius:4px;background:var(--ed-tint);
+    transition:width .5s cubic-bezier(.22,.9,.3,1)}
+  .ed .mrow.ours .mfill{background:var(--ed-accent)}
+  .ed .mbase{position:absolute;top:0;bottom:0;width:2px;background:var(--ed-neg);opacity:.8}
+  .ed .mv{font-family:var(--mono);font-size:.82rem;font-weight:700;color:var(--ink);
+    font-variant-numeric:tabular-nums;text-align:right}
+  .ed .mrow.ours .mv{color:var(--ed-accent)}
+
+  .ed .mxpin{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:16px}
+  .ed .mxseg{display:inline-flex;border:1px solid var(--rule);border-radius:999px;background:var(--band);padding:3px}
+  .ed .mxseg button{font-family:var(--sans);font-size:.8rem;font-weight:600;color:var(--muted);
+    background:none;border:0;border-radius:999px;padding:5px 14px;cursor:pointer;transition:background .18s,color .18s}
+  .ed .mxseg button.on{background:var(--ed-accent);color:var(--ed-on-accent)}
 </style>
 <script>
 /* mark a figure as scrollable only when it really overflows, so the hint never
@@ -530,7 +581,7 @@ function initAdv(){
 
 /* the include renders before the post body, so wait for the DOM */
 (function(){
-  function boot(){ initFlip(); initAdv(); initSwap(); initDepth(); initChain(); initBrainmap(); initGal(); initTwoMap(); }
+  function boot(){ initFlip(); initAdv(); initSwap(); initDepth(); initChain(); initBrainmap(); initGal(); initMatrix(); initMetric(); initTwoMap(); }
   if (document.readyState !== 'loading') boot();
   else document.addEventListener('DOMContentLoaded', boot);
 })();
@@ -914,5 +965,82 @@ function initGal(){
     box.classList.add('ready');
     selc(0);
   }).catch(function(){ box.classList.add('failed'); });
+}
+
+/* CESAR: what reasoning is worth, per MMAU track */
+function initMatrix(){
+  var box=document.getElementById('mxfx'); if(!box) return;
+  var D=JSON.parse(document.getElementById('mxdata').textContent);
+  var track=3, mode='on';
+  var LO=58, HI=86;
+  function pct(v){ return Math.max(1.5, Math.min(100, (v-LO)/(HI-LO)*100)); }
+  function render(){
+    var html='';
+    D.rows.forEach(function(r){
+      var v=r[mode][track], other=r[mode==='on'?'off':'on'][track], d=r.on[track]-r.off[track];
+      var cls=r.ours?'ours':(d<-0.5?'down':'');
+      var dl=(d>=0?'+':'\u2212')+Math.abs(d).toFixed(2);
+      html+='<div class="mxrow '+cls+' '+(d>0.5?'up':(d<-0.5?'down':'flat'))+'">'
+        +'<div class="mxl">'+r.name+'<i>'+r.sub+'</i></div>'
+        +'<div class="mxtrack"><div class="mxfill" style="width:'+pct(v).toFixed(1)+'%"></div></div>'
+        +'<div class="mxv">'+v.toFixed(2)+'<span class="mxd">'+dl+'</span></div></div>';
+    });
+    D.fixed.forEach(function(r){
+      var v=r.v[track];
+      html+='<div class="mxrow fixed"><div class="mxl">'+r.name+'<i>'+r.sub+'</i></div>'
+        +'<div class="mxtrack"><div class="mxfill" style="width:'+pct(v).toFixed(1)+'%"></div></div>'
+        +'<div class="mxv">'+v.toFixed(2)+'</div></div>';
+    });
+    box.querySelector('#mxrows').innerHTML=html;
+    var best=D.rows[0][mode][track], gem=D.fixed[0].v[track];
+    box.querySelector('#mxnote').innerHTML='On <b>'+D.tracks[track]+'</b>, reading '
+      +(mode==='on'?'with reasoning switched on':'with the model answering directly')
+      +': CESAR scores <b>'+best.toFixed(2)+'</b> against Gemini 2.5 Pro&rsquo;s '+gem.toFixed(2)
+      +'. The number after each bar is what reasoning is worth to that model on this track.';
+    box.querySelectorAll('.mxtab').forEach(function(t,k){
+      t.classList.toggle('on', k===track); t.setAttribute('aria-pressed', String(k===track)); });
+    box.querySelectorAll('.mxseg button').forEach(function(b){
+      b.classList.toggle('on', b.dataset.m===mode); b.setAttribute('aria-pressed', String(b.dataset.m===mode)); });
+  }
+  box.querySelectorAll('.mxtab').forEach(function(t,k){
+    t.addEventListener('click', function(){ track=k; render(); }); });
+  box.querySelectorAll('.mxseg button').forEach(function(b){
+    b.addEventListener('click', function(){ mode=b.dataset.m; render(); }); });
+  render();
+}
+
+/* ADRPO: every metric of Table 1, switchable */
+function initMetric(){
+  var box=document.getElementById('mtfx'); if(!box) return;
+  var D=JSON.parse(document.getElementById('mtdata').textContent);
+  var mi=0;
+  function render(){
+    var m=D.metrics[mi];
+    var base=D.rows.filter(function(r){ return r.grp==='base'; })[0][m.k];
+    var html='';
+    D.rows.forEach(function(r,i){
+      var v=r[m.k];
+      var w=Math.max(1.5, Math.min(100, (v-m.lo)/(m.hiv-m.lo)*100));
+      var bx=Math.max(0, Math.min(100, (base-m.lo)/(m.hiv-m.lo)*100));
+      html+='<div class="mrow '+(r.ours?'ours':'')+(i===3?' sep':'')+'">'
+        +'<div class="ml">'+r.name+'<i>'+r.sub+'</i></div>'
+        +'<div class="mtrack"><div class="mfill" style="width:'+w.toFixed(1)+'%"></div>'
+        +'<div class="mbase" style="left:'+bx.toFixed(1)+'%"></div></div>'
+        +'<div class="mv">'+(m.k==='blip'?v.toFixed(3):v.toFixed(2))+'</div></div>';
+    });
+    box.querySelector('#mtrows').innerHTML=html;
+    var ours=D.rows.filter(function(r){ return r.ours; })[0][m.k];
+    var best=Math.max.apply(null, D.rows.map(function(r){ return r[m.k]; }));
+    box.querySelector('#mtnote').innerHTML='<b>'+m.label+'</b> &mdash; '+m.sub
+      +'. ADRPO scores <b>'+(m.k==='blip'?ours.toFixed(3):ours.toFixed(2))+'</b>'
+      +(ours===best?', the best in the table' : '')
+      +'. The red line marks the un-tuned SD3 base model, so anything left of it is a method that '
+      +'went backwards on this metric.';
+    box.querySelectorAll('.mtab').forEach(function(t,k){
+      t.classList.toggle('on', k===mi); t.setAttribute('aria-pressed', String(k===mi)); });
+  }
+  box.querySelectorAll('.mtab').forEach(function(t,k){
+    t.addEventListener('click', function(){ mi=k; render(); }); });
+  render();
 }
 </script>
