@@ -1,8 +1,8 @@
 {
   "_updated": "2026-09-03",
-  "_timezone": "UTC",
+  "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 652,
+  "_total": 659,
   "_days": 30,
   "_range": "Aug. 4th - Sep. 3rd",
   "locations": [
@@ -17,10 +17,10 @@
     {
       "code": "US",
       "name": "Illinois, US",
-      "count": 193,
+      "count": 198,
       "cx": 90.8,
       "cy": 44.6,
-      "r": 3.97
+      "r": 4.0
     },
     {
       "code": "US",
@@ -303,6 +303,14 @@
       "r": 1.96
     },
     {
+      "code": "CR",
+      "name": "Costa Rica",
+      "count": 1,
+      "cx": 95.8,
+      "cy": 74.2,
+      "r": 1.96
+    },
+    {
       "code": "DZ",
       "name": "Algeria",
       "count": 1,
@@ -332,6 +340,14 @@
       "count": 1,
       "cx": 170.6,
       "cy": 55.2,
+      "r": 1.96
+    },
+    {
+      "code": "NL",
+      "name": "Netherlands",
+      "count": 1,
+      "cx": 185.5,
+      "cy": 31.9,
       "r": 1.96
     },
     {
@@ -395,7 +411,7 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 597
+      "count": 602
     },
     {
       "code": "HK",
@@ -493,6 +509,11 @@
       "count": 1
     },
     {
+      "code": "CR",
+      "name": "Costa Rica",
+      "count": 1
+    },
+    {
       "code": "DZ",
       "name": "Algeria",
       "count": 1
@@ -511,11 +532,6 @@
       "code": "MA",
       "name": "Morocco",
       "count": 1
-    },
-    {
-      "code": "SA",
-      "name": "Saudi Arabia",
-      "count": 1
     }
   ],
   "regions": [
@@ -530,7 +546,7 @@
       "country": "US",
       "country_name": "United States",
       "name": "Illinois",
-      "count": 193,
+      "count": 198,
       "located": true
     },
     {
@@ -657,17 +673,17 @@
     {
       "path": "/",
       "title": "Jiajun Fan - Jiajun Fan",
-      "count": 261
+      "count": 262
     },
     {
       "path": "/visitors",
       "title": "Visitors — Jiajun Fan",
-      "count": 98
+      "count": 99
     },
     {
       "path": "/publications",
       "title": "Publications — Jiajun Fan",
-      "count": 74
+      "count": 76
     },
     {
       "path": "/cv",
@@ -677,7 +693,7 @@
     {
       "path": "/year-archive",
       "title": "Blog - Jiajun Fan",
-      "count": 33
+      "count": 34
     },
     {
       "path": "/projects",
@@ -697,7 +713,7 @@
     {
       "path": "/posts/2026/08/read-the-mind-audio-llm",
       "title": "For the First Time, We Can See an Audio LLM’s Brain Map and Consciousness Space — Jiajun Fan",
-      "count": 12
+      "count": 13
     },
     {
       "path": "/contact",
@@ -740,14 +756,14 @@
       "count": 3
     },
     {
-      "path": "/publication/2026-07-08-Procedure-Aware-RL",
-      "title": "Procedure-Aware Reinforcement Learning for Tool-Augmented Large Language Models - Jiajun Fan",
+      "path": "/posts/2026/08/speechgym-voice-agent-rl",
+      "title": "Voice Agents Could Be Ranked, Never Improved. We Closed the Loop. — Jiajun Fan",
       "count": 2
     },
     {
-      "path": "/posts/2026/08/speechgym-voice-agent-rl",
-      "title": "Voice Agents Could Be Ranked, Never Improved. We Closed the Loop. — Jiajun Fan",
-      "count": 1
+      "path": "/publication/2026-07-08-Procedure-Aware-RL",
+      "title": "Procedure-Aware Reinforcement Learning for Tool-Augmented Large Language Models - Jiajun Fan",
+      "count": 2
     },
     {
       "path": "/publication/2026-05-13-PyRAG",
@@ -769,12 +785,12 @@
     {
       "name": "(unknown)",
       "id": "",
-      "count": 220
+      "count": 223
     },
     {
       "name": "www.jiajunfan.com",
       "id": "www.jiajunfan.com",
-      "count": 210
+      "count": 212
     },
     {
       "name": "Google",
@@ -784,7 +800,7 @@
     {
       "name": "www.jiajunfan.com/year-archive",
       "id": "www.jiajunfan.com/year-archive",
-      "count": 39
+      "count": 40
     },
     {
       "name": "www.jiajunfan.com/projects",
@@ -837,6 +853,11 @@
       "count": 2
     },
     {
+      "name": "www.jiajunfan.com/posts/2026/08/read-the-mind-audio-llm",
+      "id": "www.jiajunfan.com/posts/2026/08/read-the-mind-audio-llm",
+      "count": 2
+    },
+    {
       "name": "114.114.114.114:9421",
       "id": "114.114.114.114:9421",
       "count": 1
@@ -865,23 +886,18 @@
       "name": "www.jiajunfan.com/projects/ac-flow",
       "id": "www.jiajunfan.com/projects/ac-flow",
       "count": 1
-    },
-    {
-      "name": "www.jiajunfan.com/posts/2026/08/read-the-mind-audio-llm",
-      "id": "www.jiajunfan.com/posts/2026/08/read-the-mind-audio-llm",
-      "count": 1
     }
   ],
   "browsers": [
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 424
+      "count": 426
     },
     {
       "name": "Safari",
       "id": "Safari",
-      "count": 249
+      "count": 254
     },
     {
       "name": "Firefox",
@@ -898,12 +914,12 @@
     {
       "name": "iOS",
       "id": "iOS",
-      "count": 241
+      "count": 246
     },
     {
       "name": "Windows",
       "id": "Windows",
-      "count": 89
+      "count": 91
     },
     {
       "name": "Linux",
@@ -1040,27 +1056,115 @@
     },
     {
       "day": "2026-09-02",
-      "n": 25
+      "n": 31
     },
     {
       "day": "2026-09-03",
-      "n": 0
+      "n": 1
     }
   ],
   "periods": {
-    "today": 0,
-    "yesterday": 25,
-    "d7": 171,
+    "today": 1,
+    "yesterday": 31,
+    "d7": 178,
     "d7_prev": 163,
-    "d30": 652,
+    "d30": 659,
     "d30_prev": 57,
-    "day_frac": 0.049,
+    "day_frac": 0.01,
     "yesterday_day": "2026-09-02"
   },
-  "_last_visit": "2026-09-03 01:04",
+  "_last_visit": "2026-09-03 00:11",
   "recent": [
     {
-      "date": "2026-09-03 01:04",
+      "date": "2026-09-03 00:11",
+      "ts": "2026-09-03T07:11:09Z",
+      "loc": "Netherlands",
+      "path": "/publications",
+      "ref": "",
+      "browser": "Chrome 148",
+      "system": "Windows 10",
+      "screen": "2560px",
+      "first": true
+    },
+    {
+      "date": "2026-09-02 22:52",
+      "ts": "2026-09-03T05:52:02Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": true
+    },
+    {
+      "date": "2026-09-02 22:52",
+      "ts": "2026-09-03T05:52:05Z",
+      "loc": "Illinois, US",
+      "path": "/visitors",
+      "ref": "www.jiajunfan.com",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": true
+    },
+    {
+      "date": "2026-09-02 22:52",
+      "ts": "2026-09-03T05:52:23Z",
+      "loc": "Illinois, US",
+      "path": "/posts/2026/08/read-the-mind-audio-llm",
+      "ref": "www.jiajunfan.com",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": true
+    },
+    {
+      "date": "2026-09-02 22:52",
+      "ts": "2026-09-03T05:52:26Z",
+      "loc": "Illinois, US",
+      "path": "/year-archive",
+      "ref": "www.jiajunfan.com/posts/2026/08/read-the-mind-audio-llm",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": true
+    },
+    {
+      "date": "2026-09-02 22:52",
+      "ts": "2026-09-03T05:52:30Z",
+      "loc": "Illinois, US",
+      "path": "/posts/2026/08/speechgym-voice-agent-rl",
+      "ref": "www.jiajunfan.com/year-archive",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": true
+    },
+    {
+      "date": "2026-09-02 22:52",
+      "ts": "2026-09-03T05:52:58Z",
+      "loc": "Illinois, US",
+      "path": "/posts/2026/08/read-the-mind-audio-llm",
+      "ref": "www.jiajunfan.com/year-archive",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": false
+    },
+    {
+      "date": "2026-09-02 19:12",
+      "ts": "2026-09-03T02:12:42Z",
+      "loc": "Costa Rica",
+      "path": "/publications",
+      "ref": "",
+      "browser": "Chrome 148",
+      "system": "Windows 10",
+      "screen": "1920px",
+      "first": true
+    },
+    {
+      "date": "2026-09-02 18:04",
       "ts": "2026-09-03T01:04:43Z",
       "loc": "Thailand",
       "path": "/publications",
@@ -1071,7 +1175,7 @@
       "first": true
     },
     {
-      "date": "2026-09-02 21:30",
+      "date": "2026-09-02 14:30",
       "ts": "2026-09-02T21:30:07Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1082,7 +1186,7 @@
       "first": false
     },
     {
-      "date": "2026-09-02 21:30",
+      "date": "2026-09-02 14:30",
       "ts": "2026-09-02T21:30:32Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1093,7 +1197,7 @@
       "first": false
     },
     {
-      "date": "2026-09-02 21:29",
+      "date": "2026-09-02 14:29",
       "ts": "2026-09-02T21:29:14Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1104,7 +1208,7 @@
       "first": false
     },
     {
-      "date": "2026-09-02 21:07",
+      "date": "2026-09-02 14:07",
       "ts": "2026-09-02T21:07:15Z",
       "loc": "Virginia, US",
       "path": "/",
@@ -1115,7 +1219,7 @@
       "first": true
     },
     {
-      "date": "2026-09-02 20:40",
+      "date": "2026-09-02 13:40",
       "ts": "2026-09-02T20:40:16Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1126,7 +1230,7 @@
       "first": false
     },
     {
-      "date": "2026-09-02 20:30",
+      "date": "2026-09-02 13:30",
       "ts": "2026-09-02T20:30:17Z",
       "loc": "Illinois, US",
       "path": "/posts/2026/08/speechgym-voice-agent-rl",
@@ -1137,7 +1241,7 @@
       "first": false
     },
     {
-      "date": "2026-09-02 20:30",
+      "date": "2026-09-02 13:30",
       "ts": "2026-09-02T20:30:33Z",
       "loc": "Illinois, US",
       "path": "/publications",
@@ -1148,7 +1252,7 @@
       "first": true
     },
     {
-      "date": "2026-09-02 20:30",
+      "date": "2026-09-02 13:30",
       "ts": "2026-09-02T20:30:36Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1159,7 +1263,7 @@
       "first": false
     },
     {
-      "date": "2026-09-02 20:29",
+      "date": "2026-09-02 13:29",
       "ts": "2026-09-02T20:29:09Z",
       "loc": "Illinois, US",
       "path": "/year-archive",
@@ -1170,7 +1274,7 @@
       "first": true
     },
     {
-      "date": "2026-09-02 20:29",
+      "date": "2026-09-02 13:29",
       "ts": "2026-09-02T20:29:20Z",
       "loc": "Illinois, US",
       "path": "/posts/2026/08/speechgym-voice-agent-rl",
@@ -1181,7 +1285,7 @@
       "first": true
     },
     {
-      "date": "2026-09-02 20:29",
+      "date": "2026-09-02 13:29",
       "ts": "2026-09-02T20:29:54Z",
       "loc": "Illinois, US",
       "path": "/posts/2026/08/read-the-mind-audio-llm",
@@ -1192,7 +1296,7 @@
       "first": true
     },
     {
-      "date": "2026-09-02 20:28",
+      "date": "2026-09-02 13:28",
       "ts": "2026-09-02T20:28:40Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1203,7 +1307,7 @@
       "first": false
     },
     {
-      "date": "2026-09-02 20:28",
+      "date": "2026-09-02 13:28",
       "ts": "2026-09-02T20:28:44Z",
       "loc": "Illinois, US",
       "path": "/visitors",
@@ -1214,7 +1318,7 @@
       "first": false
     },
     {
-      "date": "2026-09-02 19:24",
+      "date": "2026-09-02 12:24",
       "ts": "2026-09-02T19:24:18Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1225,7 +1329,7 @@
       "first": false
     },
     {
-      "date": "2026-09-02 19:21",
+      "date": "2026-09-02 12:21",
       "ts": "2026-09-02T19:21:07Z",
       "loc": "Illinois, US",
       "path": "/posts/2025/10/inverse-scaling-audio-llms",
@@ -1236,7 +1340,7 @@
       "first": true
     },
     {
-      "date": "2026-09-02 19:20",
+      "date": "2026-09-02 12:20",
       "ts": "2026-09-02T19:20:08Z",
       "loc": "Illinois, US",
       "path": "/year-archive",
@@ -1247,7 +1351,7 @@
       "first": true
     },
     {
-      "date": "2026-09-02 19:20",
+      "date": "2026-09-02 12:20",
       "ts": "2026-09-02T19:20:56Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1258,7 +1362,7 @@
       "first": true
     },
     {
-      "date": "2026-09-02 19:20",
+      "date": "2026-09-02 12:20",
       "ts": "2026-09-02T19:20:57Z",
       "loc": "Illinois, US",
       "path": "/year-archive",
@@ -1269,7 +1373,7 @@
       "first": true
     },
     {
-      "date": "2026-09-02 19:19",
+      "date": "2026-09-02 12:19",
       "ts": "2026-09-02T19:19:50Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1280,7 +1384,7 @@
       "first": false
     },
     {
-      "date": "2026-09-02 19:19",
+      "date": "2026-09-02 12:19",
       "ts": "2026-09-02T19:19:54Z",
       "loc": "Illinois, US",
       "path": "/posts/2026/08/read-the-mind-audio-llm",
@@ -1291,7 +1395,7 @@
       "first": true
     },
     {
-      "date": "2026-09-02 19:17",
+      "date": "2026-09-02 12:17",
       "ts": "2026-09-02T19:17:27Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1300,96 +1404,8 @@
       "system": "macOS 10.15",
       "screen": "1440px",
       "first": true
-    },
-    {
-      "date": "2026-09-02 16:49",
-      "ts": "2026-09-02T16:49:01Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "weixin110.qq.com",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.5",
-      "screen": "402px",
-      "first": true
-    },
-    {
-      "date": "2026-09-02 16:03",
-      "ts": "2026-09-02T16:03:14Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "Google",
-      "browser": "Safari 18.6",
-      "system": "macOS 10.15",
-      "screen": "1470px",
-      "first": false
-    },
-    {
-      "date": "2026-09-02 16:02",
-      "ts": "2026-09-02T16:02:57Z",
-      "loc": "California, US",
-      "path": "/",
-      "ref": "nvidia.eightfold.ai",
-      "browser": "Chrome 152",
-      "system": "Windows 10",
-      "screen": "1920px",
-      "first": true
-    },
-    {
-      "date": "2026-09-02 15:21",
-      "ts": "2026-09-02T15:21:47Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "Google",
-      "browser": "Safari 18.6",
-      "system": "macOS 10.15",
-      "screen": "1470px",
-      "first": true
-    },
-    {
-      "date": "2026-09-02 15:21",
-      "ts": "2026-09-02T15:21:53Z",
-      "loc": "Illinois, US",
-      "path": "/cv",
-      "ref": "www.jiajunfan.com",
-      "browser": "Safari 18.6",
-      "system": "macOS 10.15",
-      "screen": "1470px",
-      "first": true
-    },
-    {
-      "date": "2026-09-02 13:21",
-      "ts": "2026-09-02T13:21:46Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": false
-    },
-    {
-      "date": "2026-09-02 11:39",
-      "ts": "2026-09-02T11:39:00Z",
-      "loc": "Illinois, US",
-      "path": "/visitors",
-      "ref": "www.jiajunfan.com",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": false
-    },
-    {
-      "date": "2026-09-02 11:38",
-      "ts": "2026-09-02T11:38:58Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": false
     }
   ],
-  "_recent_total": 1291,
+  "_recent_total": 1299,
   "_recent_shown": 30
 }
