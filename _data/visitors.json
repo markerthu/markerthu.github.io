@@ -2,7 +2,7 @@
   "_updated": "2026-09-03",
   "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 685,
+  "_total": 686,
   "_days": 30,
   "_range": "Aug. 4th - Sep. 3rd",
   "locations": [
@@ -17,10 +17,10 @@
     {
       "code": "US",
       "name": "Illinois, US",
-      "count": 207,
+      "count": 208,
       "cx": 90.8,
       "cy": 44.6,
-      "r": 4.05
+      "r": 4.06
     },
     {
       "code": "US",
@@ -427,7 +427,7 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 625
+      "count": 626
     },
     {
       "code": "HK",
@@ -562,7 +562,7 @@
       "country": "US",
       "country_name": "United States",
       "name": "Illinois",
-      "count": 207,
+      "count": 208,
       "located": true
     },
     {
@@ -703,7 +703,7 @@
     {
       "path": "/",
       "title": "Jiajun Fan - Jiajun Fan",
-      "count": 267
+      "count": 268
     },
     {
       "path": "/visitors",
@@ -830,7 +830,7 @@
     {
       "name": "Google",
       "id": "Google",
-      "count": 72
+      "count": 73
     },
     {
       "name": "www.jiajunfan.com/year-archive",
@@ -937,7 +937,7 @@
     {
       "name": "Safari",
       "id": "Safari",
-      "count": 254
+      "count": 255
     },
     {
       "name": "Firefox",
@@ -949,7 +949,7 @@
     {
       "name": "macOS",
       "id": "macOS",
-      "count": 329
+      "count": 330
     },
     {
       "name": "iOS",
@@ -1100,21 +1100,32 @@
     },
     {
       "day": "2026-09-03",
-      "n": 27
+      "n": 28
     }
   ],
   "periods": {
-    "today": 27,
+    "today": 28,
     "yesterday": 31,
-    "d7": 204,
+    "d7": 205,
     "d7_prev": 163,
-    "d30": 685,
+    "d30": 686,
     "d30_prev": 57,
-    "day_frac": 0.454,
+    "day_frac": 0.651,
     "yesterday_day": "2026-09-02"
   },
-  "_last_visit": "2026-09-03 09:54",
+  "_last_visit": "2026-09-03 12:18",
   "recent": [
+    {
+      "date": "2026-09-03 12:18",
+      "ts": "2026-09-03T19:18:39Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "Google",
+      "browser": "Safari 18.6",
+      "system": "macOS 10.15",
+      "screen": "1470px",
+      "first": true
+    },
     {
       "date": "2026-09-03 09:54",
       "ts": "2026-09-03T16:54:24Z",
@@ -1433,19 +1444,8 @@
       "system": "Windows 10",
       "screen": "1536px",
       "first": true
-    },
-    {
-      "date": "2026-09-03 01:07",
-      "ts": "2026-09-03T08:07:47Z",
-      "loc": "Illinois, US",
-      "path": "/posts/2025/10/diversity-collapse-rlhf",
-      "ref": "www.jiajunfan.com/year-archive",
-      "browser": "Chrome 152",
-      "system": "Windows 10",
-      "screen": "1536px",
-      "first": true
     }
   ],
-  "_recent_total": 1332,
+  "_recent_total": 1333,
   "_recent_shown": 30
 }
