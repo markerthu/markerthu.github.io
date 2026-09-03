@@ -2,7 +2,7 @@
   "_updated": "2026-09-03",
   "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 668,
+  "_total": 685,
   "_days": 30,
   "_range": "Aug. 4th - Sep. 3rd",
   "locations": [
@@ -40,19 +40,19 @@
     },
     {
       "code": "US",
+      "name": "New York, US",
+      "count": 15,
+      "cx": 104.5,
+      "cy": 41.4,
+      "r": 2.41
+    },
+    {
+      "code": "US",
       "name": "Virginia, US",
       "count": 12,
       "cx": 101.3,
       "cy": 46.3,
       "r": 2.34
-    },
-    {
-      "code": "US",
-      "name": "New York, US",
-      "count": 9,
-      "cx": 104.5,
-      "cy": 41.4,
-      "r": 2.27
     },
     {
       "code": "HK",
@@ -63,11 +63,27 @@
       "r": 2.24
     },
     {
+      "code": "SG",
+      "name": "Singapore",
+      "count": 8,
+      "cx": 283.8,
+      "cy": 82.7,
+      "r": 2.24
+    },
+    {
       "code": "US",
       "name": "Florida, US",
       "count": 7,
       "cx": 96.7,
       "cy": 55.1,
+      "r": 2.21
+    },
+    {
+      "code": "US",
+      "name": "New Jersey, US",
+      "count": 7,
+      "cx": 105.3,
+      "cy": 43.8,
       "r": 2.21
     },
     {
@@ -119,14 +135,6 @@
       "r": 2.15
     },
     {
-      "code": "SG",
-      "name": "Singapore",
-      "count": 5,
-      "cx": 283.8,
-      "cy": 82.7,
-      "r": 2.15
-    },
-    {
       "code": "US",
       "name": "Indiana, US",
       "count": 4,
@@ -136,10 +144,10 @@
     },
     {
       "code": "US",
-      "name": "New Jersey, US",
+      "name": "Massachusetts, US",
       "count": 4,
-      "cx": 105.3,
-      "cy": 43.8,
+      "cx": 108.5,
+      "cy": 41.8,
       "r": 2.11
     },
     {
@@ -157,14 +165,6 @@
       "cx": 216.9,
       "cy": 45.6,
       "r": 2.11
-    },
-    {
-      "code": "US",
-      "name": "Massachusetts, US",
-      "count": 3,
-      "cx": 108.5,
-      "cy": 41.8,
-      "r": 2.07
     },
     {
       "code": "US",
@@ -200,6 +200,14 @@
     },
     {
       "code": "US",
+      "name": "Michigan, US",
+      "count": 2,
+      "cx": 93.6,
+      "cy": 38.6,
+      "r": 2.02
+    },
+    {
+      "code": "US",
       "name": "Missouri, US",
       "count": 2,
       "cx": 88.2,
@@ -212,6 +220,14 @@
       "count": 2,
       "cx": 102.5,
       "cy": 43.0,
+      "r": 2.02
+    },
+    {
+      "code": "US",
+      "name": "Texas, US",
+      "count": 2,
+      "cx": 81.4,
+      "cy": 52.8,
       "r": 2.02
     },
     {
@@ -411,11 +427,16 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 611
+      "count": 625
     },
     {
       "code": "HK",
       "name": "Hong Kong",
+      "count": 8
+    },
+    {
+      "code": "SG",
+      "name": "Singapore",
       "count": 8
     },
     {
@@ -441,11 +462,6 @@
     {
       "code": "BR",
       "name": "Brazil",
-      "count": 5
-    },
-    {
-      "code": "SG",
-      "name": "Singapore",
       "count": 5
     },
     {
@@ -566,6 +582,13 @@
     {
       "country": "US",
       "country_name": "United States",
+      "name": "New York",
+      "count": 15,
+      "located": true
+    },
+    {
+      "country": "US",
+      "country_name": "United States",
       "name": "Virginia",
       "count": 12,
       "located": true
@@ -573,14 +596,14 @@
     {
       "country": "US",
       "country_name": "United States",
-      "name": "New York",
-      "count": 9,
+      "name": "Florida",
+      "count": 7,
       "located": true
     },
     {
       "country": "US",
       "country_name": "United States",
-      "name": "Florida",
+      "name": "New Jersey",
       "count": 7,
       "located": true
     },
@@ -601,15 +624,8 @@
     {
       "country": "US",
       "country_name": "United States",
-      "name": "New Jersey",
-      "count": 4,
-      "located": true
-    },
-    {
-      "country": "US",
-      "country_name": "United States",
       "name": "Massachusetts",
-      "count": 3,
+      "count": 4,
       "located": true
     },
     {
@@ -617,6 +633,13 @@
       "country_name": "United States",
       "name": "Nevada",
       "count": 3,
+      "located": true
+    },
+    {
+      "country": "US",
+      "country_name": "United States",
+      "name": "Michigan",
+      "count": 2,
       "located": true
     },
     {
@@ -630,6 +653,13 @@
       "country": "US",
       "country_name": "United States",
       "name": "Pennsylvania",
+      "count": 2,
+      "located": true
+    },
+    {
+      "country": "US",
+      "country_name": "United States",
+      "name": "Texas",
       "count": 2,
       "located": true
     },
@@ -673,7 +703,7 @@
     {
       "path": "/",
       "title": "Jiajun Fan - Jiajun Fan",
-      "count": 264
+      "count": 267
     },
     {
       "path": "/visitors",
@@ -683,17 +713,17 @@
     {
       "path": "/publications",
       "title": "Publications — Jiajun Fan",
-      "count": 77
+      "count": 78
     },
     {
       "path": "/cv",
       "title": "CV — Jiajun Fan",
-      "count": 66
+      "count": 68
     },
     {
       "path": "/year-archive",
       "title": "Blog - Jiajun Fan",
-      "count": 35
+      "count": 36
     },
     {
       "path": "/projects",
@@ -714,6 +744,11 @@
       "path": "/posts/2026/08/read-the-mind-audio-llm",
       "title": "For the First Time, We Can See an Audio LLM’s Brain Map and Consciousness Space — Jiajun Fan",
       "count": 13
+    },
+    {
+      "path": "/publication/2026-07-08-Procedure-Aware-RL",
+      "title": "Procedure-Aware Reinforcement Learning for Tool-Augmented Large Language Models - Jiajun Fan",
+      "count": 12
     },
     {
       "path": "/posts/2025/10/diversity-collapse-rlhf",
@@ -761,11 +796,6 @@
       "count": 3
     },
     {
-      "path": "/publication/2026-07-08-Procedure-Aware-RL",
-      "title": "Procedure-Aware Reinforcement Learning for Tool-Augmented Large Language Models - Jiajun Fan",
-      "count": 2
-    },
-    {
       "path": "/tags",
       "title": "Posts by Tags - Jiajun Fan",
       "count": 1
@@ -790,22 +820,22 @@
     {
       "name": "(unknown)",
       "id": "",
-      "count": 225
+      "count": 239
     },
     {
       "name": "www.jiajunfan.com",
       "id": "www.jiajunfan.com",
-      "count": 215
+      "count": 216
     },
     {
       "name": "Google",
       "id": "Google",
-      "count": 71
+      "count": 72
     },
     {
       "name": "www.jiajunfan.com/year-archive",
       "id": "www.jiajunfan.com/year-archive",
-      "count": 43
+      "count": 44
     },
     {
       "name": "www.jiajunfan.com/projects",
@@ -902,7 +932,7 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 435
+      "count": 452
     },
     {
       "name": "Safari",
@@ -919,7 +949,7 @@
     {
       "name": "macOS",
       "id": "macOS",
-      "count": 324
+      "count": 329
     },
     {
       "name": "iOS",
@@ -929,7 +959,7 @@
     {
       "name": "Windows",
       "id": "Windows",
-      "count": 99
+      "count": 111
     },
     {
       "name": "Linux",
@@ -1070,21 +1100,208 @@
     },
     {
       "day": "2026-09-03",
-      "n": 10
+      "n": 27
     }
   ],
   "periods": {
-    "today": 10,
+    "today": 27,
     "yesterday": 31,
-    "d7": 187,
+    "d7": 204,
     "d7_prev": 163,
-    "d30": 668,
+    "d30": 685,
     "d30_prev": 57,
-    "day_frac": 0.245,
+    "day_frac": 0.454,
     "yesterday_day": "2026-09-02"
   },
-  "_last_visit": "2026-09-03 04:31",
+  "_last_visit": "2026-09-03 09:54",
   "recent": [
+    {
+      "date": "2026-09-03 09:54",
+      "ts": "2026-09-03T16:54:24Z",
+      "loc": "New York, US",
+      "path": "/publication/2026-07-08-Procedure-Aware-RL",
+      "ref": "",
+      "browser": "Chrome 143",
+      "system": "Windows 10",
+      "screen": "2033px",
+      "first": true
+    },
+    {
+      "date": "2026-09-03 09:54",
+      "ts": "2026-09-03T16:54:39Z",
+      "loc": "New Jersey, US",
+      "path": "/publication/2026-07-08-Procedure-Aware-RL",
+      "ref": "",
+      "browser": "Chrome 143",
+      "system": "Windows 10",
+      "screen": "1920px",
+      "first": true
+    },
+    {
+      "date": "2026-09-03 09:54",
+      "ts": "2026-09-03T16:54:57Z",
+      "loc": "Texas, US",
+      "path": "/publications",
+      "ref": "",
+      "browser": "Chrome 143",
+      "system": "Windows 10",
+      "screen": "1600px",
+      "first": true
+    },
+    {
+      "date": "2026-09-03 09:53",
+      "ts": "2026-09-03T16:53:49Z",
+      "loc": "New York, US",
+      "path": "/publication/2026-07-08-Procedure-Aware-RL",
+      "ref": "",
+      "browser": "Chrome 143",
+      "system": "Windows 10",
+      "screen": "1536px",
+      "first": true
+    },
+    {
+      "date": "2026-09-03 09:53",
+      "ts": "2026-09-03T16:53:51Z",
+      "loc": "Texas, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Chrome 143",
+      "system": "macOS 10.15",
+      "screen": "1512px",
+      "first": true
+    },
+    {
+      "date": "2026-09-03 09:53",
+      "ts": "2026-09-03T16:53:53Z",
+      "loc": "New Jersey, US",
+      "path": "/publication/2026-07-08-Procedure-Aware-RL",
+      "ref": "",
+      "browser": "Chrome 143",
+      "system": "Windows 10",
+      "screen": "2560px",
+      "first": true
+    },
+    {
+      "date": "2026-09-03 09:52",
+      "ts": "2026-09-03T16:52:06Z",
+      "loc": "New York, US",
+      "path": "/publication/2026-07-08-Procedure-Aware-RL",
+      "ref": "",
+      "browser": "Chrome 143",
+      "system": "Windows 10",
+      "screen": "1440px",
+      "first": true
+    },
+    {
+      "date": "2026-09-03 09:52",
+      "ts": "2026-09-03T16:52:25Z",
+      "loc": "New York, US",
+      "path": "/publication/2026-07-08-Procedure-Aware-RL",
+      "ref": "",
+      "browser": "Chrome 138",
+      "system": "macOS 10.15",
+      "screen": "1512px",
+      "first": true
+    },
+    {
+      "date": "2026-09-03 09:52",
+      "ts": "2026-09-03T16:52:38Z",
+      "loc": "New York, US",
+      "path": "/publication/2026-07-08-Procedure-Aware-RL",
+      "ref": "",
+      "browser": "Chrome 143",
+      "system": "Windows 10",
+      "screen": "1494px",
+      "first": true
+    },
+    {
+      "date": "2026-09-03 09:52",
+      "ts": "2026-09-03T16:52:57Z",
+      "loc": "New York, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Chrome 143",
+      "system": "macOS 10.15",
+      "screen": "1920px",
+      "first": true
+    },
+    {
+      "date": "2026-09-03 09:51",
+      "ts": "2026-09-03T16:51:02Z",
+      "loc": "Michigan, US",
+      "path": "/publication/2026-07-08-Procedure-Aware-RL",
+      "ref": "",
+      "browser": "Chrome 143",
+      "system": "macOS 10.15",
+      "screen": "1470px",
+      "first": true
+    },
+    {
+      "date": "2026-09-03 09:51",
+      "ts": "2026-09-03T16:51:07Z",
+      "loc": "Michigan, US",
+      "path": "/publication/2026-07-08-Procedure-Aware-RL",
+      "ref": "",
+      "browser": "Chrome 143",
+      "system": "Windows 10",
+      "screen": "1920px",
+      "first": true
+    },
+    {
+      "date": "2026-09-03 09:51",
+      "ts": "2026-09-03T16:51:27Z",
+      "loc": "New Jersey, US",
+      "path": "/publication/2026-07-08-Procedure-Aware-RL",
+      "ref": "",
+      "browser": "Chrome 143",
+      "system": "Windows 10",
+      "screen": "1536px",
+      "first": true
+    },
+    {
+      "date": "2026-09-03 09:51",
+      "ts": "2026-09-03T16:51:27Z",
+      "loc": "Massachusetts, US",
+      "path": "/cv",
+      "ref": "",
+      "browser": "Chrome 138",
+      "system": "macOS 10.15",
+      "screen": "1440px",
+      "first": true
+    },
+    {
+      "date": "2026-09-03 09:43",
+      "ts": "2026-09-03T16:43:46Z",
+      "loc": "Singapore",
+      "path": "/year-archive",
+      "ref": "www.jiajunfan.com",
+      "browser": "Chrome 152",
+      "system": "Windows 10",
+      "screen": "2560px",
+      "first": true
+    },
+    {
+      "date": "2026-09-03 09:43",
+      "ts": "2026-09-03T16:43:53Z",
+      "loc": "Singapore",
+      "path": "/cv",
+      "ref": "www.jiajunfan.com/year-archive",
+      "browser": "Chrome 152",
+      "system": "Windows 10",
+      "screen": "2560px",
+      "first": true
+    },
+    {
+      "date": "2026-09-03 09:41",
+      "ts": "2026-09-03T16:41:18Z",
+      "loc": "Singapore",
+      "path": "/",
+      "ref": "Google",
+      "browser": "Chrome 152",
+      "system": "Windows 10",
+      "screen": "2560px",
+      "first": true
+    },
     {
       "date": "2026-09-03 04:31",
       "ts": "2026-09-03T11:31:26Z",
@@ -1227,195 +1444,8 @@
       "system": "Windows 10",
       "screen": "1536px",
       "first": true
-    },
-    {
-      "date": "2026-09-03 01:06",
-      "ts": "2026-09-03T08:06:54Z",
-      "loc": "Illinois, US",
-      "path": "/publications",
-      "ref": "www.jiajunfan.com",
-      "browser": "Chrome 152",
-      "system": "Windows 10",
-      "screen": "1536px",
-      "first": true
-    },
-    {
-      "date": "2026-09-03 01:05",
-      "ts": "2026-09-03T08:05:41Z",
-      "loc": "Illinois, US",
-      "path": "/visitors",
-      "ref": "www.jiajunfan.com",
-      "browser": "Chrome 152",
-      "system": "Windows 10",
-      "screen": "1536px",
-      "first": true
-    },
-    {
-      "date": "2026-09-03 01:01",
-      "ts": "2026-09-03T08:01:23Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 152",
-      "system": "Windows 10",
-      "screen": "1536px",
-      "first": true
-    },
-    {
-      "date": "2026-09-03 00:11",
-      "ts": "2026-09-03T07:11:09Z",
-      "loc": "Netherlands",
-      "path": "/publications",
-      "ref": "",
-      "browser": "Chrome 148",
-      "system": "Windows 10",
-      "screen": "2560px",
-      "first": true
-    },
-    {
-      "date": "2026-09-02 22:52",
-      "ts": "2026-09-03T05:52:02Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": true
-    },
-    {
-      "date": "2026-09-02 22:52",
-      "ts": "2026-09-03T05:52:05Z",
-      "loc": "Illinois, US",
-      "path": "/visitors",
-      "ref": "www.jiajunfan.com",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": true
-    },
-    {
-      "date": "2026-09-02 22:52",
-      "ts": "2026-09-03T05:52:23Z",
-      "loc": "Illinois, US",
-      "path": "/posts/2026/08/read-the-mind-audio-llm",
-      "ref": "www.jiajunfan.com",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": true
-    },
-    {
-      "date": "2026-09-02 22:52",
-      "ts": "2026-09-03T05:52:26Z",
-      "loc": "Illinois, US",
-      "path": "/year-archive",
-      "ref": "www.jiajunfan.com/posts/2026/08/read-the-mind-audio-llm",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": true
-    },
-    {
-      "date": "2026-09-02 22:52",
-      "ts": "2026-09-03T05:52:30Z",
-      "loc": "Illinois, US",
-      "path": "/posts/2026/08/speechgym-voice-agent-rl",
-      "ref": "www.jiajunfan.com/year-archive",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": true
-    },
-    {
-      "date": "2026-09-02 22:52",
-      "ts": "2026-09-03T05:52:58Z",
-      "loc": "Illinois, US",
-      "path": "/posts/2026/08/read-the-mind-audio-llm",
-      "ref": "www.jiajunfan.com/year-archive",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": false
-    },
-    {
-      "date": "2026-09-02 19:12",
-      "ts": "2026-09-03T02:12:42Z",
-      "loc": "Costa Rica",
-      "path": "/publications",
-      "ref": "",
-      "browser": "Chrome 148",
-      "system": "Windows 10",
-      "screen": "1920px",
-      "first": true
-    },
-    {
-      "date": "2026-09-02 18:04",
-      "ts": "2026-09-03T01:04:43Z",
-      "loc": "Thailand",
-      "path": "/publications",
-      "ref": "",
-      "browser": "Chrome 148",
-      "system": "Windows 10",
-      "screen": "1920px",
-      "first": true
-    },
-    {
-      "date": "2026-09-02 14:30",
-      "ts": "2026-09-02T21:30:07Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 151",
-      "system": "macOS 10.15",
-      "screen": "1440px",
-      "first": false
-    },
-    {
-      "date": "2026-09-02 14:30",
-      "ts": "2026-09-02T21:30:32Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 151",
-      "system": "macOS 10.15",
-      "screen": "1440px",
-      "first": false
-    },
-    {
-      "date": "2026-09-02 14:29",
-      "ts": "2026-09-02T21:29:14Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "doc.weixin.qq.com",
-      "browser": "Chrome 151",
-      "system": "macOS 10.15",
-      "screen": "1440px",
-      "first": false
-    },
-    {
-      "date": "2026-09-02 14:07",
-      "ts": "2026-09-02T21:07:15Z",
-      "loc": "Virginia, US",
-      "path": "/",
-      "ref": "Google",
-      "browser": "Chrome 151",
-      "system": "macOS 10.15",
-      "screen": "2560px",
-      "first": true
-    },
-    {
-      "date": "2026-09-02 13:40",
-      "ts": "2026-09-02T20:40:16Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "www.jiajunfan.com/publications",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": false
     }
   ],
-  "_recent_total": 1315,
+  "_recent_total": 1332,
   "_recent_shown": 30
 }
