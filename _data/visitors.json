@@ -2,7 +2,7 @@
   "_updated": "2026-09-03",
   "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 686,
+  "_total": 688,
   "_days": 30,
   "_range": "Aug. 4th - Sep. 3rd",
   "locations": [
@@ -703,12 +703,12 @@
     {
       "path": "/",
       "title": "Jiajun Fan - Jiajun Fan",
-      "count": 268
+      "count": 269
     },
     {
       "path": "/visitors",
       "title": "Visitors — Jiajun Fan",
-      "count": 100
+      "count": 101
     },
     {
       "path": "/publications",
@@ -820,12 +820,12 @@
     {
       "name": "(unknown)",
       "id": "",
-      "count": 239
+      "count": 240
     },
     {
       "name": "www.jiajunfan.com",
       "id": "www.jiajunfan.com",
-      "count": 216
+      "count": 217
     },
     {
       "name": "Google",
@@ -1100,21 +1100,54 @@
     },
     {
       "day": "2026-09-03",
-      "n": 28
+      "n": 30
     }
   ],
   "periods": {
-    "today": 28,
+    "today": 30,
     "yesterday": 31,
-    "d7": 205,
+    "d7": 207,
     "d7_prev": 163,
-    "d30": 686,
+    "d30": 688,
     "d30_prev": 57,
-    "day_frac": 0.651,
+    "day_frac": 0.753,
     "yesterday_day": "2026-09-02"
   },
-  "_last_visit": "2026-09-03 12:18",
+  "_last_visit": "2026-09-03 17:19",
   "recent": [
+    {
+      "date": "2026-09-03 17:19",
+      "ts": "2026-09-04T00:19:28Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": true
+    },
+    {
+      "date": "2026-09-03 17:19",
+      "ts": "2026-09-04T00:19:31Z",
+      "loc": "Illinois, US",
+      "path": "/visitors",
+      "ref": "www.jiajunfan.com",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": true
+    },
+    {
+      "date": "2026-09-03 17:19",
+      "ts": "2026-09-04T00:19:46Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "Google",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": false
+    },
     {
       "date": "2026-09-03 12:18",
       "ts": "2026-09-03T19:18:39Z",
@@ -1411,41 +1444,8 @@
       "system": "Windows 10",
       "screen": "1536px",
       "first": false
-    },
-    {
-      "date": "2026-09-03 01:07",
-      "ts": "2026-09-03T08:07:19Z",
-      "loc": "Illinois, US",
-      "path": "/year-archive",
-      "ref": "www.jiajunfan.com",
-      "browser": "Chrome 152",
-      "system": "Windows 10",
-      "screen": "1536px",
-      "first": true
-    },
-    {
-      "date": "2026-09-03 01:07",
-      "ts": "2026-09-03T08:07:26Z",
-      "loc": "Illinois, US",
-      "path": "/posts/2026/08/speechgym-voice-agent-rl",
-      "ref": "www.jiajunfan.com/year-archive",
-      "browser": "Chrome 152",
-      "system": "Windows 10",
-      "screen": "1536px",
-      "first": true
-    },
-    {
-      "date": "2026-09-03 01:07",
-      "ts": "2026-09-03T08:07:36Z",
-      "loc": "Illinois, US",
-      "path": "/posts/2025/10/inverse-scaling-audio-llms",
-      "ref": "www.jiajunfan.com/year-archive",
-      "browser": "Chrome 152",
-      "system": "Windows 10",
-      "screen": "1536px",
-      "first": true
     }
   ],
-  "_recent_total": 1333,
+  "_recent_total": 1336,
   "_recent_shown": 30
 }
