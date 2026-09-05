@@ -407,7 +407,7 @@ body.dark-mode .ed .turn.bad .txt{color:#f08a82}
   .ed .tmhd{font-family:var(--sans);font-size:.86rem;font-weight:700;color:var(--ink);margin-bottom:3px}
   .ed .tmhd .verdict-ok{color:var(--ed-accent)} .ed .tmhd .verdict-no{color:var(--ed-neg)}
   .ed .tmsub{font-family:var(--sans);font-size:.76rem;color:var(--muted);margin-bottom:9px;line-height:1.5}
-  .ed .tmapfx svg{width:100%;height:auto;min-width:760px;display:block}
+  .ed .tmapfx svg{width:100%;height:auto;min-width:900px;display:block}
   .ed .tmcell{cursor:crosshair}
 
   /* ── Finding-1 style whole-brain map ── */
@@ -923,7 +923,7 @@ function initGal(){
     var yOf=function(L){ return padT+(nL-1-L)*ch; };
     var yb =function(d){ return padT+(nL-1-(d/100*(nL-1)))*ch; };
     var regCol={audio:C.audio, question:C.ques, other:'transparent'};
-    var o=['<svg viewBox="0 0 '+W+' '+H+'" style="width:'+W+'px;max-width:none" role="img" aria-label="'
+    var o=['<svg viewBox="0 0 '+W+' '+H+'" style="width:'+Math.max(W,880)+'px;max-width:none" role="img" aria-label="'
       +'Whole-brain readout for the '+esc(c.name)+' clip: '+nL+' depths by '+np+' input positions.">'];
     o.push('<rect x="'+padL+'" y="'+yb(35)+'" width="'+(np*cw)+'" height="'+(yOf(0)+ch-yb(35))+'" fill="'+C.sensory+'"/>');
     o.push('<rect x="'+padL+'" y="'+yb(80)+'" width="'+(np*cw)+'" height="'+(yb(35)-yb(80))+'" fill="'+C.blue+'" opacity="0.09"/>');
