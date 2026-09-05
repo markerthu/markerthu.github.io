@@ -1259,6 +1259,10 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
 <ul class="news-list">
   <li>
     <span class="news-date">Aug 2026</span>
+    <span><span class="nbadge nb-finish">Finding</span>Voice agents could be measured, never improved &mdash; so we closed the loop and trained one in native audio. <a href="/posts/2026/08/speechgym-voice-agent-rl/">Blog</a> &middot; <a href="https://arxiv.org/abs/2608.26432" target="_blank" rel="noopener noreferrer">Paper</a></span>
+  </li>
+  <li>
+    <span class="news-date">Aug 2026</span>
     <span><span class="nbadge nb-finish">Finding</span>For the first time, we can see the brain map of an Audio LLM &mdash; its global workspace, the &ldquo;consciousness space&rdquo;. <a href="/posts/2026/08/read-the-mind-audio-llm/">Blog</a> &middot; <a href="https://arxiv.org/abs/2608.24958" target="_blank" rel="noopener noreferrer">Paper</a></span>
   </li>
   <li>

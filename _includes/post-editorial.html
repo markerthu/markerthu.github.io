@@ -5,9 +5,9 @@
 <style>
 /* --ed-on-accent: text sitting ON the accent colour. The accent flips to a pale
    blue in dark mode, so white-on-accent would drop to 2.4:1 — well under AA. */
-.ed{--ed-accent:var(--link);--ed-soft:var(--pill);--ed-tint:#6a9aab;--ed-neg:#b8403a;--ed-negsoft:#fbecea;--ed-bar:var(--rule);
+.ed{--ed-accent:var(--link);--ed-soft:var(--pill);--ed-tint:#6a9aab;--ed-neg:#b8403a;--ed-negsoft:#fbecea;--ed-rewardbg:#fbf1e6;--ed-rewardln:#c2760f;--ed-tthit:#7fd0a0;--ed-bar:var(--rule);
   --ed-on-accent:#ffffff}
-body.dark-mode .ed{--ed-tint:#4a7387;--ed-neg:#f08a82;--ed-negsoft:#2a1917;--ed-on-accent:#0f1216}
+body.dark-mode .ed{--ed-tint:#4a7387;--ed-neg:#f08a82;--ed-negsoft:#2a1917;--ed-rewardbg:#241d12;--ed-rewardln:#d99a3c;--ed-tthit:#12603f;--ed-on-accent:#0f1216}
 
 /* ── section kicker ── */
 .ed .snum{font-family:var(--sans);font-size:.7rem;font-weight:800;letter-spacing:.13em;
@@ -395,7 +395,7 @@ body.dark-mode .ed .turn.bad .txt{color:#f08a82}
     font-family:var(--mono);font-size:.72rem;line-height:1.65;box-shadow:0 6px 24px rgba(0,0,0,.22)}
   #bmTT .hd{font-family:var(--sans);font-weight:700;font-size:.68rem;letter-spacing:.04em;
     text-transform:uppercase;opacity:.65;margin-bottom:5px}
-  #bmTT .hit{color:#7fd0a0;font-weight:700}
+  #bmTT .hit{color:var(--ed-tthit);font-weight:700}
   .ed .bmbandlab{font-family:var(--sans);font-size:9px;font-weight:700;letter-spacing:.07em}
   .ed .bmax{font-family:var(--mono);font-size:9px;fill:var(--muted)}
   .ed .sw.bmbg{background:var(--band)}
@@ -902,7 +902,7 @@ function initGal(){
       var active = Array.isArray(pin) && pin.length===st.vars.length
                    && pin.every(function(p,k){ return p===st.vars[k].toLowerCase(); });
       return '<button type="button" class="gstep'+(active?' on':'')+(st.answer?' ans':'')
-           + '" data-i="'+i+'">'+(i+1)+'. '+esc(st.label)+(st.answer?' &#10003;':'')+'</button>';
+           + '" data-i="'+i+'" aria-pressed="'+(active?'true':'false')+'">'+(i+1)+'. '+esc(st.label)+(st.answer?' &#10003;':'')+'</button>';
     }).join('<span class="garr">&rarr;</span>');
     box.querySelector('#gsteps').innerHTML = chips;
     box.querySelectorAll('#gsteps .gstep').forEach(function(b){
@@ -1096,7 +1096,7 @@ function initCost(){
       (cost >= 100000 ? 'around $' + Math.round(cost/1000) + 'k' : 'over ' + fmt(cost)) +
       ' in API calls costs nothing here, and the money was never the real obstacle &mdash; the rollout ' +
       'volume on-policy RL needs simply cannot be bought at that price.';
-    sl.setAttribute('aria-valuetext', e + ' epochs, ' + fmt(cost) + ' through an API, $0 locally');
+    sl.setAttribute('aria-valuetext', e + (e===1?' epoch, ':' epochs, ') + fmt(cost) + ' through an API, $0 locally');
   }
   sl.addEventListener('input', render); render();
 }
