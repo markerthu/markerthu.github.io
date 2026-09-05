@@ -1,15 +1,15 @@
 {
   "_updated": "2026-09-05",
-  "_timezone": "UTC",
+  "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 660,
+  "_total": 662,
   "_days": 30,
   "_range": "Aug. 6th - Sep. 5th",
   "locations": [
     {
       "code": "US",
       "name": "Illinois, US",
-      "count": 240,
+      "count": 241,
       "cx": 90.8,
       "cy": 44.6,
       "r": 4.2
@@ -135,6 +135,14 @@
       "r": 2.15
     },
     {
+      "code": "TR",
+      "name": "Turkey",
+      "count": 5,
+      "cx": 216.9,
+      "cy": 45.6,
+      "r": 2.15
+    },
+    {
       "code": "US",
       "name": "Indiana, US",
       "count": 4,
@@ -156,14 +164,6 @@
       "count": 4,
       "cx": 301.8,
       "cy": 68.6,
-      "r": 2.11
-    },
-    {
-      "code": "TR",
-      "name": "Turkey",
-      "count": 4,
-      "cx": 216.9,
-      "cy": 45.6,
       "r": 2.11
     },
     {
@@ -427,7 +427,7 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 598
+      "count": 599
     },
     {
       "code": "SG",
@@ -460,6 +460,11 @@
       "count": 5
     },
     {
+      "code": "TR",
+      "name": "Turkey",
+      "count": 5
+    },
+    {
       "code": "BR",
       "name": "Brazil",
       "count": 4
@@ -472,11 +477,6 @@
     {
       "code": "SC",
       "name": "Seychelles",
-      "count": 4
-    },
-    {
-      "code": "TR",
-      "name": "Turkey",
       "count": 4
     },
     {
@@ -555,7 +555,7 @@
       "country": "US",
       "country_name": "United States",
       "name": "Illinois",
-      "count": 240,
+      "count": 241,
       "located": true
     },
     {
@@ -703,7 +703,7 @@
     {
       "path": "/",
       "title": "Jiajun Fan - Jiajun Fan",
-      "count": 272
+      "count": 273
     },
     {
       "path": "/visitors",
@@ -771,6 +771,11 @@
       "count": 5
     },
     {
+      "path": "/publication/2025-06-03-ProteinZero",
+      "title": "ProteinZero: Self-Improving Protein Generation via Online Reinforcement Learning - Jiajun Fan",
+      "count": 4
+    },
+    {
       "path": "/projects/orw-cfm-w2",
       "title": "ORW-CFM-W2 — Flow Matching RLHF | ICLR 2025",
       "count": 3
@@ -778,11 +783,6 @@
     {
       "path": "/blog/reading-papers",
       "title": "What’s Happening in My Field - Jiajun Fan",
-      "count": 3
-    },
-    {
-      "path": "/publication/2025-06-03-ProteinZero",
-      "title": "ProteinZero: Self-Improving Protein Generation via Online Reinforcement Learning - Jiajun Fan",
       "count": 3
     },
     {
@@ -820,7 +820,7 @@
     {
       "name": "(unknown)",
       "id": "",
-      "count": 247
+      "count": 249
     },
     {
       "name": "www.jiajunfan.com",
@@ -927,12 +927,12 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 426
+      "count": 427
     },
     {
       "name": "Safari",
       "id": "Safari",
-      "count": 250
+      "count": 251
     },
     {
       "name": "Firefox",
@@ -944,12 +944,12 @@
     {
       "name": "macOS",
       "id": "macOS",
-      "count": 305
+      "count": 306
     },
     {
       "name": "iOS",
       "id": "iOS",
-      "count": 241
+      "count": 242
     },
     {
       "name": "Windows",
@@ -1095,23 +1095,45 @@
     },
     {
       "day": "2026-09-05",
-      "n": 9
+      "n": 11
     }
   ],
   "periods": {
-    "today": 9,
+    "today": 11,
     "yesterday": 19,
-    "d7": 204,
+    "d7": 206,
     "d7_prev": 169,
-    "d30": 660,
+    "d30": 662,
     "d30_prev": 113,
-    "day_frac": 0.494,
+    "day_frac": 0.411,
     "yesterday_day": "2026-09-04"
   },
-  "_last_visit": "2026-09-05 11:03",
+  "_last_visit": "2026-09-05 09:06",
   "recent": [
     {
-      "date": "2026-09-05 11:03",
+      "date": "2026-09-05 09:06",
+      "ts": "2026-09-05T16:06:44Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": true
+    },
+    {
+      "date": "2026-09-05 08:35",
+      "ts": "2026-09-05T15:35:51Z",
+      "loc": "Turkey",
+      "path": "/publication/2025-06-03-ProteinZero",
+      "ref": "",
+      "browser": "Chrome 137",
+      "system": "macOS 10.15",
+      "screen": "1920px",
+      "first": true
+    },
+    {
+      "date": "2026-09-05 04:03",
       "ts": "2026-09-05T11:03:43Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1122,7 +1144,7 @@
       "first": true
     },
     {
-      "date": "2026-09-05 11:03",
+      "date": "2026-09-05 04:03",
       "ts": "2026-09-05T11:03:53Z",
       "loc": "Illinois, US",
       "path": "/visitors",
@@ -1133,7 +1155,7 @@
       "first": true
     },
     {
-      "date": "2026-09-05 10:14",
+      "date": "2026-09-05 03:14",
       "ts": "2026-09-05T10:14:03Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1144,7 +1166,7 @@
       "first": false
     },
     {
-      "date": "2026-09-05 09:56",
+      "date": "2026-09-05 02:56",
       "ts": "2026-09-05T09:56:55Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1155,7 +1177,7 @@
       "first": true
     },
     {
-      "date": "2026-09-05 09:41",
+      "date": "2026-09-05 02:41",
       "ts": "2026-09-05T09:41:35Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1166,7 +1188,7 @@
       "first": false
     },
     {
-      "date": "2026-09-05 09:41",
+      "date": "2026-09-05 02:41",
       "ts": "2026-09-05T09:41:39Z",
       "loc": "Illinois, US",
       "path": "/visitors",
@@ -1177,7 +1199,7 @@
       "first": false
     },
     {
-      "date": "2026-09-05 09:41",
+      "date": "2026-09-05 02:41",
       "ts": "2026-09-05T09:41:52Z",
       "loc": "Illinois, US",
       "path": "/posts/2026/08/speechgym-voice-agent-rl",
@@ -1188,7 +1210,7 @@
       "first": false
     },
     {
-      "date": "2026-09-05 08:49",
+      "date": "2026-09-05 01:49",
       "ts": "2026-09-05T08:49:10Z",
       "loc": "Illinois, US",
       "path": "/posts/2026/08/read-the-mind-audio-llm",
@@ -1199,7 +1221,7 @@
       "first": true
     },
     {
-      "date": "2026-09-05 08:49",
+      "date": "2026-09-05 01:49",
       "ts": "2026-09-05T08:49:45Z",
       "loc": "Illinois, US",
       "path": "/posts/2026/08/read-the-mind-audio-llm",
@@ -1210,7 +1232,7 @@
       "first": false
     },
     {
-      "date": "2026-09-05 08:48",
+      "date": "2026-09-05 01:48",
       "ts": "2026-09-05T08:48:05Z",
       "loc": "Illinois, US",
       "path": "/posts/2026/08/speechgym-voice-agent-rl",
@@ -1221,7 +1243,7 @@
       "first": true
     },
     {
-      "date": "2026-09-05 08:46",
+      "date": "2026-09-05 01:46",
       "ts": "2026-09-05T08:46:50Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1232,7 +1254,7 @@
       "first": true
     },
     {
-      "date": "2026-09-05 08:46",
+      "date": "2026-09-05 01:46",
       "ts": "2026-09-05T08:46:50Z",
       "loc": "Illinois, US",
       "path": "/visitors",
@@ -1243,7 +1265,7 @@
       "first": true
     },
     {
-      "date": "2026-09-05 07:16",
+      "date": "2026-09-05 00:16",
       "ts": "2026-09-05T07:16:09Z",
       "loc": "Illinois, US",
       "path": "/posts/2026/08/read-the-mind-audio-llm",
@@ -1254,7 +1276,7 @@
       "first": false
     },
     {
-      "date": "2026-09-05 07:09",
+      "date": "2026-09-05 00:09",
       "ts": "2026-09-05T07:09:59Z",
       "loc": "Illinois, US",
       "path": "/cv",
@@ -1265,7 +1287,7 @@
       "first": true
     },
     {
-      "date": "2026-09-05 07:06",
+      "date": "2026-09-05 00:06",
       "ts": "2026-09-05T07:06:31Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1276,7 +1298,7 @@
       "first": true
     },
     {
-      "date": "2026-09-05 03:45",
+      "date": "2026-09-04 20:45",
       "ts": "2026-09-05T03:45:03Z",
       "loc": "Illinois, US",
       "path": "/posts/2025/10/diversity-collapse-rlhf",
@@ -1287,7 +1309,7 @@
       "first": false
     },
     {
-      "date": "2026-09-05 03:44",
+      "date": "2026-09-04 20:44",
       "ts": "2026-09-05T03:44:20Z",
       "loc": "Illinois, US",
       "path": "/posts/2026/08/read-the-mind-audio-llm",
@@ -1298,7 +1320,7 @@
       "first": false
     },
     {
-      "date": "2026-09-05 03:44",
+      "date": "2026-09-04 20:44",
       "ts": "2026-09-05T03:44:34Z",
       "loc": "Illinois, US",
       "path": "/posts/2026/08/speechgym-voice-agent-rl",
@@ -1309,7 +1331,7 @@
       "first": false
     },
     {
-      "date": "2026-09-05 03:44",
+      "date": "2026-09-04 20:44",
       "ts": "2026-09-05T03:44:48Z",
       "loc": "Illinois, US",
       "path": "/posts/2025/10/inverse-scaling-audio-llms",
@@ -1320,7 +1342,7 @@
       "first": false
     },
     {
-      "date": "2026-09-05 03:42",
+      "date": "2026-09-04 20:42",
       "ts": "2026-09-05T03:42:17Z",
       "loc": "Illinois, US",
       "path": "/posts/2026/08/read-the-mind-audio-llm",
@@ -1331,7 +1353,7 @@
       "first": false
     },
     {
-      "date": "2026-09-05 03:41",
+      "date": "2026-09-04 20:41",
       "ts": "2026-09-05T03:41:31Z",
       "loc": "Illinois, US",
       "path": "/posts/2026/08/read-the-mind-audio-llm",
@@ -1342,7 +1364,7 @@
       "first": false
     },
     {
-      "date": "2026-09-05 03:41",
+      "date": "2026-09-04 20:41",
       "ts": "2026-09-05T03:41:45Z",
       "loc": "Illinois, US",
       "path": "/posts/2026/08/speechgym-voice-agent-rl",
@@ -1353,7 +1375,7 @@
       "first": false
     },
     {
-      "date": "2026-09-05 03:39",
+      "date": "2026-09-04 20:39",
       "ts": "2026-09-05T03:39:11Z",
       "loc": "Illinois, US",
       "path": "/posts/2025/10/inverse-scaling-audio-llms",
@@ -1364,7 +1386,7 @@
       "first": false
     },
     {
-      "date": "2026-09-05 03:39",
+      "date": "2026-09-04 20:39",
       "ts": "2026-09-05T03:39:25Z",
       "loc": "Illinois, US",
       "path": "/posts/2025/10/diversity-collapse-rlhf",
@@ -1375,7 +1397,7 @@
       "first": false
     },
     {
-      "date": "2026-09-05 03:39",
+      "date": "2026-09-04 20:39",
       "ts": "2026-09-05T03:39:40Z",
       "loc": "Illinois, US",
       "path": "/posts/2026/08/read-the-mind-audio-llm",
@@ -1386,7 +1408,7 @@
       "first": false
     },
     {
-      "date": "2026-09-05 03:38",
+      "date": "2026-09-04 20:38",
       "ts": "2026-09-05T03:38:57Z",
       "loc": "Illinois, US",
       "path": "/posts/2026/08/speechgym-voice-agent-rl",
@@ -1397,7 +1419,7 @@
       "first": false
     },
     {
-      "date": "2026-09-05 03:37",
+      "date": "2026-09-04 20:37",
       "ts": "2026-09-05T03:37:01Z",
       "loc": "Illinois, US",
       "path": "/posts/2025/10/diversity-collapse-rlhf",
@@ -1408,7 +1430,7 @@
       "first": false
     },
     {
-      "date": "2026-09-05 03:37",
+      "date": "2026-09-04 20:37",
       "ts": "2026-09-05T03:37:15Z",
       "loc": "Illinois, US",
       "path": "/posts/2026/08/read-the-mind-audio-llm",
@@ -1417,30 +1439,8 @@
       "system": "iOS 17.0",
       "screen": "390px",
       "first": false
-    },
-    {
-      "date": "2026-09-05 03:36",
-      "ts": "2026-09-05T03:36:32Z",
-      "loc": "Illinois, US",
-      "path": "/posts/2026/08/speechgym-voice-agent-rl",
-      "ref": "",
-      "browser": "Safari 17.0",
-      "system": "iOS 17.0",
-      "screen": "390px",
-      "first": false
-    },
-    {
-      "date": "2026-09-05 03:36",
-      "ts": "2026-09-05T03:36:46Z",
-      "loc": "Illinois, US",
-      "path": "/posts/2025/10/inverse-scaling-audio-llms",
-      "ref": "",
-      "browser": "Safari 17.0",
-      "system": "iOS 17.0",
-      "screen": "390px",
-      "first": false
     }
   ],
-  "_recent_total": 1398,
+  "_recent_total": 1400,
   "_recent_shown": 30
 }
