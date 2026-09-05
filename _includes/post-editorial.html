@@ -23,7 +23,8 @@ body.dark-mode .ed{--ed-tint:#4a7387;--ed-neg:#f08a82;--ed-negsoft:#2a1917;--ed-
   padding:24px 22px 18px;margin-top:2.4em;margin-bottom:2.4em}
 .ed .fig svg{display:block;width:100%;height:auto;overflow:visible}
 .ed .figscroll{overflow-x:auto}
-.ed .figscroll svg{min-width:620px}
+.ed .figscroll svg{min-width:880px}
+  @media(max-width:520px){.ed .figscroll svg{min-width:780px}}
   .ed .figscroll::after{display:none}
   .ed .figscroll.scrollable::after{content:"scroll to see the full figure \2192";display:block;
     font-family:var(--sans);font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;
