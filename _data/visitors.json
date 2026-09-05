@@ -2,7 +2,7 @@
   "_updated": "2026-09-05",
   "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 662,
+  "_total": 663,
   "_days": 30,
   "_range": "Aug. 6th - Sep. 5th",
   "locations": [
@@ -49,10 +49,10 @@
     {
       "code": "US",
       "name": "Oregon, US",
-      "count": 9,
+      "count": 10,
       "cx": 59.2,
       "cy": 39.7,
-      "r": 2.26
+      "r": 2.29
     },
     {
       "code": "SG",
@@ -427,7 +427,7 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 599
+      "count": 600
     },
     {
       "code": "SG",
@@ -590,7 +590,7 @@
       "country": "US",
       "country_name": "United States",
       "name": "Oregon",
-      "count": 9,
+      "count": 10,
       "located": true
     },
     {
@@ -713,7 +713,7 @@
     {
       "path": "/publications",
       "title": "Publications — Jiajun Fan",
-      "count": 69
+      "count": 70
     },
     {
       "path": "/cv",
@@ -820,7 +820,7 @@
     {
       "name": "(unknown)",
       "id": "",
-      "count": 249
+      "count": 250
     },
     {
       "name": "www.jiajunfan.com",
@@ -927,7 +927,7 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 427
+      "count": 428
     },
     {
       "name": "Safari",
@@ -959,7 +959,7 @@
     {
       "name": "Linux",
       "id": "Linux",
-      "count": 11
+      "count": 12
     },
     {
       "name": "Android",
@@ -1095,21 +1095,32 @@
     },
     {
       "day": "2026-09-05",
-      "n": 11
+      "n": 12
     }
   ],
   "periods": {
-    "today": 11,
+    "today": 12,
     "yesterday": 19,
-    "d7": 206,
+    "d7": 207,
     "d7_prev": 169,
-    "d30": 662,
+    "d30": 663,
     "d30_prev": 113,
-    "day_frac": 0.411,
+    "day_frac": 0.505,
     "yesterday_day": "2026-09-04"
   },
-  "_last_visit": "2026-09-05 09:06",
+  "_last_visit": "2026-09-05 11:11",
   "recent": [
+    {
+      "date": "2026-09-05 11:11",
+      "ts": "2026-09-05T18:11:29Z",
+      "loc": "Oregon, US",
+      "path": "/publications",
+      "ref": "",
+      "browser": "Chrome 152",
+      "system": "Linux",
+      "screen": "1280px",
+      "first": true
+    },
     {
       "date": "2026-09-05 09:06",
       "ts": "2026-09-05T16:06:44Z",
@@ -1428,19 +1439,8 @@
       "system": "iOS 17.0",
       "screen": "390px",
       "first": false
-    },
-    {
-      "date": "2026-09-04 20:37",
-      "ts": "2026-09-05T03:37:15Z",
-      "loc": "Illinois, US",
-      "path": "/posts/2026/08/read-the-mind-audio-llm",
-      "ref": "",
-      "browser": "Safari 17.0",
-      "system": "iOS 17.0",
-      "screen": "390px",
-      "first": false
     }
   ],
-  "_recent_total": 1400,
+  "_recent_total": 1401,
   "_recent_shown": 30
 }
