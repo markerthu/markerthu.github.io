@@ -2,7 +2,7 @@
   "_updated": "2026-09-05",
   "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 670,
+  "_total": 671,
   "_days": 30,
   "_range": "Aug. 6th - Sep. 5th",
   "locations": [
@@ -703,7 +703,7 @@
     {
       "path": "/",
       "title": "Jiajun Fan - Jiajun Fan",
-      "count": 275
+      "count": 276
     },
     {
       "path": "/visitors",
@@ -840,7 +840,7 @@
     {
       "name": "scholar.google.com",
       "id": "scholar.google.com",
-      "count": 25
+      "count": 26
     },
     {
       "name": "www.jiajunfan.com/cv",
@@ -1095,21 +1095,32 @@
     },
     {
       "day": "2026-09-05",
-      "n": 19
+      "n": 20
     }
   ],
   "periods": {
-    "today": 19,
+    "today": 20,
     "yesterday": 19,
-    "d7": 214,
+    "d7": 215,
     "d7_prev": 169,
-    "d30": 670,
+    "d30": 671,
     "d30_prev": 113,
-    "day_frac": 0.628,
+    "day_frac": 0.753,
     "yesterday_day": "2026-09-04"
   },
-  "_last_visit": "2026-09-05 13:49",
+  "_last_visit": "2026-09-05 17:23",
   "recent": [
+    {
+      "date": "2026-09-05 17:23",
+      "ts": "2026-09-06T00:23:55Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "scholar.google.com",
+      "browser": "Chrome 148",
+      "system": "macOS 10.15",
+      "screen": "2560px",
+      "first": true
+    },
     {
       "date": "2026-09-05 13:49",
       "ts": "2026-09-05T20:49:03Z",
@@ -1428,19 +1439,8 @@
       "system": "iOS 17.0",
       "screen": "390px",
       "first": false
-    },
-    {
-      "date": "2026-09-04 20:42",
-      "ts": "2026-09-05T03:42:17Z",
-      "loc": "Illinois, US",
-      "path": "/posts/2026/08/read-the-mind-audio-llm",
-      "ref": "",
-      "browser": "Safari 17.0",
-      "system": "iOS 17.0",
-      "screen": "390px",
-      "first": false
     }
   ],
-  "_recent_total": 1408,
+  "_recent_total": 1409,
   "_recent_shown": 30
 }
