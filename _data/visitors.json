@@ -2,7 +2,7 @@
   "_updated": "2026-09-06",
   "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 654,
+  "_total": 655,
   "_days": 30,
   "_range": "Aug. 7th - Sep. 6th",
   "locations": [
@@ -49,10 +49,10 @@
     {
       "code": "US",
       "name": "Oregon, US",
-      "count": 10,
+      "count": 11,
       "cx": 59.2,
       "cy": 39.7,
-      "r": 2.28
+      "r": 2.3
     },
     {
       "code": "SG",
@@ -435,7 +435,7 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 593
+      "count": 594
     },
     {
       "code": "SG",
@@ -598,7 +598,7 @@
       "country": "US",
       "country_name": "United States",
       "name": "Oregon",
-      "count": 10,
+      "count": 11,
       "located": true
     },
     {
@@ -728,7 +728,7 @@
     {
       "path": "/publications",
       "title": "Publications — Jiajun Fan",
-      "count": 68
+      "count": 69
     },
     {
       "path": "/cv",
@@ -835,7 +835,7 @@
     {
       "name": "(unknown)",
       "id": "",
-      "count": 243
+      "count": 244
     },
     {
       "name": "www.jiajunfan.com",
@@ -942,7 +942,7 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 428
+      "count": 429
     },
     {
       "name": "Safari",
@@ -972,13 +972,13 @@
       "count": 112
     },
     {
-      "name": "Android",
-      "id": "Android",
-      "count": 12
-    },
-    {
       "name": "Linux",
       "id": "Linux",
+      "count": 13
+    },
+    {
+      "name": "Android",
+      "id": "Android",
       "count": 12
     },
     {
@@ -1110,21 +1110,32 @@
     },
     {
       "day": "2026-09-06",
-      "n": 4
+      "n": 5
     }
   ],
   "periods": {
-    "today": 4,
+    "today": 5,
     "yesterday": 24,
-    "d7": 205,
+    "d7": 206,
     "d7_prev": 173,
-    "d30": 654,
+    "d30": 655,
     "d30_prev": 134,
-    "day_frac": 0.512,
+    "day_frac": 0.632,
     "yesterday_day": "2026-09-05"
   },
-  "_last_visit": "2026-09-06 11:36",
+  "_last_visit": "2026-09-06 12:58",
   "recent": [
+    {
+      "date": "2026-09-06 12:58",
+      "ts": "2026-09-06T19:58:56Z",
+      "loc": "Oregon, US",
+      "path": "/publications",
+      "ref": "",
+      "browser": "Chrome 152",
+      "system": "Linux",
+      "screen": "1280px",
+      "first": true
+    },
     {
       "date": "2026-09-06 11:36",
       "ts": "2026-09-06T18:36:59Z",
@@ -1443,19 +1454,8 @@
       "system": "iOS 26.6",
       "screen": "430px",
       "first": true
-    },
-    {
-      "date": "2026-09-05 01:49",
-      "ts": "2026-09-05T08:49:45Z",
-      "loc": "Illinois, US",
-      "path": "/posts/2026/08/read-the-mind-audio-llm",
-      "ref": "www.jiajunfan.com",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": false
     }
   ],
-  "_recent_total": 1419,
+  "_recent_total": 1420,
   "_recent_shown": 30
 }
