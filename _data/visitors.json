@@ -2,14 +2,14 @@
   "_updated": "2026-09-06",
   "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 653,
+  "_total": 654,
   "_days": 30,
   "_range": "Aug. 7th - Sep. 6th",
   "locations": [
     {
       "code": "US",
       "name": "Illinois, US",
-      "count": 251,
+      "count": 252,
       "cx": 90.8,
       "cy": 44.6,
       "r": 4.2
@@ -435,7 +435,7 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 592
+      "count": 593
     },
     {
       "code": "SG",
@@ -563,7 +563,7 @@
       "country": "US",
       "country_name": "United States",
       "name": "Illinois",
-      "count": 251,
+      "count": 252,
       "located": true
     },
     {
@@ -718,7 +718,7 @@
     {
       "path": "/",
       "title": "Jiajun Fan - Jiajun Fan",
-      "count": 270
+      "count": 271
     },
     {
       "path": "/visitors",
@@ -835,7 +835,7 @@
     {
       "name": "(unknown)",
       "id": "",
-      "count": 242
+      "count": 243
     },
     {
       "name": "www.jiajunfan.com",
@@ -947,7 +947,7 @@
     {
       "name": "Safari",
       "id": "Safari",
-      "count": 245
+      "count": 246
     },
     {
       "name": "Firefox",
@@ -964,7 +964,7 @@
     {
       "name": "iOS",
       "id": "iOS",
-      "count": 237
+      "count": 238
     },
     {
       "name": "Windows",
@@ -1110,21 +1110,32 @@
     },
     {
       "day": "2026-09-06",
-      "n": 3
+      "n": 4
     }
   ],
   "periods": {
-    "today": 3,
+    "today": 4,
     "yesterday": 24,
-    "d7": 204,
+    "d7": 205,
     "d7_prev": 173,
-    "d30": 653,
+    "d30": 654,
     "d30_prev": 134,
-    "day_frac": 0.422,
+    "day_frac": 0.512,
     "yesterday_day": "2026-09-05"
   },
-  "_last_visit": "2026-09-06 08:23",
+  "_last_visit": "2026-09-06 11:36",
   "recent": [
+    {
+      "date": "2026-09-06 11:36",
+      "ts": "2026-09-06T18:36:59Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": true
+    },
     {
       "date": "2026-09-06 08:23",
       "ts": "2026-09-06T15:23:13Z",
@@ -1443,19 +1454,8 @@
       "system": "iOS 26.6",
       "screen": "430px",
       "first": false
-    },
-    {
-      "date": "2026-09-05 01:48",
-      "ts": "2026-09-05T08:48:05Z",
-      "loc": "Illinois, US",
-      "path": "/posts/2026/08/speechgym-voice-agent-rl",
-      "ref": "www.jiajunfan.com",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": true
     }
   ],
-  "_recent_total": 1418,
+  "_recent_total": 1419,
   "_recent_shown": 30
 }
