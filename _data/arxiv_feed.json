@@ -1,86 +1,86 @@
 {
-  "updated": "2026-08-31",
+  "updated": "2026-09-07",
   "papers": [
     {
-      "id": "2608.27817",
-      "title": "Auditing Generative Audio Calls for Known-Task Audio-LLM Evaluation",
-      "authors": "Mengzhe Geng",
-      "summary": "Speech and audio LLMs are often evaluated by asking whether a waveform prompt beats an automatic speech recognition (ASR) transcript. For known closed-set tasks, that comparison conflates two factors:…",
-      "date": "2026-08-28",
+      "id": "2609.04629",
+      "title": "SiLR: Structure-Preserving Admission and Process Reward for LLM Tool Agents",
+      "authors": "Chenyu Zhou, Qiliang Jiang, Shuning Wu et al.",
+      "summary": "A runtime gate for an LLM tool agent is usually cast as a filter. In a ReAct loop a rejected proposal is followed by another at the same state, so the gate is a search operator over the proposal strea…",
+      "date": "2026-09-04",
+      "tag": "Reasoning",
+      "url": "https://arxiv.org/abs/2609.04629"
+    },
+    {
+      "id": "2609.04637",
+      "title": "Tracing Audio Grounding and Answer Selection in Audio LLMs",
+      "authors": "Hyebin Cho, Suho Yoo, Jihoo Jung et al.",
+      "summary": "Audio Large Language Models (Audio LLMs) have advanced in audio understanding, yet they can still predict the answer by reasoning from textual cues or linguistic priors rather than the provided audio.…",
+      "date": "2026-09-04",
       "tag": "Audio Reasoning",
-      "url": "https://arxiv.org/abs/2608.27817"
+      "url": "https://arxiv.org/abs/2609.04637"
     },
     {
-      "id": "2608.25246",
-      "title": "ShuttleArena: Interpretable Self-Play in Physics-Based Badminton",
-      "authors": "Peize Ding",
-      "summary": "Badminton is a compact but challenging domain for game AI: a player must choose a physically feasible shuttle trajectory, anticipate the opponent's interception, and recover to a court position whose …",
-      "date": "2026-08-26",
-      "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2608.25246"
+      "id": "2609.03241",
+      "title": "FlowBalance: Verifier-Grounded Self-Improvement from On-Policy Reasoning Experience",
+      "authors": "Zixun Huang, Kishan Panaganti, Haitao Mi et al.",
+      "summary": "A reasoning model can improve from its own on-policy experience, but this inner loop is fragile: terminal verifiers provide reliable yet sparse supervision, while dense same-model guidance can reinfor…",
+      "date": "2026-09-03",
+      "tag": "Flow Matching",
+      "url": "https://arxiv.org/abs/2609.03241"
     },
     {
-      "id": "2608.24958",
-      "title": "Can We Read the Mind of an Audio LLM? A Verbalizable, Multilingual Middle-Layer Workspace",
-      "authors": "Jiajun Fan, Jingyuan Li, Prashanth Gurunath Shivakumar et al.",
-      "summary": "An audio language model is a black box in a specific way: we see what it says, never what it works out on the way there, and chain-of-thought monitoring helps only if the model writes its reasoning do…",
-      "date": "2026-08-25",
-      "tag": "Audio Reasoning",
-      "url": "https://arxiv.org/abs/2608.24958"
-    },
-    {
-      "id": "2608.24640",
-      "title": "EVEREST:Endogenous Vision-Language Reinforcement Reasoning Exploration for Urban Socio-Semantic Segmentation",
-      "authors": "Qixiu Li, Zhongzhi He, Xiang Zhu et al.",
-      "summary": "Urban socio-semantic segmentation leverages digital and satellite imagery to provide critical spatial semantic information for downstream applications such as urban resource allocation. Although exist…",
-      "date": "2026-08-25",
+      "id": "2609.03906",
+      "title": "Revisiting Topological Graphs for Macro Action based Closed-loop Reinforcement Learning of Vision Language Navigation in Continuous Environment",
+      "authors": "Shuhao Ye, Sitong Mao, Yuxiang Cui et al.",
+      "summary": "Vision-Language Navigation in Continuous Environments (VLN-CE) requires an agent to follow natural language instructions through unseen environments. Existing imitation learning (IL) pipelines struggl…",
+      "date": "2026-09-03",
       "tag": "Multimodal",
-      "url": "https://arxiv.org/abs/2608.24640"
+      "url": "https://arxiv.org/abs/2609.03906"
     },
     {
-      "id": "2608.24949",
-      "title": "Demystifying Reinforcement Learning Post-Training of Language Models",
-      "authors": "Donovan Clay, Saket Gollapudi, Sankar Harilal et al.",
-      "summary": "Reinforcement learning (RL) post-training has emerged as a powerful framework for enhancing the capabilities of large language models (LLMs), enabling impressive reasoning, math, and coding capabiliti…",
-      "date": "2026-08-24",
+      "id": "2609.02246",
+      "title": "LLM-as-a-Judge Is Not an Oracle: Why Self-Improving Agents Need Deterministic Guardrails",
+      "authors": "Vansh Wahi",
+      "summary": "Self-improving agent pipelines have a problem at their center. An optimizer rewrites prompts to score higher, and the score comes from a judge that is itself an LLM. That judge has the last word on wh…",
+      "date": "2026-09-02",
+      "tag": "Self-Improvement",
+      "url": "https://arxiv.org/abs/2609.02246"
+    },
+    {
+      "id": "2609.02817",
+      "title": "Cliff: Learning Process Rewards from the First Mistake",
+      "authors": "Peixuan Han, Runhui Wang, Ketan Ramaneti et al.",
+      "summary": "Reinforcement learning with verifiable rewards (RLVR) has emerged as a powerful paradigm for large language model (LLM) post-training, but its reliance on coarse outcome rewards leads to limited guida…",
+      "date": "2026-09-02",
+      "tag": "Reasoning",
+      "url": "https://arxiv.org/abs/2609.02817"
+    },
+    {
+      "id": "2609.01679",
+      "title": "A Survey on Self-Improving Test-Time Intelligence: Feedback-Driven Adapting, Learning, and Scaling at Inference",
+      "authors": "Shuaicheng Niu, Guohao Chen, Yaofo Chen et al.",
+      "summary": "The ability of AI systems to improve their behavior during deployment is becoming increasingly important. As inference moves beyond the static execution of a fixed trained model, a growing body of wor…",
+      "date": "2026-09-01",
+      "tag": "Reasoning",
+      "url": "https://arxiv.org/abs/2609.01679"
+    },
+    {
+      "id": "2609.00829",
+      "title": "HarnessEvolve: Learning from Reference Trajectories for Reliable Agent Self-Evolution",
+      "authors": "Wen Jiang, Mingmin Chu, Yimeng Tian et al.",
+      "summary": "Self-evolving agents advance toward autonomy by optimizing their harness---prompts, skills, tools, and execution logic---based on environmental feedback. This paradigm, however, is hampered by three c…",
+      "date": "2026-09-01",
       "tag": "RL Training",
-      "url": "https://arxiv.org/abs/2608.24949"
+      "url": "https://arxiv.org/abs/2609.00829"
     },
     {
-      "id": "2608.21871",
-      "title": "The Chase Is the Curriculum, the Capture Anchors the Credit: Pursuit-Evasion Self-Play for Zero-Data LLM Reasoning",
-      "authors": "Jing Yu, Shengchao Chen, Yiyun Tan",
-      "summary": "Reinforcement learning with verifiable rewards has become the dominant recipe for improving large language model reasoning, yet it presumes large human-curated task collections. Zero-data self-play re…",
-      "date": "2026-08-22",
+      "id": "2608.31046",
+      "title": "Does On-Policy Distillation Really Distill? From Noisy Teacher to Self-Improvement",
+      "authors": "Yi Ding, Ruqi Zhang",
+      "summary": "On-policy distillation (OPD) offers dense token-level supervision as an alternative to the sparse outcome-level advantages of reinforcement learning with verifiable rewards (RLVR). However, the teache…",
+      "date": "2026-08-31",
       "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2608.21871"
-    },
-    {
-      "id": "2608.21204",
-      "title": "Beyond Imitation: Self-Improving Robot Policies via Off-Policy Q-Planning",
-      "authors": "Varun Giridhar, Anant Khandelwal, Jeremy A. Collins et al.",
-      "summary": "Behaviour Cloning (BC) has driven remarkable progress in robot manipulation, yet it is fundamentally limited by its inability to self-improve: a policy that fails cannot learn from that failure withou…",
-      "date": "2026-08-21",
-      "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2608.21204"
-    },
-    {
-      "id": "2608.21595",
-      "title": "Perturb the Thought, Not the Pixels: Latent-Space Rollout Diversification for Reinforcement Learning of Vision-Language Models",
-      "authors": "Michael Jerge, Joseph Pelczar, Justin Downes",
-      "summary": "Reinforcement learning with verifiable rewards (RLVR) improves the reasoning ability of vision-language models (VLMs), and diversifying the rollouts within each optimization group amplifies its gains.…",
-      "date": "2026-08-21",
-      "tag": "Multimodal",
-      "url": "https://arxiv.org/abs/2608.21595"
-    },
-    {
-      "id": "2608.20318",
-      "title": "AI4AI-Bench: Benchmarking LLM Agents in Algorithmic Design for Recursive Self-Improvement",
-      "authors": "Yizhe Chi, Wenyi Li, Deyao Hong et al.",
-      "summary": "Recursive self-improvement (RSI) asks whether an AI system can improve the process that produces AI systems, so that the next system inherits the improvement. That process is the training algorithm: a…",
-      "date": "2026-08-20",
-      "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2608.20318"
+      "url": "https://arxiv.org/abs/2608.31046"
     }
   ]
 }
