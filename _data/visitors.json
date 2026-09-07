@@ -2,14 +2,14 @@
   "_updated": "2026-09-07",
   "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 655,
+  "_total": 658,
   "_days": 30,
   "_range": "Aug. 8th - Sep. 7th",
   "locations": [
     {
       "code": "US",
       "name": "Illinois, US",
-      "count": 254,
+      "count": 255,
       "cx": 90.8,
       "cy": 44.6,
       "r": 4.2
@@ -181,6 +181,14 @@
       "cx": 263.6,
       "cy": 60.0,
       "r": 2.06
+    },
+    {
+      "code": "US",
+      "name": "Georgia, US",
+      "count": 2,
+      "cx": 97.0,
+      "cy": 51.7,
+      "r": 2.01
     },
     {
       "code": "US",
@@ -419,7 +427,7 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 581
+      "count": 584
     },
     {
       "code": "SG",
@@ -547,7 +555,7 @@
       "country": "US",
       "country_name": "United States",
       "name": "Illinois",
-      "count": 254,
+      "count": 255,
       "located": true
     },
     {
@@ -630,6 +638,13 @@
     {
       "country": "US",
       "country_name": "United States",
+      "name": "Georgia",
+      "count": 2,
+      "located": true
+    },
+    {
+      "country": "US",
+      "country_name": "United States",
       "name": "Michigan",
       "count": 2,
       "located": true
@@ -688,7 +703,7 @@
     {
       "path": "/",
       "title": "Jiajun Fan - Jiajun Fan",
-      "count": 274
+      "count": 276
     },
     {
       "path": "/visitors",
@@ -703,7 +718,7 @@
     {
       "path": "/cv",
       "title": "CV — Jiajun Fan",
-      "count": 64
+      "count": 65
     },
     {
       "path": "/year-archive",
@@ -810,12 +825,12 @@
     {
       "name": "www.jiajunfan.com",
       "id": "www.jiajunfan.com",
-      "count": 200
+      "count": 201
     },
     {
       "name": "Google",
       "id": "Google",
-      "count": 81
+      "count": 82
     },
     {
       "name": "www.jiajunfan.com/year-archive",
@@ -903,6 +918,11 @@
       "count": 1
     },
     {
+      "name": "www.linkedin.com",
+      "id": "www.linkedin.com",
+      "count": 1
+    },
+    {
       "name": "nvidia.eightfold.ai",
       "id": "nvidia.eightfold.ai",
       "count": 1
@@ -912,7 +932,7 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 418
+      "count": 421
     },
     {
       "name": "Safari",
@@ -939,7 +959,7 @@
     {
       "name": "Windows",
       "id": "Windows",
-      "count": 112
+      "count": 115
     },
     {
       "name": "Android",
@@ -1080,21 +1100,54 @@
     },
     {
       "day": "2026-09-07",
-      "n": 3
+      "n": 6
     }
   ],
   "periods": {
-    "today": 3,
+    "today": 6,
     "yesterday": 13,
-    "d7": 172,
+    "d7": 175,
     "d7_prev": 187,
-    "d30": 655,
+    "d30": 658,
     "d30_prev": 145,
-    "day_frac": 0.491,
+    "day_frac": 0.662,
     "yesterday_day": "2026-09-06"
   },
-  "_last_visit": "2026-09-07 05:37",
+  "_last_visit": "2026-09-07 12:55",
   "recent": [
+    {
+      "date": "2026-09-07 12:55",
+      "ts": "2026-09-07T19:55:24Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "Google",
+      "browser": "Chrome 152",
+      "system": "Windows 10",
+      "screen": "2195px",
+      "first": true
+    },
+    {
+      "date": "2026-09-07 11:50",
+      "ts": "2026-09-07T18:50:37Z",
+      "loc": "Georgia, US",
+      "path": "/",
+      "ref": "www.linkedin.com",
+      "browser": "Chrome 152",
+      "system": "Windows 10",
+      "screen": "1920px",
+      "first": true
+    },
+    {
+      "date": "2026-09-07 11:50",
+      "ts": "2026-09-07T18:50:40Z",
+      "loc": "Georgia, US",
+      "path": "/cv",
+      "ref": "www.jiajunfan.com",
+      "browser": "Chrome 152",
+      "system": "Windows 10",
+      "screen": "1920px",
+      "first": true
+    },
     {
       "date": "2026-09-07 05:37",
       "ts": "2026-09-07T12:37:16Z",
@@ -1391,41 +1444,8 @@
       "system": "Android 16",
       "screen": "345px",
       "first": true
-    },
-    {
-      "date": "2026-09-05 21:03",
-      "ts": "2026-09-06T04:03:38Z",
-      "loc": "Singapore",
-      "path": "/cv",
-      "ref": "www.jiajunfan.com",
-      "browser": "Chrome 131",
-      "system": "Android 16",
-      "screen": "345px",
-      "first": true
-    },
-    {
-      "date": "2026-09-05 18:05",
-      "ts": "2026-09-06T01:05:38Z",
-      "loc": "Florida, US",
-      "path": "/publication/2025-06-03-ProteinZero",
-      "ref": "Google",
-      "browser": "Chrome 152",
-      "system": "macOS 10.15",
-      "screen": "1470px",
-      "first": true
-    },
-    {
-      "date": "2026-09-05 17:23",
-      "ts": "2026-09-06T00:23:55Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "scholar.google.com",
-      "browser": "Chrome 148",
-      "system": "macOS 10.15",
-      "screen": "2560px",
-      "first": true
     }
   ],
-  "_recent_total": 1438,
+  "_recent_total": 1441,
   "_recent_shown": 30
 }
