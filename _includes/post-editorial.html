@@ -386,8 +386,13 @@ body.dark-mode .ed .turn.bad .txt{color:#f08a82}
   .ed .abcell{flex:1;background:var(--ed-tint);border-radius:2px 2px 0 0;min-width:3px}
   .ed .abcell.ws{background:var(--ed-accent)}
   .ed .abcell.crit{background:var(--ed-neg)}
-  .ed .abaxis{display:flex;justify-content:space-between;font-family:var(--sans);font-size:.68rem;
-    color:var(--muted);margin-top:8px}
+  .ed .abaxis{display:flex;justify-content:space-between;gap:12px;font-family:var(--sans);
+    font-size:.68rem;color:var(--muted);margin-top:8px}
+  .ed .abaxis span:nth-child(2){flex:1;min-width:0;text-align:center}
+  @media(max-width:560px){
+    .ed .abaxis{flex-wrap:wrap;gap:2px 12px}
+    .ed .abaxis span:nth-child(2){order:3;flex:0 0 100%;text-align:center}
+  }
   @media(max-width:620px){
     /* stack the label above the bars so the track keeps the full panel width */
     .ed .brow{grid-template-columns:1fr;gap:5px;margin-bottom:14px}
