@@ -47,7 +47,7 @@ header:
 
 <p>Text LLMs made chain-of-thought look like a free lunch: o1 and DeepSeek-R1 turned longer deliberation into better answers. Carrying the same prompt into audio produces the opposite. On the open Audio LLM this work starts from, switching reasoning on costs 3.40 points, and an outcome-only RL baseline recovers only to break-even; sweeping the maximum thinking length makes the loss deepen rather than recover. We call it <b>test-time inverse scaling</b>, and it is the first thing a process-level view has to explain.</p>
 
-<div class="panel bleed"><div class="phd"><span class="ttl">MMAU Test-mini &mdash; total accuracy</span><span class="meta">1k expertly annotated questions &middot; 27 reasoning skills &middot; higher is better</span></div>
+<div class="panel bleed"><div class="phd"><span class="ttl">MMAU Test-mini &mdash; total accuracy</span><span class="meta">1k expertly annotated questions &middot; 27 reasoning skills &middot; bars span 58&ndash;80%</span></div>
 
 <div class="brow"><div class="bl">CESAR<i>ours · with reasoning</i></div><div class="btrack"><div class="bwrap"><span class="bfill aft" style="width:86.8%"></span><span class="bval on">77.10</span></div></div></div>
 

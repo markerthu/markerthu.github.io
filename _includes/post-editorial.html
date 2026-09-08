@@ -45,16 +45,20 @@ body.dark-mode .ed{--ed-tint:#4a7387;--ed-neg:#f08a82;--ed-negsoft:#2a1917;--ed-
 .ed .brow.tot{margin-top:11px;padding-top:11px;border-top:1px solid var(--rule)}
 .ed .bl{font-family:var(--sans);font-size:.79rem;font-weight:500;color:var(--body);line-height:1.35}
 .ed .bl i{display:block;font-style:normal;font-size:.71rem;color:var(--muted);font-weight:400}
-.ed .btrack{display:flex;flex-direction:column;gap:4px;min-width:0}
-  /* grid, not flex: the value occupies exactly what it measures and the bar scales
-     against what is actually left — equal-looking bars can never mean unequal data */
-  .ed .bwrap{display:grid;grid-template-columns:1fr max-content;gap:8px;align-items:center}
+  /* the grid lives on the TRACK, not on each row: every bar in a group is then
+     measured against one shared axis, so a larger number can never draw a
+     shorter bar than a smaller one in the same group */
+  .ed .btrack{display:grid;grid-template-columns:minmax(0,1fr) max-content;
+    gap:4px 8px;align-items:center;min-width:0}
+  .ed .bwrap{display:contents}
   .ed .bfill{height:13px;border-radius:2px;min-width:2px;background:var(--ed-tint);max-width:100%}
 .ed .bfill.aft{background:var(--ed-accent)}
 .ed .bfill.neg{background:#c9736c}
 .ed .bval{font-family:var(--mono);font-size:.72rem;font-variant-numeric:tabular-nums;
-  color:var(--muted);white-space:nowrap}
+  color:var(--muted);white-space:nowrap;line-height:1.25}
 .ed .bval.on{color:var(--ed-accent);font-weight:700}
+.ed .bval i{display:block;font-style:normal;font-family:var(--sans);font-size:.65rem;
+  font-weight:400;color:var(--muted);letter-spacing:.01em}
 .ed .legend{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--sans);font-size:.76rem;
   color:var(--muted);margin-top:16px;padding-top:13px;border-top:1px solid var(--rule);line-height:1.5}
 .ed .legend span{display:flex;align-items:center;gap:6px}
@@ -132,13 +136,16 @@ body.dark-mode .ed .turn.bad .txt{color:#f08a82}
   @media print{
     /* the page paints through dark-mode tokens; without this a dark-mode reader
        prints near-white ink onto white paper */
+    /* _layouts/post.html sets an inline dark background on <html> to stop the
+       flash; only !important can beat an inline style */
+    html{background:#fff !important}
     body.dark-mode, body.dark-mode .ed{
       --bg:#fff;--band:#f6f3ec;--ink:#1a1815;--body:#2b2823;--muted:#6c6860;
       --rule:#e8e3d9;--link:#1565c0;--pill:#f0ede6;--fig-border:#e7e2d8;
       --ed-tint:#6a9aab;--ed-on-accent:#fff}
     .ed .fcard,.ed .knob,.ed .panel,.ed .fig,.ed .stat{break-inside:avoid}
     /* every element whose meaning is carried by a background colour */
-    .ed .bfill,.ed .sw,.ed .fno,.ed .chip.on,.ed .abpos,.ed .tlseg,.ed .tlmark,.ed .tmk,.ed .lgb,.ed .swbar,.ed .chstep,.ed .chtab.on,.ed .swopt.on,.ed .bmtab.on,.ed .tband,.ed .bmc,.ed .abL0b{
+    .ed .bfill,.ed .sw,.ed .fno,.ed .chip.on,.ed .abpos,.ed .abneg,.ed .abnil,.ed .abcol.ws,.ed .tlseg,.ed .tlmark,.ed .tmk,.ed .lgb,.ed .swbar,.ed .chstep,.ed .chtab.on,.ed .swopt.on,.ed .bmtab.on,.ed .tband,.ed .bmc,.ed .abL0b{
       -webkit-print-color-adjust:exact;print-color-adjust:exact}
     .ed .figscroll::after,.ed .figscroll.scrollable::after{display:none}
   }
@@ -208,9 +215,15 @@ body.dark-mode .ed .turn.bad .txt{color:#f08a82}
 
   /* ── interactive: depth scrubber ── */
   .ed .depthfx{margin:26px 0 8px}
-  .ed .dband{display:grid;grid-template-columns:35fr 45fr 20fr;gap:3px;margin:0 0 12px;
+  .ed .dband{display:grid;grid-template-columns:184px 35fr 45fr 20fr;column-gap:0;margin:0 0 42px;
+    /* 184px = .tmrow's 170px label + its 14px gap, and the three band cells carry
+       no gap of their own, so 35%/80% land exactly on the marker track's 35%/80% */
     font-family:var(--sans);font-size:.68rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
-  .ed .dband span{padding:5px 8px;border-radius:4px;text-align:center;color:var(--muted);background:var(--band)}
+  .ed .dband span{padding:5px 8px;border-radius:4px;text-align:center;color:var(--muted);background:var(--band);
+    box-sizing:border-box;border-right:3px solid transparent;background-clip:padding-box}
+  .ed .dband span:last-child{border-right:0}
+  .ed .dband .dbgap{background:none;padding:0;border:0}
+  @media(max-width:620px){.ed .dband .dbgap{display:none}}
   .ed .dband .dbw{background:var(--ed-soft);color:var(--ed-accent)}
   .ed .dcases{margin-bottom:6px}
   .ed .dcase{display:grid;grid-template-columns:132px 1fr 118px;gap:12px;align-items:center;margin-bottom:11px;
@@ -316,7 +329,9 @@ body.dark-mode .ed .turn.bad .txt{color:#f08a82}
   .ed .tlseg.s2{background:var(--ed-tint)} .ed .tlseg.s3{background:var(--ed-accent)}
   .ed .tlt{font-family:var(--sans);font-size:.7rem;font-weight:700;color:var(--ink);line-height:1.2}
   .ed .tld{font-family:var(--mono);font-size:.62rem;color:var(--muted);margin-top:2px}
-  .ed .tlseg.s2 .tlt,.ed .tlseg.s3 .tlt,.ed .tlseg.s2 .tld,.ed .tlseg.s3 .tld{color:var(--ed-on-accent)}
+  .ed .tlseg.s3 .tlt,.ed .tlseg.s3 .tld{color:var(--ed-on-accent)}
+  /* s2 sits on the pale --ed-tint, where --ed-on-accent drops to ~3:1 */
+  .ed .tlseg.s2 .tlt,.ed .tlseg.s2 .tld{color:var(--ink)}
   .ed .tlaxis{display:flex;justify-content:space-between;font-family:var(--sans);font-size:.68rem;
     color:var(--muted);margin:7px 0 18px}
   .ed .tlrow{display:grid;grid-template-columns:56px 1fr;gap:13px;align-items:start;margin-bottom:11px}
@@ -352,18 +367,31 @@ body.dark-mode .ed .turn.bad .txt{color:#f08a82}
   .ed .abL0t{font-family:var(--sans);font-size:.8rem;color:var(--body)}
   .ed .abL0t b{color:var(--ink)} .ed .abL0t span{display:block;font-family:var(--mono);
     font-size:.76rem;font-weight:700;color:var(--ed-neg)}
-  .ed .abchart{display:flex;align-items:flex-end;gap:2px;height:150px;padding:0 2px;
+  /* signed chart: bars grow from a zero rule, so sign is readable and a -5 can
+     never draw the same as a +5. Span is -5..+10 pts, zero sits 1/3 up. */
+  .ed .abchart{position:relative;display:flex;align-items:stretch;height:150px;
     border-bottom:1px solid var(--rule)}
-  .ed .abcol{flex:1;display:flex;align-items:flex-end;min-width:3px}
-  .ed .abpos{width:100%;background:var(--ed-tint);border-radius:2px 2px 0 0}
-  .ed .abcol.ws .abpos{background:var(--ed-accent)}
-  .ed .sw.abws{background:var(--ed-accent)}
+  .ed .abcol{flex:1;position:relative;min-width:3px;padding:0 1px}
+  .ed .abcol.ws{background:var(--band)}
+  .ed .abzero{position:absolute;left:0;right:0;bottom:33.33%;height:0;
+    border-top:1px solid var(--rule);pointer-events:none}
+  .ed .abpos{position:absolute;left:1px;right:1px;bottom:33.33%;
+    background:var(--ed-neg);border-radius:2px 2px 0 0}
+  .ed .abneg{position:absolute;left:1px;right:1px;top:66.67%;
+    background:var(--ed-tint);border-radius:0 0 2px 2px}
+  .ed .abnil{position:absolute;left:1px;right:1px;bottom:33.33%;height:2px;
+    background:var(--muted);opacity:.45}
+  .ed .sw.abws{background:var(--band);border:1px solid var(--rule)}
+  .ed .sw.abcost{background:var(--ed-neg)}
   .ed .abcell{flex:1;background:var(--ed-tint);border-radius:2px 2px 0 0;min-width:3px}
   .ed .abcell.ws{background:var(--ed-accent)}
   .ed .abcell.crit{background:var(--ed-neg)}
   .ed .abaxis{display:flex;justify-content:space-between;font-family:var(--sans);font-size:.68rem;
     color:var(--muted);margin-top:8px}
   @media(max-width:620px){
+    /* stack the label above the bars so the track keeps the full panel width */
+    .ed .brow{grid-template-columns:1fr;gap:5px;margin-bottom:14px}
+    .ed .bval{font-size:.68rem}
     .ed .tlbar{height:auto;min-height:62px}
     .ed .tlseg{padding:4px 3px;overflow:hidden}
     .ed .tlt{font-size:.6rem;overflow-wrap:anywhere}
@@ -371,6 +399,7 @@ body.dark-mode .ed .turn.bad .txt{color:#f08a82}
     .ed .lgrow{grid-template-columns:118px 1fr 52px;gap:8px}
     .ed .trow{grid-template-columns:1fr;gap:4px}
     .ed .tmrow{grid-template-columns:1fr;gap:6px}
+    .ed .dband{grid-template-columns:35fr 45fr 20fr}
     .ed .tlrow{grid-template-columns:46px 1fr;gap:9px}
   }
 
@@ -391,11 +420,14 @@ body.dark-mode .ed .turn.bad .txt{color:#f08a82}
   .ed .bmhead b{color:var(--ink)}
   .ed #bmGrid svg{width:100%;height:auto;min-width:620px;display:block}
   .ed .bmcell{cursor:crosshair}
-  #bmTT{position:fixed;z-index:60;pointer-events:none;opacity:0;transition:opacity .12s;
+  /* the tooltip is reparented to <body>, outside .ed, so it has to carry the
+     --ed-* tokens itself or they resolve to nothing */
+  #bmTT{--ed-tthit:#7fd0a0;position:fixed;z-index:60;pointer-events:none;opacity:0;transition:opacity .12s;
     background:var(--ink);color:var(--bg);border-radius:8px;padding:9px 11px;max-width:260px;
     font-family:var(--mono);font-size:.72rem;line-height:1.65;box-shadow:0 6px 24px rgba(0,0,0,.22)}
   #bmTT .hd{font-family:var(--sans);font-weight:700;font-size:.68rem;letter-spacing:.04em;
     text-transform:uppercase;opacity:.65;margin-bottom:5px}
+  body.dark-mode #bmTT{--ed-tthit:#12603f}
   #bmTT .hit{color:var(--ed-tthit);font-weight:700}
   .ed .bmbandlab{font-family:var(--sans);font-size:9px;font-weight:700;letter-spacing:.07em}
   .ed .bmax{font-family:var(--mono);font-size:9px;fill:var(--muted)}
@@ -488,7 +520,7 @@ body.dark-mode .ed .turn.bad .txt{color:#f08a82}
   .ed .mtab{font-family:var(--sans);font-size:.78rem;font-weight:600;color:var(--muted);
     background:var(--band);border:1px solid var(--rule);border-radius:999px;padding:5px 12px;cursor:pointer;
     display:flex;flex-direction:column;align-items:flex-start;line-height:1.25}
-  .ed .mtab i{font-style:normal;font-size:.66rem;font-weight:400;opacity:.8}
+  .ed .mtab i{font-style:normal;font-size:.66rem;font-weight:400}
   .ed .mtab.on{background:var(--ed-accent);border-color:var(--ed-accent);color:var(--ed-on-accent)}
   .ed .mtab:focus-visible{outline:2px solid var(--ed-accent);outline-offset:2px}
   .ed .mrow{display:grid;grid-template-columns:172px 1fr 92px;gap:9px 14px;align-items:center;margin-bottom:11px}
@@ -511,9 +543,12 @@ body.dark-mode .ed .turn.bad .txt{color:#f08a82}
     background:none;border:0;border-radius:999px;padding:5px 14px;cursor:pointer;transition:background .18s,color .18s}
   .ed .mxseg button.on{background:var(--ed-accent);color:var(--ed-on-accent)}
 
-  .ed .abcol.help .abbar{background:var(--ed-tint);opacity:.75}
+  
   .ed .gstep.on{background:#c2460a;border-color:#c2460a}
   .ed .tlseg.s2,.ed .tlmark.s1{color:var(--ink)}
+  /* --ed-tint under the dark --ink is 4.2:1; this darker step clears AA */
+  body.dark-mode .ed .tlmark.s1,body.dark-mode .ed .tlseg.s2{background:#456b7d}
+  @media print{body.dark-mode .ed .tlmark.s1,body.dark-mode .ed .tlseg.s2{background:var(--ed-tint)}}
   .ed .scatterfx text.ps.hi{fill:var(--body)}
   @media(max-width:620px){
     .ed .tmrow{margin-bottom:52px}
@@ -593,7 +628,7 @@ function initAdv(){
     var msg;
     if (a > 0.15)       msg = '<b>Good sample.</b> The advantage is positive, so the penalty shrinks to ' + b.toFixed(2) + '. The policy is allowed to move — this is where the model exploits what is working.';
     else if (a < -0.15) msg = '<b>Bad sample.</b> The advantage is negative, so the penalty <em>grows</em> to ' + b.toFixed(2) + '. The update is pinned near the reference model — this is what stops the collapse.';
-    else                msg = '<b>Average sample.</b> The advantage is near zero, so the coefficient stays at its baseline ' + b.toFixed(2) + ' and the sample barely moves the policy.';
+    else                msg = '<b>Average sample.</b> The advantage is near zero, so the coefficient barely moves off its baseline of ' + B0.toFixed(2) + ', sitting at ' + b.toFixed(2) + ', and the sample barely moves the policy.';
     say.innerHTML = msg;
     sl.setAttribute('aria-valuetext', 'advantage ' + a.toFixed(2) + ', regularisation coefficient ' + b.toFixed(2));
   }
@@ -604,6 +639,18 @@ function initAdv(){
 /* the include renders before the post body, so wait for the DOM */
 (function(){
   function boot(){ initFlip(); initAdv(); initSwap(); initDepth(); initChain(); initBrainmap(); initGal(); initCost(); initMatrix(); initMetric(); initTwoMap(); }
+  function repaint(light){
+    window.__edPrintLight = light;
+    (window.__edRedraw || []).forEach(function(f){ f(); });
+  }
+  window.addEventListener('beforeprint', function(){ repaint(true); });
+  window.addEventListener('afterprint',  function(){ repaint(false); });
+  if (window.matchMedia) {
+    var mq = window.matchMedia('print');
+    var on = mq.addEventListener ? mq.addEventListener.bind(mq, 'change')
+           : (mq.addListener ? mq.addListener.bind(mq) : null);
+    if (on) on(function(e){ repaint(!!(e.matches !== undefined ? e.matches : mq.matches)); });
+  }
   if (document.readyState !== 'loading') boot();
   else document.addEventListener('DOMContentLoaded', boot);
 })();
@@ -622,7 +669,7 @@ function initSwap(){
     hear.textContent = btn.textContent;
     acc.textContent  = a.toFixed(1);
     rank.textContent = btn.dataset.rank;
-    bar.style.width  = Math.max(0, Math.min(100, (a - 18) / (52 - 18) * 100)).toFixed(1) + '%';
+    bar.style.width  = Math.max(0, Math.min(100, (a - 20) / (50 - 20) * 100)).toFixed(1) + '%';
     bar.style.background = btn.dataset.k === 'real' ? 'var(--ed-accent)'
                          : (btn.dataset.k === 'sil' ? 'var(--ed-neg)' : 'var(--ed-tint)');
     opts.forEach(function(o){
@@ -708,7 +755,10 @@ function initBrainmap(){
      position:fixed descendant - the tooltip has to live outside it */
   if (tt && tt.parentNode !== document.body) document.body.appendChild(tt);
 
-  function cvar(n){ return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }
+  /* read tokens off the .ed container, not <html>: the dark palette lives on
+     body.dark-mode and --ed-* are declared on .ed, so documentElement always
+     hands back the light values */
+  function cvar(n){ return getComputedStyle(box.closest('.ed')||box).getPropertyValue(n).trim(); }
 
   function draw(){
     var c = data[cur], nL = c.nL, np = c.np;
@@ -879,10 +929,12 @@ function initGal(){
   var GAL = null, cur = 0, pin = null;
   function esc(t){ return String(t==null?'':t)
     .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-  function cv(n){ return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }
+  function cv(n){ return getComputedStyle(box.closest('.ed')||box).getPropertyValue(n).trim(); }
   var C = {};
   function palette(){
-    var dark = document.body.classList.contains('dark-mode');
+    /* under print the page is reset to light tokens by @media print, but these
+       hexes are baked into SVG fill attributes and CSS cannot reach them */
+    var dark = !window.__edPrintLight && document.body.classList.contains('dark-mode');
     C = { audio: dark?'#22364d':'#cfe0f6', ques: dark?'#33302a':'#e7e3d6',
           sensory: dark?'#171b21':'#f0f0ee', motor: dark?'#171b21':'#f0f0ee',
           blue: dark?'#5b9bf0':'#1f6fd4', blue3: cv('--ed-accent')||'#1a5cb0',
@@ -915,6 +967,8 @@ function initGal(){
       });
     });
   }
+  window.__edRedraw = window.__edRedraw || [];
+  window.__edRedraw.push(function(){ try { drawGrid(); } catch(e){} });
   function drawGrid(){
     palette();
     var c=GAL[cur], nL=c.nL, np=c.npos;
@@ -995,7 +1049,9 @@ function initGal(){
       t.addEventListener('click', function(){ selc(+t.dataset.i); }); });
     var w=box.querySelector('#gword');
     if(w) w.addEventListener('input', function(){
-      var v=w.value.trim().toLowerCase(); pin = v || null; drawPins(); drawGrid(); });
+      var ps=w.value.split('/').map(function(x){ return x.trim().toLowerCase(); })
+                    .filter(Boolean);
+      pin = ps.length>1 ? ps : (ps[0]||null); drawPins(); drawGrid(); });
     box.classList.add('ready');
     selc(0);
     var dt=document.getElementById('pg-dark');
@@ -1086,7 +1142,7 @@ function initCost(){
   var sl=box.querySelector('#epsl'), api=box.querySelector('#cApi'),
       loc=box.querySelector('#cLocal'), tm=box.querySelector('#cTime'), say=box.querySelector('#cSay');
   function fmt(n){ return '$' + n.toLocaleString('en-US'); }
-  function hrs(h){ return h < 48 ? Math.round(h) + ' hr' : Math.round(h/24) + ' days'; }
+  function hrs(h){ return h < 48 ? (Math.round(h*10)/10) + ' hr' : Math.round(h/24) + ' days'; }
   function render(){
     var e=+sl.value, cost=e*200, t=e*2.8;
     api.textContent = cost >= 100000 ? '$' + Math.round(cost/1000) + 'k' : fmt(cost);
