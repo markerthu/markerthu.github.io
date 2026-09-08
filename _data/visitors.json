@@ -2,7 +2,7 @@
   "_updated": "2026-09-07",
   "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 658,
+  "_total": 661,
   "_days": 30,
   "_range": "Aug. 8th - Sep. 7th",
   "locations": [
@@ -248,6 +248,14 @@
     },
     {
       "code": "US",
+      "name": "Arizona, US",
+      "count": 1,
+      "cx": 67.2,
+      "cy": 49.5,
+      "r": 1.95
+    },
+    {
+      "code": "US",
       "name": "Kentucky, US",
       "count": 1,
       "cx": 94.0,
@@ -359,6 +367,14 @@
       "r": 1.95
     },
     {
+      "code": "IQ",
+      "name": "Iraq",
+      "count": 1,
+      "cx": 224.4,
+      "cy": 50.6,
+      "r": 1.95
+    },
+    {
       "code": "IT",
       "name": "Italy",
       "count": 1,
@@ -427,7 +443,7 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 584
+      "count": 585
     },
     {
       "code": "SG",
@@ -673,6 +689,13 @@
     {
       "country": "US",
       "country_name": "United States",
+      "name": "Arizona",
+      "count": 1,
+      "located": true
+    },
+    {
+      "country": "US",
+      "country_name": "United States",
       "name": "Kentucky",
       "count": 1,
       "located": true
@@ -703,7 +726,7 @@
     {
       "path": "/",
       "title": "Jiajun Fan - Jiajun Fan",
-      "count": 276
+      "count": 277
     },
     {
       "path": "/visitors",
@@ -741,14 +764,14 @@
       "count": 18
     },
     {
-      "path": "/posts/2025/10/diversity-collapse-rlhf",
-      "title": "The Exploration-Exploitation Dilemma in RLHF for Generative Models — Jiajun Fan",
+      "path": "/publication/2026-07-08-Procedure-Aware-RL",
+      "title": "Procedure-Aware Reinforcement Learning for Tool-Augmented Large Language Models - Jiajun Fan",
       "count": 13
     },
     {
-      "path": "/publication/2026-07-08-Procedure-Aware-RL",
-      "title": "Procedure-Aware Reinforcement Learning for Tool-Augmented Large Language Models - Jiajun Fan",
-      "count": 12
+      "path": "/posts/2025/10/diversity-collapse-rlhf",
+      "title": "The Exploration-Exploitation Dilemma in RLHF for Generative Models — Jiajun Fan",
+      "count": 13
     },
     {
       "path": "/projects/cesar",
@@ -776,14 +799,14 @@
       "count": 4
     },
     {
-      "path": "/projects/adrpo",
-      "title": "ADRPO — Adaptive Divergence for Generative Models | NeurIPS 2025",
+      "path": "/projects/orw-cfm-w2",
+      "title": "ORW-CFM-W2 — Flow Matching RLHF | ICLR 2025",
       "count": 3
     },
     {
-      "path": "/projects/orw-cfm-w2",
-      "title": "ORW-CFM-W2 — Flow Matching RLHF | ICLR 2025",
-      "count": 2
+      "path": "/projects/adrpo",
+      "title": "ADRPO — Adaptive Divergence for Generative Models | NeurIPS 2025",
+      "count": 3
     },
     {
       "path": "/blog/reading-papers",
@@ -820,7 +843,7 @@
     {
       "name": "(unknown)",
       "id": "",
-      "count": 243
+      "count": 244
     },
     {
       "name": "www.jiajunfan.com",
@@ -830,7 +853,7 @@
     {
       "name": "Google",
       "id": "Google",
-      "count": 82
+      "count": 83
     },
     {
       "name": "www.jiajunfan.com/year-archive",
@@ -840,7 +863,7 @@
     {
       "name": "scholar.google.com",
       "id": "scholar.google.com",
-      "count": 26
+      "count": 27
     },
     {
       "name": "www.jiajunfan.com/cv",
@@ -932,7 +955,7 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 421
+      "count": 423
     },
     {
       "name": "Safari",
@@ -949,7 +972,7 @@
     {
       "name": "macOS",
       "id": "macOS",
-      "count": 297
+      "count": 298
     },
     {
       "name": "iOS",
@@ -959,7 +982,7 @@
     {
       "name": "Windows",
       "id": "Windows",
-      "count": 115
+      "count": 116
     },
     {
       "name": "Android",
@@ -1100,21 +1123,54 @@
     },
     {
       "day": "2026-09-07",
-      "n": 6
+      "n": 9
     }
   ],
   "periods": {
-    "today": 6,
+    "today": 9,
     "yesterday": 13,
-    "d7": 175,
+    "d7": 178,
     "d7_prev": 187,
-    "d30": 658,
+    "d30": 661,
     "d30_prev": 145,
-    "day_frac": 0.662,
+    "day_frac": 0.76,
     "yesterday_day": "2026-09-06"
   },
-  "_last_visit": "2026-09-07 12:55",
+  "_last_visit": "2026-09-07 17:08",
   "recent": [
+    {
+      "date": "2026-09-07 17:08",
+      "ts": "2026-09-08T00:08:48Z",
+      "loc": "California, US",
+      "path": "/",
+      "ref": "scholar.google.com",
+      "browser": "Chrome 147",
+      "system": "Linux",
+      "screen": "2560px",
+      "first": true
+    },
+    {
+      "date": "2026-09-07 16:30",
+      "ts": "2026-09-07T23:30:15Z",
+      "loc": "Iraq",
+      "path": "/publication/2026-07-08-Procedure-Aware-RL",
+      "ref": "",
+      "browser": "Chrome 137",
+      "system": "macOS 10.15",
+      "screen": "1280px",
+      "first": true
+    },
+    {
+      "date": "2026-09-07 16:27",
+      "ts": "2026-09-07T23:27:22Z",
+      "loc": "Arizona, US",
+      "path": "/projects/orw-cfm-w2",
+      "ref": "Google",
+      "browser": "Chrome 152",
+      "system": "Windows 10",
+      "screen": "1920px",
+      "first": true
+    },
     {
       "date": "2026-09-07 12:55",
       "ts": "2026-09-07T19:55:24Z",
@@ -1411,41 +1467,8 @@
       "system": "iOS 18.7",
       "screen": "390px",
       "first": true
-    },
-    {
-      "date": "2026-09-05 22:43",
-      "ts": "2026-09-06T05:43:45Z",
-      "loc": "Kentucky, US",
-      "path": "/publication/2025-06-03-ProteinZero",
-      "ref": "",
-      "browser": "Chrome 137",
-      "system": "macOS 10.15",
-      "screen": "1920px",
-      "first": true
-    },
-    {
-      "date": "2026-09-05 21:04",
-      "ts": "2026-09-06T04:04:34Z",
-      "loc": "Singapore",
-      "path": "/",
-      "ref": "Google",
-      "browser": "Chrome 131",
-      "system": "Android 16",
-      "screen": "345px",
-      "first": false
-    },
-    {
-      "date": "2026-09-05 21:03",
-      "ts": "2026-09-06T04:03:31Z",
-      "loc": "Singapore",
-      "path": "/",
-      "ref": "Google",
-      "browser": "Chrome 131",
-      "system": "Android 16",
-      "screen": "345px",
-      "first": true
     }
   ],
-  "_recent_total": 1441,
+  "_recent_total": 1444,
   "_recent_shown": 30
 }
