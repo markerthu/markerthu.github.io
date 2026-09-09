@@ -2,7 +2,7 @@
   "_updated": "2026-09-08",
   "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 663,
+  "_total": 665,
   "_days": 30,
   "_range": "Aug. 9th - Sep. 8th",
   "locations": [
@@ -749,12 +749,12 @@
     {
       "path": "/",
       "title": "Jiajun Fan - Jiajun Fan",
-      "count": 277
+      "count": 278
     },
     {
       "path": "/visitors",
       "title": "Visitors — Jiajun Fan",
-      "count": 88
+      "count": 89
     },
     {
       "path": "/publications",
@@ -866,12 +866,12 @@
     {
       "name": "(unknown)",
       "id": "",
-      "count": 249
+      "count": 250
     },
     {
       "name": "www.jiajunfan.com",
       "id": "www.jiajunfan.com",
-      "count": 201
+      "count": 202
     },
     {
       "name": "Google",
@@ -1146,21 +1146,54 @@
     },
     {
       "day": "2026-09-08",
-      "n": 12
+      "n": 14
     }
   ],
   "periods": {
-    "today": 12,
+    "today": 14,
     "yesterday": 11,
-    "d7": 144,
+    "d7": 146,
     "d7_prev": 212,
-    "d30": 663,
+    "d30": 665,
     "d30_prev": 162,
-    "day_frac": 0.656,
+    "day_frac": 0.762,
     "yesterday_day": "2026-09-07"
   },
-  "_last_visit": "2026-09-08 15:05",
+  "_last_visit": "2026-09-08 17:59",
   "recent": [
+    {
+      "date": "2026-09-08 17:59",
+      "ts": "2026-09-09T00:59:17Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": true
+    },
+    {
+      "date": "2026-09-08 17:59",
+      "ts": "2026-09-09T00:59:19Z",
+      "loc": "Illinois, US",
+      "path": "/visitors",
+      "ref": "www.jiajunfan.com",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": true
+    },
+    {
+      "date": "2026-09-08 17:59",
+      "ts": "2026-09-09T00:59:30Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": false
+    },
     {
       "date": "2026-09-08 15:05",
       "ts": "2026-09-08T22:05:20Z",
@@ -1457,41 +1490,8 @@
       "system": "iOS 26.6",
       "screen": "430px",
       "first": true
-    },
-    {
-      "date": "2026-09-07 17:08",
-      "ts": "2026-09-08T00:08:48Z",
-      "loc": "California, US",
-      "path": "/",
-      "ref": "scholar.google.com",
-      "browser": "Chrome 147",
-      "system": "Linux",
-      "screen": "2560px",
-      "first": true
-    },
-    {
-      "date": "2026-09-07 16:30",
-      "ts": "2026-09-07T23:30:15Z",
-      "loc": "Iraq",
-      "path": "/publication/2026-07-08-Procedure-Aware-RL",
-      "ref": "",
-      "browser": "Chrome 137",
-      "system": "macOS 10.15",
-      "screen": "1280px",
-      "first": true
-    },
-    {
-      "date": "2026-09-07 16:27",
-      "ts": "2026-09-07T23:27:22Z",
-      "loc": "Arizona, US",
-      "path": "/projects/orw-cfm-w2",
-      "ref": "Google",
-      "browser": "Chrome 152",
-      "system": "Windows 10",
-      "screen": "1920px",
-      "first": true
     }
   ],
-  "_recent_total": 1471,
+  "_recent_total": 1474,
   "_recent_shown": 30
 }
