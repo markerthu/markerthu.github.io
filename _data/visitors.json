@@ -2,14 +2,14 @@
   "_updated": "2026-09-10",
   "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 634,
+  "_total": 637,
   "_days": 30,
   "_range": "Aug. 11th - Sep. 10th",
   "locations": [
     {
       "code": "US",
       "name": "Illinois, US",
-      "count": 267,
+      "count": 268,
       "cx": 90.8,
       "cy": 44.6,
       "r": 4.2
@@ -20,7 +20,7 @@
       "count": 143,
       "cx": 58.1,
       "cy": 36.6,
-      "r": 3.56
+      "r": 3.55
     },
     {
       "code": "US",
@@ -36,6 +36,14 @@
       "count": 13,
       "cx": 101.3,
       "cy": 46.3,
+      "r": 2.33
+    },
+    {
+      "code": "SG",
+      "name": "Singapore",
+      "count": 13,
+      "cx": 283.8,
+      "cy": 82.7,
       "r": 2.33
     },
     {
@@ -55,20 +63,12 @@
       "r": 2.31
     },
     {
-      "code": "SG",
-      "name": "Singapore",
-      "count": 11,
-      "cx": 283.8,
-      "cy": 82.7,
-      "r": 2.29
-    },
-    {
       "code": "US",
       "name": "Florida, US",
       "count": 8,
       "cx": 96.7,
       "cy": 55.1,
-      "r": 2.22
+      "r": 2.21
     },
     {
       "code": "US",
@@ -427,12 +427,12 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 573
+      "count": 574
     },
     {
       "code": "SG",
       "name": "Singapore",
-      "count": 11
+      "count": 13
     },
     {
       "code": "CA",
@@ -555,7 +555,7 @@
       "country": "US",
       "country_name": "United States",
       "name": "Illinois",
-      "count": 267,
+      "count": 268,
       "located": true
     },
     {
@@ -710,7 +710,7 @@
     {
       "path": "/",
       "title": "Jiajun Fan - Jiajun Fan",
-      "count": 260
+      "count": 261
     },
     {
       "path": "/visitors",
@@ -743,14 +743,14 @@
       "count": 18
     },
     {
-      "path": "/projects",
-      "title": "Research Projects — Jiajun Fan",
+      "path": "/projects/cesar",
+      "title": "CESAR — Audio LLM Reasoning | ICLR 2026",
       "count": 16
     },
     {
-      "path": "/projects/cesar",
-      "title": "CESAR — Audio LLM Reasoning | ICLR 2026",
-      "count": 14
+      "path": "/projects",
+      "title": "Research Projects — Jiajun Fan",
+      "count": 16
     },
     {
       "path": "/publication/2026-07-08-Procedure-Aware-RL",
@@ -822,7 +822,7 @@
     {
       "name": "(unknown)",
       "id": "",
-      "count": 234
+      "count": 237
     },
     {
       "name": "www.jiajunfan.com",
@@ -939,12 +939,12 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 420
+      "count": 422
     },
     {
       "name": "Safari",
       "id": "Safari",
-      "count": 238
+      "count": 239
     },
     {
       "name": "Firefox",
@@ -961,12 +961,12 @@
     {
       "name": "iOS",
       "id": "iOS",
-      "count": 229
+      "count": 230
     },
     {
       "name": "Windows",
       "id": "Windows",
-      "count": 114
+      "count": 116
     },
     {
       "name": "Android",
@@ -1107,21 +1107,54 @@
     },
     {
       "day": "2026-09-10",
-      "n": 0
+      "n": 3
     }
   ],
   "periods": {
-    "today": 0,
+    "today": 3,
     "yesterday": 16,
-    "d7": 100,
+    "d7": 103,
     "d7_prev": 211,
-    "d30": 634,
+    "d30": 637,
     "d30_prev": 207,
-    "day_frac": 0.015,
+    "day_frac": 0.249,
     "yesterday_day": "2026-09-09"
   },
-  "_last_visit": "2026-09-09 23:26",
+  "_last_visit": "2026-09-10 05:22",
   "recent": [
+    {
+      "date": "2026-09-10 05:22",
+      "ts": "2026-09-10T12:22:06Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": true
+    },
+    {
+      "date": "2026-09-10 05:21",
+      "ts": "2026-09-10T12:21:58Z",
+      "loc": "Singapore",
+      "path": "/projects/cesar",
+      "ref": "",
+      "browser": "Chrome 144",
+      "system": "Windows 10",
+      "screen": "1920px",
+      "first": true
+    },
+    {
+      "date": "2026-09-10 05:21",
+      "ts": "2026-09-10T12:21:59Z",
+      "loc": "Singapore",
+      "path": "/projects/cesar",
+      "ref": "",
+      "browser": "Chrome 144",
+      "system": "Windows 10",
+      "screen": "1920px",
+      "first": true
+    },
     {
       "date": "2026-09-09 23:26",
       "ts": "2026-09-10T06:26:02Z",
@@ -1418,41 +1451,8 @@
       "system": "macOS 10.15",
       "screen": "1920px",
       "first": true
-    },
-    {
-      "date": "2026-09-08 19:47",
-      "ts": "2026-09-09T02:47:39Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": true
-    },
-    {
-      "date": "2026-09-08 17:59",
-      "ts": "2026-09-09T00:59:17Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": true
-    },
-    {
-      "date": "2026-09-08 17:59",
-      "ts": "2026-09-09T00:59:19Z",
-      "loc": "Illinois, US",
-      "path": "/visitors",
-      "ref": "www.jiajunfan.com",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": true
     }
   ],
-  "_recent_total": 1502,
+  "_recent_total": 1505,
   "_recent_shown": 30
 }
