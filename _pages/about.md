@@ -1,7 +1,7 @@
 ---
 permalink: /
 title: "Jiajun Fan"
-excerpt: "CS Ph.D. Student at UIUC | RL Post-Training for Generative Models"
+excerpt: "CS Ph.D. student at UIUC. I train multimodal generative and agentic models with reinforcement learning &mdash; stable enough to keep improving, autonomous enough to need less human data."
 author_profile: true
 redirect_from: 
   - /about/
@@ -234,6 +234,8 @@ body.dark-mode .cit-bar-year{color:#8b949e;}
 .ct-val{fill:#1565c0;font-size:11px;font-weight:800;text-anchor:middle;opacity:0;animation:ctFade .5s ease 1.3s forwards;}
 .ct-val-last{fill:#7c4dff;}
 .ct-year{fill:#64748b;font-size:11px;font-weight:600;text-anchor:middle;}
+/* the SVG scales with the column, so on a phone 11px lands near 4px on screen */
+@media(max-width:620px){.ct-val,.ct-year{font-size:20px;}}
 @keyframes ctDraw{to{stroke-dashoffset:0;}}
 @keyframes ctFade{to{opacity:1;}}
 body.dark-mode .ct-year{fill:#8b949e;}
@@ -669,11 +671,15 @@ body.dark-mode .ra-input::placeholder { color: #8b949e; }
 @media print {
   /* the page paints through .dark-mode overrides, so a dark-mode visitor would
      otherwise print white-on-white (mirrors publications/index.html) */
-  body.dark-mode, body.dark-mode .page__content, body.dark-mode p, body.dark-mode li,
-  body.dark-mode .tagline, body.dark-mode .ro-dom, body.dark-mode .ro-dom span,
-  body.dark-mode .ro-p, body.dark-mode .ro-p.nolink {
-    background: #fff !important; color: #000 !important;
+  /* enumerating selectors could never keep up with 190+ dark-mode rules, so reset
+     everything to ink-on-paper and re-colour only the few marks that carry meaning */
+  body.dark-mode, body.dark-mode * {
+    background-image: none !important; background-color: #fff !important; color: #000 !important;
+    border-color: #ccc !important; box-shadow: none !important;
   }
+  body.dark-mode a { color: #1565c0 !important; }
+  body.dark-mode .ct-val { fill: #1565c0 !important; }
+  body.dark-mode .ct-year, body.dark-mode .ct-bar { fill: #64748b !important; }
   body.dark-mode .ro-v { background: #fff !important; color: #000 !important; border-color: #ccc !important; }
   body.dark-mode .ro-row { border-bottom-color: #ccc !important; }
   .scroll-top, .dark-toggle, .ra-btn, .ra-panel, .quick-nav,
@@ -1257,6 +1263,10 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
 <h2 class="section-header" id="news"><img class="sh-icon" src="/images/icons/sh-news.png" alt="">Latest News</h2>
 
 <ul class="news-list">
+  <li>
+    <span class="news-date">Sep 2026</span>
+    <span><span class="nbadge nb-accept">Accept</span>Paper accepted at <strong>IEEE TMM</strong> (Transactions on Multimedia).</span>
+  </li>
   <li>
     <span class="news-date">Aug 2026</span>
     <span><span class="nbadge nb-finish">Finding</span>Voice agents could be measured, never improved &mdash; so we closed the loop and trained one in native audio. <a href="/posts/2026/08/speechgym-voice-agent-rl/">Blog</a> &middot; <a href="https://arxiv.org/abs/2608.26432" target="_blank" rel="noopener noreferrer">Paper</a></span>

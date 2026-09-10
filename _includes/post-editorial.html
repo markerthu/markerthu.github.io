@@ -48,7 +48,10 @@ body.dark-mode .ed{--ed-tint:#4a7387;--ed-neg:#f08a82;--ed-negsoft:#2a1917;--ed-
   /* the grid lives on the TRACK, not on each row: every bar in a group is then
      measured against one shared axis, so a larger number can never draw a
      shorter bar than a smaller one in the same group */
-  .ed .btrack{display:grid;grid-template-columns:minmax(0,1fr) max-content;
+  /* the value column is a FIXED width, not max-content: with max-content each
+     track sized its own column, so two rows of one panel had different bar
+     scales and a larger number could draw the shorter bar */
+  .ed .btrack{display:grid;grid-template-columns:minmax(0,1fr) 11em;
     gap:4px 8px;align-items:center;min-width:0}
   .ed .bwrap{display:contents}
   .ed .bfill{height:13px;border-radius:2px;min-width:2px;background:var(--ed-tint);max-width:100%}
@@ -142,12 +145,21 @@ body.dark-mode .ed .turn.bad .txt{color:#f08a82}
     body.dark-mode, body.dark-mode .ed{
       --bg:#fff;--band:#f6f3ec;--ink:#1a1815;--body:#2b2823;--muted:#6c6860;
       --rule:#e8e3d9;--link:#1565c0;--pill:#f0ede6;--fig-border:#e7e2d8;
-      --ed-tint:#6a9aab;--ed-on-accent:#fff}
+      --ed-tint:#6a9aab;--ed-on-accent:#fff;--code-bg:#f4f1ea;--faint:#787369;
+      --ed-neg:#b8403a;--ed-negsoft:#fbecea;--ed-rewardbg:#fbf1e6;--ed-rewardln:#c2760f;
+      --ed-tthit:#7fd0a0}
+    body.dark-mode .ed .l-en,body.dark-mode .ed .l-es,body.dark-mode .ed .l-zh,
+    body.dark-mode .ed .l-it,body.dark-mode .ed .l-de,body.dark-mode .ed .l-fr,
+    body.dark-mode .ed .l-ko{color:var(--body);border-color:var(--rule)}
+    body.dark-mode .ed .turn.bad .txt{color:#b8403a}
+    body.dark-mode .ed .k-assoc,body.dark-mode .ed .gopt.ok{color:var(--body)}
     .ed .fcard,.ed .knob,.ed .panel,.ed .fig,.ed .stat{break-inside:avoid}
     /* every element whose meaning is carried by a background colour */
     .ed .bfill,.ed .sw,.ed .fno,.ed .chip.on,.ed .abpos,.ed .abneg,.ed .abnil,.ed .abcol.ws,.ed .tlseg,.ed .tlmark,.ed .tmk,.ed .lgb,.ed .swbar,.ed .chstep,.ed .chtab.on,.ed .swopt.on,.ed .bmtab.on,.ed .tband,.ed .bmc,.ed .abL0b{
       -webkit-print-color-adjust:exact;print-color-adjust:exact}
     .ed .figscroll::after,.ed .figscroll.scrollable::after{display:none}
+    .ed .figscroll{overflow:visible}
+    .ed .figscroll svg,.ed .tmapfx svg,.ed #bmGrid svg{min-width:0;width:100%;height:auto}
   }
 
   /* ── interactive: two-state toggle ── */
@@ -337,7 +349,11 @@ body.dark-mode .ed .turn.bad .txt{color:#f08a82}
   .ed .tlrow{display:grid;grid-template-columns:56px 1fr;gap:13px;align-items:start;margin-bottom:11px}
   .ed .tlmark{font-family:var(--mono);font-size:.74rem;font-weight:700;color:var(--ed-on-accent);background:var(--ed-accent);
     border-radius:5px;padding:3px 0;text-align:center}
-  .ed .tlmark.s0{background:var(--muted)} .ed .tlmark.s1{background:var(--ed-tint)}
+  /* one ramp for both: stage k is the same colour in the bar and in the chip */
+  .ed .tlmark.s0{background:var(--band);color:var(--body)}
+  .ed .tlmark.s1{background:var(--ed-soft);color:var(--ink)}
+  .ed .tlmark.s2{background:var(--ed-tint)}
+  .ed .tlmark.s3{background:var(--ed-accent)}
   .ed .tlwhat{font-family:var(--sans);font-size:.82rem;color:var(--body);line-height:1.5}
   .ed .tlwhat b{display:block;color:var(--ink);margin-bottom:1px}
 
@@ -418,7 +434,7 @@ body.dark-mode .ed .turn.bad .txt{color:#f08a82}
   .ed .bmpane svg{min-width:520px;width:100%;height:auto}
   .ed .bmmeta{font-family:var(--sans);font-size:.78rem;color:var(--muted);margin-top:10px;line-height:1.5}
   .ed .bmmeta b{color:var(--ink)}
-  .ed .sw.bmsw{background:var(--ed-accent)} .ed .sw.bmws{background:var(--ed-soft);border:1px solid var(--rule)}
+  .ed .sw.bmsw{background:#e8590c} body.dark-mode .ed .sw.bmsw{background:#f0834a} .ed .sw.bmws{background:var(--ed-soft);border:1px solid var(--rule)}
 
   /* ── brain map, ported from the project's own viewer ── */
   .ed .bmhead{font-family:var(--sans);font-size:.82rem;color:var(--body);margin-bottom:12px;line-height:1.5}
@@ -444,7 +460,9 @@ body.dark-mode .ed .turn.bad .txt{color:#f08a82}
   .ed .tmhd{font-family:var(--sans);font-size:.86rem;font-weight:700;color:var(--ink);margin-bottom:3px}
   .ed .tmhd .verdict-ok{color:var(--ed-accent)} .ed .tmhd .verdict-no{color:var(--ed-neg)}
   .ed .tmsub{font-family:var(--sans);font-size:.76rem;color:var(--muted);margin-bottom:9px;line-height:1.5}
-  .ed .tmapfx svg{width:100%;height:auto;min-width:900px;display:block}
+  /* 880 matches .figscroll svg: at 900 the maps overflowed their 894px card by 6px,
+     clipping the WORKSPACE band label and showing a scroll hint for nothing */
+  .ed .tmapfx svg{width:100%;height:auto;min-width:880px;display:block}
   .ed .tmcell{cursor:crosshair}
 
   /* ── Finding-1 style whole-brain map ── */
@@ -485,8 +503,13 @@ body.dark-mode .ed .turn.bad .txt{color:#f08a82}
     color:var(--muted);margin-top:15px;padding-top:12px;border-top:1px solid var(--rule);line-height:1.5}
   .ed .glegend span{display:flex;align-items:center;gap:6px}
   .ed .gsw{width:11px;height:11px;border-radius:2px;flex:0 0 auto;border:1px solid var(--rule)}
-  .ed .gsw.r-audio{background:#bcd4ee} .ed .gsw.r-question{background:#ded6c4}
-  .ed .gsw.r-content{background:#cfd9e6} .ed .gsw.r-pin{background:var(--ed-neg);border-color:var(--ed-neg)}
+  .ed .gsw.r-audio{background:#cfe0f6} .ed .gsw.r-question{background:#e7e3d6}
+  .ed .gsw.r-content{background:#cfd9e6} .ed .gsw.r-pin{background:#e8590c;border-color:#e8590c}
+  /* the map bakes its palette into SVG fills, so the swatches have to flip with it */
+  body.dark-mode .ed .gsw.r-audio{background:#22364d}
+  body.dark-mode .ed .gsw.r-question{background:#33302a}
+  body.dark-mode .ed .gsw.r-content{background:#2a3340}
+  body.dark-mode .ed .gsw.r-pin{background:#f0834a;border-color:#f0834a}
   .ed .gsw.r-ws{background:var(--ed-soft)}
   
   .ed .garr{color:var(--muted);margin:0 3px;font-family:var(--sans)}
@@ -512,9 +535,12 @@ body.dark-mode .ed .turn.bad .txt{color:#f08a82}
   .ed .mxrow.ours .mxfill{background:var(--ed-accent)}
   .ed .mxrow.down .mxfill{background:var(--ed-neg)}
   .ed .mxrow.fixed .mxfill{background:var(--ed-tint);opacity:.6}
+  /* the delta is a child of .mxv, so right-aligning the pair put the accuracy
+     numbers on two different right edges; give the delta its own column */
   .ed .mxv{font-family:var(--mono);font-size:.83rem;font-weight:700;color:var(--ink);
-    font-variant-numeric:tabular-nums;text-align:right}
-  .ed .mxd{font-family:var(--mono);font-size:.71rem;font-weight:700;margin-left:6px}
+    font-variant-numeric:tabular-nums;text-align:right;
+    display:grid;grid-template-columns:1fr 3.6em;align-items:baseline;justify-items:end}
+  .ed .mxd{font-family:var(--mono);font-size:.71rem;font-weight:700;margin-left:0}
   .ed .mxrow.up .mxd{color:var(--ed-accent)} .ed .mxrow.down .mxd{color:var(--ed-neg)}
   .ed .mxrow.flat .mxd{color:var(--muted)}
   .ed .mxnote{font-family:var(--sans);font-size:.78rem;color:var(--muted);margin-top:12px;line-height:1.55}
@@ -540,6 +566,13 @@ body.dark-mode .ed .turn.bad .txt{color:#f08a82}
   .ed .mbase{position:absolute;top:0;bottom:0;width:2px;background:var(--ed-neg);opacity:.8}
   .ed .mv{font-family:var(--mono);font-size:.82rem;font-weight:700;color:var(--ink);
     font-variant-numeric:tabular-nums;text-align:right}
+  /* must sit AFTER the .mxrow/.mrow declarations: a media query adds no
+     specificity, so an earlier block was overridden and the 1fr bar track
+     collapsed to 0-12px on every phone */
+  @media(max-width:620px){
+    .ed .mxrow,.ed .mrow{grid-template-columns:1fr;gap:4px}
+    .ed .mxv,.ed .mv{text-align:left}
+  }
   .ed .mrow.ours .mv{color:var(--ed-accent)}
 
   .ed .mxpin{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:16px}
@@ -550,14 +583,17 @@ body.dark-mode .ed .turn.bad .txt{color:#f08a82}
 
   
   .ed .gstep.on{background:#c2460a;border-color:#c2460a}
-  .ed .tlseg.s2,.ed .tlmark.s1{color:var(--ink)}
+  .ed .tlseg.s2,.ed .tlmark.s2{color:var(--ink)}
   /* --ed-tint under the dark --ink is 4.2:1; this darker step clears AA */
-  body.dark-mode .ed .tlmark.s1,body.dark-mode .ed .tlseg.s2{background:#456b7d}
-  @media print{body.dark-mode .ed .tlmark.s1,body.dark-mode .ed .tlseg.s2{background:var(--ed-tint)}}
+  body.dark-mode .ed .tlmark.s2,body.dark-mode .ed .tlseg.s2{background:#456b7d}
+  @media print{body.dark-mode .ed .tlmark.s2,body.dark-mode .ed .tlseg.s2{background:var(--ed-tint)}}
   .ed .scatterfx text.ps.hi{fill:var(--body)}
   @media(max-width:620px){
-    .ed .tmrow{margin-bottom:52px}
-    .ed .tmk.alt i{top:-41px}
+    /* stacked, the title sits right above the track and the -20px labels landed
+       inside its line box; reserve the space instead */
+    .ed .tmrow{margin-bottom:52px;row-gap:40px}
+    .ed .tmk i{top:-19px}
+    .ed .tmk.alt i{top:-35px}
   }
 
   /* ── SpeechGym: cost comparison ── */
@@ -566,7 +602,8 @@ body.dark-mode .ed .turn.bad .txt{color:#f08a82}
   .ed .ccell{background:var(--bg);padding:16px 18px}
   .ed .ccell.ours{background:var(--ed-soft)}
   .ed .ck{font-family:var(--sans);font-size:.74rem;font-weight:700;letter-spacing:.05em;
-    text-transform:uppercase;color:var(--muted);margin-bottom:8px;line-height:1.4}
+    text-transform:uppercase;color:var(--muted);margin-bottom:8px;line-height:1.4;
+    min-height:2.8em}
   .ed .cv{font-family:var(--mono);font-size:1.7rem;font-weight:800;color:var(--ink);
     font-variant-numeric:tabular-nums;line-height:1.1}
   .ed .ccell.ours .cv{color:var(--ed-accent)}
@@ -1069,7 +1106,9 @@ function initMatrix(){
   var box=document.getElementById('mxfx'); if(!box) return;
   var D=JSON.parse(document.getElementById('mxdata').textContent);
   var track=3, mode='on';
-  var LO=58, HI=86;
+  /* 55, not 58: GPT-4o Audio scores 56.29 on Music, and a floor above it would
+     draw that value as a meaningless minimum-width stub */
+  var LO=55, HI=86;
   function pct(v){ return Math.max(1.5, Math.min(100, (v-LO)/(HI-LO)*100)); }
   function render(){
     var html='';
@@ -1132,7 +1171,8 @@ function initMetric(){
       +'. ADRPO scores <b>'+(m.k==='blip'?ours.toFixed(3):ours.toFixed(2))+'</b>'
       +(Math.abs(ours-best)<1e-9?', the best in the table' : '')
       +'. The red line marks the un-tuned SD3 base model, so anything left of it is a method that '
-      +'went backwards on this metric.';
+      +'went backwards on this metric. Bars span '
+      +(m.k==='blip'?m.lo.toFixed(2)+'&ndash;'+m.hiv.toFixed(2):m.lo+'&ndash;'+m.hiv)+'.';
     box.querySelectorAll('.mtab').forEach(function(t,k){
       t.classList.toggle('on', k===mi); t.setAttribute('aria-pressed', String(k===mi)); });
   }
