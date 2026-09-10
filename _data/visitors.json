@@ -2,7 +2,7 @@
   "_updated": "2026-09-10",
   "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 637,
+  "_total": 639,
   "_days": 30,
   "_range": "Aug. 11th - Sep. 10th",
   "locations": [
@@ -31,19 +31,19 @@
       "r": 2.87
     },
     {
+      "code": "SG",
+      "name": "Singapore",
+      "count": 14,
+      "cx": 283.8,
+      "cy": 82.7,
+      "r": 2.35
+    },
+    {
       "code": "US",
       "name": "Virginia, US",
       "count": 13,
       "cx": 101.3,
       "cy": 46.3,
-      "r": 2.33
-    },
-    {
-      "code": "SG",
-      "name": "Singapore",
-      "count": 13,
-      "cx": 283.8,
-      "cy": 82.7,
       "r": 2.33
     },
     {
@@ -432,7 +432,7 @@
     {
       "code": "SG",
       "name": "Singapore",
-      "count": 13
+      "count": 14
     },
     {
       "code": "CA",
@@ -720,7 +720,7 @@
     {
       "path": "/publications",
       "title": "Publications — Jiajun Fan",
-      "count": 69
+      "count": 70
     },
     {
       "path": "/cv",
@@ -778,14 +778,14 @@
       "count": 6
     },
     {
-      "path": "/blog/reading-papers",
-      "title": "What’s Happening in My Field - Jiajun Fan",
+      "path": "/projects/orw-cfm-w2",
+      "title": "ORW-CFM-W2 — Flow Matching RLHF | ICLR 2025",
       "count": 4
     },
     {
-      "path": "/projects/orw-cfm-w2",
-      "title": "ORW-CFM-W2 — Flow Matching RLHF | ICLR 2025",
-      "count": 3
+      "path": "/blog/reading-papers",
+      "title": "What’s Happening in My Field - Jiajun Fan",
+      "count": 4
     },
     {
       "path": "/projects/ac-flow",
@@ -822,7 +822,7 @@
     {
       "name": "(unknown)",
       "id": "",
-      "count": 237
+      "count": 238
     },
     {
       "name": "www.jiajunfan.com",
@@ -832,7 +832,7 @@
     {
       "name": "Google",
       "id": "Google",
-      "count": 80
+      "count": 81
     },
     {
       "name": "www.jiajunfan.com/year-archive",
@@ -939,12 +939,12 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 422
+      "count": 423
     },
     {
       "name": "Safari",
       "id": "Safari",
-      "count": 239
+      "count": 240
     },
     {
       "name": "Firefox",
@@ -956,7 +956,7 @@
     {
       "name": "macOS",
       "id": "macOS",
-      "count": 292
+      "count": 293
     },
     {
       "name": "iOS",
@@ -966,7 +966,7 @@
     {
       "name": "Windows",
       "id": "Windows",
-      "count": 116
+      "count": 117
     },
     {
       "name": "Android",
@@ -1107,21 +1107,43 @@
     },
     {
       "day": "2026-09-10",
-      "n": 3
+      "n": 5
     }
   ],
   "periods": {
-    "today": 3,
+    "today": 5,
     "yesterday": 16,
-    "d7": 103,
+    "d7": 105,
     "d7_prev": 211,
-    "d30": 637,
+    "d30": 639,
     "d30_prev": 207,
-    "day_frac": 0.249,
+    "day_frac": 0.447,
     "yesterday_day": "2026-09-09"
   },
-  "_last_visit": "2026-09-10 05:22",
+  "_last_visit": "2026-09-10 10:43",
   "recent": [
+    {
+      "date": "2026-09-10 10:43",
+      "ts": "2026-09-10T17:43:39Z",
+      "loc": "Illinois, US",
+      "path": "/projects/orw-cfm-w2",
+      "ref": "Google",
+      "browser": "Safari 17.6",
+      "system": "macOS 10.15",
+      "screen": "1920px",
+      "first": true
+    },
+    {
+      "date": "2026-09-10 09:01",
+      "ts": "2026-09-10T16:01:14Z",
+      "loc": "Singapore",
+      "path": "/publications",
+      "ref": "",
+      "browser": "Chrome 148",
+      "system": "Windows 10",
+      "screen": "1800px",
+      "first": true
+    },
     {
       "date": "2026-09-10 05:22",
       "ts": "2026-09-10T12:22:06Z",
@@ -1429,30 +1451,8 @@
       "system": "Linux",
       "screen": "1280px",
       "first": true
-    },
-    {
-      "date": "2026-09-08 23:24",
-      "ts": "2026-09-09T06:24:37Z",
-      "loc": "Missouri, US",
-      "path": "/",
-      "ref": "Google",
-      "browser": "Chrome 152",
-      "system": "Windows 10",
-      "screen": "1738px",
-      "first": true
-    },
-    {
-      "date": "2026-09-08 21:00",
-      "ts": "2026-09-09T04:00:42Z",
-      "loc": "California, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 151",
-      "system": "macOS 10.15",
-      "screen": "1920px",
-      "first": true
     }
   ],
-  "_recent_total": 1505,
+  "_recent_total": 1507,
   "_recent_shown": 30
 }
