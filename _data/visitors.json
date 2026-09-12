@@ -2,14 +2,14 @@
   "_updated": "2026-09-12",
   "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 643,
+  "_total": 646,
   "_days": 30,
   "_range": "Aug. 13th - Sep. 12th",
   "locations": [
     {
       "code": "US",
       "name": "Illinois, US",
-      "count": 292,
+      "count": 294,
       "cx": 90.8,
       "cy": 44.6,
       "r": 4.2
@@ -20,7 +20,7 @@
       "count": 128,
       "cx": 58.1,
       "cy": 36.6,
-      "r": 3.39
+      "r": 3.38
     },
     {
       "code": "US",
@@ -36,7 +36,7 @@
       "count": 14,
       "cx": 59.2,
       "cy": 39.7,
-      "r": 2.33
+      "r": 2.32
     },
     {
       "code": "SG",
@@ -44,7 +44,7 @@
       "count": 13,
       "cx": 283.8,
       "cy": 82.7,
-      "r": 2.31
+      "r": 2.3
     },
     {
       "code": "US",
@@ -52,7 +52,7 @@
       "count": 11,
       "cx": 104.5,
       "cy": 41.4,
-      "r": 2.27
+      "r": 2.26
     },
     {
       "code": "US",
@@ -239,6 +239,14 @@
       "r": 2.0
     },
     {
+      "code": "CN",
+      "name": "China",
+      "count": 2,
+      "cx": 285.7,
+      "cy": 46.7,
+      "r": 2.0
+    },
+    {
       "code": "US",
       "name": "Arizona, US",
       "count": 1,
@@ -316,14 +324,6 @@
       "count": 1,
       "cx": 270.6,
       "cy": 60.6,
-      "r": 1.94
-    },
-    {
-      "code": "CN",
-      "name": "China",
-      "count": 1,
-      "cx": 285.7,
-      "cy": 46.7,
       "r": 1.94
     },
     {
@@ -443,7 +443,7 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 576
+      "count": 578
     },
     {
       "code": "SG",
@@ -516,6 +516,11 @@
       "count": 2
     },
     {
+      "code": "CN",
+      "name": "China",
+      "count": 2
+    },
+    {
       "code": "AE",
       "name": "United Arab Emirates",
       "count": 1
@@ -528,11 +533,6 @@
     {
       "code": "BD",
       "name": "Bangladesh",
-      "count": 1
-    },
-    {
-      "code": "CN",
-      "name": "China",
       "count": 1
     },
     {
@@ -571,7 +571,7 @@
       "country": "US",
       "country_name": "United States",
       "name": "Illinois",
-      "count": 292,
+      "count": 294,
       "located": true
     },
     {
@@ -733,12 +733,12 @@
     {
       "path": "/",
       "title": "Jiajun Fan",
-      "count": 261
+      "count": 263
     },
     {
       "path": "/visitors",
       "title": "Visitors — Jiajun Fan",
-      "count": 77
+      "count": 78
     },
     {
       "path": "/publications",
@@ -845,12 +845,12 @@
     {
       "name": "(unknown)",
       "id": "",
-      "count": 242
+      "count": 244
     },
     {
       "name": "www.jiajunfan.com",
       "id": "www.jiajunfan.com",
-      "count": 191
+      "count": 192
     },
     {
       "name": "Google",
@@ -962,12 +962,12 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 412
+      "count": 414
     },
     {
       "name": "Safari",
       "id": "Safari",
-      "count": 249
+      "count": 250
     },
     {
       "name": "Firefox",
@@ -979,12 +979,12 @@
     {
       "name": "macOS",
       "id": "macOS",
-      "count": 291
+      "count": 293
     },
     {
       "name": "iOS",
       "id": "iOS",
-      "count": 238
+      "count": 239
     },
     {
       "name": "Windows",
@@ -1130,21 +1130,65 @@
     },
     {
       "day": "2026-09-12",
-      "n": 2
+      "n": 5
     }
   ],
   "periods": {
-    "today": 2,
+    "today": 5,
     "yesterday": 16,
-    "d7": 94,
+    "d7": 97,
     "d7_prev": 219,
-    "d30": 643,
+    "d30": 646,
     "d30_prev": 235,
-    "day_frac": 0.428,
+    "day_frac": 0.519,
     "yesterday_day": "2026-09-11"
   },
-  "_last_visit": "2026-09-12 09:10",
+  "_last_visit": "2026-09-12 12:26",
   "recent": [
+    {
+      "date": "2026-09-12 12:26",
+      "ts": "2026-09-12T19:26:18Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Chrome 152",
+      "system": "macOS 10.15",
+      "screen": "1512px",
+      "first": true
+    },
+    {
+      "date": "2026-09-12 12:26",
+      "ts": "2026-09-12T19:26:53Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Chrome 152",
+      "system": "macOS 10.15",
+      "screen": "1512px",
+      "first": false
+    },
+    {
+      "date": "2026-09-12 12:26",
+      "ts": "2026-09-12T19:26:55Z",
+      "loc": "Illinois, US",
+      "path": "/visitors",
+      "ref": "www.jiajunfan.com",
+      "browser": "Chrome 152",
+      "system": "macOS 10.15",
+      "screen": "1512px",
+      "first": true
+    },
+    {
+      "date": "2026-09-12 10:22",
+      "ts": "2026-09-12T17:22:10Z",
+      "loc": "China",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 26.0",
+      "system": "iOS 18.7",
+      "screen": "1800px",
+      "first": true
+    },
     {
       "date": "2026-09-12 09:10",
       "ts": "2026-09-12T16:10:11Z",
@@ -1430,52 +1474,8 @@
       "system": "macOS 10.15",
       "screen": "1512px",
       "first": false
-    },
-    {
-      "date": "2026-09-11 18:42",
-      "ts": "2026-09-12T01:42:23Z",
-      "loc": "Illinois, US",
-      "path": "/visitors",
-      "ref": "www.jiajunfan.com",
-      "browser": "Chrome 152",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": true
-    },
-    {
-      "date": "2026-09-11 17:13",
-      "ts": "2026-09-12T00:13:43Z",
-      "loc": "Netherlands",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 143",
-      "system": "macOS 10.15",
-      "screen": "800px",
-      "first": true
-    },
-    {
-      "date": "2026-09-11 16:39",
-      "ts": "2026-09-11T23:39:49Z",
-      "loc": "Oregon, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 147",
-      "system": "macOS 10.15",
-      "screen": "800px",
-      "first": true
-    },
-    {
-      "date": "2026-09-11 14:09",
-      "ts": "2026-09-11T21:09:09Z",
-      "loc": "Oregon, US",
-      "path": "/publications",
-      "ref": "",
-      "browser": "Chrome 153",
-      "system": "Linux",
-      "screen": "1280px",
-      "first": true
     }
   ],
-  "_recent_total": 1579,
+  "_recent_total": 1583,
   "_recent_shown": 30
 }
