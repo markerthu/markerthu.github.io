@@ -2,7 +2,7 @@
   "_updated": "2026-09-13",
   "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 631,
+  "_total": 633,
   "_days": 30,
   "_range": "Aug. 14th - Sep. 13th",
   "locations": [
@@ -127,6 +127,14 @@
       "r": 2.08
     },
     {
+      "code": "US",
+      "name": "Missouri, US",
+      "count": 4,
+      "cx": 88.2,
+      "cy": 46.0,
+      "r": 2.08
+    },
+    {
       "code": "BR",
       "name": "Brazil",
       "count": 4,
@@ -152,18 +160,18 @@
     },
     {
       "code": "US",
-      "name": "Missouri, US",
-      "count": 3,
-      "cx": 88.2,
-      "cy": 46.0,
-      "r": 2.04
-    },
-    {
-      "code": "US",
       "name": "Nevada, US",
       "count": 3,
       "cx": 63.9,
       "cy": 45.3,
+      "r": 2.04
+    },
+    {
+      "code": "CN",
+      "name": "China",
+      "count": 3,
+      "cx": 285.7,
+      "cy": 46.7,
       "r": 2.04
     },
     {
@@ -236,14 +244,6 @@
       "count": 2,
       "cx": 313.2,
       "cy": 107.8,
-      "r": 2.0
-    },
-    {
-      "code": "CN",
-      "name": "China",
-      "count": 2,
-      "cx": 285.7,
-      "cy": 46.7,
       "r": 2.0
     },
     {
@@ -443,7 +443,7 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 562
+      "count": 563
     },
     {
       "code": "SG",
@@ -486,6 +486,11 @@
       "count": 4
     },
     {
+      "code": "CN",
+      "name": "China",
+      "count": 3
+    },
+    {
       "code": "DE",
       "name": "Germany",
       "count": 3
@@ -513,11 +518,6 @@
     {
       "code": "AU",
       "name": "Australia",
-      "count": 2
-    },
-    {
-      "code": "CN",
-      "name": "China",
       "count": 2
     },
     {
@@ -640,14 +640,14 @@
     {
       "country": "US",
       "country_name": "United States",
-      "name": "Maryland",
-      "count": 3,
+      "name": "Missouri",
+      "count": 4,
       "located": true
     },
     {
       "country": "US",
       "country_name": "United States",
-      "name": "Missouri",
+      "name": "Maryland",
       "count": 3,
       "located": true
     },
@@ -733,7 +733,7 @@
     {
       "path": "/",
       "title": "Jiajun Fan",
-      "count": 258
+      "count": 260
     },
     {
       "path": "/visitors",
@@ -845,7 +845,7 @@
     {
       "name": "(unknown)",
       "id": "",
-      "count": 241
+      "count": 242
     },
     {
       "name": "www.jiajunfan.com",
@@ -855,7 +855,7 @@
     {
       "name": "Google",
       "id": "Google",
-      "count": 77
+      "count": 78
     },
     {
       "name": "www.jiajunfan.com/year-archive",
@@ -962,12 +962,12 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 409
+      "count": 410
     },
     {
       "name": "Safari",
       "id": "Safari",
-      "count": 240
+      "count": 241
     },
     {
       "name": "Firefox",
@@ -984,12 +984,12 @@
     {
       "name": "iOS",
       "id": "iOS",
-      "count": 229
+      "count": 230
     },
     {
       "name": "Windows",
       "id": "Windows",
-      "count": 103
+      "count": 104
     },
     {
       "name": "Linux",
@@ -1130,21 +1130,43 @@
     },
     {
       "day": "2026-09-13",
-      "n": 1
+      "n": 3
     }
   ],
   "periods": {
-    "today": 1,
+    "today": 3,
     "yesterday": 9,
-    "d7": 89,
+    "d7": 91,
     "d7_prev": 214,
-    "d30": 631,
+    "d30": 633,
     "d30_prev": 258,
-    "day_frac": 0.265,
+    "day_frac": 0.435,
     "yesterday_day": "2026-09-12"
   },
-  "_last_visit": "2026-09-13 00:03",
+  "_last_visit": "2026-09-13 07:59",
   "recent": [
+    {
+      "date": "2026-09-13 07:59",
+      "ts": "2026-09-13T14:59:42Z",
+      "loc": "Missouri, US",
+      "path": "/",
+      "ref": "Google",
+      "browser": "Chrome 152",
+      "system": "Windows 10",
+      "screen": "1707px",
+      "first": true
+    },
+    {
+      "date": "2026-09-13 07:30",
+      "ts": "2026-09-13T14:30:10Z",
+      "loc": "China",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 26.0",
+      "system": "iOS 18.7",
+      "screen": "1800px",
+      "first": true
+    },
     {
       "date": "2026-09-13 00:03",
       "ts": "2026-09-13T07:03:56Z",
@@ -1452,30 +1474,8 @@
       "system": "macOS 10.15",
       "screen": "1512px",
       "first": false
-    },
-    {
-      "date": "2026-09-11 19:43",
-      "ts": "2026-09-12T02:43:55Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 152",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": false
-    },
-    {
-      "date": "2026-09-11 19:39",
-      "ts": "2026-09-12T02:39:43Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 152",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": false
     }
   ],
-  "_recent_total": 1588,
+  "_recent_total": 1590,
   "_recent_shown": 30
 }
