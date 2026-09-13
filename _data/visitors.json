@@ -2,7 +2,7 @@
   "_updated": "2026-09-13",
   "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 633,
+  "_total": 636,
   "_days": 30,
   "_range": "Aug. 14th - Sep. 13th",
   "locations": [
@@ -25,10 +25,10 @@
     {
       "code": "US",
       "name": "California, US",
-      "count": 49,
+      "count": 51,
       "cx": 60.0,
       "cy": 46.9,
-      "r": 2.78
+      "r": 2.8
     },
     {
       "code": "US",
@@ -64,18 +64,18 @@
     },
     {
       "code": "US",
+      "name": "Virginia, US",
+      "count": 8,
+      "cx": 101.3,
+      "cy": 46.3,
+      "r": 2.2
+    },
+    {
+      "code": "US",
       "name": "New Jersey, US",
       "count": 7,
       "cx": 105.3,
       "cy": 43.8,
-      "r": 2.17
-    },
-    {
-      "code": "US",
-      "name": "Virginia, US",
-      "count": 7,
-      "cx": 101.3,
-      "cy": 46.3,
       "r": 2.17
     },
     {
@@ -443,7 +443,7 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 563
+      "count": 566
     },
     {
       "code": "SG",
@@ -585,7 +585,7 @@
       "country": "US",
       "country_name": "United States",
       "name": "California",
-      "count": 49,
+      "count": 51,
       "located": true
     },
     {
@@ -612,14 +612,14 @@
     {
       "country": "US",
       "country_name": "United States",
-      "name": "New Jersey",
-      "count": 7,
+      "name": "Virginia",
+      "count": 8,
       "located": true
     },
     {
       "country": "US",
       "country_name": "United States",
-      "name": "Virginia",
+      "name": "New Jersey",
       "count": 7,
       "located": true
     },
@@ -743,12 +743,12 @@
     {
       "path": "/publications",
       "title": "Publications — Jiajun Fan",
-      "count": 67
+      "count": 68
     },
     {
       "path": "/cv",
       "title": "CV — Jiajun Fan",
-      "count": 61
+      "count": 62
     },
     {
       "path": "/year-archive",
@@ -791,14 +791,14 @@
       "count": 12
     },
     {
-      "path": "/publication/2025-06-03-ProteinZero",
-      "title": "ProteinZero: Self-Improving Protein Generation via Online Reinforcement Learning - Jiajun Fan",
+      "path": "/contact",
+      "title": "Contact - Jiajun Fan",
       "count": 7
     },
     {
-      "path": "/contact",
-      "title": "Contact - Jiajun Fan",
-      "count": 6
+      "path": "/publication/2025-06-03-ProteinZero",
+      "title": "ProteinZero: Self-Improving Protein Generation via Online Reinforcement Learning - Jiajun Fan",
+      "count": 7
     },
     {
       "path": "/projects/orw-cfm-w2",
@@ -845,7 +845,7 @@
     {
       "name": "(unknown)",
       "id": "",
-      "count": 242
+      "count": 244
     },
     {
       "name": "www.jiajunfan.com",
@@ -880,7 +880,7 @@
     {
       "name": "www.jiajunfan.com/publications",
       "id": "www.jiajunfan.com/publications",
-      "count": 9
+      "count": 10
     },
     {
       "name": "chatgpt.com",
@@ -962,12 +962,12 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 410
+      "count": 411
     },
     {
       "name": "Safari",
       "id": "Safari",
-      "count": 241
+      "count": 243
     },
     {
       "name": "Firefox",
@@ -984,12 +984,12 @@
     {
       "name": "iOS",
       "id": "iOS",
-      "count": 230
+      "count": 232
     },
     {
       "name": "Windows",
       "id": "Windows",
-      "count": 104
+      "count": 105
     },
     {
       "name": "Linux",
@@ -1130,21 +1130,54 @@
     },
     {
       "day": "2026-09-13",
-      "n": 3
+      "n": 6
     }
   ],
   "periods": {
-    "today": 3,
+    "today": 6,
     "yesterday": 9,
-    "d7": 91,
+    "d7": 94,
     "d7_prev": 214,
-    "d30": 633,
+    "d30": 636,
     "d30_prev": 258,
-    "day_frac": 0.435,
+    "day_frac": 0.644,
     "yesterday_day": "2026-09-12"
   },
-  "_last_visit": "2026-09-13 07:59",
+  "_last_visit": "2026-09-13 14:31",
   "recent": [
+    {
+      "date": "2026-09-13 14:31",
+      "ts": "2026-09-13T21:31:28Z",
+      "loc": "Virginia, US",
+      "path": "/contact",
+      "ref": "",
+      "browser": "Chrome 148",
+      "system": "Windows 10",
+      "screen": "1800px",
+      "first": true
+    },
+    {
+      "date": "2026-09-13 13:57",
+      "ts": "2026-09-13T20:57:28Z",
+      "loc": "California, US",
+      "path": "/publications",
+      "ref": "",
+      "browser": "Safari 26.6",
+      "system": "iOS 18.7",
+      "screen": "402px",
+      "first": true
+    },
+    {
+      "date": "2026-09-13 13:57",
+      "ts": "2026-09-13T20:57:34Z",
+      "loc": "California, US",
+      "path": "/cv",
+      "ref": "www.jiajunfan.com/publications",
+      "browser": "Safari 26.6",
+      "system": "iOS 18.7",
+      "screen": "402px",
+      "first": true
+    },
     {
       "date": "2026-09-13 07:59",
       "ts": "2026-09-13T14:59:42Z",
@@ -1441,41 +1474,8 @@
       "system": "macOS 10.15",
       "screen": "1512px",
       "first": false
-    },
-    {
-      "date": "2026-09-11 21:16",
-      "ts": "2026-09-12T04:16:50Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 152",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": false
-    },
-    {
-      "date": "2026-09-11 21:13",
-      "ts": "2026-09-12T04:13:52Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 152",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": false
-    },
-    {
-      "date": "2026-09-11 20:11",
-      "ts": "2026-09-12T03:11:43Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 152",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": false
     }
   ],
-  "_recent_total": 1590,
+  "_recent_total": 1593,
   "_recent_shown": 30
 }
