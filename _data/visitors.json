@@ -2,14 +2,14 @@
   "_updated": "2026-09-16",
   "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 617,
+  "_total": 620,
   "_days": 30,
   "_range": "Aug. 17th - Sep. 16th",
   "locations": [
     {
       "code": "US",
       "name": "Illinois, US",
-      "count": 306,
+      "count": 307,
       "cx": 90.8,
       "cy": 44.6,
       "r": 4.2
@@ -25,10 +25,10 @@
     {
       "code": "US",
       "name": "California, US",
-      "count": 46,
+      "count": 47,
       "cx": 60.0,
       "cy": 46.9,
-      "r": 2.73
+      "r": 2.74
     },
     {
       "code": "US",
@@ -52,7 +52,7 @@
       "count": 12,
       "cx": 316.0,
       "cy": 48.3,
-      "r": 2.28
+      "r": 2.27
     },
     {
       "code": "US",
@@ -183,6 +183,14 @@
       "r": 2.04
     },
     {
+      "code": "US",
+      "name": "Texas, US",
+      "count": 3,
+      "cx": 81.4,
+      "cy": 52.8,
+      "r": 2.04
+    },
+    {
       "code": "DE",
       "name": "Germany",
       "count": 3,
@@ -228,14 +236,6 @@
       "count": 2,
       "cx": 93.6,
       "cy": 38.6,
-      "r": 1.99
-    },
-    {
-      "code": "US",
-      "name": "Texas, US",
-      "count": 2,
-      "cx": 81.4,
-      "cy": 52.8,
       "r": 1.99
     },
     {
@@ -435,7 +435,7 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 534
+      "count": 537
     },
     {
       "code": "SG",
@@ -563,7 +563,7 @@
       "country": "US",
       "country_name": "United States",
       "name": "Illinois",
-      "count": 306,
+      "count": 307,
       "located": true
     },
     {
@@ -577,7 +577,7 @@
       "country": "US",
       "country_name": "United States",
       "name": "California",
-      "count": 46,
+      "count": 47,
       "located": true
     },
     {
@@ -660,6 +660,13 @@
     {
       "country": "US",
       "country_name": "United States",
+      "name": "Texas",
+      "count": 3,
+      "located": true
+    },
+    {
+      "country": "US",
+      "country_name": "United States",
       "name": "Georgia",
       "count": 2,
       "located": true
@@ -668,13 +675,6 @@
       "country": "US",
       "country_name": "United States",
       "name": "Michigan",
-      "count": 2,
-      "located": true
-    },
-    {
-      "country": "US",
-      "country_name": "United States",
-      "name": "Texas",
       "count": 2,
       "located": true
     },
@@ -739,7 +739,7 @@
     {
       "path": "/",
       "title": "Jiajun Fan",
-      "count": 255
+      "count": 257
     },
     {
       "path": "/visitors",
@@ -804,7 +804,7 @@
     {
       "path": "/publication/2025-06-03-ProteinZero",
       "title": "ProteinZero: Self-Improving Protein Generation via Online Reinforcement Learning - Jiajun Fan",
-      "count": 6
+      "count": 7
     },
     {
       "path": "/projects/orw-cfm-w2",
@@ -856,7 +856,7 @@
     {
       "name": "(unknown)",
       "id": "",
-      "count": 245
+      "count": 247
     },
     {
       "name": "www.jiajunfan.com",
@@ -866,7 +866,7 @@
     {
       "name": "Google",
       "id": "Google",
-      "count": 77
+      "count": 78
     },
     {
       "name": "www.jiajunfan.com/year-archive",
@@ -973,12 +973,12 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 391
+      "count": 392
     },
     {
       "name": "Safari",
       "id": "Safari",
-      "count": 235
+      "count": 237
     },
     {
       "name": "Firefox",
@@ -990,17 +990,17 @@
     {
       "name": "macOS",
       "id": "macOS",
-      "count": 280
+      "count": 281
     },
     {
       "name": "iOS",
       "id": "iOS",
-      "count": 219
+      "count": 220
     },
     {
       "name": "Windows",
       "id": "Windows",
-      "count": 101
+      "count": 102
     },
     {
       "name": "Linux",
@@ -1141,21 +1141,65 @@
     },
     {
       "day": "2026-09-16",
-      "n": 2
+      "n": 5
     }
   ],
   "periods": {
-    "today": 2,
+    "today": 5,
     "yesterday": 17,
-    "d7": 81,
+    "d7": 84,
     "d7_prev": 134,
-    "d30": 617,
+    "d30": 620,
     "d30_prev": 306,
-    "day_frac": 0.274,
+    "day_frac": 0.468,
     "yesterday_day": "2026-09-15"
   },
-  "_last_visit": "2026-09-16 02:27",
+  "_last_visit": "2026-09-16 11:02",
   "recent": [
+    {
+      "date": "2026-09-16 11:02",
+      "ts": "2026-09-16T18:02:17Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": true
+    },
+    {
+      "date": "2026-09-16 11:02",
+      "ts": "2026-09-16T18:02:24Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": false
+    },
+    {
+      "date": "2026-09-16 09:06",
+      "ts": "2026-09-16T16:06:25Z",
+      "loc": "Texas, US",
+      "path": "/publication/2025-06-03-ProteinZero",
+      "ref": "Google",
+      "browser": "Safari 26.2",
+      "system": "macOS 10.15",
+      "screen": "2880px",
+      "first": true
+    },
+    {
+      "date": "2026-09-16 09:01",
+      "ts": "2026-09-16T16:01:57Z",
+      "loc": "California, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Chrome 149",
+      "system": "Windows 10",
+      "screen": "1536px",
+      "first": true
+    },
     {
       "date": "2026-09-16 02:27",
       "ts": "2026-09-16T09:27:23Z",
@@ -1441,52 +1485,8 @@
       "system": "macOS 10.15",
       "screen": "1280px",
       "first": false
-    },
-    {
-      "date": "2026-09-15 16:36",
-      "ts": "2026-09-15T23:36:48Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "Google",
-      "browser": "Safari 18.6",
-      "system": "macOS 10.15",
-      "screen": "1470px",
-      "first": true
-    },
-    {
-      "date": "2026-09-15 16:30",
-      "ts": "2026-09-15T23:30:51Z",
-      "loc": "Kentucky, US",
-      "path": "/year-archive",
-      "ref": "www.jiajunfan.com",
-      "browser": "Chrome 151",
-      "system": "macOS 10.15",
-      "screen": "1280px",
-      "first": true
-    },
-    {
-      "date": "2026-09-15 16:28",
-      "ts": "2026-09-15T23:28:33Z",
-      "loc": "Kentucky, US",
-      "path": "/",
-      "ref": "www.bing.com",
-      "browser": "Chrome 151",
-      "system": "macOS 10.15",
-      "screen": "1280px",
-      "first": true
-    },
-    {
-      "date": "2026-09-15 15:26",
-      "ts": "2026-09-15T22:26:34Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 152",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": false
     }
   ],
-  "_recent_total": 1667,
+  "_recent_total": 1671,
   "_recent_shown": 30
 }
