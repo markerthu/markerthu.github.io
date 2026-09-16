@@ -2,14 +2,14 @@
   "_updated": "2026-09-16",
   "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 620,
+  "_total": 622,
   "_days": 30,
   "_range": "Aug. 17th - Sep. 16th",
   "locations": [
     {
       "code": "US",
       "name": "Illinois, US",
-      "count": 307,
+      "count": 308,
       "cx": 90.8,
       "cy": 44.6,
       "r": 4.2
@@ -104,19 +104,19 @@
     },
     {
       "code": "US",
+      "name": "Massachusetts, US",
+      "count": 6,
+      "cx": 108.5,
+      "cy": 41.8,
+      "r": 2.13
+    },
+    {
+      "code": "US",
       "name": "New Jersey, US",
       "count": 6,
       "cx": 105.3,
       "cy": 43.8,
-      "r": 2.14
-    },
-    {
-      "code": "US",
-      "name": "Massachusetts, US",
-      "count": 5,
-      "cx": 108.5,
-      "cy": 41.8,
-      "r": 2.11
+      "r": 2.13
     },
     {
       "code": "US",
@@ -435,7 +435,7 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 537
+      "count": 539
     },
     {
       "code": "SG",
@@ -563,7 +563,7 @@
       "country": "US",
       "country_name": "United States",
       "name": "Illinois",
-      "count": 307,
+      "count": 308,
       "located": true
     },
     {
@@ -611,15 +611,15 @@
     {
       "country": "US",
       "country_name": "United States",
-      "name": "New Jersey",
+      "name": "Massachusetts",
       "count": 6,
       "located": true
     },
     {
       "country": "US",
       "country_name": "United States",
-      "name": "Massachusetts",
-      "count": 5,
+      "name": "New Jersey",
+      "count": 6,
       "located": true
     },
     {
@@ -744,7 +744,7 @@
     {
       "path": "/visitors",
       "title": "Visitors — Jiajun Fan",
-      "count": 70
+      "count": 71
     },
     {
       "path": "/publications",
@@ -809,7 +809,7 @@
     {
       "path": "/projects/orw-cfm-w2",
       "title": "ORW-CFM-W2 — Flow Matching RLHF | ICLR 2025",
-      "count": 4
+      "count": 5
     },
     {
       "path": "/blog/reading-papers",
@@ -861,7 +861,7 @@
     {
       "name": "www.jiajunfan.com",
       "id": "www.jiajunfan.com",
-      "count": 170
+      "count": 171
     },
     {
       "name": "Google",
@@ -896,7 +896,7 @@
     {
       "name": "www.bing.com",
       "id": "www.bing.com",
-      "count": 5
+      "count": 6
     },
     {
       "name": "chatgpt.com",
@@ -973,12 +973,12 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 392
+      "count": 393
     },
     {
       "name": "Safari",
       "id": "Safari",
-      "count": 237
+      "count": 238
     },
     {
       "name": "Firefox",
@@ -995,12 +995,12 @@
     {
       "name": "iOS",
       "id": "iOS",
-      "count": 220
+      "count": 221
     },
     {
       "name": "Windows",
       "id": "Windows",
-      "count": 102
+      "count": 103
     },
     {
       "name": "Linux",
@@ -1141,21 +1141,120 @@
     },
     {
       "day": "2026-09-16",
-      "n": 5
+      "n": 7
     }
   ],
   "periods": {
-    "today": 5,
+    "today": 7,
     "yesterday": 17,
-    "d7": 84,
+    "d7": 86,
     "d7_prev": 134,
-    "d30": 620,
+    "d30": 622,
     "d30_prev": 306,
-    "day_frac": 0.468,
+    "day_frac": 0.667,
     "yesterday_day": "2026-09-15"
   },
-  "_last_visit": "2026-09-16 11:02",
+  "_last_visit": "2026-09-16 15:55",
   "recent": [
+    {
+      "date": "2026-09-16 15:55",
+      "ts": "2026-09-16T22:55:21Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": false
+    },
+    {
+      "date": "2026-09-16 15:55",
+      "ts": "2026-09-16T22:55:28Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": false
+    },
+    {
+      "date": "2026-09-16 15:55",
+      "ts": "2026-09-16T22:55:34Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": false
+    },
+    {
+      "date": "2026-09-16 15:55",
+      "ts": "2026-09-16T22:55:39Z",
+      "loc": "Illinois, US",
+      "path": "/visitors",
+      "ref": "www.jiajunfan.com",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": false
+    },
+    {
+      "date": "2026-09-16 13:33",
+      "ts": "2026-09-16T20:33:01Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": false
+    },
+    {
+      "date": "2026-09-16 12:38",
+      "ts": "2026-09-16T19:38:30Z",
+      "loc": "Massachusetts, US",
+      "path": "/projects/orw-cfm-w2",
+      "ref": "www.bing.com",
+      "browser": "Chrome 153",
+      "system": "Windows 10",
+      "screen": "2561px",
+      "first": true
+    },
+    {
+      "date": "2026-09-16 12:11",
+      "ts": "2026-09-16T19:11:08Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": false
+    },
+    {
+      "date": "2026-09-16 12:11",
+      "ts": "2026-09-16T19:11:11Z",
+      "loc": "Illinois, US",
+      "path": "/visitors",
+      "ref": "www.jiajunfan.com",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": true
+    },
+    {
+      "date": "2026-09-16 12:11",
+      "ts": "2026-09-16T19:11:52Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": false
+    },
     {
       "date": "2026-09-16 11:02",
       "ts": "2026-09-16T18:02:17Z",
@@ -1386,107 +1485,8 @@
       "system": "Windows 10",
       "screen": "1920px",
       "first": false
-    },
-    {
-      "date": "2026-09-15 19:47",
-      "ts": "2026-09-16T02:47:26Z",
-      "loc": "Japan",
-      "path": "/",
-      "ref": "www.bing.com",
-      "browser": "Chrome 153",
-      "system": "Windows 10",
-      "screen": "1920px",
-      "first": false
-    },
-    {
-      "date": "2026-09-15 19:46",
-      "ts": "2026-09-16T02:46:42Z",
-      "loc": "Japan",
-      "path": "/projects/cesar",
-      "ref": "www.jiajunfan.com/cv",
-      "browser": "Chrome 153",
-      "system": "Windows 10",
-      "screen": "1920px",
-      "first": true
-    },
-    {
-      "date": "2026-09-15 19:45",
-      "ts": "2026-09-16T02:45:07Z",
-      "loc": "Japan",
-      "path": "/",
-      "ref": "www.bing.com",
-      "browser": "Chrome 153",
-      "system": "Windows 10",
-      "screen": "1920px",
-      "first": true
-    },
-    {
-      "date": "2026-09-15 19:45",
-      "ts": "2026-09-16T02:45:46Z",
-      "loc": "Japan",
-      "path": "/cv",
-      "ref": "www.jiajunfan.com",
-      "browser": "Chrome 153",
-      "system": "Windows 10",
-      "screen": "1920px",
-      "first": true
-    },
-    {
-      "date": "2026-09-15 19:29",
-      "ts": "2026-09-16T02:29:06Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 152",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": false
-    },
-    {
-      "date": "2026-09-15 19:29",
-      "ts": "2026-09-16T02:29:10Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "scholar.google.com",
-      "browser": "Chrome 152",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": false
-    },
-    {
-      "date": "2026-09-15 18:57",
-      "ts": "2026-09-16T01:57:18Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 152",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": false
-    },
-    {
-      "date": "2026-09-15 17:28",
-      "ts": "2026-09-16T00:28:19Z",
-      "loc": "Illinois, US",
-      "path": "/visitors",
-      "ref": "www.jiajunfan.com",
-      "browser": "Chrome 152",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": false
-    },
-    {
-      "date": "2026-09-15 16:55",
-      "ts": "2026-09-15T23:55:05Z",
-      "loc": "Kentucky, US",
-      "path": "/",
-      "ref": "www.bing.com",
-      "browser": "Chrome 151",
-      "system": "macOS 10.15",
-      "screen": "1280px",
-      "first": false
     }
   ],
-  "_recent_total": 1671,
+  "_recent_total": 1680,
   "_recent_shown": 30
 }
