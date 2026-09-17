@@ -2,7 +2,7 @@
   "_updated": "2026-09-16",
   "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 622,
+  "_total": 623,
   "_days": 30,
   "_range": "Aug. 17th - Sep. 16th",
   "locations": [
@@ -744,7 +744,7 @@
     {
       "path": "/visitors",
       "title": "Visitors — Jiajun Fan",
-      "count": 71
+      "count": 72
     },
     {
       "path": "/publications",
@@ -861,7 +861,7 @@
     {
       "name": "www.jiajunfan.com",
       "id": "www.jiajunfan.com",
-      "count": 171
+      "count": 172
     },
     {
       "name": "Google",
@@ -1141,21 +1141,32 @@
     },
     {
       "day": "2026-09-16",
-      "n": 7
+      "n": 8
     }
   ],
   "periods": {
-    "today": 7,
+    "today": 8,
     "yesterday": 17,
-    "d7": 86,
+    "d7": 87,
     "d7_prev": 134,
-    "d30": 622,
+    "d30": 623,
     "d30_prev": 306,
-    "day_frac": 0.667,
+    "day_frac": 0.772,
     "yesterday_day": "2026-09-15"
   },
-  "_last_visit": "2026-09-16 15:55",
+  "_last_visit": "2026-09-16 17:38",
   "recent": [
+    {
+      "date": "2026-09-16 17:38",
+      "ts": "2026-09-17T00:38:39Z",
+      "loc": "Illinois, US",
+      "path": "/visitors",
+      "ref": "www.jiajunfan.com",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": true
+    },
     {
       "date": "2026-09-16 15:55",
       "ts": "2026-09-16T22:55:21Z",
@@ -1474,19 +1485,8 @@
       "system": "Windows 10",
       "screen": "1920px",
       "first": false
-    },
-    {
-      "date": "2026-09-15 19:58",
-      "ts": "2026-09-16T02:58:25Z",
-      "loc": "Japan",
-      "path": "/",
-      "ref": "www.bing.com",
-      "browser": "Chrome 153",
-      "system": "Windows 10",
-      "screen": "1920px",
-      "first": false
     }
   ],
-  "_recent_total": 1680,
+  "_recent_total": 1681,
   "_recent_shown": 30
 }
