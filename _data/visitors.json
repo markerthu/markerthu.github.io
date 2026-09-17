@@ -2,7 +2,7 @@
   "_updated": "2026-09-17",
   "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 616,
+  "_total": 619,
   "_days": 30,
   "_range": "Aug. 18th - Sep. 17th",
   "locations": [
@@ -25,10 +25,10 @@
     {
       "code": "US",
       "name": "California, US",
-      "count": 52,
+      "count": 53,
       "cx": 60.0,
       "cy": 46.9,
-      "r": 2.78
+      "r": 2.79
     },
     {
       "code": "US",
@@ -72,6 +72,14 @@
     },
     {
       "code": "US",
+      "name": "Massachusetts, US",
+      "count": 7,
+      "cx": 108.5,
+      "cy": 41.8,
+      "r": 2.16
+    },
+    {
+      "code": "US",
       "name": "New Jersey, US",
       "count": 7,
       "cx": 105.3,
@@ -109,14 +117,6 @@
       "cx": 185.5,
       "cy": 31.9,
       "r": 2.16
-    },
-    {
-      "code": "US",
-      "name": "Massachusetts, US",
-      "count": 6,
-      "cx": 108.5,
-      "cy": 41.8,
-      "r": 2.13
     },
     {
       "code": "TW",
@@ -327,6 +327,14 @@
       "r": 1.94
     },
     {
+      "code": "CH",
+      "name": "Switzerland",
+      "count": 1,
+      "cx": 188.3,
+      "cy": 37.2,
+      "r": 1.94
+    },
+    {
       "code": "CO",
       "name": "Colombia",
       "count": 1,
@@ -435,7 +443,7 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 539
+      "count": 541
     },
     {
       "code": "SG",
@@ -523,6 +531,11 @@
       "count": 1
     },
     {
+      "code": "CH",
+      "name": "Switzerland",
+      "count": 1
+    },
+    {
       "code": "CO",
       "name": "Colombia",
       "count": 1
@@ -551,11 +564,6 @@
       "code": "IN",
       "name": "India",
       "count": 1
-    },
-    {
-      "code": "IQ",
-      "name": "Iraq",
-      "count": 1
     }
   ],
   "regions": [
@@ -577,7 +585,7 @@
       "country": "US",
       "country_name": "United States",
       "name": "California",
-      "count": 52,
+      "count": 53,
       "located": true
     },
     {
@@ -604,6 +612,13 @@
     {
       "country": "US",
       "country_name": "United States",
+      "name": "Massachusetts",
+      "count": 7,
+      "located": true
+    },
+    {
+      "country": "US",
+      "country_name": "United States",
       "name": "New Jersey",
       "count": 7,
       "located": true
@@ -613,13 +628,6 @@
       "country_name": "United States",
       "name": "Virginia",
       "count": 7,
-      "located": true
-    },
-    {
-      "country": "US",
-      "country_name": "United States",
-      "name": "Massachusetts",
-      "count": 6,
       "located": true
     },
     {
@@ -739,7 +747,7 @@
     {
       "path": "/",
       "title": "Jiajun Fan",
-      "count": 257
+      "count": 259
     },
     {
       "path": "/visitors",
@@ -754,7 +762,7 @@
     {
       "path": "/cv",
       "title": "CV — Jiajun Fan",
-      "count": 57
+      "count": 58
     },
     {
       "path": "/year-archive",
@@ -851,7 +859,7 @@
     {
       "name": "(unknown)",
       "id": "",
-      "count": 244
+      "count": 245
     },
     {
       "name": "www.jiajunfan.com",
@@ -861,7 +869,7 @@
     {
       "name": "Google",
       "id": "Google",
-      "count": 79
+      "count": 81
     },
     {
       "name": "www.jiajunfan.com/year-archive",
@@ -968,7 +976,7 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 394
+      "count": 397
     },
     {
       "name": "Safari",
@@ -985,7 +993,7 @@
     {
       "name": "macOS",
       "id": "macOS",
-      "count": 280
+      "count": 281
     },
     {
       "name": "iOS",
@@ -995,12 +1003,12 @@
     {
       "name": "Windows",
       "id": "Windows",
-      "count": 104
+      "count": 105
     },
     {
       "name": "Linux",
       "id": "Linux",
-      "count": 18
+      "count": 19
     },
     {
       "name": "Android",
@@ -1136,21 +1144,54 @@
     },
     {
       "day": "2026-09-17",
-      "n": 2
+      "n": 5
     }
   ],
   "periods": {
-    "today": 2,
+    "today": 5,
     "yesterday": 18,
-    "d7": 80,
+    "d7": 83,
     "d7_prev": 119,
-    "d30": 616,
+    "d30": 619,
     "d30_prev": 324,
-    "day_frac": 0.274,
+    "day_frac": 0.472,
     "yesterday_day": "2026-09-16"
   },
-  "_last_visit": "2026-09-17 06:05",
+  "_last_visit": "2026-09-17 10:55",
   "recent": [
+    {
+      "date": "2026-09-17 10:55",
+      "ts": "2026-09-17T17:55:14Z",
+      "loc": "California, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Chrome 138",
+      "system": "Linux",
+      "screen": "3840px",
+      "first": true
+    },
+    {
+      "date": "2026-09-17 07:18",
+      "ts": "2026-09-17T14:18:13Z",
+      "loc": "Massachusetts, US",
+      "path": "/",
+      "ref": "Google",
+      "browser": "Chrome 152",
+      "system": "macOS 10.15",
+      "screen": "1470px",
+      "first": true
+    },
+    {
+      "date": "2026-09-17 06:46",
+      "ts": "2026-09-17T13:46:03Z",
+      "loc": "Switzerland",
+      "path": "/cv",
+      "ref": "Google",
+      "browser": "Chrome 152",
+      "system": "Windows 10",
+      "screen": "1920px",
+      "first": true
+    },
     {
       "date": "2026-09-17 06:05",
       "ts": "2026-09-17T13:05:56Z",
@@ -1447,41 +1488,8 @@
       "system": "iOS 26.6",
       "screen": "430px",
       "first": false
-    },
-    {
-      "date": "2026-09-16 09:06",
-      "ts": "2026-09-16T16:06:25Z",
-      "loc": "Texas, US",
-      "path": "/publication/2025-06-03-ProteinZero",
-      "ref": "Google",
-      "browser": "Safari 26.2",
-      "system": "macOS 10.15",
-      "screen": "2880px",
-      "first": true
-    },
-    {
-      "date": "2026-09-16 09:01",
-      "ts": "2026-09-16T16:01:57Z",
-      "loc": "California, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 149",
-      "system": "Windows 10",
-      "screen": "1536px",
-      "first": true
-    },
-    {
-      "date": "2026-09-16 02:27",
-      "ts": "2026-09-16T09:27:23Z",
-      "loc": "Iowa, US",
-      "path": "/projects/orw-cfm-w2",
-      "ref": "",
-      "browser": "Chrome 153",
-      "system": "Linux",
-      "screen": "1280px",
-      "first": true
     }
   ],
-  "_recent_total": 1696,
+  "_recent_total": 1699,
   "_recent_shown": 30
 }
