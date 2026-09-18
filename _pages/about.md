@@ -167,7 +167,7 @@ body.dark-mode .pub-abst-btn:hover { background: #1e40af; }
 
 /* ── Research grid ── */
 .research-grid {
-  display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-bottom: 1.5em;
+  display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; margin-bottom: 1.5em;
 }
 .research-card {
   background: #fff; border: 1.5px solid #e0e8f0; border-radius: 12px;
@@ -1609,6 +1609,11 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
     <img class="rc-icon-img" loading="lazy" src="/images/icons/ri-superhuman.png" alt="">
     <div class="rc-title">Superhuman-Level Deep RL</div>
     <div class="rc-desc">Sample-efficient RL that exceeds human performance. Broke 24 Atari world records with 78× less data (LBC), and beat Agent57 with 500× less data (GDI).</div>
+  </div>
+  <div class="research-card">
+    <img class="rc-icon-img" loading="lazy" src="/images/icons/ri-rsi.png" alt="">
+    <div class="rc-title">Recursive Self-Improvement (RSI)</div>
+    <div class="rc-desc">Models that keep improving themselves: each improved policy becomes the critic and teacher of its successor, removing human scaffolding from RL post-training step by step.</div>
   </div>
 </div>
 
