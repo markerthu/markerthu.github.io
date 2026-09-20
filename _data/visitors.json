@@ -1,8 +1,8 @@
 {
   "_updated": "2026-09-20",
-  "_timezone": "America/Los_Angeles",
+  "_timezone": "UTC",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 605,
+  "_total": 606,
   "_days": 30,
   "_range": "Aug. 21st - Sep. 20th",
   "locations": [
@@ -65,10 +65,10 @@
     {
       "code": "US",
       "name": "Massachusetts, US",
-      "count": 8,
+      "count": 9,
       "cx": 108.5,
       "cy": 41.8,
-      "r": 2.18
+      "r": 2.2
     },
     {
       "code": "US",
@@ -459,7 +459,7 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 517
+      "count": 518
     },
     {
       "code": "SG",
@@ -622,7 +622,7 @@
       "country": "US",
       "country_name": "United States",
       "name": "Massachusetts",
-      "count": 8,
+      "count": 9,
       "located": true
     },
     {
@@ -763,7 +763,7 @@
     {
       "path": "/",
       "title": "Jiajun Fan",
-      "count": 260
+      "count": 261
     },
     {
       "path": "/publications",
@@ -895,7 +895,7 @@
     {
       "name": "scholar.google.com",
       "id": "scholar.google.com",
-      "count": 25
+      "count": 26
     },
     {
       "name": "www.jiajunfan.com/cv",
@@ -1002,7 +1002,7 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 389
+      "count": 390
     },
     {
       "name": "Safari",
@@ -1029,7 +1029,7 @@
     {
       "name": "Windows",
       "id": "Windows",
-      "count": 110
+      "count": 111
     },
     {
       "name": "Linux",
@@ -1170,23 +1170,45 @@
     },
     {
       "day": "2026-09-20",
-      "n": 2
+      "n": 3
     }
   ],
   "periods": {
-    "today": 2,
+    "today": 3,
     "yesterday": 11,
-    "d7": 87,
+    "d7": 88,
     "d7_prev": 100,
-    "d30": 605,
+    "d30": 606,
     "d30_prev": 382,
-    "day_frac": 0.253,
+    "day_frac": 0.73,
     "yesterday_day": "2026-09-19"
   },
-  "_last_visit": "2026-09-20 02:28",
+  "_last_visit": "2026-09-20 15:25",
   "recent": [
     {
-      "date": "2026-09-20 02:28",
+      "date": "2026-09-20 15:25",
+      "ts": "2026-09-20T15:25:59Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": false
+    },
+    {
+      "date": "2026-09-20 14:29",
+      "ts": "2026-09-20T14:29:45Z",
+      "loc": "Massachusetts, US",
+      "path": "/",
+      "ref": "scholar.google.com",
+      "browser": "Chrome 153",
+      "system": "Windows 10",
+      "screen": "1920px",
+      "first": true
+    },
+    {
+      "date": "2026-09-20 09:28",
       "ts": "2026-09-20T09:28:23Z",
       "loc": "United States",
       "path": "/publications",
@@ -1197,7 +1219,7 @@
       "first": true
     },
     {
-      "date": "2026-09-20 00:53",
+      "date": "2026-09-20 07:53",
       "ts": "2026-09-20T07:53:03Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1208,7 +1230,7 @@
       "first": false
     },
     {
-      "date": "2026-09-20 00:53",
+      "date": "2026-09-20 07:53",
       "ts": "2026-09-20T07:53:04Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1219,7 +1241,7 @@
       "first": false
     },
     {
-      "date": "2026-09-20 00:52",
+      "date": "2026-09-20 07:52",
       "ts": "2026-09-20T07:52:58Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1230,7 +1252,7 @@
       "first": false
     },
     {
-      "date": "2026-09-20 00:40",
+      "date": "2026-09-20 07:40",
       "ts": "2026-09-20T07:40:47Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1241,7 +1263,7 @@
       "first": true
     },
     {
-      "date": "2026-09-20 00:40",
+      "date": "2026-09-20 07:40",
       "ts": "2026-09-20T07:40:51Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1252,7 +1274,7 @@
       "first": false
     },
     {
-      "date": "2026-09-19 23:05",
+      "date": "2026-09-20 06:05",
       "ts": "2026-09-20T06:05:33Z",
       "loc": "Missouri, US",
       "path": "/",
@@ -1263,7 +1285,7 @@
       "first": false
     },
     {
-      "date": "2026-09-19 22:07",
+      "date": "2026-09-20 05:07",
       "ts": "2026-09-20T05:07:09Z",
       "loc": "Missouri, US",
       "path": "/",
@@ -1274,7 +1296,7 @@
       "first": false
     },
     {
-      "date": "2026-09-19 22:06",
+      "date": "2026-09-20 05:06",
       "ts": "2026-09-20T05:06:10Z",
       "loc": "Missouri, US",
       "path": "/",
@@ -1285,7 +1307,7 @@
       "first": true
     },
     {
-      "date": "2026-09-19 18:07",
+      "date": "2026-09-20 01:07",
       "ts": "2026-09-20T01:07:32Z",
       "loc": "Georgia, US",
       "path": "/",
@@ -1296,7 +1318,7 @@
       "first": true
     },
     {
-      "date": "2026-09-19 16:56",
+      "date": "2026-09-19 23:56",
       "ts": "2026-09-19T23:56:37Z",
       "loc": "Oregon, US",
       "path": "/",
@@ -1307,7 +1329,7 @@
       "first": true
     },
     {
-      "date": "2026-09-19 13:27",
+      "date": "2026-09-19 20:27",
       "ts": "2026-09-19T20:27:08Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1318,7 +1340,7 @@
       "first": false
     },
     {
-      "date": "2026-09-19 13:05",
+      "date": "2026-09-19 20:05",
       "ts": "2026-09-19T20:05:17Z",
       "loc": "Illinois, US",
       "path": "/year-archive",
@@ -1329,7 +1351,7 @@
       "first": true
     },
     {
-      "date": "2026-09-19 13:05",
+      "date": "2026-09-19 20:05",
       "ts": "2026-09-19T20:05:19Z",
       "loc": "Illinois, US",
       "path": "/cv",
@@ -1340,7 +1362,7 @@
       "first": false
     },
     {
-      "date": "2026-09-19 13:03",
+      "date": "2026-09-19 20:03",
       "ts": "2026-09-19T20:03:40Z",
       "loc": "Illinois, US",
       "path": "/cv",
@@ -1351,7 +1373,7 @@
       "first": true
     },
     {
-      "date": "2026-09-19 13:03",
+      "date": "2026-09-19 20:03",
       "ts": "2026-09-19T20:03:42Z",
       "loc": "Illinois, US",
       "path": "/cv",
@@ -1362,7 +1384,7 @@
       "first": false
     },
     {
-      "date": "2026-09-19 12:32",
+      "date": "2026-09-19 19:32",
       "ts": "2026-09-19T19:32:00Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1373,7 +1395,7 @@
       "first": true
     },
     {
-      "date": "2026-09-19 12:32",
+      "date": "2026-09-19 19:32",
       "ts": "2026-09-19T19:32:06Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1384,7 +1406,7 @@
       "first": false
     },
     {
-      "date": "2026-09-19 09:27",
+      "date": "2026-09-19 16:27",
       "ts": "2026-09-19T16:27:52Z",
       "loc": "Australia",
       "path": "/",
@@ -1395,7 +1417,7 @@
       "first": true
     },
     {
-      "date": "2026-09-19 04:20",
+      "date": "2026-09-19 11:20",
       "ts": "2026-09-19T11:20:56Z",
       "loc": "United Kingdom",
       "path": "/publications",
@@ -1406,7 +1428,7 @@
       "first": true
     },
     {
-      "date": "2026-09-19 03:01",
+      "date": "2026-09-19 10:01",
       "ts": "2026-09-19T10:01:09Z",
       "loc": "California, US",
       "path": "/",
@@ -1417,7 +1439,7 @@
       "first": true
     },
     {
-      "date": "2026-09-19 03:01",
+      "date": "2026-09-19 10:01",
       "ts": "2026-09-19T10:01:36Z",
       "loc": "California, US",
       "path": "/publication/2026-05-28-ElegantVLA",
@@ -1428,7 +1450,7 @@
       "first": false
     },
     {
-      "date": "2026-09-19 03:00",
+      "date": "2026-09-19 10:00",
       "ts": "2026-09-19T10:00:57Z",
       "loc": "California, US",
       "path": "/publication/2026-05-28-ElegantVLA",
@@ -1439,7 +1461,7 @@
       "first": true
     },
     {
-      "date": "2026-09-19 01:52",
+      "date": "2026-09-19 08:52",
       "ts": "2026-09-19T08:52:45Z",
       "loc": "Finland",
       "path": "/projects/cesar",
@@ -1450,7 +1472,7 @@
       "first": true
     },
     {
-      "date": "2026-09-19 01:21",
+      "date": "2026-09-19 08:21",
       "ts": "2026-09-19T08:21:54Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1461,7 +1483,7 @@
       "first": false
     },
     {
-      "date": "2026-09-18 23:40",
+      "date": "2026-09-19 06:40",
       "ts": "2026-09-19T06:40:56Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1472,7 +1494,7 @@
       "first": true
     },
     {
-      "date": "2026-09-18 20:01",
+      "date": "2026-09-19 03:01",
       "ts": "2026-09-19T03:01:20Z",
       "loc": "California, US",
       "path": "/",
@@ -1483,7 +1505,7 @@
       "first": true
     },
     {
-      "date": "2026-09-18 19:42",
+      "date": "2026-09-19 02:42",
       "ts": "2026-09-19T02:42:48Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1492,30 +1514,8 @@
       "system": "macOS 10.15",
       "screen": "1512px",
       "first": false
-    },
-    {
-      "date": "2026-09-18 19:05",
-      "ts": "2026-09-19T02:05:30Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 152",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": true
-    },
-    {
-      "date": "2026-09-18 16:59",
-      "ts": "2026-09-18T23:59:11Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": true
     }
   ],
-  "_recent_total": 1785,
+  "_recent_total": 1787,
   "_recent_shown": 30
 }
