@@ -1188,7 +1188,7 @@ body.dark-mode .pillar-tag { background: #1c2333; color: #58a6ff; }
 
 <!-- Intro -->
 <p class="tagline">
-I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <strong>multimodal large generative/agentic models with reinforcement learning</strong> in a way that is <strong>stable</strong> (<strong>e.g., lifelong continual learning</strong>) — avoiding the diversity and performance collapse that RL fine-tuning tends to cause — and <strong>progressively autonomous</strong> (<strong>e.g., recursive self-improvement, RSI</strong>), step by step taking the human out of the loop: first the collected data, then the labels, and finally the hand-designed rewards. That work spans these domains:
+I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <strong>multimodal large generative/agentic models with reinforcement learning</strong> in a way that is <strong>stable</strong> (<strong>e.g., lifelong continual learning</strong>) — avoiding the diversity and performance collapse that RL fine-tuning tends to cause — and <strong>progressively autonomous</strong> (<strong>e.g., recursive self-improvement, RSI</strong>), step by step taking the human out of the loop: first human data collection, then human labelling and hyper-parameter tuning, and finally hand-designed rewards. That work spans these domains:
 </p>
 
 
