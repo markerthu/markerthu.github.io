@@ -2,14 +2,14 @@
   "_updated": "2026-09-23",
   "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 608,
+  "_total": 609,
   "_days": 30,
   "_range": "Aug. 24th - Sep. 23rd",
   "locations": [
     {
       "code": "US",
       "name": "Illinois, US",
-      "count": 324,
+      "count": 325,
       "cx": 90.8,
       "cy": 44.6,
       "r": 4.2
@@ -435,7 +435,7 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 527
+      "count": 528
     },
     {
       "code": "SG",
@@ -563,7 +563,7 @@
       "country": "US",
       "country_name": "United States",
       "name": "Illinois",
-      "count": 324,
+      "count": 325,
       "located": true
     },
     {
@@ -725,7 +725,7 @@
     {
       "path": "/",
       "title": "Jiajun Fan",
-      "count": 261
+      "count": 262
     },
     {
       "path": "/publications",
@@ -837,7 +837,7 @@
     {
       "name": "(unknown)",
       "id": "",
-      "count": 257
+      "count": 258
     },
     {
       "name": "www.jiajunfan.com",
@@ -964,7 +964,7 @@
     {
       "name": "Safari",
       "id": "Safari",
-      "count": 212
+      "count": 213
     },
     {
       "name": "Firefox",
@@ -981,7 +981,7 @@
     {
       "name": "iOS",
       "id": "iOS",
-      "count": 196
+      "count": 197
     },
     {
       "name": "Windows",
@@ -1127,21 +1127,32 @@
     },
     {
       "day": "2026-09-23",
-      "n": 2
+      "n": 3
     }
   ],
   "periods": {
-    "today": 2,
+    "today": 3,
     "yesterday": 10,
-    "d7": 91,
+    "d7": 92,
     "d7_prev": 97,
-    "d30": 608,
+    "d30": 609,
     "d30_prev": 421,
-    "day_frac": 0.035,
+    "day_frac": 0.279,
     "yesterday_day": "2026-09-22"
   },
-  "_last_visit": "2026-09-23 00:13",
+  "_last_visit": "2026-09-23 01:28",
   "recent": [
+    {
+      "date": "2026-09-23 01:28",
+      "ts": "2026-09-23T08:28:10Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": true
+    },
     {
       "date": "2026-09-23 00:13",
       "ts": "2026-09-23T07:13:52Z",
@@ -1460,19 +1471,8 @@
       "system": "macOS 10.15",
       "screen": "1512px",
       "first": false
-    },
-    {
-      "date": "2026-09-21 17:28",
-      "ts": "2026-09-22T00:28:08Z",
-      "loc": "Oregon, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 147",
-      "system": "macOS 10.15",
-      "screen": "800px",
-      "first": true
     }
   ],
-  "_recent_total": 1857,
+  "_recent_total": 1858,
   "_recent_shown": 30
 }
