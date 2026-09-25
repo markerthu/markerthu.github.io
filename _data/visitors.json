@@ -2,7 +2,7 @@
   "_updated": "2026-09-25",
   "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 563,
+  "_total": 564,
   "_days": 30,
   "_range": "Aug. 26th - Sep. 25th",
   "locations": [
@@ -33,10 +33,10 @@
     {
       "code": "US",
       "name": "Oregon, US",
-      "count": 21,
+      "count": 22,
       "cx": 59.2,
       "cy": 39.7,
-      "r": 2.4
+      "r": 2.42
     },
     {
       "code": "US",
@@ -443,7 +443,7 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 505
+      "count": 506
     },
     {
       "code": "JP",
@@ -592,7 +592,7 @@
       "country": "US",
       "country_name": "United States",
       "name": "Oregon",
-      "count": 21,
+      "count": 22,
       "located": true
     },
     {
@@ -768,7 +768,7 @@
     {
       "path": "/posts/2026/08/speechgym-voice-agent-rl",
       "title": "Voice Agents Could Be Ranked, Never Improved. We Closed the Loop. — Jiajun Fan",
-      "count": 13
+      "count": 14
     },
     {
       "path": "/publication/2026-07-08-Procedure-Aware-RL",
@@ -850,7 +850,7 @@
     {
       "name": "(unknown)",
       "id": "",
-      "count": 247
+      "count": 248
     },
     {
       "name": "www.jiajunfan.com",
@@ -977,7 +977,7 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 396
+      "count": 397
     },
     {
       "name": "Safari",
@@ -1009,7 +1009,7 @@
     {
       "name": "Linux",
       "id": "Linux",
-      "count": 29
+      "count": 30
     },
     {
       "name": "Android",
@@ -1140,21 +1140,32 @@
     },
     {
       "day": "2026-09-25",
-      "n": 6
+      "n": 7
     }
   ],
   "periods": {
-    "today": 6,
+    "today": 7,
     "yesterday": 18,
-    "d7": 95,
+    "d7": 96,
     "d7_prev": 95,
-    "d30": 563,
+    "d30": 564,
     "d30_prev": 503,
-    "day_frac": 0.488,
+    "day_frac": 0.681,
     "yesterday_day": "2026-09-24"
   },
-  "_last_visit": "2026-09-25 10:33",
+  "_last_visit": "2026-09-25 12:28",
   "recent": [
+    {
+      "date": "2026-09-25 12:28",
+      "ts": "2026-09-25T19:28:29Z",
+      "loc": "Oregon, US",
+      "path": "/posts/2026/08/speechgym-voice-agent-rl",
+      "ref": "",
+      "browser": "Chrome 154",
+      "system": "Linux",
+      "screen": "1280px",
+      "first": true
+    },
     {
       "date": "2026-09-25 10:33",
       "ts": "2026-09-25T17:33:07Z",
@@ -1473,19 +1484,8 @@
       "system": "macOS 10.15",
       "screen": "1512px",
       "first": true
-    },
-    {
-      "date": "2026-09-24 00:38",
-      "ts": "2026-09-24T07:38:29Z",
-      "loc": "Taiwan",
-      "path": "/",
-      "ref": "scholar.google.com",
-      "browser": "Chrome 153",
-      "system": "macOS 10.15",
-      "screen": "1440px",
-      "first": true
     }
   ],
-  "_recent_total": 1912,
+  "_recent_total": 1913,
   "_recent_shown": 30
 }
