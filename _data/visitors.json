@@ -2,7 +2,7 @@
   "_updated": "2026-09-27",
   "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 546,
+  "_total": 547,
   "_days": 30,
   "_range": "Aug. 28th - Sep. 27th",
   "locations": [
@@ -191,6 +191,14 @@
       "r": 2.04
     },
     {
+      "code": "BD",
+      "name": "Bangladesh",
+      "count": 3,
+      "cx": 270.6,
+      "cy": 60.6,
+      "r": 2.04
+    },
+    {
       "code": "US",
       "name": "Michigan, US",
       "count": 2,
@@ -204,14 +212,6 @@
       "count": 2,
       "cx": 102.5,
       "cy": 43.0,
-      "r": 2.0
-    },
-    {
-      "code": "BD",
-      "name": "Bangladesh",
-      "count": 2,
-      "cx": 270.6,
-      "cy": 60.6,
       "r": 2.0
     },
     {
@@ -446,14 +446,14 @@
       "count": 4
     },
     {
-      "code": "SC",
-      "name": "Seychelles",
+      "code": "BD",
+      "name": "Bangladesh",
       "count": 3
     },
     {
-      "code": "BD",
-      "name": "Bangladesh",
-      "count": 2
+      "code": "SC",
+      "name": "Seychelles",
+      "count": 3
     },
     {
       "code": "DE",
@@ -713,7 +713,7 @@
     {
       "path": "/posts/2026/08/read-the-mind-audio-llm",
       "title": "For the First Time, We Can See an Audio LLM’s Brain Map and Consciousness Space — Jiajun Fan",
-      "count": 24
+      "count": 25
     },
     {
       "path": "/year-archive",
@@ -820,7 +820,7 @@
     {
       "name": "Google",
       "id": "Google",
-      "count": 73
+      "count": 74
     },
     {
       "name": "www.jiajunfan.com/year-archive",
@@ -937,7 +937,7 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 367
+      "count": 368
     },
     {
       "name": "Safari",
@@ -964,7 +964,7 @@
     {
       "name": "Windows",
       "id": "Windows",
-      "count": 100
+      "count": 101
     },
     {
       "name": "Linux",
@@ -1100,21 +1100,32 @@
     },
     {
       "day": "2026-09-27",
-      "n": 3
+      "n": 4
     }
   ],
   "periods": {
-    "today": 3,
+    "today": 4,
     "yesterday": 9,
-    "d7": 91,
+    "d7": 92,
     "d7_prev": 98,
-    "d30": 546,
+    "d30": 547,
     "d30_prev": 540,
-    "day_frac": 0.362,
+    "day_frac": 0.551,
     "yesterday_day": "2026-09-26"
   },
-  "_last_visit": "2026-09-27 05:46",
+  "_last_visit": "2026-09-27 12:04",
   "recent": [
+    {
+      "date": "2026-09-27 12:04",
+      "ts": "2026-09-27T19:04:41Z",
+      "loc": "Bangladesh",
+      "path": "/posts/2026/08/read-the-mind-audio-llm",
+      "ref": "Google",
+      "browser": "Chrome 153",
+      "system": "Windows 10",
+      "screen": "1920px",
+      "first": true
+    },
     {
       "date": "2026-09-27 05:46",
       "ts": "2026-09-27T12:46:36Z",
@@ -1433,19 +1444,8 @@
       "system": "macOS 10.15",
       "screen": "1512px",
       "first": false
-    },
-    {
-      "date": "2026-09-25 16:56",
-      "ts": "2026-09-25T23:56:08Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 152",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": true
     }
   ],
-  "_recent_total": 1944,
+  "_recent_total": 1945,
   "_recent_shown": 30
 }
