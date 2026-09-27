@@ -2,7 +2,7 @@
   "_updated": "2026-09-26",
   "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 560,
+  "_total": 563,
   "_days": 30,
   "_range": "Aug. 27th - Sep. 26th",
   "locations": [
@@ -25,10 +25,10 @@
     {
       "code": "US",
       "name": "Oregon, US",
-      "count": 22,
+      "count": 23,
       "cx": 59.2,
       "cy": 39.7,
-      "r": 2.44
+      "r": 2.46
     },
     {
       "code": "US",
@@ -63,19 +63,19 @@
       "r": 2.28
     },
     {
+      "code": "NL",
+      "name": "Netherlands",
+      "count": 11,
+      "cx": 185.5,
+      "cy": 31.9,
+      "r": 2.26
+    },
+    {
       "code": "US",
       "name": "Massachusetts, US",
       "count": 10,
       "cx": 108.5,
       "cy": 41.8,
-      "r": 2.23
-    },
-    {
-      "code": "NL",
-      "name": "Netherlands",
-      "count": 10,
-      "cx": 185.5,
-      "cy": 31.9,
       "r": 2.23
     },
     {
@@ -435,7 +435,7 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 475
+      "count": 476
     },
     {
       "code": "JP",
@@ -455,7 +455,7 @@
     {
       "code": "NL",
       "name": "Netherlands",
-      "count": 10
+      "count": 11
     },
     {
       "code": "HK",
@@ -577,7 +577,7 @@
       "country": "US",
       "country_name": "United States",
       "name": "Oregon",
-      "count": 22,
+      "count": 23,
       "located": true
     },
     {
@@ -725,7 +725,7 @@
     {
       "path": "/",
       "title": "Jiajun Fan",
-      "count": 259
+      "count": 260
     },
     {
       "path": "/visitors",
@@ -760,7 +760,7 @@
     {
       "path": "/posts/2026/08/speechgym-voice-agent-rl",
       "title": "Voice Agents Could Be Ranked, Never Improved. We Closed the Loop. — Jiajun Fan",
-      "count": 14
+      "count": 16
     },
     {
       "path": "/publication/2026-07-08-Procedure-Aware-RL",
@@ -842,7 +842,7 @@
     {
       "name": "(unknown)",
       "id": "",
-      "count": 248
+      "count": 251
     },
     {
       "name": "www.jiajunfan.com",
@@ -969,7 +969,7 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 373
+      "count": 375
     },
     {
       "name": "Safari",
@@ -986,7 +986,7 @@
     {
       "name": "macOS",
       "id": "macOS",
-      "count": 257
+      "count": 259
     },
     {
       "name": "iOS",
@@ -1132,21 +1132,54 @@
     },
     {
       "day": "2026-09-26",
-      "n": 6
+      "n": 9
     }
   ],
   "periods": {
-    "today": 6,
+    "today": 9,
     "yesterday": 14,
-    "d7": 98,
+    "d7": 101,
     "d7_prev": 97,
-    "d30": 560,
+    "d30": 563,
     "d30_prev": 523,
-    "day_frac": 0.665,
+    "day_frac": 0.773,
     "yesterday_day": "2026-09-25"
   },
-  "_last_visit": "2026-09-26 15:34",
+  "_last_visit": "2026-09-26 17:50",
   "recent": [
+    {
+      "date": "2026-09-26 17:50",
+      "ts": "2026-09-27T00:50:20Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": true
+    },
+    {
+      "date": "2026-09-26 16:52",
+      "ts": "2026-09-26T23:52:39Z",
+      "loc": "Netherlands",
+      "path": "/posts/2026/08/speechgym-voice-agent-rl",
+      "ref": "",
+      "browser": "Chrome 143",
+      "system": "macOS 10.15",
+      "screen": "800px",
+      "first": true
+    },
+    {
+      "date": "2026-09-26 16:08",
+      "ts": "2026-09-26T23:08:13Z",
+      "loc": "Oregon, US",
+      "path": "/posts/2026/08/speechgym-voice-agent-rl",
+      "ref": "",
+      "browser": "Chrome 147",
+      "system": "macOS 10.15",
+      "screen": "800px",
+      "first": true
+    },
     {
       "date": "2026-09-26 15:34",
       "ts": "2026-09-26T22:34:25Z",
@@ -1443,41 +1476,8 @@
       "system": "iOS 26.6",
       "screen": "430px",
       "first": true
-    },
-    {
-      "date": "2026-09-25 02:23",
-      "ts": "2026-09-25T09:23:36Z",
-      "loc": "Illinois, US",
-      "path": "/visitors",
-      "ref": "www.jiajunfan.com",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": false
-    },
-    {
-      "date": "2026-09-25 02:22",
-      "ts": "2026-09-25T09:22:04Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": true
-    },
-    {
-      "date": "2026-09-25 01:03",
-      "ts": "2026-09-25T08:03:36Z",
-      "loc": "Hong Kong",
-      "path": "/projects/cesar",
-      "ref": "gemini.google.com",
-      "browser": "Chrome 153",
-      "system": "Windows 10",
-      "screen": "1707px",
-      "first": true
     }
   ],
-  "_recent_total": 1935,
+  "_recent_total": 1938,
   "_recent_shown": 30
 }
