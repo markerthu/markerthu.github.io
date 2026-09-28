@@ -1,15 +1,15 @@
 {
   "_updated": "2026-09-28",
-  "_timezone": "UTC",
+  "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 538,
+  "_total": 542,
   "_days": 30,
   "_range": "Aug. 29th - Sep. 28th",
   "locations": [
     {
       "code": "US",
       "name": "Illinois, US",
-      "count": 300,
+      "count": 302,
       "cx": 90.8,
       "cy": 44.6,
       "r": 4.2
@@ -41,10 +41,10 @@
     {
       "code": "US",
       "name": "Virginia, US",
-      "count": 13,
+      "count": 15,
       "cx": 101.3,
       "cy": 46.3,
-      "r": 2.3
+      "r": 2.33
     },
     {
       "code": "SG",
@@ -395,7 +395,7 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 467
+      "count": 471
     },
     {
       "code": "SG",
@@ -523,7 +523,7 @@
       "country": "US",
       "country_name": "United States",
       "name": "Illinois",
-      "count": 300,
+      "count": 302,
       "located": true
     },
     {
@@ -551,7 +551,7 @@
       "country": "US",
       "country_name": "United States",
       "name": "Virginia",
-      "count": 13,
+      "count": 15,
       "located": true
     },
     {
@@ -685,12 +685,12 @@
     {
       "path": "/",
       "title": "Jiajun Fan",
-      "count": 250
+      "count": 251
     },
     {
       "path": "/visitors",
       "title": "Visitors — Jiajun Fan",
-      "count": 52
+      "count": 53
     },
     {
       "path": "/publications",
@@ -700,7 +700,7 @@
     {
       "path": "/cv",
       "title": "CV — Jiajun Fan",
-      "count": 44
+      "count": 45
     },
     {
       "path": "/posts/2026/08/read-the-mind-audio-llm",
@@ -708,13 +708,13 @@
       "count": 25
     },
     {
-      "path": "/projects/cesar",
-      "title": "CESAR — Audio LLM Reasoning | ICLR 2026",
-      "count": 19
-    },
-    {
       "path": "/year-archive",
       "title": "Blog - Jiajun Fan",
+      "count": 20
+    },
+    {
+      "path": "/projects/cesar",
+      "title": "CESAR — Audio LLM Reasoning | ICLR 2026",
       "count": 19
     },
     {
@@ -802,12 +802,12 @@
     {
       "name": "(unknown)",
       "id": "",
-      "count": 247
+      "count": 250
     },
     {
       "name": "www.jiajunfan.com",
       "id": "www.jiajunfan.com",
-      "count": 123
+      "count": 124
     },
     {
       "name": "Google",
@@ -929,7 +929,7 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 358
+      "count": 362
     },
     {
       "name": "Safari",
@@ -946,7 +946,7 @@
     {
       "name": "macOS",
       "id": "macOS",
-      "count": 244
+      "count": 246
     },
     {
       "name": "iOS",
@@ -956,7 +956,7 @@
     {
       "name": "Windows",
       "id": "Windows",
-      "count": 100
+      "count": 102
     },
     {
       "name": "Linux",
@@ -1092,23 +1092,100 @@
     },
     {
       "day": "2026-09-28",
-      "n": 2
+      "n": 6
     }
   ],
   "periods": {
-    "today": 2,
+    "today": 6,
     "yesterday": 11,
-    "d7": 79,
+    "d7": 83,
     "d7_prev": 114,
-    "d30": 538,
+    "d30": 542,
     "d30_prev": 561,
-    "day_frac": 0.366,
+    "day_frac": 0.485,
     "yesterday_day": "2026-09-27"
   },
-  "_last_visit": "2026-09-28 08:30",
+  "_last_visit": "2026-09-28 11:20",
   "recent": [
     {
-      "date": "2026-09-28 08:30",
+      "date": "2026-09-28 11:20",
+      "ts": "2026-09-28T18:20:11Z",
+      "loc": "Illinois, US",
+      "path": "/visitors",
+      "ref": "www.jiajunfan.com",
+      "browser": "Chrome 152",
+      "system": "macOS 10.15",
+      "screen": "1512px",
+      "first": true
+    },
+    {
+      "date": "2026-09-28 11:16",
+      "ts": "2026-09-28T18:16:16Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Chrome 152",
+      "system": "macOS 10.15",
+      "screen": "1512px",
+      "first": true
+    },
+    {
+      "date": "2026-09-28 05:48",
+      "ts": "2026-09-28T12:48:16Z",
+      "loc": "Virginia, US",
+      "path": "/cv",
+      "ref": "",
+      "browser": "Chrome 148",
+      "system": "Windows 10",
+      "screen": "1800px",
+      "first": true
+    },
+    {
+      "date": "2026-09-28 04:44",
+      "ts": "2026-09-28T11:44:49Z",
+      "loc": "Virginia, US",
+      "path": "/year-archive",
+      "ref": "",
+      "browser": "Chrome 148",
+      "system": "Windows 10",
+      "screen": "1800px",
+      "first": true
+    },
+    {
+      "date": "2026-09-28 03:35",
+      "ts": "2026-09-28T10:35:09Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": false
+    },
+    {
+      "date": "2026-09-28 02:32",
+      "ts": "2026-09-28T09:32:31Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": false
+    },
+    {
+      "date": "2026-09-28 02:32",
+      "ts": "2026-09-28T09:32:37Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": false
+    },
+    {
+      "date": "2026-09-28 01:30",
       "ts": "2026-09-28T08:30:01Z",
       "loc": "California, US",
       "path": "/",
@@ -1119,7 +1196,7 @@
       "first": true
     },
     {
-      "date": "2026-09-28 08:30",
+      "date": "2026-09-28 01:30",
       "ts": "2026-09-28T08:30:03Z",
       "loc": "California, US",
       "path": "/cv",
@@ -1130,7 +1207,7 @@
       "first": true
     },
     {
-      "date": "2026-09-28 06:35",
+      "date": "2026-09-27 23:35",
       "ts": "2026-09-28T06:35:21Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1141,7 +1218,7 @@
       "first": false
     },
     {
-      "date": "2026-09-28 06:33",
+      "date": "2026-09-27 23:33",
       "ts": "2026-09-28T06:33:35Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1152,7 +1229,7 @@
       "first": false
     },
     {
-      "date": "2026-09-28 05:28",
+      "date": "2026-09-27 22:28",
       "ts": "2026-09-28T05:28:42Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1163,7 +1240,7 @@
       "first": false
     },
     {
-      "date": "2026-09-28 05:28",
+      "date": "2026-09-27 22:28",
       "ts": "2026-09-28T05:28:43Z",
       "loc": "Illinois, US",
       "path": "/visitors",
@@ -1174,7 +1251,7 @@
       "first": true
     },
     {
-      "date": "2026-09-28 05:13",
+      "date": "2026-09-27 22:13",
       "ts": "2026-09-28T05:13:41Z",
       "loc": "Singapore",
       "path": "/",
@@ -1185,7 +1262,7 @@
       "first": true
     },
     {
-      "date": "2026-09-28 04:29",
+      "date": "2026-09-27 21:29",
       "ts": "2026-09-28T04:29:46Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1196,7 +1273,7 @@
       "first": false
     },
     {
-      "date": "2026-09-28 03:41",
+      "date": "2026-09-27 20:41",
       "ts": "2026-09-28T03:41:36Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1207,7 +1284,7 @@
       "first": true
     },
     {
-      "date": "2026-09-28 03:21",
+      "date": "2026-09-27 20:21",
       "ts": "2026-09-28T03:21:22Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1218,7 +1295,7 @@
       "first": true
     },
     {
-      "date": "2026-09-28 00:13",
+      "date": "2026-09-27 17:13",
       "ts": "2026-09-28T00:13:19Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1229,7 +1306,7 @@
       "first": true
     },
     {
-      "date": "2026-09-27 23:20",
+      "date": "2026-09-27 16:20",
       "ts": "2026-09-27T23:20:21Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1240,7 +1317,7 @@
       "first": true
     },
     {
-      "date": "2026-09-27 23:20",
+      "date": "2026-09-27 16:20",
       "ts": "2026-09-27T23:20:22Z",
       "loc": "Illinois, US",
       "path": "/visitors",
@@ -1251,7 +1328,7 @@
       "first": true
     },
     {
-      "date": "2026-09-27 23:20",
+      "date": "2026-09-27 16:20",
       "ts": "2026-09-27T23:20:29Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1262,7 +1339,7 @@
       "first": false
     },
     {
-      "date": "2026-09-27 19:04",
+      "date": "2026-09-27 12:04",
       "ts": "2026-09-27T19:04:41Z",
       "loc": "Bangladesh",
       "path": "/posts/2026/08/read-the-mind-audio-llm",
@@ -1273,7 +1350,7 @@
       "first": true
     },
     {
-      "date": "2026-09-27 12:46",
+      "date": "2026-09-27 05:46",
       "ts": "2026-09-27T12:46:36Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1284,7 +1361,7 @@
       "first": false
     },
     {
-      "date": "2026-09-27 12:46",
+      "date": "2026-09-27 05:46",
       "ts": "2026-09-27T12:46:41Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1295,7 +1372,7 @@
       "first": true
     },
     {
-      "date": "2026-09-27 10:53",
+      "date": "2026-09-27 03:53",
       "ts": "2026-09-27T10:53:00Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1306,7 +1383,7 @@
       "first": false
     },
     {
-      "date": "2026-09-27 10:53",
+      "date": "2026-09-27 03:53",
       "ts": "2026-09-27T10:53:07Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1317,7 +1394,7 @@
       "first": false
     },
     {
-      "date": "2026-09-27 10:53",
+      "date": "2026-09-27 03:53",
       "ts": "2026-09-27T10:53:08Z",
       "loc": "Illinois, US",
       "path": "/visitors",
@@ -1328,7 +1405,7 @@
       "first": true
     },
     {
-      "date": "2026-09-27 10:52",
+      "date": "2026-09-27 03:52",
       "ts": "2026-09-27T10:52:58Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1339,7 +1416,7 @@
       "first": true
     },
     {
-      "date": "2026-09-27 00:50",
+      "date": "2026-09-26 17:50",
       "ts": "2026-09-27T00:50:20Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1350,7 +1427,7 @@
       "first": true
     },
     {
-      "date": "2026-09-26 23:52",
+      "date": "2026-09-26 16:52",
       "ts": "2026-09-26T23:52:39Z",
       "loc": "Netherlands",
       "path": "/posts/2026/08/speechgym-voice-agent-rl",
@@ -1359,85 +1436,8 @@
       "system": "macOS 10.15",
       "screen": "800px",
       "first": true
-    },
-    {
-      "date": "2026-09-26 23:08",
-      "ts": "2026-09-26T23:08:13Z",
-      "loc": "Oregon, US",
-      "path": "/posts/2026/08/speechgym-voice-agent-rl",
-      "ref": "",
-      "browser": "Chrome 147",
-      "system": "macOS 10.15",
-      "screen": "800px",
-      "first": true
-    },
-    {
-      "date": "2026-09-26 22:34",
-      "ts": "2026-09-26T22:34:25Z",
-      "loc": "Missouri, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": true
-    },
-    {
-      "date": "2026-09-26 21:36",
-      "ts": "2026-09-26T21:36:27Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": true
-    },
-    {
-      "date": "2026-09-26 19:08",
-      "ts": "2026-09-26T19:08:30Z",
-      "loc": "Singapore",
-      "path": "/projects",
-      "ref": "",
-      "browser": "Chrome 148",
-      "system": "Windows 10",
-      "screen": "1800px",
-      "first": true
-    },
-    {
-      "date": "2026-09-26 15:54",
-      "ts": "2026-09-26T15:54:56Z",
-      "loc": "Singapore",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 153",
-      "system": "macOS 10.15",
-      "screen": "1728px",
-      "first": true
-    },
-    {
-      "date": "2026-09-26 09:07",
-      "ts": "2026-09-26T09:07:06Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 152",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": false
-    },
-    {
-      "date": "2026-09-26 08:13",
-      "ts": "2026-09-26T08:13:00Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 152",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": false
     }
   ],
-  "_recent_total": 1959,
+  "_recent_total": 1966,
   "_recent_shown": 30
 }
