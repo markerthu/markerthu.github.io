@@ -1265,6 +1265,10 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
 <ul class="news-list">
   <li>
     <span class="news-date">Sep 2026</span>
+    <span><span class="nbadge nb-upcoming">Upcoming</span>I will be attending <strong>COLM</strong> in person &mdash; always happy to meet up and talk research or collaboration.</span>
+  </li>
+  <li>
+    <span class="news-date">Sep 2026</span>
     <span><span class="nbadge nb-accept">Accept</span>Multiple papers accepted at <strong>NeurIPS 2026</strong>. See you in Atlanta!</span>
   </li>
   <li>
