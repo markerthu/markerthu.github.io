@@ -76,6 +76,7 @@ body.dark-mode .card-thumb{filter:brightness(.9)}
 .card-header{padding:18px 20px 14px;flex:1}
 .venue-tag{display:inline-block;padding:3px 10px;border-radius:20px;font-family:var(--sans);font-size:0.68em;font-weight:800;letter-spacing:.06em;text-transform:uppercase;margin-bottom:11px}
 .vt-iclr26{background:#1565c0;color:#fff}
+.vt-colm26{background:#00695c;color:#fff}
 .vt-neurips25{background:#6a1b9a;color:#fff}
 .vt-iclr25{background:#1976d2;color:#fff}
 .vt-icml22{background:#b71c1c;color:#fff}
@@ -153,6 +154,23 @@ body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-ima
 
 <div class="year-group"><h2>2026</h2></div>
 <div class="grid">
+  <div class="project-card">
+    <img class="card-thumb" src="/images/featured/parl-concept.jpg" alt="Procedure-Aware RL concept: same tool calls, right order versus wrong order">
+    <div class="card-header">
+      <span class="venue-tag vt-colm26">COLM 2026</span>
+      <h3>Procedure-Aware RL for Tool-Augmented LLMs</h3>
+      <div class="authors">Q. Zheng*, <strong>J. Fan*</strong>, C. Cheng, G. Liu</div>
+    </div>
+    <div class="card-body">
+      <div class="hl-tag"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-rocket.png);mask-image:url(/images/icons/h-rocket.png)"></i>3B model matches far larger proprietary models</div>
+      <p>Rewards the tool-call sequence &mdash; order quality plus final system state &mdash; not just the final answer.</p>
+      <div class="card-links">
+        <a class="cl cl-project" href="/projects/procedure-aware-rl/">Project Page</a>
+        <a class="cl cl-paper" href="https://openreview.net/forum?id=d4wrBuJ4xo">OpenReview</a>
+      </div>
+    </div>
+  </div>
+
   <div class="project-card">
     <img class="card-thumb" src="/images/featured/cesar-ai.jpg" alt="CESAR concept: audio LLM reasoning with process rewards">
     <div class="card-header">

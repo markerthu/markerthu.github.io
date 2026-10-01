@@ -1217,7 +1217,7 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
   <div class="ro-row">
     <div class="ro-dom">Tool-use agents<span>agentic RL</span></div>
     <div class="ro-papers">
-      <span class="ro-p nolink">Procedure-Aware RL <span class="ro-v">COLM 2026</span></span>
+      <a class="ro-p" href="/projects/procedure-aware-rl/">Procedure-Aware RL <span class="ro-v">COLM 2026</span></a>
       <a class="ro-p" href="https://arxiv.org/abs/2605.12975" target="_blank" rel="noopener">PyRAG <span class="ro-v">2026</span></a>
     </div>
   </div>
