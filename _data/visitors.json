@@ -2,14 +2,14 @@
   "_updated": "2026-10-01",
   "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 507,
+  "_total": 511,
   "_days": 30,
   "_range": "Sep. 1st - Oct. 1st",
   "locations": [
     {
       "code": "US",
       "name": "Illinois, US",
-      "count": 303,
+      "count": 305,
       "cx": 90.8,
       "cy": 44.6,
       "r": 4.2
@@ -28,7 +28,7 @@
       "count": 24,
       "cx": 59.2,
       "cy": 39.7,
-      "r": 2.48
+      "r": 2.47
     },
     {
       "code": "SG",
@@ -124,7 +124,7 @@
       "count": 4,
       "cx": 93.3,
       "cy": 45.2,
-      "r": 2.08
+      "r": 2.07
     },
     {
       "code": "US",
@@ -132,7 +132,7 @@
       "count": 4,
       "cx": 88.2,
       "cy": 46.0,
-      "r": 2.08
+      "r": 2.07
     },
     {
       "code": "CN",
@@ -140,7 +140,7 @@
       "count": 4,
       "cx": 296.5,
       "cy": 43.8,
-      "r": 2.08
+      "r": 2.07
     },
     {
       "code": "US",
@@ -228,6 +228,14 @@
       "count": 1,
       "cx": 67.2,
       "cy": 49.5,
+      "r": 1.94
+    },
+    {
+      "code": "US",
+      "name": "Colorado, US",
+      "count": 1,
+      "cx": 74.8,
+      "cy": 44.9,
       "r": 1.94
     },
     {
@@ -375,6 +383,14 @@
       "r": 1.94
     },
     {
+      "code": "SK",
+      "name": "Slovakia",
+      "count": 1,
+      "cx": 199.3,
+      "cy": 35.2,
+      "r": 1.94
+    },
+    {
       "code": "TH",
       "name": "Thailand",
       "count": 1,
@@ -395,7 +411,7 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 471
+      "count": 474
     },
     {
       "code": "SG",
@@ -523,7 +539,7 @@
       "country": "US",
       "country_name": "United States",
       "name": "Illinois",
-      "count": 303,
+      "count": 305,
       "located": true
     },
     {
@@ -655,6 +671,13 @@
     {
       "country": "US",
       "country_name": "United States",
+      "name": "Colorado",
+      "count": 1,
+      "located": true
+    },
+    {
+      "country": "US",
+      "country_name": "United States",
       "name": "Iowa",
       "count": 1,
       "located": true
@@ -692,17 +715,17 @@
     {
       "path": "/",
       "title": "Jiajun Fan",
-      "count": 246
+      "count": 247
     },
     {
       "path": "/visitors",
       "title": "Visitors — Jiajun Fan",
-      "count": 50
+      "count": 51
     },
     {
       "path": "/cv",
       "title": "CV — Jiajun Fan",
-      "count": 43
+      "count": 44
     },
     {
       "path": "/publications",
@@ -785,6 +808,11 @@
       "count": 2
     },
     {
+      "path": "/projects/adrpo",
+      "title": "ADRPO — Adaptive Divergence for Generative Models | NeurIPS 2025",
+      "count": 2
+    },
+    {
       "path": "/publication/2026-05-28-ElegantVLA",
       "title": "ElegantVLA: Learning When to Think for Efficient Vision-Language-Action Models - Jiajun Fan",
       "count": 1
@@ -798,23 +826,18 @@
       "path": "/projects/lbc",
       "title": "LBC — 24 Atari World Records | ICLR 2023 Oral",
       "count": 1
-    },
-    {
-      "path": "/projects/adrpo",
-      "title": "ADRPO — Adaptive Divergence for Generative Models | NeurIPS 2025",
-      "count": 1
     }
   ],
   "referrers": [
     {
       "name": "(unknown)",
       "id": "",
-      "count": 246
+      "count": 248
     },
     {
       "name": "www.jiajunfan.com",
       "id": "www.jiajunfan.com",
-      "count": 111
+      "count": 112
     },
     {
       "name": "Google",
@@ -854,7 +877,7 @@
     {
       "name": "chatgpt.com",
       "id": "chatgpt.com",
-      "count": 4
+      "count": 5
     },
     {
       "name": "iclr.cc",
@@ -936,12 +959,12 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 366
+      "count": 368
     },
     {
       "name": "Safari",
       "id": "Safari",
-      "count": 192
+      "count": 194
     },
     {
       "name": "Firefox",
@@ -953,17 +976,17 @@
     {
       "name": "macOS",
       "id": "macOS",
-      "count": 254
+      "count": 255
     },
     {
       "name": "iOS",
       "id": "iOS",
-      "count": 170
+      "count": 172
     },
     {
       "name": "Windows",
       "id": "Windows",
-      "count": 103
+      "count": 104
     },
     {
       "name": "Linux",
@@ -1099,21 +1122,98 @@
     },
     {
       "day": "2026-10-01",
-      "n": 0
+      "n": 4
     }
   ],
   "periods": {
-    "today": 0,
+    "today": 4,
     "yesterday": 21,
-    "d7": 104,
+    "d7": 108,
     "d7_prev": 106,
-    "d30": 507,
+    "d30": 511,
     "d30_prev": 668,
-    "day_frac": 0.086,
+    "day_frac": 0.433,
     "yesterday_day": "2026-09-30"
   },
-  "_last_visit": "2026-10-01 00:37",
+  "_last_visit": "2026-10-01 10:17",
   "recent": [
+    {
+      "date": "2026-10-01 10:17",
+      "ts": "2026-10-01T17:17:59Z",
+      "loc": "Colorado, US",
+      "path": "/cv",
+      "ref": "",
+      "browser": "Chrome 153",
+      "system": "macOS 10.15",
+      "screen": "1470px",
+      "first": true
+    },
+    {
+      "date": "2026-10-01 06:02",
+      "ts": "2026-10-01T13:02:30Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": false
+    },
+    {
+      "date": "2026-10-01 06:02",
+      "ts": "2026-10-01T13:02:38Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": false
+    },
+    {
+      "date": "2026-10-01 06:02",
+      "ts": "2026-10-01T13:02:40Z",
+      "loc": "Illinois, US",
+      "path": "/visitors",
+      "ref": "www.jiajunfan.com",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": true
+    },
+    {
+      "date": "2026-10-01 04:12",
+      "ts": "2026-10-01T11:12:38Z",
+      "loc": "Slovakia",
+      "path": "/projects/adrpo",
+      "ref": "chatgpt.com",
+      "browser": "Chrome 154",
+      "system": "Windows 10",
+      "screen": "1920px",
+      "first": false
+    },
+    {
+      "date": "2026-10-01 03:50",
+      "ts": "2026-10-01T10:50:50Z",
+      "loc": "Slovakia",
+      "path": "/projects/adrpo",
+      "ref": "chatgpt.com",
+      "browser": "Chrome 154",
+      "system": "Windows 10",
+      "screen": "1920px",
+      "first": true
+    },
+    {
+      "date": "2026-10-01 02:45",
+      "ts": "2026-10-01T09:45:01Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": true
+    },
     {
       "date": "2026-10-01 00:37",
       "ts": "2026-10-01T07:37:52Z",
@@ -1366,85 +1466,8 @@
       "system": "macOS 10.15",
       "screen": "1512px",
       "first": false
-    },
-    {
-      "date": "2026-09-30 20:23",
-      "ts": "2026-10-01T03:23:40Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 152",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": false
-    },
-    {
-      "date": "2026-09-30 20:13",
-      "ts": "2026-10-01T03:13:47Z",
-      "loc": "Illinois, US",
-      "path": "/visitors",
-      "ref": "www.jiajunfan.com",
-      "browser": "Chrome 152",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": true
-    },
-    {
-      "date": "2026-09-30 20:03",
-      "ts": "2026-10-01T03:03:18Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 152",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": false
-    },
-    {
-      "date": "2026-09-30 20:00",
-      "ts": "2026-10-01T03:00:02Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "www.jiajunfan.com/projects/procedure-aware-rl",
-      "browser": "Chrome 152",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": false
-    },
-    {
-      "date": "2026-09-30 19:59",
-      "ts": "2026-10-01T02:59:57Z",
-      "loc": "Illinois, US",
-      "path": "/projects/procedure-aware-rl",
-      "ref": "colm.eventhosts.cc",
-      "browser": "Chrome 152",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": false
-    },
-    {
-      "date": "2026-09-30 19:51",
-      "ts": "2026-10-01T02:51:45Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "Google",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.5",
-      "screen": "393px",
-      "first": false
-    },
-    {
-      "date": "2026-09-30 19:50",
-      "ts": "2026-10-01T02:50:51Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 152",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": false
     }
   ],
-  "_recent_total": 2097,
+  "_recent_total": 2104,
   "_recent_shown": 30
 }
