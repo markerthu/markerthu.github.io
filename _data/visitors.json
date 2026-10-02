@@ -2,7 +2,7 @@
   "_updated": "2026-10-02",
   "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 488,
+  "_total": 490,
   "_days": 30,
   "_range": "Sep. 2nd - Oct. 2nd",
   "locations": [
@@ -143,6 +143,14 @@
       "r": 2.08
     },
     {
+      "code": "HK",
+      "name": "Hong Kong",
+      "count": 4,
+      "cx": 294.2,
+      "cy": 61.7,
+      "r": 2.08
+    },
+    {
       "code": "US",
       "name": "Florida, US",
       "count": 3,
@@ -175,12 +183,12 @@
       "r": 2.05
     },
     {
-      "code": "HK",
-      "name": "Hong Kong",
-      "count": 3,
-      "cx": 294.2,
-      "cy": 61.7,
-      "r": 2.05
+      "code": "US",
+      "name": "Colorado, US",
+      "count": 2,
+      "cx": 74.8,
+      "cy": 44.9,
+      "r": 2.0
     },
     {
       "code": "US",
@@ -228,14 +236,6 @@
       "count": 1,
       "cx": 88.1,
       "cy": 49.3,
-      "r": 1.94
-    },
-    {
-      "code": "US",
-      "name": "Colorado, US",
-      "count": 1,
-      "cx": 74.8,
-      "cy": 44.9,
       "r": 1.94
     },
     {
@@ -387,7 +387,7 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 446
+      "count": 447
     },
     {
       "code": "SG",
@@ -420,13 +420,13 @@
       "count": 5
     },
     {
-      "code": "BD",
-      "name": "Bangladesh",
-      "count": 3
-    },
-    {
       "code": "HK",
       "name": "Hong Kong",
+      "count": 4
+    },
+    {
+      "code": "BD",
+      "name": "Bangladesh",
       "count": 3
     },
     {
@@ -614,6 +614,13 @@
     {
       "country": "US",
       "country_name": "United States",
+      "name": "Colorado",
+      "count": 2,
+      "located": true
+    },
+    {
+      "country": "US",
+      "country_name": "United States",
       "name": "Michigan",
       "count": 2,
       "located": true
@@ -636,13 +643,6 @@
       "country": "US",
       "country_name": "United States",
       "name": "Arkansas",
-      "count": 1,
-      "located": true
-    },
-    {
-      "country": "US",
-      "country_name": "United States",
-      "name": "Colorado",
       "count": 1,
       "located": true
     },
@@ -686,7 +686,7 @@
     {
       "path": "/",
       "title": "Jiajun Fan",
-      "count": 243
+      "count": 244
     },
     {
       "path": "/visitors",
@@ -696,7 +696,7 @@
     {
       "path": "/cv",
       "title": "CV — Jiajun Fan",
-      "count": 42
+      "count": 43
     },
     {
       "path": "/publications",
@@ -803,7 +803,7 @@
     {
       "name": "(unknown)",
       "id": "",
-      "count": 243
+      "count": 244
     },
     {
       "name": "www.jiajunfan.com",
@@ -813,7 +813,7 @@
     {
       "name": "Google",
       "id": "Google",
-      "count": 60
+      "count": 61
     },
     {
       "name": "scholar.google.com",
@@ -925,7 +925,7 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 340
+      "count": 342
     },
     {
       "name": "Safari",
@@ -942,7 +942,7 @@
     {
       "name": "macOS",
       "id": "macOS",
-      "count": 233
+      "count": 234
     },
     {
       "name": "iOS",
@@ -962,7 +962,7 @@
     {
       "name": "Android",
       "id": "Android",
-      "count": 4
+      "count": 5
     }
   ],
   "daily": [
@@ -1088,21 +1088,164 @@
     },
     {
       "day": "2026-10-02",
-      "n": 0
+      "n": 2
     }
   ],
   "periods": {
-    "today": 0,
+    "today": 2,
     "yesterday": 24,
-    "d7": 114,
+    "d7": 116,
     "d7_prev": 103,
-    "d30": 488,
+    "d30": 490,
     "d30_prev": 677,
-    "day_frac": 0.069,
+    "day_frac": 0.404,
     "yesterday_day": "2026-10-01"
   },
-  "_last_visit": "2026-10-02 01:32",
+  "_last_visit": "2026-10-02 07:34",
   "recent": [
+    {
+      "date": "2026-10-02 07:34",
+      "ts": "2026-10-02T14:34:42Z",
+      "loc": "Hong Kong",
+      "path": "/",
+      "ref": "Google",
+      "browser": "Chrome 116",
+      "system": "Android 10",
+      "screen": "374px",
+      "first": true
+    },
+    {
+      "date": "2026-10-02 03:48",
+      "ts": "2026-10-02T10:48:09Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": false
+    },
+    {
+      "date": "2026-10-02 02:43",
+      "ts": "2026-10-02T09:43:39Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Chrome 152",
+      "system": "macOS 10.15",
+      "screen": "1512px",
+      "first": false
+    },
+    {
+      "date": "2026-10-02 02:43",
+      "ts": "2026-10-02T09:43:42Z",
+      "loc": "Illinois, US",
+      "path": "/visitors",
+      "ref": "www.jiajunfan.com",
+      "browser": "Chrome 152",
+      "system": "macOS 10.15",
+      "screen": "1512px",
+      "first": false
+    },
+    {
+      "date": "2026-10-02 02:26",
+      "ts": "2026-10-02T09:26:37Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Chrome 152",
+      "system": "macOS 10.15",
+      "screen": "1512px",
+      "first": false
+    },
+    {
+      "date": "2026-10-02 02:23",
+      "ts": "2026-10-02T09:23:02Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Chrome 152",
+      "system": "macOS 10.15",
+      "screen": "1512px",
+      "first": false
+    },
+    {
+      "date": "2026-10-02 02:20",
+      "ts": "2026-10-02T09:20:07Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Chrome 152",
+      "system": "macOS 10.15",
+      "screen": "1512px",
+      "first": false
+    },
+    {
+      "date": "2026-10-02 02:19",
+      "ts": "2026-10-02T09:19:02Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": false
+    },
+    {
+      "date": "2026-10-02 02:12",
+      "ts": "2026-10-02T09:12:03Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Chrome 152",
+      "system": "macOS 10.15",
+      "screen": "1512px",
+      "first": false
+    },
+    {
+      "date": "2026-10-02 02:12",
+      "ts": "2026-10-02T09:12:03Z",
+      "loc": "Illinois, US",
+      "path": "/visitors",
+      "ref": "www.jiajunfan.com",
+      "browser": "Chrome 152",
+      "system": "macOS 10.15",
+      "screen": "1512px",
+      "first": false
+    },
+    {
+      "date": "2026-10-02 02:12",
+      "ts": "2026-10-02T09:12:13Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "scholar.google.com",
+      "browser": "Chrome 152",
+      "system": "macOS 10.15",
+      "screen": "1512px",
+      "first": false
+    },
+    {
+      "date": "2026-10-02 01:56",
+      "ts": "2026-10-02T08:56:10Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Chrome 152",
+      "system": "macOS 10.15",
+      "screen": "1512px",
+      "first": false
+    },
+    {
+      "date": "2026-10-02 01:50",
+      "ts": "2026-10-02T08:50:28Z",
+      "loc": "Colorado, US",
+      "path": "/cv",
+      "ref": "",
+      "browser": "Chrome 153",
+      "system": "macOS 10.15",
+      "screen": "1470px",
+      "first": true
+    },
     {
       "date": "2026-10-02 01:32",
       "ts": "2026-10-02T08:32:42Z",
@@ -1289,151 +1432,8 @@
       "system": "iOS 26.6",
       "screen": "430px",
       "first": false
-    },
-    {
-      "date": "2026-10-01 18:24",
-      "ts": "2026-10-02T01:24:48Z",
-      "loc": "Illinois, US",
-      "path": "/visitors",
-      "ref": "www.jiajunfan.com",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": false
-    },
-    {
-      "date": "2026-10-01 17:50",
-      "ts": "2026-10-02T00:50:11Z",
-      "loc": "Illinois, US",
-      "path": "/cv",
-      "ref": "www.jiajunfan.com/year-archive",
-      "browser": "Chrome 154",
-      "system": "macOS 10.15",
-      "screen": "2560px",
-      "first": false
-    },
-    {
-      "date": "2026-10-01 17:50",
-      "ts": "2026-10-02T00:50:12Z",
-      "loc": "Illinois, US",
-      "path": "/year-archive",
-      "ref": "www.jiajunfan.com",
-      "browser": "Chrome 154",
-      "system": "macOS 10.15",
-      "screen": "2560px",
-      "first": false
-    },
-    {
-      "date": "2026-10-01 17:50",
-      "ts": "2026-10-02T00:50:12Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "scholar.google.com",
-      "browser": "Chrome 154",
-      "system": "macOS 10.15",
-      "screen": "2560px",
-      "first": false
-    },
-    {
-      "date": "2026-10-01 17:49",
-      "ts": "2026-10-02T00:49:42Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "scholar.google.com",
-      "browser": "Chrome 154",
-      "system": "macOS 10.15",
-      "screen": "2560px",
-      "first": true
-    },
-    {
-      "date": "2026-10-01 17:49",
-      "ts": "2026-10-02T00:49:55Z",
-      "loc": "Illinois, US",
-      "path": "/year-archive",
-      "ref": "www.jiajunfan.com",
-      "browser": "Chrome 154",
-      "system": "macOS 10.15",
-      "screen": "2560px",
-      "first": true
-    },
-    {
-      "date": "2026-10-01 17:49",
-      "ts": "2026-10-02T00:49:57Z",
-      "loc": "Illinois, US",
-      "path": "/cv",
-      "ref": "www.jiajunfan.com/year-archive",
-      "browser": "Chrome 154",
-      "system": "macOS 10.15",
-      "screen": "2560px",
-      "first": true
-    },
-    {
-      "date": "2026-10-01 17:49",
-      "ts": "2026-10-02T00:49:58Z",
-      "loc": "Illinois, US",
-      "path": "/contact",
-      "ref": "www.jiajunfan.com/cv",
-      "browser": "Chrome 154",
-      "system": "macOS 10.15",
-      "screen": "2560px",
-      "first": true
-    },
-    {
-      "date": "2026-10-01 16:52",
-      "ts": "2026-10-01T23:52:16Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": false
-    },
-    {
-      "date": "2026-10-01 16:52",
-      "ts": "2026-10-01T23:52:51Z",
-      "loc": "Illinois, US",
-      "path": "/visitors",
-      "ref": "www.jiajunfan.com",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": false
-    },
-    {
-      "date": "2026-10-01 16:43",
-      "ts": "2026-10-01T23:43:40Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "scholar.google.com",
-      "browser": "Chrome 152",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": true
-    },
-    {
-      "date": "2026-10-01 16:43",
-      "ts": "2026-10-01T23:43:40Z",
-      "loc": "Illinois, US",
-      "path": "/visitors",
-      "ref": "www.jiajunfan.com",
-      "browser": "Chrome 152",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": true
-    },
-    {
-      "date": "2026-10-01 16:03",
-      "ts": "2026-10-01T23:03:22Z",
-      "loc": "Illinois, US",
-      "path": "/visitors",
-      "ref": "www.jiajunfan.com",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": false
     }
   ],
-  "_recent_total": 2142,
+  "_recent_total": 2155,
   "_recent_shown": 30
 }
