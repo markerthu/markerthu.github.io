@@ -2,7 +2,7 @@
   "_updated": "2026-10-03",
   "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 498,
+  "_total": 499,
   "_days": 30,
   "_range": "Sep. 3rd - Oct. 3rd",
   "locations": [
@@ -168,6 +168,14 @@
     },
     {
       "code": "US",
+      "name": "Arkansas, US",
+      "count": 2,
+      "cx": 88.1,
+      "cy": 49.3,
+      "r": 2.0
+    },
+    {
+      "code": "US",
       "name": "Colorado, US",
       "count": 2,
       "cx": 74.8,
@@ -220,14 +228,6 @@
       "count": 1,
       "cx": 67.2,
       "cy": 49.5,
-      "r": 1.94
-    },
-    {
-      "code": "US",
-      "name": "Arkansas, US",
-      "count": 1,
-      "cx": 88.1,
-      "cy": 49.3,
       "r": 1.94
     },
     {
@@ -371,7 +371,7 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 448
+      "count": 449
     },
     {
       "code": "SG",
@@ -581,6 +581,13 @@
     {
       "country": "US",
       "country_name": "United States",
+      "name": "Arkansas",
+      "count": 2,
+      "located": true
+    },
+    {
+      "country": "US",
+      "country_name": "United States",
       "name": "Colorado",
       "count": 2,
       "located": true
@@ -603,13 +610,6 @@
       "country": "US",
       "country_name": "United States",
       "name": "Arizona",
-      "count": 1,
-      "located": true
-    },
-    {
-      "country": "US",
-      "country_name": "United States",
-      "name": "Arkansas",
       "count": 1,
       "located": true
     },
@@ -660,7 +660,7 @@
     {
       "path": "/",
       "title": "Jiajun Fan",
-      "count": 254
+      "count": 255
     },
     {
       "path": "/visitors",
@@ -782,7 +782,7 @@
     {
       "name": "Google",
       "id": "Google",
-      "count": 61
+      "count": 62
     },
     {
       "name": "scholar.google.com",
@@ -899,7 +899,7 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 338
+      "count": 339
     },
     {
       "name": "Safari",
@@ -926,7 +926,7 @@
     {
       "name": "Windows",
       "id": "Windows",
-      "count": 95
+      "count": 96
     },
     {
       "name": "Linux",
@@ -1062,21 +1062,32 @@
     },
     {
       "day": "2026-10-03",
-      "n": 15
+      "n": 16
     }
   ],
   "periods": {
-    "today": 15,
+    "today": 16,
     "yesterday": 30,
-    "d7": 150,
+    "d7": 151,
     "d7_prev": 101,
-    "d30": 498,
+    "d30": 499,
     "d30_prev": 688,
-    "day_frac": 0.272,
+    "day_frac": 0.459,
     "yesterday_day": "2026-10-02"
   },
-  "_last_visit": "2026-10-03 02:51",
+  "_last_visit": "2026-10-03 09:53",
   "recent": [
+    {
+      "date": "2026-10-03 09:53",
+      "ts": "2026-10-03T16:53:02Z",
+      "loc": "Arkansas, US",
+      "path": "/",
+      "ref": "Google",
+      "browser": "Chrome 154",
+      "system": "Windows 10",
+      "screen": "2560px",
+      "first": true
+    },
     {
       "date": "2026-10-03 02:51",
       "ts": "2026-10-03T09:51:32Z",
@@ -1395,19 +1406,8 @@
       "system": "iOS 26.6",
       "screen": "430px",
       "first": false
-    },
-    {
-      "date": "2026-10-03 01:04",
-      "ts": "2026-10-03T08:04:55Z",
-      "loc": "China",
-      "path": "/",
-      "ref": "",
-      "browser": "Safari 26.0",
-      "system": "iOS 18.7",
-      "screen": "1800px",
-      "first": true
     }
   ],
-  "_recent_total": 2254,
+  "_recent_total": 2255,
   "_recent_shown": 30
 }
