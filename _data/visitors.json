@@ -1,15 +1,15 @@
 {
   "_updated": "2026-10-04",
-  "_timezone": "UTC",
+  "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 495,
+  "_total": 500,
   "_days": 30,
   "_range": "Sep. 4th - Oct. 4th",
   "locations": [
     {
       "code": "US",
       "name": "Illinois, US",
-      "count": 284,
+      "count": 287,
       "cx": 90.8,
       "cy": 44.6,
       "r": 4.2
@@ -20,7 +20,7 @@
       "count": 50,
       "cx": 60.0,
       "cy": 46.9,
-      "r": 2.81
+      "r": 2.8
     },
     {
       "code": "US",
@@ -88,6 +88,14 @@
     },
     {
       "code": "US",
+      "name": "Florida, US",
+      "count": 5,
+      "cx": 96.7,
+      "cy": 55.1,
+      "r": 2.12
+    },
+    {
+      "code": "US",
       "name": "Georgia, US",
       "count": 5,
       "cx": 97.0,
@@ -132,14 +140,6 @@
       "count": 3,
       "cx": 88.1,
       "cy": 49.3,
-      "r": 2.05
-    },
-    {
-      "code": "US",
-      "name": "Florida, US",
-      "count": 3,
-      "cx": 96.7,
-      "cy": 55.1,
       "r": 2.05
     },
     {
@@ -339,7 +339,7 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 427
+      "count": 432
     },
     {
       "code": "CN",
@@ -442,7 +442,7 @@
       "country": "US",
       "country_name": "United States",
       "name": "Illinois",
-      "count": 284,
+      "count": 287,
       "located": true
     },
     {
@@ -483,6 +483,13 @@
     {
       "country": "US",
       "country_name": "United States",
+      "name": "Florida",
+      "count": 5,
+      "located": true
+    },
+    {
+      "country": "US",
+      "country_name": "United States",
       "name": "Georgia",
       "count": 5,
       "located": true
@@ -505,13 +512,6 @@
       "country": "US",
       "country_name": "United States",
       "name": "Arkansas",
-      "count": 3,
-      "located": true
-    },
-    {
-      "country": "US",
-      "country_name": "United States",
-      "name": "Florida",
       "count": 3,
       "located": true
     },
@@ -604,12 +604,12 @@
     {
       "path": "/",
       "title": "Jiajun Fan",
-      "count": 255
+      "count": 257
     },
     {
       "path": "/visitors",
       "title": "Visitors — Jiajun Fan",
-      "count": 55
+      "count": 56
     },
     {
       "path": "/cv",
@@ -619,7 +619,7 @@
     {
       "path": "/publications",
       "title": "Publications — Jiajun Fan",
-      "count": 24
+      "count": 25
     },
     {
       "path": "/posts/2026/08/speechgym-voice-agent-rl",
@@ -627,13 +627,13 @@
       "count": 16
     },
     {
-      "path": "/projects/cesar",
-      "title": "CESAR — Audio LLM Reasoning | ICLR 2026",
-      "count": 15
-    },
-    {
       "path": "/projects",
       "title": "Research Projects — Jiajun Fan",
+      "count": 16
+    },
+    {
+      "path": "/projects/cesar",
+      "title": "CESAR — Audio LLM Reasoning | ICLR 2026",
       "count": 15
     },
     {
@@ -716,12 +716,12 @@
     {
       "name": "(unknown)",
       "id": "",
-      "count": 235
+      "count": 238
     },
     {
       "name": "www.jiajunfan.com",
       "id": "www.jiajunfan.com",
-      "count": 109
+      "count": 110
     },
     {
       "name": "Google",
@@ -734,14 +734,14 @@
       "count": 18
     },
     {
-      "name": "www.jiajunfan.com/year-archive",
-      "id": "www.jiajunfan.com/year-archive",
+      "name": "www.jiajunfan.com/projects",
+      "id": "www.jiajunfan.com/projects",
       "count": 12
     },
     {
-      "name": "www.jiajunfan.com/projects",
-      "id": "www.jiajunfan.com/projects",
-      "count": 11
+      "name": "www.jiajunfan.com/year-archive",
+      "id": "www.jiajunfan.com/year-archive",
+      "count": 12
     },
     {
       "name": "www.jiajunfan.com/cv",
@@ -843,12 +843,12 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 314
+      "count": 316
     },
     {
       "name": "Safari",
       "id": "Safari",
-      "count": 191
+      "count": 194
     },
     {
       "name": "Firefox",
@@ -860,12 +860,12 @@
     {
       "name": "macOS",
       "id": "macOS",
-      "count": 226
+      "count": 228
     },
     {
       "name": "iOS",
       "id": "iOS",
-      "count": 174
+      "count": 177
     },
     {
       "name": "Windows",
@@ -1002,7 +1002,7 @@
     },
     {
       "day": "2026-10-03",
-      "n": 24
+      "n": 29
     },
     {
       "day": "2026-10-04",
@@ -1011,18 +1011,139 @@
   ],
   "periods": {
     "today": 0,
-    "yesterday": 24,
-    "d7": 148,
+    "yesterday": 29,
+    "d7": 153,
     "d7_prev": 99,
-    "d30": 495,
+    "d30": 500,
     "d30_prev": 659,
-    "day_frac": 0.114,
+    "day_frac": 0.174,
     "yesterday_day": "2026-10-03"
   },
-  "_last_visit": "2026-10-04 02:37",
+  "_last_visit": "2026-10-03 23:57",
   "recent": [
     {
-      "date": "2026-10-04 02:37",
+      "date": "2026-10-03 23:57",
+      "ts": "2026-10-04T06:57:33Z",
+      "loc": "Florida, US",
+      "path": "/publications",
+      "ref": "www.jiajunfan.com/projects",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "440px",
+      "first": false
+    },
+    {
+      "date": "2026-10-03 23:26",
+      "ts": "2026-10-04T06:26:13Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Chrome 152",
+      "system": "macOS 10.15",
+      "screen": "1512px",
+      "first": true
+    },
+    {
+      "date": "2026-10-03 23:16",
+      "ts": "2026-10-04T06:16:41Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": true
+    },
+    {
+      "date": "2026-10-03 23:12",
+      "ts": "2026-10-04T06:12:47Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": false
+    },
+    {
+      "date": "2026-10-03 22:59",
+      "ts": "2026-10-04T05:59:04Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Chrome 152",
+      "system": "macOS 10.15",
+      "screen": "1512px",
+      "first": false
+    },
+    {
+      "date": "2026-10-03 22:59",
+      "ts": "2026-10-04T05:59:05Z",
+      "loc": "Illinois, US",
+      "path": "/visitors",
+      "ref": "www.jiajunfan.com",
+      "browser": "Chrome 152",
+      "system": "macOS 10.15",
+      "screen": "1512px",
+      "first": true
+    },
+    {
+      "date": "2026-10-03 22:59",
+      "ts": "2026-10-04T05:59:21Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "scholar.google.com",
+      "browser": "Chrome 152",
+      "system": "macOS 10.15",
+      "screen": "1512px",
+      "first": false
+    },
+    {
+      "date": "2026-10-03 22:35",
+      "ts": "2026-10-04T05:35:34Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Chrome 152",
+      "system": "macOS 10.15",
+      "screen": "1512px",
+      "first": false
+    },
+    {
+      "date": "2026-10-03 20:56",
+      "ts": "2026-10-04T03:56:06Z",
+      "loc": "Florida, US",
+      "path": "/publications",
+      "ref": "www.jiajunfan.com/projects",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "440px",
+      "first": true
+    },
+    {
+      "date": "2026-10-03 20:55",
+      "ts": "2026-10-04T03:55:54Z",
+      "loc": "Florida, US",
+      "path": "/projects",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "440px",
+      "first": true
+    },
+    {
+      "date": "2026-10-03 20:05",
+      "ts": "2026-10-04T03:05:28Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Chrome 152",
+      "system": "macOS 10.15",
+      "screen": "1512px",
+      "first": false
+    },
+    {
+      "date": "2026-10-03 19:37",
       "ts": "2026-10-04T02:37:49Z",
       "loc": "Arkansas, US",
       "path": "/",
@@ -1033,7 +1154,7 @@
       "first": true
     },
     {
-      "date": "2026-10-04 00:24",
+      "date": "2026-10-03 17:24",
       "ts": "2026-10-04T00:24:15Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1044,7 +1165,7 @@
       "first": true
     },
     {
-      "date": "2026-10-04 00:20",
+      "date": "2026-10-03 17:20",
       "ts": "2026-10-04T00:20:16Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1055,7 +1176,7 @@
       "first": true
     },
     {
-      "date": "2026-10-03 22:46",
+      "date": "2026-10-03 15:46",
       "ts": "2026-10-03T22:46:21Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1066,7 +1187,7 @@
       "first": true
     },
     {
-      "date": "2026-10-03 21:52",
+      "date": "2026-10-03 14:52",
       "ts": "2026-10-03T21:52:01Z",
       "loc": "Netherlands",
       "path": "/",
@@ -1077,7 +1198,7 @@
       "first": true
     },
     {
-      "date": "2026-10-03 21:42",
+      "date": "2026-10-03 14:42",
       "ts": "2026-10-03T21:42:43Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1088,7 +1209,7 @@
       "first": true
     },
     {
-      "date": "2026-10-03 21:18",
+      "date": "2026-10-03 14:18",
       "ts": "2026-10-03T21:18:56Z",
       "loc": "Oregon, US",
       "path": "/",
@@ -1099,7 +1220,7 @@
       "first": true
     },
     {
-      "date": "2026-10-03 18:36",
+      "date": "2026-10-03 11:36",
       "ts": "2026-10-03T18:36:01Z",
       "loc": "Pennsylvania, US",
       "path": "/",
@@ -1110,7 +1231,7 @@
       "first": true
     },
     {
-      "date": "2026-10-03 16:53",
+      "date": "2026-10-03 09:53",
       "ts": "2026-10-03T16:53:02Z",
       "loc": "Arkansas, US",
       "path": "/",
@@ -1121,7 +1242,7 @@
       "first": true
     },
     {
-      "date": "2026-10-03 09:51",
+      "date": "2026-10-03 02:51",
       "ts": "2026-10-03T09:51:32Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1132,7 +1253,7 @@
       "first": false
     },
     {
-      "date": "2026-10-03 09:47",
+      "date": "2026-10-03 02:47",
       "ts": "2026-10-03T09:47:36Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1143,7 +1264,7 @@
       "first": false
     },
     {
-      "date": "2026-10-03 09:43",
+      "date": "2026-10-03 02:43",
       "ts": "2026-10-03T09:43:00Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1154,7 +1275,7 @@
       "first": false
     },
     {
-      "date": "2026-10-03 09:43",
+      "date": "2026-10-03 02:43",
       "ts": "2026-10-03T09:43:05Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1165,7 +1286,7 @@
       "first": false
     },
     {
-      "date": "2026-10-03 09:38",
+      "date": "2026-10-03 02:38",
       "ts": "2026-10-03T09:38:00Z",
       "loc": "Illinois, US",
       "path": "/posts/2026/08/read-the-mind-audio-llm",
@@ -1176,7 +1297,7 @@
       "first": true
     },
     {
-      "date": "2026-10-03 09:38",
+      "date": "2026-10-03 02:38",
       "ts": "2026-10-03T09:38:05Z",
       "loc": "Illinois, US",
       "path": "/posts/2025/10/inverse-scaling-audio-llms",
@@ -1187,7 +1308,7 @@
       "first": true
     },
     {
-      "date": "2026-10-03 09:38",
+      "date": "2026-10-03 02:38",
       "ts": "2026-10-03T09:38:12Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1198,7 +1319,7 @@
       "first": false
     },
     {
-      "date": "2026-10-03 09:38",
+      "date": "2026-10-03 02:38",
       "ts": "2026-10-03T09:38:42Z",
       "loc": "Illinois, US",
       "path": "/contact",
@@ -1209,7 +1330,7 @@
       "first": true
     },
     {
-      "date": "2026-10-03 09:37",
+      "date": "2026-10-03 02:37",
       "ts": "2026-10-03T09:37:30Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1220,7 +1341,7 @@
       "first": false
     },
     {
-      "date": "2026-10-03 09:37",
+      "date": "2026-10-03 02:37",
       "ts": "2026-10-03T09:37:34Z",
       "loc": "Illinois, US",
       "path": "/visitors",
@@ -1229,129 +1350,8 @@
       "system": "macOS 10.15",
       "screen": "1512px",
       "first": false
-    },
-    {
-      "date": "2026-10-03 09:37",
-      "ts": "2026-10-03T09:37:37Z",
-      "loc": "Illinois, US",
-      "path": "/publications",
-      "ref": "www.jiajunfan.com",
-      "browser": "Chrome 152",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": false
-    },
-    {
-      "date": "2026-10-03 09:37",
-      "ts": "2026-10-03T09:37:39Z",
-      "loc": "Illinois, US",
-      "path": "/projects",
-      "ref": "www.jiajunfan.com",
-      "browser": "Chrome 152",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": true
-    },
-    {
-      "date": "2026-10-03 09:37",
-      "ts": "2026-10-03T09:37:40Z",
-      "loc": "Illinois, US",
-      "path": "/year-archive",
-      "ref": "www.jiajunfan.com/projects",
-      "browser": "Chrome 152",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": false
-    },
-    {
-      "date": "2026-10-03 09:37",
-      "ts": "2026-10-03T09:37:45Z",
-      "loc": "Illinois, US",
-      "path": "/projects/procedure-aware-rl",
-      "ref": "www.jiajunfan.com/projects",
-      "browser": "Chrome 152",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": true
-    },
-    {
-      "date": "2026-10-03 09:37",
-      "ts": "2026-10-03T09:37:49Z",
-      "loc": "Illinois, US",
-      "path": "/projects/cesar",
-      "ref": "www.jiajunfan.com/projects",
-      "browser": "Chrome 152",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": true
-    },
-    {
-      "date": "2026-10-03 09:37",
-      "ts": "2026-10-03T09:37:52Z",
-      "loc": "Illinois, US",
-      "path": "/projects/adrpo",
-      "ref": "www.jiajunfan.com/projects",
-      "browser": "Chrome 152",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": true
-    },
-    {
-      "date": "2026-10-03 09:37",
-      "ts": "2026-10-03T09:37:55Z",
-      "loc": "Illinois, US",
-      "path": "/year-archive",
-      "ref": "www.jiajunfan.com/projects",
-      "browser": "Chrome 152",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": false
-    },
-    {
-      "date": "2026-10-03 09:37",
-      "ts": "2026-10-03T09:37:56Z",
-      "loc": "Illinois, US",
-      "path": "/posts/2026/08/speechgym-voice-agent-rl",
-      "ref": "www.jiajunfan.com/year-archive",
-      "browser": "Chrome 152",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": true
-    },
-    {
-      "date": "2026-10-03 09:35",
-      "ts": "2026-10-03T09:35:00Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 152",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": false
-    },
-    {
-      "date": "2026-10-03 09:28",
-      "ts": "2026-10-03T09:28:09Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 152",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": false
-    },
-    {
-      "date": "2026-10-03 09:26",
-      "ts": "2026-10-03T09:26:31Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 152",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": false
     }
   ],
-  "_recent_total": 2263,
+  "_recent_total": 2274,
   "_recent_shown": 30
 }
