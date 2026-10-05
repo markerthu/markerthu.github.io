@@ -1,4 +1,86 @@
 {
-  "updated": "2026-09-28",
-  "papers": []
+  "updated": "2026-10-05",
+  "papers": [
+    {
+      "id": "2610.02828",
+      "title": "FSPO: Policy-Consistent Risk and Pareto-Feasible Control for Budgeted LLM RL Post-Training",
+      "authors": "Miaobo Hu, Shuhao Hu, Xiaobo Guo et al.",
+      "summary": "Adaptive LLM reinforcement-learning post-training changes multiple training actuators online, including rollout temperature, group size, clipping, KL regularization, verifier allocation, and update bu…",
+      "date": "2026-10-02",
+      "tag": "RL Training",
+      "url": "https://arxiv.org/abs/2610.02828"
+    },
+    {
+      "id": "2610.00948",
+      "title": "GUI-HARVEST: Self-Improving GUI Agents through Evidence-Driven Harness Evolution",
+      "authors": "Geyi Yang, Zikun Qu, Xiang Li et al.",
+      "summary": "The executable harness surrounding a GUI model determines how observations are assembled, actions are executed, and verification, recovery, and termination are controlled. Compared with harness optimi…",
+      "date": "2026-10-01",
+      "tag": "Self-Improvement",
+      "url": "https://arxiv.org/abs/2610.00948"
+    },
+    {
+      "id": "2609.40137",
+      "title": "Game-Guided Skill Discovery through Self-Play for Playable Agent Control",
+      "authors": "Seungeun Rho, Jeonghwan Kim, Xue Bin Peng et al.",
+      "summary": "We present Game-Guided Skill Discovery (GGSD), a framework that uses self-play in games to discover motor skills that are directly playable by humans. Playable skills provide a compact abstraction for…",
+      "date": "2026-09-30",
+      "tag": "Self-Improvement",
+      "url": "https://arxiv.org/abs/2609.40137"
+    },
+    {
+      "id": "2609.39045",
+      "title": "RSIGame: Autonomous Agentic Game Development with Recursive Self-improvement",
+      "authors": "Wenyi Wu, Minghao Fu, Jieyu You et al.",
+      "summary": "Recent advances in large language models have made automatic game generation increasingly feasible, yet reliably improving generated games beyond a playable version remains challenging. Naive iterativ…",
+      "date": "2026-09-30",
+      "tag": "Self-Improvement",
+      "url": "https://arxiv.org/abs/2609.39045"
+    },
+    {
+      "id": "2609.39220",
+      "title": "Learning Process Rewards via Reasoning State Propagation",
+      "authors": "Kai Gan, Zi-Hao Zhou, Bo Ye et al.",
+      "summary": "Process reward models (PRMs) have demonstrated notable effectiveness in test-time scaling and reinforcement learning by providing fine-grained signals for evaluating intermediate reasoning states, but…",
+      "date": "2026-09-30",
+      "tag": "Reasoning",
+      "url": "https://arxiv.org/abs/2609.39220"
+    },
+    {
+      "id": "2609.39847",
+      "title": "SEAR: Spoofing Evidence-Grounded Audio Reasoning Benchmark for Audio Language Models",
+      "authors": "Rong Wan, Suliu Qin, Jiaxi Li et al.",
+      "summary": "Audio language models (ALMs) are increasingly used for audio deepfake detection (ADD), yet existing benchmarks assess their verdicts or rationale plausibility without verifying the underlying acoustic…",
+      "date": "2026-09-30",
+      "tag": "Audio Reasoning",
+      "url": "https://arxiv.org/abs/2609.39847"
+    },
+    {
+      "id": "2609.39168",
+      "title": "Reinforcing Multimodal Reasoning via Token-Level Perception-Grounded Advantage Estimation",
+      "authors": "Zhihan Zhang, Lizi Liao",
+      "summary": "Reinforcement Learning with Verifiable Rewards (RLVR) has improved the reasoning capabilities of Multimodal Large Language Models (MLLMs), yet existing frameworks rely on coarse, sequence-level reward…",
+      "date": "2026-09-30",
+      "tag": "Multimodal",
+      "url": "https://arxiv.org/abs/2609.39168"
+    },
+    {
+      "id": "2609.36899",
+      "title": "Reshaping Rollout Workloads for Asynchronous RL Post-Training on Heterogeneous Accelerators",
+      "authors": "Jiahui Li, Hao Nie, Yibo Zhu et al.",
+      "summary": "Reinforcement learning (RL) post-training increasingly relies on long-horizon, multi-turn rollouts. As post-training jobs outgrow a single cluster, rollout pools assembled across clusters introduce ha…",
+      "date": "2026-09-29",
+      "tag": "RL Training",
+      "url": "https://arxiv.org/abs/2609.36899"
+    },
+    {
+      "id": "2609.37968",
+      "title": "SelfSearch: Reward-Free Search for Self-Improving Agents",
+      "authors": "Jungwoo Yang, Injin Kong, Yohan Jo",
+      "summary": "Advances in the coding capabilities of LLM agents allow them to inspect and modify their own instructions, tools, and execution procedures. Existing approaches use this ability to search for improved …",
+      "date": "2026-09-29",
+      "tag": "Self-Improvement",
+      "url": "https://arxiv.org/abs/2609.37968"
+    }
+  ]
 }
