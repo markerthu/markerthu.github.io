@@ -2,7 +2,7 @@
   "_updated": "2026-10-09",
   "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 551,
+  "_total": 554,
   "_days": 30,
   "_range": "Sep. 9th - Oct. 9th",
   "locations": [
@@ -17,7 +17,7 @@
     {
       "code": "US",
       "name": "California, US",
-      "count": 85,
+      "count": 86,
       "cx": 60.0,
       "cy": 46.9,
       "r": 3.19
@@ -87,6 +87,14 @@
       "r": 2.23
     },
     {
+      "code": "KR",
+      "name": "South Korea",
+      "count": 8,
+      "cx": 307.5,
+      "cy": 47.3,
+      "r": 2.23
+    },
+    {
       "code": "US",
       "name": "Massachusetts, US",
       "count": 7,
@@ -100,14 +108,6 @@
       "count": 7,
       "cx": 270.6,
       "cy": 60.6,
-      "r": 2.2
-    },
-    {
-      "code": "KR",
-      "name": "South Korea",
-      "count": 7,
-      "cx": 307.5,
-      "cy": 47.3,
       "r": 2.2
     },
     {
@@ -363,12 +363,12 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 468
+      "count": 469
     },
     {
       "code": "CN",
       "name": "China",
-      "count": 14
+      "count": 15
     },
     {
       "code": "JP",
@@ -386,13 +386,13 @@
       "count": 10
     },
     {
-      "code": "BD",
-      "name": "Bangladesh",
-      "count": 7
-    },
-    {
       "code": "KR",
       "name": "South Korea",
+      "count": 8
+    },
+    {
+      "code": "BD",
+      "name": "Bangladesh",
       "count": 7
     },
     {
@@ -468,7 +468,7 @@
       "country": "US",
       "country_name": "United States",
       "name": "California",
-      "count": 85,
+      "count": 86,
       "located": true
     },
     {
@@ -637,7 +637,7 @@
     {
       "path": "/",
       "title": "Jiajun Fan",
-      "count": 298
+      "count": 299
     },
     {
       "path": "/cv",
@@ -662,7 +662,7 @@
     {
       "path": "/projects/procedure-aware-rl",
       "title": "Procedure-Aware RL for Tool-Augmented LLMs | COLM 2026",
-      "count": 15
+      "count": 16
     },
     {
       "path": "/year-archive",
@@ -715,6 +715,11 @@
       "count": 2
     },
     {
+      "path": "/blog/reading-papers",
+      "title": "What’s Happening in My Field - Jiajun Fan",
+      "count": 2
+    },
+    {
       "path": "/publication/2025-06-03-ProteinZero",
       "title": "ProteinZero: Self-Improving Protein Generation via Online Reinforcement Learning - Jiajun Fan",
       "count": 2
@@ -733,18 +738,13 @@
       "path": "/posts/2025/10/inverse-scaling-audio-llms",
       "title": "Test-Time Inverse Scaling in Audio LLMs — Jiajun Fan",
       "count": 1
-    },
-    {
-      "path": "/blog/reading-papers",
-      "title": "What’s Happening in My Field - Jiajun Fan",
-      "count": 1
     }
   ],
   "referrers": [
     {
       "name": "(unknown)",
       "id": "",
-      "count": 245
+      "count": 246
     },
     {
       "name": "www.jiajunfan.com",
@@ -754,7 +754,7 @@
     {
       "name": "Google",
       "id": "Google",
-      "count": 86
+      "count": 88
     },
     {
       "name": "scholar.google.com",
@@ -871,12 +871,12 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 342
+      "count": 344
     },
     {
       "name": "Safari",
       "id": "Safari",
-      "count": 216
+      "count": 217
     },
     {
       "name": "Firefox",
@@ -888,12 +888,12 @@
     {
       "name": "macOS",
       "id": "macOS",
-      "count": 248
+      "count": 250
     },
     {
       "name": "iOS",
       "id": "iOS",
-      "count": 197
+      "count": 198
     },
     {
       "name": "Windows",
@@ -1034,21 +1034,54 @@
     },
     {
       "day": "2026-10-09",
-      "n": 0
+      "n": 3
     }
   ],
   "periods": {
-    "today": 0,
+    "today": 3,
     "yesterday": 28,
-    "d7": 164,
+    "d7": 167,
     "d7_prev": 144,
-    "d30": 551,
+    "d30": 554,
     "d30_prev": 652,
-    "day_frac": 0.094,
+    "day_frac": 0.436,
     "yesterday_day": "2026-10-08"
   },
-  "_last_visit": "2026-10-08 23:43",
+  "_last_visit": "2026-10-09 10:05",
   "recent": [
+    {
+      "date": "2026-10-09 10:05",
+      "ts": "2026-10-09T17:05:41Z",
+      "loc": "China",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 26.0",
+      "system": "iOS 18.7",
+      "screen": "1800px",
+      "first": true
+    },
+    {
+      "date": "2026-10-09 10:04",
+      "ts": "2026-10-09T17:04:07Z",
+      "loc": "California, US",
+      "path": "/projects/procedure-aware-rl",
+      "ref": "Google",
+      "browser": "Chrome 155",
+      "system": "macOS 10.15",
+      "screen": "1728px",
+      "first": true
+    },
+    {
+      "date": "2026-10-09 08:17",
+      "ts": "2026-10-09T15:17:21Z",
+      "loc": "South Korea",
+      "path": "/blog/reading-papers",
+      "ref": "Google",
+      "browser": "Chrome 154",
+      "system": "macOS 10.15",
+      "screen": "1920px",
+      "first": true
+    },
     {
       "date": "2026-10-08 23:43",
       "ts": "2026-10-09T06:43:51Z",
@@ -1345,41 +1378,8 @@
       "system": "macOS 10.15",
       "screen": "1470px",
       "first": true
-    },
-    {
-      "date": "2026-10-08 08:14",
-      "ts": "2026-10-08T15:14:22Z",
-      "loc": "Arizona, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 138",
-      "system": "Linux",
-      "screen": "3840px",
-      "first": true
-    },
-    {
-      "date": "2026-10-08 02:24",
-      "ts": "2026-10-08T09:24:22Z",
-      "loc": "Nevada, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": true
-    },
-    {
-      "date": "2026-10-08 02:21",
-      "ts": "2026-10-08T09:21:24Z",
-      "loc": "Nevada, US",
-      "path": "/",
-      "ref": "www.jiajunfan.com/visitors",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": false
     }
   ],
-  "_recent_total": 2455,
+  "_recent_total": 2458,
   "_recent_shown": 30
 }
