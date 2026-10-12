@@ -86,6 +86,7 @@ body.dark-mode .section-header .sh-icon { filter: brightness(1.55) saturate(1.1)
 .nb-accept { background: #d4edda; color: #155724; }
 .nb-service{ background: #e2e3e5; color: #383d41; }
 .nb-upcoming{ background: #dbeafe; color: #1e40af; }
+.nb-code    { background: #ede9fe; color: #5b21b6; }
 .nb-finish { background: #d4edda; color: #155724; }
 
 /* ── Publication list ── */
@@ -1264,8 +1265,8 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
 
 <ul class="news-list">
   <li>
-    <span class="news-date">Sep 2026</span>
-    <span><span class="nbadge nb-upcoming">Upcoming</span>I will be attending <strong>COLM</strong> in person &mdash; always happy to meet up and talk research or collaboration.</span>
+    <span class="news-date">Oct 2026</span>
+    <span><span class="nbadge nb-code">Code</span><strong>ProteinZero</strong> is accepted at <strong>TMLR</strong> and now open source: <a href="https://github.com/ziwenwang28/ProteinZero" target="_blank" rel="noopener">github.com/ziwenwang28/ProteinZero</a>. Feel free to use it &mdash; for example as a tool in your own agent or design pipeline &mdash; and I am always happy to discuss collaborations.</span>
   </li>
   <li>
     <span class="news-date">Sep 2026</span>
