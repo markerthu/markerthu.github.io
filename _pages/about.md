@@ -1225,7 +1225,7 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
     <div class="ro-row">
     <div class="ro-dom">AI for Science<span>protein &amp; materials design</span></div>
     <div class="ro-papers">
-      <a class="ro-p" href="https://arxiv.org/abs/2506.07459" target="_blank" rel="noopener">ProteinZero <span class="ro-v">TMLR 2026</span></a>
+      <a class="ro-p" href="/projects/proteinzero/">ProteinZero <span class="ro-v">TMLR 2026</span></a>
       <a class="ro-p" href="https://openreview.net/forum?id=stiehhc5y6" target="_blank" rel="noopener">EDiSon <span class="ro-v">AI4Mat 2024</span></a>
     </div>
   </div>
@@ -1266,7 +1266,7 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
 <ul class="news-list">
   <li>
     <span class="news-date">Oct 2026</span>
-    <span><span class="nbadge nb-code">Code</span><strong>ProteinZero</strong> is accepted at <strong>TMLR</strong> and now open source: <a href="https://github.com/ziwenwang28/ProteinZero" target="_blank" rel="noopener">github.com/ziwenwang28/ProteinZero</a>. Feel free to use it &mdash; for example as a tool in your own agent or design pipeline &mdash; and I am always happy to discuss collaborations.</span>
+    <span><span class="nbadge nb-code">Code</span><strong>ProteinZero</strong> is accepted at <strong>TMLR</strong> and now open source &mdash; feel free to use it, for example as a tool in your own agent or design pipeline, and I am always happy to discuss collaborations. <a href="/projects/proteinzero/">Project page</a> &middot; <a href="https://github.com/ziwenwang28/ProteinZero" target="_blank" rel="noopener">Code</a></span>
   </li>
   <li>
     <span class="news-date">Sep 2026</span>
