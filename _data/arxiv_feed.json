@@ -1,86 +1,86 @@
 {
-  "updated": "2026-10-05",
+  "updated": "2026-10-12",
   "papers": [
     {
-      "id": "2610.02828",
-      "title": "FSPO: Policy-Consistent Risk and Pareto-Feasible Control for Budgeted LLM RL Post-Training",
-      "authors": "Miaobo Hu, Shuhao Hu, Xiaobo Guo et al.",
-      "summary": "Adaptive LLM reinforcement-learning post-training changes multiple training actuators online, including rollout temperature, group size, clipping, KL regularization, verifier allocation, and update bu…",
-      "date": "2026-10-02",
-      "tag": "RL Training",
-      "url": "https://arxiv.org/abs/2610.02828"
-    },
-    {
-      "id": "2610.00948",
-      "title": "GUI-HARVEST: Self-Improving GUI Agents through Evidence-Driven Harness Evolution",
-      "authors": "Geyi Yang, Zikun Qu, Xiang Li et al.",
-      "summary": "The executable harness surrounding a GUI model determines how observations are assembled, actions are executed, and verification, recovery, and termination are controlled. Compared with harness optimi…",
-      "date": "2026-10-01",
-      "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2610.00948"
-    },
-    {
-      "id": "2609.40137",
-      "title": "Game-Guided Skill Discovery through Self-Play for Playable Agent Control",
-      "authors": "Seungeun Rho, Jeonghwan Kim, Xue Bin Peng et al.",
-      "summary": "We present Game-Guided Skill Discovery (GGSD), a framework that uses self-play in games to discover motor skills that are directly playable by humans. Playable skills provide a compact abstraction for…",
-      "date": "2026-09-30",
-      "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2609.40137"
-    },
-    {
-      "id": "2609.39045",
-      "title": "RSIGame: Autonomous Agentic Game Development with Recursive Self-improvement",
-      "authors": "Wenyi Wu, Minghao Fu, Jieyu You et al.",
-      "summary": "Recent advances in large language models have made automatic game generation increasingly feasible, yet reliably improving generated games beyond a playable version remains challenging. Naive iterativ…",
-      "date": "2026-09-30",
-      "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2609.39045"
-    },
-    {
-      "id": "2609.39220",
-      "title": "Learning Process Rewards via Reasoning State Propagation",
-      "authors": "Kai Gan, Zi-Hao Zhou, Bo Ye et al.",
-      "summary": "Process reward models (PRMs) have demonstrated notable effectiveness in test-time scaling and reinforcement learning by providing fine-grained signals for evaluating intermediate reasoning states, but…",
-      "date": "2026-09-30",
-      "tag": "Reasoning",
-      "url": "https://arxiv.org/abs/2609.39220"
-    },
-    {
-      "id": "2609.39847",
-      "title": "SEAR: Spoofing Evidence-Grounded Audio Reasoning Benchmark for Audio Language Models",
-      "authors": "Rong Wan, Suliu Qin, Jiaxi Li et al.",
-      "summary": "Audio language models (ALMs) are increasingly used for audio deepfake detection (ADD), yet existing benchmarks assess their verdicts or rationale plausibility without verifying the underlying acoustic…",
-      "date": "2026-09-30",
+      "id": "2610.13600",
+      "title": "AudioTETRIS: Token Elimination via Transitional Importance Signals for Efficient Audio LLMs",
+      "authors": "Shreya Sajid, Anna Vettoruzzo, Joaquin Vanschoren",
+      "summary": "Large Audio Language Models (LALMs) achieve strong performance on speech-text tasks, but standard audio encoders produce hundreds of tokens for even short audio clips. Because self-attention scales qu…",
+      "date": "2026-10-09",
       "tag": "Audio Reasoning",
-      "url": "https://arxiv.org/abs/2609.39847"
+      "url": "https://arxiv.org/abs/2610.13600"
     },
     {
-      "id": "2609.39168",
-      "title": "Reinforcing Multimodal Reasoning via Token-Level Perception-Grounded Advantage Estimation",
-      "authors": "Zhihan Zhang, Lizi Liao",
-      "summary": "Reinforcement Learning with Verifiable Rewards (RLVR) has improved the reasoning capabilities of Multimodal Large Language Models (MLLMs), yet existing frameworks rely on coarse, sequence-level reward…",
-      "date": "2026-09-30",
-      "tag": "Multimodal",
-      "url": "https://arxiv.org/abs/2609.39168"
+      "id": "2610.13500",
+      "title": "Phonology-Aware Speaker Extraction Frontend for Audio LLMs",
+      "authors": "Yanxiang Chen, Haoyuan Deng, Jinyu Wang et al.",
+      "summary": "Target speaker extraction (TSE) is a key frontend for enabling audio large language models (LLMs) to recognize and understand a designated speaker in overlapping speech. However, multilingual mixtures…",
+      "date": "2026-10-09",
+      "tag": "Audio Reasoning",
+      "url": "https://arxiv.org/abs/2610.13500"
     },
     {
-      "id": "2609.36899",
-      "title": "Reshaping Rollout Workloads for Asynchronous RL Post-Training on Heterogeneous Accelerators",
-      "authors": "Jiahui Li, Hao Nie, Yibo Zhu et al.",
-      "summary": "Reinforcement learning (RL) post-training increasingly relies on long-horizon, multi-turn rollouts. As post-training jobs outgrow a single cluster, rollout pools assembled across clusters introduce ha…",
-      "date": "2026-09-29",
-      "tag": "RL Training",
-      "url": "https://arxiv.org/abs/2609.36899"
+      "id": "2610.13081",
+      "title": "SWEAR: Section-Wise Efficient Audio Reasoning via Self-Rated Difficulty",
+      "authors": "Yixuan Li, Minghao Lv, Xuenan Xu et al.",
+      "summary": "Recent work on large audio-language models (LALMs) explores adaptive reasoning to balance accuracy and efficiency. However, existing approaches often rely on coarse-grained difficulty estimation, over…",
+      "date": "2026-10-09",
+      "tag": "Audio Reasoning",
+      "url": "https://arxiv.org/abs/2610.13081"
     },
     {
-      "id": "2609.37968",
-      "title": "SelfSearch: Reward-Free Search for Self-Improving Agents",
-      "authors": "Jungwoo Yang, Injin Kong, Yohan Jo",
-      "summary": "Advances in the coding capabilities of LLM agents allow them to inspect and modify their own instructions, tools, and execution procedures. Existing approaches use this ability to search for improved …",
-      "date": "2026-09-29",
+      "id": "2610.11803",
+      "title": "PRAXIS: Learning Dynamics of Self-Improving Models with Symbolic Archives",
+      "authors": "Venkat Margapuri, Mustafa Teber",
+      "summary": "Self-improving learning systems adapt data selection, optimization, and auxiliary symbolic components, inducing nonstationary objectives outside standard learning assumptions. We introduce \\textsc{PRA…",
+      "date": "2026-10-08",
       "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2609.37968"
+      "url": "https://arxiv.org/abs/2610.11803"
+    },
+    {
+      "id": "2610.11794",
+      "title": "Memento 3: Model-Based Recursive Self-Improvement through Reflective Rulebooks",
+      "authors": "Haoyu Zhao, Zhengxu Yu, Zhiyuan He et al.",
+      "summary": "Learning to act in unfamiliar environments requires agents to infer how the world works and revise that understanding as new evidence arrives. Yet limited observations can support multiple world model…",
+      "date": "2026-10-08",
+      "tag": "Self-Improvement",
+      "url": "https://arxiv.org/abs/2610.11794"
+    },
+    {
+      "id": "2610.11464",
+      "title": "Who Verifies the Verifier? Co-Evolving Inspectable Graders with Self-Improving Agents",
+      "authors": "Xing Zhang, Guanghui Wang, Yanwei Cui et al.",
+      "summary": "We changed the agent: did it actually get better? Every self-improving agent loop answers this hundreds of times, and every answer comes from a verifier. On open-ended tasks none exists, so the loop i…",
+      "date": "2026-10-08",
+      "tag": "Self-Improvement",
+      "url": "https://arxiv.org/abs/2610.11464"
+    },
+    {
+      "id": "2610.11884",
+      "title": "STEMMA: Song-to-Stem Multi-Audio Reasoning for Large Audio Language Models",
+      "authors": "Hoyeol Sohn, Wonil Kim, Keunhyoung Kim et al.",
+      "summary": "Music understanding often requires comparing excerpts and reasoning about relationships among songs, sections, and stems. However, existing large audio-language models (LALMs) and music question-answe…",
+      "date": "2026-10-08",
+      "tag": "Audio Reasoning",
+      "url": "https://arxiv.org/abs/2610.11884"
+    },
+    {
+      "id": "2610.12095",
+      "title": "DVLA-RL++: Dual-Level Vision-Language Alignment with Reinforcement Learning Gating for Few-Shot Learning",
+      "authors": "Wenhao Li, Xianjing Meng, Qiangchang Wang et al.",
+      "summary": "Few-shot learning aims to recognize novel categories from limited labeled examples. Recent studies incorporate textual semantics to compensate for limited visual observations and improve class represe…",
+      "date": "2026-10-08",
+      "tag": "Multimodal",
+      "url": "https://arxiv.org/abs/2610.12095"
+    },
+    {
+      "id": "2610.09679",
+      "title": "CERO: Where and When to Allocate Rollouts for RL Post-Training",
+      "authors": "Yiming Zong, Yige Wang, Xing Hu et al.",
+      "summary": "Adaptive rollout methods for group-relative reinforcement learning typically allocate a fixed per-update budget across prompts. We instead study how to coordinate a finite rollout budget over the enti…",
+      "date": "2026-10-07",
+      "tag": "RL Training",
+      "url": "https://arxiv.org/abs/2610.09679"
     }
   ]
 }
