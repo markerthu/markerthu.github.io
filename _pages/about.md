@@ -87,6 +87,7 @@ body.dark-mode .section-header .sh-icon { filter: brightness(1.55) saturate(1.1)
 .nb-service{ background: #e2e3e5; color: #383d41; }
 .nb-upcoming{ background: #dbeafe; color: #1e40af; }
 .nb-code    { background: #ede9fe; color: #5b21b6; }
+.nb-talk    { background: #fef3c7; color: #92400e; }
 .nb-finish { background: #d4edda; color: #155724; }
 
 /* ── Publication list ── */
@@ -1266,6 +1267,10 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
 <h2 class="section-header" id="news"><img class="sh-icon" src="/images/icons/sh-news.png" alt="">Latest News</h2>
 
 <ul class="news-list">
+  <li>
+    <span class="news-date">Oct 2026</span>
+    <span><span class="nbadge nb-talk">Talk</span>Speaking at the <strong>IGB</strong> (Lunch with CNRG) on building LLM post-training projects with an AI coding agent. Always happy to give talks on <strong>LLM post-training with RL</strong> and on <strong>agentic methods for automating research</strong> &mdash; just reach out. <a href="https://www.igb.illinois.edu/igb-calendar/lunch-cnrg-building-llm-post-training-projects-claude-code" target="_blank" rel="noopener">Event</a></span>
+  </li>
   <li>
     <span class="news-date">Oct 2026</span>
     <span><span class="nbadge nb-code">Code</span><strong>ProteinZero</strong> is accepted at <strong>TMLR</strong> and now open source &mdash; feel free to use it, for example as a tool in your own agent or design pipeline, and I am always happy to discuss collaborations. <a href="/projects/proteinzero/">Project page</a> &middot; <a href="https://github.com/ziwenwang28/ProteinZero" target="_blank" rel="noopener">Code</a></span>
