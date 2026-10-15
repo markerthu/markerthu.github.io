@@ -1269,7 +1269,7 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
 <ul class="news-list">
   <li>
     <span class="news-date">Oct 2026</span>
-    <span><span class="nbadge nb-talk">Talk</span>Speaking at the <strong>IGB</strong> (Lunch with CNRG) on building LLM post-training projects with an AI coding agent. Always happy to give talks on <strong>LLM post-training with RL</strong> and on <strong>agentic methods for automating research</strong> &mdash; just reach out. <a href="https://www.igb.illinois.edu/igb-calendar/lunch-cnrg-building-llm-post-training-projects-claude-code" target="_blank" rel="noopener">Event</a></span>
+    <span><span class="nbadge nb-talk">Talk</span>Gave a talk at the <strong>IGB</strong> (Lunch with CNRG) on building LLM post-training projects with an AI coding agent. Always happy to give talks on <strong>LLM post-training with RL</strong> and on <strong>agentic methods for automating research</strong> &mdash; just reach out. <a href="https://www.igb.illinois.edu/igb-calendar/lunch-cnrg-building-llm-post-training-projects-claude-code" target="_blank" rel="noopener">Event</a></span>
   </li>
   <li>
     <span class="news-date">Oct 2026</span>
