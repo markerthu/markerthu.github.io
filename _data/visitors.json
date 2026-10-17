@@ -2,7 +2,7 @@
   "_updated": "2026-10-17",
   "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 665,
+  "_total": 666,
   "_days": 30,
   "_range": "Sep. 17th - Oct. 17th",
   "locations": [
@@ -88,6 +88,14 @@
     },
     {
       "code": "US",
+      "name": "Massachusetts, US",
+      "count": 8,
+      "cx": 108.5,
+      "cy": 41.8,
+      "r": 2.16
+    },
+    {
+      "code": "US",
       "name": "New Jersey, US",
       "count": 8,
       "cx": 105.3,
@@ -109,14 +117,6 @@
       "cx": 301.0,
       "cy": 60.3,
       "r": 2.16
-    },
-    {
-      "code": "US",
-      "name": "Massachusetts, US",
-      "count": 7,
-      "cx": 108.5,
-      "cy": 41.8,
-      "r": 2.14
     },
     {
       "code": "BD",
@@ -331,7 +331,7 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 586
+      "count": 587
     },
     {
       "code": "JP",
@@ -477,15 +477,15 @@
     {
       "country": "US",
       "country_name": "United States",
-      "name": "New Jersey",
+      "name": "Massachusetts",
       "count": 8,
       "located": true
     },
     {
       "country": "US",
       "country_name": "United States",
-      "name": "Massachusetts",
-      "count": 7,
+      "name": "New Jersey",
+      "count": 8,
       "located": true
     },
     {
@@ -591,7 +591,7 @@
     {
       "path": "/",
       "title": "Jiajun Fan",
-      "count": 344
+      "count": 345
     },
     {
       "path": "/cv",
@@ -751,13 +751,13 @@
       "count": 10
     },
     {
-      "name": "weixin110.qq.com",
-      "id": "weixin110.qq.com",
-      "count": 5
-    },
-    {
       "name": "www.bing.com",
       "id": "www.bing.com",
+      "count": 6
+    },
+    {
+      "name": "weixin110.qq.com",
+      "id": "weixin110.qq.com",
       "count": 5
     },
     {
@@ -840,7 +840,7 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 412
+      "count": 413
     },
     {
       "name": "Safari",
@@ -867,7 +867,7 @@
     {
       "name": "Windows",
       "id": "Windows",
-      "count": 96
+      "count": 97
     },
     {
       "name": "Linux",
@@ -1003,21 +1003,32 @@
     },
     {
       "day": "2026-10-17",
-      "n": 7
+      "n": 8
     }
   ],
   "periods": {
-    "today": 7,
+    "today": 8,
     "yesterday": 27,
-    "d7": 176,
+    "d7": 177,
     "d7_prev": 189,
-    "d30": 665,
+    "d30": 666,
     "d30_prev": 623,
-    "day_frac": 0.429,
+    "day_frac": 0.522,
     "yesterday_day": "2026-10-16"
   },
-  "_last_visit": "2026-10-17 05:54",
+  "_last_visit": "2026-10-17 11:18",
   "recent": [
+    {
+      "date": "2026-10-17 11:18",
+      "ts": "2026-10-17T18:18:15Z",
+      "loc": "Massachusetts, US",
+      "path": "/",
+      "ref": "www.bing.com",
+      "browser": "Chrome 155",
+      "system": "Windows 10",
+      "screen": "1494px",
+      "first": true
+    },
     {
       "date": "2026-10-17 05:54",
       "ts": "2026-10-17T12:54:08Z",
@@ -1336,19 +1347,8 @@
       "system": "macOS 10.15",
       "screen": "1512px",
       "first": false
-    },
-    {
-      "date": "2026-10-16 23:59",
-      "ts": "2026-10-17T06:59:22Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "scholar.google.com",
-      "browser": "Chrome 152",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": false
     }
   ],
-  "_recent_total": 2911,
+  "_recent_total": 2912,
   "_recent_shown": 30
 }
