@@ -1,193 +1,33 @@
-<svg fill="currentColor" xmlns:xlink="http://www.w3.org/1999/xlink" width="317.675844pt" height="176.985pt" viewBox="0 0 317.675844 176.985" xmlns="http://www.w3.org/2000/svg" version="1.1">
- <metadata>
-  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-   <cc:Work>
-    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-10-12T20:45:14.415999</dc:date>
-    <dc:format>image/svg+xml</dc:format>
-    <dc:creator>
-     <cc:Agent>
-      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
-     </cc:Agent>
-    </dc:creator>
-   </cc:Work>
-  </rdf:RDF>
- </metadata>
- <defs>
-  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
- </defs>
- <g id="figure_1">
-  <g id="patch_1">
-   <path d="M 0 176.985 
-L 317.675844 176.985 
-L 317.675844 0 
-L 0 0 
-L 0 176.985 
-z
-" style="fill: none"/>
+<svg viewBox="0 0 640 214" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="sgg-t sgg-d" fill="currentColor">
+  <title id="sgg-t">Rollout groups that still carry a gradient</title>
+  <desc id="sgg-d">With an outcome-only reward, 16.0 percent of GRPO rollout groups carry a gradient; with the per-turn process reward, 99.6 percent do.</desc>
+  <style>
+    .sgg-l{font:500 13px Inter,system-ui,sans-serif;fill:var(--ink,#1a1815)}
+    .sgg-s{font:400 11.5px Inter,system-ui,sans-serif;fill:var(--c-ink2,#5B6273)}
+    .sgg-v{font:600 15px Inter,system-ui,sans-serif}
+    .sgg-t{font:400 11px Inter,system-ui,sans-serif;fill:var(--c-ink2,#5B6273)}
+  </style>
+  <!-- axis: x = 200 + 4 * value -->
+  <g stroke="var(--c-grid,#E4E8EF)" stroke-width="1">
+    <path d="M200,34 V170"/><path d="M300,34 V170"/><path d="M400,34 V170"/><path d="M500,34 V170"/><path d="M600,34 V170"/>
   </g>
-  <g id="axes_1">
-   <g id="patch_2">
-    <path d="M 53.795844 145.8 
-L 310.475844 145.8 
-L 310.475844 7.2 
-L 53.795844 7.2 
-L 53.795844 145.8 
-z
-" style="fill: none"/>
-   </g>
-   <g id="matplotlib.axis_1">
-    <g id="xtick_1">
-     <g id="line2d_1">
-      <defs>
-       <path id="m277d9815b6" d="M 0 0 
-L 0 3.5 
-" style="stroke: currentColor; stroke-width: 0.8"/>
-      </defs>
-      <g>
-       <use xlink:href="#m277d9815b6" x="104.354026" y="145.8" style="stroke: currentColor; stroke-width: 0.8"/>
-      </g>
-     </g>
-     <g id="text_1">
-      <text style="font-size: 8.6px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif" transform="translate(88.984213 158.940938)">per-turn</text>
-      <text style="font-size: 8.6px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif" transform="translate(74.72501 168.004531)">process reward</text>
-     </g>
-    </g>
-    <g id="xtick_2">
-     <g id="line2d_2">
-      <g>
-       <use xlink:href="#m277d9815b6" x="259.917662" y="145.8" style="stroke: currentColor; stroke-width: 0.8"/>
-      </g>
-     </g>
-     <g id="text_2">
-      <text style="font-size: 8.6px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif" transform="translate(233.312756 158.940938)">outcome-only</text>
-      <text style="font-size: 8.6px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif" transform="translate(246.777131 168.090531)">reward</text>
-     </g>
-    </g>
-   </g>
-   <g id="matplotlib.axis_2">
-    <g id="ytick_1">
-     <g id="line2d_3">
-      <path d="M 53.795844 145.8 
-L 310.475844 145.8 
-" clip-path="url(#p772a2eb4b1)" style="fill: none; stroke: #d9d9d9; stroke-width: 0.6; stroke-linecap: square"/>
-     </g>
-     <g id="line2d_4">
-      <defs>
-       <path id="mab20795820" d="M 0 0 
-L -3.5 0 
-" style="stroke: currentColor; stroke-width: 0.8"/>
-      </defs>
-      <g>
-       <use xlink:href="#mab20795820" x="53.795844" y="145.8" style="stroke: currentColor; stroke-width: 0.8"/>
-      </g>
-     </g>
-     <g id="text_3">
-      <text style="font-size: 10.5px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end" x="46.795844" y="149.548828" transform="rotate(-0 46.795844 149.548828)">0</text>
-     </g>
-    </g>
-    <g id="ytick_2">
-     <g id="line2d_5">
-      <path d="M 53.795844 116.435593 
-L 310.475844 116.435593 
-" clip-path="url(#p772a2eb4b1)" style="fill: none; stroke: #d9d9d9; stroke-width: 0.6; stroke-linecap: square"/>
-     </g>
-     <g id="line2d_6">
-      <g>
-       <use xlink:href="#mab20795820" x="53.795844" y="116.435593" style="stroke: currentColor; stroke-width: 0.8"/>
-      </g>
-     </g>
-     <g id="text_4">
-      <text style="font-size: 10.5px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end" x="46.795844" y="120.184421" transform="rotate(-0 46.795844 120.184421)">25</text>
-     </g>
-    </g>
-    <g id="ytick_3">
-     <g id="line2d_7">
-      <path d="M 53.795844 87.071186 
-L 310.475844 87.071186 
-" clip-path="url(#p772a2eb4b1)" style="fill: none; stroke: #d9d9d9; stroke-width: 0.6; stroke-linecap: square"/>
-     </g>
-     <g id="line2d_8">
-      <g>
-       <use xlink:href="#mab20795820" x="53.795844" y="87.071186" style="stroke: currentColor; stroke-width: 0.8"/>
-      </g>
-     </g>
-     <g id="text_5">
-      <text style="font-size: 10.5px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end" x="46.795844" y="90.820015" transform="rotate(-0 46.795844 90.820015)">50</text>
-     </g>
-    </g>
-    <g id="ytick_4">
-     <g id="line2d_9">
-      <path d="M 53.795844 57.70678 
-L 310.475844 57.70678 
-" clip-path="url(#p772a2eb4b1)" style="fill: none; stroke: #d9d9d9; stroke-width: 0.6; stroke-linecap: square"/>
-     </g>
-     <g id="line2d_10">
-      <g>
-       <use xlink:href="#mab20795820" x="53.795844" y="57.70678" style="stroke: currentColor; stroke-width: 0.8"/>
-      </g>
-     </g>
-     <g id="text_6">
-      <text style="font-size: 10.5px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end" x="46.795844" y="61.455608" transform="rotate(-0 46.795844 61.455608)">75</text>
-     </g>
-    </g>
-    <g id="ytick_5">
-     <g id="line2d_11">
-      <path d="M 53.795844 28.342373 
-L 310.475844 28.342373 
-" clip-path="url(#p772a2eb4b1)" style="fill: none; stroke: #d9d9d9; stroke-width: 0.6; stroke-linecap: square"/>
-     </g>
-     <g id="line2d_12">
-      <g>
-       <use xlink:href="#mab20795820" x="53.795844" y="28.342373" style="stroke: currentColor; stroke-width: 0.8"/>
-      </g>
-     </g>
-     <g id="text_7">
-      <text style="font-size: 10.5px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: end" x="46.795844" y="32.091201" transform="rotate(-0 46.795844 32.091201)">100</text>
-     </g>
-    </g>
-    <g id="text_8">
-     <text style="font-size: 9px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif" transform="translate(13.626562 124.595859) rotate(-90)">rollout groups that carry</text>
-     <text style="font-size: 9px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif" transform="translate(23.40225 104.751563) rotate(-90)">a gradient (%)</text>
-    </g>
-   </g>
-   <g id="patch_3">
-    <path d="M 53.795844 145.8 
-L 53.795844 7.2 
-" style="fill: none; stroke: currentColor; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
-   </g>
-   <g id="patch_4">
-    <path d="M 53.795844 145.8 
-L 310.475844 145.8 
-" style="fill: none; stroke: currentColor; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
-   </g>
-   <g id="patch_5">
-    <path d="M 65.463116 145.8 
-L 143.244935 145.8 
-L 143.244935 28.812203 
-L 65.463116 28.812203 
-z
-" clip-path="url(#p772a2eb4b1)" style="fill: #1565c0"/>
-   </g>
-   <g id="patch_6">
-    <path d="M 221.026753 145.8 
-L 298.808571 145.8 
-L 298.808571 127.00678 
-L 221.026753 127.00678 
-z
-" clip-path="url(#p772a2eb4b1)" style="fill: #b4544e"/>
-   </g>
-   <g id="text_9">
-    <text style="font-weight: 700; font-size: 9.6px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle" x="104.354026" y="23.984263" transform="rotate(-0 104.354026 23.984263)">99.6%</text>
-   </g>
-   <g id="text_10">
-    <text style="font-weight: 700; font-size: 9.6px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle" x="259.917662" y="122.178839" transform="rotate(-0 259.917662 122.178839)">16.0%</text>
-   </g>
+  <g class="sgg-t" text-anchor="middle">
+    <text x="200" y="188">0</text><text x="300" y="188">25</text><text x="400" y="188">50</text><text x="500" y="188">75</text><text x="600" y="188">100</text>
   </g>
- </g>
- <defs>
-  <clipPath id="p772a2eb4b1">
-   <rect x="53.795844" y="7.2" width="256.68" height="138.6"/>
-  </clipPath>
- </defs>
+  <text class="sgg-t" x="400" y="208" text-anchor="middle">rollout groups that still carry a gradient (%)</text>
+
+  <!-- outcome-only -->
+  <text class="sgg-l" x="190" y="66" text-anchor="end">outcome-only reward</text>
+  <text class="sgg-s" x="190" y="83" text-anchor="end">success at the end only</text>
+  <rect x="200" y="56" width="400" height="26" rx="6" fill="var(--c-grid,#E4E8EF)" fill-opacity=".55"/>
+  <rect x="200" y="56" width="64" height="26" rx="6" fill="var(--c-rl,#F5C8B5)" stroke="var(--c-rl-line,#E39A7A)" stroke-width="1.1"/>
+  <text class="sgg-v" x="274" y="75" fill="var(--c-rl-line,#E39A7A)">16.0%</text>
+  <text class="sgg-s" x="596" y="75" text-anchor="end" fill="var(--c-rl-line,#E39A7A)">84% of groups teach nothing</text>
+
+  <!-- per-turn -->
+  <text class="sgg-l" x="190" y="128" text-anchor="end" style="font-weight:600">per-turn process reward</text>
+  <text class="sgg-s" x="190" y="145" text-anchor="end">SpeechGym (ours)</text>
+  <rect x="200" y="118" width="400" height="26" rx="6" fill="var(--c-grid,#E4E8EF)" fill-opacity=".55"/>
+  <rect x="200" y="118" width="398.4" height="26" rx="6" fill="var(--c-ours-fill,#90A4C5)" stroke="var(--c-ours,#2F4B8F)" stroke-width="1.2"/>
+  <text class="sgg-v" x="588" y="137" text-anchor="end" fill="#fff" style="paint-order:stroke;stroke:var(--c-ours,#2F4B8F);stroke-width:3px">99.6%</text>
 </svg>

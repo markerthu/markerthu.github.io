@@ -81,7 +81,7 @@ L 0 3.5
      <g id="line2d_4">
       <path d="M 47.921937 151.577121 
 L 349.241938 151.577121 
-" clip-path="url(#p5d0896af0d)" style="fill: none; stroke: #d9d9d9; stroke-width: 0.6; stroke-linecap: square"/>
+" clip-path="url(#p5d0896af0d)" style="fill: none; stroke: var(--c-grid); stroke-width: 0.6; stroke-linecap: square"/>
      </g>
      <g id="line2d_5">
       <defs>
@@ -101,7 +101,7 @@ L -3.5 0
      <g id="line2d_6">
       <path d="M 47.921937 116.420048 
 L 349.241938 116.420048 
-" clip-path="url(#p5d0896af0d)" style="fill: none; stroke: #d9d9d9; stroke-width: 0.6; stroke-linecap: square"/>
+" clip-path="url(#p5d0896af0d)" style="fill: none; stroke: var(--c-grid); stroke-width: 0.6; stroke-linecap: square"/>
      </g>
      <g id="line2d_7">
       <g>
@@ -116,7 +116,7 @@ L 349.241938 116.420048
      <g id="line2d_8">
       <path d="M 47.921937 81.262974 
 L 349.241938 81.262974 
-" clip-path="url(#p5d0896af0d)" style="fill: none; stroke: #d9d9d9; stroke-width: 0.6; stroke-linecap: square"/>
+" clip-path="url(#p5d0896af0d)" style="fill: none; stroke: var(--c-grid); stroke-width: 0.6; stroke-linecap: square"/>
      </g>
      <g id="line2d_9">
       <g>
@@ -131,7 +131,7 @@ L 349.241938 81.262974
      <g id="line2d_10">
       <path d="M 47.921937 46.105901 
 L 349.241938 46.105901 
-" clip-path="url(#p5d0896af0d)" style="fill: none; stroke: #d9d9d9; stroke-width: 0.6; stroke-linecap: square"/>
+" clip-path="url(#p5d0896af0d)" style="fill: none; stroke: var(--c-grid); stroke-width: 0.6; stroke-linecap: square"/>
      </g>
      <g id="line2d_11">
       <g>
@@ -146,7 +146,7 @@ L 349.241938 46.105901
      <g id="line2d_12">
       <path d="M 47.921937 10.948828 
 L 349.241938 10.948828 
-" clip-path="url(#p5d0896af0d)" style="fill: none; stroke: #d9d9d9; stroke-width: 0.6; stroke-linecap: square"/>
+" clip-path="url(#p5d0896af0d)" style="fill: none; stroke: var(--c-grid); stroke-width: 0.6; stroke-linecap: square"/>
      </g>
      <g id="line2d_13">
       <g>
@@ -178,7 +178,7 @@ L 116.403756 151.577121
 L 116.403756 37.316633 
 L 61.618301 37.316633 
 z
-" clip-path="url(#p5d0896af0d)" style="fill: #b4544e"/>
+" clip-path="url(#p5d0896af0d)" style="fill: var(--c-rl)"/>
    </g>
    <g id="patch_6">
     <path d="M 171.18921 151.577121 
@@ -186,7 +186,7 @@ L 225.974665 151.577121
 L 225.974665 133.998584 
 L 171.18921 133.998584 
 z
-" clip-path="url(#p5d0896af0d)" style="fill: #9aa3ad"/>
+" clip-path="url(#p5d0896af0d)" style="fill: var(--c-other)"/>
    </g>
    <g id="patch_7">
     <path d="M 280.760119 151.577121 
@@ -194,18 +194,18 @@ L 335.545574 151.577121
 L 335.545574 133.998584 
 L 280.760119 133.998584 
 z
-" clip-path="url(#p5d0896af0d)" style="fill: #9aa3ad"/>
+" clip-path="url(#p5d0896af0d)" style="fill: var(--c-other)"/>
    </g>
    <g id="text_10">
-    <text style="font-weight: 700; font-size: 9.4px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #b4544e" x="89.011028" y="32.827759" transform="rotate(-0 89.011028 32.827759)">-65 pts</text>
+    <text style="font-weight: 700; font-size: 9.4px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: var(--c-rl-line)" x="89.011028" y="32.827759" transform="rotate(-0 89.011028 32.827759)">-65 pts</text>
    </g>
    <g id="text_11">
-    <text style="font-size: 8.6px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif; fill: #5a6472" transform="translate(184.082203 120.603741)">at most</text>
-    <text style="font-size: 8.6px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif; fill: #5a6472" transform="translate(184.878375 129.667335)">-10 pts</text>
+    <text style="font-size: 8.6px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif; fill: var(--c-ink2)" transform="translate(184.082203 120.603741)">at most</text>
+    <text style="font-size: 8.6px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif; fill: var(--c-ink2)" transform="translate(184.878375 129.667335)">-10 pts</text>
    </g>
    <g id="text_12">
-    <text style="font-size: 8.6px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif; fill: #5a6472" transform="translate(293.653112 120.603741)">at most</text>
-    <text style="font-size: 8.6px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif; fill: #5a6472" transform="translate(294.449284 129.667335)">-10 pts</text>
+    <text style="font-size: 8.6px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif; fill: var(--c-ink2)" transform="translate(293.653112 120.603741)">at most</text>
+    <text style="font-size: 8.6px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif; fill: var(--c-ink2)" transform="translate(294.449284 129.667335)">-10 pts</text>
    </g>
   </g>
  </g>

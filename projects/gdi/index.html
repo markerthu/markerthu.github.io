@@ -202,6 +202,15 @@ figure.rimg figcaption{font-family:var(--sans);font-size:.82rem;color:var(--mute
 
 /* the AI-agent panel (bottom:120px, z-index:9991) covers this FAB while open — hide it, as the agent does with its own launcher */
 .ra-panel.show ~ #pg-dark{opacity:0;pointer-events:none;}
+
+/* figure palette (shared by every chart and animation; Jev-style: navy = ours, misty blue = our variant,
+   peach = competing RL baseline, cool gray = base model / others) */
+:root{--c-ours:#2F4B8F;--c-ours-fill:#90A4C5;--c-var:#BFD8EC;--c-var-line:#6F94C6;--c-rl:#F5C8B5;--c-rl-line:#E39A7A;
+  --c-base:#DDE2EA;--c-base-line:#8F97A8;--c-other:#C9CED8;--c-other-line:#9AA1B0;--c-grid:#E4E8EF;--c-ink2:#5B6273}
+body.dark-mode{--c-ours:#9DB8EA;--c-ours-fill:#5E77A8;--c-var:#3F5F86;--c-var-line:#7FA6D3;--c-rl:#9A6E5D;--c-rl-line:#E9A98C;
+  --c-base:#3A414E;--c-base-line:#8F97A8;--c-other:#4A5260;--c-other-line:#9AA1B0;--c-grid:#2A303A;--c-ink2:#A6ADBB}
+figure.anim-fig{--link:var(--c-ours);--good:#3E7D5A;--bad:var(--c-rl-line)}
+body.dark-mode figure.anim-fig{--good:#7FC79A}
 </style>
 <script type="application/ld+json">{
   "@context": "https://schema.org",

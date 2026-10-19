@@ -1184,6 +1184,15 @@ body.dark-mode .pillar-tag { background: #1c2333; color: #58a6ff; }
 .page__content figure.chart figcaption b{color:var(--link);font-weight:600}
 figure.anim-fig{--ink:#1a2332;--muted:#5f6b7a;--card:#fff;--fig-border:#dfe6ef;--rule:#e6ebf2;--link:#1565c0;--good:#1b7f4b;--bad:#c0392b;--bg:#fff}
 body.dark-mode figure.anim-fig{--ink:#e6edf3;--muted:#8b949e;--card:#161b22;--fig-border:#30363d;--rule:#21262d;--link:#58a6ff;--good:#3fb950;--bad:#f85149;--bg:#0d1117}
+
+/* figure palette (shared by every chart and animation; Jev-style: navy = ours, misty blue = our variant,
+   peach = competing RL baseline, cool gray = base model / others) */
+:root{--c-ours:#2F4B8F;--c-ours-fill:#90A4C5;--c-var:#BFD8EC;--c-var-line:#6F94C6;--c-rl:#F5C8B5;--c-rl-line:#E39A7A;
+  --c-base:#DDE2EA;--c-base-line:#8F97A8;--c-other:#C9CED8;--c-other-line:#9AA1B0;--c-grid:#E4E8EF;--c-ink2:#5B6273}
+body.dark-mode{--c-ours:#9DB8EA;--c-ours-fill:#5E77A8;--c-var:#3F5F86;--c-var-line:#7FA6D3;--c-rl:#9A6E5D;--c-rl-line:#E9A98C;
+  --c-base:#3A414E;--c-base-line:#8F97A8;--c-other:#4A5260;--c-other-line:#9AA1B0;--c-grid:#2A303A;--c-ink2:#A6ADBB}
+figure.anim-fig{--link:var(--c-ours);--good:#3E7D5A;--bad:var(--c-rl-line)}
+body.dark-mode figure.anim-fig{--good:#7FC79A}
 </style>
 
 <!-- Hero banner -->
@@ -1781,28 +1790,7 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
 </p>
 </blockquote>
 
-<div class="research-timeline">
-  <div class="rt-item">
-    <div class="rt-year">Step 1 — ICLR 2025</div>
-    <div class="rt-title">Eliminate human-collected preference data</div>
-    <div class="rt-desc">ORW-CFM-W2: online reward-weighted training lets models improve from their own generations — no paired human data needed.</div>
-  </div>
-  <div class="rt-item">
-    <div class="rt-year">Step 2 — NeurIPS 2025</div>
-    <div class="rt-title">Remove manual KL tuning</div>
-    <div class="rt-desc">ADRPO: adaptive divergence control eliminates the need for hand-tuned regularization — each sample gets its own constraint.</div>
-  </div>
-  <div class="rt-item">
-    <div class="rt-year">Step 3 — ICLR 2026</div>
-    <div class="rt-title">Reward the reasoning process, not just outcomes</div>
-    <div class="rt-desc">CESAR: process-level rewards resolve test-time inverse scaling in Audio LLMs — reasoning finally helps instead of hurts, achieving SOTA on MMAU.</div>
-  </div>
-  <div class="rt-item rt-item-ongoing">
-    <div class="rt-year rt-year-ongoing">Step 4 — Ongoing</div>
-    <div class="rt-title">Fully autonomous self-improvement</div>
-    <div class="rt-desc">The endgame: generative models that continuously improve with progressively less human intervention — from data collection to reward design to training itself.</div>
-  </div>
-</div>
+{% include anim/strip_vision.html %}
 
 <!-- ═══════════════════════════════ AWARDS ════════════════════════════ -->
 <h2 class="section-header" id="awards"><img class="sh-icon" src="/images/icons/sh-awards.png" alt="">Awards &amp; Academic Service</h2>
