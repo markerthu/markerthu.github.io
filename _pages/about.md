@@ -47,6 +47,13 @@ body.dark-mode .internship-banner strong { color: #90caf9 !important; }
   position: sticky; top: 56px; z-index: 90;
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
+/* phones: one swipeable row instead of five stacked rows covering the page */
+@media (max-width: 640px) {
+  .quick-nav { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; gap: 4px 12px; padding: 8px 12px; }
+  .quick-nav::-webkit-scrollbar { display: none; }
+  .quick-nav a, .quick-nav .qn-label, .quick-nav .qn-cmdk { flex: 0 0 auto; white-space: nowrap; }
+  .quick-nav .qn-cmdk { display: none; }
+}
 .quick-nav a img.qn-ico { width: 14px; height: 14px; object-fit: contain; vertical-align: -2px; margin-right: 5px; }
 .footer-links a img.ft-ico { width: 15px; height: 15px; object-fit: contain; vertical-align: -2px; margin-right: 5px; }
 body.dark-mode .quick-nav a img.qn-ico, body.dark-mode .footer-links a img.ft-ico { filter: brightness(1.5) saturate(1.1); }
