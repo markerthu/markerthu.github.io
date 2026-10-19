@@ -103,6 +103,9 @@ body.dark-mode .hl-tag{border-left-color:#d29922}
 .cl-project{background:#1565c0;color:#fff}
 .cl-paper{background:var(--pill);color:var(--link);border:1px solid var(--rule)}
 .cl-arxiv{background:var(--pill);color:#c62828;border:1px solid var(--rule)}
+.cl-film{background:var(--pill);color:#5b3cc4;border:1px solid var(--rule);display:inline-flex;align-items:center;gap:6px}
+.cl-film::before{content:"";border-left:6px solid currentColor;border-top:4px solid transparent;border-bottom:4px solid transparent}
+body.dark-mode .cl-film{color:#b9a6f5}
 body.dark-mode .cl-arxiv{color:#f7a8b8}
 
 /* ── footer ── */
@@ -174,6 +177,7 @@ body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-ima
       <p>Voice agents could be measured, never improved. Both sides speak natively and locally, so the agent can be trained end to end.</p>
       <div class="card-links">
         <a class="cl cl-project" href="/projects/speechgym/">Project Page</a>
+        <a class="cl cl-film" href="/film/?s=speechgym">Film</a>
         <a class="cl cl-arxiv" href="https://arxiv.org/abs/2608.26432">arXiv</a>
         <a class="cl cl-paper" href="/posts/2026/08/speechgym-voice-agent-rl/">Blog</a>
       </div>
@@ -192,6 +196,7 @@ body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-ima
       <p>A verbalizable, multilingual middle-layer workspace &mdash; read with a logit lens at the audio-token positions.</p>
       <div class="card-links">
         <a class="cl cl-project" href="/projects/read-the-mind/">Project Page</a>
+        <a class="cl cl-film" href="/film/?s=read-the-mind">Film</a>
         <a class="cl cl-arxiv" href="https://arxiv.org/abs/2608.24958">arXiv</a>
         <a class="cl cl-paper" href="/posts/2026/08/read-the-mind-audio-llm/">Blog</a>
       </div>
@@ -228,6 +233,7 @@ body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-ima
       <p>Rewards the tool-call sequence &mdash; order quality plus final system state &mdash; not just the final answer.</p>
       <div class="card-links">
         <a class="cl cl-project" href="/projects/procedure-aware-rl/">Project Page</a>
+        <a class="cl cl-film" href="/film/?s=procedure-aware-rl">Film</a>
         <a class="cl cl-paper" href="https://openreview.net/forum?id=d4wrBuJ4xo">OpenReview</a>
       </div>
     </div>
@@ -245,6 +251,7 @@ body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-ima
       <p>Resolves test-time inverse scaling in Audio LLMs by rewarding the reasoning process.</p>
       <div class="card-links">
         <a class="cl cl-project" href="/projects/cesar/">Project Page</a>
+        <a class="cl cl-film" href="/film/?s=cesar">Film</a>
         <a class="cl cl-paper" href="https://openreview.net/forum?id=DUr48hxO2h">OpenReview</a>
         <a class="cl cl-arxiv" href="https://arxiv.org/abs/2510.20867">arXiv</a>
       </div>
@@ -267,6 +274,7 @@ body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-ima
       <p>Sample-level adaptive divergence regularization — high-value samples explore freely, poor samples stay constrained.</p>
       <div class="card-links">
         <a class="cl cl-project" href="/projects/adrpo/">Project Page</a>
+        <a class="cl cl-film" href="/film/?s=adrpo">Film</a>
         <a class="cl cl-paper" href="https://openreview.net/forum?id=aXO0xg0ttW">OpenReview</a>
         <a class="cl cl-arxiv" href="https://arxiv.org/abs/2510.18053">arXiv</a>
       </div>
@@ -285,6 +293,7 @@ body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-ima
       <p>No human data, no mode collapse. W2 regularization preserves generation diversity.</p>
       <div class="card-links">
         <a class="cl cl-project" href="/projects/orw-cfm-w2/">Project Page</a>
+        <a class="cl cl-film" href="/film/?s=orw-cfm-w2">Film</a>
         <a class="cl cl-paper" href="https://openreview.net/forum?id=2IoFFexvuw">OpenReview</a>
       </div>
     </div>
@@ -302,6 +311,7 @@ body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-ima
       <p>Intermediate feedback + dual-stability for robust flow matching fine-tuning on SD3.</p>
       <div class="card-links">
         <a class="cl cl-project" href="/projects/ac-flow/">Project Page</a>
+        <a class="cl cl-film" href="/film/?s=ac-flow">Film</a>
         <a class="cl cl-arxiv" href="https://arxiv.org/abs/2510.18072">arXiv</a>
       </div>
     </div>
@@ -323,6 +333,7 @@ body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-ima
       <p>Learnable behavior control via hybrid policy mapping + bandit meta-controller.</p>
       <div class="card-links">
         <a class="cl cl-project" href="/projects/lbc/">Project Page</a>
+        <a class="cl cl-film" href="/film/?s=lbc">Film</a>
         <a class="cl cl-paper" href="https://openreview.net/forum?id=FeWvD0L_a4">OpenReview</a>
       </div>
     </div>
@@ -343,6 +354,7 @@ body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-ima
       <p>Unified RL framework showing data distribution is the key to superhuman efficiency.</p>
       <div class="card-links">
         <a class="cl cl-project" href="/projects/gdi/">Project Page</a>
+        <a class="cl cl-film" href="/film/?s=gdi">Film</a>
         <a class="cl cl-paper" href="https://proceedings.mlr.press/v162/fan22c.html">PMLR</a>
       </div>
     </div>
