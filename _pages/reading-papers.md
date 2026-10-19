@@ -34,6 +34,9 @@ excerpt: "Papers Jiajun Fan is reading — latest arXiv papers in RL post-traini
 body.dark-mode .arxiv-card { background: #161b22; border-color: #30363d; }
 body.dark-mode .arxiv-card:hover { border-color: #388bfd; }
 body.dark-mode .arxiv-title { color: #e6edf3; }
+.page__content a.arxiv-card, .page__content a.arxiv-card:hover, .page__content a.arxiv-card * { text-decoration: none !important; }
+.arxiv-card:hover .arxiv-title { color: #1565c0; }
+body.dark-mode .arxiv-card:hover .arxiv-title { color: #58a6ff; }
 </style>
 
 <div class="arxiv-page-meta">
