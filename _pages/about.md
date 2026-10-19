@@ -1145,6 +1145,21 @@ body.dark-mode .pillar-tag { background: #1c2333; color: #58a6ff; }
   .ra-btn, .ra-tip, .ra-panel { display: none !important; }
 }
 
+
+/* film teaser (links to /film/) */
+.film-teaser{position:relative;display:flex;align-items:center;gap:16px;min-height:128px;margin:18px 0 8px;padding:20px 24px;border-radius:14px;overflow:hidden;background:#0b0b0c;color:#ece6da !important;text-decoration:none !important;border:1px solid rgba(201,166,107,.22);transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+.film-teaser:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(0,0,0,.22);border-color:rgba(201,166,107,.45)}
+.film-teaser:focus-visible{outline:2px solid #c9a66b;outline-offset:3px}
+.film-teaser .ft-img{position:absolute;right:0;top:50%;transform:translateY(-50%);height:150%;width:auto;max-width:none;opacity:.95;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 45%);mask-image:linear-gradient(90deg,transparent 0,#000 45%);pointer-events:none}
+.film-teaser .ft-text{position:relative;z-index:1;display:flex;flex-direction:column;gap:5px;max-width:64%}
+.film-teaser .ft-kicker{font:600 11px Inter,system-ui,sans-serif;letter-spacing:.28em;color:#c9a66b}
+.film-teaser .ft-title{font-family:Newsreader,Georgia,'Times New Roman',serif;font-weight:400;font-size:1.9rem;line-height:1.1;color:#ece6da}
+.film-teaser .ft-sub{font-family:Newsreader,Georgia,'Times New Roman',serif;font-style:italic;font-size:1rem;line-height:1.45;color:rgba(236,230,218,.72)}
+.film-teaser .ft-play{position:relative;z-index:1;margin-left:auto;flex:none;width:50px;height:50px;border-radius:50%;border:1px solid rgba(236,230,218,.5);background:rgba(10,10,11,.55);transition:background .25s ease}
+.film-teaser:hover .ft-play{background:rgba(201,166,107,.28)}
+.film-teaser .ft-play::after{content:'';position:absolute;left:20px;top:16px;border-left:14px solid #ece6da;border-top:9px solid transparent;border-bottom:9px solid transparent}
+@media (max-width:600px){.film-teaser{padding:18px}.film-teaser .ft-text{max-width:80%}.film-teaser .ft-title{font-size:1.55rem}.film-teaser .ft-img{opacity:.5}}
+@media (prefers-reduced-motion:reduce){.film-teaser,.film-teaser .ft-play{transition:none}.film-teaser:hover{transform:none}}
 </style>
 
 <!-- Hero banner -->
@@ -1255,6 +1270,16 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
   </div>
 </div>
 </div>
+
+<a class="film-teaser" href="/film/" aria-label="Watch Out of the loop, a one-minute film about this research">
+  <img class="ft-img" src="/film/teaser.jpg" alt="" width="870" height="810" loading="lazy" decoding="async">
+  <span class="ft-text">
+    <span class="ft-kicker">A ONE-MINUTE FILM</span>
+    <span class="ft-title">Out of the loop</span>
+    <span class="ft-sub">The research above as one story: taking the human out of the training loop, step by step.</span>
+  </span>
+  <span class="ft-play" aria-hidden="true"></span>
+</a>
 
 <div class="internship-banner internship-banner-pulse">
 <i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-scholar.png);mask-image:url(/images/icons/h-scholar.png)"></i><strong>Seeking research internship — Fall 2026 / 2027.</strong> RL · Generative Models · Reasoning LLMs · Agentic RL

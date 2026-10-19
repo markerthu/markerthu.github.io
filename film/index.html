@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Out of the loop — a one-minute research film | Jiajun Fan</title>
+<meta name="description" content="A one-minute film on Jiajun Fan's research: reinforcement learning that takes the human out of the training loop, step by step.">
+<meta property="og:title" content="Out of the loop — a one-minute research film">
+<meta property="og:description" content="Reinforcement learning that takes the human out of the training loop, step by step. Jiajun Fan, UIUC.">
+<meta property="og:image" content="https://www.jiajunfan.com/film/poster.jpg">
+<meta property="og:type" content="video.other">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/images/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;1,6..72,300&display=swap" rel="stylesheet">
+<style>
+  html,body{margin:0;height:100%;background:#000;color:#ece6da;font-family:Inter,system-ui,sans-serif;overflow:hidden}
+  #stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+  #film{display:block;background:#09090a;cursor:pointer;box-shadow:0 0 0 1px rgba(255,255,255,.04)}
+  .chrome{position:fixed;z-index:2;transition:opacity .5s ease}
+  body.idle .chrome{opacity:0}
+  #back{top:14px;left:16px;font-size:13px;letter-spacing:.08em;color:rgba(236,230,218,.62);text-decoration:none;padding:6px 8px;border-radius:6px}
+  #back:hover{color:#ece6da;background:rgba(255,255,255,.06)}
+  #ctl{right:14px;bottom:12px;display:flex;gap:6px}
+  #ctl button,#play{background:rgba(20,20,22,.72);color:#ece6da;border:1px solid rgba(236,230,218,.16);border-radius:999px;
+    font:500 12px Inter,system-ui,sans-serif;letter-spacing:.08em;padding:8px 13px;cursor:pointer;backdrop-filter:blur(6px)}
+  #ctl button:hover,#play:hover{border-color:rgba(236,230,218,.4)}
+  #ctl button:focus-visible,#play:focus-visible,#back:focus-visible{outline:2px solid #c9a66b;outline-offset:2px}
+  #play{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:3;font-size:14px;padding:14px 22px;display:none}
+  body.paused-end #play,body.waiting #play{display:block}
+  #load{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;font-size:12px;letter-spacing:.3em;color:rgba(236,230,218,.45);z-index:4;background:#000;transition:opacity .6s}
+  #load.gone{opacity:0;pointer-events:none}
+  #nojs{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:24px;text-align:center}
+  #rot{position:fixed;left:0;right:0;top:calc(50% + 28.2vw + 18px);text-align:center;font-size:12px;letter-spacing:.14em;color:rgba(236,230,218,.55);display:none;z-index:2}
+  @media (orientation:portrait) and (max-width:700px){#rot{display:block}}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+</head>
+<body class="waiting">
+<a id="back" class="chrome" href="/">&larr; jiajunfan.com</a>
+<div id="stage"><canvas id="film" role="img" aria-label="Out of the loop: a one-minute animated film about Jiajun Fan's research"></canvas></div>
+<div class="sr" id="transcript">
+  <h1>Out of the loop</h1>
+  <p>How much of its own teaching can a model take over from us? Three things a human still does in the loop: data collection, labelling and tuning, reward design.</p>
+  <p>2022–2023, Superhuman: an agent learns to choose its own experience and breaks 24 Atari human world records (GDI, ICML 2022; LBC, ICLR 2023 Oral).</p>
+  <p>2025–2026, Its own data: no collected preferences; the model improves from its own generations without collapsing (ORW-CFM-W2, ICLR 2025; ProteinZero, TMLR 2026).</p>
+  <p>2025–2026, Its own reasoning: no hand-tuned regularisation and no human-written chains of thought (ADRPO, NeurIPS 2025; CESAR, ICLR 2026).</p>
+  <p>2026, Worlds to act in: voice agents that listen and speak natively, and tool agents that learn the order of things (SpeechGym, arXiv 2026; Procedure-Aware RL, COLM 2026).</p>
+  <p>Next, Its own critic: recursive self-improvement, where each better model becomes the critic and teacher of the next.</p>
+</div>
+<button id="play" type="button">&#9654;&nbsp; Play the film</button>
+<div id="ctl" class="chrome">
+  <button id="bPause" type="button" aria-label="Pause">Pause</button>
+  <button id="bRestart" type="button" aria-label="Restart">Restart</button>
+  <button id="bFull" type="button" aria-label="Full screen">Full screen</button>
+</div>
+<div id="rot" class="chrome">TURN YOUR PHONE SIDEWAYS FOR THE FULL FILM</div>
+<div id="load">LOADING</div>
+<noscript><div id="nojs">This film is rendered live and needs JavaScript.</div></noscript>
+
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
+</script>
+<script type="module">
+import { createFilm, loadFonts, DESIGN_W, DESIGN_H } from './film.js';
+
+const canvas = document.getElementById('film');
+const body = document.body;
+let film, t = 0, playing = false, last = 0, raf = 0;
+const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function fit() {
+  const vw = innerWidth, vh = innerHeight, ar = 16 / 9;
+  let w = vw, h = vw / ar; if (h > vh) { h = vh; w = vh * ar; }
+  canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+  const dpr = Math.min(devicePixelRatio || 1, 2);
+  const bw = Math.min(DESIGN_W, Math.round(w * dpr)), bh = Math.round(bw * 9 / 16);
+  film && film.resize(bw, bh);
+  film && film.renderAt(t);
+}
+function frame(now) {
+  if (!playing) return;
+  const dt = Math.min(0.1, (now - last) / 1000); last = now;
+  t += dt;
+  if (t >= film.duration) { t = film.duration; film.renderAt(t); stop(true); return; }
+  film.renderAt(t);
+  raf = requestAnimationFrame(frame);
+}
+function play() {
+  if (t >= film.duration - 0.05) t = 0;
+  playing = true; body.classList.remove('waiting', 'paused-end');
+  bPause.textContent = 'Pause'; bPause.setAttribute('aria-label', 'Pause');
+  last = performance.now(); cancelAnimationFrame(raf); raf = requestAnimationFrame(frame);
+}
+function stop(end) {
+  playing = false; cancelAnimationFrame(raf);
+  bPause.textContent = 'Play'; bPause.setAttribute('aria-label', 'Play');
+  if (end) { body.classList.add('paused-end'); document.getElementById('play').innerHTML = '&#8635;&nbsp; Watch again'; }
+}
+const bPause = document.getElementById('bPause');
+bPause.onclick = () => playing ? stop(false) : play();
+document.getElementById('bRestart').onclick = () => { t = 0; play(); };
+document.getElementById('bFull').onclick = () => {
+  const el = document.documentElement;
+  if (!document.fullscreenElement) {
+    const r = (el.requestFullscreen || el.webkitRequestFullscreen || (() => {})).call(el);
+    Promise.resolve(r).then(() => screen.orientation && screen.orientation.lock && screen.orientation.lock('landscape').catch(() => {})).catch(() => {});
+  }
+  else (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+};
+document.getElementById('play').onclick = play;
+canvas.addEventListener('click', e => {
+  const r = canvas.getBoundingClientRect();
+  const x = (e.clientX - r.left) / r.width * DESIGN_W, y = (e.clientY - r.top) / r.height * DESIGN_H;
+  const seek = film.timelineHit(x, y);
+  if (seek != null) { t = seek; film.renderAt(t); if (!playing) play(); return; }
+  playing ? stop(false) : play();
+});
+addEventListener('keydown', e => {
+  if (e.code === 'Space') { e.preventDefault(); playing ? stop(false) : play(); }
+  else if (e.code === 'ArrowRight') { t = Math.min(film.duration - 0.1, t + 5); film.renderAt(t); }
+  else if (e.code === 'ArrowLeft') { t = Math.max(0, t - 5); film.renderAt(t); }
+});
+let idleT; const wake = () => { body.classList.remove('idle'); clearTimeout(idleT); idleT = setTimeout(() => playing && body.classList.add('idle'), 2200); };
+addEventListener('mousemove', wake); addEventListener('touchstart', wake, { passive: true }); wake();
+document.addEventListener('visibilitychange', () => { if (document.hidden && playing) stop(false); });
+addEventListener('resize', fit);
+
+(async () => {
+  await loadFonts();
+  try { film = createFilm(canvas, { particles: innerWidth < 700 ? 6000 : 9000 }); }
+  catch (e) { document.getElementById('load').textContent = 'WEBGL IS NOT AVAILABLE IN THIS BROWSER'; return; }
+  fit();
+  document.getElementById('load').classList.add('gone');
+  if (still) { t = 20.5; film.renderAt(t); stop(false); body.classList.add('waiting'); }
+  else play();
+})();
+</script>
+</body>
+</html>
