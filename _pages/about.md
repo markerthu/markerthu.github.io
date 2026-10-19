@@ -1791,46 +1791,34 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
 
 <script>
 (function(){
+  // Dates checked against the official sites on 2026-10-19 (AoE). Past events are dropped.
   var CONF = [
-    { name:'ECCV 2026', abbr:'ECCV', type:'CV', color:'#059669',
-      location:'Malmö, Sweden', conf:'Sep 8–13, 2026', url:'https://eccv.ecva.net/Conferences/2026',
-      deadlines:[
-        {label:'Paper Submission', date:'2026-03-05', passed:true},
-        {label:'Supplemental',     date:'2026-03-12', passed:true},
-        {label:'Rebuttal',         date:'2026-05-11', passed:true},
-        {label:'Decisions',        date:'2026-06-17'},
-      ]},
-    { name:'ICML 2026', abbr:'ICML', type:'ML', color:'#1565c0',
-      location:'Seoul, South Korea', conf:'Jul 6–11, 2026', url:'https://icml.cc/Conferences/2026',
-      deadlines:[
-        {label:'Abstract',         date:'2026-01-23', passed:true},
-        {label:'Paper Submission', date:'2026-01-28', passed:true},
-        {label:'Notification',     date:'2026-04-30', passed:true},
-        {label:'Conference',       date:'2026-07-06'},
-      ]},
     { name:'CVPR 2027', abbr:'CVPR', type:'CV', color:'#059669',
-      location:'Nashville, TN, USA', conf:'Jun 2027', url:'https://cvpr.thecvf.com/',
+      location:'Seattle, WA, USA', conf:'Jun 20–25, 2027', url:'https://cvpr.thecvf.com/Conferences/2027/CallForPapers',
       deadlines:[
-        {label:'Abstract',         date:'2026-11-06'},
-        {label:'Paper Submission', date:'2026-11-13'},
-      ]},
-    { name:'ICLR 2026', abbr:'ICLR', type:'ML', color:'#7c3aed',
-      location:'Rio de Janeiro, Brazil', conf:'Apr 23–27, 2026', url:'https://iclr.cc/Conferences/2026',
-      deadlines:[
-        {label:'Submission',       date:'2025-09-24', passed:true},
-        {label:'Notification',     date:'2026-01-25', passed:true},
-        {label:'Conference',       date:'2026-04-23', passed:true},
-      ]},
-    { name:'NeurIPS 2026', abbr:'NeurIPS', type:'ML', color:'#1565c0',
-      location:'San Diego, CA, USA', conf:'Dec 6–12, 2026', url:'https://neurips.cc/Conferences/2026',
-      deadlines:[
-        {label:'Abstract',         date:'2026-05-04', passed:true},
-        {label:'Full Paper',       date:'2026-05-06', passed:true},
-        {label:'Notification',     date:'2026-09-18'},
-        {label:'Conference',       date:'2026-12-06'},
+        {label:'Paper Enrollment', date:'2026-11-10'},
+        {label:'Paper Submission', date:'2026-11-16'},
+        {label:'Supplementary',    date:'2026-11-23'},
+        {label:'Rebuttal',         date:'2027-01-25'},
+        {label:'Decisions',        date:'2027-02-25'},
       ]},
     { name:'ICLR 2027', abbr:'ICLR', type:'ML', color:'#7c3aed',
-      location:'TBA', conf:'TBA', url:'https://iclr.cc/',
+      location:'California, USA', conf:'Apr 26–30, 2027', url:'https://iclr.cc/Conferences/2027',
+      deadlines:[
+        {label:'Abstract',         date:'2026-09-18', passed:true},
+        {label:'Paper Submission', date:'2026-09-25', passed:true},
+        {label:'Reviews',          date:'2026-11-05'},
+        {label:'Decisions',        date:'2026-12-16'},
+      ]},
+    { name:'NeurIPS 2026', abbr:'NeurIPS', type:'ML', color:'#1565c0',
+      location:'Sydney · Atlanta · Paris', conf:'Dec 6–13, 2026', url:'https://neurips.cc/Conferences/2026',
+      deadlines:[
+        {label:'Notification',     date:'2026-09-24', passed:true},
+        {label:'Early Registration', date:'2026-10-30'},
+        {label:'Conference',       date:'2026-12-06'},
+      ]},
+    { name:'ICML 2027', abbr:'ICML', type:'ML', color:'#1565c0',
+      location:'TBA', conf:'TBA', url:'https://icml.cc/',
       deadlines:[
         {label:'Abstract',         date:null},
         {label:'Paper Submission', date:null},
