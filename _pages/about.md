@@ -1795,7 +1795,7 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
 
 <script>
 (function(){
-  // Dates checked against the official sites on 2026-10-19 (AoE). Past events are dropped.
+  /* Dates checked against the official sites on 2026-10-19 (AoE). Past events are dropped. */
   var CONF = [
     { name:'CVPR 2027', abbr:'CVPR', type:'CV', color:'#059669',
       location:'Seattle, WA, USA', conf:'Jun 20–25, 2027', url:'https://cvpr.thecvf.com/Conferences/2027/CallForPapers',
@@ -2484,7 +2484,7 @@ function drawGraph(container) {
 (function(){
   var FILMS = ['speechgym','read-the-mind','procedure-aware-rl','cesar','adrpo','orw-cfm-w2','ac-flow','lbc','gdi'];
   document.querySelectorAll('.pub-entry').forEach(function(entry){
-    var proj = entry.querySelector('a.pl-project, a.pub-project');
+    var proj = entry.querySelector('.pub-links a.pl-project') || entry.querySelector('a.pub-project');
     if (!proj) return;
     var m = (proj.getAttribute('href') || '').match(/^\/projects\/([a-z0-9-]+)\/?$/);
     if (!m || FILMS.indexOf(m[1]) < 0 || entry.querySelector('.pl-video')) return;
