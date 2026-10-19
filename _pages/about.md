@@ -407,7 +407,7 @@ body.dark-mode .fv-iclr23oral { background: #5b21b6 !important; color: #e9d5ff !
 .pub-links { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; align-items: center; }
 .pub-links .pub-link, .pub-links .cite-badge {
   display: inline-flex; align-items: center; gap: 5px;
-  font: 600 0.74em/1 inherit; letter-spacing: .01em;
+  font-family: inherit; font-size: 0.74em; font-weight: 600; line-height: 1.15; letter-spacing: .01em;
   padding: 6px 11px; border-radius: 999px; border: 1px solid transparent;
   text-decoration: none !important; white-space: nowrap; cursor: pointer;
   transition: background .15s, border-color .15s, transform .15s;
