@@ -417,6 +417,9 @@ body.dark-mode .fv-iclr23oral { background: #5b21b6 !important; color: #e9d5ff !
 .pl-code:hover { background: #f8bbd0; }
 .pl-arxiv { background: #fff3e0; color: #bf360c; }
 .pl-arxiv:hover { background: #ffe0b2; }
+.pl-video { background: #14120f; color: #e2c58f; }
+.pl-video:hover { background: #2a241a; }
+.pl-video::before { content: ''; display: inline-block; margin-right: 6px; border-left: 7px solid currentColor; border-top: 4.5px solid transparent; border-bottom: 4.5px solid transparent; }
 
 /* ── Research timeline ── */
 .research-timeline {
@@ -594,6 +597,7 @@ body.dark-mode .pub-link.pl-paper  { background: #1c2333 !important; color: #58a
 body.dark-mode .pub-link.pl-project{ background: #122117 !important; color: #3fb950 !important; }
 body.dark-mode .pub-link.pl-code   { background: #3d1526 !important; color: #f48fb1 !important; }
 body.dark-mode .pub-link.pl-arxiv  { background: #3d2410 !important; color: #ffb74d !important; }
+body.dark-mode .pub-link.pl-video  { background: #2a2418 !important; color: #e8c98a !important; }
 
 /* ── BibTeX cite button & popup ── */
 .pl-cite { background: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0; cursor: pointer; font-family: inherit; font-size: 0.78em; font-weight: 600; padding: 3px 9px; border-radius: 20px; transition: background .15s, color .15s; }
@@ -2474,6 +2478,25 @@ function drawGraph(container) {
   });
 })();
 
+</script>
+<script>
+/* Video button: every publication with a project film gets one, right after its Project link */
+(function(){
+  var FILMS = ['speechgym','read-the-mind','procedure-aware-rl','cesar','adrpo','orw-cfm-w2','ac-flow','lbc','gdi'];
+  document.querySelectorAll('.pub-entry').forEach(function(entry){
+    var proj = entry.querySelector('a.pl-project, a.pub-project');
+    if (!proj) return;
+    var m = (proj.getAttribute('href') || '').match(/^\/projects\/([a-z0-9-]+)\/?$/);
+    if (!m || FILMS.indexOf(m[1]) < 0 || entry.querySelector('.pl-video')) return;
+    var links = entry.querySelector('.pub-links');
+    if (!links) { links = document.createElement('div'); links.className = 'pub-links'; (entry.querySelector('.pub-right') || entry).appendChild(links); }
+    var a = document.createElement('a');
+    a.className = 'pub-link pl-video'; a.href = '/film/?s=' + m[1]; a.textContent = 'Video';
+    a.setAttribute('aria-label', 'Watch the project film');
+    if (proj.classList.contains('pl-project') && proj.parentNode === links) links.insertBefore(a, proj.nextSibling);
+    else links.insertBefore(a, links.firstChild);
+  });
+})();
 </script>
 
 <script>

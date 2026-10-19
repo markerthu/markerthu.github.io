@@ -109,6 +109,9 @@ body.dark-mode .pub-venue.is-oral{color:#f3cf6b;background:#2b2310;border-color:
 .act:hover{border-color:var(--link);background:rgba(21,101,192,.08)}
 .act-project{background:var(--link);color:var(--on-link);border-color:var(--link)}
 .act-project:hover{background:var(--link-h);border-color:var(--link-h)}
+.act-film{background:#14120f;color:#e2c58f !important;border-color:#14120f}
+.act-film:hover{background:#2a241a;border-color:#2a241a}
+body.dark-mode .act-film{background:#2a2418;color:#e8c98a !important;border-color:#3a3020}
 .bib-btn{cursor:pointer;font-family:var(--sans);font-size:.75rem;font-weight:600;padding:4px 11px;border-radius:7px;border:1px solid var(--rule);background:transparent;color:var(--muted);transition:border-color .18s,color .18s}
 .bib-btn:hover{border-color:var(--link);color:var(--link)}
 .bib-block{display:none;position:relative;margin-top:10px;background:#1e242c;border-radius:10px;padding:16px 16px 12px}
@@ -280,6 +283,7 @@ body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-ima
       {% if post.citation %}<div class="pub-authors">{{ post.citation | replace: "Jiajun Fan", "<strong>Jiajun Fan</strong>" | replace: "J. Fan", "<strong>J. Fan</strong>" }}</div>{% endif %}
       <div class="pub-actions">
         {% if post.projectpage %}<a class="act act-project" href="{{ post.projectpage }}">Project page</a>{% endif %}
+        {% if post.film %}<a class="act act-film" href="/film/?s={{ post.film }}">&#9654;&nbsp;Video</a>{% endif %}
         {% if post.paperurl and post.paperurl != '' %}<a class="act" href="{{ post.paperurl }}" target="_blank" rel="noopener noreferrer">Paper</a>{% endif %}
         {% if post.bibtex %}
         <button class="bib-btn" aria-expanded="false" onclick="

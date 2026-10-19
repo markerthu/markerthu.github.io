@@ -15,6 +15,7 @@ bibtex: |
     year={2026},
     url={https://arxiv.org/abs/2506.07459}
   }
+projectpage: "/projects/proteinzero/"
 ---
 
 We propose ProteinZero, a self-improving framework for protein generation via online reinforcement learning. The model iteratively improves its own protein design capabilities without human-curated data, demonstrating how RL-based self-evolution can be extended to biological sequence generation.

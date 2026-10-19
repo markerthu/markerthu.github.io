@@ -15,6 +15,7 @@ bibtex: |
     year={2025},
     url={https://openreview.net/forum?id=2IoFFexvuw}
   }
+film: "orw-cfm-w2"
 ---
 
 We introduce ORW-CFM-W2, a self-evolving RLHF framework enabling flow matching models to continuously optimize through online reward feedback without relying on human-collected datasets. We derive a tractable Wasserstein-2 bound providing the first theoretical guarantee for collapse-free policy evolution.

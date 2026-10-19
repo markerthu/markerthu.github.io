@@ -15,6 +15,7 @@ bibtex: |
     year={2025},
     url={https://arxiv.org/abs/2510.18072}
   }
+film: "ac-flow"
 ---
 
 We present AC-Flow, a robust actor-critic framework for fine-tuning flow matching generative models with intermediate feedback. Key innovations include reward shaping for stable intermediate value learning, a dual-stability mechanism combining advantage clipping with critic warm-up, and a scalable generalized critic weighting scheme with Wasserstein regularization. Achieves SOTA text-to-image alignment on Stable Diffusion 3 without compromising diversity or stability.

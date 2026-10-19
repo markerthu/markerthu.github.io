@@ -15,6 +15,7 @@ bibtex: |
     year={2025},
     url={https://openreview.net/forum?id=aXO0xg0ttW}
   }
+film: "adrpo"
 ---
 
 We propose ADRPO, which dynamically adjusts divergence regularization strength based on advantage estimates — reducing regularization for high-value samples while applying stronger constraints to poor samples. Enables a 2B SD3 model to surpass 4.8B/12B models; also generalizes to LLMs and multimodal reasoning.

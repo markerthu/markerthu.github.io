@@ -12,6 +12,8 @@ bibtex: |
     booktitle={Conference on Language Modeling},
     year={2026}
   }
+film: "procedure-aware-rl"
+projectpage: "/projects/procedure-aware-rl/"
 ---
 
 A procedure-aware RL framework for tool-augmented LLMs that supervises the procedural fidelity of multi-turn tool invocations, not just final-answer correctness. It scores both invocation-chain quality and final system-state correctness, and trains with GRPO plus KL regularization. On API-Bank, Bamboogle and BFCL-V3, a fine-tuned Qwen2.5-3B-Instruct consistently beats correctness-only baselines and reaches average accuracy competitive with far larger proprietary models. Optimizing tool sequencing also improves recovery from failed tool calls.

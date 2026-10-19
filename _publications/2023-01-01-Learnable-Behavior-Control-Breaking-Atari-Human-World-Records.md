@@ -16,6 +16,7 @@ bibtex: |
     note={Oral, Top 5\%},
     url={https://openreview.net/forum?id=FeWvD0L_a4}
   }
+film: "lbc"
 ---
 
 We propose LBC (Learnable Behavior Control), a unified framework enabling significantly enlarged behavior selection space via a hybrid behavior mapping. Our agents achieved 10077.52% mean human normalized score and surpassed 24 human world records within 1B training frames, demonstrating SOTA performance with exceptional sample efficiency.
