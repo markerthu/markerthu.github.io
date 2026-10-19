@@ -8,7 +8,7 @@ export default {
       lines: ['Sample efficiency and final performance,', 'usually traded against each other.'] },
     { shape: 'chain', tick: 'THE INSIGHT', label: 'THE INSIGHT', title: 'Optimize the data',
       lines: ['Cast both into training-data distribution', 'optimization: DQN to Agent57 as special cases.'] },
-    { shape: 'invader', tick: 'RECORDS', label: 'RESULTS  ·  ATARI', title: '500× less data',
+    { shape: 'invader', tick: 'RECORDS', label: 'RESULTS  ·  ATARI', title: 'Superhuman, efficiently',
       lines: ['22 human world records and a 9,620% mean', 'human-normalized score, in 200M frames.'],
       stat: { from: 1, to: 500, suffix: '×', label: 'MORE SAMPLE-EFFICIENT THAN AGENT57' } },
     { shape: 'bars', tick: 'LEGACY', label: 'WHAT FOLLOWED', title: 'An idea that travelled',
