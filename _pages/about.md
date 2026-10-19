@@ -211,6 +211,7 @@ body.dark-mode .ro-v { color: #58a6ff; background: #161b22; border-color: #30363
 
 /* ── Stats row ── */
 .stats-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 1.2em 0 1.6em; }
+@media (max-width: 560px) { .stats-row { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; } }
 .cit-chart{background:#fff;border:1.5px solid #e0e8f0;border-radius:12px;padding:16px 20px 12px;margin:0 0 1.8em;}
 .cit-chart-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px;margin-bottom:12px;}
 .cit-chart-title{font-weight:800;font-size:0.92em;color:#1a2332;}
