@@ -227,23 +227,28 @@ export function createFilm(canvas, opts = {}) {
       const r0 = R[i * 4];
       if (r0 < 0.72) {
         const side = r0 < 0.36 ? -1 : 1, g0 = G[i * 3], g1 = G[i * 3 + 1], g2 = G[i * 3 + 2], m = Math.hypot(g0, g1, g2) || 1;
-        const rad = 0.5 * Math.cbrt(R[i * 4 + 1]) * (1 + 0.05 * Math.sin(t * 2 + side));
-        p[0] = side * 1.45 + g0 / m * rad; p[1] = g1 / m * rad; p[2] = g2 / m * rad;
+        const rad = 0.44 * Math.cbrt(R[i * 4 + 1]) * (1 + 0.05 * Math.sin(t * 2 + side));
+        p[0] = side * 1.3 + g0 / m * rad; p[1] = g1 / m * rad; p[2] = g2 / m * rad;
       } else {
         const dir = R[i * 4 + 3] < 0.5 ? 1 : -1, s = frac(R[i * 4 + 2] + t * 0.22);
-        const x = dir > 0 ? -1.0 + 2.0 * s : 1.0 - 2.0 * s;
+        const x = dir > 0 ? -0.88 + 1.76 * s : 0.88 - 1.76 * s;
         p[0] = x; p[1] = dir * 0.22 + 0.2 * Math.sin(16 * s - 6 * t) * Math.sin(Math.PI * s) + G[i * 3] * 0.02; p[2] = G[i * 3 + 1] * 0.04;
       }
       rotYX(p, 0.25 * Math.sin(t * 0.18), 0.12);
       return r0 < 0.72 ? 0.6 : 1.0;
     },
     layers(i, t, lt) { // a stack of layers; the middle ones light up as a pulse passes
-      const NL = 10, k = Math.floor(R[i * 4] * NL);
-      p[0] = -1.8 + k * 0.4 + G[i * 3] * 0.008; p[1] = (R[i * 4 + 1] * 2 - 1) * 0.95; p[2] = (R[i * 4 + 2] * 2 - 1) * 0.6;
-      const mid = Math.exp(-Math.pow((k - 5) / 1.9, 2));
-      const head = (lt * 2.2) % (NL + 6) - 2;
-      rotYX(p, 0.62, 0.16);
-      return 0.28 + 0.55 * mid + 0.75 * Math.exp(-Math.pow(k - head, 2) * 0.8);
+      const NL = 9, k = Math.floor(R[i * 4] * NL), hy = 0.9, hz = 0.55;
+      let y = (R[i * 4 + 1] * 2 - 1) * hy, z = (R[i * 4 + 2] * 2 - 1) * hz, edge = false;
+      if (R[i * 4 + 3] < 0.35) { // a third of each layer traces its frame
+        edge = true; const s = R[i * 4 + 1] * 4, f = Math.floor(s), u = (s - f) * 2 - 1;
+        if (f === 0) { y = hy; z = u * hz; } else if (f === 1) { y = -hy; z = u * hz; } else if (f === 2) { z = hz; y = u * hy; } else { z = -hz; y = u * hy; }
+      }
+      p[0] = -1.75 + k * (3.5 / (NL - 1)); p[1] = y; p[2] = z;
+      const mid = Math.exp(-Math.pow((k - (NL - 1) / 2) / 1.6, 2));
+      const head = (lt * 2.0) % (NL + 6) - 2;
+      rotYX(p, 0.42 + 0.06 * Math.sin(t * 0.3), 0.14);
+      return (edge ? 1.0 : 0.3) * (0.35 + 0.55 * mid + 0.8 * Math.exp(-Math.pow(k - head, 2) * 0.8));
     },
     helix(i, t) { // an alpha-helix ribbon along a gentle S-curve
       const u = R[i * 4], ang = 2 * Math.PI * 6 * u + t * 0.6, rr = 0.34;
@@ -278,14 +283,15 @@ export function createFilm(canvas, opts = {}) {
       rotYX(p, t * 0.15, 0.3);
       return 0.7 + 0.25 * Math.sin(c * 1.7);
     },
-    pipeline(i, t, lt) { // three steps in order, with work flowing through them
-      const r0 = R[i * 4];
-      if (r0 < 0.8) {
-        const k = Math.floor(R[i * 4 + 1] * 3), cx = -1.35 + k * 1.35, h = 0.3;
+    pipeline(i, t, lt, c) { // three steps in order, with work flowing through them
+      const r0 = R[i * 4], shuffled = c && c.arg === 'shuffled';
+      if (r0 < 0.8 || shuffled) {
+        const k = Math.floor(R[i * 4 + 1] * 3), h = 0.3;
+        const cx = shuffled ? [1.25, -1.3, 0.05][k] : -1.35 + k * 1.35, cy = shuffled ? [0.55, -0.45, 0.15][k] + 0.06 * Math.sin(t * 1.3 + k * 2) : 0;
         const face = Math.floor(R[i * 4 + 2] * 6), a = (R[i * 4 + 3] * 2 - 1) * h, b = (frac(R[i * 4 + 2] * 6) * 2 - 1) * h;
         const s = face % 2 ? h : -h;
-        if (face < 2) { p[0] = cx + s; p[1] = a; p[2] = b; } else if (face < 4) { p[0] = cx + a; p[1] = s; p[2] = b; } else { p[0] = cx + a; p[1] = b; p[2] = s; }
-        const lit = Math.exp(-Math.pow(k - ((lt * 0.9) % 4.5), 2) * 1.5);
+        if (face < 2) { p[0] = cx + s; p[1] = cy + a; p[2] = b; } else if (face < 4) { p[0] = cx + a; p[1] = cy + s; p[2] = b; } else { p[0] = cx + a; p[1] = cy + b; p[2] = s; }
+        const lit = shuffled ? 0.15 : Math.exp(-Math.pow(k - ((lt * 0.9) % 4.5), 2) * 1.5);
         rotYX(p, 0.5 + 0.15 * Math.sin(t * 0.3), 0.32);
         return 0.55 + 0.8 * lit;
       }
@@ -328,10 +334,10 @@ export function createFilm(canvas, opts = {}) {
     for (let i = 0; i < N; i++) {
       let e = 0;
       if (k < CH.length - 1 && t > T0) e = easeInOut((t - T0 - R[i * 4 + 3] * 0.5) / 1.5);
-      const ba = fa(i, t, lta); q[0] = p[0]; q[1] = p[1]; q[2] = p[2];
+      const ba = fa(i, t, lta, c); q[0] = p[0]; q[1] = p[1]; q[2] = p[2];
       let b = ba;
       if (e > 0) {
-        const bb = fb(i, t, ltb);
+        const bb = fb(i, t, ltb, nxt);
         const sw = Math.sin(Math.PI * e) * 0.35; // a little swirl mid-morph
         for (let d = 0; d < 3; d++) p[d] = q[d] + (p[d] - q[d]) * e + G[i * 3 + d] * sw;
         b = ba + (bb - ba) * e;
@@ -387,7 +393,7 @@ export function createFilm(canvas, opts = {}) {
     return (st.before || '') + (st.prefix || '') + sign + s + (st.suffix || '');
   }
 
-  const TITLE_PX = 124, TITLE_MAX = 900;
+  const TITLE_PX = 124, TITLE_MAX = 780;
   function drawChapterText(t) {
     const k = chapterAt(t), c = CH[k];
     const base = c.t0 + (k === 0 ? 0.9 : 0.35);

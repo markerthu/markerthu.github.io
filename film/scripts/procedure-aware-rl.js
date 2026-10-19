@@ -4,7 +4,7 @@ export default {
   chapters: timeline([
     { len: 7, shape: 'pipeline', label: 'COLM 2026', title: 'Procedure-Aware RL',
       lines: ['Teaching tool-using agents', 'the order of things.'], meta: 'ZHENG, FAN, CHENG, LIU  ·  UIUC' },
-    { shape: 'collapse', tick: 'THE PROBLEM', label: 'THE PROBLEM', title: 'Right calls, wrong order',
+    { shape: 'pipeline', arg: 'shuffled', tick: 'THE PROBLEM', label: 'THE PROBLEM', title: 'Right calls, wrong order',
       lines: ['Correctness-only rewards score each call, never', 'the sequence: ship it before the address is known.'] },
     { shape: 'chain', tick: 'THE REWARD', label: 'THE REWARD', title: 'Score the procedure',
       lines: ['Call order (NDCG), a final-state check and a', 'penalty for malformed calls, on top of GRPO.'] },

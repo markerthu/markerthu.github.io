@@ -4,7 +4,7 @@ export default {
   chapters: timeline([
     { len: 7, shape: 'waveform', label: 'ARXIV 2026', title: 'SpeechGym',
       lines: ['An audio-native gym for training voice agents', 'with reinforcement learning.'], meta: 'JIAJUN FAN ET AL.  ·  UIUC & AMAZON' },
-    { shape: 'collapse', tick: 'THE PROBLEM', label: 'THE PROBLEM', title: 'Measured, never trained',
+    { shape: 'sphere', tick: 'THE PROBLEM', label: 'THE PROBLEM', title: 'Measured, never trained',
       lines: ['Benchmarks score a closed realtime API: no gradient', 'crosses the boundary, and every call costs money.'] },
     { shape: 'dialog', tick: 'THE GYM', label: 'THE GYM', title: 'Both sides, in speech',
       lines: ['A frozen open omni-model plays the caller;', 'the same architecture, trainable, is the agent.'],
