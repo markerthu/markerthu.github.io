@@ -246,17 +246,7 @@ body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-ima
 <section>
   <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-gear.png);mask-image:url(/images/icons/h-gear.png)"></i>Method</h2>
   <p>CESAR uses <strong>Group Relative Policy Optimization (GRPO)</strong> with a multi-faceted reward suite that goes beyond simple correctness — every component targets a specific failure mode of unsupervised reasoning.</p>
-  <div class="method-steps">
-    <div class="step"><div class="step-num">1</div><h3>Correctness</h3><p>Standard outcome reward — is the final answer right?</p></div>
-    <div class="step"><div class="step-num">2</div><h3>Consistency</h3><p>Reasoning ↔ question and reasoning ↔ answer alignment.</p></div>
-    <div class="step"><div class="step-num">3</div><h3>Structure</h3><p>Analytical patterns, logical connectives, domain vocabulary.</p></div>
-    <div class="step"><div class="step-num">4</div><h3>Depth</h3><p>Overthinking penalty — calibrate reasoning length to the task.</p></div>
-  </div>
-  <figure class="chart wide">
-    {% include figures/cesar_framework.svg %}
-    <figcaption><b>Figure 1.</b> Outcome-only RL (top) rewards only final-answer correctness and format. CESAR (bottom) adds process rewards — consistency, structure, and an overthinking penalty — on the reasoning chain itself.</figcaption>
-  </figure>
-  {% include anim/cesar.html %}
+  {% include anim/strip_cesar.html %}
 </section>
 
 <section>
@@ -280,7 +270,7 @@ body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-ima
   </div>
   <figure class="chart">
     {% include figures/cesar_radar.svg %}
-    <figcaption><b>Figure 2.</b> Per-category MMAU accuracy. CESAR leads the base model (Qwen2.5-Omni-7B) and the outcome-only baseline (Ke-Omni-R) on Sound, Music, Speech and overall; its no-penalty variant does too, except on Music where it matches Ke-Omni-R — process rewards improve perception, not just reasoning.</figcaption>
+    <figcaption><b>Figure 1.</b> Per-category MMAU accuracy. CESAR leads the base model (Qwen2.5-Omni-7B) and the outcome-only baseline (Ke-Omni-R) on Sound, Music, Speech and overall; its no-penalty variant does too, except on Music where it matches Ke-Omni-R — process rewards improve perception, not just reasoning.</figcaption>
   </figure>
 </section>
 
@@ -289,11 +279,11 @@ body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-ima
   <p>With process rewards, more reasoning stops hurting and starts helping. The base model collapses as reasoning length grows; CESAR stays flat-high and even rises.</p>
   <figure class="chart wide">
     {% include figures/cesar_scaling.svg %}
-    <figcaption><b>Figure 3.</b> Accuracy vs. average reasoning tokens on MMAU. Qwen2.5-Omni-7B suffers inverse scaling — accuracy collapses — while CESAR, its no-penalty variant, and Ke-Omni-R stay flat and high.</figcaption>
+    <figcaption><b>Figure 2.</b> Accuracy vs. average reasoning tokens on MMAU. Qwen2.5-Omni-7B suffers inverse scaling — accuracy collapses — while CESAR, its no-penalty variant, and Ke-Omni-R stay flat and high.</figcaption>
   </figure>
   <figure class="chart">
     {% include figures/cesar_slope.svg %}
-    <figcaption><b>Figure 4.</b> Fitted scaling slopes (Δaccuracy per reasoning token). Qwen2.5-Omni-7B is strongly negative (−0.51); Ke-Omni-R is flat (−0.007); only CESAR is clearly positive (+0.038) — reasoning genuinely helps.</figcaption>
+    <figcaption><b>Figure 3.</b> Fitted scaling slopes (Δaccuracy per reasoning token). Qwen2.5-Omni-7B is strongly negative (−0.51); Ke-Omni-R is flat (−0.007); only CESAR is clearly positive (+0.038) — reasoning genuinely helps.</figcaption>
   </figure>
 </section>
 

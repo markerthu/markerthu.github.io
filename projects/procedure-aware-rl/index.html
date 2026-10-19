@@ -243,16 +243,7 @@ body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-ima
 <section>
   <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-gear.png);mask-image:url(/images/icons/h-gear.png)"></i>Method</h2>
   <p>The policy is fine-tuned with <strong>GRPO</strong> (KL-regularized) on a weighted sum of four reward terms. Only the reward changes &mdash; the RL algorithm stays standard.</p>
-  <div class="method-steps">
-    <div class="step"><div class="step-num">1</div><h3>Format</h3><p>Reasoning and tool-call tags are well-formed and parsable.</p></div>
-    <div class="step"><div class="step-num">2</div><h3>Correctness</h3><p>Tool names, parameter keys and values match the ground truth.</p></div>
-    <div class="step"><div class="step-num">3</div><h3>Procedural</h3><p>NDCG over the invocation order, plus a check that the trajectory ends in the correct state.</p></div>
-    <div class="step"><div class="step-num">4</div><h3>Error-aware</h3><p>Penalty for structural invocation errors: wrong name, wrong parameter keys, wrong types.</p></div>
-  </div>
-  <figure class="chart wide">
-    {% include figures/parl_framework.svg %}
-    <figcaption><b>Figure 1.</b> Procedure-aware agentic RL. Every rollout is scored on four axes; the weighted total drives a standard GRPO update. The procedural reward (blue) and the error-aware penalty (red) are what correctness-only RL leaves out.</figcaption>
-  </figure>
+  {% include anim/strip_parl.html %}
   <p>The procedural term uses <strong>normalized discounted cumulative gain</strong> so that partially-correct orderings are ranked above invalid ones, instead of collapsing to a binary match. The state check gives credit whenever the agent eventually reaches the correct final state, which keeps reasonable detours &mdash; listing a directory before creating a file, or recovering from a failed call &mdash; from being punished as mistakes.</p>
 </section>
 
@@ -266,7 +257,7 @@ body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-ima
   </div>
   <figure class="chart wide">
     {% include figures/parl_benchmarks.svg %}
-    <figcaption><b>Figure 2.</b> Qwen2.5-3B-Instruct trained with procedure-aware rewards, against the same base model and ToolRL's released correctness-only checkpoint, on three tool-use benchmarks.</figcaption>
+    <figcaption><b>Figure 1.</b> Qwen2.5-3B-Instruct trained with procedure-aware rewards, against the same base model and ToolRL's released correctness-only checkpoint, on three tool-use benchmarks.</figcaption>
   </figure>
   <div class="tbl-wrap">
   <table class="compare-table">
@@ -288,7 +279,7 @@ body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-ima
   <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-puzzle.png);mask-image:url(/images/icons/h-puzzle.png)"></i>Both new terms are load-bearing</h2>
   <figure class="chart">
     {% include figures/parl_ablation.svg %}
-    <figcaption><b>Figure 3.</b> Removing either term costs more than two points, and both together account for the whole gap to correctness-only RL. Scores here average the three BFCL sub-categories (non-live, live, multi-turn), so they are not directly comparable with the table above.</figcaption>
+    <figcaption><b>Figure 2.</b> Removing either term costs more than two points, and both together account for the whole gap to correctness-only RL. Scores here average the three BFCL sub-categories (non-live, live, multi-turn), so they are not directly comparable with the table above.</figcaption>
   </figure>
   <p>Dropping the error-aware penalty mostly hurts single-turn accuracy, where invocation errors go unpunished; dropping the procedural reward mostly hurts the multi-turn split, where ordering is what matters. All differences are significant under a paired bootstrap on per-sample outcomes.</p>
 </section>

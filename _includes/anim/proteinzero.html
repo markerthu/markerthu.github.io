@@ -94,7 +94,7 @@
   <circle class="fl" r="5" cx="0" cy="0" opacity="0"><animateMotion path="M681,202 V228 H99 V204" keyPoints="0;0;1;1" keyTimes="0;0.780;0.920;1" calcMode="linear" dur="12s" begin="pzT.begin"/><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0.000;0.775;0.785;0.915;0.925;1.000" dur="12s" begin="pzT.begin"/></circle>
   <text class="sub" x="390" y="248" text-anchor="middle">next round samples from the updated policy &#8212; no fixed dataset</text>
 </svg>
-<figcaption><b>How to read it.</b> Each round the model samples its own designs, scores them with ESMFold and the fast ddG proxy, is kept from collapsing onto near-identical sequences by a separate embedding-level diversity term, and takes a GRPO step &mdash; then samples again from the updated model. Schematic; the sequence is illustrative.</figcaption>
+<figcaption><b>How to read it.</b> Each round the model samples its own designs, scores them with ESMFold and the fast ddG proxy, is kept from collapsing onto near-identical sequences by a separate embedding-level diversity term, and takes a GRPO (or RAFT) step &mdash; then samples again from the updated model. Schematic; the sequence is illustrative.</figcaption>
 </figure>
 <script>
 (function(){

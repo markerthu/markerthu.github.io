@@ -304,11 +304,7 @@ figure.rimg figcaption{font-family:var(--sans);font-size:.82rem;color:var(--mute
 
 <section>
   <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-gear.png);mask-image:url(/images/icons/h-gear.png)"></i>Three Key Contributions</h2>
-  <div class="method-steps">
-    <div class="step"><div class="step-num">1</div><h3>Online Reward-Weighted Mechanism</h3><p>Integrates RL into flow matching via reward weighting — guides the model to prioritize high-reward regions in data space, without requiring reward gradients or filtered datasets.</p></div>
-    <div class="step"><div class="step-num">2</div><h3>Wasserstein-2 Regularization</h3><p>Derives a tractable upper bound for W2 distance in flow matching models — prevents policy collapse and maintains generation diversity throughout continuous optimization.</p></div>
-    <div class="step"><div class="step-num">3</div><h3>Unified RL Perspective</h3><p>Establishes a connection between flow matching fine-tuning and traditional KL-regularized RL, enabling controllable reward-diversity trade-offs and deeper understanding of the learning behavior.</p></div>
-  </div>
+  {% include anim/strip_orw.html %}
 </section>
 
 <section>

@@ -282,11 +282,7 @@ figure.rimg figcaption{font-family:var(--sans);font-size:.82rem;color:var(--mute
 
 <section>
   <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-gear.png);mask-image:url(/images/icons/h-gear.png)"></i>Three Key Innovations</h2>
-  <div class="method-steps">
-    <div class="step"><div class="step-num">1</div><h3>Reward Shaping</h3><p>Provides well-normalized learning signals for stable intermediate value learning and gradient control — enabling the critic to reason about multi-step trajectories.</p></div>
-    <div class="step"><div class="step-num">2</div><h3>Dual-Stability Mechanism</h3><p>Combines <em>advantage clipping</em> (prevents destructive policy updates) with a <em>critic warm-up phase</em> (lets critic mature before guiding the actor).</p></div>
-    <div class="step"><div class="step-num">3</div><h3>Generalized Critic Weighting</h3><p>Extends reward-weighted methods while preserving model diversity via Wasserstein regularization — compatible with ORW-CFM-W2 as a special case.</p></div>
-  </div>
+  {% include anim/strip_acflow.html %}
 </section>
 
 <section>
@@ -298,7 +294,6 @@ figure.rimg figcaption{font-family:var(--sans);font-size:.82rem;color:var(--mute
     <li><strong>Decoupled stability</strong> → advantage clipping handles actor; critic warm-up handles the critic</li>
   </ul>
   <p>The result: fine-tuning that <strong>generalizes beyond direct reward optimization</strong> — improvements transfer to unseen LLM and audio tasks (not just image generation).</p>
-  {% include anim/acflow.html %}
 </section>
 
 <section>

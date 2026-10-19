@@ -306,25 +306,7 @@ figure.rimg figcaption{font-family:var(--sans);font-size:.82rem;color:var(--mute
 <section>
   <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-puzzle.png);mask-image:url(/images/icons/h-puzzle.png)"></i>The Core Idea</h2>
   <p>Population-based methods fix a set of exploratory policies and select between them. LBC instead constructs a <strong>continuous, learnable behavior mapping space</strong> that blends all policies, then uses a <strong>bandit-based meta-controller</strong> to learn which behaviors to select at each moment:</p>
-  <div class="method-grid">
-    <div class="method-card">
-      <h3><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-chart.png);mask-image:url(/images/icons/h-chart.png)"></i>Hybrid Behavior Mapping</h3>
-      <p>Instead of selecting from a fixed population, LBC parameterizes a <em>convex combination space</em> over all policies — infinite diversity from a finite set of base agents.</p>
-    </div>
-    <div class="method-card">
-      <h3><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-game.png);mask-image:url(/images/icons/h-game.png)"></i>Bandit Meta-Controller</h3>
-      <p>A lightweight bandit algorithm learns which behavior mapping to activate for each episode, balancing exploration across the behavior space with exploitation of known good behaviors.</p>
-    </div>
-    <div class="method-card">
-      <h3><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-link.png);mask-image:url(/images/icons/h-link.png)"></i>Off-Policy Integration</h3>
-      <p>LBC is integrated into distributed off-policy actor-critic methods — compatible with existing RL infrastructure without major architectural changes.</p>
-    </div>
-    <div class="method-card">
-      <h3><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-chart.png);mask-image:url(/images/icons/h-chart.png)"></i>Unified Perspective</h3>
-      <p>Provides a unified view of diverse RL algorithms as special cases of behavior control, opening new directions for understanding exploration in deep RL.</p>
-    </div>
-  </div>
-  {% include anim/lbc.html %}
+  {% include anim/strip_lbc.html %}
 </section>
 
 <section>
