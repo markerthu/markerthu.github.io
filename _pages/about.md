@@ -570,7 +570,7 @@ body.dark-mode .stat-card:hover {
 body.dark-mode .featured-img { border-bottom-color: #30363d !important; }
 
 /* ── Dark mode: Section Headers ── */
-body.dark-mode .section-header { color: #e6edf3 !important; }
+body.dark-mode .section-header { color: #e6edf3 !important; border-bottom-color: #21262d !important; }
 body.dark-mode .section-header::after { background: linear-gradient(to right, #388bfd, transparent) !important; }
 
 /* ── Dark mode: Text ── */
