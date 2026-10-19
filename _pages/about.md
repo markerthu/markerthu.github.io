@@ -1180,7 +1180,7 @@ body.dark-mode .pillar-tag { background: #1c2333; color: #58a6ff; }
 /* animated figures shared with the project pages (strips, schematics) */
 .page__content figure.chart{margin:1.4em auto 1.8em;max-width:100%;color:var(--muted)}
 .page__content figure.chart svg{display:block;width:100%;height:auto}
-.page__content figure.chart figcaption{font-size:.8rem;color:var(--muted);margin:.9em auto 0;text-align:center;line-height:1.55;max-width:640px}
+.page__content figure.chart figcaption{font-family:Inter,system-ui,sans-serif;font-size:.8rem;color:var(--muted);margin:.9em auto 0;text-align:center;line-height:1.55;max-width:640px}
 .page__content figure.chart figcaption b{color:var(--link);font-weight:600}
 figure.anim-fig{--ink:#1a2332;--muted:#5f6b7a;--card:#fff;--fig-border:#dfe6ef;--rule:#e6ebf2;--link:#1565c0;--good:#1b7f4b;--bad:#c0392b;--bg:#fff}
 body.dark-mode figure.anim-fig{--ink:#e6edf3;--muted:#8b949e;--card:#161b22;--fig-border:#30363d;--rule:#21262d;--link:#58a6ff;--good:#3fb950;--bad:#f85149;--bg:#0d1117}
@@ -2520,7 +2520,7 @@ function drawGraph(container) {
 <script>
 /* Video button: every publication with a project film gets one, right after its Project link */
 (function(){
-  var FILMS = ['speechgym','read-the-mind','procedure-aware-rl','cesar','adrpo','orw-cfm-w2','ac-flow','lbc','gdi'];
+  var FILMS = ['speechgym','read-the-mind','proteinzero','procedure-aware-rl','cesar','adrpo','orw-cfm-w2','ac-flow','lbc','gdi'];
   document.querySelectorAll('.pub-entry').forEach(function(entry){
     var proj = entry.querySelector('.pub-links a.pl-project') || entry.querySelector('a.pub-project');
     if (!proj) return;

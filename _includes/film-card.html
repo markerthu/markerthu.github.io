@@ -10,8 +10,8 @@
 .film-card .fc-label{position:absolute;left:16px;bottom:12px;font:600 11px/1 Inter,system-ui,sans-serif;letter-spacing:.24em;color:#c9a66b;background:rgba(9,9,10,.6);padding:7px 10px;border-radius:999px}
 @media (prefers-reduced-motion:reduce){.film-card,.film-card .fc-play{transition:none}.film-card:hover{transform:none}}
 </style>
-<a class="film-card" href="/film/?s={{ include.id }}" aria-label="Watch the {{ include.name }} project film (under a minute)">
+<a class="film-card" href="/film/?s={{ include.id }}" aria-label="Watch the {{ include.name }} project film">
   <img src="/film/posters/{{ include.id }}.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async">
   <span class="fc-play" aria-hidden="true"></span>
-  <span class="fc-label">WATCH THE FILM &middot; UNDER A MINUTE</span>
+  <span class="fc-label">WATCH THE FILM</span>
 </a>

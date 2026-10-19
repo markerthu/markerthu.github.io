@@ -3,7 +3,7 @@ import { timeline } from './util.js';
 // (lines drawn with those slopes, schematic levels). MMAU totals: 65.2 / 74.6 / 76.5 / 77.1.
 const slope = (y0, m) => [[0, y0], [1, y0 + m]];
 export default {
-  id: 'cesar', name: 'CESAR', kicker: 'CESAR  ·  A PROJECT FILM', badge: ['ICLR 2026', 'audio reasoning'], page: '/projects/cesar/',
+  id: 'cesar', video: '/film/video/cesar.mp4', poster: '/film/posters/cesar.jpg', name: 'CESAR', kicker: 'CESAR  ·  A PROJECT FILM', badge: ['ICLR 2026', 'audio reasoning'], page: '/projects/cesar/',
   chapters: timeline([
     { len: 7, shape: 'v:waveform', viz: {}, label: 'ICLR 2026', title: 'CESAR',
       lines: ['Consistent, effective and scalable', 'reasoning for audio LLMs.'], meta: 'JIAJUN FAN ET AL.  ·  UIUC & AMAZON' },

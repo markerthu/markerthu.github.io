@@ -135,7 +135,20 @@ addEventListener('resize', fit);
   if (script.id !== 'main') {
     document.title = script.name + ' — a project film | Jiajun Fan';
     const back = document.getElementById('back'); back.href = script.page; back.innerHTML = '&larr; ' + script.name + ' project page';
-    document.getElementById('transcript').innerHTML = '<h1>' + script.name + '</h1>' + script.chapters.map(c => '<p>' + [c.label, c.title, (c.lines || []).join(' '), c.meta].filter(Boolean).join(' \u00b7 ') + '</p>').join('');
+    document.getElementById('transcript').innerHTML = '<h1>' + script.name + '</h1>' + (script.chapters || []).map(c => '<p>' + [c.label, c.title, (c.lines || []).join(' '), c.meta].filter(Boolean).join(' \u00b7 ') + '</p>').join('') + (script.transcript || '');
+  }
+  if (script.video) {               // a finished film with its own score: play the MP4 with native controls
+    const v = document.createElement('video');
+    Object.assign(v, { src: script.video, poster: script.poster || '', controls: true, playsInline: true, preload: 'metadata' });
+    v.setAttribute('aria-label', script.name + ' — a project film');
+    v.style.cssText = 'width:min(100vw, calc(100vh * 16 / 9));max-height:100vh;background:#000;display:block';
+    canvas.replaceWith(v);
+    document.getElementById('ctl').style.display = 'none';
+    document.getElementById('play').style.display = 'none';
+    body.classList.remove('waiting');
+    document.getElementById('load').classList.add('gone');
+    if (!still) v.play().catch(() => {});   // browsers may refuse autoplay with sound; the controls stay
+    return;
   }
   try { film = createFilm(canvas, { script, particles: innerWidth < 700 ? 6000 : 9000 }); }
   catch (e) { document.getElementById('load').textContent = 'WEBGL IS NOT AVAILABLE IN THIS BROWSER'; return; }

@@ -605,7 +605,7 @@ export async function loadFonts() {
 }
 
 // Known films (id → script module). Keep ids to [a-z0-9-].
-export const FILMS = ['main', 'speechgym', 'read-the-mind', 'procedure-aware-rl', 'cesar', 'adrpo', 'orw-cfm-w2', 'ac-flow', 'lbc', 'gdi'];
+export const FILMS = ['main', 'speechgym', 'read-the-mind', 'proteinzero', 'procedure-aware-rl', 'cesar', 'adrpo', 'orw-cfm-w2', 'ac-flow', 'lbc', 'gdi'];
 export async function loadScript(id) {
   if (!FILMS.includes(id)) id = 'main';
   return (await import(`./scripts/${id}.js`)).default;

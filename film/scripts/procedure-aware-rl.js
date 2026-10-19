@@ -4,7 +4,7 @@ import { timeline } from './util.js';
 // and the ablation (50.73 / 51.65 / 51.58 / 53.92, BFCL average over its three splits).
 const two = v => v.toFixed(2);
 export default {
-  id: 'procedure-aware-rl', name: 'Procedure-Aware RL', kicker: 'PROCEDURE-AWARE RL  ·  A PROJECT FILM', badge: ['COLM 2026', 'tool-use agents'], page: '/projects/procedure-aware-rl/',
+  id: 'procedure-aware-rl', video: '/film/video/procedure-aware-rl.mp4', poster: '/film/posters/procedure-aware-rl.jpg', name: 'Procedure-Aware RL', kicker: 'PROCEDURE-AWARE RL  ·  A PROJECT FILM', badge: ['COLM 2026', 'tool-use agents'], page: '/projects/procedure-aware-rl/',
   chapters: timeline([
     { len: 7, shape: 'v:pipeline', viz: { labels: ['1. look_up_address', '2. wrap(gift)', '3. ship(package)'] }, label: 'COLM 2026', title: 'Procedure-Aware RL',
       lines: ['Teaching tool-using agents', 'the order of things.'], meta: 'ZHENG, FAN, CHENG, LIU  ·  UIUC' },
