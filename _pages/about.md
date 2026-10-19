@@ -1781,7 +1781,28 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
 </p>
 </blockquote>
 
-{% include anim/strip_vision.html %}
+<div class="research-timeline">
+  <div class="rt-item">
+    <div class="rt-year">Step 1 — ICLR 2025</div>
+    <div class="rt-title">Eliminate human-collected preference data</div>
+    <div class="rt-desc">ORW-CFM-W2: online reward-weighted training lets models improve from their own generations — no paired human data needed.</div>
+  </div>
+  <div class="rt-item">
+    <div class="rt-year">Step 2 — NeurIPS 2025</div>
+    <div class="rt-title">Remove manual KL tuning</div>
+    <div class="rt-desc">ADRPO: adaptive divergence control eliminates the need for hand-tuned regularization — each sample gets its own constraint.</div>
+  </div>
+  <div class="rt-item">
+    <div class="rt-year">Step 3 — ICLR 2026</div>
+    <div class="rt-title">Reward the reasoning process, not just outcomes</div>
+    <div class="rt-desc">CESAR: process-level rewards resolve test-time inverse scaling in Audio LLMs — reasoning finally helps instead of hurts, achieving SOTA on MMAU.</div>
+  </div>
+  <div class="rt-item rt-item-ongoing">
+    <div class="rt-year rt-year-ongoing">Step 4 — Ongoing</div>
+    <div class="rt-title">Fully autonomous self-improvement</div>
+    <div class="rt-desc">The endgame: generative models that continuously improve with progressively less human intervention — from data collection to reward design to training itself.</div>
+  </div>
+</div>
 
 <!-- ═══════════════════════════════ AWARDS ════════════════════════════ -->
 <h2 class="section-header" id="awards"><img class="sh-icon" src="/images/icons/sh-awards.png" alt="">Awards &amp; Academic Service</h2>
