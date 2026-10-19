@@ -798,6 +798,7 @@ body.dark-mode .ra-input-row { border-color: #30363d !important; }
 .ddl-name a { color: #1a2332; text-decoration: none; }
 .ddl-name a:hover { color: #1565c0; text-decoration: underline; }
 .ddl-meta { font-size: 0.74em; color: #6b7280; margin-bottom: 8px; line-height: 1.5; }
+.ddl-line { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .ddl-chip { display: inline-block; font-size: 0.74em; font-weight: 700; padding: 2px 8px; border-radius: 20px; border: 1px solid; white-space: nowrap; }
 /* ddl-chip: override inline styles when dark mode toggled after load */
 body.dark-mode .ddl-chip[style*="#f1f5f9"] { background: #21262d !important; color: #8b949e !important; border-color: #30363d !important; }
@@ -1908,7 +1909,7 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
       + '<span class="ddl-type" style="background:' + c.color + '15;color:' + c.color + '">' + c.type + '</span>'
       + '</div>'
       + '<div class="ddl-name"><a href="' + c.url + '" target="_blank" rel="noopener noreferrer">' + c.name + '</a></div>'
-      + '<div class="ddl-meta"><i class="lbl-ico" style="color:#e11d48;-webkit-mask-image:url(/images/icons/h-pin.png);mask-image:url(/images/icons/h-pin.png)"></i>' + c.location + ' &nbsp;·&nbsp; <i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-deadlines.png);mask-image:url(/images/icons/sh-deadlines.png)"></i>' + c.conf + '</div>'
+      + '<div class="ddl-meta"><span class="ddl-line"><i class="lbl-ico" style="color:#e11d48;-webkit-mask-image:url(/images/icons/h-pin.png);mask-image:url(/images/icons/h-pin.png)"></i>' + c.location + '</span><span class="ddl-line"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-deadlines.png);mask-image:url(/images/icons/sh-deadlines.png)"></i>' + c.conf + '</span></div>'
       + chip;
     grid.appendChild(card);
   });
