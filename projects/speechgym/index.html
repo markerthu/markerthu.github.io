@@ -249,6 +249,7 @@ body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-ima
 <section>
   <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-chart.png);mask-image:url(/images/icons/h-chart.png)"></i>A per-turn reward keeps the rollouts informative</h2>
   <p>GRPO learns from differences inside a group. At audio base success rates nearly every group of rollouts fails identically, the advantage is zero, and the compute is wasted. Scoring each turn &mdash; a small bonus for a tool call that executes, a penalty for one that fails, the benchmark's own outcome still appended at the end &mdash; separates rollouts that got further from rollouts that did not.</p>
+  {% include anim/speechgym.html %}
   <figure class="chart">
     {% include figures/sg_gradient.svg %}
     <figcaption><b>Figure 1.</b> Share of rollout groups that still carry a gradient. Outcome-only training discards 84% of its groups; the per-turn process reward keeps almost all of them.</figcaption>

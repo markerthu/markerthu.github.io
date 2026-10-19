@@ -246,6 +246,7 @@ body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-ima
     <div class="step"><div class="step-num">3</div><h3>Stay diverse</h3><p>A diversity regularizer on embedding space penalizes collapse onto near-identical designs.</p></div>
     <div class="step"><div class="step-num">4</div><h3>Update</h3><p>GRPO (or RAFT) with a KL term to the reference model, balancing multiple rewards.</p></div>
   </div>
+  {% include anim/proteinzero.html %}
   <p>The fast ddG predictor is what makes this affordable: physics-based stability evaluation would dominate training cost, so it is replaced by a learned proxy inside the loop. A complete run fits on <strong>one 8-GPU node in about three days</strong>, including reward computation and data generation.</p>
   <p style="font-size:.95rem;color:var(--muted)">Scope: fast ddG is a <em>training proxy</em>. Its experimental validation is moderate and based on single-point mutations, while it is applied here to full-sequence redesign, so it is not a calibrated predictor of absolute folding stability.</p>
 </section>
