@@ -2,6 +2,7 @@
 // chapters, each with a particle shape and its type. Everything is a pure function
 // of t (seconds), so the same code drives the web player and a frame-exact MP4 export.
 import * as THREE from 'three';
+import { makeViz } from './viz.js';
 
 export const DESIGN_W = 1920, DESIGN_H = 1080;
 
@@ -70,6 +71,8 @@ export function createFilm(canvas, opts = {}) {
     size[i] = 0.7 + Math.pow(rnd(), 3) * 2.4;
     col.set(r < 0.16 ? [0.86, 0.70, 0.45] : [0.95, 0.92, 0.86], i * 3);
   }
+  const baseCol = col.slice(), tint = new Float32Array(N);
+  const GOLDC = [0.9, 0.72, 0.44], INKC = [0.95, 0.92, 0.86];
   const geo = new THREE.BufferGeometry();
   geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
   geo.setAttribute('aAlpha', new THREE.BufferAttribute(alpha, 1));
@@ -316,6 +319,11 @@ export function createFilm(canvas, opts = {}) {
     },
   };
 
+  const env = { R, G, p, rotYX, easeOut, easeInOut, smooth, frac, INVADER, tint: 0 };
+  const VZ = makeViz(env);
+  const vizOf = c => c.shape.startsWith('v:') ? VZ.V[c.shape.slice(2)] : null;
+  function evalShape(c, i, t, lt) { env.tint = 0; const vz = vizOf(c); return vz ? vz.pt(i, t, lt, c) : SHAPES[c.shape](i, t, lt, c); }
+
   function chapterAt(t) { for (let k = CH.length - 1; k >= 0; k--) if (t >= CH[k].t0) return k; return 0; }
   function presence(shape, t) { // how much of the scene is this shape right now
     let v = 0;
@@ -324,29 +332,35 @@ export function createFilm(canvas, opts = {}) {
   }
 
   const q = [0, 0, 0];
+  let colDirty = false;
   function updateParticles(t) {
     for (let f = 0; f < F; f++) { const n = icoN[f]; p[0] = n[0]; p[1] = n[1]; p[2] = n[2]; rotYX(p, t * 0.22, 0.32); facing[f] = p[2]; }
     const k = chapterAt(t), c = CH[k], nxt = CH[Math.min(k + 1, CH.length - 1)];
-    const env = smooth(0.2, 2.2, t) * (1 - smooth(DURATION - 1.6, DURATION - 0.2, t));
-    const fa = SHAPES[c.shape], fb = SHAPES[nxt.shape];
+    const fade = smooth(0.2, 2.2, t) * (1 - smooth(DURATION - 1.6, DURATION - 0.2, t));
     const lta = t - c.t0, ltb = Math.max(0, t - nxt.t0);
     const T0 = c.t1 - 1.5;
     for (let i = 0; i < N; i++) {
       let e = 0;
       if (k < CH.length - 1 && t > T0) e = easeInOut((t - T0 - R[i * 4 + 3] * 0.5) / 1.5);
-      const ba = fa(i, t, lta, c); q[0] = p[0]; q[1] = p[1]; q[2] = p[2];
-      let b = ba;
+      const ba = evalShape(c, i, t, lta), ta = env.tint; q[0] = p[0]; q[1] = p[1]; q[2] = p[2];
+      let b = ba, tn = ta;
       if (e > 0) {
-        const bb = fb(i, t, ltb, nxt);
+        const bb = evalShape(nxt, i, t, ltb); tn = ta + (env.tint - ta) * e;
         const sw = Math.sin(Math.PI * e) * 0.35; // a little swirl mid-morph
         for (let d = 0; d < 3; d++) p[d] = q[d] + (p[d] - q[d]) * e + G[i * 3 + d] * sw;
         b = ba + (bb - ba) * e;
       } else { p[0] = q[0]; p[1] = q[1]; p[2] = q[2]; }
       pos[i * 3] = p[0]; pos[i * 3 + 1] = p[1]; pos[i * 3 + 2] = p[2];
-      alpha[i] = b * env;
+      alpha[i] = b * fade;
+      if (tn !== tint[i]) {
+        tint[i] = tn; const T = tn >= 0 ? GOLDC : INKC, w = Math.abs(tn);
+        for (let d = 0; d < 3; d++) col[i * 3 + d] = baseCol[i * 3 + d] + (T[d] - baseCol[i * 3 + d]) * w;
+        colDirty = true;
+      }
     }
     geo.attributes.position.needsUpdate = true;
     geo.attributes.aAlpha.needsUpdate = true;
+    if (colDirty) { geo.attributes.aColor.needsUpdate = true; colDirty = false; }
 
     const pc = presence('crystal', t);
     edges.material.opacity = 0.16 * pc; rock.material.opacity = 0.92 * pc;
@@ -445,6 +459,32 @@ export function createFilm(canvas, opts = {}) {
         tracked(st.label, 170 + w + 26, 922, 3.2);
       });
     }
+  }
+
+  // labels that belong to a viz, projected from its 3D frame into the type layer
+  const _v = new THREE.Vector3();
+  const TAG = { name: ['500 17px Inter', INK, 0.86, 0.3], gold: ['600 17px Inter', GOLD, 1, 0.3], num: ['300 34px Newsreader', GOLD, 1, 0],
+    numInk: ['300 30px Newsreader', INK, 0.82, 0], small: ['500 13px Inter', INK, 0.6, 1.0], mono: ['500 16px Inter', INK, 0.92, 0.2],
+    good: ['600 17px Inter', [150, 205, 160], 1, 0.3], bad: ['600 17px Inter', [232, 150, 130], 1, 0.3] };
+  function drawTags(t) {
+    const c = CH[chapterAt(t)], vz = vizOf(c);
+    if (!vz && !c.tags) return;
+    const lt = t - c.t0, envA = inout(t, c.t0 + 0.2, c, 0.6);
+    if (envA <= 0.002) return;
+    group.updateMatrixWorld(true);
+    const list = (vz ? vz.tags(c, t, lt) : []).concat(c.tags || []);
+    ctx.save(); ctx.textBaseline = 'middle'; ctx.shadowColor = 'rgba(0,0,0,0.9)'; ctx.shadowBlur = 8 * S;
+    for (const tg of list) {
+      const a = (tg.a ?? 1) * envA;
+      if (a <= 0.01 || !tg.text) continue;
+      const qq = tg.at.slice(); VZ.vrot(qq, c, t);
+      _v.set(qq[0], qq[1], qq[2]).applyMatrix4(group.matrixWorld).project(camera);
+      const x = (_v.x + 1) / 2 * DESIGN_W + (tg.dx || 0), y = (1 - _v.y) / 2 * DESIGN_H + (tg.dy || 0);
+      const st = TAG[tg.style] || TAG.name;
+      font(st[0]); ctx.globalAlpha = a; ctx.fillStyle = rgba(st[1], st[2]);
+      tracked(tg.text, x, y, st[3], tg.align || 'left');
+    }
+    ctx.restore();
   }
 
   function hudAlpha(t) { return smooth(HUD_IN - 1.4, HUD_IN + 0.2, t) * (1 - smooth(HUD_OUT - 0.4, HUD_OUT + 0.8, t)); }
@@ -549,7 +589,7 @@ export function createFilm(canvas, opts = {}) {
     ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over'; ctx.filter = 'none';
     ctx.drawImage(glCanvas, 0, 0, W, H);
     drawPost(t, W, H);
-    if (opts.text !== false) { drawChapterText(t); drawHUD(t); drawTimeline(t); }
+    if (opts.text !== false) { drawTags(t); drawChapterText(t); drawHUD(t); drawTimeline(t); }
     const fb = smooth(DURATION - 1.4, DURATION - 0.1, t);
     if (fb > 0) { ctx.fillStyle = `rgba(0,0,0,${fb})`; ctx.fillRect(0, 0, W, H); }
   }
