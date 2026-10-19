@@ -1,75 +1,47 @@
-// "Out of the loop" — a one-minute research film, rendered live.
-// Everything is a pure function of t (seconds), so the same code drives the
-// web player and a frame-exact MP4 export.
+// Research films, rendered live. A film is a script (film/scripts/*.js): a list of
+// chapters, each with a particle shape and its type. Everything is a pure function
+// of t (seconds), so the same code drives the web player and a frame-exact MP4 export.
 import * as THREE from 'three';
 
 export const DESIGN_W = 1920, DESIGN_H = 1080;
-export const DURATION = 61;
 
 const INK = [236, 230, 218];
 const GOLD = [201, 166, 107];
 const BG = '#09090a';
-
-// Chapters. Only published or arXiv work is named; RSI is presented as the next step.
-const CH = [
-  { t0: 0, t1: 7, shape: 'sphere',
-    label: 'REINFORCEMENT LEARNING', title: 'Out of the loop',
-    lines: ['How much of its own teaching', 'can a model take over from us?'],
-    meta: 'JIAJUN FAN  ·  UIUC' },
-  { t0: 7, t1: 16, shape: 'crystal', tick: 'SUPERHUMAN',
-    label: '2022 — 2023', title: 'Superhuman',
-    lines: ['An agent learns to choose its own experience,', 'and breaks 24 Atari human world records.'],
-    meta: 'GDI  ·  ICML 2022          LBC  ·  ICLR 2023 ORAL' },
-  { t0: 16, t1: 25, shape: 'galaxy', tick: 'OWN DATA',
-    label: '2025 — 2026', title: 'Its own data',
-    lines: ['No collected preferences: the model improves', 'from its own generations, without collapsing.'],
-    meta: 'ORW-CFM-W2  ·  ICLR 2025          PROTEINZERO  ·  TMLR 2026' },
-  { t0: 25, t1: 34, shape: 'chain', tick: 'OWN REASONING',
-    label: '2025 — 2026', title: 'Its own reasoning',
-    lines: ['No hand-tuned regularisation, no human-written', 'chains of thought. The reasoning emerges.'],
-    meta: 'ADRPO  ·  NEURIPS 2025          CESAR  ·  ICLR 2026' },
-  { t0: 34, t1: 43, shape: 'wave', tick: 'AGENTS',
-    label: '2026', title: 'Worlds to act in',
-    lines: ['Voice agents that listen and speak natively;', 'tool agents that learn the order of things.'],
-    meta: 'SPEECHGYM  ·  ARXIV 2026          PROCEDURE-AWARE RL  ·  COLM 2026' },
-  { t0: 43, t1: 53, shape: 'knot', tick: 'OWN CRITIC',
-    label: 'NEXT', title: 'Its own critic',
-    lines: ['Recursive self-improvement: each better model', 'becomes the critic and teacher of the next.'],
-    meta: 'ONGOING WORK' },
-  { t0: 53, t1: 61, shape: 'ring',
-    label: 'RESEARCH', title: 'Jiajun Fan',
-    lines: ['Reinforcement learning for generative', 'and agentic models.'],
-    meta: 'JIAJUNFAN.COM' },
-];
-const T_TL0 = CH[1].t0, T_TL1 = CH[5].t1;
-
-// The three things a human still does in the loop, and when each one goes.
-const HUMAN = [
-  { name: 'data collection', off: 18.6 },
-  { name: 'labelling & tuning', off: 27.6 },
-  { name: 'reward design', next: 45.6 },
-];
 
 // ── small math ──
 const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
 const smooth = (a, b, x) => { const u = clamp((x - a) / (b - a)); return u * u * (3 - 2 * u); };
 const easeOut = u => 1 - Math.pow(1 - clamp(u), 3);
 const easeInOut = u => { u = clamp(u); return u < .5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2; };
+const frac = x => x - Math.floor(x);
 const rgba = (c, a) => `rgba(${c[0]},${c[1]},${c[2]},${a})`;
 function mulberry32(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a);
   t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
 
 function rotYX(p, ay, ax) {
   const cy = Math.cos(ay), sy = Math.sin(ay);
-  let x = p[0] * cy + p[2] * sy, z = -p[0] * sy + p[2] * cy, y = p[1];
+  const x = p[0] * cy + p[2] * sy, z = -p[0] * sy + p[2] * cy, y = p[1];
   const cx = Math.cos(ax), sx = Math.sin(ax);
-  const y2 = y * cx - z * sx, z2 = y * sx + z * cx;
-  p[0] = x; p[1] = y2; p[2] = z2;
+  p[0] = x; p[1] = y * cx - z * sx; p[2] = y * sx + z * cx;
 }
 
+// 11x8 space-invader sprite, two frames (legs alternate)
+const INVADER = [
+  ['..X.....X..', '...X...X...', '..XXXXXXX..', '.XX.XXX.XX.', 'XXXXXXXXXXX', 'X.XXXXXXX.X', 'X.X.....X.X', '...XX.XX...'],
+  ['..X.....X..', 'X..X...X..X', 'X.XXXXXXX.X', 'XXX.XXX.XXX', 'XXXXXXXXXXX', '.XXXXXXXXX.', '..X.....X..', '.X.......X.'],
+].map(rows => { const on = []; rows.forEach((r, y) => [...r].forEach((ch, x) => { if (ch === 'X') on.push([x - 5, 3.5 - y]); })); return on; });
+
 export function createFilm(canvas, opts = {}) {
+  const S_ = opts.script;
+  const CH = S_.chapters;
+  const DURATION = CH[CH.length - 1].t1;
+  const TICKED = CH.filter(c => c.tick);
+  const T_TL0 = TICKED.length ? TICKED[0].t0 : 0, T_TL1 = TICKED.length ? TICKED[TICKED.length - 1].t1 : DURATION;
+  const HUD_IN = CH.length > 1 ? CH[1].t0 : 0, HUD_OUT = CH[CH.length - 1].t0;
+
   const N = opts.particles || 9000;
-  const GN = Math.floor(Math.sqrt(N)); // wave grid side
+  const GN = Math.floor(Math.sqrt(N));
   const ctx = canvas.getContext('2d');
   const glCanvas = document.createElement('canvas');
   const renderer = new THREE.WebGLRenderer({ canvas: glCanvas, antialias: true, alpha: false, preserveDrawingBuffer: true });
@@ -86,20 +58,17 @@ export function createFilm(canvas, opts = {}) {
   const R = new Float32Array(N * 4), G = new Float32Array(N * 3);
   for (let i = 0; i < N; i++) {
     for (let k = 0; k < 4; k++) R[i * 4 + k] = rnd();
-    for (let k = 0; k < 3; k++) { // gaussian
+    for (let k = 0; k < 3; k++) {
       const u = Math.max(1e-6, rnd()), v = rnd();
       G[i * 3 + k] = Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
     }
   }
 
-  // geometry & material
   const pos = new Float32Array(N * 3), alpha = new Float32Array(N), size = new Float32Array(N), col = new Float32Array(N * 3);
   for (let i = 0; i < N; i++) {
     const r = rnd();
     size[i] = 0.7 + Math.pow(rnd(), 3) * 2.4;
-    const gold = r < 0.16;
-    const c = gold ? [0.86, 0.70, 0.45] : [0.95, 0.92, 0.86];
-    col.set(c, i * 3);
+    col.set(r < 0.16 ? [0.86, 0.70, 0.45] : [0.95, 0.92, 0.86], i * 3);
   }
   const geo = new THREE.BufferGeometry();
   geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
@@ -122,30 +91,24 @@ export function createFilm(canvas, opts = {}) {
   points.frustumCulled = false;
   group.add(points);
 
-  // crystal: icosahedron faces + faint edges
+  // crystal: an irregular low-poly stone (dark faces + faint edges + sparkles)
   const ico = new THREE.IcosahedronGeometry(1.75, 1); // polyhedra are already non-indexed
   const icoP = ico.attributes.position.array, F = icoP.length / 9;
-  for (let j = 0; j < icoP.length; j += 3) { // same vertex -> same bump, so faces stay closed
+  for (let j = 0; j < icoP.length; j += 3) {
     const x = icoP[j], y = icoP[j + 1], z = icoP[j + 2];
     const h = Math.sin(x * 12.9898 + y * 78.233 + z * 37.719) * 43758.5453;
     const k = 0.84 + 0.26 * (h - Math.floor(h)) * (y > 0 ? 1 : 0.85);
     icoP[j] = x * k * 1.06; icoP[j + 1] = y * k * 0.9; icoP[j + 2] = z * k;
   }
-  const icoShade = new Float32Array(F);
   const L = new THREE.Vector3(0.45, 0.8, 0.55).normalize();
+  const icoShade = new Float32Array(F), icoN = [];
   for (let f = 0; f < F; f++) {
     const a = new THREE.Vector3(icoP[f * 9], icoP[f * 9 + 1], icoP[f * 9 + 2]);
     const b = new THREE.Vector3(icoP[f * 9 + 3], icoP[f * 9 + 4], icoP[f * 9 + 5]);
     const c = new THREE.Vector3(icoP[f * 9 + 6], icoP[f * 9 + 7], icoP[f * 9 + 8]);
-    const n = b.clone().sub(a).cross(c.clone().sub(a)).normalize();
+    const n = b.sub(a).cross(c.sub(a)).normalize();
+    icoN.push(n.toArray());
     icoShade[f] = 0.22 + 0.78 * Math.pow(Math.max(0, n.dot(L)), 1.3);
-  }
-  const icoN = [];
-  for (let f = 0; f < F; f++) {
-    const a = new THREE.Vector3(icoP[f * 9], icoP[f * 9 + 1], icoP[f * 9 + 2]);
-    const b = new THREE.Vector3(icoP[f * 9 + 3], icoP[f * 9 + 4], icoP[f * 9 + 5]);
-    const c = new THREE.Vector3(icoP[f * 9 + 6], icoP[f * 9 + 7], icoP[f * 9 + 8]);
-    icoN.push(b.sub(a).cross(c.sub(a)).normalize().toArray());
   }
   const facing = new Float32Array(F);
   ico.computeVertexNormals();
@@ -168,8 +131,9 @@ export function createFilm(canvas, opts = {}) {
   linkGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array((K - 1) * 6), 3));
   const links = new THREE.LineSegments(linkGeo, lineMat());
   group.add(links);
+  const chainSway = t => 0.38 * Math.sin(t * 0.32) + 0.25;
 
-  // ── shapes: write position into p, return brightness ──
+  // ── shapes: write position into p, return brightness. lt = time since the chapter began ──
   const p = [0, 0, 0];
   const SHAPES = {
     sphere(i, t) {
@@ -197,21 +161,19 @@ export function createFilm(canvas, opts = {}) {
       rotYX(p, 0.3, 1.02);
       return 0.95 * (1.15 - rr / 2.8);
     },
-    chain(i, t) {
-      const sway = 0.38 * Math.sin(t * 0.32) + 0.25;
+    chain(i, t, lt) {
       let b;
       if (R[i * 4] < 0.5) {
         const k = Math.floor(R[i * 4 + 1] * K), n = NODES[k];
         for (let d = 0; d < 3; d++) p[d] = n[d] + G[i * 3 + d] * 0.07;
-        // a pulse walks along the chain, node by node
-        const head = ((t - 25) * 1.1) % (K + 3);
+        const head = (lt * 1.1) % (K + 3); // a pulse walks the chain, node by node
         b = 0.9 + 1.0 * Math.exp(-Math.pow(k - head, 2) * 1.2);
       } else {
         const k = Math.floor(R[i * 4 + 1] * (K - 1)), s = R[i * 4 + 2], a = NODES[k], c = NODES[k + 1];
         for (let d = 0; d < 3; d++) p[d] = a[d] + (c[d] - a[d]) * s + G[i * 3 + d] * 0.012;
         b = 0.55;
       }
-      rotYX(p, sway, 0.12);
+      rotYX(p, chainSway(t), 0.12);
       return b;
     },
     wave(i, t) {
@@ -247,12 +209,112 @@ export function createFilm(canvas, opts = {}) {
       rotYX(p, t * 0.25, 0.2);
       return 0.6;
     },
+    bloom(i, t) { // a star being born: particles stream outward from a bright core
+      const g0 = G[i * 3], g1 = G[i * 3 + 1], g2 = G[i * 3 + 2], m = Math.hypot(g0, g1, g2) || 1;
+      const q = frac(R[i * 4] + t * 0.11), r = 0.08 + 2.1 * Math.pow(q, 1.5);
+      p[0] = g0 / m * r; p[1] = g1 / m * r; p[2] = g2 / m * r;
+      rotYX(p, t * 0.08, 0.2);
+      return (1.5 - 1.1 * q) * smooth(0, 0.05, q);
+    },
+    waveform(i, t) { // a spoken clip: a filled, moving amplitude envelope
+      const x = -2.0 + 4.0 * R[i * 4];
+      const amp = (0.12 + 0.88 * Math.abs(Math.sin(2.3 * x + t * 1.3) * Math.cos(0.9 * x - t * 0.7))) * (1 - Math.pow(Math.abs(x) / 2.1, 4));
+      p[0] = x; p[1] = (R[i * 4 + 1] * 2 - 1) * amp; p[2] = G[i * 3] * 0.06;
+      rotYX(p, 0.25 * Math.sin(t * 0.2), 0.1);
+      return 0.55 + 0.6 * (1 - Math.abs(p[1]) / (amp + 1e-3)) * 0.5;
+    },
+    dialog(i, t) { // two speakers and speech travelling between them
+      const r0 = R[i * 4];
+      if (r0 < 0.72) {
+        const side = r0 < 0.36 ? -1 : 1, g0 = G[i * 3], g1 = G[i * 3 + 1], g2 = G[i * 3 + 2], m = Math.hypot(g0, g1, g2) || 1;
+        const rad = 0.5 * Math.cbrt(R[i * 4 + 1]) * (1 + 0.05 * Math.sin(t * 2 + side));
+        p[0] = side * 1.45 + g0 / m * rad; p[1] = g1 / m * rad; p[2] = g2 / m * rad;
+      } else {
+        const dir = R[i * 4 + 3] < 0.5 ? 1 : -1, s = frac(R[i * 4 + 2] + t * 0.22);
+        const x = dir > 0 ? -1.0 + 2.0 * s : 1.0 - 2.0 * s;
+        p[0] = x; p[1] = dir * 0.22 + 0.2 * Math.sin(16 * s - 6 * t) * Math.sin(Math.PI * s) + G[i * 3] * 0.02; p[2] = G[i * 3 + 1] * 0.04;
+      }
+      rotYX(p, 0.25 * Math.sin(t * 0.18), 0.12);
+      return r0 < 0.72 ? 0.6 : 1.0;
+    },
+    layers(i, t, lt) { // a stack of layers; the middle ones light up as a pulse passes
+      const NL = 10, k = Math.floor(R[i * 4] * NL);
+      p[0] = -1.8 + k * 0.4 + G[i * 3] * 0.008; p[1] = (R[i * 4 + 1] * 2 - 1) * 0.95; p[2] = (R[i * 4 + 2] * 2 - 1) * 0.6;
+      const mid = Math.exp(-Math.pow((k - 5) / 1.9, 2));
+      const head = (lt * 2.2) % (NL + 6) - 2;
+      rotYX(p, 0.62, 0.16);
+      return 0.28 + 0.55 * mid + 0.75 * Math.exp(-Math.pow(k - head, 2) * 0.8);
+    },
+    helix(i, t) { // an alpha-helix ribbon along a gentle S-curve
+      const u = R[i * 4], ang = 2 * Math.PI * 6 * u + t * 0.6, rr = 0.34;
+      const ax = -1.8 + 3.6 * u, ay = 0.4 * Math.sin(2 * Math.PI * u * 0.8);
+      const w = (R[i * 4 + 1] - 0.5) * 0.16;
+      p[0] = ax + w; p[1] = ay + rr * Math.cos(ang) + G[i * 3] * 0.018; p[2] = rr * Math.sin(ang) + G[i * 3 + 1] * 0.018;
+      rotYX(p, 0.35 + 0.18 * Math.sin(t * 0.3), 0.2);
+      return 0.55 + 0.5 * (p[2] + 0.5);
+    },
+    flow(i, t) { // flow matching: noise streams into structure
+      const q = frac(R[i * 4] + t * 0.11), e = easeInOut(q);
+      const sx = -1.35 + G[i * 3] * 0.32, sy = G[i * 3 + 1] * 0.32, sz = G[i * 3 + 2] * 0.32;
+      const a = 2 * Math.PI * R[i * 4 + 1], petal = 0.62 + 0.22 * Math.cos(5 * a); // a five-petal target
+      const tx = 1.15 + petal * Math.cos(a), ty = petal * Math.sin(a), tz = 0.05 * G[i * 3 + 2];
+      p[0] = sx + (tx - sx) * e; p[1] = sy + (ty - sy) * e + 0.3 * Math.sin(Math.PI * q) * (R[i * 4 + 2] - 0.5);
+      p[2] = sz + (tz - sz) * e;
+      rotYX(p, 0.18 * Math.sin(t * 0.2), 0.08);
+      return (0.45 + 0.75 * e) * smooth(0, 0.06, q) * (1 - smooth(0.94, 1, q));
+    },
+    collapse(i, t) { // mode collapse: almost everything in one tight clump
+      const k = R[i * 4] < 0.88, s = k ? 0.13 : 0.9;
+      p[0] = G[i * 3] * s; p[1] = G[i * 3 + 1] * s; p[2] = G[i * 3 + 2] * s;
+      rotYX(p, t * 0.2, 0.2);
+      return k ? 0.5 : 0.35;
+    },
+    diverse(i, t) { // many distinct modes, spread out
+      const NC = 7, c = Math.floor(R[i * 4] * NC);
+      const phi = Math.acos(1 - 2 * (c + 0.5) / NC), th = Math.PI * (1 + Math.sqrt(5)) * (c + 0.5);
+      const cr = 1.35;
+      p[0] = cr * Math.sin(phi) * Math.cos(th) + G[i * 3] * 0.16; p[1] = cr * Math.cos(phi) + G[i * 3 + 1] * 0.16;
+      p[2] = cr * Math.sin(phi) * Math.sin(th) + G[i * 3 + 2] * 0.16;
+      rotYX(p, t * 0.15, 0.3);
+      return 0.7 + 0.25 * Math.sin(c * 1.7);
+    },
+    pipeline(i, t, lt) { // three steps in order, with work flowing through them
+      const r0 = R[i * 4];
+      if (r0 < 0.8) {
+        const k = Math.floor(R[i * 4 + 1] * 3), cx = -1.35 + k * 1.35, h = 0.3;
+        const face = Math.floor(R[i * 4 + 2] * 6), a = (R[i * 4 + 3] * 2 - 1) * h, b = (frac(R[i * 4 + 2] * 6) * 2 - 1) * h;
+        const s = face % 2 ? h : -h;
+        if (face < 2) { p[0] = cx + s; p[1] = a; p[2] = b; } else if (face < 4) { p[0] = cx + a; p[1] = s; p[2] = b; } else { p[0] = cx + a; p[1] = b; p[2] = s; }
+        const lit = Math.exp(-Math.pow(k - ((lt * 0.9) % 4.5), 2) * 1.5);
+        rotYX(p, 0.5 + 0.15 * Math.sin(t * 0.3), 0.32);
+        return 0.55 + 0.8 * lit;
+      }
+      const s = frac(R[i * 4 + 2] + t * 0.25);
+      p[0] = -1.35 + 2.7 * s; p[1] = G[i * 3] * 0.02; p[2] = G[i * 3 + 1] * 0.02;
+      rotYX(p, 0.5 + 0.15 * Math.sin(t * 0.3), 0.32);
+      return 0.75;
+    },
+    invader(i, t) { // an Atari sprite, two animation frames
+      const on = INVADER[Math.floor(t / 0.55) % 2], px = on[Math.floor(R[i * 4] * on.length) % on.length], sz = 0.27;
+      p[0] = (px[0] + (R[i * 4 + 1] - 0.5) * 0.85) * sz; p[1] = (px[1] + (R[i * 4 + 2] - 0.5) * 0.85) * sz;
+      p[2] = (R[i * 4 + 3] - 0.5) * sz * 0.85;
+      rotYX(p, 0.4 * Math.sin(t * 0.35), 0.1);
+      return 0.95;
+    },
+    bars(i, t, lt) { // results rising
+      const HS = [0.55, 0.8, 1.05, 1.4, 1.95], k = Math.floor(R[i * 4] * 5), g = easeOut((lt - 0.3) / 2.2);
+      const h = HS[k] * g;
+      p[0] = -1.3 + k * 0.65 + (R[i * 4 + 1] - 0.5) * 0.4; p[1] = -1.0 + R[i * 4 + 2] * h; p[2] = (R[i * 4 + 3] - 0.5) * 0.4;
+      rotYX(p, 0.45 + 0.1 * Math.sin(t * 0.25), 0.18);
+      return (k === 4 ? 1.15 : 0.6) * (0.4 + 0.6 * smooth(0, 0.3, h));
+    },
   };
 
   function chapterAt(t) { for (let k = CH.length - 1; k >= 0; k--) if (t >= CH[k].t0) return k; return 0; }
-  // presence of chapter k's shape (for line overlays)
-  function presence(k, t) {
-    const c = CH[k]; return smooth(c.t0 - 0.6, c.t0 + 1.0, t) * (1 - smooth(c.t1 - 1.2, c.t1 + 0.4, t));
+  function presence(shape, t) { // how much of the scene is this shape right now
+    let v = 0;
+    CH.forEach(c => { if (c.shape === shape) v = Math.max(v, smooth(c.t0 - 0.6, c.t0 + 1.0, t) * (1 - smooth(c.t1 - 1.2, c.t1 + 0.4, t))); });
+    return v;
   }
 
   const q = [0, 0, 0];
@@ -261,14 +323,15 @@ export function createFilm(canvas, opts = {}) {
     const k = chapterAt(t), c = CH[k], nxt = CH[Math.min(k + 1, CH.length - 1)];
     const env = smooth(0.2, 2.2, t) * (1 - smooth(DURATION - 1.6, DURATION - 0.2, t));
     const fa = SHAPES[c.shape], fb = SHAPES[nxt.shape];
+    const lta = t - c.t0, ltb = Math.max(0, t - nxt.t0);
     const T0 = c.t1 - 1.5;
     for (let i = 0; i < N; i++) {
       let e = 0;
       if (k < CH.length - 1 && t > T0) e = easeInOut((t - T0 - R[i * 4 + 3] * 0.5) / 1.5);
-      let ba = fa(i, t); q[0] = p[0]; q[1] = p[1]; q[2] = p[2];
+      const ba = fa(i, t, lta); q[0] = p[0]; q[1] = p[1]; q[2] = p[2];
       let b = ba;
       if (e > 0) {
-        const bb = fb(i, t);
+        const bb = fb(i, t, ltb);
         const sw = Math.sin(Math.PI * e) * 0.35; // a little swirl mid-morph
         for (let d = 0; d < 3; d++) p[d] = q[d] + (p[d] - q[d]) * e + G[i * 3 + d] * sw;
         b = ba + (bb - ba) * e;
@@ -279,15 +342,11 @@ export function createFilm(canvas, opts = {}) {
     geo.attributes.position.needsUpdate = true;
     geo.attributes.aAlpha.needsUpdate = true;
 
-    // overlays
-    edges.material.opacity = 0.16 * presence(1, t);
-    rock.material.opacity = 0.92 * presence(1, t);
-    rock.rotation.order = 'XYZ'; rock.rotation.x = 0.32; rock.rotation.y = t * 0.22;
-    edges.rotation.set(0, 0, 0); { // match crystal rotation (Y then X)
-      edges.rotation.order = 'XYZ'; edges.rotation.x = 0.32; edges.rotation.y = t * 0.22;
-    }
-    links.material.opacity = 0.32 * presence(3, t);
-    const lp = linkGeo.attributes.position.array, sway = 0.38 * Math.sin(t * 0.32) + 0.25;
+    const pc = presence('crystal', t);
+    edges.material.opacity = 0.16 * pc; rock.material.opacity = 0.92 * pc;
+    for (const o of [edges, rock]) { o.rotation.order = 'XYZ'; o.rotation.x = 0.32; o.rotation.y = t * 0.22; }
+    links.material.opacity = 0.32 * presence('chain', t);
+    const lp = linkGeo.attributes.position.array, sway = chainSway(t);
     for (let k2 = 0; k2 < K - 1; k2++) for (let e2 = 0; e2 < 2; e2++) {
       const n = NODES[k2 + e2]; p[0] = n[0]; p[1] = n[1]; p[2] = n[2]; rotYX(p, sway, 0.12);
       lp.set(p, (k2 * 2 + e2) * 3);
@@ -295,7 +354,7 @@ export function createFilm(canvas, opts = {}) {
     linkGeo.attributes.position.needsUpdate = true;
   }
 
-  // ── 2D layer: text, HUD, timeline, grain, vignette ──
+  // ── 2D layer: type, HUD, timeline, grain, vignette ──
   const noise = document.createElement('canvas'); noise.width = noise.height = 256;
   { const nx = noise.getContext('2d'), img = nx.createImageData(256, 256), nr = mulberry32(7);
     for (let j = 0; j < img.data.length; j += 4) { const v = nr() * 255; img.data[j] = img.data[j + 1] = img.data[j + 2] = v; img.data[j + 3] = 255; }
@@ -306,7 +365,8 @@ export function createFilm(canvas, opts = {}) {
   function font(spec) { ctx.font = spec.replace(/(\d+(?:\.\d+)?)px/, (_, n) => (n * S).toFixed(2) + 'px'); }
   function trackedWidth(text, sp) { let w = 0; for (const ch of text) w += ctx.measureText(ch).width + sp * S; return w - sp * S; }
   function tracked(text, x, y, sp, align = 'left') {
-    let w = trackedWidth(text, sp), cx = align === 'right' ? x * S - w : align === 'center' ? x * S - w / 2 : x * S;
+    const w = trackedWidth(text, sp);
+    let cx = align === 'right' ? x * S - w : align === 'center' ? x * S - w / 2 : x * S;
     for (const ch of text) { ctx.fillText(ch, cx, y * S); cx += ctx.measureText(ch).width + sp * S; }
     return w / S;
   }
@@ -316,17 +376,22 @@ export function createFilm(canvas, opts = {}) {
     if (hasFilter && blurPx > 0.05) ctx.filter = `blur(${(blurPx * S).toFixed(2)}px)`;
     fn(); ctx.restore();
   }
-  // in/out envelope for chapter text
+  const isLast = c => c === CH[CH.length - 1];
   function inout(t, tin, c, dur = 0.9) {
-    const out = c.t1 - (c === CH[CH.length - 1] ? 0.9 : 1.15);
+    const out = c.t1 - (isLast(c) ? 0.9 : 1.15);
     return easeOut((t - tin) / dur) * (1 - smooth(out, out + 0.75, t));
   }
+  function fmtStat(st, v) {
+    const s = Math.abs(v).toFixed(st.decimals || 0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    const sign = v < 0 ? '−' : (st.plus && v > 0 ? '+' : '');
+    return (st.before || '') + (st.prefix || '') + sign + s + (st.suffix || '');
+  }
 
+  const TITLE_PX = 124, TITLE_MAX = 900;
   function drawChapterText(t) {
     const k = chapterAt(t), c = CH[k];
     const base = c.t0 + (k === 0 ? 0.9 : 0.35);
     ctx.textBaseline = 'alphabetic';
-    // label
     let a = inout(t, base, c);
     withA(a, (1 - a) * 6, () => {
       font('600 21px Inter'); ctx.fillStyle = rgba(GOLD, 1);
@@ -334,9 +399,11 @@ export function createFilm(canvas, opts = {}) {
       ctx.fillStyle = rgba(GOLD, 0.55);
       ctx.fillRect(170 * S, 476 * S, Math.min(96, w) * easeOut((t - base - 0.2) / 1.0) * S, 1.5 * S);
     });
-    // title, letter by letter
-    font('300 124px Newsreader');
-    const tTitle = base + 0.25, out = c.t1 - 1.15;
+    // title, letter by letter, shrunk to fit the left column
+    font(`300 ${TITLE_PX}px Newsreader`);
+    const tw = ctx.measureText(c.title).width / S;
+    if (tw > TITLE_MAX) font(`300 ${(TITLE_PX * TITLE_MAX / tw).toFixed(1)}px Newsreader`);
+    const tTitle = base + 0.25, out = c.t1 - (isLast(c) ? 0.9 : 1.15);
     const fadeOut = 1 - smooth(out, out + 0.75, t);
     let cx = 170 * S;
     [...c.title].forEach((ch, j) => {
@@ -348,67 +415,76 @@ export function createFilm(canvas, opts = {}) {
       }
       cx += ctx.measureText(ch).width - 1.5 * S;
     });
-    // italic lines
-    c.lines.forEach((line, j) => {
+    (c.lines || []).forEach((line, j) => {
       const a2 = inout(t, base + 1.25 + j * 0.3, c, 1.1);
       withA(a2 * 0.78, (1 - a2) * 5, () => {
         font('italic 300 41px Newsreader'); ctx.fillStyle = rgba(INK, 1);
         ctx.fillText(line, 170 * S, (694 + j * 54 + (1 - a2) * 14) * S);
       });
     });
-    // meta
-    const a3 = inout(t, base + 2.1, c, 1.0);
-    withA(a3 * 0.55, (1 - a3) * 4, () => {
-      font('500 17px Inter'); ctx.fillStyle = rgba(INK, 1);
-      tracked(c.meta, 170, 838, 3.4);
-    });
+    if (c.meta) {
+      const a3 = inout(t, base + 2.1, c, 1.0);
+      withA(a3 * 0.55, (1 - a3) * 4, () => { font('500 17px Inter'); ctx.fillStyle = rgba(INK, 1); tracked(c.meta, 170, 838, 3.4); });
+    }
+    if (c.stat) { // a number that counts up, with a small-caps label
+      const st = c.stat, ts = base + 1.9, a4 = inout(t, ts, c, 0.9);
+      const u = easeOut((t - ts - 0.2) / 1.6);
+      const v = st.from === undefined ? st.to : st.from + (st.to - st.from) * u;
+      withA(a4, (1 - a4) * 4, () => {
+        font('300 64px Newsreader'); ctx.fillStyle = rgba(GOLD, 1);
+        const txt = st.text || fmtStat(st, v);
+        ctx.fillText(txt, 170 * S, 928 * S);
+        const w = ctx.measureText(txt).width / S;
+        font('600 14px Inter'); ctx.fillStyle = rgba(INK, 0.62);
+        tracked(st.label, 170 + w + 26, 922, 3.2);
+      });
+    }
   }
 
+  function hudAlpha(t) { return smooth(HUD_IN - 1.4, HUD_IN + 0.2, t) * (1 - smooth(HUD_OUT - 0.4, HUD_OUT + 0.8, t)); }
   function drawHUD(t) {
-    const a = smooth(5.6, 7.2, t) * (1 - smooth(52.6, 53.8, t));
+    const a = hudAlpha(t);
     if (a <= 0.002) return;
-    ctx.save(); ctx.globalAlpha = a;
-    ctx.textBaseline = 'alphabetic';
+    ctx.save(); ctx.globalAlpha = a; ctx.textBaseline = 'alphabetic';
     font('500 15px Inter'); ctx.fillStyle = rgba(INK, 0.5);
-    tracked('OUT OF THE LOOP  ·  A RESEARCH FILM', 170, 120, 5);
-    // human-in-the-loop panel
-    ctx.fillStyle = rgba(INK, 0.5);
-    tracked('HUMAN IN THE LOOP', 1750, 120, 5, 'right');
-    HUMAN.forEach((h, j) => {
-      const y = 162 + j * 36;
-      font('400 21px Inter');
-      let txtA = 0.88, dotFill = 1, strike = 0, isNext = 0;
-      if (h.off) { const u = easeOut((t - h.off) / 0.8); strike = u; txtA = 0.88 - 0.6 * u; dotFill = 1 - u; }
-      if (h.next) isNext = easeOut((t - h.next) / 0.8);
-      const label = h.name;
-      ctx.fillStyle = isNext > 0 ? `rgba(${Math.round(INK[0] + (GOLD[0] - INK[0]) * isNext)},${Math.round(INK[1] + (GOLD[1] - INK[1]) * isNext)},${Math.round(INK[2] + (GOLD[2] - INK[2]) * isNext)},${txtA})` : rgba(INK, txtA);
-      const w = tracked(label, 1722, y, 0.6, 'right');
-      if (strike > 0) { ctx.fillStyle = rgba(INK, 0.6); ctx.fillRect((1722 - w * strike) * S, (y - 7) * S, w * strike * S, 1.4 * S); }
-      // dot
-      const dx = 1742 * S, dy = (y - 7) * S;
-      ctx.beginPath(); ctx.arc(dx, dy, 5 * S, 0, Math.PI * 2);
-      if (isNext > 0) {
-        const pulse = 0.55 + 0.45 * Math.sin((t - h.next) * 3.2);
-        ctx.strokeStyle = rgba(GOLD, 0.5 + 0.5 * pulse * isNext); ctx.lineWidth = 1.4 * S;
-        ctx.setLineDash([2.2 * S, 2.2 * S]); ctx.stroke(); ctx.setLineDash([]);
-        ctx.fillStyle = rgba(GOLD, 0.35 * pulse * isNext); ctx.fill();
-      } else {
-        ctx.strokeStyle = rgba(INK, 0.55); ctx.lineWidth = 1.2 * S; ctx.stroke();
-        if (dotFill > 0.01) { ctx.fillStyle = rgba(INK, 0.85 * dotFill); ctx.fill(); }
-      }
-      if (isNext > 0) withA(isNext, 0, () => {
-        font('600 12px Inter'); ctx.fillStyle = rgba(GOLD, 0.9);
-        tracked('NEXT', 1722 - w - 16, y - 1, 3, 'right');
+    tracked(S_.kicker, 170, 120, 5);
+    const P = S_.panel;
+    if (P) {
+      tracked(P.title, 1750, 120, 5, 'right');
+      P.items.forEach((h, j) => {
+        const y = 162 + j * 36;
+        font('400 21px Inter');
+        let txtA = 0.88, dotFill = 1, strike = 0, isNext = 0;
+        if (h.off) { const u = easeOut((t - h.off) / 0.8); strike = u; txtA = 0.88 - 0.6 * u; dotFill = 1 - u; }
+        if (h.next) isNext = easeOut((t - h.next) / 0.8);
+        ctx.fillStyle = isNext > 0 ? `rgba(${Math.round(INK[0] + (GOLD[0] - INK[0]) * isNext)},${Math.round(INK[1] + (GOLD[1] - INK[1]) * isNext)},${Math.round(INK[2] + (GOLD[2] - INK[2]) * isNext)},${txtA})` : rgba(INK, txtA);
+        const w = tracked(h.name, 1722, y, 0.6, 'right');
+        if (strike > 0) { ctx.fillStyle = rgba(INK, 0.6); ctx.fillRect((1722 - w * strike) * S, (y - 7) * S, w * strike * S, 1.4 * S); }
+        const dx = 1742 * S, dy = (y - 7) * S;
+        ctx.beginPath(); ctx.arc(dx, dy, 5 * S, 0, Math.PI * 2);
+        if (isNext > 0) {
+          const pulse = 0.55 + 0.45 * Math.sin((t - h.next) * 3.2);
+          ctx.strokeStyle = rgba(GOLD, 0.5 + 0.5 * pulse * isNext); ctx.lineWidth = 1.4 * S;
+          ctx.setLineDash([2.2 * S, 2.2 * S]); ctx.stroke(); ctx.setLineDash([]);
+          ctx.fillStyle = rgba(GOLD, 0.35 * pulse * isNext); ctx.fill();
+          withA(isNext, 0, () => { font('600 12px Inter'); ctx.fillStyle = rgba(GOLD, 0.9); tracked('NEXT', 1722 - w - 16, y - 1, 3, 'right'); });
+        } else {
+          ctx.strokeStyle = rgba(INK, 0.55); ctx.lineWidth = 1.2 * S; ctx.stroke();
+          if (dotFill > 0.01) { ctx.fillStyle = rgba(INK, 0.85 * dotFill); ctx.fill(); }
+        }
       });
-    });
+    } else if (S_.badge) {
+      tracked(S_.badge[0], 1750, 120, 5, 'right');
+      if (S_.badge[1]) { font('400 19px Inter'); ctx.fillStyle = rgba(INK, 0.78); tracked(S_.badge[1], 1750, 158, 0.6, 'right'); }
+    }
     ctx.restore();
   }
 
   const X0 = 170, X1 = 1750, TY = 992;
   const tx = t => X0 + (X1 - X0) * clamp((t - T_TL0) / (T_TL1 - T_TL0));
   function drawTimeline(t) {
-    const a = smooth(5.6, 7.2, t) * (1 - smooth(52.6, 53.8, t));
-    if (a <= 0.002) return;
+    const a = hudAlpha(t);
+    if (a <= 0.002 || !TICKED.length) return;
     ctx.save(); ctx.globalAlpha = a;
     ctx.fillStyle = rgba(INK, 0.12); ctx.fillRect(X0 * S, TY * S, (X1 - X0) * S, 1 * S);
     const mx = tx(t);
@@ -417,15 +493,14 @@ export function createFilm(canvas, opts = {}) {
       const x = tx(s); ctx.fillStyle = rgba(INK, s <= t ? 0.32 : 0.14);
       ctx.fillRect(x * S, (TY - 3) * S, 1 * S, 4 * S);
     }
-    const cur = chapterAt(t);
+    const cur = CH[chapterAt(t)];
     font('600 12px Inter');
-    for (let k = 1; k <= 5; k++) {
-      const x = tx(CH[k].t0);
+    TICKED.forEach(c => {
+      const x = tx(c.t0);
       ctx.fillStyle = rgba(INK, 0.38); ctx.fillRect(x * S, (TY - 10) * S, 1 * S, 11 * S);
-      ctx.fillStyle = k === cur ? rgba(GOLD, 0.95) : rgba(INK, k < cur ? 0.45 : 0.28);
-      tracked(CH[k].tick, x + 10, TY + 30, 3.2);
-    }
-    // marker with halo
+      ctx.fillStyle = c === cur ? rgba(GOLD, 0.95) : rgba(INK, c.t0 < cur.t0 ? 0.45 : 0.28);
+      tracked(c.tick, x + 10, TY + 30, 3.2);
+    });
     const g = ctx.createRadialGradient(mx * S, TY * S, 0, mx * S, TY * S, 22 * S);
     g.addColorStop(0, 'rgba(255,240,215,0.55)'); g.addColorStop(1, 'rgba(255,240,215,0)');
     ctx.fillStyle = g; ctx.beginPath(); ctx.arc(mx * S, TY * S, 22 * S, 0, Math.PI * 2); ctx.fill();
@@ -434,17 +509,14 @@ export function createFilm(canvas, opts = {}) {
   }
 
   function drawPost(t, W, H) {
-    // warm glow behind the object
     ctx.save(); ctx.globalCompositeOperation = 'screen';
     const g = ctx.createRadialGradient(1360 * S, 540 * S, 0, 1360 * S, 540 * S, 640 * S);
     g.addColorStop(0, 'rgba(201,166,107,0.07)'); g.addColorStop(1, 'rgba(201,166,107,0)');
     ctx.fillStyle = g; ctx.fillRect(0, 0, W, H); ctx.restore();
-    // grain
     ctx.save(); ctx.globalAlpha = 0.032;
     const f = Math.floor(t * 24);
     ctx.translate(-((f * 37) % 256), -((f * 91) % 256));
     ctx.fillStyle = ctx.createPattern(noise, 'repeat'); ctx.fillRect(0, 0, W + 256, H + 256); ctx.restore();
-    // vignette
     const v = ctx.createRadialGradient(W / 2, H / 2, H * 0.32, W / 2, H / 2, H * 1.05);
     v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, 'rgba(0,0,0,0.62)');
     ctx.fillStyle = v; ctx.fillRect(0, 0, W, H);
@@ -470,17 +542,25 @@ export function createFilm(canvas, opts = {}) {
     const W = canvas.width, H = canvas.height;
     ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over'; ctx.filter = 'none';
     ctx.drawImage(glCanvas, 0, 0, W, H);
-    drawPost(t, W, H);         // glow + grain + vignette under the type
+    drawPost(t, W, H);
     if (opts.text !== false) { drawChapterText(t); drawHUD(t); drawTimeline(t); }
     const fb = smooth(DURATION - 1.4, DURATION - 0.1, t);
     if (fb > 0) { ctx.fillStyle = `rgba(0,0,0,${fb})`; ctx.fillRect(0, 0, W, H); }
   }
 
-  return { renderAt, resize, duration: DURATION, chapters: CH.map(c => ({ t0: c.t0, title: c.title })),
-           timelineHit: (x, y) => (y > 940 && y < 1060 && x > X0 - 20 && x < X1 + 20) ? T_TL0 + (T_TL1 - T_TL0) * clamp((x - X0) / (X1 - X0)) : null };
+  return { renderAt, resize, duration: DURATION, script: S_,
+           timelineHit: (x, y) => (TICKED.length && y > 940 && y < 1060 && x > X0 - 20 && x < X1 + 20) ? T_TL0 + (T_TL1 - T_TL0) * clamp((x - X0) / (X1 - X0)) : null };
 }
 
 export async function loadFonts() {
-  const specs = ['300 124px Newsreader', 'italic 300 41px Newsreader', '600 21px Inter', '500 17px Inter', '400 21px Inter', '600 12px Inter', '500 15px Inter'];
+  const specs = ['300 124px Newsreader', 'italic 300 41px Newsreader', '300 64px Newsreader', '600 21px Inter', '500 17px Inter',
+    '400 21px Inter', '600 12px Inter', '500 15px Inter', '600 14px Inter', '400 19px Inter'];
   try { await Promise.all(specs.map(s => document.fonts.load(s))); await document.fonts.ready; } catch (e) { }
+}
+
+// Known films (id → script module). Keep ids to [a-z0-9-].
+export const FILMS = ['main', 'speechgym', 'read-the-mind', 'proteinzero', 'procedure-aware-rl', 'cesar', 'adrpo', 'orw-cfm-w2', 'ac-flow', 'lbc', 'gdi'];
+export async function loadScript(id) {
+  if (!FILMS.includes(id)) id = 'main';
+  return (await import(`./scripts/${id}.js`)).default;
 }

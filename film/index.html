@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Out of the loop — a one-minute research film | Jiajun Fan</title>
-<meta name="description" content="A one-minute film on Jiajun Fan's research: reinforcement learning that takes the human out of the training loop, step by step.">
-<meta property="og:title" content="Out of the loop — a one-minute research film">
-<meta property="og:description" content="Reinforcement learning that takes the human out of the training loop, step by step. Jiajun Fan, UIUC.">
+<title>From RL to AGI — a one-minute research film | Jiajun Fan</title>
+<meta name="description" content="A one-minute film on Jiajun Fan's research: from reinforcement learning to AGI, taking the human out of the training loop step by step, toward an AI scientist.">
+<meta property="og:title" content="From RL to AGI — a one-minute research film">
+<meta property="og:description" content="Taking the human out of the loop, one step at a time, toward an AI scientist. Jiajun Fan, UIUC.">
 <meta property="og:image" content="https://www.jiajunfan.com/film/poster.jpg">
 <meta property="og:type" content="video.other">
 <meta name="twitter:card" content="summary_large_image">
@@ -39,15 +39,16 @@
 </head>
 <body class="waiting">
 <a id="back" class="chrome" href="/">&larr; jiajunfan.com</a>
-<div id="stage"><canvas id="film" role="img" aria-label="Out of the loop: a one-minute animated film about Jiajun Fan's research"></canvas></div>
+<div id="stage"><canvas id="film" role="img" aria-label="An animated research film by Jiajun Fan"></canvas></div>
 <div class="sr" id="transcript">
-  <h1>Out of the loop</h1>
-  <p>How much of its own teaching can a model take over from us? Three things a human still does in the loop: data collection, labelling and tuning, reward design.</p>
+  <h1>From RL to AGI</h1>
+  <p>Taking the human out of the loop, one step at a time. Three things a human still does in the loop: data collection, labelling and tuning, reward design.</p>
   <p>2022–2023, Superhuman: an agent learns to choose its own experience and breaks 24 Atari human world records (GDI, ICML 2022; LBC, ICLR 2023 Oral).</p>
   <p>2025–2026, Its own data: no collected preferences; the model improves from its own generations without collapsing (ORW-CFM-W2, ICLR 2025; ProteinZero, TMLR 2026).</p>
   <p>2025–2026, Its own reasoning: no hand-tuned regularisation and no human-written chains of thought (ADRPO, NeurIPS 2025; CESAR, ICLR 2026).</p>
   <p>2026, Worlds to act in: voice agents that listen and speak natively, and tool agents that learn the order of things (SpeechGym, arXiv 2026; Procedure-Aware RL, COLM 2026).</p>
   <p>Next, Its own critic: recursive self-improvement, where each better model becomes the critic and teacher of the next.</p>
+  <p>The goal, An AI scientist: out of the loop entirely, a system that improves itself and does research on its own.</p>
 </div>
 <button id="play" type="button">&#9654;&nbsp; Play the film</button>
 <div id="ctl" class="chrome">
@@ -63,7 +64,7 @@
 { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
 </script>
 <script type="module">
-import { createFilm, loadFonts, DESIGN_W, DESIGN_H } from './film.js';
+import { createFilm, loadFonts, loadScript, DESIGN_W, DESIGN_H } from './film.js';
 
 const canvas = document.getElementById('film');
 const body = document.body;
@@ -129,7 +130,14 @@ addEventListener('resize', fit);
 
 (async () => {
   await loadFonts();
-  try { film = createFilm(canvas, { particles: innerWidth < 700 ? 6000 : 9000 }); }
+  const id = (new URLSearchParams(location.search).get('s') || 'main').replace(/[^a-z0-9-]/g, '');
+  const script = await loadScript(id);
+  if (script.id !== 'main') {
+    document.title = script.name + ' — a project film | Jiajun Fan';
+    const back = document.getElementById('back'); back.href = script.page; back.innerHTML = '&larr; ' + script.name + ' project page';
+    document.getElementById('transcript').innerHTML = '<h1>' + script.name + '</h1>' + script.chapters.map(c => '<p>' + [c.label, c.title, (c.lines || []).join(' '), c.meta].filter(Boolean).join(' \u00b7 ') + '</p>').join('');
+  }
+  try { film = createFilm(canvas, { script, particles: innerWidth < 700 ? 6000 : 9000 }); }
   catch (e) { document.getElementById('load').textContent = 'WEBGL IS NOT AVAILABLE IN THIS BROWSER'; return; }
   fit();
   document.getElementById('load').classList.add('gone');

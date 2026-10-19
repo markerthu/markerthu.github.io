@@ -1271,12 +1271,12 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
 </div>
 </div>
 
-<a class="film-teaser" href="/film/" aria-label="Watch Out of the loop, a one-minute film about this research">
+<a class="film-teaser" href="/film/" aria-label="Watch From RL to AGI, a one-minute film about this research">
   <img class="ft-img" src="/film/teaser.jpg" alt="" width="870" height="810" loading="lazy" decoding="async">
   <span class="ft-text">
     <span class="ft-kicker">A ONE-MINUTE FILM</span>
-    <span class="ft-title">Out of the loop</span>
-    <span class="ft-sub">The research above as one story: taking the human out of the training loop, step by step.</span>
+    <span class="ft-title">From RL to AGI</span>
+    <span class="ft-sub">The research above as one story: taking the human out of the loop, step by step, toward an AI scientist.</span>
   </span>
   <span class="ft-play" aria-hidden="true"></span>
 </a>
