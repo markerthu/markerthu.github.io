@@ -17,7 +17,8 @@ redirect_from:
 .page__title,.page__meta,.archive .page__lead,.page__hero-caption{display:none!important;}
 
 /* unify page chrome with the Distill article pages: warm paper, one masthead + one light footer */
-html{overflow-x:hidden;}
+html{overflow-x:hidden;background:#fdfcfa;}
+html:has(body.dark-mode),html.dark-mode-pending{background:#0f1216;}
 body{background:#fdfcfa!important;}
 .site-masthead{background:#fdfcfa!important;box-shadow:0 1px 0 #e8e3d9!important;}
 .masthead-nav a{color:#6c6860!important;}
@@ -71,6 +72,7 @@ body.dark-mode .blog-index{
 .bx-sub{font-family:var(--bx-serif);font-size:1.15rem;line-height:1.55;color:var(--bx-muted);margin:0 0 1.2em;max-width:42em;}
 .bx-cta{display:inline-flex;align-items:center;gap:8px;font-family:var(--bx-sans);font-size:.86rem;font-weight:600;color:var(--bx-link)!important;text-decoration:none!important;border:1px solid var(--bx-rule);border-radius:999px;padding:7px 16px;transition:.18s;}
 .bx-cta:hover{border-color:var(--bx-link);background:rgba(21,101,192,.06);}
+.lbl-ico{display:inline-block;width:1em;height:1em;vertical-align:-0.14em;margin-right:5px;background-color:currentColor;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;}
 .bx-cta .lbl-ico{width:.95em;height:.95em;margin-right:0;}
 .bx-head-rule{border:none;border-top:1px solid var(--bx-rule);margin:1.6em 0 .4em;}
 
