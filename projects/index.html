@@ -61,6 +61,11 @@ a{text-decoration:none}
 .p-head{max-width:1000px;margin:0 auto;padding:54px 24px 0;}
 .p-kicker{font-family:var(--sans);text-transform:uppercase;letter-spacing:.145em;font-size:.72rem;font-weight:600;color:var(--muted);margin-bottom:.7em;}
 .p-title{font-family:var(--serif);font-weight:500;font-size:2.7rem;line-height:1.1;letter-spacing:-.02em;color:var(--ink);margin-bottom:.24em;}
+.p-film{display:inline-flex;align-items:center;gap:10px;margin-top:14px;font-family:var(--sans);font-size:.9rem;color:var(--link);text-decoration:none;border:1px solid var(--rule);border-radius:999px;padding:7px 14px 7px 8px;transition:border-color .2s ease,background .2s ease}
+.p-film:hover{border-color:var(--link);background:rgba(21,101,192,.05)}
+.p-film:focus-visible{outline:2px solid var(--link);outline-offset:2px}
+.p-film-play{position:relative;width:22px;height:22px;border-radius:50%;background:#0b0b0c;box-shadow:0 0 0 1px rgba(201,166,107,.5);flex:none}
+.p-film-play::after{content:'';position:absolute;left:8px;top:6px;border-left:8px solid #ece6da;border-top:5px solid transparent;border-bottom:5px solid transparent}
 .p-sub{font-family:var(--serif);font-size:1.16rem;line-height:1.55;color:var(--muted);max-width:46em;}
 .p-rule{border:none;border-top:1px solid var(--rule);margin:1.7em 0 .2em;}
 
@@ -148,7 +153,8 @@ body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-ima
 <div class="p-head">
   <div class="p-kicker">Research</div>
   <h1 class="p-title">Projects</h1>
-  <p class="p-sub">Project pages for selected publications — method overview, key results, and BibTeX.</p>
+  <p class="p-sub">Project pages for selected publications — method overview, key results, short films, and BibTeX.</p>
+  <a class="p-film" href="/film/"><span class="p-film-play" aria-hidden="true"></span><span>Watch <em>From RL to AGI</em>, a one-minute film on the whole research line</span></a>
   <hr class="p-rule">
 </div>
 
