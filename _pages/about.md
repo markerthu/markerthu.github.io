@@ -89,6 +89,8 @@ body.dark-mode .section-header .sh-icon { filter: brightness(1.55) saturate(1.1)
 .nb-code    { background: #ede9fe; color: #5b21b6; }
 .nb-talk    { background: #fef3c7; color: #92400e; }
 .nb-finish { background: #d4edda; color: #155724; }
+.nb-find { background: #e3edff; color: #1e40af; }
+.nb-feature { background: #dff3f1; color: #0f6b63; }
 
 /* ── Publication list ── */
 .pub-list { margin: 0; padding: 0; }
@@ -121,8 +123,7 @@ body.dark-mode .section-header .sh-icon { filter: brightness(1.55) saturate(1.1)
 @media(max-width:560px){
   .pub-entry { grid-template-columns: 1fr; }
   .pub-left { flex-direction: row; gap: 8px; }
-  .stats-row { gap: 8px; }
-  .stat-card { min-width: calc(50% - 4px); flex: 1 1 calc(50% - 4px); }
+  .stats-row { gap: 8px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 .pb { /* pub badge */
   display: inline-block; padding: 3px 8px; border-radius: 5px;
@@ -209,7 +210,7 @@ body.dark-mode .ro-v { color: #58a6ff; background: #161b22; border-color: #30363
 }
 
 /* ── Stats row ── */
-.stats-row { display: flex; flex-wrap: wrap; gap: 12px; margin: 1.2em 0 1.6em; }
+.stats-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 1.2em 0 1.6em; }
 .cit-chart{background:#fff;border:1.5px solid #e0e8f0;border-radius:12px;padding:16px 20px 12px;margin:0 0 1.8em;}
 .cit-chart-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px;margin-bottom:12px;}
 .cit-chart-title{font-weight:800;font-size:0.92em;color:#1a2332;}
@@ -402,24 +403,40 @@ body.dark-mode .fv-iclr23oral { background: #5b21b6 !important; color: #e9d5ff !
 
 /* ── Pub link buttons ── */
 .pub-links { display: flex; gap: 5px; margin-top: 5px; flex-wrap: wrap; }
-.pub-link {
-  display: inline-flex; align-items: center; gap: 3px;
-  font-size: 0.72em; font-weight: 700;
-  padding: 2px 8px; border-radius: 4px;
-  text-decoration: none !important;
-  transition: background .15s;
+/* ── Publication action pills: one shape, one size, a soft tint per kind ── */
+.pub-links { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; align-items: center; }
+.pub-links .pub-link, .pub-links .cite-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  font: 600 0.74em/1 inherit; letter-spacing: .01em;
+  padding: 6px 11px; border-radius: 999px; border: 1px solid transparent;
+  text-decoration: none !important; white-space: nowrap; cursor: pointer;
+  transition: background .15s, border-color .15s, transform .15s;
 }
-.pl-paper { background: #e3f2fd; color: #0d47a1; }
-.pl-paper:hover { background: #bbdefb; }
-.pl-project { background: #e8f5e9; color: #1b5e20; }
-.pl-project:hover { background: #c8e6c9; }
-.pl-code { background: #fce4ec; color: #880e4f; }
-.pl-code:hover { background: #f8bbd0; }
-.pl-arxiv { background: #fff3e0; color: #bf360c; }
-.pl-arxiv:hover { background: #ffe0b2; }
-.pl-video { background: #14120f; color: #e2c58f; }
-.pl-video:hover { background: #2a241a; }
-.pl-video::before { content: ''; display: inline-block; margin-right: 6px; border-left: 7px solid currentColor; border-top: 4.5px solid transparent; border-bottom: 4.5px solid transparent; }
+.pub-links .pub-link:hover { transform: translateY(-1px); }
+.pub-links .pub-link .lbl-ico, .pub-links .cite-badge .lbl-ico { width: 1.05em; height: 1.05em; margin: 0; }
+.page__content .pub-links .pl-paper   { background: #eef4ff; border-color: #d3e2fb; color: #1d4ed8; }
+.page__content .pub-links .pl-project { background: #edf7ef; border-color: #cfe9d6; color: #1b6b34; }
+.page__content .pub-links .pl-video   { background: #f4f0fd; border-color: #e0d6f7; color: #5b3cc4; }
+.page__content .pub-links .pl-arxiv   { background: #fff4ea; border-color: #f8dcc4; color: #b4471a; }
+.page__content .pub-links .pl-press   { background: #eaf6f5; border-color: #c9e7e4; color: #11665f; }
+.page__content .pub-links .pl-code    { background: #fdeef3; border-color: #f4d1de; color: #a3245a; }
+.pub-links .pl-cite                   { background: #f0faf3; border-color: #c6e9d2; color: #15803d; font-family: inherit; }
+.pub-links .cite-badge                { background: #f0f7ff; border-color: #cde3fa; color: #0b5c9e; cursor: default; }
+.page__content .pub-links .pl-paper:hover   { border-color: #9dbdf5; }
+.page__content .pub-links .pl-project:hover { border-color: #97d2a7; }
+.page__content .pub-links .pl-video:hover   { border-color: #b9a6ee; }
+.page__content .pub-links .pl-arxiv:hover   { border-color: #f0b98b; }
+.page__content .pub-links .pl-press:hover   { border-color: #8fcfc8; }
+.pub-links .pl-cite:hover                   { border-color: #8fd3a6; }
+.pub-links .pl-video::before { content: ''; display: inline-block; border-left: 6px solid currentColor; border-top: 4px solid transparent; border-bottom: 4px solid transparent; margin-right: 1px; }
+body.dark-mode .page__content .pub-links .pl-paper   { background: #13213a !important; border-color: #22406e !important; color: #8ab4ff !important; }
+body.dark-mode .page__content .pub-links .pl-project { background: #10261a !important; border-color: #1f4a2f !important; color: #7fd49a !important; }
+body.dark-mode .page__content .pub-links .pl-video   { background: #1f1836 !important; border-color: #3b2d66 !important; color: #b9a6f5 !important; }
+body.dark-mode .page__content .pub-links .pl-arxiv   { background: #2c1b0e !important; border-color: #5a3519 !important; color: #f5b07a !important; }
+body.dark-mode .page__content .pub-links .pl-press   { background: #0e2826 !important; border-color: #1d4b47 !important; color: #7fd1c8 !important; }
+body.dark-mode .page__content .pub-links .pl-code    { background: #2e1320 !important; border-color: #5c2440 !important; color: #f39cbf !important; }
+body.dark-mode .pub-links .pl-cite                   { background: #0f2a1c !important; border-color: #1f5236 !important; color: #7fd49a !important; }
+body.dark-mode .pub-links .cite-badge                { background: #0d2036 !important; border-color: #1e4469 !important; color: #8cc8f5 !important; }
 
 /* ── Research timeline ── */
 .research-timeline {
@@ -593,15 +610,8 @@ body.dark-mode li[style*="color:#767676"],
 body.dark-mode span[style*="color:#767676"] { color: #8b949e !important; }
 body.dark-mode .pub-project { background: #1c2333 !important; color: #58a6ff !important; }
 body.dark-mode .pub-project:hover { background: #1e3a5f !important; }
-body.dark-mode .pub-link.pl-paper  { background: #1c2333 !important; color: #58a6ff !important; }
-body.dark-mode .pub-link.pl-project{ background: #122117 !important; color: #3fb950 !important; }
-body.dark-mode .pub-link.pl-code   { background: #3d1526 !important; color: #f48fb1 !important; }
-body.dark-mode .pub-link.pl-arxiv  { background: #3d2410 !important; color: #ffb74d !important; }
-body.dark-mode .pub-link.pl-video  { background: #2a2418 !important; color: #e8c98a !important; }
 
 /* ── BibTeX cite button & popup ── */
-.pl-cite { background: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0; cursor: pointer; font-family: inherit; font-size: 0.78em; font-weight: 600; padding: 3px 9px; border-radius: 20px; transition: background .15s, color .15s; }
-.pl-cite:hover { background: #dcfce7; }
 .bib-popup { position: absolute; z-index: 9995; display: none; background: #fff; border: 1.5px solid #e5e7eb; border-radius: 10px; padding: 14px 16px; box-shadow: 0 8px 32px rgba(0,0,0,.14); }
 .bib-popup.show { display: block; }
 .bib-pre { background: #f8fafc; border-radius: 6px; padding: 10px 12px; font-size: 0.76em; overflow-x: auto; white-space: pre; color: #1e293b; border: 1px solid #e2e8f0; margin: 0 0 10px; }
@@ -610,7 +620,6 @@ body.dark-mode .pub-link.pl-video  { background: #2a2418 !important; color: #e8c
 .bib-copy:hover { background: #0d47a1; }
 .bib-close { background: #f1f5f9; color: #4a5568; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.83em; font-weight: 600; }
 .bib-close:hover { background: #e2e8f0; }
-body.dark-mode .pl-cite { background: #0f3d2e !important; color: #3fb950 !important; border-color: #1a7f45 !important; }
 body.dark-mode .bib-popup { background: #161b22 !important; border-color: #30363d !important; }
 body.dark-mode .bib-pre { background: #0d1117 !important; color: #c9d1d9 !important; border-color: #30363d !important; }
 body.dark-mode .bib-copy { background: #1f6feb !important; color: #fff !important; }
@@ -621,6 +630,8 @@ body.dark-mode .bib-close:hover { background: #30363d !important; color: #c9d1d9
 /* ── Dark mode: News badges ── */
 body.dark-mode .nbadge.nb-accept { background: #122117 !important; color: #3fb950 !important; }
 body.dark-mode .nbadge.nb-finish { background: #122117 !important; color: #3fb950 !important; }
+body.dark-mode .nbadge.nb-find { background: #13213a !important; color: #8ab4ff !important; }
+body.dark-mode .nbadge.nb-feature { background: #0e2826 !important; color: #7fd1c8 !important; }
 body.dark-mode .nbadge.nb-top { background: #2d2000 !important; color: #ffd54f !important; }
 body.dark-mode .nbadge.nb-service { background: #21262d !important; color: #8b949e !important; }
 body.dark-mode .nbadge.nb-upcoming { background: #0d2137 !important; color: #58a6ff !important; }
@@ -901,14 +912,6 @@ body.dark-mode .ra-msgs::-webkit-scrollbar-track { background: #0d1117; }
 /* ── Thumbnail placeholder (no longer used — class removed from HTML) ── */
 
 /* ── ① Citation count badge ── */
-.cite-badge {
-  display: inline-flex; align-items: center; gap: 4px;
-  background: #f0f9ff; color: #0369a1;
-  border: 1px solid #bae6fd; border-radius: 999px;
-  padding: 1px 9px; font-size: 0.74em; font-weight: 700;
-  margin-left: 6px; vertical-align: middle; white-space: nowrap;
-}
-body.dark-mode .cite-badge { background: #0c2340; color: #7dd3fc; border-color: #1e4976; }
 
 /* ── ② Filter bar ── */
 .pub-filter-bar {
@@ -1178,6 +1181,7 @@ body.dark-mode .pillar-tag { background: #1c2333; color: #58a6ff; }
     <span class="hero-pill"><img class="hero-ico" src="/images/icons/h-reason.png" alt="">Multimodal Reasoning LLMs</span>
     <span class="hero-pill"><img class="hero-ico" src="/images/icons/h-game.png" alt="">Superhuman Deep RL</span>
     <span class="hero-pill"><img class="hero-ico" src="/images/icons/h-agentic.png" alt="">Agentic RL</span>
+    <span class="hero-pill"><img class="hero-ico" src="/images/icons/h-refresh.png" alt="">Recursive Self-Improvement</span>
   </div>
   <div class="hero-links">
     <a class="hero-link" href="/cv/"><img class="hero-ico" src="/images/icons/h-cv.png" alt="">CV</a>
@@ -1306,7 +1310,7 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
   </li>
   <li>
     <span class="news-date">Sep 2026</span>
-    <span><span class="nbadge nb-accept">Accept</span>Multiple papers accepted at <strong>NeurIPS 2026</strong>. See you in Atlanta!</span>
+    <span><span class="nbadge nb-accept">Accept</span>Multiple papers accepted at <strong>NeurIPS 2026</strong>. See you in Atlanta&nbsp;<img class="g-ico" src="/images/icons/flag-us.png" alt=""></span>
   </li>
   <li>
     <span class="news-date">Sep 2026</span>
@@ -1314,11 +1318,11 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
   </li>
   <li>
     <span class="news-date">Aug 2026</span>
-    <span><span class="nbadge nb-finish">Finding</span>Voice agents could be measured, never improved &mdash; so we closed the loop and trained one in native audio. <a href="/posts/2026/08/speechgym-voice-agent-rl/">Blog</a> &middot; <a href="https://arxiv.org/abs/2608.26432" target="_blank" rel="noopener noreferrer">Paper</a></span>
+    <span><span class="nbadge nb-find">Finding</span>Voice agents could be measured, never improved &mdash; so we closed the loop and trained one in native audio. <a href="/posts/2026/08/speechgym-voice-agent-rl/">Blog</a> &middot; <a href="https://arxiv.org/abs/2608.26432" target="_blank" rel="noopener noreferrer">Paper</a></span>
   </li>
   <li>
     <span class="news-date">Aug 2026</span>
-    <span><span class="nbadge nb-finish">Finding</span>For the first time, we can see the brain map of an Audio LLM &mdash; its global workspace, the &ldquo;consciousness space&rdquo;. <a href="/posts/2026/08/read-the-mind-audio-llm/">Blog</a> &middot; <a href="https://arxiv.org/abs/2608.24958" target="_blank" rel="noopener noreferrer">Paper</a></span>
+    <span><span class="nbadge nb-find">Finding</span>For the first time, we can see the brain map of an Audio LLM &mdash; its global workspace, the &ldquo;consciousness space&rdquo;. <a href="/posts/2026/08/read-the-mind-audio-llm/">Blog</a> &middot; <a href="https://arxiv.org/abs/2608.24958" target="_blank" rel="noopener noreferrer">Paper</a></span>
   </li>
   <li>
     <span class="news-date">Jul 2026</span>
@@ -1326,27 +1330,27 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
   </li>
   <li>
     <span class="news-date">Jul 2026</span>
-    <span><span class="nbadge nb-finish">Feature</span>CESAR is now featured on <a href="https://www.amazon.science/publications/incentivizing-consistent-effective-and-scalable-reasoning-capability-in-audio-llms-via-reasoning-process-rewards"><strong>Amazon Science</strong></a>.</span>
+    <span><span class="nbadge nb-feature">Feature</span>CESAR is now featured on <a href="https://www.amazon.science/publications/incentivizing-consistent-effective-and-scalable-reasoning-capability-in-audio-llms-via-reasoning-process-rewards"><strong>Amazon Science</strong></a>.</span>
   </li>
   <li>
     <span class="news-date">Jul 2026</span>
-    <span><span class="nbadge nb-accept">Accept</span>Papers accepted at <strong>COLM 2026</strong> (San Francisco, Oct 6–9). See you in San Francisco <img class="g-ico" src="/images/icons/flag-us.png" alt=""></span>
+    <span><span class="nbadge nb-accept">Accept</span>Papers accepted at <strong>COLM 2026</strong> (San Francisco, Oct 6–9). See you in San Francisco&nbsp;<img class="g-ico" src="/images/icons/flag-us.png" alt=""></span>
   </li>
   <li>
     <span class="news-date">Apr 2026</span>
-    <span><span class="nbadge nb-accept">Accept</span>Several papers accepted at <strong>ICML 2026</strong> (Seoul, Jul 6–11). See you in Seoul <img class="g-ico" src="/images/icons/flag-kr.png" alt=""></span>
+    <span><span class="nbadge nb-accept">Accept</span>Several papers accepted at <strong>ICML 2026</strong> (Seoul, Jul 6–11). See you in Seoul&nbsp;<img class="g-ico" src="/images/icons/flag-kr.png" alt=""></span>
   </li>
   <li>
     <span class="news-date">Apr 2026</span>
-    <span><span class="nbadge nb-finish">Finish</span><img class="g-ico" src="/images/icons/flag-br.png" alt="">Presented CESAR &amp; SP-VLA at <strong>ICLR 2026</strong>, Rio de Janeiro, Apr 23–27.</span>
+    <span><span class="nbadge nb-talk">Talk</span>Presented CESAR &amp; SP-VLA at <strong>ICLR 2026</strong>, Rio de Janeiro, Apr 23–27&nbsp;<img class="g-ico" src="/images/icons/flag-br.png" alt=""></span>
   </li>
   <li>
     <span class="news-date">Jan 2026</span>
-    <span><span class="nbadge nb-accept">Accept</span><strong>2 papers at ICLR 2026</strong> — CESAR &amp; SP-VLA. See you in Rio <img class="g-ico" src="/images/icons/flag-br.png" alt=""></span>
+    <span><span class="nbadge nb-accept">Accept</span><strong>2 papers at ICLR 2026</strong> — CESAR &amp; SP-VLA. See you in Rio&nbsp;<img class="g-ico" src="/images/icons/flag-br.png" alt=""></span>
   </li>
   <li>
     <span class="news-date">Sep 2025</span>
-    <span><span class="nbadge nb-accept">Accept</span><strong>2 papers at NeurIPS 2025</strong> — ADRPO &amp; VarCon. See you in San Diego <i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-flow.png);mask-image:url(/images/icons/h-flow.png)"></i></span>
+    <span><span class="nbadge nb-accept">Accept</span><strong>2 papers at NeurIPS 2025</strong> — ADRPO &amp; VarCon. See you in San Diego&nbsp;<img class="g-ico" src="/images/icons/flag-us.png" alt=""></span>
   </li>
   <li>
     <span class="news-date">Jun 2025</span>
@@ -1447,8 +1451,6 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
     <div class="pub-thumb-wrap"><img loading="lazy" src="/images/featured/cesar-ai.jpg" width="1000" height="337" alt="CESAR concept banner"></div>
     <div class="pub-title">
       <a href="https://openreview.net/forum?id=DUr48hxO2h" target="_blank" rel="noopener noreferrer">Incentivizing Consistent, Effective and Scalable Reasoning Capability in Audio LLMs via Reasoning Process Rewards</a>
-      <a class="pub-project" href="/projects/cesar/">Project Page</a>
-      <a class="pub-project" href="https://www.amazon.science/publications/incentivizing-consistent-effective-and-scalable-reasoning-capability-in-audio-llms-via-reasoning-process-rewards" target="_blank" rel="noopener noreferrer">Amazon Science</a>
     <button class="pub-abst-btn" aria-expanded="false" aria-label="Toggle abstract">▾ Abstract</button>
     <div class="pub-abstract-preview">CESAR resolves test-time inverse scaling in Audio LLMs by rewarding the reasoning process via GRPO, achieving SOTA on MMAU — outperforming Gemini 2.5 Pro and GPT-4o Audio.</div></div>
     <div class="pub-authors"><strong>J. Fan*</strong>, R. Ren, J. Li, R. Pandey, P.G. Shivakumar, I. Bulyko, A. Gandhe, G. Liu, Y. Gu</div>
@@ -1458,6 +1460,7 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
       <a class="pub-link pl-paper" href="https://openreview.net/forum?id=DUr48hxO2h" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-pubs.png);mask-image:url(/images/icons/sh-pubs.png)"></i>Paper</a>
       <a class="pub-link pl-project" href="/projects/cesar/"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-link.png);mask-image:url(/images/icons/h-link.png)"></i>Project</a>
       <a class="pub-link pl-arxiv" href="https://arxiv.org/abs/2510.20867" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-paperclip.png);mask-image:url(/images/icons/h-paperclip.png)"></i>arXiv</a>
+      <a class="pub-link pl-press" href="https://www.amazon.science/publications/incentivizing-consistent-effective-and-scalable-reasoning-capability-in-audio-llms-via-reasoning-process-rewards" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-megaphone.png);mask-image:url(/images/icons/h-megaphone.png)"></i>Amazon Science</a>
     </div>
   </div>
 </div>
@@ -1474,6 +1477,9 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
     <div class="pub-authors">Y. Li, Y. Meng, Z. Sun, K. Ji, C. Tang, <strong>J. Fan</strong>, X. Ma, S.-T. Xia, Z. Wang, W. Zhu</div>
     <div class="pub-desc">Action-aware model scheduling + spatio-semantic token pruning for VLA acceleration.</div>
     <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-impact.png);mask-image:url(/images/icons/sh-impact.png)"></i>1.5× lossless speedup (LIBERO) · 2.4× speedup (SimplerEnv)</div>
+    <div class="pub-links">
+      <a class="pub-link pl-paper" href="https://openreview.net/forum?id=RwdGIIjPlC" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-pubs.png);mask-image:url(/images/icons/sh-pubs.png)"></i>Paper</a>
+    </div>
   </div>
 </div>
 
@@ -1483,7 +1489,6 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
     <div class="pub-thumb-wrap"><img loading="lazy" src="/images/featured/adrpo-ai.jpg" width="1000" height="337" alt="ADRPO concept banner"></div>
     <div class="pub-title">
       <a href="https://openreview.net/forum?id=aXO0xg0ttW" target="_blank" rel="noopener noreferrer">Adaptive Divergence Regularized Policy Optimization for Fine-tuning Generative Models</a>
-      <a class="pub-project" href="/projects/adrpo/">Project Page</a>
     <button class="pub-abst-btn" aria-expanded="false" aria-label="Toggle abstract">▾ Abstract</button>
     <div class="pub-abstract-preview">ADRPO introduces sample-level adaptive divergence regularization for RLHF — high-value samples get more freedom, poor samples get stronger constraints. Plug-and-play on any RL method.</div></div>
     <div class="pub-authors"><strong>J. Fan*</strong>, T. Wei, C. Cheng, Y. Chen, G. Liu</div>
@@ -1506,9 +1511,12 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
     <div class="pub-title"><a href="https://openreview.net/forum?id=uOOlHOq500" target="_blank" rel="noopener noreferrer">Variational Supervised Contrastive Learning</a>
       <button class="pub-abst-btn" aria-expanded="false" aria-label="Toggle abstract">▾ Abstract</button>
       <div class="pub-abstract-preview">VarCon reformulates supervised contrastive learning as variational inference, achieving SOTA 79.36% Top-1 accuracy on ImageNet-1K with ResNet-50.</div></div>
-    <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-chart.png);mask-image:url(/images/icons/h-chart.png)"></i>SOTA 79.36% Top-1 on ImageNet-1K with ResNet-50</div>
     <div class="pub-authors">Z. Wang, <strong>J. Fan</strong>, T. Nguyen, H. Ji, G. Liu</div>
     <div class="pub-desc">VarCon: supervised contrastive learning as variational inference — posterior-weighted ELBO replaces pairwise comparisons.</div>
+    <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-chart.png);mask-image:url(/images/icons/h-chart.png)"></i>SOTA 79.36% Top-1 on ImageNet-1K with ResNet-50</div>
+    <div class="pub-links">
+      <a class="pub-link pl-paper" href="https://openreview.net/forum?id=uOOlHOq500" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-pubs.png);mask-image:url(/images/icons/sh-pubs.png)"></i>Paper</a>
+    </div>
   </div>
 </div>
 
@@ -1518,12 +1526,16 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
     <div class="pub-thumb-wrap"><img loading="lazy" src="/images/featured/orw-ai.jpg" width="1000" height="337" alt="ORW concept banner"></div>
     <div class="pub-title">
       <a href="https://openreview.net/forum?id=2IoFFexvuw" target="_blank" rel="noopener noreferrer">Online Reward-Weighted Fine-Tuning of Flow Matching with Wasserstein Regularization</a>
-      <a class="pub-project" href="/projects/orw-cfm-w2/">Project Page</a>
       <button class="pub-abst-btn" aria-expanded="false" aria-label="Toggle abstract">▾ Abstract</button>
       <div class="pub-abstract-preview">ORW-CFM-W2 is the first online RLHF method for flow matching — no human data, no likelihood estimation. Wasserstein regularization maintains generation diversity.</div></div>
-    <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>First online RLHF for flow matching · Collapse-free W2 regularization</div>
     <div class="pub-authors"><strong>J. Fan*</strong>, S. Shen, C. Cheng, Y. Chen, C. Liang, G. Liu</div>
     <div class="pub-desc">ORW-CFM-W2: first online RLHF for flow matching — no human data, no likelihood, no collapse. W2 regularization keeps generation diverse.</div>
+    <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>First online RLHF for flow matching · Collapse-free W2 regularization</div>
+    <div class="pub-links">
+      <a class="pub-link pl-paper" href="https://openreview.net/forum?id=2IoFFexvuw" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-pubs.png);mask-image:url(/images/icons/sh-pubs.png)"></i>Paper</a>
+      <a class="pub-link pl-project" href="/projects/orw-cfm-w2/"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-link.png);mask-image:url(/images/icons/h-link.png)"></i>Project</a>
+      <a class="pub-link pl-arxiv" href="https://arxiv.org/abs/2502.06061" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-paperclip.png);mask-image:url(/images/icons/h-paperclip.png)"></i>arXiv</a>
+    </div>
   </div>
 </div>
 
@@ -1535,12 +1547,15 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
     <div class="pub-thumb-wrap"><img loading="lazy" src="/images/featured/acflow-ai.jpg" width="1000" height="337" alt="ACFLOW concept banner"></div>
     <div class="pub-title">
       <a href="https://arxiv.org/abs/2510.18072" target="_blank" rel="noopener noreferrer">Fine-tuning Flow Matching Generative Models with Intermediate Feedback</a>
-      <a class="pub-project" href="/projects/ac-flow/">Project Page</a>
       <button class="pub-abst-btn" aria-expanded="false" aria-label="Toggle abstract">▾ Abstract</button>
       <div class="pub-abstract-preview">AC-Flow introduces actor-critic with intermediate feedback for flow matching — reward shaping + dual-stability mechanism + Wasserstein regularization enables robust SD3 fine-tuning without collapse.</div></div>
-    <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-gear.png);mask-image:url(/images/icons/h-gear.png)"></i>Actor-critic with step-level reward · Stable SD3 fine-tuning without collapse</div>
     <div class="pub-authors"><strong>J. Fan*</strong>, C. Cheng, S. Shen, X. Zhou, G. Liu &nbsp;·&nbsp; <em>Under Review</em></div>
     <div class="pub-desc">AC-Flow: actor-critic with intermediate feedback for flow matching — reward shaping + dual-stability + Wasserstein regularization. Robust fine-tuning on SD3 without collapse.</div>
+    <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-gear.png);mask-image:url(/images/icons/h-gear.png)"></i>Actor-critic with step-level reward · Stable SD3 fine-tuning without collapse</div>
+    <div class="pub-links">
+      <a class="pub-link pl-project" href="/projects/ac-flow/"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-link.png);mask-image:url(/images/icons/h-link.png)"></i>Project</a>
+      <a class="pub-link pl-arxiv" href="https://arxiv.org/abs/2510.18072" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-paperclip.png);mask-image:url(/images/icons/h-paperclip.png)"></i>arXiv</a>
+    </div>
   </div>
 </div>
 
@@ -1553,8 +1568,12 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
     <div class="pub-title"><a href="https://arxiv.org/abs/2407.05010" target="_blank" rel="noopener noreferrer">PRANCE: Joint Token-Optimization and Structural Channel-Pruning for Adaptive ViT Inference</a>
       <button class="pub-abst-btn" aria-expanded="false" aria-label="Toggle abstract">▾ Abstract</button>
       <div class="pub-abstract-preview">PRANCE jointly optimizes token pruning and structural channel pruning for adaptive ViT inference, achieving significant speedup while maintaining accuracy.</div></div>
-    <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-impact.png);mask-image:url(/images/icons/sh-impact.png)"></i>Joint token + channel pruning · Adaptive ViT inference · IEEE TPAMI 2026</div>
     <div class="pub-authors">Y. Li, C. Tang, Y. Meng, <strong>J. Fan</strong>, Z. Chai, X. Ma, Z. Wang, W. Zhu &nbsp;·&nbsp; <em>IEEE TPAMI</em></div>
+    <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-impact.png);mask-image:url(/images/icons/sh-impact.png)"></i>Joint token + channel pruning · Adaptive ViT inference · IEEE TPAMI 2026</div>
+    <div class="pub-links">
+      <a class="pub-link pl-paper" href="https://doi.org/10.1109/TPAMI.2025.3605239" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-pubs.png);mask-image:url(/images/icons/sh-pubs.png)"></i>Paper</a>
+      <a class="pub-link pl-arxiv" href="https://arxiv.org/abs/2407.05010" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-paperclip.png);mask-image:url(/images/icons/h-paperclip.png)"></i>arXiv</a>
+    </div>
   </div>
 </div>
 
@@ -1566,12 +1585,16 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
     <div class="pub-thumb-wrap"><img loading="lazy" src="/images/featured/lbc-ai.jpg" width="1000" height="337" alt="LBC concept banner"></div>
     <div class="pub-title">
       <a href="https://openreview.net/forum?id=FeWvD0L_a4" target="_blank" rel="noopener noreferrer">Learnable Behavior Control: Breaking Atari Human World Records via Sample-Efficient Behavior Selection</a>
-      <a class="pub-project" href="/projects/lbc/">Project Page</a>
     <button class="pub-abst-btn" aria-expanded="false" aria-label="Toggle abstract">▾ Abstract</button>
     <div class="pub-abstract-preview">LBC introduces a learnable hybrid behavior mapping and bandit meta-controller for exploration control in deep RL, breaking 24 Atari human world records with 78× less data than prior SOTA.</div></div>
     <div class="pub-authors"><strong>J. Fan*</strong>, Y. Zhuang, Y. Liu, J. Hao, B. Wang, J. Zhu, H. Wang, S.-T. Xia</div>
     <div class="pub-desc">LBC: learnable hybrid behavior mapping + bandit meta-controller. Unified framework for exploration control in deep RL.</div>
     <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>Ranked 5/4176 · 10,077% mean human score · 24 world records · 78× data efficiency</div>
+    <div class="pub-links">
+      <a class="pub-link pl-paper" href="https://openreview.net/forum?id=FeWvD0L_a4" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-pubs.png);mask-image:url(/images/icons/sh-pubs.png)"></i>Paper</a>
+      <a class="pub-link pl-project" href="/projects/lbc/"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-link.png);mask-image:url(/images/icons/h-link.png)"></i>Project</a>
+      <a class="pub-link pl-arxiv" href="https://arxiv.org/abs/2305.05239" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-paperclip.png);mask-image:url(/images/icons/h-paperclip.png)"></i>arXiv</a>
+    </div>
   </div>
 </div>
 
@@ -1583,12 +1606,16 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
     <div class="pub-thumb-wrap"><img loading="lazy" src="/images/featured/gdi-ai.jpg" width="1000" height="337" alt="GDI concept banner"></div>
     <div class="pub-title">
       <a href="https://proceedings.mlr.press/v162/fan22c.html" target="_blank" rel="noopener noreferrer">Generalized Data Distribution Iteration</a>
-      <a class="pub-project" href="/projects/gdi/">Project Page</a>
     <button class="pub-abst-btn" aria-expanded="false" aria-label="Toggle abstract">▾ Abstract</button>
     <div class="pub-abstract-preview">GDI shows that optimizing the training data distribution is the key lever for superhuman RL efficiency. Provides a unified framework that subsumes diverse RL algorithms as special cases.</div></div>
     <div class="pub-authors"><strong>J. Fan*</strong>, C. Xiao</div>
     <div class="pub-desc">GDI: optimizing the data distribution is the key to superhuman RL efficiency. Unified framework for diverse RL algorithms.</div>
     <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-chart.png);mask-image:url(/images/icons/h-chart.png)"></i>Agent57 beaten with 500× less data &amp; 2× avg performance</div>
+    <div class="pub-links">
+      <a class="pub-link pl-paper" href="https://proceedings.mlr.press/v162/fan22c.html" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-pubs.png);mask-image:url(/images/icons/sh-pubs.png)"></i>Paper</a>
+      <a class="pub-link pl-project" href="/projects/gdi/"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-link.png);mask-image:url(/images/icons/h-link.png)"></i>Project</a>
+      <a class="pub-link pl-arxiv" href="https://arxiv.org/abs/2206.03192" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-paperclip.png);mask-image:url(/images/icons/h-paperclip.png)"></i>arXiv</a>
+    </div>
   </div>
 </div>
 
@@ -1647,12 +1674,12 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
   </div>
   <div class="research-card">
     <img class="rc-icon-img" loading="lazy" src="/images/icons/ri-reason.png" alt="">
-    <div class="rc-title">Reasoning in Multimodal LLMs</div>
+    <div class="rc-title">Multimodal Reasoning LLMs</div>
     <div class="rc-desc">Process-reward RL for audio/visual LLMs — fixing test-time inverse scaling so reasoning actually helps, not hurts (CESAR).</div>
   </div>
   <div class="research-card">
     <img class="rc-icon-img" loading="lazy" src="/images/icons/ri-superhuman.png" alt="">
-    <div class="rc-title">Superhuman-Level Deep RL</div>
+    <div class="rc-title">Superhuman Deep RL</div>
     <div class="rc-desc">Sample-efficient RL that exceeds human performance. Broke 24 Atari world records with 78× less data (LBC), and beat Agent57 with 500× less data (GDI).</div>
   </div>
   <div class="research-card">
@@ -1795,39 +1822,54 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
 
 <script>
 (function(){
-  /* Dates checked against the official sites on 2026-10-19 (AoE). Past events are dropped. */
+  /* Dates checked against each official site on 2026-10-19 (AoE). Cards sort themselves by the next date. */
   var CONF = [
+    { name:'NeurIPS 2026', abbr:'NeurIPS', type:'ML', color:'#1565c0',
+      location:'Sydney \u00b7 Atlanta \u00b7 Paris', conf:'Dec 6\u201313, 2026', url:'https://neurips.cc/Conferences/2026',
+      deadlines:[
+        {label:'Notification',       date:'2026-09-24', passed:true},
+        {label:'Early Registration', date:'2026-10-30'},
+        {label:'Conference',         date:'2026-12-06'},
+      ]},
+    { name:'ICLR 2027', abbr:'ICLR', type:'ML', color:'#7c3aed',
+      location:'California, USA', conf:'Apr 26\u201330, 2027', url:'https://iclr.cc/Conferences/2027',
+      deadlines:[
+        {label:'Paper Submission', date:'2026-09-25', passed:true},
+        {label:'Reviews Released', date:'2026-11-05'},
+        {label:'Decisions',        date:'2026-12-16'},
+      ]},
     { name:'CVPR 2027', abbr:'CVPR', type:'CV', color:'#059669',
-      location:'Seattle, WA, USA', conf:'Jun 20–25, 2027', url:'https://cvpr.thecvf.com/Conferences/2027/CallForPapers',
+      location:'Seattle, WA, USA', conf:'Jun 20\u201325, 2027', url:'https://cvpr.thecvf.com/Conferences/2027/CallForPapers',
       deadlines:[
         {label:'Paper Enrollment', date:'2026-11-10'},
         {label:'Paper Submission', date:'2026-11-16'},
         {label:'Supplementary',    date:'2026-11-23'},
-        {label:'Rebuttal',         date:'2027-01-25'},
         {label:'Decisions',        date:'2027-02-25'},
       ]},
-    { name:'ICLR 2027', abbr:'ICLR', type:'ML', color:'#7c3aed',
-      location:'California, USA', conf:'Apr 26–30, 2027', url:'https://iclr.cc/Conferences/2027',
+    { name:'ACL 2027', abbr:'ACL', type:'NLP', color:'#c2410c',
+      location:'Kyoto, Japan', conf:'Aug 17\u201322, 2027', url:'https://2027.aclweb.org/',
       deadlines:[
-        {label:'Abstract',         date:'2026-09-18', passed:true},
-        {label:'Paper Submission', date:'2026-09-25', passed:true},
-        {label:'Reviews',          date:'2026-11-05'},
-        {label:'Decisions',        date:'2026-12-16'},
+        {label:'ARR Submission', date:'2027-01-04'},
       ]},
-    { name:'NeurIPS 2026', abbr:'NeurIPS', type:'ML', color:'#1565c0',
-      location:'Sydney · Atlanta · Paris', conf:'Dec 6–13, 2026', url:'https://neurips.cc/Conferences/2026',
+    { name:'IJCAI 2027', abbr:'IJCAI', type:'AI', color:'#0e7490',
+      location:'Kyoto, Japan', conf:'Aug 7\u201313, 2027', url:'https://2027.ijcai.org/',
       deadlines:[
-        {label:'Notification',     date:'2026-09-24', passed:true},
-        {label:'Early Registration', date:'2026-10-30'},
-        {label:'Conference',       date:'2026-12-06'},
+        {label:'Abstract',         date:'2027-01-04'},
+        {label:'Paper Submission', date:'2027-01-11'},
       ]},
     { name:'ICML 2027', abbr:'ICML', type:'ML', color:'#1565c0',
-      location:'TBA', conf:'TBA', url:'https://icml.cc/',
+      location:'South America', conf:'Dates TBA', url:'https://icml.cc/Conferences/FutureMeetings',
       deadlines:[
         {label:'Abstract',         date:null},
         {label:'Paper Submission', date:null},
       ]},
   ];
+  (function sortByNext(){
+    var now = new Date();
+    function next(c){ for (var i = 0; i < c.deadlines.length; i++) { var d = c.deadlines[i]; if (!d.date || d.passed) continue;
+      var q = d.date.split('-'), dt = new Date(+q[0], +q[1]-1, +q[2], 23, 59, 59); if (dt >= now) return dt.getTime(); } return Infinity; }
+    CONF.sort(function(a, b){ return next(a) - next(b); });
+  })();
 
   var grid = document.getElementById('conf-ddl-grid');
   if (!grid) return;
@@ -2162,7 +2204,7 @@ document.querySelectorAll('.featured-card').forEach(function(card){
       var pr = entry.querySelector('.pub-right'); if (pr) pr.appendChild(linksDiv);
     }
     var btn = document.createElement('button');
-    btn.className = 'pub-link pl-cite'; btn.textContent = '\uD83D\uDCCB Cite';
+    btn.className = 'pub-link pl-cite'; btn.innerHTML = '<i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-book.png);mask-image:url(/images/icons/h-book.png)"></i>Cite';
     var captured = bib;
     btn.addEventListener('click', function(e){
       e.stopPropagation();
