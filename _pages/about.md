@@ -308,13 +308,14 @@ body.dark-mode .ct-dot{fill:#58a6ff;} body.dark-mode .ct-dot-last{fill:#b39ddb;}
   letter-spacing: 0.01em;
 }
 .hero-pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 7px;
-  justify-content: center;
-  max-width: 560px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  max-width: 640px;
   margin: 0 auto 20px;
 }
+.hero-pills .hero-pill { text-align: center; }
+@media (max-width: 700px) { .hero-pills { grid-template-columns: 1fr; max-width: 340px; } }
 .hero-pill {
   background: rgba(255,255,255,0.10);
   border: 1px solid rgba(255,255,255,0.20);
@@ -1208,6 +1209,7 @@ body.dark-mode figure.anim-fig{--good:#7FC79A}
     <span class="hero-pill"><img class="hero-ico" src="/images/icons/h-game.png" alt="">Superhuman Deep RL</span>
     <span class="hero-pill"><img class="hero-ico" src="/images/icons/h-agentic.png" alt="">Agentic RL</span>
     <span class="hero-pill"><img class="hero-ico" src="/images/icons/h-refresh.png" alt="">Recursive Self-Improvement</span>
+    <span class="hero-pill"><img class="hero-ico" src="/images/icons/h-sparkle.png" alt="">Agentic Scientific Discovery</span>
   </div>
   <div class="hero-links">
     <a class="hero-link" href="/cv/"><img class="hero-ico" src="/images/icons/h-cv.png" alt="">CV</a>
