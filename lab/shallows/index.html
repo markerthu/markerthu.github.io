@@ -64,6 +64,11 @@
   .ctl{min-width:54px}
   .ctl svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
   .ctl[aria-pressed="true"]{background:rgba(47,75,143,.12);color:var(--navy)}
+  .sp{touch-action:none}
+  .ghost{position:fixed;left:0;top:0;z-index:7;pointer-events:none;width:56px;height:46px;margin:-23px 0 0 -28px;
+    filter:drop-shadow(0 6px 10px rgba(10,40,60,.35));transition:opacity .15s}
+  .ghost svg{width:100%;height:100%}
+  .ghost.bad{opacity:.45}
   .show{position:fixed;right:16px;bottom:16px;z-index:4;display:none}
   body.ui-hidden .show{display:flex;opacity:1;pointer-events:auto}
   .show button{appearance:none;border:1px solid var(--line);background:var(--paper);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
@@ -126,7 +131,7 @@
   </div>
 </header>
 
-<div class="hint ui" id="hint">Tap the water to scatter plankton · drag a ray to lead it · tap a species to add one</div>
+<div class="hint ui" id="hint">Tap the water to scatter plankton · drag a ray to lead it · tap or drag a species to add one</div>
 
 <nav class="bar ui" aria-label="Lagoon controls">
   <div class="grp" id="species" role="group" aria-label="Add creatures"></div>

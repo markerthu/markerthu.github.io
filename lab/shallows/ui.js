@@ -25,12 +25,35 @@ export const SPECIES_ORDER = ['manta', 'eagle', 'sting', 'moon', 'nettle'];
 export function createUI(api) {
   const sp = $('species'), seas = $('seas'), opts = $('opts');
   const ctBadge = {};
+  let dragged = false;
   SPECIES_ORDER.forEach((k, i) => {
     const b = document.createElement('button');
     b.type = 'button'; b.className = 'sp'; b.dataset.sp = k;
-    b.setAttribute('aria-label', `Add a ${NAMES[k][0].toLowerCase()} (key ${i + 1}; Shift removes one)`);
+    b.setAttribute('aria-label', `Add a ${NAMES[k][0].toLowerCase()} (key ${i + 1}; Shift removes one)`); b.title = `Tap to add a ${NAMES[k][0].toLowerCase()}, or drag it onto the water`;
     b.innerHTML = `${ICON[k]}<span class="nm">${NAMES[k][0]}</span><span class="ct" aria-hidden="true">0</span>`;
-    b.addEventListener('click', e => { e.shiftKey ? api.remove(k) : api.add(k); api.touched(); });
+    b.addEventListener('click', e => { if (dragged) { dragged = false; return; } e.shiftKey ? api.remove(k) : api.add(k); api.touched(); });
+    // drag the icon onto the water to place one exactly there
+    b.addEventListener('pointerdown', e => {
+      if (e.button !== 0) return;
+      const x0 = e.clientX, y0 = e.clientY; let ghost = null;
+      const move = ev => {
+        if (!ghost && Math.hypot(ev.clientX - x0, ev.clientY - y0) > 8) {
+          ghost = document.createElement('div'); ghost.className = 'ghost'; ghost.innerHTML = ICON[k]; document.body.appendChild(ghost);
+          try { b.setPointerCapture(e.pointerId); } catch (_) {}
+        }
+        if (ghost) {
+          ghost.style.transform = `translate(${ev.clientX}px, ${ev.clientY}px)`;
+          ghost.classList.toggle('bad', !api.canDrop(k, ev.clientX, ev.clientY));
+        }
+      };
+      const up = ev => {
+        removeEventListener('pointermove', move); removeEventListener('pointerup', up); removeEventListener('pointercancel', up);
+        if (!ghost) return;
+        ghost.remove(); dragged = true; setTimeout(() => { dragged = false; }, 0);
+        if (ev.type === 'pointerup') { api.drop(k, ev.clientX, ev.clientY); api.touched(); }
+      };
+      addEventListener('pointermove', move); addEventListener('pointerup', up); addEventListener('pointercancel', up);
+    });
     b.addEventListener('contextmenu', e => { e.preventDefault(); api.remove(k); api.touched(); });
     sp.appendChild(b); ctBadge[k] = b.querySelector('.ct');
   });

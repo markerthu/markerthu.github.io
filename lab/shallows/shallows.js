@@ -97,6 +97,24 @@ const api = {
   add(sp) { if (count(E, sp) >= LIMIT[sp]) { ui.toast(`That's plenty of ${ui.NAMES[sp][1]} for one lagoon.`); return; } addCreature(E, sp); settle(); },
   remove(sp) { if (count(E, sp) > 0) { removeCreature(E, sp); settle(); } },
   setSea(s) { setSea(E, s); if (sound) sound.setRain(s === 'rain'); if (RAYS.some(sp => count(E, sp))) tr.mark(s); settle(); },
+  // drag-and-drop from the toolbar: place one exactly where it is dropped, if that water suits the species
+  dropCheck(sp, cx, cy) {
+    const r = canvas.getBoundingClientRect(), x = (cx - r.left) / unit, y = E.H - (cy - r.top) / unit;
+    const el = document.elementFromPoint(cx, cy);
+    if (el && el !== canvas && !el.classList.contains('ghost')) return { ok: false, x, y, why: '' };
+    const d = depthAt(E, x, y), P = SPECIES[sp];
+    if (d < .3) return { ok: false, x, y, why: 'That is dry sand — drop it in the water.' };
+    if (P.maxD && d > P.maxD) return { ok: false, x, y, why: `Too deep for a ${ui.NAMES[sp][0].toLowerCase()}: they keep to the sandy shallows.` };
+    if (d < P.minD) return { ok: false, x, y, why: `Too shallow for a ${ui.NAMES[sp][0].toLowerCase()}: drop it in deeper water.` };
+    return { ok: true, x, y };
+  },
+  canDrop(sp, cx, cy) { return api.dropCheck(sp, cx, cy).ok; },
+  drop(sp, cx, cy) {
+    const c = api.dropCheck(sp, cx, cy);
+    if (!c.ok) { if (c.why) ui.toast(c.why); return; }
+    if (count(E, sp) >= LIMIT[sp]) { ui.toast(`That's plenty of ${ui.NAMES[sp][1]} for one lagoon.`); return; }
+    addCreature(E, sp, c.x, c.y); addDrop(E, c.x, c.y, 1.8, .03); settle();
+  },
   startOver() { tr.startOver(); for (const k of Object.keys(AB)) delete AB[k]; abIt = null; abLast = E.t; },
   uiHidden(on) { E.uiHidden = on; buildSwim(E); for (const c of [...E.rays, ...E.jellies]) c.sg = E.SG[c.sp]; },
   touched() { if (!touched) { touched = true; ui.hideHint(); } lastTouch = performance.now(); },
