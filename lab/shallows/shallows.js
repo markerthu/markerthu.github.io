@@ -1,14 +1,14 @@
 // shallows.js: the page. Builds the lagoon to fit the screen, runs the world at a fixed step, trains the
 // rays in time slices, measures them against an untrained habit, and draws shadows, water and creatures.
 import * as THREE from 'three';
-import { createEnv, addCreature, removeCreature, count, stepWorld, stepRipples, packRipples, addDrop, addJet, userBloom,
+import { createEnv, addCreature, removeCreature, count, stepWorld, stepRipples, packRipples, addDrop, addJet, userBloom, poke,
   setSea, buildSwim, forkEnv, makeRay, RAYS, SPECIES, depthAt } from './env.js';
 import { createTrainer, rollout } from './gym.js';
 import { createWater } from './water.js';
 import { createCreatures } from './creatures.js';
 import { createUI, SPECIES_ORDER } from './ui.js';
 
-const TAU = Math.PI * 2, STEP = 1 / 30;
+const TAU = Math.PI * 2, STEP = 1 / 60; // one world step per 60 Hz frame; ripples keep their 30 Hz cadence
 const canvas = document.getElementById('lagoon');
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const params = new URLSearchParams(location.search);
@@ -23,8 +23,7 @@ try {
 renderer.autoClear = false;
 renderer.info.autoReset = false;
 const mobile = matchMedia('(max-width: 700px)').matches || matchMedia('(pointer: coarse)').matches;
-const dpr = Math.min(devicePixelRatio || 1, mobile ? 1.5 : 1.75);
-renderer.setPixelRatio(dpr);
+let dpr = 1;
 
 const SEA_LINE = { calm: 'calm water · midday', rain: 'rain · overcast', current: 'current · ebb tide', whirl: 'whirlpool · midday' };
 const START = mobile ? { manta: 1, eagle: 2, sting: 1, moon: 2, nettle: 1 } : { manta: 2, eagle: 3, sting: 2, moon: 3, nettle: 2 };
@@ -38,13 +37,16 @@ function rectToWorld(el, W, H) {
   return { l: r.left / unit, r: r.right / unit, t: H - r.top / unit, b: H - r.bottom / unit };
 }
 function build(keep) {
-  const w = innerWidth, h = innerHeight;
+  dpr = Math.min(devicePixelRatio || 1, mobile ? 1.5 : 1.75);
+  renderer.setPixelRatio(dpr);
+  const w = canvas.clientWidth || innerWidth, h = canvas.clientHeight || innerHeight; // the box the canvas really fills
   unit = w >= 900 ? w / 16 : w / 7.4;
   const W = w / unit, H = h / unit;
   const title = rectToWorld(document.querySelector('.head'), W, H), tray = rectToWorld(document.querySelector('.bar'), W, H);
   const seed = keep ? keep.seed : (params.get('seed') ? +params.get('seed') : (Math.random() * 2 ** 31) | 0);
   E = createEnv({ W, H, portrait: h > w * 1.15, mobile, seed, title, tray });
-  E.nextBloom = 3;
+  if (keep) { E.t = keep.t; if (keep.uiHidden) { E.uiHidden = true; buildSwim(E); } } // one timeline across rebuilds
+  E.nextBloom = E.t + 3;
   if (keep) setSea(E, keep.sea);
   const counts = keep ? keep.counts : START;
   for (const sp of SPECIES_ORDER) for (let i = 0; i < counts[sp]; i++) addCreature(E, sp, null, null, { free: true, instant: !keep });
@@ -57,12 +59,14 @@ function build(keep) {
   shadowRT = new THREE.WebGLRenderTarget(Math.ceil(w * dpr / 4), Math.ceil(h * dpr / 4), { magFilter: THREE.LinearFilter, minFilter: THREE.LinearFilter, depthBuffer: false });
   if (water) water.dispose();
   water = createWater(E, renderer);
+  if (creatures) creatures.dispose();
   creatures = createCreatures(E);
+  abIt = null; // a comparison in progress belongs to the old lagoon
 }
+let abIt = null, abLast = -1e9;
 build(null);
 
 // ---- live comparison: learned habit vs untrained habit, same water, same starts, same noise ----
-let abIt = null, abLast = -1e9;
 function* abRun() {
   const F = forkEnv(E), food0 = Float32Array.from(F.food), t0 = F.t, th0 = new Float64Array(12), out = [0, 0];
   for (const sp of RAYS) {
@@ -95,7 +99,7 @@ function counts() { const o = {}; for (const sp of SPECIES_ORDER) o[sp] = count(
 const LIMIT = { manta: 4, eagle: 6, sting: 4, moon: 7, nettle: 4 };
 const api = {
   add(sp) { if (count(E, sp) >= LIMIT[sp]) { ui.toast(`That's plenty of ${ui.NAMES[sp][1]} for one lagoon.`); return; } addCreature(E, sp); settle(); },
-  remove(sp) { if (count(E, sp) > 0) { removeCreature(E, sp); settle(); } },
+  remove(sp) { if (count(E, sp) > 0) { removeCreature(E, sp); ui.toast(`One ${ui.NAMES[sp][0].toLowerCase()} swims away.`); settle(); } },
   setSea(s) { setSea(E, s); if (sound) sound.setRain(s === 'rain'); if (RAYS.some(sp => count(E, sp))) tr.mark(s); settle(); },
   // drag-and-drop from the toolbar: place one exactly where it is dropped, if that water suits the species
   dropCheck(sp, cx, cy) {
@@ -118,7 +122,8 @@ const api = {
   startOver() { tr.startOver(); for (const k of Object.keys(AB)) delete AB[k]; abIt = null; abLast = E.t; },
   uiHidden(on) { E.uiHidden = on; buildSwim(E); for (const c of [...E.rays, ...E.jellies]) c.sg = E.SG[c.sp]; },
   touched() { if (!touched) { touched = true; ui.hideHint(); } lastTouch = performance.now(); },
-  state() { return { t: E.t, gen: tr.gen, counts: counts(), sea: E.sea, seaLine: SEA_LINE[E.sea], thetas: tr.thetas(), ab: AB }; },
+  togglePause() { paused = !paused; dirty = 1; ui.toast(paused ? 'Still. Learning waits until the lagoon moves again.' : 'Moving.'); },
+  state() { return { t: E.t, gen: tr.gen, counts: counts(), sea: E.sea, seaLine: SEA_LINE[E.sea], thetas: tr.thetas(), ab: AB, paused }; },
 };
 const ui = createUI(api);
 api.toggleSound = (() => { let pending = null; return () => {
@@ -127,20 +132,27 @@ api.toggleSound = (() => { let pending = null; return () => {
   return true;
 }; })();
 
-// ---- pointer: tap water for plankton, drag a ray to lead it, moving the pointer stirs the surface ----
-let drag = null, lastMove = { x: 0, y: 0, t: 0 };
+// ---- pointer: tap water for plankton, tap a creature to startle it, drag one to lead it, moving stirs the surface ----
+let drag = null, dragId = null, dragFrom = null, lastMove = { x: 0, y: 0, t: 0 };
 const toWorld = e => { const r = canvas.getBoundingClientRect(); return [(e.clientX - r.left) / unit, E.H - (e.clientY - r.top) / unit]; };
 canvas.addEventListener('pointerdown', e => {
   const [x, y] = toWorld(e); api.touched();
+  if (drag) return; // one ray at a time
   const r = creatures.pick(x, y);
-  if (r) { drag = r; r.lead = { x, y, speed: 1 }; canvas.setPointerCapture(e.pointerId); canvas.classList.add('grabbing'); return; }
+  if (r) { drag = r; dragId = e.pointerId; dragFrom = { x: e.clientX, y: e.clientY, t: performance.now(), moved: false }; try { canvas.setPointerCapture(e.pointerId); } catch (_) {} canvas.classList.add('grabbing'); return; }
   if (depthAt(E, x, y) < .3) { ui.toast('That is dry sand — tap the water.'); return; }
-  if (userBloom(E, x, y)) { addDrop(E, x, y, 2.4, .05); dirty = 1; }
+  if (userBloom(E, x, y)) { addDrop(E, x, y, 2.4, .05); dirty = 1; settle(); }
   else ui.toast('The plankton needs a moment to settle.');
 });
 canvas.addEventListener('pointermove', e => {
+  if (drag && e.pointerId !== dragId) return;
   const [x, y] = toWorld(e), now = performance.now();
-  if (drag) { drag.lead.x = x; drag.lead.y = y; return; }
+  if (drag) {
+    if (drag.leaving || drag.gone || !(E.rays.includes(drag) || E.jellies.includes(drag))) { endDrag(); return; }
+    if (!dragFrom.moved && Math.hypot(e.clientX - dragFrom.x, e.clientY - dragFrom.y) > 7) { dragFrom.moved = true; drag.lead = { x, y, speed: 1 }; }
+    if (drag.lead) { drag.lead.x = x; drag.lead.y = y; }
+    return;
+  }
   const dx = x - lastMove.x, dy = y - lastMove.y, dtm = (now - lastMove.t) / 1000;
   if (dtm > .05 && !reduced) {
     const v = Math.hypot(dx, dy) / dtm;
@@ -149,41 +161,56 @@ canvas.addEventListener('pointermove', e => {
   }
   canvas.classList.toggle('grab', !!creatures.pick(x, y));
 });
-const endDrag = () => { if (drag) { drag.lead = null; drag = null; canvas.classList.remove('grabbing'); } };
-canvas.addEventListener('pointerup', endDrag); canvas.addEventListener('pointercancel', endDrag);
+function endDrag(e) {
+  if (!drag || (e && e.pointerId !== dragId)) return;
+  const r = drag; drag = null; dragId = null; canvas.classList.remove('grabbing');
+  if (e && e.type === 'pointerup' && !dragFrom.moved) { // a tap: the creature reacts
+    const [x, y] = toWorld(e); poke(E, r, x, y); ui.tag(ui.NAMES[r.sp][0], e.clientX, e.clientY);
+  }
+  if (paused) settle(); // a still lagoon shows the result at once
+  r.lead = null;
+}
+canvas.addEventListener('pointerup', endDrag); canvas.addEventListener('pointercancel', endDrag); canvas.addEventListener('lostpointercapture', endDrag);
 
-// ---- resize: rebuild the lagoon to the new shape, keeping creatures, sea state and learning ----
+// ---- resize: rebuild the lagoon to the new shape, keeping creatures, sea state, timeline and learning ----
 let rz = 0;
-addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(() => { const keep = { seed: E.seed, sea: E.sea, counts: counts() }; build(keep); dirty = 1; }, 300); });
+const rebuild = () => { endDrag(); const keep = { seed: E.seed, sea: E.sea, counts: counts(), t: E.t, uiHidden: E.uiHidden }; build(keep); settle(); dirty = 1; };
+addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(rebuild, 300); });
+(function watchDpr() { // zoom or a move to another monitor changes devicePixelRatio without a resize on some browsers
+  const mq = matchMedia(`(resolution: ${devicePixelRatio}dppx)`);
+  mq.addEventListener('change', () => { clearTimeout(rz); rz = setTimeout(rebuild, 300); watchDpr(); }, { once: true });
+})();
 
 // ---- main loop ----
-let last = performance.now(), acc = 0, lastRender = 0, rafCount = 0, paused = reduced, noteI = 0, dirty = 1;
-// While the lagoon is still (reduced motion), a change is stepped in silently and drawn once, with no animation.
-function settle() { if (!paused) return; for (let i = 0; i < 75; i++) { stepWorld(E, tr.thetas(), STEP); stepRipples(E); } E.events.length = 0; dirty = 1; }
-if (reduced) { for (let i = 0; i < 120; i++) { stepWorld(E, tr.thetas(), STEP); stepRipples(E); } ui.toast('Motion is reduced: the lagoon is still. Press Space to let it move.'); }
-addEventListener('keydown', e => { if (e.code === 'Space' && e.target === document.body) { e.preventDefault(); paused = !paused; dirty = 1; ui.toast(paused ? 'Paused.' : 'Moving.'); } });
-function frame(now, once) {
-  if (!once) requestAnimationFrame(frame);
-  if (!once && now - lastRender < 15.5) return;       // hold 60 fps on 120 Hz screens
-  if (paused && !once && !dirty) { last = now; ui.update(); return; } // a still lagoon is drawn only when something changes
-  dirty = 0;
-  let dt = Math.min(.1, (now - last) / 1000); last = now; lastRender = now; rafCount++;
+let last = performance.now(), acc = 0, due = 0, rafCount = 0, paused = reduced, noteI = 0, dirty = 1, stepN = 0;
+function step(dt) { stepWorld(E, tr.thetas(), dt); if (dt > STEP * 1.5 || (++stepN & 1)) stepRipples(E); }
+// While the lagoon is still, a change is stepped in silently (2.5 s of lagoon time) and drawn once, with no animation.
+function settle() { if (!paused) return; for (let i = 0; i < 75; i++) step(1 / 30); E.events.length = 0; dirty = 1; }
+if (reduced) { for (let i = 0; i < 120; i++) step(1 / 30); ui.toast('Motion is reduced, so the lagoon is still. Press Play to let it move.'); }
+function frame(now) {
+  requestAnimationFrame(frame);
+  if (now < due - 1) return;                      // pace to about 60 fps on fast screens, full rate on 60-75 Hz
+  due = Math.max(due + 1000 / 60, now);
+  if (paused && !dirty) { last = now; ui.update(); return; } // a still lagoon is drawn only when something changes
+  const snap = paused; dirty = 0;
+  let dt = Math.min(.1, (now - last) / 1000); last = now; rafCount++;
   if (!paused) {
     acc += dt; let n = 0;
-    while (acc >= STEP && n < 4) { stepWorld(E, tr.thetas(), STEP); stepRipples(E); acc -= STEP; n++; }
-    if (n === 4) acc = 0;
+    while (acc >= STEP && n < 6) { step(STEP); acc -= STEP; n++; }
+    if (n === 6) acc = 0;
     tr.tick(E.t, mobile ? 1.0 : 1.6);
     abTick(mobile ? .5 : .9);
   }
-  for (const ev of E.events) if (ev.type === 'graze' && sound) sound.note(noteI++);
+  for (const ev of E.events) if ((ev.type === 'graze' || ev.type === 'poke') && sound) sound.note(noteI++);
   E.events.length = 0;
   renderer.info.reset();
   packRipples(E);
-  water.update(E.t, paused ? 0 : dt);
+  water.update(E.t, paused ? 0 : dt, snap);
   creatures.update(E.t);
   renderer.setRenderTarget(shadowRT); renderer.setClearColor(0x000000, 1); renderer.clear(); renderer.render(creatures.shadowScene, cam);
   renderer.setRenderTarget(null); renderer.clear(); water.render(shadowRT); renderer.render(creatures.scene, cam);
   ui.update();
+  if (rafCount === 1) document.getElementById('fallback').style.display = 'none'; window.__shallowsReady = true;
 }
 requestAnimationFrame(frame);
 

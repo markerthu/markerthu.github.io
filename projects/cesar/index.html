@@ -292,14 +292,14 @@ p,li{text-wrap:pretty}
 
 <section>
   <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-target.png);mask-image:url(/images/icons/h-target.png)"></i>Test-time scaling</h2>
-  <p>With process rewards, more reasoning stops hurting and starts helping. The base model collapses as reasoning length grows; CESAR stays flat-high and even rises.</p>
+  <p>With process rewards, more reasoning stops hurting and starts helping. The base model collapses as its reasoning grows longer; CESAR climbs from 73.7% without reasoning to a peak of 77.1% at about 35 reasoning tokens.</p>
   <figure class="chart wide">
     {% include figures/cesar_scaling.svg %}
-    <figcaption><b>Figure 2.</b> Accuracy vs. average reasoning tokens on MMAU. Qwen2.5-Omni-7B suffers inverse scaling — accuracy collapses — while CESAR, its no-penalty variant, and Ke-Omni-R stay flat and high.</figcaption>
+    <figcaption><b>Figure 2.</b> Total accuracy on MMAU vs. average reasoning tokens, redrawn from the paper's test-time scaling plot. Left: Qwen2.5-Omni-7B loses accuracy the longer it reasons (inverse scaling). Right, zoomed in: CESAR rises from 73.7% to 77.1%, while Ke-Omni-R stays near its no-reasoning accuracy.</figcaption>
   </figure>
   <figure class="chart">
     {% include figures/cesar_slope.svg %}
-    <figcaption><b>Figure 3.</b> Fitted scaling slopes (Δaccuracy per reasoning token). Qwen2.5-Omni-7B is strongly negative (−0.51); Ke-Omni-R is flat (−0.007); only CESAR is clearly positive (+0.038) — reasoning genuinely helps.</figcaption>
+    <figcaption><b>Figure 3.</b> Fitted scaling slopes (change in accuracy per reasoning token, fit through the no-reasoning accuracy). Qwen2.5-Omni-7B is strongly negative (−0.51); Ke-Omni-R is flat (−0.007); only CESAR is clearly positive (+0.038) — reasoning genuinely helps.</figcaption>
   </figure>
 </section>
 

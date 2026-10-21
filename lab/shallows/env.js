@@ -375,6 +375,9 @@ export function stepRay(r, th, E, dt, rng, phi = PHI) {
     const dx = r.lead.x - r.x, dy = r.lead.y - r.y, dist = hyp(dx, dy);
     let da = Math.atan2(dy, dx) - r.h; da -= TAU * Math.round(da / TAU);
     turn = clamp(da * 2.5, -P.W * 1.4, P.W * 1.4); speed = P.V * clamp(dist / 1.2, .3, 1) * (r.lead.speed || 1);
+  } else if (r.entering && r.enterX != null) { // swim in from the edge instead of wandering off-screen
+    let da = Math.atan2(r.enterY - r.y, r.enterX - r.x) - r.h; da -= TAU * Math.round(da / TAU);
+    turn = clamp(da * 2.5, -P.W * 1.4, P.W * 1.4); speed = P.V * .8;
   }
   if (r.somer >= 0) speed = P.V * .3;
   if (r.flinch > 0) { r.flinch -= dt; turn = r.flinchDir * P.W * 1.5; speed = Math.min(P.V * 1.3, POL[1] * 1.3 + .1); }
@@ -418,6 +421,20 @@ export function stepRay(r, th, E, dt, rng, phi = PHI) {
   }
   const vv = r.v / P.V;
   return eat - 2 * stung * dt - .15 * vv * vv * dt - (s0 < .15 ? dt : 0);
+}
+// A touch: a ray startles and darts away from the finger (a resting stingray lifts off the sand);
+// a jelly contracts at once and jets away. Live lagoon only.
+export function poke(E, c, x, y) {
+  const away = Math.atan2(c.y - y, c.x - x);
+  if (c.P.kind === 'ray') {
+    if (c.rest > 0) { c.rest = 0; c.restCool = 8; liftOff(E, c); }
+    let da = away - c.h; da -= TAU * Math.round(da / TAU);
+    c.flinch = .7; c.flinchDir = da >= 0 ? 1 : -1; c.v = Math.min(c.P.V * 1.6, c.v + .5 * c.P.V);
+  } else {
+    c.dir = away; c.pc = 0; c.vx += Math.cos(away) * .32; c.vy += Math.sin(away) * .32;
+  }
+  addDrop(E, x, y, 1.6, .03);
+  E.events.push({ type: 'poke', c });
 }
 function liftOff(E, r) { addPuff(E, r.x, r.y); addDrop(E, r.x, r.y, 1.5, .006); E.events.push({ type: 'lift', r }); }
 export function addPuff(E, x, y) { if (E.puffs.length >= 6) E.puffs.shift(); E.puffs.push({ x, y, age: 0 }); }
@@ -572,10 +589,11 @@ export function addCreature(E, sp, x, y, opt = {}) {
   const P = SPECIES[sp], rng = E.rng; let h = rng() * TAU, entering = false;
   if (x == null) {
     if (opt.free) { const p = randomWater(E, sp, rng, .9); x = p[0]; y = p[1]; }
-    else { const e = edgeEntry(E, sp, rng); x = e[0]; y = e[1]; if (e[4]) { h = Math.atan2(e[3], e[2]); entering = true; } }
+    else { var e = edgeEntry(E, sp, rng); x = e[0]; y = e[1]; if (e[4]) { h = Math.atan2(e[3], e[2]); entering = true; } }
   }
   const c = P.kind === 'ray' ? makeRay(E, sp, x, y, h) : makeJelly(E, sp, x, y);
   c.entering = entering; if (opt.instant) c.fade = 1;
+  if (entering) { c.enterX = e[0] + e[2] * 2.7; c.enterY = e[1] + e[3] * 2.7; c.enterT = 0; } // aim 1.5 u inside the edge
   if (entering && P.kind === 'jelly') { c.vx = Math.cos(h) * .25; c.vy = Math.sin(h) * .25; c.dir = h; }
   (P.kind === 'ray' ? E.rays : E.jellies).push(c);
   return c;
@@ -612,7 +630,14 @@ export function stepWorld(E, thetas, dt, rng = E.rng) {
   for (const sp of RAYS) { const w = E.liveWin[sp]; if (sec !== w.sec) { for (let s = w.sec + 1; s <= sec && s <= w.sec + 60; s++) { w.food[s % 60] = 0; w.rs[s % 60] = 0; } w.sec = sec; } }
   for (const r of E.rays) {
     if (r.leaving) steerOut(E, r, dt, true);
-    if (r.entering && sAt(E, r.sg, r.x, r.y) > .5) r.entering = false;
+    if (r.entering) {
+      r.enterT = (r.enterT || 0) + dt;
+      if (sAt(E, r.sg, r.x, r.y) > .25 || (r.enterX != null && hyp(r.x - r.enterX, r.y - r.enterY) < .3)) r.entering = false;
+      else if (r.enterT > 8) { // failsafe: reappear in open water
+        const p = randomWater(E, r.sp, rng, .9); r.x = p[0]; r.y = p[1]; r.fade = 0; r.entering = false;
+        placeChain(r.tail, r.x - Math.cos(r.h) * r.P.chord * .45, r.y - Math.sin(r.h) * r.P.chord * .45, -Math.cos(r.h), -Math.sin(r.h));
+      }
+    }
     const lx = r.x, ly = r.y;
     stepRay(r, thetas[r.sp], E, dt, rng);
     if (r.lead && !r.leaving) r.ledPath += hyp(r.x - lx, r.y - ly); else if (!r.lead) r.ledPath = 0;

@@ -67,9 +67,8 @@ export function createTrainer(E, o = {}) {
   const tr = {
     gen: 0, S, ticks: [], paused: false, fast: !!o.fast, cadence: o.cadence ?? 1.5, budget: o.budget ?? 1.5,
     sigma: o.sigma ?? .3, alpha: o.alpha ?? .1, it: null, last: -1e9, recSp: o.recSp || null, lastGenMs: 0, busyMs: 0,
-    // learn two habits: follow the scent (w0), steer clear of nettles (w2); measured to beat the untrained habit.
-    // Stingrays keep to water too shallow for nettles (about 1 practice start in 30 meets one), so they learn only the scent.
-    mask: o.mask === undefined ? { manta: [0, 2], eagle: [0, 2], sting: [0] } : o.mask, np: o.np || NP,
+    // learn two habits: follow the scent (w0), steer clear of nettles (w2); measured to beat the untrained habit
+    mask: o.mask === undefined ? [0, 2] : o.mask, np: o.np || NP,
   };
   const maskOf = sp => (tr.mask && !Array.isArray(tr.mask) ? tr.mask[sp] : tr.mask);
   function* generation() {

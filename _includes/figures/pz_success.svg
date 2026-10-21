@@ -367,8 +367,11 @@ z
     <text style="font-size: 7.6px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: var(--c-ink2)" x="401.555479" y="40.629762" transform="rotate(-0 401.555479 40.629762)">91.2</text>
    </g>
    <g id="text_28">
-    <text style="font-size: 8px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: currentColor" x="43.377591" y="15.516" transform="rotate(-0 43.377591 15.516)">solid = 0-150 residues     faded = 150-300 residues</text>
-   </g>
+  <rect x="43.4" y="21" width="8" height="6" style="fill: var(--c-ours-fill); stroke: var(--c-ours); stroke-width: 0.8"/>
+  <text style="font-size: 8px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: currentColor" x="54.5" y="27">0–150 residues</text>
+  <rect x="118" y="21" width="8" height="6" style="fill: var(--c-ours-fill); opacity: 0.55; stroke: var(--c-ours); stroke-width: 0.8"/>
+  <text style="font-size: 8px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans', sans-serif; text-anchor: start; fill: currentColor" x="129" y="27">150–300 residues</text>
+ </g>
   </g>
  </g>
  <defs>

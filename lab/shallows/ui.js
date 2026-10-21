@@ -12,32 +12,44 @@ const SEA = [
   ['calm', 'Calm', '<svg viewBox="0 0 24 24"><path d="M3 13c2.5-2 5-2 7.5 0s5 2 7.5 0 2.5-1 3-1"/><path d="M3 18c2.5-2 5-2 7.5 0s5 2 7.5 0"/></svg>'],
   ['rain', 'Rain', '<svg viewBox="0 0 24 24"><path d="M7 15a4 4 0 0 1-.4-8A6 6 0 0 1 18 8.5 3.5 3.5 0 0 1 17.5 15z"/><path d="M8 18l-1 3M12 18l-1 3M16 18l-1 3"/></svg>'],
   ['current', 'Current', '<svg viewBox="0 0 24 24"><path d="M3 8h13l-3-3M3 16h13l-3 3"/><path d="M19 8h2M19 16h2"/></svg>'],
-  ['whirl', 'Whirlpool', '<svg viewBox="0 0 24 24"><path d="M12 12a1.5 1.5 0 1 0 1.5 1.5A4 4 0 1 0 9 9.4a6.5 6.5 0 1 0 9 1.2"/></svg>'],
+  ['whirl', ['Whirlpool', 'Whirl'], '<svg viewBox="0 0 24 24"><path d="M12 12a1.5 1.5 0 1 0 1.5 1.5A4 4 0 1 0 9 9.4a6.5 6.5 0 1 0 9 1.2"/></svg>'],
 ];
 const OPT = {
+  play: ['Pause', '<svg viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></svg>'],
   sound: ['Sound', '<svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg>'],
-  learn: ['Learning', '<svg viewBox="0 0 24 24"><path d="M4 19V5M4 19h16"/><path d="M7 15l4-4 3 2 5-6"/></svg>'],
+  learn: [['Learning', 'Learn'], '<svg viewBox="0 0 24 24"><path d="M4 19V5M4 19h16"/><path d="M7 15l4-4 3 2 5-6"/></svg>'],
   hide: ['Hide', '<svg viewBox="0 0 24 24"><path d="M3 12s3.5-6 9-6 9 6 9 6-3.5 6-9 6-9-6-9-6z"/><path d="M4 4l16 16"/></svg>'],
 };
 const NAMES = { manta: ['Manta', 'mantas'], eagle: ['Eagle ray', 'eagle rays'], sting: ['Stingray', 'stingrays'], moon: ['Moon jelly', 'moon jellies'], nettle: ['Sea nettle', 'sea nettles'] };
 export const SPECIES_ORDER = ['manta', 'eagle', 'sting', 'moon', 'nettle'];
 
+const nm = l => (Array.isArray(l) ? `<span class="lg">${l[0]}</span><span class="sh">${l[1]}</span>` : l);
+
 export function createUI(api) {
+  // hint, panel and toast are placed from the live toolbar and title sizes
+  const root = document.documentElement, barEl = document.querySelector('.bar'), headEl = document.querySelector('.head');
+  const measure = () => { root.style.setProperty('--barh', (innerHeight - barEl.getBoundingClientRect().top) + 'px'); root.style.setProperty('--headb', headEl.getBoundingClientRect().bottom + 'px'); };
+  if ('ResizeObserver' in window) new ResizeObserver(measure).observe(barEl);
+  addEventListener('resize', measure);
   const sp = $('species'), seas = $('seas'), opts = $('opts');
   const ctBadge = {};
-  let dragged = false;
+  let dragged = false, held = false, pressing = false;
   SPECIES_ORDER.forEach((k, i) => {
     const b = document.createElement('button');
     b.type = 'button'; b.className = 'sp'; b.dataset.sp = k;
-    b.setAttribute('aria-label', `Add a ${NAMES[k][0].toLowerCase()} (key ${i + 1}; Shift removes one)`); b.title = `Tap to add a ${NAMES[k][0].toLowerCase()}, or drag it onto the water`;
+    b.setAttribute('aria-label', `Add a ${NAMES[k][0].toLowerCase()} (key ${i + 1}; hold or Shift+${i + 1} removes one)`);
+    b.title = `Tap to add a ${NAMES[k][0].toLowerCase()}, drag one onto the water, or hold to remove one`;
     b.innerHTML = `${ICON[k]}<span class="nm">${NAMES[k][0]}</span><span class="ct" aria-hidden="true">0</span>`;
     b.addEventListener('click', e => { if (dragged) { dragged = false; return; } e.shiftKey ? api.remove(k) : api.add(k); api.touched(); });
     // drag the icon onto the water to place one exactly there
     b.addEventListener('pointerdown', e => {
       if (e.button !== 0) return;
-      const x0 = e.clientX, y0 = e.clientY; let ghost = null;
+      const x0 = e.clientX, y0 = e.clientY, pid = e.pointerId; let ghost = null; pressing = true;
+      let hold = setTimeout(() => { hold = 0; if (ghost) return; held = true; api.remove(k); api.touched(); }, 550);
       const move = ev => {
+        if (ev.pointerId !== pid) return;
         if (!ghost && Math.hypot(ev.clientX - x0, ev.clientY - y0) > 8) {
+          clearTimeout(hold); hold = 0; if (held) return;
           ghost = document.createElement('div'); ghost.className = 'ghost'; ghost.innerHTML = ICON[k]; document.body.appendChild(ghost);
           try { b.setPointerCapture(e.pointerId); } catch (_) {}
         }
@@ -47,37 +59,55 @@ export function createUI(api) {
         }
       };
       const up = ev => {
+        if (ev.pointerId !== pid) return;
+        clearTimeout(hold); pressing = false;
         removeEventListener('pointermove', move); removeEventListener('pointerup', up); removeEventListener('pointercancel', up);
+        if (held) { dragged = true; setTimeout(() => { dragged = false; held = false; }, 0); return; }
         if (!ghost) return;
         ghost.remove(); dragged = true; setTimeout(() => { dragged = false; }, 0);
         if (ev.type === 'pointerup') { api.drop(k, ev.clientX, ev.clientY); api.touched(); }
       };
       addEventListener('pointermove', move); addEventListener('pointerup', up); addEventListener('pointercancel', up);
     });
-    b.addEventListener('contextmenu', e => { e.preventDefault(); api.remove(k); api.touched(); });
+    b.addEventListener('contextmenu', e => { e.preventDefault(); if (held || pressing) return; api.remove(k); api.touched(); });
     sp.appendChild(b); ctBadge[k] = b.querySelector('.ct');
   });
   const seaBtn = {};
   for (const [k, label, svg] of SEA) {
     const b = document.createElement('button');
     b.type = 'button'; b.className = 'ctl'; b.setAttribute('aria-pressed', k === 'calm' ? 'true' : 'false');
-    b.innerHTML = `${svg}<span class="nm">${label}</span>`;
+    b.innerHTML = `${svg}<span class="nm">${nm(label)}</span>`;
     b.addEventListener('click', () => { api.setSea(k); api.touched(); });
     seas.appendChild(b); seaBtn[k] = b;
   }
   const optBtn = {};
-  for (const k of ['sound', 'learn', 'hide']) {
+  for (const k of ['play', 'sound', 'learn', 'hide']) {
     const b = document.createElement('button');
     b.type = 'button'; b.className = 'ctl'; b.setAttribute('aria-pressed', 'false');
-    b.innerHTML = `${OPT[k][1]}<span class="nm">${OPT[k][0]}</span>`;
+    b.innerHTML = `${OPT[k][1]}<span class="nm">${nm(OPT[k][0])}</span>`;
     opts.appendChild(b); optBtn[k] = b;
   }
-  optBtn.sound.addEventListener('click', () => { const on = api.toggleSound(); optBtn.sound.setAttribute('aria-pressed', on ? 'true' : 'false'); });
+  const PLAY_SVG = '<svg viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></svg>';
+  const setPlayBtn = paused => {
+    const b = optBtn.play; if (b.dataset.paused === String(paused)) return; b.dataset.paused = String(paused);
+    b.innerHTML = `${paused ? PLAY_SVG : OPT.play[1]}<span class="nm">${paused ? 'Play' : 'Pause'}</span>`;
+    b.setAttribute('aria-label', paused ? 'Let the lagoon move (Space)' : 'Hold the lagoon still (Space)'); b.removeAttribute('aria-pressed');
+  };
+  optBtn.play.addEventListener('click', () => { api.togglePause(); api.touched(); });
+  optBtn.sound.addEventListener('click', () => { const on = api.toggleSound(); optBtn.sound.setAttribute('aria-pressed', on ? 'true' : 'false'); api.touched(); });
   const panel = $('panel');
-  const setPanel = on => { panel.classList.toggle('open', on); optBtn.learn.setAttribute('aria-pressed', on ? 'true' : 'false'); if (on) renderRows(true); };
-  optBtn.learn.addEventListener('click', () => setPanel(!panel.classList.contains('open')));
-  const setHidden = on => { document.body.classList.toggle('ui-hidden', on); optBtn.hide.setAttribute('aria-pressed', on ? 'true' : 'false'); api.uiHidden(on); };
-  optBtn.hide.addEventListener('click', () => setHidden(true));
+  optBtn.learn.removeAttribute('aria-pressed'); optBtn.learn.setAttribute('aria-controls', 'panel'); optBtn.learn.setAttribute('aria-expanded', 'false');
+  const setPanel = (on, focus) => {
+    if (panel.classList.contains('open') === on) return;
+    panel.classList.toggle('open', on); optBtn.learn.setAttribute('aria-expanded', on ? 'true' : 'false');
+    if (on) { renderRows(true); if (focus) $('ptitle').focus(); } else if (focus && panel.contains(document.activeElement)) optBtn.learn.focus();
+  };
+  optBtn.learn.addEventListener('click', () => { setPanel(!panel.classList.contains('open'), true); api.touched(); });
+  const setHidden = on => {
+    document.body.classList.toggle('ui-hidden', on); optBtn.hide.setAttribute('aria-pressed', on ? 'true' : 'false'); api.uiHidden(on);
+    (on ? $('showui') : optBtn.hide).focus({ preventScroll: true });
+  };
+  optBtn.hide.addEventListener('click', () => { setHidden(true); api.touched(); });
   $('showui').addEventListener('click', () => setHidden(false));
   $('restart').addEventListener('click', () => { api.startOver(); renderRows(true); });
 
@@ -89,27 +119,30 @@ export function createUI(api) {
     const who = document.createElement('span'); who.className = 'who'; who.textContent = NAMES[k][0];
     const m1 = document.createElement('span'); m1.className = 'meter'; m1.innerHTML = '<i></i>'; m1.setAttribute('role', 'meter');
     const m2 = document.createElement('span'); m2.className = 'meter'; m2.innerHTML = '<i></i>'; m2.setAttribute('role', 'meter');
-    const g = document.createElement('span'); g.className = 'gain'; g.textContent = '—';
-    if (k === 'sting') { m2.classList.add('off'); m2.title = 'Stingrays keep to water too shallow for nettles, so they never practise this habit.'; m2.setAttribute('aria-label', 'Not learned: stingrays rarely meet nettles'); }
-    rows.append(who, m1, m2, g); R[k] = { m1, m2, g };
+    m1.setAttribute('aria-label', `${NAMES[k][0]}: follow the scent`); m2.setAttribute('aria-label', `${NAMES[k][0]}: steer clear of nettles`);
+    const g = document.createElement('span'); g.className = 'gain'; g.innerHTML = '<b>—</b><span class="gl"> plankton vs untrained</span>';
+    rows.append(who, m1, m2, g); R[k] = { m1, m2, g, gv: g.firstChild };
   }
-  const setMeter = (m, v) => { // v in about [-3, 3]; bar grows from the centre line
-    const i = m.firstChild, f = Math.max(-1, Math.min(1, v / 3));
+  const setMeter = (m, v) => { // weights live in [-4, 4]; the bar grows from the centre line
+    const i = m.firstChild, f = Math.max(-1, Math.min(1, v / 4));
     i.classList.toggle('neg', f < 0); i.style.left = (f >= 0 ? 50 : 50 + f * 50) + '%'; i.style.width = Math.abs(f) * 50 + '%';
-    m.setAttribute('aria-valuenow', v.toFixed(2)); m.setAttribute('aria-valuemin', '-3'); m.setAttribute('aria-valuemax', '3');
+    m.setAttribute('aria-valuenow', v.toFixed(2)); m.setAttribute('aria-valuemin', '-4'); m.setAttribute('aria-valuemax', '4');
   };
   let lastRows = 0;
   function renderRows(force) {
     const now = performance.now(); if (!force && now - lastRows < 400) return; lastRows = now;
     const s = api.state();
     for (const k of ['manta', 'eagle', 'sting']) {
-      const th = s.thetas[k]; setMeter(R[k].m1, th[0]); if (k !== 'sting') setMeter(R[k].m2, -th[2]);
-      const ab = s.ab[k];
-      const okAB = ab && isFinite(ab.ratio);
-      R[k].g.textContent = okAB ? `×${ab.ratio.toFixed(2)}` : ab ? 'too little plankton' : 'measuring…';
-      R[k].g.title = okAB ? `In the same water and from the same starts, the learned habit ate ${ab.ratio.toFixed(2)}× the plankton of an untrained ray (${ab.n} paired swims, checked ${Math.round(s.t - ab.t)} s ago).` : ab ? 'Too little plankton near this species to compare. Tap the water to scatter some.' : '';
+      const th = s.thetas[k]; setMeter(R[k].m1, th[0]); setMeter(R[k].m2, -th[2]);
+      const ab = s.ab[k], okAB = ab && isFinite(ab.ratio);
+      const state = okAB ? `×${ab.ratio.toFixed(2)}` : !s.counts[k] ? 'not in the water' : ab ? 'too little plankton'
+        : s.gen < 6 ? 'after a few generations' : s.paused ? 'paused' : 'measuring…';
+      R[k].gv.textContent = state; R[k].g.classList.toggle('num', !!okAB);
+      R[k].g.title = okAB ? `In the same water and from the same starts, the learned habit ate ${ab.ratio.toFixed(2)}× the plankton of an untrained ray (${ab.n} paired swims, checked ${Math.max(0, Math.round(s.t - ab.t))} s ago).`
+        : !s.counts[k] ? 'Add one to train and compare it.' : ab ? 'Too little plankton near this species to compare. Tap the water to scatter some.' : '';
     }
-    $('gen').textContent = `generation ${s.gen}` + (s.counts.manta + s.counts.eagle + s.counts.sting ? '' : ' · paused: no rays in the water');
+    const rays = s.counts.manta + s.counts.eagle + s.counts.sting;
+    $('gen').textContent = `generation ${s.gen}` + (!rays ? ' · paused: no rays in the water' : s.paused ? ' · paused while the lagoon is still' : '');
   }
   let lastCensus = '';
   function update() {
@@ -119,6 +152,7 @@ export function createUI(api) {
     const txt = `${rays} ${rays === 1 ? 'ray' : 'rays'} · ${jel} ${jel === 1 ? 'jelly' : 'jellies'} · ${s.seaLine}`;
     if (txt !== lastCensus) { $('census').textContent = txt; lastCensus = txt; }
     for (const [k] of SEA) seaBtn[k].setAttribute('aria-pressed', s.sea === k ? 'true' : 'false');
+    setPlayBtn(s.paused);
     if (panel.classList.contains('open')) renderRows(false);
   }
   let hintGone = false;
@@ -128,15 +162,24 @@ export function createUI(api) {
   // keyboard
   addEventListener('keydown', e => {
     if (e.metaKey || e.ctrlKey || e.altKey) return;
-    const k = e.key.toLowerCase();
-    const n = '12345'.indexOf(e.key.replace(/[!@#$%]/, c => '12345'['!@#$%'.indexOf(c)]));
-    if (n >= 0) { const s = SPECIES_ORDER[n]; e.shiftKey ? api.remove(s) : api.add(s); api.touched(); return; }
+    const k = e.key.toLowerCase(), tag = e.target && e.target.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+    const dm = /^(Digit|Numpad)([1-5])$/.exec(e.code || '');
+    if (dm) { const s = SPECIES_ORDER[+dm[2] - 1]; e.shiftKey ? api.remove(s) : api.add(s); api.touched(); return; }
+    if (e.code === 'Space') { if (tag === 'BUTTON' || tag === 'A') return; e.preventDefault(); api.togglePause(); api.touched(); return; }
     if (k === 'c') api.setSea('calm'); else if (k === 'r') api.setSea('rain'); else if (k === 'u') api.setSea('current'); else if (k === 'w') api.setSea('whirl');
     else if (k === 's') optBtn.sound.click(); else if (k === 'l') setPanel(!panel.classList.contains('open'));
     else if (k === 'h') setHidden(!document.body.classList.contains('ui-hidden'));
-    else if (e.key === 'Escape') { setPanel(false); if (document.body.classList.contains('ui-hidden')) setHidden(false); }
+    else if (e.key === 'Escape') { setPanel(false, true); if (document.body.classList.contains('ui-hidden')) setHidden(false); }
     else return;
     api.touched();
   });
-  return { update, hideHint, toast, NAMES };
+  // a small name tag where a creature was touched
+  const tag = (text, x, y) => {
+    const el = document.createElement('div'); el.className = 'tag'; el.textContent = text; el.setAttribute('aria-hidden', 'true');
+    el.style.left = x + 'px'; el.style.top = y + 'px'; document.body.appendChild(el);
+    requestAnimationFrame(() => el.classList.add('on')); setTimeout(() => el.classList.remove('on'), 1100); setTimeout(() => el.remove(), 1600);
+  };
+  measure();
+  return { update, hideHint, toast, tag, NAMES };
 }

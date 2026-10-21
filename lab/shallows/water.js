@@ -47,8 +47,8 @@ const frag = /* glsl */`
   uniform sampler2D uShadow;  // r: creature shadow 0..1 (low resolution)
   uniform vec2 uWorld;        // W, H in world units
   uniform vec2 uShadowTexel;
-  uniform float uTime, uRain, uCurrent, uWhirl, uOvercast, uPalm;
-  uniform vec2 uCurDir, uWhirlPos;
+  uniform float uTime, uRain, uCurrent, uWhirl, uOvercast, uPalm, uCT;
+  uniform vec2 uCurDir, uWhirlPos, uDrift;
   ${GLSL_COMMON}
   vec2 field(vec2 p){ vec4 t = texture2D(uDepth, p / uWorld); return vec2(t.r * 7.5 - .3, t.g * 18.0 - 6.0); }
   // sand: warm pale grains with wave-ripple marks; wet sand is darker and cooler
@@ -110,7 +110,7 @@ const frag = /* glsl */`
     float palmSh = palm(p) * uPalm;
     // caustics: bright, sharp in the shallows, fading with depth; blocked by shadows; weaker when overcast
     float cAmt = wet * exp(-max(D, 0.0) * .32) * (1.0 - .75 * uOvercast) * (1.0 - .8 * sh) * (1.0 - .7 * palmSh);
-    float cs = caustic(pb + uCurDir * t * .12 * uCurrent, t * (1.0 + .6 * uRain), smoothstep(2.5, .3, D));
+    float cs = caustic(pb + uDrift, uCT, smoothstep(2.5, .3, D));
     bed += vec3(1.0, .97, .86) * cs * cAmt * .42;
     bed *= 1.0 - .42 * sh * wet - .30 * palmSh;
     // water column: absorption toward turquoise, then teal-blue, then deep navy
@@ -175,6 +175,7 @@ export function createWater(E, renderer) {
     uWorld: { value: new THREE.Vector2(E.W, E.H) }, uShadowTexel: { value: new THREE.Vector2(1 / 256, 1 / 256) },
     uTime: { value: 0 }, uRain: { value: 0 }, uCurrent: { value: 0 }, uWhirl: { value: 0 }, uOvercast: { value: 0 }, uPalm: { value: 1 },
     uCurDir: { value: new THREE.Vector2(1, 0) }, uWhirlPos: { value: new THREE.Vector2(0, 0) },
+    uCT: { value: 0 }, uDrift: { value: new THREE.Vector2(0, 0) },
   };
   const mat = new THREE.ShaderMaterial({ vertexShader: vert, fragmentShader: frag, uniforms, depthTest: false, depthWrite: false });
   const quad = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), mat);
@@ -182,12 +183,16 @@ export function createWater(E, renderer) {
   const scene = new THREE.Scene(); scene.add(quad);
   const cam = new THREE.Camera();
 
-  function update(t, dt) {
+  // snap: jump eased values to their targets (a still lagoon draws a change at once)
+  function update(t, dt, snap) {
     uniforms.uTime.value = t;
-    const tgt = (k, v) => { uniforms[k].value += (v - uniforms[k].value) * Math.min(1, dt / 1.5); };
+    const tgt = (k, v) => { uniforms[k].value += (v - uniforms[k].value) * (snap ? 1 : Math.min(1, dt / 1.5)); };
     tgt('uRain', E.rain ? 1 : 0); tgt('uOvercast', E.rain ? 1 : 0);
     uniforms.uCurrent.value = E.curS; uniforms.uWhirl.value = E.whirl.s;
     const a = E.curAng; uniforms.uCurDir.value.set(Math.cos(a), Math.sin(a));
+    // caustic clock and drift are integrated here, so a change of weather changes their speed, not their phase
+    uniforms.uCT.value += dt * (1 + .6 * uniforms.uRain.value);
+    uniforms.uDrift.value.x += dt * .12 * E.curS * Math.cos(a); uniforms.uDrift.value.y += dt * .12 * E.curS * Math.sin(a);
     uniforms.uWhirlPos.value.set(E.whirl.x, E.whirl.y);
     rippleTex.needsUpdate = true;
     const f = E.food;

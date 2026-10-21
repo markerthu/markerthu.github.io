@@ -308,11 +308,13 @@ export function createCreatures(E) {
       });
     }
   }
-  function pick(x, y) { // nearest ray under the pointer
+  function pick(x, y) { // nearest creature under the pointer, judged by its drawn size
     let best = null, bd = 1e9;
-    for (const r of E.rays) { if (r.leaving) continue; const d = Math.hypot(r.x - x, r.y - y), lim = Math.max(r.P.span, r.P.chord) * .55; if (d < lim && d < bd) { bd = d; best = r; } }
+    for (const r of E.rays) { if (r.leaving) continue; const d = Math.hypot(r.x - x, r.y - y), lim = Math.max(r.P.span, r.P.chord) * .55 * VS; if (d < lim && d / lim < bd) { bd = d / lim; best = r; } }
+    for (const j of E.jellies) { if (j.leaving) continue; const d = Math.hypot(j.x - x, j.y - y), lim = j.R * JS * 1.1; if (d < lim && d / lim < bd) { bd = d / lim; best = j; } }
     return best;
   }
   function info() { let calls = 0; for (const v of vis.values()) calls += 2 + (v.tail ? 2 : 0) + (v.strands ? v.strands.length : 0); return { creatures: vis.size, approxCalls: calls }; }
-  return { scene, shadowScene, update, pick, info };
+  function dispose() { for (const c of [...vis.keys()]) drop(c); for (const g of Object.values(rayGeo)) g.dispose(); bellGeo.dispose(); }
+  return { scene, shadowScene, update, pick, info, dispose };
 }

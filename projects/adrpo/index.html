@@ -257,11 +257,11 @@ p,li{text-wrap:pretty}
   <p>A 2B SD3 model fine-tuned with ADRPO matches or outperforms FLUX.1-Dev (12B) and SANA-1.5 (4.8B) on attribute binding, style rendering, and compositional control — while reaching both the highest reward <em>and</em> the highest diversity.</p>
   <figure class="chart">
     {% include figures/adrpo_reward_diversity.svg %}
-    <figcaption><b>Figure 1.</b> Final reward vs. diversity on SD3. ADRPO reaches the top-right — the highest reward <em>and</em> the highest diversity — while ORW-CFM-W2 trades away diversity for reward and DPO lands in between.</figcaption>
+    <figcaption><b>Figure 1.</b> Final reward vs. diversity on SD3 (final checkpoints, from the paper's Figure 3). ADRPO reaches the top-right — the highest reward <em>and</em> the highest diversity — while ORW-CFM-W2 trades away diversity for reward and DPO lands in between.</figcaption>
   </figure>
   <figure class="chart">
     {% include figures/adrpo_reward_kl.svg %}
-    <figcaption><b>Figure 2.</b> Reward vs. W2 divergence from the pre-trained model (flow matching uses W2, not KL). ADRPO attains the highest reward while staying closest to the reference — the smallest divergence — whereas ORW-CFM-W2 needs far larger divergence for less reward.</figcaption>
+    <figcaption><b>Figure 2.</b> Final reward vs. W2 divergence from the pre-trained model (flow matching uses W2, not KL). ADRPO attains the highest reward while staying closest to the reference — the smallest divergence — whereas ORW-CFM-W2 needs far larger divergence for less reward.</figcaption>
   </figure>
 </section>
 
