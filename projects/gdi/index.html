@@ -218,6 +218,9 @@ body.dark-mode .problem-card h3{color:#F0B49A!important}
 .vs-bad{border-left-color:var(--c-rl-line)!important}.vs-good{border-left-color:var(--c-ours)!important}
 .vs-bad h3,.vs-bad h4,.vs-bad .vs-h{color:#B8613C!important}.vs-good h3,.vs-good h4,.vs-good .vs-h{color:var(--c-ours)!important}
 body.dark-mode .vs-bad h3,body.dark-mode .vs-bad h4,body.dark-mode .vs-bad .vs-h{color:#F0B49A!important}
+
+h1,h2,h3,.bx-title,.p-title,.pub-title,.card-title{text-wrap:balance}
+p,li{text-wrap:pretty}
 </style>
 <script type="application/ld+json">{
   "@context": "https://schema.org",
@@ -294,7 +297,7 @@ body.dark-mode .vs-bad h3,body.dark-mode .vs-bad h4,body.dark-mode .vs-bad .vs-h
 </section>
 
 <section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-vision.png);mask-image:url(/images/icons/sh-vision.png)"></i>Core Insight</h2>
+  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-vision.png);mask-image:url(/images/icons/sh-vision.png)"></i>Core insight</h2>
   <p>GDI decouples RL challenges into two problems and casts both into <strong>training data distribution optimization</strong>:</p>
   <ul>
     <li><strong>Data richness</strong> → control the capacity and diversity of behavior policy</li>
@@ -307,24 +310,14 @@ body.dark-mode .vs-bad h3,body.dark-mode .vs-bad h4,body.dark-mode .vs-bad .vs-h
   <div class="method-grid">
     <div class="method-card"><h3>DQN</h3><p>uniform replay buffer (D = uniform)</p></div>
     <div class="method-card"><h3>PER</h3><p>priority-weighted replay (D = prioritized)</p></div>
-    <div class="method-card"><h3>R2D2</h3><p>recurrent replay with retrace (D = LSTM)</p></div>
+    <div class="method-card"><h3>R2D2</h3><p>recurrent sequence replay with burn-in (D = prioritized sequence replay)</p></div>
     <div class="method-card"><h3>Agent57</h3><p>population-based explore (D = meta-controller)</p></div>
   </div>
   {% include anim/strip_gdi.html %}
 </section>
 
 <section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-chart.png);mask-image:url(/images/icons/h-chart.png)"></i>Key Results</h2>
-  <div class="results-grid">
-    <div class="result-card"><div class="rnum">22</div><div class="rdesc">Atari World Records</div></div>
-    <div class="result-card"><div class="rnum">9,620%</div><div class="rdesc">Mean Human Score</div></div>
-    <div class="result-card"><div class="rnum">500×</div><div class="rdesc">More Sample-Efficient than Agent57</div></div>
-    <div class="result-card"><div class="rnum">200M</div><div class="rdesc">Training Frames</div></div>
-  </div>
-</section>
-
-<section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-link.png);mask-image:url(/images/icons/h-link.png)"></i>Follow-Up Work</h2>
+  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-link.png);mask-image:url(/images/icons/h-link.png)"></i>Follow-up work</h2>
   <p>GDI's data distribution insight directly inspired:</p>
   <ul>
     <li><strong><a href="/projects/lbc/">LBC (ICLR 2023 Oral)</a></strong> — Extended to behavior control, breaking 24 Atari world records with 10,077% mean human-normalized score</li>
@@ -333,7 +326,7 @@ body.dark-mode .vs-bad h3,body.dark-mode .vs-bad h4,body.dark-mode .vs-bad .vs-h
 </section>
 
 <section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-deadlines.png);mask-image:url(/images/icons/sh-deadlines.png)"></i>Publication Journey</h2>
+  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-deadlines.png);mask-image:url(/images/icons/sh-deadlines.png)"></i>Publication journey</h2>
   <div class="tl">
     <div class="tl-line"></div>
     <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">Late 2021</div><div class="tl-title">Research &amp; Development</div><div class="tl-desc">Developed the GDI framework at Tsinghua University. Core insight: data distribution optimization unifies RL efficiency.</div></div>
@@ -344,7 +337,7 @@ body.dark-mode .vs-bad h3,body.dark-mode .vs-bad h4,body.dark-mode .vs-bad .vs-h
 </section>
 
 <section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-book.png);mask-image:url(/images/icons/h-book.png)"></i>Cite This Paper</h2>
+  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-book.png);mask-image:url(/images/icons/h-book.png)"></i>BibTeX</h2>
   <button class="bib-copy-btn" aria-label="Copy BibTeX citation"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-list.png);mask-image:url(/images/icons/h-list.png)"></i>Copy BibTeX</button>
   <pre class="bibtex-block" tabindex="0"><code>@InProceedings{pmlr-v162-fan22c,
 

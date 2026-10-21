@@ -240,7 +240,7 @@ body.dark-mode .cit-chart{background:#161b22;border-color:#30363d;}
 body.dark-mode .cit-chart-title{color:#e6edf3;}
 body.dark-mode .cit-bar-year{color:#8b949e;}
 @media (prefers-reduced-motion:reduce){.cit-bar-fill{animation:none;}}
-.ct-svg{width:100%;height:auto;display:block;overflow:visible;}
+.ct-svg, .cit-chart .ct-svg{width:100%;height:auto;display:block;overflow:visible;}
 .ct-area{fill:url(#ctArea);opacity:0;animation:ctFade .9s ease .45s forwards;}
 .ct-line{fill:none;stroke:url(#ctLine);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;animation:ctDraw 1.5s cubic-bezier(.4,0,.2,1) forwards;}
 .ct-dot{fill:#6F94C6;stroke:#fff;stroke-width:1.5;opacity:0;animation:ctFade .5s ease 1.2s forwards;}
@@ -733,9 +733,9 @@ body.dark-mode .awards-col-list { color: #8b949e !important; }
 /* ── Dark mode: Footer ── */
 body.dark-mode .site-footer { border-top-color: #21262d !important; color: #8b949e !important; }
 body.dark-mode .site-footer a { color: #58a6ff !important; }
-body.dark-mode .page__footer { background: #010409 !important; border-top-color: #21262d !important; }
-body.dark-mode .page__footer a { color: #58a6ff !important; }
-body.dark-mode .page__footer-follow .social-icons .fa { color: #58a6ff !important; }
+body.dark-mode .page__footer { background: #0B0F16 !important; }
+body.dark-mode .page__footer a { color: #9DB8EA !important; }
+body.dark-mode .page__footer-follow .social-icons .fa { color: #9DB8EA !important; }
 body.dark-mode .page__footer-copyright { color: #8b949e !important; }
 
 /* ── Dark mode: Scroll-top ── */
@@ -860,9 +860,10 @@ body.dark-mode .pub-thumb-wrap:hover { box-shadow: 0 4px 18px rgba(0,0,0,0.45) !
 @keyframes blink { 50% { opacity: 0; } }
 
 /* ── Image lazy-load fade ── */
-img[loading="lazy"] {
-  opacity: 0; transition: opacity 0.4s;
-}
+h1, h2, h3, .section-header, .featured-title, .pub-title, .rc-title, .pillar-title { text-wrap: balance; }
+.page__content p, .page__content li, .rc-desc, .pillar-desc, .featured-desc, .pub-desc { text-wrap: pretty; }
+/* lazy images show as soon as they arrive (no fade from blank) */
+img[loading="lazy"] { opacity: 1; }
 img[loading="lazy"].loaded {
   opacity: 1;
 }
@@ -1302,7 +1303,7 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
     <div class="ro-papers">
       <a class="ro-p" href="https://openreview.net/forum?id=RwdGIIjPlC" target="_blank" rel="noopener">SP-VLA <span class="ro-v">ICLR 2026</span></a>
       <a class="ro-p" href="https://arxiv.org/abs/2407.05010" target="_blank" rel="noopener">PRANCE <span class="ro-v">TPAMI 2026</span></a>
-      <a class="ro-p" href="https://arxiv.org/abs/2605.29438" target="_blank" rel="noopener">ElegantVLA <span class="ro-v">2026</span></a>
+      <a class="ro-p" href="https://arxiv.org/abs/2605.29438" target="_blank" rel="noopener">ElegantVLA <span class="ro-v">arXiv 2026</span></a>
     </div>
   </div>
   <div class="ro-row">
@@ -1426,16 +1427,16 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
     <img class="featured-img" loading="lazy" src="/images/featured/cesar-ai.jpg" width="1000" height="333" alt="CESAR concept: audio LLM, process-reward reasoning chain, accuracy sweet-spot curve">
   <div class="featured-body">
       <span class="featured-venue fv-iclr26">ICLR 2026</span>
-      <div class="featured-title">CESAR: Process Rewards for Audio LLM Reasoning</div>
+      <div class="featured-title">CESAR: Audio LLM Reasoning via Process Rewards</div>
       <div class="featured-desc">First to show test-time inverse scaling in Audio LLMs — and fix it with process rewards via online RL.</div>
-      <div class="featured-stat"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>SOTA MMAU · Beats Gemini 2.5 Pro</div>
+      <div class="featured-stat"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>SOTA MMAU&nbsp;· Beats Gemini 2.5&nbsp;Pro</div>
     </div>
   </a>
   <a class="featured-card" href="/projects/adrpo/">
     <img class="featured-img" loading="lazy" src="/images/featured/adrpo-ai.jpg" width="1000" height="333" alt="ADRPO concept: samples on springs of adaptive tension, small model beating big">
   <div class="featured-body">
       <span class="featured-venue fv-neurips">NeurIPS 2025</span>
-      <div class="featured-title">ADRPO: Adaptive Regularization for Generative Model RLHF</div>
+      <div class="featured-title">ADRPO: Adaptive Divergence for Generative Models</div>
       <div class="featured-desc">Sample-level adaptive divergence regularization — 2B model outperforms 12B competitors.</div>
       <div class="featured-stat"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-rocket.png);mask-image:url(/images/icons/h-rocket.png)"></i>2B SD3 &gt; FLUX 12B &amp; SANA 4.8B</div>
     </div>
@@ -1453,9 +1454,9 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
     <img class="featured-img" loading="lazy" src="/images/featured/lbc-ai.jpg" width="1000" height="333" alt="LBC concept: game controller, behavior selection, bars breaking the human-record line">
   <div class="featured-body">
       <span class="featured-venue fv-iclr23oral">ICLR 2023 · Oral</span>
-      <div class="featured-title">LBC: Superhuman Atari — 24 World Records</div>
+      <div class="featured-title">LBC: Breaking 24 Atari World Records</div>
       <div class="featured-desc">Breaking 24 Atari human world records with 78× less data than prior SOTA (Agent57).</div>
-      <div class="featured-stat"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>Rank 5/4176 · 10,077% mean human performance</div>
+      <div class="featured-stat"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>Rank 5/4176&nbsp;· 10,077% mean human performance</div>
     </div>
   </a>
 </div>
@@ -1479,6 +1480,45 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
 </div>
 
 <div class="pub-list">
+
+<div class="pub-entry" role="article" data-venue="COLM" data-year="2026" data-arxiv="d4wrBuJ4xo" data-abstract="Procedure-Aware RL rewards how a tool-using LLM sequences its calls — invocation-order quality plus a check of the final system state — not just whether the final answer is right.">
+  <div class="pub-left"><span class="pb pb-iclr">COLM 2026</span><span class="pub-year">2026</span></div>
+  <div class="pub-right">
+    <div class="pub-thumb-wrap"><img loading="lazy" src="/images/featured/parl-ai.jpg" width="1000" height="333" alt="Procedure-Aware RL: the same tool calls in the right order succeed and in the wrong order fail"></div>
+    <div class="pub-title">
+      <a href="https://openreview.net/forum?id=d4wrBuJ4xo" target="_blank" rel="noopener noreferrer">Procedure-Aware Reinforcement Learning for Tool-Augmented Large Language Models</a>
+    <button class="pub-abst-btn" aria-expanded="false" aria-label="Toggle abstract">▾ Abstract</button>
+    <div class="pub-abstract-preview">Procedure-Aware RL rewards how a tool-using LLM sequences its calls — invocation-order quality plus a check of the final system state — not just whether the final answer is right.</div></div>
+    <div class="pub-authors">Q. Zheng*, <strong>J. Fan*</strong>, C. Cheng, G. Liu</div>
+    <div class="pub-desc">Procedure-Aware RL: a procedural reward and an error-aware penalty on top of GRPO, so tool-using agents learn to order their calls.</div>
+    <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>3B model competitive with GPT-5-mini and Claude-Haiku-4.5 on BFCL-V3</div>
+    <div class="pub-links">
+      <a class="pub-link pl-paper" href="https://openreview.net/forum?id=d4wrBuJ4xo" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-pubs.png);mask-image:url(/images/icons/sh-pubs.png)"></i>Paper</a>
+      <a class="pub-link pl-project" href="/projects/procedure-aware-rl/"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-link.png);mask-image:url(/images/icons/h-link.png)"></i>Project</a>
+      <a class="pub-link pl-video" href="/film/?s=procedure-aware-rl">Video</a>
+    </div>
+  </div>
+</div>
+
+<div class="pub-entry" role="article" data-venue="TMLR" data-year="2026" data-arxiv="2506.07459" data-abstract="ProteinZero lets an inverse-folding model improve from its own designs with online RL — no curated preference data and no mode collapse.">
+  <div class="pub-left"><span class="pb pb-journal">TMLR 2026</span><span class="pub-year">2026</span></div>
+  <div class="pub-right">
+    <div class="pub-thumb-wrap"><img loading="lazy" src="/images/featured/proteinzero-ai.jpg" width="1000" height="333" alt="ProteinZero: a protein inside an online learning loop, spreading into diverse new designs"></div>
+    <div class="pub-title">
+      <a href="https://arxiv.org/abs/2506.07459" target="_blank" rel="noopener noreferrer">ProteinZero: Self-Improving Protein Generation via Online Reinforcement Learning</a>
+    <button class="pub-abst-btn" aria-expanded="false" aria-label="Toggle abstract">▾ Abstract</button>
+    <div class="pub-abstract-preview">ProteinZero lets an inverse-folding model improve from its own designs with online RL — no curated preference data and no mode collapse.</div></div>
+    <div class="pub-authors">Z. Wang*, <strong>J. Fan*</strong>, R. Guo, T. Nguyen, H. Ji, G. Liu</div>
+    <div class="pub-desc">ProteinZero: online RL for protein design — the model keeps improving from its own generations while staying diverse.</div>
+    <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-rocket.png);mask-image:url(/images/icons/h-rocket.png)"></i>&gt;90% success on CATH-4.3 · code released</div>
+    <div class="pub-links">
+      <a class="pub-link pl-paper" href="https://arxiv.org/abs/2506.07459" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-pubs.png);mask-image:url(/images/icons/sh-pubs.png)"></i>Paper</a>
+      <a class="pub-link pl-project" href="/projects/proteinzero/"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-link.png);mask-image:url(/images/icons/h-link.png)"></i>Project</a>
+      <a class="pub-link pl-video" href="/film/?s=proteinzero">Video</a>
+      <a class="pub-link pl-code" href="https://github.com/ziwenwang28/ProteinZero" target="_blank" rel="noopener noreferrer">Code</a>
+    </div>
+  </div>
+</div>
 
 <div class="pub-entry" role="article" data-venue="ICLR" data-year="2026" data-arxiv="2510.20867" data-abstract="CESAR resolves test-time inverse scaling in Audio LLMs by rewarding the reasoning process via GRPO, achieving SOTA on MMAU — outperforming Gemini 2.5 Pro and GPT-4o Audio.">
   <div class="pub-left"><span class="pb pb-iclr">ICLR 2026</span><span class="pub-year">2026</span></div>
@@ -1718,9 +1758,19 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
     <div class="rc-desc">Sample-efficient RL that exceeds human performance. Broke 24 Atari world records with 78× less data (LBC), and beat Agent57 with 500× less data (GDI).</div>
   </div>
   <div class="research-card">
+    <img class="rc-icon-img" loading="lazy" src="/images/icons/ri-agentic.png" alt="">
+    <div class="rc-title">Agentic RL</div>
+    <div class="rc-desc">RL for tool-using, multi-turn agents — rewarding the order of tool calls and the state they leave behind, and training voice agents end to end in native speech (Procedure-Aware RL, SpeechGym).</div>
+  </div>
+  <div class="research-card">
     <img class="rc-icon-img" loading="lazy" src="/images/icons/ri-rsi.png" alt="">
-    <div class="rc-title">Recursive Self-Improvement (RSI)</div>
+    <div class="rc-title">Recursive Self-Improvement</div>
     <div class="rc-desc">Models that keep improving themselves: each improved policy becomes the critic and teacher of its successor, removing human scaffolding from RL post-training step by step.</div>
+  </div>
+  <div class="research-card">
+    <img class="rc-icon-img" loading="lazy" src="/images/icons/ri-discovery.png" alt="">
+    <div class="rc-title">Agentic Scientific Discovery</div>
+    <div class="rc-desc">Agents that run a design loop on their own — propose, test, learn — starting with protein design that keeps improving from its own designs (ProteinZero), toward agents that run the research loop itself.</div>
   </div>
 </div>
 
@@ -1738,7 +1788,7 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
   </div>
   <div class="stat-card">
     <div class="stat-number" data-target="500" data-suffix="×">0</div>
-    <div class="stat-label">More Data-Efficient<br><em>than Agent57</em></div>
+    <div class="stat-label">More Data-Efficient<br><em>than Agent57 — GDI (ICML'22)</em></div>
   </div>
   <div class="stat-card">
     <div class="stat-number">SOTA</div>
@@ -1769,7 +1819,7 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
   {% assign linePts = linePts | append: x | append: ',' | append: yy | append: ' ' %}{% endfor %}
 <div class="cit-chart">
   <div class="cit-chart-head">
-    <span class="cit-chart-title">Citations over time</span>
+    <span class="cit-chart-title">Cumulative citations</span>
     <span class="cit-chart-sub">Google Scholar &middot; {{ site.data.citations._total }} citations &middot; h-index {{ site.data.citations._h_index | default: 11 }} &middot; i10 {{ site.data.citations._i10_index | default: 12 }} &middot; auto-updated daily</span>
   </div>
   <svg class="ct-svg" viewBox="0 0 720 210" preserveAspectRatio="none" role="img" aria-label="Cumulative citations over time">
@@ -2476,12 +2526,14 @@ function drawGraph(container) {
     }
     /* Label above */
     g.append('text').attr('x',d.x).attr('y',d.y-d.r-7)
-      .attr('text-anchor','middle').attr('font-size','11.5px')
+      .attr('text-anchor','middle').attr('font-size','12.5px')
       .attr('font-weight','700').attr('font-family','Inter,sans-serif')
+      .attr('paint-order','stroke').attr('stroke',bg).attr('stroke-width',5).attr('stroke-linejoin','round')
       .attr('fill',ink).text(d.label);
     /* Venue below */
-    g.append('text').attr('x',d.x).attr('y',d.y+d.r+13)
-      .attr('text-anchor','middle').attr('font-size','10px')
+    g.append('text').attr('x',d.x).attr('y',d.y+d.r+14)
+      .attr('text-anchor','middle').attr('font-size','11.5px')
+      .attr('paint-order','stroke').attr('stroke',bg).attr('stroke-width',5).attr('stroke-linejoin','round')
       .attr('font-family','Inter,sans-serif').attr('fill',sub).text(d.venue);
   });
 

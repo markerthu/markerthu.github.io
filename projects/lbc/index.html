@@ -218,6 +218,9 @@ body.dark-mode .problem-card h3{color:#F0B49A!important}
 .vs-bad{border-left-color:var(--c-rl-line)!important}.vs-good{border-left-color:var(--c-ours)!important}
 .vs-bad h3,.vs-bad h4,.vs-bad .vs-h{color:#B8613C!important}.vs-good h3,.vs-good h4,.vs-good .vs-h{color:var(--c-ours)!important}
 body.dark-mode .vs-bad h3,body.dark-mode .vs-bad h4,body.dark-mode .vs-bad .vs-h{color:#F0B49A!important}
+
+h1,h2,h3,.bx-title,.p-title,.pub-title,.card-title{text-wrap:balance}
+p,li{text-wrap:pretty}
 </style>
 <script type="application/ld+json">{
   "@context": "https://schema.org",
@@ -320,13 +323,13 @@ body.dark-mode .vs-bad h3,body.dark-mode .vs-bad h4,body.dark-mode .vs-bad .vs-h
 </section>
 
 <section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-puzzle.png);mask-image:url(/images/icons/h-puzzle.png)"></i>The Core Idea</h2>
+  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-puzzle.png);mask-image:url(/images/icons/h-puzzle.png)"></i>The core idea</h2>
   <p>Population-based methods fix a set of exploratory policies and select between them. LBC instead constructs a <strong>continuous, learnable behavior mapping space</strong> that blends all policies, then uses a <strong>bandit-based meta-controller</strong> to learn which behaviors to select at each moment:</p>
   {% include anim/strip_lbc.html %}
 </section>
 
 <section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>24 World Records Broken</h2>
+  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>24 world records broken</h2>
   <p>LBC broke <strong>24 Atari human world records</strong> within just 1 billion training frames:</p>
   <div class="games-grid">
     <div class="game-pill">Alien</div>
@@ -375,30 +378,7 @@ body.dark-mode .vs-bad h3,body.dark-mode .vs-bad h4,body.dark-mode .vs-bad .vs-h
 </section>
 
 <section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-chart.png);mask-image:url(/images/icons/h-chart.png)"></i>Quantitative Comparison</h2>
-  <div class="method-grid">
-    <div class="method-card">
-      <h3>LBC (Ours)</h3>
-      <p><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-chart.png);mask-image:url(/images/icons/h-chart.png)"></i><strong>10,077%</strong> mean human-normalized score</p>
-      <p><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-target.png);mask-image:url(/images/icons/h-target.png)"></i><strong>24</strong> world records</p>
-      <p><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-impact.png);mask-image:url(/images/icons/sh-impact.png)"></i><strong>1B</strong> training frames</p>
-    </div>
-    <div class="method-card">
-      <h3>Agent57 (Prior SOTA)</h3>
-      <p><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-chart.png);mask-image:url(/images/icons/h-chart.png)"></i><strong>4,766%</strong> mean human-normalized score</p>
-      <p><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-target.png);mask-image:url(/images/icons/h-target.png)"></i><strong>0</strong> world records</p>
-      <p><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-impact.png);mask-image:url(/images/icons/sh-impact.png)"></i><strong>78B</strong> training frames (78× more)</p>
-    </div>
-    <div class="method-card">
-      <h3>R2D2</h3>
-      <p><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-chart.png);mask-image:url(/images/icons/h-chart.png)"></i><strong>4,038%</strong> mean human-normalized score</p>
-      <p><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-impact.png);mask-image:url(/images/icons/sh-impact.png)"></i><strong>10B</strong> training frames</p>
-    </div>
-  </div>
-</section>
-
-<section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-deadlines.png);mask-image:url(/images/icons/sh-deadlines.png)"></i>Publication Journey</h2>
+  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-deadlines.png);mask-image:url(/images/icons/sh-deadlines.png)"></i>Publication journey</h2>
   <div class="tl">
     <div class="tl-line"></div>
     <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">Sep 2022</div><div class="tl-title">Submitted to ICLR 2023 (Submission #219)</div><div class="tl-desc">Submitted to The Eleventh International Conference on Learning Representations.</div></div>

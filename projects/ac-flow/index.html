@@ -218,6 +218,9 @@ body.dark-mode .problem-card h3{color:#F0B49A!important}
 .vs-bad{border-left-color:var(--c-rl-line)!important}.vs-good{border-left-color:var(--c-ours)!important}
 .vs-bad h3,.vs-bad h4,.vs-bad .vs-h{color:#B8613C!important}.vs-good h3,.vs-good h4,.vs-good .vs-h{color:var(--c-ours)!important}
 body.dark-mode .vs-bad h3,body.dark-mode .vs-bad h4,body.dark-mode .vs-bad .vs-h{color:#F0B49A!important}
+
+h1,h2,h3,.bx-title,.p-title,.pub-title,.card-title{text-wrap:balance}
+p,li{text-wrap:pretty}
 </style>
 <script type="application/ld+json">{
   "@context": "https://schema.org",
@@ -297,12 +300,12 @@ body.dark-mode .vs-bad h3,body.dark-mode .vs-bad h4,body.dark-mode .vs-bad .vs-h
 </section>
 
 <section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-gear.png);mask-image:url(/images/icons/h-gear.png)"></i>Three Key Innovations</h2>
+  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-gear.png);mask-image:url(/images/icons/h-gear.png)"></i>Three key innovations</h2>
   {% include anim/strip_acflow.html %}
 </section>
 
 <section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-puzzle.png);mask-image:url(/images/icons/h-puzzle.png)"></i>Why Intermediate Rewards Matter</h2>
+  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-puzzle.png);mask-image:url(/images/icons/h-puzzle.png)"></i>Why intermediate rewards matter</h2>
   <p>Standard RLHF for flow matching gives feedback only at the <strong>end of the denoising chain</strong> — a sparse signal over many steps. AC-Flow instead assigns <em>intermediate rewards</em> at each timestep via an actor-critic formulation:</p>
   <ul style="font-family:var(--sans);font-size:.95rem;color:var(--body);padding-left:1.4em;line-height:1.9;margin:0 0 1em">
     <li><strong>Denser gradients</strong> → more stable learning, fewer catastrophic updates</li>
@@ -338,7 +341,7 @@ body.dark-mode .vs-bad h3,body.dark-mode .vs-bad h4,body.dark-mode .vs-bad .vs-h
 </section>
 
 <section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-chart.png);mask-image:url(/images/icons/h-chart.png)"></i>Key Claims</h2>
+  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-chart.png);mask-image:url(/images/icons/h-chart.png)"></i>Key claims</h2>
   <div class="method-grid">
     <div class="method-card"><h3><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-gear.png);mask-image:url(/images/icons/h-gear.png)"></i>Actor-Critic</h3><p>Step-level rewards via intermediate feedback.</p></div>
     <div class="method-card"><h3><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-shield.png);mask-image:url(/images/icons/h-shield.png)"></i>Collapse-Free</h3><p>Wasserstein regularization + dual-stability mechanism.</p></div>
@@ -347,7 +350,7 @@ body.dark-mode .vs-bad h3,body.dark-mode .vs-bad h4,body.dark-mode .vs-bad .vs-h
 </section>
 
 <section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-link.png);mask-image:url(/images/icons/h-link.png)"></i>Related Work in This Series</h2>
+  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-link.png);mask-image:url(/images/icons/h-link.png)"></i>Related work in this series</h2>
   <p>AC-Flow builds on the online RLHF series for generative models:</p>
   <ul style="font-family:var(--sans);font-size:.95rem;color:var(--body);padding-left:1.4em;line-height:1.9;margin:0 0 1em">
     <li><strong><a href="/projects/orw-cfm-w2/">ORW-CFM-W2 (ICLR 2025)</a></strong> — First online RLHF for flow matching</li>
@@ -357,7 +360,7 @@ body.dark-mode .vs-bad h3,body.dark-mode .vs-bad h4,body.dark-mode .vs-bad .vs-h
 </section>
 
 <section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-book.png);mask-image:url(/images/icons/h-book.png)"></i>Cite This Paper</h2>
+  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-book.png);mask-image:url(/images/icons/h-book.png)"></i>BibTeX</h2>
   <button class="bib-copy-btn" aria-label="Copy BibTeX citation"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-list.png);mask-image:url(/images/icons/h-list.png)"></i>Copy BibTeX</button>
   <pre class="bibtex-block" tabindex="0"><code>@misc{fan2025finetuningflowmatchinggenerative,
   title={Fine-tuning Flow Matching Generative Models with Intermediate Feedback},

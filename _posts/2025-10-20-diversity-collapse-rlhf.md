@@ -8,7 +8,7 @@ tags:
   - RLHF
   - generative models
   - flow matching
-excerpt: "RL post-training runs on one fixed coefficient that must both protect the model and get out of its way. Subtract the advantage - one line."
+excerpt: "RL post-training runs on one fixed coefficient that must both protect the model and get out of its way. Subtract the advantage — one line."
 last_modified_at: 2026-08-25
 header:
   teaser: /images/featured/adrpo-ai.jpg

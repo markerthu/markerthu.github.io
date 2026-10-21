@@ -9,7 +9,7 @@ tags:
   - audio LLMs
   - mechanistic interpretability
   - AI safety
-excerpt: "A speech model answers a spoken question in one word. We read its middle layers while it listened - the answer was already there, in words it never says."
+excerpt: "A speech model answers a spoken question in one word. We read its middle layers while it listened — the answer was already there, in words it never says."
 header:
   teaser: /images/featured/readmind-ai.jpg
   og_image: /images/og/read-the-mind.jpg

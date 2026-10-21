@@ -218,6 +218,9 @@ body.dark-mode .problem-card h3{color:#F0B49A!important}
 .vs-bad{border-left-color:var(--c-rl-line)!important}.vs-good{border-left-color:var(--c-ours)!important}
 .vs-bad h3,.vs-bad h4,.vs-bad .vs-h{color:#B8613C!important}.vs-good h3,.vs-good h4,.vs-good .vs-h{color:var(--c-ours)!important}
 body.dark-mode .vs-bad h3,body.dark-mode .vs-bad h4,body.dark-mode .vs-bad .vs-h{color:#F0B49A!important}
+
+h1,h2,h3,.bx-title,.p-title,.pub-title,.card-title{text-wrap:balance}
+p,li{text-wrap:pretty}
 </style><script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "ScholarlyArticle",
@@ -301,7 +304,7 @@ body.dark-mode .vs-bad h3,body.dark-mode .vs-bad h4,body.dark-mode .vs-bad .vs-h
 </section>
 
 <section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-warning.png);mask-image:url(/images/icons/h-warning.png)"></i>Why Flow Matching Is Hard to Fine-Tune</h2>
+  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-warning.png);mask-image:url(/images/icons/h-warning.png)"></i>Why flow matching is hard to fine-tune</h2>
   <div class="method-grid">
     <div class="method-card">
       <h3>No Likelihood</h3>
@@ -319,7 +322,7 @@ body.dark-mode .vs-bad h3,body.dark-mode .vs-bad h4,body.dark-mode .vs-bad .vs-h
 </section>
 
 <section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-gear.png);mask-image:url(/images/icons/h-gear.png)"></i>Three Key Contributions</h2>
+  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-gear.png);mask-image:url(/images/icons/h-gear.png)"></i>Three key contributions</h2>
   {% include anim/strip_orw.html %}
 </section>
 
@@ -328,8 +331,7 @@ body.dark-mode .vs-bad h3,body.dark-mode .vs-bad h4,body.dark-mode .vs-bad .vs-h
   <div class="results-grid">
     <div class="result-card"><div class="rnum">SD3</div><div class="rdesc">Successfully fine-tunes<br>Stable Diffusion 3</div></div>
     <div class="result-card"><div class="rnum">0</div><div class="rdesc">Human-collected data<br>required</div></div>
-    <div class="result-card"><div class="rnum"><i class="lbl-ico" style="color:#16a34a;-webkit-mask-image:url(/images/icons/h-check.png);mask-image:url(/images/icons/h-check.png)"></i></div><div class="rdesc">Spatial understanding<br>&amp; compositional tasks</div></div>
-    <div class="result-card"><div class="rnum">SOTA</div><div class="rdesc">Orders of magnitude<br>less data than baselines</div></div>
+    <div class="result-card"><div class="rnum">W2</div><div class="rdesc">Tractable bound<br>that prevents collapse</div></div>
   </div>
   <p>Tasks: target image generation, image compression, text-image alignment. Consistently achieves optimal policy convergence while allowing controllable diversity-reward trade-offs.</p>
 </section>
@@ -340,23 +342,23 @@ body.dark-mode .vs-bad h3,body.dark-mode .vs-bad h4,body.dark-mode .vs-bad .vs-h
 </section>
 
 <section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-link.png);mask-image:url(/images/icons/h-link.png)"></i>Unified RL Framework</h2>
+  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-link.png);mask-image:url(/images/icons/h-link.png)"></i>Unified RL framework</h2>
   <p>We establish a formal connection between flow matching optimization and KL-regularized reinforcement learning, providing theoretical grounding for the reward-diversity trade-offs realized by ORW-CFM-W2.</p>
 </section>
 
 <section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-chart.png);mask-image:url(/images/icons/h-chart.png)"></i>Controlled Studies: the &alpha; Trade-off</h2>
+  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-chart.png);mask-image:url(/images/icons/h-chart.png)"></i>Controlled studies: the &alpha; trade-off</h2>
   <p>Controlled experiments on MNIST and CIFAR isolate the reward–diversity trade-off set by the W2 regularization strength α. Raising α preserves more diversity at some cost in reward, and the trade-off is smooth and controllable rather than a cliff — so α behaves as a usable knob. The regularization also prevents the mode collapse that unconstrained reward-weighting falls into, and the same control carries over to text-conditional CIFAR.</p>
 </section>
 
 <section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-gear.png);mask-image:url(/images/icons/h-gear.png)"></i>Alpha Control: Reward–Diversity Knob</h2>
+  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-gear.png);mask-image:url(/images/icons/h-gear.png)"></i>Alpha control: reward–diversity knob</h2>
   <p>The regularization strength α provides a smooth knob between pure reward maximization (α=0) and full diversity preservation (α=1): α=0 gives pure reward and mode collapse, α=0.3 is a balanced recommended setting, and α=0.8 preserves high diversity. The same knob applied to SD3 spans from the base model through balanced fine-tuning to full reward optimization.</p>
   {% include anim/orw.html %}
 </section>
 
 <section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-deadlines.png);mask-image:url(/images/icons/sh-deadlines.png)"></i>Publication Journey</h2>
+  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-deadlines.png);mask-image:url(/images/icons/sh-deadlines.png)"></i>Publication journey</h2>
   <div class="tl">
     <div class="tl-line"></div>
     <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">Oct 2024</div><div class="tl-title">Submitted to ICLR 2025</div><div class="tl-desc">Submitted to The Thirteenth International Conference on Learning Representations.</div></div>

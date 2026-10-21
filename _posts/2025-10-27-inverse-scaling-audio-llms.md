@@ -8,7 +8,7 @@ tags:
   - audio LLMs
   - reasoning
   - test-time scaling
-excerpt: "Telling an Audio LLM to think cost it 3.40 points. Rewarding the reasoning process instead earns 3.40 - the same margin, mirrored."
+excerpt: "Telling an Audio LLM to think cost it 3.40 points. Rewarding the reasoning process instead earns 3.40 — the same margin, mirrored."
 last_modified_at: 2026-08-25
 header:
   teaser: /images/featured/cesar-ai.jpg

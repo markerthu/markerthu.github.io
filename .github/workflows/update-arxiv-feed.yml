@@ -59,13 +59,13 @@ jobs:
 
               # Determine topic tag
               t = title.lower()
-              if "flow matching" in t or "flow" in t:
+              if any(k in t for k in ("flow matching", "rectified flow", "flow-based", "diffusion")):
                 tag = "Flow Matching"
               elif "audio" in t or "speech" in t:
                 tag = "Audio Reasoning"
               elif "process reward" in t or "test-time" in t:
                 tag = "Reasoning"
-              elif "self-improv" in t or "self-evolv" in t or "self-play" in t:
+              elif "self-improv" in t or "self-evol" in t or "self-play" in t:
                 tag = "Self-Improvement"
               elif "multimodal" in t or "vision" in t:
                 tag = "Multimodal"

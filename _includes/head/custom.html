@@ -40,8 +40,8 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- Inter font — non-render-blocking (media="print" trick defers parse until after first paint) -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap"></noscript>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap"></noscript>
 
 <style>
   /* ── Typography upgrade ── */
@@ -148,12 +148,13 @@
 
   /* ── Footer ── */
   .page__footer {
-    background: #0d1b2a;
-    color: #8899aa;
+    background: #1E2A44;
+    color: #A6ADBB;
     border-top: 3px solid #2F4B8F;
+    border-image: linear-gradient(to right, #2F4B8F 0%, #6F94C6 50%, #E39A7A 100%) 1;
   }
-  .page__footer a { color: #7eb8f7; }
-  .page__footer-follow .social-icons .fa { color: #7eb8f7; }
+  .page__footer a { color: #BFD8EC; }
+  .page__footer-follow .social-icons .fa { color: #BFD8EC; }
 
   /* ── Sidebar wider on xl ── */
   @media (min-width: 80em) {
@@ -203,8 +204,8 @@
   body.dark-mode .page__content a { color: #58a6ff !important; }
   body.dark-mode .page__content blockquote { background: #1c2333 !important; color: #adbac7 !important; border-left-color: #388bfd !important; }
   /* paragraphs inherit #c9d1d9 from .page__content — no dim override */
-  body.dark-mode .page__footer { background: #010409 !important; border-top-color: #21262d !important; }
-  body.dark-mode .page__footer a { color: #58a6ff !important; }
+  body.dark-mode .page__footer { background: #0B0F16 !important; }
+  body.dark-mode .page__footer a { color: #9DB8EA !important; }
   body.dark-mode .page__inner-wrap, body.dark-mode #main, body.dark-mode .page { background: #0d1117 !important; }
   body.dark-mode .list__item { border-bottom-color: #21262d !important; }
   body.dark-mode .archive__item-title a { color: #58a6ff !important; }

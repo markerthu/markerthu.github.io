@@ -7,6 +7,14 @@ excerpt: "Papers Jiajun Fan is reading — latest arXiv papers in RL post-traini
 ---
 
 <style>
+.page__title{display:none!important}
+.ed-head{margin:0 0 1.4em}
+.ed-kicker{font-family:'Inter',system-ui,sans-serif;text-transform:uppercase;letter-spacing:.145em;font-size:.72rem;font-weight:600;color:#6c6860;margin-bottom:.7em}
+.ed-h1{font-family:Newsreader,Georgia,serif!important;font-weight:500!important;font-size:2.6rem!important;line-height:1.1!important;letter-spacing:-.02em;color:#1a1815!important;margin:0 0 .3em!important;text-wrap:balance}
+.ed-sub{font-family:Newsreader,Georgia,serif;font-size:1.12rem;line-height:1.55;color:#6c6860;margin:0 0 .5em;max-width:40em}
+.ed-meta{font-family:'Inter',system-ui,sans-serif;font-size:.8rem;color:#787369}
+body.dark-mode .ed-h1{color:#ece8e0!important} body.dark-mode .ed-sub,body.dark-mode .ed-kicker,body.dark-mode .ed-meta{color:#8f8a80}
+@media(max-width:600px){.ed-h1{font-size:2.05rem!important}}
 .arxiv-page-meta { font-size:0.88em; color:#666; margin-bottom:24px; border-left:3px solid #2F4B8F; padding-left:12px; }
 .arxiv-grid {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 8px;
@@ -40,9 +48,11 @@ body.dark-mode .arxiv-title { color: #e6edf3; }
 body.dark-mode .arxiv-card:hover .arxiv-title { color: #58a6ff; }
 </style>
 
-<div class="arxiv-page-meta">
-  Recent arXiv papers in RL post-training · reasoning · self-improvement · multimodal LLMs<br>
-  Auto-updated weekly via GitHub Actions · Last update: <strong>{{ site.data.arxiv_feed.updated }}</strong>
+<div class="ed-head">
+  <div class="ed-kicker">Reading</div>
+  <h1 class="ed-h1">What's happening in my field</h1>
+  <p class="ed-sub">Recent arXiv papers in RL post-training, reasoning, self-improvement and multimodal LLMs.</p>
+  <div class="ed-meta">Updated weekly · last update {{ site.data.arxiv_feed.updated }}</div>
 </div>
 
 <div class="arxiv-grid">
