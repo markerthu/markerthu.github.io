@@ -2560,25 +2560,7 @@ function drawGraph(container) {
 </script>
 
 <script>
-/* ── Scroll-reveal (polish pack) ── */
-(function(){
-  if(!('IntersectionObserver' in window)) return;
-  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(reduced) return;
-  var sel = '.section-header, .featured-card, .pub-entry, .research-card, .rt-item';
-  var els = document.querySelectorAll(sel);
-  if(!els.length) return;
-  els.forEach(function(el, idx){
-    el.classList.add('sr');
-    if(el.classList.contains('featured-card')) el.classList.add('sr-d' + (idx % 3 + 1));
-  });
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting){ e.target.classList.add('sr-in'); io.unobserve(e.target); }
-    });
-  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
-  els.forEach(function(el){ io.observe(el); });
-})();
+/* Sections are visible at once: no per-section scroll reveal (it left blank gaps on fast scrolls). */
 
 
 </script>
