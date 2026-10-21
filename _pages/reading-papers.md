@@ -7,7 +7,7 @@ excerpt: "Papers Jiajun Fan is reading — latest arXiv papers in RL post-traini
 ---
 
 <style>
-.arxiv-page-meta { font-size:0.88em; color:#666; margin-bottom:24px; border-left:3px solid #90A5A7; padding-left:12px; }
+.arxiv-page-meta { font-size:0.88em; color:#666; margin-bottom:24px; border-left:3px solid #2F4B8F; padding-left:12px; }
 .arxiv-grid {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 8px;
 }
@@ -22,16 +22,17 @@ excerpt: "Papers Jiajun Fan is reading — latest arXiv papers in RL post-traini
   display: inline-block; font-size: 0.72em; font-weight: 700; border-radius: 20px;
   padding: 2px 9px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: .04em;
 }
-.arxiv-tag-rl-training     { background: #dbeafe; color: #1d4ed8; }
-.arxiv-tag-flow-matching   { background: #d1fae5; color: #065f46; }
-.arxiv-tag-audio-reasoning { background: #ede9fe; color: #5b21b6; }
-.arxiv-tag-reasoning       { background: #fce7f3; color: #9d174d; }
-.arxiv-tag-self-improvement{ background: #fef3c7; color: #92400e; }
-.arxiv-tag-multimodal      { background: #e0f2fe; color: #0369a1; }
+.arxiv-tag-rl-training     { background: #DCE7F5; color: #2F4B8F; }
+.arxiv-tag-flow-matching   { background: #E6F0F8; color: #3E6597; }
+.arxiv-tag-audio-reasoning { background: #EEF0F4; color: #4A5160; }
+.arxiv-tag-reasoning       { background: #FBE3D8; color: #8A4A2E; }
+.arxiv-tag-self-improvement{ background: #F5C8B5; color: #7A3B22; }
+.arxiv-tag-multimodal      { background: #E6F0F8; color: #3E6597; }
 .arxiv-title   { font-size: 0.84em; font-weight: 700; color: #1a2332; line-height: 1.4; margin-bottom: 5px; }
 .arxiv-authors { font-size: 0.76em; color: #888; margin-bottom: 3px; }
 .arxiv-date    { font-size: 0.73em; color: #aaa; }
 body.dark-mode .arxiv-card { background: #161b22; border-color: #30363d; }
+body.dark-mode .arxiv-tag-rl-training{background:#1E2A44;color:#9DB8EA} body.dark-mode .arxiv-tag-flow-matching,body.dark-mode .arxiv-tag-multimodal{background:#1B2A3C;color:#7FA6D3} body.dark-mode .arxiv-tag-audio-reasoning{background:#262B33;color:#A6ADBB} body.dark-mode .arxiv-tag-reasoning,body.dark-mode .arxiv-tag-self-improvement{background:#33241F;color:#F2C3AE}
 body.dark-mode .arxiv-card:hover { border-color: #388bfd; }
 body.dark-mode .arxiv-title { color: #e6edf3; }
 .page__content a.arxiv-card, .page__content a.arxiv-card:hover, .page__content a.arxiv-card * { text-decoration: none !important; }
