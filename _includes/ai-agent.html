@@ -505,7 +505,13 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
     btn.addEventListener('click', quiet);
     try{ if(sessionStorage.getItem('raSeen')==='1'){ btn.classList.add('ra-quiet'); return; } }catch(e){}
     if(tip){
-      setTimeout(function(){ tip.classList.add('show'); },2600);
+      setTimeout(function(){
+        tip.classList.add('show');
+        /* on phones the bubble sits over the text: drop it as soon as the reader scrolls */
+        if(window.matchMedia('(max-width: 700px)').matches){
+          window.addEventListener('scroll', function(){ tip.classList.remove('show'); }, {passive:true, once:true});
+        }
+      },2600);
       setTimeout(function(){ tip.classList.remove('show'); },9000);
     }
   })();

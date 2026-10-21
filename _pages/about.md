@@ -314,7 +314,7 @@ body.dark-mode .ct-dot{fill:#58a6ff;} body.dark-mode .ct-dot-last{fill:#b39ddb;}
   max-width: 640px;
   margin: 0 auto 20px;
 }
-.hero-pills .hero-pill { text-align: center; }
+.hero-pills .hero-pill { text-align: center; white-space: normal; line-height: 1.35; text-wrap: balance; display: flex; align-items: center; justify-content: center; }
 @media (max-width: 700px) { .hero-pills { grid-template-columns: 1fr; max-width: 340px; } }
 .hero-pill {
   background: rgba(255,255,255,0.10);
@@ -842,7 +842,7 @@ body.dark-mode .pub-thumb-wrap:hover { box-shadow: 0 4px 18px rgba(0,0,0,0.45) !
 /* ── Reading progress bar ── */
 #read-progress {
   position: fixed; top: 0; left: 0; height: 3px; width: 0%;
-  background: linear-gradient(90deg, #1565c0 0%, #7c3aed 60%, #059669 100%);
+  background: linear-gradient(90deg, #2F4B8F 0%, #6F94C6 60%, #E39A7A 100%);
   z-index: 9999; transition: width .08s linear;
   pointer-events: none;
 }
@@ -1193,6 +1193,15 @@ body.dark-mode figure.anim-fig{--ink:#e6edf3;--muted:#8b949e;--card:#161b22;--fi
 body.dark-mode{--c-ours:#9DB8EA;--c-ours-fill:#5E77A8;--c-var:#3F5F86;--c-var-line:#7FA6D3;--c-rl:#9A6E5D;--c-rl-line:#E9A98C;
   --c-base:#3A414E;--c-base-line:#8F97A8;--c-other:#4A5260;--c-other-line:#9AA1B0;--c-grid:#2A303A;--c-ink2:#A6ADBB}
 figure.anim-fig{--link:var(--c-ours);--good:#3E7D5A;--bad:var(--c-rl-line)}
+/* deadline cards in the site palette */
+.ddl-card{border-left-color:var(--c-ours-fill)!important}
+.ddl-card .ddl-abbr{color:var(--c-ours)!important}
+.ddl-card .ddl-type{background:var(--c-base)!important;color:var(--c-ink2)!important}
+.ddl-chip.u-hot{background:var(--c-rl)!important;border-color:var(--c-rl-line)!important;color:#7A3B22!important}
+.ddl-chip.u-soon{background:var(--c-var)!important;border-color:var(--c-var-line)!important;color:var(--c-ours)!important}
+.ddl-chip.u-later{background:var(--c-base)!important;border-color:var(--c-grid)!important;color:var(--c-ink2)!important}
+body.dark-mode .ddl-chip.u-hot{color:#FBE3D8!important}
+body.dark-mode .ddl-chip.u-soon{color:#E3EEFA!important}
 body.dark-mode figure.anim-fig{--good:#7FC79A}
 </style>
 
@@ -1896,26 +1905,23 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
     var chip = '';
     if (next) {
       var diff = Math.ceil((next.dt - now) / 86400000);
-      var urgency = diff <= 2 ? '#dc2626' : diff <= 14 ? '#ea580c' : diff <= 60 ? '#d97706' : '#6b7280';
-      chip = '<span class="ddl-chip" style="background:' + urgency + '20;color:' + urgency + ';border-color:' + urgency + '40">'
+      var urgency = diff <= 14 ? 'u-hot' : diff <= 60 ? 'u-soon' : 'u-later';
+      chip = '<span class="ddl-chip ' + urgency + '">'
            + next.label + ' · ' + (diff <= 0 ? 'Today!' : diff + 'd') + '</span>';
     } else if (c.deadlines.length && c.deadlines[0].date === null) {
-      var isDk = localStorage.getItem('darkMode')==='true';
-      chip = '<span class="ddl-chip" style="background:'+(isDk?'#21262d':'#f1f5f9')+';color:'+(isDk?'#8b949e':'#6b7280')+';border-color:'+(isDk?'#30363d':'#e2e8f0')+'">Submission TBA</span>';
+      chip = '<span class="ddl-chip u-later">Submission TBA</span>';
     } else {
-      var isDk2 = localStorage.getItem('darkMode')==='true';
-      chip = '<span class="ddl-chip" style="background:'+(isDk2?'#122117':'#f0fdf4')+';color:'+(isDk2?'#3fb950':'#16a34a')+';border-color:'+(isDk2?'#1a7f45':'#bbf7d0')+'">Done <i class="lbl-ico" style="color:#16a34a;-webkit-mask-image:url(/images/icons/h-check.png);mask-image:url(/images/icons/h-check.png)"></i></span>';
+      chip = '<span class="ddl-chip u-later">Done <i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-check.png);mask-image:url(/images/icons/h-check.png)"></i></span>';
     }
 
     var card = document.createElement('div');
     card.className = 'ddl-card';
-    card.style.borderLeftColor = c.color;
     card.innerHTML = '<div class="ddl-top">'
-      + '<span class="ddl-abbr" style="color:' + c.color + '">' + c.abbr + '</span>'
-      + '<span class="ddl-type" style="background:' + c.color + '15;color:' + c.color + '">' + c.type + '</span>'
+      + '<span class="ddl-abbr">' + c.abbr + '</span>'
+      + '<span class="ddl-type">' + c.type + '</span>'
       + '</div>'
       + '<div class="ddl-name"><a href="' + c.url + '" target="_blank" rel="noopener noreferrer">' + c.name + '</a></div>'
-      + '<div class="ddl-meta"><span class="ddl-line"><i class="lbl-ico" style="color:#e11d48;-webkit-mask-image:url(/images/icons/h-pin.png);mask-image:url(/images/icons/h-pin.png)"></i>' + c.location + '</span><span class="ddl-line"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-deadlines.png);mask-image:url(/images/icons/sh-deadlines.png)"></i>' + c.conf + '</span></div>'
+      + '<div class="ddl-meta"><span class="ddl-line"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-pin.png);mask-image:url(/images/icons/h-pin.png)"></i>' + c.location + '</span><span class="ddl-line"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-deadlines.png);mask-image:url(/images/icons/sh-deadlines.png)"></i>' + c.conf + '</span></div>'
       + chip;
     grid.appendChild(card);
   });
@@ -2327,21 +2333,24 @@ function drawGraph(container) {
   var ink = isDark ? '#e6edf3' : '#1e293b';
   var sub = isDark ? '#8b949e' : '#64748b';
   var edgeClr = isDark ? '#475569' : '#94a3b8';
+  /* theme colours = site palette (navy / misty blue / peach / slate / sage / mauve) */
+  var TC = isDark ? {deep:'#E9A98C',train:'#9DB8EA',flow:'#7FA6D3',eff:'#A6ADBB',rep:'#C3A6C0',audio:'#86B9A6'}
+                  : {deep:'#E39A7A',train:'#2F4B8F',flow:'#6F94C6',eff:'#8F97A8',rep:'#A98BA6',audio:'#5E9A86'};
 
   /* ── Column x positions (fraction of W) ── */
   var CX = {'1':0.09,'2':0.28,'3':0.50,'4':0.70,'5':0.90};
 
   /* ── Papers: fixed fractional y in working area [0.0–1.0] ── */
   var nodes = [
-    {id:'GDI',        label:'GDI',        venue:'ICML 2022',    col:'1', fy:0.40, r:21, clr:'#ea580c', url:'/projects/gdi/'},
-    {id:'LBC',        label:'LBC',        venue:'ICLR 2023',    col:'1', fy:0.72, r:24, clr:'#ea580c', url:'/projects/lbc/'},
-    {id:'PRANCE',     label:'PRANCE',     venue:'TPAMI 2026',   col:'2', fy:0.14, r:18, clr:'#0891b2', url:'https://arxiv.org/abs/2407.05010'},
-    {id:'ORW-CFM-W2', label:'ORW-CFM-W2', venue:'ICLR 2025',  col:'3', fy:0.40, r:22, clr:'#1565c0', url:'/projects/orw-cfm-w2/'},
-    {id:'VarCon',     label:'VarCon',     venue:'NeurIPS 2025', col:'3', fy:0.72, r:18, clr:'#be185d', url:'https://openreview.net/forum?id=uOOlHOq500'},
-    {id:'ADRPO',      label:'ADRPO',      venue:'NeurIPS 2025', col:'4', fy:0.16, r:20, clr:'#1565c0', url:'/projects/adrpo/'},
-    {id:'SP-VLA',     label:'SP-VLA',     venue:'ICLR 2026',    col:'4', fy:0.60, r:22, clr:'#0891b2', url:'https://openreview.net/forum?id=RwdGIIjPlC'},
-    {id:'AC-Flow',    label:'AC-Flow',    venue:'arXiv 2025',   col:'5', fy:0.48, r:18, clr:'#059669', url:'/projects/ac-flow/'},
-    {id:'CESAR',      label:'CESAR',      venue:'ICLR 2026',    col:'5', fy:0.13, r:24, clr:'#7c3aed', url:'/projects/cesar/'},
+    {id:'GDI',        label:'GDI',        venue:'ICML 2022',    col:'1', fy:0.40, r:21, clr:TC.deep, url:'/projects/gdi/'},
+    {id:'LBC',        label:'LBC',        venue:'ICLR 2023',    col:'1', fy:0.72, r:24, clr:TC.deep, url:'/projects/lbc/'},
+    {id:'PRANCE',     label:'PRANCE',     venue:'TPAMI 2026',   col:'2', fy:0.14, r:18, clr:TC.eff, url:'https://arxiv.org/abs/2407.05010'},
+    {id:'ORW-CFM-W2', label:'ORW-CFM-W2', venue:'ICLR 2025',  col:'3', fy:0.40, r:22, clr:TC.train, url:'/projects/orw-cfm-w2/'},
+    {id:'VarCon',     label:'VarCon',     venue:'NeurIPS 2025', col:'3', fy:0.72, r:18, clr:TC.rep, url:'https://openreview.net/forum?id=uOOlHOq500'},
+    {id:'ADRPO',      label:'ADRPO',      venue:'NeurIPS 2025', col:'4', fy:0.16, r:20, clr:TC.train, url:'/projects/adrpo/'},
+    {id:'SP-VLA',     label:'SP-VLA',     venue:'ICLR 2026',    col:'4', fy:0.60, r:22, clr:TC.eff, url:'https://openreview.net/forum?id=RwdGIIjPlC'},
+    {id:'AC-Flow',    label:'AC-Flow',    venue:'arXiv 2025',   col:'5', fy:0.48, r:18, clr:TC.flow, url:'/projects/ac-flow/'},
+    {id:'CESAR',      label:'CESAR',      venue:'ICLR 2026',    col:'5', fy:0.13, r:24, clr:TC.audio, url:'/projects/cesar/'},
   ];
 
   /* Apply pixel coordinates (working area: y ∈ [36, H-46]) */
@@ -2480,9 +2489,9 @@ function drawGraph(container) {
 
   /* Legend */
   var legItems = [
-    {c:'#ea580c',l:'Deep RL'},{c:'#1565c0',l:'RL Training'},
-    {c:'#059669',l:'Flow Matching'},{c:'#0891b2',l:'Efficiency'},
-    {c:'#be185d',l:'Representation'},{c:'#7c3aed',l:'Audio Reasoning'},
+    {c:TC.deep,l:'Deep RL'},{c:TC.train,l:'RL Training'},
+    {c:TC.flow,l:'Flow Matching'},{c:TC.eff,l:'Efficiency'},
+    {c:TC.rep,l:'Representation'},{c:TC.audio,l:'Audio Reasoning'},
     {c:edgeClr,  l:'Research evolution →', dash:true},
   ];
   var lx = 8, ly = H - 16;
