@@ -11,6 +11,7 @@ tags:
   - audio LLMs
 excerpt: "Voice agents could be measured, never improved. We closed the loop - two open models talking in native audio - and task success more than doubled."
 header:
+  teaser: /images/featured/speechgym-ai.jpg
   og_image: /images/og/speechgym.jpg
 ---
 

@@ -89,11 +89,17 @@ body.dark-mode .blog-index{
 .bx-desc{font-family:var(--bx-serif)!important;font-size:1.08rem!important;line-height:1.55!important;color:var(--bx-muted)!important;margin:0!important;}
 .bx-arrow{font-family:var(--bx-sans);font-size:.82rem;font-weight:600;color:var(--bx-link);margin-top:.55em;opacity:0;transform:translateX(-4px);transition:.18s;}
 .bx-entry:hover .bx-arrow{opacity:1;transform:translateX(0);}
+/* cover illustration beside each post (the same editorial art as its project) */
+.bx-entry.has-thumb{display:grid;grid-template-columns:minmax(0,1fr) 236px;gap:28px;align-items:center;}
+.bx-thumb{width:236px;height:148px;object-fit:cover;border-radius:10px;border:1px solid var(--bx-rule);background:#fbfaf7;opacity:1!important;}
+body.dark-mode .bx-thumb{filter:brightness(.92);}
 
 @media(max-width:600px){
   .bx-h1{font-size:2.05rem!important;}
   .bx-title{font-size:1.28rem!important;}
   .bx-entry{padding:1.1em .85em;margin:0 -.85em;}
+  .bx-entry.has-thumb{grid-template-columns:1fr;gap:14px;}
+  .bx-thumb{width:100%;height:auto;aspect-ratio:3/1;order:-1;}
 }
 @media print{
   /* the page paints through custom properties, so dark mode must be undone for
@@ -120,11 +126,14 @@ body.dark-mode .blog-index{
       <div class="bx-year" id="{{ year | slugify }}">{{ year }}</div>
       {% capture written_year %}{{ year }}{% endcapture %}
     {% endif %}
-    <a class="bx-entry" href="{{ post.url | relative_url }}">
-      <h2 class="bx-title">{{ post.title | strip_html }}</h2>
-      <div class="bx-meta"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %-d, %Y" }}</time>{% if post.tags %} &nbsp;·&nbsp; {{ post.tags | join: " · " }}{% endif %}</div>
-      <p class="bx-desc">{{ post.excerpt | strip_html | strip_newlines | truncate: 190 }}</p>
-      <div class="bx-arrow">Read →</div>
+    <a class="bx-entry{% if post.header.teaser %} has-thumb{% endif %}" href="{{ post.url | relative_url }}">
+      <div class="bx-text">
+        <h2 class="bx-title">{{ post.title | strip_html }}</h2>
+        <div class="bx-meta"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %-d, %Y" }}</time>{% if post.tags %} &nbsp;·&nbsp; {{ post.tags | join: " · " }}{% endif %}</div>
+        <p class="bx-desc">{{ post.excerpt | strip_html | strip_newlines | truncate: 190 }}</p>
+        <div class="bx-arrow">Read →</div>
+      </div>
+      {% if post.header.teaser %}<img class="bx-thumb" src="{{ post.header.teaser | relative_url }}" alt="" loading="lazy" width="1000" height="333">{% endif %}
     </a>
   {% endfor %}
 </div>
