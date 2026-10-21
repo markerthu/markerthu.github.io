@@ -185,6 +185,7 @@ body.dark-mode .pub-abst-btn:hover { background: #1e40af; }
 }
 .research-card:hover { border-color: #1565c0; box-shadow: 0 4px 14px rgba(21,101,192,.12); }
 .rc-icon-img { width: 46px; height: 46px; object-fit: contain; margin-bottom: 10px; display: block; }
+body.dark-mode .rc-icon-img { filter: brightness(1.35); }
 .rc-title { font-weight: 800; font-size: 0.93em; color: #1a2332; margin-bottom: 5px; }
 .rc-desc  { font-size: 0.81em; color: #555; line-height: 1.55; }
 
@@ -1127,7 +1128,7 @@ body.dark-mode .cmdk-foot kbd { background: #21262d; border-color: #30363d; }
     background: radial-gradient(220px circle at var(--mx, 50%) var(--my, 50%), rgba(21,101,192,0.10), transparent 65%);
     transition: opacity .25s;
   }
-  .research-card:hover::after, .stat-card:hover::after { opacity: 1; }
+  /* no cursor-following glow on cards: the border highlight is enough */
   body.dark-mode .research-card::after, body.dark-mode .stat-card::after {
     background: radial-gradient(220px circle at var(--mx, 50%) var(--my, 50%), rgba(88,166,255,0.12), transparent 65%);
   }
