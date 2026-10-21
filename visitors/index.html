@@ -25,7 +25,7 @@ sitemap: false
   --sans:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;
   --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
   --bg:#fdfcfa; --band:#f6f3ec; --ink:#1a1815; --body:#2b2823; --muted:#6c6860; --faint:#787369;
-  --rule:#e8e3d9; --link:#1565c0; --on-link:#ffffff; --link-h:#0d47a1; --card:#ffffff; --fig-border:#e6e0d5;
+  --rule:#e8e3d9; --link:#2F4B8F; --on-link:#ffffff; --link-h:#23396E; --card:#ffffff; --fig-border:#e6e0d5;
   --sea:#3b7ea3; --land:#ffffff; --dot:#e8262d;
 }
 body.dark-mode{
@@ -39,7 +39,7 @@ body{font-family:var(--serif);background:var(--bg);color:var(--body);line-height
 a{color:var(--link);text-decoration:none}a:hover{color:var(--link-h)}
 
 .site-masthead{background:var(--bg);box-shadow:0 1px 0 var(--rule);position:sticky;top:0;z-index:200;font-size:16px;font-family:var(--sans)}
-.site-masthead::after{content:'';display:block;height:3px;background:linear-gradient(to right,#1565c0 0%,#7c4dff 50%,#00897b 100%)}
+.site-masthead::after{content:'';display:block;height:3px;background:linear-gradient(to right,#2F4B8F 0%,#7c4dff 50%,#00897b 100%)}
 .masthead-inner{max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:56px}
 .masthead-title{font-weight:800;letter-spacing:-.02em;color:var(--ink);font-size:19px}
 .masthead-nav a{color:var(--muted);margin-left:22px;font-weight:500}
@@ -116,8 +116,8 @@ footer.pg{border-top:1px solid var(--rule);margin-top:56px;padding:24px 0 60px;f
 footer.pg a{color:var(--muted)}
 
 .pg-fab{position:fixed;right:22px;width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:9990;box-shadow:0 4px 14px rgba(0,0,0,.18);border:0;transition:opacity .2s}
-#pg-dark{bottom:22px;background:#fff;color:#333;border:1.5px solid rgba(0,0,0,.15)}
-body.dark-mode #pg-dark{background:#21262d;color:#fff;border-color:#30363d}
+#pg-dark{bottom:22px;background:#fff;color:#2F4B8F;border:1.5px solid rgba(0,0,0,.15)}
+body.dark-mode #pg-dark{background:#1A2333;color:#F5C8B5;border-color:#2B3A55}
 .pg-dico{width:20px;height:20px;display:inline-block;background-color:currentColor;-webkit-mask:url(/images/icons/h-moon.png) center/contain no-repeat;mask:url(/images/icons/h-moon.png) center/contain no-repeat}
 @media print{
   /* the page paints through custom properties, so dark mode must be undone for

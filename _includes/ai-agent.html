@@ -5,8 +5,8 @@
      punctuation-paced typing, multi-bubble replies, phrasing variation).                  -->
 <style>
 .lbl-ico{display:inline-block;width:1em;height:1em;vertical-align:-0.14em;margin-right:5px;background-color:currentColor;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;flex-shrink:0;}
-.ra-btn { position: fixed; bottom: 68px; right: 22px; width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg,#2563eb,#2F4B8F); color: #fff; font-size: 1.3em; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 16px rgba(37,99,235,.4); z-index: 9990; transition: transform .2s, box-shadow .2s; user-select: none; -webkit-user-select: none; border: none; }
-.ra-btn:hover { transform: scale(1.1); box-shadow: 0 6px 22px rgba(37,99,235,.5); }
+.ra-btn { position: fixed; bottom: 68px; right: 22px; width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg,#2F4B8F,#23396E); color: #fff; font-size: 1.3em; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 16px rgba(47,75,143,.4); z-index: 9990; transition: transform .2s, box-shadow .2s; user-select: none; -webkit-user-select: none; border: none; }
+.ra-btn:hover { transform: scale(1.1); box-shadow: 0 6px 22px rgba(47,75,143,.5); }
 .ra-launch { width: 24px; height: 24px; margin: 0; }
 .ra-btn::after { content: ''; position: absolute; inset: -4px; border-radius: 50%; border: 2px solid rgba(47,75,143,.45); animation: raPulse 2.4s ease-out infinite; pointer-events: none; }
 .ra-btn.ra-quiet::after { animation: none; opacity: 0; }
@@ -16,14 +16,14 @@
 .ra-tip.show { opacity: 1; transform: none; }
 .ra-panel { position: fixed; bottom: 120px; right: 22px; width: 320px; height: 440px; max-height: calc(100vh - 140px); background: #fff; border-radius: 16px; box-shadow: 0 12px 48px rgba(0,0,0,.18); display: flex; flex-direction: column; z-index: 9991; transform: scale(0.85) translateY(20px); opacity: 0; visibility: hidden; pointer-events: none; transition: transform .2s, opacity .2s, visibility .2s; transform-origin: bottom right; border: 1.5px solid #e5e7eb; font-family: 'Inter','Segoe UI',Arial,sans-serif; }
 .ra-panel.show { transform: scale(1) translateY(0); opacity: 1; visibility: visible; pointer-events: all; }
-.ra-header { background: linear-gradient(135deg,#2563eb,#2F4B8F); color: #fff; padding: 12px 14px; border-radius: 14px 14px 0 0; display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 0.9em; }
+.ra-header { background: linear-gradient(135deg,#2F4B8F,#23396E); color: #fff; padding: 12px 14px; border-radius: 14px 14px 0 0; display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 0.9em; }
 .ra-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #4ade80; margin: 0 4px 0 8px; vertical-align: 1px; }
 .ra-status { font-size: 0.78em; font-weight: 600; opacity: .85; }
 .ra-close { background: rgba(255,255,255,.2); border: none; color: #fff; width: 24px; height: 24px; border-radius: 50%; cursor: pointer; font-size: 0.85em; display: flex; align-items: center; justify-content: center; }
 .ra-close:hover { background: rgba(255,255,255,.35); }
 .ra-msgs { flex: 1; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 8px; }
 .ra-msg { max-width: 85%; padding: 8px 12px; border-radius: 12px; font-size: 0.82em; line-height: 1.5; overflow-wrap: anywhere; }
-.ra-user { align-self: flex-end; background: #2563eb; color: #fff; border-radius: 12px 12px 2px 12px; }
+.ra-user { align-self: flex-end; background: #2F4B8F; color: #fff; border-radius: 12px 12px 2px 12px; }
 .ra-bot { align-self: flex-start; background: #f1f5f9; color: #1e293b; border-radius: 12px 12px 12px 2px; }
 .ra-typing { display: flex; gap: 4px; align-items: center; padding: 10px 14px; }
 .ra-typing span { width: 7px; height: 7px; border-radius: 50%; background: #94a3b8; animation: ra-dot 1.2s infinite; }
@@ -32,17 +32,17 @@
 @keyframes ra-dot { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-5px)} }
 .ra-chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 8px 10px 4px; border-top: 1.5px solid #e5e7eb; }
 .ra-chip { background: #eff6ff; color: #1d4ed8; border: 1.5px solid #bfdbfe; border-radius: 999px; padding: 3px 11px; font-size: 0.75em; font-weight: 700; cursor: pointer; transition: background .15s, transform .1s; white-space: nowrap; }
-.ra-chip:hover { background: #dbeafe; transform: translateY(-1px); }
+.ra-chip:hover { background: #EEF3FA; transform: translateY(-1px); }
 .ra-chips.hidden { display: none; }
 .ra-input-row { display: flex; border-top: 1.5px solid #e5e7eb; padding: 8px 10px; gap: 6px; }
 .ra-input { flex: 1; border: 1.5px solid #e5e7eb; border-radius: 8px; padding: 7px 10px; font-size: 0.83em; outline: none; font-family: inherit; }
-.ra-input:focus { border-color: #2563eb; }
+.ra-input:focus { border-color: #2F4B8F; }
 .ra-input::placeholder { color: #767676; }
-.ra-send { background: #2563eb; color: #fff; border: none; border-radius: 8px; padding: 7px 12px; cursor: pointer; font-size: 0.9em; font-weight: 700; transition: background .15s; }
+.ra-send { background: #2F4B8F; color: #fff; border: none; border-radius: 8px; padding: 7px 12px; cursor: pointer; font-size: 0.9em; font-weight: 700; transition: background .15s; }
 .ra-send:hover { background: #1d4ed8; }
 .ra-acts { display: flex; flex-wrap: wrap; gap: 5px; margin: 2px 0 4px; max-width: 85%; }
 .ra-act { display: inline-block; background: #eff6ff; color: #1d4ed8 !important; border: 1.5px solid #bfdbfe; border-radius: 999px; padding: 2px 10px; font-size: 0.73em; font-weight: 700; text-decoration: none !important; cursor: pointer; transition: background .15s, transform .1s; }
-.ra-act:hover { background: #dbeafe; transform: translateY(-1px); }
+.ra-act:hover { background: #EEF3FA; transform: translateY(-1px); }
 body.dark-mode .ra-panel { background: #161b22 !important; border-color: #30363d !important; }
 body.dark-mode .ra-bot { background: #21262d !important; color: #c9d1d9 !important; }
 body.dark-mode .ra-input { background: #0d1117 !important; border-color: #30363d !important; color: #c9d1d9 !important; }
@@ -100,6 +100,16 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
       more:"The key insight: outcome-only RL teaches models to ramble — verbose chains that drift off-task. Process rewards grade each intermediate step, so the model learns to think usefully. That's also why it scales: more test-time compute finally helps instead of hurting.",
       rel:['focus','adrpo'],
       act:[{t:'🔗 CESAR project page', h:'/projects/cesar/'},{t:'📄 Amazon Science', h:'https://www.amazon.science/publications/incentivizing-consistent-effective-and-scalable-reasoning-capability-in-audio-llms-via-reasoning-process-rewards'},{t:'📎 arXiv', h:'https://arxiv.org/abs/2510.20867'}] },
+    { id:'speechgym', kw:['speechgym','speech gym','voice agent','voice agents','spoken agent','tau-voice','tau voice','native speech','native audio'],
+      a:["SpeechGym (arXiv 2026) is about training voice agents with RL. Voice-agent benchmarks usually score a closed realtime API from the outside, so no gradient ever reaches the agent. SpeechGym makes both sides of the call local open models talking in native speech over an existing tool-use benchmark, so the agent can actually be trained — and a per-turn process reward fixes the first thing that breaks: at audio success rates almost every rollout group fails identically and teaches nothing.",
+         "That's our newest agentic-RL paper: an audio-native gym where an open caller model and the voice agent talk in real speech, the agent calls tools against a live database, and the benchmark's own task check is the reward. Training in speech more than doubles task success on the τ-voice tasks."],
+      rel:['readmind','cesar'],
+      act:[{t:'🔗 SpeechGym project page', h:'/projects/speechgym/'},{t:'📎 arXiv', h:'https://arxiv.org/abs/2608.26432'}] },
+    { id:'readmind', kw:['read the mind','read-the-mind','logit lens','interpretability','mind of an audio','workspace','middle layer','middle-layer'],
+      a:["“Can We Read the Mind of an Audio LLM?” (arXiv 2026) looks inside a speech model while it listens. Reading Qwen3-Omni's middle layers with a logit lens at the audio-token positions, the answer to a spoken question is already legible — in words, across languages — before the model emits a single token.",
+         "It's our interpretability paper on audio LLMs: the middle layers form a verbalizable, multilingual workspace, so you can read what the model has worked out even when it never writes its reasoning down."],
+      rel:['speechgym','cesar'],
+      act:[{t:'🔗 Read the Mind project page', h:'/projects/read-the-mind/'},{t:'📎 arXiv', h:'https://arxiv.org/abs/2608.24958'}] },
     { id:'parl', kw:['procedure','procedural','tool','tool use','tool calling','function calling','colm','bfcl','api-bank','bamboogle','agent rl','toolrl'],
       a:["Procedure-Aware RL (COLM 2026) is about tool-using agents: RL that rewards only final correctness never teaches the model how to *sequence* its tool calls. We add a procedural reward — invocation-order quality plus a final-system-state check — and an error-aware penalty on top of GRPO.",
          "That's our COLM 2026 paper on tool-augmented LLMs. Same calls in the wrong order give the wrong final state, so we reward the order itself, not just the answer."],
@@ -152,8 +162,8 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
          "Drop me an email — jiajunf3 [at] illinois.edu. I read everything, and research conversations are the best part of my day."],
       act:[{t:'✉️ Email Jiajun', h:'mailto:jiajunf3@illinois.edu'},{t:'💼 LinkedIn', h:'https://www.linkedin.com/in/jiajun-fan-57b12b26b'}] },
     { id:'pubs', kw:['publication','paper','published','conference','venue','list','all papers','latest papers'],
-      a:["The headline list: COLM 2026 (Procedure-Aware RL), ICML 2026 ×2, TMLR 2026 (ProteinZero), ICLR 2026 ×2 (CESAR, SP-VLA), IEEE TPAMI 2026 (PRANCE), NeurIPS 2025 ×2 (ADRPO, VarCon), ICLR 2025 (ORW-CFM-W2), ICLR 2023 Oral (LBC), ICML 2022 (GDI) — plus active preprints.",
-         "Recent ones first: CESAR and SP-VLA at ICLR 2026, ADRPO and VarCon at NeurIPS 2025, PRANCE in TPAMI. Earlier: ORW-CFM-W2 (ICLR'25), LBC (ICLR'23 Oral), GDI (ICML'22)."],
+      a:["The headline list: COLM 2026 (Procedure-Aware RL), ICML 2026 ×2, TMLR 2026 (ProteinZero), ICLR 2026 ×2 (CESAR, SP-VLA), IEEE TPAMI 2026 (PRANCE), NeurIPS 2025 ×2 (ADRPO, VarCon), ICLR 2025 (ORW-CFM-W2), ICLR 2023 Oral (LBC), ICML 2022 (GDI) — plus 2026 preprints such as SpeechGym and Read the Mind.",
+         "Newest first: SpeechGym and Read the Mind (arXiv, Aug 2026), Procedure-Aware RL at COLM 2026, ProteinZero in TMLR 2026, CESAR and SP-VLA at ICLR 2026, ADRPO and VarCon at NeurIPS 2025, PRANCE in TPAMI. Earlier: ORW-CFM-W2 (ICLR'25), LBC (ICLR'23 Oral), GDI (ICML'22)."],
       rel:['cesar','adrpo'],
       act:[{t:'📄 Publications', h:'/publications/'},{t:'🎓 Google Scholar', h:'https://scholar.google.com/citations?user=EjmzseUAAAAJ'}] },
     { id:'cites', kw:['citation','cited','impact','scholar','h-index','how many'],
@@ -197,7 +207,7 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
       a:["Full transparency: I'm a hand-written conversational engine running entirely in your browser — fuzzy retrieval, topic memory, and human-paced typing, but no LLM and no server. Jiajun wrote the algorithm. The rest of the site is Jekyll on GitHub Pages."] }
   ];
 
-  var NAME = { cesar:'CESAR', lbc:'LBC', gdi:'GDI', adrpo:'ADRPO', orw:'ORW-CFM-W2', acflow:'AC-Flow',
+  var NAME = { cesar:'CESAR', speechgym:'SpeechGym', readmind:'Read the Mind', lbc:'LBC', gdi:'GDI', adrpo:'ADRPO', orw:'ORW-CFM-W2', acflow:'AC-Flow',
                prance:'PRANCE', spvla:'SP-VLA', focus:'my research focus', edu:'my education',
                awards:'awards', uiuc:'UIUC', advisor:'my advisor', vision:'the long-term vision' };
 

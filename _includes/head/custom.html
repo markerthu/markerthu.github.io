@@ -40,8 +40,8 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- Inter font — non-render-blocking (media="print" trick defers parse until after first paint) -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"></noscript>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap"></noscript>
 
 <style>
   /* ── Typography upgrade ── */
@@ -52,13 +52,13 @@
   /* ── Author sidebar polished ── */
   .author__avatar img {
     border-radius: 50%;
-    border: 3px solid #1565c0;
-    box-shadow: 0 4px 20px rgba(21,101,192,0.22);
+    border: 3px solid #2F4B8F;
+    box-shadow: 0 4px 20px rgba(47,75,143,0.22);
     transition: transform 0.3s, box-shadow 0.3s;
   }
   .author__avatar img:hover {
     transform: scale(1.05);
-    box-shadow: 0 8px 28px rgba(21,101,192,0.3);
+    box-shadow: 0 8px 28px rgba(47,75,143,0.3);
   }
   .author__name {
     font-size: 1.18em;
@@ -78,10 +78,10 @@
   }
   .author__urls a {
     font-size: 0.84em;
-    color: #1565c0 !important;
+    color: #2F4B8F !important;
     transition: color 0.2s;
   }
-  .author__urls a:hover { color: #0d47a1 !important; }
+  .author__urls a:hover { color: #23396E !important; }
 
   /* ── Unified site navbar (identical markup/style to project-page site-masthead) ── */
   .site-masthead { background: #fff; box-shadow: 0 2px 12px rgba(0,0,0,.06); position: sticky; top: 0; z-index: 200; font-size: 16px; }
@@ -91,8 +91,8 @@
   .masthead-title { font-weight: 800; font-size: 1.35em; color: #1a2332 !important; text-decoration: none !important; letter-spacing: -.02em; }
   .masthead-nav { display: flex; gap: 2px; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
   .masthead-nav a { font-weight: 600; font-size: 0.98em; color: #333 !important; text-decoration: none !important; padding: 6px 10px; border-radius: 6px; transition: color .2s, background .2s; letter-spacing: .01em; }
-  .masthead-nav a:hover { color: #1565c0 !important; background: #f0f4ff; }
-  .masthead-nav a.nav-active { color: #1565c0 !important; }  /* color-only active: bold would shift width by ~2px */
+  .masthead-nav a:hover { color: #2F4B8F !important; background: #EEF3FA; }
+  .masthead-nav a.nav-active { color: #2F4B8F !important; }  /* color-only active: bold would shift width by ~2px */
   @media (max-width: 560px) { .masthead-nav a { font-size: 0.86em; padding: 5px 8px; } .masthead-title { font-size: 1.15em; } .masthead-inner { padding: 0 14px; } }
   body.dark-mode .site-masthead { background: #161b22; box-shadow: 0 2px 12px rgba(0,0,0,.4); }
   body.dark-mode .masthead-title { color: #e6edf3 !important; }
@@ -113,7 +113,7 @@
     letter-spacing: -0.01em;
   }
   .page__content h3 { font-weight: 700; color: #1a2332; }
-  .page__content a { color: #1565c0; }
+  .page__content a { color: #2F4B8F; }
   .page__content a:hover { text-decoration: underline; }
   .page__content p { margin-bottom: 1em; }
 
@@ -123,7 +123,7 @@
     font-weight: 700;
     line-height: 1.4;
   }
-  .archive__item-title a { color: #1565c0; }
+  .archive__item-title a { color: #2F4B8F; }
   .archive__item-excerpt {
     font-size: 0.85em;
     color: #555;
@@ -137,8 +137,8 @@
 
   /* ── Blockquote ── */
   .page__content blockquote {
-    background: #f0f4ff;
-    border-left: 4px solid #1565c0;
+    background: #EEF3FA;
+    border-left: 4px solid #2F4B8F;
     border-radius: 0 8px 8px 0;
     padding: 14px 20px;
     color: #333;
@@ -150,7 +150,7 @@
   .page__footer {
     background: #0d1b2a;
     color: #8899aa;
-    border-top: 3px solid #1565c0;
+    border-top: 3px solid #2F4B8F;
   }
   .page__footer a { color: #7eb8f7; }
   .page__footer-follow .social-icons .fa { color: #7eb8f7; }
@@ -218,7 +218,7 @@
   body.dark-mode .pub-cv-title a:hover { color: #58a6ff !important; }
   body.dark-mode .pub-cv-authors { color: #8b949e !important; }
   body.dark-mode .pub-cv-venue { background: #1c2333 !important; color: #58a6ff !important; }
-  body.dark-mode .scholar-link { background: #1565c0 !important; }
+  body.dark-mode .scholar-link { background: #2F4B8F !important; }
 
   /* ── Dark mode: /contact/ page ── */
   body.dark-mode .contact-card { background: #161b22 !important; border-color: #30363d !important; }
@@ -530,7 +530,7 @@
     {"@type": "EducationalOrganization", "name": "Tsinghua University"},
     {"@type": "EducationalOrganization", "name": "Nankai University"}
   ],
-  "award": ["ICLR 2023 Oral (Top 1.2%, Rank 5/4176)", "NeurIPS 2025", "ICLR 2026", "ICML 2022", "IEEE TPAMI 2026"],
+  "award": ["ICLR 2023 Oral (notable top 5%, ranked 5/4176)", "NeurIPS 2025", "ICLR 2026", "ICML 2022", "IEEE TPAMI 2026"],
   "description": "{{ site.description }}",
   "sameAs": [
     "https://scholar.google.com/citations?user=EjmzseUAAAAJ",

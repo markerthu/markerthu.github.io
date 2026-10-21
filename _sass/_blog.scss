@@ -276,7 +276,7 @@
   /* ── Table of Contents ── */
   nav[id="markdown-toc"] {
     background: #f8fbff;
-    border-left: 4px solid #1565c0;
+    border-left: 4px solid #2F4B8F;
     border-radius: 0 10px 10px 0;
     padding: 16px 22px;
     margin-bottom: 2.4em;
@@ -289,7 +289,7 @@
       content: 'Contents';
       display: block;
       font-weight: 800;
-      color: #1565c0;
+      color: #2F4B8F;
       margin-bottom: 10px;
       font-size: 0.82em;
       letter-spacing: 0.08em;
@@ -315,13 +315,13 @@
 
       &::before {
         content: '▸';
-        color: #1565c0;
+        color: #2F4B8F;
         font-size: 0.7em;
         flex-shrink: 0;
       }
 
       &:hover {
-        color: #1565c0;
+        color: #2F4B8F;
         text-decoration: none;
       }
     }

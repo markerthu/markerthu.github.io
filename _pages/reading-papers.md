@@ -17,7 +17,7 @@ excerpt: "Papers Jiajun Fan is reading — latest arXiv papers in RL post-traini
   display: block; padding: 14px 16px; border-radius: 10px; border: 1.5px solid #e5e7eb;
   background: #fff; transition: transform .2s, box-shadow .2s, border-color .2s; text-decoration: none;
 }
-.arxiv-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,.1); border-color: #1565c0; }
+.arxiv-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,.1); border-color: #2F4B8F; }
 .arxiv-tag {
   display: inline-block; font-size: 0.72em; font-weight: 700; border-radius: 20px;
   padding: 2px 9px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: .04em;
@@ -36,7 +36,7 @@ body.dark-mode .arxiv-tag-rl-training{background:#1E2A44;color:#9DB8EA} body.dar
 body.dark-mode .arxiv-card:hover { border-color: #388bfd; }
 body.dark-mode .arxiv-title { color: #e6edf3; }
 .page__content a.arxiv-card, .page__content a.arxiv-card:hover, .page__content a.arxiv-card * { text-decoration: none !important; }
-.arxiv-card:hover .arxiv-title { color: #1565c0; }
+.arxiv-card:hover .arxiv-title { color: #2F4B8F; }
 body.dark-mode .arxiv-card:hover .arxiv-title { color: #58a6ff; }
 </style>
 
