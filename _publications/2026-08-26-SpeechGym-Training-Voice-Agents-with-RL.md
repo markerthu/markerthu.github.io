@@ -8,11 +8,13 @@ paperurl: 'https://arxiv.org/abs/2608.26432'
 citation: 'Jiajun Fan, Jingyuan Li, Prashanth Gurunath Shivakumar, Jia-Hong Huang, Qi Luo, M. Maruf, Ivan Bulyko, Ge Liu, Roger Ren. &quot;SpeechGym: An Audio-Native Gym for Training Voice Agents via Reinforcement Learning.&quot; arXiv preprint arXiv:2608.26432, 2026.'
 bibtex: |
   @article{fan2026speechgym,
-    title={SpeechGym: An Audio-Native Gym for Training Voice Agents via Reinforcement Learning},
-    author={Fan, Jiajun and Li, Jingyuan and Shivakumar, Prashanth Gurunath and Huang, Jia-Hong and Luo, Qi and Maruf, M. and Bulyko, Ivan and Liu, Ge and Ren, Roger},
-    journal={arXiv preprint arXiv:2608.26432},
-    year={2026},
-    url={https://arxiv.org/abs/2608.26432}
+    title   = {SpeechGym: An Audio-Native Gym for Training Voice Agents
+    via Reinforcement Learning},
+    author  = {Jiajun Fan and Jingyuan Li and Prashanth Gurunath Shivakumar
+    and Jia-Hong Huang and Qi Luo and M. Maruf and Ivan Bulyko
+    and Ge Liu and Roger Ren},
+    journal = {arXiv preprint arXiv:2608.26432},
+    year    = {2026}
   }
 film: "speechgym"
 projectpage: "/projects/speechgym/"

@@ -8,12 +8,15 @@ venue: 'International Conference on Learning Representations 2026 (<strong>ICLR 
 paperurl: 'https://openreview.net/forum?id=DUr48hxO2h'
 citation: 'Jiajun Fan, Roger Ren, Jingyuan Li, Rahul Pandey, Prashanth G. Shivakumar, Ivan Bulyko, Ankur Gandhe, Ge Liu, Yile Gu. &quot;Incentivizing Consistent, Effective and Scalable Reasoning Capability in Audio LLMs via Reasoning Process Rewards.&quot; ICLR 2026.'
 bibtex: |
-  @inproceedings{fan2026cesar,
-    title={Incentivizing Consistent, Effective and Scalable Reasoning Capability in Audio {LLMs} via Reasoning Process Rewards},
-    author={Fan, Jiajun and Ren, Roger and Li, Jingyuan and Pandey, Rahul and Shivakumar, Prashanth G. and Bulyko, Ivan and Gandhe, Ankur and Liu, Ge and Gu, Yile},
-    booktitle={International Conference on Learning Representations},
-    year={2026},
-    url={https://openreview.net/forum?id=DUr48hxO2h}
+  @inproceedings{fan2026incentivizing,
+    title     = {Incentivizing Consistent, Effective and Scalable Reasoning
+    Capability in Audio {LLM}s via Reasoning Process Rewards},
+    author    = {Jiajun Fan and Roger Ren and Jingyuan Li and Rahul Pandey and
+    Prashanth Gurunath Shivakumar and Ivan Bulyko and Ankur Gandhe
+    and Ge Liu and Yile Gu},
+    booktitle = {The Fourteenth International Conference on Learning Representations},
+    year      = {2026},
+    url       = {https://openreview.net/forum?id=DUr48hxO2h}
   }
 film: "cesar"
 ---

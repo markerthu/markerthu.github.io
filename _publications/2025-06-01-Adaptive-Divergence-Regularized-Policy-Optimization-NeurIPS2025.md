@@ -8,12 +8,13 @@ venue: 'The Thirty-Ninth Annual Conference on Neural Information Processing Syst
 paperurl: 'https://openreview.net/forum?id=aXO0xg0ttW'
 citation: 'Jiajun Fan, Tong Wei, Chaoran Cheng, Yuxin Chen, Ge Liu. &quot;Adaptive Divergence Regularized Policy Optimization for Fine-tuning Generative Models.&quot; NeurIPS 2025.'
 bibtex: |
-  @inproceedings{fan2025adrpo,
-    title={Adaptive Divergence Regularized Policy Optimization for Fine-tuning Generative Models},
-    author={Fan, Jiajun and Wei, Tong and Cheng, Chaoran and Chen, Yuxin and Liu, Ge},
-    booktitle={Advances in Neural Information Processing Systems},
-    year={2025},
-    url={https://openreview.net/forum?id=aXO0xg0ttW}
+  @inproceedings{fan2025adaptive,
+    title     = {Adaptive Divergence Regularized Policy Optimization
+    for Fine-tuning Generative Models},
+    author    = {Jiajun Fan and Tong Wei and Chaoran Cheng and Yuxin Chen and Ge Liu},
+    booktitle = {The Thirty-ninth Annual Conference on Neural Information Processing Systems},
+    year      = {2025},
+    url       = {https://openreview.net/forum?id=aXO0xg0ttW}
   }
 film: "adrpo"
 ---

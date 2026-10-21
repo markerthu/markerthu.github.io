@@ -8,12 +8,13 @@ venue: 'International Conference on Learning Representations 2023 (<strong>ICLR 
 paperurl: 'https://openreview.net/forum?id=FeWvD0L_a4'
 citation: 'Jiajun Fan, Yuzheng Zhuang, Yuecheng Liu, Jianye Hao, Bin Wang, Jiangcheng Zhu, Hao Wang, Shu-Tao Xia. &quot;Learnable Behavior Control: Breaking Atari Human World Records via Sample-Efficient Behavior Selection.&quot; ICLR 2023, oral (ranked 5/4176).'
 bibtex: |
-  @inproceedings{fan2023lbc,
-    title={Learnable Behavior Control: Breaking Atari Human World Records via Sample-Efficient Behavior Selection},
-    author={Fan, Jiajun and Zhuang, Yuzheng and Liu, Yuecheng and Hao, Jianye and Wang, Bin and Zhu, Jiangcheng and Wang, Hao and Xia, Shu-Tao},
-    booktitle={International Conference on Learning Representations},
+  @inproceedings{fan2023learnable,
+    title={Learnable Behavior Control: Breaking Atari Human World Records
+    via Sample-Efficient Behavior Selection},
+    author={Jiajun Fan and Yuzheng Zhuang and Yuecheng Liu and Jianye HAO
+    and Bin Wang and Jiangcheng Zhu and Hao Wang and Shu-Tao Xia},
+    booktitle={The Eleventh International Conference on Learning Representations},
     year={2023},
-    note={Oral, Top 5\%},
     url={https://openreview.net/forum?id=FeWvD0L_a4}
   }
 film: "lbc"

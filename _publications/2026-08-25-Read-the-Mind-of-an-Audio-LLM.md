@@ -8,11 +8,13 @@ paperurl: 'https://arxiv.org/abs/2608.24958'
 citation: 'Jiajun Fan, Jingyuan Li, Prashanth Gurunath Shivakumar, Qi Luo, Jia-Hong Huang, M. Maruf, Roger Ren, Yile Gu, Rahul Pandey, Ge Liu, Ivan Bulyko. &quot;Can We Read the Mind of an Audio LLM? A Verbalizable, Multilingual Middle-Layer Workspace.&quot; arXiv preprint arXiv:2608.24958, 2026.'
 bibtex: |
   @article{fan2026readmind,
-    title={Can We Read the Mind of an Audio {LLM}? A Verbalizable, Multilingual Middle-Layer Workspace},
-    author={Fan, Jiajun and Li, Jingyuan and Shivakumar, Prashanth Gurunath and Luo, Qi and Huang, Jia-Hong and Maruf, M. and Ren, Roger and Gu, Yile and Pandey, Rahul and Liu, Ge and Bulyko, Ivan},
-    journal={arXiv preprint arXiv:2608.24958},
-    year={2026},
-    url={https://arxiv.org/abs/2608.24958}
+    title   = {Can We Read the Mind of an Audio {LLM}? A Verbalizable,
+    Multilingual Middle-Layer Workspace},
+    author  = {Jiajun Fan and Jingyuan Li and Prashanth Gurunath Shivakumar
+    and Qi Luo and Jia-Hong Huang and M. Maruf and Roger Ren
+    and Yile Gu and Rahul Pandey and Ge Liu and Ivan Bulyko},
+    journal = {arXiv preprint arXiv:2608.24958},
+    year    = {2026}
   }
 film: "read-the-mind"
 projectpage: "/projects/read-the-mind/"

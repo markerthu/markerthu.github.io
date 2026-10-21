@@ -8,10 +8,13 @@ venue: 'International Conference on Learning Representations 2025 (<strong>ICLR 
 paperurl: 'https://openreview.net/forum?id=2IoFFexvuw'
 citation: 'Jiajun Fan, Shuaike Shen, Chaoran Cheng, Yuxin Chen, Chumeng Liang, Ge Liu. &quot;Online Reward-Weighted Fine-Tuning of Flow Matching with Wasserstein Regularization.&quot; ICLR 2025.'
 bibtex: |
-  @inproceedings{fan2025orwcfmw2,
-    title={Online Reward-Weighted Fine-Tuning of Flow Matching with Wasserstein Regularization},
-    author={Fan, Jiajun and Shen, Shuaike and Cheng, Chaoran and Chen, Yuxin and Liang, Chumeng and Liu, Ge},
-    booktitle={International Conference on Learning Representations},
+  @inproceedings{fan2025online,
+    title={Online Reward-Weighted Fine-Tuning of Flow Matching
+    with Wasserstein Regularization},
+    author={Jiajun Fan and Shuaike Shen and Chaoran Cheng
+    and Yuxin Chen and Chumeng Liang and Ge Liu},
+    booktitle={The Thirteenth International Conference on
+    Learning Representations},
     year={2025},
     url={https://openreview.net/forum?id=2IoFFexvuw}
   }

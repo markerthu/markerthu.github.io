@@ -8,11 +8,13 @@ venue: '<strong>arXiv</strong> preprint, under review'
 paperurl: 'https://arxiv.org/abs/2510.18072'
 citation: 'Jiajun Fan, Chaoran Cheng, Shuaike Shen, Xiangxin Zhou, Ge Liu. &quot;Fine-tuning Flow Matching Generative Models with Intermediate Feedback.&quot; arXiv:2510.18072, 2025.'
 bibtex: |
-  @article{fan2025acflow,
+  @misc{fan2025finetuningflowmatchinggenerative,
     title={Fine-tuning Flow Matching Generative Models with Intermediate Feedback},
-    author={Fan, Jiajun and Cheng, Chaoran and Shen, Shuaike and Zhou, Xiangxin and Liu, Ge},
-    journal={arXiv preprint arXiv:2510.18072},
+    author={Jiajun Fan and Chaoran Cheng and Shuaike Shen and Xiangxin Zhou and Ge Liu},
     year={2025},
+    eprint={2510.18072},
+    archivePrefix={arXiv},
+    primaryClass={cs.LG},
     url={https://arxiv.org/abs/2510.18072}
   }
 film: "ac-flow"
