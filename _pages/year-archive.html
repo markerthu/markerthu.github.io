@@ -90,8 +90,8 @@ body.dark-mode .blog-index{
 .bx-arrow{font-family:var(--bx-sans);font-size:.82rem;font-weight:600;color:var(--bx-link);margin-top:.55em;opacity:0;transform:translateX(-4px);transition:.18s;}
 .bx-entry:hover .bx-arrow{opacity:1;transform:translateX(0);}
 /* cover illustration beside each post (the same editorial art as its project) */
-.bx-entry.has-thumb{display:grid;grid-template-columns:minmax(0,1fr) 236px;gap:28px;align-items:center;}
-.bx-thumb{width:236px;height:148px;object-fit:cover;border-radius:10px;border:1px solid var(--bx-rule);background:#fbfaf7;opacity:1!important;}
+.bx-entry.has-thumb{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:28px;align-items:center;}
+.bx-thumb{width:300px;height:auto;aspect-ratio:3/1;object-fit:contain;border-radius:10px;border:1px solid var(--bx-rule);background:#fbfaf7;opacity:1!important;}
 body.dark-mode .bx-thumb{filter:brightness(.92);}
 
 @media(max-width:600px){
