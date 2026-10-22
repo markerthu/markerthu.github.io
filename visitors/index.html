@@ -183,7 +183,7 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
       <div class="l">Last {{ v._days | default: 30 }} days{% if pd.d30_prev and pd.d30_prev > 0 %}{% assign d30 = pd.d30 | minus: pd.d30_prev %}{% if d30 > 0 %} <span class="delta up">+{{ d30 }}</span>{% elsif d30 < 0 %} <span class="delta down">{{ d30 }}</span>{% endif %}{% endif %}</div>
     </div>
     <div class="stat"><div class="n">{{ v.countries | size }}</div><div class="l">Countries</div></div>
-    <div class="stat"><div class="n">{{ v.pages | size }}</div><div class="l">Pages visited</div></div>
+    <div class="stat"><div class="n">{{ v.pages | size }}{% if v.pages.size >= 25 %}+{% endif %}</div><div class="l">Pages visited</div></div>
   </div>
 
   {%- assign dseries = v.daily -%}
@@ -224,7 +224,7 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
   <p class="sec-note">
     {%- assign rtotal = v._recent_total | default: nrecent -%}
     Every visit since per-visit logging began, newest first &mdash; {{ rtotal }} recorded{% if rtotal > nrecent %}, showing the {{ nrecent }} most recent{% endif %}.
-    Logging of individual visits started on 4 Aug 2026, so this list covers everything since then, while the
+    Logging of individual visits started on 4 Aug 2026, so the count covers everything since then, while the
     figures above and the tables below cover a rolling {{ v._days | default: 30 }}-day window. GoatCounter also
     counts the two differently &mdash; the aggregates are filtered more strictly than the raw visit log &mdash;
     so treat this list as a feed, not as something that should sum to the totals.
@@ -367,7 +367,7 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
   <footer class="pg">
     <a href="/">&larr; Back to the site</a> &nbsp;&middot;&nbsp;
     <a href="https://jiajunfan.goatcounter.com" target="_blank" rel="noopener">Full dashboard</a> &nbsp;&middot;&nbsp;
-    Refreshed daily from GoatCounter. No cookies, no IP addresses, nothing here identifies a person.
+    Refreshed every three hours from GoatCounter. No cookies, no IP addresses, nothing here identifies a person.
   </footer>
 </main>
 

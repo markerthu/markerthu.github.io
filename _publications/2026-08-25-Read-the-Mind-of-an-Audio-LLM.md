@@ -20,4 +20,4 @@ film: "read-the-mind"
 projectpage: "/projects/read-the-mind/"
 ---
 
-An audio LLM is a black box in a specific way: we see what it says, never what it worked out on the way there, and chain-of-thought monitoring only helps if the model writes its reasoning down. Reading a base Qwen3-Omni with a logit lens at the audio-token positions, the answer to a spoken question becomes legible — in words — in the middle layers, before a single token is emitted.
+An audio LLM is a black box in a specific way: we see what it says, never what it worked out on the way there, and chain-of-thought monitoring only helps if the model writes its reasoning down. Reading a base Qwen3-Omni with a logit lens at the audio-token positions, we find that the answer to a spoken question becomes legible — in words — in the middle layers, before a single token is emitted.

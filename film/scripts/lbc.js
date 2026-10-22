@@ -1,6 +1,6 @@
 import { timeline } from './util.js';
 // LBC: blends a population of policies into a learnable behavior space, picked per episode by a bandit.
-// 24 Atari human world records in 1B frames; Agent57 used 78B (both from the project page).
+// 24 Atari human world records in 1B frames; Agent57 used 100B (both from the LBC paper's tables).
 export default {
   id: 'lbc', name: 'LBC', kicker: 'LBC  ·  A PROJECT FILM', badge: ['ICLR 2023  ·  ORAL', 'deep RL'], page: '/projects/lbc/',
   chapters: timeline([
@@ -14,8 +14,8 @@ export default {
     { shape: 'v:records', viz: { n: 24, cols: 8 }, tick: 'RECORDS', label: 'RESULTS  ·  ATARI', title: 'Superhuman',
       lines: ['Human world records within 1 billion frames,', 'and a 10,077% mean human-normalized score.'],
       stat: { from: 0, to: 24, label: 'ATARI HUMAN WORLD RECORDS' } },
-    { shape: 'v:volume', viz: { a: { label: 'Agent57', sub: '78 billion frames', v: 78 }, b: { label: 'LBC', sub: '1 billion frames', v: 1 } },
-      tick: 'EFFICIENCY', label: 'RESULTS  ·  DATA', title: '78× less data',
+    { shape: 'v:volume', viz: { a: { label: 'Agent57', sub: '100 billion frames', v: 100 }, b: { label: 'LBC', sub: '1 billion frames', v: 1 } },
+      tick: 'EFFICIENCY', label: 'RESULTS  ·  DATA', title: '100× less data',
       lines: ['Agent57 broke none of these records', 'with 78 times the experience.'] },
     { len: 7, shape: 'invader', label: 'LBC', title: 'Behavior, learned',
       lines: ['Exploration that chooses', 'its own behavior.'], meta: 'JIAJUNFAN.COM/PROJECTS/LBC' },

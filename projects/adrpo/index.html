@@ -280,7 +280,7 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
   {% include anim/adrpo_escape.html %}
   <figure class="chart">
     {% include figures/adrpo_llm_entropy.svg %}
-    <figcaption><b>Figure 3.</b> Reward over training on Qwen2 (GRPO vs. ADRPO). ADRPO escapes the local optimum GRPO stays trapped in, climbing to roughly 3× the reward — the adaptive coefficient re-opens exploration whenever the model stalls.</figcaption>
+    <figcaption><b>Figure 3.</b> Reward over training on Qwen2-0.5B (GRPO vs. ADRPO), from the paper's Figure 8. GRPO struggles to find high-reward regions, while ADRPO climbs to roughly 3× its reward. The paper shows the escape from a local optimum on Qwen3-0.6B, where ADRPO ends with 5× higher reward than GRPO.</figcaption>
   </figure>
 </section>
 

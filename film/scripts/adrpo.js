@@ -17,7 +17,7 @@ export default {
         { label: 'pre-trained SD3', x: 5.11, y: 29.2, dx: -30, align: 'right' }, { label: 'ORW-CFM-W2', x: 3.94, y: 31.3 },
         { label: 'DPO', x: 4.82, y: 31.1, dx: -30, align: 'right' }, { label: 'ADRPO (ours)', x: 5.18, y: 32.6, ours: true, dx: -34, align: 'right' }] },
       tick: 'RESULTS', label: 'RESULTS  ·  SD3', title: 'Top right',
-      lines: ['The highest reward and the highest diversity;', 'a 2B SD3 matching 4.8B and 12B models.'] },
+      lines: ['The highest reward and the highest diversity;', 'a 2B SD3 surpassing 4.8B and 12B models.'] },
     { len: 9, shape: 'v:lines', viz: { x: [0, 100], y: [0.2, 2.1], xlabel: 'training progress →', ylabel: 'reward (Qwen2)', stagger: 0.3, series: [
         { label: 'GRPO, fixed β', pts: grpo }, { label: 'ADRPO: about 3× the reward', pts: ours, ours: true }] },
       tick: 'LLMS', label: 'ACROSS MODALITIES', title: 'Out of a local optimum',

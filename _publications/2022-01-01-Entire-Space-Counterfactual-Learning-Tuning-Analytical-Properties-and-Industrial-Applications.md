@@ -10,7 +10,7 @@ bibtex: |
   @article{wang2022escl,
     title={Entire Space Counterfactual Learning: Tuning, Analytical Properties and Industrial Applications},
     author={Wang, Hao and Chen, Zhichao and Fan, Jiajun and Huang, Yuxin and Liu, Weiming and Liu, Xinggao},
-    journal={arXiv preprint arXiv:2210.11039},
+    journal={arXiv preprint arXiv:2210.11039v2},
     year={2022}
   }
 ---

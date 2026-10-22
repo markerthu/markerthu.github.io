@@ -316,10 +316,10 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
   </div>
   <div class="results-grid">
     <div class="result-card"><div class="rnum">10,077%</div><div class="rdesc">Mean Human-Normalized Score</div></div>
-    <div class="result-card"><div class="rnum">78×</div><div class="rdesc">More Sample-Efficient than Agent57</div></div>
-    <div class="result-card"><div class="rnum">1B</div><div class="rdesc">Training Frames (vs 78B for Agent57)</div></div>
+    <div class="result-card"><div class="rnum">100×</div><div class="rdesc">More Sample-Efficient than Agent57</div></div>
+    <div class="result-card"><div class="rnum">1B</div><div class="rdesc">Training Frames (vs 100B for Agent57)</div></div>
   </div>
-  <p class="tldr"><strong>TL;DR</strong> — Population-based RL methods improve exploration by running diverse policies, but are <em>fundamentally limited by a fixed, predefined population</em>. LBC breaks this limitation by learning a hybrid behavior mapping over all policies, enabling a dramatically enlarged behavior space — and achieves superhuman performance with 78× less data.</p>
+  <p class="tldr"><strong>TL;DR</strong> — Population-based RL methods improve exploration by running diverse policies, but are <em>fundamentally limited by a fixed, predefined population</em>. LBC breaks this limitation by learning a hybrid behavior mapping over all policies, enabling a dramatically enlarged behavior space — and achieves superhuman performance with 100× less data.</p>
   {% include film-card.html id="lbc" name="LBC" %}
 </section>
 
@@ -338,28 +338,29 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
   <p>LBC broke <strong>24 Atari human world records</strong> within just 1 billion training frames:</p>
   <div class="games-grid">
     <div class="game-pill">Alien</div>
-    <div class="game-pill">Amidar</div>
     <div class="game-pill">Assault</div>
-    <div class="game-pill">Asterix<i class="lbl-ico" style="color:#E39A7A;-webkit-mask-image:url(/images/icons/h-star.png);mask-image:url(/images/icons/h-star.png)"></i></div>
-    <div class="game-pill">Atlantis<i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-flow.png);mask-image:url(/images/icons/h-flow.png)"></i></div>
     <div class="game-pill">Battle Zone</div>
-    <div class="game-pill">Beam Rider</div>
-    <div class="game-pill">Centipede</div>
+    <div class="game-pill">Boxing</div>
+    <div class="game-pill">Breakout</div>
+    <div class="game-pill">Chopper Command</div>
+    <div class="game-pill">Crazy Climber</div>
+    <div class="game-pill">Double Dunk</div>
+    <div class="game-pill">Enduro</div>
+    <div class="game-pill">Fishing Derby</div>
     <div class="game-pill">Gopher</div>
-    <div class="game-pill">Kangaroo</div>
+    <div class="game-pill">Ice Hockey</div>
+    <div class="game-pill">James Bond</div>
     <div class="game-pill">Krull</div>
-    <div class="game-pill">Ms. Pac-Man</div>
-    <div class="game-pill">Phoenix</div>
-    <div class="game-pill">Q*bert</div>
-    <div class="game-pill">Road Runner</div>
+    <div class="game-pill">Kung-Fu Master</div>
+    <div class="game-pill">Name This Game</div>
+    <div class="game-pill">Pong</div>
+    <div class="game-pill">Robotank</div>
     <div class="game-pill">Seaquest</div>
-    <div class="game-pill">Tutankham</div>
+    <div class="game-pill">Star Gunner</div>
+    <div class="game-pill">Tennis</div>
+    <div class="game-pill">Time Pilot</div>
     <div class="game-pill">Up'n Down</div>
-    <div class="game-pill">Video Pinball</div>
-    <div class="game-pill">Wizard of Wor</div>
-    <div class="game-pill">Yars Revenge</div>
     <div class="game-pill">Zaxxon</div>
-    <div class="game-pill">+ 2 more</div>
   </div>
 
   <div class="tbl-wrap">
@@ -368,13 +369,13 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
       <tr><th>Method</th><th>Human-Norm. Score</th><th>Frames Used</th><th>World Records</th></tr>
     </thead>
     <tbody>
-      <tr><td>Agent57 (DeepMind)</td><td>~4,766%</td><td>78 Billion</td><td>0</td></tr>
-      <tr><td>NGU (DeepMind)</td><td>~3,421%</td><td>35 Billion</td><td>0</td></tr>
-      <tr><td>R2D2 (DeepMind)</td><td>~4,038%</td><td>10 Billion</td><td>~3</td></tr>
+      <tr><td>Agent57 (DeepMind)</td><td>4,762%</td><td>100 Billion</td><td>18</td></tr>
+      <tr><td>NGU (DeepMind)</td><td>3,169%</td><td>35 Billion</td><td>8</td></tr>
+      <tr><td>R2D2 (DeepMind)</td><td>3,373%</td><td>10 Billion</td><td>15</td></tr>
       <tr class="highlight">
         <td><strong>LBC (Ours) <i class="lbl-ico" style="color:#E39A7A;-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i></strong></td>
         <td><strong>10,077% <span class="badge-win">Best</span></strong></td>
-        <td><strong>1 Billion <span class="badge-win">78× less</span></strong></td>
+        <td><strong>1 Billion <span class="badge-win">100× less</span></strong></td>
         <td><strong>24 <span class="badge-win">Records!</span></strong></td>
       </tr>
     </tbody>

@@ -11,7 +11,7 @@ const chapters = timeline([
     lines: ['No collected preferences: the model improves', 'from its own generations, without collapsing.'],
     meta: 'ORW-CFM-W2  ·  ICLR 2025          PROTEINZERO  ·  TMLR 2026' },
   { len: 9, shape: 'v:chain', viz: { gold: true, steps: [{ text: '' }, { text: '' }, { text: '' }, { text: '' }, { text: '' }, { text: '' }] }, tick: 'OWN REASONING', label: '2025 — 2026', title: 'Its own reasoning',
-    lines: ['No hand-tuned regularisation, no human-written', 'chains of thought. The reasoning emerges.'],
+    lines: ['No hand-tuned regularization, no human-written', 'chains of thought. The reasoning emerges.'],
     meta: 'ADRPO  ·  NEURIPS 2025          CESAR  ·  ICLR 2026' },
   { len: 9, shape: 'v:dialog', viz: { left: '', right: '', mid: '', tools: '' }, tick: 'AGENTS', label: '2026', title: 'Worlds to act in',
     lines: ['Voice agents that listen and speak natively;', 'tool agents that learn the order of things.'],

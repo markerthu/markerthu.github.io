@@ -296,7 +296,7 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
 <div class="container" role="main">
 
 <section>
-  <p class="tldr"><strong>TL;DR</strong> — Existing RLHF methods for flow matching only use <em>outcome rewards</em> (ORW-CFM-W2), suffering from credit assignment problems. AC-Flow introduces a full <strong>actor-critic framework</strong> with intermediate feedback — reward shaping + dual-stability + generalized critic weighting — achieving SOTA text-to-image alignment on SD3 without degrading diversity or stability.</p>
+  <p class="tldr"><strong>TL;DR</strong> — Most existing RLHF methods for flow matching learn only from <em>outcome rewards</em> (e.g., ORW-CFM-W2) and struggle with credit assignment. AC-Flow introduces a full <strong>actor-critic framework</strong> with intermediate feedback — reward shaping + dual-stability + generalized critic weighting — achieving SOTA text-to-image alignment on SD3 without degrading diversity or stability.</p>
   {% include film-card.html id="ac-flow" name="AC-Flow" %}
 </section>
 
@@ -335,7 +335,7 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
         <li>Intermediate feedback + actor-critic</li>
         <li>Stable value learning via reward shaping</li>
         <li>Dual-stability prevents collapse</li>
-        <li>SOTA on SD3 with even less data</li>
+        <li>SOTA text-to-image alignment on SD3</li>
       </ul>
     </div>
   </div>

@@ -8,13 +8,13 @@ permalink: /projects/gdi/
 <meta charset="UTF-8">
   <meta property="og:type" content="article">
   <meta property="og:title" content="GDI: Generalized Data Distribution Iteration — ICML 2022">
-  <meta property="og:description" content="A unified theoretical framework that bridges the gap between RL and supervised learning via generalized data distribution iteration.">
+  <meta property="og:description" content="Training data distribution as one lever for both sample efficiency and final performance in deep RL: 9620% mean human-normalized score and 22 human world records with 200M frames.">
   <meta property="og:image" content="https://www.jiajunfan.com/images/og/gdi.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
   <meta property="og:url" content="https://www.jiajunfan.com/projects/gdi/">
   <link rel="canonical" href="https://www.jiajunfan.com/projects/gdi/">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="GDI: Generalized Data Distribution Iteration — ICML 2022">
-  <meta name="twitter:description" content="A unified theoretical framework that bridges the gap between RL and supervised learning via generalized data distribution iteration.">
+  <meta name="twitter:description" content="Training data distribution as one lever for both sample efficiency and final performance in deep RL: 9620% mean human-normalized score and 22 human world records with 200M frames.">
   <meta name="twitter:image" content="https://www.jiajunfan.com/images/og/gdi.jpg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GDI — 22 Atari World Records | ICML 2022</title>
@@ -307,14 +307,14 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
   {% include anim/gdi_lever.html %}
   {% include anim/gdi_behavior.html %}
   <p>GDI integrates this into <strong>Generalized Policy Iteration (GPI)</strong>, providing operator-based versions of well-known RL methods from DQN to Agent57 — all as special cases of GDI.</p>
-  <p>The key formula: <em>Generalized Bellman Operator</em> with a <strong>data distribution operator D(·)</strong> that is jointly optimized with the value function — turning the data collection strategy itself into a learnable parameter.</p>
+  <p>In GDI, the RL optimization operator <em>T</em> updates the agent's parameters from the collected samples, while a <strong>data distribution optimization operator <em>E</em></strong> updates the selective distribution over behavior policies — turning the data collection strategy itself into a learnable parameter.</p>
 
   <h3>Unified RL Algorithms as GDI Special Cases</h3>
   <div class="method-grid">
-    <div class="method-card"><h3>DQN</h3><p>uniform replay buffer (D = uniform)</p></div>
-    <div class="method-card"><h3>PER</h3><p>priority-weighted replay (D = prioritized)</p></div>
-    <div class="method-card"><h3>R2D2</h3><p>recurrent sequence replay with burn-in (D = prioritized sequence replay)</p></div>
-    <div class="method-card"><h3>Agent57</h3><p>population-based explore (D = meta-controller)</p></div>
+    <div class="method-card"><h3>DQN</h3><p>one behavior policy (|Λ| = 1); E is the identity, so the data distribution is not additionally optimized</p></div>
+    <div class="method-card"><h3>R2D2</h3><p>256 actors that share parameters, drawn uniformly; E is the identity (GDI-I<sub>1</sub> without E)</p></div>
+    <div class="method-card"><h3>PBT</h3><p>a population with searched hyperparameters; E is the meta-controller that adjusts them</p></div>
+    <div class="method-card"><h3>Agent57</h3><p>policies indexed by the intrinsic-value weight and the discount; E is a UCB multi-arm bandit controller</p></div>
   </div>
   {% include anim/strip_gdi.html %}
 </section>
@@ -332,7 +332,7 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
   <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-deadlines.png);mask-image:url(/images/icons/sh-deadlines.png)"></i>Publication journey</h2>
   <div class="tl">
     <div class="tl-line"></div>
-    <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">Late 2021</div><div class="tl-title">Research &amp; Development</div><div class="tl-desc">Developed the GDI framework at Tsinghua University. Core insight: data distribution optimization unifies RL efficiency.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">Jun 2021</div><div class="tl-title">First version on arXiv</div><div class="tl-desc">GDI: Rethinking What Makes Reinforcement Learning Different From Supervised Learning (arXiv:2106.06232), which later appeared at the AAAI-22 Workshop on Reinforcement Learning in Games.</div></div>
     <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">Jan 2022</div><div class="tl-title">Submitted to ICML 2022</div><div class="tl-desc">Submitted to the 39th International Conference on Machine Learning.</div></div>
     <div class="tl-item"><div class="tl-dot done"></div><div class="tl-date">May 2022</div><div class="tl-title"><i class="lbl-ico" style="color:var(--good);-webkit-mask-image:url(/images/icons/h-check.png);mask-image:url(/images/icons/h-check.png)"></i>Accepted at ICML 2022</div><div class="tl-desc">Accepted as a full paper. Published in PMLR Vol. 162, pages 6103–6184.</div></div>
     <div class="tl-item"><div class="tl-dot done"></div><div class="tl-date">Jul 2022</div><div class="tl-title">Presented at ICML 2022</div><div class="tl-desc">Presented at ICML 2022 in Baltimore, Maryland. Available at <a href="https://proceedings.mlr.press/v162/fan22c.html">proceedings.mlr.press</a>.</div></div>

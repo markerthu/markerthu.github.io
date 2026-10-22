@@ -16,4 +16,4 @@ bibtex: |
   }
 ---
 
-PRANCE is a Vision Transformer compression framework that jointly optimizes token usage and structural channel pruning, achieving state-of-the-art efficiency-accuracy trade-offs for adaptive ViT inference.
+PRANCE is a Vision Transformer compression framework that jointly optimizes token usage and structural channel pruning, cutting FLOPs by about 50% and keeping only about 10% of tokens with lossless Top-1 accuracy.

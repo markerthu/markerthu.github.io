@@ -5,7 +5,7 @@ permalink: /publication/2025-06-03-ProteinZero
 date: 2026-06-03
 venue: 'Transactions on Machine Learning Research (<strong>TMLR 2026</strong>)'
 paperurl: 'https://arxiv.org/abs/2506.07459'
-citation: 'Ziwen Wang, Jiajun Fan, Ruihan Guo, Thao Nguyen, Heng Ji, Ge Liu. &quot;ProteinZero: Self-Improving Protein Generation via Online Reinforcement Learning.&quot; Transactions on Machine Learning Research (TMLR), 2026.'
+citation: 'Ziwen Wang*, Jiajun Fan*, Ruihan Guo, Thao Nguyen, Heng Ji, Ge Liu. &quot;ProteinZero: Self-Improving Protein Generation via Online Reinforcement Learning.&quot; Transactions on Machine Learning Research (TMLR), 2026.'
 bibtex: |
   @article{wang2026proteinzero,
     title   = {ProteinZero: Self-Improving Protein Generation via Online

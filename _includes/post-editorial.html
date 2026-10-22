@@ -665,7 +665,7 @@ function initAdv(){
   var B0   = parseFloat(box.dataset.beta0);
   function render(){
     var a = parseFloat(sl.value) / 100;
-    var b = B0 - a;                       // the whole method, on one line
+    var b = B0 - a;                       /* the whole method, on one line */
     bA.textContent = (a >= 0 ? '+' : '\u2212') + Math.abs(a).toFixed(2);
     bB.textContent = b.toFixed(2);
     var frac = Math.max(0, Math.min(1, b / (B0 * 2)));
@@ -675,7 +675,7 @@ function initAdv(){
     var msg;
     if (a > 0.15)       msg = '<b>Good sample.</b> The advantage is positive, so the penalty shrinks to ' + b.toFixed(2) + '. The policy is allowed to move — this is where the model exploits what is working.';
     else if (a < -0.15) msg = '<b>Bad sample.</b> The advantage is negative, so the penalty <em>grows</em> to ' + b.toFixed(2) + '. The update is pinned near the reference model — this is what stops the collapse.';
-    else                msg = '<b>Average sample.</b> The advantage is near zero, so the coefficient barely moves off its baseline of ' + B0.toFixed(2) + ', sitting at ' + b.toFixed(2) + ', and the sample barely moves the policy.';
+    else                msg = '<b>Average sample.</b> The advantage is near zero, so the coefficient stays near its baseline, at ' + b.toFixed(2) + ', and the sample barely moves the policy.';
     say.innerHTML = msg;
     sl.setAttribute('aria-valuetext', 'advantage ' + a.toFixed(2) + ', regularisation coefficient ' + b.toFixed(2));
   }
@@ -817,11 +817,11 @@ function initBrainmap(){
              c.name + ' clip: ' + nL + ' readout depths by ' + np + ' audio positions, ' +
              c.lit + ' cells lit.">'];
     var GW = W - padL - 78;
-    // the three functional bands, full width
+    /* the three functional bands, full width */
     o.push('<rect x="'+padL+'" y="'+yTop(35)+'" width="'+GW+'" height="'+(yTop(0)-yTop(35))+'" fill="var(--band)"/>');
     o.push('<rect x="'+padL+'" y="'+yTop(80)+'" width="'+GW+'" height="'+(yTop(35)-yTop(80))+'" fill="var(--ed-soft)"/>');
     o.push('<rect x="'+padL+'" y="'+yTop(100)+'" width="'+GW+'" height="'+(yTop(80)-yTop(100))+'" fill="var(--band)"/>');
-    // lit cells, filling the grid with no gaps
+    /* lit cells, filling the grid with no gaps */
     var op = {3:'1', 2:'0.62', 1:'0.32'};
     c.rows.forEach(function(r){
       var L = r[0];
@@ -831,7 +831,7 @@ function initBrainmap(){
                '" data-l="'+L+'" data-p="'+cell[0]+'"/>');
       });
     });
-    // band labels on the right, like the viewer
+    /* band labels on the right, like the viewer */
     o.push('<text class="bmbandlab" x="'+(W-6)+'" y="'+(yTop(17)+3)+'" text-anchor="end" fill="var(--muted)">SENSORY</text>');
     o.push('<text class="bmbandlab" x="'+(W-6)+'" y="'+(yTop(57)+3)+'" text-anchor="end" fill="var(--ed-accent)">WORKSPACE</text>');
     o.push('<text class="bmbandlab" x="'+(W-6)+'" y="'+(yTop(90)+3)+'" text-anchor="end" fill="var(--muted)">MOTOR</text>');
@@ -894,7 +894,7 @@ function initTwoMap(){
     var W = padL + np * cw + 66, H = padT + nL * ch + padB;
     var yOf = function(li){ return padT + (nL - 1 - li) * ch; };
     var dep = function(li){ return 100 * d.layers[li] / (d.layers[nL-1] || 1); };
-    // depth -> y, using the sampled layer list
+    /* depth -> y, using the sampled layer list */
     function yb(target){
       var best = 0;
       for (var i = 0; i < nL; i++) if (Math.abs(dep(i) - target) < Math.abs(dep(best) - target)) best = i;
@@ -903,24 +903,24 @@ function initTwoMap(){
     var o = ['<svg viewBox="0 0 ' + W.toFixed(0) + ' ' + H.toFixed(0) + '" role="img" aria-label="' +
              'Brain map for the same clip read ' + d.lab + ': ' + nL + ' sampled depths across ' + np +
              ' token positions. The concept is read out in ' + Object.keys(d.pin).length + ' cells.">'];
-    // depth bands
+    /* depth bands */
     o.push('<rect x="'+padL+'" y="'+yb(35)+'" width="'+(np*cw)+'" height="'+(yOf(0)+ch-yb(35))+'" fill="var(--band)"/>');
     o.push('<rect x="'+padL+'" y="'+yb(80)+'" width="'+(np*cw)+'" height="'+(yb(35)-yb(80))+'" fill="var(--ed-soft)"/>');
     o.push('<rect x="'+padL+'" y="'+padT+'" width="'+(np*cw)+'" height="'+(yb(80)-padT)+'" fill="var(--band)"/>');
-    // region strip above the grid
+    /* region strip above the grid */
     for (var p = 0; p < np; p++) {
       var r = d.regions[p];
       if (r !== 'other') o.push('<rect x="'+(padL+p*cw)+'" y="'+(padT-7)+'" width="'+Math.ceil(cw)+
                                 '" height="4" fill="'+REG[r]+'" opacity=".55"/>');
     }
-    // content layer: pale where the top readout is a real word
+    /* content layer: pale where the top readout is a real word */
     for (var li = 0; li < nL; li++) {
       var inWS = dep(li) >= 35 && dep(li) <= 80, bits = d.content[li];
       for (var q = 0; q < np; q++) if (bits[q] === '1')
         o.push('<rect x="'+(padL+q*cw)+'" y="'+yOf(li)+'" width="'+Math.ceil(cw)+'" height="'+Math.ceil(ch)+
                '" fill="var(--ed-accent)" opacity="'+(inWS?0.22:0.09)+'"/>');
     }
-    // the pinned concept on top
+    /* the pinned concept on top */
     Object.keys(d.pin).forEach(function(k){
       var a = k.split('_'), li = +a[0], q = +a[1], rk = d.pin[k];
       var op = rk === 0 ? 1 : (rk <= 2 ? 0.62 : 0.34);
@@ -935,11 +935,11 @@ function initTwoMap(){
     o.push('<text x="'+RX+'" y="'+(yb(90)+3)+'" font-size="8" font-weight="700" fill="var(--muted)">MOTOR</text>');
     o.push('<text x="'+RX+'" y="'+(yb(57)+3)+'" font-size="8" font-weight="700" fill="var(--ed-accent)">WORKSPACE</text>');
     o.push('<text x="'+RX+'" y="'+(yb(17)+3)+'" font-size="8" font-weight="700" fill="var(--muted)">SENSORY</text>');
-    // rotated token labels
+    /* rotated token labels */
     for (var t2 = 0; t2 < np; t2++) {
       var lab = d.surface[t2];
       if (!lab || lab === ' ') continue;
-      if (lab.indexOf('<|') === 0) continue;          // audio pads repeat, and carry no information
+      if (lab.indexOf('<|') === 0) continue;          /* audio pads repeat, and carry no information */
       if (np > 120 && t2 % 2) continue;
       var cx = padL + t2*cw + cw/2;
       o.push('<text x="'+cx+'" y="'+(H-padB+7)+'" font-size="8" fill="var(--muted)"  transform="rotate(90 '+cx+' '+(H-padB+7)+')">'+lab+'</text>');
@@ -1175,7 +1175,7 @@ function initMetric(){
     box.querySelector('#mtnote').innerHTML='<b>'+m.label+'</b> &mdash; '+m.sub
       +'. ADRPO scores <b>'+(m.k==='blip'?ours.toFixed(3):ours.toFixed(2))+'</b>'
       +(Math.abs(ours-best)<1e-9?', the best in the table' : '')
-      +'. The red line marks the un-tuned SD3 base model, so anything left of it is a method that '
+      +'. The vertical line marks the un-tuned SD3 base model, so anything left of it is a method that '
       +'went backwards on this metric. Bars span '
       +(m.k==='blip'?m.lo.toFixed(2)+'&ndash;'+m.hiv.toFixed(2):m.lo+'&ndash;'+m.hiv)+'.';
     box.querySelectorAll('.mtab').forEach(function(t,k){
