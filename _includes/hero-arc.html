@@ -46,7 +46,7 @@
   var cv = root.querySelector('canvas'), ctx = cv.getContext('2d'); if (!ctx) return;
   var cards = [].slice.call(root.querySelectorAll('.ha-card')), vizEls = cards.map(function (c) { return c.querySelector('.ha-viz'); });
   var still = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var MIST = '191,216,236', PEACH = '245,200,181', W = 0, H = 0, dpr = 1, R = [], T = 11; // one loop of the travelling light, seconds
+  var MIST = '191,216,236', PEACH = '245,200,181', W = 0, H = 0, dpr = 1, R = [], T = 11; /* one loop of the travelling light, seconds */
   function rnd(i, k) { var x = Math.sin(i * 127.1 + k * 311.7) * 43758.5453; return x - Math.floor(x); }
   function ease(x) { x = Math.max(0, Math.min(1, x)); return x * x * (3 - 2 * x); }
   function layout() {
@@ -65,7 +65,7 @@
     ctx.beginPath(); pts.forEach(function (p, i) { i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1]); }); ctx.stroke(); ctx.setLineDash([]);
   }
   function check(x, y, s, a) { line([[x - s, y], [x - s * .3, y + s * .7], [x + s, y - s * .8]], '255,255,255', a, 1.6); }
-  // 1 Master games: score bars grow past a dashed human line
+  /* 1 Master games: score bars grow past a dashed human line */
   function games(r, u, on) {
     var n = 7, bw = r.w / (n * 1.7), base = r.y + r.h - 6, hum = r.y + r.h * .45, g = ease(u / .45);
     line([[r.x + 4, hum], [r.x + r.w - 4, hum]], '255,255,255', .45, 1, [3, 3]);
@@ -77,7 +77,7 @@
       if (over && g > .98) glow(x + bw / 2, base - hh, 1.8, MIST, .5 + .4 * on);
     }
   }
-  // 2 Improve itself: noise condenses into a clean sample, then loosens again
+  /* 2 Improve itself: noise condenses into a clean sample, then loosens again */
   var IMP = []; for (var i = 0; i < 56; i++) IMP.push([rnd(i, 2), rnd(i, 3), i / 56]);
   function improve(r, u, on) {
     var c = Math.min(ease((u - .05) / .4), 1 - ease((u - .82) / .16)), cx = r.x + r.w / 2, cy = r.y + r.h / 2, rad = Math.min(r.w, r.h) * .36;
@@ -88,7 +88,7 @@
       glow(nx + (tx - nx) * c, ny + (ty - ny) * c, 1.6, MIST, .4 + .5 * c * (.6 + .4 * on));
     }
   }
-  // 3 Reason: a chain of steps, each rewarded as it is taken
+  /* 3 Reason: a chain of steps, each rewarded as it is taken */
   function reason(r, u, on) {
     var n = 4, y = r.y + r.h * .62, xs = []; for (var i = 0; i < n; i++) xs.push(r.x + r.w * (.14 + .24 * i));
     line([[xs[0], y], [xs[n - 1], y]], '255,255,255', .3, 1.2);
@@ -98,7 +98,7 @@
       if (lit > 0) { glow(xs[i], y, 4.2, MIST, .55 * lit + .3 * on * lit); check(xs[i], y - 20, 4.2, .9 * lit); }
     }
   }
-  // 4 Act: the agent calls tools in order; each call that executes is ticked
+  /* 4 Act: the agent calls tools in order; each call that executes is ticked */
   function act(r, u, on) {
     var ax = r.x + r.w * .17, ay = r.y + r.h / 2, tools = [0, 1, 2].map(function (k) { return [r.x + r.w * .72, r.y + r.h * (.2 + .3 * k)]; });
     glow(ax, ay, 4.5, MIST, .7 + .3 * on);
@@ -112,7 +112,7 @@
       if (go > 0 && go < 1) { var e = ease(go); glow(ax + (t[0] - 14 - ax) * e, ay + (t[1] - ay) * e, 2.2, MIST, .9); }
     }
   }
-  // 5 Discover (next): a light keeps going round idea -> experiment -> analysis
+  /* 5 Discover (next): a light keeps going round idea -> experiment -> analysis */
   function discover(r, u, on, t) {
     var cx = r.x + r.w / 2, cy = r.y + r.h / 2 + 2, rr = Math.min(r.w, r.h) * .36;
     ctx.strokeStyle = 'rgba(' + PEACH + ',.45)'; ctx.setLineDash([3, 4]); ctx.lineWidth = 1.2;
@@ -126,7 +126,7 @@
   function draw(t) {
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H);
     var lt = (t % T) / T, n = R.length, pos = lt * (n + .6) - .3, act = Math.max(0, Math.min(n - 1, Math.round(pos)));
-    // the chain between drawings, and the light travelling along it
+    /* the chain between drawings, and the light travelling along it */
     for (var i = 0; i < n - 1; i++) {
       var a = centre(R[i]), b = centre(R[i + 1]), horiz = Math.abs(b[0] - a[0]) > Math.abs(b[1] - a[1]);
       var p0 = horiz ? [R[i].x + R[i].w + 2, a[1]] : [a[0], R[i].y + R[i].h + 2], p1 = horiz ? [R[i + 1].x - 2, b[1]] : [b[0], R[i + 1].y - 2];
@@ -136,7 +136,7 @@
     }
     for (i = 0; i < n; i++) {
       var on = Math.max(0, 1 - Math.abs(pos - i) * 1.4);
-      var u = still ? .7 : ((t / T * 1.6 + i * .17) % 1); // each drawing loops on its own clock, offset so they never sync
+      var u = still ? .7 : ((t / T * 1.6 + i * .17) % 1); /* each drawing loops on its own clock, offset so they never sync */
       ctx.save(); DRAW[i](R[i], u, on, t); ctx.restore();
       cards[i].classList.toggle('on', on > .55 && !still);
     }
