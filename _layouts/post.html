@@ -24,9 +24,12 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&display=swap"></noscript>
 <style>
+/* metric-matched stand-ins while the web fonts load, so text does not reflow when they arrive */
+@font-face{font-family:'Newsreader Fallback';src:local('Georgia');size-adjust:91.7%;ascent-override:80.2%;descent-override:28.9%;line-gap-override:0%;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Inter Fallback';src:local('Arial');size-adjust:107.1%;ascent-override:90.4%;descent-override:22.5%;line-gap-override:0%;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 :root{
-  --serif:'Newsreader', Georgia, 'Times New Roman', serif;
-  --sans:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;
+  --serif:'Newsreader','Newsreader Fallback', Georgia, 'Times New Roman', serif;
+  --sans:'Inter','Inter Fallback','Segoe UI',system-ui,-apple-system,sans-serif;
   --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
   --bg:#fdfcfa; --band:#f6f3ec; --ink:#1a1815; --body:#2b2823; --muted:#6c6860; --faint:#787369;
   --rule:#e8e3d9; --link:#2F4B8F; --link-h:#23396E; --code-bg:#f4f1ea; --fig-border:#e7e2d8; --pill:#f0ede6;
