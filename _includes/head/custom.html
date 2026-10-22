@@ -212,6 +212,9 @@
   body.dark-mode .list__item { border-bottom-color: #21262d !important; }
   body.dark-mode .archive__item-title a { color: #58a6ff !important; }
   body.dark-mode .archive__item-excerpt { color: #8b949e !important; }
+  /* archive pages (tags, categories): AA contrast in light mode; dark mode keeps its own colours */
+  body:not(.dark-mode) .archive__subtitle, body:not(.dark-mode) .archive .page__meta { color: #6b7176; }
+  body:not(.dark-mode) .archive a[rel="permalink"] { color: #2c6e8a; }
   body.dark-mode .author__avatar img:hover { box-shadow: 0 8px 28px rgba(88,166,255,0.25) !important; }
 
   /* ── Dark mode: /publications/ archive page ── */
@@ -395,6 +398,14 @@
   #reading-progress {
     background: linear-gradient(to right, #90A5A7, #607d8b, #90A5A7) !important;
   }
+
+  /* AA contrast on publication pages: pager, paper link, share button; the share heading is an h2 that looks as before */
+  body:not(.dark-mode) .pagination--pager:not(.disabled) { color: #5f666b; }
+  body:not(.dark-mode) .pagination--pager:not(.disabled):hover { color: #2c6e8a; }
+  body:not(.dark-mode) a > u { color: #2c6e8a; }
+  .page__share .btn--twitter { background-color: #1d6fa5; }
+  .page__share .btn--twitter:hover { background-color: #175a86; }
+  .page__share h2.page__share-title { font-size: 13.5px; font-weight: 700; line-height: 1.2; margin: 27px 0 10px; padding: 0; border: 0; text-transform: uppercase; }
 
   /* ─────────────── Dark mode ─────────────── */
   /* html needs its own !important rule here — the blog-post `html { background: #eef1f1 !important }` above

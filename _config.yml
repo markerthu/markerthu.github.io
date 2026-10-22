@@ -221,6 +221,15 @@ defaults:
       author_profile: true
       share: true
       comments: true
+  # keep the noindex lab pages and the search-console verification files out of sitemap.xml
+  - scope:
+      path: "lab"
+    values:
+      sitemap: false
+  - scope:
+      path: "google*.html"
+    values:
+      sitemap: false
 
 # Sass/SCSS
 sass:

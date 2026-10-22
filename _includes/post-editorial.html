@@ -5,9 +5,9 @@
 <style>
 /* --ed-on-accent: text sitting ON the accent colour. The accent flips to a pale
    blue in dark mode, so white-on-accent would drop to 2.4:1 — well under AA. */
-.ed{--ed-accent:var(--link);--ed-soft:var(--pill);--ed-tint:#6a9aab;--ed-neg:#CF7D5C;--ed-negsoft:#FBEDE6;--ed-rewardbg:#fbf1e6;--ed-rewardln:#c2760f;--ed-tthit:#7fd0a0;--ed-bar:var(--rule);
+.ed{--ed-accent:var(--link);--ed-soft:var(--pill);--ed-tint:#6a9aab;--ed-neg:#CF7D5C;--ed-neg-text:#A9583A;--ed-negsoft:#FBEDE6;--ed-rewardbg:#fbf1e6;--ed-rewardln:#c2760f;--ed-tthit:#7fd0a0;--ed-bar:var(--rule);
   --ed-on-accent:#ffffff}
-body.dark-mode .ed{--ed-tint:#4a7387;--ed-neg:#E9A98C;--ed-negsoft:#2B1E19;--ed-rewardbg:#241d12;--ed-rewardln:#d99a3c;--ed-tthit:#12603f;--ed-on-accent:#0f1216}
+body.dark-mode .ed{--ed-tint:#4a7387;--ed-neg:#E9A98C;--ed-neg-text:#E9A98C;--ed-negsoft:#2B1E19;--ed-rewardbg:#241d12;--ed-rewardln:#d99a3c;--ed-tthit:#12603f;--ed-on-accent:#0f1216}
 
 /* ── section kicker ── */
 .ed .snum{font-family:var(--sans);font-size:.7rem;font-weight:800;letter-spacing:.13em;
@@ -150,7 +150,7 @@ body.dark-mode .ed .turn.bad .txt{color:#f08a82}
       --bg:#fff;--band:#f6f3ec;--ink:#1a1815;--body:#2b2823;--muted:#6c6860;
       --rule:#e8e3d9;--link:#2F4B8F;--pill:#f0ede6;--fig-border:#e7e2d8;
       --ed-tint:#6a9aab;--ed-on-accent:#fff;--code-bg:#f4f1ea;--faint:#787369;
-      --ed-neg:#CF7D5C;--ed-negsoft:#FBEDE6;--ed-rewardbg:#fbf1e6;--ed-rewardln:#c2760f;
+      --ed-neg:#CF7D5C;--ed-neg-text:#A9583A;--ed-negsoft:#FBEDE6;--ed-rewardbg:#fbf1e6;--ed-rewardln:#c2760f;
       --ed-tthit:#7fd0a0}
     body.dark-mode .ed .l-en,body.dark-mode .ed .l-es,body.dark-mode .ed .l-zh,
     body.dark-mode .ed .l-it,body.dark-mode .ed .l-de,body.dark-mode .ed .l-fr,
@@ -189,7 +189,7 @@ body.dark-mode .ed .turn.bad .txt{color:#f08a82}
   .ed .fdel{font-family:var(--mono);font-size:.72rem;font-weight:700;margin-left:7px;opacity:0;
     transition:opacity .4s}
   .ed .flip.on .fdel{opacity:1}
-  .ed .frow.up .fdel{color:var(--ed-accent)} .ed .frow.down .fdel{color:var(--ed-neg)}
+  .ed .frow.up .fdel{color:var(--ed-accent)} .ed .frow.down .fdel{color:var(--ed-neg-text)}
 
   /* ── interactive: formula slider ── */
   .ed .knobfx{margin:26px 0 8px}
@@ -387,7 +387,7 @@ body.dark-mode .ed .turn.bad .txt{color:#f08a82}
   .ed .abL0b{width:120px;height:22px;background:var(--ed-neg);border-radius:3px;flex:0 0 auto}
   .ed .abL0t{font-family:var(--sans);font-size:.8rem;color:var(--body)}
   .ed .abL0t b{color:var(--ink)} .ed .abL0t span{display:block;font-family:var(--mono);
-    font-size:.76rem;font-weight:700;color:var(--ed-neg)}
+    font-size:.76rem;font-weight:700;color:var(--ed-neg-text)}
   /* signed chart: bars grow from a zero rule, so sign is readable and a -5 can
      never draw the same as a +5. Span is -5..+10 pts, zero sits 1/3 up. */
   .ed .abchart{position:relative;display:flex;align-items:stretch;height:150px;
@@ -463,7 +463,7 @@ body.dark-mode .ed .turn.bad .txt{color:#f08a82}
   .ed .tmapfx{margin:26px 0 8px}
   .ed .tmside{margin-bottom:22px}
   .ed .tmhd{font-family:var(--sans);font-size:.86rem;font-weight:700;color:var(--ink);margin-bottom:3px}
-  .ed .tmhd .verdict-ok{color:var(--ed-accent)} .ed .tmhd .verdict-no{color:var(--ed-neg)}
+  .ed .tmhd .verdict-ok{color:var(--ed-accent)} .ed .tmhd .verdict-no{color:var(--ed-neg-text)}
   .ed .tmsub{font-family:var(--sans);font-size:.76rem;color:var(--muted);margin-bottom:9px;line-height:1.5}
   /* 880 matches .figscroll svg: at 900 the maps overflowed their 894px card by 6px,
      clipping the WORKSPACE band label and showing a scroll hint for nothing */
@@ -546,7 +546,7 @@ body.dark-mode .ed .turn.bad .txt{color:#f08a82}
     font-variant-numeric:tabular-nums;text-align:right;
     display:grid;grid-template-columns:1fr 3.6em;align-items:baseline;justify-items:end}
   .ed .mxd{font-family:var(--mono);font-size:.71rem;font-weight:700;margin-left:0}
-  .ed .mxrow.up .mxd{color:var(--ed-accent)} .ed .mxrow.down .mxd{color:var(--ed-neg)}
+  .ed .mxrow.up .mxd{color:var(--ed-accent)} .ed .mxrow.down .mxd{color:var(--ed-neg-text)}
   .ed .mxrow.flat .mxd{color:var(--muted)}
   .ed .mxnote{font-family:var(--sans);font-size:.78rem;color:var(--muted);margin-top:12px;line-height:1.55}
   .ed .mxnote b{color:var(--ink)}
@@ -620,7 +620,11 @@ body.dark-mode .ed .turn.bad .txt{color:#f08a82}
 (function(){
   function sync(){
     document.querySelectorAll('.ed .figscroll').forEach(function(el){
-      el.classList.toggle('scrollable', el.scrollWidth > el.clientWidth + 2);
+      var sc = el.scrollWidth > el.clientWidth + 2; el.classList.toggle('scrollable', sc);
+      if (sc) { el.setAttribute('tabindex', '0'); if (!el.getAttribute('role')) el.setAttribute('role', 'region');
+        if (!el.getAttribute('aria-label')) { var f = el.closest('figure, .fig, .galfx, .tmside'); var cap = f && f.querySelector('figcaption, .cap, .lab, .tmhd');
+          el.setAttribute('aria-label', (cap ? cap.textContent : 'Scrollable figure').trim().slice(0, 90)); } }
+      else if (el.getAttribute('tabindex') === '0') { el.removeAttribute('tabindex'); }
     });
   }
   window.__edSyncFigscroll = sync;

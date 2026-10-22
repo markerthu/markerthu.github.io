@@ -28,10 +28,11 @@ permalink: /publications/
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"></noscript>
 <style>
+@font-face{font-family:'Newsreader Fallback';src:local('Georgia');size-adjust:91.7%;ascent-override:80.2%;descent-override:28.9%;line-gap-override:0%}
 @font-face{font-family:'Inter Fallback';src:local('Arial');size-adjust:107.1%;ascent-override:90.4%;descent-override:22.5%;line-gap-override:0%}
 
 :root{
-  --serif:'Newsreader',Georgia,'Times New Roman',serif;
+  --serif:'Newsreader','Newsreader Fallback',Georgia,'Times New Roman',serif;
   --sans:'Inter','Inter Fallback','Segoe UI',system-ui,-apple-system,sans-serif;
   --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
   --bg:#fdfcfa; --band:#f6f3ec; --ink:#1a1815; --body:#2b2823; --muted:#6c6860; --faint:#6b665c;
