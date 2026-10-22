@@ -115,6 +115,7 @@ em{font-style:italic} strong{font-weight:600;color:var(--ink)}
 .result-card .rdesc{font-family:var(--sans);font-size:.76rem;color:var(--muted);margin-top:8px;line-height:1.5}
 
 figure.chart{margin:1.8em auto;color:var(--muted);max-width:640px;}
+figure.chart.wide{max-width:100%;}
 figure.chart svg{display:block;width:100%;height:auto;}
 figure.chart figcaption{font-family:var(--sans);font-size:.82rem;color:var(--muted);margin-top:.9em;text-align:center;line-height:1.55;max-width:600px;margin-left:auto;margin-right:auto;}
 figure.chart figcaption b,figure.chart figcaption strong{color:var(--link);font-weight:600}
@@ -233,6 +234,7 @@ p,li{text-wrap:pretty}
   </div>
   <div class="formula">&beta;<sub>eff</sub> <span class="op">=</span> &beta;<sub>0</sub> <span class="op">&minus;</span> <em>A</em></div>
   <p>where <em>A</em> is the sample's advantage and &beta;<sub>0</sub> a baseline coefficient. No new networks, no manual KL schedule — a one-line change to existing RLHF objectives.</p>
+  {% include anim/adrpo_batch.html %}
   <div class="vs-grid">
     <div class="vs-card vs-bad">
       <h3>Fixed regularization (DPO / ORW-CFM-W2)</h3>
@@ -274,6 +276,7 @@ p,li{text-wrap:pretty}
     <span class="tag">Audio reasoning LLMs</span>
   </div>
   <p>In LLM fine-tuning, ADRPO shows an <strong>emergent ability to escape local optima</strong>: when the model stalls, the adaptive coefficient globally raises regularization and re-opens exploration, then relaxes once a promising direction appears.</p>
+  {% include anim/adrpo_escape.html %}
   <figure class="chart">
     {% include figures/adrpo_llm_entropy.svg %}
     <figcaption><b>Figure 3.</b> Reward over training on Qwen2 (GRPO vs. ADRPO). ADRPO escapes the local optimum GRPO stays trapped in, climbing to roughly 3× the reward — the adaptive coefficient re-opens exploration whenever the model stalls.</figcaption>

@@ -261,6 +261,7 @@ p,li{text-wrap:pretty}
   <p>The policy is fine-tuned with <strong>GRPO</strong> (KL-regularized) on a weighted sum of four reward terms. Only the reward changes &mdash; the RL algorithm stays standard.</p>
   {% include anim/strip_parl.html %}
   <p>The procedural term uses <strong>normalized discounted cumulative gain</strong> so that partially-correct orderings are ranked above invalid ones, instead of collapsing to a binary match. The state check gives credit whenever the agent eventually reaches the correct final state, which keeps reasonable detours &mdash; listing a directory before creating a file, or recovering from a failed call &mdash; from being punished as mistakes.</p>
+  {% include anim/procedure-aware-rl_ndcg.html %}
 </section>
 
 <section>
@@ -303,6 +304,7 @@ p,li{text-wrap:pretty}
 <section>
   <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-sparkle.png);mask-image:url(/images/icons/h-sparkle.png)"></i>What the model learns</h2>
   <p>Rewarding sequence quality buys behaviour nobody wrote into the reward. On a multi-turn file-system task the trained agent navigates before it creates &mdash; <code>cd</code> first, then the file &mdash; while the correctness-only baseline recreates a directory that already exists and then cascades through the resulting state errors. The same training also improves <strong>recovery</strong>: after a failed call the agent retries along a corrected path instead of repeating the failure.</p>
+  {% include anim/procedure-aware-rl_learns.html %}
 </section>
 
 <section>

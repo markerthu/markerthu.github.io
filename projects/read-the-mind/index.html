@@ -233,6 +233,7 @@ p,li{text-wrap:pretty}
 <section>
   <p class="tldr"><strong>TL;DR</strong> &mdash; An audio LLM is a black box in a specific way: we see what it says, never what it worked out on the way there, and chain-of-thought monitoring only helps if the model writes its reasoning down. Reading a base Qwen3-Omni with a <strong>logit lens at the audio-token positions</strong>, the answer to a spoken question becomes legible &mdash; <em>in words</em> &mdash; in the middle layers, before a single token is emitted.</p>
   {% include film-card.html id="read-the-mind" name="Read the Mind" %}
+  {% include anim/read-the-mind_lens.html %}
 </section>
 
 <section>
@@ -249,6 +250,7 @@ p,li{text-wrap:pretty}
   <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-reason.png);mask-image:url(/images/icons/h-reason.png)"></i>What the workspace looks like</h2>
   {% include anim/strip_readmind.html %}
   <p>A waveform-swap control runs throughout: identical text, only the sound changed. That is what separates a genuinely audio-driven signal from a prior over the printed answer options.</p>
+  {% include anim/read-the-mind_swap.html %}
 </section>
 
 <section>

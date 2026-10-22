@@ -312,6 +312,7 @@ p,li{text-wrap:pretty}
     <li><strong>Critic as a value estimator</strong> → predicts future reward quality at each denoising step</li>
     <li><strong>Decoupled stability</strong> → advantage clipping handles actor; critic warm-up handles the critic</li>
   </ul>
+  {% include anim/ac-flow_stability.html %}
   <p>The result: fine-tuning that <strong>generalizes beyond direct reward optimization</strong> — trained on a CLIP reward, gains carry over to unseen human-preference reward models.</p>
 </section>
 
@@ -338,6 +339,7 @@ p,li{text-wrap:pretty}
     </div>
   </div>
   <p style="font-size:.95rem;color:var(--muted)">AC-Flow generalizes ORW-CFM-W2 — the critic weighting scheme subsumes reward-weighted methods as a special case.</p>
+  {% include anim/ac-flow_signals.html %}
 </section>
 
 <section>

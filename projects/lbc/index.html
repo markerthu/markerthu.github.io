@@ -326,6 +326,10 @@ p,li{text-wrap:pretty}
   <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-puzzle.png);mask-image:url(/images/icons/h-puzzle.png)"></i>The core idea</h2>
   <p>Population-based methods fix a set of exploratory policies and select between them. LBC instead constructs a <strong>continuous, learnable behavior mapping space</strong> that blends all policies, then uses a <strong>bandit-based meta-controller</strong> to learn which behaviors to select at each moment:</p>
   {% include anim/strip_lbc.html %}
+  <p>The <strong>Blend</strong> stage is what lifts the fixed-population limit: from the same policies, LBC can select from a dramatically enlarged behavior space.</p>
+  {% include anim/lbc_space.html %}
+  <p>The <strong>Select</strong> stage is learned too: episode returns update the bandit, so it learns which behaviors to select.</p>
+  {% include anim/lbc_bandit.html %}
 </section>
 
 <section>

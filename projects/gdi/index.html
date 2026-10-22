@@ -303,6 +303,8 @@ p,li{text-wrap:pretty}
     <li><strong>Data richness</strong> → control the capacity and diversity of behavior policy</li>
     <li><strong>Exploration-exploitation</strong> → fine-grained adaptive control of sampling distribution</li>
   </ul>
+  {% include anim/gdi_lever.html %}
+  {% include anim/gdi_behavior.html %}
   <p>GDI integrates this into <strong>Generalized Policy Iteration (GPI)</strong>, providing operator-based versions of well-known RL methods from DQN to Agent57 — all as special cases of GDI.</p>
   <p>The key formula: <em>Generalized Bellman Operator</em> with a <strong>data distribution operator D(·)</strong> that is jointly optimized with the value function — turning the data collection strategy itself into a learnable parameter.</p>
 

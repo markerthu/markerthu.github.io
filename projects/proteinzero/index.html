@@ -245,6 +245,7 @@ p,li{text-wrap:pretty}
 <section>
   <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-search.png);mask-image:url(/images/icons/h-search.png)"></i>The problem</h2>
   <p>Supervised inverse folding optimizes sequence recovery against curated datasets. The design goal is different: a sequence that refolds to the target backbone and is predicted to be stable. Preference-based fine-tuning (DPO) narrows that gap, but it learns from a fixed, pre-collected preference set &mdash; and in our runs it pays for its gains with diversity.</p>
+  {% include anim/proteinzero_objective.html %}
   <div class="problem-grid">
     <div class="problem-card">
       <h3>Offline fine-tuning</h3>
@@ -286,6 +287,7 @@ p,li{text-wrap:pretty}
     <figcaption><b>Figure 2.</b> Sequence diversity among generated designs (0&ndash;150 residues). Both DPO variants end up <em>below</em> the base model &mdash; the classic collapse onto a few high-reward sequences &mdash; while ProteinZero raises diversity and success rate together.</figcaption>
   </figure>
   <p>The regularizer acts on the decoder's sequence embeddings rather than on raw token overlap, so it spreads designs apart in representation space while the reward keeps pulling them toward foldable, stable candidates. <em>Where</em> the diversity signal enters turns out to matter far more than whether it is present: pushing it into the reward instead costs more than ten points of success rate.</p>
+  {% include anim/proteinzero_forces.html %}
   <figure class="chart wide">
     {% include figures/pz_ablation.svg %}
     <figcaption><b>Figure 3.</b> Three ways to ask for diversity (0&ndash;150 residues). Rewarding Hamming distance or adding diversity to the reward drags the policy away from foldable, stable designs; keeping it as a separate embedding-level term does not.</figcaption>

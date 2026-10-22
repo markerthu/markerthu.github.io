@@ -246,7 +246,8 @@ p,li{text-wrap:pretty}
       <p>A frozen open omni-model plays the caller in native speech; the same architecture, trainable, plays the agent. Tasks, tools, databases and the success check come from the text benchmark unchanged &mdash; only the channel becomes audio.</p>
     </div>
   </div>
-  <p>Because everything runs locally, an epoch is <strong>5.4&times; faster at zero API cost</strong>, which is what makes on-policy RL affordable at all.</p>
+  <p>Because both models run locally there is no API bill, and a batched rollout server makes an epoch <strong>5.4&times; faster</strong>, which is what makes on-policy RL affordable at all.</p>
+  {% include anim/speechgym_boundary.html %}
 </section>
 
 <section>
@@ -263,6 +264,7 @@ p,li{text-wrap:pretty}
   </table>
   </div>
   <p>These are not independent problems but one cascade: a mis-heard argument produces a tool error, the error produces a retry, and the retry burns the step budget into a terminal zero. Every link in it already has a free reward channel &mdash; which is the opening.</p>
+  {% include anim/speechgym_cascade.html %}
 </section>
 
 <section>
