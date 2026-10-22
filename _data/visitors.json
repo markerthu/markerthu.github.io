@@ -1,15 +1,15 @@
 {
   "_updated": "2026-10-22",
-  "_timezone": "UTC",
+  "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 815,
+  "_total": 819,
   "_days": 30,
   "_range": "Sep. 22nd - Oct. 22nd",
   "locations": [
     {
       "code": "US",
       "name": "Illinois, US",
-      "count": 468,
+      "count": 469,
       "cx": 90.8,
       "cy": 44.6,
       "r": 4.2
@@ -60,7 +60,7 @@
       "count": 14,
       "cx": 58.1,
       "cy": 36.6,
-      "r": 2.22
+      "r": 2.21
     },
     {
       "code": "US",
@@ -127,6 +127,14 @@
       "r": 2.07
     },
     {
+      "code": "US",
+      "name": "Massachusetts, US",
+      "count": 6,
+      "cx": 108.5,
+      "cy": 41.8,
+      "r": 2.07
+    },
+    {
       "code": "BD",
       "name": "Bangladesh",
       "count": 6,
@@ -151,6 +159,14 @@
       "r": 2.07
     },
     {
+      "code": "US",
+      "name": "Texas, US",
+      "count": 5,
+      "cx": 81.4,
+      "cy": 52.8,
+      "r": 2.05
+    },
+    {
       "code": "CA",
       "name": "Canada",
       "count": 5,
@@ -168,14 +184,6 @@
     },
     {
       "code": "US",
-      "name": "Massachusetts, US",
-      "count": 4,
-      "cx": 108.5,
-      "cy": 41.8,
-      "r": 2.02
-    },
-    {
-      "code": "US",
       "name": "Minnesota, US",
       "count": 4,
       "cx": 86.3,
@@ -188,14 +196,6 @@
       "count": 4,
       "cx": 102.5,
       "cy": 43.0,
-      "r": 2.02
-    },
-    {
-      "code": "US",
-      "name": "Texas, US",
-      "count": 4,
-      "cx": 81.4,
-      "cy": 52.8,
       "r": 2.02
     },
     {
@@ -347,7 +347,7 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 725
+      "count": 729
     },
     {
       "code": "SG",
@@ -440,7 +440,7 @@
       "country": "US",
       "country_name": "United States",
       "name": "Illinois",
-      "count": 468,
+      "count": 469,
       "located": true
     },
     {
@@ -517,7 +517,14 @@
       "country": "US",
       "country_name": "United States",
       "name": "Massachusetts",
-      "count": 4,
+      "count": 6,
+      "located": true
+    },
+    {
+      "country": "US",
+      "country_name": "United States",
+      "name": "Texas",
+      "count": 5,
       "located": true
     },
     {
@@ -531,13 +538,6 @@
       "country": "US",
       "country_name": "United States",
       "name": "Pennsylvania",
-      "count": 4,
-      "located": true
-    },
-    {
-      "country": "US",
-      "country_name": "United States",
-      "name": "Texas",
       "count": 4,
       "located": true
     },
@@ -616,12 +616,12 @@
     {
       "path": "/",
       "title": "Jiajun Fan",
-      "count": 373
+      "count": 376
     },
     {
       "path": "/cv",
       "title": "CV — Jiajun Fan",
-      "count": 91
+      "count": 92
     },
     {
       "path": "/visitors",
@@ -743,17 +743,17 @@
     {
       "name": "(unknown)",
       "id": "",
-      "count": 319
+      "count": 321
     },
     {
       "name": "www.jiajunfan.com",
       "id": "www.jiajunfan.com",
-      "count": 201
+      "count": 202
     },
     {
       "name": "Google",
       "id": "Google",
-      "count": 119
+      "count": 120
     },
     {
       "name": "www.jiajunfan.com/projects",
@@ -870,12 +870,12 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 523
+      "count": 525
     },
     {
       "name": "Safari",
       "id": "Safari",
-      "count": 297
+      "count": 299
     },
     {
       "name": "Firefox",
@@ -892,12 +892,12 @@
     {
       "name": "macOS",
       "id": "macOS",
-      "count": 387
+      "count": 389
     },
     {
       "name": "iOS",
       "id": "iOS",
-      "count": 283
+      "count": 285
     },
     {
       "name": "Windows",
@@ -1038,23 +1038,67 @@
     },
     {
       "day": "2026-10-22",
-      "n": 10
+      "n": 14
     }
   ],
   "periods": {
-    "today": 10,
+    "today": 14,
     "yesterday": 71,
-    "d7": 257,
+    "d7": 261,
     "d7_prev": 196,
-    "d30": 815,
+    "d30": 819,
     "d30_prev": 622,
-    "day_frac": 0.776,
+    "day_frac": 0.685,
     "yesterday_day": "2026-10-21"
   },
-  "_last_visit": "2026-10-22 18:15",
+  "_last_visit": "2026-10-22 16:12",
   "recent": [
     {
-      "date": "2026-10-22 18:15",
+      "date": "2026-10-22 16:12",
+      "ts": "2026-10-22T23:12:15Z",
+      "loc": "Massachusetts, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 27.0",
+      "system": "iOS 18.7",
+      "screen": "414px",
+      "first": true
+    },
+    {
+      "date": "2026-10-22 16:12",
+      "ts": "2026-10-22T23:12:28Z",
+      "loc": "Massachusetts, US",
+      "path": "/cv",
+      "ref": "www.jiajunfan.com",
+      "browser": "Safari 27.0",
+      "system": "iOS 18.7",
+      "screen": "414px",
+      "first": true
+    },
+    {
+      "date": "2026-10-22 16:00",
+      "ts": "2026-10-22T23:00:45Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Chrome 152",
+      "system": "macOS 10.15",
+      "screen": "1512px",
+      "first": true
+    },
+    {
+      "date": "2026-10-22 15:49",
+      "ts": "2026-10-22T22:49:28Z",
+      "loc": "Texas, US",
+      "path": "/",
+      "ref": "Google",
+      "browser": "Chrome 155",
+      "system": "macOS 10.15",
+      "screen": "1512px",
+      "first": true
+    },
+    {
+      "date": "2026-10-22 11:15",
       "ts": "2026-10-22T18:15:49Z",
       "loc": "California, US",
       "path": "/",
@@ -1065,7 +1109,7 @@
       "first": true
     },
     {
-      "date": "2026-10-22 17:22",
+      "date": "2026-10-22 10:22",
       "ts": "2026-10-22T17:22:10Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1076,7 +1120,7 @@
       "first": false
     },
     {
-      "date": "2026-10-22 17:22",
+      "date": "2026-10-22 10:22",
       "ts": "2026-10-22T17:22:11Z",
       "loc": "Illinois, US",
       "path": "/visitors",
@@ -1087,7 +1131,7 @@
       "first": true
     },
     {
-      "date": "2026-10-22 17:22",
+      "date": "2026-10-22 10:22",
       "ts": "2026-10-22T17:22:32Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1098,7 +1142,7 @@
       "first": false
     },
     {
-      "date": "2026-10-22 17:22",
+      "date": "2026-10-22 10:22",
       "ts": "2026-10-22T17:22:34Z",
       "loc": "Illinois, US",
       "path": "/projects",
@@ -1109,7 +1153,7 @@
       "first": true
     },
     {
-      "date": "2026-10-22 17:22",
+      "date": "2026-10-22 10:22",
       "ts": "2026-10-22T17:22:39Z",
       "loc": "Illinois, US",
       "path": "/publications",
@@ -1120,7 +1164,7 @@
       "first": true
     },
     {
-      "date": "2026-10-22 17:22",
+      "date": "2026-10-22 10:22",
       "ts": "2026-10-22T17:22:41Z",
       "loc": "Illinois, US",
       "path": "/projects",
@@ -1131,7 +1175,7 @@
       "first": false
     },
     {
-      "date": "2026-10-22 17:21",
+      "date": "2026-10-22 10:21",
       "ts": "2026-10-22T17:21:41Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1142,7 +1186,7 @@
       "first": true
     },
     {
-      "date": "2026-10-22 17:21",
+      "date": "2026-10-22 10:21",
       "ts": "2026-10-22T17:21:49Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1153,7 +1197,7 @@
       "first": false
     },
     {
-      "date": "2026-10-22 16:55",
+      "date": "2026-10-22 09:55",
       "ts": "2026-10-22T16:55:37Z",
       "loc": "Illinois, US",
       "path": "/cv",
@@ -1164,7 +1208,7 @@
       "first": true
     },
     {
-      "date": "2026-10-22 16:51",
+      "date": "2026-10-22 09:51",
       "ts": "2026-10-22T16:51:59Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1175,7 +1219,7 @@
       "first": true
     },
     {
-      "date": "2026-10-22 08:25",
+      "date": "2026-10-22 01:25",
       "ts": "2026-10-22T08:25:19Z",
       "loc": "United States",
       "path": "/publications",
@@ -1186,7 +1230,7 @@
       "first": true
     },
     {
-      "date": "2026-10-22 07:10",
+      "date": "2026-10-22 00:10",
       "ts": "2026-10-22T07:10:08Z",
       "loc": "Arizona, US",
       "path": "/visitors",
@@ -1197,7 +1241,7 @@
       "first": false
     },
     {
-      "date": "2026-10-22 07:10",
+      "date": "2026-10-22 00:10",
       "ts": "2026-10-22T07:10:16Z",
       "loc": "Arizona, US",
       "path": "/",
@@ -1208,7 +1252,7 @@
       "first": false
     },
     {
-      "date": "2026-10-22 07:09",
+      "date": "2026-10-22 00:09",
       "ts": "2026-10-22T07:09:39Z",
       "loc": "Arizona, US",
       "path": "/",
@@ -1219,7 +1263,7 @@
       "first": true
     },
     {
-      "date": "2026-10-22 07:09",
+      "date": "2026-10-22 00:09",
       "ts": "2026-10-22T07:09:50Z",
       "loc": "Arizona, US",
       "path": "/visitors",
@@ -1230,7 +1274,7 @@
       "first": true
     },
     {
-      "date": "2026-10-22 07:09",
+      "date": "2026-10-22 00:09",
       "ts": "2026-10-22T07:09:59Z",
       "loc": "Arizona, US",
       "path": "/",
@@ -1241,7 +1285,7 @@
       "first": false
     },
     {
-      "date": "2026-10-22 06:33",
+      "date": "2026-10-21 23:33",
       "ts": "2026-10-22T06:33:17Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1252,7 +1296,7 @@
       "first": false
     },
     {
-      "date": "2026-10-22 06:08",
+      "date": "2026-10-21 23:08",
       "ts": "2026-10-22T06:08:03Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1263,7 +1307,7 @@
       "first": false
     },
     {
-      "date": "2026-10-22 06:08",
+      "date": "2026-10-21 23:08",
       "ts": "2026-10-22T06:08:07Z",
       "loc": "Illinois, US",
       "path": "/visitors",
@@ -1274,7 +1318,7 @@
       "first": false
     },
     {
-      "date": "2026-10-22 06:08",
+      "date": "2026-10-21 23:08",
       "ts": "2026-10-22T06:08:41Z",
       "loc": "Illinois, US",
       "path": "/projects",
@@ -1285,7 +1329,7 @@
       "first": true
     },
     {
-      "date": "2026-10-22 06:06",
+      "date": "2026-10-21 23:06",
       "ts": "2026-10-22T06:06:17Z",
       "loc": "Illinois, US",
       "path": "/posts/2025/10/diversity-collapse-rlhf",
@@ -1296,7 +1340,7 @@
       "first": false
     },
     {
-      "date": "2026-10-22 06:01",
+      "date": "2026-10-21 23:01",
       "ts": "2026-10-22T06:01:00Z",
       "loc": "Illinois, US",
       "path": "/posts/2025/10/diversity-collapse-rlhf",
@@ -1307,7 +1351,7 @@
       "first": false
     },
     {
-      "date": "2026-10-22 06:01",
+      "date": "2026-10-21 23:01",
       "ts": "2026-10-22T06:01:01Z",
       "loc": "Illinois, US",
       "path": "/posts/2026/08/read-the-mind-audio-llm",
@@ -1318,7 +1362,7 @@
       "first": false
     },
     {
-      "date": "2026-10-22 06:01",
+      "date": "2026-10-21 23:01",
       "ts": "2026-10-22T06:01:03Z",
       "loc": "Illinois, US",
       "path": "/posts/2026/08/speechgym-voice-agent-rl",
@@ -1329,7 +1373,7 @@
       "first": false
     },
     {
-      "date": "2026-10-22 06:00",
+      "date": "2026-10-21 23:00",
       "ts": "2026-10-22T06:00:25Z",
       "loc": "Illinois, US",
       "path": "/posts/2025/10/diversity-collapse-rlhf",
@@ -1338,52 +1382,8 @@
       "system": "macOS 10.15",
       "screen": "1512px",
       "first": true
-    },
-    {
-      "date": "2026-10-22 06:00",
-      "ts": "2026-10-22T06:00:26Z",
-      "loc": "Illinois, US",
-      "path": "/posts/2025/10/inverse-scaling-audio-llms",
-      "ref": "",
-      "browser": "Chrome 152",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": false
-    },
-    {
-      "date": "2026-10-22 06:00",
-      "ts": "2026-10-22T06:00:28Z",
-      "loc": "Illinois, US",
-      "path": "/posts/2026/08/read-the-mind-audio-llm",
-      "ref": "",
-      "browser": "Chrome 152",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": true
-    },
-    {
-      "date": "2026-10-22 06:00",
-      "ts": "2026-10-22T06:00:29Z",
-      "loc": "Illinois, US",
-      "path": "/posts/2026/08/speechgym-voice-agent-rl",
-      "ref": "",
-      "browser": "Chrome 152",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": true
-    },
-    {
-      "date": "2026-10-22 05:59",
-      "ts": "2026-10-22T05:59:39Z",
-      "loc": "Illinois, US",
-      "path": "/posts/2025/10/diversity-collapse-rlhf",
-      "ref": "",
-      "browser": "Chrome 152",
-      "system": "Android 14",
-      "screen": "375px",
-      "first": true
     }
   ],
-  "_recent_total": 3375,
+  "_recent_total": 3379,
   "_recent_shown": 30
 }
