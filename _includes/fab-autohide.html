@@ -1,0 +1,25 @@
+<!-- Phones: the round floating buttons (dark mode, back to top, the AI agent) slide out of the way while the
+     reader scrolls down, and come back on any scroll up, near the top of the page, or while the
+     agent panel is open. Desktop is unchanged. Block comments only: the site's HTML compressor joins lines. -->
+<style>
+@media (max-width:700px){
+  .pg-fab,.ra-btn,.ra-tip,.dark-toggle,.scroll-top{transition:transform .3s ease,opacity .3s ease}
+  html.fab-away .pg-fab,html.fab-away .ra-btn,html.fab-away .ra-tip,html.fab-away .dark-toggle,html.fab-away .scroll-top{
+    transform:translateX(90px)!important;opacity:0!important;pointer-events:none!important}
+}
+</style>
+<script>
+(function () {
+  if (window.__fabAuto) return; window.__fabAuto = true;
+  var root = document.documentElement, last = window.scrollY || 0, ticking = false;
+  function upd() {
+    ticking = false;
+    var y = window.scrollY || 0;
+    var panel = document.querySelector('.ra-panel.show');
+    if (panel || y < 220 || y < last - 8) root.classList.remove('fab-away');
+    else if (y > last + 8) root.classList.add('fab-away');
+    if (Math.abs(y - last) > 8) last = y;
+  }
+  window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(upd); } }, { passive: true });
+})();
+</script>

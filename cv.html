@@ -76,6 +76,7 @@ a:hover{color:var(--link-h)}
 /* ── layout ── */
 .cv-body{max-width:1000px;margin:0 auto;padding:30px 24px 60px;display:grid;grid-template-columns:1fr 260px;gap:34px;align-items:start}
 @media(max-width:720px){.cv-body{grid-template-columns:1fr}}
+@media screen and (max-width:720px){.cv-body{gap:18px}.sidebar-col{display:contents}.sidebar-card{margin-bottom:0}.sidebar-col>.sidebar-card:first-child{order:-1}}
 
 /* ── section titles ── */
 .sec-title{font-family:var(--sans);font-size:0.70em;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--faint);margin:0 0 14px;padding-bottom:7px;border-bottom:1px solid var(--rule)}
@@ -92,9 +93,11 @@ a:hover{color:var(--link-h)}
 .edu-notes li{margin-bottom:2px}
 
 /* ── publications ── */
-.pub-item{display:flex;gap:12px;padding:13px 0;border-bottom:1px solid var(--rule);align-items:flex-start}
+.pub-item{display:grid;grid-template-columns:8.6rem minmax(0,1fr);gap:12px;padding:13px 0;border-bottom:1px solid var(--rule);align-items:start}
 .pub-item:last-child{border-bottom:none}
 .pub-badge{display:inline-block;padding:2px 9px;border-radius:20px;font-family:var(--sans);font-size:0.68em;font-weight:800;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap;line-height:1.5;flex-shrink:0;margin-top:4px;background:var(--pill);border:1px solid var(--rule);color:var(--link)}
+.pub-badge{justify-self:start}
+@media(max-width:600px){.pub-item{grid-template-columns:minmax(0,1fr);gap:6px}.pub-badge{margin-top:0}}
 .pb-oral{background:var(--accent-bg)!important;border-color:var(--accent-bd)!important;color:var(--accent)!important}
 .pb-iclr,.pb-neurips,.pb-icml,.pb-journal,.pb-arxiv{background:var(--pill);border-color:var(--rule);color:var(--link)}
 .pub-title{font-family:var(--serif);font-weight:600;font-size:1.03em;color:var(--ink);line-height:1.38;letter-spacing:-.005em}
@@ -257,7 +260,7 @@ p,li{text-wrap:pretty}
       <div class="edu-meta"><span><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-pin.png);mask-image:url(/images/icons/h-pin.png)"></i>Urbana, IL, USA</span><span>Aug 2024 – May 2029 (expected)</span></div>
       <ul class="edu-notes">
         <li><strong>Research:</strong> Autonomous RL post-training for flow/diffusion models &amp; multimodal reasoning LLMs</li>
-        <li><strong>Service:</strong> Reviewer @ ICML 2025–26, ICLR 2025–26, NeurIPS 2024–26, COLM 2026, CVPR 2026, WACV 2027, AAAI 2027, AISTATS 2025</li>
+        <li><strong>Service:</strong> Reviewer @ ICML 2025–26, ICLR 2025–26, NeurIPS 2024–26, COLM 2026, CVPR 2026, WACV 2027, AAAI 2025 &amp; 2027, AISTATS 2025, KDD 2024</li>
       </ul>
     </div>
 
@@ -335,6 +338,14 @@ p,li{text-wrap:pretty}
     </div>
 
     <div class="pub-item">
+      <span class="pub-badge pb-journal">TPAMI 2026</span>
+      <div>
+        <div class="pub-title"><a href="https://arxiv.org/abs/2407.05010">PRANCE: Joint Token-Optimization and Structural Channel-Pruning for Adaptive ViT Inference</a></div>
+        <div class="pub-authors">Y. Li, C. Tang, Y. Meng, <strong>J. Fan</strong>, Z. Chai, X. Ma, Z. Wang, W. Zhu</div>
+      </div>
+    </div>
+
+    <div class="pub-item">
       <span class="pub-badge pb-neurips">NeurIPS 2025</span>
       <div>
         <div class="pub-title"><a href="https://openreview.net/forum?id=aXO0xg0ttW">Adaptive Divergence Regularized Policy Optimization for Fine-tuning Generative Models</a></div>
@@ -362,14 +373,6 @@ p,li{text-wrap:pretty}
     </div>
 
     <div class="pub-item">
-      <span class="pub-badge pb-arxiv">2025</span>
-      <div>
-        <div class="pub-title"><a href="https://arxiv.org/abs/2510.18072">Fine-tuning Flow Matching Generative Models with Intermediate Feedback</a></div>
-        <div class="pub-authors"><strong>J. Fan*</strong>, C. Cheng, S. Shen, X. Zhou, G. Liu <em>· Under Review</em></div>
-      </div>
-    </div>
-
-    <div class="pub-item">
       <span class="pub-badge pb-arxiv">2026</span>
       <div>
         <div class="pub-title"><a href="https://arxiv.org/abs/2605.29438">ElegantVLA: Learning When to Think for Efficient Vision-Language-Action Models</a></div>
@@ -377,11 +380,12 @@ p,li{text-wrap:pretty}
         <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>2.55&times; / 3.77&times; speedup &middot; 13.8 &rarr; 26.3 Hz on real-world GR00T tasks</div>
       </div>
     </div>
+
     <div class="pub-item">
-      <span class="pub-badge pb-journal">TPAMI 2026</span>
+      <span class="pub-badge pb-arxiv">2025</span>
       <div>
-        <div class="pub-title"><a href="https://arxiv.org/abs/2407.05010">PRANCE: Joint Token-Optimization and Structural Channel-Pruning for Adaptive ViT Inference</a></div>
-        <div class="pub-authors">Y. Li, C. Tang, Y. Meng, <strong>J. Fan</strong>, Z. Chai, X. Ma, Z. Wang, W. Zhu</div>
+        <div class="pub-title"><a href="https://arxiv.org/abs/2510.18072">Fine-tuning Flow Matching Generative Models with Intermediate Feedback</a></div>
+        <div class="pub-authors"><strong>J. Fan*</strong>, C. Cheng, S. Shen, X. Zhou, G. Liu <em>· Under Review</em></div>
       </div>
     </div>
 
@@ -410,7 +414,7 @@ p,li{text-wrap:pretty}
     <ul class="award-list">
       <li class="award-item"><span class="award-year">2024</span><span class="award-name">GPA 4.0/4.0, UIUC Ph.D. Program</span></li>
       <li class="award-item"><span class="award-year">2024</span><span class="award-name">GPA 3.97/4.0, Top 1.3% — Tsinghua University M.Eng.</span></li>
-      <li class="award-item"><span class="award-year">2021</span><span class="award-name">Outstanding Graduates (Top 1%) — Nankai University<span class="award-top">Top 1%</span></span></li>
+      <li class="award-item"><span class="award-year">2021</span><span class="award-name">Outstanding Graduates — Nankai University<span class="award-top">Top 1%</span></span></li>
       <li class="award-item"><span class="award-year">2021</span><span class="award-name">Excellent Graduation Thesis — Nankai University</span></li>
       <li class="award-item"><span class="award-year">2021</span><span class="award-name">Tang Lixin Scholarship<span class="award-top">Top 1%</span></span></li>
       <li class="award-item"><span class="award-year">2020</span><span class="award-name">National Scholarship (Rank 1/83)<span class="award-top">Top 1%</span></span></li>

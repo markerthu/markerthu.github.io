@@ -244,7 +244,7 @@ p,li{text-wrap:pretty}
         <div class="ro-papers">
           <a class="ro-p" href="https://openreview.net/forum?id=RwdGIIjPlC" target="_blank" rel="noopener">SP-VLA <span class="ro-v">ICLR 2026</span></a>
           <a class="ro-p" href="https://arxiv.org/abs/2407.05010" target="_blank" rel="noopener">PRANCE <span class="ro-v">TPAMI 2026</span></a>
-          <a class="ro-p" href="https://arxiv.org/abs/2605.29438" target="_blank" rel="noopener">ElegantVLA <span class="ro-v">2026</span></a>
+          <a class="ro-p" href="https://arxiv.org/abs/2605.29438" target="_blank" rel="noopener">ElegantVLA <span class="ro-v">arXiv 2026</span></a>
         </div>
       </div>
 
@@ -283,7 +283,7 @@ p,li{text-wrap:pretty}
           <span>{{ post.title }}</span>
         {% endif %}
       </h2>
-      {% if post.citation %}<div class="pub-authors">{{ post.citation | replace: "Jiajun Fan", "<strong>Jiajun Fan</strong>" | replace: "J. Fan", "<strong>J. Fan</strong>" }}</div>{% endif %}
+      {% if post.citation %}{%- assign authors = post.citation | split: '&quot;' | first | strip | append: '#' | replace: ',#', '' | replace: '.#', '' | remove: '#' -%}<div class="pub-authors">{{ authors | replace: "Jiajun Fan", "<strong>Jiajun Fan</strong>" | replace: "J. Fan", "<strong>J. Fan</strong>" }}</div>{% endif %}
       <div class="pub-actions">
         {% if post.projectpage %}<a class="act act-project" href="{{ post.projectpage }}">Project page</a>{% endif %}
         {% if post.film %}<a class="act act-film" href="/film/?s={{ post.film }}"><span aria-hidden="true">&#9656;</span>&nbsp;Video</a>{% endif %}
