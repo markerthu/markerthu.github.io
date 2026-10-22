@@ -1211,14 +1211,7 @@ body.dark-mode figure.anim-fig{--good:#7FC79A}
   <div class="hero-name">Jiajun Fan</div>
   <div class="hero-subtitle" id="hero-typed"></div>
   <div class="hero-status"><span class="hs-dot" aria-hidden="true"></span>Open to Research Internships — Fall 2026 / 2027</div>
-  <div class="hero-pills">
-    <span class="hero-pill"><img class="hero-ico" src="/images/icons/h-flow.png" alt="">RL Post-Training for Generative Models</span>
-    <span class="hero-pill"><img class="hero-ico" src="/images/icons/h-reason.png" alt="">Multimodal Reasoning LLMs</span>
-    <span class="hero-pill"><img class="hero-ico" src="/images/icons/h-game.png" alt="">Superhuman Deep RL</span>
-    <span class="hero-pill"><img class="hero-ico" src="/images/icons/h-agentic.png" alt="">Agentic RL</span>
-    <span class="hero-pill"><img class="hero-ico" src="/images/icons/h-refresh.png" alt="">Recursive Self-Improvement</span>
-    <span class="hero-pill"><img class="hero-ico" src="/images/icons/h-sparkle.png" alt="">Agentic Scientific Discovery</span>
-  </div>
+  {% include hero-arc.html %}
   <div class="hero-links">
     <a class="hero-link" href="/cv/"><img class="hero-ico" src="/images/icons/h-cv.png" alt="">CV</a>
     <a class="hero-link" href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer"><img class="hero-ico" src="/images/icons/h-scholar.png" alt="">Scholar</a>
