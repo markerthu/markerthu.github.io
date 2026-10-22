@@ -28,11 +28,13 @@ permalink: /publications/
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"></noscript>
 <style>
+@font-face{font-family:'Inter Fallback';src:local('Arial');size-adjust:107.1%;ascent-override:90.4%;descent-override:22.5%;line-gap-override:0%}
+
 :root{
   --serif:'Newsreader',Georgia,'Times New Roman',serif;
-  --sans:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;
+  --sans:'Inter','Inter Fallback','Segoe UI',system-ui,-apple-system,sans-serif;
   --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
-  --bg:#fdfcfa; --band:#f6f3ec; --ink:#1a1815; --body:#2b2823; --muted:#6c6860; --faint:#787369;
+  --bg:#fdfcfa; --band:#f6f3ec; --ink:#1a1815; --body:#2b2823; --muted:#6c6860; --faint:#6b665c;
   --rule:#e8e3d9; --link:#2F4B8F; --on-link:#ffffff; --link-h:#23396E; --card:#ffffff; --pill:#f0ede6;
 }
 body.dark-mode{
@@ -145,6 +147,7 @@ body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-ima
 
 h1,h2,h3,.bx-title,.p-title,.pub-title,.card-title{text-wrap:balance}
 p,li{text-wrap:pretty}
+p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcaption a,td a{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px;text-decoration-color:rgba(47,75,143,.45)}body.dark-mode p a:not([class]),body.dark-mode li a:not([class]),body.dark-mode .authors a,body.dark-mode .tl-desc a,body.dark-mode .note a,body.dark-mode figcaption a,body.dark-mode td a{text-decoration-color:rgba(157,184,234,.5)}
 </style>
 <script data-goatcounter="https://jiajunfan.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>

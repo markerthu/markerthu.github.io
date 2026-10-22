@@ -21,5 +21,18 @@
     if (Math.abs(y - last) > 8) last = y;
   }
   window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(upd); } }, { passive: true });
+  /* figures and tables that scroll sideways (on phones) get a tab stop and a name, so keyboard users can scroll them */
+  function focusable() {
+    document.querySelectorAll('figure, .table-wrap, .table-scroll, pre').forEach(function (el) {
+      var ox = getComputedStyle(el).overflowX, sc = (ox === 'auto' || ox === 'scroll') && el.scrollWidth > el.clientWidth + 2;
+      if (sc && !el.hasAttribute('tabindex')) {
+        el.setAttribute('tabindex', '0'); el.dataset.fabScroll = '1';
+        if (!el.getAttribute('role')) el.setAttribute('role', 'region');
+        if (!el.getAttribute('aria-label')) { var c = el.querySelector('figcaption, caption'); el.setAttribute('aria-label', (c ? c.textContent : 'Scrollable figure').trim().slice(0, 90)); }
+      } else if (!sc && el.dataset.fabScroll) { el.removeAttribute('tabindex'); delete el.dataset.fabScroll; }
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', focusable); else focusable();
+  window.addEventListener('load', focusable); window.addEventListener('resize', function () { clearTimeout(window.__fabT); window.__fabT = setTimeout(focusable, 300); });
 })();
 </script>

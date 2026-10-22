@@ -24,7 +24,7 @@ sitemap: false
   --serif:'Newsreader',Georgia,'Times New Roman',serif;
   --sans:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;
   --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
-  --bg:#fdfcfa; --band:#f6f3ec; --ink:#1a1815; --body:#2b2823; --muted:#6c6860; --faint:#787369;
+  --bg:#fdfcfa; --band:#f6f3ec; --ink:#1a1815; --body:#2b2823; --muted:#6c6860; --faint:#6b665c;
   --rule:#e8e3d9; --link:#2F4B8F; --on-link:#ffffff; --link-h:#23396E; --card:#ffffff; --fig-border:#e6e0d5;
   --sea:#3b7ea3; --land:#ffffff; --dot:#e8262d;
 }
@@ -132,6 +132,7 @@ body.dark-mode #pg-dark{background:#1A2333;color:#F5C8B5;border-color:#2B3A55}
   .grid2{grid-template-columns:1fr;gap:8px}
   body{font-size:18px}
 }
+p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcaption a,td a{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px;text-decoration-color:rgba(47,75,143,.45)}body.dark-mode p a:not([class]),body.dark-mode li a:not([class]),body.dark-mode .authors a,body.dark-mode .tl-desc a,body.dark-mode .note a,body.dark-mode figcaption a,body.dark-mode td a{text-decoration-color:rgba(157,184,234,.5)}
 </style>
 </head>
 <body>
@@ -151,7 +152,7 @@ body.dark-mode #pg-dark{background:#1A2333;color:#F5C8B5;border-color:#2B3A55}
 </header>
 
 <main class="wrap">
-  <div class="hero">
+  <div class="hero" role="region" aria-label="Project summary">
     <div class="kicker">Site analytics</div>
     <h1>Who stops by</h1>
     <p class="sub">Where readers of this site come from, what they read, and how they got here.</p>

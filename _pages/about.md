@@ -156,7 +156,7 @@ body.dark-mode .section-header .sh-icon { filter: brightness(1.55) saturate(1.1)
 body.dark-mode .pub-abst-btn { background: #1A2333; color: #9DB8EA; }
 body.dark-mode .pub-abst-btn:hover { background: #1e40af; }
 @media (max-width: 640px) { .pub-abst-btn { padding: 6px 10px; } }
-.pub-title a { color: #2F4B8F; text-decoration: none; }
+.pub-title a { color: #2F4B8F; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; text-decoration-color: rgba(47,75,143,.28); }
 .pub-title a:hover { text-decoration: underline; }
 .pub-authors { font-size: 0.819em; color: #6b7280; margin-top: 3px; }
 .pub-authors strong { color: #1a2332; font-weight: 700; }
