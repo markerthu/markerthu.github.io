@@ -34,12 +34,12 @@ permalink: /projects/cesar/
   --sans:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;
   --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
   --bg:#fdfcfa; --band:#f6f3ec; --ink:#1a1815; --body:#2b2823; --muted:#6c6860; --faint:#787369;
-  --rule:#e8e3d9; --link:#2F4B8F; --link-h:#23396E; --card:#ffffff; --fig-border:#e6e0d5;
+  --rule:#e8e3d9; --link:#2F4B8F; --on-link:#ffffff; --link-h:#23396E; --card:#ffffff; --fig-border:#e6e0d5;
   --good:#2F4B8F; --bad:#c0392b;
 }
 body.dark-mode{
   --bg:#0f1216; --band:#151a20; --ink:#ece8e0; --body:#cdc8be; --muted:#8f8a80; --faint:#8a857b;
-  --rule:#262b33; --link:#6ea8fe; --link-h:#93c0ff; --card:#161a20; --fig-border:#2a2f38;
+  --rule:#262b33; --link:#6ea8fe; --on-link:#0f1216; --link-h:#93c0ff; --card:#161a20; --fig-border:#2a2f38;
   --good:#9DB8EA; --bad:#f7a8b8;
 }
 .lbl-ico{display:inline-block;width:1em;height:1em;vertical-align:-0.14em;margin-right:5px;background-color:currentColor;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;flex-shrink:0;}
@@ -73,8 +73,8 @@ a{color:var(--link);text-decoration:none}a:hover{color:var(--link-h)}
 .btn-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
 .btn{display:inline-flex;align-items:center;gap:7px;padding:9px 20px;border-radius:999px;font-family:var(--sans);font-size:.85rem;font-weight:600;transition:.18s;border:1px solid var(--rule);}
 .btn:hover{transform:translateY(-1px)}
-.btn-primary{background:var(--link);color:#fff;border-color:var(--link)}
-.btn-primary:hover{color:#fff}
+.btn-primary{background:var(--link);color:var(--on-link);border-color:var(--link)}
+.btn-primary:hover{color:var(--on-link)}
 .btn-secondary{background:var(--card);color:var(--link)}
 .btn-neutral{background:var(--band);color:var(--body)}
 .hero-rule{max-width:820px;margin:2.2em auto 0;border:none;border-top:1px solid var(--rule);}
@@ -157,7 +157,7 @@ footer a{color:var(--link)}
 #read-progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,#2F4B8F,#6F94C6 60%,#E39A7A);z-index:9999;transition:width .08s linear;pointer-events:none}
 .pg-fab{position:fixed;right:22px;width:42px;height:42px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.18);z-index:9990;transition:transform .2s,opacity .2s}
 .pg-fab:hover{transform:translateY(-2px) scale(1.06)}
-#pg-top{bottom:22px;background:var(--link);color:#fff;opacity:0;pointer-events:none}
+#pg-top{bottom:22px;background:var(--link);color:var(--on-link);opacity:0;pointer-events:none}
 #pg-top.show{opacity:1;pointer-events:auto}
 #pg-dark{bottom:126px;background:#fff;color:#2F4B8F;border:1.5px solid rgba(0,0,0,.15)}
 body.dark-mode #pg-dark{background:#1A2333;color:#F5C8B5;border-color:#2B3A55}
@@ -165,7 +165,8 @@ body.dark-mode #pg-dark{background:#1A2333;color:#F5C8B5;border-color:#2B3A55}
 body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-image:url(/images/icons/h-sun.png)}
 .pg-up{width:11px;height:11px;border-top:2.6px solid currentColor;border-right:2.6px solid currentColor;transform:rotate(-45deg) translateY(2px);display:inline-block}
 
-@media(max-width:640px){figure.chart.wide{overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:6px;}figure.chart.wide svg{min-width:520px;}figure.chart.wide figcaption{position:sticky;left:0;max-width:calc(100vw - 48px);}}
+@media(max-width:640px){figure.chart.wide{overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:6px;}figure.chart.wide svg{min-width:520px;}figure.chart.wide:not(.anim-fig) svg{min-width:0;}figure.chart.wide figcaption{position:sticky;left:0;max-width:calc(100vw - 48px);}}
+figure.chart svg.cs-m{display:none}@media(max-width:640px){figure.chart svg.cs-d{display:none}figure.chart svg.cs-m{display:block}}
 @media(max-width:640px){.problem-grid{grid-template-columns:1fr}.method-steps{grid-template-columns:1fr 1fr}.results-grid{grid-template-columns:1fr 1fr}.hero h1{font-size:2rem}}
 @media print{.site-masthead,.pg-fab,#read-progress{display:none!important}}
 @media (prefers-reduced-motion:reduce){*{transition-duration:.001ms!important}html{scroll-behavior:auto}}
@@ -180,7 +181,7 @@ body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-ima
    peach = competing RL baseline, cool gray = base model / others) */
 :root{--c-ours:#2F4B8F;--c-ours-fill:#90A4C5;--c-var:#BFD8EC;--c-var-line:#6F94C6;--c-rl:#F5C8B5;--c-rl-line:#E39A7A;
   --c-base:#DDE2EA;--c-base-line:#8F97A8;--c-other:#C9CED8;--c-other-line:#9AA1B0;--c-grid:#E4E8EF;--c-ink2:#5B6273}
-body.dark-mode{--c-ours:#9DB8EA;--c-ours-fill:#5E77A8;--c-var:#3F5F86;--c-var-line:#7FA6D3;--c-rl:#9A6E5D;--c-rl-line:#E9A98C;
+body.dark-mode{--c-rl-ink:#E9A98C;--c-ours:#9DB8EA;--c-ours-fill:#5E77A8;--c-var:#3F5F86;--c-var-line:#7FA6D3;--c-rl:#9A6E5D;--c-rl-line:#E9A98C;
   --c-base:#3A414E;--c-base-line:#8F97A8;--c-other:#4A5260;--c-other-line:#9AA1B0;--c-grid:#2A303A;--c-ink2:#A6ADBB}
 figure.anim-fig{--link:var(--c-ours);--good:#3E7D5A;--bad:var(--c-rl-line)}
 body.dark-mode figure.anim-fig{--good:#7FC79A}
@@ -276,7 +277,7 @@ p,li{text-wrap:pretty}
     <div class="result-card"><div class="rnum">+0.038</div><div class="rdesc">positive scaling slope</div></div>
   </div>
   <div class="tbl-wrap">
-  <table class="compare-table">
+  <table class="compare-table"><caption style="caption-side:top;text-align:left;font-family:var(--sans);font-size:.85rem;line-height:1.5;color:var(--muted);padding:0 0 .7em"><b style="color:var(--link)">Table 1.</b> MMAU Test-mini total accuracy per model, and how its accuracy changes as it reasons longer (test-time scaling).</caption>
     <thead><tr><th>Model</th><th>MMAU (total)</th><th>Test-time scaling</th></tr></thead>
     <tbody>
       <tr><td>Qwen2.5-Omni-7B (base)</td><td>65.2%</td><td>Inverse (slope −0.51)</td></tr>
@@ -297,6 +298,7 @@ p,li{text-wrap:pretty}
   <p>With process rewards, more reasoning stops hurting and starts helping. The base model collapses as its reasoning grows longer; CESAR climbs from 73.7% without reasoning to a peak of 77.1% at about 35 reasoning tokens.</p>
   <figure class="chart wide">
     {% include figures/cesar_scaling.svg %}
+    {% include figures/cesar_scaling_m.svg %}
     <figcaption><b>Figure 2.</b> Total accuracy on MMAU vs. average reasoning tokens, redrawn from the paper's test-time scaling plot. Left: Qwen2.5-Omni-7B loses accuracy the longer it reasons (inverse scaling). Right, zoomed in: CESAR rises from 73.7% to 77.1%, while Ke-Omni-R stays near its no-reasoning accuracy.</figcaption>
   </figure>
   <figure class="chart">

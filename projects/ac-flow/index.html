@@ -34,12 +34,12 @@ permalink: /projects/ac-flow/
   --sans:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;
   --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
   --bg:#fdfcfa; --band:#f6f3ec; --ink:#1a1815; --body:#2b2823; --muted:#6c6860; --faint:#787369;
-  --rule:#e8e3d9; --link:#2F4B8F; --link-h:#23396E; --card:#ffffff; --fig-border:#e6e0d5;
+  --rule:#e8e3d9; --link:#2F4B8F; --on-link:#ffffff; --link-h:#23396E; --card:#ffffff; --fig-border:#e6e0d5;
   --good:#2F4B8F; --bad:#c0392b;
 }
 body.dark-mode{
   --bg:#0f1216; --band:#151a20; --ink:#ece8e0; --body:#cdc8be; --muted:#8f8a80; --faint:#8a857b;
-  --rule:#262b33; --link:#6ea8fe; --link-h:#93c0ff; --card:#161a20; --fig-border:#2a2f38;
+  --rule:#262b33; --link:#6ea8fe; --on-link:#0f1216; --link-h:#93c0ff; --card:#161a20; --fig-border:#2a2f38;
   --good:#9DB8EA; --bad:#f7a8b8;
 }
 .lbl-ico{display:inline-block;width:1em;height:1em;vertical-align:-0.14em;margin-right:5px;background-color:currentColor;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;flex-shrink:0;}
@@ -73,8 +73,8 @@ a{color:var(--link);text-decoration:none}a:hover{color:var(--link-h)}
 .btn-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
 .btn{display:inline-flex;align-items:center;gap:7px;padding:9px 20px;border-radius:999px;font-family:var(--sans);font-size:.85rem;font-weight:600;transition:.18s;border:1px solid var(--rule);}
 .btn:hover{transform:translateY(-1px)}
-.btn-primary{background:var(--link);color:#fff;border-color:var(--link)}
-.btn-primary:hover{color:#fff}
+.btn-primary{background:var(--link);color:var(--on-link);border-color:var(--link)}
+.btn-primary:hover{color:var(--on-link)}
 .btn-secondary{background:var(--card);color:var(--link)}
 .btn-neutral{background:var(--band);color:var(--body)}
 .hero-rule{max-width:820px;margin:2.2em auto 0;border:none;border-top:1px solid var(--rule);}
@@ -147,7 +147,7 @@ figure.chart figcaption b,figure.chart figcaption strong{color:var(--link);font-
 .bib-copy-btn{display:inline-flex;align-items:center;gap:6px;margin-bottom:10px;padding:6px 15px;border-radius:8px;border:1px solid var(--rule);cursor:pointer;font-family:var(--sans);font-size:.8rem;font-weight:600;background:var(--band);color:var(--body);transition:.18s}
 .bib-copy-btn:hover{border-color:var(--link);color:var(--link)}
 .bib-copy-btn.copied{background:var(--good);color:#fff;border-color:var(--good)}
-.bibtex-block{background:var(--band);color:var(--body);border:1px solid var(--rule);border-radius:12px;padding:18px 20px;overflow-x:auto;font-family:var(--mono);font-size:.8rem;line-height:1.7}
+.bibtex-block{background:var(--band);color:var(--body);border:1px solid var(--rule);border-radius:12px;padding:18px 20px;overflow-x:auto;white-space:pre-wrap;overflow-wrap:anywhere;font-family:var(--mono);font-size:.8rem;line-height:1.7}
 
 /* ── footer ── */
 footer{font-family:var(--sans);background:transparent;color:var(--muted);text-align:center;padding:26px 24px;font-size:.86rem;border-top:1px solid var(--rule);margin-top:2.4em}
@@ -157,7 +157,7 @@ footer a{color:var(--link)}
 #read-progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,#2F4B8F,#6F94C6 60%,#E39A7A);z-index:9999;transition:width .08s linear;pointer-events:none}
 .pg-fab{position:fixed;right:22px;width:42px;height:42px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.18);z-index:9990;transition:transform .2s,opacity .2s}
 .pg-fab:hover{transform:translateY(-2px) scale(1.06)}
-#pg-top{bottom:22px;background:var(--link);color:#fff;opacity:0;pointer-events:none}
+#pg-top{bottom:22px;background:var(--link);color:var(--on-link);opacity:0;pointer-events:none}
 #pg-top.show{opacity:1;pointer-events:auto}
 #pg-dark{bottom:126px;background:#fff;color:#2F4B8F;border:1.5px solid rgba(0,0,0,.15)}
 body.dark-mode #pg-dark{background:#1A2333;color:#F5C8B5;border-color:#2B3A55}
@@ -199,7 +199,7 @@ figure.rimg{margin:1.8em auto;max-width:100%}
 figure.rimg img{width:100%;border-radius:12px;border:1px solid var(--fig-border);background:var(--band)}
 body.dark-mode figure.rimg img{filter:brightness(.9)}
 figure.rimg figcaption{font-family:var(--sans);font-size:.82rem;color:var(--muted);margin-top:.8em;text-align:center;line-height:1.5}
-@media(max-width:640px){.vs-grid{grid-template-columns:1fr}.method-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.vs-grid{grid-template-columns:1fr}.method-grid{grid-template-columns:1fr}}
 
 /* the AI-agent panel (bottom:120px, z-index:9991) covers this FAB while open — hide it, as the agent does with its own launcher */
 .ra-panel.show ~ #pg-dark{opacity:0;pointer-events:none;}
@@ -300,7 +300,7 @@ p,li{text-wrap:pretty}
 </section>
 
 <section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-gear.png);mask-image:url(/images/icons/h-gear.png)"></i>Three key innovations</h2>
+  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-gear.png);mask-image:url(/images/icons/h-gear.png)"></i>How it works</h2>
   {% include anim/strip_acflow.html %}
 </section>
 

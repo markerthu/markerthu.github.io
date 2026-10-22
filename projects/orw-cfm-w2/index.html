@@ -34,12 +34,12 @@ permalink: /projects/orw-cfm-w2/
   --sans:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;
   --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
   --bg:#fdfcfa; --band:#f6f3ec; --ink:#1a1815; --body:#2b2823; --muted:#6c6860; --faint:#787369;
-  --rule:#e8e3d9; --link:#2F4B8F; --link-h:#23396E; --card:#ffffff; --fig-border:#e6e0d5;
+  --rule:#e8e3d9; --link:#2F4B8F; --on-link:#ffffff; --link-h:#23396E; --card:#ffffff; --fig-border:#e6e0d5;
   --good:#2F4B8F; --bad:#c0392b;
 }
 body.dark-mode{
   --bg:#0f1216; --band:#151a20; --ink:#ece8e0; --body:#cdc8be; --muted:#8f8a80; --faint:#8a857b;
-  --rule:#262b33; --link:#6ea8fe; --link-h:#93c0ff; --card:#161a20; --fig-border:#2a2f38;
+  --rule:#262b33; --link:#6ea8fe; --on-link:#0f1216; --link-h:#93c0ff; --card:#161a20; --fig-border:#2a2f38;
   --good:#9DB8EA; --bad:#f7a8b8;
 }
 .lbl-ico{display:inline-block;width:1em;height:1em;vertical-align:-0.14em;margin-right:5px;background-color:currentColor;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;flex-shrink:0;}
@@ -73,8 +73,8 @@ a{color:var(--link);text-decoration:none}a:hover{color:var(--link-h)}
 .btn-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
 .btn{display:inline-flex;align-items:center;gap:7px;padding:9px 20px;border-radius:999px;font-family:var(--sans);font-size:.85rem;font-weight:600;transition:.18s;border:1px solid var(--rule);}
 .btn:hover{transform:translateY(-1px)}
-.btn-primary{background:var(--link);color:#fff;border-color:var(--link)}
-.btn-primary:hover{color:#fff}
+.btn-primary{background:var(--link);color:var(--on-link);border-color:var(--link)}
+.btn-primary:hover{color:var(--on-link)}
 .btn-secondary{background:var(--card);color:var(--link)}
 .btn-neutral{background:var(--band);color:var(--body)}
 .hero-rule{max-width:820px;margin:2.2em auto 0;border:none;border-top:1px solid var(--rule);}
@@ -157,7 +157,7 @@ footer a{color:var(--link)}
 #read-progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,#2F4B8F,#6F94C6 60%,#E39A7A);z-index:9999;transition:width .08s linear;pointer-events:none}
 .pg-fab{position:fixed;right:22px;width:42px;height:42px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.18);z-index:9990;transition:transform .2s,opacity .2s}
 .pg-fab:hover{transform:translateY(-2px) scale(1.06)}
-#pg-top{bottom:22px;background:var(--link);color:#fff;opacity:0;pointer-events:none}
+#pg-top{bottom:22px;background:var(--link);color:var(--on-link);opacity:0;pointer-events:none}
 #pg-top.show{opacity:1;pointer-events:auto}
 #pg-dark{bottom:126px;background:#fff;color:#2F4B8F;border:1.5px solid rgba(0,0,0,.15)}
 body.dark-mode #pg-dark{background:#1A2333;color:#F5C8B5;border-color:#2B3A55}
@@ -165,7 +165,7 @@ body.dark-mode #pg-dark{background:#1A2333;color:#F5C8B5;border-color:#2B3A55}
 body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-image:url(/images/icons/h-sun.png)}
 .pg-up{width:11px;height:11px;border-top:2.6px solid currentColor;border-right:2.6px solid currentColor;transform:rotate(-45deg) translateY(2px);display:inline-block}
 
-@media(max-width:640px){.problem-grid{grid-template-columns:1fr}.method-steps{grid-template-columns:1fr 1fr}.results-grid{grid-template-columns:1fr 1fr}.hero h1{font-size:2rem}}
+@media(max-width:640px){.problem-grid{grid-template-columns:1fr}.method-steps{grid-template-columns:1fr 1fr}.results-grid{grid-template-columns:1fr 1fr}.results-grid>:nth-child(3):last-child{grid-column:1/-1}.hero h1{font-size:2rem}}
 @media print{.site-masthead,.pg-fab,#read-progress{display:none!important}}
 @media (prefers-reduced-motion:reduce){*{transition-duration:.001ms!important}html{scroll-behavior:auto}}
 @view-transition{navigation:auto}
@@ -199,7 +199,7 @@ figure.rimg{margin:1.8em auto;max-width:100%}
 figure.rimg img{width:100%;border-radius:12px;border:1px solid var(--fig-border);background:var(--band)}
 body.dark-mode figure.rimg img{filter:brightness(.9)}
 figure.rimg figcaption{font-family:var(--sans);font-size:.82rem;color:var(--muted);margin-top:.8em;text-align:center;line-height:1.5}
-@media(max-width:640px){.vs-grid{grid-template-columns:1fr}.method-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.vs-grid{grid-template-columns:1fr}.method-grid{grid-template-columns:1fr}}
 
 /* the AI-agent panel (bottom:120px, z-index:9991) covers this FAB while open — hide it, as the agent does with its own launcher */
 .ra-panel.show ~ #pg-dark{opacity:0;pointer-events:none;}
@@ -323,7 +323,7 @@ p,li{text-wrap:pretty}
 </section>
 
 <section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-gear.png);mask-image:url(/images/icons/h-gear.png)"></i>Three key contributions</h2>
+  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-gear.png);mask-image:url(/images/icons/h-gear.png)"></i>How it works</h2>
   {% include anim/strip_orw.html %}
 </section>
 
@@ -335,11 +335,13 @@ p,li{text-wrap:pretty}
     <div class="result-card"><div class="rnum">W2</div><div class="rdesc">Tractable bound<br>that prevents collapse</div></div>
   </div>
   <p>Tasks: target image generation, image compression, text-image alignment. Consistently achieves optimal policy convergence while allowing controllable diversity-reward trade-offs.</p>
-</section>
-
-<section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-palette.png);mask-image:url(/images/icons/h-palette.png)"></i>Results on SD3</h2>
-  <p>On Stable Diffusion 3, ORW-CFM-W2 improves spatial and positional understanding on complex compositional prompts that the base model fails on, compares favorably against multiple baselines for target image generation, supports multi-reward optimization across diverse prompts and reward signals, and produces images with richer semantic detail and better semantic correspondence.</p>
+  <p>On Stable Diffusion 3, ORW-CFM-W2:</p>
+  <ul style="font-family:var(--sans);font-size:.95rem;color:var(--body);padding-left:1.4em;line-height:1.9;margin:0 0 1em">
+    <li>improves spatial and positional understanding on complex compositional prompts that the base model fails on;</li>
+    <li>compares favorably against multiple baselines for target image generation;</li>
+    <li>supports multi-reward optimization across diverse prompts and reward signals;</li>
+    <li>produces images with richer semantic detail and better semantic correspondence.</li>
+  </ul>
 </section>
 
 <section>
@@ -349,13 +351,9 @@ p,li{text-wrap:pretty}
 </section>
 
 <section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-chart.png);mask-image:url(/images/icons/h-chart.png)"></i>Controlled studies: the &alpha; trade-off</h2>
-  <p>Controlled experiments on MNIST and CIFAR isolate the reward–diversity trade-off set by the W2 regularization strength α. Raising α preserves more diversity at some cost in reward, and the trade-off is smooth and controllable rather than a cliff — so α behaves as a usable knob. The regularization also prevents the mode collapse that unconstrained reward-weighting falls into, and the same control carries over to text-conditional CIFAR.</p>
-</section>
-
-<section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-gear.png);mask-image:url(/images/icons/h-gear.png)"></i>Alpha control: reward–diversity knob</h2>
-  <p>The regularization strength α provides a smooth knob between pure reward maximization (α=0) and full diversity preservation (α=1): α=0 gives pure reward and mode collapse, α=0.3 is a balanced recommended setting, and α=0.8 preserves high diversity. The same knob applied to SD3 spans from the base model through balanced fine-tuning to full reward optimization.</p>
+  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-gear.png);mask-image:url(/images/icons/h-gear.png)"></i>The &alpha; knob: reward vs. diversity</h2>
+  <p>Controlled experiments on MNIST and CIFAR isolate the reward–diversity trade-off set by the W2 regularization strength α. Raising α preserves more diversity at some cost in reward, and the trade-off is smooth and controllable rather than a cliff. The regularization also prevents the mode collapse that unconstrained reward-weighting falls into, and the same control carries over to text-conditional CIFAR.</p>
+  <p>In practice: α=0 gives pure reward and mode collapse, α=0.3 is a balanced recommended setting, and α=0.8 preserves high diversity. The same knob applied to SD3 spans from the base model through balanced fine-tuning to full reward optimization.</p>
   {% include anim/orw.html %}
 </section>
 
