@@ -1,36 +1,45 @@
-<!-- Hero research topics: the six topic pills, each with a small live drawing in the style of the research
-     film (glowing points on the hero's navy). One canvas draws all six; labels and links are plain HTML.
-     Block comments only in the script: the site's HTML compressor joins lines. -->
+<!-- Hero research arc: five stages of what the model can do, each with a small live drawing in the
+     style of the research film (glowing points on the hero's navy). One canvas draws all five
+     drawings and the light that travels the chain; the text and links are plain HTML on top. -->
 <style>
-.hero-arc{position:relative;z-index:1;margin:18px auto 24px;max-width:700px;text-align:left}
+.hero-arc{position:relative;z-index:1;margin:22px auto 26px;max-width:760px;text-align:left}
 .hero-arc canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-.hero-arc ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px;position:relative}
+.hero-arc ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:14px;position:relative}
 .hero-arc li{margin:0}
-.ha-card{box-sizing:border-box;display:flex;align-items:center;gap:12px;height:100%;padding:6px 14px 6px 8px;border-radius:14px;
-  text-decoration:none!important;color:#fff!important;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);
-  transition:background .25s,border-color .25s,transform .25s}
-.ha-card:hover,.ha-card:focus-visible,.ha-card.on{background:rgba(255,255,255,.12);border-color:rgba(191,216,236,.55)}
-.ha-card:hover{transform:translateY(-1px)}
+.ha-card{box-sizing:border-box;position:relative;display:flex;flex-direction:column;height:100%;padding:10px 11px 12px;border-radius:14px;text-decoration:none!important;color:#fff!important;
+  background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.13);transition:background .25s,border-color .25s,transform .25s}
+.ha-card:hover,.ha-card:focus-visible,.ha-card.on{background:rgba(255,255,255,.1);border-color:rgba(191,216,236,.55)}
+.ha-card:hover{transform:translateY(-2px)}
 .ha-card:focus-visible{outline:2px solid #BFD8EC;outline-offset:2px}
-.ha-viz{flex:0 0 92px;height:52px}
-.ha-t{font:600 14.5px/1.3 Inter,system-ui,sans-serif;color:#fff;text-wrap:balance}
-@media (max-width:700px){
-  .hero-arc{max-width:380px}
-  .hero-arc ul{grid-template-columns:1fr;gap:8px}
-  .ha-viz{flex-basis:84px;height:48px}
+.ha-viz{height:84px;margin:0 0 8px}
+.ha-n{font:600 11.5px/1 Inter,system-ui,sans-serif;color:rgba(191,216,236,.85);margin-bottom:5px;font-variant-numeric:tabular-nums}
+.ha-t{font:700 15.5px/1.2 Inter,system-ui,sans-serif;letter-spacing:-.01em;color:#fff;margin-bottom:4px}
+.ha-a{font:500 12.5px/1.35 Inter,system-ui,sans-serif;color:rgba(255,255,255,.78);margin-bottom:6px;text-wrap:balance}
+.ha-p{font:500 11.5px/1.35 Inter,system-ui,sans-serif;color:rgba(191,216,236,.9);margin-top:auto}
+.ha-p .nw{display:inline-block}
+.ha-next .ha-card{border-style:dashed;border-color:rgba(245,200,181,.45)}
+.ha-next .ha-n,.ha-next .ha-p{color:#F5C8B5}
+@media (max-width:760px){
+  .hero-arc{max-width:440px;margin:18px auto 20px}
+  .hero-arc ol{grid-template-columns:1fr;gap:8px}
+  .ha-card{display:grid;grid-template-columns:84px 1fr;grid-template-rows:auto auto auto;column-gap:12px;padding:8px 12px 9px 8px}
+  .ha-viz{grid-row:1 / span 3;height:62px;margin:0;align-self:center}
+  .ha-n{position:absolute;top:9px;right:11px;margin:0}
+  .ha-t{font-size:15px;margin:0 0 2px}
+  .ha-a{font-size:12.5px;margin:0 0 2px}
+  .ha-p{margin-top:0}
 }
 @media print{.hero-arc{display:none}}
 </style>
-<nav class="hero-arc" aria-label="Research topics">
+<nav class="hero-arc" aria-label="Research arc: what the model learns to do">
   <canvas aria-hidden="true"></canvas>
-  <ul>
-    <li><a class="ha-card" href="/projects/adrpo/" data-k="improve"><div class="ha-viz"></div><div class="ha-t">RL Post-Training for Generative Models</div></a></li>
-    <li><a class="ha-card" href="/projects/cesar/" data-k="reason"><div class="ha-viz"></div><div class="ha-t">Multimodal Reasoning LLMs</div></a></li>
-    <li><a class="ha-card" href="/projects/lbc/" data-k="games"><div class="ha-viz"></div><div class="ha-t">Superhuman Deep RL</div></a></li>
-    <li><a class="ha-card" href="/projects/speechgym/" data-k="act"><div class="ha-viz"></div><div class="ha-t">Agentic RL</div></a></li>
-    <li><a class="ha-card" href="#vision" data-k="spiral"><div class="ha-viz"></div><div class="ha-t">Recursive Self-Improvement</div></a></li>
-    <li><a class="ha-card" href="#vision" data-k="discover"><div class="ha-viz"></div><div class="ha-t">Agentic Scientific Discovery</div></a></li>
-  </ul>
+  <ol>
+    <li><a class="ha-card" href="/projects/lbc/" data-k="games"><div class="ha-viz"></div><div class="ha-n">1</div><div class="ha-t">Master games</div><div class="ha-a">Superhuman deep RL</div><div class="ha-p">GDI · LBC</div></a></li>
+    <li><a class="ha-card" href="/projects/adrpo/" data-k="improve"><div class="ha-viz"></div><div class="ha-n">2</div><div class="ha-t">Improve itself</div><div class="ha-a">RL post-training for generative models</div><div class="ha-p">ORW-CFM-W2 · ADRPO · ProteinZero</div></a></li>
+    <li><a class="ha-card" href="/projects/cesar/" data-k="reason"><div class="ha-viz"></div><div class="ha-n">3</div><div class="ha-t">Reason</div><div class="ha-a">Multimodal reasoning LLMs</div><div class="ha-p">CESAR · <span class="nw">Read the Mind</span></div></a></li>
+    <li><a class="ha-card" href="/projects/speechgym/" data-k="act"><div class="ha-viz"></div><div class="ha-n">4</div><div class="ha-t">Act</div><div class="ha-a">Agentic RL with speech and tools</div><div class="ha-p">SpeechGym · <span class="nw">Procedure-Aware RL</span></div></a></li>
+    <li class="ha-next"><a class="ha-card" href="#vision" data-k="discover"><div class="ha-viz"></div><div class="ha-n">5 · next</div><div class="ha-t">Discover</div><div class="ha-a">Self-improving AI scientist</div><div class="ha-p">Recursive self-improvement</div></a></li>
+  </ol>
 </nav>
 <script>
 (function () {
@@ -38,7 +47,7 @@
   var cv = root.querySelector('canvas'), ctx = cv.getContext('2d'); if (!ctx) return;
   var cards = [].slice.call(root.querySelectorAll('.ha-card')), vizEls = cards.map(function (c) { return c.querySelector('.ha-viz'); });
   var still = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var MIST = '191,216,236', PEACH = '245,200,181', W = 0, H = 0, dpr = 1, R = [], T = 12;
+  var MIST = '191,216,236', PEACH = '245,200,181', W = 0, H = 0, dpr = 1, R = [], T = 11; /* one loop of the travelling light, seconds */
   function rnd(i, k) { var x = Math.sin(i * 127.1 + k * 311.7) * 43758.5453; return x - Math.floor(x); }
   function ease(x) { x = Math.max(0, Math.min(1, x)); return x * x * (3 - 2 * x); }
   function layout() {
@@ -56,86 +65,81 @@
     ctx.strokeStyle = 'rgba(' + c + ',' + a + ')'; ctx.lineWidth = w || 1; ctx.setLineDash(dash || []);
     ctx.beginPath(); pts.forEach(function (p, i) { i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1]); }); ctx.stroke(); ctx.setLineDash([]);
   }
-  function check(x, y, s, a) { line([[x - s, y], [x - s * .3, y + s * .7], [x + s, y - s * .8]], '255,255,255', a, 1.5); }
-  /* RL post-training for generative models: noise condenses into a clean sample, then loosens again */
-  var IMP = []; for (var i = 0; i < 40; i++) IMP.push([rnd(i, 2), rnd(i, 3), i / 40]);
+  function check(x, y, s, a) { line([[x - s, y], [x - s * .3, y + s * .7], [x + s, y - s * .8]], '255,255,255', a, 1.6); }
+  /* 1 Master games: score bars grow past a dashed human line */
+  function games(r, u, on) {
+    var n = 7, bw = r.w / (n * 1.7), base = r.y + r.h - 6, hum = r.y + r.h * .45, g = ease(u / .45);
+    line([[r.x + 4, hum], [r.x + r.w - 4, hum]], '255,255,255', .45, 1, [3, 3]);
+    for (var i = 0; i < n; i++) {
+      var fin = .35 + .6 * rnd(i, 1) + (i > 2 ? .25 : 0), hh = (r.h - 12) * Math.min(1, fin) * g, x = r.x + r.w * .1 + i * bw * 1.7;
+      var over = base - hh < hum;
+      ctx.fillStyle = over ? 'rgba(' + MIST + ',' + (.55 + .35 * on) + ')' : 'rgba(255,255,255,.28)';
+      ctx.fillRect(x, base - hh, bw, hh);
+      if (over && g > .98) glow(x + bw / 2, base - hh, 1.8, MIST, .5 + .4 * on);
+    }
+  }
+  /* 2 Improve itself: noise condenses into a clean sample, then loosens again */
+  var IMP = []; for (var i = 0; i < 56; i++) IMP.push([rnd(i, 2), rnd(i, 3), i / 56]);
   function improve(r, u, on) {
     var c = Math.min(ease((u - .05) / .4), 1 - ease((u - .82) / .16)), cx = r.x + r.w / 2, cy = r.y + r.h / 2, rad = Math.min(r.w, r.h) * .36;
     for (var i = 0; i < IMP.length; i++) {
       var p = IMP[i], a = p[2] * 6.2832, k = 1 + .18 * Math.sin(a * 3);
-      var tx = cx + Math.cos(a) * rad * k * 1.5, ty = cy + Math.sin(a) * rad * k * .9;
-      var nx = r.x + 4 + p[0] * (r.w - 8), ny = r.y + 3 + p[1] * (r.h - 6);
-      glow(nx + (tx - nx) * c, ny + (ty - ny) * c, 1.4, MIST, .4 + .5 * c * (.6 + .4 * on));
+      var tx = cx + Math.cos(a) * rad * k * 1.25, ty = cy + Math.sin(a) * rad * k * .85;
+      var nx = r.x + 6 + p[0] * (r.w - 12), ny = r.y + 4 + p[1] * (r.h - 8);
+      glow(nx + (tx - nx) * c, ny + (ty - ny) * c, 1.6, MIST, .4 + .5 * c * (.6 + .4 * on));
     }
   }
-  /* multimodal reasoning: a sound wave feeds a chain of steps, each rewarded as it is taken */
-  function reason(r, u, on, t) {
-    var y = r.y + r.h * .62, wx = r.x + 4;
-    for (var b = 0; b < 5; b++) { var hh = 4 + 9 * Math.abs(Math.sin(t * 3 + b * 1.3)); ctx.fillStyle = 'rgba(' + MIST + ',.7)'; ctx.fillRect(wx + b * 4, y - hh / 2, 2.2, hh); }
-    var xs = []; for (var i = 0; i < 4; i++) xs.push(r.x + r.w * (.36 + .19 * i));
-    line([[r.x + 26, y], [xs[3], y]], '255,255,255', .3, 1.1);
-    for (i = 0; i < 4; i++) {
+  /* 3 Reason: a chain of steps, each rewarded as it is taken */
+  function reason(r, u, on) {
+    var n = 4, y = r.y + r.h * .62, xs = []; for (var i = 0; i < n; i++) xs.push(r.x + r.w * (.14 + .24 * i));
+    line([[xs[0], y], [xs[n - 1], y]], '255,255,255', .3, 1.2);
+    for (i = 0; i < n; i++) {
       var lit = ease((u - .08 - i * .14) / .06);
-      ctx.fillStyle = 'rgba(255,255,255,.18)'; ctx.beginPath(); ctx.arc(xs[i], y, 5, 0, 6.2832); ctx.fill();
-      if (lit > 0) { glow(xs[i], y, 3.4, MIST, .55 * lit + .3 * on * lit); check(xs[i], y - 15, 3.4, .9 * lit); }
+      ctx.fillStyle = 'rgba(255,255,255,.18)'; ctx.beginPath(); ctx.arc(xs[i], y, 7, 0, 6.2832); ctx.fill();
+      if (lit > 0) { glow(xs[i], y, 4.2, MIST, .55 * lit + .3 * on * lit); check(xs[i], y - 20, 4.2, .9 * lit); }
     }
   }
-  /* superhuman deep RL: scores climb past a dashed human line */
-  function games(r, u, on) {
-    var n = 7, bw = r.w / (n * 1.7), base = r.y + r.h - 3, hum = r.y + r.h * .42, g = ease(u / .45);
-    line([[r.x + 2, hum], [r.x + r.w - 2, hum]], '255,255,255', .5, 1, [3, 3]);
-    for (var i = 0; i < n; i++) {
-      var fin = .35 + .6 * rnd(i, 1) + (i > 2 ? .25 : 0), hh = (r.h - 6) * Math.min(1, fin) * g, x = r.x + r.w * .08 + i * bw * 1.7;
-      var over = base - hh < hum;
-      ctx.fillStyle = over ? 'rgba(' + MIST + ',' + (.6 + .35 * on) + ')' : 'rgba(255,255,255,.3)';
-      ctx.fillRect(x, base - hh, bw, hh);
-      if (over && g > .98) glow(x + bw / 2, base - hh, 1.6, MIST, .5 + .4 * on);
-    }
-  }
-  /* agentic RL: the agent calls tools in order; each call that executes is ticked */
+  /* 4 Act: the agent calls tools in order; each call that executes is ticked */
   function act(r, u, on) {
-    var ax = r.x + r.w * .14, ay = r.y + r.h / 2, tools = [0, 1, 2].map(function (k) { return [r.x + r.w * .66, r.y + r.h * (.17 + .33 * k)]; });
-    glow(ax, ay, 4, MIST, .7 + .3 * on);
+    var ax = r.x + r.w * .17, ay = r.y + r.h / 2, tools = [0, 1, 2].map(function (k) { return [r.x + r.w * .72, r.y + r.h * (.2 + .3 * k)]; });
+    glow(ax, ay, 4.5, MIST, .7 + .3 * on);
     for (var k = 0; k < 3; k++) {
-      var tp = tools[k], done = ease((u - .18 - k * .2) / .05);
-      ctx.strokeStyle = 'rgba(255,255,255,' + (.32 + .45 * done) + ')'; ctx.lineWidth = 1.1;
-      ctx.beginPath(); if (ctx.roundRect) ctx.roundRect(tp[0] - 12, tp[1] - 6, 24, 12, 4); else ctx.rect(tp[0] - 12, tp[1] - 6, 24, 12); ctx.stroke();
-      line([[ax + 5, ay], [tp[0] - 13, tp[1]]], '255,255,255', .15, 1);
-      if (done > 0) check(tp[0] + 19, tp[1], 3, .9 * done);
+      var t = tools[k], done = ease((u - .18 - k * .2) / .05);
+      ctx.strokeStyle = 'rgba(255,255,255,' + (.3 + .45 * done) + ')'; ctx.lineWidth = 1.2;
+      ctx.beginPath(); ctx.roundRect ? ctx.roundRect(t[0] - 14, t[1] - 7, 28, 14, 4) : ctx.rect(t[0] - 14, t[1] - 7, 28, 14); ctx.stroke();
+      line([[ax + 6, ay], [t[0] - 15, t[1]]], '255,255,255', .14, 1);
+      if (done > 0) check(t[0] + 22, t[1], 3.4, .9 * done);
       var go = (u - .06 - k * .2) / .12;
-      if (go > 0 && go < 1) { var e = ease(go); glow(ax + (tp[0] - 12 - ax) * e, ay + (tp[1] - ay) * e, 2, MIST, .9); }
+      if (go > 0 && go < 1) { var e = ease(go); glow(ax + (t[0] - 14 - ax) * e, ay + (t[1] - ay) * e, 2.2, MIST, .9); }
     }
   }
-  /* recursive self-improvement: a rising spiral, each loop a little higher than the last */
-  function spiral(r, u, on, t) {
-    var cx0 = r.x + r.w * .12, base = r.y + r.h - 6, pts = [], N = 90;
-    for (var i = 0; i <= N; i++) {
-      var s = i / N, a = s * 3 * 6.2832 - 1.5708, rad = 8 + 3 * s;
-      pts.push([cx0 + 4 + s * r.w * .66 + Math.cos(a) * rad, base - 4 - s * (r.h - 22) - Math.sin(a) * rad * .62]);
-    }
-    line(pts, '255,255,255', .45, 1.3);
-    var head = (t * .09) % 1, hi = Math.floor(head * N);
-    for (var j = 0; j < 8; j++) { var q = pts[Math.max(0, hi - j * 2)]; glow(q[0], q[1], 2.4 - j * .22, j ? MIST : '255,255,255', (.9 - j * .1) * (.75 + .25 * on)); }
-  }
-  /* agentic scientific discovery: a light keeps going round idea -> experiment -> analysis */
+  /* 5 Discover (next): a light keeps going round idea -> experiment -> analysis */
   function discover(r, u, on, t) {
-    var cx = r.x + r.w / 2, cy = r.y + r.h / 2, rr = Math.min(r.w, r.h) * .38;
-    ctx.strokeStyle = 'rgba(' + PEACH + ',.5)'; ctx.setLineDash([3, 4]); ctx.lineWidth = 1.1;
+    var cx = r.x + r.w / 2, cy = r.y + r.h / 2 + 2, rr = Math.min(r.w, r.h) * .36;
+    ctx.strokeStyle = 'rgba(' + PEACH + ',.45)'; ctx.setLineDash([3, 4]); ctx.lineWidth = 1.2;
     ctx.beginPath(); ctx.arc(cx, cy, rr, 0, 6.2832); ctx.stroke(); ctx.setLineDash([]);
-    for (var k = 0; k < 3; k++) { var a = -1.5708 + k * 2.0944; glow(cx + Math.cos(a) * rr, cy + Math.sin(a) * rr, 3, PEACH, .5 + .25 * on); }
     var a0 = t * 1.1;
-    for (var j = 0; j < 6; j++) { var b = a0 - j * .09; glow(cx + Math.cos(b) * rr, cy + Math.sin(b) * rr, 2 - j * .22, '255,255,255', (.8 - j * .12) * (.7 + .3 * on)); }
+    for (var k = 0; k < 3; k++) { var a = -1.5708 + k * 2.0944; glow(cx + Math.cos(a) * rr, cy + Math.sin(a) * rr, 3.4, PEACH, .45 + .25 * on); }
+    for (var j = 0; j < 6; j++) { var b = a0 - j * .09; glow(cx + Math.cos(b) * rr, cy + Math.sin(b) * rr, 2.2 - j * .25, '255,255,255', (.8 - j * .12) * (.7 + .3 * on)); }
   }
-  var DRAW = { improve: improve, reason: reason, games: games, act: act, spiral: spiral, discover: discover };
-  var keys = cards.map(function (c) { return c.getAttribute('data-k'); });
+  var DRAW = [games, improve, reason, act, discover];
+  function centre(r) { return [r.x + r.w / 2, r.y + r.h / 2]; }
   function draw(t) {
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H);
-    var n = R.length, hl = (t / 2.2) % n; /* a soft highlight walks across the six cards */
-    for (var i = 0; i < n; i++) {
-      var d = Math.abs(hl - i), on = still ? 0 : Math.max(0, 1 - Math.min(d, n - d) * 1.6);
-      var u = still ? .7 : ((t / T * 1.6 + i * .17) % 1);
-      ctx.save(); DRAW[keys[i]](R[i], u, on, still ? 4 : t); ctx.restore();
-      cards[i].classList.toggle('on', on > .6);
+    var lt = (t % T) / T, n = R.length, pos = lt * (n + .6) - .3, act = Math.max(0, Math.min(n - 1, Math.round(pos)));
+    /* the chain between drawings, and the light travelling along it */
+    for (var i = 0; i < n - 1; i++) {
+      var a = centre(R[i]), b = centre(R[i + 1]), horiz = Math.abs(b[0] - a[0]) > Math.abs(b[1] - a[1]);
+      var p0 = horiz ? [R[i].x + R[i].w + 2, a[1]] : [a[0], R[i].y + R[i].h + 2], p1 = horiz ? [R[i + 1].x - 2, b[1]] : [b[0], R[i + 1].y - 2];
+      line([p0, p1], i === n - 2 ? PEACH : '255,255,255', .22, 1, i === n - 2 ? [3, 4] : []);
+      var f = pos - i - .5;
+      if (f > 0 && f < 1) glow(p0[0] + (p1[0] - p0[0]) * f, p0[1] + (p1[1] - p0[1]) * f, 2.4, i === n - 2 ? PEACH : MIST, .95);
+    }
+    for (i = 0; i < n; i++) {
+      var on = Math.max(0, 1 - Math.abs(pos - i) * 1.4);
+      var u = still ? .7 : ((t / T * 1.6 + i * .17) % 1); /* each drawing loops on its own clock, offset so they never sync */
+      ctx.save(); DRAW[i](R[i], u, on, t); ctx.restore();
+      cards[i].classList.toggle('on', on > .55 && !still);
     }
   }
   var t0 = performance.now(), raf = 0, visible = true;
