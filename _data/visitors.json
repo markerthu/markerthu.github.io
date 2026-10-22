@@ -2,7 +2,7 @@
   "_updated": "2026-10-22",
   "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 807,
+  "_total": 808,
   "_days": 30,
   "_range": "Sep. 22nd - Oct. 22nd",
   "locations": [
@@ -347,7 +347,7 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 717
+      "count": 718
     },
     {
       "code": "SG",
@@ -636,7 +636,7 @@
     {
       "path": "/publications",
       "title": "Publications — Jiajun Fan",
-      "count": 37
+      "count": 38
     },
     {
       "path": "/year-archive",
@@ -753,7 +753,7 @@
     {
       "name": "Google",
       "id": "Google",
-      "count": 117
+      "count": 118
     },
     {
       "name": "www.jiajunfan.com/projects",
@@ -870,7 +870,7 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 520
+      "count": 521
     },
     {
       "name": "Safari",
@@ -892,7 +892,7 @@
     {
       "name": "macOS",
       "id": "macOS",
-      "count": 384
+      "count": 385
     },
     {
       "name": "iOS",
@@ -1038,21 +1038,32 @@
     },
     {
       "day": "2026-10-22",
-      "n": 2
+      "n": 3
     }
   ],
   "periods": {
-    "today": 2,
+    "today": 3,
     "yesterday": 71,
-    "d7": 249,
+    "d7": 250,
     "d7_prev": 196,
-    "d30": 807,
+    "d30": 808,
     "d30_prev": 622,
-    "day_frac": 0.031,
+    "day_frac": 0.287,
     "yesterday_day": "2026-10-21"
   },
-  "_last_visit": "2026-10-22 00:10",
+  "_last_visit": "2026-10-22 01:25",
   "recent": [
+    {
+      "date": "2026-10-22 01:25",
+      "ts": "2026-10-22T08:25:19Z",
+      "loc": "United States",
+      "path": "/publications",
+      "ref": "Google",
+      "browser": "Chrome 153",
+      "system": "macOS 10.15",
+      "screen": "1512px",
+      "first": true
+    },
     {
       "date": "2026-10-22 00:10",
       "ts": "2026-10-22T07:10:08Z",
@@ -1371,19 +1382,8 @@
       "system": "macOS 10.15",
       "screen": "1512px",
       "first": false
-    },
-    {
-      "date": "2026-10-21 22:13",
-      "ts": "2026-10-22T05:13:02Z",
-      "loc": "Minnesota, US",
-      "path": "/",
-      "ref": "scholar.google.com",
-      "browser": "Chrome 150",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": false
     }
   ],
-  "_recent_total": 3363,
+  "_recent_total": 3364,
   "_recent_shown": 30
 }
