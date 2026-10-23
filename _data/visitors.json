@@ -2,7 +2,7 @@
   "_updated": "2026-10-23",
   "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 810,
+  "_total": 812,
   "_days": 30,
   "_range": "Sep. 23rd - Oct. 23rd",
   "locations": [
@@ -39,20 +39,20 @@
       "r": 2.26
     },
     {
+      "code": "JP",
+      "name": "Japan",
+      "count": 17,
+      "cx": 316.0,
+      "cy": 48.3,
+      "r": 2.26
+    },
+    {
       "code": "SG",
       "name": "Singapore",
       "count": 17,
       "cx": 283.8,
       "cy": 82.7,
       "r": 2.26
-    },
-    {
-      "code": "JP",
-      "name": "Japan",
-      "count": 15,
-      "cx": 316.0,
-      "cy": 48.3,
-      "r": 2.23
     },
     {
       "code": "US",
@@ -342,14 +342,14 @@
       "count": 724
     },
     {
-      "code": "SG",
-      "name": "Singapore",
+      "code": "JP",
+      "name": "Japan",
       "count": 17
     },
     {
-      "code": "JP",
-      "name": "Japan",
-      "count": 15
+      "code": "SG",
+      "name": "Singapore",
+      "count": 17
     },
     {
       "code": "CN",
@@ -608,7 +608,7 @@
     {
       "path": "/",
       "title": "Jiajun Fan",
-      "count": 369
+      "count": 370
     },
     {
       "path": "/cv",
@@ -666,13 +666,13 @@
       "count": 11
     },
     {
-      "path": "/projects/speechgym",
-      "title": "SpeechGym — Training Voice Agents with RL | Jiajun Fan",
-      "count": 8
-    },
-    {
       "path": "/projects/adrpo",
       "title": "ADRPO — Adaptive Divergence for Generative Models | NeurIPS 2025",
+      "count": 9
+    },
+    {
+      "path": "/projects/speechgym",
+      "title": "SpeechGym — Training Voice Agents with RL | Jiajun Fan",
       "count": 8
     },
     {
@@ -740,7 +740,7 @@
     {
       "name": "www.jiajunfan.com",
       "id": "www.jiajunfan.com",
-      "count": 200
+      "count": 201
     },
     {
       "name": "Google",
@@ -848,13 +848,13 @@
       "count": 1
     },
     {
-      "name": "www.jiajunfan.com/projects/adrpo",
-      "id": "www.jiajunfan.com/projects/adrpo",
+      "name": "eurekashen.github.io",
+      "id": "eurekashen.github.io",
       "count": 1
     },
     {
-      "name": "mmlab-sigs.github.io",
-      "id": "mmlab-sigs.github.io",
+      "name": "www.jiajunfan.com/projects/adrpo",
+      "id": "www.jiajunfan.com/projects/adrpo",
       "count": 1
     }
   ],
@@ -862,7 +862,7 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 518
+      "count": 520
     },
     {
       "name": "Safari",
@@ -894,7 +894,7 @@
     {
       "name": "Windows",
       "id": "Windows",
-      "count": 105
+      "count": 107
     },
     {
       "name": "Android",
@@ -1030,21 +1030,87 @@
     },
     {
       "day": "2026-10-23",
-      "n": 0
+      "n": 2
     }
   ],
   "periods": {
-    "today": 0,
+    "today": 2,
     "yesterday": 18,
-    "d7": 238,
+    "d7": 240,
     "d7_prev": 197,
-    "d30": 810,
+    "d30": 812,
     "d30_prev": 613,
-    "day_frac": 0.274,
+    "day_frac": 0.478,
     "yesterday_day": "2026-10-22"
   },
-  "_last_visit": "2026-10-23 04:12",
+  "_last_visit": "2026-10-23 11:16",
   "recent": [
+    {
+      "date": "2026-10-23 11:16",
+      "ts": "2026-10-23T18:16:53Z",
+      "loc": "Japan",
+      "path": "/projects/adrpo",
+      "ref": "www.jiajunfan.com",
+      "browser": "Chrome 156",
+      "system": "Windows 10",
+      "screen": "1280px",
+      "first": true
+    },
+    {
+      "date": "2026-10-23 11:13",
+      "ts": "2026-10-23T18:13:02Z",
+      "loc": "Japan",
+      "path": "/",
+      "ref": "eurekashen.github.io",
+      "browser": "Chrome 156",
+      "system": "Windows 10",
+      "screen": "1280px",
+      "first": false
+    },
+    {
+      "date": "2026-10-23 11:03",
+      "ts": "2026-10-23T18:03:23Z",
+      "loc": "Japan",
+      "path": "/",
+      "ref": "eurekashen.github.io",
+      "browser": "Chrome 156",
+      "system": "Windows 10",
+      "screen": "1280px",
+      "first": true
+    },
+    {
+      "date": "2026-10-23 07:14",
+      "ts": "2026-10-23T14:14:12Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": false
+    },
+    {
+      "date": "2026-10-23 07:14",
+      "ts": "2026-10-23T14:14:15Z",
+      "loc": "Illinois, US",
+      "path": "/visitors",
+      "ref": "www.jiajunfan.com",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": false
+    },
+    {
+      "date": "2026-10-23 07:04",
+      "ts": "2026-10-23T14:04:38Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": false
+    },
     {
       "date": "2026-10-23 04:12",
       "ts": "2026-10-23T11:12:14Z",
@@ -1308,74 +1374,8 @@
       "system": "iOS 26.6",
       "screen": "430px",
       "first": true
-    },
-    {
-      "date": "2026-10-22 10:22",
-      "ts": "2026-10-22T17:22:32Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "www.jiajunfan.com",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": false
-    },
-    {
-      "date": "2026-10-22 10:22",
-      "ts": "2026-10-22T17:22:34Z",
-      "loc": "Illinois, US",
-      "path": "/projects",
-      "ref": "www.jiajunfan.com",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": true
-    },
-    {
-      "date": "2026-10-22 10:22",
-      "ts": "2026-10-22T17:22:39Z",
-      "loc": "Illinois, US",
-      "path": "/publications",
-      "ref": "www.jiajunfan.com/projects",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": true
-    },
-    {
-      "date": "2026-10-22 10:22",
-      "ts": "2026-10-22T17:22:41Z",
-      "loc": "Illinois, US",
-      "path": "/projects",
-      "ref": "www.jiajunfan.com/publications",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": false
-    },
-    {
-      "date": "2026-10-22 10:21",
-      "ts": "2026-10-22T17:21:41Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": true
-    },
-    {
-      "date": "2026-10-22 10:21",
-      "ts": "2026-10-22T17:21:49Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": false
     }
   ],
-  "_recent_total": 3396,
+  "_recent_total": 3402,
   "_recent_shown": 30
 }
