@@ -524,6 +524,7 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
         /* on phones the bubble sits over the text: drop it as soon as the reader scrolls */
         if(window.matchMedia('(max-width: 700px)').matches){
           window.addEventListener('scroll', function(){ tip.classList.remove('show'); }, {passive:true, once:true});
+          setTimeout(function(){ tip.classList.remove('show'); }, 3400); /* a short hello on phones, then out of the text */
         }
       },2600);
       setTimeout(function(){ tip.classList.remove('show'); },9000);
