@@ -2,7 +2,7 @@
   "_updated": "2026-10-24",
   "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 798,
+  "_total": 800,
   "_days": 30,
   "_range": "Sep. 24th - Oct. 24th",
   "locations": [
@@ -25,10 +25,10 @@
     {
       "code": "US",
       "name": "Oregon, US",
-      "count": 18,
+      "count": 19,
       "cx": 59.2,
       "cy": 39.7,
-      "r": 2.28
+      "r": 2.29
     },
     {
       "code": "US",
@@ -331,7 +331,7 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 718
+      "count": 720
     },
     {
       "code": "JP",
@@ -438,7 +438,7 @@
       "country": "US",
       "country_name": "United States",
       "name": "Oregon",
-      "count": 18,
+      "count": 19,
       "located": true
     },
     {
@@ -593,7 +593,7 @@
     {
       "path": "/",
       "title": "Jiajun Fan",
-      "count": 360
+      "count": 361
     },
     {
       "path": "/cv",
@@ -676,6 +676,11 @@
       "count": 4
     },
     {
+      "path": "/projects/gdi",
+      "title": "GDI — 22 Atari World Records | ICML 2022",
+      "count": 4
+    },
+    {
       "path": "/posts/2025/10/inverse-scaling-audio-llms",
       "title": "Test-Time Inverse Scaling in Audio LLMs — Jiajun Fan",
       "count": 3
@@ -688,11 +693,6 @@
     {
       "path": "/projects/ac-flow",
       "title": "AC-Flow — Actor-Critic for Flow Matching | Preprint 2025",
-      "count": 3
-    },
-    {
-      "path": "/projects/gdi",
-      "title": "GDI — 22 Atari World Records | ICML 2022",
       "count": 3
     },
     {
@@ -720,7 +720,7 @@
     {
       "name": "(unknown)",
       "id": "",
-      "count": 311
+      "count": 312
     },
     {
       "name": "www.jiajunfan.com",
@@ -730,7 +730,7 @@
     {
       "name": "Google",
       "id": "Google",
-      "count": 117
+      "count": 118
     },
     {
       "name": "www.jiajunfan.com/projects",
@@ -847,7 +847,7 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 515
+      "count": 517
     },
     {
       "name": "Safari",
@@ -879,7 +879,7 @@
     {
       "name": "Windows",
       "id": "Windows",
-      "count": 104
+      "count": 105
     },
     {
       "name": "Android",
@@ -889,7 +889,7 @@
     {
       "name": "Linux",
       "id": "Linux",
-      "count": 17
+      "count": 18
     }
   ],
   "daily": [
@@ -1015,21 +1015,43 @@
     },
     {
       "day": "2026-10-24",
-      "n": 0
+      "n": 2
     }
   ],
   "periods": {
-    "today": 0,
+    "today": 2,
     "yesterday": 7,
-    "d7": 237,
+    "d7": 239,
     "d7_prev": 177,
-    "d30": 798,
+    "d30": 800,
     "d30_prev": 596,
-    "day_frac": 0.017,
+    "day_frac": 0.24,
     "yesterday_day": "2026-10-23"
   },
-  "_last_visit": "2026-10-23 23:54",
+  "_last_visit": "2026-10-24 03:25",
   "recent": [
+    {
+      "date": "2026-10-24 03:25",
+      "ts": "2026-10-24T10:25:27Z",
+      "loc": "United States",
+      "path": "/",
+      "ref": "Google",
+      "browser": "Chrome 155",
+      "system": "Windows 10",
+      "screen": "1756px",
+      "first": true
+    },
+    {
+      "date": "2026-10-24 00:33",
+      "ts": "2026-10-24T07:33:39Z",
+      "loc": "Oregon, US",
+      "path": "/projects/gdi",
+      "ref": "",
+      "browser": "Chrome 156",
+      "system": "Linux",
+      "screen": "1280px",
+      "first": true
+    },
     {
       "date": "2026-10-23 23:54",
       "ts": "2026-10-24T06:54:57Z",
@@ -1337,30 +1359,8 @@
       "system": "iOS 26.6",
       "screen": "430px",
       "first": true
-    },
-    {
-      "date": "2026-10-22 21:25",
-      "ts": "2026-10-23T04:25:29Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": false
-    },
-    {
-      "date": "2026-10-22 21:25",
-      "ts": "2026-10-23T04:25:31Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": false
     }
   ],
-  "_recent_total": 3413,
+  "_recent_total": 3415,
   "_recent_shown": 30
 }
