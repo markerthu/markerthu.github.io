@@ -85,7 +85,7 @@ def main():
             hist = json.load(f)
     today = datetime.date.today().isoformat()
     hist = [h for h in hist if h.get("date") != today]
-    hist.append({"date": today, "total": int(total)})
+    hist.append({"date": today, "total": int(cur["_total"])})  # the number the site shows (monotonic), not a lagging fetch
     hist.sort(key=lambda h: h["date"])
     with open(HIST, "w", encoding="utf-8") as f:
         json.dump(hist, f, indent=2, ensure_ascii=False); f.write("\n")
