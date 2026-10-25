@@ -2,7 +2,7 @@
   "_updated": "2026-10-25",
   "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 807,
+  "_total": 808,
   "_days": 30,
   "_range": "Sep. 25th - Oct. 25th",
   "locations": [
@@ -25,10 +25,10 @@
     {
       "code": "US",
       "name": "Oregon, US",
-      "count": 19,
+      "count": 20,
       "cx": 59.2,
       "cy": 39.7,
-      "r": 2.29
+      "r": 2.3
     },
     {
       "code": "SG",
@@ -363,7 +363,7 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 726
+      "count": 727
     },
     {
       "code": "SG",
@@ -490,7 +490,7 @@
       "country": "US",
       "country_name": "United States",
       "name": "Oregon",
-      "count": 19,
+      "count": 20,
       "located": true
     },
     {
@@ -728,6 +728,11 @@
       "count": 4
     },
     {
+      "path": "/projects/orw-cfm-w2",
+      "title": "ORW-CFM-W2 — Flow Matching RLHF | ICLR 2025",
+      "count": 4
+    },
+    {
       "path": "/projects/gdi",
       "title": "GDI — 22 Atari World Records | ICML 2022",
       "count": 4
@@ -740,11 +745,6 @@
     {
       "path": "/posts/2025/10/inverse-scaling-audio-llms",
       "title": "Test-Time Inverse Scaling in Audio LLMs — Jiajun Fan",
-      "count": 3
-    },
-    {
-      "path": "/projects/orw-cfm-w2",
-      "title": "ORW-CFM-W2 — Flow Matching RLHF | ICLR 2025",
       "count": 3
     },
     {
@@ -772,7 +772,7 @@
     {
       "name": "(unknown)",
       "id": "",
-      "count": 316
+      "count": 317
     },
     {
       "name": "www.jiajunfan.com",
@@ -899,7 +899,7 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 519
+      "count": 520
     },
     {
       "name": "Safari",
@@ -941,7 +941,7 @@
     {
       "name": "Linux",
       "id": "Linux",
-      "count": 19
+      "count": 20
     }
   ],
   "daily": [
@@ -1067,21 +1067,32 @@
     },
     {
       "day": "2026-10-25",
-      "n": 6
+      "n": 7
     }
   ],
   "periods": {
-    "today": 6,
+    "today": 7,
     "yesterday": 20,
-    "d7": 245,
+    "d7": 246,
     "d7_prev": 182,
-    "d30": 807,
+    "d30": 808,
     "d30_prev": 566,
-    "day_frac": 0.26,
+    "day_frac": 0.445,
     "yesterday_day": "2026-10-24"
   },
-  "_last_visit": "2026-10-25 04:32",
+  "_last_visit": "2026-10-25 08:25",
   "recent": [
+    {
+      "date": "2026-10-25 08:25",
+      "ts": "2026-10-25T15:25:54Z",
+      "loc": "Oregon, US",
+      "path": "/projects/orw-cfm-w2",
+      "ref": "",
+      "browser": "Chrome 156",
+      "system": "Linux",
+      "screen": "1280px",
+      "first": true
+    },
     {
       "date": "2026-10-25 04:32",
       "ts": "2026-10-25T11:32:42Z",
@@ -1400,19 +1411,8 @@
       "system": "macOS 10.15",
       "screen": "1512px",
       "first": false
-    },
-    {
-      "date": "2026-10-24 16:51",
-      "ts": "2026-10-24T23:51:05Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 152",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": false
     }
   ],
-  "_recent_total": 3459,
+  "_recent_total": 3460,
   "_recent_shown": 30
 }
