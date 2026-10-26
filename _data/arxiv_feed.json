@@ -1,6 +1,78 @@
 {
-  "updated": "2026-10-19",
+  "updated": "2026-10-26",
   "papers": [
+    {
+      "id": "2610.32881",
+      "title": "NgramRL: Accelerating RL Post-Training for Structured Generation via Rollout-Aware N-gram Speculative Decoding",
+      "authors": "Nilesh Prasad Pandey, Jangseon Park, Jason Kong et al.",
+      "summary": "Reinforcement learning (RL) post-training improves the reasoning capabilities of large language models, but its cost is dominated by autoregressive rollout generation, which can exceed 70% of training…",
+      "date": "2026-10-23",
+      "tag": "RL Training",
+      "url": "https://arxiv.org/abs/2610.32881"
+    },
+    {
+      "id": "2610.32770",
+      "title": "On-Policy Self-Training: Data-Free Self-Improvement in Large Language Models",
+      "authors": "Leon Sick, Lukas Hoyer, Yannick Strümpler et al.",
+      "summary": "On-policy self-distillation enables post-training foundation models without relying on stronger external teachers. However, existing approaches rely on ground-truth question-answer pairs, human-curate…",
+      "date": "2026-10-23",
+      "tag": "Self-Improvement",
+      "url": "https://arxiv.org/abs/2610.32770"
+    },
+    {
+      "id": "2610.29411",
+      "title": "The Predictive--Optimization Gap in GuanDan Self-Play",
+      "authors": "Qicheng Zou, Biao Yuan, Siyu Song et al.",
+      "summary": "Outcome-predictive signals are often treated as promising optimization targets in reinforcement learning, but predictive validity and optimization utility are different claims. We expose this distinct…",
+      "date": "2026-10-21",
+      "tag": "Self-Improvement",
+      "url": "https://arxiv.org/abs/2610.29411"
+    },
+    {
+      "id": "2610.29121",
+      "title": "Recursive Self-Improvement on a Budget: Scoring Code Edits Before They Run",
+      "authors": "Erfan Darzi, Sree Bhargavi Balija, Sheng He",
+      "summary": "A coding agent that rewrites its own scaffold has to choose which proposed edit to expand before that edit has been evaluated, and the search then has to return one agent. Each run fits one linear rea…",
+      "date": "2026-10-21",
+      "tag": "Self-Improvement",
+      "url": "https://arxiv.org/abs/2610.29121"
+    },
+    {
+      "id": "2610.27610",
+      "title": "Auditing the Product, Not the Recursion: The Evaluation Evidence Behind Recursive Self-Improvement Claims",
+      "authors": "Zihan Chen, Di Zhu, Lei Nico Zheng",
+      "summary": "Recursive self-improvement (RSI) promises AI systems, such as self-evolving LLM agents, that become better at producing further improvements. Evaluating this promise requires separating product claims…",
+      "date": "2026-10-20",
+      "tag": "Self-Improvement",
+      "url": "https://arxiv.org/abs/2610.27610"
+    },
+    {
+      "id": "2610.26770",
+      "title": "HarnessPro: Recursive Harness Self-Improvement with Pareto Optimization for Performance-Cost Trade-offs",
+      "authors": "Zhuoshi Pan, ZhiYuan Feng, Yukuo Cen et al.",
+      "summary": "Harness development plays a crucial role in building capable AI agents. Recent approaches improve harnesses through recursive self-improvement (RSI), but their performance gains often come with higher…",
+      "date": "2026-10-19",
+      "tag": "Self-Improvement",
+      "url": "https://arxiv.org/abs/2610.26770"
+    },
+    {
+      "id": "2610.25599",
+      "title": "Text Dominance in Paralinguistic Conflict: Tracing Suppression Through Audio LLM Circuits",
+      "authors": "Ankur Banerjee, Vishnu Guntakala, Danity Pike et al.",
+      "summary": "Audio LLMs deployed in settings such as crisis hotlines and customer support are only useful beyond speech-to-text pipelines if they use acoustic cues rather than the transcript alone. We test whether…",
+      "date": "2026-10-19",
+      "tag": "Audio Reasoning",
+      "url": "https://arxiv.org/abs/2610.25599"
+    },
+    {
+      "id": "2610.25325",
+      "title": "Where Groups Split: A Probe Prior for Nonzero Within-Group Variance in RL Post-Training",
+      "authors": "Jonah Ellison, Mateo Ruiz, Owen Pell et al.",
+      "summary": "Group relative policy optimization learns from a prompt only when the rewards in the sampled group disagree. With a binary verifier, a group that is entirely correct or entirely incorrect has within-g…",
+      "date": "2026-10-18",
+      "tag": "RL Training",
+      "url": "https://arxiv.org/abs/2610.25325"
+    },
     {
       "id": "2610.23223",
       "title": "Process Reward Modeling with Reliability- and Conservatism-Aware Bayesian Belief",
@@ -9,78 +81,6 @@
       "date": "2026-10-16",
       "tag": "Reasoning",
       "url": "https://arxiv.org/abs/2610.23223"
-    },
-    {
-      "id": "2610.22290",
-      "title": "EliteReplay: Preserving Diverse Solutions in RL Post-Training via Quality-Diversity Search",
-      "authors": "Hanane Nour Moussa, Doeun Lee, Sachin Kumar",
-      "summary": "Reinforcement learning has become a common post-training technique to improve the accuracy of LLMs on verifiable tasks. However, such training can narrow the set of solutions the model can produce. Se…",
-      "date": "2026-10-15",
-      "tag": "RL Training",
-      "url": "https://arxiv.org/abs/2610.22290"
-    },
-    {
-      "id": "2610.21640",
-      "title": "ReFlow: Replay-Driven Decoupling for Efficient RL Post-Training",
-      "authors": "Yukun Tian, Junwei Su, Haofeng Xu et al.",
-      "summary": "Reinforcement learning (RL) has been a critical paradigm for improving large language model (LLM) reasoning and agentic capabilities, but its efficiency remains a major bottleneck. Existing RL systems…",
-      "date": "2026-10-15",
-      "tag": "Flow Matching",
-      "url": "https://arxiv.org/abs/2610.21640"
-    },
-    {
-      "id": "2610.21646",
-      "title": "The Self-Improvement Problem",
-      "authors": "Brian B. Moser, Stanislav Frolov, Tobias C. Nauen et al.",
-      "summary": "With the rise of large language models, agentic systems are becoming increasingly autonomous, as they write code, call tools, revise prompts, and propose modifications to their own components. This au…",
-      "date": "2026-10-15",
-      "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2610.21646"
-    },
-    {
-      "id": "2610.22448",
-      "title": "Lean4AgenticRL: Advancing Agentic RL with Verifiable Multi-level Process Rewards",
-      "authors": "Ruida Wang, Gerald Friedland, Tong Zhang et al.",
-      "summary": "Enhancing the agentic capabilities of Large Language Models (LLMs) to tackle complex software engineering (SWE) and general terminal-usage problems is a pressing challenge. Current state-of-the-art LL…",
-      "date": "2026-10-15",
-      "tag": "Reasoning",
-      "url": "https://arxiv.org/abs/2610.22448"
-    },
-    {
-      "id": "2610.21147",
-      "title": "All-in-One Memory: Process-Rewarded Reinforcement Learning for Memory Agents",
-      "authors": "Bingbing Wang, Jingjie Lin, Weiming Qiao et al.",
-      "summary": "Large language models increasingly rely on external memory to answer queries grounded in long-horizon histories such as multi-session dialogues and lengthy documents. However, existing memory methods …",
-      "date": "2026-10-15",
-      "tag": "RL Training",
-      "url": "https://arxiv.org/abs/2610.21147"
-    },
-    {
-      "id": "2610.21016",
-      "title": "CausalEvo: Causal Skill Self-Evolution for Health LLM Agents",
-      "authors": "Yuchen Zhang",
-      "summary": "Large language model (LLM) agents for health can accumulate reusable textual skills from task feedback, such as calculation criteria, measurement time points, and formula units. Deciding which skills …",
-      "date": "2026-10-14",
-      "tag": "RL Training",
-      "url": "https://arxiv.org/abs/2610.21016"
-    },
-    {
-      "id": "2610.20866",
-      "title": "SHRED: Self-Play for Heterogeneous Road-Users without Expert Demonstrations",
-      "authors": "Wei-Jer Chang, Zhouchonghao Wu, Akshay Rangesh et al.",
-      "summary": "Realistic traffic simulation and autonomous planning both depend on modeling interactions among heterogeneous road users whose dynamics, constraints, and behaviors differ fundamentally. Existing appro…",
-      "date": "2026-10-14",
-      "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2610.20866"
-    },
-    {
-      "id": "2610.20294",
-      "title": "MMLA-RSI: Recursive Self-Improvement through RTT and RTMA",
-      "authors": "Junyi Zou, Avrova Donz",
-      "summary": "An agent can improve its behavior within an unresolved problem by changing how it acts and which experience it retains. We propose MMLA-RSI, a recursive self-improvement scheme with two implementation…",
-      "date": "2026-10-14",
-      "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2610.20294"
     }
   ]
 }
