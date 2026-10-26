@@ -2,14 +2,14 @@
   "_updated": "2026-10-26",
   "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 805,
+  "_total": 814,
   "_days": 30,
   "_range": "Sep. 26th - Oct. 26th",
   "locations": [
     {
       "code": "US",
       "name": "Illinois, US",
-      "count": 451,
+      "count": 452,
       "cx": 90.8,
       "cy": 44.6,
       "r": 4.2
@@ -103,6 +103,14 @@
       "r": 2.16
     },
     {
+      "code": "TW",
+      "name": "Taiwan",
+      "count": 10,
+      "cx": 301.0,
+      "cy": 60.3,
+      "r": 2.16
+    },
+    {
       "code": "US",
       "name": "Florida, US",
       "count": 8,
@@ -121,9 +129,17 @@
     {
       "code": "DE",
       "name": "Germany",
-      "count": 7,
+      "count": 8,
       "cx": 190.7,
       "cy": 33.0,
+      "r": 2.12
+    },
+    {
+      "code": "NL",
+      "name": "Netherlands",
+      "count": 7,
+      "cx": 185.5,
+      "cy": 31.9,
       "r": 2.1
     },
     {
@@ -148,14 +164,6 @@
       "count": 6,
       "cx": 270.6,
       "cy": 60.6,
-      "r": 2.08
-    },
-    {
-      "code": "NL",
-      "name": "Netherlands",
-      "count": 6,
-      "cx": 185.5,
-      "cy": 31.9,
       "r": 2.08
     },
     {
@@ -196,14 +204,6 @@
       "count": 4,
       "cx": 102.5,
       "cy": 43.0,
-      "r": 2.03
-    },
-    {
-      "code": "TW",
-      "name": "Taiwan",
-      "count": 4,
-      "cx": 301.0,
-      "cy": 60.3,
       "r": 2.03
     },
     {
@@ -363,7 +363,7 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 720
+      "count": 721
     },
     {
       "code": "SG",
@@ -381,6 +381,11 @@
       "count": 10
     },
     {
+      "code": "TW",
+      "name": "Taiwan",
+      "count": 10
+    },
+    {
       "code": "CN",
       "name": "China",
       "count": 9
@@ -388,6 +393,11 @@
     {
       "code": "DE",
       "name": "Germany",
+      "count": 8
+    },
+    {
+      "code": "NL",
+      "name": "Netherlands",
       "count": 7
     },
     {
@@ -396,19 +406,9 @@
       "count": 6
     },
     {
-      "code": "NL",
-      "name": "Netherlands",
-      "count": 6
-    },
-    {
       "code": "CA",
       "name": "Canada",
       "count": 5
-    },
-    {
-      "code": "TW",
-      "name": "Taiwan",
-      "count": 4
     },
     {
       "code": "HK",
@@ -476,7 +476,7 @@
       "country": "US",
       "country_name": "United States",
       "name": "Illinois",
-      "count": 451,
+      "count": 452,
       "located": true
     },
     {
@@ -645,12 +645,12 @@
     {
       "path": "/",
       "title": "Jiajun Fan",
-      "count": 354
+      "count": 355
     },
     {
       "path": "/cv",
       "title": "CV — Jiajun Fan",
-      "count": 88
+      "count": 90
     },
     {
       "path": "/visitors",
@@ -665,12 +665,12 @@
     {
       "path": "/projects",
       "title": "Research Projects — Jiajun Fan",
-      "count": 41
+      "count": 42
     },
     {
       "path": "/year-archive",
       "title": "Blog - Jiajun Fan",
-      "count": 28
+      "count": 29
     },
     {
       "path": "/projects/procedure-aware-rl",
@@ -680,7 +680,7 @@
     {
       "path": "/posts/2026/08/speechgym-voice-agent-rl",
       "title": "Voice Agents Could Be Ranked, Never Improved. We Closed the Loop. — Jiajun Fan",
-      "count": 19
+      "count": 20
     },
     {
       "path": "/projects/cesar",
@@ -700,17 +700,17 @@
     {
       "path": "/contact",
       "title": "Contact - Jiajun Fan",
-      "count": 12
+      "count": 13
+    },
+    {
+      "path": "/projects/speechgym",
+      "title": "SpeechGym — Training Voice Agents with RL | Jiajun Fan",
+      "count": 9
     },
     {
       "path": "/projects/adrpo",
       "title": "ADRPO — Adaptive Divergence for Generative Models | NeurIPS 2025",
       "count": 9
-    },
-    {
-      "path": "/projects/speechgym",
-      "title": "SpeechGym — Training Voice Agents with RL | Jiajun Fan",
-      "count": 8
     },
     {
       "path": "/projects/read-the-mind",
@@ -725,7 +725,7 @@
     {
       "path": "/projects/orw-cfm-w2",
       "title": "ORW-CFM-W2 — Flow Matching RLHF | ICLR 2025",
-      "count": 5
+      "count": 6
     },
     {
       "path": "/projects/lbc",
@@ -772,7 +772,7 @@
     {
       "name": "(unknown)",
       "id": "",
-      "count": 315
+      "count": 319
     },
     {
       "name": "www.jiajunfan.com",
@@ -792,7 +792,7 @@
     {
       "name": "www.jiajunfan.com/year-archive",
       "id": "www.jiajunfan.com/year-archive",
-      "count": 22
+      "count": 23
     },
     {
       "name": "scholar.google.com",
@@ -802,7 +802,7 @@
     {
       "name": "www.jiajunfan.com/cv",
       "id": "www.jiajunfan.com/cv",
-      "count": 15
+      "count": 16
     },
     {
       "name": "www.jiajunfan.com/publications",
@@ -835,13 +835,13 @@
       "count": 4
     },
     {
-      "name": "luma.com",
-      "id": "luma.com",
-      "count": 3
-    },
-    {
       "name": "www.jiajunfan.com/contact",
       "id": "www.jiajunfan.com/contact",
+      "count": 4
+    },
+    {
+      "name": "luma.com",
+      "id": "luma.com",
       "count": 3
     },
     {
@@ -857,6 +857,11 @@
     {
       "name": "colm.cc",
       "id": "colm.cc",
+      "count": 2
+    },
+    {
+      "name": "www.jiajunfan.com/projects/speechgym",
+      "id": "www.jiajunfan.com/projects/speechgym",
       "count": 2
     },
     {
@@ -880,18 +885,13 @@
       "count": 1
     },
     {
+      "name": "www.jiajunfan.com/posts/2026/08/speechgym-voice-agent-rl",
+      "id": "www.jiajunfan.com/posts/2026/08/speechgym-voice-agent-rl",
+      "count": 1
+    },
+    {
       "name": "eurekashen.github.io",
       "id": "eurekashen.github.io",
-      "count": 1
-    },
-    {
-      "name": "mmlab-sigs.github.io",
-      "id": "mmlab-sigs.github.io",
-      "count": 1
-    },
-    {
-      "name": "www.jiajunfan.com/blog/reading-papers",
-      "id": "www.jiajunfan.com/blog/reading-papers",
       "count": 1
     }
   ],
@@ -899,12 +899,12 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 515
+      "count": 523
     },
     {
       "name": "Safari",
       "id": "Safari",
-      "count": 298
+      "count": 299
     },
     {
       "name": "Firefox",
@@ -921,17 +921,17 @@
     {
       "name": "macOS",
       "id": "macOS",
-      "count": 378
+      "count": 379
     },
     {
       "name": "iOS",
       "id": "iOS",
-      "count": 286
+      "count": 287
     },
     {
       "name": "Windows",
       "id": "Windows",
-      "count": 103
+      "count": 110
     },
     {
       "name": "Android",
@@ -1067,21 +1067,131 @@
     },
     {
       "day": "2026-10-26",
-      "n": 1
+      "n": 10
     }
   ],
   "periods": {
-    "today": 1,
+    "today": 10,
     "yesterday": 16,
-    "d7": 193,
+    "d7": 202,
     "d7_prev": 212,
-    "d30": 805,
+    "d30": 814,
     "d30_prev": 563,
-    "day_frac": 0.038,
+    "day_frac": 0.345,
     "yesterday_day": "2026-10-25"
   },
-  "_last_visit": "2026-10-26 00:32",
+  "_last_visit": "2026-10-26 07:42",
   "recent": [
+    {
+      "date": "2026-10-26 07:42",
+      "ts": "2026-10-26T14:42:02Z",
+      "loc": "Taiwan",
+      "path": "/projects",
+      "ref": "www.jiajunfan.com/contact",
+      "browser": "Chrome 155",
+      "system": "Windows 10",
+      "screen": "2560px",
+      "first": true
+    },
+    {
+      "date": "2026-10-26 07:41",
+      "ts": "2026-10-26T14:41:59Z",
+      "loc": "Taiwan",
+      "path": "/contact",
+      "ref": "www.jiajunfan.com/cv",
+      "browser": "Chrome 155",
+      "system": "Windows 10",
+      "screen": "2560px",
+      "first": false
+    },
+    {
+      "date": "2026-10-26 07:40",
+      "ts": "2026-10-26T14:40:01Z",
+      "loc": "Taiwan",
+      "path": "/cv",
+      "ref": "www.jiajunfan.com/posts/2026/08/speechgym-voice-agent-rl",
+      "browser": "Chrome 155",
+      "system": "Windows 10",
+      "screen": "2560px",
+      "first": true
+    },
+    {
+      "date": "2026-10-26 07:40",
+      "ts": "2026-10-26T14:40:10Z",
+      "loc": "Taiwan",
+      "path": "/contact",
+      "ref": "www.jiajunfan.com/cv",
+      "browser": "Chrome 155",
+      "system": "Windows 10",
+      "screen": "2560px",
+      "first": true
+    },
+    {
+      "date": "2026-10-26 07:38",
+      "ts": "2026-10-26T14:38:16Z",
+      "loc": "Taiwan",
+      "path": "/year-archive",
+      "ref": "www.jiajunfan.com/projects/speechgym",
+      "browser": "Chrome 155",
+      "system": "Windows 10",
+      "screen": "2560px",
+      "first": true
+    },
+    {
+      "date": "2026-10-26 07:38",
+      "ts": "2026-10-26T14:38:27Z",
+      "loc": "Taiwan",
+      "path": "/posts/2026/08/speechgym-voice-agent-rl",
+      "ref": "www.jiajunfan.com/year-archive",
+      "browser": "Chrome 155",
+      "system": "Windows 10",
+      "screen": "2560px",
+      "first": true
+    },
+    {
+      "date": "2026-10-26 07:37",
+      "ts": "2026-10-26T14:37:50Z",
+      "loc": "Taiwan",
+      "path": "/projects/speechgym",
+      "ref": "",
+      "browser": "Chrome 155",
+      "system": "Windows 10",
+      "screen": "2560px",
+      "first": true
+    },
+    {
+      "date": "2026-10-26 04:59",
+      "ts": "2026-10-26T11:59:02Z",
+      "loc": "Germany",
+      "path": "/cv",
+      "ref": "",
+      "browser": "Chrome 148",
+      "system": "Windows 10",
+      "screen": "1800px",
+      "first": true
+    },
+    {
+      "date": "2026-10-26 02:59",
+      "ts": "2026-10-26T09:59:08Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": true
+    },
+    {
+      "date": "2026-10-26 01:05",
+      "ts": "2026-10-26T08:05:05Z",
+      "loc": "Netherlands",
+      "path": "/projects/orw-cfm-w2",
+      "ref": "",
+      "browser": "Chrome 143",
+      "system": "macOS 10.15",
+      "screen": "800px",
+      "first": true
+    },
     {
       "date": "2026-10-26 00:32",
       "ts": "2026-10-26T07:32:08Z",
@@ -1301,118 +1411,8 @@
       "system": "iOS 26.6",
       "screen": "430px",
       "first": false
-    },
-    {
-      "date": "2026-10-25 04:32",
-      "ts": "2026-10-25T11:32:43Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": false
-    },
-    {
-      "date": "2026-10-25 04:32",
-      "ts": "2026-10-25T11:32:45Z",
-      "loc": "Illinois, US",
-      "path": "/visitors",
-      "ref": "www.jiajunfan.com",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": false
-    },
-    {
-      "date": "2026-10-25 03:53",
-      "ts": "2026-10-25T10:53:30Z",
-      "loc": "Illinois, US",
-      "path": "/visitors",
-      "ref": "www.jiajunfan.com",
-      "browser": "Chrome 152",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": false
-    },
-    {
-      "date": "2026-10-25 02:08",
-      "ts": "2026-10-25T09:08:04Z",
-      "loc": "Germany",
-      "path": "/cv",
-      "ref": "",
-      "browser": "Safari 27.0",
-      "system": "iOS 18.7",
-      "screen": "402px",
-      "first": true
-    },
-    {
-      "date": "2026-10-25 01:26",
-      "ts": "2026-10-25T08:26:53Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": false
-    },
-    {
-      "date": "2026-10-25 00:26",
-      "ts": "2026-10-25T07:26:00Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": false
-    },
-    {
-      "date": "2026-10-25 00:26",
-      "ts": "2026-10-25T07:26:06Z",
-      "loc": "Illinois, US",
-      "path": "/visitors",
-      "ref": "www.jiajunfan.com",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": true
-    },
-    {
-      "date": "2026-10-25 00:25",
-      "ts": "2026-10-25T07:25:53Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": true
-    },
-    {
-      "date": "2026-10-25 00:17",
-      "ts": "2026-10-25T07:17:26Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": true
-    },
-    {
-      "date": "2026-10-25 00:17",
-      "ts": "2026-10-25T07:17:28Z",
-      "loc": "Illinois, US",
-      "path": "/visitors",
-      "ref": "www.jiajunfan.com",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": true
     }
   ],
-  "_recent_total": 3478,
+  "_recent_total": 3488,
   "_recent_shown": 30
 }
