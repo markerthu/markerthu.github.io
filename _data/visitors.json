@@ -2,14 +2,14 @@
   "_updated": "2026-10-26",
   "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 814,
+  "_total": 818,
   "_days": 30,
   "_range": "Sep. 26th - Oct. 26th",
   "locations": [
     {
       "code": "US",
       "name": "Illinois, US",
-      "count": 452,
+      "count": 454,
       "cx": 90.8,
       "cy": 44.6,
       "r": 4.2
@@ -44,7 +44,7 @@
       "count": 17,
       "cx": 104.5,
       "cy": 41.4,
-      "r": 2.27
+      "r": 2.26
     },
     {
       "code": "JP",
@@ -207,6 +207,14 @@
       "r": 2.03
     },
     {
+      "code": "IN",
+      "name": "India",
+      "count": 4,
+      "cx": 263.6,
+      "cy": 60.0,
+      "r": 2.03
+    },
+    {
       "code": "US",
       "name": "Arkansas, US",
       "count": 3,
@@ -228,14 +236,6 @@
       "count": 3,
       "cx": 294.2,
       "cy": 61.7,
-      "r": 2.0
-    },
-    {
-      "code": "IN",
-      "name": "India",
-      "count": 3,
-      "cx": 263.6,
-      "cy": 60.0,
       "r": 2.0
     },
     {
@@ -319,6 +319,14 @@
       "r": 1.91
     },
     {
+      "code": "GE",
+      "name": "Georgia",
+      "count": 1,
+      "cx": 223.4,
+      "cy": 41.7,
+      "r": 1.91
+    },
+    {
       "code": "MX",
       "name": "Mexico",
       "count": 1,
@@ -363,7 +371,7 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 721
+      "count": 723
     },
     {
       "code": "SG",
@@ -411,13 +419,13 @@
       "count": 5
     },
     {
-      "code": "HK",
-      "name": "Hong Kong",
-      "count": 3
-    },
-    {
       "code": "IN",
       "name": "India",
+      "count": 4
+    },
+    {
+      "code": "HK",
+      "name": "Hong Kong",
       "count": 3
     },
     {
@@ -443,6 +451,11 @@
     {
       "code": "FI",
       "name": "Finland",
+      "count": 1
+    },
+    {
+      "code": "GE",
+      "name": "Georgia",
       "count": 1
     },
     {
@@ -476,7 +489,7 @@
       "country": "US",
       "country_name": "United States",
       "name": "Illinois",
-      "count": 452,
+      "count": 454,
       "located": true
     },
     {
@@ -645,7 +658,7 @@
     {
       "path": "/",
       "title": "Jiajun Fan",
-      "count": 355
+      "count": 356
     },
     {
       "path": "/cv",
@@ -675,7 +688,7 @@
     {
       "path": "/projects/procedure-aware-rl",
       "title": "Procedure-Aware RL for Tool-Augmented LLMs | COLM 2026",
-      "count": 26
+      "count": 27
     },
     {
       "path": "/posts/2026/08/speechgym-voice-agent-rl",
@@ -703,13 +716,13 @@
       "count": 13
     },
     {
-      "path": "/projects/speechgym",
-      "title": "SpeechGym — Training Voice Agents with RL | Jiajun Fan",
-      "count": 9
-    },
-    {
       "path": "/projects/adrpo",
       "title": "ADRPO — Adaptive Divergence for Generative Models | NeurIPS 2025",
+      "count": 10
+    },
+    {
+      "path": "/projects/speechgym",
+      "title": "SpeechGym — Training Voice Agents with RL | Jiajun Fan",
       "count": 9
     },
     {
@@ -730,7 +743,7 @@
     {
       "path": "/projects/lbc",
       "title": "LBC — 24 Atari World Records | ICLR 2023 Oral",
-      "count": 4
+      "count": 5
     },
     {
       "path": "/posts/2025/10/diversity-collapse-rlhf",
@@ -772,17 +785,17 @@
     {
       "name": "(unknown)",
       "id": "",
-      "count": 319
+      "count": 320
     },
     {
       "name": "www.jiajunfan.com",
       "id": "www.jiajunfan.com",
-      "count": 203
+      "count": 204
     },
     {
       "name": "Google",
       "id": "Google",
-      "count": 116
+      "count": 118
     },
     {
       "name": "www.jiajunfan.com/projects",
@@ -899,7 +912,7 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 523
+      "count": 527
     },
     {
       "name": "Safari",
@@ -921,7 +934,7 @@
     {
       "name": "macOS",
       "id": "macOS",
-      "count": 379
+      "count": 381
     },
     {
       "name": "iOS",
@@ -936,7 +949,7 @@
     {
       "name": "Android",
       "id": "Android",
-      "count": 33
+      "count": 35
     },
     {
       "name": "Linux",
@@ -1067,21 +1080,65 @@
     },
     {
       "day": "2026-10-26",
-      "n": 10
+      "n": 14
     }
   ],
   "periods": {
-    "today": 10,
+    "today": 14,
     "yesterday": 16,
-    "d7": 202,
+    "d7": 206,
     "d7_prev": 212,
-    "d30": 814,
+    "d30": 818,
     "d30_prev": 563,
-    "day_frac": 0.345,
+    "day_frac": 0.611,
     "yesterday_day": "2026-10-25"
   },
-  "_last_visit": "2026-10-26 07:42",
+  "_last_visit": "2026-10-26 13:52",
   "recent": [
+    {
+      "date": "2026-10-26 13:52",
+      "ts": "2026-10-26T20:52:15Z",
+      "loc": "India",
+      "path": "/projects/procedure-aware-rl",
+      "ref": "Google",
+      "browser": "Chrome 155",
+      "system": "Android 10",
+      "screen": "360px",
+      "first": true
+    },
+    {
+      "date": "2026-10-26 12:01",
+      "ts": "2026-10-26T19:01:02Z",
+      "loc": "Illinois, US",
+      "path": "/projects/lbc",
+      "ref": "www.jiajunfan.com",
+      "browser": "Chrome 155",
+      "system": "macOS 10.15",
+      "screen": "1512px",
+      "first": true
+    },
+    {
+      "date": "2026-10-26 12:00",
+      "ts": "2026-10-26T19:00:59Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Chrome 155",
+      "system": "macOS 10.15",
+      "screen": "1512px",
+      "first": true
+    },
+    {
+      "date": "2026-10-26 10:38",
+      "ts": "2026-10-26T17:38:26Z",
+      "loc": "Georgia",
+      "path": "/projects/adrpo",
+      "ref": "Google",
+      "browser": "Chrome 155",
+      "system": "Android 10",
+      "screen": "384px",
+      "first": true
+    },
     {
       "date": "2026-10-26 07:42",
       "ts": "2026-10-26T14:42:02Z",
@@ -1367,52 +1424,8 @@
       "system": "Android 10",
       "screen": "360px",
       "first": true
-    },
-    {
-      "date": "2026-10-25 11:16",
-      "ts": "2026-10-25T18:16:12Z",
-      "loc": "Singapore",
-      "path": "/",
-      "ref": "scholar.google.com",
-      "browser": "Chrome 155",
-      "system": "macOS 10.15",
-      "screen": "1470px",
-      "first": true
-    },
-    {
-      "date": "2026-10-25 11:16",
-      "ts": "2026-10-25T18:16:34Z",
-      "loc": "Singapore",
-      "path": "/",
-      "ref": "scholar.google.com",
-      "browser": "Chrome 155",
-      "system": "macOS 10.15",
-      "screen": "1470px",
-      "first": false
-    },
-    {
-      "date": "2026-10-25 08:25",
-      "ts": "2026-10-25T15:25:54Z",
-      "loc": "Oregon, US",
-      "path": "/projects/orw-cfm-w2",
-      "ref": "",
-      "browser": "Chrome 156",
-      "system": "Linux",
-      "screen": "1280px",
-      "first": true
-    },
-    {
-      "date": "2026-10-25 04:32",
-      "ts": "2026-10-25T11:32:42Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": false
     }
   ],
-  "_recent_total": 3488,
+  "_recent_total": 3492,
   "_recent_shown": 30
 }
