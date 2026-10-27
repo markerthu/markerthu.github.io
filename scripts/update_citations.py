@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 """Fetch Google Scholar citation data via SerpAPI and update _data/citations.json
-+ _data/citations_history.json. Key is read from env SERPAPI_KEY (never hardcoded)."""
++ _data/citations_history.json + _data/citation_papers.json (every paper's count and a
+log of which papers gained citations each day). Key is read from env SERPAPI_KEY (never hardcoded)."""
 import os, sys, json, urllib.request, urllib.parse, datetime
 
 AUTHOR_ID = "EjmzseUAAAAJ"
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CIT = os.path.join(ROOT, "_data", "citations.json")
 HIST = os.path.join(ROOT, "_data", "citations_history.json")
+PAPERS = os.path.join(ROOT, "_data", "citation_papers.json")
 
 # per-paper key -> lowercase title substring to match SerpAPI article titles
 PAPER_MATCH = {
@@ -30,6 +32,43 @@ def fetch():
         "api_key": key, "num": 100})
     with urllib.request.urlopen("https://serpapi.com/search?" + q, timeout=60) as r:
         return json.load(r)
+
+def cites(a): return (a.get("cited_by", {}) or {}).get("value") or 0
+
+def track_papers(arts, today):
+    """Keep every paper's count and log each rise as {date, id, title, from, to}.
+    Counts only move up, like the totals: SerpAPI's cache can lag the live profile, so a
+    lower fetch is ignored and the rise is logged once it passes the highest count seen.
+    The first run only records a baseline; a paper that appears later is logged from 0."""
+    st = {"papers": {}, "log": []}
+    if os.path.exists(PAPERS):
+        with open(PAPERS, encoding="utf-8") as f:
+            st = json.load(f)
+    baseline = not st["papers"]
+    for a in arts:
+        pid = a.get("citation_id") or a.get("title", "").strip().lower()
+        if not pid: continue
+        n = int(cites(a))
+        p = st["papers"].setdefault(pid, {"cites": n if baseline else 0, "since": today})
+        p["title"], p["year"] = a.get("title", ""), a.get("year", "")
+        if n <= p["cites"]: continue
+        e = next((e for e in st["log"] if e["date"] == today and e["id"] == pid), None)
+        if e: e["to"] = n          # a second run on the same day extends today's entry
+        else: st["log"].append({"date": today, "id": pid, "title": p["title"], "from": p["cites"], "to": n})
+        p["cites"] = n
+    with open(PAPERS, "w", encoding="utf-8") as f:
+        json.dump(st, f, indent=1, ensure_ascii=False); f.write("\n")
+    gains = [e for e in st["log"] if e["date"] == today]
+    lines = ["+%d  %s (%d -> %d)" % (e["to"] - e["from"], e["title"][:80], e["from"], e["to"])
+             for e in sorted(gains, key=lambda e: e["from"] - e["to"])]
+    head = ("Baseline: %d papers" % len(st["papers"]) if baseline else
+            "Citation gains today: +%d across %d papers" % (sum(e["to"] - e["from"] for e in gains), len(gains)))
+    print(head); print("\n".join(lines))
+    summ = os.environ.get("GITHUB_STEP_SUMMARY")
+    if summ:
+        with open(summ, "a", encoding="utf-8") as f:
+            f.write("### %s\n\n" % head + "".join("- %s\n" % l for l in lines))
+    return head, lines
 
 def main():
     d = fetch()
@@ -69,7 +108,6 @@ def main():
 
     # per-paper counts (monotonic; keep old value if a paper isn't matched)
     arts = d.get("articles", [])
-    def cites(a): return (a.get("cited_by", {}) or {}).get("value") or 0
     for k, sub in PAPER_MATCH.items():
         hit = next((a for a in arts if sub in (a.get("title", "").lower())), None)
         if hit is not None:
@@ -92,6 +130,12 @@ def main():
 
     print("Updated: total=%s h=%s i10=%s  by_year=%d  papers=%d  history=%d" %
           (total, h_index, i10, len(by_year), len(PAPER_MATCH), len(hist)))
+
+    head, lines = track_papers(arts, today)
+    msg = os.environ.get("CITATION_MSG")   # the workflow puts today's gains in the commit message
+    if msg:
+        with open(msg, "w", encoding="utf-8") as f:
+            f.write("chore: daily citation update [skip ci]\n\n%s\n%s\n" % (head, "\n".join(lines)))
 
 if __name__ == "__main__":
     main()
