@@ -1319,7 +1319,7 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
   </li>
   <li>
     <span class="news-date">Oct 2026</span>
-    <span><span class="nbadge nb-find">Finding</span><strong>Training-Free On-Policy Distillation</strong> is on arXiv. On-policy distillation usually costs rollouts, teacher passes and gradient steps for every teacher, so let&rsquo;s try it with no training at all: with forward passes only, specialists that share a base model fuse into one model that is, on average, more accurate than either specialist alone. Led by Bangji Yang. <a href="https://arxiv.org/abs/2610.22236" target="_blank" rel="noopener noreferrer">Paper</a></span>
+    <span><span class="nbadge nb-find">Finding</span><strong>Training-Free On-Policy Distillation</strong> is on arXiv. On-policy distillation usually costs rollouts, teacher passes and gradient steps for every teacher, so let&rsquo;s try it with no training at all: with forward passes only, specialists that share a base model fuse into one model that is, on average, more accurate than either specialist alone. <a href="https://arxiv.org/abs/2610.22236" target="_blank" rel="noopener noreferrer">Paper</a></span>
   </li>
   <li>
     <span class="news-date">Oct 2026</span>
