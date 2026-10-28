@@ -1,0 +1,48 @@
+<svg class="cs-d" viewBox="0 0 640 226" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="artd-t artd-d" fill="currentColor">
+  <title id="artd-t">The student surpasses its teacher</title>
+  <desc id="artd-d">MMAU test-mini accuracy with the same backbone, data and protocol. The teacher, Ke-Omni-R used as a frozen judge, scores 74.6 percent. Its student, trained by that frozen teacher, scores 75.1 percent. AudioRSI, where the student becomes the teacher every 200 steps, scores 76.1 percent.</desc>
+  <style>.art-l{font:500 13px Inter,system-ui,sans-serif;fill:var(--ink,#1a1815)}.art-b{font:600 13px Inter,system-ui,sans-serif;fill:var(--ink,#1a1815)}.art-s{font:400 11.5px Inter,system-ui,sans-serif;fill:var(--c-ink2,#5B6273)}.art-t{font:400 11px Inter,system-ui,sans-serif;fill:var(--c-ink2,#5B6273)}.art-v{font:600 14px Inter,system-ui,sans-serif}</style>
+  <g stroke="var(--c-grid,#E4E8EF)" stroke-width="1"><path d="M250,26 V178"/><path d="M310,26 V178"/><path d="M370,26 V178"/><path d="M430,26 V178"/><path d="M490,26 V178"/><path d="M550,26 V178"/></g>
+  <g class="art-t" text-anchor="middle"><text x="250" y="196">74</text><text x="310" y="196">74.5</text><text x="370" y="196">75</text><text x="430" y="196">75.5</text><text x="490" y="196">76</text><text x="550" y="196">76.5</text></g>
+  <text class="art-t" x="400.0" y="216.0" text-anchor="middle">MMAU test-mini accuracy (%) &#183; axis starts at 74</text>
+  <text class="art-l" x="234.0" y="50.0" text-anchor="end">the teacher</text>
+  <text class="art-s" x="234.0" y="66.0" text-anchor="end">Ke-Omni-R, used as a frozen judge</text>
+  <path d="M250,56 H550" stroke="var(--c-grid,#E4E8EF)" stroke-width="6" stroke-linecap="round" opacity=".55"/>
+  <circle cx="322.0" cy="56" r="7" fill="var(--c-rl,#F5C8B5)" stroke="var(--c-rl-line,#E39A7A)" stroke-width="1.6"/>
+  <text class="art-v" x="336.0" y="61.0" text-anchor="start" fill="var(--c-rl-ink,#B8613C)">74.6%</text>
+  <text class="art-l" x="234.0" y="100.0" text-anchor="end">its student</text>
+  <text class="art-s" x="234.0" y="116.0" text-anchor="end">trained by that frozen teacher</text>
+  <path d="M250,106 H550" stroke="var(--c-grid,#E4E8EF)" stroke-width="6" stroke-linecap="round" opacity=".55"/>
+  <circle cx="382.0" cy="106" r="7" fill="var(--c-var,#BFD8EC)" stroke="var(--c-var-line,#6F94C6)" stroke-width="1.6"/>
+  <text class="art-v" x="396.0" y="111.0" text-anchor="start" fill="var(--c-var-line,#6F94C6)">75.1%</text>
+  <text class="art-s" x="396.0" y="127.0" text-anchor="start" fill="var(--c-var-line,#6F94C6)">+0.5 over its teacher</text>
+  <text class="art-b" x="234.0" y="150.0" text-anchor="end">AudioRSI</text>
+  <text class="art-s" x="234.0" y="166.0" text-anchor="end">the student becomes the teacher</text>
+  <path d="M250,156 H550" stroke="var(--c-grid,#E4E8EF)" stroke-width="6" stroke-linecap="round" opacity=".55"/>
+  <circle cx="502.0" cy="156" r="8" fill="var(--c-ours-fill,#90A4C5)" stroke="var(--c-ours,#2F4B8F)" stroke-width="1.6"/>
+  <text class="art-v" x="516.0" y="161.0" text-anchor="start" fill="var(--c-ours,#2F4B8F)">76.1%</text>
+  <text class="art-s" x="516.0" y="177.0" text-anchor="start" fill="var(--c-ours,#2F4B8F)">+1.5 over the teacher</text>
+</svg>
+<svg class="cs-m" viewBox="0 0 360 284" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="artm-t artm-d" fill="currentColor">
+  <title id="artm-t">The student surpasses its teacher</title>
+  <desc id="artm-d">MMAU test-mini accuracy with the same backbone, data and protocol. The teacher, Ke-Omni-R used as a frozen judge, scores 74.6 percent. Its student, trained by that frozen teacher, scores 75.1 percent. AudioRSI, where the student becomes the teacher every 200 steps, scores 76.1 percent.</desc>
+  <style>.art-l{font:500 13px Inter,system-ui,sans-serif;fill:var(--ink,#1a1815)}.art-b{font:600 13px Inter,system-ui,sans-serif;fill:var(--ink,#1a1815)}.art-s{font:400 11.5px Inter,system-ui,sans-serif;fill:var(--c-ink2,#5B6273)}.art-t{font:400 11px Inter,system-ui,sans-serif;fill:var(--c-ink2,#5B6273)}.art-v{font:600 14px Inter,system-ui,sans-serif}</style>
+  <g stroke="var(--c-grid,#E4E8EF)" stroke-width="1"><path d="M24,14 V236"/><path d="M142,14 V236"/><path d="M260,14 V236"/></g>
+  <g class="art-t" text-anchor="middle"><text x="24" y="254">74</text><text x="142" y="254">75</text><text x="260" y="254">76</text></g>
+  <text class="art-t" x="180.0" y="274.0" text-anchor="middle">MMAU test-mini (%) &#183; axis starts at 74</text>
+  <text class="art-l" x="16.0" y="30.0" text-anchor="start">the teacher</text>
+  <text class="art-s" x="16.0" y="46.0" text-anchor="start">Ke-Omni-R, used as a frozen judge</text>
+  <path d="M24,68 H319" stroke="var(--c-grid,#E4E8EF)" stroke-width="6" stroke-linecap="round" opacity=".55"/>
+  <circle cx="94.8" cy="68" r="7" fill="var(--c-rl,#F5C8B5)" stroke="var(--c-rl-line,#E39A7A)" stroke-width="1.6"/>
+  <text class="art-v" x="107.8" y="73.0" text-anchor="start" fill="var(--c-rl-ink,#B8613C)">74.6%</text>
+  <text class="art-l" x="16.0" y="104.0" text-anchor="start">its student</text>
+  <text class="art-s" x="16.0" y="120.0" text-anchor="start">trained by that frozen teacher</text>
+  <path d="M24,142 H319" stroke="var(--c-grid,#E4E8EF)" stroke-width="6" stroke-linecap="round" opacity=".55"/>
+  <circle cx="153.8" cy="142" r="7" fill="var(--c-var,#BFD8EC)" stroke="var(--c-var-line,#6F94C6)" stroke-width="1.6"/>
+  <text class="art-v" x="166.8" y="147.0" text-anchor="start" fill="var(--c-var-line,#6F94C6)">75.1%</text>
+  <text class="art-b" x="16.0" y="178.0" text-anchor="start">AudioRSI</text>
+  <text class="art-s" x="16.0" y="194.0" text-anchor="start">the student becomes the teacher</text>
+  <path d="M24,216 H319" stroke="var(--c-grid,#E4E8EF)" stroke-width="6" stroke-linecap="round" opacity=".55"/>
+  <circle cx="271.8" cy="216" r="8" fill="var(--c-ours-fill,#90A4C5)" stroke="var(--c-ours,#2F4B8F)" stroke-width="1.6"/>
+  <text class="art-v" x="284.8" y="221.0" text-anchor="start" fill="var(--c-ours,#2F4B8F)">76.1%</text>
+</svg>

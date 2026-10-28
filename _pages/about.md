@@ -1248,6 +1248,7 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
   <div class="ro-row">
     <div class="ro-dom">Audio reasoning LLMs<span>multimodal reasoning</span></div>
     <div class="ro-papers">
+      <a class="ro-p" href="/projects/audiorsi/">AudioRSI <span class="ro-v">arXiv 2026</span></a>
       <a class="ro-p" href="https://openreview.net/forum?id=DUr48hxO2h" target="_blank" rel="noopener">CESAR <span class="ro-v">ICLR 2026</span></a>
       <a class="ro-p" href="/projects/read-the-mind/">Read the Mind <span class="ro-v">arXiv 2026</span></a>
     </div>
@@ -1312,6 +1313,10 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
 <h2 class="section-header" id="news"><img class="sh-icon" src="/images/icons/sh-news.png" alt="">Latest News</h2>
 
 <ul class="news-list">
+  <li>
+    <span class="news-date">Oct 2026</span>
+    <span><span class="nbadge nb-find">Finding</span><strong>AudioRSI</strong> is on arXiv: to our knowledge, the first recursively self-improving audio LLM. One model is both student and teacher, and the student surpasses its teacher, then becomes it. <a href="/projects/audiorsi/">Project page</a> &middot; <a href="/film/?s=audiorsi">Video</a> &middot; <a href="https://arxiv.org/abs/2610.36578" target="_blank" rel="noopener noreferrer">Paper</a></span>
+  </li>
   <li>
     <span class="news-date">Oct 2026</span>
     <span><span class="nbadge nb-talk">Talk</span>Gave a talk at the <strong>IGB</strong> (Lunch with CNRG) on building LLM post-training projects with an AI coding agent. Always happy to give talks on <strong>LLM post-training with RL</strong> and on <strong>AI scientists</strong> &mdash; agentic methods for automated scientific discovery &mdash; just reach out. <a href="https://www.igb.illinois.edu/igb-calendar/lunch-cnrg-building-llm-post-training-projects-claude-code" target="_blank" rel="noopener">Event</a></span>
@@ -2590,7 +2595,7 @@ function drawGraph(container) {
 <script>
 /* Video button: every publication with a project film gets one, right after its Project link */
 (function(){
-  var FILMS = ['speechgym','read-the-mind','proteinzero','procedure-aware-rl','cesar','adrpo','orw-cfm-w2','ac-flow','lbc','gdi'];
+  var FILMS = ['audiorsi','speechgym','read-the-mind','proteinzero','procedure-aware-rl','cesar','adrpo','orw-cfm-w2','ac-flow','lbc','gdi'];
   document.querySelectorAll('.pub-entry').forEach(function(entry){
     var proj = entry.querySelector('.pub-links a.pl-project') || entry.querySelector('a.pub-project');
     if (!proj) return;
