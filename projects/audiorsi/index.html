@@ -201,9 +201,9 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
 .case-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .case-path{border-radius:10px;padding:12px 14px;background:var(--band);border-left:3px solid var(--c-base-line)}
 .case-path.win{border-left-color:var(--c-ours)}.case-path.lose{border-left-color:var(--c-rl-line)}
-.case-path h4{font-size:.78rem;font-weight:700;letter-spacing:.02em;margin-bottom:6px;color:var(--muted)}
-.case-path.win h4{color:var(--c-ours)}.case-path.lose h4{color:#A14F2C}
-body.dark-mode .case-path.lose h4{color:#F0B49A}
+.case-path h3{font-size:.78rem;font-weight:700;letter-spacing:.02em;margin-bottom:6px;color:var(--muted)}
+.case-path.win h3{color:var(--c-ours)}.case-path.lose h3{color:#A14F2C}
+body.dark-mode .case-path.lose h3{color:#F0B49A}
 .case-path p{font-size:.86rem;line-height:1.6;color:var(--body)}
 .case-path .ans{margin-top:8px;font-weight:600;color:var(--ink)}
 .case mark{background:none;font-weight:600;padding:0 1px;border-radius:3px}
@@ -304,12 +304,12 @@ body.dark-mode .case mark.no{color:#F0B49A;background:rgba(233,169,140,.14)}
     <p class="case-q">Q: Based on the given audio, what is the most likely setting of the recording?</p>
     <div class="case-grid">
       <div class="case-path win">
-        <h4>Path A</h4>
+        <h3>Path A</h3>
         <p>&ldquo;The audio features a man speaking with <mark class="ok">a jet engine sound</mark> in the background, consistent with an airshow or airport runway setting.&rdquo;</p>
         <p class="ans">An airshow or airport runway &#10003;</p>
       </div>
       <div class="case-path lose">
-        <h4>Path B</h4>
+        <h3>Path B</h3>
         <p>&ldquo;The presence of <mark class="no">a train</mark> and a man speaking suggests a setting where announcements are made, likely <mark class="no">a train station</mark>.&rdquo;</p>
         <p class="ans">A train station during rush hour &#10007;</p>
       </div>
@@ -385,12 +385,12 @@ body.dark-mode .case mark.no{color:#F0B49A;background:rgba(233,169,140,.14)}
     <p class="case-q">Q: How many times does the word &lsquo;anchor&rsquo; appear in the sentence?</p>
     <div class="case-grid">
       <div class="case-path win">
-        <h4>AudioRSI</h4>
+        <h3>AudioRSI</h3>
         <p>&ldquo;The word &lsquo;anchor&rsquo; appears once in the sentence. It is used to describe the object being thrown down. <mark class="ok">There is no other instance of the word &lsquo;anchor&rsquo; in the sentence</mark>. I have carefully listened to the entire audio and confirmed this count.&rdquo;</p>
         <p class="ans">one &#10003;</p>
       </div>
       <div class="case-path lose">
-        <h4>Ke-Omni-R (outcome-only RL)</h4>
+        <h3>Ke-Omni-R (outcome-only RL)</h3>
         <p>&ldquo;The word &lsquo;anchor&rsquo; appears twice in the sentence: once in &lsquo;the anchor&rsquo; and <mark class="no">again in &lsquo;down&rsquo;</mark>.&rdquo;</p>
         <p class="ans">two &#10007;</p>
       </div>
