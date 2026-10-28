@@ -106,6 +106,12 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
       more:"The teacher can hear the audio, so it rejects reasoning that cites a sound the recording does not contain, which a text-only judge would have to take on trust. And the recursion is what keeps it improving: with a frozen teacher, out-of-distribution accuracy stalls, while a teacher refreshed from the student keeps it rising.",
       rel:['cesar','readmind'],
       act:[{t:'🔗 AudioRSI project page', h:'/projects/audiorsi/'},{t:'🎬 Watch the film', h:'/film/?s=audiorsi'},{t:'📎 arXiv', h:'https://arxiv.org/abs/2610.36578'}] },
+    { id:'tfopd', kw:['tf-opd','tfopd','training-free','training free','on-policy distillation','distillation','model merging','merge specialists','merging'],
+      a:["Training-Free On-Policy Distillation (TF-OPD, arXiv 2026) merges RL specialists that share a base model into one model with zero gradient steps. Each linear layer of the merged model has to reproduce every specialist on the inputs that specialist sees while reading its own answers; that is least squares, solved exactly from second moments gathered in one forward pass over a few hundred of each specialist's answers.",
+         "It's the paper where on-policy distillation stops needing training: on Olmo 3 7B, a math specialist and a code specialist merge into one model whose mean accuracy over seven math and code benchmarks (61.1) is higher than either specialist's (59.8 and 53.6), with about 10 GPU-hours of forward passes in total."],
+      more:"The surprise is that the data matters more than the solver: a few of the math specialist's answers get stuck in repetition loops. They are 7% of its answers but 23% of its tokens, and dropping them takes the merged model on AIME25 from task-arithmetic level to the specialist's own level in the same number format.",
+      rel:['audiorsi','pubs'],
+      act:[{t:'🔗 TF-OPD project page', h:'/projects/tf-opd/'},{t:'🎬 Watch the film', h:'/film/?s=tf-opd'},{t:'📎 arXiv', h:'https://arxiv.org/abs/2610.22236'}] },
     { id:'speechgym', kw:['speechgym','speech gym','voice agent','voice agents','spoken agent','tau-voice','tau voice','native speech','native audio'],
       a:["SpeechGym (arXiv 2026) is about training voice agents with RL. Voice-agent benchmarks usually score a closed realtime API from the outside, so no gradient ever reaches the agent. SpeechGym makes both sides of the call local open models talking in native speech over an existing tool-use benchmark, so the agent can actually be trained — and a per-turn process reward fixes the first thing that breaks: at audio success rates almost every rollout group fails identically and teaches nothing.",
          "That's our newest agentic-RL paper: an audio-native gym where an open caller model and the voice agent talk in real speech, the agent calls tools against a live database, and the benchmark's own task check is the reward. Training in speech more than doubles task success on the τ-voice tasks."],
@@ -217,7 +223,7 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
       a:["Full transparency: I'm a hand-written conversational engine running entirely in your browser — fuzzy retrieval, topic memory, and human-paced typing, but no LLM and no server. Jiajun wrote the algorithm. The rest of the site is Jekyll on GitHub Pages."] }
   ];
 
-  var NAME = { audiorsi:'AudioRSI', cesar:'CESAR', speechgym:'SpeechGym', readmind:'Read the Mind', lbc:'LBC', gdi:'GDI', adrpo:'ADRPO', orw:'ORW-CFM-W2', acflow:'AC-Flow',
+  var NAME = { audiorsi:'AudioRSI', tfopd:'TF-OPD', cesar:'CESAR', speechgym:'SpeechGym', readmind:'Read the Mind', lbc:'LBC', gdi:'GDI', adrpo:'ADRPO', orw:'ORW-CFM-W2', acflow:'AC-Flow',
                prance:'PRANCE', spvla:'SP-VLA', focus:'my research focus', edu:'my education',
                awards:'awards', uiuc:'UIUC', advisor:'my advisor', vision:'the long-term vision' };
 

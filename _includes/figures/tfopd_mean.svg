@@ -1,0 +1,44 @@
+<svg class="cs-d" viewBox="0 0 640 230" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="tfmd-t tfmd-d" fill="currentColor">
+  <title id="tfmd-t">Mean accuracy over seven benchmarks</title>
+  <desc id="tfmd-d">Mean accuracy over seven mathematics and code benchmarks on Olmo 3 7B: TF-OPD 61.1, math specialist 59.8, code specialist 53.6, base model 31.6 percent.</desc>
+  <style>.tfm-l{font:500 13px Inter,system-ui,sans-serif;fill:var(--ink,#1a1815)}.tfm-b{font:600 13px Inter,system-ui,sans-serif;fill:var(--ink,#1a1815)}.tfm-s{font:400 11.5px Inter,system-ui,sans-serif;fill:var(--c-ink2,#5B6273)}.tfm-t{font:400 11px Inter,system-ui,sans-serif;fill:var(--c-ink2,#5B6273)}.tfm-v{font:600 14px Inter,system-ui,sans-serif}</style>
+  <g stroke="var(--c-grid,#E4E8EF)" stroke-width="1"><path d="M230.0,14 V184"/><path d="M281.4,14 V184"/><path d="M332.9,14 V184"/><path d="M384.3,14 V184"/><path d="M435.7,14 V184"/><path d="M487.1,14 V184"/><path d="M538.6,14 V184"/><path d="M590.0,14 V184"/></g>
+  <text class="tfm-b" x="218.0" y="31.0" text-anchor="end">TF-OPD (ours)</text>
+  <text class="tfm-s" x="218.0" y="46.0" text-anchor="end">no training</text>
+  <rect x="230" y="22" width="314.2" height="22" rx="5" fill="var(--c-ours-fill,#90A4C5)" stroke="var(--c-ours,#2F4B8F)" stroke-width="1.1"/>
+  <text class="tfm-v" x="552.2" y="38.0" text-anchor="start" fill="var(--c-ours,#2F4B8F)">61.1</text>
+  <text class="tfm-l" x="218.0" y="71.0" text-anchor="end">Math specialist</text>
+  <text class="tfm-s" x="218.0" y="86.0" text-anchor="end">RL on math</text>
+  <rect x="230" y="62" width="307.5" height="22" rx="5" fill="var(--c-rl,#F5C8B5)" stroke="var(--c-rl-line,#E39A7A)" stroke-width="1.1"/>
+  <text class="tfm-v" x="545.5" y="78.0" text-anchor="start" fill="var(--c-rl-ink,#B8613C)">59.8</text>
+  <text class="tfm-l" x="218.0" y="111.0" text-anchor="end">Code specialist</text>
+  <text class="tfm-s" x="218.0" y="126.0" text-anchor="end">RL on code</text>
+  <rect x="230" y="102" width="275.7" height="22" rx="5" fill="var(--c-rl,#F5C8B5)" stroke="var(--c-rl-line,#E39A7A)" stroke-width="1.1"/>
+  <text class="tfm-v" x="513.7" y="118.0" text-anchor="start" fill="var(--c-rl-ink,#B8613C)">53.6</text>
+  <text class="tfm-l" x="218.0" y="151.0" text-anchor="end">Base model</text>
+  <text class="tfm-s" x="218.0" y="166.0" text-anchor="end">Olmo 3 7B</text>
+  <rect x="230" y="142" width="162.5" height="22" rx="5" fill="var(--c-base,#DDE2EA)" stroke="var(--c-base-line,#8F97A8)" stroke-width="1.1"/>
+  <text class="tfm-v" x="400.5" y="158.0" text-anchor="start" fill="var(--c-ink2,#5B6273)">31.6</text>
+  <g class="tfm-t" text-anchor="middle"><text x="230.0" y="202">0</text><text x="281.4" y="202">10</text><text x="332.9" y="202">20</text><text x="384.3" y="202">30</text><text x="435.7" y="202">40</text><text x="487.1" y="202">50</text><text x="538.6" y="202">60</text><text x="590.0" y="202">70</text></g>
+  <text class="tfm-t" x="410.0" y="222.0" text-anchor="middle">mean accuracy over seven benchmarks (%)</text>
+</svg>
+<svg class="cs-m" viewBox="0 0 360 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="tfmm-t tfmm-d" fill="currentColor">
+  <title id="tfmm-t">Mean accuracy over seven benchmarks</title>
+  <desc id="tfmm-d">Mean accuracy over seven mathematics and code benchmarks on Olmo 3 7B: TF-OPD 61.1, math specialist 59.8, code specialist 53.6, base model 31.6 percent.</desc>
+  <style>.tfm-l{font:500 13px Inter,system-ui,sans-serif;fill:var(--ink,#1a1815)}.tfm-b{font:600 13px Inter,system-ui,sans-serif;fill:var(--ink,#1a1815)}.tfm-s{font:400 11.5px Inter,system-ui,sans-serif;fill:var(--c-ink2,#5B6273)}.tfm-t{font:400 11px Inter,system-ui,sans-serif;fill:var(--c-ink2,#5B6273)}.tfm-v{font:600 14px Inter,system-ui,sans-serif}</style>
+  <g stroke="var(--c-grid,#E4E8EF)" stroke-width="1"><path d="M16.0,6 V216"/><path d="M56.0,6 V216"/><path d="M96.0,6 V216"/><path d="M136.0,6 V216"/><path d="M176.0,6 V216"/><path d="M216.0,6 V216"/><path d="M256.0,6 V216"/><path d="M296.0,6 V216"/></g>
+  <text class="tfm-b" x="16.0" y="21.0" text-anchor="start" style="font-size:12.5px">TF-OPD (ours) &#183; no training</text>
+  <rect x="16" y="29" width="244.4" height="20" rx="5" fill="var(--c-ours-fill,#90A4C5)" stroke="var(--c-ours,#2F4B8F)" stroke-width="1.1"/>
+  <text class="tfm-v" x="267.4" y="44.0" text-anchor="start" fill="var(--c-ours,#2F4B8F)">61.1</text>
+  <text class="tfm-l" x="16.0" y="73.0" text-anchor="start" style="font-size:12.5px">Math specialist &#183; RL on math</text>
+  <rect x="16" y="81" width="239.2" height="20" rx="5" fill="var(--c-rl,#F5C8B5)" stroke="var(--c-rl-line,#E39A7A)" stroke-width="1.1"/>
+  <text class="tfm-v" x="262.2" y="96.0" text-anchor="start" fill="var(--c-rl-ink,#B8613C)">59.8</text>
+  <text class="tfm-l" x="16.0" y="125.0" text-anchor="start" style="font-size:12.5px">Code specialist &#183; RL on code</text>
+  <rect x="16" y="133" width="214.4" height="20" rx="5" fill="var(--c-rl,#F5C8B5)" stroke="var(--c-rl-line,#E39A7A)" stroke-width="1.1"/>
+  <text class="tfm-v" x="237.4" y="148.0" text-anchor="start" fill="var(--c-rl-ink,#B8613C)">53.6</text>
+  <text class="tfm-l" x="16.0" y="177.0" text-anchor="start" style="font-size:12.5px">Base model &#183; Olmo 3 7B</text>
+  <rect x="16" y="185" width="126.4" height="20" rx="5" fill="var(--c-base,#DDE2EA)" stroke="var(--c-base-line,#8F97A8)" stroke-width="1.1"/>
+  <text class="tfm-v" x="149.4" y="200.0" text-anchor="start" fill="var(--c-ink2,#5B6273)">31.6</text>
+  <g class="tfm-t" text-anchor="middle"><text x="16.0" y="232">0</text><text x="56.0" y="232">10</text><text x="96.0" y="232">20</text><text x="136.0" y="232">30</text><text x="176.0" y="232">40</text><text x="216.0" y="232">50</text><text x="256.0" y="232">60</text><text x="296.0" y="232">70</text></g>
+  <text class="tfm-t" x="156.0" y="252.0" text-anchor="middle">mean accuracy over seven benchmarks (%)</text>
+</svg>
