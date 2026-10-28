@@ -117,6 +117,7 @@ strong{font-weight:600;color:var(--ink)}
 .problem-card p,.solution-card p{font-family:var(--sans);font-size:.86rem;color:var(--body);margin:0;line-height:1.6}
 
 /* ── comparison table ── */
+.tbl-wrap:focus-visible{outline:2px solid var(--link);outline-offset:3px;border-radius:6px}
 .tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:20px 0}
 .compare-table{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:.9rem}
 .compare-table th{background:var(--band);color:var(--muted);padding:11px 15px;text-align:left;font-weight:600;border-bottom:1px solid var(--rule);font-size:.76rem;text-transform:uppercase;letter-spacing:.04em}
@@ -342,7 +343,7 @@ body.dark-mode .case mark.no{color:#F0B49A;background:rgba(233,169,140,.14)}
     <div class="result-card"><div class="rnum">#1</div><div class="rdesc">MMSU overall (62.52%)</div></div>
     <div class="result-card"><div class="rnum">64.0%</div><div class="rdesc">MMAR, first in the 7B open-source tier without an external reward model</div></div>
   </div>
-  <div class="tbl-wrap">
+  <div class="tbl-wrap" tabindex="0" role="region" aria-label="Table 1: MMAU test-mini accuracy">
   <table class="compare-table"><caption style="caption-side:top;text-align:left;font-family:var(--sans);font-size:.85rem;line-height:1.5;color:var(--muted);padding:0 0 .7em"><b style="color:var(--link)">Table 1.</b> MMAU test-mini accuracy (%). AudioRSI and Ke-Omni-R are evaluated under one protocol; the other rows are as reported by their authors and give context rather than a controlled comparison.</caption>
     <thead><tr><th>Model</th><th>Sound</th><th>Music</th><th>Speech</th><th>Total</th></tr></thead>
     <tbody>
@@ -369,7 +370,7 @@ body.dark-mode .case mark.no{color:#F0B49A;background:rgba(233,169,140,.14)}
 <section>
   <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-reason.png);mask-image:url(/images/icons/h-reason.png)"></i>Reasoning nobody asked for</h2>
   <p>No reward term asks for any connective, template or phrase. But the teacher prefers traces that are explicit and grounded in what was heard, and the student moves toward them. Across 1,000 MMAU test-mini reasoning paths per model, every tracked behavior is most frequent under AudioRSI:</p>
-  <div class="tbl-wrap">
+  <div class="tbl-wrap" tabindex="0" role="region" aria-label="Table 2: reasoning behaviors">
   <table class="compare-table"><caption style="caption-side:top;text-align:left;font-family:var(--sans);font-size:.85rem;line-height:1.5;color:var(--muted);padding:0 0 .7em"><b style="color:var(--link)">Table 2.</b> Share of reasoning paths showing each behavior, detected by keyword matching. Keyword counts measure wording, not correctness, and rise with trace length.</caption>
     <thead><tr><th>Behavior</th><th>AudioRSI</th><th>Ke-Omni-R</th><th>Qwen2.5-Omni-7B</th></tr></thead>
     <tbody>
