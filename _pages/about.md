@@ -1315,7 +1315,7 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
 <ul class="news-list">
   <li>
     <span class="news-date">Oct 2026</span>
-    <span><span class="nbadge nb-find">Finding</span><strong>AudioRSI</strong> is on arXiv: to our knowledge, the first recursively self-improving audio LLM. One model is both student and teacher, and the student surpasses its teacher, then becomes it.<br>Recursive self-improvement here improves the teacher (judge) and the student together: the teacher is the student&rsquo;s own copy, refreshed as it improves, so the two co-evolve. <a href="/projects/audiorsi/">Project page</a> &middot; <a href="/film/?s=audiorsi">Video</a> &middot; <a href="https://arxiv.org/abs/2610.36578" target="_blank" rel="noopener noreferrer">Paper</a></span>
+    <span><span class="nbadge nb-find">Finding</span><strong>AudioRSI</strong> is on arXiv: to our knowledge, the first recursively self-improving audio LLM. One model is both student and teacher, and the student surpasses its teacher, then becomes it. Recursive self-improvement here improves the teacher (judge) and the student together: the teacher is the student&rsquo;s own copy, refreshed as it improves, so the two co-evolve. <a href="/projects/audiorsi/">Project page</a> &middot; <a href="/film/?s=audiorsi">Video</a> &middot; <a href="https://arxiv.org/abs/2610.36578" target="_blank" rel="noopener noreferrer">Paper</a></span>
   </li>
   <li>
     <span class="news-date">Oct 2026</span>
