@@ -2,14 +2,14 @@
   "_updated": "2026-10-28",
   "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 835,
+  "_total": 840,
   "_days": 30,
   "_range": "Sep. 28th - Oct. 28th",
   "locations": [
     {
       "code": "US",
       "name": "Illinois, US",
-      "count": 470,
+      "count": 475,
       "cx": 90.8,
       "cy": 44.6,
       "r": 4.2
@@ -28,7 +28,7 @@
       "count": 20,
       "cx": 59.2,
       "cy": 39.7,
-      "r": 2.3
+      "r": 2.29
     },
     {
       "code": "SG",
@@ -44,7 +44,7 @@
       "count": 17,
       "cx": 104.5,
       "cy": 41.4,
-      "r": 2.26
+      "r": 2.25
     },
     {
       "code": "US",
@@ -371,7 +371,7 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 739
+      "count": 744
     },
     {
       "code": "SG",
@@ -494,7 +494,7 @@
       "country": "US",
       "country_name": "United States",
       "name": "Illinois",
-      "count": 470,
+      "count": 475,
       "located": true
     },
     {
@@ -656,17 +656,17 @@
     {
       "path": "/",
       "title": "Jiajun Fan",
-      "count": 359
+      "count": 361
+    },
+    {
+      "path": "/visitors",
+      "title": "Visitors — Jiajun Fan",
+      "count": 90
     },
     {
       "path": "/cv",
       "title": "CV — Jiajun Fan",
       "count": 89
-    },
-    {
-      "path": "/visitors",
-      "title": "Visitors — Jiajun Fan",
-      "count": 88
     },
     {
       "path": "/publications",
@@ -744,6 +744,11 @@
       "count": 5
     },
     {
+      "path": "/projects/audiorsi",
+      "title": "AudioRSI — Recursively Self-Improving Audio Reasoners | Jiajun Fan",
+      "count": 4
+    },
+    {
       "path": "/posts/2025/10/diversity-collapse-rlhf",
       "title": "The Exploration-Exploitation Dilemma in RLHF for Generative Models — Jiajun Fan",
       "count": 4
@@ -752,11 +757,6 @@
       "path": "/projects/gdi",
       "title": "GDI — 22 Atari World Records | ICML 2022",
       "count": 4
-    },
-    {
-      "path": "/projects/audiorsi",
-      "title": "AudioRSI — Recursively Self-Improving Audio Reasoners | Jiajun Fan",
-      "count": 3
     },
     {
       "path": "/posts/2025/10/inverse-scaling-audio-llms",
@@ -783,12 +783,12 @@
     {
       "name": "(unknown)",
       "id": "",
-      "count": 323
+      "count": 325
     },
     {
       "name": "www.jiajunfan.com",
       "id": "www.jiajunfan.com",
-      "count": 213
+      "count": 216
     },
     {
       "name": "Google",
@@ -910,12 +910,12 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 546
+      "count": 548
     },
     {
       "name": "Safari",
       "id": "Safari",
-      "count": 300
+      "count": 303
     },
     {
       "name": "Firefox",
@@ -932,12 +932,12 @@
     {
       "name": "macOS",
       "id": "macOS",
-      "count": 395
+      "count": 397
     },
     {
       "name": "iOS",
       "id": "iOS",
-      "count": 288
+      "count": 291
     },
     {
       "name": "Windows",
@@ -1078,21 +1078,120 @@
     },
     {
       "day": "2026-10-28",
-      "n": 12
+      "n": 17
     }
   ],
   "periods": {
-    "today": 12,
+    "today": 17,
     "yesterday": 23,
-    "d7": 115,
+    "d7": 120,
     "d7_prev": 283,
-    "d30": 835,
+    "d30": 840,
     "d30_prev": 547,
-    "day_frac": 0.528,
+    "day_frac": 0.711,
     "yesterday_day": "2026-10-27"
   },
-  "_last_visit": "2026-10-28 09:58",
+  "_last_visit": "2026-10-28 15:53",
   "recent": [
+    {
+      "date": "2026-10-28 15:53",
+      "ts": "2026-10-28T22:53:00Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Chrome 152",
+      "system": "macOS 10.15",
+      "screen": "1512px",
+      "first": false
+    },
+    {
+      "date": "2026-10-28 15:18",
+      "ts": "2026-10-28T22:18:53Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Chrome 152",
+      "system": "macOS 10.15",
+      "screen": "1512px",
+      "first": false
+    },
+    {
+      "date": "2026-10-28 15:18",
+      "ts": "2026-10-28T22:18:57Z",
+      "loc": "Illinois, US",
+      "path": "/visitors",
+      "ref": "www.jiajunfan.com",
+      "browser": "Chrome 152",
+      "system": "macOS 10.15",
+      "screen": "1512px",
+      "first": true
+    },
+    {
+      "date": "2026-10-28 15:06",
+      "ts": "2026-10-28T22:06:14Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Chrome 152",
+      "system": "macOS 10.15",
+      "screen": "1512px",
+      "first": false
+    },
+    {
+      "date": "2026-10-28 15:02",
+      "ts": "2026-10-28T22:02:37Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Chrome 152",
+      "system": "macOS 10.15",
+      "screen": "1512px",
+      "first": true
+    },
+    {
+      "date": "2026-10-28 14:54",
+      "ts": "2026-10-28T21:54:08Z",
+      "loc": "Illinois, US",
+      "path": "/projects/audiorsi",
+      "ref": "www.jiajunfan.com",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": true
+    },
+    {
+      "date": "2026-10-28 14:52",
+      "ts": "2026-10-28T21:52:12Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": true
+    },
+    {
+      "date": "2026-10-28 14:52",
+      "ts": "2026-10-28T21:52:13Z",
+      "loc": "Illinois, US",
+      "path": "/visitors",
+      "ref": "www.jiajunfan.com",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": true
+    },
+    {
+      "date": "2026-10-28 14:52",
+      "ts": "2026-10-28T21:52:31Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "Google",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": false
+    },
     {
       "date": "2026-10-28 09:58",
       "ts": "2026-10-28T16:58:32Z",
@@ -1323,107 +1422,8 @@
       "system": "iOS 26.6",
       "screen": "430px",
       "first": true
-    },
-    {
-      "date": "2026-10-28 02:45",
-      "ts": "2026-10-28T09:45:21Z",
-      "loc": "Illinois, US",
-      "path": "/visitors",
-      "ref": "www.jiajunfan.com",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": true
-    },
-    {
-      "date": "2026-10-28 01:30",
-      "ts": "2026-10-28T08:30:33Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": false
-    },
-    {
-      "date": "2026-10-28 01:30",
-      "ts": "2026-10-28T08:30:42Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "scholar.google.com",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": false
-    },
-    {
-      "date": "2026-10-28 01:30",
-      "ts": "2026-10-28T08:30:45Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": false
-    },
-    {
-      "date": "2026-10-28 01:30",
-      "ts": "2026-10-28T08:30:49Z",
-      "loc": "Illinois, US",
-      "path": "/visitors",
-      "ref": "www.jiajunfan.com",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": true
-    },
-    {
-      "date": "2026-10-28 01:17",
-      "ts": "2026-10-28T08:17:01Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": false
-    },
-    {
-      "date": "2026-10-28 01:17",
-      "ts": "2026-10-28T08:17:01Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": false
-    },
-    {
-      "date": "2026-10-28 01:13",
-      "ts": "2026-10-28T08:13:41Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": false
-    },
-    {
-      "date": "2026-10-28 01:13",
-      "ts": "2026-10-28T08:13:44Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": false
     }
   ],
-  "_recent_total": 3596,
+  "_recent_total": 3605,
   "_recent_shown": 30
 }
