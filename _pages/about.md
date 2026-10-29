@@ -1223,6 +1223,13 @@ body.dark-mode figure.anim-fig{--good:#7FC79A}
   <button class="qn-cmdk" onclick="cmdkOpen()" aria-label="Open command palette (Cmd+K)" title="Command palette">⌘K</button>
 </div>
 
+<div class="internship-banner internship-banner-pulse">
+<i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-scholar.png);mask-image:url(/images/icons/h-scholar.png)"></i><strong>Seeking research internship — Fall 2026 / 2027.</strong> RL · Generative Models · Reasoning LLMs · Agentic RL
+&nbsp;<a href="/cv/">[CV]</a>
+&nbsp;<a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">[Scholar]</a>
+&nbsp;<a href="mailto:jiajunf3@illinois.edu">[Email]</a>
+</div>
+
 <!-- Intro -->
 <p class="tagline">
 I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <strong>multimodal large generative/agentic models with reinforcement learning</strong> in a way that is <strong>stable</strong> (<strong>e.g., lifelong continual learning</strong>) — avoiding the diversity and performance collapse that RL fine-tuning tends to cause — and <strong>progressively autonomous</strong> (<strong>e.g., recursive self-improvement, RSI</strong>), step by step taking the human out of the loop: first human data collection, then human labelling and hyper-parameter tuning, and finally hand-designed rewards. That work spans these domains:
@@ -1276,7 +1283,7 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
     </div>
   </div>
   <div class="ro-row">
-    <div class="ro-dom">VLA &amp; robotics<span>efficient inference</span></div>
+    <div class="ro-dom">Embodied AI<span>VLA &amp; efficient inference</span></div>
     <div class="ro-papers">
       <a class="ro-p" href="https://openreview.net/forum?id=RwdGIIjPlC" target="_blank" rel="noopener">SP-VLA <span class="ro-v">ICLR 2026</span></a>
       <a class="ro-p" href="https://arxiv.org/abs/2407.05010" target="_blank" rel="noopener">PRANCE <span class="ro-v">TPAMI 2026</span></a>
@@ -1301,13 +1308,6 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
   </span>
   <span class="ft-play" aria-hidden="true"></span>
 </a>
-
-<div class="internship-banner internship-banner-pulse">
-<i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-scholar.png);mask-image:url(/images/icons/h-scholar.png)"></i><strong>Seeking research internship — Fall 2026 / 2027.</strong> RL · Generative Models · Reasoning LLMs · Agentic RL
-&nbsp;<a href="/cv/">[CV]</a>
-&nbsp;<a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">[Scholar]</a>
-&nbsp;<a href="mailto:jiajunf3@illinois.edu">[Email]</a>
-</div>
 
 <!-- ═══════════════════════════════ NEWS ═══════════════════════════════ -->
 <h2 class="section-header" id="news"><img class="sh-icon" src="/images/icons/sh-news.png" alt="">Latest News</h2>
