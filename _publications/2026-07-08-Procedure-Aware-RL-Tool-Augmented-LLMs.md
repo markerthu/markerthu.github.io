@@ -5,7 +5,7 @@ permalink: /publication/2026-07-08-Procedure-Aware-RL
 date: 2026-07-08
 venue: 'Conference on Language Modeling (<strong>COLM 2026</strong>)'
 paperurl: 'https://openreview.net/forum?id=d4wrBuJ4xo'
-citation: 'Qinglong Zheng, Jiajun Fan, Chaoran Cheng, Ge Liu. &quot;Procedure-Aware Reinforcement Learning for Tool-Augmented Large Language Models.&quot; COLM 2026.'
+citation: 'Qinglong Zheng*, Jiajun Fan*, Chaoran Cheng, Ge Liu. &quot;Procedure-Aware Reinforcement Learning for Tool-Augmented Large Language Models.&quot; COLM 2026.'
 bibtex: |
   @inproceedings{zheng2026procedure,
     title     = {Procedure-Aware Reinforcement Learning for Tool-Augmented

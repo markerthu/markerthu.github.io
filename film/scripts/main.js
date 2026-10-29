@@ -1,5 +1,5 @@
 import { timeline } from './util.js';
-// Only published or arXiv work is named; recursive self-improvement is presented as the next step,
+// Only published or arXiv work is named; recursive self-improvement is presented as the next step (AudioRSI is its first paper),
 // and the AI scientist as the long-term goal.
 const chapters = timeline([
   { len: 7, shape: 'sphere', label: 'JIAJUN FAN  ·  RESEARCH', title: 'From RL to AGI',
@@ -18,7 +18,7 @@ const chapters = timeline([
     meta: 'SPEECHGYM  ·  ARXIV 2026          PROCEDURE-AWARE RL  ·  COLM 2026' },
   { len: 9, shape: 'knot', tick: 'OWN CRITIC', label: 'NEXT', title: 'Its own critic',
     lines: ['Recursive self-improvement: each better model', 'becomes the critic and teacher of the next.'],
-    meta: 'ONGOING WORK' },
+    meta: 'FIRST STEP  ·  AUDIORSI  ·  ARXIV 2026' },
   { len: 9, shape: 'bloom', tick: 'AI SCIENTIST', label: 'THE GOAL', title: 'An AI scientist',
     lines: ['Out of the loop entirely: a system that improves', 'itself, and does research on its own.'],
     meta: 'THE LONG-TERM DREAM  ·  FROM RL TO AGI' },
