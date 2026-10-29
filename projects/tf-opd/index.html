@@ -14,7 +14,7 @@ permalink: /projects/tf-opd/
   <link rel="canonical" href="https://www.jiajunfan.com/projects/tf-opd/">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Training-Free On-Policy Distillation">
-  <meta name="twitter:description" content="Merge RL specialists into one model with zero gradient steps; the fused model beats each specialist on average.">
+  <meta name="twitter:description" content="Merge RL specialists that share a base model into one model with zero gradient steps; the fused model beats each specialist on average.">
   <meta name="twitter:image" content="https://www.jiajunfan.com/images/og/tf-opd.jpg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TF-OPD — Training-Free On-Policy Distillation | Jiajun Fan</title>
@@ -246,12 +246,12 @@ body.dark-mode .case mark.no{color:#F0B49A;background:rgba(233,169,140,.14)}
 <div class="hero" role="region" aria-label="Project summary">
   <div class="kicker">Preprint &middot; arXiv 2610.22236</div>
   <h1>Training-Free <span style="white-space:nowrap">On-Policy</span> Distillation</h1>
-  <p class="short">Merge RL specialists into one model, with <strong>zero gradient steps</strong>.</p>
+  <p class="short">Merge RL specialists that share a base model into one, with <strong>zero gradient steps</strong>.</p>
   <div class="authors">
     Bangji&nbsp;Yang<sup>1,*</sup>, <a href="/" class="me">Jiajun&nbsp;Fan</a><sup>1,*</sup>, Zhaoyu&nbsp;Zhu<sup>1</sup>, Hongbo&nbsp;Ma<sup>2</sup>,
-    <a href="https://geliu.web.illinois.edu/">Ge&nbsp;Liu</a><sup>1</sup>
+    <a href="https://geliu.web.illinois.edu/">Ge&nbsp;Liu</a><sup>1,&dagger;</sup>
   </div>
-  <div class="affil"><sup>1</sup>University of Illinois Urbana-Champaign &nbsp;&nbsp; <sup>2</sup>Tsinghua University &nbsp;&nbsp; <sup>*</sup>Equal contribution</div>
+  <div class="affil"><sup>1</sup>University of Illinois Urbana-Champaign &nbsp;&nbsp; <sup>2</sup>Tsinghua University &nbsp;&nbsp; <sup>*</sup>Equal contribution &nbsp;&nbsp; <sup>&dagger;</sup>Corresponding author</div>
   <div class="btn-row">
     <a class="btn btn-primary" href="https://arxiv.org/abs/2610.22236">Paper (arXiv)</a>
     <a class="btn btn-secondary" href="/film/?s=tf-opd">Watch the film</a>
@@ -263,13 +263,13 @@ body.dark-mode .case mark.no{color:#F0B49A;background:rgba(233,169,140,.14)}
 <div class="container" role="main">
 
 <section>
-  <p class="tldr"><strong>TL;DR</strong> &mdash; Reinforcement learning turns one base model into specialists, each strong in one domain and behind in the others. Putting them back into one model has meant training again: on-policy distillation costs rollouts, teacher passes and gradient steps for every teacher. We show that this step <strong>does not need training</strong>. When the specialists share a base model, distillation has an exact layer-wise solution: one forward pass over a few hundred of each specialist&rsquo;s own answers, then a least-squares solve per layer. The fused model is, on average, <strong>more accurate than either specialist</strong>.</p>
+  <p class="tldr"><strong>TL;DR</strong> &mdash; Reinforcement learning turns one base model into specialists, each strong in one domain and behind in the others. Putting them back into one model has meant either training again, as in on-policy distillation, which costs rollouts, teacher passes and gradient steps for every teacher, or weight arithmetic such as task arithmetic, which on these specialists falls below the mathematics specialist on AIME25. We show that this step <strong>does not need training</strong>. When the specialists share a base model, distillation has an exact layer-wise solution: each specialist answers a few hundred training problems and reads its kept answers once in a forward pass, then every layer is solved by least squares. The fused model is, on average, <strong>more accurate than either specialist</strong>.</p>
   {% include film-card.html id="tf-opd" name="TF-OPD" %}
 </section>
 
 <section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-search.png);mask-image:url(/images/icons/h-search.png)"></i>The problem: one model again means training again</h2>
-  <p>A family of specialists that share a base model is now the usual result of reinforcement learning: one is strong at mathematics, another at code, and each falls far behind in the other&rsquo;s domain. Getting one model that does both has meant another round of training, through multi-domain RL or on-policy distillation.</p>
+  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-search.png);mask-image:url(/images/icons/h-search.png)"></i>The problem: train again, or merge weights without the models&rsquo; own rollouts</h2>
+  <p>A family of specialists that share a base model is now the usual result of reinforcement learning: one is strong at mathematics, another at code, and each falls far behind in the other&rsquo;s domain. Getting one model that does both has meant another round of training, through multi-domain RL or on-policy distillation, or a training-free weight merge such as task arithmetic, which applies every specialist&rsquo;s update to every input and, on these specialists, falls below the mathematics specialist on AIME25.</p>
   <div class="problem-grid">
     <div class="problem-card">
       <h3>On-policy distillation</h3>
@@ -286,9 +286,9 @@ body.dark-mode .case mark.no{color:#F0B49A;background:rgba(233,169,140,.14)}
   <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-gear.png);mask-image:url(/images/icons/h-gear.png)"></i>Method: four steps, no gradient</h2>
   <p>Each linear layer of the fused model must reproduce every specialist&rsquo;s output on the inputs that specialist receives while it reads its own answers. That is a least-squares problem, and its solution needs only the second moments G<sub>d</sub> of those inputs:</p>
   <p class="eq" role="math" aria-label="W star equals W b plus the sum over d of Delta d times G d, times the inverse of the sum over d of G d">W<sub>&#9733;</sub> = W<sub>b</sub> + (&Sigma;<sub>d</sub> &Delta;<sub>d</sub> G<sub>d</sub>)(&Sigma;<sub>d</sub> G<sub>d</sub>)<sup>&minus;1</sup></p>
-  <p>Here &Delta;<sub>d</sub> is specialist d&rsquo;s update to the base weight W<sub>b</sub> (the paper also shrinks the off-diagonal second moments slightly). Task arithmetic applies every specialist&rsquo;s update to every input, including inputs only another specialist ever sees; TF-OPD minimizes exactly that error, weighted by how often each input direction occurs.</p>
+  <p>Here &Delta;<sub>d</sub> is specialist d&rsquo;s update to the base weight W<sub>b</sub> (the paper also shrinks the off-diagonal second moments slightly). This is the closed-form solution of RegMean, written for updates; RegMean takes the second moments from each task&rsquo;s training corpus, and TF-OPD takes them where on-policy distillation takes its data, from the models&rsquo; own rollouts. Task arithmetic applies every specialist&rsquo;s update to every input, including inputs only another specialist ever sees; TF-OPD minimizes exactly that error, weighted by how often each input direction occurs.</p>
   {% include anim/strip_tfopd.html %}
-  <p>The statistics are on-policy: they come from each specialist reading its own answers, which are the inputs a layer actually sees in use, not from reference solutions the model never wrote. The procedure keeps no optimizer state and has no learning rate to tune; for two specialists it takes about 10 GPU-hours of forward computation in total, on 48&nbsp;GB GPUs.</p>
+  <p>The statistics are on-policy: they come from each specialist reading its own answers, which are the inputs a layer actually sees in use, not from reference solutions the model never wrote. The procedure keeps no optimizer state and has no learning rate to tune; for two specialists it takes about 10 GPU-hours in total on 48&nbsp;GB GPUs, every step forward computation or linear algebra.</p>
 </section>
 
 <section>
@@ -298,7 +298,7 @@ body.dark-mode .case mark.no{color:#F0B49A;background:rgba(233,169,140,.14)}
     <div class="result-card"><div class="rnum">61.1</div><div class="rdesc">mean accuracy over seven math and code benchmarks, highest of all four models</div></div>
     <div class="result-card"><div class="rnum">50.0</div><div class="rdesc">AIME24, level with the math specialist</div></div>
     <div class="result-card"><div class="rnum">69.4</div><div class="rdesc">OlympiadBench, highest of all four models</div></div>
-    <div class="result-card"><div class="rnum">0</div><div class="rdesc">gradient steps; about 10 GPU-hours of forward passes in total</div></div>
+    <div class="result-card"><div class="rnum">0</div><div class="rdesc">gradient steps; about 10 GPU-hours in total, forward passes and linear algebra only</div></div>
   </div>
   <figure class="chart">
     {% include figures/tfopd_mean.svg %}
@@ -306,7 +306,7 @@ body.dark-mode .case mark.no{color:#F0B49A;background:rgba(233,169,140,.14)}
   </figure>
   <p>Each specialist is far ahead in its own domain and far behind in the other. TF-OPD stays close to the specialist of the domain on every benchmark and keeps most of what reinforcement learning added on each, so it is the only model that is never far from the best score.</p>
   <div class="tbl-wrap" tabindex="0" role="region" aria-label="Table 1: accuracy on seven benchmarks">
-  <table class="compare-table tight"><caption style="caption-side:top;text-align:left;font-family:var(--sans);font-size:.85rem;line-height:1.5;color:var(--muted);padding:0 0 .7em"><b style="color:var(--link)">Table 1.</b> Accuracy (%) on Olmo&nbsp;3 7B. AIME24, AIME25 and HMMT25 average four sampled answers per problem; the other benchmarks use one. Released checkpoints are evaluated in bfloat16 and the fused model in float16. Best value in each column in bold.</caption>
+  <table class="compare-table tight"><caption style="caption-side:top;text-align:left;font-family:var(--sans);font-size:.85rem;line-height:1.5;color:var(--muted);padding:0 0 .7em"><b style="color:var(--link)">Table 1.</b> Accuracy (%) on Olmo&nbsp;3 7B. AIME24, AIME25 and HMMT25 average four sampled answers per problem; the other benchmarks use one. Released checkpoints are evaluated in bfloat16 and the fused model in float16. The mean is taken over the seven benchmarks before rounding. Best value in each column in bold.</caption>
     <thead><tr><th>Model</th><th>MATH-500</th><th>Olympiad&shy;Bench</th><th>AIME24</th><th>AIME25</th><th>HMMT25</th><th>HumanEval+</th><th>MBPP+</th><th>Mean</th></tr></thead>
     <tbody>
       <tr><td>Base model</td><td>63.4</td><td>33.4</td><td>15.8</td><td>10.0</td><td>8.3</td><td>45.7</td><td>44.2</td><td>31.6</td></tr>
@@ -316,7 +316,7 @@ body.dark-mode .case mark.no{color:#F0B49A;background:rgba(233,169,140,.14)}
     </tbody>
   </table>
   </div>
-  <p style="font-size:.95rem;color:var(--muted)">The released specialists are scored in bfloat16, their native format. Scored in the same format (float16), the fused model is within a point of the mathematics specialist on AIME25.</p>
+  <p style="font-size:.95rem;color:var(--muted)">The released specialists are scored in bfloat16, their native format. Scored in the same format (float16), the fused model is within a point of the mathematics specialist on AIME25. AIME24, AIME25 and HMMT25 have thirty problems each, so differences of a few points are within their sampling noise.</p>
 </section>
 
 <section>
@@ -326,15 +326,15 @@ body.dark-mode .case mark.no{color:#F0B49A;background:rgba(233,169,140,.14)}
     {% include figures/tfopd_loops.svg %}
     <figcaption><b>Figure 2.</b> The mathematics specialist&rsquo;s rollouts: answers that end in a repetition loop, as a share of the answers and of the tokens.</figcaption>
   </figure>
-  <p>Remove them, and the fused model goes from task arithmetic&rsquo;s level on AIME25 to the specialist&rsquo;s own level in the same format. The damage does not show token by token: built from all answers, the fused model already predicts almost the same next token as the specialist, yet a long derivation is decided at a few of its steps.</p>
+  <p>Remove them, and the fused model goes from task arithmetic&rsquo;s level on AIME25 to the specialist&rsquo;s own level in the same format, recovering every hard problem that the model built from all answers loses. The damage does not show token by token: when both read the specialist&rsquo;s own correct solutions, the fused model built from all answers already predicts almost the same next token as the specialist, yet a long derivation is decided at a few of its steps.</p>
   <figure class="chart">
     {% include figures/tfopd_aime.svg %}
-    <figcaption><b>Figure 3.</b> AIME25 accuracy (%), four sampled answers per problem, every model in float16. Only the answers that enter the statistics change between the two TF-OPD rows; the final model of Table 1 also keeps only code answers that pass their tests.</figcaption>
+    <figcaption><b>Figure 3.</b> AIME25 accuracy (%), four sampled answers per problem. The fused models and the mathematics specialist are evaluated in float16; task arithmetic is stored in bfloat16. The two closed-form rows differ only in which answers enter the statistics. The final model of Table 1 also keeps only correct mathematics answers and only code answers that pass their tests.</figcaption>
   </figure>
 </section>
 
 <section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-reason.png);mask-image:url(/images/icons/h-reason.png)"></i>Case study: where the specialist loops</h2>
+  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-reason.png);mask-image:url(/images/icons/h-reason.png)"></i>Case study: where the specialist repeats itself</h2>
   <p>The fused model is not only a compromise between its sources: on some problems it succeeds where every sample of that domain&rsquo;s specialist fails.</p>
   <div class="case" role="group" aria-label="Case study: a geometry problem from HMMT25">
     <p class="case-q">HMMT25: In a two-dimensional cave with a parallel floor and ceiling, two stalactites of lengths 16 and 36 hang perpendicularly from the ceiling, while two stalagmites of heights 25 and 49 grow perpendicularly from the ground. If the tips of these four structures form the vertices of a square in some order, compute the height of the cave. (Answer: 63)</p>
@@ -346,7 +346,7 @@ body.dark-mode .case mark.no{color:#F0B49A;background:rgba(233,169,140,.14)}
       </div>
       <div class="case-path lose">
         <h3>Math specialist &middot; 0 of 4 samples correct</h3>
-        <p>&ldquo;&hellip; which implies 400 = 576, which is impossible.&rdquo; &hellip; &ldquo;<mark class="no">I think I have to concede and say the answer is 61.</mark>&rdquo; (the same opening then returns in later steps)</p>
+        <p>&ldquo;&hellip; which implies 400 = 576, which is impossible.&rdquo; &hellip; &ldquo;<mark class="no">I think I have to concede and say the answer is 61.</mark>&rdquo; &hellip; &ldquo;The correct configuration involves the horizontal and vertical distances being the components of the square&rsquo;s sides.&rdquo; (the same opening returns in later steps)</p>
         <p class="ans">61 &#10007;</p>
       </div>
     </div>

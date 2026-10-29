@@ -83,7 +83,7 @@
   <text class="sub" x="681.0" y="184.0" text-anchor="middle" style="font-size:10.5px">one model, same size<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0.000;0.740;0.765;0.940;1.000" dur="12s" begin="tfST.begin"/></text>
   <text class="sub" x="390.0" y="232.0" text-anchor="middle">forward passes and linear algebra only: no backpropagation, no optimizer, no learning rate</text>
 </svg>
-<figcaption><b>How to read it.</b> Each specialist answers a few hundred of its own training problems; answers stuck in repetition loops are dropped (for mathematics, only correct answers are kept, for code only answers that pass their tests); each specialist reads its kept answers once while every linear layer records the second moments of its inputs; then each layer is solved exactly. Schematic.</figcaption>
+<figcaption><b>How to read it.</b> Each specialist answers a few hundred training problems from its own domain; answers stuck in repetition loops are dropped (for mathematics, only correct answers are kept, for code only answers that pass their tests); each specialist reads its kept answers once while every linear layer records the second moments of its inputs; then each layer is solved exactly. Schematic.</figcaption>
 </figure>
 <script>
 (function(){

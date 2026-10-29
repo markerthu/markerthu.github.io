@@ -283,11 +283,11 @@ body.dark-mode .case mark.no{color:#F0B49A;background:rgba(233,169,140,.14)}
 
 <section>
   <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-target.png);mask-image:url(/images/icons/h-target.png)"></i>The key finding: the student surpasses its teacher</h2>
-  <p>Train an audio LLM with a frozen external judge as its teacher. Here the teacher is Ke-Omni-R, an outcome-only RL model on the same backbone, which scores <strong>74.6%</strong> on MMAU test-mini. Its student ends at <strong>75.1%</strong>, above the teacher that trained it: a teacher does not have to be better than its student to help it.</p>
+  <p>Train an audio LLM with a frozen external judge as its teacher. Here the teacher is Ke-Omni-R, an outcome-only RL model on the same backbone, which scores <strong>74.6%</strong> on MMAU test-mini. Its student ends at <strong>75.1%</strong>, slightly above the teacher that trained it: a teacher does not have to be better than its student to help it.</p>
   <p>So the student can teach itself, and keep doing so. Let the improved student become the teacher, again and again: that is AudioRSI, at <strong>76.1%</strong>.</p>
   <figure class="chart">
     {% include figures/arsi_teacher.svg %}
-    <figcaption><b>Figure 1.</b> MMAU test-mini accuracy. All three start from the same backbone (Qwen2.5-Omni-7B), train on the same AVQA data and are evaluated the same way; only the reward differs. Each configuration is one training run, so read these as small but consistent steps.</figcaption>
+    <figcaption><b>Figure 1.</b> MMAU test-mini accuracy. All three start from the same backbone (Qwen2.5-Omni-7B), train on the same AVQA data and are evaluated the same way; only the reward differs. Each configuration is a single training run with one seed, so read these as small steps rather than established gaps.</figcaption>
   </figure>
 </section>
 
@@ -295,7 +295,7 @@ body.dark-mode .case mark.no{color:#F0B49A;background:rgba(233,169,140,.14)}
   <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-gear.png);mask-image:url(/images/icons/h-gear.png)"></i>Method: one model, two roles</h2>
   <p>AudioRSI runs inside GRPO. For each audio question the model, as the <strong>student</strong> (actor), writes K&nbsp;=&nbsp;8 reasoning paths. The same model, as the <strong>teacher</strong> (critic), hears the same recording and compares the paths pair by pair: win, tie or lose. A path&rsquo;s self-critique reward is how often it beats the rest of its group, added to the usual reward for a correct answer. There is no hand-crafted process reward and no external judge.</p>
   {% include anim/strip_audiorsi.html %}
-  <p>The teacher is a copy of the student&rsquo;s weights, held fixed between handovers so that the reward does not drift from one step to the next. Every T&nbsp;=&nbsp;200 steps the current student replaces it, but only if its accuracy has not regressed, so the teacher&rsquo;s role never passes to a weaker checkpoint. A 6,400-step run has 32 such sync points: the teacher learns too, so student and teacher co-evolve.</p>
+  <p>The teacher is a copy of the student&rsquo;s weights, held fixed between handovers so that the reward does not drift from one step to the next. Every T&nbsp;=&nbsp;200 steps the current student replaces it, but only if its outcome accuracy on the current training mini-batch has not dropped below the teacher&rsquo;s, a simple check against handing the teacher&rsquo;s role to a weaker checkpoint. A 6,400-step run has 32 such sync points: the teacher learns too, so student and teacher co-evolve.</p>
 </section>
 
 <section>
@@ -322,12 +322,12 @@ body.dark-mode .case mark.no{color:#F0B49A;background:rgba(233,169,140,.14)}
 
 <section>
   <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-refresh.png);mask-image:url(/images/icons/h-refresh.png)"></i>Why the recursion matters</h2>
-  <p>Keep everything else fixed and change only whether the teacher is refreshed. With a frozen teacher, accuracy on MMAU test-mini, which is never used for training, climbs and then stalls. When the student keeps becoming the teacher, accuracy keeps rising, and AudioRSI stays ahead at every checkpoint in the second half of training.</p>
+  <p>Train the same recipe with a frozen external teacher (Ke-Omni-R) instead of the student&rsquo;s own, refreshed copy. With the frozen teacher, accuracy on MMAU test-mini, which is never used for training, climbs and then stalls. When the student keeps becoming the teacher, accuracy keeps rising, and AudioRSI stays ahead at every checkpoint in the second half of training.</p>
   <figure class="chart">
     {% include figures/arsi_curve.svg %}
-    <figcaption><b>Figure 2.</b> Out-of-distribution accuracy on MMAU test-mini during training, redrawn from the paper&rsquo;s training curves. The frozen-teacher run uses the same recipe with Ke-Omni-R as a fixed judge. It nearly closes the gap around step 5,200, then stays flat while AudioRSI rises again.</figcaption>
+    <figcaption><b>Figure 2.</b> Out-of-distribution accuracy on MMAU test-mini during training, redrawn from the paper&rsquo;s training curves. The frozen-teacher run uses the same recipe with Ke-Omni-R as a fixed judge, so it changes which model judges as well as whether the teacher is refreshed. Both runs start from the untrained Qwen2.5-Omni-7B, which scores 65.2% under the paper&rsquo;s protocol (its reported score is 71.5%, Table 1). The frozen-teacher run nearly closes the gap around step 5,200, then stays flat while AudioRSI rises again.</figcaption>
   </figure>
-  <p>How often to hand over matters too. Hand over too often (T&nbsp;=&nbsp;50), close to a reward that shifts with every update, and the whole gain over outcome-only training is lost; too rarely (T&nbsp;=&nbsp;1000, the closest setting to a frozen copy) and most of it is. Periods of 200 to 500 steps work best.</p>
+  <p>The sync-period sweep keeps the model&rsquo;s own teacher and changes only how often it is refreshed, so it is the more direct test of the recursion. Hand over too often (T&nbsp;=&nbsp;50), close to a reward that shifts with every update, and the whole gain over outcome-only training is lost; too rarely (T&nbsp;=&nbsp;1000, the closest setting to a frozen copy) and most of it is. Periods of 200 to 500 steps work best.</p>
   <figure class="chart">
     {% include figures/arsi_period.svg %}
     <figcaption><b>Figure 3.</b> Sync-period sweep on MMAU test-mini (total accuracy, %; the axis starts at 74). Dashed lines: outcome-only training and a frozen external teacher. The sweep is run on MMAU test-mini; the other three benchmarks, evaluated only at the default T&nbsp;=&nbsp;200, are the cleaner test of the chosen period.</figcaption>
