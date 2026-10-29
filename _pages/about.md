@@ -1781,7 +1781,7 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
   <div class="research-card">
     <img class="rc-icon-img" loading="lazy" src="/images/icons/ri-rsi.png" alt="">
     <div class="rc-title">Recursive Self-Improvement</div>
-    <div class="rc-desc">Models that keep improving themselves: each improved policy becomes the critic and teacher of its successor, removing human scaffolding from RL post-training step by step.</div>
+    <div class="rc-desc">Models that keep improving themselves: each improved policy becomes the critic and teacher of its successor, removing human scaffolding from RL post-training step by step (AudioRSI).</div>
   </div>
   <div class="research-card">
     <img class="rc-icon-img" loading="lazy" src="/images/icons/ri-discovery.png" alt="">
