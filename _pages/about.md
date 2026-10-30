@@ -1273,6 +1273,7 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
     <div class="ro-dom">AI for Science<span>protein &amp; materials design</span></div>
     <div class="ro-papers">
       <a class="ro-p" href="/projects/proteinzero/">ProteinZero <span class="ro-v">TMLR 2026</span></a>
+      <a class="ro-p" href="https://arxiv.org/abs/2607.09039" target="_blank" rel="noopener">GPFlow <span class="ro-v">NeurIPS 2026</span></a>
       <a class="ro-p" href="https://openreview.net/forum?id=stiehhc5y6" target="_blank" rel="noopener">EDiSon <span class="ro-v">AI4Mat 2024</span></a>
     </div>
   </div>
@@ -1332,7 +1333,7 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
   </li>
   <li>
     <span class="news-date">Sep 2026</span>
-    <span><span class="nbadge nb-accept">Accept</span>Multiple papers accepted at <strong>NeurIPS 2026</strong>. See you in Atlanta&nbsp;<img class="g-ico" src="/images/icons/flag-us.png" alt=""></span>
+    <span><span class="nbadge nb-accept">Accept</span>Multiple papers accepted at <strong>NeurIPS 2026</strong>, including ElegantVLA and GPFlow. See you in Atlanta&nbsp;<img class="g-ico" src="/images/icons/flag-us.png" alt=""></span>
   </li>
   <li>
     <span class="news-date">Sep 2026</span>
@@ -1478,6 +1479,19 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
     <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>Up to 2.55&times; (GR00T) / 3.77&times; (CogACT) speedup &middot; 13.8 &rarr; 26.3 Hz on real-world GR00T tasks</div>
     <div class="pub-links">
       <a class="pub-link pl-paper" href="https://arxiv.org/abs/2605.29438" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-pubs.png);mask-image:url(/images/icons/sh-pubs.png)"></i>Paper</a>
+    </div>
+  </div>
+</div>
+
+<div class="pub-entry" role="article" data-venue="NeurIPS" data-year="2026" data-arxiv="2607.09039">
+  <div class="pub-left"><span class="pb pb-neurips">NeurIPS 2026</span></div>
+  <div class="pub-right">
+    <div class="pub-title"><a href="https://arxiv.org/abs/2607.09039" target="_blank" rel="noopener noreferrer">Variable-Length Generative Protein Design via Generalized Poisson Flow</a></div>
+    <div class="pub-authors">C. Cheng, Z. Ni, Y. Qu, Y. Chen, R. Guo, <strong>J. Fan</strong>, G. Liu</div>
+    <div class="pub-desc">GPFlow: protein generation without fixing the length in advance, by learning the rate function of an inhomogeneous generalized Poisson process over both structure and sequence.</div>
+    <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>First on 10 of 16 motif-scaffolding tasks &middot; up to 10&times; success rate on the hardest targets</div>
+    <div class="pub-links">
+      <a class="pub-link pl-paper" href="https://arxiv.org/abs/2607.09039" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-pubs.png);mask-image:url(/images/icons/sh-pubs.png)"></i>Paper</a>
     </div>
   </div>
 </div>
@@ -1809,7 +1823,7 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
 
 <div class="stats-row">
   <div class="stat-card">
-    <div class="stat-number" data-target="10" data-suffix="+">0</div>
+    <div class="stat-number" data-target="13" data-suffix="+">0</div>
     <div class="stat-label">Top Venue Papers<br><em>ICLR · NeurIPS · ICML · TPAMI</em></div>
   </div>
   <div class="stat-card">
@@ -1825,7 +1839,7 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
     <div class="stat-label">MMAU Audio Reasoning<br><em>Beats Gemini 2.5 Pro</em></div>
   </div>
   <div class="stat-card">
-    <div class="stat-number" data-target="{{ site.data.citations._total | default: 437 }}" data-suffix="+">0</div>
+    <div class="stat-number" data-target="{{ site.data.citations._total | default: 560 }}" data-suffix="+">0</div>
     <div class="stat-label">Google Scholar Citations</div>
   </div>
   <div class="stat-card">
@@ -1850,7 +1864,7 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
 <div class="cit-chart">
   <div class="cit-chart-head">
     <span class="cit-chart-title">Cumulative citations</span>
-    <span class="cit-chart-sub">Google Scholar &middot; {{ site.data.citations._total }} citations &middot; h-index {{ site.data.citations._h_index | default: 11 }} &middot; i10 {{ site.data.citations._i10_index | default: 12 }} &middot; auto-updated daily</span>
+    <span class="cit-chart-sub">Google Scholar &middot; {{ site.data.citations._total }} citations &middot; h-index {{ site.data.citations._h_index | default: 12 }} &middot; i10 {{ site.data.citations._i10_index | default: 13 }} &middot; auto-updated daily</span>
   </div>
   <svg class="ct-svg" viewBox="0 0 720 210" preserveAspectRatio="none" role="img" aria-label="Cumulative citations over time">
     <defs>
@@ -2230,9 +2244,10 @@ document.querySelectorAll('.featured-card').forEach(function(card){
   var BIB = {
     'd4wrBuJ4xo': '@inproceedings{zheng2026procedure,\n  title={Procedure-Aware Reinforcement Learning for Tool-Augmented Large Language Models},\n  author={Qinglong Zheng and Jiajun Fan and Chaoran Cheng and Ge Liu},\n  booktitle={Conference on Language Modeling (COLM)},\n  year={2026},\n  url={https://openreview.net/forum?id=d4wrBuJ4xo}\n}',
     '2506.07459': '@article{wang2026proteinzero,\n  title={ProteinZero: Self-Improving Protein Generation via Online Reinforcement Learning},\n  author={Ziwen Wang and Jiajun Fan and Ruihan Guo and Thao Nguyen and Heng Ji and Ge Liu},\n  journal={Transactions on Machine Learning Research},\n  year={2026},\n  url={https://arxiv.org/abs/2506.07459}\n}',
-    '8Oc3Mx754M': '@inproceedings{yang2026bcr,\n  title={Batched Contextual Reinforcement},\n  author={Yang, Bangji and Ma, Hongbo and Fan, Jiajun and Liu, Ge},\n  booktitle={International Conference on Machine Learning},\n  year={2026},\n  url={https://openreview.net/forum?id=8Oc3Mx754M}\n}',
+    '8Oc3Mx754M': '@inproceedings{yang2026bcr,\n  title={Batched Contextual Reinforcement},\n  author={Yang, Bangji and Ma, Hongbo and Fan, Jiajun and Liu, Ge},\n  booktitle={Forty-third International Conference on Machine Learning},\n  year={2026},\n  url={https://openreview.net/forum?id=8Oc3Mx754M}\n}',
     '2605.29438': '@inproceedings{li2026elegantvla,\n  title={ElegantVLA: Learning When to Think for Efficient Vision-Language-Action Models},\n  author={Li, Ye and Liu, Huanan and Ji, Kangye and Meng, Yuan and Fan, Jiajun and Wang, Yuansong and Qin, Shiyu and Wu, Chenglei and Xia, Shu-Tao and Wang, Zhi},\n  booktitle={Advances in Neural Information Processing Systems},\n  year={2026},\n  url={https://arxiv.org/abs/2605.29438}\n}',
-    'Tt8lCe1NrW': '@inproceedings{sun2026barrag,\n  title={Rethinking the Reranker: Boundary-Aware Evidence Selection for Robust Retrieval-Augmented Generation},\n  author={Sun, Jiashuo and Jiang, Pengcheng and Wang, Saizhuo and Fan, Jiajun and Wang, Heng and Ouyang, Siru and Zhong, Ming and Jiao, Yizhu and Huang, Chengsong and Xu, Xueqiang and Han, Pengrui and Li, Peiran and Huang, Jiaxin and Liu, Ge and Ji, Heng and Han, Jiawei},\n  booktitle={International Conference on Machine Learning},\n  year={2026},\n  url={https://openreview.net/forum?id=Tt8lCe1NrW}\n}',
+    '2607.09039': '@inproceedings{cheng2026gpflow,\n  title={Variable-Length Generative Protein Design via Generalized Poisson Flow},\n  author={Cheng, Chaoran and Ni, Zhanghan and Qu, Yanru and Chen, Yuxin and Guo, Ruihan and Fan, Jiajun and Liu, Ge},\n  booktitle={Advances in Neural Information Processing Systems},\n  year={2026},\n  url={https://arxiv.org/abs/2607.09039}\n}',
+    'Tt8lCe1NrW': '@inproceedings{sun2026barrag,\n  title={Rethinking the Reranker: Boundary-Aware Evidence Selection for Robust Retrieval-Augmented Generation},\n  author={Sun, Jiashuo and Jiang, Pengcheng and Wang, Saizhuo and Fan, Jiajun and Wang, Heng and Ouyang, Siru and Zhong, Ming and Jiao, Yizhu and Huang, Chengsong and Xu, Xueqiang and Han, Pengrui and Li, Peiran and Huang, Jiaxin and Liu, Ge and Ji, Heng and Han, Jiawei},\n  booktitle={Forty-third International Conference on Machine Learning},\n  year={2026},\n  url={https://openreview.net/forum?id=Tt8lCe1NrW}\n}',
     'FeWvD0L_a4': '@inproceedings{fan2023learnable,\n  title={Learnable Behavior Control: Breaking Atari Human World Records via Sample-Efficient Behavior Selection},\n  author={Jiajun Fan and Yuzheng Zhuang and Yuecheng Liu and Jianye HAO and Bin Wang and Jiangcheng Zhu and Hao Wang and Shu-Tao Xia},\n  booktitle={The Eleventh International Conference on Learning Representations},\n  year={2023},\n  url={https://openreview.net/forum?id=FeWvD0L_a4}\n}',
     'DUr48hxO2h': '@inproceedings{fan2026incentivizing,\n  title={Incentivizing Consistent, Effective and Scalable Reasoning Capability in Audio {LLM}s via Reasoning Process Rewards},\n  author={Jiajun Fan and Roger Ren and Jingyuan Li and Rahul Pandey and Prashanth Gurunath Shivakumar and Ivan Bulyko and Ankur Gandhe and Ge Liu and Yile Gu},\n  booktitle={The Fourteenth International Conference on Learning Representations},\n  year={2026},\n  url={https://openreview.net/forum?id=DUr48hxO2h}\n}',
     'aXO0xg0ttW': '@inproceedings{fan2025adaptive,\n  title={Adaptive Divergence Regularized Policy Optimization for Fine-tuning Generative Models},\n  author={Jiajun Fan and Tong Wei and Chaoran Cheng and Yuxin Chen and Ge Liu},\n  booktitle={The Thirty-ninth Annual Conference on Neural Information Processing Systems},\n  year={2025},\n  url={https://openreview.net/forum?id=aXO0xg0ttW}\n}',
@@ -2359,7 +2374,7 @@ function filterByVenue(btn, venue) {
     if(!links) return;
     var badge = document.createElement('span');
     badge.className = 'cite-badge';
-    badge.innerHTML = '<i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-chart.png);mask-image:url(/images/icons/h-chart.png)"></i>' + count + ' citations';
+    badge.innerHTML = '<i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-chart.png);mask-image:url(/images/icons/h-chart.png)"></i>' + count + (count === 1 ? ' citation' : ' citations');
     links.appendChild(badge);
   });
 })();

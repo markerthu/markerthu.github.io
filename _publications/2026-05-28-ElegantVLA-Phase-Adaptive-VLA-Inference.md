@@ -3,7 +3,7 @@ title: "ElegantVLA: Learning When to Think for Efficient Vision-Language-Action 
 collection: publications
 permalink: /publication/2026-05-28-ElegantVLA
 date: 2026-05-28
-venue: '<strong>NeurIPS</strong> 2026'
+venue: 'The Fortieth Annual Conference on Neural Information Processing Systems (<strong>NeurIPS 2026</strong>)'
 paperurl: 'https://arxiv.org/abs/2605.29438'
 citation: 'Ye Li, Huanan Liu, Kangye Ji, Yuan Meng, Jiajun Fan, Yuansong Wang, Shiyu Qin, Chenglei Wu, Shu-Tao Xia, Zhi Wang. &quot;ElegantVLA: Learning When to Think for Efficient Vision-Language-Action Models.&quot; NeurIPS 2026.'
 bibtex: |

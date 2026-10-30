@@ -10,7 +10,7 @@ bibtex: |
   @inproceedings{li2026spvla,
     title={{SP-VLA}: A Joint Model Scheduling and Token Pruning Approach for {VLA} Model Acceleration},
     author={Li, Ye and Meng, Yuan and Sun, Zewen and Ji, Kangye and Tang, Chen and Fan, Jiajun and Ma, Xinzhu and Xia, Shu-Tao and Wang, Zhi and Zhu, Wenwu},
-    booktitle={International Conference on Learning Representations},
+    booktitle={The Fourteenth International Conference on Learning Representations},
     year={2026},
     url={https://openreview.net/forum?id=RwdGIIjPlC}
   }

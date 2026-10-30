@@ -11,6 +11,8 @@ bibtex: |
     title={Optimal Transport for Treatment Effect Estimation},
     author={Wang, Hao and Fan, Jiajun and Chen, Zhichao and Li, Haoxuan and Liu, Weiming and Liu, Tianqiao and Dai, Quanyu and Wang, Yichao and Dong, Zhenhua and Tang, Ruiming},
     booktitle={Advances in Neural Information Processing Systems},
+    volume={36},
+    pages={5404--5418},
     year={2023},
     url={https://arxiv.org/abs/2310.18286}
   }

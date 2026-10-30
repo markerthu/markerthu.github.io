@@ -6,7 +6,7 @@ projectpage: "/projects/cesar/"
 date: 2026-01-01
 venue: 'International Conference on Learning Representations 2026 (<strong>ICLR 2026</strong>)'
 paperurl: 'https://openreview.net/forum?id=DUr48hxO2h'
-citation: 'Jiajun Fan, Roger Ren, Jingyuan Li, Rahul Pandey, Prashanth G. Shivakumar, Ivan Bulyko, Ankur Gandhe, Ge Liu, Yile Gu. &quot;Incentivizing Consistent, Effective and Scalable Reasoning Capability in Audio LLMs via Reasoning Process Rewards.&quot; ICLR 2026.'
+citation: 'Jiajun Fan, Roger Ren, Jingyuan Li, Rahul Pandey, Prashanth Gurunath Shivakumar, Ivan Bulyko, Ankur Gandhe, Ge Liu, Yile Gu. &quot;Incentivizing Consistent, Effective and Scalable Reasoning Capability in Audio LLMs via Reasoning Process Rewards.&quot; ICLR 2026.'
 bibtex: |
   @inproceedings{fan2026incentivizing,
     title     = {Incentivizing Consistent, Effective and Scalable Reasoning

@@ -10,7 +10,7 @@ bibtex: |
   @inproceedings{yang2026bcr,
     title={Batched Contextual Reinforcement},
     author={Yang, Bangji and Ma, Hongbo and Fan, Jiajun and Liu, Ge},
-    booktitle={International Conference on Machine Learning},
+    booktitle={Forty-third International Conference on Machine Learning},
     year={2026},
     url={https://openreview.net/forum?id=8Oc3Mx754M}
   }

@@ -21,7 +21,17 @@ PAPER_MATCH = {
     "GDI":        "generalized data distribution iteration",
     "SP-VLA":     "sp-vla",
     "VarCon":     "variational supervised contrastive",
+    "2605.29438": "elegantvla",
+    "2607.09039": "generalized poisson flow",
+    "Tt8lCe1NrW": "boundary-aware evidence selection",
+    "8Oc3Mx754M": "=batched contextual reinforcement",   # "=": exact title, so BCR II / the arXiv twin never match
+    "d4wrBuJ4xo": "procedure-aware reinforcement learning",
+    "2506.07459": "proteinzero",
 }
+
+def title_match(a, sub):
+    t = (a.get("title") or "").strip().lower()
+    return t == sub[1:] if sub.startswith("=") else sub in t
 
 def fetch():
     key = os.environ.get("SERPAPI_KEY")
@@ -109,7 +119,7 @@ def main():
     # per-paper counts (monotonic; keep old value if a paper isn't matched)
     arts = d.get("articles", [])
     for k, sub in PAPER_MATCH.items():
-        hit = next((a for a in arts if sub in (a.get("title", "").lower())), None)
+        hit = next((a for a in arts if title_match(a, sub)), None)
         if hit is not None:
             cur[k] = max(int(cites(hit)), int(cur.get(k) or 0))
 

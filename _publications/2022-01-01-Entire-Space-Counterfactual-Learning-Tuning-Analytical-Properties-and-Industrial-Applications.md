@@ -5,7 +5,7 @@ permalink: /publication/2022-01-01-Entire-Space-Counterfactual-Learning-Tuning-A
 date: 2022-01-01
 venue: '<strong>arXiv</strong>'
 paperurl: 'https://arxiv.org/abs/2210.11039v2'
-citation: ' Hao Wang,  Zhichao Chen,  Jiajun Fan,  Yuxin Huang,  Weiming Liu,  Xinggao Liu, &quot;Entire Space Counterfactual Learning: Tuning, Analytical Properties and Industrial Applications.&quot; Arxiv, 2022.'
+citation: 'Hao Wang, Zhichao Chen, Jiajun Fan, Yuxin Huang, Weiming Liu, Xinggao Liu. &quot;Entire Space Counterfactual Learning: Tuning, Analytical Properties and Industrial Applications.&quot; arXiv preprint arXiv:2210.11039v2, 2022.'
 bibtex: |
   @article{wang2022escl,
     title={Entire Space Counterfactual Learning: Tuning, Analytical Properties and Industrial Applications},
