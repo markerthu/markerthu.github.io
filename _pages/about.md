@@ -1264,6 +1264,7 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
     <div class="ro-dom">Tool-use agents<span>agentic RL</span></div>
     <div class="ro-papers">
       <a class="ro-p" href="/projects/procedure-aware-rl/">Procedure-Aware RL <span class="ro-v">COLM 2026</span></a>
+      <a class="ro-p" href="https://openreview.net/forum?id=Tt8lCe1NrW" target="_blank" rel="noopener">BAR-RAG <span class="ro-v">ICML 2026</span></a>
       <a class="ro-p" href="https://arxiv.org/abs/2605.12975" target="_blank" rel="noopener">PyRAG <span class="ro-v">arXiv 2026</span></a>
       <a class="ro-p" href="/projects/speechgym/">SpeechGym <span class="ro-v">arXiv 2026</span></a>
     </div>
@@ -1285,9 +1286,9 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
   <div class="ro-row">
     <div class="ro-dom">Embodied AI<span>VLA &amp; efficient inference</span></div>
     <div class="ro-papers">
+      <a class="ro-p" href="https://arxiv.org/abs/2605.29438" target="_blank" rel="noopener">ElegantVLA <span class="ro-v">NeurIPS 2026</span></a>
       <a class="ro-p" href="https://openreview.net/forum?id=RwdGIIjPlC" target="_blank" rel="noopener">SP-VLA <span class="ro-v">ICLR 2026</span></a>
       <a class="ro-p" href="https://arxiv.org/abs/2407.05010" target="_blank" rel="noopener">PRANCE <span class="ro-v">TPAMI 2026</span></a>
-      <a class="ro-p" href="https://arxiv.org/abs/2605.29438" target="_blank" rel="noopener">ElegantVLA <span class="ro-v">arXiv 2026</span></a>
     </div>
   </div>
   <div class="ro-row">
@@ -1467,6 +1468,19 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
 </div>
 
 <div class="pub-list">
+
+<div class="pub-entry" role="article" data-venue="NeurIPS" data-year="2026" data-arxiv="2605.29438">
+  <div class="pub-left"><span class="pb pb-neurips">NeurIPS 2026</span></div>
+  <div class="pub-right">
+    <div class="pub-title"><a href="https://arxiv.org/abs/2605.29438" target="_blank" rel="noopener noreferrer">ElegantVLA: Learning When to Think for Efficient Vision-Language-Action Models</a></div>
+    <div class="pub-authors">Y. Li, H. Liu, K. Ji, Y. Meng, <strong>J. Fan</strong>, Y. Wang, S. Qin, C. Wu, S.-T. Xia, Z. Wang</div>
+    <div class="pub-desc">A plug-in scheduler that decides when a VLA model needs full computation, reusing vision, language and denoising states during stable motion. No retraining of the base model.</div>
+    <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>Up to 2.55&times; (GR00T) / 3.77&times; (CogACT) speedup &middot; 13.8 &rarr; 26.3 Hz on real-world GR00T tasks</div>
+    <div class="pub-links">
+      <a class="pub-link pl-paper" href="https://arxiv.org/abs/2605.29438" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-pubs.png);mask-image:url(/images/icons/sh-pubs.png)"></i>Paper</a>
+    </div>
+  </div>
+</div>
 
 <div class="pub-entry" role="article" data-venue="ICML" data-year="2026" data-arxiv="Tt8lCe1NrW">
   <div class="pub-left"><span class="pb pb-icml">ICML 2026</span></div>
@@ -2217,6 +2231,7 @@ document.querySelectorAll('.featured-card').forEach(function(card){
     'd4wrBuJ4xo': '@inproceedings{zheng2026procedure,\n  title={Procedure-Aware Reinforcement Learning for Tool-Augmented Large Language Models},\n  author={Qinglong Zheng and Jiajun Fan and Chaoran Cheng and Ge Liu},\n  booktitle={Conference on Language Modeling (COLM)},\n  year={2026},\n  url={https://openreview.net/forum?id=d4wrBuJ4xo}\n}',
     '2506.07459': '@article{wang2026proteinzero,\n  title={ProteinZero: Self-Improving Protein Generation via Online Reinforcement Learning},\n  author={Ziwen Wang and Jiajun Fan and Ruihan Guo and Thao Nguyen and Heng Ji and Ge Liu},\n  journal={Transactions on Machine Learning Research},\n  year={2026},\n  url={https://arxiv.org/abs/2506.07459}\n}',
     '8Oc3Mx754M': '@inproceedings{yang2026bcr,\n  title={Batched Contextual Reinforcement},\n  author={Yang, Bangji and Ma, Hongbo and Fan, Jiajun and Liu, Ge},\n  booktitle={International Conference on Machine Learning},\n  year={2026},\n  url={https://openreview.net/forum?id=8Oc3Mx754M}\n}',
+    '2605.29438': '@inproceedings{li2026elegantvla,\n  title={ElegantVLA: Learning When to Think for Efficient Vision-Language-Action Models},\n  author={Li, Ye and Liu, Huanan and Ji, Kangye and Meng, Yuan and Fan, Jiajun and Wang, Yuansong and Qin, Shiyu and Wu, Chenglei and Xia, Shu-Tao and Wang, Zhi},\n  booktitle={Advances in Neural Information Processing Systems},\n  year={2026},\n  url={https://arxiv.org/abs/2605.29438}\n}',
     'Tt8lCe1NrW': '@inproceedings{sun2026barrag,\n  title={Rethinking the Reranker: Boundary-Aware Evidence Selection for Robust Retrieval-Augmented Generation},\n  author={Sun, Jiashuo and Jiang, Pengcheng and Wang, Saizhuo and Fan, Jiajun and Wang, Heng and Ouyang, Siru and Zhong, Ming and Jiao, Yizhu and Huang, Chengsong and Xu, Xueqiang and Han, Pengrui and Li, Peiran and Huang, Jiaxin and Liu, Ge and Ji, Heng and Han, Jiawei},\n  booktitle={International Conference on Machine Learning},\n  year={2026},\n  url={https://openreview.net/forum?id=Tt8lCe1NrW}\n}',
     'FeWvD0L_a4': '@inproceedings{fan2023learnable,\n  title={Learnable Behavior Control: Breaking Atari Human World Records via Sample-Efficient Behavior Selection},\n  author={Jiajun Fan and Yuzheng Zhuang and Yuecheng Liu and Jianye HAO and Bin Wang and Jiangcheng Zhu and Hao Wang and Shu-Tao Xia},\n  booktitle={The Eleventh International Conference on Learning Representations},\n  year={2023},\n  url={https://openreview.net/forum?id=FeWvD0L_a4}\n}',
     'DUr48hxO2h': '@inproceedings{fan2026incentivizing,\n  title={Incentivizing Consistent, Effective and Scalable Reasoning Capability in Audio {LLM}s via Reasoning Process Rewards},\n  author={Jiajun Fan and Roger Ren and Jingyuan Li and Rahul Pandey and Prashanth Gurunath Shivakumar and Ivan Bulyko and Ankur Gandhe and Ge Liu and Yile Gu},\n  booktitle={The Fourteenth International Conference on Learning Representations},\n  year={2026},\n  url={https://openreview.net/forum?id=DUr48hxO2h}\n}',

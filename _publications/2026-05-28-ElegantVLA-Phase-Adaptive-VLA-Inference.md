@@ -3,14 +3,14 @@ title: "ElegantVLA: Learning When to Think for Efficient Vision-Language-Action 
 collection: publications
 permalink: /publication/2026-05-28-ElegantVLA
 date: 2026-05-28
-venue: '<strong>arXiv</strong> preprint, 2026'
+venue: '<strong>NeurIPS</strong> 2026'
 paperurl: 'https://arxiv.org/abs/2605.29438'
-citation: 'Ye Li, Huanan Liu, Kangye Ji, Yuan Meng, Jiajun Fan, Yuansong Wang, Shiyu Qin, Chenglei Wu, Shu-Tao Xia, Zhi Wang. &quot;ElegantVLA: Learning When to Think for Efficient Vision-Language-Action Models.&quot; arXiv preprint arXiv:2605.29438, 2026.'
+citation: 'Ye Li, Huanan Liu, Kangye Ji, Yuan Meng, Jiajun Fan, Yuansong Wang, Shiyu Qin, Chenglei Wu, Shu-Tao Xia, Zhi Wang. &quot;ElegantVLA: Learning When to Think for Efficient Vision-Language-Action Models.&quot; NeurIPS 2026.'
 bibtex: |
-  @article{li2026elegantvla,
+  @inproceedings{li2026elegantvla,
     title={ElegantVLA: Learning When to Think for Efficient Vision-Language-Action Models},
     author={Li, Ye and Liu, Huanan and Ji, Kangye and Meng, Yuan and Fan, Jiajun and Wang, Yuansong and Qin, Shiyu and Wu, Chenglei and Xia, Shu-Tao and Wang, Zhi},
-    journal={arXiv preprint arXiv:2605.29438},
+    booktitle={Advances in Neural Information Processing Systems},
     year={2026},
     url={https://arxiv.org/abs/2605.29438}
   }
