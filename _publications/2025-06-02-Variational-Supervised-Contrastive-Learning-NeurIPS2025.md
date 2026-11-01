@@ -16,4 +16,4 @@ bibtex: |
   }
 ---
 
-We propose VarCon, reformulating supervised contrastive learning as variational inference over latent class variables. Achieves SOTA 79.36% Top-1 on ImageNet-1K with ResNet-50, with superior embedding space organization and few-shot robustness.
+We propose VarCon, reformulating supervised contrastive learning as variational inference over latent class variables. Achieves SOTA among contrastive learning methods: 79.36% Top-1 on ImageNet-1K with ResNet-50, with superior embedding space organization and few-shot robustness.
