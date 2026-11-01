@@ -1333,7 +1333,7 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
   </li>
   <li>
     <span class="news-date">Sep 2026</span>
-    <span><span class="nbadge nb-accept">Accept</span>Multiple papers accepted at <strong>NeurIPS 2026</strong>, including ElegantVLA and GPFlow. See you in Atlanta&nbsp;<img class="g-ico" src="/images/icons/flag-us.png" alt=""></span>
+    <span><span class="nbadge nb-accept">Accept</span>Multiple papers accepted at <strong>NeurIPS 2026</strong>. See you in Atlanta&nbsp;<img class="g-ico" src="/images/icons/flag-us.png" alt=""></span>
   </li>
   <li>
     <span class="news-date">Sep 2026</span>
