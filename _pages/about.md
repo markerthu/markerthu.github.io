@@ -1197,7 +1197,7 @@ body.dark-mode figure.anim-fig{--good:#7FC79A}
   <canvas class="hero-particles" id="particles" aria-hidden="true"></canvas>
   <div class="hero-name">Jiajun Fan</div>
   <div class="hero-subtitle" id="hero-typed"></div>
-  <div class="hero-status"><span class="hs-dot" aria-hidden="true"></span>Open to Research Internships — Fall 2026 / 2027</div>
+  <div class="hero-status"><span class="hs-dot" aria-hidden="true"></span>Open to Research Internships — Spring &amp; Summer 2027</div>
   {% include hero-arc.html %}
   <div class="hero-links">
     <a class="hero-link" href="/cv/"><img class="hero-ico" src="/images/icons/h-cv.png" alt="">CV</a>
@@ -1224,7 +1224,7 @@ body.dark-mode figure.anim-fig{--good:#7FC79A}
 </div>
 
 <div class="internship-banner internship-banner-pulse">
-<i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-scholar.png);mask-image:url(/images/icons/h-scholar.png)"></i><strong>Seeking research internship — Fall 2026 / 2027.</strong> RL · Generative Models · Reasoning LLMs · Agentic RL
+<i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-scholar.png);mask-image:url(/images/icons/h-scholar.png)"></i><strong>Seeking research internship — Spring &amp; Summer 2027.</strong> RL · Generative Models · Reasoning LLMs · Agentic RL
 &nbsp;<a href="/cv/">[CV]</a>
 &nbsp;<a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">[Scholar]</a>
 &nbsp;<a href="mailto:jiajunf3@illinois.edu">[Email]</a>
