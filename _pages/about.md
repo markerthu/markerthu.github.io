@@ -2073,7 +2073,7 @@ Happy to discuss research, internships, or collaborations. Best reached by email
 <!-- ══════════════════ COMMAND PALETTE (⌘K) ══════════════════ -->
 <div id="cmdk-overlay" role="dialog" aria-modal="true" aria-label="Command palette" aria-hidden="true">
   <div id="cmdk">
-    <input id="cmdk-input" type="text" placeholder="Search papers, sections, actions…" aria-label="Command palette search" autocomplete="off">
+    <input id="cmdk-input" type="text" placeholder="Search papers, sections, actions…" aria-label="Command palette search" autocomplete="off" role="combobox" aria-controls="cmdk-list" aria-expanded="true" aria-autocomplete="list">
     <ul id="cmdk-list" role="listbox"></ul>
     <div class="cmdk-foot"><span><kbd>↑↓</kbd> navigate</span><span><kbd>↵</kbd> select</span><span><kbd>esc</kbd> close</span></div>
   </div>
@@ -2677,7 +2677,6 @@ function drawGraph(container) {
     if (!links) { links = document.createElement('div'); links.className = 'pub-links'; (entry.querySelector('.pub-right') || entry).appendChild(links); }
     var a = document.createElement('a');
     a.className = 'pub-link pl-video'; a.href = '/film/?s=' + m[1]; a.textContent = 'Video';
-    a.setAttribute('aria-label', 'Watch the project film');
     if (proj.classList.contains('pl-project') && proj.parentNode === links) links.insertBefore(a, proj.nextSibling);
     else links.insertBefore(a, links.firstChild);
   });
@@ -2741,12 +2740,15 @@ function drawGraph(container) {
       li.className = 'cmdk-empty';
       li.textContent = 'No results — try \u201ccesar\u201d, \u201ccv\u201d or \u201cdark\u201d';
       list.appendChild(li);
+      input.removeAttribute('aria-activedescendant');
       return;
     }
     filtered.forEach(function(it, idx){
       var li = document.createElement('li');
       li.className = 'cmdk-item' + (idx === sel ? ' active' : '');
       li.setAttribute('role','option');
+      li.id = 'cmdk-opt-' + idx;
+      li.setAttribute('aria-selected', idx === sel ? 'true' : 'false');
       li.innerHTML = '<span class="ck-icon"></span><span class="ck-t"></span><span class="ck-hint"></span>';
       if (it.i && it.i.charAt(0) === '/') {
         li.children[0].innerHTML = '<i class="lbl-ico" style="margin:0;width:1.15em;height:1.15em;-webkit-mask-image:url('+it.i+');mask-image:url('+it.i+')"></i>';
@@ -2759,6 +2761,7 @@ function drawGraph(container) {
       li.addEventListener('mousemove', function(){ if(sel !== idx){ sel = idx; render(); } });
       list.appendChild(li);
     });
+    input.setAttribute('aria-activedescendant', 'cmdk-opt-' + sel);
     var act = list.children[sel];
     if(act && act.scrollIntoView) act.scrollIntoView({ block: 'nearest' });
   }
