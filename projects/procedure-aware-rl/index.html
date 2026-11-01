@@ -280,7 +280,7 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
     <figcaption><b>Figure 1.</b> Qwen2.5-3B-Instruct trained with procedure-aware rewards, against the same base model and ToolRL's released correctness-only checkpoint, on three tool-use benchmarks.</figcaption>
   </figure>
   <div class="tbl-wrap">
-  <table class="compare-table"><caption style="caption-side:top;text-align:left;font-family:var(--sans);font-size:.85rem;line-height:1.5;color:var(--muted);padding:0 0 .7em"><b style="color:var(--link)">Table 1.</b> BFCL-V3 accuracy, averaged over its five sub-categories (including relevance and irrelevance detection), and on multi-turn tasks. The base model, ToolRL and Procedure-Aware RL share the Qwen2.5-3B backbone; the other three models are references.</caption>
+  <table class="compare-table"><caption style="caption-side:top;text-align:left;font-family:var(--sans);font-size:.85rem;line-height:1.5;color:var(--muted);padding:0 0 .7em"><b style="color:var(--link)">Table 1.</b> BFCL-V3 accuracy, averaged over its five sub-categories (including relevance and irrelevance detection), and on multi-turn tasks. The base model, ToolRL and Procedure-Aware RL share the Qwen2.5-3B backbone; the other five models are references.</caption>
     <thead><tr><th>Model</th><th>BFCL-V3 avg. acc</th><th>Multi-turn acc</th></tr></thead>
     <tbody>
       <tr><td>Qwen2.5-3B-Instruct (base)</td><td>57.31%</td><td>1.00%</td></tr>
@@ -288,6 +288,8 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
       <tr><td>GPT-5-mini</td><td>57.11%</td><td>5.50%</td></tr>
       <tr><td>GPT-4.1-mini</td><td>64.65%</td><td>2.50%</td></tr>
       <tr><td>Gemma-3-12b-it</td><td>64.69%</td><td>5.75%</td></tr>
+      <tr><td>Gemini-2.5-Flash-Lite</td><td>57.94%</td><td>7.63%</td></tr>
+      <tr><td>Claude-Haiku-4.5</td><td>47.26%</td><td>1.75%</td></tr>
       <tr class="highlight"><td><strong>Procedure-Aware RL (ours, 3B)</strong></td><td><strong>65.67% <span class="badge-win">Best</span></strong></td><td><strong>7.25%</strong></td></tr>
     </tbody>
   </table>

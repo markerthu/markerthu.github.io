@@ -169,7 +169,7 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
       rel:['spvla'],
       act:[{t:'📎 arXiv', h:'https://arxiv.org/abs/2407.05010'}] },
     { id:'spvla', kw:['sp-vla','spvla','sp vla','vla','robot','vision language action','model scheduling'],
-      a:["SP-VLA (ICLR 2026) speeds up Vision-Language-Action models with joint model scheduling and spatio-semantic token pruning — 1.5× lossless on LIBERO, 2.4× on SimplerEnv. A Tsinghua-led collaboration."],
+      a:["SP-VLA (ICLR 2026) speeds up Vision-Language-Action models with joint model scheduling and spatio-semantic token pruning — 1.5× lossless on LIBERO, 2.4× on SimplerEnv."],
       rel:['prance'] },
     { id:'varcon', kw:['varcon','variational contrastive','supervised contrastive','imagenet','resnet'],
       a:["VarCon (NeurIPS 2025) recasts supervised contrastive learning as variational inference — a principled probabilistic framing that reaches 79.36% Top-1 on ImageNet-1K with ResNet-50."] },
@@ -228,7 +228,7 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
 
   var NAME = { audiorsi:'AudioRSI', tfopd:'TF-OPD', cesar:'CESAR', speechgym:'SpeechGym', readmind:'Read the Mind', lbc:'LBC', gdi:'GDI', adrpo:'ADRPO', orw:'ORW-CFM-W2', acflow:'AC-Flow',
                prance:'PRANCE', spvla:'SP-VLA', focus:'my research focus', edu:'my education',
-               awards:'awards', uiuc:'UIUC', advisor:'my advisor', vision:'the long-term vision' };
+               awards:'awards', uiuc:'UIUC', advisor:'my advisor', vision:'the long-term vision', pubs:'my publications' };
 
   /* ════════ INTENTS (social / dialogue moves) ════════ */
   var GREET_RE = /^(hi|hello|hey|yo|hiya|howdy|good (morning|afternoon|evening)|你好|您好|哈喽|嗨)[!. ]*$/i;
@@ -254,7 +254,7 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
                  "All well on my end! Ask me anything about Jiajun's work."];
   var NAME_R = ["I'm Jiajun's site agent — a little conversational engine he wrote to answer questions about his research. What can I help with?",
                 "Just \"Jiajun's AI Agent\" 🤖 I live on this site and know his papers cold. Ask away!"];
-  var CANDO_R = ["I can explain any of Jiajun's papers (CESAR, LBC, GDI, ADRPO, ORW-CFM-W2, AC-Flow, PRANCE, SP-VLA, VarCon), summarize his research direction, or point you to his CV, citations, awards, and contact. Try \"what is CESAR?\" or \"tell me about his research\".",
+  var CANDO_R = ["I can explain any of Jiajun's papers (AudioRSI, TF-OPD, SpeechGym, Read the Mind, Procedure-Aware RL, ProteinZero, CESAR, ADRPO, ORW-CFM-W2, AC-Flow, LBC, GDI, GPFlow, PRANCE, SP-VLA, VarCon), summarize his research direction, or point you to his CV, citations, awards, and contact. Try \"what is CESAR?\" or \"tell me about his research\".",
                  "Lots! Papers, research focus, education, awards, citations, how to get in touch — and I remember context, so you can say \"tell me more\". What are you curious about?"];
   var WHOMADE_R = ["Jiajun wrote me himself — I'm a hand-coded conversational engine (fuzzy matching + topic memory + human-paced typing), no LLM and no server. Kind of fitting for an RL post-training researcher, right?"];
   var OPENERS = ["", "", "", "Good question — ", "Ah, ", "Sure — ", "Right, so — ", "Oh, that one's fun. "];

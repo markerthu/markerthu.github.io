@@ -1380,12 +1380,12 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
     <span><span class="nbadge nb-accept">Accept</span>Paper accepted at <strong>IEEE TPAMI</strong>: PRANCE.</span>
   </li>
   <li>
-    <span class="news-date">Feb 2025</span>
+    <span class="news-date">Jan 2025</span>
     <span><span class="nbadge nb-accept">Accept</span>Paper accepted at <strong>ICLR 2025</strong>: ORW-CFM-W2 (Flow Matching self-evolution).</span>
   </li>
   <li class="news-hidden" id="news-extra-1">
     <span class="news-date">Jan 2025</span>
-    <span><span class="nbadge nb-service">Service</span>Reviewer: ICML 2023–26, ICLR 2024–26, NeurIPS 2022–26, COLM 2026, CVPR 2026, WACV 2027, AAAI 2025 &amp; 2027, AISTATS 2025, KDD 2024.</span>
+    <span><span class="nbadge nb-service">Service</span>Reviewer: ICML 2023–24, ICLR 2024–25, NeurIPS 2022–24, AAAI 2025, AISTATS 2025, KDD 2024.</span>
   </li>
   <li class="news-hidden" id="news-extra-2">
     <span class="news-date">Aug 2024</span>
@@ -1563,6 +1563,38 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
       <a class="pub-link pl-paper" href="https://openreview.net/forum?id=2IoFFexvuw" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-pubs.png);mask-image:url(/images/icons/sh-pubs.png)"></i>Paper</a>
       <a class="pub-link pl-project" href="/projects/orw-cfm-w2/"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-link.png);mask-image:url(/images/icons/h-link.png)"></i>Project</a>
       <a class="pub-link pl-arxiv" href="https://arxiv.org/abs/2502.06061" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-paperclip.png);mask-image:url(/images/icons/h-paperclip.png)"></i>arXiv</a>
+    </div>
+  </div>
+</div>
+
+<div class="pub-entry" role="article" data-venue="Preprint" data-year="2026" data-arxiv="2610.36578">
+  <div class="pub-left">
+    <span class="pb pb-arxiv">Preprint</span><span class="pub-year">2026</span></div>
+  <div class="pub-right">
+    <div class="pub-thumb-wrap"><img loading="lazy" src="/images/featured/audiorsi-ai.jpg" width="1000" height="333" alt="AudioRSI: an audio waveform feeds a rising staircase of the same audio model; each copy writes reasoning paths, a balance scale compares them, and an arrow hands each copy over to the next"></div>
+    <div class="pub-title"><a href="https://arxiv.org/abs/2610.36578" target="_blank" rel="noopener noreferrer">AudioRSI: Recursively Self-Improving Audio Reasoners</a></div>
+    <div class="pub-authors"><strong>J. Fan*</strong>, R. Ren, J. Li, R. Pandey, P.G. Shivakumar, A. Gandhe, Y. Gu, G. Liu, I. Bulyko</div>
+    <div class="pub-desc">AudioRSI: one model is both student and teacher. To our knowledge, the first recursively self-improving audio LLM, with no external reward model.</div>
+    <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>The student surpasses its teacher, then becomes it</div>
+    <div class="pub-links">
+      <a class="pub-link pl-project" href="/projects/audiorsi/"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-link.png);mask-image:url(/images/icons/h-link.png)"></i>Project</a>
+      <a class="pub-link pl-arxiv" href="https://arxiv.org/abs/2610.36578" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-paperclip.png);mask-image:url(/images/icons/h-paperclip.png)"></i>arXiv</a>
+    </div>
+  </div>
+</div>
+
+<div class="pub-entry" role="article" data-venue="Preprint" data-year="2026" data-arxiv="2610.22236">
+  <div class="pub-left">
+    <span class="pb pb-arxiv">Preprint</span><span class="pub-year">2026</span></div>
+  <div class="pub-right">
+    <div class="pub-thumb-wrap"><img loading="lazy" src="/images/featured/tfopd-ai.jpg" width="1000" height="333" alt="TF-OPD: a math specialist and a code specialist stream their own answers into a grid of statistics, and an arrow leads to one merged model that carries both skills"></div>
+    <div class="pub-title"><a href="https://arxiv.org/abs/2610.22236" target="_blank" rel="noopener noreferrer">Training-Free On-Policy Distillation</a></div>
+    <div class="pub-authors">B. Yang*, <strong>J. Fan*</strong>, Z. Zhu, H. Ma, G. Liu</div>
+    <div class="pub-desc">TF-OPD: RL specialists that share a base model merge into one model with forward passes only.</div>
+    <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>Zero gradient steps &middot; the fused model beats either specialist on average</div>
+    <div class="pub-links">
+      <a class="pub-link pl-project" href="/projects/tf-opd/"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-link.png);mask-image:url(/images/icons/h-link.png)"></i>Project</a>
+      <a class="pub-link pl-arxiv" href="https://arxiv.org/abs/2610.22236" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-paperclip.png);mask-image:url(/images/icons/h-paperclip.png)"></i>arXiv</a>
     </div>
   </div>
 </div>
@@ -2249,6 +2281,8 @@ document.querySelectorAll('.featured-card').forEach(function(card){
     'd4wrBuJ4xo': '@inproceedings{zheng2026procedure,\n  title={Procedure-Aware Reinforcement Learning for Tool-Augmented Large Language Models},\n  author={Qinglong Zheng and Jiajun Fan and Chaoran Cheng and Ge Liu},\n  booktitle={Conference on Language Modeling (COLM)},\n  year={2026},\n  url={https://openreview.net/forum?id=d4wrBuJ4xo}\n}',
     '2506.07459': '@article{wang2026proteinzero,\n  title={ProteinZero: Self-Improving Protein Generation via Online Reinforcement Learning},\n  author={Ziwen Wang and Jiajun Fan and Ruihan Guo and Thao Nguyen and Heng Ji and Ge Liu},\n  journal={Transactions on Machine Learning Research},\n  year={2026},\n  url={https://arxiv.org/abs/2506.07459}\n}',
     '8Oc3Mx754M': '@inproceedings{yang2026bcr,\n  title={Batched Contextual Reinforcement},\n  author={Yang, Bangji and Ma, Hongbo and Fan, Jiajun and Liu, Ge},\n  booktitle={Forty-third International Conference on Machine Learning},\n  year={2026},\n  url={https://openreview.net/forum?id=8Oc3Mx754M}\n}',
+    '2610.36578': '@article{fan2026audiorsi,\n  title   = {% raw %}{{AudioRSI}{% endraw %}: Recursively Self-Improving Audio Reasoners},\n  author  = {Jiajun Fan and Roger Ren and Jingyuan Li and Rahul Pandey and\n             Prashanth Gurunath Shivakumar and Ankur Gandhe and Yile Gu and\n             Ge Liu and Ivan Bulyko},\n  journal = {arXiv preprint arXiv:2610.36578},\n  year    = {2026}\n}',
+    '2610.22236': '@article{yang2026tfopd,\n  title   = {Training-Free On-Policy Distillation},\n  author  = {Yang, Bangji and Fan, Jiajun and Zhu, Zhaoyu and\n             Ma, Hongbo and Liu, Ge},\n  journal = {arXiv preprint arXiv:2610.22236},\n  year    = {2026}\n}',
     '2605.29438': '@inproceedings{li2026elegantvla,\n  title={ElegantVLA: Learning When to Think for Efficient Vision-Language-Action Models},\n  author={Li, Ye and Liu, Huanan and Ji, Kangye and Meng, Yuan and Fan, Jiajun and Wang, Yuansong and Qin, Shiyu and Wu, Chenglei and Xia, Shu-Tao and Wang, Zhi},\n  booktitle={Advances in Neural Information Processing Systems},\n  year={2026},\n  url={https://arxiv.org/abs/2605.29438}\n}',
     '2607.09039': '@inproceedings{cheng2026gpflow,\n  title={Variable-Length Generative Protein Design via Generalized Poisson Flow},\n  author={Cheng, Chaoran and Ni, Zhanghan and Qu, Yanru and Chen, Yuxin and Guo, Ruihan and Fan, Jiajun and Liu, Ge},\n  booktitle={Advances in Neural Information Processing Systems},\n  year={2026},\n  url={https://arxiv.org/abs/2607.09039}\n}',
     'Tt8lCe1NrW': '@inproceedings{sun2026barrag,\n  title={Rethinking the Reranker: Boundary-Aware Evidence Selection for Robust Retrieval-Augmented Generation},\n  author={Sun, Jiashuo and Jiang, Pengcheng and Wang, Saizhuo and Fan, Jiajun and Wang, Heng and Ouyang, Siru and Zhong, Ming and Jiao, Yizhu and Huang, Chengsong and Xu, Xueqiang and Han, Pengrui and Li, Peiran and Huang, Jiaxin and Liu, Ge and Ji, Heng and Han, Jiawei},\n  booktitle={Forty-third International Conference on Machine Learning},\n  year={2026},\n  url={https://openreview.net/forum?id=Tt8lCe1NrW}\n}',

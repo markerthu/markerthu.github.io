@@ -16,7 +16,7 @@ export default {
       stat: { from: 0, to: 24, label: 'ATARI HUMAN WORLD RECORDS' } },
     { shape: 'v:volume', viz: { a: { label: 'Agent57', sub: '100 billion frames', v: 100 }, b: { label: 'LBC', sub: '1 billion frames', v: 1 } },
       tick: 'EFFICIENCY', label: 'RESULTS  ·  DATA', title: '100× less data',
-      lines: ['Agent57 broke none of these records', 'with 78 times the experience.'] },
+      lines: ['Agent57 broke 18 human world records,', 'with 100 times the experience.'] },
     { len: 7, shape: 'invader', label: 'LBC', title: 'Behavior, learned',
       lines: ['Exploration that chooses', 'its own behavior.'], meta: 'JIAJUNFAN.COM/PROJECTS/LBC' },
   ]),
