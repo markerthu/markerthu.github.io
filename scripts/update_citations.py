@@ -27,6 +27,8 @@ PAPER_MATCH = {
     "8Oc3Mx754M": "=batched contextual reinforcement",   # "=": exact title, so BCR II / the arXiv twin never match
     "d4wrBuJ4xo": "procedure-aware reinforcement learning",
     "2506.07459": "proteinzero",
+    "2610.36578": "audiorsi",
+    "2610.22236": "=training-free on-policy distillation",
 }
 
 def title_match(a, sub):
