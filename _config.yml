@@ -230,6 +230,15 @@ defaults:
       path: "google*.html"
     values:
       sitemap: false
+  # personal records stay reachable by direct link but are not offered to search engines
+  - scope:
+      path: "files/Graduate_Transcript.pdf"
+    values:
+      sitemap: false
+  - scope:
+      path: "files/Undergraduate_Transcript.pdf"
+    values:
+      sitemap: false
 
 # Sass/SCSS
 sass:
