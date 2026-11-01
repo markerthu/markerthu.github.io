@@ -1632,7 +1632,7 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
 <div class="pub-entry" role="article" data-venue="NeurIPS" data-year="2026" data-arxiv="2605.29438">
   <div class="pub-left"><span class="pb pb-neurips">NeurIPS 2026</span></div>
   <div class="pub-right">
-    <div class="pub-thumb-wrap"><img loading="lazy" src="/images/featured/elegantvla-ai.jpg" width="1000" height="333" alt="ElegantVLA concept banner"></div>
+    <div class="pub-thumb-wrap"><img loading="lazy" src="/images/featured/elegantvla-ai.jpg" width="1000" height="333" alt="ElegantVLA: along a robot arm&#39;s motion most steps reuse earlier computation, and full computation runs only at two key moments"></div>
     <div class="pub-title"><a href="https://arxiv.org/abs/2605.29438" target="_blank" rel="noopener noreferrer">ElegantVLA: Learning When to Think for Efficient Vision-Language-Action Models</a></div>
     <div class="pub-authors">Y. Li, H. Liu, K. Ji, Y. Meng, <strong>J. Fan</strong>, Y. Wang, S. Qin, C. Wu, S.-T. Xia, Z. Wang</div>
     <div class="pub-desc">A plug-in scheduler that decides when a VLA model needs full computation, reusing vision, language and denoising states during stable motion. No retraining of the base model.</div>
@@ -1646,7 +1646,7 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
 <div class="pub-entry" role="article" data-venue="NeurIPS" data-year="2026" data-arxiv="2607.09039">
   <div class="pub-left"><span class="pb pb-neurips">NeurIPS 2026</span></div>
   <div class="pub-right">
-    <div class="pub-thumb-wrap"><img loading="lazy" src="/images/featured/gpflow-ai.jpg" width="1000" height="333" alt="GPFlow concept banner"></div>
+    <div class="pub-thumb-wrap"><img loading="lazy" src="/images/featured/gpflow-ai.jpg" width="1000" height="333" alt="GPFlow: residue chains of different lengths grow one bead at a time and fold into proteins of different sizes"></div>
     <div class="pub-title"><a href="https://arxiv.org/abs/2607.09039" target="_blank" rel="noopener noreferrer">Variable-Length Generative Protein Design via Generalized Poisson Flow</a></div>
     <div class="pub-authors">C. Cheng, Z. Ni, Y. Qu, Y. Chen, R. Guo, <strong>J. Fan</strong>, G. Liu</div>
     <div class="pub-desc">GPFlow: protein generation without fixing the length in advance, by learning the rate function of an inhomogeneous generalized Poisson process over both structure and sequence.</div>
@@ -1660,7 +1660,7 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
 <div class="pub-entry" role="article" data-venue="ICML" data-year="2026" data-arxiv="Tt8lCe1NrW">
   <div class="pub-left"><span class="pb pb-icml">ICML 2026</span></div>
   <div class="pub-right">
-    <div class="pub-thumb-wrap"><img loading="lazy" src="/images/featured/barrag-ai.jpg" width="1000" height="333" alt="BAR-RAG concept banner"></div>
+    <div class="pub-thumb-wrap"><img loading="lazy" src="/images/featured/barrag-ai.jpg" width="1000" height="333" alt="BAR-RAG: a selector sorts evidence into too easy, not enough, and challenging but sufficient, and passes only the last to the model"></div>
     <div class="pub-title"><a href="https://openreview.net/forum?id=Tt8lCe1NrW" target="_blank" rel="noopener noreferrer">Rethinking the Reranker: Boundary-Aware Evidence Selection for Robust Retrieval-Augmented Generation</a></div>
     <div class="pub-authors">J. Sun, P. Jiang, S. Wang, <strong>J. Fan</strong>, H. Wang, S. Ouyang, M. Zhong, Y. Jiao, C. Huang, X. Xu, P. Han, P. Li, J. Huang, G. Liu, H. Ji, J. Han</div>
     <div class="pub-desc">BAR-RAG: a reranker trained with RL from generator feedback to pick evidence that is challenging yet sufficient, not just answer-revealing.</div>
@@ -1676,7 +1676,7 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
 <div class="pub-entry" role="article" data-venue="ICML" data-year="2026" data-arxiv="8Oc3Mx754M">
   <div class="pub-left"><span class="pb pb-icml">ICML 2026</span></div>
   <div class="pub-right">
-    <div class="pub-thumb-wrap"><img loading="lazy" src="/images/featured/bcr-ai.jpg" width="1000" height="333" alt="BCR concept banner"></div>
+    <div class="pub-thumb-wrap"><img loading="lazy" src="/images/featured/bcr-ai.jpg" width="1000" height="333" alt="BCR: one problem alone gets long, tangled reasoning; three problems sharing one window and budget get short, direct reasoning"></div>
     <div class="pub-title"><a href="https://openreview.net/forum?id=8Oc3Mx754M" target="_blank" rel="noopener noreferrer">Batched Contextual Reinforcement</a></div>
     <div class="pub-authors">B. Yang, H. Ma, <strong>J. Fan</strong>, G. Liu</div>
     <div class="pub-desc">BCR: one model solves several problems in a single shared context, rewarded only by per-problem accuracy &mdash; the shared window becomes an implicit token budget.</div>
