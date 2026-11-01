@@ -1264,24 +1264,24 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
     <div class="ro-dom">Tool-use agents<span>agentic RL</span></div>
     <div class="ro-papers">
       <a class="ro-p" href="/projects/procedure-aware-rl/">Procedure-Aware RL <span class="ro-v">COLM 2026</span></a>
+      <a class="ro-p" href="/projects/speechgym/">SpeechGym <span class="ro-v">arXiv 2026</span></a>
       <a class="ro-p" href="https://openreview.net/forum?id=Tt8lCe1NrW" target="_blank" rel="noopener">BAR-RAG <span class="ro-v">ICML 2026</span></a>
       <a class="ro-p" href="https://arxiv.org/abs/2605.12975" target="_blank" rel="noopener">PyRAG <span class="ro-v">arXiv 2026</span></a>
-      <a class="ro-p" href="/projects/speechgym/">SpeechGym <span class="ro-v">arXiv 2026</span></a>
     </div>
   </div>
     <div class="ro-row">
     <div class="ro-dom">AI for Science<span>protein &amp; materials design</span></div>
     <div class="ro-papers">
       <a class="ro-p" href="/projects/proteinzero/">ProteinZero <span class="ro-v">TMLR 2026</span></a>
-      <a class="ro-p" href="https://arxiv.org/abs/2607.09039" target="_blank" rel="noopener">GPFlow <span class="ro-v">NeurIPS 2026</span></a>
       <a class="ro-p" href="https://openreview.net/forum?id=stiehhc5y6" target="_blank" rel="noopener">EDiSon <span class="ro-v">AI4Mat 2024</span></a>
+      <a class="ro-p" href="https://arxiv.org/abs/2607.09039" target="_blank" rel="noopener">GPFlow <span class="ro-v">NeurIPS 2026</span></a>
     </div>
   </div>
   <div class="ro-row">
     <div class="ro-dom">Math reasoning<span>token efficiency</span></div>
     <div class="ro-papers">
-      <a class="ro-p" href="https://openreview.net/forum?id=8Oc3Mx754M" target="_blank" rel="noopener">BCR <span class="ro-v">ICML 2026</span></a>
       <a class="ro-p" href="https://openreview.net/forum?id=aXO0xg0ttW" target="_blank" rel="noopener">ADRPO <span class="ro-v">NeurIPS 2025</span></a>
+      <a class="ro-p" href="https://openreview.net/forum?id=8Oc3Mx754M" target="_blank" rel="noopener">BCR <span class="ro-v">ICML 2026</span></a>
     </div>
   </div>
   <div class="ro-row">
@@ -1470,61 +1470,6 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
 
 <div class="pub-list">
 
-<div class="pub-entry" role="article" data-venue="NeurIPS" data-year="2026" data-arxiv="2605.29438">
-  <div class="pub-left"><span class="pb pb-neurips">NeurIPS 2026</span></div>
-  <div class="pub-right">
-    <div class="pub-title"><a href="https://arxiv.org/abs/2605.29438" target="_blank" rel="noopener noreferrer">ElegantVLA: Learning When to Think for Efficient Vision-Language-Action Models</a></div>
-    <div class="pub-authors">Y. Li, H. Liu, K. Ji, Y. Meng, <strong>J. Fan</strong>, Y. Wang, S. Qin, C. Wu, S.-T. Xia, Z. Wang</div>
-    <div class="pub-desc">A plug-in scheduler that decides when a VLA model needs full computation, reusing vision, language and denoising states during stable motion. No retraining of the base model.</div>
-    <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>Up to 2.55&times; (GR00T) / 3.77&times; (CogACT) speedup &middot; 13.8 &rarr; 26.3 Hz on real-world GR00T tasks</div>
-    <div class="pub-links">
-      <a class="pub-link pl-paper" href="https://arxiv.org/abs/2605.29438" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-pubs.png);mask-image:url(/images/icons/sh-pubs.png)"></i>Paper</a>
-    </div>
-  </div>
-</div>
-
-<div class="pub-entry" role="article" data-venue="NeurIPS" data-year="2026" data-arxiv="2607.09039">
-  <div class="pub-left"><span class="pb pb-neurips">NeurIPS 2026</span></div>
-  <div class="pub-right">
-    <div class="pub-title"><a href="https://arxiv.org/abs/2607.09039" target="_blank" rel="noopener noreferrer">Variable-Length Generative Protein Design via Generalized Poisson Flow</a></div>
-    <div class="pub-authors">C. Cheng, Z. Ni, Y. Qu, Y. Chen, R. Guo, <strong>J. Fan</strong>, G. Liu</div>
-    <div class="pub-desc">GPFlow: protein generation without fixing the length in advance, by learning the rate function of an inhomogeneous generalized Poisson process over both structure and sequence.</div>
-    <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>First on 10 of 16 motif-scaffolding tasks &middot; up to 10&times; success rate on the hardest targets</div>
-    <div class="pub-links">
-      <a class="pub-link pl-paper" href="https://arxiv.org/abs/2607.09039" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-pubs.png);mask-image:url(/images/icons/sh-pubs.png)"></i>Paper</a>
-    </div>
-  </div>
-</div>
-
-<div class="pub-entry" role="article" data-venue="ICML" data-year="2026" data-arxiv="Tt8lCe1NrW">
-  <div class="pub-left"><span class="pb pb-icml">ICML 2026</span></div>
-  <div class="pub-right">
-    <div class="pub-title"><a href="https://openreview.net/forum?id=Tt8lCe1NrW" target="_blank" rel="noopener noreferrer">Rethinking the Reranker: Boundary-Aware Evidence Selection for Robust Retrieval-Augmented Generation</a></div>
-    <div class="pub-authors">J. Sun, P. Jiang, S. Wang, <strong>J. Fan</strong>, H. Wang, S. Ouyang, M. Zhong, Y. Jiao, C. Huang, X. Xu, P. Han, P. Li, J. Huang, G. Liu, H. Ji, J. Han</div>
-    <div class="pub-desc">BAR-RAG: a reranker trained with RL from generator feedback to pick evidence that is challenging yet sufficient, not just answer-revealing.</div>
-    <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>+10.3% over strong RAG and reranking baselines under noisy retrieval</div>
-    <div class="pub-links">
-      <a class="pub-link pl-paper" href="https://openreview.net/forum?id=Tt8lCe1NrW" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-pubs.png);mask-image:url(/images/icons/sh-pubs.png)"></i>Paper</a>
-      <a class="pub-link pl-arxiv" href="https://arxiv.org/abs/2602.03689" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-paperclip.png);mask-image:url(/images/icons/h-paperclip.png)"></i>arXiv</a>
-      <a class="pub-link pl-code" href="https://github.com/GasolSun36/BAR-RAG" target="_blank" rel="noopener noreferrer">Code</a>
-    </div>
-  </div>
-</div>
-
-<div class="pub-entry" role="article" data-venue="ICML" data-year="2026" data-arxiv="8Oc3Mx754M">
-  <div class="pub-left"><span class="pb pb-icml">ICML 2026</span></div>
-  <div class="pub-right">
-    <div class="pub-title"><a href="https://openreview.net/forum?id=8Oc3Mx754M" target="_blank" rel="noopener noreferrer">Batched Contextual Reinforcement</a></div>
-    <div class="pub-authors">B. Yang, H. Ma, <strong>J. Fan</strong>, G. Liu</div>
-    <div class="pub-desc">BCR: one model solves several problems in a single shared context, rewarded only by per-problem accuracy &mdash; the shared window becomes an implicit token budget.</div>
-    <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>15.8&ndash;62.6% fewer tokens at equal or better accuracy</div>
-    <div class="pub-links">
-      <a class="pub-link pl-paper" href="https://openreview.net/forum?id=8Oc3Mx754M" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-pubs.png);mask-image:url(/images/icons/sh-pubs.png)"></i>Paper</a>
-      <a class="pub-link pl-arxiv" href="https://arxiv.org/abs/2604.02322" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-paperclip.png);mask-image:url(/images/icons/h-paperclip.png)"></i>arXiv</a>
-    </div>
-  </div>
-</div>
-
 <div class="pub-entry" role="article" data-venue="COLM" data-year="2026" data-arxiv="d4wrBuJ4xo" data-abstract="Training tool-augmented large language models has evolved from supervised fine-tuning (SFT) to reinforcement learning with verifiable rewards (RLVR). Yet existing methods rarely examine whether intermediate execution logic—specifically, the procedural fidelity of multi-turn tool invocations—requires explicit supervision. We hypothesize that enforcing sequential validity at the turn level is a prerequisite for robust multi-turn task completion. To this end, we introduce a Procedure-Aware Reinforcement Learning Framework that explicitly evaluates procedural validity through both invocation chain quality and final system state correctness. Using Group Relative Policy Optimization (GRPO) with KL regularization to fine-tune Qwen2.5-3B-Instruct, we demonstrate on API-Bank, Bamboogle, and BFCL-V3 that our approach consistently outperforms correctness-only baselines. Despite operating at a substantially smaller scale, our 3B model achieves average accuracy competitive with proprietary models such as GPT-5-mini, GPT-4.1-mini, Claude-Haiku-4.5, and Gemini-2.5-Flash-Lite, whose scores are obtained under BFCL’s official per-model evaluation protocols. Qualitative analysis reveals that optimizing tool sequencing yields emergent benefits, simultaneously enhancing multi-turn performance and error recovery from failed tool calls.">
   <div class="pub-left"><span class="pb pb-iclr">COLM 2026</span></div>
   <div class="pub-right">
@@ -1584,24 +1529,6 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
   </div>
 </div>
 
-<div class="pub-entry" role="article" data-venue="ICLR" data-year="2026" data-arxiv="SP-VLA" data-abstract="Vision-Language-Action (VLA) models have attracted increasing attention for their strong control capabilities. However, their high computational cost and low execution frequency hinder their suitability for real-time tasks such as robotic manipulation and autonomous navigation. Existing VLA acceleration methods primarily focus on structural optimization, overlooking the fact that these models operate in sequential decision-making environments. As a result, temporal redundancy in sequential action generation and spatial redundancy in visual input remain unaddressed. To this end, we propose SP-VLA, a unified framework that accelerates VLA models by jointly scheduling models and pruning tokens. Specifically, we design an action-aware model scheduling mechanism that reduces temporal redundancy by dynamically switching between VLA model and a lightweight generator. Inspired by the human motion pattern of focusing on key decision points while relying on intuition for other actions, we categorize VLA actions into deliberative and intuitive, assigning the former to the VLA model and the latter to the lightweight generator, enabling frequency-adaptive execution through collaborative model scheduling. To address spatial redundancy, we further develop a spatio-semantic dual-aware token pruning method. Tokens are classified into spatial and semantic types and pruned based on their dual-aware importance to accelerate VLA inference. These two mechanisms work jointly to guide the VLA in focusing on critical actions and salient visual information, achieving effective acceleration while maintaining high accuracy. Extensive experiments show that our method achieves 1.5× lossless acceleration in LIBERO and 2.4× in SimplerEnv, with up to 6% average performance gain. Inference frequency and latency improve by 2.2× in SimplerEnv and 1.4× in LIBERO.">
-  <div class="pub-left">
-    
-    <span class="pb pb-iclr">ICLR 2026</span></div>
-  <div class="pub-right">
-    <div class="pub-thumb-wrap"><img loading="lazy" src="/images/featured/spvla-ai.jpg" width="1000" height="333" alt="SPVLA concept banner"></div>
-    <div class="pub-title"><a href="https://openreview.net/forum?id=RwdGIIjPlC" target="_blank" rel="noopener noreferrer">SP-VLA: A Joint Model Scheduling and Token Pruning Approach for VLA Model Acceleration</a>
-    <button class="pub-abst-btn" aria-expanded="false" aria-label="Toggle abstract">▾ Abstract</button>
-    <div class="pub-abstract-preview">Vision-Language-Action (VLA) models have attracted increasing attention for their strong control capabilities. However, their high computational cost and low execution frequency hinder their suitability for real-time tasks such as robotic manipulation and autonomous navigation. Existing VLA acceleration methods primarily focus on structural optimization, overlooking the fact that these models operate in sequential decision-making environments. As a result, temporal redundancy in sequential action generation and spatial redundancy in visual input remain unaddressed. To this end, we propose SP-VLA, a unified framework that accelerates VLA models by jointly scheduling models and pruning tokens. Specifically, we design an action-aware model scheduling mechanism that reduces temporal redundancy by dynamically switching between VLA model and a lightweight generator. Inspired by the human motion pattern of focusing on key decision points while relying on intuition for other actions, we categorize VLA actions into deliberative and intuitive, assigning the former to the VLA model and the latter to the lightweight generator, enabling frequency-adaptive execution through collaborative model scheduling. To address spatial redundancy, we further develop a spatio-semantic dual-aware token pruning method. Tokens are classified into spatial and semantic types and pruned based on their dual-aware importance to accelerate VLA inference. These two mechanisms work jointly to guide the VLA in focusing on critical actions and salient visual information, achieving effective acceleration while maintaining high accuracy. Extensive experiments show that our method achieves 1.5× lossless acceleration in LIBERO and 2.4× in SimplerEnv, with up to 6% average performance gain. Inference frequency and latency improve by 2.2× in SimplerEnv and 1.4× in LIBERO.</div></div>
-    <div class="pub-authors">Y. Li, Y. Meng, Z. Sun, K. Ji, C. Tang, <strong>J. Fan</strong>, X. Ma, S.-T. Xia, Z. Wang, W. Zhu</div>
-    <div class="pub-desc">Action-aware model scheduling + spatio-semantic token pruning for VLA acceleration.</div>
-    <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-impact.png);mask-image:url(/images/icons/sh-impact.png)"></i>1.5× lossless speedup (LIBERO) · 2.4× speedup (SimplerEnv)</div>
-    <div class="pub-links">
-      <a class="pub-link pl-paper" href="https://openreview.net/forum?id=RwdGIIjPlC" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-pubs.png);mask-image:url(/images/icons/sh-pubs.png)"></i>Paper</a>
-    </div>
-  </div>
-</div>
-
 <div class="pub-entry" role="article" data-venue="NeurIPS" data-year="2025" data-arxiv="2510.18053" data-abstract="Balancing exploration and exploitation during reinforcement learning fine-tuning of generative models presents a critical challenge, as existing approaches rely on fixed divergence regularization that creates an inherent dilemma: strong regularization preserves model capabilities but limits reward optimization, while weak regularization enables greater alignment but risks instability or reward hacking. We introduce Adaptive Divergence Regularized Policy Optimization (ADRPO), which automatically adjusts regularization strength based on advantage estimates-reducing regularization for high-value samples while applying stronger regularization to poor samples, enabling policies to navigate between exploration and aggressive exploitation according to data quality. Our implementation with Wasserstein-2 regularization for flow matching generative models achieves remarkable results on text-to-image generation, achieving better semantic alignment and diversity than offline methods like DPO and online methods with fixed regularization like ORW-CFM-W2. ADRPO enables a 2B parameter SD3 model to surpass much larger models with 4.8B and 12B parameters in attribute binding, semantic consistency, artistic style transfer, and compositional control while maintaining generation diversity. ADRPO generalizes to KL-regularized fine-tuning of both text-only LLMs and multi-modal reasoning models, enhancing existing online RL methods like GRPO. In LLM fine-tuning, ADRPO demonstrates an emergent ability to escape local optima through active exploration, while in multi-modal audio reasoning, it outperforms GRPO through superior step-by-step reasoning, enabling a 7B model to outperform substantially larger commercial models including Gemini 2.5 Pro and GPT-4o Audio, offering an effective plug-and-play solution to the exploration-exploitation challenge across diverse generative architectures and modalities.">
   <div class="pub-left"><span class="pb pb-neurips">NeurIPS 2025</span></div>
   <div class="pub-right">
@@ -1617,24 +1544,6 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
       <a class="pub-link pl-paper" href="https://openreview.net/forum?id=aXO0xg0ttW" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-pubs.png);mask-image:url(/images/icons/sh-pubs.png)"></i>Paper</a>
       <a class="pub-link pl-project" href="/projects/adrpo/"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-link.png);mask-image:url(/images/icons/h-link.png)"></i>Project</a>
       <a class="pub-link pl-arxiv" href="https://arxiv.org/abs/2510.18053" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-paperclip.png);mask-image:url(/images/icons/h-paperclip.png)"></i>arXiv</a>
-    </div>
-  </div>
-</div>
-
-<div class="pub-entry" role="article" data-venue="NeurIPS" data-year="2025" data-arxiv="VarCon" data-abstract="Contrastive learning has proven to be highly efficient and adaptable in shaping representation spaces across diverse modalities by pulling similar samples together and pushing dissimilar ones apart. However, two key limitations persist: (1) Without explicit regulation of the embedding distribution, semantically related instances can inadvertently be pushed apart unless complementary signals guide pair selection, and (2) excessive reliance on large in-batch negatives and tailored augmentations hinders generalization. To address these limitations, we propose Variational Supervised Contrastive Learning (VarCon), which reformulates supervised contrastive learning as variational inference over latent class variables and maximizes a posterior-weighted evidence lower bound (ELBO) that replaces exhaustive pair-wise comparisons for efficient class-aware matching and grants fine-grained control over intra-class dispersion in the embedding space. Trained exclusively on image data, our experiments on CIFAR-10, CIFAR-100, ImageNet-100, and ImageNet-1K show that VarCon (1) achieves state-of-the-art performance for contrastive learning frameworks, reaching 79.36% Top-1 accuracy on ImageNet-1K and 78.29% on CIFAR-100 with a ResNet-50 encoder while converging in just 200 epochs; (2) yields substantially clearer decision boundaries and semantic organization in the embedding space, as evidenced by KNN classification, hierarchical clustering results, and transfer-learning assessments; and (3) demonstrates superior performance in few-shot learning than supervised baseline and superior robustness across various augmentation strategies. Our code is available at https://github.com/ziwenwang28/VarContrast.">
-  <div class="pub-left">
-    
-    <span class="pb pb-neurips">NeurIPS 2025</span></div>
-  <div class="pub-right">
-    <div class="pub-thumb-wrap"><img loading="lazy" src="/images/featured/varcon-ai.jpg" width="1000" height="333" alt="VARCON concept banner"></div>
-    <div class="pub-title"><a href="https://openreview.net/forum?id=uOOlHOq500" target="_blank" rel="noopener noreferrer">Variational Supervised Contrastive Learning</a>
-      <button class="pub-abst-btn" aria-expanded="false" aria-label="Toggle abstract">▾ Abstract</button>
-      <div class="pub-abstract-preview">Contrastive learning has proven to be highly efficient and adaptable in shaping representation spaces across diverse modalities by pulling similar samples together and pushing dissimilar ones apart. However, two key limitations persist: (1) Without explicit regulation of the embedding distribution, semantically related instances can inadvertently be pushed apart unless complementary signals guide pair selection, and (2) excessive reliance on large in-batch negatives and tailored augmentations hinders generalization. To address these limitations, we propose Variational Supervised Contrastive Learning (VarCon), which reformulates supervised contrastive learning as variational inference over latent class variables and maximizes a posterior-weighted evidence lower bound (ELBO) that replaces exhaustive pair-wise comparisons for efficient class-aware matching and grants fine-grained control over intra-class dispersion in the embedding space. Trained exclusively on image data, our experiments on CIFAR-10, CIFAR-100, ImageNet-100, and ImageNet-1K show that VarCon (1) achieves state-of-the-art performance for contrastive learning frameworks, reaching 79.36% Top-1 accuracy on ImageNet-1K and 78.29% on CIFAR-100 with a ResNet-50 encoder while converging in just 200 epochs; (2) yields substantially clearer decision boundaries and semantic organization in the embedding space, as evidenced by KNN classification, hierarchical clustering results, and transfer-learning assessments; and (3) demonstrates superior performance in few-shot learning than supervised baseline and superior robustness across various augmentation strategies. Our code is available at <a href="https://github.com/ziwenwang28/VarContrast" target="_blank" rel="noopener noreferrer">https://github.com/ziwenwang28/VarContrast</a>.</div></div>
-    <div class="pub-authors">Z. Wang, <strong>J. Fan</strong>, T. Nguyen, H. Ji, G. Liu</div>
-    <div class="pub-desc">VarCon: supervised contrastive learning as variational inference — posterior-weighted ELBO replaces pairwise comparisons.</div>
-    <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-chart.png);mask-image:url(/images/icons/h-chart.png)"></i>SOTA 79.36% Top-1 on ImageNet-1K with ResNet-50</div>
-    <div class="pub-links">
-      <a class="pub-link pl-paper" href="https://openreview.net/forum?id=uOOlHOq500" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-pubs.png);mask-image:url(/images/icons/sh-pubs.png)"></i>Paper</a>
     </div>
   </div>
 </div>
@@ -1678,24 +1587,6 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
   </div>
 </div>
 
-<div class="pub-entry" role="article" data-venue="TPAMI" data-year="2026" data-arxiv="2407.05010" data-abstract="We introduce PRANCE, a Vision Transformer compression framework that jointly optimizes the activated channels and reduces tokens, based on the characteristics of inputs. Specifically, PRANCE leverages adaptive token optimization strategies for a certain computational budget, aiming to accelerate ViTs&#x27; inference from a unified data and architectural perspective. However, the joint framework poses challenges to both architectural and decision-making aspects. Firstly, while ViTs inherently support variable-token inference, they do not facilitate dynamic computations for variable channels. To overcome this limitation, we propose a meta-network using weight-sharing techniques to support arbitrary channels of the Multi-head Self-Attention and Multi-layer Perceptron layers, serving as a foundational model for architectural decision-making. Second, simultaneously optimizing the structure of the meta-network and input data constitutes a combinatorial optimization problem with an extremely large decision space, reaching up to around 10^14, making supervised learning infeasible. To this end, we design a lightweight selector employing Proximal Policy Optimization for efficient decision-making. Furthermore, we introduce a novel &quot;Result-to-Go&quot; training mechanism that models ViTs&#x27; inference process as a Markov decision process, significantly reducing action space and mitigating delayed-reward issues during training. Extensive experiments demonstrate the effectiveness of PRANCE in reducing FLOPs by approximately 50%, retaining only about 10% of tokens while achieving lossless Top-1 accuracy. Additionally, our framework is shown to be compatible with various token optimization techniques such as pruning, merging, and sequential pruning-merging strategies. The code is available at https://github.com/ChildTang/PRANCE.">
-  <div class="pub-left">
-    
-    <span class="pb pb-journal">TPAMI 2026</span></div>
-  <div class="pub-right">
-    <div class="pub-thumb-wrap"><img loading="lazy" src="/images/featured/prance-ai.jpg" width="1000" height="333" alt="PRANCE concept banner"></div>
-    <div class="pub-title"><a href="https://arxiv.org/abs/2407.05010" target="_blank" rel="noopener noreferrer">PRANCE: Joint Token-Optimization and Structural Channel-Pruning for Adaptive ViT Inference</a>
-      <button class="pub-abst-btn" aria-expanded="false" aria-label="Toggle abstract">▾ Abstract</button>
-      <div class="pub-abstract-preview">We introduce PRANCE, a Vision Transformer compression framework that jointly optimizes the activated channels and reduces tokens, based on the characteristics of inputs. Specifically, PRANCE leverages adaptive token optimization strategies for a certain computational budget, aiming to accelerate ViTs' inference from a unified data and architectural perspective. However, the joint framework poses challenges to both architectural and decision-making aspects. Firstly, while ViTs inherently support variable-token inference, they do not facilitate dynamic computations for variable channels. To overcome this limitation, we propose a meta-network using weight-sharing techniques to support arbitrary channels of the Multi-head Self-Attention and Multi-layer Perceptron layers, serving as a foundational model for architectural decision-making. Second, simultaneously optimizing the structure of the meta-network and input data constitutes a combinatorial optimization problem with an extremely large decision space, reaching up to around 10<sup>14</sup>, making supervised learning infeasible. To this end, we design a lightweight selector employing Proximal Policy Optimization for efficient decision-making. Furthermore, we introduce a novel "Result-to-Go" training mechanism that models ViTs' inference process as a Markov decision process, significantly reducing action space and mitigating delayed-reward issues during training. Extensive experiments demonstrate the effectiveness of PRANCE in reducing FLOPs by approximately 50%, retaining only about 10% of tokens while achieving lossless Top-1 accuracy. Additionally, our framework is shown to be compatible with various token optimization techniques such as pruning, merging, and sequential pruning-merging strategies. The code is available at <a href="https://github.com/ChildTang/PRANCE" target="_blank" rel="noopener noreferrer">https://github.com/ChildTang/PRANCE</a>.</div></div>
-    <div class="pub-authors">Y. Li, C. Tang, Y. Meng, <strong>J. Fan</strong>, Z. Chai, X. Ma, Z. Wang, W. Zhu &nbsp;·&nbsp; <em>IEEE TPAMI</em></div>
-    <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-impact.png);mask-image:url(/images/icons/sh-impact.png)"></i>Joint token + channel pruning · Adaptive ViT inference · IEEE TPAMI 2026</div>
-    <div class="pub-links">
-      <a class="pub-link pl-paper" href="https://doi.org/10.1109/TPAMI.2025.3605239" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-pubs.png);mask-image:url(/images/icons/sh-pubs.png)"></i>Paper</a>
-      <a class="pub-link pl-arxiv" href="https://arxiv.org/abs/2407.05010" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-paperclip.png);mask-image:url(/images/icons/h-paperclip.png)"></i>arXiv</a>
-    </div>
-  </div>
-</div>
-
 <div class="pub-entry" role="article" data-venue="ICLR" data-year="2023" data-arxiv="LBC" data-abstract="The exploration problem is one of the main challenges in deep reinforcement learning (RL). Recent promising works tried to handle the problem with population-based methods, which collect samples with diverse behaviors derived from a population of different exploratory policies. Adaptive policy selection has been adopted for behavior control. However, the behavior selection space is largely limited by the predefined policy population, which further limits behavior diversity. In this paper, we propose a general framework called Learnable Behavioral Control (LBC) to address the limitation, which a) enables a significantly enlarged behavior selection space via formulating a hybrid behavior mapping from all policies; b) constructs a unified learnable process for behavior selection. We introduce LBC into distributed off-policy actor-critic methods and achieve behavior control via optimizing the selection of the behavior mappings with bandit-based meta-controllers. Our agents have achieved 10077.52% mean human normalized score and surpassed 24 human world records within 1B training frames in the Arcade Learning Environment, which demonstrates our significant state-of-the-art (SOTA) performance without degrading the sample efficiency.">
   <div class="pub-left">
     
@@ -1734,6 +1625,119 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
       <a class="pub-link pl-paper" href="https://proceedings.mlr.press/v162/fan22c.html" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-pubs.png);mask-image:url(/images/icons/sh-pubs.png)"></i>Paper</a>
       <a class="pub-link pl-project" href="/projects/gdi/"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-link.png);mask-image:url(/images/icons/h-link.png)"></i>Project</a>
       <a class="pub-link pl-arxiv" href="https://arxiv.org/abs/2206.03192" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-paperclip.png);mask-image:url(/images/icons/h-paperclip.png)"></i>arXiv</a>
+    </div>
+  </div>
+</div>
+
+<div class="pub-entry" role="article" data-venue="NeurIPS" data-year="2026" data-arxiv="2605.29438">
+  <div class="pub-left"><span class="pb pb-neurips">NeurIPS 2026</span></div>
+  <div class="pub-right">
+    <div class="pub-thumb-wrap"><img loading="lazy" src="/images/featured/elegantvla-ai.jpg" width="1000" height="333" alt="ElegantVLA concept banner"></div>
+    <div class="pub-title"><a href="https://arxiv.org/abs/2605.29438" target="_blank" rel="noopener noreferrer">ElegantVLA: Learning When to Think for Efficient Vision-Language-Action Models</a></div>
+    <div class="pub-authors">Y. Li, H. Liu, K. Ji, Y. Meng, <strong>J. Fan</strong>, Y. Wang, S. Qin, C. Wu, S.-T. Xia, Z. Wang</div>
+    <div class="pub-desc">A plug-in scheduler that decides when a VLA model needs full computation, reusing vision, language and denoising states during stable motion. No retraining of the base model.</div>
+    <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>Up to 2.55&times; (GR00T) / 3.77&times; (CogACT) speedup &middot; 13.8 &rarr; 26.3 Hz on real-world GR00T tasks</div>
+    <div class="pub-links">
+      <a class="pub-link pl-paper" href="https://arxiv.org/abs/2605.29438" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-pubs.png);mask-image:url(/images/icons/sh-pubs.png)"></i>Paper</a>
+    </div>
+  </div>
+</div>
+
+<div class="pub-entry" role="article" data-venue="NeurIPS" data-year="2026" data-arxiv="2607.09039">
+  <div class="pub-left"><span class="pb pb-neurips">NeurIPS 2026</span></div>
+  <div class="pub-right">
+    <div class="pub-thumb-wrap"><img loading="lazy" src="/images/featured/gpflow-ai.jpg" width="1000" height="333" alt="GPFlow concept banner"></div>
+    <div class="pub-title"><a href="https://arxiv.org/abs/2607.09039" target="_blank" rel="noopener noreferrer">Variable-Length Generative Protein Design via Generalized Poisson Flow</a></div>
+    <div class="pub-authors">C. Cheng, Z. Ni, Y. Qu, Y. Chen, R. Guo, <strong>J. Fan</strong>, G. Liu</div>
+    <div class="pub-desc">GPFlow: protein generation without fixing the length in advance, by learning the rate function of an inhomogeneous generalized Poisson process over both structure and sequence.</div>
+    <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>First on 10 of 16 motif-scaffolding tasks &middot; up to 10&times; success rate on the hardest targets</div>
+    <div class="pub-links">
+      <a class="pub-link pl-paper" href="https://arxiv.org/abs/2607.09039" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-pubs.png);mask-image:url(/images/icons/sh-pubs.png)"></i>Paper</a>
+    </div>
+  </div>
+</div>
+
+<div class="pub-entry" role="article" data-venue="ICML" data-year="2026" data-arxiv="Tt8lCe1NrW">
+  <div class="pub-left"><span class="pb pb-icml">ICML 2026</span></div>
+  <div class="pub-right">
+    <div class="pub-thumb-wrap"><img loading="lazy" src="/images/featured/barrag-ai.jpg" width="1000" height="333" alt="BAR-RAG concept banner"></div>
+    <div class="pub-title"><a href="https://openreview.net/forum?id=Tt8lCe1NrW" target="_blank" rel="noopener noreferrer">Rethinking the Reranker: Boundary-Aware Evidence Selection for Robust Retrieval-Augmented Generation</a></div>
+    <div class="pub-authors">J. Sun, P. Jiang, S. Wang, <strong>J. Fan</strong>, H. Wang, S. Ouyang, M. Zhong, Y. Jiao, C. Huang, X. Xu, P. Han, P. Li, J. Huang, G. Liu, H. Ji, J. Han</div>
+    <div class="pub-desc">BAR-RAG: a reranker trained with RL from generator feedback to pick evidence that is challenging yet sufficient, not just answer-revealing.</div>
+    <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>+10.3% over strong RAG and reranking baselines under noisy retrieval</div>
+    <div class="pub-links">
+      <a class="pub-link pl-paper" href="https://openreview.net/forum?id=Tt8lCe1NrW" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-pubs.png);mask-image:url(/images/icons/sh-pubs.png)"></i>Paper</a>
+      <a class="pub-link pl-arxiv" href="https://arxiv.org/abs/2602.03689" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-paperclip.png);mask-image:url(/images/icons/h-paperclip.png)"></i>arXiv</a>
+      <a class="pub-link pl-code" href="https://github.com/GasolSun36/BAR-RAG" target="_blank" rel="noopener noreferrer">Code</a>
+    </div>
+  </div>
+</div>
+
+<div class="pub-entry" role="article" data-venue="ICML" data-year="2026" data-arxiv="8Oc3Mx754M">
+  <div class="pub-left"><span class="pb pb-icml">ICML 2026</span></div>
+  <div class="pub-right">
+    <div class="pub-thumb-wrap"><img loading="lazy" src="/images/featured/bcr-ai.jpg" width="1000" height="333" alt="BCR concept banner"></div>
+    <div class="pub-title"><a href="https://openreview.net/forum?id=8Oc3Mx754M" target="_blank" rel="noopener noreferrer">Batched Contextual Reinforcement</a></div>
+    <div class="pub-authors">B. Yang, H. Ma, <strong>J. Fan</strong>, G. Liu</div>
+    <div class="pub-desc">BCR: one model solves several problems in a single shared context, rewarded only by per-problem accuracy &mdash; the shared window becomes an implicit token budget.</div>
+    <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>15.8&ndash;62.6% fewer tokens at equal or better accuracy</div>
+    <div class="pub-links">
+      <a class="pub-link pl-paper" href="https://openreview.net/forum?id=8Oc3Mx754M" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-pubs.png);mask-image:url(/images/icons/sh-pubs.png)"></i>Paper</a>
+      <a class="pub-link pl-arxiv" href="https://arxiv.org/abs/2604.02322" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-paperclip.png);mask-image:url(/images/icons/h-paperclip.png)"></i>arXiv</a>
+    </div>
+  </div>
+</div>
+
+<div class="pub-entry" role="article" data-venue="ICLR" data-year="2026" data-arxiv="SP-VLA" data-abstract="Vision-Language-Action (VLA) models have attracted increasing attention for their strong control capabilities. However, their high computational cost and low execution frequency hinder their suitability for real-time tasks such as robotic manipulation and autonomous navigation. Existing VLA acceleration methods primarily focus on structural optimization, overlooking the fact that these models operate in sequential decision-making environments. As a result, temporal redundancy in sequential action generation and spatial redundancy in visual input remain unaddressed. To this end, we propose SP-VLA, a unified framework that accelerates VLA models by jointly scheduling models and pruning tokens. Specifically, we design an action-aware model scheduling mechanism that reduces temporal redundancy by dynamically switching between VLA model and a lightweight generator. Inspired by the human motion pattern of focusing on key decision points while relying on intuition for other actions, we categorize VLA actions into deliberative and intuitive, assigning the former to the VLA model and the latter to the lightweight generator, enabling frequency-adaptive execution through collaborative model scheduling. To address spatial redundancy, we further develop a spatio-semantic dual-aware token pruning method. Tokens are classified into spatial and semantic types and pruned based on their dual-aware importance to accelerate VLA inference. These two mechanisms work jointly to guide the VLA in focusing on critical actions and salient visual information, achieving effective acceleration while maintaining high accuracy. Extensive experiments show that our method achieves 1.5× lossless acceleration in LIBERO and 2.4× in SimplerEnv, with up to 6% average performance gain. Inference frequency and latency improve by 2.2× in SimplerEnv and 1.4× in LIBERO.">
+  <div class="pub-left">
+    
+    <span class="pb pb-iclr">ICLR 2026</span></div>
+  <div class="pub-right">
+    <div class="pub-thumb-wrap"><img loading="lazy" src="/images/featured/spvla-ai.jpg" width="1000" height="333" alt="SPVLA concept banner"></div>
+    <div class="pub-title"><a href="https://openreview.net/forum?id=RwdGIIjPlC" target="_blank" rel="noopener noreferrer">SP-VLA: A Joint Model Scheduling and Token Pruning Approach for VLA Model Acceleration</a>
+    <button class="pub-abst-btn" aria-expanded="false" aria-label="Toggle abstract">▾ Abstract</button>
+    <div class="pub-abstract-preview">Vision-Language-Action (VLA) models have attracted increasing attention for their strong control capabilities. However, their high computational cost and low execution frequency hinder their suitability for real-time tasks such as robotic manipulation and autonomous navigation. Existing VLA acceleration methods primarily focus on structural optimization, overlooking the fact that these models operate in sequential decision-making environments. As a result, temporal redundancy in sequential action generation and spatial redundancy in visual input remain unaddressed. To this end, we propose SP-VLA, a unified framework that accelerates VLA models by jointly scheduling models and pruning tokens. Specifically, we design an action-aware model scheduling mechanism that reduces temporal redundancy by dynamically switching between VLA model and a lightweight generator. Inspired by the human motion pattern of focusing on key decision points while relying on intuition for other actions, we categorize VLA actions into deliberative and intuitive, assigning the former to the VLA model and the latter to the lightweight generator, enabling frequency-adaptive execution through collaborative model scheduling. To address spatial redundancy, we further develop a spatio-semantic dual-aware token pruning method. Tokens are classified into spatial and semantic types and pruned based on their dual-aware importance to accelerate VLA inference. These two mechanisms work jointly to guide the VLA in focusing on critical actions and salient visual information, achieving effective acceleration while maintaining high accuracy. Extensive experiments show that our method achieves 1.5× lossless acceleration in LIBERO and 2.4× in SimplerEnv, with up to 6% average performance gain. Inference frequency and latency improve by 2.2× in SimplerEnv and 1.4× in LIBERO.</div></div>
+    <div class="pub-authors">Y. Li, Y. Meng, Z. Sun, K. Ji, C. Tang, <strong>J. Fan</strong>, X. Ma, S.-T. Xia, Z. Wang, W. Zhu</div>
+    <div class="pub-desc">Action-aware model scheduling + spatio-semantic token pruning for VLA acceleration.</div>
+    <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-impact.png);mask-image:url(/images/icons/sh-impact.png)"></i>1.5× lossless speedup (LIBERO) · 2.4× speedup (SimplerEnv)</div>
+    <div class="pub-links">
+      <a class="pub-link pl-paper" href="https://openreview.net/forum?id=RwdGIIjPlC" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-pubs.png);mask-image:url(/images/icons/sh-pubs.png)"></i>Paper</a>
+    </div>
+  </div>
+</div>
+
+<div class="pub-entry" role="article" data-venue="NeurIPS" data-year="2025" data-arxiv="VarCon" data-abstract="Contrastive learning has proven to be highly efficient and adaptable in shaping representation spaces across diverse modalities by pulling similar samples together and pushing dissimilar ones apart. However, two key limitations persist: (1) Without explicit regulation of the embedding distribution, semantically related instances can inadvertently be pushed apart unless complementary signals guide pair selection, and (2) excessive reliance on large in-batch negatives and tailored augmentations hinders generalization. To address these limitations, we propose Variational Supervised Contrastive Learning (VarCon), which reformulates supervised contrastive learning as variational inference over latent class variables and maximizes a posterior-weighted evidence lower bound (ELBO) that replaces exhaustive pair-wise comparisons for efficient class-aware matching and grants fine-grained control over intra-class dispersion in the embedding space. Trained exclusively on image data, our experiments on CIFAR-10, CIFAR-100, ImageNet-100, and ImageNet-1K show that VarCon (1) achieves state-of-the-art performance for contrastive learning frameworks, reaching 79.36% Top-1 accuracy on ImageNet-1K and 78.29% on CIFAR-100 with a ResNet-50 encoder while converging in just 200 epochs; (2) yields substantially clearer decision boundaries and semantic organization in the embedding space, as evidenced by KNN classification, hierarchical clustering results, and transfer-learning assessments; and (3) demonstrates superior performance in few-shot learning than supervised baseline and superior robustness across various augmentation strategies. Our code is available at https://github.com/ziwenwang28/VarContrast.">
+  <div class="pub-left">
+    
+    <span class="pb pb-neurips">NeurIPS 2025</span></div>
+  <div class="pub-right">
+    <div class="pub-thumb-wrap"><img loading="lazy" src="/images/featured/varcon-ai.jpg" width="1000" height="333" alt="VARCON concept banner"></div>
+    <div class="pub-title"><a href="https://openreview.net/forum?id=uOOlHOq500" target="_blank" rel="noopener noreferrer">Variational Supervised Contrastive Learning</a>
+      <button class="pub-abst-btn" aria-expanded="false" aria-label="Toggle abstract">▾ Abstract</button>
+      <div class="pub-abstract-preview">Contrastive learning has proven to be highly efficient and adaptable in shaping representation spaces across diverse modalities by pulling similar samples together and pushing dissimilar ones apart. However, two key limitations persist: (1) Without explicit regulation of the embedding distribution, semantically related instances can inadvertently be pushed apart unless complementary signals guide pair selection, and (2) excessive reliance on large in-batch negatives and tailored augmentations hinders generalization. To address these limitations, we propose Variational Supervised Contrastive Learning (VarCon), which reformulates supervised contrastive learning as variational inference over latent class variables and maximizes a posterior-weighted evidence lower bound (ELBO) that replaces exhaustive pair-wise comparisons for efficient class-aware matching and grants fine-grained control over intra-class dispersion in the embedding space. Trained exclusively on image data, our experiments on CIFAR-10, CIFAR-100, ImageNet-100, and ImageNet-1K show that VarCon (1) achieves state-of-the-art performance for contrastive learning frameworks, reaching 79.36% Top-1 accuracy on ImageNet-1K and 78.29% on CIFAR-100 with a ResNet-50 encoder while converging in just 200 epochs; (2) yields substantially clearer decision boundaries and semantic organization in the embedding space, as evidenced by KNN classification, hierarchical clustering results, and transfer-learning assessments; and (3) demonstrates superior performance in few-shot learning than supervised baseline and superior robustness across various augmentation strategies. Our code is available at <a href="https://github.com/ziwenwang28/VarContrast" target="_blank" rel="noopener noreferrer">https://github.com/ziwenwang28/VarContrast</a>.</div></div>
+    <div class="pub-authors">Z. Wang, <strong>J. Fan</strong>, T. Nguyen, H. Ji, G. Liu</div>
+    <div class="pub-desc">VarCon: supervised contrastive learning as variational inference — posterior-weighted ELBO replaces pairwise comparisons.</div>
+    <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-chart.png);mask-image:url(/images/icons/h-chart.png)"></i>SOTA 79.36% Top-1 on ImageNet-1K with ResNet-50</div>
+    <div class="pub-links">
+      <a class="pub-link pl-paper" href="https://openreview.net/forum?id=uOOlHOq500" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-pubs.png);mask-image:url(/images/icons/sh-pubs.png)"></i>Paper</a>
+    </div>
+  </div>
+</div>
+
+<div class="pub-entry" role="article" data-venue="TPAMI" data-year="2026" data-arxiv="2407.05010" data-abstract="We introduce PRANCE, a Vision Transformer compression framework that jointly optimizes the activated channels and reduces tokens, based on the characteristics of inputs. Specifically, PRANCE leverages adaptive token optimization strategies for a certain computational budget, aiming to accelerate ViTs&#x27; inference from a unified data and architectural perspective. However, the joint framework poses challenges to both architectural and decision-making aspects. Firstly, while ViTs inherently support variable-token inference, they do not facilitate dynamic computations for variable channels. To overcome this limitation, we propose a meta-network using weight-sharing techniques to support arbitrary channels of the Multi-head Self-Attention and Multi-layer Perceptron layers, serving as a foundational model for architectural decision-making. Second, simultaneously optimizing the structure of the meta-network and input data constitutes a combinatorial optimization problem with an extremely large decision space, reaching up to around 10^14, making supervised learning infeasible. To this end, we design a lightweight selector employing Proximal Policy Optimization for efficient decision-making. Furthermore, we introduce a novel &quot;Result-to-Go&quot; training mechanism that models ViTs&#x27; inference process as a Markov decision process, significantly reducing action space and mitigating delayed-reward issues during training. Extensive experiments demonstrate the effectiveness of PRANCE in reducing FLOPs by approximately 50%, retaining only about 10% of tokens while achieving lossless Top-1 accuracy. Additionally, our framework is shown to be compatible with various token optimization techniques such as pruning, merging, and sequential pruning-merging strategies. The code is available at https://github.com/ChildTang/PRANCE.">
+  <div class="pub-left">
+    
+    <span class="pb pb-journal">TPAMI 2026</span></div>
+  <div class="pub-right">
+    <div class="pub-thumb-wrap"><img loading="lazy" src="/images/featured/prance-ai.jpg" width="1000" height="333" alt="PRANCE concept banner"></div>
+    <div class="pub-title"><a href="https://arxiv.org/abs/2407.05010" target="_blank" rel="noopener noreferrer">PRANCE: Joint Token-Optimization and Structural Channel-Pruning for Adaptive ViT Inference</a>
+      <button class="pub-abst-btn" aria-expanded="false" aria-label="Toggle abstract">▾ Abstract</button>
+      <div class="pub-abstract-preview">We introduce PRANCE, a Vision Transformer compression framework that jointly optimizes the activated channels and reduces tokens, based on the characteristics of inputs. Specifically, PRANCE leverages adaptive token optimization strategies for a certain computational budget, aiming to accelerate ViTs' inference from a unified data and architectural perspective. However, the joint framework poses challenges to both architectural and decision-making aspects. Firstly, while ViTs inherently support variable-token inference, they do not facilitate dynamic computations for variable channels. To overcome this limitation, we propose a meta-network using weight-sharing techniques to support arbitrary channels of the Multi-head Self-Attention and Multi-layer Perceptron layers, serving as a foundational model for architectural decision-making. Second, simultaneously optimizing the structure of the meta-network and input data constitutes a combinatorial optimization problem with an extremely large decision space, reaching up to around 10<sup>14</sup>, making supervised learning infeasible. To this end, we design a lightweight selector employing Proximal Policy Optimization for efficient decision-making. Furthermore, we introduce a novel "Result-to-Go" training mechanism that models ViTs' inference process as a Markov decision process, significantly reducing action space and mitigating delayed-reward issues during training. Extensive experiments demonstrate the effectiveness of PRANCE in reducing FLOPs by approximately 50%, retaining only about 10% of tokens while achieving lossless Top-1 accuracy. Additionally, our framework is shown to be compatible with various token optimization techniques such as pruning, merging, and sequential pruning-merging strategies. The code is available at <a href="https://github.com/ChildTang/PRANCE" target="_blank" rel="noopener noreferrer">https://github.com/ChildTang/PRANCE</a>.</div></div>
+    <div class="pub-authors">Y. Li, C. Tang, Y. Meng, <strong>J. Fan</strong>, Z. Chai, X. Ma, Z. Wang, W. Zhu &nbsp;·&nbsp; <em>IEEE TPAMI</em></div>
+    <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-impact.png);mask-image:url(/images/icons/sh-impact.png)"></i>Joint token + channel pruning · Adaptive ViT inference · IEEE TPAMI 2026</div>
+    <div class="pub-links">
+      <a class="pub-link pl-paper" href="https://doi.org/10.1109/TPAMI.2025.3605239" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-pubs.png);mask-image:url(/images/icons/sh-pubs.png)"></i>Paper</a>
+      <a class="pub-link pl-arxiv" href="https://arxiv.org/abs/2407.05010" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-paperclip.png);mask-image:url(/images/icons/h-paperclip.png)"></i>arXiv</a>
     </div>
   </div>
 </div>
