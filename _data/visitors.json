@@ -2,7 +2,7 @@
   "_updated": "2026-11-01",
   "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 859,
+  "_total": 860,
   "_days": 30,
   "_range": "Oct. 2nd - Nov. 1st",
   "locations": [
@@ -135,6 +135,14 @@
       "r": 2.08
     },
     {
+      "code": "US",
+      "name": "Massachusetts, US",
+      "count": 7,
+      "cx": 108.5,
+      "cy": 41.8,
+      "r": 2.08
+    },
+    {
       "code": "NL",
       "name": "Netherlands",
       "count": 7,
@@ -156,14 +164,6 @@
       "count": 6,
       "cx": 86.4,
       "cy": 42.0,
-      "r": 2.06
-    },
-    {
-      "code": "US",
-      "name": "Massachusetts, US",
-      "count": 6,
-      "cx": 108.5,
-      "cy": 41.8,
       "r": 2.06
     },
     {
@@ -379,7 +379,7 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 774
+      "count": 775
     },
     {
       "code": "JP",
@@ -573,6 +573,13 @@
     {
       "country": "US",
       "country_name": "United States",
+      "name": "Massachusetts",
+      "count": 7,
+      "located": true
+    },
+    {
+      "country": "US",
+      "country_name": "United States",
       "name": "Colorado",
       "count": 6,
       "located": true
@@ -581,13 +588,6 @@
       "country": "US",
       "country_name": "United States",
       "name": "Iowa",
-      "count": 6,
-      "located": true
-    },
-    {
-      "country": "US",
-      "country_name": "United States",
-      "name": "Massachusetts",
       "count": 6,
       "located": true
     },
@@ -673,7 +673,7 @@
     {
       "path": "/",
       "title": "Jiajun Fan",
-      "count": 350
+      "count": 351
     },
     {
       "path": "/visitors",
@@ -810,7 +810,7 @@
     {
       "name": "Google",
       "id": "Google",
-      "count": 113
+      "count": 114
     },
     {
       "name": "www.jiajunfan.com/projects",
@@ -932,7 +932,7 @@
     {
       "name": "Safari",
       "id": "Safari",
-      "count": 292
+      "count": 293
     },
     {
       "name": "Firefox",
@@ -949,7 +949,7 @@
     {
       "name": "macOS",
       "id": "macOS",
-      "count": 416
+      "count": 417
     },
     {
       "name": "iOS",
@@ -1095,21 +1095,43 @@
     },
     {
       "day": "2026-11-01",
-      "n": 5
+      "n": 6
     }
   ],
   "periods": {
-    "today": 5,
+    "today": 6,
     "yesterday": 57,
-    "d7": 173,
+    "d7": 174,
     "d7_prev": 253,
-    "d30": 859,
+    "d30": 860,
     "d30_prev": 503,
-    "day_frac": 0.552,
+    "day_frac": 0.775,
     "yesterday_day": "2026-10-31"
   },
-  "_last_visit": "2026-11-01 10:36",
+  "_last_visit": "2026-11-01 15:00",
   "recent": [
+    {
+      "date": "2026-11-01 15:00",
+      "ts": "2026-11-01T23:00:23Z",
+      "loc": "Massachusetts, US",
+      "path": "/",
+      "ref": "www.jiajunfan.com/film",
+      "browser": "Safari 17.6",
+      "system": "macOS 10.15",
+      "screen": "1728px",
+      "first": false
+    },
+    {
+      "date": "2026-11-01 14:58",
+      "ts": "2026-11-01T22:58:52Z",
+      "loc": "Massachusetts, US",
+      "path": "/",
+      "ref": "Google",
+      "browser": "Safari 17.6",
+      "system": "macOS 10.15",
+      "screen": "1728px",
+      "first": true
+    },
     {
       "date": "2026-11-01 10:36",
       "ts": "2026-11-01T18:36:14Z",
@@ -1417,30 +1439,8 @@
       "system": "macOS 10.15",
       "screen": "1512px",
       "first": true
-    },
-    {
-      "date": "2026-10-31 23:01",
-      "ts": "2026-11-01T06:01:25Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 152",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": false
-    },
-    {
-      "date": "2026-10-31 22:57",
-      "ts": "2026-11-01T05:57:27Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 152",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": true
     }
   ],
-  "_recent_total": 3870,
+  "_recent_total": 3872,
   "_recent_shown": 30
 }
