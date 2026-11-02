@@ -165,7 +165,12 @@ body.dark-mode #theme-toggle::before{-webkit-mask-image:url(/images/icons/h-sun.
   .cv-body{grid-template-columns:1fr!important;gap:0!important;padding-top:12pt}
   .sidebar-col{width:100%!important;background:none!important;border:none!important;padding:0!important;margin-bottom:12pt;border-bottom:1pt solid #ccc}
   .main-col{padding:0!important}
-  .main-section{break-inside:avoid;margin-bottom:14pt}
+  /* sections may run across pages; only single entries stay whole */
+  .main-section{margin-bottom:14pt}
+  .edu-card,.award-item,.stat-item{break-inside:avoid}
+  .sec-title{break-after:avoid}
+  /* links that only make sense on screen: the PDF itself, mail button, site footer */
+  a[href="/files/CV.pdf"],.cta-btn,body > footer{display:none!important}
   .pub-item{break-inside:avoid;padding:4pt 0;border-bottom:0.5pt solid #eee}
   .pub-badge{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   a{color:#000!important;text-decoration:none!important}
@@ -261,7 +266,7 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
     <div class="edu-card">
       <div class="edu-school">University of Illinois Urbana-Champaign</div>
       <div class="edu-degree">Ph.D. in Computer Science &nbsp;<span class="edu-gpa">GPA 4.0/4.0</span></div>
-      <div class="edu-meta"><span><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-pin.png);mask-image:url(/images/icons/h-pin.png)"></i>Urbana, IL, USA</span><span>Aug 2024 – May 2029 (expected)</span></div>
+      <div class="edu-meta"><span><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-pin.png);mask-image:url(/images/icons/h-pin.png)"></i>Urbana, IL, USA</span><span>Aug 2024 – Dec 2027 (expected)</span></div>
       <ul class="edu-notes">
         <li><strong>Research:</strong> Autonomous RL post-training for flow/diffusion models &amp; multimodal reasoning LLMs</li>
         <li><strong>Service:</strong> Reviewer @ ICML 2025–26, ICLR 2025–26, NeurIPS 2024–26, COLM 2026, CVPR 2026, WACV 2027, AAAI 2025 &amp; 2027, AISTATS 2025, KDD 2024</li>
