@@ -1,15 +1,15 @@
 {
   "_updated": "2026-11-02",
-  "_timezone": "America/Los_Angeles",
+  "_timezone": "UTC",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 847,
+  "_total": 853,
   "_days": 30,
   "_range": "Oct. 3rd - Nov. 2nd",
   "locations": [
     {
       "code": "US",
       "name": "Illinois, US",
-      "count": 500,
+      "count": 501,
       "cx": 90.8,
       "cy": 44.6,
       "r": 4.2
@@ -17,10 +17,18 @@
     {
       "code": "US",
       "name": "California, US",
-      "count": 90,
+      "count": 91,
       "cx": 60.0,
       "cy": 46.9,
       "r": 2.82
+    },
+    {
+      "code": "US",
+      "name": "New York, US",
+      "count": 18,
+      "cx": 104.5,
+      "cy": 41.4,
+      "r": 2.25
     },
     {
       "code": "US",
@@ -28,15 +36,7 @@
       "count": 18,
       "cx": 59.2,
       "cy": 39.7,
-      "r": 2.26
-    },
-    {
-      "code": "US",
-      "name": "New York, US",
-      "count": 17,
-      "cx": 104.5,
-      "cy": 41.4,
-      "r": 2.24
+      "r": 2.25
     },
     {
       "code": "JP",
@@ -96,18 +96,18 @@
     },
     {
       "code": "US",
+      "name": "Virginia, US",
+      "count": 11,
+      "cx": 101.3,
+      "cy": 46.3,
+      "r": 2.16
+    },
+    {
+      "code": "US",
       "name": "Arizona, US",
       "count": 10,
       "cx": 67.2,
       "cy": 49.5,
-      "r": 2.14
-    },
-    {
-      "code": "US",
-      "name": "Virginia, US",
-      "count": 10,
-      "cx": 101.3,
-      "cy": 46.3,
       "r": 2.14
     },
     {
@@ -167,6 +167,14 @@
       "r": 2.06
     },
     {
+      "code": "CH",
+      "name": "Switzerland",
+      "count": 6,
+      "cx": 188.3,
+      "cy": 37.2,
+      "r": 2.06
+    },
+    {
       "code": "US",
       "name": "Colorado, US",
       "count": 5,
@@ -199,11 +207,11 @@
       "r": 2.04
     },
     {
-      "code": "CH",
-      "name": "Switzerland",
+      "code": "IN",
+      "name": "India",
       "count": 5,
-      "cx": 188.3,
-      "cy": 37.2,
+      "cx": 263.6,
+      "cy": 60.0,
       "r": 2.04
     },
     {
@@ -212,14 +220,6 @@
       "count": 4,
       "cx": 93.3,
       "cy": 45.2,
-      "r": 2.01
-    },
-    {
-      "code": "IN",
-      "name": "India",
-      "count": 4,
-      "cx": 263.6,
-      "cy": 60.0,
       "r": 2.01
     },
     {
@@ -371,7 +371,7 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 769
+      "count": 773
     },
     {
       "code": "JP",
@@ -409,6 +409,11 @@
       "count": 8
     },
     {
+      "code": "CH",
+      "name": "Switzerland",
+      "count": 6
+    },
+    {
       "code": "BD",
       "name": "Bangladesh",
       "count": 5
@@ -419,14 +424,9 @@
       "count": 5
     },
     {
-      "code": "CH",
-      "name": "Switzerland",
-      "count": 5
-    },
-    {
       "code": "IN",
       "name": "India",
-      "count": 4
+      "count": 5
     },
     {
       "code": "HK",
@@ -489,14 +489,21 @@
       "country": "US",
       "country_name": "United States",
       "name": "Illinois",
-      "count": 500,
+      "count": 501,
       "located": true
     },
     {
       "country": "US",
       "country_name": "United States",
       "name": "California",
-      "count": 90,
+      "count": 91,
+      "located": true
+    },
+    {
+      "country": "US",
+      "country_name": "United States",
+      "name": "New York",
+      "count": 18,
       "located": true
     },
     {
@@ -504,13 +511,6 @@
       "country_name": "United States",
       "name": "Oregon",
       "count": 18,
-      "located": true
-    },
-    {
-      "country": "US",
-      "country_name": "United States",
-      "name": "New York",
-      "count": 17,
       "located": true
     },
     {
@@ -544,14 +544,14 @@
     {
       "country": "US",
       "country_name": "United States",
-      "name": "Arizona",
-      "count": 10,
+      "name": "Virginia",
+      "count": 11,
       "located": true
     },
     {
       "country": "US",
       "country_name": "United States",
-      "name": "Virginia",
+      "name": "Arizona",
       "count": 10,
       "located": true
     },
@@ -658,7 +658,7 @@
     {
       "path": "/",
       "title": "Jiajun Fan",
-      "count": 341
+      "count": 345
     },
     {
       "path": "/visitors",
@@ -713,7 +713,7 @@
     {
       "path": "/contact",
       "title": "Contact - Jiajun Fan",
-      "count": 13
+      "count": 14
     },
     {
       "path": "/projects/audiorsi",
@@ -753,7 +753,7 @@
     {
       "path": "/blog/reading-papers",
       "title": "What’s Happening in My Field - Jiajun Fan",
-      "count": 6
+      "count": 7
     },
     {
       "path": "/posts/2025/10/diversity-collapse-rlhf",
@@ -785,7 +785,7 @@
     {
       "name": "(unknown)",
       "id": "",
-      "count": 360
+      "count": 361
     },
     {
       "name": "www.jiajunfan.com",
@@ -795,7 +795,7 @@
     {
       "name": "Google",
       "id": "Google",
-      "count": 112
+      "count": 116
     },
     {
       "name": "www.jiajunfan.com/projects",
@@ -805,7 +805,7 @@
     {
       "name": "scholar.google.com",
       "id": "scholar.google.com",
-      "count": 21
+      "count": 22
     },
     {
       "name": "www.jiajunfan.com/publications",
@@ -912,12 +912,12 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 594
+      "count": 599
     },
     {
       "name": "Safari",
       "id": "Safari",
-      "count": 286
+      "count": 287
     },
     {
       "name": "Firefox",
@@ -934,17 +934,17 @@
     {
       "name": "macOS",
       "id": "macOS",
-      "count": 426
+      "count": 430
     },
     {
       "name": "iOS",
       "id": "iOS",
-      "count": 276
+      "count": 277
     },
     {
       "name": "Windows",
       "id": "Windows",
-      "count": 106
+      "count": 107
     },
     {
       "name": "Android",
@@ -1080,23 +1080,122 @@
     },
     {
       "day": "2026-11-02",
-      "n": 15
+      "n": 21
     }
   ],
   "periods": {
-    "today": 15,
+    "today": 21,
     "yesterday": 16,
-    "d7": 181,
+    "d7": 187,
     "d7_prev": 206,
-    "d30": 847,
+    "d30": 853,
     "d30_prev": 506,
-    "day_frac": 0.235,
+    "day_frac": 0.951,
     "yesterday_day": "2026-11-01"
   },
-  "_last_visit": "2026-11-02 05:25",
+  "_last_visit": "2026-11-02 21:40",
   "recent": [
     {
-      "date": "2026-11-02 05:25",
+      "date": "2026-11-02 21:40",
+      "ts": "2026-11-02T21:40:24Z",
+      "loc": "California, US",
+      "path": "/",
+      "ref": "Google",
+      "browser": "Chrome 155",
+      "system": "macOS 10.15",
+      "screen": "1728px",
+      "first": true
+    },
+    {
+      "date": "2026-11-02 21:36",
+      "ts": "2026-11-02T21:36:50Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "Google",
+      "browser": "Chrome 156",
+      "system": "macOS 10.15",
+      "screen": "1920px",
+      "first": true
+    },
+    {
+      "date": "2026-11-02 20:53",
+      "ts": "2026-11-02T20:53:41Z",
+      "loc": "India",
+      "path": "/",
+      "ref": "Google",
+      "browser": "Chrome 155",
+      "system": "macOS 10.15",
+      "screen": "1512px",
+      "first": true
+    },
+    {
+      "date": "2026-11-02 19:50",
+      "ts": "2026-11-02T19:50:52Z",
+      "loc": "Switzerland",
+      "path": "/blog/reading-papers",
+      "ref": "Google",
+      "browser": "Safari 26.6",
+      "system": "iOS 18.7",
+      "screen": "440px",
+      "first": true
+    },
+    {
+      "date": "2026-11-02 19:25",
+      "ts": "2026-11-02T19:25:59Z",
+      "loc": "New York, US",
+      "path": "/",
+      "ref": "scholar.google.com",
+      "browser": "Chrome 156",
+      "system": "macOS 10.15",
+      "screen": "1728px",
+      "first": true
+    },
+    {
+      "date": "2026-11-02 16:58",
+      "ts": "2026-11-02T16:58:50Z",
+      "loc": "Virginia, US",
+      "path": "/contact",
+      "ref": "",
+      "browser": "Chrome 148",
+      "system": "Windows 10",
+      "screen": "1800px",
+      "first": true
+    },
+    {
+      "date": "2026-11-02 13:54",
+      "ts": "2026-11-02T13:54:23Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": false
+    },
+    {
+      "date": "2026-11-02 13:54",
+      "ts": "2026-11-02T13:54:31Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": false
+    },
+    {
+      "date": "2026-11-02 13:52",
+      "ts": "2026-11-02T13:52:41Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 26.6",
+      "screen": "430px",
+      "first": false
+    },
+    {
+      "date": "2026-11-02 13:25",
       "ts": "2026-11-02T13:25:16Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1107,7 +1206,7 @@
       "first": false
     },
     {
-      "date": "2026-11-02 05:25",
+      "date": "2026-11-02 13:25",
       "ts": "2026-11-02T13:25:17Z",
       "loc": "Illinois, US",
       "path": "/visitors",
@@ -1118,7 +1217,7 @@
       "first": true
     },
     {
-      "date": "2026-11-02 05:01",
+      "date": "2026-11-02 13:01",
       "ts": "2026-11-02T13:01:34Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1129,7 +1228,7 @@
       "first": false
     },
     {
-      "date": "2026-11-02 04:01",
+      "date": "2026-11-02 12:01",
       "ts": "2026-11-02T12:01:42Z",
       "loc": "Singapore",
       "path": "/cv",
@@ -1140,7 +1239,7 @@
       "first": true
     },
     {
-      "date": "2026-11-02 03:10",
+      "date": "2026-11-02 11:10",
       "ts": "2026-11-02T11:10:02Z",
       "loc": "Netherlands",
       "path": "/projects/read-the-mind",
@@ -1151,7 +1250,7 @@
       "first": true
     },
     {
-      "date": "2026-11-02 03:07",
+      "date": "2026-11-02 11:07",
       "ts": "2026-11-02T11:07:05Z",
       "loc": "Netherlands",
       "path": "/publications",
@@ -1162,7 +1261,7 @@
       "first": false
     },
     {
-      "date": "2026-11-02 03:07",
+      "date": "2026-11-02 11:07",
       "ts": "2026-11-02T11:07:07Z",
       "loc": "Netherlands",
       "path": "/projects",
@@ -1173,7 +1272,7 @@
       "first": true
     },
     {
-      "date": "2026-11-02 03:07",
+      "date": "2026-11-02 11:07",
       "ts": "2026-11-02T11:07:08Z",
       "loc": "Netherlands",
       "path": "/year-archive",
@@ -1184,7 +1283,7 @@
       "first": true
     },
     {
-      "date": "2026-11-02 03:07",
+      "date": "2026-11-02 11:07",
       "ts": "2026-11-02T11:07:10Z",
       "loc": "Netherlands",
       "path": "/projects",
@@ -1195,7 +1294,7 @@
       "first": false
     },
     {
-      "date": "2026-11-02 03:07",
+      "date": "2026-11-02 11:07",
       "ts": "2026-11-02T11:07:17Z",
       "loc": "Netherlands",
       "path": "/contact",
@@ -1206,7 +1305,7 @@
       "first": true
     },
     {
-      "date": "2026-11-02 03:07",
+      "date": "2026-11-02 11:07",
       "ts": "2026-11-02T11:07:21Z",
       "loc": "Netherlands",
       "path": "/year-archive",
@@ -1217,7 +1316,7 @@
       "first": false
     },
     {
-      "date": "2026-11-02 03:07",
+      "date": "2026-11-02 11:07",
       "ts": "2026-11-02T11:07:23Z",
       "loc": "Netherlands",
       "path": "/projects",
@@ -1228,7 +1327,7 @@
       "first": false
     },
     {
-      "date": "2026-11-02 03:07",
+      "date": "2026-11-02 11:07",
       "ts": "2026-11-02T11:07:24Z",
       "loc": "Netherlands",
       "path": "/publications",
@@ -1239,7 +1338,7 @@
       "first": false
     },
     {
-      "date": "2026-11-02 03:07",
+      "date": "2026-11-02 11:07",
       "ts": "2026-11-02T11:07:30Z",
       "loc": "Netherlands",
       "path": "/year-archive",
@@ -1250,7 +1349,7 @@
       "first": false
     },
     {
-      "date": "2026-11-02 03:07",
+      "date": "2026-11-02 11:07",
       "ts": "2026-11-02T11:07:32Z",
       "loc": "Netherlands",
       "path": "/posts/2026/08/read-the-mind-audio-llm",
@@ -1261,7 +1360,7 @@
       "first": false
     },
     {
-      "date": "2026-11-02 03:06",
+      "date": "2026-11-02 11:06",
       "ts": "2026-11-02T11:06:41Z",
       "loc": "Netherlands",
       "path": "/publications",
@@ -1272,7 +1371,7 @@
       "first": true
     },
     {
-      "date": "2026-11-02 03:06",
+      "date": "2026-11-02 11:06",
       "ts": "2026-11-02T11:06:55Z",
       "loc": "Netherlands",
       "path": "/cv",
@@ -1283,7 +1382,7 @@
       "first": true
     },
     {
-      "date": "2026-11-02 03:05",
+      "date": "2026-11-02 11:05",
       "ts": "2026-11-02T11:05:51Z",
       "loc": "Netherlands",
       "path": "/posts/2026/08/read-the-mind-audio-llm",
@@ -1294,7 +1393,7 @@
       "first": true
     },
     {
-      "date": "2026-11-02 03:00",
+      "date": "2026-11-02 11:00",
       "ts": "2026-11-02T11:00:17Z",
       "loc": "Virginia, US",
       "path": "/year-archive",
@@ -1305,7 +1404,7 @@
       "first": true
     },
     {
-      "date": "2026-11-02 02:44",
+      "date": "2026-11-02 10:44",
       "ts": "2026-11-02T10:44:50Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1316,7 +1415,7 @@
       "first": true
     },
     {
-      "date": "2026-11-02 02:44",
+      "date": "2026-11-02 10:44",
       "ts": "2026-11-02T10:44:56Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1325,107 +1424,8 @@
       "system": "iOS 26.6",
       "screen": "430px",
       "first": false
-    },
-    {
-      "date": "2026-11-02 01:58",
-      "ts": "2026-11-02T09:58:10Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": false
-    },
-    {
-      "date": "2026-11-02 01:58",
-      "ts": "2026-11-02T09:58:11Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": false
-    },
-    {
-      "date": "2026-11-02 01:57",
-      "ts": "2026-11-02T09:57:51Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": true
-    },
-    {
-      "date": "2026-11-02 01:57",
-      "ts": "2026-11-02T09:57:52Z",
-      "loc": "Illinois, US",
-      "path": "/visitors",
-      "ref": "www.jiajunfan.com",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": true
-    },
-    {
-      "date": "2026-11-02 00:57",
-      "ts": "2026-11-02T08:57:24Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 152",
-      "system": "Android 14",
-      "screen": "375px",
-      "first": true
-    },
-    {
-      "date": "2026-11-02 00:56",
-      "ts": "2026-11-02T08:56:57Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 152",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": false
-    },
-    {
-      "date": "2026-11-02 00:50",
-      "ts": "2026-11-02T08:50:40Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 152",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": true
-    },
-    {
-      "date": "2026-11-02 00:50",
-      "ts": "2026-11-02T08:50:50Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 152",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": false
-    },
-    {
-      "date": "2026-11-01 21:23",
-      "ts": "2026-11-02T05:23:23Z",
-      "loc": "Pennsylvania, US",
-      "path": "/publications",
-      "ref": "www.jiajunfan.com",
-      "browser": "Chrome 156",
-      "system": "macOS 10.15",
-      "screen": "1280px",
-      "first": false
     }
   ],
-  "_recent_total": 3917,
+  "_recent_total": 3926,
   "_recent_shown": 30
 }
