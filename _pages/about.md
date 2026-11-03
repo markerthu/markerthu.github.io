@@ -1295,7 +1295,6 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
   <div class="ro-row">
     <div class="ro-dom">Math reasoning<span>token efficiency</span></div>
     <div class="ro-papers">
-      <a class="ro-p" href="https://openreview.net/forum?id=aXO0xg0ttW" target="_blank" rel="noopener">ADRPO <span class="ro-v">NeurIPS 2025</span></a>
       <a class="ro-p" href="https://openreview.net/forum?id=8Oc3Mx754M" target="_blank" rel="noopener">BCR <span class="ro-v">ICML 2026</span></a>
     </div>
   </div>
@@ -1796,7 +1795,7 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
 
 <!-- ════════════ RESEARCH GRAPH ════════════ -->
 <h2 class="section-header" id="research-graph-section"><img class="sh-icon" src="/images/icons/sh-network.png" alt="">Research Paper Network</h2>
-<p style="font-size:0.88em;color:#595959;margin-bottom:14px;">Hover a node to highlight connections; click or tap it to open the paper. Colours mark the research theme; arrows show how ideas evolved.</p>
+<p style="font-size:0.88em;color:#595959;margin-bottom:14px;">Hover a node to highlight connections; click or tap it to open the paper. Colours mark the research theme; arrows link papers that build on related ideas.</p>
 <div id="research-graph" role="img" aria-label="Network graph showing how Jiajun Fan's papers connect by research theme: from Deep RL (GDI, LBC) to RL training and flow matching for generative models (ORW-CFM-W2, ADRPO, AC-Flow, ProteinZero) to audio reasoning (CESAR) and tool-use agents (PARL)."></div>
 
 <!-- ═══════════════════════════════ NORTH STAR ═══════════════════════════ -->
@@ -1809,8 +1808,8 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
     <div class="pillar-body">
       <div class="pillar-kicker">Auto Self-Evolution</div>
       <div class="pillar-title">Models that improve themselves</div>
-      <div class="pillar-desc">Generative models and reasoning LLMs that self-improve from their own outputs and environment feedback — no human-labeled data. Reward-weighted, collapse-free, process-supervised online RL.</div>
-      <div class="pillar-papers"><span class="pillar-tag">ORW-CFM-W2</span><span class="pillar-tag">ADRPO</span><span class="pillar-tag">AC-Flow</span><span class="pillar-tag">CESAR</span></div>
+      <div class="pillar-desc">Generative models and reasoning LLMs that self-improve from their own outputs and environment feedback, with minimal human supervision. Reward-weighted, collapse-free, process-supervised online RL.</div>
+      <div class="pillar-papers"><span class="pillar-tag">ORW-CFM-W2</span><span class="pillar-tag">ADRPO</span><span class="pillar-tag">AC-Flow</span><span class="pillar-tag">CESAR</span><span class="pillar-tag">AudioRSI</span></div>
     </div>
   </div>
   <div class="pillar-card">
@@ -1988,7 +1987,7 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
       deadlines:[
         {label:'Notification',       date:'2026-09-24', passed:true},
         {label:'Early Registration', date:'2026-10-30'},
-        {label:'Conference',         date:'2026-12-06'},
+        {label:'Conference',         date:'2026-12-06', end:'2026-12-13'},
       ]},
     { name:'ICLR 2027', abbr:'ICLR', type:'ML', color:'#7c3aed',
       location:'California, USA', conf:'Apr 26\u201330, 2027', url:'https://iclr.cc/Conferences/2027',
@@ -2017,17 +2016,26 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
         {label:'Paper Submission', date:'2027-01-11'},
       ]},
     { name:'ICML 2027', abbr:'ICML', type:'ML', color:'#1565c0',
-      location:'South America', conf:'Dates TBA', url:'https://icml.cc/Conferences/FutureMeetings',
+      location:'Rio de Janeiro, Brazil', conf:'Jul 31\u2013Aug 6, 2027', url:'https://icml.cc/Conferences/2027',
       deadlines:[
         {label:'Abstract',         date:null},
         {label:'Paper Submission', date:null},
       ]},
   ];
+  /* Deadlines are Anywhere on Earth (UTC-12): a date stays open until 23:59:59 AoE, i.e. 11:59:59 UTC the next day,
+     whatever the reader's time zone. An item with an end date (a conference) is "in progress" until its last day ends. */
+  function aoeEnd(s){ var q = s.split('-'); return Date.UTC(+q[0], +q[1]-1, +q[2]+1, 11, 59, 59); }
+  function aoeStart(s){ var q = s.split('-'); return Date.UTC(+q[0], +q[1]-1, +q[2], 12, 0, 0); }
+  function aoeDaysUntil(s, now){ var q = s.split('-'), a = new Date(now.getTime() - 12*3600e3);
+    return Math.round((Date.UTC(+q[0], +q[1]-1, +q[2]) - Date.UTC(a.getUTCFullYear(), a.getUTCMonth(), a.getUTCDate())) / 86400000); }
+  function current(c, now){
+    for (var i = 0; i < c.deadlines.length; i++) { var d = c.deadlines[i]; if (!d.date || d.passed) continue;
+      if (now.getTime() <= aoeEnd(d.end || d.date)) return { d: d, live: !!d.end && now.getTime() >= aoeStart(d.date) }; }
+    return null; }
   (function sortByNext(){
     var now = new Date();
-    function next(c){ for (var i = 0; i < c.deadlines.length; i++) { var d = c.deadlines[i]; if (!d.date || d.passed) continue;
-      var q = d.date.split('-'), dt = new Date(+q[0], +q[1]-1, +q[2], 23, 59, 59); if (dt >= now) return dt.getTime(); } return Infinity; }
-    CONF.sort(function(a, b){ return next(a) - next(b); });
+    function key(c){ var x = current(c, now); return x ? (x.live ? now.getTime() : aoeEnd(x.d.date)) : Infinity; }
+    CONF.sort(function(a, b){ return key(a) - key(b); });
   })();
 
   var grid = document.getElementById('conf-ddl-grid');
@@ -2035,22 +2043,16 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
   var now = new Date();
 
   CONF.forEach(function(c) {
-    var next = null;
-    for (var i = 0; i < c.deadlines.length; i++) {
-      var d = c.deadlines[i];
-      if (!d.date) continue;
-      if (d.passed) continue;
-      var p = d.date.split('-');
-      var dt = new Date(+p[0], +p[1]-1, +p[2], 23, 59, 59);
-      if (dt >= now) { next = {label: d.label, dt: dt}; break; }
-    }
+    var cur = current(c, now);
 
     var chip = '';
-    if (next) {
-      var diff = Math.ceil((next.dt - now) / 86400000);
+    if (cur && cur.live) {
+      chip = '<span class="ddl-chip u-hot">' + cur.d.label + ' · In progress</span>';
+    } else if (cur) {
+      var diff = aoeDaysUntil(cur.d.date, now);
       var urgency = diff <= 14 ? 'u-hot' : diff <= 60 ? 'u-soon' : 'u-later';
       chip = '<span class="ddl-chip ' + urgency + '">'
-           + next.label + ' · ' + (diff <= 0 ? 'Today!' : diff + 'd') + '</span>';
+           + cur.d.label + ' · ' + (diff <= 0 ? 'Today!' : diff + 'd') + '</span>';
     } else if (c.deadlines.length && c.deadlines[0].date === null) {
       chip = '<span class="ddl-chip u-later">Submission TBA</span>';
     } else {
@@ -2476,7 +2478,7 @@ function drawGraph(container) {
                   : {deep:'#E39A7A',train:'#2F4B8F',flow:'#6F94C6',eff:'#8F97A8',rep:'#A98BA6',audio:'#5E9A86'};
 
   /* ── Column x positions (fraction of W) ── */
-  var CX = {'1':0.09,'2':0.28,'3':0.50,'4':0.70,'5':0.90};
+  var CX = {'1':0.07,'2':0.235,'3':0.40,'4':0.565,'5':0.73,'6':0.90};
 
   /* ── Papers: fixed fractional y in working area [0.0–1.0] ── */
   var nodes = [
@@ -2491,6 +2493,9 @@ function drawGraph(container) {
     {id:'CESAR',      label:'CESAR',      venue:'ICLR 2026',    col:'5', fy:0.13, r:24, clr:TC.audio, url:'/projects/cesar/'},
     {id:'ProteinZero',label:'ProteinZero',venue:'TMLR 2026',   col:'4', fy:0.84, r:20, clr:TC.train, url:'/projects/proteinzero/'},
     {id:'PARL',       label:'PARL',       venue:'COLM 2026',   col:'5', fy:0.84, r:20, clr:TC.train, url:'/projects/procedure-aware-rl/'},
+    {id:'AudioRSI',   label:'AudioRSI',   venue:'arXiv 2026',  col:'6', fy:0.13, r:22, clr:TC.audio, url:'/projects/audiorsi/'},
+    {id:'ReadMind',   label:'Read the Mind', venue:'arXiv 2026', col:'6', fy:0.48, r:18, clr:TC.audio, url:'/projects/read-the-mind/'},
+    {id:'SpeechGym',  label:'SpeechGym',  venue:'arXiv 2026',  col:'6', fy:0.84, r:20, clr:TC.audio, url:'/projects/speechgym/'},
   ];
 
   /* Apply pixel coordinates (working area: y ∈ [36, H-46]) */
@@ -2509,13 +2514,15 @@ function drawGraph(container) {
     {s:'GDI', t:'PRANCE',     bend:-22},
     {s:'PRANCE', t:'SP-VLA',  bend:72},
     {s:'ORW-CFM-W2', t:'ADRPO',  bend:-22},
-    {s:'ORW-CFM-W2', t:'VarCon', bend:0},
     {s:'ADRPO', t:'AC-Flow',  bend:22},
     {s:'ADRPO', t:'CESAR',    bend:-18},
-    {s:'VarCon', t:'CESAR',   bend:-28},
     {s:'AC-Flow', t:'CESAR',   bend:0},
     {s:'ORW-CFM-W2', t:'ProteinZero', bend:0},
     {s:'ADRPO', t:'PARL',     bend:0},
+    {s:'CESAR', t:'AudioRSI', bend:0},
+    {s:'AC-Flow', t:'AudioRSI', bend:16},
+    {s:'CESAR', t:'ReadMind', bend:16},
+    {s:'PARL', t:'SpeechGym', bend:0},
   ];
 
   /* ── Build SVG ── */
@@ -2533,7 +2540,7 @@ function drawGraph(container) {
     .append('path').attr('d','M0,1 L7,4 L0,7 Z').attr('fill',edgeClr);
 
   /* Year labels at top — span reflects the papers in each column */
-  [{t:'2022–23',cx:CX['1']},{t:'2025–26',cx:(CX['2']+CX['5'])/2}]
+  [{t:'2022–23',cx:CX['1']},{t:'2025–26',cx:(CX['2']+CX['6'])/2}]
   .forEach(function(d){
     svg.append('text').attr('x',d.cx*W).attr('y',18)
       .attr('text-anchor','middle').attr('font-size','12px')
