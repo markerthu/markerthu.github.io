@@ -86,20 +86,45 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
 
   /* ════════ KNOWLEDGE BASE ════════
      id      stable topic id (used by rel/follow-ups)
-     nm      the paper's own names (scored above topical keywords)
-     kw      retrieval keywords (phrases allowed; matched as whole words/phrases)
+     nm      the paper's own names: an exact name hit wins outright. A name of 4-5 letters also
+             takes a one-letter typo ('cesa', 'caesar', 'adrop', 'pyragg'; a 3-letter name only a
+             doubled letter: 'lbcc', 'gdii'), never a common word ('sure' is not 'surge', 'park'
+             not 'parl') and never before a food or other generic word ("caesar salad"); see
+             typoName ("barrage" is not 'barrag' either: TYPO_STOP). A leading '=' keeps a name
+             exact; a leading '^' also requires that case in the visitor's own text ('^OT': "what
+             is OT", never "how ot contact him"). When several papers are named, see pickName.
+     nx      (optional) context in which the entry's names do not count, except a '^' name
+             ('edison' with "invent", "light bulb", "who was…": the inventor, not the paper)
+     kw      retrieval keywords (phrases allowed; matched as whole words/phrases);
+             a leading '=' makes a keyword exact-only (no typo matching); a leading '!' makes it
+             exact-only and lets it beat a paper name ("how many citations does LBC have"); a
+             leading '~' marks a weak framing word, exact-only and scoring 1, so it answers on
+             its own but loses to any topic ("does he work on audio?" -> CESAR, not focus); a
+             leading '^' is exact and case-sensitive, as for names ('^PI': "his PI", not "pi");
+             a leading '*' (before the others) marks an incidental word: it scores as usual but
+             does not by itself take a follow-up away from a paper whose own text uses it
+             ('student' after AudioRSI's "student and teacher", 'code' after TF-OPD's "code
+             specialist"), or when the message ties it to the paper ("how much impact did it
+             have?", "the recent results"); see followTo
+     gen     (optional) a generic entry (research focus, publication list, LLM reasoning, flow
+             models): it loses ties to a specific entry, and in a follow-up it keeps the reply on
+             the last topic when its words also describe that topic (see followTo)
+     ov      (optional) a pattern that, like a '!' keyword, beats a paper name
+     pri     (optional) a pattern that adds 2 to the entry's score ("his ICLR 2026 papers")
      a       answer variants (one is picked; never the same twice in a row)
      more    deeper detail served on "tell me more / why / how"
      rel     related topic ids the agent may proactively offer
+     ab      (optional) words that also describe a paper without retrieving it ('diffusion' for
+             ADRPO, tested on SD3): a follow-up on them stays on the paper (see followTo)
      act     action chips rendered under the reply
      plain   a plain fact: no conversational opener                       */
   var KB = [
-    { id:'focus', kw:['research','focus','interest','direction','work on','studying','topic','about you','what do you do'],
+    { id:'focus', gen:1, kw:['~research','~researching','~his work','~his other work','~your work','~your other work','~focus','~interest','~interests','~interested in','~direction','~work on','~works on','~working on','=known for','=what does he study','=what do you study','~studying','~topic','=about you','=what do you do','研究方向','研究什么','做什么研究','研究兴趣','他的研究','~specialize','~specializes','~specialise','~specialises','~specialize in','~reinforcement learning','~deep reinforcement learning','~rl post-training','~post-training','~reward modeling','~reward modelling','~强化学习'],
       a:["My research is about autonomous RL post-training for large generative models — making diffusion models, flow matching models, and multimodal LLMs continuously self-improve with minimal human supervision.",
          "In one line: I teach big generative models to improve themselves. Concretely — RL post-training for diffusion/flow models and multimodal reasoning LLMs, with as little human supervision as possible."],
       more:"The thread that connects everything: who supplies the learning signal when humans step away? My answers so far — reward-weighted matching (ORW-CFM-W2), adaptive regularization (ADRPO), intermediate feedback (AC-Flow), and process rewards for reasoning (CESAR).",
       rel:['cesar','orw'] },
-    { id:'cesar', nm:['cesar'], kw:['audio','mmau','audio llm','audio llms','audio reasoning','process reward','process rewards','test-time inverse','inverse scaling','reasoning process','iclr 2026','amazon science'],
+    { id:'cesar', nm:['cesar'], kw:['audio','mmau','audio llm','audio llms','audio reasoning','process reward','process rewards','test-time inverse','inverse scaling','reasoning process','iclr 2026','amazon science','test-time scaling','test time scaling'],
       a:["CESAR (ICLR 2026, also featured on Amazon Science) tackles a paradox we found in Audio LLMs: longer reasoning chains can actually hurt accuracy — test-time inverse scaling. We fix it with process-level rewards (GRPO) that grade the reasoning itself, not just the answer. Result: SOTA on MMAU, ahead of Gemini 2.5 Pro and GPT-4o Audio.",
          "That's our ICLR 2026 paper (now also on Amazon Science). Audio LLMs get worse when they think longer — we measured it, named it (test-time inverse scaling), and fixed it by rewarding the reasoning process instead of only outcomes. SOTA on MMAU."],
       more:"The key insight: outcome-only RL teaches models to ramble — verbose chains that drift off-task. Process rewards grade each intermediate step, so the model learns to think usefully. That's also why it scales: more test-time compute finally helps instead of hurting.",
@@ -111,18 +136,24 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
       more:"The teacher can hear the audio, so it can reject reasoning that cites a sound the recording does not contain, which a text-only judge would have to take on trust. And the recursion is what keeps it improving: with a frozen external judge, out-of-distribution accuracy plateaus, while a teacher refreshed from the student keeps it rising.",
       rel:['cesar','readmind'],
       act:[{t:'🔗 AudioRSI project page', h:'/projects/audiorsi/'},{t:'Watch the film', h:'/film/?s=audiorsi'},{t:'📎 arXiv', h:'https://arxiv.org/abs/2610.36578'}] },
-    { id:'tfopd', nm:['tf-opd','tfopd','training-free on-policy distillation'], kw:['training-free','training free','on-policy distillation','distillation','model merging','merge specialists','merging'],
+    { id:'tfopd', nm:['tf-opd','tfopd','training-free on-policy distillation'], ab:['llm','llms','language model','language models'], kw:['=training-free','=training free','on-policy distillation','distillation','distilling','model merging','merge specialists','merging'],
       a:["Training-Free On-Policy Distillation (TF-OPD, arXiv 2026) merges RL specialists that share a base model into one model with zero gradient steps. Each linear layer of the merged model has to reproduce every specialist on the inputs that specialist sees while reading its own answers; that is least squares, solved exactly from second moments gathered in one forward pass over each specialist's kept answers to a few hundred training problems.",
          "It's the paper where, for specialists that share a base model, on-policy distillation stops needing training: on Olmo 3 7B, a math specialist and a code specialist merge into one model whose mean accuracy over seven math and code benchmarks (61.1) is higher than either specialist's (59.8 and 53.6), with about 10 GPU-hours of forward computation and linear algebra in total."],
       more:"The surprise is that the data matters more than the solver: a few of the math specialist's answers get stuck in repetition loops. They are 7% of its answers but 23% of its tokens, and dropping them takes the merged model on AIME25 from task-arithmetic level to the specialist's own level in the same number format.",
       rel:['audiorsi','pubs'],
       act:[{t:'🔗 TF-OPD project page', h:'/projects/tf-opd/'},{t:'Watch the film', h:'/film/?s=tf-opd'},{t:'📎 arXiv', h:'https://arxiv.org/abs/2610.22236'}] },
-    { id:'speechgym', nm:['speechgym','speech gym'], kw:['voice agent','voice agents','spoken agent','tau-voice','tau voice','native speech','native audio'],
+    /* SURGE: co-first (_publications/2026-10-01-SURGE.md); every number is from that record */
+    { id:'surge', nm:['surge','does scaling reinforcement learning really require more training','does scaling rl really require more training'],
+      kw:['scaling rl','scaling reinforcement learning','training history','training histories','checkpoint fusion','fuse checkpoints','fusing checkpoints','spectral space'],
+      a:["SURGE (arXiv 2026) asks whether scaling RL really requires more training. Our finding: a finished RL training history can yield policies stronger than any checkpoint its optimizer visited, with no more training and no more inference per query. SURGE fuses two checkpoints of the same run, an accurate anchor and a donor that answers more briefly, in the spectral space of their updates; we evaluate it on two 1.5B math-reasoning histories and a 7B coding history."],
+      rel:['tfopd','parl'],
+      act:[{t:'📎 arXiv', h:'https://arxiv.org/abs/2610.01133'}] },
+    { id:'speechgym', nm:['speechgym','speech gym'], ab:['tool calling','tool-calling','function calling','tool use'], kw:['=voice','=speech','speech llm','speech agent','speech agents','voice agent','voice agents','spoken agent','tau-voice','tau voice','native speech','native audio'],
       a:["SpeechGym (arXiv 2026) is about training voice agents with RL. Voice-agent benchmarks usually score a closed realtime API from the outside, so no gradient ever reaches the agent. SpeechGym makes both sides of the call local open models talking in native speech over an existing tool-use benchmark, so the agent can actually be trained — and a per-turn process reward fixes the first thing that breaks: at audio success rates almost every rollout group fails identically and teaches nothing.",
          "That's our newest agentic-RL paper: an audio-native gym where an open caller model and the voice agent talk in real speech, the agent calls tools against a live database, and the benchmark's own task check is the reward. Training in speech more than doubles task success on the τ-voice tasks."],
       rel:['readmind','cesar'],
       act:[{t:'🔗 SpeechGym project page', h:'/projects/speechgym/'},{t:'📎 arXiv', h:'https://arxiv.org/abs/2608.26432'}] },
-    { id:'readmind', nm:['read the mind','read-the-mind'], kw:['logit lens','interpretability','mind of an audio','workspace','middle layer','middle layers','middle-layer'],
+    { id:'readmind', nm:['read the mind','read-the-mind'], kw:['logit lens','logit lenses','interpretability','mind of an audio','workspace','middle layer','middle layers','middle-layer'],
       a:["“Can We Read the Mind of an Audio LLM?” (arXiv 2026) looks inside a speech model while it listens. Reading Qwen3-Omni's middle layers with a logit lens at the audio-token positions, the answer to a spoken question is already legible — in words, across languages — before the model emits a single token.",
          "It's our interpretability paper on audio LLMs: the middle layers form a verbalizable, multilingual workspace, so you can read what the model has worked out even when it never writes its reasoning down."],
       rel:['speechgym','cesar'],
@@ -133,15 +164,15 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
       more:"With those rewards a 3B model beats the correctness-only RL baseline on BFCL-V3, API-Bank and Bamboogle, and lands in the same range as much larger proprietary models. It also learns to recover after a failed call — nothing in the reward asks for that.",
       rel:['focus','cesar'],
       act:[{t:'🔗 Procedure-Aware RL project page', h:'/projects/procedure-aware-rl/'},{t:'📄 OpenReview', h:'https://openreview.net/forum?id=d4wrBuJ4xo'}] },
-    { id:'proteinzero', nm:['proteinzero','protein zero'], kw:['protein','proteins','protein design','inverse folding','tmlr','esmfold','cath'],
+    { id:'proteinzero', nm:['proteinzero','protein zero'], kw:['protein','proteins','protein design','inverse folding','tmlr','esmfold','cath','protein language model','protein language models'],
       a:["ProteinZero (TMLR 2026) lets a protein inverse-folding model improve from its own designs with online RL: ESMFold structure feedback plus a fast self-derived ddG proxy as the reward, and an embedding-level diversity regularizer so it does not collapse onto a few sequences. On CATH-4.3 it reaches success rates above 90% with 36–48% fewer design failures than prior models, and a full run fits on one 8-GPU node in about three days. The code is open source."],
       rel:['orw','adrpo'],
       act:[{t:'🔗 ProteinZero project page', h:'/projects/proteinzero/'},{t:'📎 arXiv', h:'https://arxiv.org/abs/2506.07459'},{t:'💻 Code', h:'https://github.com/ziwenwang28/ProteinZero'}] },
-    { id:'lbc', nm:['lbc','learnable behavior control'], kw:['atari','world record','world records','record','records','superhuman','behavior control','exploration','bandit','iclr 2023'],
+    { id:'lbc', nm:['lbc','learnable behavior control'], kw:['atari','world record','world records','record','records','superhuman','behavior control','=exploration','bandit','iclr 2023'],
       a:["LBC (ICLR 2023 Oral, rank 5/4176) broke 24 Atari human world records with 1B frames — 100× less data than Agent57. The trick: a learnable hybrid behavior mapping plus a bandit meta-controller, which massively enlarges the space of behaviors the agent can explore.",
          "My favorite to talk about — LBC got an ICLR 2023 Oral (top 5%). We broke 24 Atari human world records using 100× less data than Agent57, by making behavior selection itself learnable instead of hand-designed."],
       more:"Why it works: population-based methods like Agent57 pick from a fixed, hand-designed set of policies. LBC instead learns a hybrid mapping over ALL policies and lets a bandit meta-controller choose — the effective behavior space explodes, and exploration quality with it. 10,077% mean human-normalized score.",
-      rel:['gdi'],
+      rel:['gdi','atari'],
       act:[{t:'🔗 LBC project page', h:'/projects/lbc/'},{t:'📎 arXiv', h:'https://arxiv.org/abs/2305.05239'}] },
     { id:'gdi', nm:['gdi','generalized data distribution iteration'], kw:['generalized data','distribution iteration','icml 2022'],
       a:["GDI (ICML 2022) makes one claim: the training data distribution is THE lever for RL efficiency. Optimize it directly and you get 9,620% mean human-normalized score on Atari with just 200M frames — about 500× less data than Agent57.",
@@ -149,44 +180,50 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
       more:"GDI frames RL as alternating between improving the policy and improving the DATA the policy learns from. Most algorithms only do the first implicitly. Making the second explicit — choosing what experience to learn from — is where the 500× efficiency comes from. LBC builds directly on this.",
       rel:['lbc'],
       act:[{t:'🔗 GDI project page', h:'/projects/gdi/'},{t:'📎 arXiv', h:'https://arxiv.org/abs/2206.03192'}] },
-    { id:'adrpo', nm:['adrpo'], kw:['adaptive divergence','adaptive regularization','neurips 2025'],
+    /* sole-author review (_publications/2021-01-01-A-Review-for-Deep-Reinforcement-Learning-in-Atari-...md) */
+    { id:'atari', nm:['atari review','atari survey','review for deep reinforcement learning in atari','deep reinforcement learning in atari','deep rl in atari'],
+      kw:['atari benchmark','atari benchmarks','human-normalized','human normalized'],
+      a:["“A Review for Deep Reinforcement Learning in Atari” (AAAI-22 Workshop on Reinforcement Learning in Games) is my sole-author review of deep RL on the Atari benchmark. It argues that the usual human-normalized criteria understate what humans can do, proposes a benchmark built on human world records that asks for both final performance and learning efficiency, reports state-of-the-art methods on the new metrics, and lays out the open challenges that keep agents from superhuman play."],
+      rel:['lbc','gdi'],
+      act:[{t:'📎 arXiv', h:'https://arxiv.org/abs/2112.04145'}] },
+    { id:'adrpo', nm:['adrpo'], ab:['diffusion','text-to-image'], kw:['adaptive divergence','adaptive regularization','kl regularization','adaptive kl','kl penalty','neurips 2025'],
       a:["ADRPO (NeurIPS 2025) makes KL regularization adaptive at the sample level — good samples get freedom to explore, bad ones get pulled back hard. With it, our 2B SD3 beats 12B FLUX and 4.8B SANA.",
          "The one-line pitch for ADRPO: stop regularizing every sample equally. Modulate the divergence penalty by sample value, and a 2B model out-generates 12B competitors. NeurIPS 2025, plug-and-play on any RL method."],
       more:"Fixed KL strength is always wrong in both directions — too tight kills exploration on promising samples, too loose lets bad samples drift into reward hacking. Sample-level adaptation resolves the dilemma, and it transfers across modalities (we show it on flow models and LLMs).",
       rel:['orw','acflow'],
       act:[{t:'🔗 ADRPO project page', h:'/projects/adrpo/'},{t:'📎 arXiv', h:'https://arxiv.org/abs/2510.18053'}] },
-    { id:'orw', nm:['orw-cfm-w2','orw-cfm','orw'], kw:['cfm','wasserstein','flow matching rlhf','iclr 2025','online rlhf','rlhf'],
+    { id:'orw', nm:['orw-cfm-w2','orw-cfm','orw'], ab:['diffusion','text-to-image'], kw:['cfm','wasserstein','flow matching rlhf','iclr 2025','online rlhf','rlhf','online rl','online reinforcement learning'],
       a:["ORW-CFM-W2 (ICLR 2025) is the first online RLHF framework for flow matching models. No human data, no reward gradients — just a reward function, with Wasserstein-2 regularization to prevent collapse while keeping diversity.",
          "That's where my generative-model line started — ICLR 2025. Online reward-weighted fine-tuning for flow matching, with a tractable W2 bound that keeps the model from collapsing onto a single high-reward mode."],
       more:"The hard part was the W2 term: exact Wasserstein-2 between continuous flows is intractable, so we derived a tractable upper bound inside the flow matching objective. That bound is what balances exploitation (chase reward) against exploration (stay diverse).",
       rel:['adrpo','acflow'],
       act:[{t:'🔗 ORW-CFM-W2 project page', h:'/projects/orw-cfm-w2/'},{t:'📎 arXiv', h:'https://arxiv.org/abs/2502.06061'}] },
-    { id:'acflow', nm:['ac-flow','acflow'], kw:['actor critic','actor-critic','intermediate feedback','dual-stability'],
+    { id:'acflow', nm:['ac-flow','acflow'], ab:['diffusion','text-to-image'], kw:['actor critic','actor-critic','critics','a critic','critic model','learned critic','intermediate feedback','dual-stability'],
       a:["AC-Flow brings actor-critic RL to flow matching: a critic provides feedback at intermediate timesteps, not just the final image. Dual-stability (advantage clipping + critic warm-up) keeps SD3 fine-tuning robust against reward hacking."],
       more:"Final-output rewards leave the credit-assignment problem to the very end — the model only hears 'good/bad' once the image is done. A critic at intermediate steps gives feedback along the way, and the dual-stability mechanism keeps that training stable, without collapse or reward hacking.",
       rel:['orw','adrpo'],
       act:[{t:'🔗 AC-Flow project page', h:'/projects/ac-flow/'},{t:'📎 arXiv', h:'https://arxiv.org/abs/2510.18072'}] },
     /* agentic RL / LLM reasoning: points only to his own first- and co-first-author papers */
-    { id:'reasoning', kw:['agentic rl','agentic','agentic reinforcement learning','llm reasoning','reasoning llm','reasoning llms','reasoning models','reasoning','math reasoning','llm','llms','large language model','large language models','language model','language models','llm agents','tool-using agents'],
-      a:["On agentic RL and LLM reasoning, my own papers are Procedure-Aware RL (COLM 2026, co-first) for tool-using agents, SpeechGym for training voice agents with RL in native speech, CESAR (ICLR 2026) and AudioRSI for reasoning in audio LLMs, and Training-Free On-Policy Distillation (co-first), which merges RL specialists that share a base model into one model with zero gradient steps."],
+    { id:'reasoning', gen:1, kw:['agentic rl','agentic','agentic reinforcement learning','llm reasoning','reasoning llm','reasoning llms','reasoning models','reasoning','math reasoning','llm','llms','large language model','large language models','language model','language models','llm agents','tool-using agents'],
+      a:["On agentic RL and LLM reasoning, my own papers are Procedure-Aware RL (COLM 2026, co-first) for tool-using agents, SpeechGym for training voice agents with RL in native speech, CESAR (ICLR 2026) and AudioRSI for reasoning in audio LLMs, Training-Free On-Policy Distillation (co-first), which merges RL specialists that share a base model into one model with zero gradient steps, and SURGE (co-first), which fuses two checkpoints of a finished RL run with no more training."],
       rel:['parl','speechgym','cesar'],
       act:[{t:'🔗 Procedure-Aware RL', h:'/projects/procedure-aware-rl/'},{t:'🔗 SpeechGym', h:'/projects/speechgym/'},{t:'🔗 CESAR', h:'/projects/cesar/'}] },
 
     /* ── co-authored work (Jiajun is not first or co-first author): always said so in the answer ── */
-    { id:'prance', nm:['prance'], kw:['token pruning','channel pruning','vit','tpami','efficient inference'],
+    { id:'prance', nm:['prance'], kw:['token pruning','channel pruning','pruning','vit','vits','vision transformer','vision transformers','tpami','efficient inference'],
       a:["PRANCE (IEEE TPAMI 2026) is a paper I co-authored: it jointly optimizes token pruning and channel pruning for ViTs — about 50% FLOPs cut, keeping only ~10% of tokens, with lossless Top-1 accuracy."],
       rel:['spvla'],
       act:[{t:'📎 arXiv', h:'https://arxiv.org/abs/2407.05010'}] },
-    { id:'spvla', nm:['sp-vla','spvla'], kw:['vision language action','vision-language-action','model scheduling','spatio-semantic','libero','simplerenv'],
+    { id:'spvla', nm:['sp-vla','spvla'], ab:['robot','robots','robotics','vlas'], kw:['=vla','=vlas','=robot','=robots','=robotics','vision language action','vision-language-action','model scheduling','spatio-semantic','libero','simplerenv'],
       a:["SP-VLA (ICLR 2026) is a paper I co-authored: it speeds up Vision-Language-Action models with joint model scheduling and spatio-semantic token pruning — 1.5× lossless on LIBERO, 2.4× on SimplerEnv."],
       rel:['prance'] },
-    { id:'varcon', nm:['varcon'], kw:['variational contrastive','supervised contrastive','imagenet','resnet'],
+    { id:'varcon', nm:['varcon'], kw:['variational contrastive','supervised contrastive','contrastive learning','imagenet','resnet'],
       a:["VarCon (NeurIPS 2025) is a paper I co-authored: it recasts supervised contrastive learning as variational inference — a principled probabilistic framing that reaches 79.36% Top-1 on ImageNet-1K with ResNet-50."] },
-    { id:'gpflow', nm:['gpflow','generalized poisson flow'], kw:['poisson flow','generalized poisson','variable-length','variable length','motif scaffolding','motif-scaffolding'],
+    { id:'gpflow', nm:['gpflow','gp flow','gp-flow','generalized poisson flow'], kw:['poisson flow','generalized poisson','variable-length','variable length','motif scaffolding','motif-scaffolding'],
       a:["GPFlow (NeurIPS 2026) is a paper I co-authored. It generates proteins without fixing their length in advance: it learns the rate function of an inhomogeneous generalized Poisson process, over both structure and sequence. It ranks first on 10 of 16 structure-based motif-scaffolding tasks, with more than a 10-fold increase in unique successes on several challenging targets."],
       rel:['proteinzero'],
       act:[{t:'📎 arXiv', h:'https://arxiv.org/abs/2607.09039'}] },
-    { id:'elegantvla', nm:['elegantvla','elegant vla','elegant-vla'], kw:['learning when to think','when to think','phase-adaptive','gr00t','cogact'],
+    { id:'elegantvla', nm:['elegantvla','elegant vla','elegant-vla'], ab:['robot','robots','robotics','vla','vlas'], kw:['learning when to think','when to think','phase-adaptive','gr00t','cogact'],
       a:["ElegantVLA (NeurIPS 2026) is a paper I co-authored: a plug-in scheduler that decides when a VLA model needs full computation, reusing vision, language and denoising states during stable motion, with no retraining of the base model. Up to 2.55× (GR00T) / 3.77× (CogACT) speedup · 13.8 → 26.3 Hz on real-world GR00T tasks."],
       rel:['spvla'],
       act:[{t:'📎 arXiv', h:'https://arxiv.org/abs/2605.29438'}] },
@@ -198,80 +235,108 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
       a:["BCR (Batched Contextual Reinforcement, ICML 2026) is a paper I co-authored: one model solves several problems in a single shared context, rewarded only by per-problem accuracy — the shared window becomes an implicit token budget. 15.8–62.6% fewer tokens at equal or better accuracy."],
       rel:['adrpo'],
       act:[{t:'📄 OpenReview', h:'https://openreview.net/forum?id=8Oc3Mx754M'},{t:'📎 arXiv', h:'https://arxiv.org/abs/2604.02322'}] },
+    /* a separate paper (_publications/2026-10-16-BCR-II.md): its longer names beat BCR's */
+    { id:'bcr2', nm:['bcr-ii','bcr ii','bcr 2','bcr2','batched contextual reinforcement ii','batched contextual reinforcement 2'],
+      kw:['concurrent constraint reinforcement','long rollout windows','rollout window','rollout windows'],
+      a:["BCR-II (Batched Contextual Reinforcement II, arXiv 2026) is a paper I co-authored, a continuation of BCR. Its Concurrent Constraint Reinforcement places three independently verifiable problems in one capped training completion, so answers finished before truncation keep their credit and the shared budget favors shorter reasoning without a length penalty. With an 8,000-token window it uses about 80% fewer tokens per training step than single-problem GRPO with a 32k window."],
+      rel:['bcr'],
+      act:[{t:'📎 arXiv', h:'https://arxiv.org/abs/2610.22887'}] },
     { id:'pyrag', nm:['pyrag','py-rag'], kw:['retrieval is cheap','executable multi-hop','multi-hop rag','multi-hop','multihop','program synthesis'],
       a:["PyRAG (arXiv 2026) is a paper I co-authored. It recasts multi-hop retrieval-augmented generation as program synthesis and execution: the model writes an executable Python program over retrieval and QA tools, so intermediate states become variables, execution gives deterministic feedback, and the whole reasoning trace can be inspected. On five QA benchmarks (PopQA, HotpotQA, 2WikiMultihopQA, MuSiQue and Bamboogle) it outperforms strong baselines in both training-free and RL-trained settings."],
       rel:['barrag','parl'],
       act:[{t:'📎 arXiv', h:'https://arxiv.org/abs/2605.12975'}] },
+    { id:'discoveryrsi', nm:['discoveryrsi','discovery rsi','discovery-rsi','recursively learning to discover valuable hypotheses'],
+      kw:['hypothesis','hypotheses','hypothesis generation','dfm-bench','dfm bench','scientific discovery'],
+      a:["DiscoveryRSI (arXiv 2026) is a paper I co-authored. It grows research hypotheses as trees through multi-agent evolutionary search, compiles the selected investigations into executable tasks, and improves recursively through hypothesis credit optimization, harness replay and rediscovery. It also introduces DFM-Bench, which scores hypothesis quality and cumulative research progress, and is evaluated across four life-science domains."],
+      act:[{t:'📎 arXiv', h:'https://arxiv.org/abs/2610.23839'}] },
+    /* '^OT': only an upper-case OT is the paper; lower-case 'ot' is usually a typo for 'to' */
+    { id:'ot', nm:['^OT','optimal transport for treatment effect estimation','optimal transport'],
+      kw:['treatment effect','treatment effects','treatment effect estimation','causal inference','selection bias','balanced representation'],
+      a:["Optimal Transport for Treatment Effect Estimation (NeurIPS 2023) is a paper I co-authored. It proposes an optimal transport-based framework for treatment effect estimation that addresses selection bias through balanced representation learning, and reports substantially better performance than state-of-the-art methods."],
+      act:[{t:'📄 Paper page', h:'/publication/2023-06-01-Optimal-Transport-Treatment-Effect'}] },
     /* EDiSon: _publications and Google Scholar list J. Fan first, so no authorship label is given here */
-    { id:'edison', nm:['edison'], kw:['robot design','robot morphology','morphology','design and control','design-and-control','materials design','ai4mat','tetris'],
+    { id:'edison', nm:['^EDiSon','edison'], nx:/\b(?:alva|inventor|inventors|invent|invents|invented|inventing|invention|inventions|light ?bulbs?|lightbulbs?|phonograph|tesla|electricity|con edison|consolidated edison|biography|born|died|who (?:was|is) (?:thomas )?edison)\b/, kw:['robot design','robot morphology','morphology','design and control','design-and-control','materials design','ai4mat','tetris'],
       a:["EDiSon (AI4Mat workshop at NeurIPS 2024) learns design and control together with deep RL: a design policy proposes a structure step by step while a control policy operates it, and a design memory drives adaptive exploration by switching between building a design from scratch and refining a stored high-quality one. The same formulation covers robot morphology design and Tetris-based design."],
       rel:['proteinzero'],
       act:[{t:'📄 OpenReview', h:'https://openreview.net/forum?id=stiehhc5y6'}] },
-    { id:'uiuc', kw:['phd','uiuc','illinois','university','where study','school','student'],
+    { id:'uiuc', kw:['*phd','uiuc','illinois','~university','*where study','school','*=student','=who is jiajun','=who is he','=about jiajun','=about him','=where does he study','=where do you study','=which university','=what university','哪个学校','什么学校','伊利诺伊','他是谁','jiajun是谁'],
       a:["I'm a CS PhD student at the University of Illinois Urbana-Champaign — 4.0/4.0 so far. Advised by Prof. Ge Liu."],
       rel:['edu','advisor'] },
-    { id:'graduation', plain:1, kw:['graduate','graduation','graduating','graduates','when does he graduate','when will he graduate','finish his phd','finish the phd','finish your phd','phd end','expected graduation'],
+    { id:'graduation', plain:1, kw:['graduate','graduation','graduating','graduates','when does he graduate','when will he graduate','finish his phd','finish the phd','finish your phd','=finishing his phd','=finishing the phd','=finishing your phd','phd end','expected graduation','什么时候毕业','毕业时间','~毕业'],
       a:["I started the CS PhD at UIUC in Aug 2024; graduation is Dec 2027 (expected)."],
       act:[{t:'📋 View CV', h:'/cv/'}] },
-    { id:'location', plain:1, kw:['location','located','based in','where is he','where are you','where is jiajun','where is he based','where are you based','where do you live','where does he live','urbana','champaign','which city','what city'],
+    { id:'location', plain:1, kw:['*location','*located','*based in','=where is he','=where are you','=where is jiajun','=where is he based','=where are you based','=where do you live','where does he live','where does jiajun live','where is he based','=where does he work','=where do you work','=where does jiajun work','urbana','champaign','=which city','=what city','他在哪','在哪个城市','住在哪'],
       a:["Based in Urbana, IL — I'm a CS PhD student at the University of Illinois Urbana-Champaign."] },
-    { id:'talks', kw:['talks','give a talk','gave a talk','given talks','given a talk','invited talk','talk invitation','presentation','presentations','presented','seminar','speaker','speak at','igb'],
+    { id:'talks', kw:['talks','give a talk','gave a talk','given talks','given a talk','invited talk','talk invitation','*presentation','*presentations','*presented','seminar','*speaker','speak at','igb','演讲','报告'],
       a:["Most recent: a talk at the IGB (Lunch with CNRG) on building LLM post-training projects with an AI coding agent; earlier, I presented CESAR at ICLR 2026 in Rio de Janeiro. I'm always happy to give talks on LLM post-training with RL and on AI scientists — agentic methods for automated scientific discovery — just reach out at jiajunf3 [at] illinois.edu."],
       act:[{t:'🔗 IGB event', h:'https://www.igb.illinois.edu/igb-calendar/lunch-cnrg-building-llm-post-training-projects-claude-code'},{t:'✉️ Email Jiajun', h:'mailto:jiajunf3@illinois.edu'}] },
-    { id:'contact', kw:['contact','email','reach','reach out','get in touch','collaborate','collaboration','talk to','talk with','work with','message'],
+    { id:'contact', kw:['contact','email','*reach','reach out','=reach him','=reach you','=reach jiajun','get in touch','collaborate','collaboration','collaborating','=collaborations','=talk to him','=talk to jiajun','=talk with him','=talk with jiajun','=i can talk to','=can i talk to','=talk to someone','=talk to a person','=talk to a human','=meet him','=work with him','=work with you','=work with jiajun','=get involved in his','=get involved with his','=get involved in your','=project with him','=projects with him','=research with him','message','interview','interviews','=interview him','linkedin','邮箱','邮件','联系'],
       a:["Easiest way is email: jiajunf3 [at] illinois.edu. Always happy to talk RL post-training, generative models, or multimodal reasoning.",
          "Drop me an email — jiajunf3 [at] illinois.edu. I read everything, and research conversations are the best part of my day."],
       act:[{t:'✉️ Email Jiajun', h:'mailto:jiajunf3@illinois.edu'},{t:'💼 LinkedIn', h:'https://www.linkedin.com/in/jiajun-fan-57b12b26b'}] },
-    { id:'pubs', kw:['publication','publications','paper','papers','published','conference','venue','venues','list','all papers','latest papers','how many papers','neurips','icml','iclr','accepted','acceptance','acceptances','first-author','first author'],
-      a:["My own papers first (first or co-first author): Procedure-Aware RL (COLM 2026, co-first), ProteinZero (TMLR 2026, co-first), CESAR (ICLR 2026), ADRPO (NeurIPS 2025), ORW-CFM-W2 (ICLR 2025), LBC (ICLR 2023 Oral) and GDI (ICML 2022), plus the preprints AudioRSI, Training-Free On-Policy Distillation (co-first), SpeechGym and Read the Mind (2026) and AC-Flow (2025). On top of that, co-authored papers at NeurIPS 2026, ICML 2026, ICLR 2026, NeurIPS 2025 and IEEE TPAMI.",
-         "Recent highlights: AudioRSI and Training-Free On-Policy Distillation (co-first) on arXiv in Oct 2026, SpeechGym and Read the Mind on arXiv in Aug 2026, Procedure-Aware RL at COLM 2026 and ProteinZero in TMLR 2026 (both co-first), CESAR at ICLR 2026 and ADRPO at NeurIPS 2025. Earlier: ORW-CFM-W2 (ICLR'25), LBC (ICLR'23 Oral), GDI (ICML'22). Plus co-authored papers at NeurIPS 2026, ICML 2026, ICLR 2026, NeurIPS 2025 and IEEE TPAMI."],
+    /* pri: the plural 'papers' with a venue asks for the list ("his ICLR 2026 papers"), not one paper */
+    { id:'pubs', gen:1, kw:['publication','publications','paper','papers','published','~conference','~venue','~venues','list','all papers','latest papers','how many papers','=track record','~neurips','~icml','~iclr','accepted','acceptance','acceptances','first-author','first author','论文','发表'],
+      pri:/^(?=.*\b(?:papers|publications)\b)(?=.*\b(?:neurips|icml|iclr|colm|tmlr|tpami|cvpr|aaai|kdd|aistats|wacv)\b)/,
+      a:["My own papers first — a selection of my first- and co-first-author work: Procedure-Aware RL (COLM 2026, co-first), ProteinZero (TMLR 2026, co-first), CESAR (ICLR 2026), ADRPO (NeurIPS 2025), ORW-CFM-W2 (ICLR 2025), LBC (ICLR 2023 Oral) and GDI (ICML 2022), plus the preprints AudioRSI, Training-Free On-Policy Distillation (co-first), SURGE (co-first), SpeechGym and Read the Mind (2026) and AC-Flow (2025). On top of that, co-authored papers at NeurIPS 2026, ICML 2026, ICLR 2026, NeurIPS 2025 and IEEE TPAMI.",
+         "Recent highlights: AudioRSI, Training-Free On-Policy Distillation (co-first) and SURGE (co-first) on arXiv in Oct 2026, SpeechGym and Read the Mind on arXiv in Aug 2026, Procedure-Aware RL at COLM 2026 and ProteinZero in TMLR 2026 (both co-first), CESAR at ICLR 2026 and ADRPO at NeurIPS 2025. Earlier: ORW-CFM-W2 (ICLR'25), LBC (ICLR'23 Oral), GDI (ICML'22). Plus co-authored papers at NeurIPS 2026, ICML 2026, ICLR 2026, NeurIPS 2025 and IEEE TPAMI."],
       rel:['cesar','adrpo'],
       act:[{t:'📄 Publications', h:'/publications/'},{t:'🎓 Google Scholar', h:'https://scholar.google.com/citations?user=EjmzseUAAAAJ'}] },
-    { id:'cites', kw:['citation','cited','impact','scholar','h-index','how many'],
-      a:["{{ site.data.citations._total | default: 560 }}+ citations, h-index {{ site.data.citations._h_index | default: 12 }} and climbing. The most cited paper I'm on is Optimal Transport for Treatment Effect Estimation (NeurIPS 2023), then SP-VLA with {{ site.data.citations['SP-VLA'] | default: 70 }}; among my first-author papers ORW-CFM-W2 leads with {{ site.data.citations['ORW-CFM-W2'] | default: 49 }}, followed by my Atari deep-RL review, LBC at {{ site.data.citations['LBC'] | default: 30 }} and GDI at {{ site.data.citations['GDI'] | default: 26 }}. Live numbers are on Google Scholar (EjmzseUAAAAJ)."] },
-    { id:'vision', kw:['self-improve','self-improvement','self-play','autonomous','annotation-free','human supervision','long-term vision','research vision','his vision','your vision','big picture','goal','future','long-term','dream'],
+    /* only a question about counts beats a paper name ("how many citations does LBC have");
+       "citation for CESAR" and "bibtex for LBC" go to the paper. Every number is from
+       _data/citations.json (the defaults are its current values); CESAR is key 2510.20867 and
+       ProteinZero 2506.07459. No paper is called "most cited", and no co-authored paper is named. */
+    { id:'cites', kw:['!citations','!most cited','*citation','cited','*=cite','*impact','scholar','!h-index','!h index','!citation count','!number of citations','~how many','引用'],
+      ov:/\b(?:how many (?:[a-z0-9-]+ ){0,4}?(?:citations?|cites?|cited)|how (?:often|much|widely|highly) (?:[a-z0-9-]+ ){0,4}?cited|how cited|citation counts?|citations count|cited how many)\b/,
+      a:["{{ site.data.citations._total | default: 560 }}+ citations and an h-index of {{ site.data.citations._h_index | default: 12 }} on Google Scholar. Among my own papers, ORW-CFM-W2 has {{ site.data.citations['ORW-CFM-W2'] | default: 52 }}, LBC {{ site.data.citations['LBC'] | default: 31 }}, GDI {{ site.data.citations['GDI'] | default: 27 }}, ProteinZero (co-first) {{ site.data.citations['2506.07459'] | default: 21 }} and CESAR {{ site.data.citations['2510.20867'] | default: 20 }}, plus co-authored work. Live numbers are on Google Scholar (EjmzseUAAAAJ)."] },
+    { id:'vision', kw:['*self-improve','*self-improvement','*self-play','*autonomous','*annotation-free','*human supervision','long-term vision','research vision','his vision','your vision','big picture','*goal','*future','*long-term','dream'],
       a:["The long game: generative models that improve themselves — learning from environment feedback and their own outputs, with humans stepping back at every stage. Process rewards, actor-critic loops, and online RL post-training are the stepping stones."],
       more:"I think of it as a ladder: first replace human labels with reward models (done), then replace outcome rewards with process rewards (CESAR), then let the model become its own teacher, recursively (AudioRSI), and next let it set its own curriculum. Each rung removes one human from the loop.",
       rel:['focus'] },
-    { id:'flow', kw:['flow matching','diffusion','diffusion models','generative model','generative models','score matching','score-based','trajectory'],
+    { id:'flow', gen:1, kw:['flow matching','diffusion','diffusion models','generative model','generative models','score matching','score-based','trajectory'],
       a:["Flow matching learns straight paths from noise to data — often more stable to train than diffusion. My angle (ORW-CFM-W2, AC-Flow) is fine-tuning these models with RL, demonstrated on Stable Diffusion 3."],
       rel:['orw','acflow'] },
-    { id:'code', kw:['github','code','source code','open source','open-source','repository','repo','implementation'],
+    { id:'code', kw:['github','*code','=his code','=your code','source code','open source','open-source','repository','repo','*implementation','代码','开源'],
       a:["GitHub is @markerthu — several projects ship code, and each project page links its repo."],
       act:[{t:'💻 GitHub', h:'https://github.com/markerthu'}] },
-    { id:'intern', kw:['intern','internship','job','position','opportunity','hiring','open to','spring','summer','2027'],
+    { id:'intern', kw:['intern','internship','job','=jobs','=hire','=hire him','*position','*opportunity','~hiring','~availability','~is he available','~he is available','~when is he available','~is he still available','*open to','*spring','*summer','*2027','实习'],
       a:["Yes — I'm looking for a research internship for Spring & Summer 2027, in RL post-training, generative models, or LLM reasoning. Email me at jiajunf3@illinois.edu and let's talk.",
          "Good timing: I'm open for Spring & Summer 2027 research internships. If your team works on frontier RL, post-training, or generative AI, I'd love to chat — jiajunf3@illinois.edu."],
       act:[{t:'✉️ Reach out', h:'mailto:jiajunf3@illinois.edu'},{t:'📋 View CV', h:'/cv/'}] },
-    { id:'edu', kw:['education','background','undergrad','undergraduate','bachelor','nankai','tsinghua','master','masters','before uiuc','degree'],
+    { id:'edu', kw:['education','background','undergrad','undergraduate','bachelor','nankai','tsinghua','master','masters','before uiuc','degree','=what did he study','=where did he study','本科','南开','清华','教育背景'],
       a:["Nankai for undergrad (ranked 1st/83 in major, top 1%), Tsinghua for my M.Eng (3.97/4.0, top 1.3%), and now the CS PhD at UIUC (4.0/4.0)."],
       rel:['awards'] },
-    { id:'awards', kw:['award','awards','scholarship','scholarships','gpa','ranked','class rank','major rank','prize','honor','honors','national scholarship','outstanding','outstanding graduate'],
+    { id:'awards', kw:['award','awards','scholarship','scholarships','gpa','*ranked','*=ranking','=class ranking','class rank','major rank','prize','*honor','*honors','national scholarship','什么奖','*outstanding','outstanding graduate','奖学金','获奖','奖项'],
       a:["Highlights: National Scholarship ×2, Outstanding Graduate (top 1%) and Tang Lixin Scholarship at Nankai, 1st/83 major rank — and a 4.0/4.0 at UIUC."],
       rel:['edu'] },
-    { id:'service', kw:['reviewer','reviewing','peer review','does he review','service','program committee','pc member','area chair'],
+    { id:'service', kw:['=reviewer','=reviewers','=reviewing','=reviewed for','=has he reviewed','=peer review','=does he review','=reviews for','=service','=program committee','=pc member','=area chair','审稿'],
       a:["I review for ICML (2023–26), ICLR (2024–26), NeurIPS (2022–26), COLM 2026, CVPR 2026, WACV 2027, AAAI 2025 & 2027, AISTATS 2025 and KDD 2024."] },
-    { id:'advisor', kw:['advisor','adviser','supervisor','his lab','your lab','which lab','what lab','research group','principal investigator','professor','mentor','guided by','who advises'],
+    { id:'advisor', kw:['advisor','adviser','supervisor','^PI','=his pi','=your pi','=the pi','=pi s','*=lab','his lab','your lab','which lab','what lab','=his group','=what group','=which group','research group','principal investigator','*professor','*mentor','guided by','who advises','*=working with','=ge liu','导师'],
+      pri:/\b(?:his|your|jiajun s) (?:lab|group)\b/,
       a:["My advisor is Prof. Ge Liu at UIUC — I work on RL post-training for large generative models."],
       rel:['uiuc'] },
-    { id:'cv', kw:['cv','resume','curriculum vitae','download cv'],
+    { id:'cv', kw:['*cv','=his cv','=your cv','=jiajun s cv','resume','curriculum vitae','download cv','简历'],
       a:["The full CV lives at /cv/ — education, papers, awards, the lot. There's a PDF download on that page too."],
       act:[{t:'📋 Open CV', h:'/cv/'},{t:'⬇️ Download PDF', h:'/files/CV.pdf'}] },
-    { id:'news', kw:['news','latest news','latest','recent','update','updates','announcement','what is new',"what's new",'whats new','anything new','tmm','ieee tmm','transactions on multimedia'],
+    { id:'news', kw:['news','latest news','*latest','*recent','*update','*updates','announcement','=what is new',"=what's new",'=whats new','=anything new','=what else is new','=anything else new','tmm','ieee tmm','transactions on multimedia','最新','新闻','动态'],
       a:["Most recent: AudioRSI on arXiv, to our knowledge the first recursively self-improving audio LLM; Training-Free On-Policy Distillation on arXiv, fusing specialists that share a base model with forward passes only; a talk at IGB on building LLM post-training projects with an AI coding agent; ProteinZero (TMLR 2026) released as open source; multiple papers accepted at NeurIPS 2026 and a paper accepted at IEEE TMM; and SpeechGym and Read the Mind on arXiv in August. Earlier this year: COLM 2026 (including Procedure-Aware RL), ICML 2026, CESAR at ICLR 2026, and CESAR featured on Amazon Science."],
       rel:['audiorsi','cesar'],
       act:[{t:'📰 News on homepage', h:'/#news'}] },
-    { id:'hobby', kw:['hobby','hobbies','outside research','free time','personal','personal interest','fun','for fun','game design','game','creative','enjoy'],
+    { id:'hobby', kw:['hobby','hobbies','outside research','free time','*personal','personal interest','*fun','for fun','game design','*game','*=games','*creative','*enjoy','爱好'],
       a:["Outside research I design games and build creative AI agents — anything with emergent behavior. Honestly, designing RL reward functions and designing game mechanics are the same craft.",
          "Games, mostly — designing them more than playing. There's real overlap with my research: a good reward function and a good game mechanic are both about shaping behavior you can't script directly."] },
-    { id:'site', kw:['website','personal website','this site','built','how made','jekyll','github pages','tech stack','this agent','are you human','are you real','are you a human','are you a robot','are you a bot','are you a person','real person','are you ai','are you an ai','chatbot','which llm','what model are you'],
+    { id:'site', kw:['*website','*personal website','this site','*built','*=how made','jekyll','github pages','tech stack','this agent','=this assistant','=the assistant','=this chatbot','=this bot','=are you human','=are you real','=are you a human','=are you a robot','=are you a bot','=are you a person','=real person','=real human','=is this a real person','=is this a real human','=is this a person','=is this a human','=is this a robot','=is this a bot','=am i talking to a','=am i talking to','=bot','=are you ai','=are you an ai','chatbot','=which llm','=is this an llm','=are you an llm','=powered by','=is this chatgpt','=are you chatgpt','=chatgpt','=gpt','what model are you','机器人','真人'],
       a:["Full transparency: I'm a hand-written conversational engine running entirely in your browser — fuzzy retrieval, topic memory, and human-paced typing, but no LLM and no server. Jiajun wrote the algorithm. The rest of the site is Jekyll on GitHub Pages."] }
   ];
 
+  /* how a follow-up offer names a topic ("Want me to go deeper on {T}?"); an offer naming a paper
+     he co-authored says so: "Curious how this relates to SP-VLA (a paper I co-authored)?"       */
+  var CO=' (a paper I co-authored)';
   var NAME = { audiorsi:'AudioRSI', tfopd:'TF-OPD', cesar:'CESAR', speechgym:'SpeechGym', readmind:'Read the Mind', lbc:'LBC', gdi:'GDI', adrpo:'ADRPO', orw:'ORW-CFM-W2', acflow:'AC-Flow',
-               prance:'PRANCE', spvla:'SP-VLA', focus:'my research focus', edu:'my education',
+               prance:'PRANCE'+CO, spvla:'SP-VLA'+CO, focus:'my research focus', edu:'my education',
                awards:'awards', uiuc:'UIUC', advisor:'my advisor', vision:'the long-term vision', pubs:'my publications',
-               parl:'Procedure-Aware RL', proteinzero:'ProteinZero', pyrag:'PyRAG', barrag:'BAR-RAG' };
+               parl:'Procedure-Aware RL', proteinzero:'ProteinZero', pyrag:'PyRAG'+CO, barrag:'BAR-RAG'+CO,
+               surge:'SURGE', atari:'the Atari review', bcr:'BCR'+CO, bcr2:'BCR-II'+CO, gpflow:'GPFlow'+CO, elegantvla:'ElegantVLA'+CO,
+               varcon:'VarCon'+CO, edison:'EDiSon', discoveryrsi:'DiscoveryRSI'+CO, ot:'the optimal transport paper'+CO };
 
   /* ════════ INTENTS (social / dialogue moves) ════════
      Tested on the lower-cased raw text (apostrophes kept). CJK alternatives sit outside \b,
@@ -280,10 +345,30 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
   var GREET_RE = new RegExp("^(?:(?:hi|hello|hey|heya|yo|hiya|howdy|greetings|sup|what'?s up|good (?:morning|afternoon|evening|day))(?:[\\s,]+(?:there|jiajun|agent|bot|friend|all|everyone|folks))?|你好|您好|哈喽|嗨)"+TRAIL, 'i');
   var BYE_RE = new RegExp("^(?:bye|bye bye|goodbye|good bye|see you|see ya|cya|later|再见|拜拜)"+TRAIL, 'i');
   var THANKS_RE = /(?:\b(?:thank|thanks|thx|appreciate|appreciated)\b|谢谢|感谢|多谢)/i;
-  var MORE_RE = /(?:\b(?:more|else|detail|details|deeper|elaborate|continue|go on|why|how come|how does|how do|expand)\b|具体|为什么|细节|展开|多说)/i;
-  var YES_RE = new RegExp("^(?:(?:yes|yeah|yep|yup|sure|ok|okay|sounds good|please|do it|go ahead|go for it|why not|of course)[\\s,!.]*)+$|^(?:好|好的|可以|行|嗯|是的)"+TRAIL, 'i');
+  var MORE_RE = /(?:\b(?:more|else|detail|details|deeper|elaborate|continue|go on|why|how come|how does|how do|how did|how is|how are|how was|how were|how much|how long|how many|expand)\b|具体|详细|为什么|细节|展开|多说|多讲|讲讲)/i;
+  /* accepting / declining an offer: whole message, any punctuation or emoji between the words
+     ("yes 👍", "please do", "absolutely", "yes, I'd like that"; "no", "nope", "no, I'm good") */
+  var YES_W = "yes+|y|yeah|yep|yup|yea|ya|yah|sure|ok|okay|alright|all right|sounds good|sounds great|sounds interesting|please|pls|plz|please do|do it|go ahead|go for it|why not|of course|i would|i do|"+
+              "absolutely|definitely|certainly|totally|for sure|sure thing|i'?d like that|i would like that|i'?d love that|i'?d love to|that would be great|that'?d be great|"+
+              "let'?s do it|let'?s go|i'?m curious|i am curious";
+  var NO_W = "no|nope|nah|naw|not really|not interested|not now|not right now|maybe later|no need|i'?m good|i'?m fine|i'?m ok|i'?m okay|i am good|all good|that'?s ok|that'?s okay|that'?s fine|never mind|nevermind";
+  var YES_RE = new RegExp("^(?:(?:"+YES_W+")(?![a-z0-9'])[^a-z0-9\\u4e00-\\u9fff]*)+$|^(?:好|好的|好啊|好呀|可以|可以啊|行|嗯|是的|当然)"+TRAIL, 'i');
+  /* "yes, thanks", "sure, thanks!", "yes, tell me more", "ok, go on", "yes go deeper": a yes with a
+     thanks or a "go on" still accepts the offer. A thanks or "tell me more" alone does not, and with
+     a thanks it takes a clear yes ("ok thanks" closes the topic; "sure, thanks!" accepts).          */
+  var THX_FILL_RE = /\b(?:thanks|thank you|thank u|thx|ty)\b|谢谢|多谢|感谢/g, GO_FILL_RE = /\b(?:tell me more|tell me about it|tell me|go deeper|go on)\b/g;
+  var CLEAR_YES_RE = /\b(?:yes+|yeah|yep|yup|yea|ya|yah|sure|please|pls|plz|absolutely|definitely|certainly|of course|totally|i would|i do|go ahead|go for it|why not|sounds good|sounds great|sounds interesting|let'?s)\b|好|可以|是的|当然/;
+  function isYes(low){
+    if(YES_RE.test(low)) return true;
+    var go=GO_FILL_RE.test(low), r=low.replace(GO_FILL_RE,' ').replace(THX_FILL_RE,' ');
+    GO_FILL_RE.lastIndex=0;
+    if(r===low || !/[a-z\u4e00-\u9fff]/.test(r) || !YES_RE.test(r.replace(/^[^a-z0-9\u4e00-\u9fff]+/,'').trim())) return false;
+    return go || CLEAR_YES_RE.test(r);
+  }
+  var NO_RE = new RegExp("^(?:(?:"+NO_W+")(?![a-z0-9'])[^a-z0-9\\u4e00-\\u9fff]*)+$|^(?:不用了|不用|不了|算了|不需要)"+TRAIL, 'i');
   /* small talk */
-  var HOWRU_RE = /(?:\b(?:how are you|how're you|how's it going|how is it going|how are things|how do you do|how's your day)\b|你好吗|怎么样)/i;
+  /* 怎么样 only of the agent itself ("你怎么样", "最近怎么样"), not "他的研究怎么样" */
+  var HOWRU_RE = /(?:\b(?:how are you|how're you|how's it going|how is it going|how are things|how do you do|how's your day)\b|你好吗|你(?:最近|今天)?(?:过得)?怎么样|^(?:最近|今天)?(?:过得)?怎么样)/i;
   var NAME_RE = /(?:\b(?:your name|who are you|what are you called)\b|什么名字|你是谁)/i;
   var CANDO_RE = /(?:\b(?:what can you do|what can you tell me|how can you help|can you help me|what do you know)\b|你能做什么|能干什么|你会什么)/i;
   var WHOMADE_RE = /(?:\b(?:who made you|who built you|who created you|who wrote you)\b|谁做的|谁写的)/i;
@@ -291,6 +376,8 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
   var GREETS = ["Hey! What would you like to know — a paper, the research direction, or something about Jiajun's background?",
                 "Hi there 👋 Ask me anything about Jiajun's work. The papers are my favorite subject.",
                 "Hello! Ask me about Jiajun's research — fire away."];
+  var NO_R = ["No problem — ask me anything else whenever you like.",
+              "All right! I'm here if anything else comes to mind."];
   var THANKS_R = ["Anytime! Ask away if anything else comes to mind.",
                   "Happy to help. For deeper discussions, jiajunf3 [at] illinois.edu is the way.",
                   "You're welcome! I'm here whenever."];
@@ -300,7 +387,7 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
                  "All well on my end! Ask me anything about Jiajun's work."];
   var NAME_R = ["I'm Jiajun's site agent — a little conversational engine he wrote to answer questions about his research. What can I help with?",
                 "Just \"Jiajun's AI Agent\" 🤖 I live on this site and know his main papers. Ask away!"];
-  var CANDO_R = ["I can explain Jiajun's own papers (AudioRSI, TF-OPD, SpeechGym, Read the Mind, Procedure-Aware RL, ProteinZero, CESAR, ADRPO, ORW-CFM-W2, AC-Flow, LBC, GDI) and give short summaries of the papers he co-authored, summarize his research direction, or point you to his CV, citations, awards, and contact. Try \"what is CESAR?\" or \"tell me about his research\".",
+  var CANDO_R = ["I can explain Jiajun's own papers (AudioRSI, TF-OPD, SURGE, SpeechGym, Read the Mind, Procedure-Aware RL, ProteinZero, CESAR, ADRPO, ORW-CFM-W2, AC-Flow, LBC, GDI, EDiSon and his Atari deep-RL review).||I also have short summaries of these papers he co-authored: ElegantVLA, GPFlow, BAR-RAG, BCR, BCR-II, PyRAG, DiscoveryRSI, SP-VLA, PRANCE, VarCon and Optimal Transport for Treatment Effect Estimation.||Or ask about his research direction, CV, citations, awards and contact. Try \"what is CESAR?\" or \"tell me about his research\".",
                  "Lots! Papers, research focus, education, awards, citations, how to get in touch — and I remember context, so you can say \"tell me more\". What are you curious about?"];
   var WHOMADE_R = ["Jiajun wrote me himself — I'm a hand-coded conversational engine (fuzzy matching + topic memory + human-paced typing), no LLM and no server. Kind of fitting for an RL post-training researcher, right?"];
   var OPENERS = ["", "", "", "Good question — ", "Ah, ", "Sure — ", "Right, so — ", "Oh, that one's fun. "];
@@ -313,7 +400,10 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
                    "That's outside what I know well, honestly. I'm strongest on the papers and Jiajun's background — or you can reach the human at jiajunf3 [at] illinois.edu."];
 
   /* ════════ RETRIEVAL: char-bigram Dice similarity + phrase/keyword scoring ════════ */
-  function norm(s){ return (s||'').toLowerCase().replace(/[^a-z0-9一-鿿\s-]/g,' ').replace(/\s+/g,' ').trim(); }
+  /* CJK is split from Latin ("介绍一下LBC" -> "介绍一下 lbc"), so names inside Chinese are whole words */
+  function norm(s){ return (s||'').toLowerCase().replace(/[^a-z0-9一-鿿\s-]/g,' ')
+    .replace(/([一-鿿])([a-z0-9])/g,'$1 $2').replace(/([a-z0-9])([一-鿿])/g,'$1 $2')
+    .replace(/\s+/g,' ').trim(); }
   function bigrams(s){ var b=[],i; for(i=0;i<s.length-1;i++) b.push(s.substr(i,2)); return b; }
   function diceRaw(a,b){
     if(a===b) return 1;
@@ -323,48 +413,337 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
     for(i=0;i<B.length;i++) if(map[B[i]]>0){ map[B[i]]--; hit++; }
     return 2*hit/(A.length+B.length);
   }
-  /* max of unpadded (inner typos) and space-padded (boundary typos) similarity */
+  /* max of unpadded (inner typos) and space-padded (boundary typos) similarity; two swapped
+     neighbouring letters ('adpro' for 'adrpo', 'acflwo' for 'acflow') count as 0.9            */
+  function swapped(a,b){
+    if(a.length!==b.length || a.length<4) return false;
+    var i=0; while(i<a.length && a.charAt(i)===b.charAt(i)) i++;
+    return i<a.length-1 && a.charAt(i)===b.charAt(i+1) && a.charAt(i+1)===b.charAt(i) && a.slice(i+2)===b.slice(i+2);
+  }
   function dice(a,b){
     var r1=diceRaw(a,b), r2=diceRaw(' '+a+' ',' '+b+' ');
-    return r1>r2 ? r1 : r2;
+    if(r2>r1) r1=r2;
+    return (r1<0.9 && swapped(a,b)) ? 0.9 : r1;
   }
-  /* One keyword against the query.
+  /* words that carry no topic: fuzzy matching never rests on them */
+  var STOP={a:1,an:1,the:1,is:1,are:1,was:1,were:1,be:1,am:1,of:1,to:1,'in':1,on:1,at:1,'for':1,by:1,'with':1,and:1,or:1,as:1,
+            it:1,its:1,'this':1,that:1,what:1,whats:1,s:1,where:1,who:1,how:1,why:1,when:1,which:1,he:1,him:1,his:1,
+            you:1,your:1,i:1,me:1,my:1,we:1,our:1,they:1,them:1,'do':1,does:1,did:1,can:1,about:1,there:1,here:1};
+  var CJK=/[一-鿿]/;
+  /* a query word that is a keyword with a piece cut off is a different word, not a typo:
+     'review' is not 'reviewer', 'training' is not 'training-free', 'ranking' is not 'reranking',
+     'person' is not 'personal' (a cut-off 's', 'es', 'ed' or one letter still counts)          */
+  function affix(w, k){
+    if(w.length>=k.length) return false;
+    var rest;
+    if(k.indexOf(w)===0){ rest=k.slice(w.length).replace(/[\s-]/g,''); return rest.length>=2 && rest!=='es' && rest!=='ed'; }
+    if(k.slice(k.length-w.length)===w) return k.length-w.length>=2;
+    return false;
+  }
+  /* One keyword against the query; returns {s:score, a,b: span in the query, x:exact} or null
+     (i: an incidental '*' keyword, w: a weak '~' one, ty: a typo of a name).
      - exact hits are whole words / whole phrases only ('vla' does not fire inside 'elegantvla',
-       'rank' not inside 'reranker', 'code' not inside 'decode');
+       'rank' not inside 'reranker', 'bcr' not inside 'bcr-ii'); CJK keywords match as substrings;
      - a phrase with a hyphen or space also matches the other spelling ('ac flow' = 'ac-flow');
-     - fuzzy (typo-tolerant) hits compare a phrase with a window of as many query words, and are
-       off for keywords with digits (so 'neurips 2025' never fires on 'neurips 2026') and for
-       keywords under 4 characters.                                                          */
-  function kwScore(k, isName, Q){
-    var kn=norm(k); if(!kn) return 0;
+     - fuzzy (typo-tolerant) hits compare a phrase with a window of as many query words. They are
+       off for '='-marked keywords, keywords with digits ('neurips 2025' never fires on 'neurips
+       2026'), keywords under 4 characters and keywords whose content words (non-STOP) are under 4
+       characters ('what is new', 'where is he'); a phrase with STOP words also needs each of its
+       content words matched on its own, so 'what is a' never passes for 'what is new'; and a
+       fuzzy hit keeps the keyword's first letter and is not a cut-off piece of it (affix).
+     - paper names of 3-5 letters take only the one-edit typos of typoName; a '^' name must also
+       appear in that case in the visitor's text (caseHit); the names of an entry with nx do not
+       count in that context, unless it is a '^' name; no name, typo or not, is a common word
+       one edit away from it (TYPO_STOP: 'sure' for 'surge', 'barrage' for 'barrag');
+     - an exact phrase with he/him/his also matches with Jiajun ('where does jiajun study').    */
+  /* a '^' name in that exact case. In an all-caps message the visitor's case says nothing, so
+     there it counts only at the end of a clause or before "paper": "WHAT IS OT" is the paper,
+     "HOW OT CONTACT HIM" ('ot' for 'to') is not.                                              */
+  function caseHit(name, raw){
+    var re=new RegExp('(?:^|[^A-Za-z0-9])'+name.replace(/[^A-Za-z0-9]/g,'\\$&')+'(?![A-Za-z0-9])','g'), m;
+    raw=raw||'';
+    if(/[a-z]/.test(raw)) return re.test(raw);
+    while((m=re.exec(raw))) if(/^\s*(?:$|[^\sA-Za-z0-9]|(?:PAPER|AND|OR|VS)\b)/.test(raw.slice(m.index+m[0].length))) return true;
+    return false;
+  }
+  var HE_RE=/\b(?:he|him|his)\b/;
+  function jiajunForm(kn){ return kn.replace(/\b(?:he|him)\b/g,'jiajun').replace(/\bhis\b/g,'jiajun s'); }
+  /* ── typo names ── A name of 4-5 letters (no digit, space or hyphen) also matches a query word
+     one edit away, so within one letter of its length: a letter dropped, added or changed, or two
+     neighbours swapped; the first letter is never changed ('france' is not 'prance'). A 3-letter
+     name matches only with one letter doubled ('lbcc', 'gdii', 'oorw'). Never a common word one
+     edit away from a name (TYPO_STOP: 'sure', 'urge', 'park', 'part', 'cedar'…), and no name, typo
+     or not, right before a food or other generic word ("caesar salad", TYPO_NEXT) or after a first
+     name of someone else ("julius caesar", "thomas edison", TYPO_PREV).                         */
+  var TYPO_STOP={sure:1,urge:1,serge:1,surges:1,surged:1,surgy:1,spurge:1,cedar:1,pal:1,pall:1,par:1,para:1,pare:1,pari:1,pars:1,park:1,part:1,
+                 paul:1,pearl:1,purl:1,pail:1,pawl:1,pard:1,parle:1,parly:1,parol:1,parr:1,perl:1,paal:1,parel:1,pirl:1,
+                 barrage:1,barrages:1,barraged:1,barrack:1,barracks:1};
+  var TYPO_NEXT={salad:1,salads:1,dressing:1,cipher:1,ciphers:1,shift:1,recipe:1,recipes:1,sauce:1,soup:1,pizza:1,wrap:1,palace:1,chavez:1,millan:1};
+  var TYPO_PREV={julius:1,thomas:1};
+  function oneEdit(t, k){
+    var a=t.length, b=k.length, i, d=[], s, l;
+    if(t===k || Math.abs(a-b)>1) return false;
+    if(a===b){
+      for(i=0;i<a;i++) if(t.charAt(i)!==k.charAt(i)) d.push(i);
+      if(d.length===1) return d[0]>0;
+      return d.length===2 && d[1]===d[0]+1 && t.charAt(d[0])===k.charAt(d[1]) && t.charAt(d[1])===k.charAt(d[0]);
+    }
+    s=a<b?t:k; l=a<b?k:t;
+    for(i=0;i<l.length;i++) if(l.slice(0,i)+l.slice(i+1)===s) return true;
+    return false;
+  }
+  function doubled(t, k){
+    if(t.length!==k.length+1) return false;
+    for(var i=0;i<t.length-1;i++) if(t.charAt(i)===t.charAt(i+1) && t.slice(0,i)+t.slice(i+1)===k) return true;
+    return false;
+  }
+  /* the word before / after a span of the query: no name right before "salad" or after "julius" */
+  function ctxBad(Q, a, b){
+    var pre=Q.q.slice(0,a).trim().split(' ').pop(), nxt=Q.q.slice(b).trim().split(' ')[0];
+    return !!(TYPO_NEXT[nxt] || TYPO_PREV[pre]);
+  }
+  /* spans {a,b} of the query words that are typos of the (normalised) name kn */
+  function typoName(kn, Q){
+    var out=[], i, t, L=kn.length;
+    if(L<3 || L>5 || /[^a-z]/.test(kn)) return out;
+    for(i=0;i<Q.toks.length;i++){
+      t=Q.toks[i];
+      if(TYPO_STOP[t] || !(L>=4 ? oneEdit(t,kn) : doubled(t,kn))) continue;
+      if(!ctxBad(Q, Q.off[i], Q.off[i]+t.length)) out.push({a:Q.off[i], b:Q.off[i]+t.length});
+    }
+    return out;
+  }
+  /* a name of several words also matches with one word of 4+ letters one edit away, all the others
+     exact: "read the mnd", "reed the mind", "atari reveiw", "speach gym"                        */
+  function typoPhrase(kn, Q){
+    var out=[], nw=kn.split(' '), n=nw.length, i, j, t, bad, ok;
+    if(n<2 || /[^a-z ]/.test(kn)) return out;
+    for(i=0;i+n<=Q.toks.length;i++){
+      bad=-1; ok=true;
+      for(j=0;j<n && ok;j++){ t=Q.toks[i+j]; if(t===nw[j]) continue;
+        if(bad<0 && nw[j].length>=4 && !STOP[nw[j]] && t.length>=3 && !TYPO_STOP[t] && oneEdit(t, nw[j])) bad=j; else ok=false; }
+      if(ok && bad>=0 && !ctxBad(Q, Q.off[i], Q.off[i+n-1]+Q.toks[i+n-1].length)) out.push({a:Q.off[i], b:Q.off[i+n-1]+Q.toks[i+n-1].length});
+    }
+    return out;
+  }
+  function kwHit(k, isName, Q, nx){
+    var inc = k.charAt(0)==='*'; if(inc) k=k.slice(1);
+    var c0=k.charAt(0), over = c0==='!', weak = c0==='~', cs = c0==='^', exactOnly = over || weak || cs || c0==='=';
+    if(cs && !caseHit(k.slice(1), Q.raw)) return null;
+    if(isName && nx && !cs && nx.test(Q.q)) return null;
+    var kn=norm(exactOnly ? k.slice(1) : k); if(!kn) return null;
     var w = isName ? 2.5 : (kn.length>=8 ? 2.2 : (kn.length>=5 ? 1.5 : 1));
-    var phrase = kn.indexOf(' ')>=0, bonus = phrase ? 1.25 : 1;
-    if(Q.qs.indexOf(' '+kn+' ')>=0) return 2*w*bonus;
-    if((phrase || kn.indexOf('-')>=0) && Q.qh.indexOf(' '+kn.replace(/-/g,' ')+' ')>=0) return 2*w*bonus;
-    if(/\d/.test(kn) || kn.length<4) return 0;
-    var n=kn.split(' ').length, toks=Q.toks, best=0, t, sim;
+    var phrase = kn.indexOf(' ')>=0, sc = weak ? 1 : 2*w*(phrase ? 1.25 : 1), p, L=kn.length, kj, ty;
+    if(CJK.test(kn)){ p=Q.q.indexOf(kn); return p>=0 ? {s:sc, a:p, b:p+kn.length, x:1, i:inc?1:0, w:weak?1:0} : null; }
+    p=Q.qs.indexOf(' '+kn+' ');
+    if(p<0 && (phrase || kn.indexOf('-')>=0)) p=Q.qh.indexOf(' '+kn.replace(/-/g,' ')+' ');
+    if(p<0 && phrase && HE_RE.test(kn)){ kj=jiajunForm(kn); p=Q.qs.indexOf(' '+kj+' '); L=kj.length; }
+    if(p>=0 && isName && ctxBad(Q, p, p+L)) p=-1;
+    if(p>=0) return {s:sc, a:p, b:p+L, x:1, o:over?1:0, i:inc?1:0, w:weak?1:0};
+    if(isName && !exactOnly){ ty=typoName(kn, Q); if(!ty.length) ty=typoPhrase(kn, Q); if(ty.length) return {s:sc, a:ty[0].a, b:ty[0].b, x:1, ty:1}; }
+    if(exactOnly || /\d/.test(kn) || kn.length<4 || (isName && kn.length<6)) return null;
+    var kt=kn.split(' '), ct=kt.filter(function(x){ return !STOP[x]; }), n=kt.length;
+    if(ct.join(' ').length<4) return null;
+    var toks=Q.toks, best=0, bt=-1, t, win, ws, sim;
+    function has(c){ for(var i=0;i<win.length;i++) if(win[i]===c || dice(win[i],c)>=0.72) return true; return false; }
     for(t=0;t+n<=toks.length;t++){
-      sim=dice(toks.slice(t,t+n).join(' '), kn);
-      if(sim>best) best=sim;
+      win=toks.slice(t,t+n); ws=win.join(' ');
+      if(ws.charAt(0)!==kn.charAt(0) || affix(ws,kn)) continue;   /* typos keep the first letter: 'france' is not 'prance' */
+      if(isName && (TYPO_STOP[ws] || ctxBad(Q, Q.off[t], Q.off[t+n-1]+toks[t+n-1].length))) continue;
+      sim=dice(ws,kn);
+      if(sim<0.72 || sim<=best) continue;
+      if(ct.length<kt.length && !ct.every(has)) continue;
+      best=sim; bt=t;
     }
-    return best>=0.72 ? best*w : 0;
+    return bt<0 ? null : {s:best*w, a:Q.off[bt], b:Q.off[bt+n-1]+toks[bt+n-1].length, x:0, i:inc?1:0};
   }
+  /* An entry's score: its hits, strongest first, each span of the query counted once, so
+     'llm reasoning' + 'reasoning' + 'llm' is one hit, not three. o = a '!' keyword or the ov
+     pattern fired (beats any name); pri adds 2; tx = an exact hit on one of its own topic
+     words (not a name, not a weak '~' or incidental '*' keyword); took = the counted hits.    */
   function scoreEntry(entry, Q){
-    var s=0, j;
-    if(entry.nm) for(j=0;j<entry.nm.length;j++) s += kwScore(entry.nm[j], true, Q);
-    for(j=0;j<entry.kw.length;j++) s += kwScore(entry.kw[j], false, Q);
-    return s;
-  }
-  function retrieve(qRaw){
-    var q=norm(qRaw); if(!q) return null;
-    var Q={ qs:' '+q+' ', qh:' '+q.replace(/-/g,' ')+' ', toks:q.split(' ') };
-    var best=null, bestS=0, i, s;
-    for(i=0;i<KB.length;i++){
-      s=scoreEntry(KB[i],Q);
-      if(s>bestS){ bestS=s; best=KB[i]; }
+    var hits=[], j, h, s=0, x=0, o=0, tx=0, took=[], i, free;
+    if(entry.nm) for(j=0;j<entry.nm.length;j++){ h=kwHit(entry.nm[j], true, Q, entry.nx); if(h){ h.n=1; hits.push(h); } }
+    for(j=0;j<entry.kw.length;j++){ h=kwHit(entry.kw[j], false, Q); if(h){ hits.push(h); if(h.o) o=1; if(h.x && !h.i && !h.w) tx=1; } }
+    if(entry.ov && entry.ov.test(Q.q)) o=1;
+    hits.sort(function(u,v){ return v.s-u.s; });
+    for(j=0;j<hits.length;j++){
+      h=hits[j]; free=true;
+      for(i=0;i<took.length;i++) if(h.a<took[i].b && took[i].a<h.b){ free=false; break; }
+      if(free){ took.push(h); s+=h.s; if(h.x) x=1; }
     }
-    return bestS>=0.9 ? best : null;
+    if(s>0 && entry.pri && entry.pri.test(Q.q)) s+=2;
+    return { s:s, x:x, o:o, tx:tx, took:took };
   }
+  /* cb[i]: a clause boundary (, . ; : ! ? or a dash) comes right before query word i */
+  var CB='qqcbqq';
+  function clauses(raw, toks){
+    var c=norm(String(raw||'').replace(/[,.;:!?…，。；：！？、()\[\]—–]/g,' '+CB+' ')).split(' '), cb=[], pend=false, i;
+    for(i=0;i<c.length;i++){
+      if(c[i]===CB){ pend=true; continue; }
+      cb.push(pend || (i>0 && c[i-1]==='-')); pend=false;
+    }
+    return cb.length===toks.length ? cb : [];
+  }
+  function mkQ(q, raw){
+    var toks=q.split(' '), off=[], p=0, i;
+    for(i=0;i<toks.length;i++){ off.push(p); p+=toks[i].length+1; }
+    return { q:q, raw:raw||q, qs:' '+q+' ', qh:' '+q.replace(/-/g,' ')+' ', toks:toks, off:off, cb:clauses(raw||q, toks) };
+  }
+  /* every occurrence of an entry's own names in the query (typos included), as spans {a,b} */
+  function allIdx(h, n){ var r=[], p=h.indexOf(n); while(p>=0){ r.push(p); p=h.indexOf(n,p+1); } return r; }
+  function nameOcc(entry, Q){
+    var out=[], j, k, kn, alt, c0;
+    function add(L){ return function(p){ if(!ctxBad(Q, p, p+L)) out.push({a:p, b:p+L}); }; }
+    for(j=0;j<entry.nm.length;j++){
+      k=entry.nm[j]; c0=k.charAt(0);
+      if(c0==='^'){ k=k.slice(1); if(!caseHit(k, Q.raw)) continue; }
+      else if(entry.nx && entry.nx.test(Q.q)) continue;
+      kn=norm(k); if(!kn) continue;
+      if(CJK.test(kn)){ allIdx(Q.q, kn).forEach(add(kn.length)); continue; }
+      allIdx(Q.qs, ' '+kn+' ').forEach(add(kn.length));
+      if(kn.indexOf(' ')>=0 || kn.indexOf('-')>=0){ alt=kn.replace(/-/g,' '); allIdx(Q.qh, ' '+alt+' ').forEach(add(alt.length)); }
+      if(c0!=='=' && c0!=='^') out=out.concat(typoName(kn, Q), typoPhrase(kn, Q));
+    }
+    return out;
+  }
+  /* the words just before a name, in its own clause: is the name being asked about ('pos':
+     "what is LBC", "tell me about GDI") or set aside ('neg': "I already know CESAR", "skip
+     CESAR", "not ProteinZero", "after reading ADRPO", "better than GDI")?                    */
+  var NEG_CUE=/(?:^| )(?:already|skip|skipping|not|besides|except|excluding|than|beyond|without|forget|ignore|other than|apart from|aside from|instead of|after reading|i know|i knew|i read|i ve read|i have read|thanks for|thank you for)(?= |$)/;
+  var POS_CUE=/(?:^| )(?:what is|what s|whats|what are|what was|what about|how about|tell me about|tell me more about|about|explain|describe|summarize|summarise|introduce|how does|how do|how is|how did|why does|why is|why did|does|is|did|was|介绍一下|讲讲|说说)$/;
+  var DET_END=/(?:^| )(?:the|a|an|your|his|my|our|this|that|jiajun s|jiajun)$/;
+  /* a single paper is set aside only by a word right before it: "Besides LBC", "Not LBC",
+     "Other than CESAR" (not "why not use outcome rewards in CESAR?")                         */
+  var ASIDE_END=/(?:^| )(?:besides|beside|not|other than|apart from|aside from|except|except for|excluding|instead of|rather than|skip|skipping|without|beyond|forget|forget about|ignore|nothing about|not about)$/;
+  function wordsBefore(Q, a){
+    var ti=0, i, w=[];
+    for(i=0;i<Q.toks.length;i++) if(Q.off[i]<=a) ti=i;
+    i=ti;
+    while(i>0 && !Q.cb[i] && w.length<5){ i--; w.unshift(Q.toks[i]); }
+    return w.join(' ');
+  }
+  function nameCue(Q, a){
+    var s=wordsBefore(Q, a);
+    if(NEG_CUE.test(s)) return 'neg';
+    while(s && DET_END.test(s)) s=s.replace(DET_END,'');
+    return POS_CUE.test(s) ? 'pos' : '';
+  }
+  function setAside(Q, a){
+    var s=wordsBefore(Q, a);
+    while(s && DET_END.test(s)) s=s.replace(DET_END,'');
+    return ASIDE_END.test(s);
+  }
+  /* Several papers named: a name nested in a longer name of another paper does not count
+     ('BCR' inside 'BCR II'); then a paper set aside loses, a paper asked about wins, and
+     otherwise the last one named wins. One paper named and set aside every time it is named
+     ("Besides LBC, …") comes back as {aside:entry}.                                          */
+  function pickName(cands, Q){
+    var all=[], live, per={}, ids, info, pool, P, i, j;
+    for(i=0;i<cands.length;i++) for(j=0;j<cands[i].occ.length;j++) all.push({c:i, a:cands[i].occ[j].a, b:cands[i].occ[j].b});
+    live=all.filter(function(o){ return !all.some(function(p){ return p.c!==o.c && p.a<=o.a && o.b<=p.b && p.b-p.a>o.b-o.a; }); });
+    live.forEach(function(o){ (per[o.c]=per[o.c]||[]).push(o); });
+    ids=Object.keys(per);
+    if(!ids.length) return null;
+    if(ids.length===1){
+      var e1=cands[+ids[0]].e;
+      return per[ids[0]].every(function(o){ return setAside(Q, o.a); }) ? { aside:e1 } : { e:e1 };
+    }
+    info=ids.map(function(id){
+      var neg=true, pos=false, last=-1;
+      per[id].forEach(function(o){ var c=nameCue(Q, o.a); if(c!=='neg') neg=false; if(c==='pos') pos=true; if(o.a>last) last=o.a; });
+      return { e:cands[+id].e, neg:neg, pos:pos && !neg, last:last };
+    });
+    pool=info.filter(function(x){ return !x.neg; }); if(!pool.length) pool=info;
+    P=pool.filter(function(x){ return x.pos; }); if(P.length) pool=P;
+    pool.sort(function(x,y){ return y.last-x.last; });
+    return { e:pool[0].e };
+  }
+  /* a paper reached through one of its topic words that the visitor frames as an area of work:
+     "his protein work", "why does he work on protein design", "RAG in his work"                 */
+  var AREA_BEFORE=/(?:^| )(?:work|works|working|worked|research|researching|researched|paper|papers|done|do|does|did|anything|something|stuff)(?: on| in| about| with| for| related to)(?: the| his| your| any| some)?$/;
+  var AREA_AFTER=/^ (?:work|works|research|paper|papers|project|projects|stuff|side|line)\b|^ (?:in|for) (?:his|your|jiajun s) (?:work|research)\b/;
+  /* "how does the robot work?", "how does the RAG work?": a topic word that is the subject of
+     "does / do / did …" makes the 'work' after it the verb, not "his robotics work"              */
+  var VERB_SUBJ=/(?:^| )(?:does|do|did|will|would|can|could|should|might|may)(?: (?:the|a|an|this|that|its|their|these|those))?$/;
+  function areaHit(Q, took){
+    for(var i=0;i<took.length;i++){
+      var h=took[i], pre, post; if(h.n || !h.x || h.w) continue;
+      pre=Q.q.slice(0,h.a).replace(/ +$/,''); post=Q.q.slice(h.b);
+      if(AREA_BEFORE.test(pre)) return true;
+      if(AREA_AFTER.test(post) && !(/^ works?\b/.test(post) && VERB_SUBJ.test(pre))) return true;
+    }
+    return false;
+  }
+  /* The visitor describing themselves ("I'm a student", "I'm a professor at CMU", "student here:",
+     "I work at a robotics lab") is not what they ask about: those words are dropped before the
+     lookup, so 'student' does not reach UIUC and 'professor' not the advisor.                   */
+  /* where the description ends and the visitor's own topic begins: "I'm a PhD student at CMU | working
+     on audio LLMs", "a researcher at Apple | on speech agents", "a student at MIT | interested in…"  */
+  var SELF_END="and|but|so|who|that|interested|looking|curious|wondering|trying|hoping|working|studying|doing|focusing|researching|building|developing|on";
+  var SELF_RE=new RegExp("(^|[,.;:!?…—–]\\s*|\\b(?:and|but|so|hi|hello|hey)\\b[,!]?\\s*)"+
+    "((?:i'?m|i am|as|being)\\s+(?:a|an)\\s+(?:[\\w'-]+\\s+){0,4}?(?:student|undergrad|undergraduate|candidate|professor|prof|faculty member|lecturer|researcher|scientist|engineer|recruiter|journalist|reporter|postdoc|mentor|manager|developer|founder|teacher)"+
+    "|(?:i|we)\\s+(?:work|study)\\s+(?:at|in|for)\\s+(?:[\\w'&-]+\\s+){0,4}?(?:lab|company|startup|university|group|team|institute)"+
+    "|(?:(?:phd|grad|undergrad|master'?s)\\s+)?(?:student|professor|recruiter|researcher|journalist|reporter|hiring manager)\\s+(?:here|question))"+
+    "(?:\\s+(?:at|in|from|of|with|for)(?:\\s+(?!(?:"+SELF_END+")\\b)[^\\s,.;:!?…—–]+)+?)?"+
+    "(?=\\s*(?:[,.;:!?…—–]|$)|\\s+(?:"+SELF_END+")\\b)", 'gi');
+  /* mid-sentence, only after a verb of joining: "if I wanted to apply to his lab as a PhD
+     student" (but "what he did as a student" is about him)                                  */
+  var SELF_AS_RE=/(\b(?:apply|applying|join|joining|come|coming|enroll|enrolling|start|starting)\b[^,.;:!?…—–]*?)\s+as\s+an?\s+(?:[\w'-]+\s+){0,4}?(?:student|undergrad|undergraduate|candidate|intern|postdoc|researcher)(?=\s*(?:[,.;:!?…—–]|$))/gi;
+  function stripSelf(raw){
+    var s=String(raw||'').replace(SELF_RE, function(m, pre){ return pre+' '; });
+    /* Chinese self-introductions ("我是本科生", "我是清华的研究生"): drop the clause, keep the question */
+    s=s.replace(/我(?:是|现在是|目前是)[^，,。.!！?？；;]{0,16}?(?:学生|本科生|研究生|硕士生|博士生|博士|老师|教授|工程师|研究员)[，,。.!！；;]?/g, ' ');
+    return /\b(?:i|i'm|i'd|me|my)\b/i.test(s) ? s.replace(SELF_AS_RE, '$1') : s;
+  }
+  /* A '!' keyword or ov pattern wins outright (but is not a name); then an exact (or typo) paper
+     name (pickName); otherwise the best score, if it clears 0.9, a tie going to the more
+     specific entry (spec: "not his papers, his awards" -> awards). Returns {e:entry, named:paper-name
+     hit, x:any exact hit, o:override, tx:own topic word, area:paper framed as an area, sw:the
+     visitor set a paper aside} or null.                                                       */
+  function lookup(qRaw){
+    var raw=String(qRaw||''), rest=stripSelf(raw);
+    if(rest!==raw){ if(!norm(rest)) return null; raw=rest; }
+    return lookup1(raw, null);
+  }
+  /* a tie goes to the more specific entry: not a generic one, then one hit on its own topic word
+     rather than only on an incidental one ("is his advisor a professor?" -> advisor)        */
+  function spec(e, r){ return (e.gen ? 0 : 2) + (r.tx ? 1 : 0); }
+  function lookup1(qRaw, skip){
+    var q=norm(qRaw); if(!q) return null;
+    var Q=mkQ(q, qRaw), best=null, bs=null, ov=null, cands=[], i, r, occ, pk, sc={};
+    for(i=0;i<KB.length;i++){
+      if(KB[i]===skip) continue;
+      r=sc[KB[i].id]=scoreEntry(KB[i],Q);
+      if(r.o && !ov) ov=KB[i];
+      if(KB[i].nm){ occ=nameOcc(KB[i],Q); if(occ.length) cands.push({e:KB[i], occ:occ}); }
+      if(r.s>0 && (!bs || r.s>bs.s+1e-9 || (r.s>bs.s-1e-9 && spec(KB[i],r)>spec(best,bs)))){ bs=r; best=KB[i]; }
+    }
+    if(ov) return { e:ov, named:false, x:true, o:true, tx:true };
+    pk=pickName(cands, Q);
+    if(pk && pk.e) return { e:pk.e, named:true, x:true };
+    if(pk && pk.aside) return asideTo(pk.aside, qRaw, sc[pk.aside.id], Q);
+    if(!best || bs.s<0.9) return null;
+    return { e:best, named:false, x:!!bs.x, tx:!!bs.tx, area:!!(best.nm && areaHit(Q, bs.took)), took:bs.took, Q:Q };
+  }
+  /* The one paper named was set aside ("Besides LBC, what else did he do on Atari?"): answer the
+     rest of the question without it; else another paper on the same area word ('atari' -> the
+     Atari review, 'audio' -> AudioRSI); else a generic answer to the rest; else its related paper;
+     else the publication list.                                                                 */
+  function asideTo(P, qRaw, sP, Q){
+    var r=lookup1(qRaw, P), i, j, h, word, e, k;
+    if(r && !r.e.gen) return { e:r.e, named:false, x:true, sw:true };
+    for(i=0;sP && i<sP.took.length;i++){
+      h=sP.took[i]; if(h.n || !h.x) continue;
+      word=Q.q.slice(h.a, h.b);
+      for(j=0;j<KB.length;j++){ e=KB[j]; if(e===P || !e.nm) continue;
+        for(k=0;k<e.kw.length;k++) if((' '+norm(e.kw[k])+' ').indexOf(' '+word+' ')>=0) return { e:e, named:false, x:true, sw:true }; }
+    }
+    if(r) return { e:r.e, named:false, x:true, sw:true };
+    for(i=0;P.rel && i<P.rel.length;i++){ e=entryById(P.rel[i]); if(e && e.nm) return { e:e, named:false, x:true, sw:true }; }
+    return { e:entryById('pubs'), named:false, x:true, sw:true };
+  }
+  function retrieve(qRaw){ var r=lookup(qRaw); return r ? r.e : null; }
 
   /* ════════ DIALOGUE STATE ════════ */
   var state = { lastTopic:null, offered:null, lastOpener:-1, lastVariant:{}, visited:{} };
@@ -399,47 +778,197 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
     if(h<18) return "Good afternoon! 👋";
     return "Good evening! 🌆";
   }
-  function lowRaw(s){ return (s||'').toLowerCase().replace(/[‘’ʼ`]/g,"'").replace(/\s+/g,' ').trim(); }
+  /* the visitor's text with quotes and spaces tidied; the case is kept, for '^' names */
+  function tidy(s){ return String(s||'').replace(/[‘’ʼ`]/g,"'").replace(/\s+/g,' ').trim(); }
   /* a social intent counts only when what is left after its phrase asks about nothing in the KB:
-     "thanks" -> thanks, but "thanks, what is CESAR?" -> CESAR                                   */
-  function intentOnly(re, low){
+     "who are you" -> name, but "who are you, and what is LBC?" -> LBC                         */
+  function intentOnly(re, low, raw){
     var m=re.exec(low); if(!m) return false;
-    return !retrieve(low.slice(0,m.index)+' '+low.slice(m.index+m[0].length));
+    var s = raw.length===low.length ? raw : low;
+    return !retrieve(s.slice(0,m.index)+' '+s.slice(m.index+m[0].length));
+  }
+  /* is what is left after a "thanks" a question? Only a "?" or a clause that starts like one
+     ("what is", "how does", "tell me", "can you", "explain", "is he") counts; a "what" or "how"
+     inside a statement does not ("thanks, now I understand how LBC works"). askPart returns the
+     question from where it starts, so a paper named in the thanks is not asked about again.  */
+  var ASK_START_RE = new RegExp("(?:^|[,.;:!?…，。；：！？—–]\\s*|\\b(?:and|also|so|but|now|then|oh|ok|okay|well)\\s+)"+
+    "(?:(?:what|how|who|where|when|which|why|whose|whom)\\s+(?:is|are|was|were|does|do|did|can|could|would|should|will|has|have|about|else|many|much|come|kind|sort|other|papers?)\\b"+
+    "|(?:what|who|how|where|why)'?s\\b|tell me\\b|explain\\b|describe\\b|show me\\b|give me\\b|send me\\b|share\\b|summari[sz]e\\b|walk me through\\b|list\\b|introduce\\b"+
+    "|(?:can|could|would|will) you\\b|please (?:tell|explain|show|give|describe|list|summari[sz]e)\\b"+
+    "|(?:is|are|was|were|does|do|did|can|could|would|should|has|have|will) (?:he|she|it|you|i|they|there|this|that|his|your|jiajun)\\b)", 'i');
+  var CJK_ASK_RE = /什么|吗|怎么|为什么|哪|谁|介绍一下|说说|讲讲|呢/;
+  /* a polite request counts as a question wherever it stands: "I'd appreciate it if you could
+     tell me…", "we'd like to know if…", "I'm interested in…", "I want to know about…", "please
+     share…" (but not "what I wanted to know", "I'll tell my advisor")                        */
+  var POLITE_RE = /\b(?:if you could|(?:could|can|would|will) you(?: please)? (?:tell|explain|share|send|show|give|list|describe|let)|(?:i'?d|i would|we'?d|we would) (?:also |really )?(?:like|love) (?:to (?:know|hear|learn|ask|see|read|get|have)|his|the|a|an|more|some|any|info|information|details)|(?:i|we) (?:also )?(?:want|wanna|need|wish) to (?:know|hear|learn|ask|see|read|get)|(?:i|we) (?:also )?need (?:his|the|a|an|some|more|any|info|information|details)|(?:i'?m|i am|we'?re|we are) (?:interested in|curious about|curious (?:whether|if|to)|wondering (?:about|whether|if))|please (?:share|send|tell|explain|show|give|describe|list|summari[sz]e|let me know)|let me know|send me|i'?d love to hear|would love to (?:know|hear|learn|see|read|get|ask)|any (?:info|information|details|news|updates?) (?:on|about|regarding)|(?:i |we )?(?:also )?wanted to ask|(?:i was |i'?m |i am |we were |we'?re |we are )?hoping to (?:learn|know|hear|ask|get|see|read)|would appreciate)\b/;
+  /* a clause that only says the visitor understood, liked it, or will do something later is no
+     request, even when it names a topic: "now I understand how LBC works", "I'll read the LBC paper",
+     "great explanation of GDI", "that's what I wanted to know about LBC"                          */
+  var STATEMENT_RE = /\b(?:now i (?:understand|get|see)|i (?:understand|see|get it|got it)|(?:that'?s|that is|this is) (?:exactly |just )?what i|what i (?:needed|wanted|was looking for)|(?:that|this|it) (?:was|is|'s|s) (?:very |really |so )?(?:helpful|great|clear|useful|perfect|enough|interesting|cool|nice|awesome)|that helps|i'?ll|i will|i'?m going to|i am going to|we'?ll|for (?:the|that|this|your|all the) (?:explanation|explanations|info|information|summary|answer|answers|help|time|overview|details|rundown)|(?:great|nice|cool|good|clear|helpful|awesome|perfect|interesting|fascinating) (?:explanation|answer|summary|paper|work|overview|stuff|read)|you too|have a (?:great|good|nice)|(?:is|are|was|were|sounds|looks|seems) (?:very |really |so |super |pretty )?(?:cool|great|interesting|amazing|impressive|nice|good|awesome|neat|fascinating|helpful|clear|useful))\b/i;
+  /* a short follow-on topic after a thanks: "and his hobbies", "now GDI", "next: his awards",
+     "GDI please" (a lead or tail word, at most four words, no I/we/that's/it's)                 */
+  var SHORT_LEAD = /^(?:and also|and what about|and|now|next|also|then|plus|what about|how about)\s+/i, SHORT_TAIL = /\s+(?:please|too|as well|next)$/i;
+  function shortAsk(rest){
+    var cl=rest.replace(/:/g,' ').split(/[,.;!?…，。；！？—–]+/), i, c, lead, tail, body;
+    for(i=0;i<cl.length;i++){
+      c=cl[i].replace(/\s+/g,' ').trim(); if(!c) continue;
+      lead=SHORT_LEAD.test(c); body=c.replace(SHORT_LEAD,''); tail=SHORT_TAIL.test(body); body=body.replace(SHORT_TAIL,'');
+      if((lead||tail) && body && body.split(' ').length<=4 && !/\b(?:i|i'?m|i'?ll|i'?ve|i'?d|we|my|me|you|that'?s|it'?s|this|that|so|much)\b/i.test(body)) return body;
+    }
+    return null;
+  }
+  function askPart(rest){
+    var low=rest.toLowerCase(), m=ASK_START_RE.exec(low), q, i;
+    if(m) return rest.slice(m.index);
+    m=POLITE_RE.exec(low);
+    if(m){ for(i=m.index-1;i>=0;i--) if(/[,.;:!?…，。；：！？—–]/.test(low.charAt(i))) break;
+      if(!STATEMENT_RE.test(low.slice(i+1, m.index+m[0].length))) return rest.slice(m.index); }
+    q=low.search(/[?？]/);
+    if(q>=0){ for(i=q-1;i>=0;i--) if(/[,.;:!…，。；：！—–]/.test(low.charAt(i))) break; return rest.slice(i+1); }
+    return shortAsk(rest) || (CJK_ASK_RE.test(rest) ? rest : null) || topicClause(rest);
+  }
+  /* any other clause that names a specific topic is a request ("Next, his education", "his advisor
+     too"), unless it only says the visitor understood or will do something (STATEMENT_RE), is what
+     the thanks is for ("thanks for explaining CESAR"), or speaks of the visitor ("where I work we
+     use GDI"; a first-person request was already taken by POLITE_RE). The first 12 clauses only. */
+  var FIRST_P=/\b(?:i|i'?m|i'?ll|i'?ve|i'?d|we|we'?re|we'?ll|we'?ve|my|our|me|us)\b/i;
+  function topicClause(rest){
+    var cl=rest.split(/[,.;:!?…，。；：！？—–]+/), i, c, R;
+    for(i=0;i<cl.length && i<12;i++){
+      c=cl[i].trim(); if(!c || STATEMENT_RE.test(c) || /^for\b/i.test(c) || FIRST_P.test(c)) continue;
+      R=lookup(c);
+      if(R && (R.named || !R.e.gen)) return c;
+    }
+    return null;
+  }
+  /* A follow-up ("tell me more / why / how does / how much …") switches to whatever it asks about,
+     as a new question would. It stays on the last topic only when
+       (i)   nothing is found, or the last topic itself is found;
+       (ii)  a generic entry (focus, publications, LLM reasoning, flow models), or a paper found
+             through its topic words (not named, not framed as another area), is found only through
+             words that also describe the last topic: its own text or its ab words ("how does he
+             define good reasoning?" after CESAR, "how did you test it on diffusion models?" after
+             ADRPO, "tell me more about your audio LLM" after AudioRSI); words inside a pointing
+             phrase ("why did your paper get an ICLR oral?", "the LLM experiments") need not. When
+             the visitor asks for that topic by name (TOPIC_REQ: "more on LLM reasoning please"),
+             the message must also point at the last topic (it, this, that, the paper / method /
+             model / results, your or his paper / method / model / approach…);
+       (iii) a specific entry is found only through an incidental '*' or weak '~' word that the last
+             topic's own text uses ("how does the student become the teacher?" after AudioRSI, "the
+             code specialist" after TF-OPD), or that the message ties to the topic: a pointing word
+             or "the" right before it ("how much impact did it have?", "the recent results").
+     Another paper named or set aside, a '!' keyword ("how many citations does it have?"), and a
+     wider question (BROAD: "what else is he working on?", "his other work", "his own papers")
+     always switch, unless the wider question points back at the topic ("…connect to it?").      */
+  var PAPERREF_RE = /\b(?:it|its|they|them|(?:about|on|of|in|for|with|behind|from|to|like|does|did|do|is|was|are|were|will|would|can|could|make|makes|made) (?:this|that|these|those)\b(?! (?:i|he|she|you|we|they|his|jiajun)\b)|(?:this|that)$|(?:the|this|that|these|those) (?:[a-z0-9-]+ ){0,2}(?:one|paper|model|models|method|methods|approach|experiment|experiments|result|results|findings)|(?:your|his|jiajun s) (?:[a-z0-9-]+ ){0,1}(?:paper|model|models|method|approach|team|experiment|experiments|results|llm|llms))\b/;
+  var BROAD = [ [/\b(?:(?:his|your|jiajun s) (?:other |own |main |overall )?(?:research|work)|about (?:you|yourself)|what else (?:is|are|has|have) (?:he|you|jiajun) (?:been )?(?:working on|doing|researching|studying|up to)|what else (?:does|do) (?:he|you|jiajun) (?:work on|do|research|study))\b/, 'focus'],
+                [/\b(?:(?:his|your|jiajun s) (?:other |own )?(?:papers|publications|projects)|what else (?:has|have|did) (?:he|you|jiajun) (?:published|publish|written|write|co-authored|co-author|coauthored|coauthor)|(?:other|more) (?:papers|publications))\b/, 'pubs'] ];
+  function broadEntry(n){ for(var i=0;i<BROAD.length;i++) if(BROAD[i][0].test(n)) return entryById(BROAD[i][1]); return null; }
+  /* the words of an entry's own text (names, keywords, ab words, answers, detail), for "describes the
+     topic"; a paper is also described by the words for a paper and its publication              */
+  var PUB_WORDS='paper papers publish published publication publications accepted venue conference oral authors';
+  function wordsOf(e){
+    if(e._w) return e._w;
+    var w={}, src=(e.nm||[]).concat(e.kw||[], e.ab||[]).map(function(k){ return String(k).replace(/^[*!~=^]+/,''); }).concat(e.a||[], e.more ? [e.more] : []);
+    if(e.nm) src.push(PUB_WORDS);
+    norm(src.join(' ')).split(/[ -]/).forEach(function(x){ if(x) w[x]=1; });
+    return (e._w=w);
+  }
+  function inWords(w, x){ return !!(w[x] || w[x+'s'] || (x.length>3 && /s$/.test(x) && w[x.slice(0,-1)])); }
+  /* every content word of the hit spans hs, outside a pointing phrase, is in the text of t */
+  function describes(t, R, hs){
+    var w=wordsOf(t), i, j, ws, refs=[], m, re=new RegExp(PAPERREF_RE.source,'g');
+    while((m=re.exec(R.Q.q))) refs.push([m.index, m.index+m[0].length]);
+    for(i=0;i<hs.length;i++){
+      for(j=0;j<refs.length;j++) if(refs[j][0]<=hs[i].a && hs[i].b<=refs[j][1]) break;
+      if(j<refs.length) continue;
+      ws=R.Q.q.slice(hs[i].a, hs[i].b).split(/[ -]/);
+      for(j=0;j<ws.length;j++) if(ws[j] && !STOP[ws[j]] && !inWords(w, ws[j])) return false; }
+    return true;
+  }
+  /* "more on LLM reasoning", "tell me more about agentic RL", "why does he care about X": the visitor
+     asks for a topic by name (no "the / your …" before it), so its words describing the last topic
+     too do not keep the reply there                                                              */
+  var TOPIC_REQ=/(?:^| )(?:more|tell me|talk|hear|learn|know|anything|something|info|information|detail|details|care|cares) (?:on|about|regarding)(?: (?:his|jiajun s))?$/;
+  function followTo(t, R, n){
+    var hit=R ? R.e : null, ref=PAPERREF_RE.test(n), b=broadEntry(n), i, h, the;
+    if(hit && hit!==t && (R.named || R.o || R.sw)) return hit;
+    if(!hit || hit===t || hit.gen) if(b && !ref) return b;
+    if(!hit || hit===t) return t;
+    for(i=0;i<R.took.length;i++){ h=R.took[i];
+      if(!(h.i || h.w)) break;
+      the=/(?:^| )the $/.test(R.Q.q.slice(0,h.a));
+      if(!(ref || the || describes(t, R, [h]))) break; }
+    if(i===R.took.length) return t;                                      /* (iii) */
+    if(hit.gen || (hit.nm && !R.area)) return (describes(t, R, R.took) && (ref || !TOPIC_REQ.test(R.Q.q.slice(0, R.took[0].a).replace(/ +$/,'')))) ? t : hit;   /* (ii) */
+    return hit;
   }
   function respond(qRaw){
-    var low=lowRaw(qRaw);
+    var raw=tidy(qRaw), low=raw.toLowerCase();
+    if(low.length!==raw.length) raw=low;
+    /* an offer lives for one turn: "yes" accepts only the offer in the reply right above it,
+       and every reply that makes no offer (greeting, thanks, small talk, bye…) leaves none */
+    var offered=state.offered; state.offered=null;
     /* greetings / goodbyes (whole message) */
     if(GREET_RE.test(low))  return { text:timeHello()+" "+pick(GREETS,'greet') };
     if(BYE_RE.test(low))    return { text:pick(BYES,'bye') };
     /* accepting an offered follow-up */
-    if(YES_RE.test(low) && state.offered){
-      var off=entryById(state.offered); state.offered=null;
+    if(offered && isYes(low)){
+      var off=entryById(offered);
       if(off) return answerFrom(off, true);
     }
-    /* small talk, unless the message also asks about something */
-    if(intentOnly(THANKS_RE, low))   return { text:pick(THANKS_R,'thanks') };
-    if(intentOnly(HOWRU_RE, low))    return { text:pick(HOWRU_R,'howru') };
-    if(intentOnly(NAME_RE, low))     return { text:pick(NAME_R,'name') };
-    if(intentOnly(WHOMADE_RE, low))  return { text:pick(WHOMADE_R,'whomade') };
-    if(intentOnly(CANDO_RE, low))    return { text:pick(CANDO_R,'cando'), act:[{t:'🎧 What is CESAR?', h:'/projects/cesar/'},{t:'📄 Publications', h:'/publications/'}] };
-    /* retrieve first: a new question that happens to contain "how does", "why", "more" or
-       "else" is answered on its own topic; "tell me more" only continues the last topic when
-       nothing new is hit, or the hit is that same topic                                     */
-    var hit=retrieve(qRaw);
-    if(MORE_RE.test(low) && state.lastTopic && (!hit || hit===state.lastTopic)){
-      var t=state.lastTopic;
-      if(t.more && !t._moreServed){
-        t._moreServed=true;
-        var fu=followupFor(t);
-        return { text:t.more + (fu ? '||'+fu : ''), act:t.act };
-      }
-      var fu2=followupFor(t);
-      if(fu2) return { text:"I've told you the best parts of that one! "+fu2 };
-      if(!hit) return { text:"That's the core of it from me — the paper has the full details.", act:t.act };
+    /* thanks: answered as a question only if the rest of the message is one */
+    var tm=THANKS_RE.exec(low);
+    /* "I'd appreciate (it if you could tell me) …" asks for something: the rest is the question */
+    var wa=/\b(?:i'?d|we'?d|would)\s+(?:really\s+|greatly\s+|much\s+|also\s+)?appreciate(?:\s+it)?\b/.exec(low);
+    if(wa){
+      var r0=reply(raw.slice(wa.index+wa[0].length), "Sure! ");
+      if(!r0.fb) return r0;
     }
-    if(hit) return answerFrom(hit, false, THANKS_RE.test(low) ? "You're welcome! " : null);
+    if(tm){
+      var ask=askPart((raw.slice(0,tm.index)+' '+raw.slice(tm.index+tm[0].length)).trim());
+      if(ask){
+        var r=reply(ask, "You're welcome! ");
+        if(!r.fb) return r;
+      }
+      state.offered=null;
+      return { text:pick(THANKS_R,'thanks') };
+    }
+    /* declining ("no", "nope", "no, I'm good"): a short polite line; the offer is already gone */
+    if(NO_RE.test(low))     return { text:pick(NO_R,'no') };
+    return reply(raw, null);
+  }
+  function reply(qRaw, lead){
+    var raw=tidy(qRaw), low=raw.toLowerCase();
+    /* small talk, unless the message also asks about something */
+    if(intentOnly(HOWRU_RE, low, raw))    return { text:pick(HOWRU_R,'howru') };
+    if(intentOnly(NAME_RE, low, raw))     return { text:pick(NAME_R,'name') };
+    if(intentOnly(WHOMADE_RE, low, raw))  return { text:pick(WHOMADE_R,'whomade') };
+    if(intentOnly(CANDO_RE, low, raw))    return { text:pick(CANDO_R,'cando'), act:[{t:'🎧 What is CESAR?', h:'/projects/cesar/'},{t:'📄 Publications', h:'/publications/'}] };
+    var R=lookup(raw), hit=R ? R.e : null;
+    if(MORE_RE.test(low) && state.lastTopic){
+      var t=state.lastTopic, go=followTo(t, R, norm(low));
+      if(go!==t) hit=go;
+      else {
+        if(t.more && !t._moreServed){
+          t._moreServed=true;
+          var fu=followupFor(t);
+          return { text:t.more + (fu ? '||'+fu : ''), act:t.act };
+        }
+        var fu2=followupFor(t);
+        if(fu2) return { text:"I've told you the best parts of that one! "+fu2 };
+        if(hit!==t) return t.nm ? { text:"That's the core of it from me — the paper has the full details.", act:t.act }
+                                : { text:"That's all I have on that one — ask me about something else, or email jiajunf3 [at] illinois.edu." };
+      }
+    }
+    if(hit) return answerFrom(hit, false, lead);
+    if(!hit && state.lastTopic && state.lastTopic.nm && /\b(?:it|its|this|that|they|them|the paper|the method|the model|the teacher)\b/.test(low)){
+      var lt=state.lastTopic;
+      if(lt.more && !lt._moreServed){ lt._moreServed=true; return { text:lt.more, act:lt.act }; }
+      return answerFrom(lt, false, "In short: ");
+    }
     state.offered=null;
-    return { text:pick(FALLBACKS,'fb'), act:[{t:'📄 Browse papers', h:'/publications/'},{t:'✉️ Email Jiajun', h:'mailto:jiajunf3@illinois.edu'}] };
+    return { fb:1, text:pick(FALLBACKS,'fb'), act:[{t:'📄 Browse papers', h:'/publications/'},{t:'✉️ Email Jiajun', h:'mailto:jiajunf3@illinois.edu'}] };
   }
   function answerFrom(entry, accepted, lead){
     state.lastTopic=entry; state.visited[entry.id]=true; state.offered=null;
@@ -458,13 +987,25 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
        indicator between them — like a person sending two messages   */
   var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function el(id){ return document.getElementById(id); }
-  function addMsg(text, role){
+  /* The visitor's bubble is always appended at once. Bot output (bubbles, typing dots, action
+     chips) goes through place(): above the bubble of the first question still waiting in the
+     queue, so a reply in progress stays together under its own question and the transcript
+     reads question, answer, question, answer even when the visitor types ahead.              */
+  function place(node){
     var msgs=el('ra-msgs'); if(!msgs) return;
+    var anchor=null, i;
+    for(i=0;i<queue.length;i++) if(queue[i].bubble && queue[i].bubble.parentNode===msgs){ anchor=queue[i].bubble; break; }
+    if(anchor) msgs.insertBefore(node, anchor); else msgs.appendChild(node);
+    msgs.scrollTop=msgs.scrollHeight;
+  }
+  function addMsg(text, role){
+    var msgs=el('ra-msgs'); if(!msgs) return null;
     var div=document.createElement('div');
     div.className='ra-msg ra-'+role;
     div.textContent=text;
-    msgs.appendChild(div);
+    if(role==='user') msgs.appendChild(div); else place(div);
     msgs.scrollTop=msgs.scrollHeight;
+    return div;
   }
   function appendActs(acts){
     if(!acts||!acts.length) return;
@@ -493,8 +1034,7 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
       }
       wrap.appendChild(a);
     });
-    msgs.appendChild(wrap);
-    msgs.scrollTop=msgs.scrollHeight;
+    place(wrap);
   }
   function showTyping(){
     if(el('ra-typing-indicator')) return;
@@ -502,7 +1042,7 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
     var div=document.createElement('div');
     div.className='ra-msg ra-bot ra-typing'; div.id='ra-typing-indicator';
     div.innerHTML='<span class="ra-sr">Typing…</span><i aria-hidden="true"></i><i aria-hidden="true"></i><i aria-hidden="true"></i>';
-    msgs.appendChild(div); msgs.scrollTop=msgs.scrollHeight;
+    place(div);
   }
   function removeTyping(){
     var x=el('ra-typing-indicator');
@@ -519,11 +1059,11 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
     var msgs=el('ra-msgs'); if(!msgs){ if(done) done(); return; }
     var div=document.createElement('div');
     div.className='ra-msg ra-bot';
-    if(reduced){ div.textContent=text; msgs.appendChild(div); msgs.scrollTop=msgs.scrollHeight; if(done) done(); return; }
+    if(reduced){ div.textContent=text; place(div); if(done) done(); return; }
     var vis=document.createElement('span');
     vis.setAttribute('aria-hidden','true');
     div.appendChild(vis);
-    msgs.appendChild(div); msgs.scrollTop=msgs.scrollHeight;
+    place(div);
     var i=0;
     (function tick(){
       if(i<=text.length){
@@ -551,28 +1091,33 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
     }
     next();
   }
-  /* One reply at a time. A question sent while a reply is still typing waits its turn; its
-     bubble and respond() both run when it is dequeued, so bubbles stay in question order and
-     state.offered always belongs to the follow-up shown last ("yes" accepts what you see). */
+  /* One reply at a time. The visitor's bubble shows the moment it is sent; only respond() waits
+     its turn and runs when its job is dequeued, so state.offered always belongs to the follow-up
+     shown last above that bubble ("yes" accepts what you see). While a job waits, its bubble
+     is the anchor that place() keeps the reply in progress above.                           */
   var queue=[], busy=false;
-  function enqueue(job){ queue.push(job); if(!busy) pump(); }
+  function enqueue(run, bubble){ queue.push({ run:run, bubble:bubble||null }); if(!busy) pump(); }
   function pump(){
     if(!queue.length){ busy=false; return; }
     busy=true;
     var job=queue.shift(), reply=null;
-    try{ reply=job(); }catch(e){ reply=null; }
+    try{ reply=job.run(); }catch(e){ reply=null; }
     if(reply && reply.text) deliver(reply, pump); else pump();
   }
 
   /* ════════ PUBLIC API (open/close/send) ════════ */
   var welcomed=false;
+  /* a chip sends its own text and leaves whatever the visitor was typing in the input */
+  function send(q){
+    var bubble=addMsg(q,'user');
+    enqueue(function(){ return respond(q); }, bubble);
+  }
   window.raAsk=function(btn){
     if(!btn) return;
     var text=btn.textContent.replace(/^[^\w]+/,'').trim();
-    var chips=el('ra-chips'); var input=el('ra-input');
+    var chips=el('ra-chips');
     if(chips) chips.classList.add('hidden');
-    if(input) input.value=text;
-    raSend();
+    if(text) send(text);
   };
   window.raOpen=function(){
     var panel=el('ra-panel'); var btn=el('ra-btn');
@@ -614,7 +1159,7 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
     var inp=el('ra-input'); if(!inp) return;
     var q=inp.value.trim(); if(!q) return;
     inp.value='';
-    enqueue(function(){ addMsg(q,'user'); return respond(q); });
+    send(q);
   };
 
   /* FAB tooltip (once per session) + pulse quiet after open */
