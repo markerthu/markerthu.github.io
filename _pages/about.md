@@ -108,7 +108,7 @@ body.dark-mode .section-header .sh-icon { filter: brightness(1.55) saturate(1.1)
   border-bottom: 1px solid #f0f0f0;
   align-items: start;
 }
-.pub-entry:last-child { border-bottom: none; }
+.pub-entry:last-of-type { border-bottom: none; }
 .pub-left {
   display: flex; flex-direction: column;
   gap: 4px; align-items: flex-start; padding-top: 2px;
@@ -133,8 +133,11 @@ body.dark-mode .section-header .sh-icon { filter: brightness(1.55) saturate(1.1)
   .pub-list .pub-entry { grid-template-columns: 248px minmax(0, 1fr); column-gap: 24px; row-gap: 0; padding: 22px 0; }
   .pub-list .pub-entry > .pub-right { display: contents; }
   .pub-list .pub-entry > .pub-left { grid-column: 1; grid-row: 1; flex-direction: row; align-items: center; gap: 8px; padding-top: 4px; }
-  .pub-list .pub-entry .pub-thumb-wrap { grid-column: 1; grid-row: 2 / span 8; margin: 10px 0 0; align-self: start; }
+  /* the figure sits a fixed 10px under the venue badge, whatever the title or an opened abstract does to row 1 */
+  .pub-list .pub-entry .pub-thumb-wrap { grid-column: 1; grid-row: 1 / span 9; margin: 37px 0 0; align-self: start; }
+  .pub-list .pub-entry:has(.pb-oral) .pub-thumb-wrap { margin-top: 54px; }
   .pub-list .pub-entry .pub-right > :not(.pub-thumb-wrap) { grid-column: 2; }
+  .pub-list .pub-entry .pub-right > .pub-hl { justify-self: start; }
 }
 @media(max-width:560px){
   .news-list li { flex-direction: column; gap: 2px; }
