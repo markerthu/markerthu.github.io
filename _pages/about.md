@@ -239,6 +239,7 @@ body.dark-mode .ro-v { color: #9DB8EA; background: #161b22; border-color: #30363
 .cit-chart-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px;margin-bottom:12px;}
 .cit-chart-title{font-weight:800;font-size:0.907em;color:#1a2332; line-height:1.3; text-wrap:balance;}
 .cit-chart-sub{font-size:0.7em;color:#767676;}
+body.dark-mode .cit-chart-sub, body.dark-mode .pub-year{color:#8b949e;}
 .cit-bars{display:flex;align-items:stretch;gap:10px;height:170px;}
 .cit-bar{flex:1;display:flex;flex-direction:column;align-items:center;}
 .cit-bar-track{flex:1;width:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;}
@@ -425,7 +426,7 @@ body.dark-mode .ct-dot{fill:#9DB8EA;} body.dark-mode .ct-dot-last{fill:#9DB8EA;}
 
 /* ── LBC featured card placeholder ── */
 .fv-iclr23oral { background: #F5C8B5; color: #7A3B22; }
-body.dark-mode .fv-iclr23oral { background: #9A6E5D !important; color: #FBE3D8 !important; }
+body.dark-mode .fv-iclr23oral { background: #86594A !important; color: #FBE3D8 !important; }
 
 /* ── Pub link buttons ── */
 .pub-links { display: flex; gap: 5px; margin-top: 5px; flex-wrap: wrap; }
@@ -1199,7 +1200,7 @@ figure.anim-fig{--link:var(--c-ours);--good:#3E7D5A;--bad:var(--c-rl-line)}
 .ddl-chip.u-hot{background:var(--c-rl)!important;border-color:var(--c-rl-line)!important;color:#7A3B22!important}
 .ddl-chip.u-soon{background:var(--c-var)!important;border-color:var(--c-var-line)!important;color:var(--c-ours)!important}
 .ddl-chip.u-later{background:var(--c-base)!important;border-color:var(--c-grid)!important;color:var(--c-ink2)!important}
-body.dark-mode .ddl-chip.u-hot{color:#FBE3D8!important}
+body.dark-mode .ddl-chip.u-hot{background:#86594A!important;color:#FBE3D8!important}
 body.dark-mode .ddl-chip.u-soon{color:#E3EEFA!important}
 body.dark-mode figure.anim-fig{--good:#7FC79A}
 </style>
