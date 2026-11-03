@@ -5,7 +5,7 @@ permalink: /publication/2026-05-13-PyRAG
 date: 2026-05-13
 venue: '<strong>arXiv</strong> preprint, 2026'
 paperurl: 'https://arxiv.org/abs/2605.12975'
-citation: 'Jiashuo Sun, Jimeng Shi, Yixuan Xie, Saizhuo Wang, Jash Rajesh Parekh, Pengcheng Jiang, Zhiyi Shi, Jiajun Fan, Qinglong Zheng, Peiran Li, Shaowen Wang, Ge Liu, Jiawei Han. &quot;Retrieval is Cheap, Show Me the Code: Executable Multi-Hop Reasoning for Retrieval-Augmented Generation.&quot; arXiv preprint arXiv:2605.12975, 2026.'
+citation: 'Jiashuo Sun*, Jimeng Shi*, Yixuan Xie, Saizhuo Wang, Jash Rajesh Parekh, Pengcheng Jiang, Zhiyi Shi, Jiajun Fan, Qinglong Zheng, Peiran Li, Shaowen Wang, Ge Liu, Jiawei Han. &quot;Retrieval is Cheap, Show Me the Code: Executable Multi-Hop Reasoning for Retrieval-Augmented Generation.&quot; arXiv preprint arXiv:2605.12975, 2026.'
 bibtex: |
   @article{sun2026pyrag,
     title={Retrieval is Cheap, Show Me the Code: Executable Multi-Hop Reasoning for Retrieval-Augmented Generation},

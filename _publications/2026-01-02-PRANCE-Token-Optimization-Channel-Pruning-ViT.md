@@ -5,7 +5,7 @@ permalink: /publication/2025-01-02-PRANCE-TPAMI
 date: 2026-01-02
 venue: 'IEEE Transactions on Pattern Analysis and Machine Intelligence (<strong>TPAMI 2026</strong>)'
 paperurl: 'https://arxiv.org/abs/2407.05010'
-citation: 'Ye Li, Chen Tang, Yuan Meng, Jiajun Fan, Zenghao Chai, Xinzhu Ma, Zhi Wang, Wenwu Zhu. &quot;PRANCE: Joint Token-Optimization and Structural Channel-Pruning for Adaptive ViT Inference.&quot; TPAMI 2026.'
+citation: 'Ye Li*, Chen Tang*, Yuan Meng, Jiajun Fan, Zenghao Chai, Xinzhu Ma, Zhi Wang, Wenwu Zhu. &quot;PRANCE: Joint Token-Optimization and Structural Channel-Pruning for Adaptive ViT Inference.&quot; TPAMI 2026.'
 bibtex: |
   @article{li2026prance,
     title={{PRANCE}: Joint Token-Optimization and Structural Channel-Pruning for Adaptive {ViT} Inference},
