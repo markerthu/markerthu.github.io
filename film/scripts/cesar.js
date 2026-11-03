@@ -1,5 +1,5 @@
 import { timeline } from './util.js';
-// Fitted scaling slopes from the paper: Qwen2.5-Omni-7B -0.510, Ke-Omni-R -0.007, CESAR +0.038
+// Fitted scaling slopes from the paper: Qwen2.5-Omni-7B -0.5083, Ke-Omni-R -0.007, CESAR +0.038
 // (lines drawn with those slopes, schematic levels). MMAU totals: 65.2 / 74.6 / 76.5 / 77.1.
 const slope = (y0, m) => [[0, y0], [1, y0 + m]];
 export default {
@@ -22,7 +22,7 @@ export default {
       tick: 'RESULTS', label: 'RESULTS  ·  MMAU', title: 'State of the art',
       lines: ['Best on MMAU test-mini, ahead of Gemini 2.5 Pro', 'and GPT-4o Audio.'] },
     { len: 9, shape: 'v:lines', viz: { x: [0, 1], y: [0, 1], xlabel: 'longer reasoning →', ylabel: 'accuracy', stagger: 0.7, series: [
-        { label: 'base: −0.510', pts: [[0, 0.72], [1, 0.21]] },
+        { label: 'base: −0.508', pts: [[0, 0.72], [1, 0.2117]] },
         { label: 'outcome-only RL: −0.007', pts: slope(0.77, -0.007), dy: 14 },
         { label: 'CESAR: +0.038', pts: slope(0.84, 0.038), ours: true, dy: -14 }] },
       tick: 'SCALING', label: 'TEST-TIME SCALING', title: 'Thinking that helps',

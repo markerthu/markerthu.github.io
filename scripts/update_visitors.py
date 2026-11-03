@@ -31,7 +31,7 @@ MAX_DOTS = 60      # dots drawn on the map
 R_MIN, R_MAX = 1.8, 4.2   # dot radius range in SVG units (viewBox is 360 wide)
 MAX_ROWS = 30      # individual visits shown on the /visitors/ table
 COUNTRY_NAMES = {}  # ISO_A2 -> full name, filled from the locations API
-TOP_N = 25         # rows kept per aggregate table
+TOP_N = 25         # rows kept per aggregate table (not countries: the page says "every country")
 
 
 def call(path, data=None, raw=False, timeout=60):
@@ -120,6 +120,107 @@ def clean(rows, top=TOP_N):
         out.append({"name": name, "id": r.get("id") or "", "count": c})
     out.sort(key=lambda r: -r["count"])
     return out[:top]
+
+
+# ---- pure helpers (no API calls; safe to run on an existing visitors.json) ----
+
+def fmt_day(dt):
+    d = dt.day
+    suffix = "th" if 11 <= d % 100 <= 13 else {1: "st", 2: "nd", 3: "rd"}.get(d % 10, "th")
+    return "%s. %d%s" % (dt.strftime("%b"), d, suffix)
+
+
+def days_between(rows, a, b):
+    """The daily rows dated a..b inclusive (site-timezone dates), oldest first.
+
+    GoatCounter's stats/total shifts the requested range into the site's timezone
+    before cutting it into days, so a request for whole dates comes back with a
+    partial bucket at each edge. In Los Angeles, start=D gave a first bucket for D-1
+    holding only its evening (2026-10-03: 8 views as the first bucket, 24-29 in runs
+    where it sat inside the window), and
+    the series ran one day longer than the label. Ask wider, keep exactly a..b."""
+    a, b = a.isoformat(), b.isoformat()
+    out = [r for r in rows if r.get("day") and a <= r["day"] <= b]
+    out.sort(key=lambda r: r["day"])
+    return out
+
+
+def window_summary(daily, fallback_start, fallback_end):
+    """Header total, day count and printed range, all read off the same daily rows,
+    so 'N Pageviews', 'Last N days', the range and the chart describe one window."""
+    if daily:
+        a = datetime.date.fromisoformat(daily[0]["day"])
+        b = datetime.date.fromisoformat(daily[-1]["day"])
+        if (b - a).days + 1 != len(daily):
+            print("  warn: daily series has gaps (%d rows over %s..%s)" % (len(daily), a, b),
+                  file=sys.stderr)
+    else:
+        a, b = fallback_start, fallback_end
+    return {
+        "_total": sum(int(r.get("n") or 0) for r in daily),
+        "_days": len(daily) if daily else (b - a).days + 1,
+        "_range": "%s - %s" % (fmt_day(a), fmt_day(b)),
+    }
+
+
+def build_dots(countries, regions, cent, reg_cent, proj, max_dots=MAX_DOTS):
+    """Map dots from the country and region tables.
+
+    One dot per region we can place, plus one dot at the country's centroid for the
+    rest of that country's views (all of them when no region could be placed). The
+    rest used to be dropped, so the dots summed to less than the country table
+    (877 vs 906: 22 US and 7 CN views had no region). Now the dots add up to the
+    country table, unless a country has no centroid or the MAX_DOTS cap cuts some.
+    Returns (dots, codes_without_centroid)."""
+    W, H = proj["W"], proj["H"]
+    LON0, LON1, LAT0, LAT1 = proj["LON0"], proj["LON1"], proj["LAT0"], proj["LAT1"]
+
+    def xy(lon, lat):
+        return (round((lon - LON0) / (LON1 - LON0) * W, 1),
+                round((LAT1 - lat) / (LAT1 - LAT0) * H, 1))
+
+    by_country = {}
+    for r in regions:
+        by_country.setdefault(r.get("country") or "", []).append(r)
+
+    dots, nocent = [], []
+    for c in countries:
+        code, name, n = c.get("code") or "", c.get("name") or "", int(c.get("count") or 0)
+        if n <= 0:
+            continue
+        placed = 0
+        for r in by_country.get(code, []):
+            rname, rn = (r.get("name") or "").strip(), int(r.get("count") or 0)
+            ll = reg_cent.get("%s|%s" % (code, rname.lower())) if rname else None
+            if not ll or rn <= 0:
+                continue
+            cx, cy = xy(ll[1], ll[0])
+            dots.append({"code": code, "name": "%s, %s" % (rname, code),
+                         "count": rn, "cx": cx, "cy": cy})
+            placed += rn
+        rest = n - placed
+        if rest <= 0:
+            continue
+        if code not in cent:
+            nocent.append(code or name)
+            continue
+        lat, lon = cent[code]
+        cx, cy = xy(lon, lat)
+        dots.append({"code": code,
+                     "name": name if not placed else "%s, other regions" % name,
+                     "count": rest, "cx": cx, "cy": cy})
+
+    dots.sort(key=lambda d: -d["count"])
+    dots = dots[:max_dots]
+    # Radius is normalised against the busiest dot and capped, so a single hot region
+    # cannot swallow its neighbours; area still scales with the count (sqrt).
+    if dots:
+        top = max(d["count"] for d in dots) or 1
+        for d in dots:
+            d["r"] = round(R_MIN + (R_MAX - R_MIN) * ((d["count"] / top) ** 0.5), 2)
+    # biggest first in document order => smaller dots paint on top and stay visible
+    dots.sort(key=lambda d: -d["r"])
+    return dots, nocent
 
 
 def try_export(prev_rows):
@@ -341,8 +442,11 @@ def main():
     end = datetime.datetime.now(tz).date()
     start = end - datetime.timedelta(days=DAYS - 1)
     print("  site timezone: %s (today there is %s)" % (tz_name, end))
-    # The API returns buckets up to the day BEFORE `end`, so today never lands in the
-    # window. Ask for one extra day; everything is then keyed by date, not position.
+    # qs feeds the breakdown endpoints (locations, regions, pages, referrers, browsers,
+    # systems). GoatCounter keeps those per UTC day, so they cannot be cut at site-
+    # timezone midnight and their sums differ from the daily series; the page labels
+    # them as their own counts. end=today+1 so that today is included. The daily
+    # series is fetched separately (complete_days) and trimmed to exactly start..end.
     api_end = end + datetime.timedelta(days=1)
     qs = "start=%s&end=%s" % (start.isoformat(), api_end.isoformat())
 
@@ -373,12 +477,6 @@ def main():
 
     cent = json.load(open(CENTROIDS, encoding="utf-8"))
     proj = json.load(open(PROJ, encoding="utf-8"))
-    W, H = proj["W"], proj["H"]
-    LON0, LON1, LAT0, LAT1 = proj["LON0"], proj["LON1"], proj["LAT0"], proj["LAT1"]
-
-    def xy(lon, lat):
-        return (round((lon - LON0) / (LON1 - LON0) * W, 1),
-                round((LAT1 - lat) / (LAT1 - LAT0) * H, 1))
 
     reg_cent = {}
     if os.path.exists(REGIONS):
@@ -387,19 +485,21 @@ def main():
         except Exception:
             reg_cent = {}
 
-    dots, countries, regions, total, nocent = [], [], [], 0, []
+    # loc_total: every view the locations table attributes to a country. It comes
+    # from GoatCounter's per-UTC-day location counts, NOT from the daily series, so
+    # it is not the header total; the page labels it as its own count.
+    countries, regions, loc_total = [], [], 0
     for row in locations:
         code = (row.get("id") or "").upper()
         name = row.get("name") or code or "(unknown)"
         n = int(row.get("count") or 0)
-        total += n
+        loc_total += n
         if n <= 0:
             continue
         countries.append({"code": code, "name": name, "count": n})
 
         # Drill into regions (states / provinces). GoatCounter only collects these
         # for the countries listed in the site's settings; elsewhere the name is "".
-        placed = False
         rcode, rbody = call("/api/v0/stats/locations/%s?%s&limit=100" % (code, qs))
         if rcode == 200:
             try:
@@ -411,36 +511,13 @@ def main():
                 rn = int(r.get("count") or 0)
                 if not rname or rn <= 0:
                     continue
-                key = "%s|%s" % (code, rname.lower())
-                ll = reg_cent.get(key)
-                regions.append({"country": code, "country_name": name,
-                                "name": rname, "count": rn, "located": bool(ll)})
-                if ll:
-                    cx, cy = xy(ll[1], ll[0])
-                    dots.append({"code": code, "name": "%s, %s" % (rname, code),
-                                 "count": rn, "cx": cx, "cy": cy})
-                    placed = True
-
-        # No usable region breakdown -> one dot at the country centroid.
-        if not placed:
-            if code not in cent:
-                nocent.append(code or name)
-                continue
-            lat, lon = cent[code]
-            cx, cy = xy(lon, lat)
-            dots.append({"code": code, "name": name, "count": n, "cx": cx, "cy": cy})
+                regions.append({"country": code, "country_name": name, "name": rname,
+                                "count": rn,
+                                "located": bool(reg_cent.get("%s|%s" % (code, rname.lower())))})
 
     countries.sort(key=lambda c: -c["count"])
-    dots.sort(key=lambda d: -d["count"])
-    dots = dots[:MAX_DOTS]
-    # Radius is normalised against the busiest dot and capped, so a single hot region
-    # cannot swallow its neighbours; area still scales with the count (sqrt).
-    if dots:
-        top = max(d["count"] for d in dots) or 1
-        for d in dots:
-            d["r"] = round(R_MIN + (R_MAX - R_MIN) * ((d["count"] / top) ** 0.5), 2)
-    # biggest first in document order => smaller dots paint on top and stay visible
-    dots.sort(key=lambda d: -d["r"])
+    # Built from the FULL region list (the file keeps only the top TOP_N regions).
+    dots, nocent = build_dots(countries, regions, cent, reg_cent, proj)
 
     # most-visited pages
     pages, pages_ok = [], False
@@ -487,13 +564,29 @@ def main():
         return [{"day": x.get("day"), "n": int(x.get("daily") or 0)}
                 for x in (d.get("stats") or []) if x.get("day")]
 
-    daily, daily_stale = series(start, api_end), False
+    one = datetime.timedelta(days=1)
+
+    def complete_days(a, b):
+        """Whole site-timezone days a..b. A whole-date request comes back with partial
+        buckets at both edges (see days_between); end=b+1 means 00:00 UTC, which is
+        only 16:00/17:00 of day b in Los Angeles, so the evening of b was cut off.
+        Ask for [a-1, b+2], which covers a..b completely for any UTC offset, then
+        keep exactly a..b."""
+        rows = series(a - one, b + 2 * one)
+        return None if rows is None else days_between(rows, a, b)
+
+    daily, daily_stale = complete_days(start, end), False
     if daily is None:
-        daily, daily_stale = (prev.get("daily") or []), True
+        # Reuse the previous run's window as a whole (its own N days, range and
+        # _updated), rather than mixing it with today's dates.
+        daily, daily_stale = (prev.get("daily") or [])[-DAYS:], True
         print("  warn: daily series fetch failed; reusing the previous series",
               file=sys.stderr)
+    elif len(daily) != DAYS:
+        print("  warn: daily series has %d days for %s..%s, expected %d"
+              % (len(daily), start, end, DAYS), file=sys.stderr)
     prev_start = start - datetime.timedelta(days=DAYS)
-    prev_daily = series(prev_start, start) or []
+    prev_daily = complete_days(prev_start, start - one) or []
 
     def total_of(rows, days=None):
         if not rows:
@@ -521,6 +614,8 @@ def main():
         "day_frac": day_frac,
         "yesterday_day": (end - datetime.timedelta(days=1)).isoformat(),
     }
+    if daily_stale and prev.get("periods"):
+        periods = dict(prev["periods"])     # same stale window as the reused series
 
     try_export.tz = tz
     recent, note = try_export(prev.get("recent") or [])
@@ -539,35 +634,23 @@ def main():
             return prev.get(key) or []
         return clean(fetched)
 
-    def fmt(dt):
-        d = dt.day
-        suffix = "th" if 11 <= d % 100 <= 13 else {1: "st", 2: "nd", 3: "rd"}.get(d % 10, "th")
-        return "%s. %d%s" % (dt.strftime("%b"), d, suffix)
-
-    # The daily series is the authoritative pageview count for the window; the
-    # per-country sum can be lower (hits whose country could not be resolved).
-    # Use one number everywhere so the map header, the tile and the chart agree.
-    if daily and not daily_stale:
-        total = periods["d30"]
-        # Derive the printed range from the series the API actually returned, so the
-        # map header and the chart axis can never disagree by a day.
-        try:
-            rng_start = datetime.date.fromisoformat(daily[0]["day"])
-            rng_end = datetime.date.fromisoformat(daily[-1]["day"])
-        except Exception:
-            rng_start, rng_end = start, end
-    else:
-        rng_start, rng_end = start, end
+    # The header total, "Last N days", the printed range and the chart all come from
+    # the one daily series (window_summary). The country / browser / system tables
+    # and the map dots come from GoatCounter's per-UTC-day breakdowns, which cover a
+    # slightly different span and summed HIGHER than the series (906 vs 870 on
+    # 2026-11-02), so they are never used as the header total; the page prints
+    # their own sum next to them instead.
+    win = window_summary(daily, start, end)
 
     out = {
         "_updated": (daily[-1]["day"] if daily else end.isoformat()),
         "_timezone": tz_name,
         "_source": "GoatCounter API (%s)" % SITE,
-        "_total": total,
-        "_days": DAYS,
-        "_range": "%s - %s" % (fmt(rng_start), fmt(rng_end)),
+        "_total": win["_total"],
+        "_days": win["_days"],
+        "_range": win["_range"],
         "locations": dots,
-        "countries": countries[:TOP_N],
+        "countries": countries,
         "regions": sorted(regions, key=lambda r: -r["count"])[:TOP_N],
         "pages": pages,
         "referrers": keep("referrers", stats("toprefs", qs)),
@@ -584,12 +667,14 @@ def main():
         json.dump(out, f, indent=2, ensure_ascii=False)
         f.write("\n")
 
-    print("Updated: %d countries, %d regions, %d dots, %d pageviews, %d pages, %d referrers, %d recent rows"
-          % (len(countries), len(regions), len(dots), total, len(pages),
+    print("Updated: %d countries, %d regions, %d dots, %d pageviews over %s (%d days), "
+          "%d views by location, %d on the map, %d pages, %d referrers, %d recent rows"
+          % (len(countries), len(regions), len(dots), out["_total"], out["_range"],
+             out["_days"], loc_total, sum(d["count"] for d in dots), len(pages),
              len(out["referrers"]), len(recent)))
     unplaced = [r["name"] for r in regions if not r["located"]]
     if unplaced:
-        print("  regions without a centroid (kept in table, no dot): %s"
+        print("  regions without a centroid (kept in table, counted in the country-centre dot): %s"
               % ", ".join(sorted(set(unplaced))[:12]))
     if kept:
         print("  kept previous data for (fetch failed): %s" % ", ".join(kept))

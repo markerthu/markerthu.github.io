@@ -1,6 +1,6 @@
 <svg viewBox="0 0 640 214" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="sgg-t sgg-d" fill="currentColor">
   <title id="sgg-t">Rollout groups that still carry a gradient</title>
-  <desc id="sgg-d">With an outcome-only reward, 16.0 percent of GRPO rollout groups carry a gradient; with the per-turn process reward, 99.6 percent do.</desc>
+  <desc id="sgg-d">With an outcome-only reward, 16 percent of GRPO rollout groups carry a gradient; with the per-turn process reward, 99.6 percent do.</desc>
   <style>
     .sgg-l{font:500 13px Inter,system-ui,sans-serif;fill:var(--ink,#1a1815)}
     .sgg-s{font:400 11.5px Inter,system-ui,sans-serif;fill:var(--c-ink2,#5B6273)}
@@ -21,7 +21,7 @@
   <text class="sgg-s" x="190" y="83" text-anchor="end">success at the end only</text>
   <rect x="200" y="56" width="400" height="26" rx="6" fill="var(--c-grid,#E4E8EF)" fill-opacity=".55"/>
   <rect x="200" y="56" width="64" height="26" rx="6" fill="var(--c-rl,#F5C8B5)" stroke="var(--c-rl-line,#E39A7A)" stroke-width="1.1"/>
-  <text class="sgg-v" x="274" y="75" fill="var(--c-rl-ink,#B8613C)">16.0%</text>
+  <text class="sgg-v" x="274" y="75" fill="var(--c-rl-ink,#B8613C)">16%</text>
   <text class="sgg-s" x="596" y="75" text-anchor="end" fill="var(--c-rl-line,#E39A7A)">84% of groups teach nothing</text>
 
   <!-- per-turn -->

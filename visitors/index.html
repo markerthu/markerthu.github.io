@@ -74,6 +74,7 @@ body.dark-mode .delta.up{color:#4ade80}body.dark-mode .delta.down{color:#f7a8b8}
 .mapcard{background:var(--sea);border-radius:12px;padding:16px 14px 14px;margin:8px 0 34px}
 .mapcard h2{margin:0 0 3px;font-family:var(--sans);font-size:17px;font-weight:700;color:#fff;text-align:center;letter-spacing:-.01em}
 .mapcard .r{text-align:center;color:#fff;opacity:.8;font-family:var(--sans);font-size:12px;margin-bottom:11px}
+.mapcard .mapnote{text-align:center;color:#fff;font-family:var(--sans);font-size:12px;line-height:1.45;margin:10px auto 0;max-width:62ch}
 .vmap-svg{display:block;width:100%;height:auto}
 .vmap-land{fill:var(--land);stroke:var(--sea);stroke-width:.7;stroke-linejoin:round}
 .vmap-dot{fill:var(--dot);fill-opacity:.88;stroke:#fff;stroke-width:.9}
@@ -215,6 +216,8 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
     <h2>{{ v._total | default: 0 }} Pageviews</h2>
     <div class="r">{{ v._range }}</div>
     {% include visitor-map-svg.html %}
+    {%- assign dot_sum = 0 -%}{%- for l in v.locations -%}{%- assign dot_sum = dot_sum | plus: l.count -%}{%- endfor %}
+    <p class="mapnote">The dots hold {{ dot_sum }} views by location{% if dot_sum != v._total %}, tallied by UTC day like the country table below, so they need not match the {{ v._total | default: 0 }} pageviews above{% endif %}.</p>
   </div>
 
   <h2 class="sec">Recent visits</h2>
@@ -261,7 +264,7 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
   {%- assign nreg = v.regions | size -%}
   {% if nreg > 0 %}
   <h2 class="sec">Regions</h2>
-  <p class="sec-note">States and provinces, where the country reports them. Each located region gets its own dot on the map above.</p>
+  <p class="sec-note">States and provinces, where the country reports them. Each located region gets its own dot on the map above; a country&rsquo;s remaining views (no region reported, or a region the map cannot place) share one dot at the country&rsquo;s centre.</p>
   {%- assign topr = v.regions | first -%}
   <div class="tablewrap">
     <table>
@@ -281,7 +284,8 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
   {% endif %}
 
   <h2 class="sec">Countries</h2>
-  <p class="sec-note">Every country a visit came from, in the last {{ v._days | default: 30 }} days.</p>
+  {%- assign csum = 0 -%}{%- for c in v.countries -%}{%- assign csum = csum | plus: c.count -%}{%- endfor %}
+  <p class="sec-note">Every country a visit came from, {{ csum }} views in all.{% if csum != v._total %} GoatCounter tallies countries, browsers and systems by UTC day, so these tables cover a slightly different span from the {{ v._days | default: 30 }}-day chart above and need not add up to its {{ v._total | default: 0 }} pageviews.{% endif %}</p>
   {%- assign topc = v.countries | first -%}
   <div class="tablewrap">
     <table>
