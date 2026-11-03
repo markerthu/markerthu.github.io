@@ -3,7 +3,7 @@ export default {
   id: 'ac-flow', name: 'AC-Flow', kicker: 'AC-FLOW  ·  A PROJECT FILM', badge: ['ARXIV 2025', 'arXiv 2510.18072'], page: '/projects/ac-flow/',
   chapters: timeline([
     { len: 7, shape: 'v:denoise', viz: { mode: 'dense', note: '' }, label: 'ARXIV 2025', title: 'AC-Flow',
-      lines: ['Fine-tuning flow matching models', 'with intermediate feedback.'], meta: 'FAN, CHENG, SHEN, ZHOU, LIU  ·  UIUC' },
+      lines: ['Fine-tuning flow matching models', 'with intermediate feedback.'], meta: 'FAN, CHENG, SHEN, ZHOU, LIU  ·  UIUC, CMU & UCAS' },
     { shape: 'v:denoise', viz: { mode: 'outcome' }, tick: 'THE PROBLEM', label: 'THE PROBLEM', title: 'One reward, many steps',
       lines: ['Outcome rewards arrive only at the end of the', 'denoising chain: a credit-assignment problem.'] },
     { shape: 'v:denoise', viz: { mode: 'dense' }, tick: 'ACTOR-CRITIC', label: 'THE METHOD', title: 'An actor and a critic',

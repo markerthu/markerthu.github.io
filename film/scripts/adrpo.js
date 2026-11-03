@@ -20,8 +20,8 @@ export default {
       lines: ['The highest reward and the highest diversity;', 'a 2B SD3 surpassing 4.8B and 12B models.'] },
     { len: 9, shape: 'v:lines', viz: { x: [0, 100], y: [0.2, 2.1], xlabel: 'training progress →', ylabel: 'reward (Qwen2)', stagger: 0.3, series: [
         { label: 'GRPO, fixed β', pts: grpo }, { label: 'ADRPO: about 3× the reward', pts: ours, ours: true }] },
-      tick: 'LLMS', label: 'ACROSS MODALITIES', title: 'Out of a local optimum',
-      lines: ['On Qwen2, the adaptive strength re-opens', 'exploration whenever the model stalls.'] },
+      tick: 'LLMS', label: 'ACROSS MODALITIES', title: 'Climbing where GRPO stalls',
+      lines: ['On Qwen2, GRPO plateaus while ADRPO', 'keeps improving throughout training.'] },
     { len: 7, shape: 'v:leash', viz: { formula: '', hi: '', lo: '', ref: '' }, label: 'ADRPO', title: 'Regularize adaptively',
       lines: ['Explore where it pays,', 'hold back where it does not.'], meta: 'JIAJUNFAN.COM/PROJECTS/ADRPO' },
   ]),

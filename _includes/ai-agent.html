@@ -26,9 +26,10 @@
 .ra-user { align-self: flex-end; background: #2F4B8F; color: #fff; border-radius: 12px 12px 2px 12px; }
 .ra-bot { align-self: flex-start; background: #f1f5f9; color: #1e293b; border-radius: 12px 12px 12px 2px; }
 .ra-typing { display: flex; gap: 4px; align-items: center; padding: 10px 14px; }
-.ra-typing span { width: 7px; height: 7px; border-radius: 50%; background: #94a3b8; animation: ra-dot 1.2s infinite; }
-.ra-typing span:nth-child(2) { animation-delay: .2s; }
-.ra-typing span:nth-child(3) { animation-delay: .4s; }
+.ra-typing i { display: block; width: 7px; height: 7px; border-radius: 50%; background: #94a3b8; animation: ra-dot 1.2s infinite; }
+.ra-typing i:nth-of-type(2) { animation-delay: .2s; }
+.ra-typing i:nth-of-type(3) { animation-delay: .4s; }
+.ra-sr { position: absolute !important; width: 1px !important; height: 1px !important; padding: 0 !important; margin: -1px !important; overflow: hidden !important; clip: rect(0,0,0,0) !important; white-space: nowrap !important; border: 0 !important; background: none !important; animation: none !important; }
 @keyframes ra-dot { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-5px)} }
 .ra-chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 8px 10px 4px; border-top: 1.5px solid #e5e7eb; }
 .ra-chip { background: #eff6ff; color: #1d4ed8; border: 1.5px solid #bfdbfe; border-radius: 999px; padding: 3px 11px; font-size: 0.75em; font-weight: 700; cursor: pointer; transition: background .15s, transform .1s; white-space: nowrap; }
@@ -52,6 +53,8 @@ body.dark-mode .ra-chip { background: #1c2333 !important; color: #58a6ff !import
 body.dark-mode .ra-act { background: #1c2333 !important; color: #58a6ff !important; border-color: #1f3a6e !important; }
 body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
 @media (max-width: 400px) { .ra-panel { width: calc(100vw - 32px); right: 16px; } }
+/* iOS Safari zooms the page when a focused input is under 16px */
+@media (max-width: 700px) { .ra-panel .ra-input { font-size: 16px; } }
 @media print { .ra-btn, .ra-tip, .ra-panel { display: none !important; } }
 </style>
 
@@ -62,7 +65,7 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
     <span><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-agentic.png);mask-image:url(/images/icons/h-agentic.png)"></i>Jiajun's AI Agent<span class="ra-dot" aria-hidden="true"></span><span class="ra-status">online</span></span>
     <button onclick="raClose()" class="ra-close" aria-label="Close chat widget"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-cross.png);mask-image:url(/images/icons/h-cross.png)"></i></button>
   </div>
-  <div id="ra-msgs" class="ra-msgs"></div>
+  <div id="ra-msgs" class="ra-msgs" role="log" aria-live="polite" aria-label="Conversation"></div>
   <div id="ra-chips" class="ra-chips">
     <button class="ra-chip" onclick="raAsk(this)"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-target.png);mask-image:url(/images/icons/h-target.png)"></i>Latest papers</button>
     <button class="ra-chip" onclick="raAsk(this)"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-research.png);mask-image:url(/images/icons/sh-research.png)"></i>Research focus</button>
@@ -83,168 +86,211 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
 
   /* ════════ KNOWLEDGE BASE ════════
      id      stable topic id (used by rel/follow-ups)
-     kw      retrieval keywords (phrases allowed)
+     nm      the paper's own names (scored above topical keywords)
+     kw      retrieval keywords (phrases allowed; matched as whole words/phrases)
      a       answer variants (one is picked; never the same twice in a row)
      more    deeper detail served on "tell me more / why / how"
      rel     related topic ids the agent may proactively offer
-     act     action chips rendered under the reply                       */
+     act     action chips rendered under the reply
+     plain   a plain fact: no conversational opener                       */
   var KB = [
     { id:'focus', kw:['research','focus','interest','direction','work on','studying','topic','about you','what do you do'],
       a:["My research is about autonomous RL post-training for large generative models — making diffusion models, flow matching models, and multimodal LLMs continuously self-improve with minimal human supervision.",
          "In one line: I teach big generative models to improve themselves. Concretely — RL post-training for diffusion/flow models and multimodal reasoning LLMs, with as little human supervision as possible."],
       more:"The thread that connects everything: who supplies the learning signal when humans step away? My answers so far — reward-weighted matching (ORW-CFM-W2), adaptive regularization (ADRPO), intermediate feedback (AC-Flow), and process rewards for reasoning (CESAR).",
       rel:['cesar','orw'] },
-    { id:'cesar', kw:['cesar','audio','mmau','audio llm','process reward','test-time inverse','reasoning process'],
+    { id:'cesar', nm:['cesar'], kw:['audio','mmau','audio llm','audio llms','audio reasoning','process reward','process rewards','test-time inverse','inverse scaling','reasoning process','iclr 2026','amazon science'],
       a:["CESAR (ICLR 2026, also featured on Amazon Science) tackles a paradox we found in Audio LLMs: longer reasoning chains can actually hurt accuracy — test-time inverse scaling. We fix it with process-level rewards (GRPO) that grade the reasoning itself, not just the answer. Result: SOTA on MMAU, ahead of Gemini 2.5 Pro and GPT-4o Audio.",
          "That's our ICLR 2026 paper (now also on Amazon Science). Audio LLMs get worse when they think longer — we measured it, named it (test-time inverse scaling), and fixed it by rewarding the reasoning process instead of only outcomes. SOTA on MMAU."],
       more:"The key insight: outcome-only RL teaches models to ramble — verbose chains that drift off-task. Process rewards grade each intermediate step, so the model learns to think usefully. That's also why it scales: more test-time compute finally helps instead of hurting.",
       rel:['focus','adrpo'],
       act:[{t:'🔗 CESAR project page', h:'/projects/cesar/'},{t:'📄 Amazon Science', h:'https://www.amazon.science/publications/incentivizing-consistent-effective-and-scalable-reasoning-capability-in-audio-llms-via-reasoning-process-rewards'},{t:'📎 arXiv', h:'https://arxiv.org/abs/2510.20867'}] },
-    { id:'audiorsi', kw:['audiorsi','audio rsi','audio-rsi','recursive self','recursively','self-improving audio','self-critique','self critic','student and teacher','surpass its teacher','own teacher'],
+    { id:'audiorsi', nm:['audiorsi','audio rsi','audio-rsi'], kw:['recursive self','recursive self-improvement','recursively','self-improving audio','self-critique','self critic','student and teacher','surpass its teacher','own teacher'],
       a:["AudioRSI (arXiv 2026) is, to our knowledge, the first recursively self-improving audio LLM. One model is both student and teacher: as the student it writes reasoning paths, and as the teacher it hears the same recording and compares them pair by pair, so its own judgments become a process-level reward added to the outcome reward. Every 200 steps the improved student becomes the teacher of its successor, as long as it has not regressed.",
          "That's our newest audio paper. The surprise behind it: trained by a frozen external judge that scores 74.6% on MMAU test-mini, the student ends at 75.1%, slightly above its teacher. So we let the student keep becoming the teacher, and the recursion reaches 76.1% with a 7B model and no external reward model."],
       more:"The teacher can hear the audio, so it can reject reasoning that cites a sound the recording does not contain, which a text-only judge would have to take on trust. And the recursion is what keeps it improving: with a frozen external judge, out-of-distribution accuracy plateaus, while a teacher refreshed from the student keeps it rising.",
       rel:['cesar','readmind'],
-      act:[{t:'🔗 AudioRSI project page', h:'/projects/audiorsi/'},{t:'🎬 Watch the film', h:'/film/?s=audiorsi'},{t:'📎 arXiv', h:'https://arxiv.org/abs/2610.36578'}] },
-    { id:'tfopd', kw:['tf-opd','tfopd','training-free','training free','on-policy distillation','distillation','model merging','merge specialists','merging'],
+      act:[{t:'🔗 AudioRSI project page', h:'/projects/audiorsi/'},{t:'Watch the film', h:'/film/?s=audiorsi'},{t:'📎 arXiv', h:'https://arxiv.org/abs/2610.36578'}] },
+    { id:'tfopd', nm:['tf-opd','tfopd','training-free on-policy distillation'], kw:['training-free','training free','on-policy distillation','distillation','model merging','merge specialists','merging'],
       a:["Training-Free On-Policy Distillation (TF-OPD, arXiv 2026) merges RL specialists that share a base model into one model with zero gradient steps. Each linear layer of the merged model has to reproduce every specialist on the inputs that specialist sees while reading its own answers; that is least squares, solved exactly from second moments gathered in one forward pass over each specialist's kept answers to a few hundred training problems.",
          "It's the paper where, for specialists that share a base model, on-policy distillation stops needing training: on Olmo 3 7B, a math specialist and a code specialist merge into one model whose mean accuracy over seven math and code benchmarks (61.1) is higher than either specialist's (59.8 and 53.6), with about 10 GPU-hours of forward computation and linear algebra in total."],
       more:"The surprise is that the data matters more than the solver: a few of the math specialist's answers get stuck in repetition loops. They are 7% of its answers but 23% of its tokens, and dropping them takes the merged model on AIME25 from task-arithmetic level to the specialist's own level in the same number format.",
       rel:['audiorsi','pubs'],
-      act:[{t:'🔗 TF-OPD project page', h:'/projects/tf-opd/'},{t:'🎬 Watch the film', h:'/film/?s=tf-opd'},{t:'📎 arXiv', h:'https://arxiv.org/abs/2610.22236'}] },
-    { id:'speechgym', kw:['speechgym','speech gym','voice agent','voice agents','spoken agent','tau-voice','tau voice','native speech','native audio'],
+      act:[{t:'🔗 TF-OPD project page', h:'/projects/tf-opd/'},{t:'Watch the film', h:'/film/?s=tf-opd'},{t:'📎 arXiv', h:'https://arxiv.org/abs/2610.22236'}] },
+    { id:'speechgym', nm:['speechgym','speech gym'], kw:['voice agent','voice agents','spoken agent','tau-voice','tau voice','native speech','native audio'],
       a:["SpeechGym (arXiv 2026) is about training voice agents with RL. Voice-agent benchmarks usually score a closed realtime API from the outside, so no gradient ever reaches the agent. SpeechGym makes both sides of the call local open models talking in native speech over an existing tool-use benchmark, so the agent can actually be trained — and a per-turn process reward fixes the first thing that breaks: at audio success rates almost every rollout group fails identically and teaches nothing.",
          "That's our newest agentic-RL paper: an audio-native gym where an open caller model and the voice agent talk in real speech, the agent calls tools against a live database, and the benchmark's own task check is the reward. Training in speech more than doubles task success on the τ-voice tasks."],
       rel:['readmind','cesar'],
       act:[{t:'🔗 SpeechGym project page', h:'/projects/speechgym/'},{t:'📎 arXiv', h:'https://arxiv.org/abs/2608.26432'}] },
-    { id:'readmind', kw:['read the mind','read-the-mind','logit lens','interpretability','mind of an audio','workspace','middle layer','middle-layer'],
+    { id:'readmind', nm:['read the mind','read-the-mind'], kw:['logit lens','interpretability','mind of an audio','workspace','middle layer','middle layers','middle-layer'],
       a:["“Can We Read the Mind of an Audio LLM?” (arXiv 2026) looks inside a speech model while it listens. Reading Qwen3-Omni's middle layers with a logit lens at the audio-token positions, the answer to a spoken question is already legible — in words, across languages — before the model emits a single token.",
          "It's our interpretability paper on audio LLMs: the middle layers form a verbalizable, multilingual workspace, so you can read what the model has worked out even when it never writes its reasoning down."],
       rel:['speechgym','cesar'],
       act:[{t:'🔗 Read the Mind project page', h:'/projects/read-the-mind/'},{t:'📎 arXiv', h:'https://arxiv.org/abs/2608.24958'}] },
-    { id:'parl', kw:['procedure','procedural','tool','tool use','tool calling','function calling','colm','bfcl','api-bank','bamboogle','agent rl','toolrl'],
-      a:["Procedure-Aware RL (COLM 2026) is about tool-using agents: RL that rewards only final correctness never teaches the model how to *sequence* its tool calls. We add a procedural reward — invocation-order quality plus a final-system-state check — and an error-aware penalty on top of GRPO.",
+    { id:'parl', nm:['procedure-aware rl','procedure-aware','parl'], kw:['procedure','procedural','tool','tools','tool use','tool calling','function calling','colm','colm 2026','bfcl','api-bank','bamboogle','agent rl','toolrl'],
+      a:["Procedure-Aware RL (COLM 2026) is about tool-using agents: RL that rewards only final correctness never teaches the model how to sequence its tool calls. We add a procedural reward — invocation-order quality plus a final-system-state check — and an error-aware penalty on top of GRPO.",
          "That's our COLM 2026 paper on tool-augmented LLMs. Same calls in the wrong order give the wrong final state, so we reward the order itself, not just the answer."],
       more:"With those rewards a 3B model beats the correctness-only RL baseline on BFCL-V3, API-Bank and Bamboogle, and lands in the same range as much larger proprietary models. It also learns to recover after a failed call — nothing in the reward asks for that.",
       rel:['focus','cesar'],
       act:[{t:'🔗 Procedure-Aware RL project page', h:'/projects/procedure-aware-rl/'},{t:'📄 OpenReview', h:'https://openreview.net/forum?id=d4wrBuJ4xo'}] },
-    { id:'proteinzero', kw:['proteinzero','protein zero','protein','protein design','inverse folding','tmlr','esmfold','cath'],
+    { id:'proteinzero', nm:['proteinzero','protein zero'], kw:['protein','proteins','protein design','inverse folding','tmlr','esmfold','cath'],
       a:["ProteinZero (TMLR 2026) lets a protein inverse-folding model improve from its own designs with online RL: ESMFold structure feedback plus a fast self-derived ddG proxy as the reward, and an embedding-level diversity regularizer so it does not collapse onto a few sequences. On CATH-4.3 it reaches success rates above 90% with 36–48% fewer design failures than prior models, and a full run fits on one 8-GPU node in about three days. The code is open source."],
       rel:['orw','adrpo'],
       act:[{t:'🔗 ProteinZero project page', h:'/projects/proteinzero/'},{t:'📎 arXiv', h:'https://arxiv.org/abs/2506.07459'},{t:'💻 Code', h:'https://github.com/ziwenwang28/ProteinZero'}] },
-    { id:'gpflow', kw:['gpflow','poisson flow','generalized poisson','variable-length','variable length','motif scaffolding'],
-      a:["GPFlow (NeurIPS 2026) generates proteins without fixing their length in advance: it learns the rate function of an inhomogeneous generalized Poisson process, over both structure and sequence. It ranks first on 10 of 16 motif-scaffolding tasks, with up to a 10-fold higher success rate on the hardest targets."],
-      act:[{t:'📎 arXiv', h:'https://arxiv.org/abs/2607.09039'}] },
-    { id:'lbc', kw:['lbc','atari','world record','record','superhuman','behavior control','exploration','bandit'],
+    { id:'lbc', nm:['lbc','learnable behavior control'], kw:['atari','world record','world records','record','records','superhuman','behavior control','exploration','bandit','iclr 2023'],
       a:["LBC (ICLR 2023 Oral, rank 5/4176) broke 24 Atari human world records with 1B frames — 100× less data than Agent57. The trick: a learnable hybrid behavior mapping plus a bandit meta-controller, which massively enlarges the space of behaviors the agent can explore.",
          "My favorite to talk about — LBC got an ICLR 2023 Oral (top 5%). We broke 24 Atari human world records using 100× less data than Agent57, by making behavior selection itself learnable instead of hand-designed."],
       more:"Why it works: population-based methods like Agent57 pick from a fixed, hand-designed set of policies. LBC instead learns a hybrid mapping over ALL policies and lets a bandit meta-controller choose — the effective behavior space explodes, and exploration quality with it. 10,077% mean human-normalized score.",
       rel:['gdi'],
       act:[{t:'🔗 LBC project page', h:'/projects/lbc/'},{t:'📎 arXiv', h:'https://arxiv.org/abs/2305.05239'}] },
-    { id:'gdi', kw:['gdi','generalized data','distribution iteration','icml 2022'],
+    { id:'gdi', nm:['gdi','generalized data distribution iteration'], kw:['generalized data','distribution iteration','icml 2022'],
       a:["GDI (ICML 2022) makes one claim: the training data distribution is THE lever for RL efficiency. Optimize it directly and you get 9,620% mean human-normalized score on Atari with just 200M frames — about 500× less data than Agent57.",
          "GDI is the theory piece — it shows DQN through Agent57 are all special cases of one operator view, and that actively optimizing the data distribution is what really buys sample efficiency. 9,620% mean HNS at 200M frames."],
       more:"GDI frames RL as alternating between improving the policy and improving the DATA the policy learns from. Most algorithms only do the first implicitly. Making the second explicit — choosing what experience to learn from — is where the 500× efficiency comes from. LBC builds directly on this.",
       rel:['lbc'],
       act:[{t:'🔗 GDI project page', h:'/projects/gdi/'},{t:'📎 arXiv', h:'https://arxiv.org/abs/2206.03192'}] },
-    { id:'adrpo', kw:['adrpo','adaptive divergence','adaptive regularization','neurips 2025'],
+    { id:'adrpo', nm:['adrpo'], kw:['adaptive divergence','adaptive regularization','neurips 2025'],
       a:["ADRPO (NeurIPS 2025) makes KL regularization adaptive at the sample level — good samples get freedom to explore, bad ones get pulled back hard. With it, our 2B SD3 beats 12B FLUX and 4.8B SANA.",
          "The one-line pitch for ADRPO: stop regularizing every sample equally. Modulate the divergence penalty by sample value, and a 2B model out-generates 12B competitors. NeurIPS 2025, plug-and-play on any RL method."],
       more:"Fixed KL strength is always wrong in both directions — too tight kills exploration on promising samples, too loose lets bad samples drift into reward hacking. Sample-level adaptation resolves the dilemma, and it transfers across modalities (we show it on flow models and LLMs).",
       rel:['orw','acflow'],
       act:[{t:'🔗 ADRPO project page', h:'/projects/adrpo/'},{t:'📎 arXiv', h:'https://arxiv.org/abs/2510.18053'}] },
-    { id:'orw', kw:['orw','cfm','wasserstein','flow matching rlhf','iclr 2025','online rlhf'],
+    { id:'orw', nm:['orw-cfm-w2','orw-cfm','orw'], kw:['cfm','wasserstein','flow matching rlhf','iclr 2025','online rlhf','rlhf'],
       a:["ORW-CFM-W2 (ICLR 2025) is the first online RLHF framework for flow matching models. No human data, no reward gradients — just a reward function, with Wasserstein-2 regularization to prevent collapse while keeping diversity.",
          "That's where my generative-model line started — ICLR 2025. Online reward-weighted fine-tuning for flow matching, with a tractable W2 bound that keeps the model from collapsing onto a single high-reward mode."],
       more:"The hard part was the W2 term: exact Wasserstein-2 between continuous flows is intractable, so we derived a tractable upper bound inside the flow matching objective. That bound is what balances exploitation (chase reward) against exploration (stay diverse).",
       rel:['adrpo','acflow'],
       act:[{t:'🔗 ORW-CFM-W2 project page', h:'/projects/orw-cfm-w2/'},{t:'📎 arXiv', h:'https://arxiv.org/abs/2502.06061'}] },
-    { id:'acflow', kw:['ac-flow','acflow','actor critic','intermediate feedback','dual-stability'],
+    { id:'acflow', nm:['ac-flow','acflow'], kw:['actor critic','actor-critic','intermediate feedback','dual-stability'],
       a:["AC-Flow brings actor-critic RL to flow matching: a critic provides feedback at intermediate timesteps, not just the final image. Dual-stability (advantage clipping + critic warm-up) keeps SD3 fine-tuning robust against reward hacking."],
-      more:"Final-output rewards waste most of the trajectory — the model only hears 'good/bad' at the end. A critic at intermediate steps densifies the signal dramatically, which is why training is both faster and more stable.",
+      more:"Final-output rewards leave the credit-assignment problem to the very end — the model only hears 'good/bad' once the image is done. A critic at intermediate steps gives feedback along the way, and the dual-stability mechanism keeps that training stable, without collapse or reward hacking.",
       rel:['orw','adrpo'],
       act:[{t:'🔗 AC-Flow project page', h:'/projects/ac-flow/'},{t:'📎 arXiv', h:'https://arxiv.org/abs/2510.18072'}] },
-    { id:'prance', kw:['prance','token pruning','channel pruning','vit','tpami','efficient inference'],
-      a:["PRANCE (IEEE TPAMI 2026) jointly optimizes token pruning and channel pruning for ViTs — about 50% FLOPs cut, keeping only ~10% of tokens, with lossless Top-1 accuracy."],
+    /* agentic RL / LLM reasoning: points only to his own first- and co-first-author papers */
+    { id:'reasoning', kw:['agentic rl','agentic','agentic reinforcement learning','llm reasoning','reasoning llm','reasoning llms','reasoning models','reasoning','math reasoning','llm','llms','large language model','large language models','language model','language models','llm agents','tool-using agents'],
+      a:["On agentic RL and LLM reasoning, my own papers are Procedure-Aware RL (COLM 2026, co-first) for tool-using agents, SpeechGym for training voice agents with RL in native speech, CESAR (ICLR 2026) and AudioRSI for reasoning in audio LLMs, and Training-Free On-Policy Distillation (co-first), which merges RL specialists that share a base model into one model with zero gradient steps."],
+      rel:['parl','speechgym','cesar'],
+      act:[{t:'🔗 Procedure-Aware RL', h:'/projects/procedure-aware-rl/'},{t:'🔗 SpeechGym', h:'/projects/speechgym/'},{t:'🔗 CESAR', h:'/projects/cesar/'}] },
+
+    /* ── co-authored work (Jiajun is not first or co-first author): always said so in the answer ── */
+    { id:'prance', nm:['prance'], kw:['token pruning','channel pruning','vit','tpami','efficient inference'],
+      a:["PRANCE (IEEE TPAMI 2026) is a paper I co-authored: it jointly optimizes token pruning and channel pruning for ViTs — about 50% FLOPs cut, keeping only ~10% of tokens, with lossless Top-1 accuracy."],
       rel:['spvla'],
       act:[{t:'📎 arXiv', h:'https://arxiv.org/abs/2407.05010'}] },
-    { id:'spvla', kw:['sp-vla','spvla','sp vla','vla','robot','vision language action','model scheduling'],
-      a:["SP-VLA (ICLR 2026) speeds up Vision-Language-Action models with joint model scheduling and spatio-semantic token pruning — 1.5× lossless on LIBERO, 2.4× on SimplerEnv."],
+    { id:'spvla', nm:['sp-vla','spvla'], kw:['vision language action','vision-language-action','model scheduling','spatio-semantic','libero','simplerenv'],
+      a:["SP-VLA (ICLR 2026) is a paper I co-authored: it speeds up Vision-Language-Action models with joint model scheduling and spatio-semantic token pruning — 1.5× lossless on LIBERO, 2.4× on SimplerEnv."],
       rel:['prance'] },
-    { id:'varcon', kw:['varcon','variational contrastive','supervised contrastive','imagenet','resnet'],
-      a:["VarCon (NeurIPS 2025) recasts supervised contrastive learning as variational inference — a principled probabilistic framing that reaches 79.36% Top-1 on ImageNet-1K with ResNet-50."] },
+    { id:'varcon', nm:['varcon'], kw:['variational contrastive','supervised contrastive','imagenet','resnet'],
+      a:["VarCon (NeurIPS 2025) is a paper I co-authored: it recasts supervised contrastive learning as variational inference — a principled probabilistic framing that reaches 79.36% Top-1 on ImageNet-1K with ResNet-50."] },
+    { id:'gpflow', nm:['gpflow','generalized poisson flow'], kw:['poisson flow','generalized poisson','variable-length','variable length','motif scaffolding','motif-scaffolding'],
+      a:["GPFlow (NeurIPS 2026) is a paper I co-authored. It generates proteins without fixing their length in advance: it learns the rate function of an inhomogeneous generalized Poisson process, over both structure and sequence. It ranks first on 10 of 16 structure-based motif-scaffolding tasks, with more than a 10-fold increase in unique successes on several challenging targets."],
+      rel:['proteinzero'],
+      act:[{t:'📎 arXiv', h:'https://arxiv.org/abs/2607.09039'}] },
+    { id:'elegantvla', nm:['elegantvla','elegant vla','elegant-vla'], kw:['learning when to think','when to think','phase-adaptive','gr00t','cogact'],
+      a:["ElegantVLA (NeurIPS 2026) is a paper I co-authored: a plug-in scheduler that decides when a VLA model needs full computation, reusing vision, language and denoising states during stable motion, with no retraining of the base model. Up to 2.55× (GR00T) / 3.77× (CogACT) speedup · 13.8 → 26.3 Hz on real-world GR00T tasks."],
+      rel:['spvla'],
+      act:[{t:'📎 arXiv', h:'https://arxiv.org/abs/2605.29438'}] },
+    { id:'barrag', nm:['bar-rag','barrag'], kw:['reranker','rerankers','reranking','boundary-aware','evidence selection','rethinking the reranker','goldilocks','rag','retrieval-augmented generation','retrieval augmented generation'],
+      a:["BAR-RAG (ICML 2026) is a paper I co-authored: a reranker trained with RL from generator feedback to pick evidence that is challenging yet sufficient, not just answer-revealing. +10.3% over strong RAG and reranking baselines under noisy retrieval."],
+      rel:['pyrag','parl'],
+      act:[{t:'📄 OpenReview', h:'https://openreview.net/forum?id=Tt8lCe1NrW'},{t:'📎 arXiv', h:'https://arxiv.org/abs/2602.03689'},{t:'💻 Code', h:'https://github.com/GasolSun36/BAR-RAG'}] },
+    { id:'bcr', nm:['bcr','batched contextual reinforcement'], kw:['batched contextual','task-scaling','task scaling','token budget','fewer tokens','shared context','efficient reasoning'],
+      a:["BCR (Batched Contextual Reinforcement, ICML 2026) is a paper I co-authored: one model solves several problems in a single shared context, rewarded only by per-problem accuracy — the shared window becomes an implicit token budget. 15.8–62.6% fewer tokens at equal or better accuracy."],
+      rel:['adrpo'],
+      act:[{t:'📄 OpenReview', h:'https://openreview.net/forum?id=8Oc3Mx754M'},{t:'📎 arXiv', h:'https://arxiv.org/abs/2604.02322'}] },
+    { id:'pyrag', nm:['pyrag','py-rag'], kw:['retrieval is cheap','executable multi-hop','multi-hop rag','multi-hop','multihop','program synthesis'],
+      a:["PyRAG (arXiv 2026) is a paper I co-authored. It recasts multi-hop retrieval-augmented generation as program synthesis and execution: the model writes an executable Python program over retrieval and QA tools, so intermediate states become variables, execution gives deterministic feedback, and the whole reasoning trace can be inspected. On five QA benchmarks (PopQA, HotpotQA, 2WikiMultihopQA, MuSiQue and Bamboogle) it outperforms strong baselines in both training-free and RL-trained settings."],
+      rel:['barrag','parl'],
+      act:[{t:'📎 arXiv', h:'https://arxiv.org/abs/2605.12975'}] },
+    /* EDiSon: _publications and Google Scholar list J. Fan first, so no authorship label is given here */
+    { id:'edison', nm:['edison'], kw:['robot design','robot morphology','morphology','design and control','design-and-control','materials design','ai4mat','tetris'],
+      a:["EDiSon (AI4Mat workshop at NeurIPS 2024) learns design and control together with deep RL: a design policy proposes a structure step by step while a control policy operates it, and a design memory drives adaptive exploration by switching between building a design from scratch and refining a stored high-quality one. The same formulation covers robot morphology design and Tetris-based design."],
+      rel:['proteinzero'],
+      act:[{t:'📄 OpenReview', h:'https://openreview.net/forum?id=stiehhc5y6'}] },
     { id:'uiuc', kw:['phd','uiuc','illinois','university','where study','school','student'],
       a:["I'm a CS PhD student at the University of Illinois Urbana-Champaign — 4.0/4.0 so far. Advised by Prof. Ge Liu."],
       rel:['edu','advisor'] },
-    { id:'contact', kw:['contact','email','reach','collaborate','talk','message'],
+    { id:'graduation', plain:1, kw:['graduate','graduation','graduating','graduates','when does he graduate','when will he graduate','finish his phd','finish the phd','finish your phd','phd end','expected graduation'],
+      a:["I started the CS PhD at UIUC in Aug 2024; graduation is Dec 2027 (expected)."],
+      act:[{t:'📋 View CV', h:'/cv/'}] },
+    { id:'location', plain:1, kw:['location','located','based in','where is he','where are you','where is jiajun','where is he based','where are you based','where do you live','where does he live','urbana','champaign','which city','what city'],
+      a:["Based in Urbana, IL — I'm a CS PhD student at the University of Illinois Urbana-Champaign."] },
+    { id:'talks', kw:['talks','give a talk','gave a talk','given talks','given a talk','invited talk','talk invitation','presentation','presentations','presented','seminar','speaker','speak at','igb'],
+      a:["Most recent: a talk at the IGB (Lunch with CNRG) on building LLM post-training projects with an AI coding agent; earlier, I presented CESAR at ICLR 2026 in Rio de Janeiro. I'm always happy to give talks on LLM post-training with RL and on AI scientists — agentic methods for automated scientific discovery — just reach out at jiajunf3 [at] illinois.edu."],
+      act:[{t:'🔗 IGB event', h:'https://www.igb.illinois.edu/igb-calendar/lunch-cnrg-building-llm-post-training-projects-claude-code'},{t:'✉️ Email Jiajun', h:'mailto:jiajunf3@illinois.edu'}] },
+    { id:'contact', kw:['contact','email','reach','reach out','get in touch','collaborate','collaboration','talk to','talk with','work with','message'],
       a:["Easiest way is email: jiajunf3 [at] illinois.edu. Always happy to talk RL post-training, generative models, or multimodal reasoning.",
          "Drop me an email — jiajunf3 [at] illinois.edu. I read everything, and research conversations are the best part of my day."],
       act:[{t:'✉️ Email Jiajun', h:'mailto:jiajunf3@illinois.edu'},{t:'💼 LinkedIn', h:'https://www.linkedin.com/in/jiajun-fan-57b12b26b'}] },
-    { id:'pubs', kw:['publication','paper','published','conference','venue','list','all papers','latest papers'],
-      a:["The headline list: NeurIPS 2026 (multiple papers, incl. ElegantVLA and GPFlow), COLM 2026 (Procedure-Aware RL), ICML 2026 ×2 (BAR-RAG, BCR), TMLR 2026 (ProteinZero), ICLR 2026 ×2 (CESAR, SP-VLA), IEEE TPAMI 2026 (PRANCE), NeurIPS 2025 ×2 (ADRPO, VarCon), ICLR 2025 (ORW-CFM-W2), ICLR 2023 Oral (LBC), ICML 2022 (GDI) — plus 2026 preprints such as AudioRSI, Training-Free On-Policy Distillation, SpeechGym and Read the Mind.",
-         "Recent highlights: multiple papers accepted at NeurIPS 2026, new preprints such as AudioRSI, Training-Free On-Policy Distillation and Batched Contextual Reinforcement II (arXiv, Oct 2026), SpeechGym and Read the Mind (arXiv, Aug 2026), Procedure-Aware RL at COLM 2026, BCR and BAR-RAG at ICML 2026, ProteinZero in TMLR 2026, CESAR and SP-VLA at ICLR 2026, ADRPO and VarCon at NeurIPS 2025, PRANCE in TPAMI. Earlier: ORW-CFM-W2 (ICLR'25), LBC (ICLR'23 Oral), GDI (ICML'22)."],
+    { id:'pubs', kw:['publication','publications','paper','papers','published','conference','venue','venues','list','all papers','latest papers','how many papers','neurips','icml','iclr','accepted','acceptance','acceptances','first-author','first author'],
+      a:["My own papers first (first or co-first author): Procedure-Aware RL (COLM 2026, co-first), ProteinZero (TMLR 2026, co-first), CESAR (ICLR 2026), ADRPO (NeurIPS 2025), ORW-CFM-W2 (ICLR 2025), LBC (ICLR 2023 Oral) and GDI (ICML 2022), plus the preprints AudioRSI, Training-Free On-Policy Distillation (co-first), SpeechGym and Read the Mind (2026) and AC-Flow (2025). On top of that, co-authored papers at NeurIPS 2026, ICML 2026, ICLR 2026, NeurIPS 2025 and IEEE TPAMI.",
+         "Recent highlights: AudioRSI and Training-Free On-Policy Distillation (co-first) on arXiv in Oct 2026, SpeechGym and Read the Mind on arXiv in Aug 2026, Procedure-Aware RL at COLM 2026 and ProteinZero in TMLR 2026 (both co-first), CESAR at ICLR 2026 and ADRPO at NeurIPS 2025. Earlier: ORW-CFM-W2 (ICLR'25), LBC (ICLR'23 Oral), GDI (ICML'22). Plus co-authored papers at NeurIPS 2026, ICML 2026, ICLR 2026, NeurIPS 2025 and IEEE TPAMI."],
       rel:['cesar','adrpo'],
       act:[{t:'📄 Publications', h:'/publications/'},{t:'🎓 Google Scholar', h:'https://scholar.google.com/citations?user=EjmzseUAAAAJ'}] },
     { id:'cites', kw:['citation','cited','impact','scholar','h-index','how many'],
       a:["{{ site.data.citations._total | default: 560 }}+ citations, h-index {{ site.data.citations._h_index | default: 12 }} and climbing. The most cited paper I'm on is Optimal Transport for Treatment Effect Estimation (NeurIPS 2023), then SP-VLA with {{ site.data.citations['SP-VLA'] | default: 70 }}; among my first-author papers ORW-CFM-W2 leads with {{ site.data.citations['ORW-CFM-W2'] | default: 49 }}, followed by my Atari deep-RL review, LBC at {{ site.data.citations['LBC'] | default: 30 }} and GDI at {{ site.data.citations['GDI'] | default: 26 }}. Live numbers are on Google Scholar (EjmzseUAAAAJ)."] },
-    { id:'vision', kw:['self-improve','self-play','autonomous','annotation-free','human supervision','vision','goal','future','long-term','dream'],
+    { id:'vision', kw:['self-improve','self-improvement','self-play','autonomous','annotation-free','human supervision','long-term vision','research vision','his vision','your vision','big picture','goal','future','long-term','dream'],
       a:["The long game: generative models that improve themselves — learning from environment feedback and their own outputs, with humans stepping back at every stage. Process rewards, actor-critic loops, and online RL post-training are the stepping stones."],
       more:"I think of it as a ladder: first replace human labels with reward models (done), then replace outcome rewards with process rewards (CESAR), then let the model become its own teacher, recursively (AudioRSI), and next let it set its own curriculum. Each rung removes one human from the loop.",
       rel:['focus'] },
-    { id:'flow', kw:['flow matching','diffusion','generative model','score','ode','trajectory'],
+    { id:'flow', kw:['flow matching','diffusion','diffusion models','generative model','generative models','score matching','score-based','trajectory'],
       a:["Flow matching learns straight paths from noise to data — often more stable to train than diffusion. My angle (ORW-CFM-W2, AC-Flow) is fine-tuning these models with RL, demonstrated on Stable Diffusion 3."],
       rel:['orw','acflow'] },
-    { id:'code', kw:['github','code','open source','repository','implementation'],
+    { id:'code', kw:['github','code','source code','open source','open-source','repository','repo','implementation'],
       a:["GitHub is @markerthu — several projects ship code, and each project page links its repo."],
       act:[{t:'💻 GitHub', h:'https://github.com/markerthu'}] },
     { id:'intern', kw:['intern','internship','job','position','opportunity','hiring','open to','spring','summer','2027'],
       a:["Yes — I'm looking for a research internship for Spring & Summer 2027, in RL post-training, generative models, or LLM reasoning. Email me at jiajunf3@illinois.edu and let's talk.",
          "Good timing: I'm open for Spring & Summer 2027 research internships. If your team works on frontier RL, post-training, or generative AI, I'd love to chat — jiajunf3@illinois.edu."],
       act:[{t:'✉️ Reach out', h:'mailto:jiajunf3@illinois.edu'},{t:'📋 View CV', h:'/cv/'}] },
-    { id:'edu', kw:['education','background','undergrad','bachelor','nankai','tsinghua','master','before uiuc','degree'],
+    { id:'edu', kw:['education','background','undergrad','undergraduate','bachelor','nankai','tsinghua','master','masters','before uiuc','degree'],
       a:["Nankai for undergrad (ranked 1st/83 in major, top 1%), Tsinghua for my M.Eng (3.97/4.0, top 1.3%), and now the CS PhD at UIUC (4.0/4.0)."],
       rel:['awards'] },
-    { id:'awards', kw:['award','scholarship','gpa','rank','prize','honor','national scholarship','outstanding'],
+    { id:'awards', kw:['award','awards','scholarship','scholarships','gpa','ranked','class rank','major rank','prize','honor','honors','national scholarship','outstanding','outstanding graduate'],
       a:["Highlights: National Scholarship ×2, Outstanding Graduate (top 1%) and Tang Lixin Scholarship at Nankai, 1st/83 major rank — and a 4.0/4.0 at UIUC."],
       rel:['edu'] },
-    { id:'service', kw:['reviewer','review','service','program committee','pc member','area chair'],
+    { id:'service', kw:['reviewer','reviewing','peer review','does he review','service','program committee','pc member','area chair'],
       a:["I review for ICML (2023–26), ICLR (2024–26), NeurIPS (2022–26), COLM 2026, CVPR 2026, WACV 2027, AAAI 2025 & 2027, AISTATS 2025 and KDD 2024."] },
-    { id:'advisor', kw:['advisor','supervisor','pi','lab','group','professor','mentor','guided by'],
+    { id:'advisor', kw:['advisor','adviser','supervisor','his lab','your lab','which lab','what lab','research group','principal investigator','professor','mentor','guided by','who advises'],
       a:["My advisor is Prof. Ge Liu at UIUC — I work on RL post-training for large generative models."],
       rel:['uiuc'] },
     { id:'cv', kw:['cv','resume','curriculum vitae','download cv'],
       a:["The full CV lives at /cv/ — education, papers, awards, the lot. There's a PDF download on that page too."],
       act:[{t:'📋 Open CV', h:'/cv/'},{t:'⬇️ Download PDF', h:'/files/CV.pdf'}] },
-    { id:'news', kw:['news','latest','recent','update','announcement','what is new'],
-      a:["Most recent: AudioRSI on arXiv, to our knowledge the first recursively self-improving audio LLM; Training-Free On-Policy Distillation on arXiv, fusing specialists that share a base model with forward passes only; several papers accepted at NeurIPS 2026, a paper accepted at IEEE TMM, ProteinZero (TMLR 2026) released as open source, and a talk at IGB on building LLM post-training projects with an AI coding agent. Earlier this year: COLM 2026 (including Procedure-Aware RL), ICML 2026, CESAR + SP-VLA at ICLR 2026, and CESAR featured on Amazon Science."],
+    { id:'news', kw:['news','latest news','latest','recent','update','updates','announcement','what is new',"what's new",'whats new','anything new','tmm','ieee tmm','transactions on multimedia'],
+      a:["Most recent: AudioRSI on arXiv, to our knowledge the first recursively self-improving audio LLM; Training-Free On-Policy Distillation on arXiv, fusing specialists that share a base model with forward passes only; a talk at IGB on building LLM post-training projects with an AI coding agent; ProteinZero (TMLR 2026) released as open source; multiple papers accepted at NeurIPS 2026 and a paper accepted at IEEE TMM; and SpeechGym and Read the Mind on arXiv in August. Earlier this year: COLM 2026 (including Procedure-Aware RL), ICML 2026, CESAR at ICLR 2026, and CESAR featured on Amazon Science."],
       rel:['audiorsi','cesar'],
       act:[{t:'📰 News on homepage', h:'/#news'}] },
     { id:'hobby', kw:['hobby','hobbies','outside research','free time','personal','personal interest','fun','for fun','game design','game','creative','enjoy'],
       a:["Outside research I design games and build creative AI agents — anything with emergent behavior. Honestly, designing RL reward functions and designing game mechanics are the same craft.",
          "Games, mostly — designing them more than playing. There's real overlap with my research: a good reward function and a good game mechanic are both about shaping behavior you can't script directly."] },
-    { id:'site', kw:['website','this site','built','how made','jekyll','github pages','tech stack','this agent','are you human','are you real','human','robot','person','are you ai','chatbot'],
+    { id:'site', kw:['website','personal website','this site','built','how made','jekyll','github pages','tech stack','this agent','are you human','are you real','are you a human','are you a robot','are you a bot','are you a person','real person','are you ai','are you an ai','chatbot','which llm','what model are you'],
       a:["Full transparency: I'm a hand-written conversational engine running entirely in your browser — fuzzy retrieval, topic memory, and human-paced typing, but no LLM and no server. Jiajun wrote the algorithm. The rest of the site is Jekyll on GitHub Pages."] }
   ];
 
   var NAME = { audiorsi:'AudioRSI', tfopd:'TF-OPD', cesar:'CESAR', speechgym:'SpeechGym', readmind:'Read the Mind', lbc:'LBC', gdi:'GDI', adrpo:'ADRPO', orw:'ORW-CFM-W2', acflow:'AC-Flow',
                prance:'PRANCE', spvla:'SP-VLA', focus:'my research focus', edu:'my education',
-               awards:'awards', uiuc:'UIUC', advisor:'my advisor', vision:'the long-term vision', pubs:'my publications' };
+               awards:'awards', uiuc:'UIUC', advisor:'my advisor', vision:'the long-term vision', pubs:'my publications',
+               parl:'Procedure-Aware RL', proteinzero:'ProteinZero', pyrag:'PyRAG', barrag:'BAR-RAG' };
 
-  /* ════════ INTENTS (social / dialogue moves) ════════ */
-  var GREET_RE = /^(hi|hello|hey|yo|hiya|howdy|good (morning|afternoon|evening)|你好|您好|哈喽|嗨)[!. ]*$/i;
-  var THANKS_RE = /\b(thank|thanks|thx|appreciate|谢谢|感谢)\b/i;
-  var BYE_RE = /^(bye|goodbye|see you|cya|later|再见|拜拜)[!. ]*$/i;
-  var MORE_RE = /\b(more|else|detail|details|deeper|elaborate|continue|go on|why|how come|how does|how do|expand|具体|为什么|细节|展开)\b/i;
-  var YES_RE = /^(yes|yeah|yep|sure|ok|okay|sounds good|please|do it|好|好的|可以|行)[!. ]*$/i;
+  /* ════════ INTENTS (social / dialogue moves) ════════
+     Tested on the lower-cased raw text (apostrophes kept). CJK alternatives sit outside \b,
+     because \b never fires next to CJK characters.                                        */
+  var TRAIL = "[^a-z0-9\\u4e00-\\u9fff]*$";   /* trailing punctuation / emoji only */
+  var GREET_RE = new RegExp("^(?:(?:hi|hello|hey|heya|yo|hiya|howdy|greetings|sup|what'?s up|good (?:morning|afternoon|evening|day))(?:[\\s,]+(?:there|jiajun|agent|bot|friend|all|everyone|folks))?|你好|您好|哈喽|嗨)"+TRAIL, 'i');
+  var BYE_RE = new RegExp("^(?:bye|bye bye|goodbye|good bye|see you|see ya|cya|later|再见|拜拜)"+TRAIL, 'i');
+  var THANKS_RE = /(?:\b(?:thank|thanks|thx|appreciate|appreciated)\b|谢谢|感谢|多谢)/i;
+  var MORE_RE = /(?:\b(?:more|else|detail|details|deeper|elaborate|continue|go on|why|how come|how does|how do|expand)\b|具体|为什么|细节|展开|多说)/i;
+  var YES_RE = new RegExp("^(?:(?:yes|yeah|yep|yup|sure|ok|okay|sounds good|please|do it|go ahead|go for it|why not|of course)[\\s,!.]*)+$|^(?:好|好的|可以|行|嗯|是的)"+TRAIL, 'i');
   /* small talk */
-  var HOWRU_RE = /\b(how are you|how's it going|how are things|how do you do|你好吗|怎么样)\b/i;
-  var NAME_RE = /\b(your name|who are you|what are you called|什么名字|你是谁)\b/i;
-  var CANDO_RE = /\b(what can you do|what can you tell me|how can you help|can you help me\??$|你能做什么|能干什么|你会什么)\b/i;
-  var WHOMADE_RE = /\b(who made you|who built you|who created you|who wrote you|谁做的|谁写的)\b/i;
+  var HOWRU_RE = /(?:\b(?:how are you|how're you|how's it going|how is it going|how are things|how do you do|how's your day)\b|你好吗|怎么样)/i;
+  var NAME_RE = /(?:\b(?:your name|who are you|what are you called)\b|什么名字|你是谁)/i;
+  var CANDO_RE = /(?:\b(?:what can you do|what can you tell me|how can you help|can you help me|what do you know)\b|你能做什么|能干什么|你会什么)/i;
+  var WHOMADE_RE = /(?:\b(?:who made you|who built you|who created you|who wrote you)\b|谁做的|谁写的)/i;
 
   var GREETS = ["Hey! What would you like to know — a paper, the research direction, or something about Jiajun's background?",
                 "Hi there 👋 Ask me anything about Jiajun's work. The papers are my favorite subject.",
-                "Hello! I know Jiajun's research inside out — fire away."];
+                "Hello! Ask me about Jiajun's research — fire away."];
   var THANKS_R = ["Anytime! Ask away if anything else comes to mind.",
                   "Happy to help. For deeper discussions, jiajunf3 [at] illinois.edu is the way.",
                   "You're welcome! I'm here whenever."];
@@ -253,11 +299,15 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
                  "I'm good — running smoothly in your browser 😄 What would you like to know?",
                  "All well on my end! Ask me anything about Jiajun's work."];
   var NAME_R = ["I'm Jiajun's site agent — a little conversational engine he wrote to answer questions about his research. What can I help with?",
-                "Just \"Jiajun's AI Agent\" 🤖 I live on this site and know his papers cold. Ask away!"];
-  var CANDO_R = ["I can explain any of Jiajun's papers (AudioRSI, TF-OPD, SpeechGym, Read the Mind, Procedure-Aware RL, ProteinZero, CESAR, ADRPO, ORW-CFM-W2, AC-Flow, LBC, GDI, GPFlow, PRANCE, SP-VLA, VarCon), summarize his research direction, or point you to his CV, citations, awards, and contact. Try \"what is CESAR?\" or \"tell me about his research\".",
+                "Just \"Jiajun's AI Agent\" 🤖 I live on this site and know his main papers. Ask away!"];
+  var CANDO_R = ["I can explain Jiajun's own papers (AudioRSI, TF-OPD, SpeechGym, Read the Mind, Procedure-Aware RL, ProteinZero, CESAR, ADRPO, ORW-CFM-W2, AC-Flow, LBC, GDI) and give short summaries of the papers he co-authored, summarize his research direction, or point you to his CV, citations, awards, and contact. Try \"what is CESAR?\" or \"tell me about his research\".",
                  "Lots! Papers, research focus, education, awards, citations, how to get in touch — and I remember context, so you can say \"tell me more\". What are you curious about?"];
   var WHOMADE_R = ["Jiajun wrote me himself — I'm a hand-coded conversational engine (fuzzy matching + topic memory + human-paced typing), no LLM and no server. Kind of fitting for an RL post-training researcher, right?"];
   var OPENERS = ["", "", "", "Good question — ", "Ah, ", "Sure — ", "Right, so — ", "Oh, that one's fun. "];
+  /* after an opener ending in ", " or "— " only these ordinary sentence starters are lower-cased;
+     paper and place names (AudioRSI, ProteinZero, Nankai, GitHub…) keep their capitals */
+  var LOWER_OK = { "My":1, "In":1, "That's":1, "It's":1, "On":1, "The":1, "Easiest":1, "Drop":1, "Recent":1, "Flow":1,
+                   "Yes":1, "Good":1, "Highlights":1, "Most":1, "Outside":1, "Games":1, "Full":1, "Based":1, "This":1, "Here":1 };
   var FOLLOWUP = ["Want me to go deeper on {T}?", "Curious how this relates to {T}?", "I can also tell you about {T} if you're interested."];
   var FALLBACKS = ["Hmm, I don't have a confident answer for that one. Try a paper name (CESAR, LBC, GDI, ADRPO…) or a topic like flow matching or audio reasoning — or email jiajunf3 [at] illinois.edu directly.",
                    "That's outside what I know well, honestly. I'm strongest on the papers and Jiajun's background — or you can reach the human at jiajunf3 [at] illinois.edu."];
@@ -278,26 +328,39 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
     var r1=diceRaw(a,b), r2=diceRaw(' '+a+' ',' '+b+' ');
     return r1>r2 ? r1 : r2;
   }
-  function scoreEntry(entry, q, qTokens){
-    var s=0, j, k, kn, t, best, sim;
-    for(j=0;j<entry.kw.length;j++){
-      k=entry.kw[j]; kn=norm(k);
-      var w = kn.length>=8 ? 2.2 : (kn.length>=5 ? 1.5 : 1);
-      if(q.indexOf(kn)>=0){ s += 2*w; continue; }        /* exact phrase hit */
-      best=0;
-      for(t=0;t<qTokens.length;t++){                      /* fuzzy token hit (typo-tolerant) */
-        sim=dice(qTokens[t],kn);
-        if(sim>best) best=sim;
-      }
-      if(best>=0.72) s += best*w;
+  /* One keyword against the query.
+     - exact hits are whole words / whole phrases only ('vla' does not fire inside 'elegantvla',
+       'rank' not inside 'reranker', 'code' not inside 'decode');
+     - a phrase with a hyphen or space also matches the other spelling ('ac flow' = 'ac-flow');
+     - fuzzy (typo-tolerant) hits compare a phrase with a window of as many query words, and are
+       off for keywords with digits (so 'neurips 2025' never fires on 'neurips 2026') and for
+       keywords under 4 characters.                                                          */
+  function kwScore(k, isName, Q){
+    var kn=norm(k); if(!kn) return 0;
+    var w = isName ? 2.5 : (kn.length>=8 ? 2.2 : (kn.length>=5 ? 1.5 : 1));
+    var phrase = kn.indexOf(' ')>=0, bonus = phrase ? 1.25 : 1;
+    if(Q.qs.indexOf(' '+kn+' ')>=0) return 2*w*bonus;
+    if((phrase || kn.indexOf('-')>=0) && Q.qh.indexOf(' '+kn.replace(/-/g,' ')+' ')>=0) return 2*w*bonus;
+    if(/\d/.test(kn) || kn.length<4) return 0;
+    var n=kn.split(' ').length, toks=Q.toks, best=0, t, sim;
+    for(t=0;t+n<=toks.length;t++){
+      sim=dice(toks.slice(t,t+n).join(' '), kn);
+      if(sim>best) best=sim;
     }
+    return best>=0.72 ? best*w : 0;
+  }
+  function scoreEntry(entry, Q){
+    var s=0, j;
+    if(entry.nm) for(j=0;j<entry.nm.length;j++) s += kwScore(entry.nm[j], true, Q);
+    for(j=0;j<entry.kw.length;j++) s += kwScore(entry.kw[j], false, Q);
     return s;
   }
   function retrieve(qRaw){
-    var q=norm(qRaw), qTokens=q.split(' ').filter(function(x){return x.length>1;});
+    var q=norm(qRaw); if(!q) return null;
+    var Q={ qs:' '+q+' ', qh:' '+q.replace(/-/g,' ')+' ', toks:q.split(' ') };
     var best=null, bestS=0, i, s;
     for(i=0;i<KB.length;i++){
-      s=scoreEntry(KB[i],q,qTokens);
+      s=scoreEntry(KB[i],Q);
       if(s>bestS){ bestS=s; best=KB[i]; }
     }
     return bestS>=0.9 ? best : null;
@@ -336,23 +399,34 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
     if(h<18) return "Good afternoon! 👋";
     return "Good evening! 🌆";
   }
+  function lowRaw(s){ return (s||'').toLowerCase().replace(/[‘’ʼ`]/g,"'").replace(/\s+/g,' ').trim(); }
+  /* a social intent counts only when what is left after its phrase asks about nothing in the KB:
+     "thanks" -> thanks, but "thanks, what is CESAR?" -> CESAR                                   */
+  function intentOnly(re, low){
+    var m=re.exec(low); if(!m) return false;
+    return !retrieve(low.slice(0,m.index)+' '+low.slice(m.index+m[0].length));
+  }
   function respond(qRaw){
-    var q=norm(qRaw);
-    /* social intents first */
-    if(GREET_RE.test(qRaw.trim()))  return { text:timeHello()+" "+pick(GREETS,'greet') };
-    if(BYE_RE.test(qRaw.trim()))    return { text:pick(BYES,'bye') };
-    if(THANKS_RE.test(q))           return { text:pick(THANKS_R,'thanks') };
-    if(HOWRU_RE.test(q))            return { text:pick(HOWRU_R,'howru') };
-    if(NAME_RE.test(q))             return { text:pick(NAME_R,'name') };
-    if(WHOMADE_RE.test(q))          return { text:pick(WHOMADE_R,'whomade') };
-    if(CANDO_RE.test(q))            return { text:pick(CANDO_R,'cando'), act:[{t:'🎧 What is CESAR?', h:'/projects/cesar/'},{t:'📄 Publications', h:'/publications/'}] };
+    var low=lowRaw(qRaw);
+    /* greetings / goodbyes (whole message) */
+    if(GREET_RE.test(low))  return { text:timeHello()+" "+pick(GREETS,'greet') };
+    if(BYE_RE.test(low))    return { text:pick(BYES,'bye') };
     /* accepting an offered follow-up */
-    if(YES_RE.test(qRaw.trim()) && state.offered){
+    if(YES_RE.test(low) && state.offered){
       var off=entryById(state.offered); state.offered=null;
       if(off) return answerFrom(off, true);
     }
-    /* "tell me more" about current topic */
-    if(MORE_RE.test(q) && state.lastTopic){
+    /* small talk, unless the message also asks about something */
+    if(intentOnly(THANKS_RE, low))   return { text:pick(THANKS_R,'thanks') };
+    if(intentOnly(HOWRU_RE, low))    return { text:pick(HOWRU_R,'howru') };
+    if(intentOnly(NAME_RE, low))     return { text:pick(NAME_R,'name') };
+    if(intentOnly(WHOMADE_RE, low))  return { text:pick(WHOMADE_R,'whomade') };
+    if(intentOnly(CANDO_RE, low))    return { text:pick(CANDO_R,'cando'), act:[{t:'🎧 What is CESAR?', h:'/projects/cesar/'},{t:'📄 Publications', h:'/publications/'}] };
+    /* retrieve first: a new question that happens to contain "how does", "why", "more" or
+       "else" is answered on its own topic; "tell me more" only continues the last topic when
+       nothing new is hit, or the hit is that same topic                                     */
+    var hit=retrieve(qRaw);
+    if(MORE_RE.test(low) && state.lastTopic && (!hit || hit===state.lastTopic)){
       var t=state.lastTopic;
       if(t.more && !t._moreServed){
         t._moreServed=true;
@@ -361,18 +435,18 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
       }
       var fu2=followupFor(t);
       if(fu2) return { text:"I've told you the best parts of that one! "+fu2 };
+      if(!hit) return { text:"That's the core of it from me — the paper has the full details.", act:t.act };
     }
-    /* content retrieval */
-    var hit=retrieve(qRaw);
-    if(hit) return answerFrom(hit, false);
+    if(hit) return answerFrom(hit, false, THANKS_RE.test(low) ? "You're welcome! " : null);
     state.offered=null;
     return { text:pick(FALLBACKS,'fb'), act:[{t:'📄 Browse papers', h:'/publications/'},{t:'✉️ Email Jiajun', h:'mailto:jiajunf3@illinois.edu'}] };
   }
-  function answerFrom(entry, accepted){
+  function answerFrom(entry, accepted, lead){
     state.lastTopic=entry; state.visited[entry.id]=true; state.offered=null;
     var body=pick(entry.a, entry.id);
-    var pre = accepted ? pick(["Alright — ","Here goes: ",""]) : opener();
-    if(pre && /[,—] $/.test(pre) && /^[A-Z][a-z]/.test(body)) body = body.charAt(0).toLowerCase() + body.slice(1);
+    var pre = lead ? lead : (accepted ? pick(["Alright — ","Here goes: ",""]) : (entry.plain ? '' : opener()));
+    var first=(body.match(/^[A-Za-z']+/)||[''])[0];
+    if(pre && /[,—] $/.test(pre) && LOWER_OK[first]) body = body.charAt(0).toLowerCase() + body.slice(1);
     var fu = (Math.random()<0.6) ? followupFor(entry) : null;
     return { text: pre+body + (fu ? '||'+fu : ''), act:entry.act };
   }
@@ -427,7 +501,7 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
     var msgs=el('ra-msgs'); if(!msgs) return;
     var div=document.createElement('div');
     div.className='ra-msg ra-bot ra-typing'; div.id='ra-typing-indicator';
-    div.innerHTML='<span></span><span></span><span></span>';
+    div.innerHTML='<span class="ra-sr">Typing…</span><i aria-hidden="true"></i><i aria-hidden="true"></i><i aria-hidden="true"></i>';
     msgs.appendChild(div); msgs.scrollTop=msgs.scrollHeight;
   }
   function removeTyping(){
@@ -439,27 +513,35 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
     if(prev===','||prev===';'||prev==='—') return 70+Math.random()*70;   /* mini-pause */
     return 6+Math.random()*16;                                            /* normal burst */
   }
+  /* #ra-msgs is a polite live region. The characters are typed into an aria-hidden span, and the
+     finished text replaces it in one step, so a screen reader hears each bubble once, not per key. */
   function typeBubble(text, done){
     var msgs=el('ra-msgs'); if(!msgs){ if(done) done(); return; }
     var div=document.createElement('div');
     div.className='ra-msg ra-bot';
+    if(reduced){ div.textContent=text; msgs.appendChild(div); msgs.scrollTop=msgs.scrollHeight; if(done) done(); return; }
+    var vis=document.createElement('span');
+    vis.setAttribute('aria-hidden','true');
+    div.appendChild(vis);
     msgs.appendChild(div); msgs.scrollTop=msgs.scrollHeight;
-    if(reduced){ div.textContent=text; if(done) done(); return; }
     var i=0;
     (function tick(){
       if(i<=text.length){
-        div.textContent=text.substring(0,i);
+        vis.textContent=text.substring(0,i);
         msgs.scrollTop=msgs.scrollHeight;
         i++;
         setTimeout(tick, charDelay(text[i-1]||'', text[i-2]||''));
-      } else if(done) done();
+      } else {
+        div.textContent=text;
+        if(done) done();
+      }
     })();
   }
-  function deliver(reply){
+  function deliver(reply, done){
     var parts=reply.text.split('||').map(function(p){return p.trim();}).filter(Boolean);
     var idx=0;
     function next(){
-      if(idx>=parts.length){ appendActs(reply.act); return; }
+      if(idx>=parts.length){ appendActs(reply.act); if(done) done(); return; }
       var part=parts[idx++];
       var think = idx===1
         ? Math.min(420+part.length*2.2, 1700)+Math.random()*380   /* reading + thinking */
@@ -469,8 +551,21 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
     }
     next();
   }
+  /* One reply at a time. A question sent while a reply is still typing waits its turn; its
+     bubble and respond() both run when it is dequeued, so bubbles stay in question order and
+     state.offered always belongs to the follow-up shown last ("yes" accepts what you see). */
+  var queue=[], busy=false;
+  function enqueue(job){ queue.push(job); if(!busy) pump(); }
+  function pump(){
+    if(!queue.length){ busy=false; return; }
+    busy=true;
+    var job=queue.shift(), reply=null;
+    try{ reply=job(); }catch(e){ reply=null; }
+    if(reply && reply.text) deliver(reply, pump); else pump();
+  }
 
   /* ════════ PUBLIC API (open/close/send) ════════ */
+  var welcomed=false;
   window.raAsk=function(btn){
     if(!btn) return;
     var text=btn.textContent.replace(/^[^\w]+/,'').trim();
@@ -487,11 +582,12 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
     btn.style.display='none';
     btn.setAttribute('aria-expanded','true');
     var msgs=el('ra-msgs');
-    if(msgs&&!msgs.children.length){
-      setTimeout(function(){
-        deliver({ text:"Hey, welcome 👋 I'm Jiajun's site agent — I know every paper here cold.||Ask me anything, or tap a topic below.",
-                  act:[{t:'🏠 Homepage', h:'/'},{t:'📄 Publications', h:'/publications/'},{t:'✉️ Contact', h:'mailto:jiajunf3@illinois.edu'}] });
-      },200);
+    if(msgs&&!welcomed&&!msgs.children.length){
+      welcomed=true;
+      enqueue(function(){
+        return { text:"Hey, welcome 👋 I'm Jiajun's site agent — I know his main papers well.||Ask me anything, or tap a topic below.",
+                 act:[{t:'🏠 Homepage', h:'/'},{t:'📄 Publications', h:'/publications/'},{t:'✉️ Contact', h:'mailto:jiajunf3@illinois.edu'}] };
+      });
     }
     setTimeout(function(){ var i=el('ra-input'); if(i) i.focus(); },300);
   };
@@ -518,8 +614,7 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
     var inp=el('ra-input'); if(!inp) return;
     var q=inp.value.trim(); if(!q) return;
     inp.value='';
-    addMsg(q,'user');
-    deliver(respond(q));
+    enqueue(function(){ addMsg(q,'user'); return respond(q); });
   };
 
   /* FAB tooltip (once per session) + pulse quiet after open */

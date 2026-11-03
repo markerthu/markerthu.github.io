@@ -356,7 +356,7 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
 <section>
   <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-gear.png);mask-image:url(/images/icons/h-gear.png)"></i>The &alpha; knob: reward vs. diversity</h2>
   <p>Controlled experiments on MNIST and CIFAR isolate the reward–diversity trade-off set by the W2 regularization strength α. Raising α preserves more diversity at some cost in reward, and the trade-off is smooth and controllable rather than a cliff. The regularization also prevents the mode collapse that unconstrained reward-weighting falls into, and the same control carries over to text-conditional CIFAR.</p>
-  <p>In practice: α=0 gives pure reward and mode collapse, α=0.3 is a balanced recommended setting, and α=0.8 preserves high diversity. The same knob applied to SD3 spans from the base model through balanced fine-tuning to full reward optimization.</p>
+  <p>In practice: α=0 gives pure reward and mode collapse, α=0.3 gives a balanced trade-off, and α=0.8 preserves high diversity. The same knob applied to SD3 spans from the base model through balanced fine-tuning to full reward optimization.</p>
   {% include anim/orw.html %}
 </section>
 
