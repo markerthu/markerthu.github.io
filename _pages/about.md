@@ -2643,7 +2643,7 @@ function drawGraph(container) {
     {c:TC.deep,l:'Deep RL'},{c:TC.train,l:'RL Training'},
     {c:TC.flow,l:'Flow Matching'},{c:TC.eff,l:'Efficiency'},
     {c:TC.rep,l:'Representation'},{c:TC.audio,l:'Audio Reasoning'},
-    {c:edgeClr,  l:'Research evolution', dash:true},
+    {c:edgeClr,  l:'Builds on related ideas', dash:true},
   ];
   var legW = legItems.reduce(function(s, it){ return s + (it.dash ? 18 : 14) + it.l.length * 6.2 + 18; }, 8);
   var lx = 8, ly = H - (legW > W ? 30 : 16);
