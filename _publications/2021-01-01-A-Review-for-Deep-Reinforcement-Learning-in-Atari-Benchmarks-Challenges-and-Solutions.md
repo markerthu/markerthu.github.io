@@ -14,3 +14,5 @@ bibtex: |
     year={2022}
   }
 ---
+
+A review of deep reinforcement learning on the Atari benchmark. It argues that the usual human-normalized criteria understate what humans can do, proposes a benchmark based on human world records that asks for both final performance and learning efficiency, reports state-of-the-art methods on the new metrics, and identifies the open challenges that keep agents from superhuman play.

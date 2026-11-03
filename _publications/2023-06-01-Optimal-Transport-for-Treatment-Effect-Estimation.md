@@ -4,7 +4,7 @@ collection: publications
 permalink: /publication/2023-06-01-Optimal-Transport-Treatment-Effect
 date: 2023-06-01
 venue: 'Conference on Neural Information Processing Systems 2023 (<strong>NeurIPS 2023</strong>)'
-paperurl: 'https://arxiv.org/abs/2310.18286'
+paperurl: 'https://proceedings.neurips.cc/paper_files/paper/2023/hash/1160e7f31d0a74abbbe1bbf7924b949c-Abstract-Conference.html'
 citation: 'Hao Wang, Jiajun Fan, Zhichao Chen, Haoxuan Li, Weiming Liu, Tianqiao Liu, Quanyu Dai, Yichao Wang, Zhenhua Dong, Ruiming Tang. &quot;Optimal Transport for Treatment Effect Estimation.&quot; NeurIPS 2023.'
 bibtex: |
   @inproceedings{wang2023ot,
@@ -14,7 +14,7 @@ bibtex: |
     volume={36},
     pages={5404--5418},
     year={2023},
-    url={https://arxiv.org/abs/2310.18286}
+    url={https://proceedings.neurips.cc/paper_files/paper/2023/hash/1160e7f31d0a74abbbe1bbf7924b949c-Abstract-Conference.html}
   }
 ---
 

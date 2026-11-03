@@ -1201,7 +1201,7 @@ function initCost(){
     var e=+sl.value, cost=e*200, t=e*2.8;
     api.textContent = cost >= 100000 ? '$' + Math.round(cost/1000) + 'k' : fmt(cost);
     loc.textContent = '$0';
-    tm.textContent  = hrs(t);
+    if(tm) tm.textContent = hrs(t);
     var word = e===1 ? 'One epoch.' : (e===7 ? 'Seven epochs.' : e.toLocaleString('en-US') + ' epochs.');
     say.innerHTML = '<b>' + word + '</b> A run that costs ' +
       (cost >= 100000 ? 'around $' + Math.round(cost/1000) + 'k' : 'over ' + fmt(cost)) +

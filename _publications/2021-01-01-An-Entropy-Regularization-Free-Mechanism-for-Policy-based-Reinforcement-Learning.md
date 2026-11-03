@@ -14,3 +14,5 @@ bibtex: |
     year={2021}
   }
 ---
+
+Policy-based RL is prone to policy collapse, which value-based methods avoid through the diversity and adaptive trade-off of ε-greedy exploration. This paper proposes an entropy-regularization-free mechanism that gives policy-based methods the same three properties and makes them markedly more sample-efficient on the Arcade Learning Environment.

@@ -24,3 +24,5 @@ bibtex: |
   }
 film: "gdi"
 ---
+
+GDI tackles sample efficiency and final performance at once by casting both as optimizing the training data distribution: it models and controls the capacity and diversity of the behavior policy and adapts its sampling distribution. Integrated into Generalized Policy Iteration, it yields operator-based versions of RL methods from DQN to Agent57 and surpasses 22 human world records on Atari with only 200M training frames.

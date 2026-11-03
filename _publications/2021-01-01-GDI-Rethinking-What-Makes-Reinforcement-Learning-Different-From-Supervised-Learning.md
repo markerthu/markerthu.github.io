@@ -15,3 +15,5 @@ bibtex: |
     year={2022}
   }
 ---
+
+Workshop version of GDI. Where supervised learning cannot close the gap between the estimated and the true data distribution, RL can, and this paper builds on that difference: it generalizes Generalized Policy Iteration into Generalized Data Distribution Iteration, which unifies many RL algorithms as special cases, and reaches state-of-the-art results on Atari with 22 human world records in 200M training frames.

@@ -1,17 +1,19 @@
 ---
-layout: archive
+layout: null
+sitemap: false
 permalink: /categories/
-title: "Posts by Category"
-author_profile: true
 ---
-
-{% include base_path %}
-{% include group-by-array collection=site.posts field="categories" %}
-
-{% for category in group_names %}
-  {% assign posts = group_items[forloop.index0] %}
-  <h2 id="{{ category | slugify }}" class="archive__subtitle">{{ category }}</h2>
-  {% for post in posts %}
-    {% include archive-single.html %}
-  {% endfor %}
-{% endfor %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="refresh" content="0; url=/year-archive/">
+<link rel="canonical" href="https://www.jiajunfan.com/year-archive/">
+<title>Redirecting…</title>
+</head>
+<body>
+<p>This page has moved. <a href="/year-archive/">Go to the blog archive →</a></p>
+<script>window.location.replace("/year-archive/");</script>
+</body>
+</html>

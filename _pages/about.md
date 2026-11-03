@@ -787,6 +787,7 @@ body.dark-mode .ra-chip { background: #1c2333 !important; color: #9DB8EA !import
 .ra-input-row { display: flex; border-top: 1.5px solid #e5e7eb; padding: 8px 10px; gap: 6px; }
 .ra-input { flex: 1; border: 1.5px solid #e5e7eb; border-radius: 8px; padding: 7px 10px; font-size: 0.83em; outline: none; font-family: inherit; }
 .ra-input:focus { border-color: #2F4B8F; }
+@media (max-width: 700px) { .ra-input { font-size: 16px; } } /* iOS zooms into inputs under 16px */
 .ra-send { background: #2F4B8F; color: #fff; border: none; border-radius: 8px; padding: 7px 12px; cursor: pointer; font-size: 0.9em; font-weight: 700; transition: background .15s; }
 .ra-send:hover { background: #23396E; }
 body.dark-mode .ra-panel { background: #161b22 !important; border-color: #30363d !important; }
@@ -1379,19 +1380,19 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
   </li>
   <li>
     <span class="news-date">Apr 2026</span>
-    <span><span class="nbadge nb-talk">Talk</span>Presented CESAR &amp; SP-VLA at <strong>ICLR 2026</strong>, Rio de Janeiro, Apr 23–27&nbsp;<img class="g-ico" src="/images/icons/flag-br.png" alt=""></span>
+    <span><span class="nbadge nb-talk">Talk</span>Presented CESAR at <strong>ICLR 2026</strong>, Rio de Janeiro, Apr 23–27&nbsp;<img class="g-ico" src="/images/icons/flag-br.png" alt=""></span>
   </li>
   <li>
     <span class="news-date">Jan 2026</span>
-    <span><span class="nbadge nb-accept">Accept</span><strong>2 papers at ICLR 2026</strong> — CESAR &amp; SP-VLA. See you in Rio&nbsp;<img class="g-ico" src="/images/icons/flag-br.png" alt=""></span>
+    <span><span class="nbadge nb-accept">Accept</span><strong>2 papers at ICLR 2026</strong>, including CESAR. See you in Rio&nbsp;<img class="g-ico" src="/images/icons/flag-br.png" alt=""></span>
   </li>
   <li>
     <span class="news-date">Sep 2025</span>
-    <span><span class="nbadge nb-accept">Accept</span><strong>2 papers at NeurIPS 2025</strong> — ADRPO &amp; VarCon. See you in San Diego&nbsp;<img class="g-ico" src="/images/icons/flag-us.png" alt=""></span>
+    <span><span class="nbadge nb-accept">Accept</span><strong>2 papers at NeurIPS 2025</strong>, including ADRPO. See you in San Diego&nbsp;<img class="g-ico" src="/images/icons/flag-us.png" alt=""></span>
   </li>
   <li>
     <span class="news-date">Jun 2025</span>
-    <span><span class="nbadge nb-accept">Accept</span>Paper accepted at <strong>IEEE TPAMI</strong>: PRANCE.</span>
+    <span><span class="nbadge nb-accept">Accept</span>Paper accepted at <strong>IEEE TPAMI</strong>.</span>
   </li>
   <li>
     <span class="news-date">Jan 2025</span>
@@ -1696,7 +1697,7 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
     <div class="pub-title"><a href="https://arxiv.org/abs/2607.09039" target="_blank" rel="noopener noreferrer">Variable-Length Generative Protein Design via Generalized Poisson Flow</a></div>
     <div class="pub-authors">C. Cheng, Z. Ni, Y. Qu, Y. Chen, R. Guo, <strong>J. Fan</strong>, G. Liu</div>
     <div class="pub-desc">GPFlow: protein generation without fixing the length in advance, by learning the rate function of an inhomogeneous generalized Poisson process over both structure and sequence.</div>
-    <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>First on 10 of 16 motif-scaffolding tasks &middot; up to 10&times; success rate on the hardest targets</div>
+    <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>First on 10 of 16 motif-scaffolding tasks &middot; over 10&times; more unique successes on several hard targets</div>
     <div class="pub-links">
       <a class="pub-link pl-paper" href="https://arxiv.org/abs/2607.09039" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-pubs.png);mask-image:url(/images/icons/sh-pubs.png)"></i>Paper</a>
     </div>

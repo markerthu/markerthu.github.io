@@ -5,7 +5,7 @@ permalink: /publication/2026-04-30-BCR
 date: 2026-04-30
 venue: 'International Conference on Machine Learning (<strong>ICML 2026</strong>)'
 paperurl: 'https://openreview.net/forum?id=8Oc3Mx754M'
-citation: 'Bangji Yang, Hongbo Ma, Jiajun Fan, Ge Liu. &quot;Batched Contextual Reinforcement.&quot; ICML 2026.'
+citation: 'Bangji Yang*, Hongbo Ma*, Jiajun Fan, Ge Liu. &quot;Batched Contextual Reinforcement.&quot; ICML 2026.'
 bibtex: |
   @inproceedings{yang2026bcr,
     title={Batched Contextual Reinforcement},

@@ -14,3 +14,5 @@ bibtex: |
     year={2020}
   }
 ---
+
+Critic PI2 is a model-based reinforcement learning framework for continuous control, where tree-based planners such as AlphaGo and MuZero struggle. It combines trajectory optimization through policy improvement with path integrals, deep actor-critic learning and a learned model, and shows that planning with a critic improves sample efficiency and real-time performance on inverted-pendulum and other continuous domains.

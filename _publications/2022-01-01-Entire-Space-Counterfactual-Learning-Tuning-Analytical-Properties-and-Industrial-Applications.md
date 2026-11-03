@@ -14,3 +14,5 @@ bibtex: |
     year={2022}
   }
 ---
+
+Post-click conversion-rate estimation for recommender systems suffers from sample selection bias and data sparsity. The paper shows two defects of entire-space multi-task models, an inherent estimation bias and a potential independence priority, and proposes ESCM², a counterfactual risk minimizer that fixes both, with an analysis of its tuning and properties and an industrial deployment.

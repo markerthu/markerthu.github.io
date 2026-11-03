@@ -5,7 +5,7 @@ permalink: /publication/2026-10-16-DiscoveryRSI
 date: 2026-10-16
 venue: '<strong>arXiv</strong> preprint, 2026'
 paperurl: 'https://arxiv.org/abs/2610.23839'
-citation: 'Jianyuan Zhong, Chenwei Wu, Zhaochen Yu, Xixian Jiang, Jiajun Fan, Xuewei Li, Hao Xiao, Xilin Dai, Junyang Wang, Jiaru Zou, Zhiqing Cui, Boyuan Zheng, Jing Xiong, Zhen Zhang, Qiang Gao, Michael Morley, Luis Nakayama, Qiang Xu, Liyue Shen, Tao Gui, Leo Anthony Celi, Zhenfei Yin, Yingcheng Wu, Ling Yang. &quot;DiscoveryRSI: Recursively Learning to Discover Valuable Hypotheses.&quot; arXiv preprint arXiv:2610.23839, 2026.'
+citation: 'Jianyuan Zhong*, Chenwei Wu*, Zhaochen Yu*, Xixian Jiang, Jiajun Fan, Xuewei Li, Hao Xiao, Xilin Dai, Junyang Wang, Jiaru Zou, Zhiqing Cui, Boyuan Zheng, Jing Xiong, Zhen Zhang, Qiang Gao, Michael Morley, Luis Nakayama, Qiang Xu, Liyue Shen, Tao Gui, Leo Anthony Celi, Zhenfei Yin, Yingcheng Wu, Ling Yang. &quot;DiscoveryRSI: Recursively Learning to Discover Valuable Hypotheses.&quot; arXiv preprint arXiv:2610.23839, 2026.'
 bibtex: |
   @article{zhong2026discoveryrsi,
     title={DiscoveryRSI: Recursively Learning to Discover Valuable Hypotheses},

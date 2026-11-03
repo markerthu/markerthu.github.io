@@ -14,3 +14,5 @@ bibtex: |
     year={2022}
   }
 ---
+
+CASA regularizes the inconsistency between policy evaluation and policy improvement in model-free RL. Treating the evaluation step as a compensation for the improvement step removes the gradient conflict between the two, which is equivalent to entropy-regularized policy improvement and keeps the policy out of suboptimal solutions; it outperforms strong baselines on the Arcade Learning Environment.

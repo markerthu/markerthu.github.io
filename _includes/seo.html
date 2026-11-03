@@ -29,6 +29,10 @@
 {% if seo_description %}
   {% assign seo_description = seo_description | markdownify | strip_html | strip_newlines | escape_once %}
 {% endif %}
+{% assign seo_description_check = seo_description | strip %}
+{% if seo_description_check == "" %}
+  {% assign seo_description = site.description | markdownify | strip_html | strip_newlines | escape_once %}
+{% endif %}
 
 {% assign seo_author = page.author | default: page.author[0] | default: site.author[0] %}
 {% if seo_author %}
