@@ -8,7 +8,7 @@ permalink: /projects/adrpo/
 <meta charset="UTF-8">
   <meta property="og:type" content="article">
   <meta property="og:title" content="ADRPO: Adaptive Divergence Regularized Policy Optimization for Fine-tuning Generative Models — NeurIPS 2025">
-  <meta property="og:description" content="Sample-level adaptive divergence control for RLHF. A 2B SD3 model fine-tuned with ADRPO surpasses 4.8B and 12B models — no manual KL tuning.">
+  <meta property="og:description" content="Sample-level adaptive divergence control for RLHF. A 2B SD3 model fine-tuned with ADRPO surpasses 4.8B and 12B models — no manual KL schedule.">
   <meta property="og:image" content="https://www.jiajunfan.com/images/og/adrpo.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
   <meta property="og:url" content="https://www.jiajunfan.com/projects/adrpo/">
   <link rel="canonical" href="https://www.jiajunfan.com/projects/adrpo/">
@@ -208,7 +208,7 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
 <div class="hero" role="region" aria-label="Project summary">
   <div class="kicker">NeurIPS 2025</div>
   <h1>Adaptive Divergence Regularized Policy Optimization for Fine-tuning Generative Models</h1>
-  <p class="short"><strong>ADRPO</strong> — sample-level adaptive divergence control, no manual tuning required</p>
+  <p class="short"><strong>ADRPO</strong> — sample-level adaptive divergence control, no manual KL schedule</p>
   <div class="authors">
     <a href="/" class="me">Jiajun Fan</a><sup>1</sup>, Tong Wei<sup>1</sup>, Chaoran Cheng<sup>1</sup>,
     Yuxin Chen<sup>1</sup>, <a href="https://geliu.web.illinois.edu/">Ge Liu</a><sup>1</sup>
@@ -225,7 +225,7 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
 <div class="container" role="main">
 
 <section>
-  <p class="tldr"><strong>TL;DR</strong> — Fixed divergence regularization in RLHF forces a dilemma: strong regularization preserves diversity but limits alignment; weak regularization aligns better but risks collapse. ADRPO <strong>adapts the regularization strength per sample</strong> from the advantage estimate — high-value samples explore freely, poor samples stay constrained. One line of math; works with W2 (flow matching) and KL (LLMs).</p>
+  <p class="tldr"><strong>TL;DR</strong> — Fixed divergence regularization in RLHF forces a dilemma: strong regularization preserves diversity but limits alignment; weak regularization aligns better but risks collapse. ADRPO <strong>adapts the regularization strength per sample</strong> from the advantage estimate — high-value samples get a lighter penalty and are exploited, poor samples stay constrained. One line of math; works with W2 (flow matching) and KL (LLMs).</p>
   {% include film-card.html id="adrpo" name="ADRPO" %}
 </section>
 
@@ -241,11 +241,11 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
   <div class="vs-grid">
     <div class="vs-card vs-bad">
       <h3>Fixed regularization (DPO / ORW-CFM-W2)</h3>
-      <ul><li>Same strength for every sample</li><li>Strong → conservative, slow</li><li>Weak → reward hacking / collapse</li><li>Manual coefficient tuning</li></ul>
+      <ul><li>Same strength for every sample</li><li>Strong → conservative, slow</li><li>Weak → reward hacking / collapse</li></ul>
     </div>
     <div class="vs-card vs-good">
       <h3>ADRPO (ours)</h3>
-      <ul><li>Adaptive from advantage estimates</li><li>High-value samples explore freely</li><li>Poor samples kept on a short leash</li><li>Plug-and-play — no extra networks</li></ul>
+      <ul><li>Adaptive from advantage estimates</li><li>High-value samples exploited, lighter penalty</li><li>Poor samples kept on a short leash</li><li>Plug-and-play — no extra networks</li></ul>
     </div>
   </div>
   {% include anim/adrpo.html %}
@@ -278,7 +278,7 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
     <span class="tag">Text LLMs (GRPO) · KL</span>
     <span class="tag">Audio reasoning LLMs</span>
   </div>
-  <p>In LLM fine-tuning, ADRPO shows an <strong>emergent ability to escape local optima</strong>: when the model stalls, the adaptive coefficient globally raises regularization and re-opens exploration, then relaxes once a promising direction appears.</p>
+  <p>In LLM fine-tuning, ADRPO shows an <strong>emergent ability to escape local optima</strong>: on Qwen3-0.6B it first explores lower-entropy regions, then actively increases entropy to escape a local optimum, before converging to a final checkpoint with 5× higher reward than GRPO. The behavior emerges from the advantage-guided adaptive mechanism without explicit programming.</p>
   {% include anim/adrpo_escape.html %}
   <figure class="chart">
     {% include figures/adrpo_llm_entropy.svg %}

@@ -5,7 +5,7 @@
 <figure class="chart wide anim-fig">
 <svg class="lbS" viewBox="0 0 780 258" role="img" aria-labelledby="lbS-t lbS-d" xmlns="http://www.w3.org/2000/svg">
   <title id="lbS-t">LBC: learnable behavior control</title>
-  <desc id="lbS-d">Four stages repeat. Start from a population of base policies; a learnable mapping blends all of them into a large behaviour space; a bandit meta-controller picks a behaviour for each episode; off-policy actor-critic learning updates them.</desc>
+  <desc id="lbS-d">Four stages repeat. Start from a population of base policies; a learnable mapping blends all of them into a large behavior space; a bandit meta-controller picks a behavior for each episode; off-policy actor-critic learning updates them.</desc>
   <style>
     .lbS .lbl{font:600 14px Inter,system-ui,sans-serif;fill:var(--ink,#1a1815)}
     .lbS .sub{font:500 13px Inter,system-ui,sans-serif;fill:var(--muted,#6c6860)}
@@ -47,9 +47,9 @@
   <path class="ln" d="M574.0,110.0 H593.0" marker-end="url(#lbS-arm)"/>
   <path class="ln" d="M681,202 V228 H99 V204" marker-end="url(#lbS-arm)" stroke-opacity=".7"/>
   <circle class="fl" r="5" cx="0" cy="0" opacity="0"><animateMotion path="M681,202 V228 H99 V204" keyPoints="0;0;1;1" keyTimes="0;0.780;0.920;1" calcMode="linear" dur="12s" begin="lbST.begin"/><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0.000;0.775;0.785;0.915;0.925;1.000" dur="12s" begin="lbST.begin"/></circle>
-  <text class="sub" x="390.0" y="248.0" text-anchor="middle">episode returns update the bandit and the policies &#8212; the behaviour space keeps improving</text>
+  <text class="sub" x="390.0" y="248.0" text-anchor="middle">episode returns update the bandit and the policies &#8212; the behavior space keeps improving</text>
 </svg>
-<figcaption><b>How to read it.</b> Population-based methods can only switch between a fixed set of policies. LBC blends all of them into a learnable hybrid behaviour space and lets a bandit meta-controller choose per episode &mdash; 24 Atari human world records in 1 billion frames. Schematic.</figcaption>
+<figcaption><b>How to read it.</b> Population-based methods can only switch between a fixed set of policies. LBC blends all of them into a learnable hybrid behavior space and lets a bandit meta-controller choose per episode &mdash; 24 Atari human world records in 1 billion frames. Schematic.</figcaption>
 </figure>
 <script>
 (function(){

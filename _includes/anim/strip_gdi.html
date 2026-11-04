@@ -4,8 +4,8 @@
 <style>@media(max-width:640px){figure.anim-fig{overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:6px}figure.anim-fig svg{min-width:620px}figure.anim-fig figcaption{position:sticky;left:0;max-width:calc(100vw - 48px)}figure.anim-fig:not(:has(svg.sgB,svg.sgC,svg.pzBn,svg.pzCn,svg.m))::before{content:"swipe to see the full figure →";display:block;position:sticky;left:0;text-align:right;font:600 .7rem/1.2 Inter,system-ui,sans-serif;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}}</style>
 <figure class="chart wide anim-fig">
 <svg class="gdS" viewBox="0 0 780 258" role="img" aria-labelledby="gdS-t gdS-d" xmlns="http://www.w3.org/2000/svg">
-  <title id="gdS-t">GDI: learning which behaviours collect the data</title>
-  <desc id="gdS-d">Four stages repeat. Behaviour policies drawn from a parameterized family act and collect experience; it becomes the training data; RL optimization updates the learner; data distribution optimization reshapes the selective distribution over behaviour policies, so the next round collects better data.</desc>
+  <title id="gdS-t">GDI: learning which behaviors collect the data</title>
+  <desc id="gdS-d">Four stages repeat. Behavior policies drawn from a parameterized family act and collect experience; it becomes the training data; RL optimization updates the learner; data distribution optimization reshapes the selective distribution over behavior policies, so the next round collects better data.</desc>
   <style>
     .gdS .lbl{font:600 14px Inter,system-ui,sans-serif;fill:var(--ink,#1a1815)}
     .gdS .sub{font:500 13px Inter,system-ui,sans-serif;fill:var(--muted,#6c6860)}
@@ -26,7 +26,7 @@
   <rect class="hot" x="16.0" y="22" width="166.0" height="176" rx="12" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0.000;0.020;0.040;0.185;0.205;1.000" dur="12s" begin="gdST.begin"/></rect>
   <text class="lbl" x="32.0" y="48.0" text-anchor="start">1  Act</text>
   <text class="sub" x="32.0" y="67.0" text-anchor="start" style="font-size:12px">collect experience</text>
-  <rect class="box" x="34.0" y="106" width="46" height="40" rx="8"/><text class="sub" x="57.0" y="130.0" text-anchor="middle" style="font-size:11px;fill:var(--ink,#1a1815)">agent</text><rect class="box" x="116.0" y="106" width="48" height="40" rx="8"/><text class="sub" x="140.0" y="130.0" text-anchor="middle" style="font-size:11px;fill:var(--ink,#1a1815)">env</text><path class="ln" d="M82.0,118 H114.0" marker-end="url(#gdS-arm)" stroke-opacity=".7"/><circle r="3.5" fill="var(--link,#1565c0)" cx="114.0" cy="118"><animateMotion path="M82.0,118 H114.0" keyPoints="0;0;1;1" keyTimes="0;0.045;0.094;1" calcMode="linear" dur="12s" begin="gdST.begin"/></circle><path class="ln" d="M114.0,136 H82.0" marker-end="url(#gdS-arm)" stroke-opacity=".7"/><circle r="3.5" fill="var(--link,#1565c0)" cx="82.0" cy="136"><animateMotion path="M114.0,136 H82.0" keyPoints="0;0;1;1" keyTimes="0;0.103;0.152;1" calcMode="linear" dur="12s" begin="gdST.begin"/></circle><text class="sub" x="99.0" y="184.0" text-anchor="middle" style="font-size:11px">behaviours from the family</text>
+  <rect class="box" x="34.0" y="106" width="46" height="40" rx="8"/><text class="sub" x="57.0" y="130.0" text-anchor="middle" style="font-size:11px;fill:var(--ink,#1a1815)">agent</text><rect class="box" x="116.0" y="106" width="48" height="40" rx="8"/><text class="sub" x="140.0" y="130.0" text-anchor="middle" style="font-size:11px;fill:var(--ink,#1a1815)">env</text><path class="ln" d="M82.0,118 H114.0" marker-end="url(#gdS-arm)" stroke-opacity=".7"/><circle r="3.5" fill="var(--link,#1565c0)" cx="114.0" cy="118"><animateMotion path="M82.0,118 H114.0" keyPoints="0;0;1;1" keyTimes="0;0.045;0.094;1" calcMode="linear" dur="12s" begin="gdST.begin"/></circle><path class="ln" d="M114.0,136 H82.0" marker-end="url(#gdS-arm)" stroke-opacity=".7"/><circle r="3.5" fill="var(--link,#1565c0)" cx="82.0" cy="136"><animateMotion path="M114.0,136 H82.0" keyPoints="0;0;1;1" keyTimes="0;0.103;0.152;1" calcMode="linear" dur="12s" begin="gdST.begin"/></circle><text class="sub" x="99.0" y="184.0" text-anchor="middle" style="font-size:11px">behaviors from the family</text>
   <rect class="box" x="210.0" y="22" width="166.0" height="176" rx="12"/>
   <rect class="hot" x="210.0" y="22" width="166.0" height="176" rx="12" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0.000;0.205;0.225;0.370;0.390;1.000" dur="12s" begin="gdST.begin"/></rect>
   <text class="lbl" x="226.0" y="48.0" text-anchor="start">2  Collect</text>
@@ -42,14 +42,14 @@
   <rect class="box" x="598.0" y="22" width="166.0" height="176" rx="12"/>
   <rect class="hot" x="598.0" y="22" width="166.0" height="176" rx="12" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0.000;0.575;0.595;0.740;0.760;1.000" dur="12s" begin="gdST.begin"/></rect>
   <text class="lbl" x="614.0" y="48.0" text-anchor="start">4  Reselect</text>
-  <text class="sub" x="614.0" y="67.0" text-anchor="start" style="font-size:12px">which behaviours to use</text>
+  <text class="sub" x="614.0" y="67.0" text-anchor="start" style="font-size:12px">which behaviors to use</text>
   <rect class="box" x="623.0" y="108" width="116" height="52" rx="10"/><rect class="fl" x="623.0" y="108" width="116" height="52" rx="10" fill-opacity="0"><animate attributeName="fill-opacity" values="0;0;0.16;0.16;0;0" keyTimes="0.000;0.608;0.638;0.688;0.718;1.000" dur="12s" begin="gdST.begin"/></rect><text class="lbl" x="681.0" y="131.0" text-anchor="middle">learner</text><text class="sub" x="681.0" y="149.0" text-anchor="middle" style="font-size:11.5px">selective P<tspan baseline-shift="sub" font-size="70%">&#923;</tspan></text>
   <path class="ln" d="M574.0,110.0 H593.0" marker-end="url(#gdS-arm)"/>
   <path class="ln" d="M681,202 V228 H99 V204" marker-end="url(#gdS-arm)" stroke-opacity=".7"/>
   <circle class="fl" r="5" cx="0" cy="0" opacity="0"><animateMotion path="M681,202 V228 H99 V204" keyPoints="0;0;1;1" keyTimes="0;0.780;0.920;1" calcMode="linear" dur="12s" begin="gdST.begin"/><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0.000;0.775;0.785;0.915;0.925;1.000" dur="12s" begin="gdST.begin"/></circle>
-  <text class="sub" x="390.0" y="248.0" text-anchor="middle">data distribution optimization: which behaviours collect the data is learned too</text>
+  <text class="sub" x="390.0" y="248.0" text-anchor="middle">data distribution optimization: which behaviors collect the data is learned too</text>
 </svg>
-<figcaption><b>How to read it.</b> Which behaviour policies collect the training data is a choice. GDI draws them from a parameterized family through a selective distribution, and optimizes that distribution alongside the usual RL update, so data collection itself is learned. Schematic.</figcaption>
+<figcaption><b>How to read it.</b> Which behavior policies collect the training data is a choice. GDI draws them from a parameterized family through a selective distribution, and optimizes that distribution alongside the usual RL update, so data collection itself is learned. Schematic.</figcaption>
 </figure>
 <script>
 (function(){

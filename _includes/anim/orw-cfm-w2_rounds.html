@@ -83,7 +83,7 @@
   <g><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0.000;0.630;0.655;0.940;1.000" dur="12s" begin="owT3.begin"/><text class="lbl" x="190" y="294" text-anchor="start" style="font-size:13px">converges: the high-reward mode leads, the other modes stay</text></g>
   <g><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0.000;0.740;0.765;0.940;1.000" dur="12s" begin="owT3.begin"/><text class="em" x="390" y="324" text-anchor="middle">The W2 term lets online reward-weighting converge instead of collapse</text></g>
 </svg>
-<figcaption><b>How to read it.</b> Training is online: every round the model samples from its current self and weights those samples by reward, so the tilt toward high reward builds up round after round. With reward-weighting alone that ends in policy collapse onto a few high-reward modes. The Wasserstein-2 term keeps the policy near the base model (dashed outline), so training converges with the other modes still present; how near is the &alpha; knob shown further down. Schematic.</figcaption>
+<figcaption><b>How to read it.</b> Training is online: every round the model samples from its current self and weights those samples by reward, so the tilt toward high reward builds up round after round. With reward-weighting alone that ends in policy collapse onto a single high-reward mode (a Dirac delta, Lemma 1). The Wasserstein-2 term keeps the policy near the base model (dashed outline), so training converges with the other modes still present; how near is the &alpha; knob shown further down. Schematic.</figcaption>
 </figure>
 <script>
 (function(){

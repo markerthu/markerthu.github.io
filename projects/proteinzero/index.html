@@ -278,7 +278,7 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
   </div>
   <figure class="chart wide">
     {% include figures/pz_success.svg %}
-    <figcaption><b>Figure 1.</b> Success rate on held-out CATH-4.3 backbones &mdash; a design counts only if it satisfies both criteria (scRMSD &lt; 2 &Aring; and FoldX ddG &lt; 0). Both ProteinZero variants pass every supervised and preference-based baseline; GRPO is the stronger of the two.</figcaption>
+    <figcaption><b>Figure 1.</b> Success rate on held-out CATH-4.3 backbones &mdash; a backbone counts as a success when the mean over its 64 sampled designs satisfies both criteria (scRMSD &lt; 2 &Aring; and FoldX ddG &lt; 0). Both ProteinZero variants pass every supervised and preference-based baseline; GRPO is the stronger of the two.</figcaption>
   </figure>
   <p>The reward uses ESMFold and fast ddG, but the gains also appear under independent evaluators (AlphaFold3 for structure, FoldX for stability) that were never part of training &mdash; evidence that the improvements are not simply fitted to the reward models. All of this is in-silico; no wet-lab validation is performed.</p>
 </section>

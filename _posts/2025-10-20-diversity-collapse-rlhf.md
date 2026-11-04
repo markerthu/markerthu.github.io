@@ -199,9 +199,9 @@ header:
 
 <h2>An emergent willingness to explore</h2>
 
-<p>The same objective drops into GRPO for LLM fine-tuning by making the KL coefficient advantage-dependent. Tracked in reward&ndash;entropy space on Qwen2 (0.5B) and Qwen3 (0.6B), with RM-Gemma-2B supplying the reward, ADRPO and GRPO take visibly different paths. GRPO holds high entropy throughout and moves sideways &mdash; lots of exploration, little reward found. ADRPO first tightens into a low-entropy region, then <em>deliberately raises entropy again</em> to break out of the local optimum it landed in, and converges at <b>5&times; GRPO&rsquo;s final reward</b>.</p>
+<p>The same objective drops into GRPO for LLM fine-tuning by making the KL coefficient advantage-dependent. Tracked in reward&ndash;entropy space on Qwen2 (0.5B) and Qwen3 (0.6B), with RM-Gemma-2B supplying the reward, ADRPO and GRPO take visibly different paths. GRPO holds high entropy throughout and moves sideways &mdash; lots of exploration, little reward found. On Qwen3, ADRPO first tightens into a low-entropy region, then <em>deliberately raises entropy again</em> to break out of the local optimum it landed in, and converges at <b>5&times; GRPO&rsquo;s final reward</b>.</p>
 
-<p>Nobody designed that behaviour. It falls out of the coefficient: once a region stops producing advantage, regularisation rises, the policy loosens, and exploration resumes on its own. The <em>absence</em> of that mechanism is why GRPO&rsquo;s later checkpoints often score worse than earlier ones while ADRPO keeps improving throughout training &mdash; no early stopping required.</p>
+<p>Nobody designed that behaviour. The paper reports that this three-phase pattern, reminiscent of a simulated-annealing schedule, emerged from the advantage-guided coefficient without explicit programming. GRPO&rsquo;s later checkpoints often score worse than earlier ones, while ADRPO keeps improving throughout training &mdash; no early stopping required.</p>
 
 <p class="snum">06 &mdash; Audio reasoning</p>
 

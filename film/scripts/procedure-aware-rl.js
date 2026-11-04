@@ -7,7 +7,7 @@ export default {
   id: 'procedure-aware-rl', video: '/film/video/procedure-aware-rl.mp4', poster: '/film/posters/procedure-aware-rl.jpg', name: 'Procedure-Aware RL', kicker: 'PROCEDURE-AWARE RL  ·  A PROJECT FILM', badge: ['COLM 2026', 'tool-use agents'], page: '/projects/procedure-aware-rl/',
   chapters: timeline([
     { len: 7, shape: 'v:pipeline', viz: { labels: ['1. look_up_address', '2. wrap(gift)', '3. ship(package)'] }, label: 'COLM 2026', title: 'Procedure-Aware RL',
-      lines: ['Teaching tool-using agents', 'the order of things.'], meta: 'ZHENG, FAN, CHENG, LIU  ·  UIUC' },
+      lines: ['Teaching tool-using agents', 'the order of things.'], meta: 'ZHENG*, FAN*, CHENG, LIU  ·  UIUC' },
     { shape: 'v:pipeline', viz: { shuffled: true, labels: ['1. ship(package)', '2. wrap(gift)', '3. look_up_address'], verdict: 'same calls, same parameters — wrong final state' },
       tick: 'THE PROBLEM', label: 'THE PROBLEM', title: 'Right calls, wrong order',
       lines: ['A correctness-only reward scores this rollout', 'as highly as the right one.'] },

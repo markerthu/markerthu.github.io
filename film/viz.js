@@ -444,7 +444,7 @@ export function makeViz(env) {
     },
     tags(c, t, lt) { const v = c.viz || {}; return [
       { text: v.formula ?? 'β = β₀ − A', at: [0, 1.25, 0], style: 'num', align: 'center', a: smooth(0.8, 1.5, lt) },
-      { text: v.hi ?? 'high advantage: explores', at: [1.4, 0.8, 0], style: 'gold', align: 'left', a: smooth(1.6, 2.2, lt) },
+      { text: v.hi ?? 'high advantage: exploited', at: [1.4, 0.8, 0], style: 'gold', align: 'left', a: smooth(1.6, 2.2, lt) },
       { text: v.lo ?? 'low advantage: held close', at: [-0.3, -1.25, 0], style: 'name', align: 'center', a: smooth(2.0, 2.6, lt) },
       { text: v.ref ?? 'reference model', at: [0, 0, 0], dy: 32, style: 'small', align: 'center', a: smooth(1.0, 1.6, lt) },
     ]; },

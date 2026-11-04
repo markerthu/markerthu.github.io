@@ -12,7 +12,7 @@ export default {
     { shape: 'v:alpha', viz: { panels: [{ label: 'strong regularization', note: 'stays near the base model', mode: 'stuck' }, { label: 'weak regularization', note: 'collapses onto one mode', mode: 'collapse' }] },
       tick: 'THE DILEMMA', label: 'THE DILEMMA', title: 'One knob, two failures',
       lines: ['A fixed strength either holds the model back', 'or lets reward-hacking collapse it.'] },
-    { shape: 'v:leash', viz: { formula: 'β = β₀ − A' }, tick: 'THE IDEA', label: 'THE IDEA', title: 'Let the advantage decide',
+    { shape: 'v:leash', viz: { formula: 'β = β₀ − A', hi: 'high advantage: exploited' }, tick: 'THE IDEA', label: 'THE IDEA', title: 'Let the advantage decide',
       lines: ['Each sample gets its own strength, set by its', 'advantage: no extra networks, no schedule.'] },
     { len: 9, shape: 'v:scatter', viz: { x: [3.6, 5.6], y: [28.8, 33.0], xlabel: 'diversity →', ylabel: 'reward', points: [
         { label: 'pre-trained SD3', x: 5.11, y: 29.2, dx: -30, align: 'right' }, { label: 'ORW-CFM-W2', x: 3.94, y: 31.3 },
@@ -24,6 +24,6 @@ export default {
       tick: 'LLMS', label: 'ACROSS MODALITIES', title: 'Climbing where GRPO stalls',
       lines: ['On Qwen2, GRPO never gets far from the base model;', 'ADRPO ends with about 3.5× its reward.'] },
     { len: 7, shape: 'v:leash', viz: { formula: '', hi: '', lo: '', ref: '' }, label: 'ADRPO', title: 'Regularize adaptively',
-      lines: ['Explore where it pays,', 'hold back where it does not.'], meta: 'JIAJUNFAN.COM/PROJECTS/ADRPO' },
+      lines: ['Push where it pays,', 'hold back where it does not.'], meta: 'JIAJUNFAN.COM/PROJECTS/ADRPO' },
   ]),
 };

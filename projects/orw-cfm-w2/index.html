@@ -315,7 +315,7 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
     </div>
     <div class="method-card">
       <h3>Policy Collapse</h3>
-      <p>Without diversity constraints, reward maximization causes the model to collapse onto a few high-reward modes, losing generative quality.</p>
+      <p>Without diversity constraints, reward maximization causes the model to collapse onto a single high-reward mode (a Dirac delta, Lemma 1), losing generative quality.</p>
     </div>
     <div class="method-card">
       <h3>No Human Data</h3>
@@ -341,8 +341,8 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
   <p>On Stable Diffusion 3, ORW-CFM-W2:</p>
   <ul style="font-family:var(--sans);font-size:.95rem;color:var(--body);padding-left:1.4em;line-height:1.9;margin:0 0 1em">
     <li>improves spatial and positional understanding on complex compositional prompts that the base model fails on;</li>
-    <li>compares favorably against multiple baselines for target image generation;</li>
-    <li>supports multi-reward optimization across diverse prompts and reward signals;</li>
+    <li>outperforms RAFT and ReFT, with and without W2 regularization, on CLIP text-image alignment (App. A, Table 1);</li>
+    <li>adapts to different reward models (HPS-V2, Pick Score, Alpha Clip) without reward-specific optimizations;</li>
     <li>produces images with richer semantic detail and better semantic correspondence.</li>
   </ul>
 </section>
@@ -355,7 +355,7 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
 
 <section>
   <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-gear.png);mask-image:url(/images/icons/h-gear.png)"></i>The &alpha; knob: reward vs. diversity</h2>
-  <p>Controlled experiments on MNIST and CIFAR isolate the reward–diversity trade-off set by the W2 regularization strength α. Raising α preserves more diversity at some cost in reward, and the trade-off is smooth and controllable rather than a cliff. The regularization also prevents the mode collapse that unconstrained reward-weighting falls into, and the same control carries over to text-conditional CIFAR.</p>
+  <p>Controlled experiments on MNIST and CIFAR isolate the reward–diversity trade-off set by the W2 regularization strength α. Raising α preserves more diversity at some cost in reward, and the trade-off is smooth and controllable rather than a cliff. The regularization also prevents the mode collapse that unconstrained reward-weighting falls into, and the same control carries over to steering an unconditional CIFAR-10 model with a CLIP text-image reward.</p>
   <p>In practice: α=0 gives pure reward and mode collapse, α=0.3 gives a balanced trade-off, and α=0.8 preserves high diversity. The same knob applied to SD3 spans from the base model through balanced fine-tuning to full reward optimization.</p>
   {% include anim/orw.html %}
 </section>

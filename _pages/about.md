@@ -1429,7 +1429,7 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
   <div class="featured-body">
       <span class="featured-venue fv-iclr26">ICLR 2026</span>
       <div class="featured-title">CESAR: Audio LLM Reasoning via Process Rewards</div>
-      <div class="featured-desc">First to show test-time inverse scaling in Audio LLMs — and fix it with process rewards via online RL.</div>
+      <div class="featured-desc">First to systematically identify test-time inverse scaling in Audio LLMs — and fix it with process rewards via online RL.</div>
       <div class="featured-stat"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>SOTA MMAU&nbsp;· Beats Gemini 2.5&nbsp;Pro</div>
     </div>
   </a>

@@ -1,6 +1,7 @@
 import { timeline } from './util.js';
-// Depths follow the paper's layer-by-layer table for the Nixon clip (water/gate/scandal at 8-16%,
-// Nixon by ~29-33%, president at 37%, the Chinese 'president' at 61-65%, Nixon again at 86-90%).
+// Nixon clip, paper Sec. 4.1 and Fig. 1: water + gate and scandal are rank 1 from the early layers; Nixon and
+// president reach rank 1 together across the sensory-workspace transition (~35%); the role persists in the
+// workspace band as Chinese zongtong. Event-then-actor, not a strict token order.
 // The garbled transcript is quoted from the paper. Layer deletion: entry layer -65 pts, interior <= 10.
 export default {
   id: 'read-the-mind', name: 'Read the Mind', kicker: 'READ THE MIND  ·  A PROJECT FILM', badge: ['ARXIV 2026', 'arXiv 2608.24958'], page: '/projects/read-the-mind/',
@@ -12,8 +13,8 @@ export default {
       lines: ['A logit lens at the audio positions turns each', 'layer into words, before a token is emitted.'] },
     { len: 9, shape: 'v:layers', viz: { band: [0.35, 0.8], bandLabel: 'workspace band', tokens: [
         { text: 'water + gate', d: 0.12, y: 1.02, t: 1.0 }, { text: 'scandal', d: 0.15, y: 0.62, t: 1.6 },
-        { text: 'Nixon', d: 0.31, y: 1.02, t: 2.2 }, { text: 'president', d: 0.37, y: 0.62, t: 2.8 },
-        { text: '总统', d: 0.63, y: 1.02, t: 3.4 }, { text: 'Nixon', d: 0.88, y: 0.62, t: 4.0 }] },
+        { text: 'Nixon', d: 0.356, y: 1.02, t: 2.4 }, { text: 'president', d: 0.416, y: 0.62, t: 2.4 },
+        { text: '总统', d: 0.63, y: 1.02, t: 3.2 }] },
       tick: 'A HIDDEN CHAIN', label: 'A HIDDEN CHAIN', title: 'Watergate, then Nixon',
       lines: ['Its own transcript is garbled, yet the readout', 'rebuilds Watergate, then names Nixon.'],
       meta: 'READ OVER THE AUDIO, BEFORE ANY TOKEN' },

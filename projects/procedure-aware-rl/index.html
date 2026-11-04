@@ -288,9 +288,9 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
       <tr><td>GPT-5-mini</td><td>57.11%</td><td>5.50%</td></tr>
       <tr><td>GPT-4.1-mini</td><td>64.65%</td><td>2.50%</td></tr>
       <tr><td>Gemma-3-12b-it</td><td>64.69%</td><td>5.75%</td></tr>
-      <tr><td>Gemini-2.5-Flash-Lite</td><td>57.94%</td><td>7.63%</td></tr>
+      <tr><td>Gemini-2.5-Flash-Lite</td><td>57.94%</td><td><strong>7.63%</strong></td></tr>
       <tr><td>Claude-Haiku-4.5</td><td>47.26%</td><td>1.75%</td></tr>
-      <tr class="highlight"><td><strong>Procedure-Aware RL (ours, 3B)</strong></td><td><strong>65.67% <span class="badge-win">Best</span></strong></td><td><strong>7.25%</strong></td></tr>
+      <tr class="highlight"><td><strong>Procedure-Aware RL (ours, 3B)</strong></td><td><strong>65.67% <span class="badge-win">Best</span></strong></td><td>7.25%</td></tr>
     </tbody>
   </table>
   </div>
@@ -308,7 +308,7 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
 
 <section>
   <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-sparkle.png);mask-image:url(/images/icons/h-sparkle.png)"></i>What the model learns</h2>
-  <p>Rewarding sequence quality buys behaviour nobody wrote into the reward. On a multi-turn file-system task the trained agent navigates before it creates &mdash; <code>cd</code> first, then the file &mdash; while the correctness-only baseline recreates a directory that already exists and then cascades through the resulting state errors. The same training also improves <strong>recovery</strong>: after a failed call the agent retries along a corrected path instead of repeating the failure.</p>
+  <p>Rewarding sequence quality buys behavior nobody wrote into the reward. On a multi-turn file-system task the trained agent navigates before it creates &mdash; <code>cd</code> first, then the file &mdash; while the correctness-only baseline recreates a directory that already exists and then cascades through the resulting state errors. The same training also improves <strong>recovery</strong>: after a failed call the agent retries along a corrected path instead of repeating the failure.</p>
   {% include anim/procedure-aware-rl_learns.html %}
 </section>
 
