@@ -1359,7 +1359,7 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
   </li>
   <li>
     <span class="news-date">Aug 2026</span>
-    <span><span class="nbadge nb-find">Finding</span>For the first time, we can see the brain map of an Audio LLM &mdash; its global workspace, the &ldquo;consciousness space&rdquo;. <a href="/posts/2026/08/read-the-mind-audio-llm/">Blog</a> &middot; <a href="https://arxiv.org/abs/2608.24958" target="_blank" rel="noopener noreferrer">Paper</a></span>
+    <span><span class="nbadge nb-find">Finding</span>Reading the mind of an Audio LLM: its brain map and middle-layer workspace, where the answer to a spoken question is legible in words before the model speaks. <a href="/posts/2026/08/read-the-mind-audio-llm/">Blog</a> &middot; <a href="https://arxiv.org/abs/2608.24958" target="_blank" rel="noopener noreferrer">Paper</a></span>
   </li>
   <li>
     <span class="news-date">Jul 2026</span>

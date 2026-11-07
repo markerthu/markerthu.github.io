@@ -6,7 +6,7 @@
   <path d="M60,170.8 H580" stroke="var(--c-rl-line,#E39A7A)" stroke-width="1.6" stroke-dasharray="5 4"/>
   <path d="M60,134.8 H580" stroke="var(--c-base-line,#8F97A8)" stroke-width="1.6" stroke-dasharray="2 4"/>
   <text class="arp-s" x="566.0" y="186.8" text-anchor="end" style="fill:var(--c-rl-ink,#B8613C)">outcome-only training &#183; 74.6%</text>
-  <text class="arp-s" x="566.0" y="150.8" text-anchor="end">frozen external teacher &#183; 75.1%</text>
+  <text class="arp-s" x="566.0" y="150.8" text-anchor="end">frozen-teacher run &#183; 75.1%</text>
   <polyline points="70.0,170.8 185.7,98.8 301.4,62.8 454.3,70.0 570.0,134.8" fill="none" stroke="var(--c-ours,#2F4B8F)" stroke-width="2.2" stroke-linejoin="round"/>
   <circle cx="70.0" cy="170.8" r="5" fill="var(--c-ours-fill,#90A4C5)" stroke="var(--c-ours,#2F4B8F)" stroke-width="1.5"/>
   <text class="arp-l" x="70.0" y="157.8" text-anchor="middle">74.6</text>
@@ -29,7 +29,7 @@
   <path d="M24,178.3 H336" stroke="var(--c-rl-line,#E39A7A)" stroke-width="1.6" stroke-dasharray="5 4"/>
   <path d="M24,141.9 H336" stroke="var(--c-base-line,#8F97A8)" stroke-width="1.6" stroke-dasharray="2 4"/>
   <text class="arp-s" x="322.0" y="194.3" text-anchor="end" style="fill:var(--c-rl-ink,#B8613C)">outcome-only training &#183; 74.6%</text>
-  <text class="arp-s" x="322.0" y="157.9" text-anchor="end">frozen external teacher &#183; 75.1%</text>
+  <text class="arp-s" x="322.0" y="157.9" text-anchor="end">frozen-teacher run &#183; 75.1%</text>
   <polyline points="34.0,178.3 101.6,105.5 169.1,69.1 258.4,76.4 326.0,141.9" fill="none" stroke="var(--c-ours,#2F4B8F)" stroke-width="2.2" stroke-linejoin="round"/>
   <circle cx="34.0" cy="178.3" r="5" fill="var(--c-ours-fill,#90A4C5)" stroke="var(--c-ours,#2F4B8F)" stroke-width="1.5"/>
   <text class="arp-l" x="34.0" y="165.3" text-anchor="middle">74.6</text>

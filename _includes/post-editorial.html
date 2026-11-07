@@ -906,7 +906,7 @@ function initTwoMap(){
     }
     var o = ['<svg viewBox="0 0 ' + W.toFixed(0) + ' ' + H.toFixed(0) + '" role="img" aria-label="' +
              'Brain map for the same clip read ' + d.lab + ': ' + nL + ' sampled depths across ' + np +
-             ' token positions. The concept is read out in ' + Object.keys(d.pin).length + ' cells.">'];
+             ' token positions.">'];
     /* depth bands */
     o.push('<rect x="'+padL+'" y="'+yb(35)+'" width="'+(np*cw)+'" height="'+(yOf(0)+ch-yb(35))+'" fill="var(--band)"/>');
     o.push('<rect x="'+padL+'" y="'+yb(80)+'" width="'+(np*cw)+'" height="'+(yb(35)-yb(80))+'" fill="var(--ed-soft)"/>');
@@ -1176,11 +1176,14 @@ function initMetric(){
     box.querySelector('#mtrows').innerHTML=html;
     var ours=D.rows.filter(function(r){ return r.ours; })[0][m.k];
     var best=Math.max.apply(null, D.rows.map(function(r){ return r[m.k]; }));
+    var others=D.rows.filter(function(r){ return r.grp==='other'; }).map(function(r){ return r.name; });
     box.querySelector('#mtnote').innerHTML='<b>'+m.label+'</b> &mdash; '+m.sub
       +'. ADRPO scores <b>'+(m.k==='blip'?ours.toFixed(3):ours.toFixed(2))+'</b>'
       +(Math.abs(ours-best)<1e-9?', the best in the table' : '')
-      +'. The vertical line marks the un-tuned SD3 base model, so anything left of it is a method that '
-      +'went backwards on this metric. Bars span '
+      +'. The vertical line marks the un-tuned SD3 base model, so an SD3 fine-tuning row left of it '
+      +'went backwards on this metric'
+      +(others.length?'; '+others.join(' and ')+' are separate, larger models, not SD3 fine-tunes':'')
+      +'. Bars span '
       +(m.k==='blip'?m.lo.toFixed(2)+'&ndash;'+m.hiv.toFixed(2):m.lo+'&ndash;'+m.hiv)+'.';
     box.querySelectorAll('.mtab').forEach(function(t,k){
       t.classList.toggle('on', k===mi); t.setAttribute('aria-pressed', String(k===mi)); });
