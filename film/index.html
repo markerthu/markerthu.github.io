@@ -131,7 +131,9 @@ addEventListener('resize', fit);
 
 (async () => {
   await loadFonts();
-  const id = (new URLSearchParams(location.search).get('s') || 'main').replace(/[^a-z0-9-]/g, '');
+  // Site links use /film/#<id> so Google sees one page; old /film/?s=<id> links still work.
+  const id = (new URLSearchParams(location.search).get('s') || location.hash.slice(1) || 'main').replace(/[^a-z0-9-]/g, '') || 'main';
+  addEventListener('hashchange', () => location.reload());
   const script = await loadScript(id);
   if (script.id !== 'main') {
     document.title = script.name + ' — a project film | Jiajun Fan';

@@ -1331,11 +1331,11 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
 <ul class="news-list">
   <li>
     <span class="news-date">Oct 2026</span>
-    <span><span class="nbadge nb-find">Finding</span><strong>AudioRSI</strong> is on arXiv: to our knowledge, the first recursively self-improving audio LLM. One model is both student and teacher, and the student surpasses its teacher, then becomes it. Recursive self-improvement here improves the teacher (judge) and the student together: the teacher is the student&rsquo;s own copy, refreshed as it improves, so the two co-evolve. <a href="/projects/audiorsi/">Project page</a> &middot; <a href="/film/?s=audiorsi">Video</a> &middot; <a href="https://arxiv.org/abs/2610.36578" target="_blank" rel="noopener noreferrer">Paper</a></span>
+    <span><span class="nbadge nb-find">Finding</span><strong>AudioRSI</strong> is on arXiv: to our knowledge, the first recursively self-improving audio LLM. One model is both student and teacher, and the student surpasses its teacher, then becomes it. Recursive self-improvement here improves the teacher (judge) and the student together: the teacher is the student&rsquo;s own copy, refreshed as it improves, so the two co-evolve. <a href="/projects/audiorsi/">Project page</a> &middot; <a href="/film/#audiorsi">Video</a> &middot; <a href="https://arxiv.org/abs/2610.36578" target="_blank" rel="noopener noreferrer">Paper</a></span>
   </li>
   <li>
     <span class="news-date">Oct 2026</span>
-    <span><span class="nbadge nb-find">Finding</span><strong>Training-Free On-Policy Distillation</strong> is on arXiv. On-policy distillation usually costs rollouts, teacher passes and gradient steps for every teacher, so let&rsquo;s try it with no training at all: with forward passes only, specialists that share a base model fuse into one model that is, on average, more accurate than either specialist alone. <a href="/projects/tf-opd/">Project page</a> &middot; <a href="/film/?s=tf-opd">Video</a> &middot; <a href="https://arxiv.org/abs/2610.22236" target="_blank" rel="noopener noreferrer">Paper</a></span>
+    <span><span class="nbadge nb-find">Finding</span><strong>Training-Free On-Policy Distillation</strong> is on arXiv. On-policy distillation usually costs rollouts, teacher passes and gradient steps for every teacher, so let&rsquo;s try it with no training at all: with forward passes only, specialists that share a base model fuse into one model that is, on average, more accurate than either specialist alone. <a href="/projects/tf-opd/">Project page</a> &middot; <a href="/film/#tf-opd">Video</a> &middot; <a href="https://arxiv.org/abs/2610.22236" target="_blank" rel="noopener noreferrer">Paper</a></span>
   </li>
   <li>
     <span class="news-date">Oct 2026</span>
@@ -1498,7 +1498,7 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
     <div class="pub-links">
       <a class="pub-link pl-paper" href="https://openreview.net/forum?id=d4wrBuJ4xo" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-pubs.png);mask-image:url(/images/icons/sh-pubs.png)"></i>Paper</a>
       <a class="pub-link pl-project" href="/projects/procedure-aware-rl/"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-link.png);mask-image:url(/images/icons/h-link.png)"></i>Project</a>
-      <a class="pub-link pl-video" href="/film/?s=procedure-aware-rl">Video</a>
+      <a class="pub-link pl-video" href="/film/#procedure-aware-rl">Video</a>
     </div>
   </div>
 </div>
@@ -1517,7 +1517,7 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
     <div class="pub-links">
       <a class="pub-link pl-paper" href="https://arxiv.org/abs/2506.07459" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-pubs.png);mask-image:url(/images/icons/sh-pubs.png)"></i>Paper</a>
       <a class="pub-link pl-project" href="/projects/proteinzero/"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-link.png);mask-image:url(/images/icons/h-link.png)"></i>Project</a>
-      <a class="pub-link pl-video" href="/film/?s=proteinzero">Video</a>
+      <a class="pub-link pl-video" href="/film/#proteinzero">Video</a>
       <a class="pub-link pl-code" href="https://github.com/ziwenwang28/ProteinZero" target="_blank" rel="noopener noreferrer">Code</a>
     </div>
   </div>
@@ -2698,7 +2698,7 @@ function drawGraph(container) {
     var links = entry.querySelector('.pub-links');
     if (!links) { links = document.createElement('div'); links.className = 'pub-links'; (entry.querySelector('.pub-right') || entry).appendChild(links); }
     var a = document.createElement('a');
-    a.className = 'pub-link pl-video'; a.href = '/film/?s=' + m[1]; a.textContent = 'Video';
+    a.className = 'pub-link pl-video'; a.href = '/film/#' + m[1]; a.textContent = 'Video';
     if (proj.classList.contains('pl-project') && proj.parentNode === links) links.insertBefore(a, proj.nextSibling);
     else links.insertBefore(a, links.firstChild);
   });

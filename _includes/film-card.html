@@ -11,7 +11,7 @@
 @media (max-width:600px){.film-card .fc-play{width:44px;height:44px;right:12px;bottom:10px}.film-card .fc-play::after{left:16px;top:12px;border-left-width:14px;border-top-width:9px;border-bottom-width:9px}}
 @media (prefers-reduced-motion:reduce){.film-card,.film-card .fc-play{transition:none}.film-card:hover{transform:none}}
 </style>
-<a class="film-card" href="/film/?s={{ include.id }}" aria-label="Watch the {{ include.name }} project film">
+<a class="film-card" href="/film/#{{ include.id }}" aria-label="Watch the {{ include.name }} project film">
   <img src="/film/posters/{{ include.id }}.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async">
   <span class="fc-play" aria-hidden="true"></span>
   <span class="fc-label">WATCH THE FILM</span>
