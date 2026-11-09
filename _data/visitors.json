@@ -1,10 +1,10 @@
 {
-  "_updated": "2026-11-08",
+  "_updated": "2026-11-09",
   "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 796,
+  "_total": 769,
   "_days": 30,
-  "_range": "Oct. 10th - Nov. 8th",
+  "_range": "Oct. 11th - Nov. 9th",
   "locations": [
     {
       "code": "US",
@@ -17,10 +17,10 @@
     {
       "code": "US",
       "name": "California, US",
-      "count": 62,
+      "count": 52,
       "cx": 60.0,
       "cy": 46.9,
-      "r": 2.63
+      "r": 2.56
     },
     {
       "code": "US",
@@ -80,14 +80,6 @@
     },
     {
       "code": "US",
-      "name": "United States, other regions",
-      "count": 11,
-      "cx": 89.6,
-      "cy": 45.7,
-      "r": 2.15
-    },
-    {
-      "code": "US",
       "name": "Virginia, US",
       "count": 10,
       "cx": 101.3,
@@ -96,11 +88,11 @@
     },
     {
       "code": "US",
-      "name": "Arizona, US",
-      "count": 8,
-      "cx": 67.2,
-      "cy": 49.5,
-      "r": 2.1
+      "name": "United States, other regions",
+      "count": 10,
+      "cx": 89.6,
+      "cy": 45.7,
+      "r": 2.13
     },
     {
       "code": "US",
@@ -108,14 +100,6 @@
       "count": 8,
       "cx": 105.3,
       "cy": 43.8,
-      "r": 2.1
-    },
-    {
-      "code": "KR",
-      "name": "South Korea",
-      "count": 8,
-      "cx": 307.5,
-      "cy": 47.3,
       "r": 2.1
     },
     {
@@ -144,18 +128,18 @@
     },
     {
       "code": "US",
+      "name": "Arizona, US",
+      "count": 6,
+      "cx": 67.2,
+      "cy": 49.5,
+      "r": 2.06
+    },
+    {
+      "code": "US",
       "name": "Iowa, US",
       "count": 6,
       "cx": 86.4,
       "cy": 42.0,
-      "r": 2.06
-    },
-    {
-      "code": "CN",
-      "name": "China, other regions",
-      "count": 6,
-      "cx": 285.7,
-      "cy": 46.7,
       "r": 2.06
     },
     {
@@ -191,11 +175,27 @@
       "r": 2.04
     },
     {
+      "code": "CN",
+      "name": "China, other regions",
+      "count": 5,
+      "cx": 285.7,
+      "cy": 46.7,
+      "r": 2.04
+    },
+    {
       "code": "DE",
       "name": "Germany",
       "count": 5,
       "cx": 190.7,
       "cy": 33.0,
+      "r": 2.04
+    },
+    {
+      "code": "KR",
+      "name": "South Korea",
+      "count": 5,
+      "cx": 307.5,
+      "cy": 47.3,
       "r": 2.04
     },
     {
@@ -264,14 +264,6 @@
     },
     {
       "code": "US",
-      "name": "Nevada, US",
-      "count": 1,
-      "cx": 63.9,
-      "cy": 45.3,
-      "r": 1.91
-    },
-    {
-      "code": "US",
       "name": "South Carolina, US",
       "count": 1,
       "cx": 99.0,
@@ -300,6 +292,14 @@
       "count": 1,
       "cx": 234.2,
       "cy": 59.8,
+      "r": 1.91
+    },
+    {
+      "code": "BR",
+      "name": "Brazil",
+      "count": 1,
+      "cx": 123.1,
+      "cy": 93.7,
       "r": 1.91
     },
     {
@@ -387,7 +387,7 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 724
+      "count": 710
     },
     {
       "code": "SG",
@@ -407,11 +407,6 @@
     {
       "code": "CN",
       "name": "China",
-      "count": 9
-    },
-    {
-      "code": "KR",
-      "name": "South Korea",
       "count": 8
     },
     {
@@ -427,6 +422,11 @@
     {
       "code": "DE",
       "name": "Germany",
+      "count": 5
+    },
+    {
+      "code": "KR",
+      "name": "South Korea",
       "count": 5
     },
     {
@@ -452,6 +452,11 @@
     {
       "code": "AE",
       "name": "United Arab Emirates",
+      "count": 1
+    },
+    {
+      "code": "BR",
+      "name": "Brazil",
       "count": 1
     },
     {
@@ -517,7 +522,7 @@
       "country": "US",
       "country_name": "United States",
       "name": "California",
-      "count": 62,
+      "count": 52,
       "located": true
     },
     {
@@ -558,13 +563,6 @@
     {
       "country": "US",
       "country_name": "United States",
-      "name": "Arizona",
-      "count": 8,
-      "located": true
-    },
-    {
-      "country": "US",
-      "country_name": "United States",
       "name": "New Jersey",
       "count": 8,
       "located": true
@@ -581,6 +579,13 @@
       "country_name": "United States",
       "name": "Massachusetts",
       "count": 7,
+      "located": true
+    },
+    {
+      "country": "US",
+      "country_name": "United States",
+      "name": "Arizona",
+      "count": 6,
       "located": true
     },
     {
@@ -642,13 +647,6 @@
     {
       "country": "US",
       "country_name": "United States",
-      "name": "Nevada",
-      "count": 1,
-      "located": true
-    },
-    {
-      "country": "US",
-      "country_name": "United States",
       "name": "South Carolina",
       "count": 1,
       "located": true
@@ -672,12 +670,12 @@
     {
       "path": "/",
       "title": "Jiajun Fan",
-      "count": 311
+      "count": 294
     },
     {
       "path": "/visitors",
       "title": "Visitors — Jiajun Fan",
-      "count": 96
+      "count": 92
     },
     {
       "path": "/cv",
@@ -687,27 +685,27 @@
     {
       "path": "/publications",
       "title": "Publications — Jiajun Fan",
-      "count": 51
+      "count": 48
     },
     {
       "path": "/projects",
       "title": "Research Projects — Jiajun Fan",
-      "count": 38
+      "count": 36
     },
     {
       "path": "/year-archive",
       "title": "Blog - Jiajun Fan",
-      "count": 26
+      "count": 24
     },
     {
       "path": "/posts/2026/08/speechgym-voice-agent-rl",
       "title": "Voice Agents Could Be Ranked, Never Improved. We Closed the Loop. — Jiajun Fan",
-      "count": 22
+      "count": 21
     },
     {
       "path": "/projects/cesar",
       "title": "CESAR — Audio LLM Reasoning | ICLR 2026",
-      "count": 21
+      "count": 20
     },
     {
       "path": "/projects/proteinzero",
@@ -730,11 +728,6 @@
       "count": 13
     },
     {
-      "path": "/contact",
-      "title": "Contact - Jiajun Fan",
-      "count": 12
-    },
-    {
       "path": "/projects/audiorsi",
       "title": "AudioRSI — Recursively Self-Improving Audio Reasoners | Jiajun Fan",
       "count": 11
@@ -743,6 +736,11 @@
       "path": "/projects/adrpo",
       "title": "ADRPO — Adaptive Divergence for Generative Models | NeurIPS 2025",
       "count": 11
+    },
+    {
+      "path": "/contact",
+      "title": "Contact - Jiajun Fan",
+      "count": 10
     },
     {
       "path": "/projects/read-the-mind",
@@ -755,11 +753,6 @@
       "count": 9
     },
     {
-      "path": "/projects/orw-cfm-w2",
-      "title": "ORW-CFM-W2 — Flow Matching RLHF | ICLR 2025",
-      "count": 9
-    },
-    {
       "path": "/projects/tf-opd",
       "title": "TF-OPD — Training-Free On-Policy Distillation | Jiajun Fan",
       "count": 8
@@ -767,6 +760,11 @@
     {
       "path": "/posts/2025/10/diversity-collapse-rlhf",
       "title": "The Exploration-Exploitation Dilemma in RLHF for Generative Models — Jiajun Fan",
+      "count": 8
+    },
+    {
+      "path": "/projects/orw-cfm-w2",
+      "title": "ORW-CFM-W2 — Flow Matching RLHF | ICLR 2025",
       "count": 8
     },
     {
@@ -785,8 +783,8 @@
       "count": 5
     },
     {
-      "path": "/projects/ac-flow",
-      "title": "AC-Flow — Actor-Critic for Flow Matching | Preprint 2025",
+      "path": "/404.html",
+      "title": "404 — Page Not Found - Jiajun Fan",
       "count": 4
     },
     {
@@ -799,27 +797,27 @@
     {
       "name": "(unknown)",
       "id": "",
-      "count": 356
+      "count": 341
     },
     {
       "name": "www.jiajunfan.com",
       "id": "www.jiajunfan.com",
-      "count": 204
+      "count": 197
     },
     {
       "name": "Google",
       "id": "Google",
-      "count": 89
+      "count": 86
     },
     {
       "name": "www.jiajunfan.com/projects",
       "id": "www.jiajunfan.com/projects",
-      "count": 34
+      "count": 32
     },
     {
       "name": "scholar.google.com",
       "id": "scholar.google.com",
-      "count": 20
+      "count": 19
     },
     {
       "name": "www.jiajunfan.com/publications",
@@ -827,18 +825,18 @@
       "count": 16
     },
     {
-      "name": "www.jiajunfan.com/year-archive",
-      "id": "www.jiajunfan.com/year-archive",
-      "count": 14
-    },
-    {
       "name": "weixin110.qq.com",
       "id": "weixin110.qq.com",
-      "count": 13
+      "count": 12
     },
     {
       "name": "www.jiajunfan.com/cv",
       "id": "www.jiajunfan.com/cv",
+      "count": 12
+    },
+    {
+      "name": "www.jiajunfan.com/year-archive",
+      "id": "www.jiajunfan.com/year-archive",
       "count": 12
     },
     {
@@ -857,13 +855,13 @@
       "count": 6
     },
     {
-      "name": "www.jiajunfan.com/contact",
-      "id": "www.jiajunfan.com/contact",
-      "count": 5
-    },
-    {
       "name": "www.jiajunfan.com/visitors",
       "id": "www.jiajunfan.com/visitors",
+      "count": 3
+    },
+    {
+      "name": "www.jiajunfan.com/contact",
+      "id": "www.jiajunfan.com/contact",
       "count": 3
     },
     {
@@ -912,13 +910,13 @@
       "count": 1
     },
     {
-      "name": "www.jiajunfan.com/projects/ac-flow",
-      "id": "www.jiajunfan.com/projects/ac-flow",
+      "name": "www.jiajunfan.com/posts/2026/08/speechgym-voice-agent-rl",
+      "id": "www.jiajunfan.com/posts/2026/08/speechgym-voice-agent-rl",
       "count": 1
     },
     {
-      "name": "www.jiajunfan.com/posts/2026/08/speechgym-voice-agent-rl",
-      "id": "www.jiajunfan.com/posts/2026/08/speechgym-voice-agent-rl",
+      "name": "www.aocr.org",
+      "id": "www.aocr.org",
       "count": 1
     }
   ],
@@ -926,12 +924,12 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 566
+      "count": 561
     },
     {
       "name": "Safari",
       "id": "Safari",
-      "count": 259
+      "count": 247
     },
     {
       "name": "Firefox",
@@ -948,17 +946,17 @@
     {
       "name": "macOS",
       "id": "macOS",
-      "count": 395
+      "count": 389
     },
     {
       "name": "iOS",
       "id": "iOS",
-      "count": 248
+      "count": 236
     },
     {
       "name": "Windows",
       "id": "Windows",
-      "count": 104
+      "count": 105
     },
     {
       "name": "Android",
@@ -972,10 +970,6 @@
     }
   ],
   "daily": [
-    {
-      "day": "2026-10-10",
-      "n": 29
-    },
     {
       "day": "2026-10-11",
       "n": 12
@@ -1090,21 +1084,47 @@
     },
     {
       "day": "2026-11-08",
-      "n": 8
+      "n": 9
+    },
+    {
+      "day": "2026-11-09",
+      "n": 1
     }
   ],
   "periods": {
-    "today": 8,
-    "yesterday": 18,
-    "d7": 133,
-    "d7_prev": 184,
-    "d30": 796,
-    "d30_prev": 567,
-    "day_frac": 0.781,
-    "yesterday_day": "2026-11-07"
+    "today": 1,
+    "yesterday": 9,
+    "d7": 93,
+    "d7_prev": 208,
+    "d30": 769,
+    "d30_prev": 576,
+    "day_frac": 0.251,
+    "yesterday_day": "2026-11-08"
   },
-  "_last_visit": "2026-11-08 13:58",
+  "_last_visit": "2026-11-09 01:23",
   "recent": [
+    {
+      "date": "2026-11-09 01:23",
+      "ts": "2026-11-09T09:23:55Z",
+      "loc": "Brazil",
+      "path": "/404.html",
+      "ref": "www.aocr.org",
+      "browser": "Chrome 146",
+      "system": "Windows 10",
+      "screen": "800px",
+      "first": true
+    },
+    {
+      "date": "2026-11-08 23:57",
+      "ts": "2026-11-09T07:57:22Z",
+      "loc": "California, US",
+      "path": "/",
+      "ref": "scholar.google.com",
+      "browser": "Chrome 156",
+      "system": "macOS 10.15",
+      "screen": "1728px",
+      "first": true
+    },
     {
       "date": "2026-11-08 13:58",
       "ts": "2026-11-08T21:58:19Z",
@@ -1412,30 +1432,8 @@
       "system": "macOS 10.15",
       "screen": "1512px",
       "first": false
-    },
-    {
-      "date": "2026-11-08 02:49",
-      "ts": "2026-11-08T10:49:17Z",
-      "loc": "Illinois, US",
-      "path": "/cv",
-      "ref": "www.jiajunfan.com",
-      "browser": "Chrome 157",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": false
-    },
-    {
-      "date": "2026-11-08 02:48",
-      "ts": "2026-11-08T10:48:40Z",
-      "loc": "Illinois, US",
-      "path": "/cv",
-      "ref": "www.jiajunfan.com",
-      "browser": "Chrome 157",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": false
     }
   ],
-  "_recent_total": 4152,
+  "_recent_total": 4154,
   "_recent_shown": 30
 }
