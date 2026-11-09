@@ -1,86 +1,86 @@
 {
-  "updated": "2026-11-02",
+  "updated": "2026-11-09",
   "papers": [
     {
-      "id": "2610.41539",
-      "title": "Scalable Audio-LLM System for Speech MOS Evaluation: A Diagnostic Case Study and Adaptation Roadmap",
-      "authors": "Dimitrios Kokkinis, Panagiotis Kakoulidis, Nikolaos Ellinas et al.",
-      "summary": "The continuous deployment of enterprise voice systems creates a critical operational bottleneck: evaluating the acoustic quality of synthetic speech across high-volume production updates. While human …",
-      "date": "2026-10-30",
-      "tag": "Audio Reasoning",
-      "url": "https://arxiv.org/abs/2610.41539"
+      "id": "2611.09798",
+      "title": "Test-Time Compute Scales Better with Parallel Agent Teams",
+      "authors": "Junlin Wang, Haozhe Chen, Ang Li et al.",
+      "summary": "Test-time scaling improves the performance of a fixed model by spending more computation at inference. There are two common ways to spend it on agents when a verifier can score every attempt. Best-of-…",
+      "date": "2026-11-06",
+      "tag": "Reasoning",
+      "url": "https://arxiv.org/abs/2611.09798"
     },
     {
-      "id": "2610.41390",
-      "title": "Hierarchical Dual-Graph Retrieval for Long-form Audio Reasoning",
-      "authors": "Eunsang Lee, Taein Ju, Jiyoung Lee",
-      "summary": "Large audio language models (LALMs) struggle with long-form audio reasoning, as processing entire recordings often limits to capture query-relevant content distributed across distant segments while in…",
-      "date": "2026-10-30",
-      "tag": "Audio Reasoning",
-      "url": "https://arxiv.org/abs/2610.41390"
-    },
-    {
-      "id": "2610.40901",
-      "title": "TSFLab: A Self-Improving Agent-Agnostic Workbench for Time Series Forecasting Research",
-      "authors": "ChengAo Shen, Yanjun Zhao, Haoxin Liu et al.",
-      "summary": "As publications and products on time series forecasting (TSF) proliferate, researchers face a growing burden of analyzing existing work. First, not all publications release code. For instance, only ab…",
-      "date": "2026-10-29",
+      "id": "2611.07773",
+      "title": "Optimal Learning in Games with Arbitrary Delays: Best-of-Both-Worlds for Self-Play and Adversarial Opponents",
+      "authors": "Emmanuel Esposito, Andrew Jacobsen, Hao Qiu et al.",
+      "summary": "We study learning in zero-sum games with delayed feedback. We introduce Multi-Anchor Optimistic Online Mirror Descent (MAO-OMD), a single algorithm which obtains optimal fast rates in self-play on smo…",
+      "date": "2026-11-05",
       "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2610.40901"
+      "url": "https://arxiv.org/abs/2611.07773"
     },
     {
-      "id": "2610.40738",
-      "title": "Apriel Voice 27B Preview: An Open Model for Speech, Reasoning, and Tool Use",
-      "authors": "Aman Tiwari, Akshay Kalkunte, Akintunde Oladipo et al.",
-      "summary": "A capable voice assistant must do more than recognize words; it must understand requests, reason over context, sustain conversations, and act through tools. We present Apriel Voice 27B Preview, an ope…",
-      "date": "2026-10-29",
-      "tag": "Audio Reasoning",
-      "url": "https://arxiv.org/abs/2610.40738"
+      "id": "2611.07367",
+      "title": "Test-Time Self-Play: Scaling without a Verifier",
+      "authors": "Akira Yoshiyama, Akmal Ashirmatov, Jonas Hübotter et al.",
+      "summary": "Test-time scaling methods spend additional compute at deployment to improve a large language model's performance on a hard target problem. Most methods rely on a verifier that scores candidate solutio…",
+      "date": "2026-11-05",
+      "tag": "Reasoning",
+      "url": "https://arxiv.org/abs/2611.07367"
     },
     {
-      "id": "2610.38570",
-      "title": "Do Audio LLMs HEAR Pain? Tracing Acoustic Evidence from Speech to Language Reasoning",
-      "authors": "Wenqi Li, Xiangjue Dong, Sulaiman Vesal",
-      "summary": "Large audio language models (LALMs) can process speech directly, but it remains unclear how well they use the non-lexical acoustic information that speech carries. We study this question through pain,…",
-      "date": "2026-10-28",
-      "tag": "Audio Reasoning",
-      "url": "https://arxiv.org/abs/2610.38570"
-    },
-    {
-      "id": "2610.36578",
-      "title": "AudioRSI: Recursively Self-Improving Audio Reasoners",
-      "authors": "Jiajun Fan, Roger Ren, Jingyuan Li et al.",
-      "summary": "Reinforcement learning has made Audio Large Language Models (Audio LLMs) better reasoners, but the reward that drives it still comes from outside the model: a final-answer check, a hand-crafted proces…",
-      "date": "2026-10-27",
-      "tag": "Audio Reasoning",
-      "url": "https://arxiv.org/abs/2610.36578"
-    },
-    {
-      "id": "2610.37378",
-      "title": "VLA-Stem: A Lightweight Safety Mechanism for Vision-Language-Action Models via Reinforcement Learning",
-      "authors": "Bojun Zou, Wenhao Yu, Jiaohao Li et al.",
-      "summary": "Vision-Language-Action (VLA) models integrate high-level reasoning with low-level action execution for end-to-end robotic control. However, most VLA models target static manipulation in unconstrained …",
-      "date": "2026-10-27",
+      "id": "2611.06353",
+      "title": "Traffic-VL: Reinforced Vision-Language Models for Generalizable End-to-End Traffic Signal Control",
+      "authors": "Xingchen Zou, Maonan Wang, Kemou Jiang et al.",
+      "summary": "Existing traffic signal control methods typically rely on structured traffic states produced by dedicated perception pipelines. Emerging visual approaches often use idealized simulator images and conv…",
+      "date": "2026-11-04",
       "tag": "Multimodal",
-      "url": "https://arxiv.org/abs/2610.37378"
+      "url": "https://arxiv.org/abs/2611.06353"
     },
     {
-      "id": "2610.34137",
-      "title": "Self-Evolution Reasoner: Continuous Optimization via Policy-Intrinsic Exploration and Exploitation",
-      "authors": "Wenhang Shi, Yiren Chen, Zhe Zhao et al.",
-      "summary": "Reinforcement learning with verifiable rewards (RLVR) enables large language models (LLMs) to continuously self-improve their reasoning capabilities. Compared to RLVR's scalar rewards, recent self-sup…",
-      "date": "2026-10-25",
-      "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2610.34137"
+      "id": "2611.04887",
+      "title": "FourSight: Stable FP4 RL Post-Training via Sequence Filtering and Sparse Channel Compensation",
+      "authors": "Yining Wei, Tianyuan Wu, Gu Gong et al.",
+      "summary": "Reinforcement learning (RL) post-training increasingly targets low-bit deployment, with NVFP4 weight-and activation quantization (W4A4) becoming the state-of-the-practice format. However, integrating …",
+      "date": "2026-11-03",
+      "tag": "RL Training",
+      "url": "https://arxiv.org/abs/2611.04887"
     },
     {
-      "id": "2610.33845",
-      "title": "Build, Don't Play: Self-Improving LLM Research Agents Develop a Hearthstone Battlegrounds AI That Rivals Top Players",
-      "authors": "Changlian Ma, Limin Wang",
-      "summary": "Can LLM agents carry a hard real-world problem from raw data to a system that holds its own against people? We study this in Hearthstone Battlegrounds, an eight-player auto-battler with stochastic sho…",
-      "date": "2026-10-24",
+      "id": "2611.05158",
+      "title": "Perturb, Repair, Verify: Self-Play Vision-Language Verifiers for Compositional Understanding",
+      "authors": "Zijun Huang, Yingjun Du, Cees G. M. Snoek",
+      "summary": "Vision-language verifiers judge whether an image faithfully matches a textual description, yet existing training pipelines typically rely on static supervision from stronger external judges or curated…",
+      "date": "2026-11-03",
       "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2610.33845"
+      "url": "https://arxiv.org/abs/2611.05158"
+    },
+    {
+      "id": "2611.04634",
+      "title": "VeriSpoof: Beyond Real or Fake with One Audio LLM",
+      "authors": "Yang Xiao, Ting Dang",
+      "summary": "A speech deepfake detector estimates whether a recording is synthetic, but a forensic analyst also asks which system produced it, whether recordings share a source, and what evidence supports each con…",
+      "date": "2026-11-03",
+      "tag": "Audio Reasoning",
+      "url": "https://arxiv.org/abs/2611.04634"
+    },
+    {
+      "id": "2611.04580",
+      "title": "Confidence-Aware Aggregation for Multimodal Audio Reasoning",
+      "authors": "Michel Olvera, Paraskevas Stamatiadis, Ga{ë}l Richard",
+      "summary": "Large Audio Language Models (LALMs) enable generative reasoning over complex acoustic scenes but often exhibit prediction instability. We show that this variability can serve as a reliability metric v…",
+      "date": "2026-11-03",
+      "tag": "Audio Reasoning",
+      "url": "https://arxiv.org/abs/2611.04580"
+    },
+    {
+      "id": "2611.02797",
+      "title": "SelfImprove-Bench: Evaluating Generalization in Self-Improving Agents",
+      "authors": "Bangrui Xu, Jie Yang, Sidi Chen et al.",
+      "summary": "Recursively self-improving (RSI) systems are increasingly viewed as a promising means of accelerating progress toward artificial general intelligence. They aim to autonomously improve their capabiliti…",
+      "date": "2026-11-02",
+      "tag": "Self-Improvement",
+      "url": "https://arxiv.org/abs/2611.02797"
     }
   ]
 }
