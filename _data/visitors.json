@@ -1,8 +1,8 @@
 {
   "_updated": "2026-11-11",
-  "_timezone": "UTC",
+  "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 754,
+  "_total": 758,
   "_days": 30,
   "_range": "Oct. 13th - Nov. 11th",
   "locations": [
@@ -33,26 +33,26 @@
     {
       "code": "US",
       "name": "Oregon, US",
-      "count": 16,
+      "count": 17,
       "cx": 59.2,
       "cy": 39.7,
-      "r": 2.22
+      "r": 2.24
     },
     {
       "code": "US",
       "name": "Pennsylvania, US",
-      "count": 16,
+      "count": 17,
       "cx": 102.5,
       "cy": 43.0,
-      "r": 2.22
+      "r": 2.24
     },
     {
       "code": "NL",
       "name": "Netherlands",
-      "count": 13,
+      "count": 14,
       "cx": 185.5,
       "cy": 31.9,
-      "r": 2.18
+      "r": 2.2
     },
     {
       "code": "US",
@@ -207,19 +207,19 @@
       "r": 2.01
     },
     {
+      "code": "HK",
+      "name": "Hong Kong",
+      "count": 4,
+      "cx": 294.2,
+      "cy": 61.7,
+      "r": 2.01
+    },
+    {
       "code": "US",
       "name": "Minnesota, US",
       "count": 3,
       "cx": 86.3,
       "cy": 37.4,
-      "r": 1.98
-    },
-    {
-      "code": "HK",
-      "name": "Hong Kong",
-      "count": 3,
-      "cx": 294.2,
-      "cy": 61.7,
       "r": 1.98
     },
     {
@@ -411,7 +411,7 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 690
+      "count": 692
     },
     {
       "code": "SG",
@@ -421,7 +421,7 @@
     {
       "code": "NL",
       "name": "Netherlands",
-      "count": 13
+      "count": 14
     },
     {
       "code": "JP",
@@ -461,7 +461,7 @@
     {
       "code": "HK",
       "name": "Hong Kong",
-      "count": 3
+      "count": 4
     },
     {
       "code": "IN",
@@ -563,14 +563,14 @@
       "country": "US",
       "country_name": "United States",
       "name": "Oregon",
-      "count": 16,
+      "count": 17,
       "located": true
     },
     {
       "country": "US",
       "country_name": "United States",
       "name": "Pennsylvania",
-      "count": 16,
+      "count": 17,
       "located": true
     },
     {
@@ -711,7 +711,7 @@
     {
       "path": "/",
       "title": "Jiajun Fan",
-      "count": 294
+      "count": 295
     },
     {
       "path": "/visitors",
@@ -721,12 +721,12 @@
     {
       "path": "/cv",
       "title": "CV — Jiajun Fan",
-      "count": 65
+      "count": 66
     },
     {
       "path": "/publications",
       "title": "Publications — Jiajun Fan",
-      "count": 52
+      "count": 54
     },
     {
       "path": "/projects",
@@ -838,7 +838,7 @@
     {
       "name": "(unknown)",
       "id": "",
-      "count": 345
+      "count": 348
     },
     {
       "name": "www.jiajunfan.com",
@@ -858,7 +858,7 @@
     {
       "name": "scholar.google.com",
       "id": "scholar.google.com",
-      "count": 19
+      "count": 20
     },
     {
       "name": "www.jiajunfan.com/publications",
@@ -965,12 +965,12 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 552
+      "count": 555
     },
     {
       "name": "Safari",
       "id": "Safari",
-      "count": 235
+      "count": 236
     },
     {
       "name": "Firefox",
@@ -987,7 +987,7 @@
     {
       "name": "macOS",
       "id": "macOS",
-      "count": 384
+      "count": 388
     },
     {
       "name": "iOS",
@@ -1125,7 +1125,7 @@
     },
     {
       "day": "2026-11-10",
-      "n": 11
+      "n": 15
     },
     {
       "day": "2026-11-11",
@@ -1134,18 +1134,73 @@
   ],
   "periods": {
     "today": 0,
-    "yesterday": 11,
-    "d7": 85,
+    "yesterday": 15,
+    "d7": 89,
     "d7_prev": 196,
-    "d30": 754,
+    "d30": 758,
     "d30_prev": 597,
-    "day_frac": 0.029,
+    "day_frac": 0.066,
     "yesterday_day": "2026-11-10"
   },
-  "_last_visit": "2026-11-11 00:16",
+  "_last_visit": "2026-11-10 22:58",
   "recent": [
     {
-      "date": "2026-11-11 00:16",
+      "date": "2026-11-10 22:58",
+      "ts": "2026-11-11T06:58:11Z",
+      "loc": "Netherlands",
+      "path": "/publications",
+      "ref": "",
+      "browser": "Chrome 143",
+      "system": "macOS 10.15",
+      "screen": "800px",
+      "first": true
+    },
+    {
+      "date": "2026-11-10 22:23",
+      "ts": "2026-11-11T06:23:10Z",
+      "loc": "Oregon, US",
+      "path": "/publications",
+      "ref": "",
+      "browser": "Chrome 147",
+      "system": "macOS 10.15",
+      "screen": "800px",
+      "first": true
+    },
+    {
+      "date": "2026-11-10 21:19",
+      "ts": "2026-11-11T05:19:07Z",
+      "loc": "Hong Kong",
+      "path": "/cv",
+      "ref": "",
+      "browser": "Safari 26.5",
+      "system": "macOS 10.15",
+      "screen": "1728px",
+      "first": true
+    },
+    {
+      "date": "2026-11-10 18:58",
+      "ts": "2026-11-11T02:58:53Z",
+      "loc": "Pennsylvania, US",
+      "path": "/",
+      "ref": "scholar.google.com",
+      "browser": "Chrome 157",
+      "system": "macOS 10.15",
+      "screen": "2560px",
+      "first": true
+    },
+    {
+      "date": "2026-11-10 18:39",
+      "ts": "2026-11-11T02:39:51Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Chrome 157",
+      "system": "macOS 10.15",
+      "screen": "1512px",
+      "first": false
+    },
+    {
+      "date": "2026-11-10 16:16",
       "ts": "2026-11-11T00:16:04Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1156,7 +1211,7 @@
       "first": false
     },
     {
-      "date": "2026-11-11 00:16",
+      "date": "2026-11-10 16:16",
       "ts": "2026-11-11T00:16:07Z",
       "loc": "Illinois, US",
       "path": "/visitors",
@@ -1167,7 +1222,7 @@
       "first": false
     },
     {
-      "date": "2026-11-11 00:16",
+      "date": "2026-11-10 16:16",
       "ts": "2026-11-11T00:16:49Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1178,7 +1233,7 @@
       "first": false
     },
     {
-      "date": "2026-11-10 23:39",
+      "date": "2026-11-10 15:39",
       "ts": "2026-11-10T23:39:27Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1189,7 +1244,7 @@
       "first": true
     },
     {
-      "date": "2026-11-10 23:39",
+      "date": "2026-11-10 15:39",
       "ts": "2026-11-10T23:39:31Z",
       "loc": "Illinois, US",
       "path": "/visitors",
@@ -1200,7 +1255,7 @@
       "first": true
     },
     {
-      "date": "2026-11-10 23:01",
+      "date": "2026-11-10 15:01",
       "ts": "2026-11-10T23:01:25Z",
       "loc": "Illinois, US",
       "path": "/publication/2026-07-10-GPFlow",
@@ -1211,7 +1266,7 @@
       "first": true
     },
     {
-      "date": "2026-11-10 19:51",
+      "date": "2026-11-10 11:51",
       "ts": "2026-11-10T19:51:08Z",
       "loc": "Pennsylvania, US",
       "path": "/",
@@ -1222,7 +1277,7 @@
       "first": true
     },
     {
-      "date": "2026-11-10 17:38",
+      "date": "2026-11-10 09:38",
       "ts": "2026-11-10T17:38:25Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1233,7 +1288,7 @@
       "first": false
     },
     {
-      "date": "2026-11-10 17:37",
+      "date": "2026-11-10 09:37",
       "ts": "2026-11-10T17:37:09Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1244,7 +1299,7 @@
       "first": false
     },
     {
-      "date": "2026-11-10 17:37",
+      "date": "2026-11-10 09:37",
       "ts": "2026-11-10T17:37:10Z",
       "loc": "Illinois, US",
       "path": "/visitors",
@@ -1255,7 +1310,7 @@
       "first": false
     },
     {
-      "date": "2026-11-10 17:37",
+      "date": "2026-11-10 09:37",
       "ts": "2026-11-10T17:37:35Z",
       "loc": "Illinois, US",
       "path": "/publications",
@@ -1266,7 +1321,7 @@
       "first": true
     },
     {
-      "date": "2026-11-10 17:37",
+      "date": "2026-11-10 09:37",
       "ts": "2026-11-10T17:37:50Z",
       "loc": "Illinois, US",
       "path": "/cv",
@@ -1277,7 +1332,7 @@
       "first": true
     },
     {
-      "date": "2026-11-10 17:36",
+      "date": "2026-11-10 09:36",
       "ts": "2026-11-10T17:36:02Z",
       "loc": "Illinois, US",
       "path": "/visitors",
@@ -1288,7 +1343,7 @@
       "first": false
     },
     {
-      "date": "2026-11-10 17:36",
+      "date": "2026-11-10 09:36",
       "ts": "2026-11-10T17:36:04Z",
       "loc": "Illinois, US",
       "path": "/visitors",
@@ -1299,7 +1354,7 @@
       "first": false
     },
     {
-      "date": "2026-11-10 17:35",
+      "date": "2026-11-10 09:35",
       "ts": "2026-11-10T17:35:27Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1310,7 +1365,7 @@
       "first": true
     },
     {
-      "date": "2026-11-10 17:35",
+      "date": "2026-11-10 09:35",
       "ts": "2026-11-10T17:35:34Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1321,7 +1376,7 @@
       "first": false
     },
     {
-      "date": "2026-11-10 17:35",
+      "date": "2026-11-10 09:35",
       "ts": "2026-11-10T17:35:36Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1332,7 +1387,7 @@
       "first": false
     },
     {
-      "date": "2026-11-10 17:35",
+      "date": "2026-11-10 09:35",
       "ts": "2026-11-10T17:35:37Z",
       "loc": "Illinois, US",
       "path": "/visitors",
@@ -1343,7 +1398,7 @@
       "first": true
     },
     {
-      "date": "2026-11-10 16:54",
+      "date": "2026-11-10 08:54",
       "ts": "2026-11-10T16:54:14Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1354,7 +1409,7 @@
       "first": false
     },
     {
-      "date": "2026-11-10 16:44",
+      "date": "2026-11-10 08:44",
       "ts": "2026-11-10T16:44:55Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1365,7 +1420,7 @@
       "first": false
     },
     {
-      "date": "2026-11-10 15:03",
+      "date": "2026-11-10 07:03",
       "ts": "2026-11-10T15:03:25Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1376,7 +1431,7 @@
       "first": true
     },
     {
-      "date": "2026-11-10 10:31",
+      "date": "2026-11-10 02:31",
       "ts": "2026-11-10T10:31:00Z",
       "loc": "Netherlands",
       "path": "/",
@@ -1387,7 +1442,7 @@
       "first": true
     },
     {
-      "date": "2026-11-10 08:13",
+      "date": "2026-11-10 00:13",
       "ts": "2026-11-10T08:13:07Z",
       "loc": "Oregon, US",
       "path": "/publications",
@@ -1398,7 +1453,7 @@
       "first": true
     },
     {
-      "date": "2026-11-10 06:56",
+      "date": "2026-11-09 22:56",
       "ts": "2026-11-10T06:56:18Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1409,7 +1464,7 @@
       "first": true
     },
     {
-      "date": "2026-11-10 06:05",
+      "date": "2026-11-09 22:05",
       "ts": "2026-11-10T06:05:10Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1418,63 +1473,8 @@
       "system": "iOS 26.6",
       "screen": "402px",
       "first": true
-    },
-    {
-      "date": "2026-11-10 06:05",
-      "ts": "2026-11-10T06:05:46Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "www.jiajunfan.com/lab/aquatic-rsi-world-model",
-      "browser": "Safari 11.0",
-      "system": "iOS 26.6",
-      "screen": "402px",
-      "first": false
-    },
-    {
-      "date": "2026-11-10 05:05",
-      "ts": "2026-11-10T05:05:54Z",
-      "loc": "Oregon, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 157",
-      "system": "Linux",
-      "screen": "1280px",
-      "first": true
-    },
-    {
-      "date": "2026-11-10 03:53",
-      "ts": "2026-11-10T03:53:59Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "scholar.google.com",
-      "browser": "Chrome 156",
-      "system": "macOS 10.15",
-      "screen": "2048px",
-      "first": true
-    },
-    {
-      "date": "2026-11-10 03:42",
-      "ts": "2026-11-10T03:42:39Z",
-      "loc": "Colombia",
-      "path": "/404.html",
-      "ref": "www.aocr.org",
-      "browser": "Chrome 146",
-      "system": "Windows 10",
-      "screen": "800px",
-      "first": true
-    },
-    {
-      "date": "2026-11-10 02:06",
-      "ts": "2026-11-10T02:06:13Z",
-      "loc": "Oregon, US",
-      "path": "/publications",
-      "ref": "",
-      "browser": "Chrome 157",
-      "system": "Linux",
-      "screen": "1280px",
-      "first": true
     }
   ],
-  "_recent_total": 4213,
+  "_recent_total": 4218,
   "_recent_shown": 30
 }
