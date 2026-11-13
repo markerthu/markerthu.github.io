@@ -1,15 +1,15 @@
 {
   "_updated": "2026-11-13",
-  "_timezone": "UTC",
+  "_timezone": "America/Los_Angeles",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 728,
+  "_total": 733,
   "_days": 30,
   "_range": "Oct. 15th - Nov. 13th",
   "locations": [
     {
       "code": "US",
       "name": "Illinois, US",
-      "count": 487,
+      "count": 490,
       "cx": 90.8,
       "cy": 44.6,
       "r": 4.2
@@ -23,6 +23,14 @@
       "r": 2.54
     },
     {
+      "code": "SG",
+      "name": "Singapore",
+      "count": 18,
+      "cx": 283.8,
+      "cy": 82.7,
+      "r": 2.26
+    },
+    {
       "code": "US",
       "name": "Oregon, US",
       "count": 17,
@@ -31,20 +39,12 @@
       "r": 2.25
     },
     {
-      "code": "SG",
-      "name": "Singapore",
-      "count": 17,
-      "cx": 283.8,
-      "cy": 82.7,
-      "r": 2.25
-    },
-    {
       "code": "US",
       "name": "Pennsylvania, US",
       "count": 16,
       "cx": 102.5,
       "cy": 43.0,
-      "r": 2.24
+      "r": 2.23
     },
     {
       "code": "NL",
@@ -71,6 +71,14 @@
       "r": 2.16
     },
     {
+      "code": "JP",
+      "name": "Japan",
+      "count": 10,
+      "cx": 316.0,
+      "cy": 48.3,
+      "r": 2.14
+    },
+    {
       "code": "US",
       "name": "New Jersey, US",
       "count": 9,
@@ -84,14 +92,6 @@
       "count": 9,
       "cx": 101.3,
       "cy": 46.3,
-      "r": 2.13
-    },
-    {
-      "code": "JP",
-      "name": "Japan",
-      "count": 9,
-      "cx": 316.0,
-      "cy": 48.3,
       "r": 2.13
     },
     {
@@ -443,12 +443,12 @@
     {
       "code": "US",
       "name": "United States",
-      "count": 664
+      "count": 667
     },
     {
       "code": "SG",
       "name": "Singapore",
-      "count": 17
+      "count": 18
     },
     {
       "code": "NL",
@@ -458,7 +458,7 @@
     {
       "code": "JP",
       "name": "Japan",
-      "count": 9
+      "count": 10
     },
     {
       "code": "CN",
@@ -586,7 +586,7 @@
       "country": "US",
       "country_name": "United States",
       "name": "Illinois",
-      "count": 487,
+      "count": 490,
       "located": true
     },
     {
@@ -762,7 +762,7 @@
     {
       "path": "/",
       "title": "Jiajun Fan",
-      "count": 274
+      "count": 277
     },
     {
       "path": "/visitors",
@@ -772,12 +772,12 @@
     {
       "path": "/cv",
       "title": "CV — Jiajun Fan",
-      "count": 61
+      "count": 62
     },
     {
       "path": "/publications",
       "title": "Publications — Jiajun Fan",
-      "count": 49
+      "count": 50
     },
     {
       "path": "/projects",
@@ -889,17 +889,17 @@
     {
       "name": "(unknown)",
       "id": "",
-      "count": 329
+      "count": 331
     },
     {
       "name": "www.jiajunfan.com",
       "id": "www.jiajunfan.com",
-      "count": 178
+      "count": 179
     },
     {
       "name": "Google",
       "id": "Google",
-      "count": 81
+      "count": 82
     },
     {
       "name": "www.jiajunfan.com/projects",
@@ -934,7 +934,7 @@
     {
       "name": "chatgpt.com",
       "id": "chatgpt.com",
-      "count": 8
+      "count": 9
     },
     {
       "name": "www.bing.com",
@@ -1016,7 +1016,7 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 539
+      "count": 544
     },
     {
       "name": "Safari",
@@ -1038,7 +1038,7 @@
     {
       "name": "macOS",
       "id": "macOS",
-      "count": 367
+      "count": 369
     },
     {
       "name": "iOS",
@@ -1048,7 +1048,7 @@
     {
       "name": "Windows",
       "id": "Windows",
-      "count": 98
+      "count": 101
     },
     {
       "name": "Android",
@@ -1180,23 +1180,78 @@
     },
     {
       "day": "2026-11-13",
-      "n": 0
+      "n": 5
     }
   ],
   "periods": {
-    "today": 0,
+    "today": 5,
     "yesterday": 17,
-    "d7": 92,
+    "d7": 97,
     "d7_prev": 180,
-    "d30": 728,
+    "d30": 733,
     "d30_prev": 636,
-    "day_frac": 0.405,
+    "day_frac": 0.441,
     "yesterday_day": "2026-11-12"
   },
-  "_last_visit": "2026-11-13 04:38",
+  "_last_visit": "2026-11-13 10:14",
   "recent": [
     {
-      "date": "2026-11-13 04:38",
+      "date": "2026-11-13 10:14",
+      "ts": "2026-11-13T18:14:47Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Chrome 157",
+      "system": "macOS 10.15",
+      "screen": "1512px",
+      "first": true
+    },
+    {
+      "date": "2026-11-13 08:20",
+      "ts": "2026-11-13T16:20:12Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "Google",
+      "browser": "Chrome 157",
+      "system": "Windows 10",
+      "screen": "1560px",
+      "first": true
+    },
+    {
+      "date": "2026-11-13 08:20",
+      "ts": "2026-11-13T16:20:37Z",
+      "loc": "Illinois, US",
+      "path": "/cv",
+      "ref": "www.jiajunfan.com",
+      "browser": "Chrome 157",
+      "system": "Windows 10",
+      "screen": "1560px",
+      "first": true
+    },
+    {
+      "date": "2026-11-13 08:12",
+      "ts": "2026-11-13T16:12:53Z",
+      "loc": "Singapore",
+      "path": "/",
+      "ref": "chatgpt.com",
+      "browser": "Chrome 147",
+      "system": "macOS 10.15",
+      "screen": "1512px",
+      "first": true
+    },
+    {
+      "date": "2026-11-13 05:23",
+      "ts": "2026-11-13T13:23:48Z",
+      "loc": "Japan",
+      "path": "/publications",
+      "ref": "",
+      "browser": "Chrome 148",
+      "system": "Windows 10",
+      "screen": "1800px",
+      "first": true
+    },
+    {
+      "date": "2026-11-12 20:38",
       "ts": "2026-11-13T04:38:06Z",
       "loc": "Australia",
       "path": "/projects/proteinzero",
@@ -1207,7 +1262,7 @@
       "first": true
     },
     {
-      "date": "2026-11-13 02:51",
+      "date": "2026-11-12 18:51",
       "ts": "2026-11-13T02:51:52Z",
       "loc": "Oregon, US",
       "path": "/projects/procedure-aware-rl",
@@ -1218,7 +1273,7 @@
       "first": true
     },
     {
-      "date": "2026-11-13 02:45",
+      "date": "2026-11-12 18:45",
       "ts": "2026-11-13T02:45:19Z",
       "loc": "Oregon, US",
       "path": "/projects/procedure-aware-rl",
@@ -1229,7 +1284,7 @@
       "first": true
     },
     {
-      "date": "2026-11-13 02:14",
+      "date": "2026-11-12 18:14",
       "ts": "2026-11-13T02:14:51Z",
       "loc": "Illinois, US",
       "path": "/projects/tf-opd",
@@ -1240,7 +1295,7 @@
       "first": false
     },
     {
-      "date": "2026-11-13 02:14",
+      "date": "2026-11-12 18:14",
       "ts": "2026-11-13T02:14:55Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1251,7 +1306,7 @@
       "first": false
     },
     {
-      "date": "2026-11-13 02:13",
+      "date": "2026-11-12 18:13",
       "ts": "2026-11-13T02:13:07Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1262,7 +1317,7 @@
       "first": true
     },
     {
-      "date": "2026-11-13 02:12",
+      "date": "2026-11-12 18:12",
       "ts": "2026-11-13T02:12:25Z",
       "loc": "Illinois, US",
       "path": "/projects/tf-opd",
@@ -1273,7 +1328,7 @@
       "first": true
     },
     {
-      "date": "2026-11-13 02:12",
+      "date": "2026-11-12 18:12",
       "ts": "2026-11-13T02:12:43Z",
       "loc": "Illinois, US",
       "path": "/year-archive",
@@ -1284,7 +1339,7 @@
       "first": true
     },
     {
-      "date": "2026-11-13 02:12",
+      "date": "2026-11-12 18:12",
       "ts": "2026-11-13T02:12:51Z",
       "loc": "Illinois, US",
       "path": "/blog/reading-papers",
@@ -1295,7 +1350,7 @@
       "first": true
     },
     {
-      "date": "2026-11-13 01:36",
+      "date": "2026-11-12 17:36",
       "ts": "2026-11-13T01:36:08Z",
       "loc": "Georgia, US",
       "path": "/projects/tf-opd",
@@ -1306,7 +1361,7 @@
       "first": true
     },
     {
-      "date": "2026-11-13 01:23",
+      "date": "2026-11-12 17:23",
       "ts": "2026-11-13T01:23:27Z",
       "loc": "New Jersey, US",
       "path": "/",
@@ -1317,7 +1372,7 @@
       "first": true
     },
     {
-      "date": "2026-11-13 00:07",
+      "date": "2026-11-12 16:07",
       "ts": "2026-11-13T00:07:07Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1328,7 +1383,7 @@
       "first": false
     },
     {
-      "date": "2026-11-13 00:07",
+      "date": "2026-11-12 16:07",
       "ts": "2026-11-13T00:07:13Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1339,7 +1394,7 @@
       "first": false
     },
     {
-      "date": "2026-11-13 00:07",
+      "date": "2026-11-12 16:07",
       "ts": "2026-11-13T00:07:18Z",
       "loc": "Illinois, US",
       "path": "/visitors",
@@ -1350,7 +1405,7 @@
       "first": false
     },
     {
-      "date": "2026-11-12 23:03",
+      "date": "2026-11-12 15:03",
       "ts": "2026-11-12T23:03:50Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1361,7 +1416,7 @@
       "first": false
     },
     {
-      "date": "2026-11-12 22:49",
+      "date": "2026-11-12 14:49",
       "ts": "2026-11-12T22:49:42Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1372,7 +1427,7 @@
       "first": false
     },
     {
-      "date": "2026-11-12 22:28",
+      "date": "2026-11-12 14:28",
       "ts": "2026-11-12T22:28:45Z",
       "loc": "Illinois, US",
       "path": "/visitors",
@@ -1383,7 +1438,7 @@
       "first": true
     },
     {
-      "date": "2026-11-12 19:47",
+      "date": "2026-11-12 11:47",
       "ts": "2026-11-12T19:47:44Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1394,7 +1449,7 @@
       "first": false
     },
     {
-      "date": "2026-11-12 19:23",
+      "date": "2026-11-12 11:23",
       "ts": "2026-11-12T19:23:08Z",
       "loc": "United States",
       "path": "/projects/speechgym",
@@ -1405,7 +1460,7 @@
       "first": true
     },
     {
-      "date": "2026-11-12 19:12",
+      "date": "2026-11-12 11:12",
       "ts": "2026-11-12T19:12:38Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1416,7 +1471,7 @@
       "first": false
     },
     {
-      "date": "2026-11-12 19:05",
+      "date": "2026-11-12 11:05",
       "ts": "2026-11-12T19:05:17Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1427,7 +1482,7 @@
       "first": true
     },
     {
-      "date": "2026-11-12 19:05",
+      "date": "2026-11-12 11:05",
       "ts": "2026-11-12T19:05:18Z",
       "loc": "Illinois, US",
       "path": "/visitors",
@@ -1438,7 +1493,7 @@
       "first": true
     },
     {
-      "date": "2026-11-12 17:47",
+      "date": "2026-11-12 09:47",
       "ts": "2026-11-12T17:47:02Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1449,7 +1504,7 @@
       "first": false
     },
     {
-      "date": "2026-11-12 17:46",
+      "date": "2026-11-12 09:46",
       "ts": "2026-11-12T17:46:48Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1460,7 +1515,7 @@
       "first": false
     },
     {
-      "date": "2026-11-12 17:37",
+      "date": "2026-11-12 09:37",
       "ts": "2026-11-12T17:37:34Z",
       "loc": "Illinois, US",
       "path": "/",
@@ -1469,63 +1524,8 @@
       "system": "macOS 10.15",
       "screen": "1512px",
       "first": false
-    },
-    {
-      "date": "2026-11-12 15:39",
-      "ts": "2026-11-12T15:39:16Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 157",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": false
-    },
-    {
-      "date": "2026-11-12 15:37",
-      "ts": "2026-11-12T15:37:48Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 157",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": false
-    },
-    {
-      "date": "2026-11-12 15:16",
-      "ts": "2026-11-12T15:16:27Z",
-      "loc": "Canada",
-      "path": "/posts/2026/08/speechgym-voice-agent-rl",
-      "ref": "www.jiajunfan.com/projects/speechgym",
-      "browser": "Chrome 156",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": true
-    },
-    {
-      "date": "2026-11-12 15:14",
-      "ts": "2026-11-12T15:14:31Z",
-      "loc": "Canada",
-      "path": "/projects/speechgym",
-      "ref": "Google",
-      "browser": "Chrome 156",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": true
-    },
-    {
-      "date": "2026-11-12 12:50",
-      "ts": "2026-11-12T12:50:59Z",
-      "loc": "Ohio, US",
-      "path": "/projects/proteinzero",
-      "ref": "Google",
-      "browser": "Chrome 157",
-      "system": "Linux",
-      "screen": "1920px",
-      "first": true
     }
   ],
-  "_recent_total": 4283,
+  "_recent_total": 4288,
   "_recent_shown": 30
 }
