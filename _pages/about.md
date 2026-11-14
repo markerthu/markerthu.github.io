@@ -1295,6 +1295,7 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
   <div class="ro-row">
     <div class="ro-dom">Math reasoning<span>token efficiency</span></div>
     <div class="ro-papers">
+      <a class="ro-p" href="https://openreview.net/forum?id=aXO0xg0ttW" target="_blank" rel="noopener">ADRPO <span class="ro-v">NeurIPS 2025</span></a>
       <a class="ro-p" href="https://openreview.net/forum?id=8Oc3Mx754M" target="_blank" rel="noopener">BCR <span class="ro-v">ICML 2026</span></a>
     </div>
   </div>
