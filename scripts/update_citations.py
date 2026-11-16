@@ -31,6 +31,19 @@ PAPER_MATCH = {
     "2610.22236": "=training-free on-policy distillation",
 }
 
+# Hand corrections the monotonic guard would otherwise undo, held until the given date.
+# Scholar briefly merged a stranger's "Co-evolving policy distillation" (8 citations)
+# into TF-OPD's entry; the live profile split it back out by 2026-11-16 (TF-OPD = 1).
+# SerpAPI's cache can still show the merged 8, so until the date below no fetched
+# value raises these entries. Keys are PAPER_MATCH keys or Scholar citation ids.
+HOLD = {
+    "2610.22236": "2026-11-30",
+    "EjmzseUAAAAJ:bEWYMUwI8FkC": "2026-11-30",
+}
+
+def held(key, today):
+    return key in HOLD and today <= HOLD[key]
+
 def title_match(a, sub):
     t = (a.get("title") or "").strip().lower()
     return t == sub[1:] if sub.startswith("=") else sub in t
@@ -61,6 +74,7 @@ def track_papers(arts, today):
         pid = a.get("citation_id") or a.get("title", "").strip().lower()
         if not pid: continue
         n = int(cites(a))
+        if held(pid, today): continue
         p = st["papers"].setdefault(pid, {"cites": n if baseline else 0, "since": today})
         p["title"], p["year"] = a.get("title", ""), a.get("year", "")
         if n <= p["cites"]: continue
@@ -121,6 +135,7 @@ def main():
     # per-paper counts (monotonic; keep old value if a paper isn't matched)
     arts = d.get("articles", [])
     for k, sub in PAPER_MATCH.items():
+        if held(k, cur["_updated"]): continue
         hit = next((a for a in arts if title_match(a, sub)), None)
         if hit is not None:
             cur[k] = max(int(cites(hit)), int(cur.get(k) or 0))
