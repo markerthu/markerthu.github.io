@@ -41,6 +41,17 @@ HOLD = {
     "EjmzseUAAAAJ:bEWYMUwI8FkC": "2026-11-30",
 }
 
+# Entries he deleted from Scholar. A SerpAPI response that still lists one is a cache
+# from before the deletion: its totals still count that entry, and the monotonic guard
+# would lock them in. Such a fetch is skipped as a whole. Each rule expires on its date.
+DELETED = {
+    "co-evolving policy distillation": "2026-12-31",   # stranger's paper, removed 2026-11-16
+}
+
+def stale_titles(arts, today):
+    return [t for t, until in DELETED.items() if today <= until
+            and any(t in (a.get("title") or "").lower() for a in arts)]
+
 def held(key, today):
     return key in HOLD and today <= HOLD[key]
 
@@ -100,6 +111,10 @@ def main():
     d = fetch()
     if "error" in d:
         print("SerpAPI error:", d["error"], file=sys.stderr); sys.exit(1)
+    stale = stale_titles(d.get("articles", []), datetime.date.today().isoformat())
+    if stale:
+        print("SerpAPI cache predates a Scholar deletion (%s); data left unchanged." % ", ".join(stale))
+        return
 
     # total / indices from cited_by table
     total = h_index = i10 = None
