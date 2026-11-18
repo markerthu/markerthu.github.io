@@ -1,0 +1,166 @@
+<script>
+(function(){
+  var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $=function(s,r){return (r||document).querySelector(s);}, $$=function(s,r){return [].slice.call((r||document).querySelectorAll(s));};
+  var hasIO='IntersectionObserver' in window;
+  if(reduced||!hasIO) document.body.classList.add('no-anim');
+
+  function revealAll(){$$('.reveal,.anim').forEach(function(e){e.classList.add('in');});}
+  var revIO=hasIO&&!reduced?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');revIO.unobserve(e.target);}});},{threshold:0.3,rootMargin:'0px 0px -6% 0px'}):null;
+  function watch(el){if(revIO)revIO.observe(el);else el.classList.add('in');}
+  if(hasIO){var pauseIO=new IntersectionObserver(function(es){es.forEach(function(e){e.target.classList.toggle('paused',!e.isIntersecting);e.target.dispatchEvent(new CustomEvent('srw:vis',{detail:e.isIntersecting}));});},{threshold:0.05});
+    $$('.pausable').forEach(function(e){e.classList.add('paused');pauseIO.observe(e);});}
+
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  function f1(v){return v.toFixed(1);}
+  function setLens(root){$$('.draw',root).forEach(function(p){try{p.style.setProperty('--len',Math.ceil(p.getTotalLength())+2);}catch(e){}});}
+
+  (function(){
+    var el=$('#loopcount'), duel=$('.duel'); if(!el||!duel||reduced) return;
+    var started=false;
+    duel.addEventListener('srw:vis',function(e){
+      if(!e.detail||started) return; started=true;
+      var t0=performance.now(), D=5200;
+      (function tick(now){var u=Math.min(1,(now-t0)/D), v=Math.max(1,Math.round(549*(1-Math.pow(1-u,2.2))));el.innerHTML=v+'&times;';if(u<1)requestAnimationFrame(tick);})(t0);
+    });
+  })();
+
+  function stair(el){
+    var cw=el.clientWidth, small=cw<640, W=small?Math.round(Math.max(330,Math.min(cw,600))):Math.round(Math.max(740,cw)), H=small?372:410;
+    var m={l:small?36:58,r:small?22:136,t:small?84:46,b:small?86:92};
+    var acc=[57.24,57.76,61.25,61.25,61.25,61.25,61.25,61.25,63.80], base=57.24;
+    var ci={2:[2.27,5.74],8:[5.03,8.14]}, lab={2:'+4.0',8:'+6.6'};
+    var lo=55.4, hi=66.2;
+    var X=function(i){return m.l+(W-m.l-m.r)*i/8;}, Y=function(v){return m.t+(H-m.t-m.b)*(1-(v-lo)/(hi-lo));};
+    var s='';
+    [56,58,60,62,64,66].forEach(function(v){s+='<line class="grid" x1="'+m.l+'" x2="'+(W-m.r)+'" y1="'+Y(v)+'" y2="'+Y(v)+'"/><text x="'+(m.l-10)+'" y="'+(Y(v)+4)+'" text-anchor="end">'+v+'%</text>';});
+    s+='<line x1="'+X(0)+'" x2="'+X(8)+'" y1="'+Y(base)+'" y2="'+Y(base)+'" stroke="var(--ice-e)" stroke-width="1.2" stroke-dasharray="3 5" class="fade"/>';
+    s+='<rect class="fade" style="--d:1s" x="'+(X(3)-X(1)/8*0-18)+'" y="'+(Y(61.25)-15)+'" width="'+(X(7)-X(3)+36)+'" height="30" rx="15" fill="var(--mint-l)"/>';
+    var d='M'+X(0)+' '+Y(acc[0]);for(var i=1;i<9;i++)d+='L'+X(i)+' '+Y(acc[i]);
+    s+='<path class="l-mint draw" d="'+d+'"/>';
+    [2,8].forEach(function(k,n){var a=Y(base+ci[k][0]),b=Y(base+ci[k][1]),x=X(k),c='l-ci fade';
+      s+='<g class="'+c+'" style="--d:'+(0.5+k*0.14)+'s"><line x1="'+x+'" x2="'+x+'" y1="'+a+'" y2="'+b+'"/><line x1="'+(x-6)+'" x2="'+(x+6)+'" y1="'+a+'" y2="'+a+'"/><line x1="'+(x-6)+'" x2="'+(x+6)+'" y1="'+b+'" y2="'+b+'"/></g>';
+      s+='<text class="t-mint fade mid" style="--d:'+(0.7+k*0.14)+'s" x="'+x+'" y="'+(b-9)+'" text-anchor="middle">'+lab[k]+'</text>';});
+    for(i=0;i<9;i++){var x=X(i),y=Y(acc[i]),dl=(0.15+i*0.16)+'s';
+      if(i===0) s+='<circle class="d-ice pop" style="--d:'+dl+'" cx="'+x+'" cy="'+y+'" r="6.5"/>';
+      else if(i===2) s+='<circle class="d-mint pop" style="--d:'+dl+'" cx="'+x+'" cy="'+y+'" r="7"/>';
+      else if(i===8) s+='<circle class="pop" style="--d:'+dl+'" cx="'+x+'" cy="'+y+'" r="17" fill="var(--mint-l)"/><circle class="d-mint pop" style="--d:'+dl+'" cx="'+x+'" cy="'+y+'" r="8.5"/>';
+      else s+='<circle class="pop" style="--d:'+dl+'" cx="'+x+'" cy="'+y+'" r="4.5" fill="var(--card)" stroke="var(--mint-e)" stroke-width="1.5"/>';
+      s+='<text x="'+x+'" y="'+(H-m.b+24)+'" text-anchor="middle" class="'+(i===2||i===8?'t-ink mid':'')+'">'+(i===0?'start':i)+'</text>';}
+    s+=small?'<text class="t-ice fade" x="'+X(8)+'" y="'+(Y(base)+18)+'" text-anchor="end">57.2% at the start</text>':'<text class="t-ice fade" x="'+(X(8)+26)+'" y="'+(Y(base)+4)+'">57.2% at the start</text>';
+    s+='<text class="fade" style="--d:1.2s" x="'+(X(5))+'" y="'+(Y(61.25)+34)+'" text-anchor="middle">'+(small?'3–7 withdraw: unchanged':'sessions 3–7: it withdraws, and the model stays as it was')+'</text>';
+    if(small) s+='<text class="t-mint big fade" style="--d:1.6s" x="'+(X(8)+14)+'" y="52" text-anchor="end">63.8%</text>';
+    else s+='<text class="t-mint big fade" style="--d:1.6s" x="'+(X(8)+26)+'" y="'+(Y(63.8)+10)+'">63.8%</text>';
+    var yd=H-m.b+50;
+    s+='<text x="'+(m.l-10)+'" y="'+(yd-22)+'" text-anchor="end" class="sm"></text>';
+    for(i=1;i<9;i++){var sub=(i===1||i===2||i===8);
+      s+='<g class="pop" style="--d:'+(0.3+i*0.16)+'s"><rect x="'+(X(i)-(small?13:30))+'" y="'+(yd-13)+'" width="'+(small?26:60)+'" height="22" rx="11" '+(sub?'fill="var(--mint)" stroke="var(--mint-e)"':'fill="var(--card)" stroke="var(--hair)" stroke-dasharray="3 3"')+'/>'+
+        '<text x="'+X(i)+'" y="'+(yd+2.5)+'" text-anchor="middle" class="sm" style="font-weight:600;fill:'+(sub?'var(--ink)':'var(--faint)')+'">'+(small?(sub?'✓':'–'):(sub?'submits':'withdraws'))+'</text></g>';}
+    s+='<text x="'+X(0)+'" y="'+(yd+2.5)+'" text-anchor="middle" class="sm">'+(small?'':'its decision')+'</text>';
+    if(small) s+='<text x="'+m.l+'" y="'+(yd+30)+'" class="sm">✓ submits its edit    – withdraws</text>';
+    s+='<text x="'+m.l+'" y="'+(small?20:22)+'" class="t-ink mid">Accuracy after each session</text>';
+    el.innerHTML='<svg viewBox="0 0 '+W+' '+H+'">'+s+'</svg>';setLens(el);
+  }
+
+  var RATIO=[[0,136.3],[0,139.9],[1,145],[1,65.9],[2,140.8],[2,162.3],[3,97.5],[4,131],[4,45.8],[5,131.8],[5,54.4],[6,131.1],[6,81.6],[7,50.6],[8,132.6],[8,60.7],[9,119.7],[9,62.6],[10,99.8],[10,39.4],[11,84.1],[12,93.1],[12,31.6],[13,88.2],[13,35.2],[14,103.3],[14,34.4],[15,33.2],[16,92.7],[16,48.2],[17,94.7],[17,31],[18,119.5],[18,82.7],[19,75.5],[20,121.1],[20,50.9],[21,112.4],[21,34.3],[22,107.8],[22,70],[23,85.5],[24,98.7],[24,103.5],[25,80.2],[25,71.3],[26,80.4],[26,89.8],[27,74.8],[28,85.1],[28,54.3],[29,69.2],[29,52.6],[30,54.7],[31,93.1],[32,81.5],[32,79],[33,70.4],[33,45],[34,97.2],[34,79.9],[35,90.5],[36,103.7],[36,36.5],[37,99],[37,42.4],[38,101.5],[38,99.6],[39,81.5],[40,85.7],[40,95],[41,70.3],[41,77.6],[42,73.5],[42,79.1],[43,82.9],[44,61.2],[44,64.8],[45,79],[45,53.3],[46,76.6],[46,84.8],[47,85],[48,81.1],[48,81.3],[49,75.9],[49,86.2],[50,97.4],[50,79.5],[51,98.3],[52,90],[52,105.1],[53,88.7],[53,79.6],[54,96.8],[54,95.1],[55,97.3],[56,103],[56,96.4],[57,98.3],[57,86.7],[58,115],[58,93.3],[59,104.9],[60,78.2],[60,147.7],[61,78.7],[61,61.1],[62,94.1],[62,87.8],[63,72.1]];
+  function find(el){
+    var cw=el.clientWidth, mm=function(q){return !!(window.matchMedia&&window.matchMedia(q).matches);}, small=mm('(max-width:520px)'), one=mm('(max-width:900px)');
+    var lw=one?cw:(cw-44)*1.9/2.9, rw=one?(small?cw:(cw-28)/2):(cw-44)/2.9;
+    var W=small?Math.round(Math.max(340,Math.min(lw,480))):Math.round(Math.max(520,Math.min(lw,820))), H=small?300:350, m={l:50,r:small?10:18,t:44,b:42};
+    var X=function(l){return m.l+(W-m.l-m.r)*(l+1.5)/66;}, LY=function(v){return m.t+(H-m.t-m.b)*(1-(Math.log(v)-Math.log(22))/(Math.log(3000)-Math.log(22)));};
+    var s='<text x="0" y="16" class="t-ink mid">'+(small?'112 output matrices of the damaged copy':'It measures 112 output matrices of the damaged copy')+'</text>';
+    [30,100,300,1000].forEach(function(v){s+='<line class="grid" x1="'+m.l+'" x2="'+(W-m.r)+'" y1="'+LY(v)+'" y2="'+LY(v)+'"/><text x="'+(m.l-8)+'" y="'+(LY(v)+4)+'" text-anchor="end">'+(v===1000?'1,000':v)+'×</text>';});
+    [0,16,32,48,63].forEach(function(l){s+='<text x="'+X(l)+'" y="'+(H-m.b+20)+'" text-anchor="middle">'+l+'</text>';});
+    s+='<text x="'+(W-m.r)+'" y="'+(H-4)+'" text-anchor="end" class="sm">layer</text><text x="'+(small?0:m.l)+'" y="'+(H-4)+'" class="sm">largest weight ÷ typical weight of each matrix</text>';
+    s+='<line class="fade" style="--d:1.9s" x1="'+m.l+'" x2="'+(W-m.r)+'" y1="'+LY(162.3)+'" y2="'+LY(162.3)+'" stroke="var(--lav-e)" stroke-width="1.2" stroke-dasharray="3 4"/>';
+    s+='<text class="t-lav fade sm" style="--d:1.9s;font-weight:600" x="'+(W-m.r)+'" y="'+(LY(162.3)-7)+'" text-anchor="end">every other matrix: at most 162.3×</text>';
+    RATIO.forEach(function(r){s+='<circle class="d-lav pop" style="--d:'+(0.25+r[0]*0.024).toFixed(2)+'s" cx="'+X(r[0]).toFixed(1)+'" cy="'+LY(r[1]).toFixed(1)+'" r="'+(small?2.8:3.6)+'"/>';});
+    s+='<rect class="scan" x="'+(X(0)-1)+'" y="'+m.t+'" width="2" height="'+(H-m.t-m.b)+'" fill="var(--lav-e)" style="--tx:'+(X(63)-X(0))+'px"/>';
+    var ox=X(30), oy=LY(1397.2);
+    s+='<circle class="pop" style="--d:1.75s" cx="'+ox+'" cy="'+oy+'" r="20" fill="var(--mint-l)"/><circle class="d-mint pop" style="--d:1.75s" cx="'+ox+'" cy="'+oy+'" r="8"/>';
+    s+='<text class="t-mint fade" style="--d:2s" x="'+(ox+28)+'" y="'+(oy-2)+'">layer 30: 1,397×</text><text class="fade sm" style="--d:2s" x="'+(ox+28)+'" y="'+(oy+14)+'">'+(W-ox-28<250?'the one we corrupted,</text><text class="fade sm" style="--d:2s" x="'+(ox+28)+'" y="'+(oy+29)+'">and the one it names':'the matrix we corrupted, and the one it names')+'</text>';
+    var a='<div><svg viewBox="0 0 '+W+' '+H+'">'+s+'</svg><p class="said fade" style="--d:2.2s"><span>The model, turn 24</span>&ldquo;Layer 30&rsquo;s down_proj has an extreme 1397x outlier.&rdquo;</p></div>';
+    var W2=small?Math.round(Math.max(320,Math.min(rw,420))):Math.round(Math.max(230,Math.min(rw,400))), H2=small?260:316, mb={l:small?30:10,r:10,t:54,b:58}, bw=small?70:62;
+    var BY=function(v){return mb.t+(H2-mb.t-mb.b)*(1-v/66);}, xs=[0,1,2].map(function(i){return mb.l+(W2-mb.l-mb.r)*(i+0.5)/3;});
+    var bars=[['base model',58.5,'d-ice','t-ice'],['damaged copy',0,'d-peach','t-peach'],['after its own repair',33.0,'d-mint','t-mint']];
+    var b='<text x="0" y="16" class="t-ink mid">Text math problems solved</text>';
+    b+='<line class="ax" x1="'+mb.l+'" x2="'+(W2-mb.r)+'" y1="'+BY(0)+'" y2="'+BY(0)+'"/>';
+    bars.forEach(function(r,i){var y=BY(r[1]),h=Math.max(BY(0)-y,3);
+      b+='<rect class="'+r[2]+' growy" style="--d:'+(2+i*0.25)+'s" x="'+(xs[i]-bw/2)+'" y="'+(BY(0)-h)+'" width="'+bw+'" height="'+h+'" rx="5"/>';
+      b+='<text class="'+r[3]+' fade" style="--d:'+(2.3+i*0.25)+'s;font-family:var(--serif);font-size:var(--t-lead);font-weight:'+(i===2?600:500)+'" x="'+xs[i]+'" y="'+(BY(0)-h-10)+'" text-anchor="middle">'+f1(r[1])+'%</text>';
+      var words=r[0].split(' '), l1=i===2?'after its':words[0], l2=i===2?'own repair':words.slice(1).join(' ');
+      b+='<text x="'+xs[i]+'" y="'+(BY(0)+20)+'" text-anchor="middle" class="'+(i===2?'t-ink':'')+'" style="font-weight:'+(i===2?600:400)+'">'+l1+'</text><text x="'+xs[i]+'" y="'+(BY(0)+36)+'" text-anchor="middle" class="'+(i===2?'t-ink':'')+'" style="font-weight:'+(i===2?600:400)+'">'+l2+'</text>';});
+    var H3=132, rows3=[['original',0.071,'d-ice','t-ice','0.071'],['damaged',10.1,'d-peach','t-peach','10.1'],['its repair',0.108,'d-mint','t-mint','0.108']], bx0=74, bx1=W2-52;
+    var c='<text x="0" y="16" class="t-ink mid">Largest weight in the damaged rows</text>';
+    rows3.forEach(function(r,i){var y=40+i*30, wv=Math.max(6,(bx1-bx0)*(Math.log(r[1])-Math.log(0.05))/(Math.log(12)-Math.log(0.05)));
+      c+='<text x="0" y="'+(y+4.5)+'" class="'+(i===2?'t-ink':'')+'" style="font-weight:'+(i===2?600:400)+'">'+r[0]+'</text>';
+      c+='<rect class="'+r[2]+' grow" style="--d:'+(2.8+i*0.2)+'s" x="'+bx0+'" y="'+(y-7)+'" width="'+wv.toFixed(1)+'" height="14" rx="4"/>';
+      c+='<text class="'+r[3]+' fade" style="--d:'+(3+i*0.2)+'s;font-weight:600" x="'+(bx0+wv+8).toFixed(1)+'" y="'+(y+4.5)+'">'+r[4]+'</text>';});
+    el.innerHTML='<div class="two">'+a+'<div><svg viewBox="0 0 '+W2+' '+H2+'">'+b+'</svg><svg viewBox="0 0 '+W2+' '+H3+'" style="margin-top:'+(small?18:6)+'px">'+c+'</svg></div></div>';
+  }
+
+  var charts=[['#ch-stair',stair],['#ch-find',find]], lastW=0;
+  function build(){charts.forEach(function(c){var el=$(c[0]);if(el)c[1](el);});}
+  build();
+  var fold=$('#find-more');
+  if(fold)fold.addEventListener('toggle',function(){if(fold.open)find($('#ch-find'));});
+  function cols(){return window.matchMedia?[900,520].map(function(b){return window.matchMedia('(max-width:'+b+'px)').matches;}).join():'';}
+  var lastOne=cols();
+  var rt=0;window.addEventListener('resize',function(){var one=cols();if(Math.abs(window.innerWidth-lastW)<40&&one===lastOne)return;clearTimeout(rt);rt=setTimeout(function(){lastW=window.innerWidth;lastOne=one;build();},180);});
+  lastW=window.innerWidth;
+  $$('.reveal,.anim').forEach(watch);
+  if(reduced) revealAll();
+
+  (function(){
+    var root=$('#replay'); if(!root) return;
+    var S={
+      self:[
+        ['fail','Symptom','turn 1',[['q','The diagnosis shows 80.5% of answers hit the token limit without finishing, but 96% of completed answers are correct.']]],
+        ['read','It reads itself','turns 3, 9',[['q','The layer 56 hidden states show a clear difference pattern. I’ll try removing the “excessive generation” direction from the output projections.']]],
+        ['fail','Edits it drops','turns 21–27',[['q','Both approaches made things worse.'],['o','samples wrong->right 1, right->wrong 6']]],
+        ['read','It looks earlier','turns 30–32',[['q','The differences grow with depth. Let me try a very small edit on an earlier layer (layer 8) to see if that helps.']]],
+        ['edit','The edit','turn 50',[['c','diff_vec = length_mean - finished_mean\nu = diff_vec / np.linalg.norm(diff_vec)\nalpha = 0.05\nout_proj_edited = remove_direction(…)']]],
+        ['test','Its tests decide','turns 52–55',[['o','samples wrong->right 14, right->wrong 4'],['q','… removing the “excessive reasoning” direction from this layer helped the model conclude earlier.']]]
+      ],
+      repair:[
+        ['fail','Symptom','turn 1',[['q','… 29.7% of answers hit the token limit with 100% ending in repetition, and even finished answers are 0% correct.']]],
+        ['read','It reads the copy’s states','turn 12',[['q','… activations exploding from ~0.5 at Layer 0 to ~225 at Layer 63. This suggests corrupted weights in early layers causing activation explosion.']]],
+        ['fail','An attempt it drops','turns 14–19',[['c','def clip_outliers(W, factor=5.0):'],['q','The edit made things worse - cut rate increased from 31.2% to 68.8%. Clipping was too aggressive.']]],
+        ['read','The outlier','turns 23–24',[['c','ratio = max_val / median if median > 0 else 0'],['q','Layer 30’s down_proj has an extreme 1397x outlier.']]],
+        ['edit','The repair','turn 33',[['q','… I need to try a more conservative clipping approach - only removing the most extreme outliers.'],['c','def clip_outliers_gentle(W, factor=15.0):']]],
+        ['test','Its tests decide','turns 41–42',[['o','samples wrong->right 16, right->wrong 0'],['q','The edits work well: 26.7% accuracy vs 0% …']]]
+      ]};
+    var KIND={fail:'what goes wrong',read:'it reads itself',edit:'it writes an edit',test:'it tests the edit against itself'};
+    var rail=$('.rp-rail',root), view=$('.rp-view',root), tabs=$$('.rp-tabs button',root);
+    var cur='self', at=0, playing=!reduced, vis=false, timer=0, DUR=7000;
+    function renderRail(){
+      rail.innerHTML=S[cur].map(function(st,i){return '<button type="button" class="k-'+st[0]+'" data-i="'+i+'"><span class="n">'+(i+1)+'</span><span>'+esc(st[1])+'<small>'+esc(st[2])+'</small></span></button>';}).join('');
+    }
+    function show(i,user){
+      at=i;var st=S[cur][i];
+      $$('button',rail).forEach(function(b,k){b.setAttribute('aria-current',k===i?'true':'false');b.classList.toggle('done',k<i);});
+      var act=$('button[aria-current=true]',rail);if(act&&rail.scrollWidth>rail.clientWidth)rail.scrollTo({left:act.offsetLeft-60,behavior:reduced?'auto':'smooth'});
+      view.className='rp-view k-'+st[0];
+      var h='<p class="rp-kind">'+esc(st[1])+'<span>'+KIND[st[0]]+', '+esc(st[2])+'</span></p>';
+      st[3].forEach(function(it,k){var dl=' style="animation-delay:'+(k*0.55)+'s"';
+        if(it[0]==='q')h+='<p class="rp-q rp-item"'+dl+'>'+esc(it[1])+'</p>';
+        else h+='<pre class="rp-code rp-item'+(it[0]==='o'?' out':'')+'"'+dl+'>'+esc(it[1])+'</pre>';});
+      h+='<div class="rp-foot"><button type="button" class="rp-play" aria-label="'+(playing?'Pause':'Play')+' the replay">'+(playing?'<svg viewBox="0 0 12 12"><rect x="2" y="1.5" width="3" height="9" rx="1"/><rect x="7" y="1.5" width="3" height="9" rx="1"/></svg>':'<svg viewBox="0 0 12 12"><path d="M3 1.5v9l7.5-4.5z"/></svg>')+'</button><div class="rp-bar"><i></i></div></div>';
+      view.innerHTML=h;schedule();
+    }
+    function schedule(){
+      clearTimeout(timer);var bar=$('.rp-bar i',view);if(!bar)return;
+      if(!playing||!vis){bar.style.transition='none';bar.style.width=playing?'0':'0';return;}
+      bar.style.transition='none';bar.style.width='0';void bar.offsetWidth;
+      bar.style.transition='width '+DUR+'ms linear';bar.style.width='100%';
+      timer=setTimeout(function(){show((at+1)%S[cur].length);},DUR);
+    }
+    rail.addEventListener('click',function(e){var b=e.target.closest('button');if(b)show(+b.getAttribute('data-i'),true);});
+    view.addEventListener('click',function(e){if(e.target.closest('.rp-play')){playing=!playing;show(at);}});
+    tabs.forEach(function(t){t.addEventListener('click',function(){cur=t.getAttribute('data-s');tabs.forEach(function(o){o.setAttribute('aria-selected',o===t?'true':'false');});renderRail();show(0,true);});});
+    root.addEventListener('srw:vis',function(e){vis=e.detail;schedule();});
+    if(!hasIO)vis=true;
+    renderRail();show(0);
+  })();
+})();
+</script>

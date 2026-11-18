@@ -1,0 +1,128 @@
+<figure class="cst" id="ch-cost">
+  <div class="cst-stage">
+    <article class="cst-act tts">
+      <header><h3>Test-time scaling</h3><p>many chains of reasoning behind every answer</p></header>
+      <div class="cst-draw" role="img" aria-label="Schematic. Test-time scaling: the weights stay frozen. Each of four questions fans out into many chains of reasoning before one answer comes back, and the chains are gone once it is answered. The added cost climbs one more step with every question."></div>
+      <p class="cst-say">Many chains of reasoning, paid again on every question.</p>
+      <ul class="pdm-yn"><li class="n"><i></i>No added cost per answer</li><li class="n"><i></i>The weights themselves improve</li></ul>
+    </article>
+    <article class="cst-act own">
+      <header><h3>The rewritten model</h3><p>one chain of reasoning, the gain already in its weights</p></header>
+      <div class="cst-draw" role="img" aria-label="Schematic. The rewritten model: a few of its weights are rewritten once, and that is paid once. After that each of four questions takes one chain of reasoning to its answer, and the added cost stays flat."></div>
+      <p class="cst-say">One chain per answer. The gain was paid once, and it stays.</p>
+      <ul class="pdm-yn"><li class="y"><i></i>No added cost per answer</li><li class="y"><i></i>The weights themselves improve</li></ul>
+    </article>
+  </div>
+  <figcaption class="cap">Schematic: nothing in it is measured.</figcaption>
+</figure>
+<script>
+(function(){
+  var fig=document.getElementById('ch-cost'); if(!fig) return;
+  var acts=[].slice.call(fig.querySelectorAll('.cst-act')), hosts=acts.map(function(a){return a.querySelector('.cst-draw');});
+  if(hosts.length!==2||!hosts[0]||!hosts[1]) return;
+  var mq=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)'):{matches:false};
+  var NQ=4, T0=1.7, QD=2.3, TA=T0+NQ*QD, HOLD=4.2, OUT=0.6, T=TA+HOLD, FINAL=TA+1.6;
+  var YS=[62,78,94,110,126], CY=94, MY=222, MH=46, OWN=0.3, NC=8, FLIP=[2,5,6];
+  var W=440, ND=17, X0=92, X1=348, AX=386, DX=16, MX0=14, MX1=426, XQ=[], wide=0, P=[];
+  var visible=false, raf=0, last=0, tc=0, lit=null;
+
+  function clamp(x){return x<0?0:x>1?1:x;}
+  function ease(x){x=clamp(x);return x*x*(3-2*x);}
+  function seg(t,a,b){return clamp((t-a)/(b-a));}
+  function f(v){return v.toFixed(1);}
+  function chain(y){
+    var s='<g class="chain"><path class="ln fan" d="M54,'+CY+' C70,'+CY+' 68,'+y+' 84,'+y+'"/>';
+    for(var i=0;i<ND;i++)s+='<circle class="dt" cx="'+f(X0+i*DX)+'" cy="'+y+'" r="3.2"/>';
+    return s+'<path class="ln join" d="M'+f(X1+8)+','+y+' C'+f(X1+24)+','+y+' '+f(X1+22)+','+CY+' '+AX+','+CY+'"/></g>';
+  }
+  function build(host,own){
+    var s='<g class="wts">', i, cx=14+19*(own?FLIP[1]:3)+7.5;
+    for(i=0;i<NC;i++)s+='<rect class="cell'+(own&&FLIP.indexOf(i)>=0?' flip':'')+'" x="'+(14+i*19)+'" y="10" width="15" height="15" rx="3"/>';
+    s+='<text class="lb wl" x="'+(14+NC*19+6)+'" y="22">'+(own?'weights, rewritten once':'weights, frozen')+'</text>';
+    s+='<path class="ln link" d="M'+cx+',29 V'+(own?CY-8:YS[0]-8)+'" stroke-dasharray="2 3.5"/></g>';
+    s+='<rect class="bx0" x="14" y="'+(CY-20)+'" width="40" height="40" rx="9"/><text class="qa qn" x="34" y="'+(CY+6)+'" text-anchor="middle">Q1</text>';
+    if(own)s+=chain(CY);else YS.forEach(function(y){s+=chain(y);});
+    s+='<g class="ans"><rect class="bx" x="'+AX+'" y="'+(CY-20)+'" width="40" height="40" rx="9"/><text class="qa" x="'+(AX+20)+'" y="'+(CY+6)+'" text-anchor="middle">A</text></g>';
+    s+='<text class="lb" x="'+MX0+'" y="'+(MY-MH-12)+'">added cost</text><text class="lb sch" x="'+MX1+'" y="'+(MY-MH-12)+'" text-anchor="end">schematic</text>';
+    s+='<path class="ar"/><line class="base" x1="'+MX0+'" x2="'+MX1+'" y1="'+MY+'" y2="'+MY+'"/><text class="lb" x="'+MX0+'" y="'+(MY+17)+'">questions</text>';
+    for(i=0;i<NQ;i++)s+='<g class="tick"><line x1="'+f(XQ[i])+'" x2="'+f(XQ[i])+'" y1="'+MY+'" y2="'+(MY+4)+'"/><text class="lb" x="'+f(XQ[i])+'" y="'+(MY+17)+'" text-anchor="middle">'+(i+1)+'</text></g>';
+    s+='<path class="mt"/><circle class="dt now" r="3.6"/>';
+    if(own)s+='<text class="lb once" x="'+(MX0+12)+'" y="'+f(MY-MH*OWN-8)+'">paid once</text>';
+    host.innerHTML='<svg viewBox="0 0 '+W+' 246" aria-hidden="true">'+s+'</svg>';
+    var q=function(sel){return [].slice.call(host.querySelectorAll(sel));};
+    return {own:own,svg:q('svg')[0],wts:q('.wts')[0],flips:q('.flip'),wl:q('.wl')[0],link:q('.link')[0],qn:q('.qn')[0],
+      chains:q('.chain').map(function(g){return {fan:g.querySelector('.fan'),join:g.querySelector('.join'),dots:[].slice.call(g.querySelectorAll('.dt'))};}),
+      ans:q('.ans')[0],ticks:q('.tick'),mt:q('.mt')[0],ar:q('.ar')[0],now:q('.now')[0],once:q('.once')[0],k:-1};
+  }
+  function setup(){
+    var cw=Math.max(280,Math.min(520,Math.round(hosts[0].clientWidth))); if(cw===wide) return false;
+    var n=cw<380;
+    wide=cw;W=cw;AX=W-54;X1=AX-38;ND=Math.round((X1-X0)/(n?13:16))+1;DX=(X1-X0)/(ND-1);MX1=W-14;
+    var a=n?88:104, b=MX1-22;XQ=[];
+    for(var i=0;i<NQ;i++)XQ.push(a+(b-a)*i/(NQ-1));
+    P=[build(hosts[0],false),build(hosts[1],true)];return true;
+  }
+  function draw(p,t){
+    var k=Math.min(NQ-1,Math.max(0,Math.floor((t-T0)/QD))), s=Math.max(0,t-T0-k*QD), lastQ=k===NQ-1, n=p.chains.length;
+    var gone=lastQ?0:seg(s,QD-0.5,QD-0.08), span=0.95-(n-1)*0.06;
+    p.wts.style.opacity=f(seg(t,0.1,0.6));
+    if(p.own){
+      p.flips.forEach(function(c,i){var on=t>=0.55+i*0.28;if(on!==c.classList.contains('w'))c.classList.toggle('w',on);});
+      p.wl.style.opacity=f(0.45+0.55*seg(t,1.0,1.4));
+      p.once.style.opacity=f(seg(t,1.1,1.5));
+    }
+    if(p.k!==k){p.k=k;p.qn.textContent='Q'+(k+1);}
+    p.chains.forEach(function(c,ci){
+      var lag=0.18+ci*0.06, live=t>=T0?1:0;
+      c.fan.style.opacity=f(live*seg(s,lag,lag+0.18)*(1-gone)*0.75);
+      c.dots.forEach(function(d,i){d.style.opacity=f(live*seg(s,lag+0.1+span*i/ND,lag+0.18+span*i/ND)*(1-gone));});
+      c.join.style.opacity=f(live*seg(s,lag+0.1+span,lag+0.28+span)*(1-gone)*0.75);
+    });
+    p.ans.style.opacity=f(0.3+0.7*(t>=T0?seg(s,1.25,1.45)*(1-gone):0));
+    var pts=[[MX0,0]], lv, x, i, d='';
+    if(p.own){
+      lv=OWN*ease(seg(t,0.5,1.2));pts.push([MX0,lv]);
+      x=t<T0?MX0+(XQ[0]-22-MX0)*seg(t,1.2,T0):(k===0?XQ[0]-22:XQ[k-1])+((XQ[k])-(k===0?XQ[0]-22:XQ[k-1]))*ease(seg(s,0,1.3));
+      if(t>=TA)x=XQ[NQ-1]+(MX1-XQ[NQ-1])*seg(t,TA,TA+0.4);
+      pts.push([x,lv]);
+    }else if(t>=T0){
+      for(i=0;i<k;i++){pts.push([XQ[i],i/NQ]);pts.push([XQ[i],(i+1)/NQ]);}
+      x=k===0?MX0:XQ[k-1];
+      if(s<0.35)pts.push([x+(XQ[k]-x)*ease(s/0.35),k/NQ]);
+      else{pts.push([XQ[k],k/NQ]);pts.push([XQ[k],(k+ease(seg(s,0.35,1.3)))/NQ]);}
+      if(t>=TA)pts.push([XQ[NQ-1]+(MX1-XQ[NQ-1])*seg(t,TA,TA+0.4),1]);
+    }
+    pts.forEach(function(q,j){d+=(j?' L':'M')+f(q[0])+','+f(MY-MH*q[1]);});
+    p.mt.setAttribute('d',d);
+    p.ar.setAttribute('d',d+' L'+f(pts[pts.length-1][0])+','+MY+' L'+MX0+','+MY+' Z');
+    p.now.setAttribute('cx',f(pts[pts.length-1][0]));p.now.setAttribute('cy',f(MY-MH*pts[pts.length-1][1]));
+    p.ticks.forEach(function(tk,q){tk.classList.toggle('on',t>=T0+q*QD+0.35);});
+    p.svg.style.opacity=f(Math.min(seg(t,0,0.5),1-seg(t,T-OUT,T)));
+  }
+  function frame(t){
+    P.forEach(function(p){draw(p,t);});
+    var on=t>=TA+0.5&&t<T-OUT;
+    if(on!==lit){lit=on;acts.forEach(function(a){a.classList.toggle('done',on);});}
+  }
+  function still(){return mq.matches||!('IntersectionObserver' in window);}
+  function tick(now){
+    raf=0;if(!visible||mq.matches) return;
+    if(!last) last=now;
+    tc+=Math.min(0.1,(now-last)/1000);last=now;
+    if(tc>=T) tc=0;
+    frame(tc);raf=requestAnimationFrame(tick);
+  }
+  function sync(){
+    if(still()){if(raf){cancelAnimationFrame(raf);raf=0;}fig.classList.remove('cst-live');frame(FINAL);return;}
+    fig.classList.add('cst-live');
+    if(visible&&!raf){last=0;raf=requestAnimationFrame(tick);}
+  }
+  setup();
+  if(still())frame(FINAL);else{fig.classList.add('cst-live');frame(0);}
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){es.forEach(function(e){visible=e.isIntersecting;sync();});},{threshold:0.25}).observe(fig);
+  }
+  if(mq.addEventListener) mq.addEventListener('change',sync);
+  var rt=0;window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){if(setup())frame(still()?FINAL:tc);},180);});
+})();
+</script>

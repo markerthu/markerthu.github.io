@@ -1,0 +1,26 @@
+<script>
+(function(){
+  var ax=document.querySelector('.era-axis'); if(!ax) return;
+  var fill=ax.querySelector('.ax-fill'), dot=ax.querySelector('.ax-dot'), end=ax.querySelector('.ax-end');
+  var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var RUN=5200, HOLD=4200, t0=null, raf=0, vis=false;
+  function ease(u){return u<0.5?2*u*u:1-Math.pow(-2*u+2,2)/2;}
+  function draw(p){
+    fill.style.transform='scaleX('+p+')'; dot.style.left=(p*100)+'%';
+    end.textContent=String(Math.round(1947+79*p));
+  }
+  function tick(now){
+    if(t0===null) t0=now;
+    var e=now-t0;
+    if(e>RUN+HOLD){t0=now;e=0;}
+    draw(e>=RUN?1:ease(e/RUN));
+    if(vis) raf=requestAnimationFrame(tick);
+  }
+  if(reduced||!('IntersectionObserver' in window)) return;
+  draw(0);
+  new IntersectionObserver(function(es){es.forEach(function(en){
+    vis=en.isIntersecting; cancelAnimationFrame(raf);
+    if(vis){t0=null;raf=requestAnimationFrame(tick);}
+  });},{threshold:0.3}).observe(ax);
+})();
+</script>

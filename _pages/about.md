@@ -1331,6 +1331,10 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
 
 <ul class="news-list">
   <li>
+    <span class="news-date">Nov 2026</span>
+    <span><span class="nbadge nb-find">Finding</span><strong>Language Models Can Rewrite Their Own Weights</strong> is on arXiv. A third way to make a model better: it rewrites its own weights by its own reasoning, with no gradients and no training. The model is its own optimizer. It takes no frontier model: an open 27B model becomes 6.6 points more accurate on 490 problems it never saw, and repairs a damaged copy of itself without ever seeing its original weights. No training pipeline, no cluster, no added cost per answer: a few hours on one GPU. Affordable. Scalable. Recursive. <a href="/projects/self-rewriting/">Project page</a> &middot; <a href="https://arxiv.org/abs/2611.21885" target="_blank" rel="noopener noreferrer">Paper</a></span>
+  </li>
+  <li>
     <span class="news-date">Oct 2026</span>
     <span><span class="nbadge nb-find">Finding</span><strong>AudioRSI</strong> is on arXiv: to our knowledge, the first recursively self-improving audio LLM. One model is both student and teacher, and the student surpasses its teacher, then becomes it. Recursive self-improvement here improves the teacher (judge) and the student together: the teacher is the student&rsquo;s own copy, refreshed as it improves, so the two co-evolve. <a href="/projects/audiorsi/">Project page</a> &middot; <a href="/film/#audiorsi">Video</a> &middot; <a href="https://arxiv.org/abs/2610.36578" target="_blank" rel="noopener noreferrer">Paper</a></span>
   </li>
@@ -1578,6 +1582,22 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
       <a class="pub-link pl-paper" href="https://openreview.net/forum?id=2IoFFexvuw" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-pubs.png);mask-image:url(/images/icons/sh-pubs.png)"></i>Paper</a>
       <a class="pub-link pl-project" href="/projects/orw-cfm-w2/"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-link.png);mask-image:url(/images/icons/h-link.png)"></i>Project</a>
       <a class="pub-link pl-arxiv" href="https://arxiv.org/abs/2502.06061" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-paperclip.png);mask-image:url(/images/icons/h-paperclip.png)"></i>arXiv</a>
+    </div>
+  </div>
+</div>
+
+<div class="pub-entry" role="article" data-venue="Preprint" data-year="2026" data-arxiv="2611.21885">
+  <div class="pub-left">
+    <span class="pb pb-arxiv">Preprint</span><span class="pub-year">2026</span></div>
+  <div class="pub-right">
+    <div class="pub-thumb-wrap"><img loading="lazy" src="/images/featured/selfrw-ai.jpg" width="1000" height="333" alt="Self-rewriting: a neural network looks at one of its own layers through a magnifier, a pencil rewrites one row of its weight matrix, and the same network comes out improved, with a dashed line looping back to show it edits itself"></div>
+    <div class="pub-title"><a href="https://arxiv.org/abs/2611.21885" target="_blank" rel="noopener noreferrer">Language Models Can Rewrite Their Own Weights</a></div>
+    <div class="pub-authors"><strong>J. Fan*</strong>, N. He, C. Yang, A. Mao, X. Zhu, C. Cheng, K. Liang, S. Shen, Z. Li, R. Guo, G. Liu</div>
+    <div class="pub-desc">A third way to make a language model better: it rewrites its own weights by its own reasoning. No gradients, no training, no added cost per answer: the model is its own optimizer.</div>
+    <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>Its own edit: +6.6 points on 490 problems it never saw</div>
+    <div class="pub-links">
+      <a class="pub-link pl-project" href="/projects/self-rewriting/"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-link.png);mask-image:url(/images/icons/h-link.png)"></i>Project</a>
+      <a class="pub-link pl-arxiv" href="https://arxiv.org/abs/2611.21885" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-paperclip.png);mask-image:url(/images/icons/h-paperclip.png)"></i>arXiv</a>
     </div>
   </div>
 </div>
@@ -2299,6 +2319,7 @@ document.querySelectorAll('.featured-card').forEach(function(card){
     'd4wrBuJ4xo': '@inproceedings{zheng2026procedure,\n  title={Procedure-Aware Reinforcement Learning for Tool-Augmented Large Language Models},\n  author={Qinglong Zheng and Jiajun Fan and Chaoran Cheng and Ge Liu},\n  booktitle={Conference on Language Modeling (COLM)},\n  year={2026},\n  url={https://openreview.net/forum?id=d4wrBuJ4xo}\n}',
     '2506.07459': '@article{wang2026proteinzero,\n  title={ProteinZero: Self-Improving Protein Generation via Online Reinforcement Learning},\n  author={Ziwen Wang and Jiajun Fan and Ruihan Guo and Thao Nguyen and Heng Ji and Ge Liu},\n  journal={Transactions on Machine Learning Research},\n  year={2026},\n  url={https://arxiv.org/abs/2506.07459}\n}',
     '8Oc3Mx754M': '@inproceedings{yang2026bcr,\n  title={Batched Contextual Reinforcement},\n  author={Yang, Bangji and Ma, Hongbo and Fan, Jiajun and Liu, Ge},\n  booktitle={Forty-third International Conference on Machine Learning},\n  year={2026},\n  url={https://openreview.net/forum?id=8Oc3Mx754M}\n}',
+    '2611.21885': '@article{fan2026selfrewriting,\n  title         = {Language Models Can Rewrite Their Own Weights},\n  author        = {Jiajun Fan and Neil He and Changyi Yang and Andy Mao and\n                   Xi Zhu and Chaoran Cheng and Kaiqu Liang and Shuaike Shen and\n                   Zetian Li and Ruihan Guo and Ge Liu},\n  journal       = {arXiv preprint arXiv:2611.21885},\n  eprint        = {2611.21885},\n  archivePrefix = {arXiv},\n  year          = {2026}\n}',
     '2610.36578': '@article{fan2026audiorsi,\n  title   = {% raw %}{{AudioRSI}{% endraw %}: Recursively Self-Improving Audio Reasoners},\n  author  = {Jiajun Fan and Roger Ren and Jingyuan Li and Rahul Pandey and\n             Prashanth Gurunath Shivakumar and Ankur Gandhe and Yile Gu and\n             Ge Liu and Ivan Bulyko},\n  journal = {arXiv preprint arXiv:2610.36578},\n  year    = {2026}\n}',
     '2610.22236': '@article{yang2026tfopd,\n  title   = {Training-Free On-Policy Distillation},\n  author  = {Yang, Bangji and Fan, Jiajun and Zhu, Zhaoyu and\n             Ma, Hongbo and Liu, Ge},\n  journal = {arXiv preprint arXiv:2610.22236},\n  year    = {2026}\n}',
     '2605.29438': '@inproceedings{li2026elegantvla,\n  title={ElegantVLA: Learning When to Think for Efficient Vision-Language-Action Models},\n  author={Li, Ye and Liu, Huanan and Ji, Kangye and Meng, Yuan and Fan, Jiajun and Wang, Yuansong and Qin, Shiyu and Wu, Chenglei and Xia, Shu-Tao and Wang, Zhi},\n  booktitle={Advances in Neural Information Processing Systems},\n  year={2026},\n  url={https://arxiv.org/abs/2605.29438}\n}',
@@ -2725,6 +2746,7 @@ function drawGraph(container) {
     {i:'/images/icons/sh-awards.png', t:'Awards', k:'awards honors scholarship', h:'#awards', hint:'Section'},
     {i:'/images/icons/sh-deadlines.png', t:'Conference Deadlines', k:'deadlines conferences ddl', h:'#deadlines', hint:'Section'},
     {i:'/images/icons/sh-contact.png', t:'Contact', k:'contact email reach', h:'#contact', hint:'Section'},
+    {i:'/images/icons/h-gear.png', t:'Self-Rewriting — Language Models Can Rewrite Their Own Weights', k:'self-rewriting self rewriting rewrite own weights weight editing self-edit repair scaling', h:'/projects/self-rewriting/', hint:'Preprint'},
     {i:'/images/icons/h-refresh.png', t:'AudioRSI — Recursively Self-Improving Audio Reasoners', k:'audiorsi audio rsi recursive self-improvement reasoning judge', h:'/projects/audiorsi/', hint:'Preprint'},
     {i:'/images/icons/h-puzzle.png', t:'TF-OPD — Training-Free On-Policy Distillation', k:'tf-opd training-free on-policy distillation fuse specialists model merging', h:'/projects/tf-opd/', hint:'Preprint'},
     {i:'/images/icons/h-list.png', t:'Procedure-Aware RL — Tool-Use Agents', k:'procedure-aware rl parl tool use agents function calling bfcl colm 2026', h:'/projects/procedure-aware-rl/', hint:'COLM 2026'},

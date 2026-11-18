@@ -1,0 +1,23 @@
+---
+title: "Language Models Can Rewrite Their Own Weights"
+collection: publications
+permalink: /publication/2026-11-17-Self-Rewriting
+date: 2026-11-17
+venue: '<strong>arXiv</strong> preprint, 2026'
+paperurl: 'https://arxiv.org/abs/2611.21885'
+citation: 'Jiajun Fan, Neil He, Changyi Yang, Andy Mao, Xi Zhu, Chaoran Cheng, Kaiqu Liang, Shuaike Shen, Zetian Li, Ruihan Guo, Ge Liu. &quot;Language Models Can Rewrite Their Own Weights.&quot; arXiv preprint arXiv:2611.21885, 2026.'
+bibtex: |
+  @article{fan2026selfrewriting,
+    title         = {Language Models Can Rewrite Their Own Weights},
+    author        = {Jiajun Fan and Neil He and Changyi Yang and Andy Mao and
+                     Xi Zhu and Chaoran Cheng and Kaiqu Liang and Shuaike Shen and
+                     Zetian Li and Ruihan Guo and Ge Liu},
+    journal       = {arXiv preprint arXiv:2611.21885},
+    eprint        = {2611.21885},
+    archivePrefix = {arXiv},
+    year          = {2026}
+  }
+projectpage: "/projects/self-rewriting/"
+---
+
+Self-rewriting is a third way to make a language model better: the model rewrites its own weights by its own reasoning, with no gradients and no training. The model is its own optimizer. It takes no frontier model: an open 27B model's own edit makes it 6.6 points more accurate on 490 problems it never saw. Over eight consecutive sessions its accuracy only rises. Like a broken robot that fixes itself without being rebuilt, it repairs a damaged copy of itself without ever seeing its original weights, from 7.3% to 70.2% on six image benchmarks. The ability emerges with scale: of four sizes of one model family, only the largest improves and repairs itself. No training pipeline to build, no cluster to rent, no added cost per answer: a few hours on one GPU for the sessions behind the largest gains. The wall between training and inference is a limit of our tools, not a property of intelligence.

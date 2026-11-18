@@ -29,6 +29,7 @@ PAPER_MATCH = {
     "2506.07459": "proteinzero",
     "2610.36578": "audiorsi",
     "2610.22236": "=training-free on-policy distillation",
+    "2611.21885": "=language models can rewrite their own weights",
 }
 
 # Hand corrections the monotonic guard would otherwise undo, held until the given date.

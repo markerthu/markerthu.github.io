@@ -1,0 +1,56 @@
+<script>
+(function(){
+  var root=document.getElementById('robo'); if(!root) return;
+  var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var GY=140, X0=44, XF=424, OBS=[{x:196,w:20,h:24},{x:306,w:20,h:40}], DAY=3.2, NIGHT=1.8, DAYS=3, HOLD=1.6, V=175;
+  var CYCLE=DAYS*(DAY+NIGHT)+HOLD;
+  function build(p){
+    var svg=p.querySelector('svg'), h='';
+    h+='<rect class="rb-sky" x="-8" y="26" width="496" height="126" rx="10"/>';
+    h+='<text class="rb-t" x="0" y="16"></text><text class="rb-s" x="480" y="16" text-anchor="end"></text>';
+    h+='<g class="rb-sun" transform="translate(74,11)"><circle r="4.500"/><path d="M0-9v-3M0 9v3M-9 0h-3M9 0h3M-6.400-6.400l-2.100-2.100M6.400 6.400l2.100 2.100M-6.400 6.400l-2.100 2.100M6.400-6.400l2.100-2.100"/></g>';
+    h+='<path class="rb-moon" transform="translate(68,3)" d="M10 13.500A8 8 0 0 1 4.500 0 7 7 0 1 0 14.500 9a8 8 0 0 1-4.500 4.500z"/>';
+    h+='<line class="rb-gr" x1="0" y1="'+GY+'" x2="480" y2="'+GY+'"/>';
+    OBS.forEach(function(o){h+='<rect class="rb-ob" x="'+o.x+'" y="'+(GY-o.h)+'" width="'+o.w+'" height="'+o.h+'" rx="3"/>';});
+    h+='<line class="rb-pole" x1="'+(XF+26)+'" y1="'+GY+'" x2="'+(XF+26)+'" y2="'+(GY-46)+'"/><path class="rb-flag" d="M'+(XF+26)+' '+(GY-46)+'l20 7-20 7z"/>';
+    h+='<path class="rb-ok" d="M'+(XF+16)+' '+(GY-64)+'l6 6 11-12"/>';
+    h+='<g class="rb-x"><path d="M-6-6l12 12M6-6l-12 12"/></g>';
+    h+='<g class="rb"><line class="rb-ant" x1="0" y1="-58" x2="0" y2="-50"/><circle class="rb-ink" cx="0" cy="-60" r="2.600"/><rect class="rb-body" x="-13" y="-50" width="26" height="17" rx="5"/><circle class="rb-ink" cx="-5" cy="-41.500" r="2"/><circle class="rb-ink" cx="5" cy="-41.500" r="2"/><rect class="rb-body" x="-20" y="-31" width="40" height="24" rx="6"/><rect class="rb-cell" x="-12" y="-23" width="6" height="8" rx="1.500"/><rect class="rb-cell" x="-3" y="-23" width="6" height="8" rx="1.500"/><rect class="rb-cell" x="6" y="-23" width="6" height="8" rx="1.500"/><circle class="rb-ink" cx="-11" cy="-5" r="5"/><circle class="rb-ink" cx="11" cy="-5" r="5"/></g>';
+    svg.innerHTML=h;
+    return {mode:p.getAttribute('data-mode'),rb:svg.querySelector('.rb'),day:svg.querySelector('.rb-t'),st:svg.querySelector('.rb-s'),sky:svg.querySelector('.rb-sky'),
+      sun:svg.querySelector('.rb-sun'),moon:svg.querySelector('.rb-moon'),x:svg.querySelector('.rb-x'),ok:svg.querySelector('.rb-ok'),cells:[].slice.call(svg.querySelectorAll('.rb-cell'))};
+  }
+  var P=[].slice.call(root.querySelectorAll('.robo-p')).map(build);
+  function hop(x,k){var y=0;for(var i=0;i<k&&i<OBS.length;i++){var o=OBS[i],c=o.x+o.w/2,d=Math.abs(x-c);if(d<46)y=Math.min(y,-(o.h+14)*Math.cos(d/46*Math.PI/2));}return y;}
+  function draw(T){
+    var d=Math.min(DAYS-1,Math.floor(T/(DAY+NIGHT))), t=T-d*(DAY+NIGHT), end=T>=DAYS*(DAY+NIGHT)-NIGHT, night=!end&&t>=DAY;
+    if(end){d=DAYS-1;t=DAY;}
+    P.forEach(function(p){
+      var live=p.mode==='rewrite', k=live?d:0, stop=k<OBS.length?OBS[k].x-24:XF;
+      var x=Math.min(stop,X0+V*Math.min(t,DAY)), at=x>=stop, fail=at&&k<OBS.length, win=at&&k>=OBS.length;
+      var since=at?Math.min(t,DAY)-(stop-X0)/V:0, shake=fail?Math.sin(since*26)*4*Math.exp(-since*5):0;
+      var nt=night?(t-DAY)/NIGHT:0, fade=night?Math.max(0,1-nt*2.4):1, back=night&&nt>0.5;
+      p.rb.setAttribute('transform','translate('+(back?X0:x-shake).toFixed(1)+','+(GY+(back?0:hop(x,k))).toFixed(1)+')');
+      p.rb.setAttribute('opacity',back?Math.min(1,(nt-0.5)*3).toFixed(2):fade.toFixed(2));
+      p.day.textContent=night?'Night '+(d+1):'Day '+(d+1);
+      p.sky.style.opacity=night?(0.07*Math.sin(nt*Math.PI)).toFixed(3):0;
+      p.sun.style.opacity=night?0:1; p.moon.style.opacity=night?1:0;
+      var txt='',cls='rb-s';
+      if(night){txt=live?'rewrites its weights':'weights stay frozen';if(live)cls+=' good';}
+      else if(fail){txt=live&&k>0?'gets further, then fails':'fails';cls+=' bad';}
+      else if(win){txt='reaches the goal';cls+=' good';}
+      p.st.textContent=txt; p.st.setAttribute('class',cls);
+      p.x.style.opacity=fail&&!night?1:0;
+      if(fail)p.x.setAttribute('transform','translate('+(OBS[k].x+OBS[k].w/2)+','+(GY-OBS[k].h-16)+')');
+      p.ok.style.opacity=win?1:0;
+      var learned=live?d+(night&&nt>0.45?1:0):0;
+      p.cells.forEach(function(c,i){c.setAttribute('class','rb-cell'+(i<learned?' on':'')+(live&&night&&i===d&&nt<=0.45&&Math.sin(nt*40)>0?' glow':''));});
+    });
+  }
+  if(reduced||!('IntersectionObserver' in window)){draw(DAYS*(DAY+NIGHT)-NIGHT+0.1);return;}
+  var t0=null,raf=0,vis=false;
+  function tick(now){if(t0===null)t0=now;var T=(now-t0)/1000;if(T>CYCLE){t0=now;T=0;}draw(T);if(vis)raf=requestAnimationFrame(tick);}
+  draw(0);
+  new IntersectionObserver(function(es){es.forEach(function(en){vis=en.isIntersecting;cancelAnimationFrame(raf);if(vis){t0=null;raf=requestAnimationFrame(tick);}});},{threshold:0.3}).observe(root);
+})();
+</script>

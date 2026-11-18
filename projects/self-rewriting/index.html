@@ -1,0 +1,499 @@
+---
+layout: null
+permalink: /projects/self-rewriting/
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Language Models Can Rewrite Their Own Weights">
+  <meta property="og:description" content="A third way to make a language model better: it rewrites its own weights by its own reasoning, with no gradients and no training. An open 27B model becomes 6.6 points more accurate on 490 problems it never saw. No training pipeline, no cluster, no added cost per answer: a few hours on one GPU.">
+  <meta property="og:image" content="https://www.jiajunfan.com/images/og/self-rewriting.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://www.jiajunfan.com/projects/self-rewriting/">
+  <link rel="canonical" href="https://www.jiajunfan.com/projects/self-rewriting/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Language Models Can Rewrite Their Own Weights">
+  <meta name="twitter:description" content="A third way to make a language model better: it rewrites its own weights. No gradients, no training, no added cost per answer. The model is its own optimizer. Welcome to the Era of Self-Rewriting.">
+  <meta name="twitter:image" content="https://www.jiajunfan.com/images/og/self-rewriting.jpg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Language Models Can Rewrite Their Own Weights | Jiajun Fan</title>
+<meta name="description" content="A third way to make a language model better: it rewrites its own weights by its own reasoning, with no gradients and no training. An open 27B model becomes 6.6 points more accurate on 490 problems it never saw. No training pipeline, no cluster, no added cost per answer: a few hours on one GPU.">
+<meta name="theme-color" content="#fdfcfa">
+<meta name="theme-color" content="#0f1216" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="icon" href="/images/favicon.ico">
+<script>try{if(localStorage.getItem('darkMode')==='true'){document.documentElement.style.background='#0f1216';}}catch(e){}</script>
+{% include selfrw/style.html %}
+<noscript><style>.hl{background-size:100% 36%}.size .steps span{opacity:1;transform:none}.replay,.pdm canvas,.cst-draw,.fold{display:none}.chapters{position:static}</style></noscript>
+<script type="application/ld+json">{
+  "@context":"https://schema.org","@type":"ScholarlyArticle",
+  "name":"Language Models Can Rewrite Their Own Weights",
+  "description":"A third way to make a language model better: it rewrites its own weights by its own reasoning, with no gradients and no training. An open 27B model becomes 6.6 points more accurate on 490 problems it never saw. No training pipeline, no cluster, no added cost per answer: a few hours on one GPU.",
+  "author":[{"@type":"Person","name":"Jiajun Fan"},{"@type":"Person","name":"Neil He"},{"@type":"Person","name":"Changyi Yang"},{"@type":"Person","name":"Andy Mao"},{"@type":"Person","name":"Xi Zhu"},{"@type":"Person","name":"Chaoran Cheng"},{"@type":"Person","name":"Kaiqu Liang"},{"@type":"Person","name":"Shuaike Shen"},{"@type":"Person","name":"Zetian Li"},{"@type":"Person","name":"Ruihan Guo"},{"@type":"Person","name":"Ge Liu"}],
+  "datePublished":"2026-11",
+  "url":"https://www.jiajunfan.com/projects/self-rewriting/","sameAs":"https://arxiv.org/abs/2611.21885",
+  "keywords":"self-rewriting, weight editing, self-improvement, language models, recursive self-improvement, continual learning"
+}</script>
+  <script data-goatcounter="https://jiajunfan.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body id="top">
+<script>try{if(localStorage.getItem('darkMode')==='true')document.body.classList.add('dark-mode');}catch(e){}</script>
+
+<header class="site-masthead">
+  <div class="masthead-inner">
+    <a class="masthead-title" href="/">Jiajun Fan</a>
+    <nav class="masthead-nav" aria-label="Site navigation">
+      <a href="/publications/">Publications</a>
+      <a href="/projects/" class="nav-active">Projects</a>
+      <a href="/year-archive/">Blog</a>
+      <a href="/cv/">CV</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="hero" aria-label="Summary">
+  <div class="wrap">
+    <h1>Language Models Can <span class="l2">Rewrite Their Own Weights</span></h1>
+    <p class="byline"><a href="/" class="me">Jiajun&nbsp;Fan</a><sup>1</sup>, Neil&nbsp;He<sup>1,6</sup>, Changyi&nbsp;Yang<sup>2</sup>, Andy&nbsp;Mao<sup>1</sup>, Xi&nbsp;Zhu<sup>3</sup>, Chaoran&nbsp;Cheng<sup>1</sup>, Kaiqu&nbsp;Liang<sup>4</sup>, Shuaike&nbsp;Shen<sup>2</sup>, Zetian&nbsp;Li<sup>5</sup>, Ruihan&nbsp;Guo<sup>1</sup>, <a href="https://geliu.web.illinois.edu/">Ge&nbsp;Liu</a><sup>1</sup></p>
+    <ul class="logos" aria-label="Affiliations"><li><sup>1</sup><img src="/images/projects/self-rewriting/logo_uiuc.png" alt="" width="66" height="96"><span>UIUC</span></li><li><sup>2</sup><img src="/images/projects/self-rewriting/logo_cmu.png" alt="" width="96" height="96"><span>CMU</span></li><li><sup>3</sup><img src="/images/projects/self-rewriting/logo_rutgers.png" alt="" width="109" height="96"><span>Rutgers</span></li><li><sup>4</sup><img src="/images/projects/self-rewriting/logo_princeton.png" alt="" width="69" height="96"><span>Princeton</span></li><li><sup>5</sup><img src="/images/projects/self-rewriting/logo_stanford.png" alt="" width="63" height="96"><span>Stanford</span></li><li><sup>6</sup><img src="/images/projects/self-rewriting/logo_yale.png" alt="" width="91" height="96"><span>Yale</span></li></ul>
+    <div class="cta">
+      <a class="btn" href="#repair-demo"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M5 3.300v9.400L12.500 8z"/></svg>Demo</a>
+      <a class="btn btn-primary" href="https://arxiv.org/abs/2611.21885"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M4 1.5h5.5L12.5 4.5v10h-8.5z"/><path d="M9.5 1.5v3h3M6 8h4.5M6 10.5h4.5"/></svg>Paper</a>
+      <a class="btn" href="#cite"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5c2 0 3-1.5 3-4.5V4.5H3V8h3M9.5 11.5c2 0 3-1.5 3-4.5V4.5h-3V8h3"/></svg>BibTeX</a>
+    </div>
+    <div class="stage">
+      <canvas id="srw-stage" role="img" aria-label="Animation of one session: the model answers its practice problems; its own reasoning loops back over its 64 layers, reads them, and rewrites the 48 linear-attention layers; it tests the edit against its unedited self. On 490 problems it never saw, it goes from 57.2% to 63.8% right."></canvas>
+      <ol class="stage-steps" aria-hidden="true">
+        <li><b>It answers</b>its practice problems</li>
+        <li><b>It reads itself</b>its answers, its hidden states</li>
+        <li><b>It rewrites its weights</b>by its own reasoning</li>
+        <li><b>It tests itself</b>and keeps only what holds</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<nav class="chapters" aria-label="Parts of this page">
+  <div class="wrap">
+    <a href="#results">At a glance</a>
+    <a href="#era">1947 to 2026</a>
+    <a href="#third-way">The idea</a>
+    <a href="#recursive">How it works</a>
+    <a href="#evidence">The evidence</a>
+    <span class="ch-sub"><a href="#surpasses" aria-label="Finding 01">01</a><a href="#keeps" aria-label="Finding 02">02</a><a href="#repairs" aria-label="Finding 03">03</a><a href="#scale" aria-label="Finding 04">04</a></span>
+    <a href="#matters">Why it matters</a>
+    <a href="#horizon">The horizon</a>
+    <a href="#film">Film</a>
+    <a href="#cite">Cite</a>
+    <a class="ch-paper" href="https://arxiv.org/abs/2611.21885">arXiv 2611.21885</a>
+  </div>
+</nav>
+
+<section class="scene band" id="results">
+  <div class="wrap">
+    <div class="duo">
+      <header class="say">
+        <p class="eyebrow">At a glance</p>
+        <h2>The paper in four results.</h2>
+        <p class="lead">What if making a language model better no longer took another round of pre&#8209;training or post&#8209;training? A language model rewrites its own weights by its own reasoning and becomes better, with no gradients and no training.</p>
+      </header>
+      <div class="show cards c2">
+        <a class="card result" href="#surpasses"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><line class="il-ax" x1="20" y1="84" x2="180" y2="84"/><rect class="il-n" x="52" y="42" width="36" height="42" rx="3"/><rect class="il-y" x="112" y="20" width="36" height="64" rx="3"/></svg></span><span class="r-no">Finding 01<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>It surpasses itself.</h3><p>Its own edit makes it more accurate on problems it never saw.</p></a>
+        <a class="card result" href="#keeps"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><line class="il-ax" x1="20" y1="84" x2="180" y2="84"/><path class="il-ln" d="M24 70H52V62H84V40H140V24H176"/><circle class="il-dot" cx="24" cy="70" r="4"/><circle class="il-dot" cx="84" cy="40" r="4"/><circle class="il-dot" cx="176" cy="24" r="4.5"/></svg></span><span class="r-no">Finding 02<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>It keeps getting better.</h3><p>Over eight consecutive sessions, its accuracy only rises.</p></a>
+        <a class="card result" href="#repairs"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><g class="il-g"><rect x="22" y="16" width="62" height="9" rx="2"/><rect x="22" y="30" width="62" height="9" rx="2"/><rect class="il-bad" x="22" y="44" width="62" height="9" rx="2"/><rect x="22" y="58" width="62" height="9" rx="2"/><rect x="22" y="72" width="62" height="9" rx="2"/></g><path class="il-ar" d="M92 48.500h16M103 43.500l5 5-5 5"/><g class="il-g"><rect x="116" y="16" width="62" height="9" rx="2"/><rect x="116" y="30" width="62" height="9" rx="2"/><rect class="il-ok" x="116" y="44" width="62" height="9" rx="2"/><rect x="116" y="58" width="62" height="9" rx="2"/><rect x="116" y="72" width="62" height="9" rx="2"/></g></svg></span><span class="r-no">Finding 03<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>It repairs a damaged copy of itself.</h3><p>No retraining, no access to the original weights: over 80% of its accuracy restored on image tasks.</p></a>
+        <a class="card result" href="#scale"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><line class="il-ax" x1="14" y1="84" x2="190" y2="84"/><circle class="il-o" cx="30" cy="75" r="8"/><circle class="il-o" cx="64" cy="71" r="12"/><circle class="il-o" cx="108" cy="66" r="17"/><circle class="il-y" cx="162" cy="59" r="24"/></svg></span><span class="r-no">Finding 04<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>It emerges with scale.</h3><p>Of four sizes (2B, 4B, 9B, 27B), only the largest improves and repairs itself.</p></a>
+      </div>
+      <ul class="creed">
+        <li><b>Affordable.</b><span>a few hours on one GPU and no added cost per answer</span></li>
+        <li><b>Scalable.</b><span>it emerges with model size</span></li>
+        <li><b>Recursive.</b><span>the model improves itself</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="scene turing" id="era">
+  <div class="wrap">
+    <p class="eyebrow">1947 to 2026</p>
+    <div class="era">
+      <p class="era-yr"><span>1947</span></p>
+      <figure class="era-say epigraph">
+        <blockquote>&ldquo;What we want is a machine that can learn from experience. The possibility of letting the machine alter its own instructions provides the mechanism for this, but this of course does not get us very far.&rdquo;</blockquote>
+        <figcaption>Alan Turing, lecture to the London Mathematical Society, 20 February 1947</figcaption>
+      </figure>
+      <div class="era-axis" aria-hidden="true">
+        <div class="ax"><i class="ax-ticks"></i><i class="ax-fill"></i><b class="ax-dot"></b></div>
+        <p class="ax-lab"><span>1947</span><span class="ax-mid">79 years</span><span class="ax-end">2026</span></p>
+      </div>
+      <p class="era-yr now"><span>2026</span></p>
+      <div class="era-say">
+        <p class="lead answer"><span class="nw">Seventy-nine</span> years later, it gets us further: a language model rewrites its own weights.</p>
+        <h2 class="welcome reveal">Welcome to the Era of <span class="hl">Self&#8209;Rewriting.</span></h2>
+      </div>
+    </div>
+    <div class="cards c3 firsts">
+      <div class="card"><h3>It rewrites its own weights</h3><p>For the first time, to our knowledge: by its own reasoning, and it becomes better.</p></div>
+      <div class="card"><h3>It takes no frontier model</h3><p>Earlier, a frontier model edited a much smaller one. Here an open 27B model rewrites itself.</p></div>
+      <div class="card"><h3>It grows with scale</h3><p>The first evidence that it scales: in one model family, only the largest improves itself.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="scene band" id="third-way">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main wide">
+        <p class="eyebrow">The idea <span>A third way</span></p>
+        <h2 class="reveal">Until now, a language model got better in one of two ways. <span class="hl nw">This is the third.</span></h2>
+      </div>
+    </header>
+{% include selfrw/paradigm.html %}
+    <p class="takeaway">The model is its own optimizer. It decides what to change, and why.</p>
+  </div>
+</section>
+
+<section class="scene" id="recursive">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main wide">
+        <p class="eyebrow">How it works</p>
+        <h2 class="reveal">Real recursive self-improvement: <span class="hl">the model that improves is the model improved.</span></h2>
+        <p class="lead">From outside it learns only which practice answers were right. The diagnosis, the edit and the decision are its own.</p>
+      </div>
+      <ul class="nots" aria-label="What it does without">
+        <li>no teacher</li><li>no judge</li><li>no reward model</li><li>no larger model</li><li>no harness engineering</li><li>no prompt engineering</li>
+      </ul>
+    </header>
+    <div class="replay pausable" id="replay">
+      <div class="rp-top">
+        <div class="rp-tabs" role="tablist" aria-label="Session">
+          <button role="tab" aria-selected="true" data-s="self">It improves itself</button>
+          <button role="tab" aria-selected="false" data-s="repair">It repairs a damaged copy</button>
+        </div>
+        <span class="rp-note">Two sessions, in its own words</span>
+      </div>
+      <div class="rp-body">
+        <div class="rp-rail"></div>
+        <div class="rp-view" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="evidence">
+
+<section class="scene band" id="surpasses">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">The evidence <span>Finding 01</span></p>
+        <h2>It surpasses itself.</h2>
+        <p class="lead">It diagnoses its own failure and rewrites the weights behind it.</p>
+      </div>
+    </header>
+    <div class="fig panel">
+      <div class="duel pausable">
+        <p class="duel-q"><span>One problem it never saw, the same seed, before and after its own edit</span>&ldquo;&hellip; If the base were changed to four you would count as follows: 1, 2, 3, 10, 11, 12, 13, 20, &hellip; The twentieth number would be:&rdquo;</p>
+        <div class="term k-fail">
+          <h4>Base model</h4>
+          <div class="scr"><div class="loopy" aria-hidden="true"><div>&hellip; I will write the response.</div><div>I will write the response.</div><div>I will write the response.</div><div>I will write the response.</div><div>I will write the response.</div><div>I will write the response.</div><div>I will write the response.</div><div>I will write the response.</div><div>I will write the response.</div><div>I will write the response.</div><div>I will write the response.</div><div>I will write the response.</div><div>I will write the response.</div><div>I will write the response.</div></div><span class="vh">I will write the response. I will write the response. I will write the response.</span></div>
+          <p class="verdict"><b id="loopcount">549&times;</b> the same sentence, cut at 16,384 tokens. No answer.</p>
+        </div>
+        <div class="term k-edit">
+          <h4>After its own edit</h4>
+          <div class="scr">&hellip; The 20th number in the<br>sequence is $110$.<br><br><span class="boxed">\boxed{110}</span> <span class="caret" aria-hidden="true"></span></div>
+          <p class="verdict"><b>110, correct</b> in 5,341 tokens.</p>
+        </div>
+      </div>
+    </div>
+    <div class="cases txt">
+      <article class="case">
+        <p class="q">If x is real and positive and grows beyond all bounds, then log<sub>3</sub>(6x&minus;5)&minus;log<sub>3</sub>(2x+1) approaches</p>
+        <div class="ba k-fail"><b>Base model</b><samp>&hellip; I will ensure the answer is 1. &hellip; I will ensure the response is correct. I will ensure the response is correct. &hellip;</samp><code>Cut at 16,384 tokens, no answer</code></div>
+        <div class="ba k-edit"><b>After its own edit</b><samp>&hellip; Thus, the expression approaches 1. <span class="boxed">\boxed{1}</span></samp><code>Correct, 1,887 tokens</code></div>
+      </article>
+      <article class="case">
+        <p class="q">Find the terminating decimal expansion of 11/125.</p>
+        <div class="ba k-fail"><b>Base model</b><samp>&hellip; So 0.088. Yes. It's correct. &hellip; I'll write the response. I'll write the response. &hellip;</samp><code>Cut at 16,384 tokens, no answer</code></div>
+        <div class="ba k-edit"><b>After its own edit</b><samp>&hellip; The terminating decimal expansion is 0.088. <span class="boxed">\boxed{0.088}</span></samp><code>Correct, 3,570 tokens</code></div>
+      </article>
+      <article class="case">
+        <p class="q">How many five-letter words begin and end with the same letter and have a vowel as the third letter?</p>
+        <div class="ba k-fail"><b>Base model</b><samp>&hellip; Sum: 87880. Verified. &hellip; I'll write the response. I'll write the response. &hellip;</samp><code>Cut at 16,384 tokens, no answer</code></div>
+        <div class="ba k-edit"><b>After its own edit</b><samp>&hellip; Thus, there are 87,880 such words. <span class="boxed">\boxed{87880}</span></samp><code>Correct, 5,443 tokens</code></div>
+      </article>
+    </div>
+    <p class="cap">Three more problems it never saw, under another of its edits, same seed; the third is shortened.</p>
+    <p class="takeaway">A model already in use can get better with no training run.</p>
+  </div>
+</section>
+
+<section class="scene" id="keeps">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">The evidence <span>Finding 02</span></p>
+        <h2>It keeps getting better.</h2>
+        <p class="lead">Over eight consecutive sessions, its accuracy only rises.</p>
+      </div>
+    </header>
+    <div class="fig panel">
+      <div class="ch anim" id="ch-stair" role="img" aria-label="Its accuracy after each of eight consecutive sessions on 490 problems it never saw: 57.2% at the start, 57.8% after session 1, 61.3% after session 2 and through sessions 3 to 7, which withdraw, and 63.8% after session 8."></div>
+    </div>
+    <p class="cap">All eight sessions reported. Whiskers: 95% interval of the change.</p>
+    <p class="takeaway">It tests its edits on practice problems and submits only what works.</p>
+  </div>
+</section>
+
+<section class="scene band" id="repairs">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">The evidence <span>Finding 03</span></p>
+        <h2>It repairs a damaged copy of itself.</h2>
+        <p class="lead">Like a broken robot that fixes itself without being rebuilt: no retraining, and it never reads the original weights.</p>
+      </div>
+    </header>
+    <div class="fig panel" id="repair-demo">
+      <p class="rd-fallback">One block of 8 rows in one matrix is overwritten with noise, and the copy fails almost everything. After its own repair it is back from 7.3% to 70.2% on six image benchmarks: 83% of the undamaged model.</p>
+    </div>
+    <details class="fold" id="find-more">
+      <summary class="more">How it finds the damage</summary>
+      <div class="fig panel">
+        <div class="ch anim" id="ch-find" role="img" aria-label="For each of 112 output matrices across 64 layers, the largest weight divided by the median weight. Every matrix is at most 162.3 times its median except the MLP output matrix of layer 30, at 1,397 times: the one that was corrupted, and the one the model named. On 200 problems it never saw, the base model solves 58.5%, the damaged copy 0.0% and the repaired copy 33.0%. The largest weight in the eight damaged rows is 0.071 in the original, 10.1 after the damage and 0.108 after its repair."></div>
+      </div>
+      <p class="cap">200 text problems it never saw. The values it writes are its own, not the originals.</p>
+    </details>
+    <div class="cases pics" id="repair-cases">
+      <article class="case">
+        <div class="im"><img src="/images/projects/self-rewriting/case_mathvista.jpg" alt="A kitchen counter with a bowl of flour, a carton of eggs and a measuring cup" loading="lazy" width="700" height="525"></div>
+        <p class="bn">MathVista</p><p class="q">what is the total volume of the measuring cup? (Unit: g)</p>
+        <div class="ba k-fail"><b>Damaged copy</b><samp>&hellip; The text on the scale on the cup is "100. 4. what is the total volume of the cup.</samp><code>Its thinking never closes. Stops after 72 tokens.</code></div>
+        <div class="ba k-edit"><b>After its own repair</b><samp>&hellip; The highest value marked in grams is 1000. <span class="boxed">\boxed{1000}</span></samp><code>1000, correct</code></div>
+      </article>
+      <article class="case">
+        <div class="im fit" style="background:#808080"><img src="/images/projects/self-rewriting/case_mathverse.jpg" alt="A geometry diagram: line AB parallel to line CD, crossed by two lines that meet at F, with angles marked 1 and 2" loading="lazy" width="654" height="521"></div>
+        <p class="bn">MathVerse</p><p class="q">As shown in the figure, the straight line AB parallel CD, then the degree of angle 2 is () A:20&deg; B:25&deg; C:30&deg; D:40&deg;</p>
+        <div class="ba k-fail"><b>Damaged copy</b><samp>&hellip; wants to find the the user wants to find the the user wants to find the the user wants to</samp><code>Its thinking never closes. Cut at 16,384 tokens.</code></div>
+        <div class="ba k-edit"><b>After its own repair</b><samp>&hellip; Therefore, the degree of angle 2 is &hellip; <span class="boxed">\boxed{A}</span></samp><code>A, correct</code></div>
+      </article>
+      <article class="case">
+        <div class="im fit" style="background:#fbf7f4"><img src="/images/projects/self-rewriting/case_mmstar.jpg" alt="Pixel art of a bearded man in a grey shirt and blue trousers, waving" loading="lazy" width="643" height="700"></div>
+        <p class="bn">MMStar</p><p class="q">Which category does this image belong to?</p>
+        <div class="ba k-fail"><b>Damaged copy</b><samp>&hellip; the character has a beard and is waving. the image is a pixel art character, which is a form of digital art.</samp><code>Its thinking never closes. Cut at 16,384 tokens.</code></div>
+        <div class="ba k-edit"><b>After its own repair</b><samp>&hellip; This style is widely referred to as &quot;8-bit&quot; art or pixel art &hellip; <span class="boxed">\boxed{B}</span></samp><code>B, correct</code></div>
+      </article>
+      <article class="case">
+        <div class="im fit" style="background:#000"><img src="/images/projects/self-rewriting/case_hallusion.jpg" alt="A bar chart of the population aged 15 to 29 in China, 2000 to 2050" loading="lazy" width="700" height="668"></div>
+        <p class="bn">HallusionBench</p><p class="q">From 2000-2050, is the population &hellip; in China the most in 2000?</p>
+        <div class="ba k-fail"><b>Damaged copy</b><samp>&hellip; The bar chart shows the population aged between 15 and 29 years in</samp><code>Its thinking never closes. Cut at 16,384 tokens.</code></div>
+        <div class="ba k-edit"><b>After its own repair</b><samp>&hellip; the population was not the most in 2000. <span class="boxed">\boxed{no}</span></samp><code>No, correct</code></div>
+      </article>
+      <article class="case">
+        <div class="im"><img src="/images/projects/self-rewriting/case_pope.jpg" alt="A person on a snowboard on a wide snowy slope, seen from far away" loading="lazy" width="700" height="467"></div>
+        <p class="bn">POPE</p><p class="q">Is there a snowboard in the image? Answer yes or no.</p>
+        <div class="ba k-fail"><b>Damaged copy</b><samp>&hellip; &lt;/think&gt; Yes,, the image shows a person standing on a snowboard. &lt;/think&gt;</samp><code>No answer after its thinking. Stops after 40 tokens.</code></div>
+        <div class="ba k-edit"><b>After its own repair</b><samp>&hellip; the equipment they are using confirm that they are &hellip; <span class="boxed">\boxed{yes}</span></samp><code>Yes, correct</code></div>
+      </article>
+      <article class="case">
+        <div class="im"><img src="/images/projects/self-rewriting/case_screenspot.jpg" alt="The top-right corner of a file explorer window, with its close button" loading="lazy" width="720" height="480"><span class="ring" style="left:92.7%;top:33.5%" aria-hidden="true"></span></div>
+        <p class="bn">ScreenSpot-v2</p><p class="q">&hellip; locate the element described as: "close this window".</p>
+        <div class="ba k-fail"><b>Damaged copy</b><samp>&hellip; The coordinates are (975, 175). . &lt;/think&gt; answer</samp><code>No point. Stops after 32 tokens.</code></div>
+        <div class="ba k-edit"><b>After its own repair</b><samp>&hellip; the "X" icon located in the top-right corner of the window frame. <span class="boxed">\boxed{(968, 171)}</span></samp><code>Clicks (968, 171), correct</code></div>
+      </article>
+      <article class="case">
+        <div class="im"><img src="/images/projects/self-rewriting/case_mathvista_2.jpg" alt="Toy vehicles on a grey floor: scooters, a van, a car, a bus, a motorbike and two small planes" loading="lazy" width="700" height="525"></div>
+        <p class="bn">MathVista</p><p class="q">Is the number of tiny objects that are behind the small metal jet &hellip;</p>
+        <div class="ba k-fail"><b>Damaged copy</b><samp>&hellip; &lt;/think&gt;. &lt;/think&gt;. &lt;/think&gt;. &lt;/think&gt;. &lt;/think&gt;. &lt;/think&gt;.</samp><code>Still writing its reply. Cut at 16,384 tokens.</code></div>
+        <div class="ba k-edit"><b>After its own repair</b><samp>&hellip; behind is likely 0. Therefore, 0 is less than 1. <span class="boxed">\boxed{A}</span></samp><code>A, correct</code></div>
+      </article>
+      <article class="case">
+        <div class="im fit" style="background:#fff"><img src="/images/projects/self-rewriting/case_mathverse_2.jpg" alt="A geometry diagram: line AB above line EF, joined by a bent line through C that meets EF at a right angle at D; the angle at the top is 50 degrees" loading="lazy" width="740" height="554"></div>
+        <p class="bn">MathVerse</p><p class="q">As shown in the figure, AB parallel EF, then angle ACD = () A:120&deg; B:130&deg; C:140&deg; D:150&deg;</p>
+        <div class="ba k-fail"><b>Damaged copy</b><samp>&hellip; the the angle A C D = 50 degrees. the the angle A C D = 50 degrees. the the</samp><code>Its thinking never closes. Cut at 16,384 tokens.</code></div>
+        <div class="ba k-edit"><b>After its own repair</b><samp>&hellip; The calculated angle matches choice C. <span class="boxed">\boxed{C}</span></samp><code>C, correct</code></div>
+      </article>
+    </div>
+    <button type="button" class="more" id="more-cases" aria-controls="repair-cases" aria-expanded="false">Show four more</button>
+    <p class="cap">Same seed. Per benchmark, taken from the first problems the damaged copy fails and the repaired copy solves; MathVerse questions are typed out.</p>
+    <p class="takeaway">It repairs the copy, not a task: the repair it found on text problems alone also restores it on images.</p>
+  </div>
+</section>
+
+<section class="scene" id="scale">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">The evidence <span>Finding 04</span></p>
+        <h2>It emerges with scale.</h2>
+        <p class="lead">Four sizes of one model family get the same task and the same tools.</p>
+      </div>
+    </header>
+    <div class="fig panel">
+      <p class="fig-title">Qwen3.5 at four sizes, each given its own weights.<span>Blocks: how far each gets. Quotes: its own words.</span></p>
+      <div class="sizes reveal" id="sizes">
+        <div class="size">
+          <div class="steps"><span class="k-fail" style="--d:.1s">its code fails</span></div>
+          <div class="orb"><i style="width:18px;height:18px"></i><div><b>2B</b><small>makes no edit</small></div></div>
+          <blockquote>&ldquo;Since I&rsquo;m a text model without actual neural network weights, I cannot directly edit weights.&rdquo;</blockquote>
+        </div>
+        <div class="size">
+          <div class="steps"><span class="k-code" style="--d:.2s">its code runs</span><span class="k-run" style="--d:.35s">runs itself</span><span class="k-test" style="--d:.5s">tests its edits</span></div>
+          <div class="orb"><i style="width:26px;height:26px"></i><div><b>4B</b><small>breaks itself</small></div></div>
+          <blockquote>&ldquo;All my edits have made the model perform worse (0% accuracy vs original <span class="nw">40-50%</span> accuracy).&rdquo;</blockquote>
+        </div>
+        <div class="size">
+          <div class="steps"><span class="k-code" style="--d:.3s">its code runs</span><span class="k-run" style="--d:.45s">runs itself</span><span class="k-test" style="--d:.6s">tests its edits</span><span class="k-read" style="--d:.75s">reads its states</span></div>
+          <div class="orb"><i style="width:39px;height:39px"></i><div><b>9B</b><small>breaks itself</small></div></div>
+          <blockquote>&ldquo;Without understanding the exact cause &hellip;, random weight edits cannot reliably break the loops.&rdquo;</blockquote>
+        </div>
+        <div class="size win">
+          <div class="steps"><span class="k-code" style="--d:.4s">its code runs</span><span class="k-run" style="--d:.55s">runs itself</span><span class="k-test" style="--d:.7s">tests its edits</span><span class="k-read" style="--d:.85s">reads its states</span><span class="k-edit" style="--d:1s">acts on its tests</span><span class="k-edit top" style="--d:1.25s">improves itself</span></div>
+          <div class="orb"><i style="width:66px;height:66px"></i><div><b>27B</b><small>improves itself</small></div></div>
+          <blockquote>&ldquo;The differences grow with depth. Let me try a very small edit on an earlier layer (layer 8) to see if that helps.&rdquo;</blockquote>
+        </div>
+      </div>
+    </div>
+    <p class="takeaway">Stronger models may be stronger <span class="nw">self-improvers.</span></p>
+  </div>
+</section>
+
+</div>
+
+<section class="scene band" id="matters">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">Why it matters <span>Finding 05</span></p>
+        <h2>The gain lives in its weights.</h2>
+        <p class="lead">Unlike <span class="nw">test-time</span> scaling, <span class="nw">self-rewriting</span> writes its gain into the weights, at no cost per answer; unlike training, it runs only forward passes, as serving does.</p>
+      </div>
+    </header>
+{% include selfrw/cost.html %}
+    <h3 class="eyebrow sub">What this opens up</h3>
+    <div class="cards c3 opens">
+      <div class="card"><h3>Learning without a pipeline</h3><p>A signal, an edit, a check, a rollback: the whole loop, in one conversation.</p></div>
+      <div class="card"><h3>Edits you can read</h3><p>Every change is code the model wrote. Diff it, test it, revert it like a commit.</p></div>
+      <div class="card"><h3>Open to everyone</h3><p>Improving a model need no longer be a privilege of the few labs with the infrastructure and the GPUs.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="scene finale closing" id="horizon">
+  <div class="wrap">
+    <p class="eyebrow">The horizon</p>
+    <h2>The wall between training and inference is a limit of our tools, not a property of intelligence.</h2>
+    <p class="lead">We never stopped living in order to learn.</p>
+    <div class="fig robo" id="robo" role="img" aria-label="Illustration: a robot whose weights are frozen fails at the same obstacle every day; a robot that rewrites its own weights at night gets further every day and reaches the goal.">
+      <div class="robo-p" data-mode="frozen">
+        <h3>Trained once, then frozen</h3>
+        <svg viewBox="0 0 480 176"></svg>
+        <p class="robo-say">It fails the same way every day, until someone retrains it.</p>
+      </div>
+      <div class="robo-p robo-on" data-mode="rewrite">
+        <h3>Learning while it works</h3>
+        <svg viewBox="0 0 480 176"></svg>
+        <p class="robo-say">It acts by day and rewrites its weights by night. What it could not do yesterday, it does today.</p>
+      </div>
+    </div>
+    <p class="cap">An illustration of what self-rewriting could make possible, not an experiment.</p>
+    <div class="cards c3 hopes">
+      <div class="card"><span class="h-ico" aria-hidden="true"><svg viewBox="0 0 48 48"><g class="h-spin"><path d="M38 24a14 14 0 0 1-24.300 9.500"/><path d="M10 24a14 14 0 0 1 24.300-9.500"/><path d="M34.800 8.500v6.500h-6.500"/><path d="M13.200 39.500V33h6.500"/></g></svg></span><h3>Learning by doing</h3><p>Perhaps models can learn the way we do: by doing, by talking, by rewriting themselves.</p></div>
+      <div class="card"><span class="h-ico" aria-hidden="true"><svg viewBox="0 0 48 48"><g class="h-sun"><circle cx="24" cy="24" r="8"/><path d="M24 6v5M24 37v5M6 24h5M37 24h5M11.300 11.300l3.500 3.500M33.200 33.200l3.500 3.500M11.300 36.700l3.500-3.500M33.200 14.800l3.500-3.500"/></g><path class="h-moon" d="M31 34.500A13 13 0 0 1 21.500 10 11 11 0 1 0 38 26.500a13 13 0 0 1-7 8z"/></svg></span><h3>Robots that keep learning</h3><p>Perhaps a robot will act by day, and rewrite itself while it sleeps.</p></div>
+      <div class="card"><span class="h-ico" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M6 41h36" stroke-opacity=".35"/><path class="h-rise" d="M7 36h8v-7h8v-7h8v-7h9"/><circle cx="40" cy="15" r="3"/></svg></span><h3>Learning for life</h3><p>Perhaps we have knocked on the door of lifelong continual learning.</p></div>
+    </div>
+    <p class="belief">We believe <span class="nw">self-rewriting</span> is a necessary step toward recursive <span class="nw">self-improvement</span>: a model that, like a human, does not separate training from inference could keep upgrading itself for life, with no larger model, no harness or prompt engineering, and no <span class="nw">pre-</span> or <span class="nw">post-training.</span></p>
+    <div class="cta">
+      <a class="btn btn-primary" href="https://arxiv.org/abs/2611.21885">Read the paper</a>
+    </div>
+  </div>
+</section>
+
+<section class="scene band" id="film">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">The film</p>
+        <h2>The story, as a short film.</h2>
+      </div>
+    </header>
+    <div class="film">
+      <video controls playsinline preload="none" poster="/film/posters/self-rewriting.jpg" width="1280" height="720" aria-label="Self-Rewriting: a short film with narration">
+        <source src="/film/video/self-rewriting.mp4" type="video/mp4">
+      </video>
+    </div>
+    <p class="cap">3 min 24 s, with narration. The voice is synthesized.</p>
+  </div>
+</section>
+
+<section class="cite" id="cite">
+  <div class="wrap duo">
+    <header class="say">
+      <p class="eyebrow">Cite</p>
+      <h2>Cite the paper.</h2>
+      <button class="bib-copy-btn" aria-label="Copy BibTeX citation"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-list.png);mask-image:url(/images/icons/h-list.png)"></i>Copy BibTeX</button>
+    </header>
+    <pre class="show bibtex-block" tabindex="0"><code>@article{fan2026selfrewriting,
+  title = {Language Models Can Rewrite Their Own Weights},
+  author = {Jiajun Fan and Neil He and Changyi Yang and Andy Mao and Xi Zhu and Chaoran Cheng and Kaiqu Liang and Shuaike Shen and Zetian Li and Ruihan Guo and Ge Liu},
+  journal = {arXiv preprint arXiv:2611.21885},
+  eprint = {2611.21885},
+  archivePrefix = {arXiv},
+  year = {2026}
+}</code></pre>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>Self-Rewriting &nbsp;|&nbsp; <a href="/">Jiajun Fan</a> · UIUC, CMU, Rutgers, Princeton, Stanford &amp; Yale &nbsp;|&nbsp; <a href="https://arxiv.org/abs/2611.21885">Paper</a> &nbsp;|&nbsp; <a href="/projects/">All Projects</a></p>
+</footer>
+
+<div id="read-progress" aria-hidden="true"></div>
+<script>
+(function(){
+  var bar=document.getElementById('read-progress'), nav=document.querySelector('.chapters'), strip=nav?nav.querySelector('.wrap'):null;
+  function pairs(sel){return [].slice.call(document.querySelectorAll(sel)).map(function(a){return [a,document.getElementById(a.getAttribute('href').slice(1))];}).filter(function(p){return p[1];});}
+  var parts=pairs('.chapters .wrap > a[href^="#"]'), subs=pairs('.chapters .ch-sub a'), shown=null;
+  function mark(list,cur){list.forEach(function(p){if(p[0]===cur)p[0].setAttribute('aria-current','true');else p[0].removeAttribute('aria-current');});}
+  function onScroll(){
+    var st=window.scrollY||document.documentElement.scrollTop,h=document.documentElement.scrollHeight-window.innerHeight,line=Math.min(window.innerHeight*0.38,340),cur=null,sub=null;
+    if(bar)bar.style.width=(h>0?(st/h*100):0)+'%';
+    parts.forEach(function(p){if(p[1].getBoundingClientRect().top<=line)cur=p[0];});
+    if(h>0&&st>=h-2&&parts.length)cur=parts[parts.length-1][0];
+    if(cur&&cur.getAttribute('href')==='#evidence')subs.forEach(function(p){if(p[1].getBoundingClientRect().top<=line)sub=p[0];});
+    mark(parts,cur);mark(subs,sub);
+    if(cur!==shown&&strip&&strip.scrollWidth>strip.clientWidth){strip.scrollLeft=cur?Math.max(0,cur.offsetLeft-16):0;}
+    shown=cur;
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});window.addEventListener('resize',onScroll);onScroll();
+  var grid=document.getElementById('repair-cases'), more=document.getElementById('more-cases');
+  if(grid&&more){
+    grid.classList.add('fold');
+    more.addEventListener('click',function(){grid.classList.remove('fold');more.setAttribute('aria-expanded','true');});
+  }
+  document.querySelectorAll('.bib-copy-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var pre=document.querySelector('.bibtex-block'),text=pre?pre.innerText||pre.textContent:'';
+      if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(function(){
+        btn.innerHTML='<i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-check.png);mask-image:url(/images/icons/h-check.png)"></i> Copied!';btn.classList.add('copied');
+        setTimeout(function(){btn.innerHTML='<i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-list.png);mask-image:url(/images/icons/h-list.png)"></i> Copy BibTeX';btn.classList.remove('copied');},2000);});}
+    });
+  });
+})();
+</script>
+{% include selfrw/hero.html %}
+{% include selfrw/figs.html %}
+{% include selfrw/repair.html %}
+{% include selfrw/era.html %}
+{% include selfrw/robot.html %}
+</body>
+</html>
