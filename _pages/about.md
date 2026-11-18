@@ -1332,7 +1332,7 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
 <ul class="news-list">
   <li>
     <span class="news-date">Nov 2026</span>
-    <span><span class="nbadge nb-find">Finding</span><strong>Language Models Can Rewrite Their Own Weights</strong> is on arXiv. A third way to make a model better: for the first time, to our knowledge, a language model rewrites its own weights by its own reasoning and becomes better, with no gradients and no training. The model is its own optimizer. It takes no frontier model: its own edit makes it 6.6 points more accurate on 490 problems it never saw, and it repairs a damaged copy of itself without ever seeing its original weights. No training pipeline, no cluster, no added cost per answer: a few hours on one GPU. Affordable. Scalable. Recursive. <a href="/projects/self-rewriting/">Project page</a> &middot; <a href="https://arxiv.org/abs/2611.21885" target="_blank" rel="noopener noreferrer">Paper</a></span>
+    <span><span class="nbadge nb-find">Finding</span><strong>Language Models Can Rewrite Their Own Weights</strong> is on arXiv. A third way to make a model better: for the first time, to our knowledge, a language model rewrites its own weights by its own reasoning and becomes better, with no gradients and no training. The model is its own optimizer. It takes no frontier model: the model surpasses itself on problems it never saw, keeps getting better session after session, and repairs a damaged copy of itself without ever seeing its original weights; the ability emerges with scale. No training pipeline, no cluster, no added cost per answer. Affordable. Scalable. Recursive. <a href="/projects/self-rewriting/">Project page</a> &middot; <a href="https://arxiv.org/abs/2611.21885" target="_blank" rel="noopener noreferrer">Paper</a></span>
   </li>
   <li>
     <span class="news-date">Oct 2026</span>
@@ -1594,7 +1594,7 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
     <div class="pub-title"><a href="https://arxiv.org/abs/2611.21885" target="_blank" rel="noopener noreferrer">Language Models Can Rewrite Their Own Weights</a></div>
     <div class="pub-authors"><strong>J. Fan*</strong>, N. He, C. Yang, A. Mao, X. Zhu, C. Cheng, K. Liang, S. Shen, Z. Li, R. Guo, G. Liu</div>
     <div class="pub-desc">A third way to make a language model better: it rewrites its own weights by its own reasoning. No gradients, no training, no added cost per answer: the model is its own optimizer.</div>
-    <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>Its own edit: +6.6 points on 490 problems it never saw</div>
+    <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>It surpasses itself, keeps getting better and repairs itself &middot; Emerges with scale</div>
     <div class="pub-links">
       <a class="pub-link pl-project" href="/projects/self-rewriting/"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-link.png);mask-image:url(/images/icons/h-link.png)"></i>Project</a>
       <a class="pub-link pl-arxiv" href="https://arxiv.org/abs/2611.21885" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-paperclip.png);mask-image:url(/images/icons/h-paperclip.png)"></i>arXiv</a>
