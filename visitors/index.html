@@ -161,7 +161,7 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
       Measured with <a href="https://www.goatcounter.com" rel="noopener">GoatCounter</a>, an open-source analytics tool.
       No cookies, no tracking across sites, and no IP addresses are stored. Location is resolved to a country,
       and to a state or province for the few countries that report one &mdash; never to a person.
-      Refreshed every three hours; last run covered {{ v._updated }}{% if v._timezone %} ({{ v._timezone }} time){% endif %}, so &ldquo;today so far&rdquo; only counts up to the last refresh.
+      Refreshed several times a day{% if v._refreshed %}; last refreshed <span id="vrefreshed" data-ts="{{ v._refreshed }}">{{ v._refreshed | replace: "T", " " | slice: 0, 16 }} UTC</span>{% else %}; last run covered {{ v._updated }}{% if v._timezone %} ({{ v._timezone }} time){% endif %}{% endif %}, so &ldquo;today so far&rdquo; only counts up to the last refresh.
     </div>
   </div>
 
@@ -371,7 +371,7 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
   <footer class="pg">
     <a href="/">&larr; Back to the site</a> &nbsp;&middot;&nbsp;
     <a href="https://jiajunfan.goatcounter.com" target="_blank" rel="noopener">Full dashboard</a> &nbsp;&middot;&nbsp;
-    Refreshed every three hours from GoatCounter. No cookies, no IP addresses, nothing here identifies a person.
+    Refreshed several times a day from GoatCounter. No cookies, no IP addresses, nothing here identifies a person.
   </footer>
 </main>
 
@@ -448,6 +448,18 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
           td.textContent=d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())+' '+pad(d.getHours())+':'+pad(d.getMinutes());
         }
       });
+      var rf=document.getElementById('vrefreshed');
+      if(rf){
+        var rd=new Date(rf.getAttribute('data-ts'));
+        if(!isNaN(rd)){
+          try{
+            var rp=new Intl.DateTimeFormat('en-CA',{timeZone:z,year:'numeric',month:'2-digit',day:'2-digit',
+                  hour:'2-digit',minute:'2-digit',hour12:false,timeZoneName:'short'}).formatToParts(rd), ro={};
+            rp.forEach(function(x){ro[x.type]=x.value;});
+            rf.textContent=ro.year+'-'+ro.month+'-'+ro.day+' '+ro.hour+':'+ro.minute+' '+(ro.timeZoneName||'');
+          }catch(e){}
+        }
+      }
       sel.value=z;
       if(offEl) offEl.textContent=offsetOf(z);
       if(reset) reset.hidden=(z===myZone);

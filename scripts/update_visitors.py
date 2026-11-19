@@ -645,6 +645,7 @@ def main():
     out = {
         "_updated": (daily[-1]["day"] if daily else end.isoformat()),
         "_timezone": tz_name,
+        "_refreshed": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "_source": "GoatCounter API (%s)" % SITE,
         "_total": win["_total"],
         "_days": win["_days"],

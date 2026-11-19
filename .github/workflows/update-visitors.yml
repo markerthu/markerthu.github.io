@@ -1,14 +1,15 @@
 name: Update visitor map
-# Daily GoatCounter location refresh -> _data/visitors.json (drives the sidebar visitor map).
+# GoatCounter refresh -> _data/visitors.json (drives /visitors and the sidebar visitor map).
 # The API token lives ONLY in the encrypted Actions secret GOATCOUNTER_TOKEN, never in the repo.
 
 on:
   schedule:
-    # Every three hours. Once a day meant the run always landed at the very start of
-    # the current day, so the "today" figure was permanently ~0 until the next run.
-    # Three hours is the practical floor: GoatCounter rate-limits the export that
-    # feeds the per-visit list to roughly one an hour.
-    - cron: '20 2,5,8,11,14,17,20,23 * * *'
+    # Asked for hourly, at an off-peak minute. GitHub delays and silently drops many
+    # scheduled runs: the old three-hourly schedule (8 a day) actually ran 2-3 times a
+    # day, 5-10 hours apart. GoatCounter rate-limits the export behind the per-visit
+    # list to about one an hour; when two runs land close together the script keeps
+    # the previous visit list and still refreshes everything else.
+    - cron: '47 * * * *'
   workflow_dispatch: {}    # allow manual run from the Actions tab
 
 permissions:
@@ -33,7 +34,8 @@ jobs:
             git config user.name  "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add _data/visitors.json
-            git commit -m "chore: daily visitor map update [skip ci]"
+            git commit -m "chore: visitor map update [skip ci]"
+            git pull --rebase
             git push
           else
             echo "No visitor changes today."
