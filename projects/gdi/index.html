@@ -7,246 +7,38 @@ permalink: /projects/gdi/
 <head>
 <meta charset="UTF-8">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="GDI: Generalized Data Distribution Iteration — ICML 2022">
-  <meta property="og:description" content="Training data distribution as one lever for both sample efficiency and final performance in deep RL: 9620% mean human-normalized score and 22 human world records with 200M frames.">
+  <meta property="og:title" content="Generalized Data Distribution Iteration">
+  <meta property="og:description" content="Deep RL agents tend to learn fast or end strong, rarely both. GDI makes the training data distribution something to optimize: it learns which behavior policies collect its data, explains RL methods from DQN to Agent57 as special cases, and sets a new state of the art on Atari with 500 times less data than Agent57. ICML 2022.">
   <meta property="og:image" content="https://www.jiajunfan.com/images/og/gdi.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
   <meta property="og:url" content="https://www.jiajunfan.com/projects/gdi/">
   <link rel="canonical" href="https://www.jiajunfan.com/projects/gdi/">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="GDI: Generalized Data Distribution Iteration — ICML 2022">
-  <meta name="twitter:description" content="Training data distribution as one lever for both sample efficiency and final performance in deep RL: 9620% mean human-normalized score and 22 human world records with 200M frames.">
+  <meta name="twitter:title" content="Generalized Data Distribution Iteration">
+  <meta name="twitter:description" content="GDI learns which behavior policies collect its data: a new state of the art on Atari, 22 human world records, 500 times less data than Agent57. ICML 2022.">
   <meta name="twitter:image" content="https://www.jiajunfan.com/images/og/gdi.jpg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GDI — 22 Atari World Records | ICML 2022</title>
-<meta name="description" content="Generalized Data Distribution Iteration. ICML 2022. Superhuman RL with 500× less data.">
+<title>Generalized Data Distribution Iteration | Jiajun Fan</title>
+<meta name="description" content="Deep RL agents tend to learn fast or end strong, rarely both. GDI makes the training data distribution something to optimize: it learns which behavior policies collect its data, explains RL methods from DQN to Agent57 as special cases, and sets a new state of the art on Atari with 500 times less data than Agent57. ICML 2022.">
 <meta name="theme-color" content="#fdfcfa">
 <meta name="theme-color" content="#0f1216" media="(prefers-color-scheme: dark)">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
 <link rel="icon" href="/images/favicon.ico">
-<meta name="robots" content="index,follow">
 <script>try{if(localStorage.getItem('darkMode')==='true'){document.documentElement.style.background='#0f1216';}}catch(e){}</script>
-<style>
-@font-face{font-family:'Newsreader Fallback';src:local('Georgia');size-adjust:91.7%;ascent-override:80.2%;descent-override:28.9%;line-gap-override:0%;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:'Inter Fallback';src:local('Arial');size-adjust:107.1%;ascent-override:90.4%;descent-override:22.5%;line-gap-override:0%;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-:root{
-  --serif:'Newsreader','Newsreader Fallback',Georgia,'Times New Roman',serif;
-  --sans:'Inter','Inter Fallback','Segoe UI',system-ui,-apple-system,sans-serif;
-  --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
-  --bg:#fdfcfa; --band:#f6f3ec; --ink:#1a1815; --body:#2b2823; --muted:#6c6860; --faint:#6b665c;
-  --rule:#e8e3d9; --link:#2F4B8F; --on-link:#ffffff; --link-h:#23396E; --card:#ffffff; --fig-border:#e6e0d5;
-  --good:#2F4B8F; --bad:#c0392b;
-}
-body.dark-mode{
-  --bg:#0f1216; --band:#151a20; --ink:#ece8e0; --body:#cdc8be; --muted:#8f8a80; --faint:#8a857b;
-  --rule:#262b33; --link:#6ea8fe; --on-link:#0f1216; --link-h:#93c0ff; --card:#161a20; --fig-border:#2a2f38;
-  --good:#9DB8EA; --bad:#f7a8b8;
-}
-.lbl-ico{display:inline-block;width:1em;height:1em;vertical-align:-0.14em;margin-right:5px;background-color:currentColor;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;flex-shrink:0;}
-*{box-sizing:border-box;margin:0;padding:0}
-html{overflow-x:hidden;scroll-behavior:smooth;}
-body{font-family:var(--serif);background:var(--bg);color:var(--body);line-height:1.72;font-size:19px;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s;}
-a{color:var(--link);text-decoration:none}a:hover{color:var(--link-h)}
-::selection{background:rgba(47,75,143,.16);}
-
-/* ── masthead (shared) ── */
-.site-masthead{background:var(--bg);box-shadow:0 1px 0 var(--rule);position:sticky;top:0;z-index:200;font-size:16px;font-family:var(--sans);}
-.site-masthead::after{content:'';display:block;height:3px;background:linear-gradient(to right,#2F4B8F 0%,#6F94C6 50%,#E39A7A 100%)}
-.masthead-inner{max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:56px}
-.masthead-title{font-weight:800;font-size:1.35em;color:var(--ink)!important;text-decoration:none!important;letter-spacing:-.02em}
-.masthead-nav{display:flex;gap:2px;align-items:center}
-.masthead-nav a{font-weight:600;font-size:0.98em;color:var(--muted)!important;text-decoration:none!important;padding:6px 10px;border-radius:6px;transition:color .2s,background .2s}
-.masthead-nav a:hover{color:var(--link)!important;background:rgba(47,75,143,.07)}
-.masthead-nav a.nav-active{color:var(--link)!important}
-@media(max-width:600px){.masthead-inner{flex-wrap:wrap;height:auto;padding:8px 14px 7px;row-gap:1px;justify-content:center}.masthead-title{width:100%;text-align:center}.masthead-nav{width:100%;justify-content:center;flex-wrap:wrap}}
-@media(max-width:560px){.masthead-nav a{font-size:0.86em;padding:5px 8px}.masthead-title{font-size:1.15em}}
-
-/* ── hero (editorial) ── */
-.hero{max-width:820px;margin:0 auto;padding:52px 24px 8px;text-align:center;}
-.kicker{font-family:var(--sans);text-transform:uppercase;letter-spacing:.145em;font-size:.72rem;font-weight:700;color:var(--link);margin-bottom:1em;}
-.hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.12;letter-spacing:-.015em;color:var(--ink);margin:0 auto .5em;max-width:15em;}
-.hero .short{font-family:var(--serif);font-size:1.2rem;color:var(--muted);margin-bottom:1.3em;}
-.hero .short strong{color:var(--body);font-weight:600;}
-.authors{font-family:var(--sans);font-size:.92rem;color:var(--muted);max-width:720px;margin:0 auto .5em;line-height:1.9}
-.authors .me{font-weight:700;color:var(--ink)}
-.affil{font-family:var(--sans);font-size:.82rem;color:var(--faint);margin-bottom:1.5em;line-height:1.6}
-.btn-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
-.btn{display:inline-flex;align-items:center;gap:7px;padding:9px 20px;border-radius:999px;font-family:var(--sans);font-size:.85rem;font-weight:600;transition:.18s;border:1px solid var(--rule);}
-.btn:hover{transform:translateY(-1px)}
-.btn-primary{background:var(--link);color:var(--on-link);border-color:var(--link)}
-.btn-primary:hover{color:var(--on-link)}
-.btn-secondary{background:var(--card);color:var(--link)}
-.btn-neutral{background:var(--band);color:var(--body)}
-.hero-rule{max-width:820px;margin:2.2em auto 0;border:none;border-top:1px solid var(--rule);}
-
-/* ── layout ── */
-.container{max-width:720px;margin:0 auto;padding:0 24px}
-section{padding:34px 0 8px}
-section p{color:var(--body);margin-bottom:1em;font-size:1.06rem;line-height:1.72}
-h2{font-family:var(--sans);font-size:1.45rem;font-weight:700;color:var(--ink);margin:1.4em 0 .7em;line-height:1.25;letter-spacing:-.01em}
-h2 .lbl-ico{color:var(--link);}
-h3,h4{font-family:var(--sans);color:var(--ink);}
-em{font-style:italic}
-strong{font-weight:600;color:var(--ink)}
-
-/* ── abstract / TL;DR ── */
-.tldr{font-family:var(--serif);font-size:1.16rem;line-height:1.6;color:var(--body);border-left:3px solid var(--rule);padding:2px 0 2px 22px;margin:.4em 0 .2em;}
-.tldr strong{color:var(--link);font-weight:600}
-
-/* ── stat cards ── */
-.results-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:20px 0}
-.result-card{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:20px 14px;text-align:center}
-.result-card .rnum{font-family:var(--sans);font-size:1.7rem;font-weight:800;color:var(--link);line-height:1.1;white-space:nowrap}
-.result-card .rdesc{font-family:var(--sans);font-size:.76rem;color:var(--muted);margin-top:8px;line-height:1.5}
-
-/* ── method steps ── */
-.method-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;margin:20px 0}
-.step{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:18px;text-align:center}
-.step .step-num{width:34px;height:34px;background:var(--link);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--sans);font-weight:800;font-size:.9em;margin:0 auto 11px}
-.step h3{font-family:var(--sans);font-size:.86rem;font-weight:700;color:var(--ink);margin-bottom:7px}
-.step p{font-family:var(--sans);font-size:.8rem;color:var(--muted);margin:0;line-height:1.55}
-
-/* ── problem / solution ── */
-.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0}
-.problem-card,.solution-card{border-radius:12px;padding:18px 20px;background:var(--card);border:1px solid var(--rule)}
-.problem-card{border-left:3px solid var(--bad)} .solution-card{border-left:3px solid var(--good)}
-.problem-card h3,.solution-card h3{font-family:var(--sans);font-size:.86rem;font-weight:700;margin-bottom:8px}
-.problem-card h3{color:var(--bad)} .solution-card h3{color:var(--good)}
-.problem-card p,.solution-card p{font-family:var(--sans);font-size:.86rem;color:var(--body);margin:0;line-height:1.6}
-
-/* ── comparison table ── */
-.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:20px 0}
-.compare-table{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:.9rem}
-.compare-table th{background:var(--band);color:var(--muted);padding:11px 15px;text-align:left;font-weight:600;border-bottom:1px solid var(--rule);font-size:.76rem;text-transform:uppercase;letter-spacing:.04em}
-.compare-table td{padding:11px 15px;border-bottom:1px solid var(--rule);color:var(--body)}
-.compare-table tr:last-child td{border-bottom:none}
-.compare-table .highlight td{background:rgba(47,75,143,.06);font-weight:600;color:var(--ink)}
-body.dark-mode .badge-win{background:#1A2333}
-.badge-win{background:#E6EEF8;color:var(--good);padding:2px 9px;border-radius:6px;font-weight:700;font-size:.82em}
-
-/* ── figures (native inline SVG charts) ── */
-figure.chart{margin:1.8em auto;color:var(--muted);max-width:640px;}
-figure.chart.wide{max-width:100%;}
-figure.chart.narrow{max-width:460px;}
-figure.chart svg{display:block;width:100%;height:auto;}
-figure.chart figcaption{font-family:var(--sans);font-size:.82rem;color:var(--muted);margin-top:.9em;text-align:center;line-height:1.55;max-width:600px;margin-left:auto;margin-right:auto;}
-figure.chart figcaption b,figure.chart figcaption strong{color:var(--link);font-weight:600}
-
-/* ── timeline ── */
-.tl{position:relative;padding-left:24px;margin:10px 0}
-.tl-line{position:absolute;left:8px;top:4px;bottom:4px;width:2px;background:var(--rule)}
-.tl-item{position:relative;margin-bottom:18px}
-.tl-dot{position:absolute;left:-20px;top:5px;width:11px;height:11px;border-radius:50%;background:var(--c-var,#BFD8EC);border:1.5px solid var(--c-var-line,#6F94C6);box-shadow:0 0 0 3px var(--bg)}
-.tl-dot.done{background:var(--good);border-color:var(--good)}
-.tl-date{font-family:var(--sans);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--link)}
-.tl-dot.done ~ .tl-date{color:var(--good)}
-.tl-title{font-family:var(--sans);font-weight:600;font-size:.95rem;color:var(--ink);margin:1px 0 2px}
-.tl-desc{font-family:var(--sans);font-size:.84rem;color:var(--muted);line-height:1.55}
-
-/* ── BibTeX ── */
-.bib-copy-btn{display:inline-flex;align-items:center;gap:6px;margin-bottom:10px;padding:6px 15px;border-radius:8px;border:1px solid var(--rule);cursor:pointer;font-family:var(--sans);font-size:.8rem;font-weight:600;background:var(--band);color:var(--body);transition:.18s}
-.bib-copy-btn:hover{border-color:var(--link);color:var(--link)}
-.bib-copy-btn.copied{background:var(--good);color:#fff;border-color:var(--good)}
-.bibtex-block{background:var(--band);color:var(--body);border:1px solid var(--rule);border-radius:12px;padding:18px 20px;overflow-x:auto;white-space:pre-wrap;overflow-wrap:anywhere;font-family:var(--mono);font-size:.8rem;line-height:1.7}
-
-/* ── footer ── */
-footer{font-family:var(--sans);background:transparent;color:var(--muted);text-align:center;padding:26px 24px;font-size:.86rem;border-top:1px solid var(--rule);margin-top:2.4em}
-footer a{color:var(--link)}
-
-/* ── controls ── */
-#read-progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,#2F4B8F,#6F94C6 60%,#E39A7A);z-index:9999;transition:width .08s linear;pointer-events:none}
-.pg-fab{position:fixed;right:22px;width:42px;height:42px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.18);z-index:9990;transition:transform .2s,opacity .2s}
-.pg-fab:hover{transform:translateY(-2px) scale(1.06)}
-#pg-top{bottom:22px;background:var(--link);color:var(--on-link);opacity:0;pointer-events:none}
-#pg-top.show{opacity:1;pointer-events:auto}
-#pg-dark{bottom:126px;background:#fff;color:#2F4B8F;border:1.5px solid rgba(0,0,0,.15)}
-body.dark-mode #pg-dark{background:#1A2333;color:#F5C8B5;border-color:#2B3A55}
-.pg-dico{width:20px;height:20px;display:inline-block;background-color:currentColor;-webkit-mask:url(/images/icons/h-moon.png) center/contain no-repeat;mask:url(/images/icons/h-moon.png) center/contain no-repeat}
-body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-image:url(/images/icons/h-sun.png)}
-.pg-up{width:11px;height:11px;border-top:2.6px solid currentColor;border-right:2.6px solid currentColor;transform:rotate(-45deg) translateY(2px);display:inline-block}
-
-@media(max-width:640px){.problem-grid{grid-template-columns:1fr}.method-steps{grid-template-columns:1fr 1fr}.results-grid{grid-template-columns:1fr 1fr}.results-grid>:nth-child(3):last-child{grid-column:1/-1}.hero h1{font-size:2rem}}
-@media print{.site-masthead,.pg-fab,#read-progress{display:none!important}}
-@media (prefers-reduced-motion:reduce){*{transition-duration:.001ms!important}html{scroll-behavior:auto}}
-@view-transition{navigation:auto}
-::view-transition-old(root),::view-transition-new(root){animation-duration:.18s}
-@media (prefers-reduced-motion:reduce){::view-transition-old(root),::view-transition-new(root){animation:none!important}}
-
-/* ── extra components (records wall, game pills, method cards, framed images) ── */
-.records-wall{background:var(--band);border:1px solid var(--rule);border-radius:16px;padding:30px 24px;text-align:center;margin:18px 0}
-.records-title{font-family:var(--sans);font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:8px}
-.records-number{font-family:var(--sans);font-size:4rem;font-weight:800;line-height:1;color:var(--link);margin-bottom:4px}
-.records-sub{font-family:var(--sans);font-size:.9rem;color:var(--muted)}
-.games-grid{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
-.game-pill{font-family:var(--sans);font-size:.82rem;font-weight:600;padding:5px 13px;border-radius:999px;background:var(--band);border:1px solid var(--rule);color:var(--body)}
-.method-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:20px 0}
-.method-grid:has(> :nth-child(4):last-child){grid-template-columns:repeat(2,minmax(0,1fr))}
-.method-card{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:18px 20px}
-.method-card h3{font-family:var(--sans);font-size:.9rem;font-weight:700;color:var(--ink);margin-bottom:7px}
-.method-card p{font-family:var(--sans);font-size:.83rem;color:var(--muted);margin:0;line-height:1.6}
-.insight{background:var(--band);border:1px solid var(--rule);border-radius:12px;padding:20px 24px;margin:16px 0}
-.insight h3{font-family:var(--sans);font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:8px}
-.insight p{font-size:1rem;color:var(--body);margin:0;line-height:1.62}
-.vs-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0}
-.vs-card{border-radius:12px;padding:18px 20px;background:var(--card);border:1px solid var(--rule)}
-.vs-bad{border-left:3px solid var(--bad)} .vs-good{border-left:3px solid var(--good)}
-.vs-card h3{font-family:var(--sans);font-size:.85rem;font-weight:700;margin-bottom:10px}
-.vs-bad h3{color:var(--bad)} .vs-good h3{color:var(--good)}
-.vs-card ul{padding-left:16px;font-family:var(--sans);font-size:.85rem;color:var(--body);line-height:1.75}
-.tags{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 8px}
-.tag{font-family:var(--sans);font-size:.82rem;font-weight:600;padding:5px 13px;border-radius:999px;background:var(--band);border:1px solid var(--rule);color:var(--body)}
-figure.rimg{margin:1.8em auto;max-width:100%}
-figure.rimg img{width:100%;border-radius:12px;border:1px solid var(--fig-border);background:var(--band)}
-body.dark-mode figure.rimg img{filter:brightness(.9)}
-figure.rimg figcaption{font-family:var(--sans);font-size:.82rem;color:var(--muted);margin-top:.8em;text-align:center;line-height:1.5}
-@media(max-width:640px){.vs-grid{grid-template-columns:1fr}.method-grid{grid-template-columns:1fr}}
-
-/* the AI-agent panel (bottom:120px, z-index:9991) covers this FAB while open — hide it, as the agent does with its own launcher */
-.ra-panel.show ~ #pg-dark{opacity:0;pointer-events:none;}
-
-/* figure palette (shared by every chart and animation; Jev-style: navy = ours, misty blue = our variant,
-   peach = competing RL baseline, cool gray = base model / others) */
-:root{--c-ours:#2F4B8F;--c-ours-fill:#90A4C5;--c-var:#BFD8EC;--c-var-line:#6F94C6;--c-rl:#F5C8B5;--c-rl-line:#E39A7A;
-  --c-base:#DDE2EA;--c-base-line:#8F97A8;--c-other:#C9CED8;--c-other-line:#9AA1B0;--c-grid:#E4E8EF;--c-ink2:#5B6273}
-body.dark-mode{--c-ours:#9DB8EA;--c-ours-fill:#5E77A8;--c-var:#3F5F86;--c-var-line:#7FA6D3;--c-rl:#9A6E5D;--c-rl-line:#E9A98C;
-  --c-base:#3A414E;--c-base-line:#8F97A8;--c-other:#4A5260;--c-other-line:#9AA1B0;--c-grid:#2A303A;--c-ink2:#A6ADBB}
-figure.anim-fig{--link:var(--c-ours);--good:#3E7D5A;--bad:var(--c-rl-line)}
-body.dark-mode figure.anim-fig{--good:#7FC79A}
-.problem-card{border-left-color:var(--c-rl-line)!important}.problem-card h3{color:#A14F2C!important}
-.solution-card{border-left-color:var(--c-ours)!important}.solution-card h3{color:var(--c-ours)!important}
-body.dark-mode .problem-card h3{color:#F0B49A!important}
-.vs-bad{border-left-color:var(--c-rl-line)!important}.vs-good{border-left-color:var(--c-ours)!important}
-.vs-bad h3,.vs-bad h4,.vs-bad .vs-h{color:#A14F2C!important}.vs-good h3,.vs-good h4,.vs-good .vs-h{color:var(--c-ours)!important}
-body.dark-mode .vs-bad h3,body.dark-mode .vs-bad h4,body.dark-mode .vs-bad .vs-h{color:#F0B49A!important}
-
-h1,h2,h3,.bx-title,.p-title,.pub-title,.card-title{text-wrap:balance}
-p,li{text-wrap:pretty}
-p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcaption a,td a{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px;text-decoration-color:rgba(47,75,143,.45)}body.dark-mode p a:not([class]),body.dark-mode li a:not([class]),body.dark-mode .authors a,body.dark-mode .tl-desc a,body.dark-mode .note a,body.dark-mode figcaption a,body.dark-mode td a{text-decoration-color:rgba(157,184,234,.5)}
-</style>
+{% include selfrw/style.html %}
+{% include proj/gdi/style.html %}
+<noscript><style>.hl{background-size:100% 36%}.lv-col{opacity:1;transform:none}.chapters{position:static}.op,#stage-wrap canvas{display:none}</style></noscript>
 <script type="application/ld+json">{
-  "@context": "https://schema.org",
-  "@type": "ScholarlyArticle",
-  "name": "Generalized Data Distribution Iteration",
-  "author": [
-    {
-      "@type": "Person",
-      "name": "Jiajun Fan"
-    },
-    {
-      "@type": "Person",
-      "name": "Changnan Xiao"
-    }
-  ],
-  "datePublished": "2022",
-  "publisher": {
-    "@type": "Organization",
-    "name": "ICML 2022"
-  },
-  "url": "https://www.jiajunfan.com/projects/gdi/",
-  "sameAs": "https://proceedings.mlr.press/v162/fan22c.html",
-  "keywords": "reinforcement learning, data distribution, deep RL, superhuman performance"
+  "@context":"https://schema.org","@type":"ScholarlyArticle",
+  "name":"Generalized Data Distribution Iteration",
+  "description":"GDI makes the training data distribution of deep reinforcement learning something to optimize: it learns which behavior policies collect its data, explains RL methods from DQN to Agent57 as special cases, and sets a new state of the art on Atari with 500 times less data than Agent57.",
+  "author":[{"@type":"Person","name":"Jiajun Fan"},{"@type":"Person","name":"Changnan Xiao"}],
+  "datePublished":"2022",
+  "publisher":{"@type":"Organization","name":"ICML 2022"},
+  "url":"https://www.jiajunfan.com/projects/gdi/","sameAs":"https://arxiv.org/abs/2206.03192",
+  "keywords":"reinforcement learning, data distribution, behavior policy, exploration, Atari, sample efficiency"
 }</script>
   <script data-goatcounter="https://jiajunfan.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 {% include site-chrome.html %}
@@ -267,85 +59,278 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
   </div>
 </header>
 
-<div class="hero" role="region" aria-label="Project summary">
-  <div class="kicker">ICML 2022</div>
-  <h1>Generalized Data Distribution Iteration</h1>
-  <p class="short">A unified RL framework achieving superhuman performance with 500× less data</p>
-  <div class="authors">
-    <a href="/" class="me">Jiajun Fan</a><sup>1</sup>, Changnan Xiao
+<main>
+
+<section class="hero" aria-label="Summary">
+  <div class="wrap">
+    <h1>Generalized Data <span class="l2">Distribution Iteration</span></h1>
+    <p class="byline"><a href="/" class="me">Jiajun&nbsp;Fan</a>, Changnan&nbsp;Xiao</p>
+    <div class="cta">
+      <a class="btn" href="#film"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M5 3.300v9.400L12.500 8z"/></svg>Film</a>
+      <a class="btn btn-primary" href="https://arxiv.org/abs/2206.03192"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M4 1.5h5.5L12.5 4.5v10h-8.5z"/><path d="M9.5 1.5v3h3M6 8h4.5M6 10.5h4.5"/></svg>Paper</a>
+      <a class="btn" href="#cite"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5c2 0 3-1.5 3-4.5V4.5H3V8h3M9.5 11.5c2 0 3-1.5 3-4.5V4.5h-3V8h3"/></svg>BibTeX</a>
+    </div>
+    <div class="stage" id="stage-wrap">
+      <canvas id="gdi-stage" role="img" aria-label="Animation of the GDI loop, twice. The agent picks behavior policies, from very exploratory to purely exploitative, by how often each one plays; they play the game and bring back data that is seen or unseen, of high or low value; the learner trains on that data; then the agent reshapes how often each behavior plays, toward the behaviors whose data paid off. On the second pass most of the new data is high-value."></canvas>
+      <ol class="stage-steps" aria-hidden="true">
+        <li><b>It picks behaviors</b>by how often each plays</li>
+        <li><b>They play the game</b>and bring back data</li>
+        <li><b>It learns</b>from that data</li>
+        <li><b>It reshapes its choice</b>toward what paid off</li>
+      </ol>
+    </div>
   </div>
-  <div class="affil"><sup>1</sup>Tsinghua University</div>
-  <div class="btn-row">
-    <a class="btn btn-primary" href="https://arxiv.org/abs/2206.03192">arXiv</a>
-    <a class="btn btn-secondary" href="https://proceedings.mlr.press/v162/fan22c.html"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-pubs.png);mask-image:url(/images/icons/sh-pubs.png)"></i>PMLR</a>
-    <a class="btn btn-secondary" href="https://proceedings.mlr.press/v162/fan22c/fan22c.pdf">PDF</a>
-    <a class="btn btn-neutral" href="/"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-home.png);mask-image:url(/images/icons/h-home.png)"></i>Homepage</a>
+</section>
+
+<nav class="chapters" aria-label="Parts of this page">
+  <div class="wrap">
+    <a href="#results">At a glance</a>
+    <a href="#problem">The problem</a>
+    <a href="#idea">The idea</a>
+    <a href="#how">How it works</a>
+    <a href="#evidence">The evidence</a>
+    <span class="ch-sub"><a href="#sota" aria-label="Finding 01">01</a><a href="#efficient" aria-label="Finding 02">02</a><a href="#steer" aria-label="Finding 03">03</a><a href="#richer" aria-label="Finding 04">04</a></span>
+    <a href="#matters">Why it matters</a>
+    <a href="#film">Film</a>
+    <a href="#cite">Cite</a>
+    <a class="ch-paper" href="https://arxiv.org/abs/2206.03192">arXiv 2206.03192</a>
   </div>
-  <hr class="hero-rule">
+</nav>
+
+<section class="scene band" id="results">
+  <div class="wrap">
+    <div class="duo">
+      <header class="say">
+        <p class="eyebrow">At a glance</p>
+        <h2>The paper in four results.</h2>
+        <p class="lead">Deep reinforcement learning agents tend to learn fast or end strong, rarely both. What if both come down to one thing: which data the agent learns from? GDI learns which behaviors should collect its data, and sets a new state of the art on Atari with a fraction of the data.</p>
+      </header>
+      <div class="show cards c2">
+        <a class="card result" href="#sota"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><line class="il-ax" x1="20" y1="84" x2="180" y2="84"/><rect class="il-n" x="34" y="56" width="22" height="28" rx="3"/><rect class="il-n" x="66" y="44" width="22" height="40" rx="3"/><rect class="il-n" x="98" y="40" width="22" height="44" rx="3"/><rect class="il-y" x="138" y="12" width="26" height="72" rx="3"/></svg></span><span class="r-no">Finding 01<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>It sets a new state of the art.</h3><p>The highest mean human-normalized score on 57 Atari games, ahead of Agent57 and MuZero.</p></a>
+        <a class="card result" href="#efficient"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><g class="il-g"><rect x="60" y="14" width="10" height="10" rx="2"/><rect x="74" y="14" width="10" height="10" rx="2"/><rect x="88" y="14" width="10" height="10" rx="2"/><rect x="102" y="14" width="10" height="10" rx="2"/><rect x="116" y="14" width="10" height="10" rx="2"/><rect x="130" y="14" width="10" height="10" rx="2"/><rect x="60" y="28" width="10" height="10" rx="2"/><rect x="74" y="28" width="10" height="10" rx="2"/><rect x="88" y="28" width="10" height="10" rx="2"/><rect x="102" y="28" width="10" height="10" rx="2"/><rect x="116" y="28" width="10" height="10" rx="2"/><rect x="130" y="28" width="10" height="10" rx="2"/><rect x="60" y="42" width="10" height="10" rx="2"/><rect x="74" y="42" width="10" height="10" rx="2"/><rect x="88" y="42" width="10" height="10" rx="2"/><rect x="102" y="42" width="10" height="10" rx="2"/><rect x="116" y="42" width="10" height="10" rx="2"/><rect x="130" y="42" width="10" height="10" rx="2"/><rect x="60" y="56" width="10" height="10" rx="2"/><rect x="74" y="56" width="10" height="10" rx="2"/><rect x="88" y="56" width="10" height="10" rx="2"/><rect x="102" y="56" width="10" height="10" rx="2"/><rect x="116" y="56" width="10" height="10" rx="2"/><rect x="130" y="56" width="10" height="10" rx="2"/><rect x="60" y="70" width="10" height="10" rx="2"/><rect x="74" y="70" width="10" height="10" rx="2"/><rect x="88" y="70" width="10" height="10" rx="2"/><rect x="102" y="70" width="10" height="10" rx="2"/><rect x="116" y="70" width="10" height="10" rx="2"/><rect class="il-ok" x="130" y="70" width="10" height="10" rx="2"/></g></svg></span><span class="r-no">Finding 02<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>It needs 500 times less data.</h3><p>Agent57-level play on a five-hundredth of its experience, and 22 human world records.</p></a>
+        <a class="card result" href="#steer"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><line class="il-ax" x1="20" y1="84" x2="180" y2="84"/><line x1="36" y1="22" x2="164" y2="22" stroke="var(--hair)" stroke-width="1.5" stroke-dasharray="4 4"/><rect class="il-y" x="58" y="22" width="34" height="62" rx="3"/><rect x="112" y="70" width="34" height="14" rx="3" fill="var(--peach)" stroke="var(--peach-e)" stroke-width="1.5"/></svg></span><span class="r-no">Finding 03<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>Choosing the data is the lever.</h3><p>Take away the operator that steers the data, and the same agent falls far behind.</p></a>
+        <a class="card result" href="#richer"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><g fill="var(--hair)"><circle cx="48" cy="50" r="3"/><circle cx="56" cy="44" r="3"/><circle cx="60" cy="54" r="3"/><circle cx="52" cy="58" r="3"/><circle cx="64" cy="47" r="3"/><circle cx="45" cy="42" r="3"/></g><path class="il-ar" d="M86 50h18M99 45l5 5-5 5"/><g fill="var(--mint)" stroke="var(--mint-e)" stroke-width="1"><circle cx="128" cy="24" r="3"/><circle cx="150" cy="30" r="3"/><circle cx="170" cy="22" r="3"/><circle cx="136" cy="44" r="3"/><circle cx="160" cy="50" r="3"/><circle cx="178" cy="42" r="3"/><circle cx="126" cy="64" r="3"/><circle cx="146" cy="70" r="3"/><circle cx="168" cy="72" r="3"/><circle cx="140" cy="58" r="3"/><circle cx="156" cy="38" r="3"/><circle cx="174" cy="60" r="3"/></g></svg></span><span class="r-no">Finding 04<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>Richer behaviors see more.</h3><p>A larger space of behavior policies visits more of the game and scores higher.</p></a>
+      </div>
+      <ul class="creed">
+        <li><b>General.</b><span>DQN, R2D2, Agent57 and others are special cases of one loop</span></li>
+        <li><b>Proven.</b><span>a proof that it is superior to generalized policy iteration</span></li>
+        <li><b>Lean.</b><span>every Atari experiment ran on one GPU</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="scene" id="problem">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">The problem</p>
+        <h2>Top agents end strong by trying to see everything, and pay for it in data.</h2>
+        <p class="lead">Agent57 and Go-Explore try to visit every unseen situation. They ignore which data is worth having, so many of their trials collect data of little value.</p>
+      </div>
+    </header>
+{% include proj/gdi/cover.html %}
+    <p class="takeaway">When interactions are limited, which data you collect matters as much as how much.</p>
+  </div>
+</section>
+
+<section class="scene band" id="idea">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main wide">
+        <p class="eyebrow">The idea <span>One lever</span></p>
+        <h2 class="reveal">Learning fast and ending strong are one problem: <span class="hl">the distribution of the training data.</span></h2>
+      </div>
+    </header>
+    <div class="lv" id="lever" role="img" aria-label="Diagram. Two challenges, sample efficiency and final performance, become two classic RL problems, data richness and the exploration-exploitation trade-off. Both are one problem: optimizing the training data distribution, that is, getting the desired data within limited interactions. It is solved with two controls: the capacity and diversity of the behavior policies, and how often each one is selected.">
+      <div class="lv-col" style="--d:0s">
+        <p class="lv-h">Two challenges</p>
+        <div class="lv-c k-fail"><b>Sample efficiency</b><span>learn from few interactions</span></div>
+        <div class="lv-c k-fail"><b>Final performance</b><span>end as strong as possible</span></div>
+      </div>
+      <div class="lv-x" aria-hidden="true"><svg viewBox="0 0 22 22"><path d="M8 5l6 6-6 6"/></svg><i style="--d:.9s"></i></div>
+      <div class="lv-col" style="--d:.45s">
+        <p class="lv-h">Two classic problems</p>
+        <div class="lv-c k-read"><b>Data richness</b><span>how much of the game the data covers</span></div>
+        <div class="lv-c k-read"><b>Explore or exploit</b><span>new situations, or valuable ones</span></div>
+      </div>
+      <div class="lv-x" aria-hidden="true"><svg viewBox="0 0 22 22"><path d="M8 5l6 6-6 6"/></svg><i style="--d:1.3s"></i></div>
+      <div class="lv-col lv-one" style="--d:.9s">
+        <p class="lv-h">One problem</p>
+        <div class="lv-c k-run"><b>Optimize the training data distribution</b><span>get the data it needs within limited interactions</span></div>
+      </div>
+      <div class="lv-x" aria-hidden="true"><svg viewBox="0 0 22 22"><path d="M8 5l6 6-6 6"/></svg><i style="--d:1.7s"></i></div>
+      <div class="lv-col" style="--d:1.35s">
+        <p class="lv-h">Two controls</p>
+        <div class="lv-c k-edit"><b>Capacity and diversity</b><span>how many behavior policies exist, and how many are used</span></div>
+        <div class="lv-c k-edit"><b>Selective distribution</b><span>how often each one plays, adapted as it learns</span></div>
+      </div>
+    </div>
+    <p class="takeaway">Control which behavior policies collect the data, and you control both.</p>
+  </div>
+</section>
+
+<section class="scene" id="how">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main wide">
+        <p class="eyebrow">How it works</p>
+        <h2 class="reveal">One loop with two updates: <span class="hl">one for the policy, one for the data.</span></h2>
+        <p class="lead">Generalized policy iteration updates the agent from its data. GDI adds a second update for which behavior policies collect that data. Switch it off, or shrink the space of behaviors, and familiar algorithms appear.</p>
+      </div>
+    </header>
+    <div class="replay op pausable" id="ops">
+      <div class="rp-top">
+        <p class="op-h"><b>Seen through GDI</b>seven algorithms, one loop</p>
+        <span class="rp-note">The same loop with different settings</span>
+      </div>
+      <div class="rp-body">
+        <div class="rp-rail" role="tablist" aria-label="Algorithm"></div>
+        <div class="rp-view" aria-live="polite"></div>
+      </div>
+    </div>
+    <p class="cap">Schematic of the paper&rsquo;s operator view. Blue: the RL update of the learner. Green: the update of the data distribution, done by a meta-controller; dashed when an algorithm has none.</p>
+    <p class="takeaway">The loop stays the same. What changes is whether, and how, the data is chosen.</p>
+  </div>
+</section>
+
+<div id="evidence">
+
+<section class="scene band" id="sota">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">The evidence <span>Finding 01</span></p>
+        <h2>It sets a new state of the art on Atari.</h2>
+        <p class="lead">Across the 57 games of the Arcade Learning Environment, GDI reaches the highest mean human-normalized score of every agent compared.</p>
+      </div>
+    </header>
+    <div class="fig panel">
+      <div class="ch anim" id="ch-hns" role="img" aria-label="Mean human-normalized score on 57 Atari games and training frames. GDI-H3 9620.33% with 2.00E+08 frames; GDI-I3 7810.1% with 2.00E+08; MuZero 4994.97% with 2.00E+10; Go-Explore 4989.31% with 1.00E+10; Agent57 4762.17% with 1.00E+11; R2D2 3373.48% with 1.00E+10; NGU 3169.07% with 3.50E+10; Muesli 2538.12% with 2.00E+08; LASER 1740.94% with 2.00E+08; IMPALA 956.99% with 2.00E+08; Rainbow 873.54% with 2.00E+08; DreamerV2 642.49% with 2.00E+08; SimPLe 25.78% with 1.00E+06."></div>
+    </div>
+    <p class="cap">Mean human-normalized score (HNS) over 57 Atari games, from the paper&rsquo;s full comparison table. Green: GDI. Right: frames each agent trained on.</p>
+    <p class="takeaway">Ending strong no longer requires collecting everything.</p>
+  </div>
+</section>
+
+<section class="scene" id="efficient">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">The evidence <span>Finding 02</span></p>
+        <h2>It needs 500 times less data than Agent57.</h2>
+        <p class="lead">It beats Agent57&rsquo;s mean score and breaks more human world records, on a five-hundredth of the experience.</p>
+      </div>
+    </header>
+    <div class="fig panel">
+      <div class="ch anim" id="ch-scale" role="img" aria-label="Two charts. Left: a grid of 500 squares, each the 2E+8 frames GDI trained on, the equivalent of 38.5 days of human play; Agent57 trained on all 500, 1E+11 frames or 19,290 days. Right: human world records broken: GDI-H3 22 in 38.5 days of play, MuZero 19 in 3,858 days, Agent57 18 in 19,290 days, GDI-I3 17 in 38.5 days, R2D2 15 in 1,929 days, Go-Explore 15 in 1,929 days, NGU 8 in 6,751.5 days."></div>
+    </div>
+    <p class="cap">Training frames, equivalent human playtime and human world records broken (out of 57 games), from the paper&rsquo;s comparison tables.</p>
+    <p class="takeaway">Choosing the data turned decades of play into weeks.</p>
+  </div>
+</section>
+
+<section class="scene band" id="steer">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">The evidence <span>Finding 03</span></p>
+        <h2>Choosing the data is the lever.</h2>
+        <p class="lead">Fix the behavior policy to a single point, so nothing steers the data, and the same agent falls far behind.</p>
+      </div>
+    </header>
+    <div class="fig panel">
+      <div class="two-ch">
+        <div class="ch anim" id="ch-steer" role="img" aria-label="Ablation on 57 Atari games, relative to GDI-I3 at 1. Without the data distribution operator, with the behavior policy fixed to one point, the relative mean and median human-normalized scores both fall far below GDI-I3's."></div>
+        <div>
+          <p class="fig-note">Same space of behaviors, same RL update, same hyperparameters. The only change: no meta-controller, so the behavior policy keeps one fixed index and the data distribution is never optimized.</p>
+          <div class="thm"><b>The theory agrees</b>With the same RL update, updating the data distribution never lowers the target of the next update (Theorem 1), nor its expected improvement under natural gradients (Theorem 2), under the paper&rsquo;s assumptions.</div>
+        </div>
+      </div>
+    </div>
+    <p class="cap">Normalized by GDI-I³ (dashed line at 1). Bars as drawn in the paper&rsquo;s ablation figure, which prints no values.</p>
+    <p class="takeaway">Collecting data is not enough. Choosing it is what works.</p>
+  </div>
+</section>
+
+<section class="scene" id="richer">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">The evidence <span>Finding 04</span></p>
+        <h2>A richer space of behaviors sees more of the game.</h2>
+        <p class="lead">Shrink the behaviors to one temperature knob and the agent scores lower; build them from two separate networks and it scores higher.</p>
+      </div>
+    </header>
+    <div class="fig panel">
+      <div class="two-ch">
+      <div class="ch anim" id="ch-rich" role="img" aria-label="Ablation on 57 Atari games, relative to GDI-I3 at 1. GDI-I1, whose behaviors have one temperature knob, scores lower in mean and median human-normalized score; GDI-H3, whose behaviors come from two separate networks, scores higher in both."></div>
+    <div class="tsne">
+      <figure class="ts">
+        <div class="im"><img src="/images/projects/gdi/tsne_seaquest_gdi_i3.jpg" alt="t-SNE of Seaquest states: the states visited by GDI-I3 are highlighted in red and spread over more of the map" loading="lazy" width="768" height="900"></div>
+        <p><b>GDI-I³: three knobs</b>Its visited states, in red, spread over more of the map.</p>
+      </figure>
+      <figure class="ts">
+        <div class="im"><img src="/images/projects/gdi/tsne_seaquest_gdi_i1.jpg" alt="t-SNE of the same Seaquest states: the states visited by GDI-I1 are highlighted in red and gather in a smaller region" loading="lazy" width="774" height="900"></div>
+        <p><b>GDI-I¹: one knob</b>Its visited states, in red, gather in a smaller region.</p>
+      </figure>
+    </div>
+      </div>
+    </div>
+    <p class="cap">Left: normalized by GDI-I³, as drawn in the paper&rsquo;s ablation figure. Right: the paper&rsquo;s t-SNE of 6k Seaquest states from three stages of training.</p>
+    <p class="takeaway">More kinds of behavior give richer data, and richer data gives a stronger agent.</p>
+  </div>
+</section>
+
 </div>
 
-<div class="container" role="main">
-
-<section>
-  <div class="records-wall">
-    <div class="records-number">22</div>
-    <div class="records-sub">Human World Records Broken</div>
-  </div>
-  <div class="results-grid">
-    <div class="result-card"><div class="rnum">9,620%</div><div class="rdesc">Mean Human-Normalized Score</div></div>
-    <div class="result-card"><div class="rnum">500×</div><div class="rdesc">More Sample-Efficient than Agent57</div></div>
-    <div class="result-card"><div class="rnum">200M</div><div class="rdesc">Training Frames</div></div>
-  </div>
-  <p class="tldr"><strong>TL;DR</strong> — Sample efficiency and final performance are two classic RL challenges. GDI addresses both simultaneously by showing that <strong>training data distribution is the key lever</strong> — unifying diverse RL algorithms and achieving 9620% mean human-normalized score with only 200M frames (500× less than Agent57).</p>
-  {% include film-card.html id="gdi" name="GDI" %}
-</section>
-
-<section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-vision.png);mask-image:url(/images/icons/sh-vision.png)"></i>Core insight</h2>
-  <p>GDI decouples RL challenges into two problems and casts both into <strong>training data distribution optimization</strong>:</p>
-  <ul>
-    <li><strong>Data richness</strong> → control the capacity and diversity of behavior policy</li>
-    <li><strong>Exploration-exploitation</strong> → fine-grained adaptive control of sampling distribution</li>
-  </ul>
-  {% include anim/gdi_lever.html %}
-  {% include anim/gdi_behavior.html %}
-  <p>GDI integrates this into <strong>Generalized Policy Iteration (GPI)</strong>, providing operator-based versions of well-known RL methods from DQN to Agent57 — all as special cases of GDI.</p>
-  <p>In GDI, the RL optimization operator <em>T</em> updates the agent's parameters from the collected samples, while a <strong>data distribution optimization operator <em>E</em></strong> updates the selective distribution over behavior policies — turning the data collection strategy itself into a learnable parameter.</p>
-
-  <h3>Unified RL Algorithms as GDI Special Cases</h3>
-  <div class="method-grid">
-    <div class="method-card"><h3>DQN</h3><p>one behavior policy (|Λ| = 1); E is the identity, so the data distribution is not additionally optimized</p></div>
-    <div class="method-card"><h3>R2D2</h3><p>256 actors that share parameters, drawn uniformly; E is the identity (GDI-I<sub>1</sub> without E)</p></div>
-    <div class="method-card"><h3>PBT</h3><p>a population with searched hyperparameters; E is the meta-controller that adjusts them</p></div>
-    <div class="method-card"><h3>Agent57</h3><p>policies indexed by the intrinsic-value weight and the discount; E is a UCB multi-arm bandit controller</p></div>
-  </div>
-  {% include anim/strip_gdi.html %}
-</section>
-
-<section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-link.png);mask-image:url(/images/icons/h-link.png)"></i>Follow-up work</h2>
-  <p>GDI's data distribution insight directly inspired:</p>
-  <ul>
-    <li><strong><a href="/projects/lbc/">LBC (ICLR 2023 Oral)</a></strong> — Extended to behavior control, breaking 24 Atari world records with 10,077% mean human-normalized score</li>
-    <li><strong><a href="/projects/orw-cfm-w2/">ORW-CFM-W2 (ICLR 2025)</a></strong> — Applied distribution-optimization principles to flow matching for generative model RLHF</li>
-  </ul>
-</section>
-
-<section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-deadlines.png);mask-image:url(/images/icons/sh-deadlines.png)"></i>Publication journey</h2>
-  <div class="tl">
-    <div class="tl-line"></div>
-    <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">Jun 2021</div><div class="tl-title">First version on arXiv</div><div class="tl-desc">GDI: Rethinking What Makes Reinforcement Learning Different From Supervised Learning (arXiv:2106.06232), which later appeared at the AAAI-22 Workshop on Reinforcement Learning in Games.</div></div>
-    <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">Jan 2022</div><div class="tl-title">Submitted to ICML 2022</div><div class="tl-desc">Submitted to the 39th International Conference on Machine Learning.</div></div>
-    <div class="tl-item"><div class="tl-dot done"></div><div class="tl-date">May 2022</div><div class="tl-title"><i class="lbl-ico" style="color:var(--good);-webkit-mask-image:url(/images/icons/h-check.png);mask-image:url(/images/icons/h-check.png)"></i>Accepted at ICML 2022</div><div class="tl-desc">Accepted as a full paper. Published in PMLR Vol. 162, pages 6103–6184.</div></div>
-    <div class="tl-item"><div class="tl-dot done"></div><div class="tl-date">Jul 2022</div><div class="tl-title">Presented at ICML 2022</div><div class="tl-desc">Presented at ICML 2022 in Baltimore, Maryland. Available at <a href="https://proceedings.mlr.press/v162/fan22c.html">proceedings.mlr.press</a>.</div></div>
+<section class="scene band" id="matters">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">Why it matters</p>
+        <h2>The data an agent learns from is not a given. <span class="nw">It is a lever.</span></h2>
+        <p class="lead">GDI turns the choice of behavior policies into a learnable part of reinforcement learning, with a framework, a proof and a recipe.</p>
+      </div>
+    </header>
+    <div class="cards c3 sub">
+      <div class="card"><h3>One loop, many algorithms</h3><p>DQN, R2D2, LASER, PBT, Agent57 and Go-Explore become special cases, which makes each easier to understand.</p></div>
+      <div class="card"><h3>A guarantee, not a heuristic</h3><p>With a few assumptions, optimizing the data distribution is proven never to hurt the RL update it feeds.</p></div>
+      <div class="card"><h3>Superhuman on a small budget</h3><p>All of it on one GPU and one CPU, from the equivalent of weeks of human play.</p></div>
+    </div>
+    <h3 class="eyebrow sub">What came next</h3>
+    <div class="cards c2">
+      <a class="card next" href="/projects/lbc/"><span class="r-no">ICLR 2023 Oral</span><h3>Learnable Behavior Control</h3><p>Builds on GDI&rsquo;s view of the data distribution and learns to control the behaviors themselves.</p></a>
+      <a class="card next" href="/projects/orw-cfm-w2/"><span class="r-no">ICLR 2025</span><h3>Online Reward-Weighted Fine-Tuning of Flow Matching with Wasserstein Regularization</h3><p>Carries the idea of optimizing the training distribution over to fine-tuning generative models.</p></a>
+    </div>
   </div>
 </section>
 
-<section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-book.png);mask-image:url(/images/icons/h-book.png)"></i>BibTeX</h2>
-  <button class="bib-copy-btn" aria-label="Copy BibTeX citation"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-list.png);mask-image:url(/images/icons/h-list.png)"></i>Copy BibTeX</button>
-  <pre class="bibtex-block" tabindex="0"><code>@InProceedings{pmlr-v162-fan22c,
+<section class="scene" id="film">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">The film</p>
+        <h2>The story, as a short film.</h2>
+      </div>
+    </header>
+    <div class="film">
+      <a href="/film/#gdi" aria-label="Play the GDI film"><img src="/film/posters/gdi.jpg" alt="Film poster: GDI, generalized data distribution iteration. A grid of behavior policies feeds a learner." loading="lazy" width="1280" height="720"><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></svg></span></a>
+    </div>
+    <p class="cap">An animated research film, rendered live in the browser.</p>
+  </div>
+</section>
+
+<section class="cite" id="cite">
+  <div class="wrap duo">
+    <header class="say">
+      <p class="eyebrow">Cite</p>
+      <h2>Cite the paper.</h2>
+      <p class="venue">International Conference on Machine Learning (<b>ICML 2022</b>). <a href="https://proceedings.mlr.press/v162/fan22c.html">PMLR</a> &middot; <a href="https://proceedings.mlr.press/v162/fan22c/fan22c.pdf">PDF</a> &middot; <a href="https://arxiv.org/abs/2206.03192">arXiv</a></p>
+      <p class="venue">An earlier version: <a href="https://arxiv.org/abs/2106.06232">GDI: Rethinking What Makes Reinforcement Learning Different From Supervised Learning</a>, <b>AAAI-22 Workshop</b> on Reinforcement Learning in Games.</p>
+      <button class="bib-copy-btn" aria-label="Copy BibTeX citation"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-list.png);mask-image:url(/images/icons/h-list.png)"></i>Copy BibTeX</button>
+    </header>
+    <pre class="show bibtex-block" tabindex="0"><code>@InProceedings{pmlr-v162-fan22c,
   title     = {Generalized Data Distribution Iteration},
   author    = {Fan, Jiajun and Xiao, Changnan},
   booktitle = {Proceedings of the 39th International Conference on Machine Learning},
@@ -359,29 +344,36 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
   pdf       = {https://proceedings.mlr.press/v162/fan22c/fan22c.pdf},
   url       = {https://proceedings.mlr.press/v162/fan22c.html}
 }</code></pre>
+  </div>
 </section>
 
-</div>
+</main>
 
 <footer>
-  <p>GDI · ICML 2022 &nbsp;|&nbsp; <a href="/">Jiajun Fan</a> · Tsinghua University &nbsp;|&nbsp; <a href="https://proceedings.mlr.press/v162/fan22c.html">Paper</a> &nbsp;|&nbsp; <a href="https://proceedings.mlr.press/v162/fan22c/fan22c.pdf">PDF</a> &nbsp;|&nbsp; <a href="/publications/">All Publications</a></p>
+  <p>GDI &nbsp;|&nbsp; <a href="/">Jiajun Fan</a> · Tsinghua University &nbsp;|&nbsp; <a href="https://arxiv.org/abs/2206.03192">Paper</a> &nbsp;|&nbsp; <a href="https://proceedings.mlr.press/v162/fan22c.html">PMLR</a> &nbsp;|&nbsp; <a href="/projects/">All Projects</a></p>
 </footer>
 
 <div id="read-progress" aria-hidden="true"></div>
-<button id="pg-dark" class="pg-fab" aria-label="Toggle dark mode" title="Toggle dark mode"><i class="pg-dico"></i></button>
-<button id="pg-top" class="pg-fab" aria-label="Back to top" title="Back to top"><span class="pg-up"></span></button>
 <script>
 (function(){
-  try{if(localStorage.getItem('darkMode')==='true')document.body.classList.add('dark-mode');}catch(e){}
-  var bar=document.getElementById('read-progress'),top=document.getElementById('pg-top'),dk=document.getElementById('pg-dark');
-  function onScroll(){var st=window.scrollY||document.documentElement.scrollTop,h=document.documentElement.scrollHeight-window.innerHeight;
-    if(bar)bar.style.width=(h>0?(st/h*100):0)+'%'; if(top){st>400?top.classList.add('show'):top.classList.remove('show');}}
-  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
-  if(top)top.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
-  if(dk)dk.addEventListener('click',function(){var on=document.body.classList.toggle('dark-mode');try{localStorage.setItem('darkMode',on);}catch(e){}});
+  var bar=document.getElementById('read-progress'), nav=document.querySelector('.chapters'), strip=nav?nav.querySelector('.wrap'):null;
+  function pairs(sel){return [].slice.call(document.querySelectorAll(sel)).map(function(a){return [a,document.getElementById(a.getAttribute('href').slice(1))];}).filter(function(p){return p[1];});}
+  var parts=pairs('.chapters .wrap > a[href^="#"]'), subs=pairs('.chapters .ch-sub a'), shown=null;
+  function mark(list,cur){list.forEach(function(p){if(p[0]===cur)p[0].setAttribute('aria-current','true');else p[0].removeAttribute('aria-current');});}
+  function onScroll(){
+    var st=window.scrollY||document.documentElement.scrollTop,h=document.documentElement.scrollHeight-window.innerHeight,line=Math.min(window.innerHeight*0.38,340),cur=null,sub=null;
+    if(bar)bar.style.width=(h>0?(st/h*100):0)+'%';
+    parts.forEach(function(p){if(p[1].getBoundingClientRect().top<=line)cur=p[0];});
+    if(h>0&&st>=h-2&&parts.length)cur=parts[parts.length-1][0];
+    if(cur&&cur.getAttribute('href')==='#evidence')subs.forEach(function(p){if(p[1].getBoundingClientRect().top<=line)sub=p[0];});
+    mark(parts,cur);mark(subs,sub);
+    if(cur!==shown&&strip&&strip.scrollWidth>strip.clientWidth){strip.scrollLeft=cur?Math.max(0,cur.offsetLeft-16):0;}
+    shown=cur;
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});window.addEventListener('resize',onScroll);onScroll();
   document.querySelectorAll('.bib-copy-btn').forEach(function(btn){
     btn.addEventListener('click',function(){
-      var pre=btn.nextElementSibling,text=pre?pre.innerText||pre.textContent:'';
+      var pre=document.querySelector('.bibtex-block'),text=pre?pre.innerText||pre.textContent:'';
       if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(function(){
         btn.innerHTML='<i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-check.png);mask-image:url(/images/icons/h-check.png)"></i> Copied!';btn.classList.add('copied');
         setTimeout(function(){btn.innerHTML='<i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-list.png);mask-image:url(/images/icons/h-list.png)"></i> Copy BibTeX';btn.classList.remove('copied');},2000);});}
@@ -389,5 +381,8 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
   });
 })();
 </script>
+{% include proj/gdi/hero.html %}
+{% include proj/gdi/figs.html %}
+{% include proj/gdi/ops.html %}
 </body>
 </html>

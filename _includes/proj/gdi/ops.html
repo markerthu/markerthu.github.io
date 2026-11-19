@@ -1,0 +1,193 @@
+<script>
+/* How it works: the paper's operator view. One loop for every algorithm: behavior policies (bars: how often each
+   one plays) collect data in the game; the learner's RL update trains on it (blue); a meta-controller, when there
+   is one, reshapes the bars (green). Each tab sets the loop the way the paper writes that algorithm. Schematic. */
+(function(){
+  var root=document.getElementById('ops'); if(!root) return;
+  var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var NS='http://www.w3.org/2000/svg';
+  var A=[
+    {k:'k-run',name:'DQN',tag:'no data operator',also:'and Rainbow, PPO, IMPALA',cls:'GDI-I⁰, without the data operator',nets:1,netLab:'one network',K:1,beh:'one behavior policy',dist:'one',E:null,
+     say:'One behavior policy, so the selective distribution is a single point. Nothing optimizes the data: the data operator is the identity.'},
+    {k:'k-run',name:'R2D2',tag:'no data operator',also:'and Ape-X',cls:'GDI-I¹, without the data operator',nets:1,netLab:'one shared network',K:16,beh:'256 values of ε',dist:'uniform',E:null,
+     say:'256 ε-greedy behaviors share one network and are drawn uniformly. The distribution never changes.'},
+    {k:'k-run',name:'LASER',tag:'no data operator',also:'',cls:'GDI-H¹, without the data operator',nets:3,netLab:'one network per learner',K:6,beh:'one per learner',dist:'uniform',E:null,
+     say:'Several learners with separate parameters share their samples. Behaviors are drawn uniformly, and nothing reshapes them.'},
+    {k:'k-read',name:'PBT',tag:'meta-controller',also:'',cls:'GDI-Hⁿ⁺¹',nets:3,netLab:'one network per agent',K:8,beh:'searched hyperparameters',dist:'learn',E:'meta-controller',
+     say:'A population of agents with separate parameters. A meta-controller adjusts each agent&rsquo;s hyperparameters from the performance of the whole population.'},
+    {k:'k-read',name:'Agent57',tag:'UCB bandit',also:'and NGU',cls:'GDI-I²',nets:1,netLab:'one shared network',K:16,beh:'intrinsic weight β, discount γ',dist:'learn',E:'UCB bandit',
+     say:'Behaviors indexed by the weight of the intrinsic reward and the discount share one network. A bandit with UCB reshapes which of them play, to maximize return.'},
+    {k:'k-read',name:'Go-Explore',tag:'search',also:'',cls:'GDI-H¹',nets:2,netLab:'explore, robustify',K:5,beh:'when to switch between them',dist:'learn',E:'search',
+     say:'Two models, one that explores and one that robustifies. A search-based controller decides where to explore next.'},
+    {k:'k-ours',name:'GDI-H³',tag:'ours: bandits',also:'',cls:'',ours:1,nets:2,netLab:'two networks',K:18,beh:'very exploratory to purely exploitative',dist:'learn',E:'bandits',
+     say:'A soft entropy space of behaviors, from very exploratory to purely exploitative, built from two networks learned with different reward shaping. Bandits learn how often each behavior plays. GDI-I³ is the same with one shared network.'}
+  ];
+  var rail=root.querySelector('.rp-rail'), view=root.querySelector('.rp-view');
+  var at=A.length-1, playing=!reduced, vis=false, timer=0, DUR=7600, raf=0, t0=0, S=null;
+
+  function el(tag,attr,parent,txt){var e=document.createElementNS(NS,tag);for(var k in attr)e.setAttribute(k,attr[k]);if(txt!=null)e.textContent=txt;if(parent)parent.appendChild(e);return e;}
+  function clamp(x){return x<0?0:x>1?1:x;}
+  function ease(x){x=clamp(x);return x*x*(3-2*x);}
+  function seg(t,a,b){return clamp((t-a)/(b-a));}
+  function shape(c,w,K){var o=[];for(var i=0;i<K;i++){var x=K>1?i/(K-1):0.5;o.push(0.12+0.88*Math.exp(-Math.pow(x-c,2)/(2*w*w)));}return o;}
+  var CENT=[0.62,0.38,0.7,0.5,0.66,0.45];
+
+  function net(g,cx,cy,sc){
+    var L=[2,3,2], P=[];
+    for(var l=0;l<3;l++)for(var m=0;m<L[l];m++)P.push([cx+(l-1)*13*sc,cy+(m-(L[l]-1)/2)*11*sc,l]);
+    var gg=el('g',{class:'net'},g);
+    P.forEach(function(a){P.forEach(function(b){if(b[2]===a[2]+1)el('line',{x1:a[0],y1:a[1],x2:b[0],y2:b[1]},gg);});});
+    P.forEach(function(a){el('circle',{cx:a[0],cy:a[1],r:3.6*sc},gg);});
+    return gg;
+  }
+  function path(pts){return pts.map(function(p,i){return (i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1);}).join(' ');}
+  function along(pts,u){
+    var L=[],tot=0,i;for(i=1;i<pts.length;i++){var d=Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]);L.push(d);tot+=d;}
+    var x=u*tot;for(i=0;i<L.length;i++){if(x<=L[i]||i===L.length-1){var f=L[i]?Math.min(1,x/L[i]):0;return [pts[i][0]+(pts[i+1][0]-pts[i][0])*f,pts[i][1]+(pts[i+1][1]-pts[i][1])*f];}x-=L[i];}
+    return pts[pts.length-1];
+  }
+  function arrow(g,p,dir,cls){var d=dir==='up'?'M-4 4L0 -1L4 4':dir==='left'?'M4 -4L-1 0L4 4':'M-4 -4L1 0L-4 4';el('path',{d:d,transform:'translate('+p[0]+','+p[1]+')',class:'fl '+cls},g);}
+
+  function build(a){
+    var host=view.querySelector('.op-fig'); if(!host) return null;
+    var cw=Math.max(280,host.clientWidth), wide=cw>=600, W=Math.round(cw), H, s={a:a,wide:wide};
+    var svg=el('svg',{role:'img','aria-label':a.name+' as a special case of GDI. '+a.say.replace(/<[^>]+>/g,'')});
+    host.innerHTML='';host.appendChild(svg);
+    var g=el('g',{},svg), B, Ln, Me, Ev, beh;
+    if(wide){
+      H=292;
+      Ln={x:0,y:34,w:W*0.2,h:180};B={x:W*0.27,y:34,w:W*0.44,h:180};Me={x:W*0.78,y:34,w:W*0.22,h:180};Ev={x:W*0.27,y:244,w:W*0.44,h:38};
+      el('text',{class:'t',x:Ln.x+Ln.w/2,y:22,'text-anchor':'middle'},g,'learner');
+      el('text',{class:'t',x:B.x+B.w/2,y:22,'text-anchor':'middle'},g,'behavior policies');
+      el('text',{class:'t',x:Me.x+Me.w/2,y:22,'text-anchor':'middle'},g,'meta-controller');
+      s.base=B.y+122;s.hmax=78;s.dotY=B.y+140;s.lab=B.y+166;
+    }else{
+      H=404;
+      B={x:0,y:8,w:W,h:178};Ev={x:W*0.2,y:206,w:W*0.6,h:34};Ln={x:0,y:282,w:W*0.47,h:114};Me={x:W*0.53,y:282,w:W*0.47,h:114};
+      s.base=B.y+122;s.hmax=78;s.dotY=B.y+140;s.lab=B.y+165;
+    }
+    svg.setAttribute('viewBox','0 0 '+W+' '+H);
+    el('rect',{class:'box ln',x:Ln.x+0.5,y:Ln.y,width:Ln.w-1,height:Ln.h,rx:14},g);
+    el('rect',{class:'box',x:B.x+0.5,y:B.y,width:B.w-1,height:B.h,rx:14},g);
+    el('rect',{class:'box '+(a.E?'me':'off'),x:Me.x+0.5,y:Me.y,width:Me.w-1,height:Me.h,rx:14},g);
+    el('rect',{class:'env',x:Ev.x,y:Ev.y,width:Ev.w,height:Ev.h,rx:10},g);
+    el('text',{class:'s',x:Ev.x+Ev.w/2,y:Ev.y+Ev.h/2+4.5,'text-anchor':'middle'},g,'the game: Atari');
+    if(!wide){
+      el('text',{class:'t',x:B.x+16,y:B.y+22},g,'behavior policies');
+      el('text',{class:'t',x:Ln.x+Ln.w/2,y:Ln.y+22,'text-anchor':'middle'},g,'learner');
+      el('text',{class:'t',x:Me.x+Me.w/2,y:Me.y+22,'text-anchor':'middle'},g,'meta-controller');
+    }
+    el('text',{class:'s',x:B.x+16,y:wide?B.y+22:B.y+40},g,'bars: how often each one plays');
+    /* learner networks */
+    var lcx=Ln.x+Ln.w/2, lcy=wide?Ln.y+84:Ln.y+60, sc=wide?(a.nets>2?Math.min(1.25,Ln.w/150):a.nets>1?Math.min(1.7,Ln.w/120):2):(a.nets>2?0.85:a.nets>1?1.05:1.4), sp=wide?Ln.w/(a.nets+0.35):Ln.w/(a.nets+0.45);
+    s.nets=[];for(var n=0;n<a.nets;n++)s.nets.push(net(g,lcx+(n-(a.nets-1)/2)*sp,lcy,sc));
+    el('text',{class:'s',x:lcx,y:wide?Ln.y+150:Ln.y+100,'text-anchor':'middle'},g,a.netLab);
+    /* meta-controller */
+    var mcx=Me.x+Me.w/2;
+    if(a.E){
+      s.dial=el('g',{transform:'translate('+mcx+','+(wide?Me.y+80:Me.y+56)+')'},g);
+      el('path',{class:'fl e',d:'M13 0a13 13 0 0 1-22.6 8.8M-13 0a13 13 0 0 1 22.6-8.8'},s.dial);
+      el('path',{class:'fl e',d:'M10.6-14.4v6h-6M-10.6 14.4v-6h6'},s.dial);
+      el('text',{class:'s e',x:mcx,y:wide?Me.y+132:Me.y+96,'text-anchor':'middle'},g,a.E);
+      if(wide) el('text',{class:'s',x:mcx,y:Me.y+152,'text-anchor':'middle'},g,'reshapes the bars');
+    }else{
+      el('text',{class:'s',x:mcx,y:wide?Me.y+86:Me.y+60,'text-anchor':'middle'},g,'none');
+      el('text',{class:'s',x:mcx,y:wide?Me.y+106:Me.y+78,'text-anchor':'middle'},g,'the bars never change');
+    }
+    /* behaviors and bars */
+    var K=a.K, ix0=B.x+28, ix1=B.x+B.w-28, dx=K>1?(ix1-ix0)/(K-1):0, bw=Math.max(5,Math.min(22,dx*0.58||22));
+    s.bx=[];s.bars=[];s.dots=[];
+    for(var i=0;i<K;i++){var x=K>1?ix0+dx*i:B.x+B.w/2;s.bx.push(x);
+      s.bars.push(el('rect',{class:'br'+(a.name==='GDI-H³'?' lt':''),x:(x-bw/2).toFixed(1),y:s.base,width:bw.toFixed(1),height:0,rx:2.5},g));
+      s.dots.push(el('circle',{class:'bd',cx:x.toFixed(1),cy:s.dotY,r:K>12?4:5},g));}
+    el('text',{class:'s',x:B.x+B.w/2,y:s.lab,'text-anchor':'middle'},g,a.beh);
+    /* flows */
+    var T1, E1, E2, Th;
+    if(wide){
+      T1=[[Ev.x,Ev.y+Ev.h/2],[lcx,Ev.y+Ev.h/2],[lcx,Ln.y+Ln.h]];
+      E1=[[Ev.x+Ev.w,Ev.y+Ev.h/2],[mcx,Ev.y+Ev.h/2],[mcx,Me.y+Me.h]];
+      E2=[[Me.x,B.y+60],[B.x+B.w,B.y+60]];
+      Th=[[Ln.x+Ln.w,B.y+60],[B.x,B.y+60]];
+    }else{
+      T1=[[Ev.x+Ev.w*0.22,Ev.y+Ev.h],[Ev.x+Ev.w*0.22,Ev.y+Ev.h+20],[lcx,Ev.y+Ev.h+20],[lcx,Ln.y]];
+      E1=[[Ev.x+Ev.w*0.78,Ev.y+Ev.h],[Ev.x+Ev.w*0.78,Ev.y+Ev.h+20],[mcx,Ev.y+Ev.h+20],[mcx,Me.y]];
+      E2=[[W-12,Me.y],[W-12,B.y+B.h]];
+      Th=[[12,Ln.y],[12,B.y+B.h]];
+    }
+    el('path',{class:'fl p',d:path(Th)},g);arrow(g,Th[1],wide?'right':'up','p');
+    el('path',{class:'fl t',d:path(T1)},g);arrow(g,T1[T1.length-1],wide?'up':'down','t');
+    el('path',{class:'fl e'+(a.E?'':' off'),d:path(E1)},g);arrow(g,E1[E1.length-1],wide?'up':'down','e'+(a.E?'':' off'));
+    el('path',{class:'fl e'+(a.E?'':' off'),d:path(E2)},g);arrow(g,E2[1],wide?'left':'up','e'+(a.E?'':' off'));
+    if(!wide){
+      var dn=el('path',{class:'fl p',d:'M'+(W/2)+' '+(B.y+B.h)+'V'+Ev.y},g);
+    }
+    s.T1=T1;s.E1=E1;s.E2=E2;s.Ev=Ev;
+    s.qp=el('circle',{class:'q p',r:0,cx:0,cy:0},g);
+    s.qt=el('circle',{class:'q t',r:0,cx:0,cy:0},g);
+    s.qe=el('circle',{class:'q e',r:0,cx:0,cy:0},g);
+    s.qe2=el('circle',{class:'q e',r:0,cx:0,cy:0},g);
+    s.cur=a.dist==='one'?[1]:a.dist==='uniform'?shape(0.5,10,K).map(function(){return 0.5;}):shape(0.5,0.3,K);
+    s.from=s.cur.slice();s.to=s.cur.slice();s.lastCycle=-1;s.pick=0;
+    return s;
+  }
+
+  var PERIOD=2.2;
+  function put(c,p){if(!p){c.setAttribute('r',0);return;}c.setAttribute('cx',p[0].toFixed(1));c.setAttribute('cy',p[1].toFixed(1));c.setAttribute('r',4);}
+  function pickIndex(s,cyc){
+    var K=s.a.K; if(K===1) return 0;
+    var w=s.to, tot=w.reduce(function(x,y){return x+y;},0), r=((cyc*0.6180339+0.13)%1)*tot;
+    for(var i=0;i<K;i++){r-=w[i];if(r<=0)return i;}return K-1;
+  }
+  function frame(t){
+    if(!S) return;
+    var cyc=Math.floor(t/PERIOD), u=t-cyc*PERIOD, a=S.a, i;
+    if(cyc!==S.lastCycle){
+      S.lastCycle=cyc;S.pick=pickIndex(S,cyc);
+      if(a.dist==='learn'){S.from=S.cur.slice();S.to=shape(CENT[cyc%CENT.length],0.2,a.K);}
+    }
+    if(a.dist==='learn'){var m=ease(seg(u,1.55,2.1));for(i=0;i<a.K;i++)S.cur[i]=S.from[i]+(S.to[i]-S.from[i])*m;}
+    for(i=0;i<a.K;i++){var h=S.hmax*S.cur[i];S.bars[i].setAttribute('y',(S.base-h).toFixed(1));S.bars[i].setAttribute('height',h.toFixed(1));}
+    var hot=seg(u,0,0.15)*(1-seg(u,0.55,0.75));
+    S.dots.forEach(function(d,j){d.setAttribute('class','bd'+(j===S.pick&&hot>0.2?' pk':''));});
+    var x0=S.bx[S.pick], p0=[x0,S.dotY+6], p1=[S.Ev.x+S.Ev.w/2,S.Ev.y], up=seg(u,0.15,0.6);
+    put(S.qp,up>0&&up<1?[p0[0]+(p1[0]-p0[0])*ease(up),p0[1]+(p1[1]-p0[1])*ease(up)]:null);
+    var ut=seg(u,0.6,1.35);put(S.qt,ut>0&&ut<1?along(S.T1,ease(ut)):null);
+    var lit=Math.sin(Math.PI*seg(u,1.3,1.9));
+    S.nets.forEach(function(n){n.style.opacity=(0.75+0.25*lit).toFixed(2);});
+    if(a.E){
+      var ue=seg(u,0.6,1.35);put(S.qe,ue>0&&ue<1?along(S.E1,ease(ue)):null);
+      var u2=seg(u,1.35,1.75);put(S.qe2,u2>0&&u2<1?along(S.E2,ease(u2)):null);
+      if(S.dial)S.dial.setAttribute('transform',S.dial.getAttribute('transform').replace(/ rotate\([^)]*\)/,'')+' rotate('+(ease(seg(u,1.2,1.7))*180+cyc*180).toFixed(1)+')');
+    }
+  }
+  function still(){if(!S)return;S.lastCycle=0;S.pick=Math.floor(S.a.K*0.62);if(S.a.dist==='learn'){S.to=shape(0.62,0.2,S.a.K);S.cur=S.to.slice();S.from=S.to.slice();}frame(1.0);}
+  function loop(now){raf=0;if(!vis||!playing||!S)return;if(!t0)t0=now;frame((now-t0)/1000);raf=requestAnimationFrame(loop);}
+  function run(){if(raf){cancelAnimationFrame(raf);raf=0;}if(reduced||!playing||!vis){still();return;}t0=0;raf=requestAnimationFrame(loop);}
+
+  function renderRail(){
+    rail.innerHTML=A.map(function(a,i){return '<button type="button" role="tab" class="'+a.k+'" data-i="'+i+'"><span class="n">'+(i+1)+'</span><span>'+a.name+'<small>'+a.tag+'</small></span></button>';}).join('');
+  }
+  function show(i){
+    at=i;var a=A[i];
+    [].slice.call(rail.querySelectorAll('button')).forEach(function(b,k){b.setAttribute('aria-current',k===i?'true':'false');b.setAttribute('aria-selected',k===i?'true':'false');b.classList.toggle('done',k<i);});
+    var act=rail.querySelector('button[aria-current=true]');if(act&&rail.scrollWidth>rail.clientWidth)rail.scrollTo({left:act.offsetLeft-60,behavior:reduced?'auto':'smooth'});
+    view.className='rp-view '+a.k;
+    view.innerHTML='<p class="rp-kind">'+a.name+'<span>'+(a.ours?'ours: the full loop':(a.also?a.also+'. ':'')+'In the paper&rsquo;s terms: '+a.cls)+'</span></p><div class="op-fig"></div><p class="op-say">'+a.say+'</p>'+
+      '<div class="rp-foot"><button type="button" class="rp-play" aria-label="'+(playing?'Pause':'Play')+' the tour">'+(playing?'<svg viewBox="0 0 12 12"><rect x="2" y="1.5" width="3" height="9" rx="1"/><rect x="7" y="1.5" width="3" height="9" rx="1"/></svg>':'<svg viewBox="0 0 12 12"><path d="M3 1.5v9l7.5-4.5z"/></svg>')+'</button><div class="rp-bar"><i aria-hidden="true"></i></div></div>';
+    S=build(a);run();schedule();
+  }
+  function schedule(){
+    clearTimeout(timer);var bar=view.querySelector('.rp-bar i');if(!bar)return;
+    bar.style.transition='none';bar.style.width='0';
+    if(!playing||!vis||reduced)return;
+    void bar.offsetWidth;bar.style.transition='width '+DUR+'ms linear';bar.style.width='100%';
+    timer=setTimeout(function(){show((at+1)%A.length);},DUR);
+  }
+  rail.addEventListener('click',function(e){var b=e.target.closest('button');if(b)show(+b.getAttribute('data-i'));});
+  view.addEventListener('click',function(e){if(e.target.closest('.rp-play')){playing=!playing;show(at);}});
+  root.addEventListener('gd:vis',function(e){var was=vis;vis=e.detail;if(vis&&!was){show(A.length-1);}else{run();schedule();}});
+  if(!('IntersectionObserver' in window))vis=true;
+  var rw=0,rt=0;window.addEventListener('resize',function(){if(Math.abs(window.innerWidth-rw)<30)return;clearTimeout(rt);rt=setTimeout(function(){rw=window.innerWidth;S=build(A[at]);run();},180);});rw=window.innerWidth;
+  renderRail();show(A.length-1);
+})();
+</script>

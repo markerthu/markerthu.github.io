@@ -1,0 +1,111 @@
+<figure class="cst cv" id="cover">
+  <div class="cst-stage">
+    <article class="cst-act all">
+      <header><h3>Collect everything</h3><p>try to visit every unseen situation, as Agent57 and Go-Explore do</p></header>
+      <div class="cst-draw" role="img" aria-label="Schematic. Collect everything: trials land all over the space of situations, seen or unseen, high or low value. Many trials are spent, and much of the data they bring back has little value."></div>
+      <p class="cst-say">Many trials, and much of what they bring back has little value.</p>
+      <ul class="pdm-yn"><li class="y"><i role="img" aria-label="Yes:"></i>Reaches unseen situations</li><li class="n"><i role="img" aria-label="No:"></i>Avoids low-value repeats</li></ul>
+    </article>
+    <article class="cst-act own">
+      <header><h3>Choose the data</h3><p>learn which behaviors collect it, as GDI does</p></header>
+      <div class="cst-draw" role="img" aria-label="Schematic. Choose the data: trials land mostly where the data has high value, both seen and unseen. The same high-value data comes back from far fewer trials."></div>
+      <p class="cst-say">Fewer trials, spent where the data is worth having.</p>
+      <ul class="pdm-yn"><li class="y"><i role="img" aria-label="Yes:"></i>Reaches unseen situations</li><li class="y"><i role="img" aria-label="Yes:"></i>Avoids low-value repeats</li></ul>
+    </article>
+  </div>
+  <figcaption class="cap">Schematic of the paper&rsquo;s argument: nothing in it is measured.</figcaption>
+</figure>
+<script>
+(function(){
+  var fig=document.getElementById('cover'); if(!fig) return;
+  var acts=[].slice.call(fig.querySelectorAll('.cst-act')), hosts=acts.map(function(a){return a.querySelector('.cst-draw');});
+  var mq=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)'):{matches:false};
+  var NS='http://www.w3.org/2000/svg', T0=0.5, RUN=7.4, HOLD=3.2, OUT=0.6, T=T0+RUN+HOLD+OUT, FINAL=T0+RUN+0.6;
+  var visible=false, raf=0, last=0, tc=0, lit=null, P=[], width=0;
+  function clamp(x){return x<0?0:x>1?1:x;}
+  function seg(t,a,b){return clamp((t-a)/(b-a));}
+  function rng(seed){var s=seed;return function(){s=(s*1664525+1013904223)%4294967296;return s/4294967296;};}
+  /* the drops: [x 0..1 (seen..unseen), y 0..1 (high..low value)]; left 56 trials (24 high-value), right 28 (24 high-value) */
+  function drops(n,nHigh,seed){
+    var r=rng(seed), out=[], i, hi=[];
+    for(i=0;i<n;i++)hi.push(i<nHigh);
+    for(i=n-1;i>0;i--){var j=Math.floor(r()*(i+1)),t=hi[i];hi[i]=hi[j];hi[j]=t;}
+    for(i=0;i<n;i++){var h=hi[i];out.push([0.04+0.92*r(), h?0.1+0.24*r():0.58+0.26*r(), h]);}
+    return out;
+  }
+  var D=[drops(56,24,7),drops(28,24,11)], MAXN=56;
+  function el(tag,attr,parent){var e=document.createElementNS(NS,tag);for(var k in attr)e.setAttribute(k,attr[k]);if(parent)parent.appendChild(e);return e;}
+  function build(host,k){
+    var W=width, x0=12, x1=W-12, y0=8, y1=150, ym=(y0+y1)/2, xm=(x0+x1)/2, H=240;
+    host.innerHTML='';
+    var svg=el('svg',{viewBox:'0 0 '+W+' '+H,'aria-hidden':'true'},host);
+    el('rect',{class:'pl',x:x0,y:y0,width:x1-x0,height:y1-y0,rx:10},svg);
+    el('rect',{class:'hi',x:x0+1,y:y0+1,width:x1-x0-2,height:ym-y0-1,rx:9},svg);
+    el('line',{class:'axl',x1:xm,x2:xm,y1:y0+6,y2:y1-6},svg);
+    el('line',{class:'axl',x1:x0+6,x2:x1-6,y1:ym,y2:ym},svg);
+    var t=el('text',{class:'lb',x:x0+10,y:y0+19},svg);t.textContent='high value';
+    t=el('text',{class:'lb',x:x0+10,y:y1-9},svg);t.textContent='low value';
+    t=el('text',{class:'lb',x:x0+10,y:ym-7},svg);t.textContent='seen';
+    t=el('text',{class:'lb','text-anchor':'end',x:x1-10,y:ym-7},svg);t.textContent='unseen';
+    var my=[y1+38,y1+74], bw=x1-x0, lbls=['trials','high-value data'], bars=[];
+    lbls.forEach(function(s,i){
+      var tt=el('text',{class:'lb'+(i===1?' on':''),x:x0,y:my[i]-8},svg);tt.textContent=s;
+      el('rect',{class:'trk',x:x0,y:my[i],width:bw,height:6,rx:3},svg);
+      bars.push(el('rect',{class:i?'bar-h':'bar-t',x:x0,y:my[i],width:0,height:6,rx:3},svg));
+    });
+    if(k===0){t=el('text',{class:'lb sch','text-anchor':'end',x:x1,y:my[0]-8},svg);t.textContent='schematic';}
+    var g=el('g',{},svg), pts=D[k].map(function(d){
+      var cx=x0+8+(x1-x0-16)*d[0], cy=y0+8+(y1-y0-16)*d[1];
+      return {cx:cx,cy:cy,h:d[2],ln:el('line',{class:'drop',x1:cx,x2:cx,y1:y0,y2:y0},g),c:el('circle',{class:'pt '+(d[2]?'hv':'lv'),cx:cx,cy:cy,r:0},g)};
+    });
+    return {pts:pts,bars:bars,bw:bw,svg:svg};
+  }
+  function setup(){
+    var w=Math.max(260,Math.min(520,Math.round(hosts[0].clientWidth))); if(w===width) return false;
+    width=w; P=hosts.map(build); return true;
+  }
+  function draw(p,k,t){
+    var n=p.pts.length, every=RUN/n, cnt=0, hv=0;
+    p.pts.forEach(function(q,i){
+      var s=T0+i*every, u=seg(t,s,s+0.32), a=seg(t,s+0.28,s+0.5);
+      q.ln.setAttribute('y2',(q.cy*u+(1-u)*8).toFixed(1));
+      q.ln.style.opacity=(u>0&&a<1?0.7*(1-a):0).toFixed(2);
+      var r=a<=0?0:(3.6+1.6*Math.sin(Math.PI*Math.min(1,a*1.4)))*(a<1?1:1);
+      q.c.setAttribute('r',(a>=1?3.8:r).toFixed(2));
+      if(a>0){cnt++;if(q.h)hv++;}
+    });
+    p.bars[0].setAttribute('width',(p.bw*cnt/MAXN).toFixed(1));
+    p.bars[1].setAttribute('width',(p.bw*hv/MAXN).toFixed(1));
+    p.svg.style.opacity=(1-seg(t,T-OUT,T)).toFixed(2);
+  }
+  function frame(t){
+    P.forEach(function(p,k){draw(p,k,t);});
+    var on=t>=T0+RUN+0.3&&t<T-OUT;
+    if(on!==lit){lit=on;acts.forEach(function(a){a.classList.toggle('done',on);});}
+  }
+  function still(){return mq.matches||!('IntersectionObserver' in window);}
+  function tick(now){
+    raf=0;if(!visible||still()) return;
+    if(!last) last=now;
+    tc+=Math.min(0.1,(now-last)/1000);last=now;
+    if(tc>=T) tc=0;
+    frame(tc);raf=requestAnimationFrame(tick);
+  }
+  function sync(){
+    if(still()){if(raf){cancelAnimationFrame(raf);raf=0;}fig.classList.remove('cst-live');frame(FINAL);return;}
+    fig.classList.add('cst-live');
+    if(visible&&!raf){last=0;raf=requestAnimationFrame(tick);}
+  }
+  setup();
+  if(still())frame(FINAL);else{fig.classList.add('cst-live');frame(0);}
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){es.forEach(function(e){
+      var was=visible;visible=e.isIntersecting;
+      if(visible&&!was&&!still()){tc=0;lit=null;frame(0);}
+      sync();
+    });},{threshold:0.25}).observe(fig);
+  }
+  if(mq.addEventListener) mq.addEventListener('change',sync);
+  var rt=0;window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){if(setup())frame(still()?FINAL:tc);},180);});
+})();
+</script>

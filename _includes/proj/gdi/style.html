@@ -1,0 +1,135 @@
+<style>
+/* GDI page: the few components the shared design system (selfrw/style.html) does not have.
+   Sizes and colours come only from its tokens. */
+.stage-steps li:nth-child(1){--sc:var(--lav-e)}
+.stage-steps li:nth-child(2){--sc:var(--peach-e)}
+.stage-steps li:nth-child(3){--sc:var(--ice-e)}
+.stage-steps li:nth-child(4){--sc:var(--mint-e)}
+
+/* the idea: two challenges -> one lever */
+.lv{display:grid;grid-template-columns:minmax(0,1fr) 40px minmax(0,1fr) 40px minmax(0,1fr) 40px minmax(0,1fr);margin-top:var(--sp-fig)}
+.lv-col{display:flex;flex-direction:column;gap:12px;min-width:0;opacity:0;transform:translateY(12px)}
+.lv.in .lv-col,.no-anim .lv-col{opacity:1;transform:none;transition:opacity .6s ease var(--d,0s),transform .6s cubic-bezier(.2,.7,.2,1) var(--d,0s)}
+.lv-h{font-size:var(--t-label);font-weight:600;line-height:1.4;color:var(--muted);min-height:1.4em}
+.lv-c{flex:1;display:flex;flex-direction:column;justify-content:center;border:1px solid var(--ke);background:var(--kl);border-radius:14px;padding:14px 16px;min-width:0;transition:box-shadow .6s ease}
+.lv-c b{display:block;font-weight:600;font-size:var(--t-body);line-height:1.3;color:var(--ink)}
+.lv-c span{display:block;font-size:var(--t-label);line-height:1.45;color:var(--muted);margin-top:4px}
+.lv-one .lv-c{background:var(--card);border-width:1.5px}
+.lv.in .lv-one .lv-c{box-shadow:0 0 0 6px var(--ice-l);transition-delay:1.5s}
+.lv-x{position:relative;display:flex;align-items:center;justify-content:center;padding-top:calc(1.4em + 12px);font-size:var(--t-label)}
+.lv-x svg{width:22px;height:22px;fill:none;stroke:var(--faint);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;position:relative;z-index:1}
+.lv-x::before{content:'';position:absolute;left:6px;right:6px;top:calc(50% + .7em + 6px);height:1px;background:var(--hair)}
+.lv-x i{position:absolute;left:6px;top:calc(50% + .7em + 3px);width:7px;height:7px;border-radius:50%;background:var(--mint-e);opacity:0}
+.lv.in .lv-x i{animation:lvflow 2.6s ease-in-out var(--d,0s) infinite}
+@keyframes lvflow{0%{transform:translateX(0);opacity:0}15%{opacity:1}85%{opacity:1}100%{transform:translateX(21px);opacity:0}}
+@media(max-width:860px){
+  .lv{grid-template-columns:1fr;row-gap:0}
+  .lv-col{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .lv-h{grid-column:1/-1}
+  .lv-one .lv-c{grid-column:1/-1}
+  .lv-x{padding:0;height:40px}
+  .lv-x svg{transform:rotate(90deg)}
+  .lv-x::before{left:50%;right:auto;top:6px;bottom:6px;width:1px;height:auto}
+  .lv-x i{left:calc(50% - 3px);top:6px}
+  @keyframes lvflow{0%{transform:translateY(0);opacity:0}15%{opacity:1}85%{opacity:1}100%{transform:translateY(21px);opacity:0}}
+}
+@media(max-width:420px){.lv-col{grid-template-columns:1fr}}
+
+/* the problem: collect everything vs choose the data (reuses .cst) */
+.cv .pl{fill:var(--card);stroke:var(--hair);stroke-width:1}
+.cv .hi{fill:var(--mint-l)}
+.cv .axl{stroke:var(--hair);stroke-width:1}
+.cv .pt{stroke-width:1.2;transform-box:fill-box;transform-origin:center}
+.cv .pt.hv{fill:var(--mint);stroke:var(--mint-e)}
+.cv .pt.lv{fill:var(--peach);stroke:var(--peach-e)}
+.cv .drop{stroke:var(--ke);stroke-width:1.4;stroke-linecap:round}
+.cv .trk{fill:var(--rule)}
+.cv .bar-t{fill:var(--hair)}
+.cv .bar-h{fill:var(--mint-e)}
+.cv .lb.on{fill:var(--ink);font-weight:600}
+.cst-act.all{--k:var(--peach);--ke:var(--peach-e);--kt:var(--peach-t);--kl:var(--peach-l)}
+
+/* how it works: the operator view (reuses .replay) */
+.op .rp-view{min-height:0;padding-bottom:16px}
+.op-fig{margin:2px 0 4px}
+.op-fig svg{display:block;width:100%;height:auto;overflow:visible}
+.op-say{font-size:var(--t-body);line-height:1.5;color:var(--ink);max-width:46em;margin-top:10px}
+.op-say b{font-weight:600}
+.op .t{font-family:var(--sans);font-size:var(--t-label);font-weight:600;fill:var(--ink)}
+.op .s{font-family:var(--sans);font-size:var(--t-fine);fill:var(--muted)}
+.op .s.e{fill:var(--mint-t);font-weight:600}
+.op .box{fill:var(--card);stroke:var(--hair);stroke-width:1}
+.op .box.ln{fill:var(--ice-l);stroke:var(--ice-e)}
+.op .box.me{fill:var(--mint-l);stroke:var(--mint-e)}
+.op .box.off{fill:none;stroke:var(--hair);stroke-dasharray:4 4}
+.op .env{fill:var(--band);stroke:var(--rule)}
+.op .net line{stroke:var(--ice-e);stroke-width:1;opacity:.7}
+.op .net circle{fill:var(--card);stroke:var(--ice-e);stroke-width:1.3}
+.op .bd{fill:var(--ice);stroke:var(--ice-e);stroke-width:1.1}
+.op .bd.pk{fill:var(--lav);stroke:var(--lav-e)}
+.op .br{fill:var(--ice);stroke:var(--ice-e);stroke-width:1}
+.op .br.lt{fill:var(--mint);stroke:var(--mint-e)}
+.op .fl{fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.op .fl.t{stroke:var(--ice-e)}
+.op .fl.e{stroke:var(--mint-e)}
+.op .fl.e.off{stroke:var(--hair);stroke-dasharray:3 4}
+.op .fl.p{stroke:var(--hair)}
+.op .q{stroke:none}
+.op .q.t{fill:var(--ice-e)}
+.op .q.e{fill:var(--mint-e)}
+.op .q.p{fill:var(--lav-e)}
+.op .rp-rail button small{white-space:nowrap}
+.k-ours{--k:var(--mint);--ke:var(--mint-e);--kt:var(--mint-t);--kl:var(--mint-l)}
+@media(max-width:860px){.op .rp-rail button{flex:1 1 0}.op .rp-rail button .n{margin:0 auto}}
+@media(max-width:700px){.op .rp-kind{flex-wrap:wrap;row-gap:2px}.op .rp-kind span{flex-basis:100%;padding-left:17px;line-height:1.45}}
+
+/* evidence charts (reuse .ch from the design system) */
+.ch .bar-l{font-weight:600}
+.ch .t-faint{fill:var(--faint)}
+.d-hair{fill:var(--band);stroke:var(--hair);stroke-width:1.2}
+.d-ice-o{fill:var(--ice-l);stroke:var(--ice-e);stroke-width:1.2}
+.d-mint-o{fill:var(--mint-l);stroke:var(--mint-e);stroke-width:1.2}
+.d-peach-o{fill:var(--peach-l);stroke:var(--peach-e);stroke-width:1.2}
+.d-lav-o{fill:var(--lav-l);stroke:var(--lav-e);stroke-width:1.2}
+.cell{fill:var(--ice);stroke:var(--ice-e);stroke-width:.8}
+.cell.me{fill:var(--mint);stroke:var(--mint-e);stroke-width:1.4}
+.anim .cell.fill{opacity:0}
+.anim.in .cell.fill{opacity:1;transition:opacity .25s ease var(--d,0s)}
+.two-ch{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:28px 48px;align-items:start}
+.two-ch > div{min-width:0}
+@media(max-width:900px){.two-ch{grid-template-columns:1fr}}
+.thm{border:1px solid var(--mint-e);background:var(--mint-l);border-radius:14px;padding:14px 18px;margin-top:16px;font-size:var(--t-label);line-height:1.55;color:var(--body)}
+.thm b{display:block;font-weight:600;color:var(--mint-t);margin-bottom:2px}
+
+/* t-SNE pair */
+.tsne{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-self:center}
+.ts{border:1px solid var(--rule);border-radius:14px;background:var(--card);overflow:hidden;min-width:0}
+.ts .im{aspect-ratio:1/1;background:#fff;display:flex;align-items:center;justify-content:center;padding:10px;border-bottom:1px solid var(--rule)}
+.ts .im img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
+body.dark-mode .ts .im{filter:brightness(.9)}
+.ts p{font-size:var(--t-label);line-height:1.45;color:var(--muted);padding:10px 14px 12px}
+.ts p b{display:block;font-size:var(--t-body);font-weight:600;color:var(--ink)}
+@media(max-width:560px){.tsne{gap:10px}.ts p{padding:8px 10px 10px}.ts p b{font-size:var(--t-label)}.ts .im{padding:6px}.film .play{width:56px;height:56px;margin:-28px 0 0 -28px}.film .play svg{width:18px;height:18px}}
+@media(max-width:330px){.tsne{grid-template-columns:1fr}}
+
+/* why it matters: follow-up links */
+a.card.next{display:block;color:inherit;transition:border-color .2s,transform .2s}
+a.card.next:hover{border-color:var(--mint-e);transform:translateY(-2px);color:inherit}
+a.card.next .r-no{display:block;font-size:var(--t-label);font-weight:600;color:var(--mint-t);margin-bottom:6px}
+
+/* film poster */
+.film a{display:block;position:relative;color:inherit}
+.film img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+.film .play{position:absolute;left:50%;top:50%;width:76px;height:76px;margin:-38px 0 0 -38px;border-radius:50%;background:var(--card);border:1px solid var(--hair);display:grid;place-items:center;transition:transform .2s}
+.film .play svg{width:24px;height:24px;margin-left:4px;fill:var(--ink)}
+.film a:hover .play{transform:scale(1.06)}
+.film a:focus-visible{outline-offset:-4px}
+
+/* cite: venue line */
+.venue{font-size:var(--t-label);line-height:1.55;color:var(--muted);margin-top:14px;max-width:26em}
+.venue b{font-weight:600;color:var(--body)}
+.venue a{text-decoration:underline;text-decoration-color:var(--hair);text-underline-offset:3px}
+.fig-note{font-size:var(--t-label);line-height:1.55;color:var(--muted);max-width:30em}
+.op-h{font-size:var(--t-label);color:var(--muted);line-height:1.4}
+.op-h b{font-weight:600;color:var(--ink);margin-right:.6em}
+</style>

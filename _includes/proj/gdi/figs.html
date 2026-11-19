@@ -1,0 +1,110 @@
+<script>
+/* GDI evidence charts, drawn from the paper's own numbers, plus the page's reveal-on-view.
+   Every .anim/.reveal/.lv plays when it scrolls in and restarts when it comes back. */
+(function(){
+  var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $=function(s,r){return (r||document).querySelector(s);}, $$=function(s,r){return [].slice.call((r||document).querySelectorAll(s));};
+  var hasIO='IntersectionObserver' in window;
+  if(reduced||!hasIO) document.body.classList.add('no-anim');
+  function mm(q){return !!(window.matchMedia&&window.matchMedia(q).matches);}
+
+  /* Finding 01: mean HNS (%) and training frames, App. "Full performance comparison" table */
+  var HNS=[['GDI-H³','9620.33',9620.33,'2.00E+08',1],['GDI-I³','7810.1',7810.1,'2.00E+08',1],['MuZero','4994.97',4994.97,'2.00E+10'],['Go-Explore','4989.31',4989.31,'1.00E+10'],
+    ['Agent57','4762.17',4762.17,'1.00E+11'],['R2D2','3373.48',3373.48,'1.00E+10'],['NGU','3169.07',3169.07,'3.50E+10'],['Muesli','2538.12',2538.12,'2.00E+08'],
+    ['LASER','1740.94',1740.94,'2.00E+08'],['IMPALA','956.99',956.99,'2.00E+08'],['Rainbow','873.54',873.54,'2.00E+08'],['DreamerV2','642.49',642.49,'2.00E+08'],['SimPLe','25.78',25.78,'1.00E+06']];
+  function hns(el){
+    var cw=el.clientWidth, small=cw<620, W=Math.round(Math.max(small?290:640,cw)), rh=small?42:29, top=small?34:44;
+    var m={l:small?0:112,r:small?72:150}, H=top+HNS.length*rh+(small?26:34), x0=m.l, x1=W-m.r;
+    var X=function(v){return x0+(x1-x0)*v/10000;}, s='';
+    s+='<text x="0" y="16" class="t-ink mid">Mean human-normalized score, 57 Atari games</text>';
+    if(!small) s+='<text x="'+W+'" y="16" text-anchor="end" class="mid">training frames</text>';
+    [0,2000,4000,6000,8000,10000].forEach(function(v){
+      if(small&&v%4000) return;
+      s+='<line class="grid" x1="'+X(v)+'" x2="'+X(v)+'" y1="'+(top-8)+'" y2="'+(top+HNS.length*rh-4)+'"/>';
+      s+='<text x="'+X(v)+'" y="'+(top+HNS.length*rh+16)+'" text-anchor="'+(small&&!v?'start':'middle')+'" class="sm">'+(v?v.toLocaleString('en-US'):0)+'%</text>';});
+    HNS.forEach(function(r,i){
+      var y=top+i*rh, ours=!!r[4], bh=small?13:16, by=y+(small?20:(rh-bh)/2-2), w=Math.max(2,X(r[2])-x0), d=(0.08+i*0.07).toFixed(2);
+      if(small){s+='<text x="0" y="'+(by-6)+'" class="'+(ours?'t-ink bar-l':'')+'">'+r[0]+'</text><text x="'+W+'" y="'+(by-6)+'" text-anchor="end" class="sm t-faint">'+r[3]+' frames</text>';}
+      else s+='<text x="'+(x0-12)+'" y="'+(by+12.5)+'" text-anchor="end" class="'+(ours?'t-ink bar-l':'')+'">'+r[0]+'</text>';
+      s+='<rect class="'+(ours?'d-mint':'d-ice')+' grow" style="--d:'+d+'s" x="'+x0+'" y="'+by+'" width="'+w.toFixed(1)+'" height="'+bh+'" rx="4"/>';
+      s+='<text class="fade '+(ours?'t-mint':'t-ink')+(small?' sm':'')+'" style="--d:'+(+d+0.5).toFixed(2)+'s" x="'+(x0+w+8).toFixed(1)+'" y="'+(by+(small?10.5:12.5))+'">'+r[1]+'%</text>';
+      if(!small) s+='<text x="'+W+'" y="'+(by+12.5)+'" text-anchor="end" class="'+(ours?'t-ink mid':'t-faint')+'">'+r[3]+'</text>';
+    });
+    el.innerHTML='<svg viewBox="0 0 '+W+' '+H+'">'+s+'</svg>';
+  }
+
+  /* Finding 02: training scale and records, Table 1 and the full comparison table */
+  var REC=[['GDI-H³',22,'38.5',1],['MuZero',19,'3,858'],['Agent57',18,'19,290'],['GDI-I³',17,'38.5',1],['R2D2',15,'1,929'],['Go-Explore',15,'1,929'],['NGU',8,'6,751.5']];
+  function scale(el){
+    var cw=el.clientWidth, one=mm('(max-width:900px)'), small=cw<520, lw=one?cw:(cw-48)*1.05/2.05, rw=one?cw:(cw-48)/2.05;
+    /* left: 500 squares */
+    var cols=small?20:25, rows=500/cols, gap=small?3:3, cs=Math.min(small?11.5:14,(Math.min(lw,520)-gap*(cols-1))/cols), gw=cols*cs+gap*(cols-1);
+    var W1=Math.round(Math.max(gw,Math.min(lw,520))), top=34, H1=Math.round(top+rows*(cs+gap)+76), a='';
+    a+='<text x="0" y="16" class="t-ink mid">'+(small?'Each square: 2E+8 frames':'Training data. Each square: 2E+8 frames')+'</text>';
+    for(var r=0;r<rows;r++)for(var c=0;c<cols;c++){
+      var n=r*cols+c, x=c*(cs+gap), y=top+r*(cs+gap);
+      a+='<rect class="cell'+(n?' fill':' me pop')+'" style="--d:'+(n?(0.6+n*0.0042).toFixed(3):'0.1')+'s" x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" width="'+cs.toFixed(1)+'" height="'+cs.toFixed(1)+'" rx="2.5"/>';}
+    var ly=top+rows*(cs+gap)+16;
+    a+='<rect class="cell me" x="0" y="'+ly+'" width="12" height="12" rx="2.5"/><text x="20" y="'+(ly+10.5)+'" class="t-ink mid">GDI</text><text x="'+(small?58:62)+'" y="'+(ly+10.5)+'">2E+8 frames, 38.5 days of play</text>';
+    a+='<rect class="cell fade" style="--d:2.7s" x="0" y="'+(ly+26)+'" width="12" height="12" rx="2.5"/><text class="fade" style="--d:2.7s" x="20" y="'+(ly+36.5)+'"><tspan class="t-ink mid">Agent57</tspan><tspan dx="8">1E+11 frames, 19,290 days</tspan></text>';
+    a+='<text class="t-mint fade" style="--d:2.9s;font-weight:600" x="0" y="'+(ly+62)+'">500 times less data for GDI</text>';
+    /* right: human world records broken */
+    var W2=Math.round(Math.max(300,Math.min(rw,560))), sm2=W2<440, rh=sm2?40:42, nl=sm2?82:94, dx=sm2?Math.min(9.4,(W2-nl-36)/22):Math.min(12,(W2-nl-130)/22), rr=sm2?3.3:4.3, H2=36+REC.length*rh+8, b='';
+    b+='<text x="0" y="16" class="t-ink mid">Human world records broken</text>';
+    if(!sm2) b+='<text x="'+W2+'" y="16" text-anchor="end" class="sm">days of play</text>';
+    REC.forEach(function(q,i){
+      var y=40+i*rh, ours=!!q[3], cy=y+(sm2?6:0);
+      b+='<text x="0" y="'+(cy+4.5)+'" class="'+(ours?'t-ink bar-l':'')+'">'+q[0]+'</text>';
+      if(sm2) b+='<text x="0" y="'+(cy+21)+'" class="sm t-faint">'+q[2]+' days</text>';
+      for(var k=0;k<q[1];k++) b+='<circle class="'+(ours?'d-mint':'d-ice')+' pop" style="--d:'+(0.3+i*0.1+k*0.035).toFixed(2)+'s" cx="'+(nl+rr+k*dx).toFixed(1)+'" cy="'+cy+'" r="'+rr+'"/>';
+      b+='<text class="fade '+(ours?'t-mint':'t-ink mid')+'" style="--d:'+(0.6+i*0.1+q[1]*0.035).toFixed(2)+'s" x="'+(nl+rr*2+(q[1]-1)*dx+8).toFixed(1)+'" y="'+(cy+4.5)+'">'+q[1]+'</text>';
+      if(!sm2) b+='<text x="'+W2+'" y="'+(cy+4.5)+'" text-anchor="end" class="'+(ours?'t-ink mid':'t-faint')+'">'+q[2]+'</text>';
+    });
+    el.innerHTML='<div class="two-ch"><div><svg viewBox="0 0 '+W1+' '+H1+'" style="max-width:'+W1+'px">'+a+'</svg></div><div><svg viewBox="0 0 '+W2+' '+H2+'">'+b+'</svg></div></div>';
+  }
+
+  /* Findings 03 and 04: ablation, relative to GDI-I3; heights as drawn in the paper's ablation figure */
+  function grouped(el,groups,opt){
+    var cw=el.clientWidth, small=cw<520, W=Math.round(Math.max(small?300:420,Math.min(cw,opt.max||cw))), H=small?300:320;
+    var m={l:40,r:10,t:54,b:small?58:56}, lo=0, hi=opt.hi, gw=(W-m.l-m.r)/groups.length, bw=Math.min(small?34:46,gw*0.28);
+    var Y=function(v){return m.t+(H-m.t-m.b)*(1-(v-lo)/(hi-lo));}, s='';
+    s+='<text x="0" y="16" class="t-ink mid">'+opt.title+'</text>';
+    s+='<rect x="0" y="28" width="11" height="11" rx="2" class="d-hair" style="fill:var(--muted);stroke:var(--muted)"/><text x="17" y="37.5" class="sm">mean</text>';
+    s+='<rect x="66" y="28" width="11" height="11" rx="2" class="d-hair"/><text x="83" y="37.5" class="sm">median</text>';
+    opt.ticks.forEach(function(v){s+='<line class="grid" x1="'+m.l+'" x2="'+(W-m.r)+'" y1="'+Y(v)+'" y2="'+Y(v)+'"/><text x="'+(m.l-8)+'" y="'+(Y(v)+4)+'" text-anchor="end" class="sm">'+v.toFixed(1)+'</text>';});
+    s+='<line class="fade" style="--d:.2s" x1="'+m.l+'" x2="'+(W-m.r)+'" y1="'+Y(1)+'" y2="'+Y(1)+'" stroke="var(--ice-e)" stroke-width="1.3" stroke-dasharray="4 4"/>';
+    groups.forEach(function(g,i){
+      var cx=m.l+gw*(i+0.5), dl=0.25+i*0.3;
+      [[g[1],g[3]],[g[2],g[3]+'-o']].forEach(function(b,j){
+        var x=cx+(j?2:-bw-2), y=Y(b[0]), h=Y(0)-y;
+        s+='<rect class="'+b[1]+' growy" style="--d:'+(dl+j*0.12).toFixed(2)+'s" x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" width="'+bw.toFixed(1)+'" height="'+h.toFixed(1)+'" rx="4"/>';});
+      s+='<text x="'+cx+'" y="'+(H-m.b+20)+'" text-anchor="middle" class="'+(g[5]?'t-ink':'')+'" style="font-weight:600">'+g[0]+'</text>';
+      s+='<text x="'+cx+'" y="'+(H-m.b+37)+'" text-anchor="middle" class="sm">'+(gw<190&&g[6]?g[6]:g[4])+'</text>';
+    });
+    s+='<line class="ax" x1="'+m.l+'" x2="'+(W-m.r)+'" y1="'+Y(0)+'" y2="'+Y(0)+'"/>';
+    s+=opt.labLeft?'<text class="fade t-ice sm" style="--d:.3s;font-weight:600" x="'+(m.l+4)+'" y="'+(Y(1)-7)+'">GDI-I³ = 1</text>':'<text class="fade t-ice sm" style="--d:.3s;font-weight:600" x="'+(W-m.r)+'" y="'+(Y(1)-7)+'" text-anchor="end">GDI-I³ = 1</text>';
+    el.innerHTML='<svg viewBox="0 0 '+W+' '+H+'"'+(opt.max?' style="max-width:'+W+'px"':'')+'>'+s+'</svg>';
+  }
+  function steer(el){grouped(el,[['GDI-I³',1,1,'d-ice','with the data operator',1],['without it',0.2172,0.2349,'d-peach','behavior fixed to one point',0,'one fixed behavior']],{title:'Relative score on 57 Atari games',hi:1.2,ticks:[0,0.2,0.4,0.6,0.8,1.0,1.2],max:560});}
+  function rich(el){grouped(el,[['GDI-I¹',0.8594,0.5732,'d-lav','one knob: a temperature',0,'one knob'],['GDI-I³',1,1,'d-ice','three knobs, one network',0,'one network'],['GDI-H³',1.2317,1.3770,'d-mint','three knobs, two networks',1,'two networks']],{title:'Relative score on 57 Atari games',hi:1.4,ticks:[0,0.2,0.4,0.6,0.8,1.0,1.2,1.4],max:820,labLeft:1});}
+
+  var charts=[['#ch-hns',hns],['#ch-scale',scale],['#ch-steer',steer],['#ch-rich',rich]], lastW=0;
+  function build(){charts.forEach(function(c){var el=$(c[0]);if(el)c[1](el);});}
+  build();
+  var rt=0;window.addEventListener('resize',function(){if(Math.abs(window.innerWidth-lastW)<30)return;clearTimeout(rt);rt=setTimeout(function(){lastW=window.innerWidth;build();},180);});
+  lastW=window.innerWidth;
+
+  /* reveal: in on entry, reset on exit, so every figure replays on re-entry */
+  var els=$$('.reveal,.anim,.lv');
+  if(reduced||!hasIO){els.forEach(function(e){e.classList.add('in');});}
+  else{
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){
+      if(e.isIntersecting&&e.intersectionRatio>=0.2){e.target.classList.add('in');}
+      else if(!e.isIntersecting){e.target.classList.remove('in');}
+    });},{threshold:[0,0.2],rootMargin:'0px 0px -6% 0px'});
+    els.forEach(function(e){io.observe(e);});
+  }
+  if(hasIO){var pauseIO=new IntersectionObserver(function(es){es.forEach(function(e){e.target.classList.toggle('paused',!e.isIntersecting);e.target.dispatchEvent(new CustomEvent('gd:vis',{detail:e.isIntersecting}));});},{threshold:0.05});
+    $$('.pausable').forEach(function(e){e.classList.add('paused');pauseIO.observe(e);});}
+})();
+</script>
