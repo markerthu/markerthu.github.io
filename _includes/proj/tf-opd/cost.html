@@ -1,0 +1,71 @@
+<figure class="tf-cost" id="tf-cost">
+  <div class="tc-panel">
+    <p class="tc-key" aria-hidden="true"><span class="c-roll">rollouts</span><span class="c-read">teacher pass</span><span class="c-back">backward pass</span><span class="c-solve">linear solve</span></p>
+    <div class="tc-row" data-k="opd">
+      <header><h3>On-policy distillation</h3><p>at every update, for every teacher</p></header>
+      <div class="tc-track" role="img" aria-label="Schematic. On-policy distillation repeats rollouts, teacher passes and a backward pass at every update, so its compute keeps growing."></div>
+    </div>
+    <div class="tc-row own" data-k="tf">
+      <header><h3>TF&#8209;OPD</h3><p>once per specialist, then done</p></header>
+      <div class="tc-track" role="img" aria-label="Schematic. TF-OPD generates rollouts once, reads them once and solves every layer once; after that no more compute is spent."></div>
+    </div>
+  </div>
+  <figcaption class="cap">Schematic: block lengths are not measured.</figcaption>
+</figure>
+<script>
+(function(){
+  var fig=document.getElementById('tf-cost'); if(!fig) return;
+  var rows=[].slice.call(fig.querySelectorAll('.tc-row')), tracks=rows.map(function(r){return r.querySelector('.tc-track');});
+  var mq=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)'):{matches:false};
+  var T=10, RUN=7.6, visible=false, raf=0, last=0, tc=0, W=0, H=58, B=[];
+  function clamp(x){return x<0?0:x>1?1:x;}
+  function f(v){return (Math.round(v*10)/10).toString();}
+  function layout(){
+    var w=Math.round(tracks[0].clientWidth); if(!w||w===W) return false; W=w; B=[];
+    var unit=W<420?16:24, x=0, opd=[], g=2;
+    while(x<W-6){[['c-roll',unit*1.4],['c-read',unit*0.8],['c-back',unit*1.1]].forEach(function(b){if(x>=W-6)return;var bw=Math.min(b[1],W-x);opd.push([b[0],x,bw]);x+=bw+g;});x+=g*2;}
+    var tf=[['c-roll',unit*1.4*1.5],['c-read',unit*0.8],['c-solve',unit*0.7]], tx=0, tfb=[];
+    tf.forEach(function(b){tfb.push([b[0],tx,b[1]]);tx+=b[1]+g;});
+    B=[opd,tfb];
+    tracks.forEach(function(tr,i){
+      var s='<line class="tc-base" x1="0" x2="'+W+'" y1="'+(H-6)+'" y2="'+(H-6)+'"/>';
+      B[i].forEach(function(b,k){s+='<rect class="tc-b '+b[0]+'" x="'+f(b[1])+'" y="10" width="'+f(Math.max(1,b[2]))+'" height="'+(H-22)+'" rx="4" data-x="'+f(b[1])+'"/>';});
+      if(i===1){var ex=tx+10;s+='<g class="tc-done"><circle cx="'+f(ex+7)+'" cy="'+((H-12)/2+4)+'" r="7"/><path d="M'+f(ex+3.5)+','+((H-12)/2+4)+'l2.6,2.6 5-5.2"/></g><text class="tc-lb t-mint" x="'+f(ex+22)+'" y="'+((H-12)/2+8.5)+'">'+(W<420?'one model':'one model, no further updates')+'</text>';}
+      s+='<line class="tc-head" x1="0" x2="0" y1="4" y2="'+(H-2)+'"/>';
+      tr.innerHTML='<svg viewBox="0 0 '+W+' '+H+'" aria-hidden="true">'+s+'</svg>';
+    });
+    return true;
+  }
+  function frame(t){
+    var p=clamp(t/RUN), hx=p*W, fade=1-clamp((t-(T-0.5))/0.5);
+    tracks.forEach(function(tr,i){
+      var svg=tr.firstChild; if(!svg) return;
+      [].slice.call(svg.querySelectorAll('.tc-b')).forEach(function(r){var x=+r.getAttribute('data-x');r.style.opacity=(x<=hx?fade:0.08).toFixed(2);});
+      var dn=svg.querySelector('.tc-done'), lb=svg.querySelector('.tc-lb'), endx=B[1]?B[1][B[1].length-1][1]+B[1][B[1].length-1][2]:0;
+      var head=svg.querySelector('.tc-head'), hxi=i===1?Math.min(hx,endx+3):hx;
+      if(head){head.setAttribute('x1',f(hxi));head.setAttribute('x2',f(hxi));head.style.opacity=(p<1&&!(i===1&&hx>=endx+8)?1:0);}
+      if(dn){var on=hx>=endx+8?fade:0;dn.style.opacity=on;lb.style.opacity=on;}
+    });
+  }
+  function still(){return mq.matches||!('IntersectionObserver' in window);}
+  function tick(now){
+    raf=0;if(!visible||still()) return;
+    if(!last) last=now;
+    tc+=Math.min(0.1,(now-last)/1000);last=now;
+    if(tc>=T) tc=0;
+    frame(tc);raf=requestAnimationFrame(tick);
+  }
+  function sync(){
+    layout();
+    if(still()){if(raf){cancelAnimationFrame(raf);raf=0;}frame(RUN+0.5);return;}
+    if(visible&&!raf){last=0;raf=requestAnimationFrame(tick);}
+  }
+  layout();frame(still()?RUN+0.5:0);
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){es.forEach(function(e){var was=visible;visible=e.isIntersecting;if(visible&&!was)tc=0;sync();});},{threshold:0.2}).observe(fig);
+  }
+  if(mq.addEventListener)mq.addEventListener('change',sync);
+  var rt=0;window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){if(layout())frame(still()?RUN+0.5:tc);},150);});
+  sync();
+})();
+</script>

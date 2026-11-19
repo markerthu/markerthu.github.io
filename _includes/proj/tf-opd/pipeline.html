@@ -1,0 +1,108 @@
+<figure class="tf-pipe" id="pipe">
+  <p class="pp-key" aria-hidden="true"><span class="k-ice">math specialist</span><span class="k-lav">code specialist</span></p>
+  <ol class="pp-steps">
+    <li class="pp k-run">
+      <p class="pp-n"><span class="n">1</span>Rollouts</p>
+      <div class="pp-fig anim" data-k="roll" role="img" aria-label="Each specialist answers 256 training problems of its own domain. One of the math answers runs to the length limit in a repetition loop."></div>
+      <p class="pp-say">Each specialist answers training problems of its own domain, sampled as in evaluation.</p>
+      <p class="pp-num"><b>256</b> problems per specialist</p>
+    </li>
+    <li class="pp k-fail">
+      <p class="pp-n"><span class="n">2</span>Selection</p>
+      <div class="pp-fig anim" data-k="sel" role="img" aria-label="Of 256 math answers, 175 are kept: correct, finished and loop-free. 19 are truncated in a repetition loop. Of 256 code answers, 92 pass every test and are kept."></div>
+      <p class="pp-say">Answers that loop are dropped; only correct math and code that passes its tests are kept.</p>
+      <p class="pp-num"><b>175</b> math and <b>92</b> code answers kept</p>
+    </li>
+    <li class="pp k-read">
+      <p class="pp-n"><span class="n">3</span>Statistics</p>
+      <div class="pp-fig anim" data-k="stat" role="img" aria-label="Each specialist reads its kept answers once with teacher forcing, and every linear layer averages the outer products of its inputs over all tokens."></div>
+      <p class="pp-say">Each specialist reads its kept answers once. Every layer averages x&#8239;x<sup>&#8868;</sup> of its inputs over all tokens.</p>
+      <p class="pp-num"><b>40 min</b> for 2.6M tokens</p>
+    </li>
+    <li class="pp k-edit">
+      <p class="pp-n"><span class="n">4</span>Solve</p>
+      <div class="pp-fig anim" data-k="solve" role="img" aria-label="Every layer of one model of the same size is solved in closed form, layer by layer."></div>
+      <p class="pp-say">One linear solve per layer, in 64-bit floats. The result is one model of the same size.</p>
+      <p class="pp-num"><b>25 min</b> for all layers</p>
+    </li>
+  </ol>
+  <p class="pp-total"><b>About 10 GPU-hours</b> in all for two specialists, on 48&nbsp;GB GPUs; the rollouts take most of it, 1 GPU-hour per 64 problems.</p>
+</figure>
+<script>
+(function(){
+  var hosts=[].slice.call(document.querySelectorAll('#pipe .pp-fig')); if(!hosts.length) return;
+  function f(v){return (Math.round(v*10)/10).toString();}
+  var rnd=(function(){var s=7746;return function(){s=(s*1664525+1013904223)%4294967296;return s/4294967296;};})();
+  function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(rnd()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+  var MATH=[],CODE=[],i;
+  for(i=0;i<256;i++)MATH.push(i<175?'k':i<194?'l':'w');
+  for(i=0;i<256;i++)CODE.push(i<92?'k':'w');
+  shuffle(MATH);shuffle(CODE);
+  var GRAM=[];for(i=0;i<64;i++){var r=Math.floor(i/8),c=i%8;GRAM.push(r===c?0.75+0.25*rnd():Math.max(0.06,0.5*rnd()*Math.exp(-Math.abs(r-c)/2.5)));}
+  var RANK=shuffle(GRAM.map(function(_,k){return k;}));
+  var H=140;
+  function roll(W){
+    var s='', x0=4, x1=W-6, rows=[[28,'ln-ice','--ice-e'],[104,'ln-lav','--lav-e']];
+    rows.forEach(function(r,ri){
+      [0.62,0.84,0.48,0.7,0.55,1].forEach(function(L,k){
+        var y=r[0]-20+k*8, d=(0.15+k*0.12+ri*0.08).toFixed(2), loop=(ri===0&&k===5);
+        if(loop){var z='M'+x0+','+y, x=x0+(x1-x0)*0.32; z+='H'+f(x); var up=1; while(x<x1-4){x+=4;z+='L'+f(x)+','+(y+(up?-2.5:2.5));up=!up;}
+          s+='<path class="'+r[1]+' thin draw" style="--d:'+d+'s" d="'+z+'"/>';
+          s+='<text class="sm fade t-peach" style="--d:1.4s;font-weight:600" x="'+f(x1)+'" y="'+(y+17)+'" text-anchor="end">one runs to the limit</text>';}
+        else s+='<line class="'+r[1]+' draw" style="--d:'+d+'s" x1="'+x0+'" x2="'+f(x0+(x1-x0)*L*0.86)+'" y1="'+y+'" y2="'+y+'"/>';
+      });
+    });
+    return s;
+  }
+  function waffle(x,y,cell,gap,arr,col){
+    var s='';
+    arr.forEach(function(v,k){var r=Math.floor(k/16),c=k%16,cls=v==='k'?col:v==='l'?'wf-loop':'wf-drop';
+      s+='<rect class="'+cls+' pop" style="--d:'+(0.15+((r*16+c)*0.0045)).toFixed(3)+'s" x="'+f(x+c*(cell+gap))+'" y="'+f(y+r*(cell+gap))+'" width="'+f(cell)+'" height="'+f(cell)+'" rx="1"/>';});
+    return s;
+  }
+  function sel(W){
+    var gap=1, side=Math.min(108,(W-18)/2), cell=(side-15*gap)/16, s='', xb=W/2+9;
+    s+=waffle(0,6,cell,gap,MATH,'wf-ice')+waffle(xb,6,cell,gap,CODE,'wf-lav');
+    var yl=6+side+16;
+    s+='<text class="sm t-ice fade" style="--d:1.4s;font-weight:600" x="0" y="'+f(yl)+'">175 kept</text>';
+    s+='<text class="sm t-peach fade" style="--d:1.5s;font-weight:600" x="0" y="'+f(yl+16)+'">19 loops</text>';
+    s+='<text class="sm t-lav fade" style="--d:1.6s;font-weight:600" x="'+f(xb)+'" y="'+f(yl)+'">92 kept</text>';
+    return {s:s,h:Math.ceil(yl+22)};
+  }
+  function heat(x,y,size,col,dl){
+    var g=1.5, c=(size-7*g)/8, s='';
+    GRAM.forEach(function(v,k){var r=Math.floor(k/8),cc=k%8;
+      s+='<rect class="hm fade" style="--d:'+(dl+RANK[k]*0.018).toFixed(3)+'s;fill:var('+col+')" fill-opacity="'+(0.12+0.88*v).toFixed(2)+'" x="'+f(x+cc*(c+g))+'" y="'+f(y+r*(c+g))+'" width="'+f(c)+'" height="'+f(c)+'" rx="1"/>';});
+    s+='<rect class="hm-box" x="'+f(x-2)+'" y="'+f(y-2)+'" width="'+f(size+4)+'" height="'+f(size+4)+'" rx="3" style="stroke:var('+(col==='--ice-e'?'--ice-e':'--lav-e')+')"/>';
+    return s;
+  }
+  function stat(W){
+    var size=Math.min(84,(W-30)/2), s='', xb=W/2+8;
+    s+=heat(4,8,size,'--ice-e',0.2)+heat(xb,8,size,'--lav-e',0.35);
+    s+='<text class="sm t-ice fade" style="--d:.9s;font-weight:600" x="'+f(4+size/2)+'" y="'+f(size+32)+'" text-anchor="middle">G math</text>';
+    s+='<text class="sm t-lav fade" style="--d:1s;font-weight:600" x="'+f(xb+size/2)+'" y="'+f(size+32)+'" text-anchor="middle">G code</text>';
+    return {s:s,h:Math.ceil(size+38)};
+  }
+  function solve(W){
+    var n=16, x0=14, x1=W-16, dx=(x1-x0)/(n-1), sw=Math.min(10,dx*0.9), k=sw/2, yA=18, yB=96, s='';
+    for(var i=0;i<n;i++){var x=x0+dx*i;
+      var d='M'+f(x-sw)+','+f(yA+k)+'L'+f(x+sw)+','+f(yA-k)+'L'+f(x+sw)+','+f(yB-k)+'L'+f(x-sw)+','+f(yB+k)+'Z';
+      s+='<path class="sl-off" d="'+d+'"/><path class="sl-on fade" style="--d:'+(0.3+i*0.09).toFixed(2)+'s" d="'+d+'"/>';}
+    s+='<text class="sm fade t-mint" style="--d:1.9s;font-weight:600" x="'+f(W/2)+'" y="122" text-anchor="middle">one model, same size</text>';
+    return s;
+  }
+  function build(h){
+    var W=Math.round(Math.max(200,Math.min(460,h.clientWidth))), k=h.getAttribute('data-k'), s, hh=H;
+    if(k==='roll')s=roll(W);
+    else if(k==='sel'){var r=sel(W);s=r.s;hh=r.h;}
+    else if(k==='stat'){var r2=stat(W);s=r2.s;hh=r2.h;}
+    else s=solve(W);
+    h.innerHTML='<svg viewBox="0 0 '+W+' '+hh+'" aria-hidden="true">'+s+'</svg>';
+    [].slice.call(h.querySelectorAll('.draw')).forEach(function(p){try{p.style.setProperty('--len',Math.ceil(p.getTotalLength())+2);}catch(e){}});
+  }
+  var lw=0;
+  function all(){hosts.forEach(build);lw=window.innerWidth;}
+  all();
+  var rt=0;window.addEventListener('resize',function(){if(Math.abs(window.innerWidth-lw)<30)return;clearTimeout(rt);rt=setTimeout(all,180);});
+})();
+</script>

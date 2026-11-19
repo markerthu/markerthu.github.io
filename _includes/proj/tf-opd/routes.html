@@ -1,0 +1,174 @@
+<figure class="pdm tf-routes" id="routes">
+  <div class="pdm-stage">
+    <article class="pdm-act">
+      <header><h3>Train again</h3><p>on-policy distillation</p></header>
+      <div class="rt-draw" data-k="opd" role="img" aria-label="Schematic. On-policy distillation: the student writes answers, every teacher scores them, and a backward pass updates the student. The loop repeats at every update."></div>
+      <p class="pdm-say">Rollouts, teacher passes and a backward pass at every update, for every teacher.</p>
+      <ul class="pdm-yn">
+        <li class="n"><i role="img" aria-label="No:"></i>No training</li>
+        <li class="y"><i role="img" aria-label="Yes:"></i>Learns from the models&rsquo; own answers</li>
+        <li class="y"><i role="img" aria-label="Yes:"></i>Fit to each specialist</li>
+      </ul>
+    </article>
+    <article class="pdm-act">
+      <header><h3>Add the weights</h3><p>task arithmetic &middot; TIES &middot; DARE</p></header>
+      <div class="rt-draw" data-k="ta" role="img" aria-label="Schematic. Task arithmetic: the math and code updates are added to the base weights. No input is ever looked at, so every update acts on every input."></div>
+      <p class="pdm-say">Free, but blind to the inputs: on these specialists it falls below the math specialist on AIME25.</p>
+      <ul class="pdm-yn">
+        <li class="y"><i role="img" aria-label="Yes:"></i>No training</li>
+        <li class="n"><i role="img" aria-label="No:"></i>Learns from the models&rsquo; own answers</li>
+        <li class="n"><i role="img" aria-label="No:"></i>Fit to each specialist</li>
+      </ul>
+    </article>
+    <article class="pdm-act ours">
+      <header><h3>Solve each layer</h3><p>TF&#8209;OPD &middot; forward passes &middot; linear algebra</p></header>
+      <div class="rt-draw" data-k="tf" role="img" aria-label="Schematic. TF-OPD: each specialist answers problems of its own domain, looping and failing answers are dropped, the kept answers are read once to record statistics, and every layer of one model is solved from them."></div>
+      <p class="pdm-say">Fit to every specialist on its own answers, with forward passes only.</p>
+      <ul class="pdm-yn">
+        <li class="y"><i role="img" aria-label="Yes:"></i>No training</li>
+        <li class="y"><i role="img" aria-label="Yes:"></i>Learns from the models&rsquo; own answers</li>
+        <li class="y"><i role="img" aria-label="Yes:"></i>Fit to each specialist</li>
+      </ul>
+    </article>
+  </div>
+  <figcaption class="cap">Three routes from several specialists to one model, played in turn. RegMean also solves each layer in closed form, but from a fixed training corpus rather than the models&rsquo; own answers. Schematic.</figcaption>
+</figure>
+<script>
+(function(){
+  var fig=document.getElementById('routes'); if(!fig) return;
+  var acts=[].slice.call(fig.querySelectorAll('.pdm-act')), hosts=acts.map(function(a){return a.querySelector('.rt-draw');});
+  var mq=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)'):{matches:false};
+  var D=5.6, A=[0,D,2*D], HOLD=6, T=3*D+HOLD, H=196;
+  var visible=false, raf=0, last=0, tc=0, Ws=[0,0,0], lastKey=['','',''], fps=0;
+
+  function clamp(x){return x<0?0:x>1?1:x;}
+  function ease(x){x=clamp(x);return x*x*(3-2*x);}
+  function seg(t,a,b){return clamp((t-a)/(b-a));}
+  function f(v){return (Math.round(v*10)/10).toString();}
+  function o(v){return (Math.round(clamp(v)*100)/100).toString();}
+  function txt(x,y,s,cls,anchor,op){return '<text class="'+(cls||'')+'" x="'+f(x)+'" y="'+f(y)+'"'+(anchor?' text-anchor="'+anchor+'"':'')+(op!=null?' opacity="'+o(op)+'"':'')+'>'+s+'</text>';}
+  function slabs(x0,x1,yc,h,s,k,n,fill,edge,flash,flashC){
+    var out='',dx=(x1-x0)/(n-1);
+    for(var i=0;i<n;i++){var x=x0+dx*i,yA=yc-h/2,yB=yc+h/2,fl=flash?flash(i):0;
+      out+='<path d="M'+f(x-s)+','+f(yA+k)+'L'+f(x+s)+','+f(yA-k)+'L'+f(x+s)+','+f(yB-k)+'L'+f(x-s)+','+f(yB+k)+'Z" style="fill:var('+(fl>0.5?flashC:fill)+');stroke:var('+(fl>0.5?'--peach-e':edge)+')" fill-opacity=".75" stroke-width="1"/>';}
+    return out;
+  }
+  function grid(x,y,n,c,gap,cellFn){
+    var out='';
+    for(var i=0;i<n;i++)for(var j=0;j<n;j++){var r=cellFn(i,j);
+      out+='<rect x="'+f(x+j*(c+gap))+'" y="'+f(y+i*(c+gap))+'" width="'+f(c)+'" height="'+f(c)+'" rx="2" style="fill:var('+r[0]+');stroke:var('+r[1]+')" fill-opacity="'+o(r[2])+'" stroke-opacity="'+o(r[3]==null?r[2]:r[3])+'" stroke-width="1"/>';}
+    return out;
+  }
+  var SPARSE_M=[1,0,0,1,0, 0,1,0,0,1, 1,0,0,0,0, 0,0,1,0,1, 0,1,0,1,0];
+  var SPARSE_C=[0,1,0,0,1, 1,0,0,1,0, 0,0,1,0,1, 1,0,0,0,0, 0,1,1,0,0];
+  var GR=[[.9,.3,.15,.1,.2],[.3,.85,.35,.1,.1],[.15,.35,.95,.4,.15],[.1,.1,.4,.8,.3],[.2,.1,.15,.3,.9]];
+  var RK=[3,11,19,7,22,14,0,9,17,4,24,6,12,1,20,10,16,2,23,8,13,21,5,18,15];
+
+  function drawOPD(W,t,dim){
+    var s='', sx0=W*0.1, sx1=W*0.1+40, syc=82, tx=W*0.66, tw=Math.min(84,W*0.27), cyc=1.85, k=Math.min(2,Math.floor(t/cyc)), u=t-k*cyc;
+    var done=t>=D-0.01, n=done?3:k+(u>1.55?1:0);
+    var flash=function(i){return (!done&&u>1.15&&u<1.55&&Math.abs((1.55-u)/0.4*7-i)<1.2)?1:0;};
+    s+=slabs(sx0,sx1,syc,58,6,3,8,'--ice','--ice-e',flash,'--peach');
+    s+=txt((sx0+sx1)/2,26,'student','lb','middle');
+    var gl=done?1:ease(seg(u,0.05,0.6));
+    [-12,0,12].forEach(function(dy,i){var x0=sx1+14,x1=x0+(tx-x0-12)*(0.6+0.15*i)*gl;
+      s+='<line x1="'+f(x0)+'" x2="'+f(x1)+'" y1="'+(syc+dy)+'" y2="'+(syc+dy)+'" class="ln-ice"/>';});
+    var lit=done?0:seg(u,0.6,0.8)*(1-seg(u,1.1,1.3));
+    s+='<rect x="'+f(tx)+'" y="38" width="'+f(tw)+'" height="32" rx="8" class="bx-ice"/>'+txt(tx+tw/2,59,'math','lb t-ice','middle');
+    s+='<rect x="'+f(tx)+'" y="94" width="'+f(tw)+'" height="32" rx="8" class="bx-lav"/>'+txt(tx+tw/2,115,'code','lb t-lav','middle');
+    if(lit>0)s+='<rect x="'+f(tx-3)+'" y="35" width="'+f(tw+6)+'" height="94" rx="10" class="halo" opacity="'+o(lit)+'"/>';
+    s+=txt(tx+tw/2,26,'teachers','lb','middle');
+    var bx0=tx+tw/2, by0=128, bx1=(sx0+sx1)/2, by1=114, cy=166;
+    var bp=done?1:ease(seg(u,1.1,1.55)), d='M'+f(bx0)+','+by0+' C'+f(bx0)+','+cy+' '+f(bx1)+','+cy+' '+f(bx1)+','+by1;
+    s+='<path d="'+d+'" class="arc-back" pathLength="100" stroke-dasharray="'+f(bp*100)+' 100"/>';
+    if(bp>0.98)s+='<path d="M'+f(bx1-5)+','+(by1+8)+'L'+f(bx1)+','+by1+'L'+f(bx1+5)+','+(by1+8)+'" class="arc-back"/>';
+    s+=txt((bx0+bx1)/2,cy+2,'backward pass','lb t-peach','middle',done?1:seg(u,1.1,1.3));
+    s+=txt(8,H-6,'updates','lb');
+    for(var i=0;i<3;i++){var on=i<n;s+='<circle cx="'+f(76+i*14)+'" cy="'+(H-10)+'" r="4.5" class="'+(on?'dot-peach':'dot-off')+'"/>';}
+    s+=txt(76+3*14,H-6,'&hellip; and again','lb',null,n>=3?1:0);
+    return s;
+  }
+  function drawTA(W,t,dim){
+    var gap=2, g=Math.min(62,(W-16-3*20)/4), c=(g-4*gap)/5, y=46, xs=[], s='';
+    for(var i=0;i<4;i++)xs.push(8+i*(g+20));
+    var pm=t>=D?1:seg(t,0.2,1.2), pc=t>=D?1:seg(t,1.2,2.2), ps=t>=D?1:seg(t,2.4,3.6);
+    s+=grid(xs[0],y,5,c,gap,function(){return ['--band','--hair',1];});
+    s+=grid(xs[1],y,5,c,gap,function(i,j){var on=SPARSE_M[i*5+j]&&(i*5+j)/25<pm*1.2;return on?['--ice','--ice-e',1]:['--card','--rule',1];});
+    s+=grid(xs[2],y,5,c,gap,function(i,j){var on=SPARSE_C[i*5+j]&&(i*5+j)/25<pc*1.2;return on?['--lav','--lav-e',1]:['--card','--rule',1];});
+    s+=grid(xs[3],y,5,c,gap,function(i,j){var q=i*5+j,a=SPARSE_M[q],b=SPARSE_C[q],on=(a||b)&&q/25<ps*1.2;return on?(a&&b?['--peach','--peach-e',1]:a?['--ice','--ice-e',1]:['--lav','--lav-e',1]):['--band','--hair',1];});
+    ['+','+','='].forEach(function(op,i){s+=txt(xs[i]+g+10,y+g/2+5,op,'lb op','middle');});
+    ['base','math','code','sum'].forEach(function(l,i){s+=txt(xs[i]+g/2,y+g+18,l,'lb'+(i===1?' t-ice':i===2?' t-lav':''),'middle');});
+    var pi=t>=D?1:seg(t,3.5,5.2), yi=158, x0=8, x1=xs[3]+g/2;
+    var sh=Math.max(0,x1-x0-6*14-14)*ease(pi);
+    for(var q=0;q<7;q++){var cx=x0+4+q*14+sh,cls=q%2?'dot-lav':'dot-ice';
+      s+='<circle cx="'+f(cx)+'" cy="'+yi+'" r="4" class="'+cls+'" opacity="'+o(0.35+0.65*pi)+'"/>';}
+    s+=txt(8,yi+26,'every input meets every update','lb t-peach',null,pi);
+    s+=txt(8,24,'never looks at an input','lb',null,ps);
+    return s;
+  }
+  function drawTF(W,t,dim){
+    var s='', ax0=8, ax1=W*0.38, gx=W*0.46, c=7, gap=2, gs=5*c+4*gap, rx=W*0.76, rows=[[50,'--ice','--ice-e','ln-ice'],[118,'--lav','--lav-e','ln-lav']];
+    var pg=t>=D?1:seg(t,0.1,1.5), pd=t>=D?1:seg(t,1.6,2.3), pr=t>=D?1:seg(t,2.4,3.8), pv=t>=D?1:seg(t,3.9,5.3);
+    rows.forEach(function(r,ri){
+      [0.7,1,0.55].forEach(function(L,i){var y=r[0]-9+i*9,len=(ax1-ax0)*L*ease(seg(pg,i*0.15,0.55+i*0.15)),drop=(ri===0?i===1:i===2);
+        var cls=drop&&pd>0.4?'ln-peach':r[3], op=drop?1-0.75*pd:1;
+        if(ri===0&&i===1){var z='M'+f(ax0)+','+y, x=ax0+len*0.3; z+='H'+f(x); var up=1; while(x<ax0+len-4){x+=4;z+='L'+f(x)+','+(y+(up?-3:3));up=!up;} s+='<path d="'+z+'" class="'+cls+' thin" opacity="'+o(op)+'"/>';}
+        else s+='<line x1="'+f(ax0)+'" x2="'+f(ax0+len)+'" y1="'+y+'" y2="'+y+'" class="'+cls+'" opacity="'+o(op)+'"/>';});
+      s+=grid(gx,r[0]-gs/2,5,c,gap,function(i,j){var v=GR[i][j],on=seg(pr*1.5-RK[i*5+j]/24*0.5,0,1);return [r[1],r[2],0.12+0.88*v*on,0.25+0.75*on];});
+      var lx=gx+gs+6, ly=r[0], ex=rx-6, ey=84;
+      s+='<path d="M'+f(lx)+','+ly+' C'+f(lx+24)+','+ly+' '+f(ex-24)+','+ey+' '+f(ex)+','+ey+'" class="ln-mint" pathLength="100" stroke-dasharray="'+f(pv*100)+' 100"/>';
+    });
+    s+=txt(ax0,160,(pd>0.3?'loops and failures dropped':'their own answers'),'lb'+(pd>0.3?' t-peach':''));
+    s+=txt(gx+gs/2,18,'statistics','lb','middle',0.4+0.6*pr);
+    var n=8, fx0=rx+4, fx1=W-10, done=function(i){return pv*1.15>i/(n-1)?1:0;};
+    var dx=(fx1-fx0)/(n-1);
+    for(var i=0;i<n;i++){var x=fx0+dx*i, on=done(i), yA=57, yB=111;
+      s+='<path d="M'+f(x-5)+','+(yA+2.5)+'L'+f(x+5)+','+(yA-2.5)+'L'+f(x+5)+','+(yB-2.5)+'L'+f(x-5)+','+(yB+2.5)+'Z" style="fill:var('+(on?'--mint':'--card')+');stroke:var('+(on?'--mint-e':'--hair')+')" fill-opacity=".8" stroke-width="1"/>';}
+    s+=txt((fx0+fx1)/2,134,'one model','lb'+(pv>0.95?' t-mint':''),'middle');
+    s+=txt(W-6,H-6,'solved exactly','lb t-mint','end',seg(pv,0.6,1));
+    return s;
+  }
+  var DRAW={opd:drawOPD,ta:drawTA,tf:drawTF};
+  function paint(i,t,state){
+    var h=hosts[i]; if(!h) return; var W=Ws[i]; if(!W) return;
+    var key=state+':'+(state==='on'?Math.round(t*30):'');
+    if(key===lastKey[i]&&state!=='on') return; lastKey[i]=key;
+    h.innerHTML='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" aria-hidden="true" class="rt-svg'+(state==='pre'?' pre':'')+'">'+DRAW[h.getAttribute('data-k')](W,state==='on'?t:D,state==='pre')+'</svg>';
+  }
+  function measure(){var ch=false;hosts.forEach(function(h,i){var w=Math.round(Math.min(420,h.clientWidth));if(w&&w!==Ws[i]){Ws[i]=w;lastKey[i]='';ch=true;}});return ch;}
+  function frame(t){
+    var lit=t>=3*D;
+    acts.forEach(function(a,i){
+      var on=!lit&&t>=A[i]&&t<A[i]+D, done=lit||t>=A[i]+D;
+      a.classList.toggle('on',on);a.classList.toggle('done',done);
+      paint(i,t-A[i],on?'on':done?'done':'pre');
+    });
+    fig.classList.toggle('lit',lit);
+  }
+  function still(){return mq.matches||!('IntersectionObserver' in window);}
+  function tick(now){
+    raf=0;if(!visible||still()) return;
+    if(!last) last=now;
+    tc+=Math.min(0.1,(now-last)/1000);last=now;
+    if(tc>=T) tc=0;
+    frame(tc);raf=requestAnimationFrame(tick);
+  }
+  function sync(){
+    measure();
+    if(still()){if(raf){cancelAnimationFrame(raf);raf=0;}fig.classList.remove('pdm-live');frame(T-0.5);return;}
+    fig.classList.add('pdm-live');
+    if(visible&&!raf){last=0;raf=requestAnimationFrame(tick);}
+  }
+  measure();frame(still()?T-0.5:0);
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){es.forEach(function(e){
+      var was=visible;visible=e.isIntersecting;
+      if(visible&&!was){tc=0;}
+      sync();
+    });},{threshold:0.15}).observe(fig);
+  }
+  if(mq.addEventListener)mq.addEventListener('change',sync);
+  var rt=0;window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){if(measure())frame(still()?T-0.5:tc);},150);});
+  sync();
+})();
+</script>

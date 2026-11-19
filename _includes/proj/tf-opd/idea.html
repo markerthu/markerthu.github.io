@@ -1,0 +1,55 @@
+<figure class="cst tf-idea" id="idea-fig">
+  <div class="cst-stage">
+    <article class="cst-act tts">
+      <header><h3>Add the updates</h3><p>task arithmetic: every update acts on every input</p></header>
+      <div class="id-draw anim" data-k="ta" role="img" aria-label="Schematic. Inputs the layer receives inside the math specialist and inside the code specialist, drawn as two clouds of dots. With the updates simply added, every dot is off from its specialist, because the other specialist's update acts on it too."></div>
+      <p class="cst-say">On each specialist&rsquo;s inputs, it is off by the other specialist&rsquo;s update.</p>
+    </article>
+    <article class="cst-act own">
+      <header><h3>Fit each specialist on its own inputs</h3><p>TF&#8209;OPD: least squares, weighted by how often each input occurs</p></header>
+      <div class="id-draw anim" data-k="tf" role="img" aria-label="Schematic. The same two clouds of inputs. Fitted by least squares on each specialist's own inputs, the fused layer matches each specialist on its inputs and is off only where the two clouds overlap."></div>
+      <p class="cst-say">It is off only where their inputs overlap.</p>
+    </article>
+  </div>
+  <div class="tf-eq">
+    <p class="eq" role="math" aria-label="W star equals W b plus the sum over d of Delta d times G d, times the inverse of the sum over d of G d">W<sub>&#9733;</sub> = W<sub>b</sub> + <span class="nw">(&Sigma;<sub>d</sub> &Delta;<sub>d</sub> G<sub>d</sub>)</span> <span class="nw">(&Sigma;<sub>d</sub> G<sub>d</sub>)<sup>&minus;1</sup></span></p>
+    <dl class="eq-key">
+      <div><dt>&Delta;<sub>d</sub></dt><dd>what specialist d changed in this layer of the base model W<sub>b</sub></dd></div>
+      <div><dt>G<sub>d</sub></dt><dd>second moments of the inputs this layer sees while specialist d reads its own answers, shrunk slightly toward their diagonal</dd></div>
+    </dl>
+  </div>
+  <figcaption class="cap">Schematic. Each dot is an input the layer receives; its line is how far the fused layer&rsquo;s output is from that specialist&rsquo;s. The solution is RegMean&rsquo;s closed form, written for updates, with second moments gathered on the specialists&rsquo; own rollouts.</figcaption>
+</figure>
+<script>
+(function(){
+  var hosts=[].slice.call(document.querySelectorAll('#idea-fig .id-draw')); if(!hosts.length) return;
+  var rnd=(function(){var s=20261015;return function(){s=(s*1664525+1013904223)%4294967296;return s/4294967296;};})();
+  function gn(){var u=Math.max(1e-6,rnd()),v=rnd();return Math.sqrt(-2*Math.log(u))*Math.cos(6.2832*v);}
+  var NP=26, P=[];
+  [-1,1].forEach(function(side,ci){
+    for(var i=0;i<NP;i++){var u=side*0.44+gn()*0.24, v=gn()*0.42+side*0.08*(u-side*0.44);
+      P.push({c:ci,u:Math.max(-1.05,Math.min(1.05,u)),v:Math.max(-0.95,Math.min(0.95,v)),r:rnd()});}
+  });
+  P.forEach(function(p){p.ov=Math.max(0,1-Math.abs(p.u)/0.24);});
+  function f(v){return (Math.round(v*10)/10).toString();}
+  function build(h){
+    var W=Math.round(Math.max(260,Math.min(520,h.clientWidth))), H=W<380?220:240, cx=W/2, cy=H/2+2, su=W*0.42, sv=H*0.33, tf=h.getAttribute('data-k')==='tf';
+    var s='';
+    if(tf) s+='<ellipse class="fade ov-ring" style="--d:1.9s" cx="'+f(cx)+'" cy="'+f(cy)+'" rx="'+f(su*0.27)+'" ry="'+f(sv*1.15)+'"/>';
+    var pts=P.map(function(p){return {x:cx+p.u*su,y:cy-p.v*sv,p:p};});
+    pts.forEach(function(q,i){var p=q.p,len=tf?16*p.ov:11+9*p.r,dl=(1.25+i*0.012).toFixed(2);
+      if(len>1.2) s+='<line class="whisk growy" style="--d:'+dl+'s" x1="'+f(q.x)+'" x2="'+f(q.x)+'" y1="'+f(q.y-4)+'" y2="'+f(q.y-4-len)+'"/>';});
+    pts.forEach(function(q,i){var p=q.p;
+      s+='<circle class="'+(p.c?'d-lav':'d-ice')+' pop" style="--d:'+(0.1+i*0.022).toFixed(2)+'s" cx="'+f(q.x)+'" cy="'+f(q.y)+'" r="'+(W<380?3.4:3.8)+'"/>';});
+    s+='<text class="t-ice fade sm" style="--d:.9s;font-weight:600" x="'+f(cx-su*0.5)+'" y="'+f(H-6)+'" text-anchor="middle">math inputs</text>';
+    s+='<text class="t-lav fade sm" style="--d:1s;font-weight:600" x="'+f(cx+su*0.5)+'" y="'+f(H-6)+'" text-anchor="middle">code inputs</text>';
+    if(tf) s+='<text class="fade sm t-mint" style="--d:2.1s;font-weight:600" x="'+f(cx)+'" y="16" text-anchor="middle">where they overlap</text>';
+    else s+='<text class="fade sm t-peach" style="--d:2.1s;font-weight:600" x="'+f(cx)+'" y="16" text-anchor="middle">off on every input</text>';
+    h.innerHTML='<svg viewBox="0 0 '+W+' '+H+'" aria-hidden="true">'+s+'</svg>';
+  }
+  var lw=0;
+  function all(){hosts.forEach(build);lw=window.innerWidth;}
+  all();
+  var rt=0;window.addEventListener('resize',function(){if(Math.abs(window.innerWidth-lw)<30)return;clearTimeout(rt);rt=setTimeout(all,180);});
+})();
+</script>

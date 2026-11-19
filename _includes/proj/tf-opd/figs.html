@@ -1,0 +1,178 @@
+<script>
+(function(){
+  var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $=function(s,r){return (r||document).querySelector(s);}, $$=function(s,r){return [].slice.call((r||document).querySelectorAll(s));};
+  var hasIO='IntersectionObserver' in window;
+  if(reduced||!hasIO) document.body.classList.add('no-anim');
+  function f(v){return (Math.round(v*10)/10).toString();}
+  function f1(v){return v.toFixed(1);}
+  function mm(q){return !!(window.matchMedia&&window.matchMedia(q).matches);}
+  function setLens(root){$$('.draw',root).forEach(function(p){try{p.style.setProperty('--len',Math.ceil(p.getTotalLength())+2);}catch(e){}});}
+  function tx(x,y,s,cls,anchor,extra){return '<text x="'+f(x)+'" y="'+f(y)+'"'+(cls?' class="'+cls+'"':'')+(anchor?' text-anchor="'+anchor+'"':'')+(extra||'')+'>'+s+'</text>';}
+
+  /* Finding 01: mathematics against code, and the mean over seven benchmarks (Table 1). */
+  var MODELS=[
+    {n:'Base model',k:'base',m:[63.4,33.4,15.8,10.0,8.3],c:[45.7,44.2],mean:31.6},
+    {n:'Math specialist',k:'math',m:[91.8,68.7,50.0,43.3,30.8],c:[71.3,62.4],mean:59.8},
+    {n:'Code specialist',k:'code',m:[85.6,62.5,26.7,30.0,15.0],c:[86.0,69.3],mean:53.6},
+    {n:'TF-OPD',k:'ours',m:[90.8,69.4,50.0,38.3,27.5],c:[84.1,67.5],mean:61.1}];
+  function avg(a){return a.reduce(function(s,v){return s+v;},0)/a.length;}
+  function marker(k,x,y,r,cls,st){
+    if(k==='math') return '<rect class="mk-math '+(cls||'')+'"'+(st||'')+' x="'+f(x-r)+'" y="'+f(y-r)+'" width="'+f(2*r)+'" height="'+f(2*r)+'" rx="1.5"/>';
+    if(k==='code') return '<path class="mk-code '+(cls||'')+'"'+(st||'')+' d="M'+f(x)+','+f(y-r*1.3)+'L'+f(x+r*1.3)+','+f(y)+'L'+f(x)+','+f(y+r*1.3)+'L'+f(x-r*1.3)+','+f(y)+'Z"/>';
+    if(k==='base') return '<circle class="mk-base '+(cls||'')+'"'+(st||'')+' cx="'+f(x)+'" cy="'+f(y)+'" r="'+f(r)+'"/>';
+    return '<circle class="mk-ours '+(cls||'')+'"'+(st||'')+' cx="'+f(x)+'" cy="'+f(y)+'" r="'+f(r)+'"/>';
+  }
+  function plane(el){
+    var cw=el.clientWidth, one=mm('(max-width:900px)'), small=cw<560;
+    var lw=one?cw:(cw-44)*1.6/2.6, rw=one?cw:(cw-44)/2.6;
+    var W=Math.round(Math.max(300,Math.min(lw,640))), H=small?390:370, m={l:small?40:48,r:small?14:22,t:small?110:52,b:46};
+    var X=function(v){return m.l+(W-m.l-m.r)*(v-40)/40;}, Y=function(v){return m.t+(H-m.t-m.b)*(1-(v-20)/40);};
+    var s=tx(0,16,'Mathematics against code','t-ink mid');
+    if(small){[['base','Base model'],['math','Math specialist'],['code','Code specialist'],['ours','TF-OPD']].forEach(function(g,i){var lx=i%2?W/2:0,ly=i<2?40:64;
+      s+=marker(g[0],lx+7,ly-4,g[0]==='ours'?6.5:5.5,'','')+tx(lx+20,ly,g[1],g[0]==='ours'?'t-ink mid':'');});}
+    s+=tx(0,m.t-18,'math, mean accuracy (%)','sm');
+    [20,30,40,50,60].forEach(function(v){s+='<line class="grid" x1="'+m.l+'" x2="'+(W-m.r)+'" y1="'+f(Y(v))+'" y2="'+f(Y(v))+'"/>'+tx(m.l-8,Y(v)+4,v,'','end');});
+    [40,50,60,70,80].forEach(function(v){s+=tx(X(v),H-m.b+20,v,'','middle');});
+    s+=tx(W-m.r,H-4,'code, mean accuracy (%)','sm','end');
+    var P={};MODELS.forEach(function(o){P[o.k]=[X(avg(o.c)),Y(avg(o.m))];});
+    var cx=X(avg(MODELS[2].c)), cy=Y(avg(MODELS[1].m));
+    s+='<path class="fade cornr" style="--d:1.5s" d="M'+m.l+','+f(cy)+'H'+f(cx)+'V'+f(H-m.b)+'"/>';
+    s+=tx(m.l+6,cy+17,'math specialist on math','sm fade','',' style="--d:1.6s"');
+    s+=tx(cx-6,H-m.b-8,'code specialist on code','sm fade','end',' style="--d:1.7s"');
+    var b=P.base,o=P.ours;
+    var ax0=b[0]+7, ay0=b[1]-5, ax1=o[0]-13, ay1=o[1]+10, an=Math.atan2(ay1-ay0,ax1-ax0);
+    s+='<path class="l-arrow draw" style="--d:.9s" d="M'+f(ax0)+','+f(ay0)+'L'+f(ax1)+','+f(ay1)+'"/>';
+    s+='<path class="l-arrow fade" style="--d:1.9s" d="M'+f(ax1-8*Math.cos(an-0.45))+','+f(ay1-8*Math.sin(an-0.45))+'L'+f(ax1)+','+f(ay1)+'L'+f(ax1-8*Math.cos(an+0.45))+','+f(ay1-8*Math.sin(an+0.45))+'"/>';
+    s+=marker('base',b[0],b[1],6,'pop',' style="--d:.2s"');
+    s+=marker('math',P.math[0],P.math[1],6.5,'pop',' style="--d:.45s"');
+    s+=marker('code',P.code[0],P.code[1],6.5,'pop',' style="--d:.6s"');
+    s+='<circle class="pop" style="--d:2s" cx="'+f(o[0])+'" cy="'+f(o[1])+'" r="18" fill="var(--mint-l)"/>'+marker('ours',o[0],o[1],9,'pop',' style="--d:2s"');
+    if(!small){
+      s+=tx(b[0]+12,b[1]+5,'base model','fade','',' style="--d:.3s"');
+      s+=tx(P.math[0]-12,P.math[1]-10,'math specialist','fade','end',' style="--d:.5s"');
+      s+=tx(P.code[0]-12,P.code[1]+5,'code specialist','fade','end',' style="--d:.65s"');
+    }
+    s+=tx(o[0]+4,cy-9,'TF-OPD','t-mint fade','end',' style="--d:2.2s"');
+    var a='<div><svg viewBox="0 0 '+W+' '+H+'" style="max-width:'+W+'px">'+s+'</svg></div>';
+    var W2=Math.round(Math.max(280,Math.min(rw,460))), rows=[MODELS[3],MODELS[1],MODELS[2],MODELS[0]], rh=small?46:52, lbw=small?118:124, H2=56+rows.length*rh+30;
+    var BX=function(v){return lbw+(W2-lbw-50)*v/70;};
+    var t=tx(0,16,'Mean over seven benchmarks','t-ink mid');
+    [0,20,40,60].forEach(function(v){t+='<line class="grid" x1="'+f(BX(v))+'" x2="'+f(BX(v))+'" y1="40" y2="'+(H2-26)+'"/>'+tx(BX(v),H2-8,v,'sm','middle');});
+    rows.forEach(function(o2,i){var y=48+i*rh, ours=o2.k==='ours', cls=ours?'d-mint':o2.k==='math'?'d-ice':o2.k==='code'?'d-lav':'d-base';
+      t+=tx(0,y+rh/2-2,o2.n,ours?'t-ink mid':'','',ours?'':' style="fill:var(--body)"');
+      t+='<rect class="'+cls+' grow" style="--d:'+(0.3+i*0.15).toFixed(2)+'s" x="'+f(BX(0))+'" y="'+f(y+rh/2-17)+'" width="'+f(BX(o2.mean)-BX(0))+'" height="22" rx="4"/>';
+      t+=tx(BX(o2.mean)+8,y+rh/2-1,f1(o2.mean),(ours?'t-mint ':'')+'fade','',' style="--d:'+(0.9+i*0.15).toFixed(2)+'s;font-weight:'+(ours?700:600)+'"');});
+    el.innerHTML='<div class="two tf-two">'+a+'<div><svg viewBox="0 0 '+W2+' '+H2+'" style="max-width:'+W2+'px">'+t+'</svg></div></div>';
+    setLens(el);
+  }
+
+  /* Finding 02: every benchmark (Table 1). */
+  var BENCH=[['MATH-500',0],['OlympiadBench',1],['AIME24',2],['AIME25',3],['HMMT25',4],['HumanEval+',5],['MBPP+',6]];
+  function val(o,i){return i<5?o.m[i]:o.c[i-5];}
+  function every(el){
+    var cw=el.clientWidth, small=cw<600, W=Math.round(Math.max(300,Math.min(cw,1100))), lbw=small?6:150, vw=small?56:76, rh=small?54:42;
+    var gh=small?30:34, legendH=small?56:44, H=legendH+2*gh+BENCH.length*rh+40;
+    var x0=lbw, x1=W-2*vw-(small?12:24), X=function(v){return x0+(x1-x0)*v/100;};
+    var s='', y=legendH;
+    var lg=[['base','Base model'],['math','Math specialist'],['code','Code specialist'],['ours','TF-OPD']], lx=0, ly=16;
+    lg.forEach(function(g,i){var w=[118,150,150,90][i];
+      if(small){lx=i%2?W/2:0;ly=i<2?14:38;}
+      s+=marker(g[0],lx+7,ly-4,g[0]==='ours'?6.5:5.5,'','')+tx(lx+20,ly,g[1],g[0]==='ours'?'t-ink mid':'');
+      if(!small)lx+=w;});
+    s+=tx(W-vw-4,y+gh-12,'specialist','sm','end');
+    s+=tx(W,y+gh-12,'TF-OPD','sm t-mint','end',' style="font-weight:700"');
+    [0,25,50,75,100].forEach(function(v){s+='<line class="grid" x1="'+f(X(v))+'" x2="'+f(X(v))+'" y1="'+(legendH+gh-6)+'" y2="'+(H-30)+'"/>'+tx(X(v),H-12,v,'sm','middle');});
+    var k=0;
+    BENCH.forEach(function(b,i){
+      if(i===0||i===5){s+=tx(0,y+gh-12,i===0?'Mathematics':'Code','sm',null,' style="font-weight:600;fill:var(--mint-t)"');y+=gh;}
+      var vals=MODELS.map(function(o){return val(o,b[1]);}), lo=Math.min.apply(null,vals), hi=Math.max.apply(null,vals), dl=0.2+k*0.12;
+      var cy=small?y+34:y+rh/2, bh=small?26:rh-8, by=small?cy-13:y+4;
+      s+='<rect x="'+f(x0-8)+'" y="'+f(by)+'" width="'+f(x1-x0+16)+'" height="'+bh+'" rx="'+(bh/2)+'" fill="var(--band)"/>';
+      if(small) s+=tx(0,y+12,b[0],'sm','',' style="fill:var(--ink);font-weight:600"');
+      else s+=tx(0,cy+5,b[0],'','',' style="fill:var(--ink)"');
+      s+='<line class="db-ln grow" style="--d:'+dl.toFixed(2)+'s" x1="'+f(X(lo))+'" x2="'+f(X(hi))+'" y1="'+f(cy)+'" y2="'+f(cy)+'"/>';
+      s+=marker('base',X(vals[0]),cy,5,'pop',' style="--d:'+(dl).toFixed(2)+'s"');
+      s+=marker('math',X(vals[1]),cy,5,'pop',' style="--d:'+(dl+0.15).toFixed(2)+'s"');
+      s+=marker('code',X(vals[2]),cy,5,'pop',' style="--d:'+(dl+0.25).toFixed(2)+'s"');
+      s+='<g class="slide" style="--dx:'+f(X(vals[0])-X(vals[3]))+'px;--d:'+(dl+0.45).toFixed(2)+'s">'+marker('ours',X(vals[3]),cy,7,'','')+'</g>';
+      var spec=i<5?vals[1]:vals[2];
+      s+=tx(W-vw-4,cy+5,f1(spec),'fade','end',' style="--d:'+(dl+0.3).toFixed(2)+'s;fill:var(--body)"');
+      s+=tx(W,cy+5,f1(vals[3]),'t-mint fade','end',' style="--d:'+(dl+0.8).toFixed(2)+'s"');
+      y+=rh;k++;
+    });
+    el.innerHTML='<svg viewBox="0 0 '+W+' '+H+'" style="max-width:'+W+'px">'+s+'</svg>';
+  }
+
+  /* Finding 03: looping answers (Figure 4a) and AIME25 by statistics (Table 7). */
+  function loops(el){
+    var cw=el.clientWidth, one=mm('(max-width:900px)'), small=cw<560;
+    var lw=one?cw:(cw-48)*1/2.3, rw=one?cw:(cw-48)*1.3/2.3;
+    var W=Math.round(Math.max(290,Math.min(lw,470))), H=small?190:220, lb=small?62:70, bx0=lb, bx1=W-6;
+    var s=tx(0,16,'A few answers carry many of the tokens','t-ink mid');
+    s+=tx(0,36,'the math specialist&rsquo;s rollouts','sm');
+    var B=function(p){return bx0+(bx1-bx0)*p/100;};
+    [['answers',7,64],['tokens',23,124]].forEach(function(r,i){var y=r[2]+(small?-6:0);
+      s+=tx(0,y+18,r[0],'','',' style="fill:var(--ink)"');
+      s+='<rect x="'+f(bx0)+'" y="'+y+'" width="'+f(bx1-bx0)+'" height="26" rx="5" class="d-ice2"/>';
+      s+='<rect class="d-peach grow" style="--d:'+(0.4+i*0.35)+'s" x="'+f(bx0)+'" y="'+y+'" width="'+f(B(r[1])-bx0)+'" height="26" rx="5"/>';
+      s+=tx(B(r[1])+8,y+18,r[1]+'%'+(i===0?' end in a loop':''),'t-peach fade','',' style="--d:'+(0.9+i*0.35)+'s;font-weight:700"');});
+    s+='<rect x="'+bx0+'" y="'+(H-22)+'" width="11" height="11" rx="2" class="d-peach"/>'+tx(bx0+17,H-12,'truncated in a repetition loop','sm');
+    var a='<div><svg viewBox="0 0 '+W+' '+H+'" style="max-width:'+W+'px">'+s+'</svg></div>';
+    var W2=Math.round(Math.max(300,Math.min(rw,640))), rows=[['task arithmetic','weights only',34.2,'d-base'],['all answers','closed form',34.2,'d-peach'],['loops removed','closed form',40.0,'d-mint'],['correct, loop-free','closed form',40.0,'d-mint']];
+    var rh=small?44:46, lbw=small?126:150, top=small?72:58, H2=top+rows.length*rh+34, X=function(v){return lbw+(W2-lbw-46)*v/45;};
+    var t=tx(0,16,'AIME25, by the answers the statistics use','t-ink mid');
+    [0,10,20,30,40].forEach(function(v){t+='<line class="grid" x1="'+f(X(v))+'" x2="'+f(X(v))+'" y1="'+(top-6)+'" y2="'+(H2-24)+'"/>'+tx(X(v),H2-8,v,'sm','middle');});
+    rows.forEach(function(r,i){var y=top+i*rh, win=r[3]==='d-mint';
+      if(i===1)t+='<line x1="0" x2="'+f(W2)+'" y1="'+f(y-2)+'" y2="'+f(y-2)+'" stroke="var(--rule)"/>';
+      t+=tx(0,y+rh/2-3,r[0],win?'t-ink mid':'','',win?'':' style="fill:var(--body)"');
+      t+=tx(0,y+rh/2+13,r[1],'sm');
+      t+='<rect class="'+r[3]+' grow" style="--d:'+(0.4+i*0.18).toFixed(2)+'s" x="'+f(X(0))+'" y="'+f(y+rh/2-14)+'" width="'+f(X(r[2])-X(0))+'" height="22" rx="4"/>';
+      if(win) t+=tx(X(r[2])+8,y+rh/2+2,f1(r[2]),'t-mint fade','',' style="--d:'+(1+i*0.18).toFixed(2)+'s;font-weight:700"');
+      else t+=tx(X(r[2])-8,y+rh/2+2,f1(r[2]),'fade','end',' style="--d:'+(1+i*0.18).toFixed(2)+'s;font-weight:600;fill:var(--ink)"');});
+    var xs=X(39.2);
+    t+='<line class="fade" style="--d:1.7s" x1="'+f(xs)+'" x2="'+f(xs)+'" y1="'+(top-12)+'" y2="'+(H2-24)+'" stroke="var(--ink)" stroke-width="1.3" stroke-dasharray="4 4"/>';
+    t+=tx(xs+4,top-18,'math specialist, same format: 39.2','sm fade','end',' style="--d:1.8s;font-weight:600;fill:var(--ink)"');
+    el.innerHTML='<div class="two tf-two l3">'+a+'<div><svg viewBox="0 0 '+W2+' '+H2+'" style="max-width:'+W2+'px">'+t+'</svg></div></div>';
+  }
+
+  /* Finding 03, fold: teacher-forced agreement (Table 8). */
+  function fit(el){
+    var cw=el.clientWidth; if(!cw) return;
+    var small=cw<560, W=Math.round(Math.max(300,Math.min(cw,1100))), lbw=small?0:190, vw=small?54:130, rh=small?56:46, top=small?66:60, H=top+3*rh+34;
+    var x0=lbw, x1=W-vw-(small?60:80), X=function(v){return x0+(x1-x0)*v/0.065;};
+    var rows=[['TF-OPD, all answers',0.0024,'98.6%','d-peach'],['task arithmetic',0.0247,'95.3%','d-base'],['code specialist',0.0595,'92.8%','d-lav']];
+    var s=tx(0,16,small?'Reading the specialist&rsquo;s own solutions':'Reading the math specialist&rsquo;s own correct solutions','t-ink mid');
+    s+=tx(x0,top-16,small?'KL per token':'KL to the math specialist, per token','sm');
+    s+=tx(W,top-16,small?'top-1':'top-1 agreement','sm','end');
+    [0,0.02,0.04,0.06].forEach(function(v){s+='<line class="grid" x1="'+f(X(v))+'" x2="'+f(X(v))+'" y1="'+(top-6)+'" y2="'+(H-24)+'"/>'+tx(X(v),H-8,v===0?'0':v.toFixed(2),'sm','middle');});
+    rows.forEach(function(r,i){var y=top+i*rh, cy=small?y+34:y+rh/2;
+      if(small) s+=tx(0,y+14,r[0],'sm','',' style="fill:var(--ink);font-weight:600"');
+      else s+=tx(0,cy+5,r[0],'','',' style="fill:var(--ink)"');
+      s+='<rect class="'+r[3]+' grow" style="--d:'+(0.2+i*0.18).toFixed(2)+'s" x="'+f(X(0))+'" y="'+f(cy-11)+'" width="'+f(Math.max(3,X(r[1])-X(0)))+'" height="22" rx="4"/>';
+      s+=tx(Math.max(X(r[1]),X(0)+3)+8,cy+5,r[1].toFixed(4),'fade','',' style="--d:'+(0.7+i*0.18).toFixed(2)+'s;font-weight:600;fill:var(--body)"');
+      s+=tx(W,cy+5,r[2],'fade','end',' style="--d:'+(0.8+i*0.18).toFixed(2)+'s;font-weight:600;fill:var(--ink)"');});
+    el.innerHTML='<svg viewBox="0 0 '+W+' '+H+'" style="max-width:'+W+'px">'+s+'</svg>';
+  }
+
+  var charts=[['#ch-plane',plane],['#ch-every',every],['#ch-loops',loops],['#ch-fit',fit]], lastW=0;
+  function build(){charts.forEach(function(c){var el=$(c[0]);if(el&&el.clientWidth)c[1](el);});}
+  build();
+  var fold=$('#fit-more');
+  if(fold)fold.addEventListener('toggle',function(){if(fold.open){var el=$('#ch-fit');el.classList.remove('in');fit(el);requestAnimationFrame(function(){requestAnimationFrame(function(){el.classList.add('in');});});}});
+  function cols(){return [900,600,560].map(function(b){return mm('(max-width:'+b+'px)');}).join();}
+  var lastOne=cols(), rt=0;
+  window.addEventListener('resize',function(){var one=cols();if(Math.abs(window.innerWidth-lastW)<40&&one===lastOne)return;clearTimeout(rt);rt=setTimeout(function(){lastW=window.innerWidth;lastOne=one;build();},180);});
+  lastW=window.innerWidth;
+
+  /* Reveal on entry; reset when fully out of view, so every figure plays again on re-entry. */
+  var els=$$('.reveal,.anim');
+  if(reduced||!hasIO){els.forEach(function(e){e.classList.add('in');});return;}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    var r=e.boundingClientRect, vh=window.innerHeight||800;
+    if(e.isIntersecting&&(e.intersectionRatio>=0.25||r.top<vh*0.7))e.target.classList.add('in');
+    else if(!e.isIntersecting)e.target.classList.remove('in');
+  });},{threshold:[0,0.1,0.25,0.5]});
+  els.forEach(function(e){io.observe(e);});
+})();
+</script>
