@@ -73,7 +73,14 @@ def site_timezone():
     """GoatCounter buckets days in the SITE's timezone, while the Actions runner and the
     CSV export are both UTC. Mixing the two produced a day-long shortfall and a table
     whose timestamps disagreed with the chart. Resolve it once, here."""
-    code, body = call("/api/v0/me")
+    # /api/v0/me answers 404 now and then (2 of 6 runs on 2026-11-17/18). Retry, and if
+    # it still fails keep the zone the previous run used, so one bad answer cannot flip
+    # the whole page to UTC days.
+    for attempt in range(3):
+        code, body = call("/api/v0/me")
+        if code == 200:
+            break
+        time.sleep(5 * (attempt + 1))
     name = ""
     if code == 200:
         try:
@@ -97,7 +104,14 @@ def site_timezone():
         except Exception:
             pass
     else:
-        print("  warn: /api/v0/me -> %s, falling back to UTC" % code, file=sys.stderr)
+        print("  warn: /api/v0/me -> %s, using the previous run's zone" % code, file=sys.stderr)
+    if not name:
+        try:
+            prev = json.load(open(OUT, encoding="utf-8")).get("_timezone", "")
+            if prev and prev != "UTC":
+                name = prev
+        except Exception:
+            pass
     name = (name or "").split(".", 1)[-1].strip()      # "US.America/Los_Angeles" -> "America/Los_Angeles"
     if name and ZoneInfo:
         try:
