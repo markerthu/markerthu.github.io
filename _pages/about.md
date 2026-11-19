@@ -1332,6 +1332,10 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
 <ul class="news-list">
   <li>
     <span class="news-date">Nov 2026</span>
+    <span><span class="nbadge nb-upcoming">Upcoming</span>Attending <strong>NeurIPS 2026</strong> in Atlanta, Dec 9–13. Always happy to connect and talk about collaboration &mdash; <a href="/contact/">get in touch</a>. See you in Atlanta&nbsp;<img class="g-ico" src="/images/icons/flag-us.png" alt=""></span>
+  </li>
+  <li>
+    <span class="news-date">Nov 2026</span>
     <span><span class="nbadge nb-find">Finding</span><strong>Language Models Can Rewrite Their Own Weights</strong> is on arXiv. A third way to make a model better: for the first time, to our knowledge, a language model rewrites its own weights by its own reasoning and becomes better, with no gradients and no training. The model is its own optimizer. It takes no frontier model: the model surpasses itself on problems it never saw, keeps getting better session after session, and repairs a damaged copy of itself without ever seeing its original weights; the ability emerges with scale. No training pipeline, no cluster, no added cost per answer. Affordable. Scalable. Recursive. <a href="/projects/self-rewriting/">Project page</a> &middot; <a href="https://arxiv.org/abs/2611.21885" target="_blank" rel="noopener noreferrer">Paper</a></span>
   </li>
   <li>
