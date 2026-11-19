@@ -7,261 +7,38 @@ permalink: /projects/orw-cfm-w2/
 <head>
 <meta charset="UTF-8">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="ORW-CFM-W2: Online Reward-Weighted Fine-Tuning for Flow Matching — ICLR 2025">
-  <meta property="og:description" content="First collapse-free online RLHF framework for flow matching generative models, using Wasserstein-2 distance as regularization.">
+  <meta property="og:title" content="Online Reward-Weighted Fine-Tuning of Flow Matching with Wasserstein Regularization">
+  <meta property="og:description" content="Fine-tuning a flow-matching image model toward any reward, online: it learns from its own samples weighted by reward, and a tractable Wasserstein-2 bound keeps it from collapsing. No likelihoods, no reward gradients, no human-collected data. ICLR 2025.">
   <meta property="og:image" content="https://www.jiajunfan.com/images/og/orw-cfm-w2.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
   <meta property="og:url" content="https://www.jiajunfan.com/projects/orw-cfm-w2/">
   <link rel="canonical" href="https://www.jiajunfan.com/projects/orw-cfm-w2/">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="ORW-CFM-W2: Online Reward-Weighted Fine-Tuning for Flow Matching — ICLR 2025">
-  <meta name="twitter:description" content="First collapse-free online RLHF framework for flow matching generative models, using Wasserstein-2 distance as regularization.">
+  <meta name="twitter:title" content="Online Reward-Weighted Fine-Tuning of Flow Matching with Wasserstein Regularization">
+  <meta name="twitter:description" content="A flow-matching model learns from its own samples, weighted by any reward, and a Wasserstein-2 bound it can compute keeps it from collapsing. ICLR 2025.">
   <meta name="twitter:image" content="https://www.jiajunfan.com/images/og/orw-cfm-w2.jpg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ORW-CFM-W2 — Flow Matching RLHF | ICLR 2025</title>
-<meta name="description" content="Online Reward-Weighted Fine-Tuning of Flow Matching with Wasserstein Regularization. ICLR 2025.">
+<title>Online Reward-Weighted Fine-Tuning of Flow Matching with Wasserstein Regularization | Jiajun Fan</title>
+<meta name="description" content="Fine-tuning a flow-matching image model toward any reward, online: it learns from its own samples weighted by reward, and a tractable Wasserstein-2 bound keeps it from collapsing. No likelihoods, no reward gradients, no human-collected data. ICLR 2025.">
 <meta name="theme-color" content="#fdfcfa">
 <meta name="theme-color" content="#0f1216" media="(prefers-color-scheme: dark)">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
 <link rel="icon" href="/images/favicon.ico">
-<meta name="robots" content="index,follow">
 <script>try{if(localStorage.getItem('darkMode')==='true'){document.documentElement.style.background='#0f1216';}}catch(e){}</script>
-<style>
-@font-face{font-family:'Newsreader Fallback';src:local('Georgia');size-adjust:91.7%;ascent-override:80.2%;descent-override:28.9%;line-gap-override:0%;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:'Inter Fallback';src:local('Arial');size-adjust:107.1%;ascent-override:90.4%;descent-override:22.5%;line-gap-override:0%;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-:root{
-  --serif:'Newsreader','Newsreader Fallback',Georgia,'Times New Roman',serif;
-  --sans:'Inter','Inter Fallback','Segoe UI',system-ui,-apple-system,sans-serif;
-  --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
-  --bg:#fdfcfa; --band:#f6f3ec; --ink:#1a1815; --body:#2b2823; --muted:#6c6860; --faint:#6b665c;
-  --rule:#e8e3d9; --link:#2F4B8F; --on-link:#ffffff; --link-h:#23396E; --card:#ffffff; --fig-border:#e6e0d5;
-  --good:#2F4B8F; --bad:#c0392b;
-}
-body.dark-mode{
-  --bg:#0f1216; --band:#151a20; --ink:#ece8e0; --body:#cdc8be; --muted:#8f8a80; --faint:#8a857b;
-  --rule:#262b33; --link:#6ea8fe; --on-link:#0f1216; --link-h:#93c0ff; --card:#161a20; --fig-border:#2a2f38;
-  --good:#9DB8EA; --bad:#f7a8b8;
-}
-.lbl-ico{display:inline-block;width:1em;height:1em;vertical-align:-0.14em;margin-right:5px;background-color:currentColor;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;flex-shrink:0;}
-*{box-sizing:border-box;margin:0;padding:0}
-html{overflow-x:hidden;scroll-behavior:smooth;}
-body{font-family:var(--serif);background:var(--bg);color:var(--body);line-height:1.72;font-size:19px;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s;}
-a{color:var(--link);text-decoration:none}a:hover{color:var(--link-h)}
-::selection{background:rgba(47,75,143,.16);}
-
-/* ── masthead (shared) ── */
-.site-masthead{background:var(--bg);box-shadow:0 1px 0 var(--rule);position:sticky;top:0;z-index:200;font-size:16px;font-family:var(--sans);}
-.site-masthead::after{content:'';display:block;height:3px;background:linear-gradient(to right,#2F4B8F 0%,#6F94C6 50%,#E39A7A 100%)}
-.masthead-inner{max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:56px}
-.masthead-title{font-weight:800;font-size:1.35em;color:var(--ink)!important;text-decoration:none!important;letter-spacing:-.02em}
-.masthead-nav{display:flex;gap:2px;align-items:center}
-.masthead-nav a{font-weight:600;font-size:0.98em;color:var(--muted)!important;text-decoration:none!important;padding:6px 10px;border-radius:6px;transition:color .2s,background .2s}
-.masthead-nav a:hover{color:var(--link)!important;background:rgba(47,75,143,.07)}
-.masthead-nav a.nav-active{color:var(--link)!important}
-@media(max-width:600px){.masthead-inner{flex-wrap:wrap;height:auto;padding:8px 14px 7px;row-gap:1px;justify-content:center}.masthead-title{width:100%;text-align:center}.masthead-nav{width:100%;justify-content:center;flex-wrap:wrap}}
-@media(max-width:560px){.masthead-nav a{font-size:0.86em;padding:5px 8px}.masthead-title{font-size:1.15em}}
-
-/* ── hero (editorial) ── */
-.hero{max-width:820px;margin:0 auto;padding:52px 24px 8px;text-align:center;}
-.kicker{font-family:var(--sans);text-transform:uppercase;letter-spacing:.145em;font-size:.72rem;font-weight:700;color:var(--link);margin-bottom:1em;}
-.hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.12;letter-spacing:-.015em;color:var(--ink);margin:0 auto .5em;max-width:15em;}
-.hero .short{font-family:var(--serif);font-size:1.2rem;color:var(--muted);margin-bottom:1.3em;}
-.hero .short strong{color:var(--body);font-weight:600;}
-.authors{font-family:var(--sans);font-size:.92rem;color:var(--muted);max-width:720px;margin:0 auto .5em;line-height:1.9}
-.authors .me{font-weight:700;color:var(--ink)}
-.affil{font-family:var(--sans);font-size:.82rem;color:var(--faint);margin-bottom:1.5em;line-height:1.6}
-.btn-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
-.btn{display:inline-flex;align-items:center;gap:7px;padding:9px 20px;border-radius:999px;font-family:var(--sans);font-size:.85rem;font-weight:600;transition:.18s;border:1px solid var(--rule);}
-.btn:hover{transform:translateY(-1px)}
-.btn-primary{background:var(--link);color:var(--on-link);border-color:var(--link)}
-.btn-primary:hover{color:var(--on-link)}
-.btn-secondary{background:var(--card);color:var(--link)}
-.btn-neutral{background:var(--band);color:var(--body)}
-.hero-rule{max-width:820px;margin:2.2em auto 0;border:none;border-top:1px solid var(--rule);}
-
-/* ── layout ── */
-.container{max-width:720px;margin:0 auto;padding:0 24px}
-section{padding:34px 0 8px}
-section p{color:var(--body);margin-bottom:1em;font-size:1.06rem;line-height:1.72}
-h2{font-family:var(--sans);font-size:1.45rem;font-weight:700;color:var(--ink);margin:1.4em 0 .7em;line-height:1.25;letter-spacing:-.01em}
-h2 .lbl-ico{color:var(--link);}
-h3,h4{font-family:var(--sans);color:var(--ink);}
-em{font-style:italic}
-strong{font-weight:600;color:var(--ink)}
-
-/* ── abstract / TL;DR ── */
-.tldr{font-family:var(--serif);font-size:1.16rem;line-height:1.6;color:var(--body);border-left:3px solid var(--rule);padding:2px 0 2px 22px;margin:.4em 0 .2em;}
-.tldr strong{color:var(--link);font-weight:600}
-
-/* ── stat cards ── */
-.results-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:20px 0}
-.result-card{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:20px 14px;text-align:center}
-.result-card .rnum{font-family:var(--sans);font-size:1.7rem;font-weight:800;color:var(--link);line-height:1.1;white-space:nowrap}
-.result-card .rdesc{font-family:var(--sans);font-size:.76rem;color:var(--muted);margin-top:8px;line-height:1.5}
-
-/* ── method steps ── */
-.method-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;margin:20px 0}
-.step{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:18px;text-align:center}
-.step .step-num{width:34px;height:34px;background:var(--link);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--sans);font-weight:800;font-size:.9em;margin:0 auto 11px}
-.step h3{font-family:var(--sans);font-size:.86rem;font-weight:700;color:var(--ink);margin-bottom:7px}
-.step p{font-family:var(--sans);font-size:.8rem;color:var(--muted);margin:0;line-height:1.55}
-
-/* ── problem / solution ── */
-.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0}
-.problem-card,.solution-card{border-radius:12px;padding:18px 20px;background:var(--card);border:1px solid var(--rule)}
-.problem-card{border-left:3px solid var(--bad)} .solution-card{border-left:3px solid var(--good)}
-.problem-card h3,.solution-card h3{font-family:var(--sans);font-size:.86rem;font-weight:700;margin-bottom:8px}
-.problem-card h3{color:var(--bad)} .solution-card h3{color:var(--good)}
-.problem-card p,.solution-card p{font-family:var(--sans);font-size:.86rem;color:var(--body);margin:0;line-height:1.6}
-
-/* ── comparison table ── */
-.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:20px 0}
-.compare-table{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:.9rem}
-.compare-table th{background:var(--band);color:var(--muted);padding:11px 15px;text-align:left;font-weight:600;border-bottom:1px solid var(--rule);font-size:.76rem;text-transform:uppercase;letter-spacing:.04em}
-.compare-table td{padding:11px 15px;border-bottom:1px solid var(--rule);color:var(--body)}
-.compare-table tr:last-child td{border-bottom:none}
-.compare-table .highlight td{background:rgba(47,75,143,.06);font-weight:600;color:var(--ink)}
-body.dark-mode .badge-win{background:#1A2333}
-.badge-win{background:#E6EEF8;color:var(--good);padding:2px 9px;border-radius:6px;font-weight:700;font-size:.82em}
-
-/* ── figures (native inline SVG charts) ── */
-figure.chart{margin:1.8em auto;color:var(--muted);max-width:640px;}
-figure.chart.wide{max-width:100%;}
-figure.chart.narrow{max-width:460px;}
-figure.chart svg{display:block;width:100%;height:auto;}
-figure.chart figcaption{font-family:var(--sans);font-size:.82rem;color:var(--muted);margin-top:.9em;text-align:center;line-height:1.55;max-width:600px;margin-left:auto;margin-right:auto;}
-figure.chart figcaption b,figure.chart figcaption strong{color:var(--link);font-weight:600}
-
-/* ── timeline ── */
-.tl{position:relative;padding-left:24px;margin:10px 0}
-.tl-line{position:absolute;left:8px;top:4px;bottom:4px;width:2px;background:var(--rule)}
-.tl-item{position:relative;margin-bottom:18px}
-.tl-dot{position:absolute;left:-20px;top:5px;width:11px;height:11px;border-radius:50%;background:var(--c-var,#BFD8EC);border:1.5px solid var(--c-var-line,#6F94C6);box-shadow:0 0 0 3px var(--bg)}
-.tl-dot.done{background:var(--good);border-color:var(--good)}
-.tl-date{font-family:var(--sans);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--link)}
-.tl-dot.done ~ .tl-date{color:var(--good)}
-.tl-title{font-family:var(--sans);font-weight:600;font-size:.95rem;color:var(--ink);margin:1px 0 2px}
-.tl-desc{font-family:var(--sans);font-size:.84rem;color:var(--muted);line-height:1.55}
-
-/* ── BibTeX ── */
-.bib-copy-btn{display:inline-flex;align-items:center;gap:6px;margin-bottom:10px;padding:6px 15px;border-radius:8px;border:1px solid var(--rule);cursor:pointer;font-family:var(--sans);font-size:.8rem;font-weight:600;background:var(--band);color:var(--body);transition:.18s}
-.bib-copy-btn:hover{border-color:var(--link);color:var(--link)}
-.bib-copy-btn.copied{background:var(--good);color:#fff;border-color:var(--good)}
-.bibtex-block{background:var(--band);color:var(--body);border:1px solid var(--rule);border-radius:12px;padding:18px 20px;overflow-x:auto;font-family:var(--mono);font-size:.8rem;line-height:1.7}
-
-/* ── footer ── */
-footer{font-family:var(--sans);background:transparent;color:var(--muted);text-align:center;padding:26px 24px;font-size:.86rem;border-top:1px solid var(--rule);margin-top:2.4em}
-footer a{color:var(--link)}
-
-/* ── controls ── */
-#read-progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,#2F4B8F,#6F94C6 60%,#E39A7A);z-index:9999;transition:width .08s linear;pointer-events:none}
-.pg-fab{position:fixed;right:22px;width:42px;height:42px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.18);z-index:9990;transition:transform .2s,opacity .2s}
-.pg-fab:hover{transform:translateY(-2px) scale(1.06)}
-#pg-top{bottom:22px;background:var(--link);color:var(--on-link);opacity:0;pointer-events:none}
-#pg-top.show{opacity:1;pointer-events:auto}
-#pg-dark{bottom:126px;background:#fff;color:#2F4B8F;border:1.5px solid rgba(0,0,0,.15)}
-body.dark-mode #pg-dark{background:#1A2333;color:#F5C8B5;border-color:#2B3A55}
-.pg-dico{width:20px;height:20px;display:inline-block;background-color:currentColor;-webkit-mask:url(/images/icons/h-moon.png) center/contain no-repeat;mask:url(/images/icons/h-moon.png) center/contain no-repeat}
-body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-image:url(/images/icons/h-sun.png)}
-.pg-up{width:11px;height:11px;border-top:2.6px solid currentColor;border-right:2.6px solid currentColor;transform:rotate(-45deg) translateY(2px);display:inline-block}
-
-@media(max-width:640px){.problem-grid{grid-template-columns:1fr}.method-steps{grid-template-columns:1fr 1fr}.results-grid{grid-template-columns:1fr 1fr}.results-grid>:nth-child(3):last-child{grid-column:1/-1}.hero h1{font-size:2rem}}
-@media print{.site-masthead,.pg-fab,#read-progress{display:none!important}}
-@media (prefers-reduced-motion:reduce){*{transition-duration:.001ms!important}html{scroll-behavior:auto}}
-@view-transition{navigation:auto}
-::view-transition-old(root),::view-transition-new(root){animation-duration:.18s}
-@media (prefers-reduced-motion:reduce){::view-transition-old(root),::view-transition-new(root){animation:none!important}}
-
-/* ── extra components (records wall, game pills, method cards, framed images) ── */
-.records-wall{background:var(--band);border:1px solid var(--rule);border-radius:16px;padding:30px 24px;text-align:center;margin:18px 0}
-.records-title{font-family:var(--sans);font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:8px}
-.records-number{font-family:var(--sans);font-size:4rem;font-weight:800;line-height:1;color:var(--link);margin-bottom:4px}
-.records-sub{font-family:var(--sans);font-size:.9rem;color:var(--muted)}
-.games-grid{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
-.game-pill{font-family:var(--sans);font-size:.82rem;font-weight:600;padding:5px 13px;border-radius:999px;background:var(--band);border:1px solid var(--rule);color:var(--body)}
-.method-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:20px 0}
-.method-grid:has(> :nth-child(4):last-child){grid-template-columns:repeat(2,minmax(0,1fr))}
-.method-card{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:18px 20px}
-.method-card h3{font-family:var(--sans);font-size:.9rem;font-weight:700;color:var(--ink);margin-bottom:7px}
-.method-card p{font-family:var(--sans);font-size:.83rem;color:var(--muted);margin:0;line-height:1.6}
-.insight{background:var(--band);border:1px solid var(--rule);border-radius:12px;padding:20px 24px;margin:16px 0}
-.insight h3{font-family:var(--sans);font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:8px}
-.insight p{font-size:1rem;color:var(--body);margin:0;line-height:1.62}
-.vs-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0}
-.vs-card{border-radius:12px;padding:18px 20px;background:var(--card);border:1px solid var(--rule)}
-.vs-bad{border-left:3px solid var(--bad)} .vs-good{border-left:3px solid var(--good)}
-.vs-card h3{font-family:var(--sans);font-size:.85rem;font-weight:700;margin-bottom:10px}
-.vs-bad h3{color:var(--bad)} .vs-good h3{color:var(--good)}
-.vs-card ul{padding-left:16px;font-family:var(--sans);font-size:.85rem;color:var(--body);line-height:1.75}
-.tags{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 8px}
-.tag{font-family:var(--sans);font-size:.82rem;font-weight:600;padding:5px 13px;border-radius:999px;background:var(--band);border:1px solid var(--rule);color:var(--body)}
-figure.rimg{margin:1.8em auto;max-width:100%}
-figure.rimg img{width:100%;border-radius:12px;border:1px solid var(--fig-border);background:var(--band)}
-body.dark-mode figure.rimg img{filter:brightness(.9)}
-figure.rimg figcaption{font-family:var(--sans);font-size:.82rem;color:var(--muted);margin-top:.8em;text-align:center;line-height:1.5}
-@media(max-width:640px){.vs-grid{grid-template-columns:1fr}.method-grid{grid-template-columns:1fr}}
-
-/* the AI-agent panel (bottom:120px, z-index:9991) covers this FAB while open — hide it, as the agent does with its own launcher */
-.ra-panel.show ~ #pg-dark{opacity:0;pointer-events:none;}
-
-/* figure palette (shared by every chart and animation; Jev-style: navy = ours, misty blue = our variant,
-   peach = competing RL baseline, cool gray = base model / others) */
-:root{--c-ours:#2F4B8F;--c-ours-fill:#90A4C5;--c-var:#BFD8EC;--c-var-line:#6F94C6;--c-rl:#F5C8B5;--c-rl-line:#E39A7A;
-  --c-base:#DDE2EA;--c-base-line:#8F97A8;--c-other:#C9CED8;--c-other-line:#9AA1B0;--c-grid:#E4E8EF;--c-ink2:#5B6273}
-body.dark-mode{--c-ours:#9DB8EA;--c-ours-fill:#5E77A8;--c-var:#3F5F86;--c-var-line:#7FA6D3;--c-rl:#9A6E5D;--c-rl-line:#E9A98C;
-  --c-base:#3A414E;--c-base-line:#8F97A8;--c-other:#4A5260;--c-other-line:#9AA1B0;--c-grid:#2A303A;--c-ink2:#A6ADBB}
-figure.anim-fig{--link:var(--c-ours);--good:#3E7D5A;--bad:var(--c-rl-line)}
-body.dark-mode figure.anim-fig{--good:#7FC79A}
-.problem-card{border-left-color:var(--c-rl-line)!important}.problem-card h3{color:#A14F2C!important}
-.solution-card{border-left-color:var(--c-ours)!important}.solution-card h3{color:var(--c-ours)!important}
-body.dark-mode .problem-card h3{color:#F0B49A!important}
-.vs-bad{border-left-color:var(--c-rl-line)!important}.vs-good{border-left-color:var(--c-ours)!important}
-.vs-bad h3,.vs-bad h4,.vs-bad .vs-h{color:#A14F2C!important}.vs-good h3,.vs-good h4,.vs-good .vs-h{color:var(--c-ours)!important}
-body.dark-mode .vs-bad h3,body.dark-mode .vs-bad h4,body.dark-mode .vs-bad .vs-h{color:#F0B49A!important}
-
-h1,h2,h3,.bx-title,.p-title,.pub-title,.card-title{text-wrap:balance}
-p,li{text-wrap:pretty}
-p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcaption a,td a{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px;text-decoration-color:rgba(47,75,143,.45)}body.dark-mode p a:not([class]),body.dark-mode li a:not([class]),body.dark-mode .authors a,body.dark-mode .tl-desc a,body.dark-mode .note a,body.dark-mode figcaption a,body.dark-mode td a{text-decoration-color:rgba(157,184,234,.5)}
-</style><script type="application/ld+json">{
-  "@context": "https://schema.org",
-  "@type": "ScholarlyArticle",
-  "name": "Online Reward-Weighted Fine-Tuning of Flow Matching with Wasserstein Regularization",
-  "author": [
-    {
-      "@type": "Person",
-      "name": "Jiajun Fan"
-    },
-    {
-      "@type": "Person",
-      "name": "Shuaike Shen"
-    },
-    {
-      "@type": "Person",
-      "name": "Chaoran Cheng"
-    },
-    {
-      "@type": "Person",
-      "name": "Yuxin Chen"
-    },
-    {
-      "@type": "Person",
-      "name": "Chumeng Liang"
-    },
-    {
-      "@type": "Person",
-      "name": "Ge Liu"
-    }
-  ],
-  "datePublished": "2025",
-  "publisher": {
-    "@type": "Organization",
-    "name": "ICLR 2025"
-  },
-  "url": "https://www.jiajunfan.com/projects/orw-cfm-w2/",
-  "sameAs": "https://arxiv.org/abs/2502.06061",
-  "keywords": "flow matching, RLHF, Wasserstein regularization, online fine-tuning"
+{% include selfrw/style.html %}
+{% include proj/orw-cfm-w2/style.html %}
+<noscript><style>.hl{background-size:100% 36%}.tiles .tile{opacity:1;transform:none}.chapters{position:static}</style></noscript>
+<script type="application/ld+json">{
+  "@context":"https://schema.org","@type":"ScholarlyArticle",
+  "name":"Online Reward-Weighted Fine-Tuning of Flow Matching with Wasserstein Regularization",
+  "description":"Fine-tuning a flow-matching image model toward any reward, online: it learns from its own samples weighted by reward, and a tractable Wasserstein-2 bound keeps it from collapsing. No likelihoods, no reward gradients, no human-collected data.",
+  "author":[{"@type":"Person","name":"Jiajun Fan"},{"@type":"Person","name":"Shuaike Shen"},{"@type":"Person","name":"Chaoran Cheng"},{"@type":"Person","name":"Yuxin Chen"},{"@type":"Person","name":"Chumeng Liang"},{"@type":"Person","name":"Ge Liu"}],
+  "datePublished":"2025",
+  "publisher":{"@type":"Organization","name":"ICLR 2025"},
+  "url":"https://www.jiajunfan.com/projects/orw-cfm-w2/","sameAs":"https://arxiv.org/abs/2502.06061",
+  "keywords":"flow matching, reinforcement learning, RLHF, reward-weighted fine-tuning, Wasserstein regularization, policy collapse, Stable Diffusion 3"
 }</script>
   <script data-goatcounter="https://jiajunfan.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 {% include site-chrome.html %}
@@ -282,132 +59,379 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
   </div>
 </header>
 
-<div class="hero" role="region" aria-label="Project summary">
-  <div class="kicker">ICLR 2025</div>
-  <h1>Online Reward-Weighted Fine-Tuning of Flow Matching with Wasserstein Regularization</h1>
-  <p class="short"><strong>ORW-CFM-W2</strong>: First online RLHF framework for flow matching models — no human data, no collapse</p>
-  <div class="authors">
-    <a href="/" class="me">Jiajun Fan</a><sup>1</sup>,
-    Shuaike Shen<sup>2</sup>, Chaoran Cheng<sup>1</sup>, Yuxin Chen<sup>3</sup>, Chumeng Liang<sup>4</sup>,
-    <a href="https://geliu.web.illinois.edu/">Ge Liu</a><sup>1</sup>
+<main>
+
+<section class="hero" aria-label="Summary">
+  <div class="wrap">
+    <p class="venue">ICLR 2025</p>
+    <h1>Online Reward&#8209;Weighted Fine&#8209;Tuning of Flow Matching <span class="l2">with Wasserstein Regularization</span></h1>
+    <p class="byline"><a href="/" class="me">Jiajun&nbsp;Fan</a><sup>1</sup>, Shuaike&nbsp;Shen<sup>2</sup>, Chaoran&nbsp;Cheng<sup>1</sup>, Yuxin&nbsp;Chen<sup>3</sup>, Chumeng&nbsp;Liang<sup>4</sup>, <a href="https://geliu.web.illinois.edu/">Ge&nbsp;Liu</a><sup>1</sup></p>
+    <ul class="logos" aria-label="Affiliations"><li><sup>1</sup><img src="/images/projects/self-rewriting/logo_uiuc.png" alt="" width="66" height="96"><span>UIUC</span></li><li class="nologo"><sup>2</sup><span>Zhejiang University</span></li><li class="nologo"><sup>3</sup><span>Tsinghua University</span></li><li class="nologo"><sup>4</sup><span>USC</span></li></ul>
+    <div class="cta">
+      <a class="btn" href="/film/#orw-cfm-w2"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M5 3.300v9.400L12.500 8z"/></svg>Film</a>
+      <a class="btn btn-primary" href="https://arxiv.org/abs/2502.06061"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M4 1.5h5.5L12.5 4.5v10h-8.5z"/><path d="M9.5 1.5v3h3M6 8h4.5M6 10.5h4.5"/></svg>Paper</a>
+      <a class="btn" href="#cite"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5c2 0 3-1.5 3-4.5V4.5H3V8h3M9.5 11.5c2 0 3-1.5 3-4.5V4.5h-3V8h3"/></svg>BibTeX</a>
+    </div>
+    <div class="stage">
+      <canvas id="orw-stage" role="img" aria-label="Animation of the method, round by round. Noise flows through the model into its own samples, which fall into four groups. A reward weighs each sample, favouring one group. A Wasserstein-2 bound holds the model near the base model, drawn dashed. The model updates and samples again. Over the rounds the best group's share grows while the other groups stay."></canvas>
+      <ol class="stage-steps" aria-hidden="true">
+        <li><b>It samples</b>images from its own flow</li>
+        <li><b>A reward weighs them</b>any reward, no gradient</li>
+        <li><b>W2 holds it close</b>to the base model's flow</li>
+        <li><b>It updates</b>and samples again, online</li>
+      </ol>
+    </div>
   </div>
-  <div class="affil"><sup>1</sup>University of Illinois Urbana-Champaign &nbsp;&nbsp; <sup>2</sup>Zhejiang University &nbsp;&nbsp; <sup>3</sup>Tsinghua University &nbsp;&nbsp; <sup>4</sup>University of Southern California</div>
-  <div class="btn-row">
-    <a class="btn btn-primary" href="https://arxiv.org/abs/2502.06061">arXiv</a>
-    <a class="btn btn-secondary" href="https://openreview.net/forum?id=2IoFFexvuw">Paper (OpenReview)</a>
-    <a class="btn btn-neutral" href="/">Author Homepage</a>
+</section>
+
+<nav class="chapters" aria-label="Parts of this page">
+  <div class="wrap">
+    <a href="#results">At a glance</a>
+    <a href="#problem">The problem</a>
+    <a href="#finding">The finding</a>
+    <a href="#method">How it works</a>
+    <a href="#evidence">The evidence</a>
+    <span class="ch-sub"><a href="#optimum" aria-label="Finding 01">01</a><a href="#collapse" aria-label="Finding 02">02</a><a href="#dial" aria-label="Finding 03">03</a><a href="#sd3-scene" aria-label="Finding 04">04</a></span>
+    <a href="#matters">Why it matters</a>
+    <a href="#film">Film</a>
+    <a href="#cite">Cite</a>
+    <a class="ch-paper" href="https://arxiv.org/abs/2502.06061">arXiv 2502.06061</a>
   </div>
-  <hr class="hero-rule">
+</nav>
+
+<section class="scene band" id="results">
+  <div class="wrap">
+    <div class="duo">
+      <header class="say">
+        <p class="eyebrow">At a glance</p>
+        <h2>The paper in four results.</h2>
+        <p class="lead">Can a flow-matching image model learn from a reward alone, online, from its own samples, without collapsing? Yes: weight its own samples by their reward, and hold it near the base model with a Wasserstein&#8209;2 bound it can compute.</p>
+      </header>
+      <div class="show cards c2">
+        <a class="card result" href="#optimum"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><line class="il-ax" x1="20" y1="84" x2="180" y2="84"/><line x1="20" y1="18" x2="180" y2="18" stroke="var(--muted)" stroke-width="1.4" stroke-dasharray="4 5"/><path d="M22 80C52 78 64 46 100 40S150 37 178 37" fill="none" stroke="var(--peach-e)" stroke-width="2.5" stroke-linecap="round"/><path class="il-ln" d="M22 80C44 70 56 26 90 20S150 18 178 18"/><circle class="il-dot" cx="178" cy="18" r="4.5"/></svg></span><span class="r-no">Finding 01<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>Online, it reaches the optimum.</h3><p>Trained on its own samples, it reaches the best reward. A fixed dataset stops short.</p></a>
+        <a class="card result" href="#collapse"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><g fill="var(--peach)" stroke="var(--peach-e)" stroke-width="1.2"><rect x="20" y="14" width="20" height="20" rx="4"/><rect x="44" y="14" width="20" height="20" rx="4"/><rect x="68" y="14" width="20" height="20" rx="4"/><rect x="20" y="38" width="20" height="20" rx="4"/><rect x="44" y="38" width="20" height="20" rx="4"/><rect x="68" y="38" width="20" height="20" rx="4"/><rect x="20" y="62" width="20" height="20" rx="4"/><rect x="44" y="62" width="20" height="20" rx="4"/><rect x="68" y="62" width="20" height="20" rx="4"/></g><path class="il-ar" d="M96 48h10M102 44l4 4-4 4"/><g stroke-width="1.2"><rect x="112" y="14" width="20" height="20" rx="4" fill="var(--mint)" stroke="var(--mint-e)"/><rect x="136" y="14" width="20" height="20" rx="4" fill="var(--ice)" stroke="var(--ice-e)"/><rect x="160" y="14" width="20" height="20" rx="4" fill="var(--lav)" stroke="var(--lav-e)"/><rect x="112" y="38" width="20" height="20" rx="4" fill="var(--ice)" stroke="var(--ice-e)"/><rect x="136" y="38" width="20" height="20" rx="4" fill="var(--rose)" stroke="var(--rose-e)"/><rect x="160" y="38" width="20" height="20" rx="4" fill="var(--mint)" stroke="var(--mint-e)"/><rect x="112" y="62" width="20" height="20" rx="4" fill="var(--lav)" stroke="var(--lav-e)"/><rect x="136" y="62" width="20" height="20" rx="4" fill="var(--mint)" stroke="var(--mint-e)"/><rect x="160" y="62" width="20" height="20" rx="4" fill="var(--ice)" stroke="var(--ice-e)"/></g></svg></span><span class="r-no">Finding 02<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>A W2 bound stops the collapse.</h3><p>Without it, the model ends up drawing one picture. With it, the samples stay varied.</p></a>
+        <a class="card result" href="#dial"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><line class="il-ax" x1="20" y1="84" x2="180" y2="84"/><path class="il-ln" d="M24 22C60 26 72 52 104 62S160 70 176 71"/><line x1="24" y1="48" x2="176" y2="48" stroke="var(--hair)" stroke-width="1.5"/><circle cx="104" cy="48" r="8" fill="var(--card)" stroke="var(--mint-e)" stroke-width="2"/><circle class="il-dot" cx="104" cy="62" r="4"/></svg></span><span class="r-no">Finding 03<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>One knob sets the balance.</h3><p>Raising &alpha; keeps it closer to the base model, trading reward for diversity.</p></a>
+        <a class="card result" href="#sd3-scene"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><line class="il-ax" x1="20" y1="84" x2="180" y2="84"/><line class="il-ax" x1="20" y1="10" x2="20" y2="84"/><circle cx="36" cy="22" r="5" fill="var(--ice)" stroke="var(--ice-e)" stroke-width="1.4"/><circle cx="52" cy="72" r="5" fill="var(--peach)" stroke="var(--peach-e)" stroke-width="1.4"/><circle cx="54" cy="50" r="5" fill="var(--peach)" stroke="var(--peach-e)" stroke-width="1.4"/><circle cx="84" cy="62" r="5" fill="var(--lav)" stroke="var(--lav-e)" stroke-width="1.4"/><circle cx="112" cy="44" r="5" fill="var(--lav)" stroke="var(--lav-e)" stroke-width="1.4"/><circle cx="130" cy="48" r="5" fill="var(--mint-l)" stroke="var(--mint-e)" stroke-width="1.4"/><circle cx="168" cy="30" r="14" fill="var(--mint-l)"/><circle class="il-y" cx="168" cy="30" r="7"/></svg></span><span class="r-no">Finding 04<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>It aligns Stable Diffusion 3.</h3><p>The highest CLIP score of all methods compared, with diversity close to the base model.</p></a>
+      </div>
+      <ul class="creed">
+        <li><b>Online.</b><span>it learns from what it just generated</span></li>
+        <li><b>Likelihood-free.</b><span>the bound needs only two vector fields</span></li>
+        <li><b>Any reward.</b><span>a classifier, a file size, CLIP and more</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="scene" id="problem">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main wide">
+        <p class="eyebrow">The problem</p>
+        <h2>Reward fine-tuning works for diffusion models. For flow matching, three things stand in the way.</h2>
+      </div>
+    </header>
+    <div class="cards c3 pbs pausable">
+      <div class="card pb">
+        <span class="r-ill" aria-hidden="true"><svg viewBox="0 0 220 104"><g class="pb-noise"><circle cx="20" cy="56" r="3"/><circle cx="28" cy="66" r="2.5"/><circle cx="16" cy="70" r="2.5"/><circle cx="26" cy="52" r="2"/><circle cx="12" cy="60" r="2"/><circle cx="32" cy="58" r="2"/><circle cx="22" cy="76" r="2"/></g><path class="pb-path" d="M34 62C84 62 118 20 168 46"/><g><circle class="pb-tick" style="--i:0" cx="40.2" cy="61.8" r="3"/><circle class="pb-tick" style="--i:1" cx="52.1" cy="60.2" r="3"/><circle class="pb-tick" style="--i:2" cx="63.5" cy="57.5" r="3"/><circle class="pb-tick" style="--i:3" cx="74.5" cy="54" r="3"/><circle class="pb-tick" style="--i:4" cx="85.2" cy="50.1" r="3"/><circle class="pb-tick" style="--i:5" cx="95.7" cy="46.1" r="3"/><circle class="pb-tick" style="--i:6" cx="106.3" cy="42.5" r="3"/><circle class="pb-tick" style="--i:7" cx="116.8" cy="39.6" r="3"/><circle class="pb-tick" style="--i:8" cx="127.5" cy="37.9" r="3"/><circle class="pb-tick" style="--i:9" cx="138.5" cy="37.6" r="3"/><circle class="pb-tick" style="--i:10" cx="149.9" cy="39.2" r="3"/><circle class="pb-tick" style="--i:11" cx="161.8" cy="43.1" r="3"/></g><circle class="pb-run" r="4.5" style="--op:path('M34 62C84 62 118 20 168 46')"/><rect class="pb-img" x="172" y="30" width="34" height="34" rx="6"/><rect class="pb-cell" x="177" y="35" width="11" height="11" rx="2"/><rect class="pb-cell b" x="190" y="35" width="11" height="11" rx="2"/><rect class="pb-cell b" x="177" y="48" width="11" height="11" rx="2"/><rect class="pb-cell" x="190" y="48" width="11" height="11" rx="2"/><text class="pb-t" x="22" y="98" text-anchor="middle">noise</text><text class="pb-t bad" x="100" y="14" text-anchor="middle">summed along the whole path</text><text class="pb-t" x="189" y="82" text-anchor="middle">image</text></svg></span>
+        <span class="pb-k">Policy gradients</span>
+        <h3>The likelihood is too costly.</h3>
+        <p>Methods such as DDPO need each sample's likelihood. For a continuous flow, that means integrating the model's divergence along its whole path.</p>
+      </div>
+      <div class="card pb">
+        <span class="r-ill" aria-hidden="true"><svg viewBox="0 0 220 104"><path class="pb-ax" d="M14 6V92H210"/><line class="pb-dash" x1="14" y1="18" x2="210" y2="18"/><text class="pb-t" x="18" y="12">optimal</text><path class="pb-off" d="M16 90C56 90 72 44 118 40S180 40 196 40"/><g class="pb-gap"><path d="M204 20V38M200 20h8M200 38h8"/></g><text class="pb-t bad pb-gap" style="stroke:none" x="196" y="58" text-anchor="end">gap</text></svg></span>
+        <span class="pb-k">Offline re-weighting</span>
+        <h3>A fixed dataset stops short.</h3>
+        <p>Re-weighting data collected in advance cannot reach the best policy: the online&ndash;offline gap. DPO also needs pairs and filtered data.</p>
+      </div>
+      <div class="card pb">
+        <span class="r-ill" aria-hidden="true"><svg viewBox="0 0 220 104"><circle class="pb-dot" cx="30" cy="24" r="5" style="--dx:80px;--dy:28px"/><circle class="pb-dot" cx="58" cy="80" r="5" style="--dx:52px;--dy:-28px"/><circle class="pb-dot" cx="84" cy="30" r="5" style="--dx:26px;--dy:22px"/><circle class="pb-dot" cx="150" cy="22" r="5" style="--dx:-40px;--dy:30px"/><circle class="pb-dot" cx="186" cy="74" r="5" style="--dx:-76px;--dy:-22px"/><circle class="pb-dot" cx="196" cy="34" r="5" style="--dx:-86px;--dy:18px"/><circle class="pb-dot" cx="126" cy="86" r="5" style="--dx:-16px;--dy:-34px"/><circle class="pb-dot" cx="40" cy="58" r="5" style="--dx:70px;--dy:-6px"/><circle class="pb-dot" cx="170" cy="52" r="5" style="--dx:-60px;--dy:0px"/><circle class="pb-dot" cx="96" cy="64" r="5" style="--dx:14px;--dy:-12px"/><circle class="pb-dot" cx="68" cy="14" r="5" style="--dx:42px;--dy:38px"/><circle class="pb-dot" cx="140" cy="60" r="5" style="--dx:-30px;--dy:-8px"/><circle class="pb-dot" cx="20" cy="86" r="5" style="--dx:90px;--dy:-34px"/><circle class="pb-dot" cx="204" cy="14" r="5" style="--dx:-94px;--dy:38px"/><circle class="pb-one" cx="110" cy="52" r="11"/></svg></span>
+        <span class="pb-k">Online, unchecked</span>
+        <h3>Learning online collapses.</h3>
+        <p>A model that keeps training on its own best samples narrows until it makes one image: the over-optimization seen in diffusion models.</p>
+      </div>
+    </div>
+    <p class="takeaway">What is missing: an online method with a limit that a flow model can actually compute.</p>
+  </div>
+</section>
+
+<section class="scene band" id="finding">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main wide">
+        <p class="eyebrow">The finding <span>Lemma 1</span></p>
+        <h2 class="reveal">Learning online reaches the best reward. <span class="hl">Left unchecked, it collapses.</span></h2>
+        <p class="lead">We prove that re-weighting its own samples round after round sharpens the model toward the highest reward, until it makes the same image every time. The usual limit, a KL penalty, needs the very likelihood a flow cannot afford.</p>
+      </div>
+    </header>
+    <div class="fig panel">
+      <div class="rounds anim" id="rounds" role="img" aria-label="Schematic. Two rows of small bar charts over five modes, the rightmost with the highest reward, from the base model through round 1, round 2 and round 3 to many rounds. With reward only, the highest-reward mode grows every round until it holds all samples: collapse, as Lemma 1 proves. With the W2 bound, the highest-reward mode leads but the distribution settles and the other modes stay."></div>
+    </div>
+    <p class="cap">Schematic of the paper's analysis (Theorem 2, Lemma 1 and Theorem 5), not measured. Bars: share of samples in each of five modes; dashed: the base model.</p>
+    <p class="takeaway">So keep the online loop, and add a limit the model can compute.</p>
+  </div>
+</section>
+
+<section class="scene" id="method">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main wide">
+        <p class="eyebrow">How it works</p>
+        <h2 class="reveal">Learn from its own samples, <span class="hl">within reach of where it started.</span></h2>
+        <p class="lead">Each round it weights its own samples by their reward and trains on them. A Wasserstein&#8209;2 bound, computed from the two models' vector fields, keeps it near the base model.</p>
+      </div>
+      <ul class="nots" aria-label="What it does without">
+        <li>no likelihoods</li><li>no reward gradients</li><li>no filtered datasets</li><li>no human-collected data</li>
+      </ul>
+    </header>
+    <div class="fig panel">
+      <div class="loop pausable" id="loop" role="img" aria-label="Diagram of one round. The flow model being fine-tuned draws its own samples; any reward scores them; each sample is weighted by w equals exp of tau times r; the weighted flow-matching loss plus alpha times the W2 bound to the frozen base model updates the flow model, and the loop starts again."></div>
+    </div>
+    <div class="terms">
+      <div class="term2 k-a"><b>Reward-weighted flow matching</b><p class="eq">w(x<sub>1</sub>) &middot; &#8214;v<sub>&theta;</sub>(t, x) &minus; u<sub>t</sub>(x | x<sub>1</sub>)&#8214;<sup>2</sup></p><p>Trains on its own samples, each weighted by its reward. Online, the weights compound round after round.</p></div>
+      <div class="term2 k-b"><b>The W2 bound, Theorem 3</b><p class="eq">W<sub>2</sub><sup>2</sup> &le; e<sup>2L</sup> &int;<sub>0</sub><sup>1</sup> E &#8214;v<sup>ft</sup> &minus; v<sup>ref</sup>&#8214;<sup>2</sup> ds</p><p>Bounds how far it drifts from the base model with only the two vector fields, no likelihood. It enters the loss with weight &alpha;.</p></div>
+    </div>
+    <p class="takeaway">&tau; sets how fast it converges; &alpha; sets where it settles.</p>
+  </div>
+</section>
+
+<div id="evidence">
+
+<section class="scene band" id="optimum">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">The evidence <span>Finding 01</span></p>
+        <h2>Online, it reaches the optimum.</h2>
+        <p class="lead">Rewarded for even digits, a model trained on its own samples reaches the best possible reward. Re-weighting a fixed dataset stops short.</p>
+      </div>
+    </header>
+    <div class="fig panel">
+      <p class="fig-h">Fine-tuning an MNIST flow model toward even digits <span>reward = p(even) &minus; p(odd), no W2 term (&alpha; = 0)</span></p>
+      <p class="lg"><span><i style="--c:var(--mint-e)"></i>Online, &tau; = 10</span><span><i class="lite" style="--c:var(--mint-e)"></i>Online, &tau; = 0.01</span><span><i style="--c:var(--peach-e)"></i>Offline, RW-CFM</span><span><i style="--c:var(--faint)"></i>No reward weight, &tau; = 0</span><span><i class="dash" style="--c:var(--muted)"></i>Optimal</span></p>
+      <div class="ch anim" id="ch-gap" role="img" aria-label="Reward over 10000 training steps. The two online runs, tau 10 and tau 0.01, climb to the optimal reward of 1.0. The offline method, RW-CFM, levels off below it: the online-offline gap. With tau 0 the reward stays near where it started."></div>
+    </div>
+    <div class="tiles anim">
+      <div class="tcard">
+        <div class="trow wn" style="--n:4">
+          <div class="tnote"><p class="tc-h">What each run generates</p><p class="tn">The paper's own samples, one grid per run. The larger &tau;, the greedier it gets.</p></div>
+          <figure class="tile" style="--d:.1s"><img src="/images/projects/orw-cfm-w2/mnist_tau0.png" alt="An 8 by 8 grid of handwritten digits of every kind, odd and even" loading="lazy" width="480" height="480"><figcaption><b>&tau; = 0</b>every digit, like the pre-trained model</figcaption></figure>
+          <figure class="tile k-edit" style="--d:.25s"><img src="/images/projects/orw-cfm-w2/mnist_tau001.png" alt="An 8 by 8 grid of even digits: zeros, twos, fours, sixes and eights" loading="lazy" width="480" height="480"><figcaption><b>&tau; = 0.01</b>even digits</figcaption></figure>
+          <figure class="tile" style="--d:.4s"><img src="/images/projects/orw-cfm-w2/mnist_tau10.png" alt="An 8 by 8 grid that is almost all sixes" loading="lazy" width="480" height="480"><figcaption><b>&tau; = 10</b>even digits, less variety</figcaption></figure>
+        </div>
+      </div>
+    </div>
+    <p class="cap">Paper, Fig. 2. Curves traced from the paper's figure, without its shaded spread.</p>
+    <p class="takeaway">Learning from what it just generated takes it where no fixed dataset reaches.</p>
+  </div>
+</section>
+
+<section class="scene" id="collapse">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">The evidence <span>Finding 02</span></p>
+        <h2>A W2 bound stops the collapse.</h2>
+        <p class="lead">Rewarded for cats, dogs or birds, the model without the bound draws the same picture over and over. With it, the samples stay varied at a similar reward.</p>
+      </div>
+    </header>
+    <div class="ab tiles anim" id="clip-cases">
+      <div class="tcard"><p class="tc-h">&ldquo;an image of cat&rdquo;</p><div class="trow"><figure class="tile k-fail" style="--d:.1s"><img src="/images/projects/orw-cfm-w2/clip_cat_a0.jpg" alt="An 8 by 8 grid of the same pale blurry shape repeated in every cell" loading="lazy" width="548" height="548"><figcaption><b>Without W2</b>&alpha; = 0</figcaption></figure><figure class="tile k-edit" style="--d:.3s"><img src="/images/projects/orw-cfm-w2/clip_cat_a1.jpg" alt="An 8 by 8 grid of small, different cat images" loading="lazy" width="548" height="548"><figcaption><b>With W2</b>&alpha; = 1</figcaption></figure></div></div>
+      <div class="tcard"><p class="tc-h">&ldquo;an image of dog&rdquo;</p><div class="trow"><figure class="tile k-fail" style="--d:.2s"><img src="/images/projects/orw-cfm-w2/clip_dog_a0.jpg" alt="An 8 by 8 grid of one identical dark image repeated in every cell" loading="lazy" width="548" height="548"><figcaption><b>Without W2</b>&alpha; = 0</figcaption></figure><figure class="tile k-edit" style="--d:.4s"><img src="/images/projects/orw-cfm-w2/clip_dog_a1.jpg" alt="An 8 by 8 grid of small, different dog images" loading="lazy" width="548" height="548"><figcaption><b>With W2</b>&alpha; = 1</figcaption></figure></div></div>
+      <div class="tcard"><p class="tc-h">&ldquo;an image of bird&rdquo;</p><div class="trow"><figure class="tile k-fail" style="--d:.3s"><img src="/images/projects/orw-cfm-w2/clip_bird_a0.jpg" alt="An 8 by 8 grid of one identical green and grey image repeated in every cell" loading="lazy" width="548" height="548"><figcaption><b>Without W2</b>&alpha; = 0</figcaption></figure><figure class="tile k-edit" style="--d:.5s"><img src="/images/projects/orw-cfm-w2/clip_bird_a1.jpg" alt="An 8 by 8 grid of small, different bird images" loading="lazy" width="548" height="548"><figcaption><b>With W2</b>&alpha; = 1</figcaption></figure></div></div>
+    </div>
+    <button type="button" class="more" id="more-clip" aria-controls="clip-cases" aria-expanded="false">Show dog and bird</button>
+    <div class="fig panel sub">
+      <p class="fig-h">The cat run, step by step <span>W2 distance estimated by its upper bound</span></p>
+      <div class="ch anim" id="ch-clip" role="img" aria-label="Two charts over 1000 training steps. Reward: without W2 it climbs close to the optimum of 1.0; with W2 it climbs nearly as high; the pre-trained model stays where it started. W2 distance to the base model: without W2 it keeps growing; with W2 it stays low and nearly flat."></div>
+    </div>
+    <p class="cap">Paper, Figs. 11, 13 and 14: an unconditional CIFAR-10 flow model with a CLIP reward, &tau; = 1. Curves traced from Fig. 11; dashed: the pre-trained model.</p>
+    <p class="takeaway">Without a limit, it drifts ever further from where it started; with the bound, it stays close.</p>
+  </div>
+</section>
+
+<section class="scene band" id="dial">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">The evidence <span>Finding 03</span></p>
+        <h2>One knob sets the balance.</h2>
+        <p class="lead">Raise &alpha; and the model stays closer to the base model, giving up some reward in exchange. Each point on the curves is fine&#8209;tuned separately, at its own &alpha;.</p>
+      </div>
+    </header>
+    <div class="fig panel">
+      <p class="fig-h">Making CIFAR-10 images easy to compress <span>reward from the JPEG file size, &tau; = 1</span></p>
+      <div class="ch anim" id="ch-dial" role="img" aria-label="Two charts against alpha from 0 to 1, each point fine-tuned separately at its own alpha. As alpha grows, the reward at convergence falls but stays above the pre-trained model, and the W2 distance to the pre-trained model falls almost to zero."></div>
+    </div>
+    <div class="tiles t2 anim">
+      <div class="tcard">
+        <p class="tc-h">Image compression, CIFAR-10 <span>&tau; = 1</span></p>
+        <div class="trow n4" style="--n:4">
+          <figure class="tile" style="--d:.1s"><img src="/images/projects/orw-cfm-w2/jpeg_ref.jpg" alt="An 8 by 8 grid of varied CIFAR-10 style images: animals, cars, ships" loading="lazy" width="548" height="548"><figcaption><b>Pre-trained</b>the starting point</figcaption></figure>
+          <figure class="tile k-fail" style="--d:.25s"><img src="/images/projects/orw-cfm-w2/jpeg_a0.jpg" alt="An 8 by 8 grid of almost blank white images" loading="lazy" width="548" height="548"><figcaption><b>&alpha; = 0</b>nearly blank</figcaption></figure>
+          <figure class="tile k-edit" style="--d:.4s"><img src="/images/projects/orw-cfm-w2/jpeg_a05.jpg" alt="An 8 by 8 grid of simple, smooth images of animals, planes and objects" loading="lazy" width="548" height="548"><figcaption><b>&alpha; = 0.5</b>simpler images</figcaption></figure>
+          <figure class="tile" style="--d:.55s"><img src="/images/projects/orw-cfm-w2/jpeg_a10.jpg" alt="An 8 by 8 grid of varied images close to the pre-trained ones" loading="lazy" width="548" height="548"><figcaption><b>&alpha; = 10</b>close to the start</figcaption></figure>
+        </div>
+      </div>
+      <div class="tcard">
+        <p class="tc-h">Even digits, MNIST <span>&tau; = 10</span></p>
+        <div class="trow" style="--n:3">
+          <figure class="tile k-fail" style="--d:.2s"><img src="/images/projects/orw-cfm-w2/mnist_a0.png" alt="An 8 by 8 grid of sixes only" loading="lazy" width="480" height="480"><figcaption><b>&alpha; = 0</b>one digit</figcaption></figure>
+          <figure class="tile" style="--d:.35s"><img src="/images/projects/orw-cfm-w2/mnist_a03.png" alt="An 8 by 8 grid of mostly sixes with some zeros, twos, fours and eights" loading="lazy" width="480" height="480"><figcaption><b>&alpha; = 0.3</b>more variety</figcaption></figure>
+          <figure class="tile k-edit" style="--d:.5s"><img src="/images/projects/orw-cfm-w2/mnist_a08.png" alt="An 8 by 8 grid of varied even digits" loading="lazy" width="480" height="480"><figcaption><b>&alpha; = 0.8</b>still more</figcaption></figure>
+        </div>
+      </div>
+    </div>
+    <p class="cap">Paper, Figs. 3 and 4. Curves traced from Fig. 4e and 4f; dashed: the pre-trained model.</p>
+    <p class="takeaway">The trade-off is set with one number, not with a new dataset.</p>
+  </div>
+</section>
+
+<section class="scene" id="sd3-scene">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">The evidence <span>Finding 04</span></p>
+        <h2>It aligns <span class="nw">Stable Diffusion 3,</span> <span class="nw">and keeps it diverse.</span></h2>
+        <p class="lead">Fine-tuned on &ldquo;a cat in the sky&rdquo; with a CLIP reward, it scores highest of all methods compared, with diversity close to the base model. The W2 bound lifts every method it is added to.</p>
+      </div>
+    </header>
+    <div class="fig panel pausable" id="sd3">
+      <div class="mtabs" role="tablist" aria-label="Method">
+        <button role="tab" aria-selected="false" data-k="sd3" data-name="SD3, before fine-tuning" data-clip="28.69" data-div="4.78" data-img="/images/projects/orw-cfm-w2/cat_sd3.jpg" data-alt="Three SD3 samples: a cat sitting on a ledge, a cat lying in grass, a cat on a roof, all under a blue sky">SD3</button>
+        <button role="tab" aria-selected="false" data-k="raft" data-name="RAFT" data-clip="29.30" data-div="2.05" data-img="/images/projects/orw-cfm-w2/cat_raft.jpg" data-alt="Three almost identical, garishly coloured cat faces against the sky">RAFT</button>
+        <button role="tab" aria-selected="false" data-k="reft" data-name="ReFT" data-clip="29.32" data-div="3.26" data-img="/images/projects/orw-cfm-w2/cat_reft.jpg" data-alt="Three over-saturated yellow cats against a blue sky">ReFT</button>
+        <button role="tab" aria-selected="false" data-k="orwcfm" data-name="ORW-CFM, no W2" data-clip="33.63" data-div="3.47" data-img="/images/projects/orw-cfm-w2/cat_orwcfm.jpg" data-alt="Three nearly identical small cats standing on clouds in a deep blue sky">ORW-CFM, no W2</button>
+        <button role="tab" aria-selected="false" data-k="raftw2" data-name="RAFT + W2" data-clip="30.88" data-div="2.81" data-img="/images/projects/orw-cfm-w2/cat_raftw2.jpg" data-alt="Three close-up cat faces against the sky">RAFT + W2</button>
+        <button role="tab" aria-selected="false" data-k="reftw2" data-name="ReFT + W2" data-clip="32.03" data-div="3.63" data-img="/images/projects/orw-cfm-w2/cat_reftw2.jpg" data-alt="Three cats against the sky, one sitting on a field, two on clouds">ReFT + W2</button>
+        <button role="tab" aria-selected="true" class="ours" data-k="ours" data-name="ORW-CFM-W2, ours" data-clip="35.46" data-div="4.21" data-img="/images/projects/orw-cfm-w2/cat_ours.jpg" data-alt="Three different cats in the sky: one resting on a cloud, one leaping between clouds, one floating">ORW-CFM-W2</button>
+      </div>
+      <div class="sd3-body">
+        <figure class="sd3-view">
+          <p class="sd3-q">Prompt: <span>&ldquo;a cat in the sky&rdquo;</span></p>
+          <div class="sd3-im"><img id="sd3-img" src="/images/projects/orw-cfm-w2/cat_ours.jpg" alt="Three different cats in the sky: one resting on a cloud, one leaping between clouds, one floating" width="960" height="320"></div>
+          <figcaption class="sd3-say"><b id="sd3-name">ORW-CFM-W2, ours</b><span class="v" id="sd3-val">CLIP score <b>35.46</b> &nbsp;&middot;&nbsp; diversity score <b>4.21</b></span></figcaption>
+        </figure>
+        <div class="ch anim" id="ch-sd3" role="img" aria-label="Scatter plot of CLIP score against diversity score for seven methods on Stable Diffusion 3. SD3: 28.69 and 4.78. RAFT: 29.30 and 2.05. ReFT: 29.32 and 3.26. ORW-CFM without W2: 33.63 and 3.47. RAFT plus W2: 30.88 and 2.81. ReFT plus W2: 32.03 and 3.63. ORW-CFM-W2, ours: 35.46 and 4.21. Arrows show that adding W2 raises both scores for RAFT, ReFT and ORW-CFM."></div>
+      </div>
+    </div>
+    <p class="cap">Paper, Table 1 and Fig. 8. Scores averaged across 64 samples; diversity is the mean pairwise distance between CLIP embeddings. Three samples per method, as shown in the paper.</p>
+    <h3 class="eyebrow sub">Spatial and compositional prompts</h3>
+    <div class="bcases" id="sd3-cases">
+      <article class="bcase"><p class="q">A banana on the left of an apple</p><div><p class="bk">SD3</p><div class="im2"><img src="/images/projects/orw-cfm-w2/pos_banana_sd3.jpg" alt="Two SD3 samples: bananas lying around and behind an apple" loading="lazy" width="640" height="320"></div></div><div><p class="bk ours">ORW-CFM-W2</p><div class="im2 ours"><img src="/images/projects/orw-cfm-w2/pos_banana_ours.jpg" alt="Two samples after fine-tuning: a banana on the left, an apple on the right" loading="lazy" width="640" height="320"></div></div></article>
+      <article class="bcase"><p class="q">A cat on the left of a dog.</p><div><p class="bk">SD3</p><div class="im2"><img src="/images/projects/orw-cfm-w2/pos_catdog_sd3.jpg" alt="Two SD3 samples: a single dog, and a single animal that mixes cat and dog" loading="lazy" width="640" height="320"></div></div><div><p class="bk ours">ORW-CFM-W2</p><div class="im2 ours"><img src="/images/projects/orw-cfm-w2/pos_catdog_ours.jpg" alt="Two samples after fine-tuning: a cat on the left sitting beside a dog on the right" loading="lazy" width="640" height="320"></div></div></article>
+      <article class="bcase"><p class="q">A laptop on top of a teddy bear</p><div><p class="bk">SD3</p><div class="im2"><img src="/images/projects/orw-cfm-w2/pos_laptop_sd3.jpg" alt="Two SD3 samples: a laptop beside a teddy bear" loading="lazy" width="640" height="320"></div></div><div><p class="bk ours">ORW-CFM-W2</p><div class="im2 ours"><img src="/images/projects/orw-cfm-w2/pos_laptop_ours.jpg" alt="Two samples after fine-tuning: an open laptop resting on top of a teddy bear" loading="lazy" width="640" height="320"></div></div></article>
+      <article class="bcase"><p class="q">A stack of 3 cubes. A red cube is on the top, sitting on a red cube. The red cube is in the middle, sitting on a green cube. The green cube is on the bottom.</p><div><p class="bk">SD3</p><div class="im2"><img src="/images/projects/orw-cfm-w2/comp_cubes_sd3.jpg" alt="Two SD3 samples: stacks of four cubes with the colours in the wrong order" loading="lazy" width="640" height="320"></div></div><div><p class="bk ours">ORW-CFM-W2</p><div class="im2 ours"><img src="/images/projects/orw-cfm-w2/comp_cubes_ours.jpg" alt="Two samples after fine-tuning: two red cubes stacked on a green cube" loading="lazy" width="640" height="320"></div></div></article>
+      <article class="bcase"><p class="q">A stack of 3 plates. A blue plate is on the top, sitting on a blue plate. The blue plate is in the middle, sitting on a green plate. The green plate is on the bottom.</p><div><p class="bk">SD3</p><div class="im2"><img src="/images/projects/orw-cfm-w2/comp_plates_sd3.jpg" alt="Two SD3 samples: piles of several blue and green plates" loading="lazy" width="640" height="320"></div></div><div><p class="bk ours">ORW-CFM-W2</p><div class="im2 ours"><img src="/images/projects/orw-cfm-w2/comp_plates_ours.jpg" alt="Two samples after fine-tuning: blue plates stacked on a green plate" loading="lazy" width="640" height="320"></div></div></article>
+      <article class="bcase"><p class="q">An emoji of a baby panda wearing a red hat, green gloves, red shirt, and green pants</p><div><p class="bk">SD3</p><div class="im2"><img src="/images/projects/orw-cfm-w2/comp_panda_sd3.jpg" alt="Two SD3 panda emojis with a red hat, green gloves and a red and green body that runs together" loading="lazy" width="640" height="320"></div></div><div><p class="bk ours">ORW-CFM-W2</p><div class="im2 ours"><img src="/images/projects/orw-cfm-w2/comp_panda_ours.jpg" alt="Two panda emojis after fine-tuning, each with a red hat, green gloves, a red shirt and green pants" loading="lazy" width="640" height="320"></div></div></article>
+    </div>
+    <button type="button" class="more" id="more-cases" aria-controls="sd3-cases" aria-expanded="false">Show three more</button>
+    <p class="cap">Paper, Figs. 7 and 10; prompts from DrawBench as used in DPOK, with the paper's own wording. Fig. 7 samples every method with the same random seeds.</p>
+    <p class="takeaway">Better placement and attributes, without giving up image quality.</p>
+  </div>
+</section>
+
 </div>
 
-<div class="container" role="main">
-
-<section>
-  <p class="tldr"><strong>TL;DR</strong> — RL fine-tuning of diffusion models is well-studied, but <strong>flow matching</strong> models (Stable Diffusion 3, Flux) remain underexplored due to unique challenges: no likelihood, policy collapse risk, high compute. ORW-CFM-W2 solves all three — online reward-weighting for alignment, Wasserstein-2 regularization for diversity, and a tractable bound that makes it efficient.</p>
-  {% include film-card.html id="orw-cfm-w2" name="ORW-CFM-W2" %}
-</section>
-
-<section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-warning.png);mask-image:url(/images/icons/h-warning.png)"></i>Why flow matching is hard to fine-tune</h2>
-  <div class="method-grid">
-    <div class="method-card">
-      <h3>No Likelihood</h3>
-      <p>Unlike diffusion models, flow matching has no tractable likelihood — standard KL regularization cannot be computed directly.</p>
+<section class="scene band matters" id="matters">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">Why it matters</p>
+        <h2>Change the reward, not the dataset.</h2>
+        <p class="lead">It needs only a score for each image it makes: no human&#8209;collected data, no filtered datasets, no gradient of the reward.</p>
+      </div>
+    </header>
+    <div class="fig panel">
+      <p class="surf-q">Stable Diffusion 3, <span>&ldquo;a train on top of a surfboard&rdquo;</span>, with three other reward models</p>
+      <div class="surf">
+        <p class="sk">HPS-V2</p><div class="sim"><img src="/images/projects/orw-cfm-w2/surf_hps_a.jpg" alt="Three samples with the HPS-V2 reward: a train on tracks, a locomotive by the sea, a locomotive on a surfboard in the waves" loading="lazy" width="960" height="320"><img src="/images/projects/orw-cfm-w2/surf_hps_b.jpg" alt="Three more samples with the HPS-V2 reward: locomotives riding surfboards on the water" loading="lazy" width="960" height="320"></div>
+        <p class="sk">Pick Score</p><div class="sim"><img src="/images/projects/orw-cfm-w2/surf_pick_a.jpg" alt="Three samples with the Pick Score reward: trains on surfboards on a beach and in the surf" loading="lazy" width="960" height="320"><img src="/images/projects/orw-cfm-w2/surf_pick_b.jpg" alt="Three more samples with the Pick Score reward: locomotives on surfboards in the sea" loading="lazy" width="960" height="320"></div>
+        <p class="sk">Alpha Clip</p><div class="sim"><img src="/images/projects/orw-cfm-w2/surf_alphaclip_a.jpg" alt="Three samples with the Alpha Clip reward: a surfboard on the sand, a train by the water, a train on a surfboard on the beach" loading="lazy" width="960" height="320"><img src="/images/projects/orw-cfm-w2/surf_alphaclip_b.jpg" alt="Three more samples with the Alpha Clip reward: trains riding surfboards on the water" loading="lazy" width="960" height="320"></div>
+      </div>
     </div>
-    <div class="method-card">
-      <h3>Policy Collapse</h3>
-      <p>Without diversity constraints, reward maximization causes the model to collapse onto a single high-reward mode (a Dirac delta, Lemma 1), losing generative quality.</p>
+    <p class="cap">Paper, Fig. 9, in the paper&rsquo;s order.</p>
+    <div class="cards c3 opens">
+      <div class="card"><h3>Any score will do</h3><p>A classifier, a JPEG file size, CLIP, HPS&#8209;V2, Pick Score, Alpha Clip: one method, no reward&#8209;specific changes.</p></div>
+      <div class="card"><h3>Its own data</h3><p>Every training image is one it generated itself. Flip the sign of the reward and the same model learns odd digits instead of even ones.</p></div>
+      <div class="card"><h3>Two dials, clear roles</h3><p>&tau; sets how fast it converges and &alpha; where it settles, so fine-tuning stays under control.</p></div>
     </div>
-    <div class="method-card">
-      <h3>No Human Data</h3>
-      <p>Existing fine-tuning methods require expensive human-curated datasets or preference annotations. ORW-CFM-W2 needs neither.</p>
+    <div class="cta">
+      <a class="btn btn-primary" href="https://arxiv.org/abs/2502.06061">Read the paper</a>
+      <a class="btn" href="https://openreview.net/forum?id=2IoFFexvuw">OpenReview</a>
     </div>
-  </div>
-  {% include anim/orw-cfm-w2_rounds.html %}
-</section>
-
-<section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-gear.png);mask-image:url(/images/icons/h-gear.png)"></i>How it works</h2>
-  {% include anim/strip_orw.html %}
-</section>
-
-<section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-chart.png);mask-image:url(/images/icons/h-chart.png)"></i>Experiments</h2>
-  <div class="results-grid">
-    <div class="result-card"><div class="rnum">SD3</div><div class="rdesc">Successfully fine-tunes<br>Stable Diffusion 3</div></div>
-    <div class="result-card"><div class="rnum">0</div><div class="rdesc">Human-collected data<br>required</div></div>
-    <div class="result-card"><div class="rnum">W2</div><div class="rdesc">Tractable bound<br>that prevents collapse</div></div>
-  </div>
-  <p>Tasks: target image generation, image compression, text-image alignment. Across these tasks, ORW-CFM-W2 converges to the optimal policy while allowing controllable reward–diversity trade-offs.</p>
-  <p>On Stable Diffusion 3, ORW-CFM-W2:</p>
-  <ul style="font-family:var(--sans);font-size:.95rem;color:var(--body);padding-left:1.4em;line-height:1.9;margin:0 0 1em">
-    <li>improves spatial and positional understanding on complex compositional prompts that the base model fails on;</li>
-    <li>outperforms RAFT and ReFT, with and without W2 regularization, on CLIP text-image alignment (App. A, Table 1);</li>
-    <li>adapts to different reward models (HPS-V2, Pick Score, Alpha Clip) without reward-specific optimizations;</li>
-    <li>produces images with richer semantic detail and better semantic correspondence.</li>
-  </ul>
-</section>
-
-<section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-link.png);mask-image:url(/images/icons/h-link.png)"></i>Unified RL framework</h2>
-  <p>We establish a formal connection between flow matching optimization and KL-regularized reinforcement learning, providing theoretical grounding for the reward-diversity trade-offs realized by ORW-CFM-W2.</p>
-  {% include anim/orw-cfm-w2_w2bound.html %}
-</section>
-
-<section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-gear.png);mask-image:url(/images/icons/h-gear.png)"></i>The &alpha; knob: reward vs. diversity</h2>
-  <p>Controlled experiments on MNIST and CIFAR isolate the reward–diversity trade-off set by the W2 regularization strength α. Raising α preserves more diversity at some cost in reward, and the trade-off is smooth and controllable rather than a cliff. The regularization also prevents the mode collapse that unconstrained reward-weighting falls into, and the same control carries over to steering an unconditional CIFAR-10 model with a CLIP text-image reward.</p>
-  <p>In practice: α=0 gives pure reward and mode collapse, α=0.3 gives a balanced trade-off, and α=0.8 preserves high diversity. The same knob applied to SD3 spans from the base model through balanced fine-tuning to full reward optimization.</p>
-  {% include anim/orw.html %}
-</section>
-
-<section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-deadlines.png);mask-image:url(/images/icons/sh-deadlines.png)"></i>Publication journey</h2>
-  <div class="tl">
-    <div class="tl-line"></div>
-    <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">Oct 2024</div><div class="tl-title">Submitted to ICLR 2025</div><div class="tl-desc">Submitted to The Thirteenth International Conference on Learning Representations.</div></div>
-    <div class="tl-item"><div class="tl-dot done"></div><div class="tl-date">Jan 2025</div><div class="tl-title">Accepted at ICLR 2025 (Poster)</div><div class="tl-desc"><a href="https://openreview.net/forum?id=2IoFFexvuw">OpenReview</a>.</div></div>
-    <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">Feb 2025</div><div class="tl-title">arXiv preprint released</div><div class="tl-desc">arXiv:2502.06061.</div></div>
-    <div class="tl-item"><div class="tl-dot done"></div><div class="tl-date">Apr 2025</div><div class="tl-title">Presented at ICLR 2025 · Singapore</div><div class="tl-desc">ICLR 2025.</div></div>
   </div>
 </section>
 
-<section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-book.png);mask-image:url(/images/icons/h-book.png)"></i>BibTeX</h2>
-  <button class="bib-copy-btn" aria-label="Copy BibTeX citation"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-list.png);mask-image:url(/images/icons/h-list.png)"></i>Copy BibTeX</button>
-  <pre class="bibtex-block" tabindex="0"><code>@inproceedings{fan2025online,
+<section class="scene" id="film">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">The film</p>
+        <h2>The story, as a short film.</h2>
+      </div>
+    </header>
+    <a class="film-poster" href="/film/#orw-cfm-w2" aria-label="Watch the ORW-CFM-W2 film">
+      <img src="/film/posters/orw-cfm-w2.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async">
+      <span class="fp-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3.5v17L20.5 12z"/></svg></span>
+      <span class="fp-lab" aria-hidden="true">Watch the film</span>
+    </a>
+    <p class="cap">Opens on the films page.</p>
+  </div>
+</section>
+
+<section class="cite" id="cite">
+  <div class="wrap duo">
+    <header class="say">
+      <p class="eyebrow">Cite</p>
+      <h2>Cite the paper.</h2>
+      <button class="bib-copy-btn" aria-label="Copy BibTeX citation"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-list.png);mask-image:url(/images/icons/h-list.png)"></i>Copy BibTeX</button>
+    </header>
+    <pre class="show bibtex-block" tabindex="0"><code>@inproceedings{fan2025online,
   title={Online Reward-Weighted Fine-Tuning of Flow Matching
-         with Wasserstein Regularization},
+  with Wasserstein Regularization},
   author={Jiajun Fan and Shuaike Shen and Chaoran Cheng
-          and Yuxin Chen and Chumeng Liang and Ge Liu},
+  and Yuxin Chen and Chumeng Liang and Ge Liu},
   booktitle={The Thirteenth International Conference on
-             Learning Representations},
+  Learning Representations},
   year={2025},
   url={https://openreview.net/forum?id=2IoFFexvuw}
 }</code></pre>
+  </div>
 </section>
 
-</div>
+</main>
 
 <footer>
-  <p>ORW-CFM-W2 · ICLR 2025 &nbsp;|&nbsp; <a href="/">Jiajun Fan</a> · UIUC &nbsp;|&nbsp; <a href="https://openreview.net/forum?id=2IoFFexvuw">Paper</a> &nbsp;|&nbsp; <a href="/projects/">All Projects</a></p>
+  <p>ORW-CFM-W2 &middot; ICLR 2025 &nbsp;|&nbsp; <a href="/">Jiajun Fan</a> &middot; UIUC, Zhejiang University, Tsinghua University &amp; USC &nbsp;|&nbsp; <a href="https://arxiv.org/abs/2502.06061">Paper</a> &middot; <a href="https://openreview.net/forum?id=2IoFFexvuw">OpenReview</a> &nbsp;|&nbsp; <a href="/projects/">All Projects</a></p>
 </footer>
 
 <div id="read-progress" aria-hidden="true"></div>
-<button id="pg-dark" class="pg-fab" aria-label="Toggle dark mode" title="Toggle dark mode"><i class="pg-dico"></i></button>
-<button id="pg-top" class="pg-fab" aria-label="Back to top" title="Back to top"><span class="pg-up"></span></button>
 <script>
 (function(){
-  try{if(localStorage.getItem('darkMode')==='true')document.body.classList.add('dark-mode');}catch(e){}
-  var bar=document.getElementById('read-progress'),top=document.getElementById('pg-top'),dk=document.getElementById('pg-dark');
-  function onScroll(){var st=window.scrollY||document.documentElement.scrollTop,h=document.documentElement.scrollHeight-window.innerHeight;
-    if(bar)bar.style.width=(h>0?(st/h*100):0)+'%'; if(top){st>400?top.classList.add('show'):top.classList.remove('show');}}
-  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
-  if(top)top.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
-  if(dk)dk.addEventListener('click',function(){var on=document.body.classList.toggle('dark-mode');try{localStorage.setItem('darkMode',on);}catch(e){}});
+  var bar=document.getElementById('read-progress'), nav=document.querySelector('.chapters'), strip=nav?nav.querySelector('.wrap'):null;
+  function pairs(sel){return [].slice.call(document.querySelectorAll(sel)).map(function(a){return [a,document.getElementById(a.getAttribute('href').slice(1))];}).filter(function(p){return p[1];});}
+  var parts=pairs('.chapters .wrap > a[href^="#"]'), subs=pairs('.chapters .ch-sub a'), shown=null;
+  function mark(list,cur){list.forEach(function(p){if(p[0]===cur)p[0].setAttribute('aria-current','true');else p[0].removeAttribute('aria-current');});}
+  function onScroll(){
+    var st=window.scrollY||document.documentElement.scrollTop,h=document.documentElement.scrollHeight-window.innerHeight,line=Math.min(window.innerHeight*0.38,340),cur=null,sub=null;
+    if(bar)bar.style.width=(h>0?(st/h*100):0)+'%';
+    parts.forEach(function(p){if(p[1].getBoundingClientRect().top<=line)cur=p[0];});
+    if(h>0&&st>=h-2&&parts.length)cur=parts[parts.length-1][0];
+    if(cur&&cur.getAttribute('href')==='#evidence')subs.forEach(function(p){if(p[1].getBoundingClientRect().top<=line)sub=p[0];});
+    mark(parts,cur);mark(subs,sub);
+    if(cur!==shown&&strip&&strip.scrollWidth>strip.clientWidth){strip.scrollLeft=cur?Math.max(0,cur.offsetLeft-16):0;}
+    shown=cur;
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});window.addEventListener('resize',onScroll);onScroll();
+  [['sd3-cases','more-cases'],['clip-cases','more-clip']].forEach(function(f){
+    var grid=document.getElementById(f[0]), more=document.getElementById(f[1]);
+    if(!grid||!more) return;
+    grid.classList.add('fold');
+    more.addEventListener('click',function(){grid.classList.remove('fold');more.setAttribute('aria-expanded','true');});
+  });
   document.querySelectorAll('.bib-copy-btn').forEach(function(btn){
     btn.addEventListener('click',function(){
-      var pre=btn.nextElementSibling,text=pre?pre.innerText||pre.textContent:'';
+      var pre=document.querySelector('.bibtex-block'),text=pre?pre.innerText||pre.textContent:'';
       if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(function(){
         btn.innerHTML='<i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-check.png);mask-image:url(/images/icons/h-check.png)"></i> Copied!';btn.classList.add('copied');
         setTimeout(function(){btn.innerHTML='<i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-list.png);mask-image:url(/images/icons/h-list.png)"></i> Copy BibTeX';btn.classList.remove('copied');},2000);});}
@@ -415,5 +439,7 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
   });
 })();
 </script>
+{% include proj/orw-cfm-w2/hero.html %}
+{% include proj/orw-cfm-w2/figs.html %}
 </body>
 </html>
