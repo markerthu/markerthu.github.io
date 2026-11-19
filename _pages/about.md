@@ -1332,7 +1332,7 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
 <ul class="news-list">
   <li>
     <span class="news-date">Nov 2026</span>
-    <span><span class="nbadge nb-upcoming">Upcoming</span>Attending <strong>NeurIPS 2026</strong> in Atlanta, Dec 9–13. Always happy to connect and talk about collaboration &mdash; <a href="/contact/">get in touch</a>. See you in Atlanta&nbsp;<img class="g-ico" src="/images/icons/flag-us.png" alt=""></span>
+    <span><span class="nbadge nb-upcoming">Upcoming</span>I will attend <strong>NeurIPS 2026</strong> in Atlanta, Dec 9–13. Always happy to connect and talk about collaboration &mdash; <a href="/contact/">get in touch</a>. See you in Atlanta&nbsp;<img class="g-ico" src="/images/icons/flag-us.png" alt=""></span>
   </li>
   <li>
     <span class="news-date">Nov 2026</span>
