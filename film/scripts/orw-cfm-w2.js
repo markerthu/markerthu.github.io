@@ -5,7 +5,7 @@ export default {
   id: 'orw-cfm-w2', name: 'ORW-CFM-W2', kicker: 'ORW-CFM-W2  ·  A PROJECT FILM', badge: ['ICLR 2025', 'flow matching'], page: '/projects/orw-cfm-w2/',
   chapters: timeline([
     { len: 7, shape: 'v:flow', viz: { from: 'noise', to: 'samples' }, label: 'ICLR 2025', title: 'ORW-CFM-W2',
-      lines: ['Online reward-weighted fine-tuning of flow', 'matching, with Wasserstein regularization.'], meta: 'FAN, SHEN, CHENG, CHEN, LIANG, LIU  ·  UIUC, ZJU, TSINGHUA & USC' },
+      lines: ['Online reward-weighted fine-tuning of flow', 'matching, with Wasserstein regularization.'], meta: 'FAN, SHEN, CHENG, CHEN, LIANG, LIU  ·  UIUC, CMU & USC' },
     { shape: 'v:alpha', viz: { panels: [{ label: 'reward-weighting alone', note: 'collapses onto one mode', mode: 'collapse' }] },
       tick: 'THE PROBLEM', label: 'THE PROBLEM', title: 'Hard to fine-tune',
       lines: ['No likelihood to regularize with, collapse under', 'reward pressure, and a need for human data.'] },

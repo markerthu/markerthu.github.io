@@ -7,6 +7,10 @@
 .masthead-nav a{font-size:17px!important;font-weight:600!important;padding:6px 10px!important;margin:0!important;letter-spacing:0!important}
 @media(max-width:600px){.masthead-title{font-size:17px!important}.masthead-nav a{font-size:14px!important;padding:5px 8px!important}}
 {% unless include.home %}
+/* Film posters: the play button sits bottom-right so it never covers the title printed on the poster. */
+a[href^="/film/"] .play{left:auto!important;top:auto!important;right:28px!important;bottom:24px!important;margin:0!important}
+@media(max-width:560px){a[href^="/film/"] .play{right:14px!important;bottom:12px!important}}
+
 /* Project pages: one venue label above the title, the same on every published paper. */
 .hero p.venue{font-size:14px;line-height:1.5;font-weight:600;color:var(--mint-t);margin:0 0 12px;font-variant-numeric:tabular-nums}
 

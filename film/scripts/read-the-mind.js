@@ -8,7 +8,7 @@ export default {
   chapters: timeline([
     { len: 7, shape: 'v:waveform', viz: { caption: 'the model’s own transcript of this clip:  “The ote — [End of Audio]”' },
       label: 'ARXIV 2026', title: 'Read the Mind',
-      lines: ['Can we read the mind of an audio LLM', 'before it speaks?'], meta: 'JIAJUN FAN ET AL.  ·  AMAZON AGI & UIUC' },
+      lines: ['Can we read the mind of an audio LLM', 'before it speaks?'], meta: 'JIAJUN FAN ET AL.  ·  UIUC & AMAZON' },
     { shape: 'v:layers', viz: {}, tick: 'THE LENS', label: 'THE LENS', title: 'Read every layer',
       lines: ['A logit lens at the audio positions turns each', 'layer into words, before a token is emitted.'] },
     { len: 9, shape: 'v:layers', viz: { band: [0.35, 0.8], bandLabel: 'workspace band', tokens: [
