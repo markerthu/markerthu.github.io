@@ -17,6 +17,7 @@ bibtex: |
     archivePrefix = {arXiv},
     year          = {2026}
   }
+film: "self-rewriting"
 projectpage: "/projects/self-rewriting/"
 ---
 

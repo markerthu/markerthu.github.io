@@ -514,7 +514,15 @@ def main():
 
         # Drill into regions (states / provinces). GoatCounter only collects these
         # for the countries listed in the site's settings; elsewhere the name is "".
-        rcode, rbody = call("/api/v0/stats/locations/%s?%s&limit=100" % (code, qs))
+        for attempt in range(3):
+            rcode, rbody = call("/api/v0/stats/locations/%s?%s&limit=100" % (code, qs))
+            if rcode == 200:
+                break
+            time.sleep(5 * (attempt + 1))
+        if rcode != 200:
+            # Keep the previous run's regions for this country rather than blanking them.
+            print("  warn: regions for %s -> %s; keeping previous" % (code, rcode), file=sys.stderr)
+            regions.extend(r for r in (prev.get("regions") or []) if r.get("country") == code)
         if rcode == 200:
             try:
                 rstats = json.loads(rbody).get("stats", []) or []
@@ -659,7 +667,9 @@ def main():
     out = {
         "_updated": (daily[-1]["day"] if daily else end.isoformat()),
         "_timezone": tz_name,
-        "_refreshed": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        # Reused (stale) daily numbers keep the time of the run that produced them.
+        "_refreshed": (prev.get("_refreshed") if daily_stale
+                       else datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")),
         "_source": "GoatCounter API (%s)" % SITE,
         "_total": win["_total"],
         "_days": win["_days"],

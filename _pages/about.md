@@ -1336,7 +1336,7 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
   </li>
   <li>
     <span class="news-date">Nov 2026</span>
-    <span><span class="nbadge nb-find">Finding</span><strong>Language Models Can Rewrite Their Own Weights</strong> is on arXiv. A third way to make a model better: for the first time, to our knowledge, a language model rewrites its own weights by its own reasoning and becomes better, with no gradients and no training. The model is its own optimizer. It takes no frontier model: the model surpasses itself on problems it never saw, keeps getting better session after session, and repairs a damaged copy of itself without ever seeing its original weights; the ability emerges with scale. No training pipeline, no cluster, no added cost per answer. Affordable. Scalable. Recursive. <a href="/projects/self-rewriting/">Project page</a> &middot; <a href="https://arxiv.org/abs/2611.21885" target="_blank" rel="noopener noreferrer">Paper</a></span>
+    <span><span class="nbadge nb-find">Finding</span><strong>Language Models Can Rewrite Their Own Weights</strong> is on arXiv. A third way to make a model better: for the first time, to our knowledge, a language model rewrites its own weights by its own reasoning and becomes better, with no gradients and no training. The model is its own optimizer. It takes no frontier model: the model surpasses itself on problems it never saw, keeps getting better session after session, and repairs a damaged copy of itself without ever seeing its original weights; the ability emerges with scale. No training pipeline, no cluster, no added cost per answer. Affordable. Scalable. Recursive. <a href="/projects/self-rewriting/">Project page</a> &middot; <a href="/film/#self-rewriting">Video</a> &middot; <a href="https://arxiv.org/abs/2611.21885" target="_blank" rel="noopener noreferrer">Paper</a></span>
   </li>
   <li>
     <span class="news-date">Oct 2026</span>
@@ -1719,7 +1719,7 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
   <div class="pub-right">
     <div class="pub-thumb-wrap"><img loading="lazy" src="/images/featured/gpflow-ai.jpg" width="1000" height="333" alt="GPFlow: residue chains of different lengths grow one bead at a time and fold into proteins of different sizes"></div>
     <div class="pub-title"><a href="https://arxiv.org/abs/2607.09039" target="_blank" rel="noopener noreferrer">Variable-Length Generative Protein Design via Generalized Poisson Flow</a></div>
-    <div class="pub-authors">C. Cheng, Z. Ni, Y. Qu, Y. Chen, R. Guo, <strong>J. Fan</strong>, G. Liu</div>
+    <div class="pub-authors">C. Cheng*, Z. Ni*, Y. Qu*, Y. Chen, R. Guo, <strong>J. Fan</strong>, G. Liu</div>
     <div class="pub-desc">GPFlow: protein generation without fixing the length in advance, by learning the rate function of an inhomogeneous generalized Poisson process over both structure and sequence.</div>
     <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>First on 10 of 16 motif-scaffolding tasks &middot; over 10&times; more unique successes on several hard targets</div>
     <div class="pub-links">
@@ -1749,7 +1749,7 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
   <div class="pub-right">
     <div class="pub-thumb-wrap"><img loading="lazy" src="/images/featured/bcr-ai.jpg" width="1000" height="333" alt="BCR: one problem alone gets long, tangled reasoning; three problems sharing one window and budget get short, direct reasoning"></div>
     <div class="pub-title"><a href="https://openreview.net/forum?id=8Oc3Mx754M" target="_blank" rel="noopener noreferrer">Batched Contextual Reinforcement</a></div>
-    <div class="pub-authors">B. Yang, H. Ma, <strong>J. Fan</strong>, G. Liu</div>
+    <div class="pub-authors">B. Yang*, H. Ma*, <strong>J. Fan</strong>, G. Liu</div>
     <div class="pub-desc">BCR: one model solves several problems in a single shared context, rewarded only by per-problem accuracy &mdash; the shared window becomes an implicit token budget.</div>
     <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>15.8&ndash;62.6% fewer tokens at equal or better accuracy</div>
     <div class="pub-links">
@@ -1804,7 +1804,7 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
     <div class="pub-title"><a href="https://arxiv.org/abs/2407.05010" target="_blank" rel="noopener noreferrer">PRANCE: Joint Token-Optimization and Structural Channel-Pruning for Adaptive ViT Inference</a>
       <button class="pub-abst-btn" aria-expanded="false" aria-label="Toggle abstract">▾ Abstract</button>
       <div class="pub-abstract-preview">We introduce PRANCE, a Vision Transformer compression framework that jointly optimizes the activated channels and reduces tokens, based on the characteristics of inputs. Specifically, PRANCE leverages adaptive token optimization strategies for a certain computational budget, aiming to accelerate ViTs' inference from a unified data and architectural perspective. However, the joint framework poses challenges to both architectural and decision-making aspects. Firstly, while ViTs inherently support variable-token inference, they do not facilitate dynamic computations for variable channels. To overcome this limitation, we propose a meta-network using weight-sharing techniques to support arbitrary channels of the Multi-head Self-Attention and Multi-layer Perceptron layers, serving as a foundational model for architectural decision-making. Second, simultaneously optimizing the structure of the meta-network and input data constitutes a combinatorial optimization problem with an extremely large decision space, reaching up to around 10<sup>14</sup>, making supervised learning infeasible. To this end, we design a lightweight selector employing Proximal Policy Optimization for efficient decision-making. Furthermore, we introduce a novel "Result-to-Go" training mechanism that models ViTs' inference process as a Markov decision process, significantly reducing action space and mitigating delayed-reward issues during training. Extensive experiments demonstrate the effectiveness of PRANCE in reducing FLOPs by approximately 50%, retaining only about 10% of tokens while achieving lossless Top-1 accuracy. Additionally, our framework is shown to be compatible with various token optimization techniques such as pruning, merging, and sequential pruning-merging strategies. The code is available at <a href="https://github.com/ChildTang/PRANCE" target="_blank" rel="noopener noreferrer">https://github.com/ChildTang/PRANCE</a>.</div></div>
-    <div class="pub-authors">Y. Li, C. Tang, Y. Meng, <strong>J. Fan</strong>, Z. Chai, X. Ma, Z. Wang, W. Zhu &nbsp;·&nbsp; <em>IEEE TPAMI</em></div>
+    <div class="pub-authors">Y. Li*, C. Tang*, Y. Meng, <strong>J. Fan</strong>, Z. Chai, X. Ma, Z. Wang, W. Zhu &nbsp;·&nbsp; <em>IEEE TPAMI</em></div>
     <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-impact.png);mask-image:url(/images/icons/sh-impact.png)"></i>Joint token + channel pruning · Adaptive ViT inference · IEEE TPAMI 2026</div>
     <div class="pub-links">
       <a class="pub-link pl-paper" href="https://doi.org/10.1109/TPAMI.2025.3605239" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-pubs.png);mask-image:url(/images/icons/sh-pubs.png)"></i>Paper</a>
@@ -1993,7 +1993,7 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
       <li>ICLR 2024 · <strong>2025 · 2026</strong></li>
       <li>NeurIPS 2022–2023 · <strong>2024–2026</strong></li>
       <li>COLM <strong>2026</strong> · CVPR <strong>2026</strong> · WACV <strong>2027</strong></li>
-      <li>AAAI 2025 · <strong>2027</strong> · AISTATS 2025 · KDD 2024</li>
+      <li>AAAI 2025 · <strong>2027</strong> · AISTATS 2025 · KDD 2024 · TMLR</li>
     </ul>
   </div>
 </div>
@@ -2715,7 +2715,7 @@ function drawGraph(container) {
 <script>
 /* Video button: every publication with a project film gets one, right after its Project link */
 (function(){
-  var FILMS = ['audiorsi','tf-opd','speechgym','read-the-mind','proteinzero','procedure-aware-rl','cesar','adrpo','orw-cfm-w2','ac-flow','lbc','gdi'];
+  var FILMS = ['self-rewriting','audiorsi','tf-opd','speechgym','read-the-mind','proteinzero','procedure-aware-rl','cesar','adrpo','orw-cfm-w2','ac-flow','lbc','gdi'];
   document.querySelectorAll('.pub-entry').forEach(function(entry){
     var proj = entry.querySelector('.pub-links a.pl-project') || entry.querySelector('a.pub-project');
     if (!proj) return;

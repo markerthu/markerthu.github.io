@@ -195,7 +195,7 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
   <div class="trend">
     <div class="trend-hd">
       <h2>Audience overview</h2>
-      <span class="rng">{{ v._range }} &middot; peak {{ dmax }}/day{% if v._last_visit %} &middot; last visit {{ v._last_visit }}{% endif %}</span>
+      <span class="rng">{{ v._range }} &middot; peak {{ dmax }}/day{% if v._last_visit %}{% assign lv0 = v.recent | first %} &middot; last visit <span class="vtime"{% if lv0.ts %} data-ts="{{ lv0.ts }}"{% endif %} data-site="{{ v._last_visit }}">{{ v._last_visit }}</span>{% endif %}</span>
     </div>
     <svg class="trend-svg" viewBox="0 0 300 60" preserveAspectRatio="none" role="img"
          aria-label="Daily pageviews over the last {{ dn }} days">
