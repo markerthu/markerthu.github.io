@@ -11,146 +11,124 @@ redirect_from:
   - /blog/
 ---
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600&display=swap" media="print" onload="this.media='all'">
-
+{% include selfrw/style.html %}
 <style>
-/* hide theme's default page title/meta — we render our own editorial header */
-.page__title,.page__meta,.archive .page__lead,.page__hero-caption{display:none!important;}
+/* Blog index on the self-rewriting design system (the /projects/ and /publications/ look).
+   This page still renders inside the theme's archive layout, so the first block undoes the
+   theme around it: its 18px root size, the sidebar gutter, the dark navy footer, the theme
+   .btn colours and its heading/paragraph margins. */
+html{font-size:16px;background:var(--bg)}
+html.dark-mode-pending,html:has(body.dark-mode){background:#0f1216!important}
+body{padding-bottom:0!important}
+body.dark-mode{background:var(--bg)!important;color:var(--body)!important}
+body.dark-mode #main{background:transparent!important}
+.page__title,.page__meta,.archive .page__lead,.page__hero-caption{display:none!important}
+#main{max-width:none!important;margin:0!important;padding:0!important}
+.archive{width:100%!important;float:none!important;margin:0!important;padding:0!important}
+:where(.bl) :is(h1,h2,h3,p){margin:0}
+.bl a,.bl a:hover{text-decoration:none}
+.bl a:hover img{box-shadow:none}
+body.dark-mode .site-masthead{background:var(--bg);box-shadow:0 1px 0 var(--rule)}
+body.dark-mode .masthead-title{color:var(--ink)!important}
+body.dark-mode .masthead-nav a{color:var(--muted)!important}
+body.dark-mode .masthead-nav a:hover{color:var(--link)!important;background:rgba(47,75,143,.07)}
+body.dark-mode .masthead-nav a.nav-active{color:var(--link)!important}
 
-/* unify page chrome with the Distill article pages: warm paper, one masthead + one light footer */
-html{overflow-x:hidden;background:#fdfcfa;}
-html:has(body.dark-mode),html.dark-mode-pending{background:#0f1216;}
-body{background:#fdfcfa!important;}
-.site-masthead{background:#fdfcfa!important;box-shadow:0 1px 0 #e8e3d9!important;}
-.masthead-nav a{color:#6c6860!important;}
-.page__footer{background:#fdfcfa!important;color:#6c6860!important;border-top:1px solid #e8e3d9!important;box-shadow:none!important;margin-top:3.5em;}
-.page__footer a{color:#6c6860!important;}
-.page__footer a:hover{color:#2F4B8F!important;}
-/* override the shared theme anti-flash (#0d1117) — this page is on the warm token */
-html.dark-mode-pending{background:#0f1216!important;}
-body.dark-mode{background:#0f1216!important;}
-body.dark-mode .site-masthead{background:#0f1216!important;box-shadow:0 1px 0 #262b33!important;}
-.masthead-title{color:#1a1815!important;}
-body.dark-mode .masthead-title{color:#ece8e0!important;}
-body.dark-mode .masthead-nav a{color:#8f8a80!important;}
-body.dark-mode .masthead-nav a:hover,body.dark-mode .masthead-nav a.nav-active{color:#6ea8fe!important;}
-body.dark-mode .page__footer{background:#0f1216!important;color:#8f8a80!important;border-top-color:#262b33!important;}
-body.dark-mode .page__footer a{color:#8f8a80!important;}
+/* hero: centred title, one-line lead, quiet stats, one action */
+.hero{padding-bottom:clamp(32px,3.6vw,48px)}
+.hero .lead{max-width:none;margin:14px auto 0;color:var(--muted);text-wrap:balance}
+.hero .stats{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 26px;margin-top:22px;font-size:var(--t-label);color:var(--muted);font-variant-numeric:tabular-nums}
+.stats b{color:var(--ink);font-weight:600;margin-right:5px}
+.hero .cta{margin-top:24px}
+.bl .btn{margin:0;color:var(--ink)!important;border:1px solid var(--hair)!important}
+.bl .btn:hover{background:var(--card);border-color:var(--mint-e)!important}
+.bl .btn-primary,.bl .btn-primary:hover{background:var(--ink);color:var(--bg)!important;border-color:var(--ink)!important}
 
-/* dark-mode FAB — same control the article pages have */
-#pg-top{bottom:22px;background:#2F4B8F;color:#fff;border:none;opacity:0;pointer-events:none;}
-#pg-top.show{opacity:1;pointer-events:auto;}
-.pg-up{width:11px;height:11px;border-top:2.6px solid currentColor;border-right:2.6px solid currentColor;transform:rotate(-45deg) translateY(2px);display:inline-block;}
-.pg-fab{position:fixed;right:22px;bottom:74px;width:42px;height:42px;border-radius:50%;border:1.5px solid rgba(0,0,0,.15);background:#fff;color:#2F4B8F;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.18);z-index:9990;transition:transform .2s;}
-.pg-fab:hover{transform:translateY(-2px) scale(1.06);}
-body.dark-mode .pg-fab{background:#1A2333;color:#F5C8B5;border-color:#2B3A55;}
-.pg-dico{width:20px;height:20px;display:inline-block;background-color:currentColor;-webkit-mask:url(/images/icons/h-moon.png) center/contain no-repeat;mask:url(/images/icons/h-moon.png) center/contain no-repeat;}
-body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-image:url(/images/icons/h-sun.png);}
+/* one band per year; posts as cards, two to a row, a short last row centred */
+.bl .scene{padding:clamp(44px,5vw,72px) 0}
+.bgrid{display:flex;flex-wrap:wrap;justify-content:center;gap:var(--gap);margin-top:6px}
+.bgrid > .bcard{flex:0 0 calc((100% - var(--gap))/2)}
+.bcard{padding:0;overflow:hidden;display:flex;flex-direction:column;color:inherit;transition:border-color .2s,transform .2s}
+.bcard:hover{border-color:var(--mint-e);transform:translateY(-2px);color:inherit}
+.bc-img{display:block;aspect-ratio:3/1;overflow:hidden;background:var(--band);border-bottom:1px solid var(--rule)}
+.bc-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.bcard:hover .bc-img img{transform:scale(1.03)}
+.bc-body{padding:20px 24px 22px;display:flex;flex-direction:column;flex:1}
+.bcard .bc-date{margin:0;font-size:var(--t-label);line-height:1.4;font-weight:600;color:var(--mint-t);font-variant-numeric:tabular-nums}
+.bcard .bc-title{margin-top:6px;font-size:var(--t-card);line-height:1.3;font-weight:600;letter-spacing:-.01em;color:var(--ink);transition:color .15s}
+.bcard:hover .bc-title{color:var(--link)}
+.bcard .bc-desc{font-size:var(--t-body);line-height:1.55;color:var(--body);margin-top:10px;max-width:34em}
+.bcard .bc-tags{font-size:var(--t-fine);line-height:1.5;color:var(--muted);margin-top:14px}
+.bcard .bc-read{margin-top:auto;padding-top:16px;font-size:var(--t-label);font-weight:600;color:var(--link)}
+.bc-read span{display:inline-block;transition:transform .18s}
+.bcard:hover .bc-read span{transform:translateX(3px)}
+@media(max-width:760px){.bgrid > .bcard{flex-basis:100%}}
+@media(max-width:700px){.hero .lead{margin-left:0}.hero .stats{justify-content:flex-start}}
+@media(max-width:600px){.hero .cta{display:flex;flex-wrap:wrap;gap:8px}.hero .cta .btn{min-width:0;padding:9px 16px}}
+@media(max-width:600px){.bc-body{padding:16px 18px 18px}}
 
-/* This page has no author sidebar, but the Minimal Mistakes theme still reserves
-   its gutter (.page is width:83% float:right with a 17% right padding), which
-   pushed the column right and broke alignment with every other page. Undo it so
-   the 1000px column centres the same way the standalone pages do. */
-.archive,.page{width:100%!important;float:none!important;padding-left:0!important;padding-right:0!important;margin-left:0!important;margin-right:0!important}
-.page__inner-wrap{width:100%!important}
-.blog-index{
-  --bx-serif:'Inter','Segoe UI',system-ui,sans-serif;
-  --bx-sans:'Inter','Segoe UI',system-ui,sans-serif;
-  --bx-ink:#1a1815; --bx-body:#2b2823; --bx-muted:#6c6860; --bx-faint:#787369;
-  --bx-rule:#e8e3d9; --bx-link:#2F4B8F; --bx-band:#f6f3ec;
-  max-width:1000px;margin:0 auto;padding:0 24px;
-}
-body.dark-mode .blog-index{
-  --bx-ink:#ece8e0; --bx-body:#cdc8be; --bx-muted:#8f8a80; --bx-faint:#8a857b;
-  --bx-rule:#262b33; --bx-link:#6ea8fe; --bx-band:#151a20;
-}
+/* the theme footer, in the project pages' footer format */
+.page__footer,body.dark-mode .page__footer{position:static!important;float:none!important;margin:0!important;background:var(--bg)!important;color:var(--muted)!important;border:0!important;border-image:none!important;box-shadow:none!important}
+.page__footer footer{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 0;max-width:none;margin:40px 0 0;padding:26px max(var(--gut),calc((100% - var(--w))/2))}
+.page__footer a,body.dark-mode .page__footer a{color:var(--link)!important;text-decoration:none!important;font-weight:400;padding:0}
+.page__footer a:hover{color:var(--link-h)!important}
+.page__footer i{display:none}
+.page__footer-follow ul{display:flex;flex-wrap:wrap;align-items:baseline}
+.page__footer-follow li{font-family:var(--sans);font-size:var(--t-label);text-transform:none;padding:0;margin:0}
+.page__footer-follow li strong{font-weight:500;margin-right:.45em}
+.page__footer-follow li + li::before{content:none}
+.page__footer-follow li + li + li::before{content:'\00b7';padding:0 .2em 0 .45em;color:var(--faint)}
+.page__footer-copyright{font-family:var(--sans);font-size:var(--t-label)}
+.page__footer-copyright::before{content:'|';padding:0 .7em;color:var(--hair)}
+@media(max-width:600px){.page__footer footer{flex-direction:column}.page__footer-copyright::before{content:none}}
 
-/* ── editorial header ── */
-.bx-head{margin:0 0 1.6em;}
-.bx-sub,.bx-head p{max-width:44em}
-.bx-kicker{font-family:var(--bx-sans);text-transform:uppercase;letter-spacing:.145em;font-size:.72rem;font-weight:600;color:var(--bx-muted);margin-bottom:.7em;}
-.bx-h1{font-family:var(--bx-serif)!important;font-weight:500!important;font-size:2.6rem!important;line-height:1.1!important;letter-spacing:-.02em;color:var(--bx-ink)!important;margin:0 0 .28em!important;}
-.bx-sub{font-family:var(--bx-serif);font-size:1.15rem;line-height:1.55;color:var(--bx-muted);margin:0 0 1.2em;max-width:42em;}
-.bx-cta{display:inline-flex;align-items:center;gap:8px;font-family:var(--bx-sans);font-size:.86rem;font-weight:600;color:var(--bx-link)!important;text-decoration:none!important;border:1px solid var(--bx-rule);border-radius:999px;padding:7px 16px;transition:.18s;}
-.bx-cta:hover{border-color:var(--bx-link);background:rgba(47,75,143,.06);}
-.lbl-ico{display:inline-block;width:1em;height:1em;vertical-align:-0.14em;margin-right:5px;background-color:currentColor;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;}
-.bx-cta .lbl-ico{width:.95em;height:.95em;margin-right:0;}
-.bx-head-rule{border:none;border-top:1px solid var(--bx-rule);margin:1.6em 0 .4em;}
-
-/* ── year label ── */
-.bx-year{font-family:var(--bx-sans);font-size:.74rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--bx-faint);margin:2em 0 .2em;}
-.bx-year:first-of-type{margin-top:.6em;}
-
-/* ── entries ── */
-.bx-entry{display:block;text-decoration:none!important;padding:1.35em 1.1em;margin:0 -1.1em;border-bottom:1px solid var(--bx-rule);border-radius:12px;transition:background .18s;}
-.bx-entry:hover{background:var(--bx-band);}
-.bx-entry:hover .bx-title{color:var(--bx-link);}
-.bx-title{font-family:var(--bx-serif)!important;font-weight:500!important;font-size:1.5rem!important;line-height:1.24!important;letter-spacing:-.01em;color:var(--bx-ink)!important;margin:0 0 .3em!important;transition:color .15s;}
-.bx-meta{font-family:var(--bx-sans);font-size:.8rem;color:var(--bx-muted);margin:0 0 .5em;letter-spacing:.01em;}
-.bx-desc{font-family:var(--bx-serif)!important;font-size:1.08rem!important;line-height:1.55!important;color:var(--bx-muted)!important;margin:0!important;}
-.bx-arrow{font-family:var(--bx-sans);font-size:.82rem;font-weight:600;color:var(--bx-link);margin-top:.55em;opacity:0;transform:translateX(-4px);transition:.18s;}
-.bx-entry:hover .bx-arrow{opacity:1;transform:translateX(0);}
-/* cover illustration beside each post (the same editorial art as its project) */
-.bx-entry.has-thumb{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:28px;align-items:center;}
-.bx-thumb{width:300px;height:auto;aspect-ratio:3/1;object-fit:contain;border-radius:10px;border:1px solid var(--bx-rule);background:#fbfaf7;opacity:1!important;}
-body.dark-mode .bx-thumb{filter:brightness(.92);}
-
-@media(max-width:600px){
-  .bx-h1{font-size:2.05rem!important;}
-  .bx-title{font-size:1.28rem!important;}
-  .bx-entry{padding:1.1em .85em;margin:0 -.85em;}
-  .bx-entry.has-thumb{grid-template-columns:1fr;gap:14px;}
-  .bx-thumb{width:100%;height:auto;aspect-ratio:3/1;order:-1;}
-}
+@media(prefers-reduced-motion:reduce){.bcard,.bc-img img,.bc-read span{transition:none}}
 @media print{
   /* the page paints through custom properties, so dark mode must be undone for
-     paper or every non-link heading prints near-white on white */
-  body.dark-mode{--bg:#fff;--band:#fff;--card:#fff;--pill:#fff;--ink:#000;--body:#000;
-    --muted:#333;--faint:#444;--rule:#ccc;--link:#000;--link-h:#000;--on-link:#fff;
-    --sea:#fff;--land:#fff;--fig-border:#ccc}
-.pg-fab{display:none!important;}}
-
-h1,h2,h3,.bx-title,.p-title,.pub-title,.card-title{text-wrap:balance}
-p,li{text-wrap:pretty}
+     paper or every heading prints near-white on white */
+  body.dark-mode{--bg:#fff;--band:#fff;--card:#fff;--ink:#000;--body:#000;
+    --muted:#333;--faint:#444;--rule:#ccc;--hair:#ccc;--link:#000;--link-h:#000;--on-link:#fff}
+}
 </style>
 
-<div class="blog-index">
-  <div class="bx-head">
-    <div class="bx-kicker">Writing</div>
-    <h1 class="bx-h1">Blog</h1>
-    <p class="bx-sub">Notes on reinforcement learning, generative models, and research observations — written to think through ideas, not to summarize papers.</p>
-    <a class="bx-cta" href="/blog/reading-papers/"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-book.png);mask-image:url(/images/icons/h-book.png)"></i>What's happening in my field →</a>
-    <hr class="bx-head-rule">
+<div class="bl">
+<section class="hero" aria-label="Blog">
+  <div class="wrap">
+    <p class="venue">Writing</p>
+    <h1>Blog</h1>
+    <p class="lead">Notes on reinforcement learning, generative models, and research observations — written to think through ideas, not to summarize papers.</p>
+    {% assign bl_first = site.posts.last.date | date: '%Y' | plus: 0 %}{% assign bl_last = site.posts.first.date | date: '%Y' | plus: 0 %}
+    <p class="stats"><span><b>{{ site.posts | size }}</b>posts</span><span><b>{{ site.tags | size }}</b>topics</span><span><b>{{ bl_last | minus: bl_first | plus: 1 }}</b>years</span></p>
+    <div class="cta">
+      <a class="btn btn-primary" href="/blog/reading-papers/"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M8 4.300C6.500 3.200 4.500 2.900 2 3.100v9.100c2.500-.2 4.500.1 6 1.200 1.500-1.100 3.500-1.400 6-1.200V3.100c-2.500-.2-4.500.1-6 1.200zM8 4.300v9.100"/></svg>What's happening in my field →</a>
+    </div>
   </div>
+</section>
 
   {% capture written_year %}'None'{% endcapture %}
+  {% assign bl_band = 0 %}
   {% for post in site.posts %}
     {% capture year %}{{ post.date | date: '%Y' }}{% endcapture %}
     {% if year != written_year %}
-      <div class="bx-year" id="{{ year | slugify }}">{{ year }}</div>
+      {% unless forloop.first %}</div></div></section>{% endunless %}
+      {% assign bl_n = 0 %}{% for p in site.posts %}{% capture bl_y %}{{ p.date | date: '%Y' }}{% endcapture %}{% if bl_y == year %}{% assign bl_n = bl_n | plus: 1 %}{% endif %}{% endfor %}
+      <section class="scene{% if bl_band == 0 %} band{% endif %}" id="{{ year | slugify }}" aria-label="{{ year }}">
+        <div class="wrap">
+          <p class="eyebrow">{{ year }} <span>{{ bl_n }} {% if bl_n == 1 %}post{% else %}posts{% endif %}</span></p>
+          <div class="bgrid">
+      {% assign bl_band = 1 | minus: bl_band %}
       {% capture written_year %}{{ year }}{% endcapture %}
     {% endif %}
-    <a class="bx-entry{% if post.header.teaser %} has-thumb{% endif %}" href="{{ post.url | relative_url }}">
-      <div class="bx-text">
-        <h2 class="bx-title">{{ post.title | strip_html }}</h2>
-        <div class="bx-meta"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %-d, %Y" }}</time>{% if post.tags %} &nbsp;·&nbsp; {{ post.tags | join: " · " }}{% endif %}</div>
-        <p class="bx-desc">{{ post.excerpt | strip_html | strip_newlines | truncate: 190 }}</p>
-        <div class="bx-arrow">Read →</div>
+    <a class="card bcard{% if post.header.teaser %} has-thumb{% endif %}" href="{{ post.url | relative_url }}">
+      {% if post.header.teaser %}<span class="bc-img"><img src="{{ post.header.teaser | relative_url }}" alt="" loading="lazy" width="1000" height="333"></span>{% endif %}
+      <div class="bc-body">
+        <p class="bc-date"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %-d, %Y" }}</time></p>
+        <h2 class="bc-title">{{ post.title | strip_html }}</h2>
+        <p class="bc-desc">{{ post.excerpt | strip_html | strip_newlines | truncate: 190 }}</p>
+        {% if post.tags %}<p class="bc-tags">{{ post.tags | join: " · " }}</p>{% endif %}
+        <p class="bc-read">Read <span>→</span></p>
       </div>
-      {% if post.header.teaser %}<img class="bx-thumb" src="{{ post.header.teaser | relative_url }}" alt="" loading="lazy" width="1000" height="333">{% endif %}
     </a>
+    {% if forloop.last %}</div></div></section>{% endif %}
   {% endfor %}
 </div>
-
-<button id="pg-dark" class="pg-fab" aria-label="Toggle dark mode" title="Toggle dark mode"><i class="pg-dico"></i></button>
-<button id="pg-top" class="pg-fab" aria-label="Back to top" title="Back to top"><span class="pg-up"></span></button>
-<script>
-(function(){
-  try{ if(localStorage.getItem('darkMode')==='true') document.body.classList.add('dark-mode'); }catch(e){}
-  var dk=document.getElementById('pg-dark'), tp=document.getElementById('pg-top');
-  function onScroll(){ var st=window.scrollY||document.documentElement.scrollTop; if(tp){ st>400?tp.classList.add('show'):tp.classList.remove('show'); } }
-  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
-  if(tp) tp.addEventListener('click',function(){ window.scrollTo({top:0,behavior:'smooth'}); });
-  if(dk) dk.addEventListener('click',function(){ var on=document.body.classList.toggle('dark-mode'); try{localStorage.setItem('darkMode',on);}catch(e){} });
-})();
-</script>

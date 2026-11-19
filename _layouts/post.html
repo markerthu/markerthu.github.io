@@ -21,164 +21,82 @@
 <script>try{if(localStorage.getItem('darkMode')==='true'){document.documentElement.style.background='#0f1216';document.documentElement.classList.add('dark-mode-pending');}}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&display=swap" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&display=swap"></noscript>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+{% include selfrw/style.html %}
 <style>
-/* metric-matched stand-ins while the web fonts load, so text does not reflow when they arrive */
-@font-face{font-family:'Newsreader Fallback';src:local('Georgia');size-adjust:91.7%;ascent-override:80.2%;descent-override:28.9%;line-gap-override:0%;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:'Inter Fallback';src:local('Arial');size-adjust:107.1%;ascent-override:90.4%;descent-override:22.5%;line-gap-override:0%;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-:root{
-  --serif:'Newsreader','Newsreader Fallback', Georgia, 'Times New Roman', serif;
-  --sans:'Inter','Inter Fallback','Segoe UI',system-ui,-apple-system,sans-serif;
-  --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
-  --bg:#fdfcfa; --band:#f6f3ec; --ink:#1a1815; --body:#2b2823; --muted:#6c6860; --faint:#787369;
-  --rule:#e8e3d9; --link:#2F4B8F; --link-h:#23396E; --code-bg:#f4f1ea; --fig-border:#e7e2d8; --pill:#f0ede6;
-  --col:706px; --fig:940px;
+/* Research notes on the self-rewriting design system (tokens, hero, eyebrow, scene, card, btn).
+   Only the reading column is new: 17px text in a narrow, centred, left-aligned column. */
+:root{--col:680px;--fig:940px}
+
+/* hero: centred title, one line of byline, the tags as quiet pills */
+.hero{padding-bottom:clamp(36px,4vw,56px)}
+.hero h1{max-width:21em;margin:0 auto}
+.hero .byline{display:flex;flex-wrap:wrap;justify-content:center;gap:0 .45em;margin-top:16px;color:var(--muted)}
+.byline .me{font-weight:600;color:var(--ink);white-space:nowrap}
+.byline .sep{color:var(--hair)}
+.byline time{white-space:nowrap}
+.tags{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:16px}
+.tags a{display:inline-flex;align-items:center;padding:4px 12px;border-radius:999px;border:1px solid var(--hair);background:var(--card);font-size:var(--t-fine);font-weight:600;color:var(--body);transition:border-color .18s,color .18s}
+.tags a:hover{border-color:var(--mint-e);color:var(--ink)}
+
+/* the article is one scene; its sections are separated the way scenes are */
+.post{padding-top:clamp(48px,5.4vw,80px)}
+.d-body{max-width:var(--col);margin:0 auto;font-size:var(--t-body);line-height:1.7;color:var(--body)}
+.d-body p{margin:0 0 1.25em}
+.d-body a{color:var(--link);text-decoration:underline;text-decoration-color:var(--hair);text-underline-offset:3px;transition:color .15s,text-decoration-color .15s}
+.d-body a:hover{color:var(--link-h);text-decoration-color:currentColor}
+.d-body strong,.d-body b{color:var(--ink);font-weight:600}
+.d-body em{font-style:italic}
+.d-body h2{font-size:var(--t-h2);line-height:1.18;letter-spacing:-.016em;margin:0 0 .7em}
+.d-body h3{font-size:var(--t-card);line-height:1.3;letter-spacing:-.01em;margin:2.2em 0 .5em}
+.d-body h3 + p{margin-top:0}
+.d-body ul,.d-body ol{margin:0 0 1.25em;padding-left:1.3em}
+.d-body ul{list-style:disc}.d-body ol{list-style:decimal}
+.d-body li{margin:.3em 0;padding-left:.2em}
+.d-body li::marker{color:var(--faint)}
+.d-body blockquote{font-size:var(--t-lead);line-height:1.55;font-weight:500;color:var(--ink);padding-left:20px;border-left:2px solid var(--mint-e);margin:1.8em 0}
+.d-body blockquote p{margin:0}
+.d-body hr{border:0;height:1px;background:var(--rule);margin:3em 0}
+.d-body figure{margin:var(--sp-fig) 0}
+.d-body figure img,.d-body p img{width:100%;height:auto;border-radius:14px;border:1px solid var(--rule);background:var(--band)}
+.d-body figcaption{font-size:var(--t-label);line-height:1.55;color:var(--muted);margin-top:12px}
+.d-body table{width:100%;border-collapse:collapse;font-size:var(--t-label);margin:1.8em 0;display:block;overflow-x:auto;font-variant-numeric:tabular-nums}
+.d-body th{text-align:left;font-weight:600;color:var(--ink);border-bottom:1px solid var(--hair);padding:9px 14px 9px 0;white-space:nowrap}
+.d-body td{padding:9px 14px 9px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+.d-body pre{background:var(--band);border:1px solid var(--rule);border-radius:14px;padding:14px 16px;margin:1.5em 0;overflow-x:auto;font-family:var(--mono);font-size:var(--t-label);line-height:1.6}
+.d-body pre code{background:none;border:0;padding:0;font-size:inherit}
+.d-body code{font-family:var(--mono);font-size:var(--t-label);background:var(--band);border:1px solid var(--rule);border-radius:6px;padding:.05em .35em;color:var(--ink)}
+.d-body #markdown-toc{list-style:none;font-size:var(--t-label);line-height:1.5;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:14px 0;margin:0 0 2em;padding-left:0}
+.d-body #markdown-toc a{color:var(--muted);text-decoration:none}
+.d-body #markdown-toc a:hover{color:var(--link)}
+.d-body .MathJax_Display,.d-body .MJXc-display{overflow-x:auto;overflow-y:visible;max-width:100%}
+.d-body .MathJax{color:var(--ink)!important}
+
+/* end of the article: one action, then the site footer */
+.post-end{max-width:var(--col);margin:var(--sp-fig) auto 0;padding-top:28px;border-top:1px solid var(--rule)}
+.post-end .cta{justify-content:flex-start;margin-top:0}
+footer p{max-width:var(--col)}
+
+@media(max-width:700px){
+  .hero h1{margin:0}
+  .tags{justify-content:flex-start}
+  .hero .byline{justify-content:flex-start;gap:0 .3em}
 }
-:root.dark-mode-pending,body.dark-mode{
-  --bg:#0f1216; --band:#151a20; --ink:#ece8e0; --body:#cdc8be; --muted:#8f8a80; --faint:#8a857b;
-  --rule:#262b33; --link:#6ea8fe; --link-h:#93c0ff; --code-bg:#12161c; --fig-border:#2a2f38; --pill:#1a1f27;
-}
-:root.dark-mode-pending{background:#0f1216;}
-*{box-sizing:border-box;margin:0;padding:0}
-html{overflow-x:hidden;scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--body);font-family:var(--serif);-webkit-font-smoothing:antialiased;transition:background .3s,color .3s;}
-::selection{background:rgba(47,75,143,.16);}
-
-/* ── Site masthead (identical to rest of site) ── */
-.site-masthead{background:var(--bg);box-shadow:0 1px 0 var(--rule);position:sticky;top:0;z-index:200;font-size:16px;font-family:var(--sans);}
-.site-masthead::after{content:'';display:block;height:3px;background:linear-gradient(to right,#2F4B8F 0%,#6F94C6 50%,#E39A7A 100%)}
-.masthead-inner{max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:56px}
-.masthead-title{font-weight:800;font-size:1.35em;color:var(--ink)!important;text-decoration:none!important;letter-spacing:-.02em}
-.masthead-nav{display:flex;gap:2px;align-items:center}
-.masthead-nav a{font-weight:600;font-size:0.98em;color:var(--muted)!important;text-decoration:none!important;padding:6px 10px;border-radius:6px;transition:color .2s,background .2s;letter-spacing:.01em}
-.masthead-nav a:hover{color:var(--link)!important;background:rgba(47,75,143,.07)}
-.masthead-nav a.nav-active{color:var(--link)!important}
-@media(max-width:600px){.masthead-inner{flex-wrap:wrap;height:auto;padding:8px 14px 7px;row-gap:1px;justify-content:center}.masthead-title{width:100%;text-align:center;white-space:nowrap}.masthead-nav{width:100%;justify-content:center;flex-wrap:wrap}}
-@media(max-width:560px){.masthead-nav a{font-size:0.86em;padding:5px 8px}.masthead-title{font-size:1.15em}}
-
-/* ── Article shell ── */
-.d-wrap{padding:0 24px;}
-.d-article{max-width:var(--fig);margin:0 auto;padding:56px 0 40px;}
-.d-article > *{max-width:var(--col);margin-left:auto;margin-right:auto;}
-
-/* header block */
-.d-kicker{font-family:var(--sans);text-transform:uppercase;letter-spacing:.145em;font-size:.72rem;font-weight:600;color:var(--muted);margin-bottom:1.15em;}
-.d-title{font-family:var(--serif);font-weight:500;font-size:clamp(2.1rem,5.2vw,3.05rem);line-height:1.12;letter-spacing:-.021em;color:var(--ink);margin-bottom:.42em;text-wrap:balance;}
-.d-byline{font-family:var(--sans);font-size:.92rem;color:var(--muted);display:flex;flex-wrap:wrap;align-items:center;gap:.55em;line-height:1.5;}
-.d-byline .sep{color:var(--faint);}
-.d-byline .who{color:var(--ink);font-weight:600;}
-.d-tags{max-width:var(--col);margin:.9em auto 0;display:flex;flex-wrap:wrap;gap:7px;}
-.d-tags a{font-family:var(--sans);font-size:.74rem;font-weight:600;color:var(--muted);background:var(--pill);border:1px solid var(--rule);border-radius:999px;padding:2px 11px;text-decoration:none;transition:.15s;}
-.d-tags a:hover{color:var(--link);border-color:var(--link);}
-.d-hr-head{border:none;border-top:1px solid var(--rule);margin:1.9em auto 1.8em;}
-
-/* ── Body typography ── */
-.d-body{font-family:var(--serif);font-size:1.185rem;line-height:1.72;color:var(--body);}
-.d-body p{margin:0 0 1.35em;}
-.d-body a{color:var(--link);text-decoration:none;border-bottom:1px solid transparent;transition:color .15s,border-color .15s;}
-.d-body a:hover{color:var(--link-h);border-bottom-color:currentColor;}
-.d-body strong{color:var(--ink);font-weight:600;}
-.d-body em{font-style:italic;}
-.d-body h2{font-family:var(--sans);font-weight:700;font-size:1.5rem;line-height:1.25;letter-spacing:-.014em;color:var(--ink);margin:3.4em auto .75em;}
-.d-body h3{font-family:var(--sans);font-weight:600;font-size:1.14rem;line-height:1.3;color:var(--ink);margin:2.3em auto .5em;}
-.d-body h2 + h3{margin-top:1.1em;}
-.d-body ul,.d-body ol{margin:0 auto 1.35em;padding-left:1.4em;}
-.d-body li{margin:.35em 0;padding-left:.2em;}
-.d-body li::marker{color:var(--faint);}
-
-/* abstract = first blockquote */
-.d-body > blockquote:first-child{font-family:var(--serif);font-size:1.28rem;line-height:1.6;color:var(--ink);font-weight:400;border:none;padding:0;margin:.2em auto 1.3em;letter-spacing:-.003em;}
-.d-body > blockquote:first-child p{margin:0;}
-.d-body > blockquote:first-child + hr,.d-body > blockquote:first-child + p{}
-/* pull-quotes = other blockquotes */
-.d-body blockquote{font-family:var(--serif);font-style:italic;font-size:1.16rem;line-height:1.55;color:var(--muted);border-left:3px solid var(--link);padding:.1em 0 .1em 1.15em;margin:1.7em auto;}
-.d-body blockquote p{margin:0;}
-.d-body > blockquote:first-child{font-style:normal;border-left:none;padding-left:0;}
-
-/* section divider — quiet hairline, generous whitespace (reference is airy) */
-.d-body hr{border:none;height:1px;background:var(--rule);margin:3.6em auto;}
-
-/* table of contents (kramdown) */
-.d-body h2.no_toc{font-family:var(--sans);font-size:.76rem;text-transform:uppercase;letter-spacing:.14em;font-weight:700;color:var(--muted);margin:2.4em auto .55em;}
-.d-body #markdown-toc{list-style:none;font-family:var(--sans);font-size:.9rem;line-height:1.5;background:none;border:none;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:15px 2px;margin:.4em auto 2.2em;columns:2;column-gap:36px;}
-.d-body #markdown-toc li{margin:.28em 0;padding:0;break-inside:avoid;}
-.d-body #markdown-toc a{color:var(--muted);border:none;}
-.d-body #markdown-toc a:hover{color:var(--link);}
-.d-body #markdown-toc ul{list-style:none;padding-left:14px;margin:.2em 0;}
-.d-body #markdown-toc ul a{color:var(--muted);font-size:.95em;}
-@media(max-width:640px){.d-body #markdown-toc{columns:1;}}
-
-/* figures — break out wider than the 706px text column, centered on the page */
-.d-body figure{width:min(var(--fig),calc(100vw - 40px));max-width:none;margin:3.2em 0 3.2em 50%;transform:translateX(-50%);padding:0;}
-.d-body figure img,.d-body p img{display:block;width:100%;height:auto;border-radius:10px;border:1px solid var(--fig-border);background:var(--band);box-shadow:0 6px 30px -14px rgba(0,0,0,.28);}
-body.dark-mode .d-body figure img,body.dark-mode .d-body p img{filter:brightness(.92);}
-.d-body figcaption{font-family:var(--sans);font-size:.86rem;line-height:1.55;color:var(--muted);max-width:660px;margin:.85em auto 0;text-align:center;}
-.d-body figcaption b,.d-body figcaption strong{color:var(--link);font-weight:700;}
-/* native inline SVG charts — text uses currentColor so the chart follows the theme;
-   sized to sit with the text, not break out huge (overrides the figure breakout) */
-.d-body figure.chart{width:auto;max-width:680px;margin:2.6em auto;transform:none;color:var(--muted);}
-.d-body figure.chart.wide{max-width:850px;}
-.d-body figure.chart.narrow{max-width:460px;}
-.d-body figure.chart svg{display:block;width:100%;height:auto;}
-/* generated-image sample grids (MNIST): transparent digits, invert in dark mode */
-.d-body .mnist-tile{background:transparent!important;box-shadow:none!important;border:1px solid var(--fig-border);border-radius:10px;}
-body.dark-mode .d-body figure .mnist-tile{filter:invert(1);}
-/* side-by-side figure group (kept modest, not a full breakout) */
-.d-body .fig-row{width:auto;max-width:600px;margin:2.6em auto;display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start;}
-.d-body .fig-row figure{width:100%;max-width:100%;margin:0;transform:none;}
-.d-body .fig-row figcaption{max-width:100%;text-align:center;}
-@media(max-width:640px){.d-body .fig-row{grid-template-columns:1fr;gap:12px;}}
-/* wide multi-panel charts: scroll instead of shrinking type below legibility on phones */
-@media(max-width:640px){.d-body figure.chart.wide{overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:6px;}
-.d-body figure.chart.wide svg{min-width:520px;}
-.d-body figure.chart.wide figcaption{position:sticky;left:0;max-width:calc(100vw - 48px);}}
-
-/* tables */
-.d-body table{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:.92rem;margin:1.9em auto;display:block;overflow-x:auto;}
-.d-body thead th{text-align:left;font-weight:700;color:var(--ink);border-bottom:2px solid var(--ink);padding:9px 14px 9px 0;white-space:nowrap;}
-.d-body tbody td{padding:9px 14px 9px 0;border-bottom:1px solid var(--rule);color:var(--body);vertical-align:top;}
-.d-body tbody tr:last-child td{border-bottom:none;}
-
-/* code */
-.d-body pre{background:var(--code-bg);border:1px solid var(--rule);border-radius:10px;padding:14px 16px;margin:1.5em auto;overflow-x:auto;font-family:var(--mono);font-size:.85rem;line-height:1.55;color:var(--body);}
-.d-body pre code{background:none;padding:0;border:none;font-size:inherit;color:inherit;}
-.d-body code{font-family:var(--mono);font-size:.86em;background:var(--code-bg);border:1px solid var(--rule);border-radius:5px;padding:.08em .36em;color:var(--ink);}
-.d-body :is(h2,h3) code{font-size:.82em;}
-
-/* MathJax spacing */
-.d-body .MathJax_Display,.d-body .MathJax_Preview{overflow-x:auto;max-width:100%;}
-.d-body .MJXc-display{margin:1.4em 0!important;overflow-x:auto;overflow-y:visible;padding-bottom:4px;scrollbar-gutter:stable;}
-.d-body .MathJax{color:var(--ink)!important;}
-
-/* article footer */
-.d-foot{border-top:1px solid var(--rule);margin:3em auto 0;padding-top:1.6em;font-family:var(--sans);font-size:.92rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center;}
-.d-foot a{color:var(--link);text-decoration:none;font-weight:600;}
-.d-foot a:hover{color:var(--link-h);}
-
-/* ── premium controls (progress + FABs) ── */
-#read-progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,#2F4B8F,#6F94C6 60%,#E39A7A);z-index:9999;transition:width .08s linear;pointer-events:none;}
-.pg-fab{position:fixed;right:22px;width:42px;height:42px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.18);z-index:9990;transition:transform .2s,opacity .2s,background .2s;}
-.pg-fab:hover{transform:translateY(-2px) scale(1.06);}
-#pg-top{bottom:22px;background:#2F4B8F;color:#fff;opacity:0;pointer-events:none;}
-#pg-top.show{opacity:1;pointer-events:auto;}
-#pg-dark{bottom:74px;background:#fff;color:#2F4B8F;border:1.5px solid rgba(0,0,0,.15);}
-body.dark-mode #pg-dark{background:#1A2333;color:#F5C8B5;border-color:#2B3A55;}
-.pg-dico{width:20px;height:20px;display:inline-block;background-color:currentColor;-webkit-mask:url(/images/icons/h-moon.png) center/contain no-repeat;mask:url(/images/icons/h-moon.png) center/contain no-repeat;}
-body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-image:url(/images/icons/h-sun.png);}
-.pg-up{width:11px;height:11px;border-top:2.6px solid currentColor;border-right:2.6px solid currentColor;transform:rotate(-45deg) translateY(2px);display:inline-block;}
-@media print{#read-progress,.pg-fab,.site-masthead{display:none!important;}}
-@media (prefers-reduced-motion:reduce){#read-progress,.pg-fab{transition:none;}html{scroll-behavior:auto;}}
-
-@view-transition{navigation:auto;}
-::view-transition-old(root),::view-transition-new(root){animation-duration:.18s;}
-@media (prefers-reduced-motion:reduce){::view-transition-old(root),::view-transition-new(root){animation:none!important;}}
+/* a phone cannot fit the byline on one line: break after the affiliation, never before "11 min read" */
+@media(max-width:440px){.hero .byline .brk{flex-basis:100%;height:0;overflow:hidden}}
+@media print{.site-masthead,#read-progress,.pg-fab,.post-end{display:none!important}.scene{border-top:0}}
 </style>
 <script data-goatcounter="https://jiajunfan.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <link rel="alternate" type="application/atom+xml" href="https://www.jiajunfan.com/feed.xml" title="Jiajun Fan Feed">
 {% include site-chrome.html %}
 </head>
 <body>
+<script>
+/* dark mode: respect site-wide preference */
+try{ if(localStorage.getItem('darkMode')==='true') document.body.classList.add('dark-mode'); }catch(e){}
+document.documentElement.classList.remove('dark-mode-pending');
+</script>
 <header class="site-masthead">
   <div class="masthead-inner">
     <a class="masthead-title" href="/">Jiajun Fan</a>
@@ -194,40 +112,41 @@ body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-ima
 
 <div id="read-progress" aria-hidden="true"></div>
 
-<main class="d-wrap">
-  <article class="d-article">
-    <div class="d-kicker">Research Notes</div>
-    <h1 class="d-title">{{ page.title | strip_html }}</h1>
-    <div class="d-byline">
-      <span class="who">Jiajun Fan</span>
-      <span class="sep">·</span><span>UIUC</span>
-      <span class="sep">·</span><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time>
-      <span class="sep">·</span><span>{{ content | strip_html | number_of_words | divided_by: 200 | plus: 1 }} min read</span>
-    </div>
+<main>
+<section class="hero" aria-label="Research note">
+  <div class="wrap">
+    <p class="venue">Research Notes</p>
+    <h1>{{ page.title | strip_html }}</h1>
+    <p class="byline d-byline">
+      <span class="me">Jiajun Fan</span><span class="sep">·</span><span>UIUC</span><span class="sep brk">·</span><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time><span class="sep">·</span><span class="nw">{{ content | strip_html | number_of_words | divided_by: 200 | plus: 1 }} min read</span>
+    </p>
     {% if page.tags %}
-    <div class="d-tags">{% for t in page.tags %}<a href="/tags/#{{ t | slugify }}">{{ t }}</a>{% endfor %}</div>
+    <div class="tags d-tags">{% for t in page.tags %}<a href="/tags/#{{ t | slugify }}">{{ t }}</a>{% endfor %}</div>
     {% endif %}
-    <hr class="d-hr-head">
+  </div>
+</section>
 
+<article class="scene post">
+  <div class="wrap">
     <div class="d-body">
       {{ content }}
-
-      <footer class="d-foot">
-        <a href="/year-archive/">&larr; All posts</a>
-        <span>Jiajun Fan &middot; <a href="/">jiajunfan.com</a></span>
-      </footer>
     </div>
-  </article>
+    <div class="post-end">
+      <div class="cta"><a class="btn" href="/year-archive/">&larr; All posts</a></div>
+    </div>
+  </div>
+</article>
 </main>
+
+<footer>
+  <p>Research Notes &nbsp;|&nbsp; Jiajun Fan &middot; <a href="/">jiajunfan.com</a></p>
+</footer>
 
 <button id="pg-dark" class="pg-fab" aria-label="Toggle dark mode" title="Toggle dark mode"><i class="pg-dico"></i></button>
 <button id="pg-top" class="pg-fab" aria-label="Back to top" title="Back to top"><span class="pg-up"></span></button>
 {% include fab-autohide.html %}
 
 <script>
-/* dark mode: respect site-wide preference */
-try{ if(localStorage.getItem('darkMode')==='true') document.body.classList.add('dark-mode'); }catch(e){}
-document.documentElement.classList.remove('dark-mode-pending');
 (function(){
   var bar=document.getElementById('read-progress'), top=document.getElementById('pg-top'), dk=document.getElementById('pg-dark');
   function onScroll(){
