@@ -1,0 +1,211 @@
+<script>
+/* ADRPO hero: one fine-tuning run as a loop. The model samples a batch, scores each sample against
+   the batch average, ties each sample to the pre-trained model with strength beta0 - A (loose for good
+   samples, tight for poor ones), and moves toward the good ones. Schematic, nothing measured. */
+(function(){
+  var cv=document.getElementById('ad-stage'); if(!cv||!cv.getContext) return;
+  var ctx=cv.getContext('2d'), W=0, H=0, dpr=1, G=null, C=null;
+  var mq=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)'):{matches:false};
+  var steps=[].slice.call(document.querySelectorAll('#hero-steps li'));
+  var T=17.2, FINAL=6.48, fixed=null, visible=true, raf=0, t0=0, lastStep=-1, NS=9;
+  var F=[.34,.52,.66,.77,.86,.92];
+  var SLOW=[0.7,9.2], FAST=1.55, NFAST=4;
+
+  function hex(s){s=s.trim().replace('#','');if(s.length===3)s=s[0]+s[0]+s[1]+s[1]+s[2]+s[2];return [parseInt(s.slice(0,2),16),parseInt(s.slice(2,4),16),parseInt(s.slice(4,6),16)];}
+  function mix(a,b,t){t=t<0?0:t>1?1:t;return [a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t,a[2]+(b[2]-a[2])*t];}
+  function rgba(c,a){return 'rgba('+(c[0]|0)+','+(c[1]|0)+','+(c[2]|0)+','+(a==null?1:a<0?0:a>1?1:a)+')';}
+  function clamp(x){return x<0?0:x>1?1:x;}
+  function ease(x){x=clamp(x);return x*x*(3-2*x);}
+  function seg(t,a,b){return clamp((t-a)/(b-a));}
+  function colors(){
+    var cs=getComputedStyle(document.body), v=function(n){return hex(cs.getPropertyValue(n));};
+    C={bg:v('--bg'),card:v('--card'),ink:v('--ink'),body:v('--body'),muted:v('--muted'),faint:v('--faint'),hair:v('--hair'),rule:v('--rule'),
+       mint:v('--mint'),mintE:v('--mint-e'),mintT:v('--mint-t'),mintL:v('--mint-l'),
+       peach:v('--peach'),peachE:v('--peach-e'),peachT:v('--peach-t'),ice:v('--ice'),iceE:v('--ice-e'),iceT:v('--ice-t'),iceL:v('--ice-l'),
+       lav:v('--lav'),lavE:v('--lav-e'),lavT:v('--lav-t'),
+       dark:document.body.classList.contains('dark-mode'),sans:cs.getPropertyValue('--sans')};
+  }
+
+  var rnd=(function(){var s=20251202;return function(){s=(s*1664525+1013904223)%4294967296;return s/4294967296;};})();
+  function gs(){var u=rnd()||1e-6,v=rnd();return Math.sqrt(-2*Math.log(u))*Math.cos(6.28318*v);}
+  var OFF=[];
+  for(var k=0;k<F.length;k++){var a=[];for(var i=0;i<NS;i++){var ang=i/NS*6.28318+k*0.7+gs()*0.25, rr=0.55+0.5*rnd();a.push([Math.cos(ang)*rr,Math.sin(ang)*rr]);}OFF.push(a);}
+
+  function layout(){
+    var r=cv.getBoundingClientRect();W=Math.max(280,r.width);H=Math.max(240,r.height);
+    dpr=Math.min(2,window.devicePixelRatio||1);cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);
+    var wide=W>=620;
+    G={wide:wide};
+    if(wide){G.R=[W*0.19,H*0.68];G.P=[W*0.77,H*0.36];G.s=38;G.ring=30;G.fs=13;}
+    else{G.R=[W*0.2,H*0.72];G.P=[W*0.72,H*0.3];G.s=25;G.ring=21;G.fs=12;}
+  }
+  function center(f){
+    var R=G.R,P=G.P,dx=P[0]-R[0],dy=P[1]-R[1],L=Math.sqrt(dx*dx+dy*dy),b=Math.sin(Math.PI*f)*0.1*L;
+    return [R[0]+dx*f+dy/L*b, R[1]+dy*f-dx/L*b];
+  }
+  function dist(a,b){var x=a[0]-b[0],y=a[1]-b[1];return Math.sqrt(x*x+y*y);}
+  function samples(k){
+    var c=center(F[k]), s=G.s, out=[], i, sum=0;
+    for(i=0;i<NS;i++){var p=[c[0]+OFF[k][i][0]*s*1.25,c[1]+OFF[k][i][1]*s];out.push({p:p,d:dist(p,G.P)});sum+=out[i].d;}
+    var avg=sum/NS, mx=0;
+    out.forEach(function(o){o.A=avg-o.d;mx=Math.max(mx,Math.abs(o.A));});
+    out.forEach(function(o){o.a=o.A/(mx||1);});
+    return {c:c,avg:avg,pts:out};
+  }
+  function txt(s,x,y,col,a,al,w,size){if(a<=0.01)return;ctx.font=(w||500)+' '+(size||G.fs)+'px '+C.sans;ctx.textAlign=al||'center';ctx.fillStyle=rgba(col,a);ctx.fillText(s,x,y);}
+  function halo(s,x,y,col,a,al,w,size){if(a<=0.01)return;ctx.font=(w||500)+' '+(size||G.fs)+'px '+C.sans;ctx.textAlign=al||'center';ctx.lineWidth=5;ctx.lineJoin='round';ctx.strokeStyle=rgba(C.bg,a*0.9);ctx.strokeText(s,x,y);ctx.fillStyle=rgba(col,a);ctx.fillText(s,x,y);}
+  function dot(x,y,r,fill,fa,edge,ea,lw){ctx.beginPath();ctx.arc(x,y,r,0,6.2832);if(fill){ctx.fillStyle=rgba(fill,fa);ctx.fill();}if(edge){ctx.lineWidth=lw||1.3;ctx.strokeStyle=rgba(edge,ea);ctx.stroke();}}
+
+  function phaseOf(t){
+    if(t<SLOW[0]) return {k:0,u:-1,slow:true};
+    if(t<SLOW[1]) return {k:0,u:(t-SLOW[0])/(SLOW[1]-SLOW[0]),slow:true};
+    var e=t-SLOW[1], k=Math.floor(e/FAST);
+    if(k<NFAST) return {k:k+1,u:(e-k*FAST)/FAST,slow:false};
+    return {k:NFAST+1,u:-1,slow:false,done:true,e:e-NFAST*FAST};
+  }
+  /* within one iteration, u in [0,1]: sample, score, tie, move */
+  var PS=[0,.22,.47,.72,1];
+
+  function draw(t){
+    if(!G||!C) return;
+    ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,W,H);
+    var wide=G.wide, ph=phaseOf(t), u=ph.u, k=ph.k;
+    var fadeIn=seg(t,0,0.6), fadeOut=1-seg(t,T-0.7,T);
+    var A0=fadeIn*fadeOut;
+    var step=t<SLOW[0]?0:(ph.slow?(u<PS[1]?0:u<PS[2]?1:u<PS[3]?2:3):3);
+    if(ph.done) step=3;
+    if(step!==lastStep){lastStep=step;steps.forEach(function(el,j){el.classList.toggle('on',j===step);});}
+
+    /* reward landscape */
+    var P=G.P, R=G.R, i, j;
+    var gl=ctx.createRadialGradient(P[0],P[1],2,P[0],P[1],G.ring*3.2);
+    gl.addColorStop(0,rgba(C.mintL,0.95*A0));gl.addColorStop(1,rgba(C.mintL,0));
+    ctx.fillStyle=gl;ctx.beginPath();ctx.arc(P[0],P[1],G.ring*3.2,0,6.2832);ctx.fill();
+    for(i=4;i>=1;i--){
+      ctx.beginPath();ctx.ellipse(P[0],P[1],G.ring*i*1.08,G.ring*i*0.86,-0.35,0,6.2832);
+      ctx.lineWidth=1;ctx.strokeStyle=rgba(C.mintE,A0*(0.66-i*0.11));ctx.stroke();
+    }
+    dot(P[0],P[1],3,C.mintE,A0*0.9);
+    halo('higher reward',P[0],P[1]-G.ring*2.05-4,C.mintT,A0,'center',600);
+
+    /* the pre-trained model */
+    ctx.beginPath();ctx.ellipse(R[0],R[1],G.s*1.35,G.s*1.08,0,0,6.2832);
+    ctx.fillStyle=rgba(C.ice,A0*(C.dark?0.32:0.42));ctx.fill();
+    ctx.setLineDash([3,4]);ctx.lineWidth=1.2;ctx.strokeStyle=rgba(C.iceE,A0*0.8);ctx.stroke();ctx.setLineDash([]);
+    dot(R[0],R[1],3.2,C.iceE,A0);
+    txt('the pre-trained model',R[0],R[1]+G.s*1.08+(wide?20:17),C.iceT,A0,'center',600);
+
+    /* current iteration */
+    var kk=Math.min(k,F.length-1), S=samples(Math.min(kk,F.length-2));
+    var moving=!ph.done&&u>=PS[3], mv=moving?ease(seg(u,PS[3]+.02,PS[4]-.04)):0;
+    var cNow=ph.done?center(F[F.length-1]):(u<0?center(F[kk]):(function(){var a=center(F[kk]),b=center(F[kk+1]);return [a[0]+(b[0]-a[0])*mv,a[1]+(b[1]-a[1])*mv];})());
+
+    /* trail of the model so far */
+    var last=ph.done?F.length-1:kk, pts=[R.slice()];
+    for(i=0;i<=last;i++)pts.push(center(F[i]));
+    pts.push(cNow);
+    if(pts.length>1){
+      ctx.beginPath();ctx.moveTo(pts[0][0],pts[0][1]);for(i=1;i<pts.length;i++)ctx.lineTo(pts[i][0],pts[i][1]);
+      ctx.setLineDash([2,5]);ctx.lineWidth=1.6;ctx.lineCap='round';ctx.strokeStyle=rgba(C.mintE,A0*0.75);ctx.stroke();ctx.setLineDash([]);
+      for(i=2;i<pts.length-1;i++)dot(pts[i][0],pts[i][1],2.4,C.card,A0,C.mintE,A0*0.8,1.2);
+    }
+
+    /* the model: a cloud of what it generates */
+    var fin=ph.done?ease(seg(ph.e,0,0.8)):0;
+    var cg=ctx.createRadialGradient(cNow[0],cNow[1],1,cNow[0],cNow[1],G.s*1.9);
+    var cc=mix(C.ice,C.mint,Math.max(fin,(k/(NFAST+1))*0.6));
+    cg.addColorStop(0,rgba(cc,A0*(C.dark?0.5:0.62)));cg.addColorStop(1,rgba(cc,0));
+    ctx.fillStyle=cg;ctx.beginPath();ctx.arc(cNow[0],cNow[1],G.s*1.9,0,6.2832);ctx.fill();
+    ctx.beginPath();ctx.ellipse(cNow[0],cNow[1],G.s*1.42,G.s*1.14,0,0,6.2832);
+    ctx.lineWidth=1.3;ctx.strokeStyle=rgba(mix(C.iceE,C.mintE,fin),A0*0.85);ctx.stroke();
+    dot(cNow[0],cNow[1],3.4,C.ink,A0*0.9);
+
+    if(!ph.done&&u>=0){
+      var sIn=seg(u,0,PS[1]*0.85), sc=seg(u,PS[1],PS[2]), tie=seg(u,PS[2],PS[3]), out=1-seg(u,PS[3]+.02,PS[3]+.16);
+      if(!ph.slow){out=1-seg(u,PS[3],PS[3]+.12);}
+      /* batch average: the reward contour through the batch */
+      var avA=Math.sin(Math.PI*seg(u,PS[1]-.02,PS[3]+.06))*A0;
+      if(avA>0.01){
+        var a0=Math.atan2(S.c[1]-P[1],S.c[0]-P[0]), sp=(wide?1.7:1.5)*G.s/S.avg*1.6;
+        ctx.beginPath();ctx.arc(P[0],P[1],S.avg,a0-sp,a0+sp);
+        ctx.setLineDash([5,5]);ctx.lineWidth=1.4;ctx.strokeStyle=rgba(C.lavE,avA*0.85);ctx.stroke();ctx.setLineDash([]);
+        if(ph.slow){
+          var lx=P[0]+Math.cos(a0+sp)*S.avg, ly=P[1]+Math.sin(a0+sp)*S.avg;
+          halo('batch average',lx+6,ly-6,C.lavT,avA,'left',600);
+        }
+      }
+      /* ties to the pre-trained model: strength beta0 - A */
+      if(tie>0){
+        S.pts.forEach(function(o,n){
+          var p=o.p, good=o.A>0, str=0.5-0.5*o.a, prog=ease(seg(tie,n*0.04,0.55+n*0.04))*out;
+          if(prog<=0.01) return;
+          var ex=p[0]+(R[0]-p[0])*prog, ey=p[1]+(R[1]-p[1])*prog;
+          ctx.beginPath();ctx.moveTo(p[0],p[1]);
+          if(good){var mx=(p[0]+ex)/2, my=(p[1]+ey)/2+ (14+22*o.a)*prog*(wide?1:0.7);ctx.quadraticCurveTo(mx,my,ex,ey);ctx.setLineDash([3,4]);}
+          else ctx.lineTo(ex,ey);
+          ctx.lineWidth=good?1.1:1+2.6*str;ctx.lineCap='round';
+          ctx.strokeStyle=rgba(good?C.mintE:C.peachE,A0*(good?0.8:0.62));ctx.stroke();ctx.setLineDash([]);
+        });
+        if(ph.slow&&wide){
+          var la=seg(tie,0.3,0.6)*out*A0;
+          halo('each sample is tied back with strength β₀ − A',R[0]+G.s*2.4,R[1]+G.s*0.5+8,C.ink,la,'left',600);
+          halo('loose when A > 0, tight when A < 0',R[0]+G.s*2.4,R[1]+G.s*0.5+26,C.muted,la,'left',500,12);
+        }else if(ph.slow){
+          var lb=seg(tie,0.3,0.6)*out*A0;
+          halo('tied back with strength β₀ − A',R[0]+G.s*0.2,R[1]+G.s*1.08+36,C.ink,lb,'left',600);
+        }
+      }
+      /* the samples */
+      S.pts.forEach(function(o,n){
+        var app=ph.slow?ease(seg(sIn,n/NS*0.7,n/NS*0.7+0.35)):ease(sIn);
+        if(app<=0.01) return;
+        var c0=S.c, x=c0[0]+(o.p[0]-c0[0])*app, y=c0[1]+(o.p[1]-c0[1])*app;
+        var col=ease(seg(sc,n*0.05,0.4+n*0.05)), good=o.A>0, a=A0*app*out;
+        var fill=mix(C.card,good?C.mint:C.peach,col), edge=mix(C.iceE,good?C.mintE:C.peachE,col);
+        var pop=1+0.35*Math.sin(Math.PI*col);
+        dot(x,y,(wide?5.4:4.4)*pop,fill,a,edge,a,1.4);
+      });
+      if(ph.slow&&k===0){
+        var la2=seg(u,0.03,0.1)*(1-seg(u,PS[1]-.05,PS[1]))*A0;
+        halo(wide?'it samples a batch':'a batch',S.c[0],S.c[1]-G.s*1.55-8,C.body,la2,'center',600);
+        var la3=seg(sc,0.35,0.6)*(1-seg(u,PS[3]+.02,PS[3]+.1))*A0;
+        if(wide){
+          halo('A > 0: better than the batch',S.c[0]+G.s*1.6,S.c[1]-G.s*0.55,C.mintT,la3,'left',600,12);
+          halo('A < 0: worse than the batch',S.c[0]+G.s*1.6,S.c[1]-G.s*0.55+17,C.peachT,la3,'left',600,12);
+        }else{
+          halo('A > 0',S.c[0]+G.s*1.7,S.c[1]-G.s*0.4,C.mintT,la3,'left',600,12);
+          halo('A < 0',S.c[0]+G.s*1.7,S.c[1]-G.s*0.4+15,C.peachT,la3,'left',600,12);
+        }
+      }
+    }
+    if(ph.done){
+      var lf=seg(ph.e,0.3,0.9)*A0;
+      halo(wide?'more reward, and its samples stay varied':'more reward,',cNow[0]-G.s*1.5,cNow[1]+G.s*1.14+(wide?26:22),C.mintT,lf,wide?'left':'left',600);
+      if(!wide) halo('samples still varied',cNow[0]-G.s*1.5,cNow[1]+G.s*1.14+38,C.mintT,lf,'left',600);
+    }
+  }
+
+  function frame(now){
+    raf=0;if(fixed!=null||mq.matches||!visible||document.hidden) return;
+    if(!t0)t0=now;var e=(now-t0)/1000;
+    if(e>=T){t0=now;e=0;}
+    draw(e);raf=requestAnimationFrame(frame);
+  }
+  function still(){draw(fixed!=null?fixed:FINAL);}
+  function kick(){
+    if(fixed!=null||mq.matches){still();return;}
+    if(!raf&&visible&&!document.hidden){t0=0;raf=requestAnimationFrame(frame);}
+  }
+  function refresh(){colors();layout();if(fixed!=null||mq.matches||!raf)still();}
+  colors();layout();
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){visible=es[0].isIntersecting;if(visible)kick();},{threshold:0.05}).observe(cv);
+  }
+  document.addEventListener('visibilitychange',kick);
+  window.addEventListener('resize',function(){layout();if(fixed!=null||mq.matches)still();});
+  if(mq.addEventListener)mq.addEventListener('change',function(){if(mq.matches)still();else kick();});
+  new MutationObserver(function(){colors();if(fixed!=null||mq.matches)still();}).observe(document.body,{attributes:true,attributeFilter:['class']});
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(refresh);
+  kick();
+})();
+</script>

@@ -1,0 +1,276 @@
+<script>
+/* ADRPO page figures. Numbers: Table 1 (text-to-image), Table 2 (MMAU). Trajectories: the checkpoints
+   plotted in Figure 3 (SD3) and Figure 4 (Qwen3) of the paper, read from the paper's own vector figures. */
+(function(){
+  var TR={
+   q3a:[[5.295,0.469],[5.327,0.48],[5.296,0.476],[5.199,0.447],[5.096,0.533],[5.1,0.548],[5,0.498],[4.96,0.472],[4.9,0.458],[4.837,0.477],[4.75,0.46],[4.747,0.515],[4.718,0.504],[4.657,0.465],[4.611,0.541],[4.535,0.563],[4.478,0.471],[4.437,0.484],[4.471,0.474],[4.414,0.489],[4.353,0.455],[4.22,0.483],[4.098,0.515],[4.098,0.518],[4.099,0.585],[4.027,0.677],[4.043,0.657],[3.996,0.655],[3.998,0.66],[3.907,0.751],[3.848,0.793],[3.73,0.773],[3.63,0.757],[3.62,0.815],[3.539,0.83],[3.483,0.777],[3.386,0.728],[3.324,0.712],[3.255,0.769],[3.141,0.746],[3.049,0.758],[2.984,0.856],[2.895,1.01],[2.741,1.166],[2.571,1.35],[2.397,1.332],[2.25,1.406],[2.103,1.323],[1.862,1.444],[1.655,1.465],[1.418,1.377],[1.303,1.33],[1.182,1.339],[1.142,1.373],[1.094,1.354],[1.007,1.315],[0.985,1.284],[0.917,1.261],[0.872,1.239],[0.894,1.238],[0.854,1.213],[0.88,1.205],[0.9,1.222],[0.858,1.204],[0.764,1.195],[0.69,1.2],[0.552,1.172],[0.506,1.171],[0.405,1.148],[0.4,1.163],[0.32,1.142],[0.331,1.159],[0.34,1.172],[0.272,1.149],[0.293,1.164],[0.235,1.143],[0.263,1.159],[0.211,1.139],[0.169,1.123],[0.21,1.143],[0.244,1.159],[0.195,1.139],[0.156,1.123],[0.2,1.143],[0.236,1.159],[0.189,1.139],[0.151,1.123],[0.196,1.143],[0.157,1.126],[0.201,1.146],[0.236,1.161],[0.189,1.141],[0.152,1.124],[0.217,1.159],[0.29,1.207],[0.242,1.439],[0.194,1.63],[0.156,1.783],[0.125,1.905],[0.1,2.002],[0.08,2.08],[0.064,2.143],[0.051,2.193],[0.041,2.233],[0.033,2.265],[0.027,2.29],[0.021,2.311],[0.017,2.327],[0.014,2.34],[0.011,2.351],[0.009,2.359],[0.007,2.366],[0.006,2.371],[0.005,2.376],[0.004,2.379],[0.003,2.382],[0.003,2.384],[0.002,2.386],[0.002,2.387],[0.002,2.388],[0.001,2.389],[0.001,2.39],[0.001,2.39],[0.001,2.391],[0.001,2.391],[0.001,2.392],[0.001,2.392],[0.001,2.392],[0.001,2.392],[0.001,2.392],[0.001,2.392],[0.001,2.392],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.001,2.393],[0.005,2.395],[0.075,2.478],[0.318,2.439],[0.539,2.383],[0.728,2.346],[0.896,2.375],[0.99,2.468],[0.989,2.535],[0.965,2.627],[0.939,2.706],[0.891,2.783],[0.842,2.832]],
+   q3g:[[5.295,0.469],[5.323,0.5],[5.31,0.505],[5.199,0.618],[5.062,0.61],[5.032,0.698],[4.895,0.768],[4.869,0.814],[4.762,0.722],[4.696,0.711],[4.592,0.732],[4.443,0.736],[4.365,0.71],[4.284,0.565],[4.145,0.529],[3.871,0.513],[3.727,0.5],[3.664,0.575],[3.478,0.527],[3.361,0.572],[3.373,0.558],[3.423,0.507],[3.474,0.473],[3.576,0.439],[3.642,0.435],[3.724,0.315],[3.807,0.244],[3.912,0.241],[3.981,0.227],[4.004,0.232],[4.035,0.292],[4.047,0.334],[4.028,0.29],[3.999,0.362],[3.942,0.467],[3.869,0.589],[3.749,0.588],[3.588,0.638],[3.493,0.716],[3.312,0.805],[3.205,0.918],[3.077,1.023],[2.887,1.101],[2.77,1.154],[2.666,1.131],[2.585,1.151],[2.496,1.164],[2.465,1.222],[2.454,1.317],[2.301,1.352],[2.165,1.255],[2.015,1.274],[1.903,1.314],[1.922,1.422],[2.012,1.505],[1.91,1.557],[1.846,1.548],[1.763,1.462],[1.644,1.389],[1.546,1.307],[1.485,1.255],[1.426,1.194],[1.38,1.175],[1.557,1.1],[1.923,1.006],[2.077,0.978],[2.047,1.053],[2.136,0.997],[2.317,0.973],[2.499,0.973],[2.59,0.939],[2.829,0.916],[2.991,0.884],[2.968,0.911],[2.874,0.932],[2.777,0.934],[2.689,0.971],[2.735,1.054],[2.915,1.06],[2.793,1.062],[2.929,1.111],[2.881,1.071],[2.914,1.014],[3.046,1.01],[3.196,0.993],[3.305,0.928],[3.357,0.911],[3.326,0.924],[3.376,0.906],[3.408,0.877],[3.316,0.923],[3.37,0.958],[3.272,1.018],[3.282,1.071],[3.305,1.063],[3.348,1.115],[3.213,1.137],[3.275,1.137],[3.28,1.073],[3.42,1.075],[3.52,0.997],[3.687,0.878],[3.728,0.892],[3.74,0.853],[3.697,0.858],[3.655,0.905],[3.479,0.919],[3.514,0.886],[3.429,0.903],[3.265,0.913],[3.243,0.91],[3.141,0.9],[3.119,0.912],[3.141,0.831],[3.228,0.77],[3.389,0.669],[3.439,0.634],[3.388,0.637],[3.31,0.622],[3.384,0.552],[3.416,0.539],[3.503,0.488],[3.571,0.418],[3.59,0.492],[3.583,0.561],[3.71,0.49],[3.725,0.476],[3.727,0.502],[3.719,0.553],[3.745,0.597],[3.74,0.602],[3.774,0.631],[3.636,0.62],[3.704,0.629],[3.731,0.549],[3.529,0.636],[3.628,0.648],[3.635,0.684],[3.595,0.738],[3.499,0.744],[3.434,0.786],[3.429,0.809],[3.218,0.871],[3.213,0.849],[3.229,0.777],[3.39,0.71],[3.211,0.737],[3.416,0.71],[3.5,0.691],[3.602,0.682],[3.743,0.703],[3.878,0.668],[3.995,0.656],[4.15,0.634],[4.251,0.628],[4.331,0.623],[4.403,0.647],[4.43,0.609],[4.483,0.511],[4.471,0.494],[4.608,0.494],[4.533,0.587],[4.526,0.579],[4.58,0.501],[4.587,0.563],[4.649,0.528],[4.639,0.578],[4.494,0.575],[4.464,0.603],[4.551,0.471],[4.572,0.554],[4.663,0.504],[4.603,0.538],[4.67,0.455],[4.736,0.466],[4.737,0.442],[4.656,0.419],[4.672,0.42],[4.608,0.418],[4.595,0.458],[4.545,0.421],[4.605,0.402],[4.593,0.526],[4.668,0.484],[4.731,0.44],[4.578,0.448],[4.555,0.457],[4.553,0.458],[4.546,0.495],[4.453,0.506],[4.438,0.561],[4.508,0.455],[4.546,0.45],[4.447,0.463],[4.417,0.498],[4.439,0.513],[4.445,0.468],[4.476,0.49],[4.608,0.44],[4.489,0.505]],
+   d_adrpo:[[5.114,29.21],[5.129,29.528],[5.249,29.967],[5.254,30.462],[5.272,31.001],[5.273,31.354],[5.302,31.521],[5.347,31.747],[5.375,31.987],[5.347,32.182],[5.321,32.27],[5.292,32.345],[5.235,32.47],[5.198,32.542],[5.166,32.275],[5.115,32.344],[5.095,32.476],[5.15,32.304],[5.212,32.428],[5.146,32.591],[5.156,32.633],[5.14,32.707],[5.099,32.814],[5.13,32.79],[5.177,32.725],[5.227,32.656],[5.237,32.496],[5.252,32.434],[5.134,32.684],[5.149,32.623],[5.184,32.634]],
+   w_adrpo:[[0.00001,29.21],[0.00008,29.528],[0.00016,29.967],[0.00044,30.462],[0.00055,31.001],[0.00078,31.354],[0.00087,31.521],[0.00087,31.747],[0.00085,31.987],[0.00099,32.182],[0.00093,32.27],[0.00122,32.345],[0.00118,32.47],[0.00108,32.542],[0.00103,32.275],[0.00089,32.344],[0.00084,32.476],[0.00084,32.304],[0.00077,32.428],[0.00072,32.591],[0.00114,32.633],[0.00114,32.707],[0.00102,32.814],[0.00087,32.79],[0.00077,32.725],[0.00068,32.656],[0.00059,32.496],[0.00101,32.434],[0.00121,32.684],[0.00105,32.623],[0.00089,32.634]],
+   d_dpo:[[5.114,29.21],[5.121,29.485],[5.176,29.752],[5.193,30.031],[5.203,30.208],[5.149,30.44],[5.086,30.701],[5.121,30.956],[5.128,31.077],[5.176,30.974],[5.193,31.015],[5.159,30.997],[5.156,30.884],[5.134,31.003],[5.042,31.06],[4.953,31.027],[4.908,31.11],[4.905,31.069],[4.903,31.074],[4.805,31.11],[4.828,31.154],[4.801,31.197],[4.744,31.278],[4.807,31.343],[4.824,31.294],[4.796,31.096],[4.794,31.011],[4.859,30.926],[4.864,30.938],[4.826,31.005],[4.821,31.122]],
+   w_dpo:[[0.00001,29.21],[0.00009,29.485],[0.00024,29.752],[0.00049,30.031],[0.00073,30.208],[0.00083,30.44],[0.00099,30.701],[0.00128,30.956],[0.00162,31.077],[0.00218,30.974],[0.00229,31.015],[0.00288,30.997],[0.00289,30.884],[0.00298,31.003],[0.00319,31.06],[0.00292,31.027],[0.00292,31.11],[0.00328,31.069],[0.00325,31.074],[0.00316,31.11],[0.00315,31.154],[0.00365,31.197],[0.00364,31.278],[0.00387,31.343],[0.00387,31.294],[0.00396,31.096],[0.00434,31.011],[0.00492,30.926],[0.00518,30.938],[0.00497,31.005],[0.0047,31.122]],
+   d_orw:[[5.114,29.21],[5.054,29.283],[5.046,29.62],[4.984,29.922],[4.916,30.15],[4.821,30.224],[4.746,30.503],[4.664,30.685],[4.584,30.866],[4.504,31.073],[4.438,31.179],[4.451,31.141],[4.416,31.135],[4.336,31.222],[4.312,31.289],[4.292,31.251],[4.233,31.287],[4.22,31.271],[4.189,31.321],[4.164,31.327],[4.118,31.275],[4.119,31.383],[4.119,31.344],[4.058,31.367],[4.006,31.381],[4.019,31.316],[4.018,31.315],[4.011,31.335],[3.999,31.349],[3.974,31.299],[3.942,31.325]],
+   w_orw:[[0.00001,29.21],[0.00063,29.283],[0.00174,29.62],[0.00298,29.922],[0.00403,30.15],[0.00469,30.224],[0.00563,30.503],[0.00661,30.685],[0.00768,30.866],[0.0111,31.073],[0.01158,31.179],[0.01213,31.141],[0.01299,31.135],[0.01347,31.222],[0.01472,31.289],[0.01398,31.251],[0.01408,31.287],[0.01523,31.271],[0.01503,31.321],[0.01474,31.327],[0.01496,31.275],[0.01545,31.383],[0.01702,31.344],[0.01818,31.367],[0.01746,31.381],[0.01808,31.316],[0.01695,31.315],[0.01891,31.335],[0.02114,31.349],[0.02106,31.299],[0.0219,31.325]]
+  };
+  var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $=function(s,r){return (r||document).querySelector(s);}, $$=function(s,r){return [].slice.call((r||document).querySelectorAll(s));};
+  var hasIO='IntersectionObserver' in window;
+  if(reduced||!hasIO) document.body.classList.add('no-anim');
+  function mm(q){return !!(window.matchMedia&&window.matchMedia(q).matches);}
+
+  /* reveal on view, and replay on re-entry */
+  var revIO=hasIO&&!reduced?new IntersectionObserver(function(es){es.forEach(function(e){
+    if(e.isIntersecting) e.target.classList.add('in');
+    else if(e.boundingClientRect.top>window.innerHeight||e.boundingClientRect.bottom<0) e.target.classList.remove('in');
+  });},{threshold:[0,0.25],rootMargin:'0px 0px -6% 0px'}):null;
+  function watch(el){if(revIO)revIO.observe(el);else el.classList.add('in');}
+  var pauseIO=hasIO?new IntersectionObserver(function(es){es.forEach(function(e){e.target.classList.toggle('paused',!e.isIntersecting);e.target.dispatchEvent(new CustomEvent('ad:vis',{detail:e.isIntersecting}));});},{threshold:0.08}):null;
+  $$('.pausable').forEach(function(e){if(pauseIO){e.classList.add('paused');pauseIO.observe(e);}});
+
+  function f(v){return (+v).toFixed(1);}
+  function T(x,y,s,cls,anchor,style){return '<text x="'+f(x)+'" y="'+f(y)+'"'+(cls?' class="'+cls+'"':'')+(anchor?' text-anchor="'+anchor+'"':'')+(style?' style="'+style+'"':'')+'>'+s+'</text>';}
+
+  /* dot rows: one row per model, one dot at its value */
+  function rows(o){
+    var W=o.W, rh=o.rh||30, top=o.title?(o.sub?52:30):4, H=top+o.rows.length*rh+4, x0=o.labW+12, x1=W-(o.valW||52);
+    var X=function(v){return x0+(x1-x0)*(v-o.lo)/(o.hi-o.lo);}, s='';
+    if(o.title) s+=T(0,16,o.title,'t-ink mid');
+    if(o.sub) s+=T(0,36,o.sub,'sm');
+    o.rows.forEach(function(r,i){
+      var y=top+i*rh+rh/2, ours=r.k==='mint', d=(o.d0||0)+i*0.1, cx=X(r.v);
+      s+=T(0,y+(r.s?-3:5),r.l,ours?'t-mint':'t-ink',null,'font-weight:'+(ours?700:500));
+      if(r.s) s+=T(0,y+13,r.s,'sm');
+      s+='<line class="grid" x1="'+f(x0)+'" x2="'+f(x1)+'" y1="'+f(y)+'" y2="'+f(y)+'"/>';
+      s+='<g class="slide" style="--d:'+d.toFixed(2)+'s;--dx:'+f(x0-cx)+'px"><circle class="d-'+r.k+'" cx="'+f(cx)+'" cy="'+f(y)+'" r="'+(ours?7:5.5)+'"/></g>';
+      s+=T(cx+(ours?13:11),y+5,r.lab,'fade'+(ours?' t-mint':''),null,'--d:'+(d+0.9).toFixed(2)+'s;font-weight:'+(ours?700:500));
+    });
+    return '<svg viewBox="0 0 '+W+' '+H+'">'+s+'</svg>';
+  }
+  function dom(vals,padL,padR){var lo=Math.min.apply(null,vals),hi=Math.max.apply(null,vals),r=hi-lo;return [lo-r*(padL==null?.14:padL),hi+r*(padR==null?.02:padR)];}
+
+  /* Table 1: SD3 + ADRPO (2B) against larger flow models */
+  var T1=[
+    ['ClipScore','text and image agree; the reward',[29.27,32.18,31.72,32.97],['29.27','32.18','31.72','32.97']],
+    ['ClipDiversity','how varied the samples are',[5.08,4.31,4.29,5.13],['5.08','4.31','4.29','5.13']],
+    ['Aesthetic','image quality',[5.53,5.89,5.95,6.27],['5.53','5.89','5.95','6.27']],
+    ['BLIPScore','human preference',[0.501,0.526,0.492,0.567],['0.501','0.526','0.492','0.567']],
+    ['ImageReward','human preference',[0.97,1.45,1.11,1.61],['0.97','1.45','1.11','1.61']],
+    ['PickScore','human preference',[20.81,21.85,21.83,22.78],['20.81','21.85','21.83','22.78']]
+  ];
+  var T1M=[['SD3','ice'],['SANA-1.5','peach'],['FLUX.1-Dev','lav'],['ADRPO','mint']];
+  function sizes(el){
+    var cells=$$('.mult',el); if(!cells.length) return;
+    cells.forEach(function(c,i){
+      var m=T1[i], W=Math.round(Math.max(240,c.clientWidth)), d=dom(m[2]);
+      c.innerHTML=rows({W:W,title:m[0],sub:m[1],labW:78,lo:d[0],hi:d[1],d0:i*0.12,
+        rows:T1M.map(function(r,j){return {l:r[0],v:m[2][j],lab:m[3][j],k:r[1]};})});
+    });
+  }
+
+  /* Table 1: against other ways to fine-tune SD3 */
+  var T2=[
+    ['Reward','ClipScore, mean of 3 seeds',[29.27,29.35,31.30,31.42,32.97],['29.27','29.35','31.30','31.42','32.97']],
+    ['Diversity','ClipDiversity, mean of 3 seeds',[5.08,1.85,4.78,3.86,5.13],['5.08','1.85','4.78','3.86','5.13']]
+  ];
+  var T2M=[['SD3','ice','base model'],['RAFT','n',''],['DPO','lav',''],['ORW-CFM-W2','peach',''],['ADRPO','mint','']];
+  function finals(el){
+    var cells=$$('.mult',el);
+    cells.forEach(function(c,i){
+      var m=T2[i], W=Math.round(Math.max(260,c.clientWidth)), d=dom(m[2],.1,.02);
+      c.innerHTML=rows({W:W,title:m[0],sub:m[1],labW:96,lo:d[0],hi:d[1],d0:.3+i*.2,rh:29,
+        rows:T2M.map(function(r,j){return {l:r[0],v:m[2][j],lab:m[3][j],k:r[1]};})});
+    });
+  }
+
+  /* Table 2: MMAU audio reasoning, total accuracy */
+  function mmau(el){
+    var W=Math.round(Math.max(300,el.clientWidth)), small=W<480;
+    var R=[['ADRPO','Qwen2.5-Omni-7B',76.0,'76.0','mint'],['GRPO','Qwen2.5-Omni-7B',74.2,'74.2','peach'],['Gemini 2.5 Pro','commercial',71.6,'71.6','n'],['Qwen2.5-Omni-7B','before fine-tuning',68.6,'68.6','ice'],['GPT-4o Audio','commercial',62.5,'62.5','n']];
+    var d=dom(R.map(function(r){return r[2];}),.12,.02);
+    el.innerHTML=rows({W:W,title:'MMAU, total accuracy (%)',sub:small?'test-mini, sound, music and speech':'test-mini split: sound, music and speech questions',labW:small?118:150,lo:d[0],hi:d[1],rh:46,
+      rows:R.map(function(r){return {l:r[0],s:r[1],v:r[2],lab:r[3],k:r[4]};})});
+  }
+
+  /* trajectories, drawn checkpoint by checkpoint */
+  var anims=[], loop=0;
+  function tick(now){
+    loop=0;var any=false;
+    anims.forEach(function(a){if(!a.run)return;any=true;if(!a.t0)a.t0=now;var u=Math.min(1,(now-a.t0)/a.D);a.step(u);if(u>=1)a.run=false;});
+    if(any) loop=requestAnimationFrame(tick);
+  }
+  function play(a){if(reduced||!hasIO){a.step(1);return;}a.t0=0;a.run=true;a.step(0);if(!loop)loop=requestAnimationFrame(tick);}
+  function stop(a){a.run=false;}
+  function bindAnim(el,a){
+    anims.push(a);
+    if(!hasIO||reduced){a.step(1);return;}
+    a.step(0);
+    new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){if(!a.seen){a.seen=true;play(a);}}else if(e.boundingClientRect.top>window.innerHeight||e.boundingClientRect.bottom<0){a.seen=false;stop(a);a.step(0);}});},{threshold:0.35}).observe(el);
+  }
+  function traj(el,cfg){
+    var W=Math.round(Math.max(300,el.clientWidth)), small=W<520, H=cfg.H||(small?330:400);
+    var m={l:small?44:56,r:small?12:18,t:small?14:16,b:small?50:54};
+    var X=function(v){return m.l+(W-m.l-m.r)*(v-cfg.xd[0])/(cfg.xd[1]-cfg.xd[0]);}, Y=function(v){return m.t+(H-m.t-m.b)*(1-(v-cfg.yd[0])/(cfg.yd[1]-cfg.yd[0]));};
+    var s='', i;
+    cfg.yt.forEach(function(t){s+='<line class="grid" x1="'+m.l+'" x2="'+(W-m.r)+'" y1="'+f(Y(t[0]))+'" y2="'+f(Y(t[0]))+'"/>'+T(m.l-8,Y(t[0])+4,t[1],'sm','end');});
+    cfg.xt.forEach(function(t,k){if(small&&cfg.xskip&&k%2)return;s+=T(X(t[0]),H-m.b+20,t[1],'sm','middle');});
+    s+='<line class="ax" x1="'+m.l+'" x2="'+(W-m.r)+'" y1="'+(H-m.b)+'" y2="'+(H-m.b)+'"/>';
+    s+=T(W-m.r,H-8,cfg.xl,'sm','end');s+=T(0,m.t-2,cfg.yl,'sm ax-t','start');
+    if(cfg.extra) s+=cfg.extra(X,Y,small);
+    cfg.series.forEach(function(sr,k){if(cfg.dots){s+='<g class="tr-dots" data-g="'+k+'">';sr.pts.forEach(function(p,j){s+='<circle class="d-'+sr.c+'" cx="'+f(X(p[0]))+'" cy="'+f(Y(p[1]))+'" r="2.6" style="stroke-width:1;opacity:0" data-o="'+(0.18+0.5*j/sr.pts.length).toFixed(2)+'"/>';});s+='</g>';}});
+    cfg.series.forEach(function(sr,k){s+='<path class="tr-ln tr-'+sr.c+'" data-k="'+k+'"/>';});
+    var st=cfg.start;
+    s+='<rect class="d-ice" x="'+f(X(st.p[0])-6)+'" y="'+f(Y(st.p[1])-6)+'" width="12" height="12" rx="2" transform="rotate(45 '+f(X(st.p[0]))+' '+f(Y(st.p[1]))+')"/>';
+    s+=T(X(st.p[0])+(st.dx||0),Y(st.p[1])+(st.dy||0),st.t,'t-iceb halo',st.a||'start');
+    cfg.series.forEach(function(sr,k){
+      s+='<circle class="tr-dot d-'+sr.c+'" data-h="'+k+'" r="'+(sr.c==='mint'?6:5)+'" cx="-50" cy="-50"/>';
+      var e=sr.pts[sr.pts.length-1];
+      if(sr.end) s+='<text class="lbl-in halo '+sr.tc+'" data-e="'+k+'" x="'+f(X(e[0])+(sr.end.dx||0))+'" y="'+f(Y(e[1])+(sr.end.dy||0))+'" text-anchor="'+(sr.end.a||'start')+'">'+sr.end.t+'</text>';
+    });
+    (cfg.notes||[]).forEach(function(n,k){if(small&&n.wideOnly)return;s+='<text class="lbl-in halo '+(n.c||'')+'" data-n="'+k+'" x="'+f(X(n.p[0]))+'" y="'+f(Y(n.p[1]))+'" text-anchor="'+(n.a||'start')+'" style="font-weight:600">'+(small&&n.ts?n.ts:n.t)+'</text>';});
+    el.innerHTML='<svg viewBox="0 0 '+W+' '+H+'">'+s+'</svg>';
+    var paths=$$('path[data-k]',el), heads=$$('circle[data-h]',el), ends=$$('text[data-e]',el), notes=$$('text[data-n]',el);
+    var PX=cfg.series.map(function(sr){return sr.pts.map(function(p){return [X(p[0]),Y(p[1])];});});
+    if(cfg.smooth) PX=PX.map(function(P){return P.map(function(q,j){var h=Math.min(cfg.smooth,j,P.length-1-j),sx=0,sy=0,c=0;for(var t=j-h;t<=j+h;t++){sx+=P[t][0];sy+=P[t][1];c++;}return [sx/c,sy/c];});});
+    var DOT=cfg.dots?[].slice.call(el.querySelectorAll('g[data-g]')).map(function(g){return [].slice.call(g.querySelectorAll('circle'));}):null, shown=0;
+    var N=Math.max.apply(null,PX.map(function(p){return p.length;}));
+    return {D:cfg.D||4200,step:function(u){
+      var n=Math.max(1,Math.round(u*(N-1))+1);
+      if(DOT){if(n<shown){DOT.forEach(function(L){L.forEach(function(c){c.style.opacity=0;});});shown=0;}
+        DOT.forEach(function(L){for(var j=shown;j<n&&j<L.length;j++)L[j].style.opacity=L[j].getAttribute('data-o');});shown=n;}
+      PX.forEach(function(P,k){
+        var upto=Math.min(P.length,n), d='M'+f(P[0][0])+' '+f(P[0][1]);
+        for(i=1;i<upto;i++)d+='L'+f(P[i][0])+' '+f(P[i][1]);
+        paths[k].setAttribute('d',d);
+        var h=P[upto-1];heads[k].setAttribute('cx',f(h[0]));heads[k].setAttribute('cy',f(h[1]));
+      });
+      ends.forEach(function(t){t.classList.toggle('on',u>=1);});
+      notes.forEach(function(t){var nn=cfg.notes[+t.getAttribute('data-n')];t.classList.toggle('on',n>=nn.at);});
+    }};
+  }
+
+  var TT={};
+  TT.div={xd:[3.84,5.46],yd:[28.95,33.05],xskip:true,
+    xt:[[4,'4.0'],[4.2,'4.2'],[4.4,'4.4'],[4.6,'4.6'],[4.8,'4.8'],[5,'5.0'],[5.2,'5.2'],[5.4,'5.4']],
+    yt:[[29.5,'29.5'],[30,'30.0'],[30.5,'30.5'],[31,'31.0'],[31.5,'31.5'],[32,'32.0'],[32.5,'32.5']],
+    xl:'diversity →',yl:'↑ reward',start:{p:[5.114,29.21],t:'SD3',dx:-12,dy:5,a:'end'},
+    series:[{pts:TR.d_orw,c:'peach',tc:'t-peachx',end:{t:'ORW-CFM-W2',dx:0,dy:-14,a:'start'}},
+            {pts:TR.d_dpo,c:'lav',tc:'t-lavb',end:{t:'DPO',dx:-12,dy:18,a:'end'}},
+            {pts:TR.d_adrpo,c:'mint',tc:'t-mint',end:{t:'ADRPO',dx:-14,dy:-12,a:'end'}}]};
+  TT.w2={xd:[-0.0009,0.0232],yd:[28.95,33.05],
+    xt:[[0,'0.000'],[0.005,'0.005'],[0.01,'0.010'],[0.015,'0.015'],[0.02,'0.020']],
+    yt:TT.div.yt,xl:'W2 divergence from SD3 →',yl:'↑ reward',start:{p:[0.00001,29.21],t:'SD3',dx:12,dy:5,a:'start'},
+    series:[{pts:TR.w_orw,c:'peach',tc:'t-peachx',end:{t:'ORW-CFM-W2',dx:4,dy:-14,a:'end'}},
+            {pts:TR.w_dpo,c:'lav',tc:'t-lavb',end:{t:'DPO',dx:12,dy:18,a:'start'}},
+            {pts:TR.w_adrpo,c:'mint',tc:'t-mint',end:{t:'ADRPO',dx:14,dy:-10,a:'start'}}]};
+  var t2iAnim=null, t2iMode='div';
+  function t2i(el){
+    var a=traj(el,TT[t2iMode]);
+    if(!t2iAnim){t2iAnim={D:4200,step:function(u){t2iAnim.cur.step(u);}};t2iAnim.cur=a;bindAnim(el,t2iAnim);}
+    else{t2iAnim.cur=a;a.step(t2iAnim.run?0:(t2iAnim.seen||reduced||!hasIO?1:0));}
+  }
+
+  var llmCfg={xd:[-0.15,5.65],yd:[0.18,3.02],D:7600,dots:true,smooth:6,
+    xt:[[0,'0'],[1,'1'],[2,'2'],[3,'3'],[4,'4'],[5,'5']],
+    yt:[[0.5,'0.5'],[1,'1.0'],[1.5,'1.5'],[2,'2.0'],[2.5,'2.5']],
+    xl:'entropy: how widely it explores →',yl:'↑ reward',start:{p:[5.295,0.469],t:'pre-trained',dx:4,dy:22,a:'end'},
+    series:[{pts:TR.q3g,c:'peach',tc:'t-peachx',end:{t:'GRPO, final',dx:-12,dy:-14,a:'end'}},
+            {pts:TR.q3a,c:'mint',tc:'t-mint',end:{t:'ADRPO, final',dx:14,dy:5,a:'start'}}],
+    notes:[{p:[1.0,0.86],t:'1  it lowers its entropy',ts:'1  lowers entropy',at:60,c:'t-mintx'},
+           {p:[1.14,2.47],t:'2  then raises it again to escape',ts:'2  raises it to escape',at:192,c:'t-mintx'}]};
+  function llm(el){var a=traj(el,llmCfg);if(!llm.a){llm.a={D:7600,step:function(u){llm.a.cur.step(u);}};llm.a.cur=a;bindAnim(el,llm.a);}else{llm.a.cur=a;a.step(llm.a.seen||reduced||!hasIO?1:0);}}
+
+  /* final reward on Qwen3 (Figure 4, bottom center), with the paper's axis */
+  function llmBars(el){
+    var W=Math.round(Math.max(240,el.clientWidth)), H=mm('(max-width:900px)')?(W<520?250:300):400, m={l:34,r:8,t:44,b:46};
+    var Y=function(v){return m.t+(H-m.t-m.b)*(1-v/3.02);}, bw=Math.min(W<520?54:64,(W-m.l-m.r)/5), xs=[0,1,2].map(function(i){return m.l+(W-m.l-m.r)*(i+.5)/3;});
+    var s=T(0,16,'Final reward','t-ink mid');
+    [[0,'0.0'],[0.5,'0.5'],[1,'1.0'],[1.5,'1.5'],[2,'2.0'],[2.5,'2.5']].forEach(function(t){s+='<line class="grid" x1="'+m.l+'" x2="'+(W-m.r)+'" y1="'+f(Y(t[0]))+'" y2="'+f(Y(t[0]))+'"/>'+T(m.l-8,Y(t[0])+4,t[1],'sm','end');});
+    var B=[['ADRPO',2.832,'bar-m','t-mint'],['GRPO',0.506,'bar-p','t-peachx'],['pre-trained',0.468,'bar-i','t-iceb']];
+    B.forEach(function(b,i){var y=Y(b[1]);s+='<rect class="'+b[2]+' growy" style="--d:'+(0.3+i*0.15)+'s" x="'+f(xs[i]-bw/2)+'" y="'+f(y)+'" width="'+f(bw)+'" height="'+f(Y(0)-y)+'" rx="5"/>';
+      s+=T(xs[i],H-m.b+20,b[0],i===0?'t-mint':'sm','middle',i===0?'font-weight:700':'');});
+    var yA=Y(2.832), yG=Y(0.506);
+    s+='<path class="fade" style="--d:1.3s" d="M'+f(xs[0]+bw/2+6)+' '+f(yA)+'H'+f(xs[1]+4)+'V'+f(yG-8)+'" fill="none" stroke="var(--mint-e)" stroke-width="1.4" stroke-dasharray="3 3"/>';
+    s+=T(xs[1]+12,(yA+yG)/2+8,'5×','t-mint big fade','start','--d:1.5s');
+    s+=T(xs[1]+12,(yA+yG)/2+28,'GRPO’s','sm fade','start','--d:1.5s');
+    el.innerHTML='<svg viewBox="0 0 '+W+' '+H+'">'+s+'</svg>';
+  }
+
+  /* the rule: beta = beta0 - A, clipped */
+  var ruleState=null;
+  function rule(el){
+    var W=Math.round(Math.max(300,el.clientWidth)), small=W<520, H=small?300:340, m={l:small?40:50,r:small?10:16,t:small?44:46,b:small?58:62};
+    var lo=-1.5,hi=1.5,X=function(a){return m.l+(W-m.l-m.r)*(a-lo)/(hi-lo);},Y=function(b){return m.t+(H-m.t-m.b)*(1-(b+0.12)/2.5);};
+    var s='';
+    s+='<rect class="zone-b fade" x="'+f(X(lo))+'" y="'+m.t+'" width="'+f(X(0)-X(lo))+'" height="'+f(Y(-0.12)-m.t)+'"/>';
+    s+='<rect class="zone-g fade" x="'+f(X(0))+'" y="'+m.t+'" width="'+f(X(hi)-X(0))+'" height="'+f(Y(-0.12)-m.t)+'"/>';
+    s+=T(X(lo)+8,m.t-12,small?'A < 0: worse':'worse than its batch','t-peachx','start');
+    s+=T(X(hi)-8,m.t-12,small?'A > 0: better':'better than its batch','t-mint','end');
+    [[0,'0'],[1,'β₀'],[2,'2β₀']].forEach(function(t){s+='<line class="grid" x1="'+m.l+'" x2="'+(W-m.r)+'" y1="'+f(Y(t[0]))+'" y2="'+f(Y(t[0]))+'"/>'+T(m.l-10,Y(t[0])+5,t[1],'','end');});
+    [[-1,'A<tspan class="sm" dy="4">min</tspan>'],[0,'0'],[1,'A<tspan class="sm" dy="4">max</tspan>']].forEach(function(t){s+='<line class="ax" x1="'+f(X(t[0]))+'" x2="'+f(X(t[0]))+'" y1="'+f(Y(-0.12))+'" y2="'+f(Y(-0.12)+5)+'"/>'+T(X(t[0]),Y(-0.12)+22,t[1],'','middle');});
+    s+=T(X(0),H-6,small?'advantage A: reward minus the batch average':'advantage A of a sample: its reward minus the batch average','sm','middle');
+    s+='<line x1="'+f(X(lo))+'" x2="'+f(X(hi))+'" y1="'+f(Y(1))+'" y2="'+f(Y(1))+'" stroke="var(--faint)" stroke-width="1.6" stroke-dasharray="5 5" class="fade" style="--d:.2s"/>';
+    s+=T(X(hi)-8,Y(1)-10,small?'fixed β':'fixed β: every sample alike','t-faint fade','end','--d:.3s;font-weight:600');
+    var d='M'+f(X(lo))+' '+f(Y(2))+'L'+f(X(-1))+' '+f(Y(2))+'L'+f(X(1))+' '+f(Y(0))+'L'+f(X(hi))+' '+f(Y(0));
+    s+='<path class="l-mint draw" style="--d:.4s" d="'+d+'"/>';
+    s+=T(X(-1)+(small?-4:6),Y(2)-10,'ADRPO: β₀ − A','t-mint fade','start','--d:1.2s');
+    s+='<line class="rg-v" stroke="var(--hair)" stroke-width="1.2" stroke-dasharray="2 3"/><line class="rg-h" stroke="var(--hair)" stroke-width="1.2" stroke-dasharray="2 3"/>';
+    s+='<circle class="rg-d" r="8" stroke-width="2"/>';
+    el.innerHTML='<svg viewBox="0 0 '+W+' '+H+'">'+s+'</svg>';
+    var dv=$('.rg-v',el),dh=$('.rg-h',el),dd=$('.rg-d',el);
+    ruleState={place:function(a){var b=1-Math.max(-1,Math.min(1,a)),x=X(a),y=Y(b);
+      dv.setAttribute('x1',f(x));dv.setAttribute('x2',f(x));dv.setAttribute('y1',f(y));dv.setAttribute('y2',f(Y(-0.12)));
+      dh.setAttribute('x1',f(m.l));dh.setAttribute('x2',f(x));dh.setAttribute('y1',f(y));dh.setAttribute('y2',f(y));
+      dd.setAttribute('cx',f(x));dd.setAttribute('cy',f(y));
+      dd.setAttribute('fill',a>0?'var(--mint)':'var(--peach)');dd.setAttribute('stroke',a>0?'var(--mint-e)':'var(--peach-e)');
+      return a;}};
+    ruleState.place(0.62);
+  }
+
+  var charts=[['#ch-rule',rule],['#ch-sizes',sizes],['#ch-t2i',t2i],['#ch-final',finals],['#ch-llm',llm],['#ch-llmbars',llmBars],['#ch-mmau',mmau]], lastW=0;
+  function build(){charts.forEach(function(c){var el=$(c[0]);if(el)c[1](el);});}
+  build();
+  (function(){
+    var fig=$('#rule-fig'); if(!fig) return;
+    var items=$$('.rule-read li',fig), raf=0, t0=0, vis=false;
+    function mark(a){items.forEach(function(li){var k=li.getAttribute('data-r');li.classList.toggle('on',(k==='g'&&a>0&&a<=1)||(k==='b'&&a<0&&a>=-1)||(k==='c'&&Math.abs(a)>1));});}
+    function frame(now){raf=0;if(!vis||!ruleState)return;if(!t0)t0=now;var e=(now-t0)/1000;
+      var a=1.38*Math.sin(e*2*Math.PI/9-0.5);ruleState.place(a);mark(a);raf=requestAnimationFrame(frame);}
+    function still(){if(ruleState){ruleState.place(0.62);}}
+    if(reduced||!hasIO){still();return;}
+    fig.classList.add('rule-live');
+    fig.addEventListener('ad:vis',function(e){vis=e.detail;if(vis&&!raf){t0=0;raf=requestAnimationFrame(frame);}});
+    still();
+  })();
+  $$('#t2i-tabs button').forEach(function(b){b.addEventListener('click',function(){
+    t2iMode=b.getAttribute('data-v');$$('#t2i-tabs button').forEach(function(o){o.setAttribute('aria-selected',o===b?'true':'false');});
+    var el=$('#ch-t2i');t2i(el);if(t2iAnim){t2iAnim.seen=true;play(t2iAnim);}
+  });});
+  function cols(){return [900,700,520].map(function(b){return mm('(max-width:'+b+'px)');}).join();}
+  var lastC=cols(), rt=0;
+  window.addEventListener('resize',function(){var c=cols();if(Math.abs(window.innerWidth-lastW)<40&&c===lastC)return;clearTimeout(rt);rt=setTimeout(function(){lastW=window.innerWidth;lastC=c;build();if(ruleState&&(reduced||!hasIO))ruleState.place(0.62);},180);});
+  lastW=window.innerWidth;
+  $$('.reveal,.anim').forEach(watch);
+  if(reduced||!hasIO) $$('.reveal,.anim').forEach(function(e){e.classList.add('in');});
+
+  /* image galleries: one prompt at a time; it moves on by itself until a tab is chosen */
+  $$('.gal').forEach(function(g){
+    var tabs=$$('.gal-tabs button',g), panes=$$('.gal-pane',g), at=0, auto=!reduced&&hasIO, vis=false, timer=0, DUR=6000;
+    function show(i,user){
+      at=i;tabs.forEach(function(t,k){t.setAttribute('aria-selected',k===i?'true':'false');var b=t.querySelector('i');if(b){b.style.transition='none';b.style.transform='scaleX(0)';}});
+      panes.forEach(function(p,k){p.hidden=k!==i;});
+      var strip=tabs[i]&&tabs[i].parentNode;
+      if(strip&&strip.scrollWidth>strip.clientWidth+1){var t=tabs[i];strip.scrollLeft=Math.max(0,t.offsetLeft-strip.offsetLeft-(strip.clientWidth-t.offsetWidth)/2);}
+      if(user)auto=false;sched();
+    }
+    function sched(){
+      clearTimeout(timer);var b=tabs[at]&&tabs[at].querySelector('i');
+      if(!auto||!vis){if(b){b.style.transition='none';b.style.transform='scaleX(0)';}return;}
+      if(b){b.style.transition='none';b.style.transform='scaleX(0)';void b.offsetWidth;b.style.transition='transform '+DUR+'ms linear';b.style.transform='scaleX(1)';}
+      timer=setTimeout(function(){show((at+1)%panes.length);},DUR);
+    }
+    tabs.forEach(function(t,k){t.addEventListener('click',function(){show(k,true);});});
+    g.addEventListener('ad:vis',function(e){vis=e.detail;sched();});
+    show(0);
+  });
+})();
+</script>

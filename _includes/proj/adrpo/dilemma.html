@@ -1,0 +1,188 @@
+<figure class="pdm" id="dilemma">
+  <div class="pdm-stage">
+    <article class="pdm-act">
+      <header><h3>Strong, fixed</h3><p>one large &beta; for every sample</p></header>
+      <canvas role="img" aria-label="Animation, first of three. With one strong regularization for every sample, each sample is tied tightly to the pre-trained model. The model stays close to where it started and keeps its samples varied, but it barely moves toward higher reward."></canvas>
+      <p class="pdm-say">Safe, but the reward barely moves.</p>
+      <ul class="pdm-yn">
+        <li class="n"><i role="img" aria-label="No:"></i>Reaches high reward</li>
+        <li class="y"><i role="img" aria-label="Yes:"></i>Keeps its samples varied</li>
+      </ul>
+    </article>
+    <article class="pdm-act">
+      <header><h3>Weak, fixed</h3><p>one small &beta; for every sample</p></header>
+      <canvas role="img" aria-label="Animation, second of three. With one weak regularization for every sample, the ties are loose. The model rushes toward higher reward, and its samples collapse into nearly one."></canvas>
+      <p class="pdm-say">The reward climbs, and the samples collapse into one.</p>
+      <ul class="pdm-yn">
+        <li class="y"><i role="img" aria-label="Yes:"></i>Reaches high reward</li>
+        <li class="n"><i role="img" aria-label="No:"></i>Keeps its samples varied</li>
+      </ul>
+    </article>
+    <article class="pdm-act ours">
+      <header><h3>Adaptive: ADRPO</h3><p>&beta;<sub>0</sub>&nbsp;&minus;&nbsp;A, set by each sample</p></header>
+      <canvas role="img" aria-label="Animation, third of three. With ADRPO, each sample's tie depends on its advantage: loose for samples better than their batch, tight for worse ones. The model moves toward higher reward and its samples stay varied."></canvas>
+      <p class="pdm-say">The reward climbs, and the samples stay varied.</p>
+      <ul class="pdm-yn">
+        <li class="y"><i role="img" aria-label="Yes:"></i>Reaches high reward</li>
+        <li class="y"><i role="img" aria-label="Yes:"></i>Keeps its samples varied</li>
+      </ul>
+    </article>
+  </div>
+  <figcaption class="cap">Three ways to set the regularization, played in turn. Schematic: nothing in it is measured; the measured results follow below.</figcaption>
+</figure>
+<script>
+(function(){
+  var fig=document.getElementById('dilemma'); if(!fig) return;
+  var acts=[].slice.call(fig.querySelectorAll('.pdm-act')), cvs=acts.map(function(a){return a.querySelector('canvas');});
+  if(acts.length!==3||!cvs[0].getContext) return;
+  var cx=cvs.map(function(v){return v.getContext('2d');}), nos=[].slice.call(fig.querySelectorAll('.pdm-no span'));
+  var mq=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)'):{matches:false};
+  var LW=320, LH=338, NI=6, IT=0.78, A=[0,5.2,10.4,15.6], HOLD=6.4, OUT=0.7, T=A[3]+HOLD, FINAL=A[3]+1.4;
+  var R=[76,210], P=[232,86], S0=25, NS=7;
+  var MODE=[
+    {f:[0,.06,.12,.17,.21,.24,.26],s:[1,1,1,1,1,1,1]},
+    {f:[0,.2,.42,.62,.8,.93,1],s:[1,.84,.64,.46,.31,.2,.13]},
+    {f:[0,.17,.36,.54,.7,.83,.92],s:[1,1,.98,.97,.96,.96,.95]}
+  ];
+  var c=null, C=null, sc=1, dpr=1, visible=!('IntersectionObserver' in window), raf=0, last=0, tc=0, lit=null;
+
+  function hex(s){s=s.trim().replace('#','');if(s.length===3)s=s[0]+s[0]+s[1]+s[1]+s[2]+s[2];return [parseInt(s.slice(0,2),16),parseInt(s.slice(2,4),16),parseInt(s.slice(4,6),16)];}
+  function mix(a,b,t){t=t<0?0:t>1?1:t;return [a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t,a[2]+(b[2]-a[2])*t];}
+  function rgba(k,a){return 'rgba('+(k[0]|0)+','+(k[1]|0)+','+(k[2]|0)+','+(a==null?1:a<0?0:a>1?1:a)+')';}
+  function clamp(x){return x<0?0:x>1?1:x;}
+  function ease(x){x=clamp(x);return x*x*(3-2*x);}
+  function seg(t,a,b){return clamp((t-a)/(b-a));}
+  function colors(){
+    var cs=getComputedStyle(document.body), v=function(n){return hex(cs.getPropertyValue(n));};
+    C={card:v('--card'),bg:v('--bg'),ink:v('--ink'),body:v('--body'),muted:v('--muted'),faint:v('--faint'),hair:v('--hair'),rule:v('--rule'),band:v('--band'),
+       mint:v('--mint'),mintE:v('--mint-e'),mintT:v('--mint-t'),mintL:v('--mint-l'),
+       peach:v('--peach'),peachE:v('--peach-e'),ice:v('--ice'),iceE:v('--ice-e'),iceT:v('--ice-t'),
+       lav:v('--lav'),lavE:v('--lav-e'),lavT:v('--lav-t'),
+       dark:document.body.classList.contains('dark-mode'),sans:cs.getPropertyValue('--sans')};
+  }
+  function layout(){
+    var w=cvs[0].getBoundingClientRect().width||LW;sc=w/LW;dpr=Math.min(2,window.devicePixelRatio||1);
+    cvs.forEach(function(v){v.width=Math.round(w*dpr);v.height=Math.round(w*LH/LW*dpr);});
+  }
+  var rnd=(function(){var s=7193;return function(){s=(s*1664525+1013904223)%4294967296;return s/4294967296;};})();
+  var OFF=[];for(var k=0;k<=NI;k++){var o=[];for(var i=0;i<NS;i++){var ang=i/NS*6.2832+k*1.3+(rnd()-.5)*.5,r=.5+.55*rnd();o.push([Math.cos(ang)*r,Math.sin(ang)*r]);}OFF.push(o);}
+
+  function F(w,px){return w+' '+Math.max(px,11/sc).toFixed(2)+'px '+C.sans;}
+  function txt(s,x,y,a,col,al,w){if(a<=.01)return;c.font=F(w||500,11.6);c.textAlign=al||'center';c.fillStyle=rgba(col||C.muted,a);c.fillText(s,x,y);}
+  function dot(x,y,r,fill,fa,edge,ea,lw){c.beginPath();c.arc(x,y,r,0,6.2832);if(fill){c.fillStyle=rgba(fill,fa);c.fill();}if(edge){c.lineWidth=lw||1.2;c.strokeStyle=rgba(edge,ea);c.stroke();}}
+  function center(f){var dx=P[0]-R[0],dy=P[1]-R[1],L=Math.sqrt(dx*dx+dy*dy),b=Math.sin(Math.PI*f)*.08*L;return [R[0]+dx*f+dy/L*b,R[1]+dy*f-dx/L*b];}
+  function batch(m,k,cc,sg){
+    var pts=[],sum=0,i;
+    for(i=0;i<NS;i++){var p=[cc[0]+OFF[k][i][0]*S0*1.2*sg,cc[1]+OFF[k][i][1]*S0*sg],d=Math.hypot(p[0]-P[0],p[1]-P[1]);pts.push({p:p,d:d});sum+=d;}
+    var avg=sum/NS,mx=0;pts.forEach(function(o){o.A=avg-o.d;mx=Math.max(mx,Math.abs(o.A));});pts.forEach(function(o){o.a=o.A/(mx||1);});
+    return pts;
+  }
+
+  function scene(i,tl,dim){
+    var m=MODE[i], a=dim?0.55:1, j;
+    /* reward landscape */
+    var g=c.createRadialGradient(P[0],P[1],2,P[0],P[1],84);g.addColorStop(0,rgba(C.mintL,a));g.addColorStop(1,rgba(C.mintL,0));
+    c.fillStyle=g;c.beginPath();c.arc(P[0],P[1],84,0,6.2832);c.fill();
+    for(j=4;j>=1;j--){c.beginPath();c.ellipse(P[0],P[1],j*20,j*16,-.35,0,6.2832);c.lineWidth=1;c.strokeStyle=rgba(C.mintE,a*(.62-j*.11));c.stroke();}
+    dot(P[0],P[1],2.4,C.mintE,a);
+    txt('higher reward',P[0],P[1]-38,a,C.mintT,'center',600);
+    /* pre-trained model */
+    c.beginPath();c.ellipse(R[0],R[1],S0*1.3,S0*1.04,0,0,6.2832);c.fillStyle=rgba(C.ice,a*(C.dark?.3:.4));c.fill();
+    c.setLineDash([3,4]);c.lineWidth=1.1;c.strokeStyle=rgba(C.iceE,a*.8);c.stroke();c.setLineDash([]);
+    dot(R[0],R[1],2.6,C.iceE,a);
+    txt('pre-trained',R[0],R[1]+S0*1.04+16,a,C.iceT,'center',600);
+
+    var it=tl<0?-1:Math.min(NI,Math.floor(tl/IT)), u=tl<0?0:(it>=NI?1:(tl-it*IT)/IT), k=Math.max(0,Math.min(it,NI-1));
+    var done=it>=NI, fA, fB, sA, sB, mv;
+    if(tl<0){fA=fB=m.f[0];sA=sB=m.s[0];mv=0;}
+    else if(done){fA=fB=m.f[NI];sA=sB=m.s[NI];mv=1;}
+    else{fA=m.f[k];fB=m.f[k+1];sA=m.s[k];sB=m.s[k+1];mv=ease(seg(u,.7,.98));}
+    var f=fA+(fB-fA)*mv, sg=sA+(sB-sA)*mv, cc=center(f);
+    /* trail */
+    var upto=tl<0?0:(done?NI:k);
+    c.beginPath();var p0=center(m.f[0]);c.moveTo(p0[0],p0[1]);
+    for(j=1;j<=upto;j++){var q=center(m.f[j]);c.lineTo(q[0],q[1]);}
+    c.lineTo(cc[0],cc[1]);c.setLineDash([2,4]);c.lineWidth=1.4;c.lineCap='round';
+    var tc2=i===2?C.mintE:i===0?C.iceE:C.lavE;
+    c.strokeStyle=rgba(tc2,a*.75);c.stroke();c.setLineDash([]);
+    /* model cloud */
+    var cg=c.createRadialGradient(cc[0],cc[1],1,cc[0],cc[1],S0*1.8*sg+6);
+    var col=i===2?mix(C.ice,C.mint,f):i===1?mix(C.ice,C.lav,1-sg):C.ice;
+    cg.addColorStop(0,rgba(col,a*(C.dark?.5:.62)));cg.addColorStop(1,rgba(col,0));
+    c.fillStyle=cg;c.beginPath();c.arc(cc[0],cc[1],S0*1.8*sg+6,0,6.2832);c.fill();
+    c.beginPath();c.ellipse(cc[0],cc[1],S0*1.36*sg+2,S0*1.1*sg+2,0,0,6.2832);c.lineWidth=1.2;c.strokeStyle=rgba(i===2?mix(C.iceE,C.mintE,f):C.iceE,a*.8);c.stroke();
+    /* the batch */
+    var show=done||tl<0?(done?1:0):1;
+    if(show){
+      var bk=done?NI:k, pts=batch(m,bk,done?cc:center(fA),done?sg:sA);
+      var sIn=done?1:ease(seg(u,0,.24)), sc2=done?1:seg(u,.24,.44), tie=done?0:seg(u,.44,.7), out=done?1:1-seg(u,.72,.84);
+      if(tie>0&&out>0){
+        pts.forEach(function(o){
+          var good=o.A>0, pr=ease(tie)*out, ex=o.p[0]+(R[0]-o.p[0])*pr, ey=o.p[1]+(R[1]-o.p[1])*pr, w, colr, dash=false, sag=0;
+          if(i===0){w=2.6;colr=C.iceE;}
+          else if(i===1){w=.9;colr=C.lavE;dash=true;sag=16;}
+          else if(good){w=1;colr=C.mintE;dash=true;sag=10+16*o.a;}
+          else{w=1+2.4*(.5-.5*o.a);colr=C.peachE;}
+          c.beginPath();c.moveTo(o.p[0],o.p[1]);
+          if(sag){c.quadraticCurveTo((o.p[0]+ex)/2,(o.p[1]+ey)/2+sag*pr,ex,ey);}else c.lineTo(ex,ey);
+          if(dash)c.setLineDash([3,3.5]);c.lineWidth=w;c.lineCap='round';c.strokeStyle=rgba(colr,a*(i===0?.5:.75));c.stroke();c.setLineDash([]);
+        });
+      }
+      pts.forEach(function(o,n){
+        var ap=ease(seg(sIn,n/NS*.6,n/NS*.6+.4))*out; if(ap<=.01)return;
+        var base=done?cc:center(fA), x=base[0]+(o.p[0]-base[0])*ap, y=base[1]+(o.p[1]-base[1])*ap, good=o.A>0, k2=ease(seg(sc2,n*.06,.5+n*.06));
+        dot(x,y,3.9,mix(C.card,good?C.mint:C.peach,k2),a*ap,mix(C.iceE,good?C.mintE:C.peachE,k2),a*ap,1.2);
+      });
+    }
+    dot(cc[0],cc[1],2.6,C.ink,a*.85);
+    /* readouts */
+    var rw=clamp(1-Math.hypot(cc[0]-P[0],cc[1]-P[1])/Math.hypot(R[0]-P[0],R[1]-P[1])), dv=sg;
+    var x0=96,x1=298,ys=[286,312],vals=[.08+.92*rw,dv],labs=['reward','diversity'];
+    for(j=0;j<2;j++){
+      txt(labs[j],22,ys[j]+4,a,C.muted,'left',500);
+      c.beginPath();c.moveTo(x0,ys[j]);c.lineTo(x1,ys[j]);c.lineWidth=6;c.lineCap='round';c.strokeStyle=rgba(C.rule,a);c.stroke();
+      var good2=j===0?rw>.7:dv>.7, bad2=j===0?rw<.4:dv<.4, bc=good2?C.mintE:bad2?C.peachE:C.iceE;
+      c.beginPath();c.moveTo(x0,ys[j]);c.lineTo(x0+(x1-x0)*vals[j],ys[j]);c.strokeStyle=rgba(bc,a);c.stroke();
+    }
+    txt('schematic',x1,334,a*.7,C.muted,'right',500);
+  }
+
+  function frame(t){
+    for(var i=0;i<3;i++){
+      c=cx[i];c.setTransform(dpr*sc,0,0,dpr*sc,0,0);c.clearRect(0,0,LW,LH);
+      var tl=t-A[i], fade=Math.min(seg(t,0,.4),1-seg(t,T-OUT,T));
+      c.globalAlpha=fade;
+      scene(i,tl,tl<0);
+      c.globalAlpha=1;
+      var on=tl>=0&&tl<NI*IT+.2, dn=tl>=NI*IT+.2&&t<T-OUT;
+      acts[i].classList.toggle('on',on);acts[i].classList.toggle('done',dn);
+      acts[i].style.setProperty('--p',on?clamp(tl/(NI*IT)).toFixed(3):dn?1:0);
+    }
+    var l=t>=A[3]+.3&&t<T-OUT;
+    if(l!==lit){lit=l;fig.classList.toggle('lit',l);}
+    nos.forEach(function(s,n){s.classList.toggle('in',t>=A[3]+.6+n*.5&&t<T-OUT);});
+  }
+  function still(){return mq.matches||!('IntersectionObserver' in window);}
+  function tick(now){
+    raf=0;if(!visible||mq.matches) return;
+    if(!last) last=now;
+    tc+=Math.min(.1,(now-last)/1000);last=now;
+    if(tc>=T) tc=0;
+    frame(tc);raf=requestAnimationFrame(tick);
+  }
+  function sync(){
+    if(still()){if(raf){cancelAnimationFrame(raf);raf=0;}fig.classList.remove('pdm-live');frame(FINAL);return;}
+    fig.classList.add('pdm-live');
+    if(visible&&!raf){last=0;raf=requestAnimationFrame(tick);}
+  }
+  colors();layout();
+  if(still())frame(FINAL);else{fig.classList.add('pdm-live');frame(0);}
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){es.forEach(function(e){var was=visible;visible=e.isIntersecting;if(visible&&!was){tc=0;}sync();});},{threshold:0.2}).observe(fig);
+  }
+  if(mq.addEventListener) mq.addEventListener('change',sync);
+  new MutationObserver(function(){colors();if(!raf)frame(still()?FINAL:tc);}).observe(document.body,{attributes:true,attributeFilter:['class']});
+  var rt=0;window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){layout();frame(still()?FINAL:tc);},150);});
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){colors();frame(still()?FINAL:tc);});
+})();
+</script>
