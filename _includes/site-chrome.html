@@ -1,0 +1,10 @@
+<!-- Site-wide chrome. One masthead size everywhere (the /projects/self-rewriting/ size), and the
+     floating buttons (AI agent, dark mode, back to top) on the homepage only. Included after each
+     page's own styles; !important so older per-page rules cannot win. Block comments only. -->
+<style>
+.masthead-title{font-size:1.0625rem!important;font-weight:800!important;letter-spacing:-.02em}
+.masthead-nav{display:flex;gap:2px;align-items:center}
+.masthead-nav a{font-size:1.0625rem!important;font-weight:600!important;padding:6px 10px!important;margin:0!important;letter-spacing:0!important}
+@media(max-width:600px){.masthead-title{font-size:1.0625rem!important}.masthead-nav a{font-size:.875rem!important;padding:5px 8px!important}}
+{% unless include.home %}.pg-fab,.ra-btn,.ra-tip,.ra-panel,.dark-toggle,.scroll-top,#pg-dark,#pg-top,#ra-btn,#ra-tip,#darkToggle{display:none!important}
+{% endunless %}</style>

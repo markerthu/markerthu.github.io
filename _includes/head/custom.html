@@ -592,3 +592,5 @@ document.addEventListener('DOMContentLoaded', function(){
 </script>
 
 {% include fab-autohide.html %}
+
+{% if page.url == "/" %}{% include site-chrome.html home=true %}{% else %}{% include site-chrome.html %}{% endif %}

@@ -151,6 +151,7 @@ p,li{text-wrap:pretty}
 p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcaption a,td a{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px;text-decoration-color:rgba(47,75,143,.45)}body.dark-mode p a:not([class]),body.dark-mode li a:not([class]),body.dark-mode .authors a,body.dark-mode .tl-desc a,body.dark-mode .note a,body.dark-mode figcaption a,body.dark-mode td a{text-decoration-color:rgba(157,184,234,.5)}
 </style>
 <script data-goatcounter="https://jiajunfan.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+{% include site-chrome.html %}
 </head>
 <body id="top">
 <script>try{if(localStorage.getItem('darkMode')==='true')document.body.classList.add('dark-mode');}catch(e){}</script>
@@ -334,6 +335,5 @@ document.getElementById('pg-dark').addEventListener('click',function(){
   try{localStorage.setItem('darkMode',on?'true':'false');}catch(e){}
 });
 </script>
-{% include ai-agent.html %}
 </body>
 </html>
