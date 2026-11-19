@@ -25,130 +25,53 @@ permalink: /publications/
 <script>try{if(localStorage.getItem('darkMode')==='true'){document.documentElement.style.background='#0f1216';}}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"></noscript>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+{% include selfrw/style.html %}
 <style>
-@font-face{font-family:'Newsreader Fallback';src:local('Georgia');size-adjust:91.7%;ascent-override:80.2%;descent-override:28.9%;line-gap-override:0%;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:'Inter Fallback';src:local('Arial');size-adjust:107.1%;ascent-override:90.4%;descent-override:22.5%;line-gap-override:0%;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-
-:root{
-  --serif:'Newsreader','Newsreader Fallback',Georgia,'Times New Roman',serif;
-  --sans:'Inter','Inter Fallback','Segoe UI',system-ui,-apple-system,sans-serif;
-  --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
-  --bg:#fdfcfa; --band:#f6f3ec; --ink:#1a1815; --body:#2b2823; --muted:#6c6860; --faint:#6b665c;
-  --rule:#e8e3d9; --link:#2F4B8F; --on-link:#ffffff; --link-h:#23396E; --card:#ffffff; --pill:#f0ede6;
-}
-body.dark-mode{
-  --bg:#0f1216; --band:#151a20; --ink:#ece8e0; --body:#cdc8be; --muted:#8f8a80; --faint:#8a857b;
-  --rule:#262b33; --link:#6ea8fe; --on-link:#0f1216; --link-h:#93c0ff; --card:#161a20; --pill:#1a1f27;
-}
-.lbl-ico{display:inline-block;width:1em;height:1em;vertical-align:-0.14em;margin-right:5px;background-color:currentColor;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;flex-shrink:0;}
-*{box-sizing:border-box;margin:0;padding:0}
-html{overflow-x:hidden;scroll-behavior:smooth}
-body{font-family:var(--serif);background:var(--bg);color:var(--body);line-height:1.7;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s}
-a{text-decoration:none}
-::selection{background:rgba(47,75,143,.16)}
-
-/* ── masthead (shared with projects/blog) ── */
-.site-masthead{background:var(--bg);box-shadow:0 1px 0 var(--rule);position:sticky;top:0;z-index:200;font-size:16px;font-family:var(--sans)}
-.site-masthead::after{content:'';display:block;height:3px;background:linear-gradient(to right,#2F4B8F 0%,#6F94C6 50%,#E39A7A 100%)}
-.masthead-inner{max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:56px}
-.masthead-title{font-weight:800;font-size:1.35em;color:var(--ink)!important;letter-spacing:-.02em}
-.masthead-nav{display:flex;gap:2px;align-items:center}
-.masthead-nav a{font-weight:600;font-size:0.98em;color:var(--muted)!important;padding:6px 10px;border-radius:6px;transition:color .2s,background .2s}
-.masthead-nav a:hover{color:var(--link)!important;background:rgba(47,75,143,.07)}
-.masthead-nav a.nav-active{color:var(--link)!important}
-@media(max-width:600px){.masthead-inner{flex-wrap:wrap;height:auto;padding:8px 14px 7px;row-gap:1px;justify-content:center}.masthead-title{width:100%;text-align:center;white-space:nowrap}.masthead-nav{width:100%;justify-content:center;flex-wrap:wrap}}
-@media(max-width:560px){.masthead-nav a{font-size:0.86em;padding:5px 8px}.masthead-title{font-size:1.15em}}
-
-/* ── editorial header ── */
-.p-head{max-width:1000px;margin:0 auto;padding:54px 24px 0}
-.p-kicker{font-family:var(--sans);text-transform:uppercase;letter-spacing:.145em;font-size:.72rem;font-weight:600;color:var(--muted);margin-bottom:.7em}
-.p-title{font-family:var(--serif);font-weight:500;font-size:2.7rem;line-height:1.1;letter-spacing:-.02em;color:var(--ink);margin-bottom:.24em}
-.p-sub{font-family:var(--serif);font-size:1.16rem;line-height:1.55;color:var(--muted);max-width:44em}
-.p-rule{border:none;border-top:1px solid var(--rule);margin:1.7em 0 .2em}
-
-/* ── stat strip ── */
-.stats{display:flex;flex-wrap:wrap;gap:9px;margin:1.5em 0 .2em;font-family:var(--sans)}
-.stat{display:inline-flex;align-items:center;background:var(--band);border:1px solid var(--rule);border-radius:20px;padding:4px 13px;font-size:.8rem;font-weight:600;color:var(--body)}
-.stat b{color:var(--ink);font-weight:800;margin-right:4px}
-.scholar-cta{display:inline-flex;align-items:center;background:var(--link);color:var(--on-link)!important;border-radius:20px;padding:5px 15px;font-size:.8rem;font-weight:700;font-family:var(--sans);transition:background .2s,transform .15s}
-.scholar-cta:hover{background:var(--link-h);transform:translateY(-1px)}
-
-/* ── research overview ── */
-.ro{margin:2.2em 0 .6em}
-.ro-lead{font-family:var(--serif);font-size:1.08rem;line-height:1.62;color:var(--body);max-width:38em;margin-bottom:1.5em}
+/* Publications on the self-rewriting design system: same tokens, card, eyebrow, scene and band. */
+.hero{padding-bottom:clamp(32px,3.6vw,48px)}
+.hero .lead{max-width:40em;margin:14px auto 0;color:var(--muted)}
+.stats{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 26px;margin-top:22px;font-size:var(--t-label);color:var(--muted);font-variant-numeric:tabular-nums}
+.stats b{color:var(--ink);font-weight:600;margin-right:5px}
+.hero .cta{margin-top:24px}
+.ro-lead{max-width:44em;margin-top:.2em;color:var(--body)}
 .ro-lead strong{color:var(--ink);font-weight:600}
-.ro-rows{display:grid;gap:0}
-.ro-row{display:grid;grid-template-columns:16.5em 1fr;gap:18px;align-items:baseline;
-  padding:13px 0;border-bottom:1px solid var(--rule)}
-.ro-row:last-child{border-bottom:none}
-.ro-dom{font-family:var(--sans);font-size:.86rem;font-weight:700;color:var(--ink);line-height:1.4}
-.ro-dom span{display:block;font-weight:500;font-size:.78rem;color:var(--faint);margin-top:2px}
-.ro-papers{display:flex;flex-wrap:wrap;gap:7px 9px;align-items:center}
-.ro-p{display:inline-flex;align-items:baseline;gap:6px;font-family:var(--sans);font-size:.84rem;
-  font-weight:600;color:var(--body);padding:2px 4px;border-radius:6px}
-a.ro-p:hover{color:var(--link);background:rgba(47,75,143,.07)}
-.ro-v{font-family:var(--sans);font-size:.66rem;font-weight:700;letter-spacing:.04em;
-  color:var(--link);background:var(--pill);border:1px solid var(--rule);border-radius:20px;padding:1px 8px;white-space:nowrap}
-.ro-p.nolink{color:var(--body);cursor:default}
-@media(max-width:800px){.ro-row{grid-template-columns:1fr;gap:7px}.ro-dom span{display:inline;margin-left:6px}}
-
-/* ── list ── */
-.container{max-width:1000px;margin:0 auto;padding:8px 24px 40px}
-.year-head{font-family:var(--sans);font-size:.74rem;font-weight:700;color:var(--faint);text-transform:uppercase;letter-spacing:.14em;margin:2.4em 0 .3em;padding-bottom:.5em;border-bottom:1px solid var(--rule)}
-.pub{padding:19px 0;border-bottom:1px solid var(--rule)}
-.pub:last-child{border-bottom:none}
-.pub-venue{display:inline-block;font-family:var(--sans);font-size:.68rem;font-weight:700;letter-spacing:.04em;margin-right:6px;color:var(--link);background:var(--pill);border:1px solid var(--rule);border-radius:20px;padding:2px 10px;margin-bottom:9px}
-.pub-venue.is-oral{color:#8A4A2E;background:#FBEDE6;border-color:#F5C8B5}
-body.dark-mode .pub-venue.is-oral{color:#F2C3AE;background:#33241F;border-color:#5A3A2E}
-.pub-title{font-family:var(--serif);font-size:1.24rem;font-weight:600;line-height:1.32;letter-spacing:-.01em;margin-bottom:7px}
+.ro-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--gap);margin-top:32px}
+.ro-card{padding:18px 20px 20px}
+.ro-dom{font-size:var(--t-body);font-weight:600;color:var(--ink);line-height:1.3}
+.ro-dom span{display:block;font-size:var(--t-label);font-weight:500;color:var(--muted);margin-top:3px}
+.ro-papers{display:flex;flex-direction:column;gap:8px;margin-top:14px;padding-top:12px;border-top:1px solid var(--rule)}
+.ro-p{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-size:var(--t-label);font-weight:600;color:var(--body)}
+a.ro-p:hover{color:var(--link)}
+.ro-v{font-size:var(--t-fine);font-weight:500;color:var(--mint-t);white-space:nowrap;font-variant-numeric:tabular-nums}
+.list-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap}
+.list-head .lead{max-width:36em;margin-top:.85em;color:var(--muted)}
+.year-head{font-size:var(--t-h2);font-weight:600;color:var(--ink);letter-spacing:-.016em;margin:56px 0 4px;padding-bottom:12px;border-bottom:1px solid var(--rule);font-variant-numeric:tabular-nums;scroll-margin-top:24px}
+.year-head:first-of-type{margin-top:36px}
+.pub{display:grid;grid-template-columns:168px minmax(0,1fr);gap:var(--gap);padding:22px 0;border-bottom:1px solid var(--rule)}
+.pub-venue{font-size:var(--t-label);font-weight:600;color:var(--mint-t);line-height:1.45;padding-top:3px;font-variant-numeric:tabular-nums}
+.pub-venue .is-oral{display:block;font-weight:500;color:var(--muted)}
+.pub-title{font-size:var(--t-card);font-weight:600;line-height:1.3;letter-spacing:-.01em;color:var(--ink)}
 .pub-title a{color:var(--ink)}
 .pub-title a:hover{color:var(--link)}
-.pub-authors{font-family:var(--sans);font-size:.83rem;color:var(--muted);line-height:1.55;max-width:72ch}
-.pub-authors strong{color:var(--body);font-weight:700}
-.pub-actions{display:flex;gap:7px;flex-wrap:wrap;align-items:center;margin-top:11px}
-.act{font-family:var(--sans);font-size:.75rem;font-weight:600;padding:4px 11px;border-radius:7px;border:1px solid var(--rule);background:var(--pill);color:var(--link);transition:background .18s,border-color .18s}
-.act:hover{border-color:var(--link);background:rgba(47,75,143,.08)}
-.act-project{background:var(--link);color:var(--on-link);border-color:var(--link)}
-.act-project:hover{background:var(--link-h);border-color:var(--link-h)}
-.act-film{background:#FBEDE6;color:#8A4A2E !important;border-color:#F5C8B5}
-.act-film:hover{background:#F8E3D9;border-color:#E39A7A}
-body.dark-mode .act-film{background:#2B1E19;color:#E9A98C !important;border-color:#4A3128}
-.bib-btn{cursor:pointer;font-family:var(--sans);font-size:.75rem;font-weight:600;padding:4px 11px;border-radius:7px;border:1px solid var(--rule);background:transparent;color:var(--muted);transition:border-color .18s,color .18s}
-.bib-btn:hover{border-color:var(--link);color:var(--link)}
-.bib-block{display:none;position:relative;margin-top:10px;background:#1e242c;border-radius:10px;padding:16px 16px 12px}
+.pub-authors{font-size:var(--t-label);color:var(--muted);line-height:1.55;margin-top:7px;max-width:62em}
+.pub-authors strong{color:var(--ink);font-weight:600}
+.pub-actions{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:12px}
+.act{display:inline-flex;align-items:center;padding:4px 12px;border-radius:999px;border:1px solid var(--hair);background:var(--card);font-family:var(--sans);font-size:var(--t-fine);font-weight:600;color:var(--body);cursor:pointer;transition:border-color .18s,color .18s}
+.act:hover{border-color:var(--mint-e);color:var(--ink)}
+.act-project{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.act-project:hover{color:var(--bg);border-color:var(--ink)}
+.bib-block{display:none;position:relative;margin-top:12px}
 .bib-block.open{display:block}
-.bib-block pre{margin:0;font-family:var(--mono);font-size:.74rem;line-height:1.7;color:#e2e8f0;white-space:pre;overflow-x:auto}
-.bib-copy{position:absolute;top:8px;right:10px;background:#39424e;border:none;border-radius:5px;color:#c7ced8;font-family:var(--sans);font-size:.7rem;font-weight:600;padding:3px 10px;cursor:pointer;transition:background .15s,color .15s}
-.bib-copy:hover{background:var(--link);color:var(--on-link)}
-
-.note{font-family:var(--sans);font-size:.84rem;color:var(--faint);margin-top:1.4em;padding-left:13px;border-left:2px solid var(--rule)}
-
-footer{color:var(--muted);text-align:center;padding:26px 24px;font-family:var(--sans);font-size:.86em;border-top:1px solid var(--rule);margin-top:2em}
-footer a{color:var(--link)}
-footer a:hover{color:var(--link-h)}
-
-.pg-fab{position:fixed;right:22px;bottom:126px;width:42px;height:42px;border-radius:50%;border:1.5px solid rgba(0,0,0,.15);background:#fff;color:#2F4B8F;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.18);z-index:9990;transition:transform .2s}
-.pg-fab:hover{transform:translateY(-2px) scale(1.06)}
-body.dark-mode .pg-fab{background:#1A2333;color:#F5C8B5;border-color:#2B3A55}
-.pg-dico{width:20px;height:20px;display:inline-block;background-color:currentColor;-webkit-mask:url(/images/icons/h-moon.png) center/contain no-repeat;mask:url(/images/icons/h-moon.png) center/contain no-repeat}
-body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-image:url(/images/icons/h-sun.png)}
-.ra-panel.show ~ #pg-dark{opacity:0;pointer-events:none}
-
-@media(max-width:640px){.p-title{font-size:2.1rem}.pub-title{font-size:1.12rem}}
-@media print{
-  /* the page paints through custom properties, so dark mode must be undone for
-     paper or every non-link heading prints near-white on white */
-  body.dark-mode{--bg:#fff;--band:#fff;--card:#fff;--pill:#fff;--ink:#000;--body:#000;
-    --muted:#333;--faint:#444;--rule:#ccc;--link:#000;--link-h:#000;--on-link:#fff;
-    --sea:#fff;--land:#fff;--fig-border:#ccc}
-.site-masthead,.pg-fab,.bib-btn{display:none!important}}
-@media (prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;transition-duration:.001ms!important}html{scroll-behavior:auto}}
-
-h1,h2,h3,.bx-title,.p-title,.pub-title,.card-title{text-wrap:balance}
-p,li{text-wrap:pretty}
-p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcaption a,td a{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px;text-decoration-color:rgba(47,75,143,.45)}body.dark-mode p a:not([class]),body.dark-mode li a:not([class]),body.dark-mode .authors a,body.dark-mode .tl-desc a,body.dark-mode .note a,body.dark-mode figcaption a,body.dark-mode td a{text-decoration-color:rgba(157,184,234,.5)}
+.bib-block pre{background:var(--band);color:var(--body);border:1px solid var(--rule);border-radius:14px;padding:16px 18px;overflow-x:auto;white-space:pre-wrap;overflow-wrap:anywhere;font-family:var(--mono);font-size:var(--t-fine);line-height:1.7}
+.bib-copy{position:absolute;top:10px;right:12px;padding:3px 11px;border-radius:999px;border:1px solid var(--hair);background:var(--card);font-family:var(--sans);font-size:var(--t-fine);font-weight:600;color:var(--ink);cursor:pointer}
+.bib-copy:hover{border-color:var(--mint-e)}
+.note{font-size:var(--t-label);color:var(--muted);margin-top:28px;padding-left:14px;border-left:2px solid var(--mint-e)}
+@media(max-width:1000px){.ro-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){.ro-grid{grid-template-columns:1fr}.pub{grid-template-columns:1fr;gap:6px}.pub-venue .is-oral{display:inline;margin-left:8px}.hero .lead{margin-left:0}.stats{justify-content:flex-start}}
+@media(max-width:600px){.hero .cta{display:flex;flex-wrap:wrap;gap:8px}.hero .cta .btn{min-width:0;padding:9px 16px}}
+@media print{.site-masthead,.bib-btn{display:none!important}}
 </style>
 <script data-goatcounter="https://jiajunfan.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 {% include site-chrome.html %}
@@ -169,33 +92,32 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
   </div>
 </header>
 
-<div class="p-head" role="region" aria-label="Page introduction">
-  <div class="p-kicker">Publications</div>
-  <h1 class="p-title">Papers</h1>
-  <p class="p-sub">Reinforcement learning for generative models and reasoning LLMs, agentic RL, and efficient inference. Listed newest first; my name is <strong>bold</strong> in each author list, and * marks equal contribution.</p>
-  <div class="stats">
-    <a class="scholar-cta" href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Google Scholar</a>
-    <span class="stat"><b>{{ site.data.citations._total | default: 560 }}</b> citations</span>
-    <span class="stat"><b>{{ site.data.citations._h_index | default: 12 }}</b> h-index</span>
-    <span class="stat"><b>{{ site.data.citations._i10_index | default: 13 }}</b> i10-index</span>
-    <span class="stat"><b>{{ site.publications | size }}</b> papers</span>
+<main>
+<section class="hero" aria-label="Publications">
+  <div class="wrap">
+    <h1>Publications</h1>
+    <p class="lead">Reinforcement learning for generative models and reasoning LLMs, agentic RL, and efficient inference.</p>
+    <p class="stats"><span><b>{{ site.data.citations._total | default: 560 }}</b>citations</span><span><b>{{ site.data.citations._h_index | default: 12 }}</b>h-index</span><span><b>{{ site.data.citations._i10_index | default: 13 }}</b>i10-index</span><span><b>{{ site.publications | size }}</b>papers</span></p>
+    <div class="cta">
+      <a class="btn btn-primary" href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Google Scholar</a>
+      <a class="btn" href="/projects/">Project pages</a>
+      <a class="btn" href="/cv/">CV</a>
+    </div>
   </div>
-  <hr class="p-rule">
-</div>
+</section>
 
-<main class="container">
-  <section class="ro" aria-labelledby="ro-h">
-    <h2 class="sec" id="ro-h" style="margin-top:0">Research overview</h2>
-    <p class="ro-lead">
-      I study how to train <strong>multimodal large generative/agentic models with reinforcement learning</strong>
+<section class="scene band" id="overview" aria-labelledby="ro-h">
+  <div class="wrap">
+    <p class="eyebrow">Research overview</p>
+    <h2 id="ro-h">What the papers are about.</h2>
+    <p class="lead ro-lead">I study how to train <strong>multimodal large generative/agentic models with reinforcement learning</strong>
       in a way that is <strong>stable</strong> (<strong>e.g., lifelong continual learning</strong>) — avoiding the diversity and
       performance collapse that RL fine-tuning tends to cause — and <strong>progressively autonomous</strong>
       (<strong>e.g., recursive self-improvement, RSI</strong>), step by step taking the human out of the loop: first human data collection,
-      then human labelling and hyper-parameter tuning, and finally hand-designed rewards. That work spans these domains:
-    </p>
-    <div class="ro-rows">
+      then human labelling and hyper-parameter tuning, and finally hand-designed rewards. That work spans these domains:</p>
+    <div class="ro-grid">
 
-      <div class="ro-row">
+      <div class="card ro-card">
         <div class="ro-dom">Data-distribution optimization<span>game agents</span></div>
         <div class="ro-papers">
           <a class="ro-p" href="https://proceedings.mlr.press/v162/fan22c.html" target="_blank" rel="noopener">GDI <span class="ro-v">ICML 2022</span></a>
@@ -203,7 +125,7 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
         </div>
       </div>
 
-      <div class="ro-row">
+      <div class="card ro-card">
         <div class="ro-dom">Text-to-image generation<span>flow matching &amp; diffusion</span></div>
         <div class="ro-papers">
           <a class="ro-p" href="https://openreview.net/forum?id=2IoFFexvuw" target="_blank" rel="noopener">ORW-CFM-W2 <span class="ro-v">ICLR 2025</span></a>
@@ -211,7 +133,7 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
         </div>
       </div>
 
-      <div class="ro-row">
+      <div class="card ro-card">
         <div class="ro-dom">Audio reasoning LLMs<span>multimodal reasoning</span></div>
         <div class="ro-papers">
           <a class="ro-p" href="/projects/audiorsi/">AudioRSI <span class="ro-v">arXiv 2026</span></a>
@@ -220,7 +142,7 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
         </div>
       </div>
 
-      <div class="ro-row">
+      <div class="card ro-card">
         <div class="ro-dom">Tool-use agents<span>agentic RL</span></div>
         <div class="ro-papers">
           <a class="ro-p" href="/projects/procedure-aware-rl/">Procedure-Aware RL <span class="ro-v">COLM 2026</span></a>
@@ -230,7 +152,7 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
         </div>
       </div>
 
-            <div class="ro-row">
+            <div class="card ro-card">
         <div class="ro-dom">AI for Science<span>protein &amp; materials design</span></div>
         <div class="ro-papers">
           <a class="ro-p" href="/projects/proteinzero/">ProteinZero <span class="ro-v">TMLR 2026</span></a>
@@ -239,7 +161,7 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
         </div>
       </div>
 
-      <div class="ro-row">
+      <div class="card ro-card">
         <div class="ro-dom">Math reasoning<span>token efficiency</span></div>
         <div class="ro-papers">
           <a class="ro-p" href="https://openreview.net/forum?id=aXO0xg0ttW" target="_blank" rel="noopener">ADRPO <span class="ro-v">NeurIPS 2025</span></a>
@@ -247,7 +169,7 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
         </div>
       </div>
 
-      <div class="ro-row">
+      <div class="card ro-card">
         <div class="ro-dom">Embodied AI<span>VLA &amp; efficient inference</span></div>
         <div class="ro-papers">
           <a class="ro-p" href="https://arxiv.org/abs/2605.29438" target="_blank" rel="noopener">ElegantVLA <span class="ro-v">NeurIPS 2026</span></a>
@@ -256,23 +178,33 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
         </div>
       </div>
 
-      <div class="ro-row">
+      <div class="card ro-card">
         <div class="ro-dom">Robot design<span>morphology &amp; control</span></div>
         <div class="ro-papers">
           <a class="ro-p" href="https://openreview.net/forum?id=stiehhc5y6" target="_blank" rel="noopener">EDiSon <span class="ro-v">AI4Mat 2024</span></a>
         </div>
       </div>
 
+    
     </div>
-    <hr class="p-rule" style="margin:2.2em 0 0">
-  </section>
+  </div>
+</section>
 
+<section class="scene" id="papers" aria-labelledby="pl-h">
+  <div class="wrap">
+    <div class="list-head">
+      <div>
+        <p class="eyebrow">Papers <span>newest first</span></p>
+        <h2 id="pl-h">Every paper.</h2>
+        <p class="lead">My name is <strong>bold</strong> in each author list, and * marks equal contribution.</p>
+      </div>
+    </div>
   {%- assign pubs = site.publications | sort: 'date' | reverse -%}
   {%- assign lastyear = '' -%}
   {% for post in pubs %}
     {%- comment -%} each entry's date year matches its venue year, so this groups cleanly {%- endcomment -%}
     {%- assign y = post.date | date: '%Y' -%}
-    {% if y != lastyear %}<div class="year-head">{{ y }}</div>{% assign lastyear = y %}{% endif %}
+    {% if y != lastyear %}<h3 class="year-head" id="y{{ y }}">{{ y }}</h3>{% assign lastyear = y %}{% endif %}
     {%- comment -%} the <strong> inside `venue` holds the short label, e.g. "ICLR 2026" {%- endcomment -%}
     {%- assign vfull = post.venue | strip_html | strip -%}
     {%- if post.venue contains '<strong>' -%}
@@ -282,27 +214,27 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
     {%- endif -%}
     {%- assign vmain = vshort | split: ',' | first | strip -%}
     <article class="pub">
-      {% if vmain and vmain != '' %}<span class="pub-venue" title="{{ vfull | escape }}">{{ vmain | escape }}</span>{% endif %}
-      {% if vshort contains 'Oral' %}<span class="pub-venue is-oral">Oral · Top 5%</span>{% endif %}
-      <h2 class="pub-title">
+      <p class="pub-venue" title="{{ vfull | escape }}">{% if vmain and vmain != '' %}{{ vmain | escape }}{% endif %}{% if vshort contains 'Oral' %}<span class="is-oral">Oral · Top 5%</span>{% endif %}</p>
+      <div class="pub-main">
+      <h4 class="pub-title">
         {% if post.paperurl and post.paperurl != '' %}
           <a href="{{ post.paperurl }}" target="_blank" rel="noopener noreferrer">{{ post.title }}</a>
         {% else %}
           <span>{{ post.title }}</span>
         {% endif %}
-      </h2>
+      </h4>
       {% if post.citation %}{%- assign authors = post.citation | split: '&quot;' | first | strip | append: '#' | replace: ',#', '' | replace: '.#', '' | remove: '#' -%}<div class="pub-authors">{{ authors | replace: "Jiajun Fan", "<strong>Jiajun Fan</strong>" | replace: "J. Fan", "<strong>J. Fan</strong>" }}</div>{% endif %}
       <div class="pub-actions">
         {% if post.projectpage %}<a class="act act-project" href="{{ post.projectpage }}">Project page</a>{% endif %}
-        {% if post.film %}<a class="act act-film" href="/film/#{{ post.film }}"><span aria-hidden="true">&#9656;</span>&nbsp;Video</a>{% endif %}
+        {% if post.film %}<a class="act act-film" href="/film/#{{ post.film }}">Video</a>{% endif %}
         {% if post.paperurl and post.paperurl != '' %}<a class="act" href="{{ post.paperurl }}" target="_blank" rel="noopener noreferrer">Paper</a>{% endif %}
         {% if post.bibtex %}
-        <button class="bib-btn" aria-expanded="false" onclick="
+        <button class="act bib-btn" aria-expanded="false" onclick="
           var b=this.parentNode.parentNode.querySelector('.bib-block');
           var open=b.classList.toggle('open');
           this.setAttribute('aria-expanded',open);
-          this.textContent=open?'▾ BibTeX':'▸ BibTeX';
-        ">▸ BibTeX</button>
+          this.textContent='BibTeX';
+        ">BibTeX</button>
         {% endif %}
       </div>
       {% if post.bibtex %}
@@ -316,24 +248,18 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
         <pre>{{ post.bibtex | escape }}</pre>
       </div>
       {% endif %}
+      </div>
     </article>
   {% endfor %}
 
-  <p class="note">Citation counts update daily from Google Scholar. Preprints and workshop papers are included; see Google Scholar for the complete record.</p>
+
+    <p class="note">Citation counts update daily from Google Scholar. Preprints and workshop papers are included; see Google Scholar for the complete record.</p>
+  </div>
+</section>
 </main>
 
 <footer>
-  <a href="/">Home</a> &nbsp;·&nbsp; <a href="/projects/">Projects</a> &nbsp;·&nbsp;
-  <a href="/cv/">CV</a> &nbsp;·&nbsp;
-  <a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Scholar</a>
+  <p><a href="/">Home</a> &nbsp;·&nbsp; <a href="/projects/">Projects</a> &nbsp;·&nbsp; <a href="/cv/">CV</a> &nbsp;·&nbsp; <a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Scholar</a></p>
 </footer>
-
-<button id="pg-dark" class="pg-fab" aria-label="Toggle dark mode" title="Toggle dark mode"><i class="pg-dico"></i></button>
-<script>
-document.getElementById('pg-dark').addEventListener('click',function(){
-  var on=document.body.classList.toggle('dark-mode');
-  try{localStorage.setItem('darkMode',on?'true':'false');}catch(e){}
-});
-</script>
 </body>
 </html>
