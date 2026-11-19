@@ -334,7 +334,7 @@
     s+='<path class="fade" style="--d:1.2s;fill:var(--mint-e)" d="M'+f(X(b[1])-18)+' '+f(Y(b[3])-3)+' L'+f(X(b[1])-10)+' '+f(Y(b[3])+1)+' L'+f(X(b[1])-18)+' '+f(Y(b[3])+5)+'z"/>';
     s+=small?'<text class="t-mint fade" style="--d:1.4s" x="'+f(X(b[1])+7)+'" y="'+f(Y(b[3])+30)+'" text-anchor="end">adding W2</text>':'<text class="t-mint fade" style="--d:1.4s" x="'+f((X(a[1])+X(b[1]))/2)+'" y="'+f(Y(2.62)+28)+'" text-anchor="middle">adding W2 raises both</text>';
     pts.forEach(function(r,i){var ours=r[0]==='AC-Flow', o=off[r[0]], x=X(r[1]), y=Y(r[3]), d=(0.15+i*0.08)+'s';
-      s+='<circle class="'+(ours?'dot-m':i===0?'dot-b':'dot-o')+' pop" style="--d:'+d+'" cx="'+f(x)+'" cy="'+f(y)+'" r="'+(ours?7.5:5.5)+'"/>';
+      s+='<circle class="'+(ours?'dot-m':i===0?'dot-b':r===NOW2?'dot-l':'dot-o')+' pop" style="--d:'+d+'" cx="'+f(x)+'" cy="'+f(y)+'" r="'+(ours?7.5:5.5)+'"/>';
       s+='<text class="'+(ours?'t-mint':'')+' fade sm" style="--d:'+d+'" x="'+f(x+o[0])+'" y="'+f(y+o[1])+'" text-anchor="'+o[2]+'">'+r[0]+'</text>';});
     el.innerHTML='<svg viewBox="0 0 '+W+' '+H+'" style="max-width:'+W+'px">'+s+'</svg>';
   }
@@ -346,7 +346,7 @@
     if(cap){s+='<line class="ref fade" style="--d:1s" x1="'+f(X(cap))+'" x2="'+f(X(cap))+'" y1="'+m.t+'" y2="'+(H-m.b)+'"/>';}
     rows.forEach(function(r,i){var y=m.t+rh*i+(small?rh-13:rh/2), ours=i===0, v=r[col];
       s+='<text x="'+(small?m.l:8)+'" y="'+(small?y-15:y+5)+'" class="'+(ours?'t-mint':'')+(small?' halo':'')+'">'+r[0]+'</text>';
-      s+='<rect class="'+(ours?'bar-m':'bar-o')+' grow" style="--d:'+(0.1+i*0.08)+'s" x="'+m.l+'" y="'+(y-(small?7:9))+'" width="'+f(X(v)-m.l)+'" height="'+(small?14:18)+'" rx="4"/>';
+      s+='<rect class="'+(ours?'bar-m':i===1?'bar-l':'bar-o')+' grow" style="--d:'+(0.1+i*0.08)+'s" x="'+m.l+'" y="'+(y-(small?7:9))+'" width="'+f(X(v)-m.l)+'" height="'+(small?14:18)+'" rx="4"/>';
       s+='<text class="'+(ours?'t-mint':'')+' fade halo" style="--d:'+(0.6+i*0.08)+'s" x="'+f(X(v)+8)+'" y="'+(y+5)+'">'+v+'</text>';});
     el.innerHTML='<svg viewBox="0 0 '+W+' '+H+'" style="max-width:'+W+'px">'+s+'</svg>';
   }

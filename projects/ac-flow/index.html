@@ -66,7 +66,7 @@ permalink: /projects/ac-flow/
     <p class="byline"><a href="/" class="me">Jiajun&nbsp;Fan</a><sup>1</sup>, Chaoran&nbsp;Cheng<sup>1</sup>, Shuaike&nbsp;Shen<sup>1,2</sup>, Xiangxin&nbsp;Zhou<sup>1</sup>, <a href="https://geliu.web.illinois.edu/">Ge&nbsp;Liu</a><sup>1</sup></p>
     <ul class="logos" aria-label="Affiliations"><li><sup>1</sup><img src="/images/projects/self-rewriting/logo_uiuc.png" alt="" width="66" height="96"><span>UIUC</span></li><li><sup>2</sup><img src="/images/projects/self-rewriting/logo_cmu.png" alt="" width="96" height="96"><span>CMU</span></li></ul>
     <div class="cta">
-      <a class="btn" href="/film/#ac-flow"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M5 3.300v9.400L12.500 8z"/></svg>Film</a>
+      <a class="btn" href="#film"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M5 3.300v9.400L12.500 8z"/></svg>Film</a>
       <a class="btn btn-primary" href="https://arxiv.org/abs/2510.18072"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M4 1.5h5.5L12.5 4.5v10h-8.5z"/><path d="M9.5 1.5v3h3M6 8h4.5M6 10.5h4.5"/></svg>Paper</a>
       <a class="btn" href="#cite"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5c2 0 3-1.5 3-4.5V4.5H3V8h3M9.5 11.5c2 0 3-1.5 3-4.5V4.5h-3V8h3"/></svg>BibTeX</a>
     </div>
@@ -144,6 +144,7 @@ permalink: /projects/ac-flow/
       </div>
       <figcaption class="cap">Schematic. The loss scale and the three images come from the paper&rsquo;s plain actor-critic run (Fig.&nbsp;2).</figcaption>
     </figure>
+    <p class="takeaway">What is missing: credit for each step, from a critic that stays stable.</p>
   </div>
 </section>
 
@@ -180,6 +181,7 @@ permalink: /projects/ac-flow/
         <div class="rp-view" aria-live="polite"></div>
       </div>
     </div>
+    <p class="takeaway">A critic it can trust, and a model kept close to where it started.</p>
   </div>
 </section>
 
@@ -342,7 +344,7 @@ permalink: /projects/ac-flow/
   <div class="wrap">
     <header class="say">
       <div class="say-main">
-        <p class="eyebrow">Why it matters</p>
+        <p class="eyebrow">Why it matters <span>Finding 05</span></p>
         <h2>Step-level feedback, for about the cost of scoring the end.</h2>
         <p class="lead">The critic adds little. Next to reward-weighted fine-tuning, a run takes about two hours and two gigabytes more, and every run fits on one GPU.</p>
       </div>
@@ -360,7 +362,10 @@ permalink: /projects/ac-flow/
       <div class="card"><h3>Models that learn from their own samples</h3><p>Stable online training on self-generated data points to generators that keep improving through their own outputs.</p></div>
       <div class="card"><h3>Any goal you can score</h3><p>Swap in another reward, such as one for safety, and the same loop steers the model toward it.</p></div>
     </div>
-    <p class="series">Part of a series on fine-tuning flow models online: <a href="/projects/orw-cfm-w2/">ORW-CFM-W2</a> and <a href="/projects/adrpo/">ADRPO</a>.</p>
+    <div class="cta left">
+      <a class="btn btn-primary" href="https://arxiv.org/abs/2510.18072">Read the paper</a>
+    </div>
+    <p class="cap">Part of a series on fine-tuning flow models online: <a href="/projects/orw-cfm-w2/">ORW-CFM-W2</a> and <a href="/projects/adrpo/">ADRPO</a>.</p>
   </div>
 </section>
 
@@ -372,11 +377,11 @@ permalink: /projects/ac-flow/
         <h2>The story, as a short film.</h2>
       </div>
     </header>
-    <a class="filmlink" href="/film/#ac-flow" aria-label="Watch the AC-Flow film">
+    <a class="film poster" href="/film/#ac-flow" aria-label="Watch the AC-Flow film">
       <img src="/film/posters/ac-flow.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async">
-      <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3.5v17L20 12z"/></svg></span>
-      <span class="lbl">Watch the film</span>
+      <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.500v15l12.500-7.500z"/></svg></span>
     </a>
+    <p class="cap">Opens the film page.</p>
   </div>
 </section>
 

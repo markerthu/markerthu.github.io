@@ -63,11 +63,11 @@ permalink: /projects/lbc/
 
 <section class="hero" aria-label="Summary">
   <div class="wrap">
-    <p class="venue">ICLR 2023 &middot; Oral, notable top 5%</p>
+    <p class="venue">ICLR 2023, Oral &mdash; Notable Top 5%</p>
     <h1>Learnable Behavior Control: <span class="l2">Breaking Atari Human World Records via Sample-Efficient Behavior Selection</span></h1>
     <p class="byline"><a href="/" class="me">Jiajun&nbsp;Fan</a>, Yuzheng&nbsp;Zhuang, Yuecheng&nbsp;Liu, Jianye&nbsp;Hao, Bin&nbsp;Wang, Jiangcheng&nbsp;Zhu, Hao&nbsp;Wang, Shu&#8209;Tao&nbsp;Xia</p>
     <div class="cta">
-      <a class="btn" href="/film/#lbc"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M5 3.300v9.400L12.500 8z"/></svg>Film</a>
+      <a class="btn" href="#film"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M5 3.300v9.400L12.500 8z"/></svg>Film</a>
       <a class="btn btn-primary" href="https://arxiv.org/abs/2305.05239"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M4 1.5h5.5L12.500 4.500v10h-8.500z"/><path d="M9.500 1.500v3h3M6 8h4.500M6 10.500h4.500"/></svg>Paper</a>
       <a class="btn" href="#cite"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.500c2 0 3-1.500 3-4.500V4.500H3V8h3M9.500 11.500c2 0 3-1.500 3-4.500V4.500h-3V8h3"/></svg>BibTeX</a>
     </div>
@@ -86,6 +86,7 @@ permalink: /projects/lbc/
 <nav class="chapters" aria-label="Parts of this page">
   <div class="wrap">
     <a href="#results">At a glance</a>
+    <a href="#problem">The problem</a>
     <a href="#idea">The idea</a>
     <a href="#how">How it works</a>
     <a href="#evidence">The evidence</a>
@@ -120,21 +121,39 @@ permalink: /projects/lbc/
   </div>
 </section>
 
-<section class="scene" id="idea">
+<section class="scene" id="problem">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">The problem</p>
+        <h2>Population-based agents pick one policy at a time.</h2>
+        <p class="lead">Picking caps the behaviors at the number of policies, and every extra policy costs more data.</p>
+      </div>
+    </header>
+{% include proj/lbc/pick.html %}
+    <p class="takeaway">More behaviors should come from the same policies, not from more of them.</p>
+  </div>
+</section>
+
+<section class="scene band" id="idea">
   <div class="wrap">
     <header class="say">
       <div class="say-main wide">
         <p class="eyebrow">The idea <span>Blend, do not pick</span></p>
-        <h2 class="reveal">Population-based agents pick one policy at a time. <span class="hl">LBC blends them all.</span></h2>
-        <p class="lead">Picking caps the behaviors at the number of policies, and every extra policy costs more data. A blend of the same policies can be any point in a continuous space.</p>
+        <h2 class="reveal">LBC blends every policy, <span class="hl">so the same policies open a continuous space of behaviors.</span></h2>
+        <p class="lead">Any point in that space is one behavior, and a bandit learns which one to play.</p>
       </div>
     </header>
-{% include proj/lbc/pick.html %}
+    <div class="cards c3 steps3">
+      <div class="card k-edit"><span class="n">1</span><h3>Blend</h3><p>Each policy is sharpened or flattened by its own temperature, then weighted. The weighted sum is the behavior.</p></div>
+      <div class="card k-run"><span class="n">2</span><h3>Select</h3><p>The space of blends is cut into regions. A bandit scores each by the returns it brought, plus a bonus for regions it has tried less.</p></div>
+      <div class="card k-read"><span class="n">3</span><h3>Learn</h3><p>The episodes train all three policies off-policy, and each return updates the bandit&rsquo;s score for its region.</p></div>
+    </div>
     <p class="takeaway">The space of behaviors grows with the blend, not with the population.</p>
   </div>
 </section>
 
-<section class="scene band" id="how">
+<section class="scene" id="how">
   <div class="wrap">
     <header class="say">
       <div class="say-main wide">
@@ -145,17 +164,13 @@ permalink: /projects/lbc/
     </header>
 {% include proj/lbc/mixer.html %}
     <p class="cap">Interactive schematic: the probabilities are illustrative, not measured. Drag the point or move a slider.</p>
-    <div class="cards c3 steps3">
-      <div class="card k-edit"><span class="n">1</span><h3>Blend</h3><p>Each policy is sharpened or flattened by its own temperature, then weighted. The weighted sum is the behavior.</p></div>
-      <div class="card k-run"><span class="n">2</span><h3>Select</h3><p>The space of blends is cut into regions. A bandit scores each by the returns it brought, plus a bonus for regions it has tried less.</p></div>
-      <div class="card k-read"><span class="n">3</span><h3>Learn</h3><p>The episodes train all three policies off-policy, and each return updates the bandit&rsquo;s score for its region.</p></div>
-    </div>
+    <p class="takeaway">Every policy shapes each behavior, and the returns decide the blend.</p>
   </div>
 </section>
 
 <div id="evidence">
 
-<section class="scene" id="records">
+<section class="scene band" id="records">
   <div class="wrap">
     <header class="say">
       <div class="say-main">
@@ -213,7 +228,7 @@ permalink: /projects/lbc/
   </div>
 </section>
 
-<section class="scene band" id="score">
+<section class="scene" id="score">
   <div class="wrap">
     <header class="say">
       <div class="say-main">
@@ -230,7 +245,7 @@ permalink: /projects/lbc/
   </div>
 </section>
 
-<section class="scene" id="space">
+<section class="scene band" id="space">
   <div class="wrap">
     <header class="say">
       <div class="say-main">
@@ -247,7 +262,7 @@ permalink: /projects/lbc/
   </div>
 </section>
 
-<section class="scene band" id="choice">
+<section class="scene" id="choice">
   <div class="wrap">
     <header class="say">
       <div class="say-main">
@@ -266,7 +281,7 @@ permalink: /projects/lbc/
 
 </div>
 
-<section class="scene" id="matters">
+<section class="scene band" id="matters">
   <div class="wrap">
     <header class="say">
       <div class="say-main">
@@ -275,10 +290,11 @@ permalink: /projects/lbc/
         <p class="lead">Which behavior gathers the data used to be a fixed rule, or a pick from a fixed list. LBC turns it into a space to design and a choice to learn.</p>
       </div>
     </header>
-    <div class="cards c3 opens sub pausable">
-      <div class="card"><span class="h-ico" aria-hidden="true"><svg viewBox="0 0 48 48"><path class="soft" d="M4 43h40"/><path class="soft" d="M4 13h40" stroke-dasharray="2 3"/><path class="thick" d="M14 43v-9"/><path class="bar-up thick" d="M32 43V5"/></svg></span><h3>A harder yardstick</h3><p>Human world records, not the average player, to claim superhuman play.</p></div>
-      <div class="card"><span class="h-ico" aria-hidden="true"><svg viewBox="0 0 48 48"><path class="soft" d="M24 6 43 40H5z"/><circle class="p1" cx="24" cy="6" r="4.2"/><circle class="p2" cx="5" cy="40" r="4.2"/><circle class="p3" cx="43" cy="40" r="4.2"/><circle class="dot wander" cx="24" cy="28" r="5"/></svg></span><h3>More behaviors, same policies</h3><p>Blending grows the space of behaviors without training more policies.</p></div>
-      <div class="card"><span class="h-ico" aria-hidden="true"><svg viewBox="0 0 48 48"><circle class="p1 in1" cx="24" cy="11" r="8.5"/><circle class="p2 in2" cx="12" cy="33" r="8.5"/><circle class="p3 in3" cx="36" cy="33" r="8.5"/></svg></span><h3>A general recipe</h3><p>It plugs into distributed off-policy agents: blend the policies, then learn the blend.</p></div>
+    <h3 class="eyebrow sub">What this opens up</h3>
+    <div class="cards c3">
+      <div class="card"><h3>A harder yardstick</h3><p>Human world records, not the average player, to claim superhuman play.</p></div>
+      <div class="card"><h3>More behaviors, same policies</h3><p>Blending grows the space of behaviors without training more policies.</p></div>
+      <div class="card"><h3>A general recipe</h3><p>It plugs into distributed off-policy agents: blend the policies, then learn the blend.</p></div>
     </div>
     <div class="cta left">
       <a class="btn btn-primary" href="https://arxiv.org/abs/2305.05239">Read the paper</a>
@@ -287,7 +303,7 @@ permalink: /projects/lbc/
   </div>
 </section>
 
-<section class="scene band" id="film">
+<section class="scene" id="film">
   <div class="wrap">
     <header class="say">
       <div class="say-main">
@@ -297,7 +313,7 @@ permalink: /projects/lbc/
     </header>
     <a class="film poster" href="/film/#lbc" aria-label="Watch the film about LBC">
       <img src="/film/posters/lbc.jpg" alt="Film poster: LBC, learnable behavior control, breaking Atari human world records" width="1280" height="720" loading="lazy" decoding="async">
-      <span class="play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 2.2v11.6L13.5 8z"/></svg></span>
+      <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></svg></span>
     </a>
     <p class="cap">Opens the film page.</p>
   </div>

@@ -1,8 +1,6 @@
 <style>
 /* CESAR page: only what the shared design system (selfrw/style.html) does not already have */
 .hero .venue{font-size:var(--t-label);font-weight:600;color:var(--mint-t);margin:0 0 12px;font-variant-numeric:tabular-nums}
-.hero h1{max-width:21.5em;margin-left:auto;margin-right:auto}
-.stage canvas#ce-stage{height:400px}
 
 /* idea: two columns, outcome-only RL against CESAR (layout from .cst) */
 .cst-act.rlvr{--k:var(--ice);--ke:var(--ice-e);--kt:var(--ice-t);--kl:var(--ice-l)}
@@ -63,7 +61,7 @@
 .il-md{stroke:var(--ink);stroke-opacity:.45;stroke-width:1.3;stroke-dasharray:3 3}
 .il-b{fill:var(--hair)}
 
-#matters .cta{justify-content:flex-start;margin-top:var(--sp-fig)}
+.cta.left{justify-content:flex-start;margin-top:var(--sp-fig)}
 #cite .bibtex-block{font-size:var(--t-fine)}
 
 /* evidence charts */
@@ -88,7 +86,6 @@
   #evidence .cases.txt .case{display:block}
 }
 @media(max-width:700px){
-  .stage canvas#ce-stage{height:420px}
   .scorer .rp-view{min-height:440px}
   .sc-out{padding:10px 12px}
 }

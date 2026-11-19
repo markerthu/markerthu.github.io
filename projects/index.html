@@ -34,14 +34,16 @@ permalink: /projects/
 #projects-list .scene{padding:clamp(44px,5vw,72px) 0}
 .pc-note{font-weight:500;color:var(--muted)}
 .hero .cta{margin-top:26px}
-.pgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gap);margin-top:6px}
+/* three to a row; a short last row sits in the middle, so every year is symmetric */
+.pgrid{display:flex;flex-wrap:wrap;justify-content:center;gap:var(--gap);margin-top:6px}
+.pgrid > .pcard{flex:0 0 calc((100% - 2*var(--gap))/3)}
 .pcard{padding:0;overflow:hidden;display:flex;flex-direction:column;transition:border-color .2s,transform .2s}
 .pcard:hover{border-color:var(--mint-e);transform:translateY(-2px)}
 .pc-img{display:block;aspect-ratio:16/9;overflow:hidden;background:var(--band);border-bottom:1px solid var(--rule)}
 .pc-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
 .pcard:hover .pc-img img{transform:scale(1.03)}
 .pc-body{padding:18px 22px 20px;display:flex;flex-direction:column;flex:1}
-.pc-venue{font-size:var(--t-label);font-weight:600;color:var(--mint-t);font-variant-numeric:tabular-nums}
+.pcard p.pc-venue{font-size:var(--t-label);line-height:1.4;font-weight:600;color:var(--mint-t);margin:0;font-variant-numeric:tabular-nums}
 .pcard h3{margin-top:6px;font-size:var(--t-card);line-height:1.25}
 .pcard h3 a{color:var(--ink)}
 .pcard h3 a:hover{color:var(--link)}
@@ -55,8 +57,8 @@ permalink: /projects/
 .pc-l:hover{border-color:var(--mint-e);color:var(--ink)}
 .pc-l.pc-main{background:var(--ink);border-color:var(--ink);color:var(--bg)}
 .pc-l.pc-main:hover{color:var(--bg)}
-@media(max-width:1000px){.pgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:640px){.pgrid{grid-template-columns:1fr}.hero .lead{margin-left:0}}
+@media(max-width:1000px){.pgrid > .pcard{flex-basis:calc((100% - var(--gap))/2)}}
+@media(max-width:640px){.pgrid > .pcard{flex-basis:100%}.hero .lead{margin-left:0}}
 @media(max-width:600px){.hero .cta{display:flex;flex-wrap:wrap;gap:8px}.hero .cta .btn{min-width:0;padding:9px 16px}}
 .reveal-card{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
 .reveal-card.in{opacity:1;transform:none}
@@ -259,6 +261,10 @@ permalink: /projects/
 </section>
 </div>
 </main>
+
+<footer>
+  <p>Projects &nbsp;|&nbsp; <a href="/">Jiajun Fan</a> &nbsp;|&nbsp; <a href="/film/">Films</a> &middot; <a href="/publications/">All Publications</a></p>
+</footer>
 
 <script>
 (function(){

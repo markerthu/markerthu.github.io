@@ -134,17 +134,17 @@
     var en=bw*0.526,zh=bw*0.385;
     s+='<rect class="d-hair grow"'+D(0.1)+' x="0" y="'+by+'" width="'+bw+'" height="'+bh+'" rx="6" style="--d:.1s;stroke:none"/>';
     s+='<rect class="d-ice grow"'+D(0.25)+' x="0" y="'+by+'" width="'+n1(en)+'" height="'+bh+'" rx="6"/>';
-    s+='<rect class="d-mint grow"'+D(0.6)+' x="'+n1(en+2)+'" y="'+by+'" width="'+n1(zh-2)+'" height="'+bh+'" rx="6"/>';
-    s+=T(0,by+bh+22,'English 52.6%','t-ice mid fade','start','--d:.6s')+T(en+2,by+bh+22,'Chinese 38.5%','t-mint fade','start','--d:1s')+T(W,by+bh+22,'other','sm fade','end','--d:1.1s');
+    s+='<rect class="d-lav grow"'+D(0.6)+' x="'+n1(en+2)+'" y="'+by+'" width="'+n1(zh-2)+'" height="'+bh+'" rx="6"/>';
+    s+=T(0,by+bh+22,'English 52.6%','t-ice mid fade','start','--d:.6s')+T(en+2,by+bh+22,'Chinese 38.5%','t-lav mid fade','start','--d:1s')+T(W,by+bh+22,'other','sm fade','end','--d:1.1s');
     var y2=168;
     s+=T(0,y2,'音乐 (music) at rank 1','t-ink mid')+T(0,y2+18,'how often, by kind of clip','sm');
     var lw=W<360?112:124,mx=W-lw-46,bar=function(v){return Math.max(3,mx*v/30);};
-    var rows=[['music clips',30,'d-mint','t-mint'],['610 other clips',6,'d-hair','']];
+    var rows=[['music clips',30,'d-lav','t-lav'],['610 other clips',6,'d-hair','']];
     rows.forEach(function(r,k){var y=y2+44+k*34;
       s+=T(0,y+5,r[0],k===0?'t-ink':'');
       s+='<rect class="'+r[2]+' grow"'+D(1.3+k*0.2)+' x="'+lw+'" y="'+(y-10)+'" width="'+n1(bar(r[1]))+'" height="20" rx="5"/>';
       s+=T(lw+bar(r[1])+8,y+5,r[1]+'%',(r[3]?r[3]+' ':'')+'mid fade','start','--d:'+(1.6+k*0.2)+'s');});
-    s+=T(0,y2+44+2*34+18,'a 5× lift: specific to the clip','t-mint mid fade','start','--d:2s');
+    s+=T(0,y2+44+2*34+18,'a 5× lift: specific to the clip','t-lav mid fade','start','--d:2s');
     el.innerHTML=svg(W,y2+44+2*34+28,s);
   }
 

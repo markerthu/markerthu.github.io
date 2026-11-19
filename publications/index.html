@@ -35,10 +35,12 @@ permalink: /publications/
 .stats{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 26px;margin-top:22px;font-size:var(--t-label);color:var(--muted);font-variant-numeric:tabular-nums}
 .stats b{color:var(--ink);font-weight:600;margin-right:5px}
 .hero .cta{margin-top:24px}
-.ro-lead{max-width:44em;margin-top:.2em;color:var(--body)}
+.ro-lead{max-width:31em;margin-top:.85em;color:var(--body)}
 .ro-lead strong{color:var(--ink);font-weight:600}
 .ro-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--gap);margin-top:32px}
 .ro-card{padding:18px 20px 20px}
+/* each card spans two shared rows, so the dividers line up across a row */
+@supports (grid-template-rows:subgrid){.ro-card{display:grid;grid-template-rows:subgrid;grid-row:span 2;row-gap:0}}
 .ro-dom{font-size:var(--t-body);font-weight:600;color:var(--ink);line-height:1.3}
 .ro-dom span{display:block;font-size:var(--t-label);font-weight:500;color:var(--muted);margin-top:3px}
 .ro-papers{display:flex;flex-direction:column;gap:8px;margin-top:14px;padding-top:12px;border-top:1px solid var(--rule)}
@@ -69,7 +71,7 @@ a.ro-p:hover{color:var(--link)}
 .bib-copy:hover{border-color:var(--mint-e)}
 .note{font-size:var(--t-label);color:var(--muted);margin-top:28px;padding-left:14px;border-left:2px solid var(--mint-e)}
 @media(max-width:1000px){.ro-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:640px){.ro-grid{grid-template-columns:1fr}.pub{grid-template-columns:1fr;gap:6px}.pub-venue .is-oral{display:inline;margin-left:8px}.hero .lead{margin-left:0}.stats{justify-content:flex-start}}
+@media(max-width:640px){.ro-grid{grid-template-columns:1fr}.pub{grid-template-columns:1fr;gap:6px}.pub-venue .is-oral{display:inline;margin-left:8px}.hero .lead{margin-left:0}.stats{display:grid;grid-template-columns:repeat(2,max-content);justify-content:start;gap:6px 28px}}
 @media(max-width:600px){.hero .cta{display:flex;flex-wrap:wrap;gap:8px}.hero .cta .btn{min-width:0;padding:9px 16px}}
 @media print{.site-masthead,.bib-btn{display:none!important}}
 </style>
@@ -226,7 +228,7 @@ a.ro-p:hover{color:var(--link)}
       {% if post.citation %}{%- assign authors = post.citation | split: '&quot;' | first | strip | append: '#' | replace: ',#', '' | replace: '.#', '' | remove: '#' -%}<div class="pub-authors">{{ authors | replace: "Jiajun Fan", "<strong>Jiajun Fan</strong>" | replace: "J. Fan", "<strong>J. Fan</strong>" }}</div>{% endif %}
       <div class="pub-actions">
         {% if post.projectpage %}<a class="act act-project" href="{{ post.projectpage }}">Project page</a>{% endif %}
-        {% if post.film %}<a class="act act-film" href="/film/#{{ post.film }}">Video</a>{% endif %}
+        {% if post.film %}<a class="act act-film" href="/film/#{{ post.film }}">Film</a>{% endif %}
         {% if post.paperurl and post.paperurl != '' %}<a class="act" href="{{ post.paperurl }}" target="_blank" rel="noopener noreferrer">Paper</a>{% endif %}
         {% if post.bibtex %}
         <button class="act bib-btn" aria-expanded="false" onclick="
@@ -259,7 +261,7 @@ a.ro-p:hover{color:var(--link)}
 </main>
 
 <footer>
-  <p><a href="/">Home</a> &nbsp;·&nbsp; <a href="/projects/">Projects</a> &nbsp;·&nbsp; <a href="/cv/">CV</a> &nbsp;·&nbsp; <a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Scholar</a></p>
+  <p>Publications &nbsp;|&nbsp; <a href="/">Jiajun Fan</a> &nbsp;|&nbsp; <a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Scholar</a> &middot; <a href="/cv/">CV</a> &nbsp;|&nbsp; <a href="/projects/">All Projects</a></p>
 </footer>
 </body>
 </html>

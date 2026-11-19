@@ -57,7 +57,7 @@
     ['ImageReward','human preference',[0.97,1.45,1.11,1.61],['0.97','1.45','1.11','1.61']],
     ['PickScore','human preference',[20.81,21.85,21.83,22.78],['20.81','21.85','21.83','22.78']]
   ];
-  var T1M=[['SD3','ice'],['SANA-1.5','peach'],['FLUX.1-Dev','lav'],['ADRPO','mint']];
+  var T1M=[['SD3','ice'],['SANA-1.5','n'],['FLUX.1-Dev','n'],['ADRPO','mint']];
   function sizes(el){
     var cells=$$('.mult',el); if(!cells.length) return;
     cells.forEach(function(c,i){
@@ -72,7 +72,7 @@
     ['Reward','ClipScore, mean of 3 seeds',[29.27,29.35,31.30,31.42,32.97],['29.27','29.35','31.30','31.42','32.97']],
     ['Diversity','ClipDiversity, mean of 3 seeds',[5.08,1.85,4.78,3.86,5.13],['5.08','1.85','4.78','3.86','5.13']]
   ];
-  var T2M=[['SD3','ice','base model'],['RAFT','n',''],['DPO','lav',''],['ORW-CFM-W2','peach',''],['ADRPO','mint','']];
+  var T2M=[['SD3','ice','base model'],['RAFT','n',''],['DPO','n',''],['ORW-CFM-W2','n',''],['ADRPO','mint','']];
   function finals(el){
     var cells=$$('.mult',el);
     cells.forEach(function(c,i){
@@ -153,14 +153,14 @@
     xt:[[4,'4.0'],[4.2,'4.2'],[4.4,'4.4'],[4.6,'4.6'],[4.8,'4.8'],[5,'5.0'],[5.2,'5.2'],[5.4,'5.4']],
     yt:[[29.5,'29.5'],[30,'30.0'],[30.5,'30.5'],[31,'31.0'],[31.5,'31.5'],[32,'32.0'],[32.5,'32.5']],
     xl:'diversity →',yl:'↑ reward',start:{p:[5.114,29.21],t:'SD3',dx:-12,dy:5,a:'end'},
-    series:[{pts:TR.d_orw,c:'peach',tc:'t-peachx',end:{t:'ORW-CFM-W2',dx:0,dy:-14,a:'start'}},
-            {pts:TR.d_dpo,c:'lav',tc:'t-lavb',end:{t:'DPO',dx:-12,dy:18,a:'end'}},
+    series:[{pts:TR.d_orw,c:'n',tc:'t-nb',end:{t:'ORW-CFM-W2',dx:0,dy:-14,a:'start'}},
+            {pts:TR.d_dpo,c:'n2',tc:'t-nb',end:{t:'DPO',dx:-12,dy:18,a:'end'}},
             {pts:TR.d_adrpo,c:'mint',tc:'t-mint',end:{t:'ADRPO',dx:-14,dy:-12,a:'end'}}]};
   TT.w2={xd:[-0.0009,0.0232],yd:[28.95,33.05],
     xt:[[0,'0.000'],[0.005,'0.005'],[0.01,'0.010'],[0.015,'0.015'],[0.02,'0.020']],
     yt:TT.div.yt,xl:'W2 divergence from SD3 →',yl:'↑ reward',start:{p:[0.00001,29.21],t:'SD3',dx:12,dy:5,a:'start'},
-    series:[{pts:TR.w_orw,c:'peach',tc:'t-peachx',end:{t:'ORW-CFM-W2',dx:4,dy:-14,a:'end'}},
-            {pts:TR.w_dpo,c:'lav',tc:'t-lavb',end:{t:'DPO',dx:12,dy:18,a:'start'}},
+    series:[{pts:TR.w_orw,c:'n',tc:'t-nb',end:{t:'ORW-CFM-W2',dx:4,dy:-14,a:'end'}},
+            {pts:TR.w_dpo,c:'n2',tc:'t-nb',end:{t:'DPO',dx:12,dy:18,a:'start'}},
             {pts:TR.w_adrpo,c:'mint',tc:'t-mint',end:{t:'ADRPO',dx:14,dy:-10,a:'start'}}]};
   var t2iAnim=null, t2iMode='div';
   function t2i(el){

@@ -65,7 +65,7 @@ permalink: /projects/tf-opd/
     <h1>Training&#8209;Free <span class="l2">On&#8209;Policy Distillation</span></h1>
     <p class="byline">Bangji&nbsp;Yang<sup>1,*</sup>, <a href="/" class="me">Jiajun&nbsp;Fan</a><sup>1,*</sup>, Zhaoyu&nbsp;Zhu<sup>1</sup>, Hongbo&nbsp;Ma<sup>2</sup>, <a href="https://geliu.web.illinois.edu/">Ge&nbsp;Liu</a><sup>1,&dagger;</sup></p>
     <ul class="logos" aria-label="Affiliations"><li><sup>1</sup><img src="/images/projects/self-rewriting/logo_uiuc.png" alt="" width="66" height="96"><span>UIUC</span></li><li><sup>2</sup><img src="/images/projects/tf-opd/logo_tsinghua.png" alt="" width="96" height="96"><span>Tsinghua</span></li></ul>
-    <p class="tf-contrib"><span><sup>*</sup>Equal contribution</span><span><sup>&dagger;</sup>Corresponding author</span></p>
+    <p class="note"><span><sup>*</sup>Equal contribution</span><span><sup>&dagger;</sup>Corresponding author</span></p>
     <div class="cta">
       <a class="btn" href="#film"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M5 3.300v9.400L12.500 8z"/></svg>Film</a>
       <a class="btn btn-primary" href="https://arxiv.org/abs/2610.22236"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M4 1.5h5.5L12.5 4.5v10h-8.5z"/><path d="M9.5 1.5v3h3M6 8h4.5M6 10.5h4.5"/></svg>Paper</a>
@@ -107,9 +107,9 @@ permalink: /projects/tf-opd/
         <p class="lead">What if putting specialists back into one model took no training at all? When they share a base model, every layer of the merged model has an exact solution, computed from the specialists&rsquo; own answers with forward passes only.</p>
       </header>
       <div class="show cards c2">
-        <a class="card result" href="#better"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><line class="il-ax" x1="20" y1="84" x2="180" y2="84"/><rect class="il-n" x="38" y="34" width="30" height="50" rx="3"/><rect class="il-n" x="85" y="44" width="30" height="40" rx="3"/><rect class="il-y" x="132" y="24" width="30" height="60" rx="3"/></svg></span><span class="r-no">Finding 01<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>One model, ahead of both specialists.</h3><p>On average over seven benchmarks, it beats each specialist it was built from.</p></a>
+        <a class="card result" href="#better"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><line class="il-ax" x1="20" y1="84" x2="180" y2="84"/><rect class="il-n" x="38" y="34" width="30" height="50" rx="3"/><rect class="il-n" x="85" y="44" width="30" height="40" rx="3"/><rect class="il-y" x="132" y="24" width="30" height="60" rx="3"/></svg></span><span class="r-no">Finding 01<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>One model, ahead of both specialists on average.</h3><p>On average over seven benchmarks, it beats each specialist it was built from.</p></a>
         <a class="card result" href="#every"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><g class="il-db"><line x1="30" y1="22" x2="150" y2="22"/><line x1="44" y1="48" x2="172" y2="48"/><line x1="24" y1="74" x2="138" y2="74"/></g><circle class="il-o" cx="30" cy="22" r="4.5"/><circle class="il-o" cx="44" cy="48" r="4.5"/><circle class="il-o" cx="24" cy="74" r="4.5"/><circle class="il-dot" cx="150" cy="22" r="4.5"/><circle class="il-dot" cx="172" cy="48" r="4.5"/><circle class="il-dot" cx="138" cy="74" r="4.5"/><circle class="il-y" cx="144" cy="22" r="6.5"/><circle class="il-y" cx="166" cy="48" r="6.5"/><circle class="il-y" cx="138" cy="74" r="6.5"/></svg></span><span class="r-no">Finding 02<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>Close to the best on every benchmark.</h3><p>It keeps most of each specialist&rsquo;s gain, in math and in code.</p></a>
-        <a class="card result" href="#rollouts"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><g class="il-ln2"><line x1="30" y1="20" x2="110" y2="20"/><line x1="30" y1="34" x2="128" y2="34"/><line x1="30" y1="62" x2="96" y2="62"/><line x1="30" y1="76" x2="118" y2="76"/></g><path class="il-loop" d="M30 48h26l5-5 5 10 5-10 5 10 5-10 5 10 5-10 5 10 5-10 5 10 5-10 5 10 5-10 5 10 5-5"/><path class="il-x" d="M176 42l12 12M188 42l-12 12"/></svg></span><span class="r-no">Finding 03<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>The rollouts matter more than the solver.</h3><p>Dropping a few looping answers lifts it to the math specialist&rsquo;s level on AIME25, at matched precision.</p></a>
+        <a class="card result" href="#rollouts"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><g class="il-ln2"><line x1="30" y1="20" x2="110" y2="20"/><line x1="30" y1="34" x2="128" y2="34"/><line x1="30" y1="62" x2="96" y2="62"/><line x1="30" y1="76" x2="118" y2="76"/></g><path class="il-loop" d="M30 48h26l5-5 5 10 5-10 5 10 5-10 5 10 5-10 5 10 5-10 5 10 5-10 5 10 5-10 5 10 5-5"/><path class="il-x" d="M176 42l12 12M188 42l-12 12"/></svg></span><span class="r-no">Finding 03<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>What the rollouts contain matters more than the solver.</h3><p>Dropping a few looping answers lifts it to the math specialist&rsquo;s level on AIME25, at matched precision.</p></a>
         <a class="card result" href="#cases"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><g class="il-sq ok"><rect x="30" y="22" width="22" height="22" rx="4"/><rect x="56" y="22" width="22" height="22" rx="4"/><rect x="108" y="22" width="22" height="22" rx="4"/></g><g class="il-sq no"><rect x="82" y="22" width="22" height="22" rx="4"/><rect x="30" y="54" width="22" height="22" rx="4"/><rect x="56" y="54" width="22" height="22" rx="4"/><rect x="82" y="54" width="22" height="22" rx="4"/><rect x="108" y="54" width="22" height="22" rx="4"/></g><path class="il-ok" d="M146 33l6 6 11-12"/><path class="il-x" d="M147 59l12 12M159 59l-12 12"/></svg></span><span class="r-no">Finding 04<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>It solves what its specialist cannot.</h3><p>On some problems it succeeds where every sample of the specialist fails.</p></a>
       </div>
       <ul class="creed">
@@ -311,7 +311,7 @@ for i in range(2, len(s)):
       <div class="card"><h3>Data you can choose</h3><p>The statistics are a picture of each specialist&rsquo;s own answers, and which answers enter them decides the hard problems.</p></div>
     </div>
     <p class="belief">What a trained student is asked to do, match each teacher on the text the models generate, has an exact layer-wise solution. For specialists that share a base model, that solution already gives one model close to each teacher and more accurate on average than either.</p>
-    <div class="cta tf-left">
+    <div class="cta left">
       <a class="btn btn-primary" href="https://arxiv.org/abs/2610.22236">Read the paper</a>
     </div>
   </div>
@@ -330,7 +330,7 @@ for i in range(2, len(s)):
         <source src="/film/video/tf-opd.mp4" type="video/mp4">
       </video>
     </div>
-    <p class="cap">Also in <a href="/film/#tf-opd">the film collection</a>.</p>
+    <p class="cap">1 min 12 s. Also in the <a href="/film/#tf-opd">film collection</a>.</p>
   </div>
 </section>
 

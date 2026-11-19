@@ -127,16 +127,20 @@
 .rm-lang .k-de{--k:var(--lav);--ke:var(--lav-e);--kt:var(--lav-t);--kl:var(--lav-l)}
 @media(max-width:560px){.rm-lang .row{grid-template-columns:1fr;gap:8px}.rm-lang .row > b{padding-top:0}}
 
-/* film poster */
-a.rm-film{position:relative;display:block;margin-top:var(--sp-fig);border:1px solid var(--rule);border-radius:var(--radius);overflow:hidden;background:#05070b}
-a.rm-film img{display:block;width:100%;height:auto;aspect-ratio:16/9;transition:transform .5s ease,opacity .3s}
-a.rm-film:hover img{transform:scale(1.015);opacity:.92}
-.rm-film-l{position:absolute;left:20px;bottom:18px;display:inline-flex;align-items:center;gap:10px;font-size:var(--t-label);font-weight:600;color:var(--ink);background:var(--bg);border:1px solid var(--hair);padding:6px 16px 6px 6px;border-radius:999px;transition:transform .2s}
-a.rm-film:hover .rm-film-l{transform:translateY(-2px)}
-.rm-play{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:var(--ink)}
-.rm-play svg{width:14px;height:14px;margin-left:2px;fill:var(--bg)}
-@media(max-width:560px){.rm-film-l{left:10px;bottom:10px;padding:4px 12px 4px 4px;gap:8px}.rm-play{width:30px;height:30px}.rm-play svg{width:12px;height:12px}}
+/* film: the poster in the shared .film frame, one centred play button */
+a.film{position:relative;display:block;color:inherit}
+a.film img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;transition:transform .6s ease}
+a.film:hover img{transform:scale(1.015)}
+a.film .play{position:absolute;left:50%;top:50%;width:72px;height:72px;margin:-36px 0 0 -36px;border-radius:50%;background:var(--card);box-shadow:0 6px 24px rgba(0,0,0,.25);display:grid;place-items:center;transition:transform .2s}
+a.film:hover .play{transform:scale(1.06)}
+a.film .play svg{width:24px;height:24px;margin-left:4px;fill:var(--ink)}
+a.film:focus-visible{outline-offset:-4px}
+body.dark-mode a.film .play{background:var(--ink)}
+body.dark-mode a.film .play svg{fill:var(--bg)}
 
+/* closing call to action: left-aligned; 22px after the closing lead */
+.cta.left{justify-content:flex-start;margin-top:var(--sp-fig)}
+.finale .cta.left{margin-top:22px}
 .finale .cta .btn{min-width:0}
 .opens .card h3{font-size:var(--t-card)}
 @media(max-width:900px){

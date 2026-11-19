@@ -64,11 +64,11 @@ permalink: /projects/orw-cfm-w2/
 <section class="hero" aria-label="Summary">
   <div class="wrap">
     <p class="venue">ICLR 2025</p>
-    <h1>Online Reward&#8209;Weighted Fine&#8209;Tuning of Flow Matching <span class="l2">with Wasserstein Regularization</span></h1>
+    <h1>Online Reward&#8209;<wbr>Weighted Fine&#8209;Tuning of Flow Matching <span class="l2">with Wasserstein Regularization</span></h1>
     <p class="byline"><a href="/" class="me">Jiajun&nbsp;Fan</a><sup>1</sup>, Shuaike&nbsp;Shen<sup>1,2</sup>, Chaoran&nbsp;Cheng<sup>1</sup>, Yuxin&nbsp;Chen<sup>1</sup>, Chumeng&nbsp;Liang<sup>1,3</sup>, <a href="https://geliu.web.illinois.edu/">Ge&nbsp;Liu</a><sup>1</sup></p>
     <ul class="logos" aria-label="Affiliations"><li><sup>1</sup><img src="/images/projects/self-rewriting/logo_uiuc.png" alt="" width="66" height="96"><span>UIUC</span></li><li><sup>2</sup><img src="/images/projects/self-rewriting/logo_cmu.png" alt="" width="96" height="96"><span>CMU</span></li><li><sup>3</sup><img src="/images/projects/orw-cfm-w2/logo_usc.png" alt="" width="93" height="96"><span>USC</span></li></ul>
     <div class="cta">
-      <a class="btn" href="/film/#orw-cfm-w2"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M5 3.300v9.400L12.500 8z"/></svg>Film</a>
+      <a class="btn" href="#film"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M5 3.300v9.400L12.500 8z"/></svg>Film</a>
       <a class="btn btn-primary" href="https://arxiv.org/abs/2502.06061"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M4 1.5h5.5L12.5 4.5v10h-8.5z"/><path d="M9.5 1.5v3h3M6 8h4.5M6 10.5h4.5"/></svg>Paper</a>
       <a class="btn" href="#cite"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5c2 0 3-1.5 3-4.5V4.5H3V8h3M9.5 11.5c2 0 3-1.5 3-4.5V4.5h-3V8h3"/></svg>BibTeX</a>
     </div>
@@ -88,7 +88,7 @@ permalink: /projects/orw-cfm-w2/
   <div class="wrap">
     <a href="#results">At a glance</a>
     <a href="#problem">The problem</a>
-    <a href="#finding">The finding</a>
+    <a href="#finding">The idea</a>
     <a href="#method">How it works</a>
     <a href="#evidence">The evidence</a>
     <span class="ch-sub"><a href="#optimum" aria-label="Finding 01">01</a><a href="#collapse" aria-label="Finding 02">02</a><a href="#dial" aria-label="Finding 03">03</a><a href="#sd3-scene" aria-label="Finding 04">04</a></span>
@@ -111,7 +111,7 @@ permalink: /projects/orw-cfm-w2/
         <a class="card result" href="#optimum"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><line class="il-ax" x1="20" y1="84" x2="180" y2="84"/><line x1="20" y1="18" x2="180" y2="18" stroke="var(--muted)" stroke-width="1.4" stroke-dasharray="4 5"/><path d="M22 80C52 78 64 46 100 40S150 37 178 37" fill="none" stroke="var(--peach-e)" stroke-width="2.5" stroke-linecap="round"/><path class="il-ln" d="M22 80C44 70 56 26 90 20S150 18 178 18"/><circle class="il-dot" cx="178" cy="18" r="4.5"/></svg></span><span class="r-no">Finding 01<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>Online, it reaches the optimum.</h3><p>Trained on its own samples, it reaches the best reward. A fixed dataset stops short.</p></a>
         <a class="card result" href="#collapse"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><g fill="var(--peach)" stroke="var(--peach-e)" stroke-width="1.2"><rect x="20" y="14" width="20" height="20" rx="4"/><rect x="44" y="14" width="20" height="20" rx="4"/><rect x="68" y="14" width="20" height="20" rx="4"/><rect x="20" y="38" width="20" height="20" rx="4"/><rect x="44" y="38" width="20" height="20" rx="4"/><rect x="68" y="38" width="20" height="20" rx="4"/><rect x="20" y="62" width="20" height="20" rx="4"/><rect x="44" y="62" width="20" height="20" rx="4"/><rect x="68" y="62" width="20" height="20" rx="4"/></g><path class="il-ar" d="M96 48h10M102 44l4 4-4 4"/><g stroke-width="1.2"><rect x="112" y="14" width="20" height="20" rx="4" fill="var(--mint)" stroke="var(--mint-e)"/><rect x="136" y="14" width="20" height="20" rx="4" fill="var(--ice)" stroke="var(--ice-e)"/><rect x="160" y="14" width="20" height="20" rx="4" fill="var(--lav)" stroke="var(--lav-e)"/><rect x="112" y="38" width="20" height="20" rx="4" fill="var(--ice)" stroke="var(--ice-e)"/><rect x="136" y="38" width="20" height="20" rx="4" fill="var(--rose)" stroke="var(--rose-e)"/><rect x="160" y="38" width="20" height="20" rx="4" fill="var(--mint)" stroke="var(--mint-e)"/><rect x="112" y="62" width="20" height="20" rx="4" fill="var(--lav)" stroke="var(--lav-e)"/><rect x="136" y="62" width="20" height="20" rx="4" fill="var(--mint)" stroke="var(--mint-e)"/><rect x="160" y="62" width="20" height="20" rx="4" fill="var(--ice)" stroke="var(--ice-e)"/></g></svg></span><span class="r-no">Finding 02<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>A W2 bound stops the collapse.</h3><p>Without it, the model ends up drawing one picture. With it, the samples stay varied.</p></a>
         <a class="card result" href="#dial"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><line class="il-ax" x1="20" y1="84" x2="180" y2="84"/><path class="il-ln" d="M24 22C60 26 72 52 104 62S160 70 176 71"/><line x1="24" y1="48" x2="176" y2="48" stroke="var(--hair)" stroke-width="1.5"/><circle cx="104" cy="48" r="8" fill="var(--card)" stroke="var(--mint-e)" stroke-width="2"/><circle class="il-dot" cx="104" cy="62" r="4"/></svg></span><span class="r-no">Finding 03<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>One knob sets the balance.</h3><p>Raising &alpha; keeps it closer to the base model, trading reward for diversity.</p></a>
-        <a class="card result" href="#sd3-scene"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><line class="il-ax" x1="20" y1="84" x2="180" y2="84"/><line class="il-ax" x1="20" y1="10" x2="20" y2="84"/><circle cx="36" cy="22" r="5" fill="var(--ice)" stroke="var(--ice-e)" stroke-width="1.4"/><circle cx="52" cy="72" r="5" fill="var(--peach)" stroke="var(--peach-e)" stroke-width="1.4"/><circle cx="54" cy="50" r="5" fill="var(--peach)" stroke="var(--peach-e)" stroke-width="1.4"/><circle cx="84" cy="62" r="5" fill="var(--lav)" stroke="var(--lav-e)" stroke-width="1.4"/><circle cx="112" cy="44" r="5" fill="var(--lav)" stroke="var(--lav-e)" stroke-width="1.4"/><circle cx="130" cy="48" r="5" fill="var(--mint-l)" stroke="var(--mint-e)" stroke-width="1.4"/><circle cx="168" cy="30" r="14" fill="var(--mint-l)"/><circle class="il-y" cx="168" cy="30" r="7"/></svg></span><span class="r-no">Finding 04<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>It aligns Stable Diffusion 3.</h3><p>The highest CLIP score of all methods compared, with diversity close to the base model.</p></a>
+        <a class="card result" href="#sd3-scene"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><line class="il-ax" x1="20" y1="84" x2="180" y2="84"/><line class="il-ax" x1="20" y1="10" x2="20" y2="84"/><circle cx="36" cy="22" r="5" fill="var(--ice)" stroke="var(--ice-e)" stroke-width="1.4"/><circle cx="52" cy="72" r="5" fill="var(--peach)" stroke="var(--peach-e)" stroke-width="1.4"/><circle cx="54" cy="50" r="5" fill="var(--peach)" stroke="var(--peach-e)" stroke-width="1.4"/><circle cx="84" cy="62" r="5" fill="var(--lav)" stroke="var(--lav-e)" stroke-width="1.4"/><circle cx="112" cy="44" r="5" fill="var(--lav)" stroke="var(--lav-e)" stroke-width="1.4"/><circle cx="130" cy="48" r="5" fill="var(--mint-l)" stroke="var(--mint-e)" stroke-width="1.4"/><circle cx="168" cy="30" r="14" fill="var(--mint-l)"/><circle class="il-y" cx="168" cy="30" r="7"/></svg></span><span class="r-no">Finding 04<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>It aligns <span class="nw">Stable Diffusion 3,</span> and keeps it diverse.</h3><p>The highest CLIP score of all methods compared, with diversity close to the base model.</p></a>
       </div>
       <ul class="creed">
         <li><b>Online.</b><span>it learns from what it just generated</span></li>
@@ -158,7 +158,7 @@ permalink: /projects/orw-cfm-w2/
   <div class="wrap">
     <header class="say">
       <div class="say-main wide">
-        <p class="eyebrow">The finding <span>Lemma 1</span></p>
+        <p class="eyebrow">The idea <span>Lemma 1</span></p>
         <h2 class="reveal">Learning online reaches the best reward. <span class="hl">Left unchecked, it collapses.</span></h2>
         <p class="lead">We prove that re-weighting its own samples round after round sharpens the model toward the highest reward, until it makes the same image every time. The usual limit, a KL penalty, needs the very likelihood a flow cannot afford.</p>
       </div>
@@ -239,7 +239,7 @@ permalink: /projects/orw-cfm-w2/
       <div class="tcard"><p class="tc-h">&ldquo;an image of dog&rdquo;</p><div class="trow"><figure class="tile k-fail" style="--d:.2s"><img src="/images/projects/orw-cfm-w2/clip_dog_a0.jpg" alt="An 8 by 8 grid of one identical dark image repeated in every cell" loading="lazy" width="548" height="548"><figcaption><b>Without W2</b>&alpha; = 0</figcaption></figure><figure class="tile k-edit" style="--d:.4s"><img src="/images/projects/orw-cfm-w2/clip_dog_a1.jpg" alt="An 8 by 8 grid of small, different dog images" loading="lazy" width="548" height="548"><figcaption><b>With W2</b>&alpha; = 1</figcaption></figure></div></div>
       <div class="tcard"><p class="tc-h">&ldquo;an image of bird&rdquo;</p><div class="trow"><figure class="tile k-fail" style="--d:.3s"><img src="/images/projects/orw-cfm-w2/clip_bird_a0.jpg" alt="An 8 by 8 grid of one identical green and grey image repeated in every cell" loading="lazy" width="548" height="548"><figcaption><b>Without W2</b>&alpha; = 0</figcaption></figure><figure class="tile k-edit" style="--d:.5s"><img src="/images/projects/orw-cfm-w2/clip_bird_a1.jpg" alt="An 8 by 8 grid of small, different bird images" loading="lazy" width="548" height="548"><figcaption><b>With W2</b>&alpha; = 1</figcaption></figure></div></div>
     </div>
-    <button type="button" class="more" id="more-clip" aria-controls="clip-cases" aria-expanded="false">Show dog and bird</button>
+    <button type="button" class="more" id="more-clip" aria-controls="clip-cases" aria-expanded="false">Show two more</button>
     <div class="fig panel sub">
       <p class="fig-h">The cat run, step by step <span>W2 distance estimated by its upper bound</span></p>
       <div class="ch anim" id="ch-clip" role="img" aria-label="Two charts over 1000 training steps. Reward: without W2 it climbs close to the optimum of 1.0; with W2 it climbs nearly as high; the pre-trained model stays where it started. W2 distance to the base model: without W2 it keeps growing; with W2 it stays low and nearly flat."></div>
@@ -336,7 +336,7 @@ permalink: /projects/orw-cfm-w2/
   <div class="wrap">
     <header class="say">
       <div class="say-main">
-        <p class="eyebrow">Why it matters</p>
+        <p class="eyebrow">Why it matters <span>Finding 05</span></p>
         <h2>Change the reward, not the dataset.</h2>
         <p class="lead">It needs only a score for each image it makes: no human&#8209;collected data, no filtered datasets, no gradient of the reward.</p>
       </div>
@@ -350,12 +350,13 @@ permalink: /projects/orw-cfm-w2/
       </div>
     </div>
     <p class="cap">Paper, Fig. 9, in the paper&rsquo;s order.</p>
+    <h3 class="eyebrow sub">What this opens up</h3>
     <div class="cards c3 opens">
       <div class="card"><h3>Any score will do</h3><p>A classifier, a JPEG file size, CLIP, HPS&#8209;V2, Pick Score, Alpha Clip: one method, no reward&#8209;specific changes.</p></div>
       <div class="card"><h3>Its own data</h3><p>Every training image is one it generated itself. Flip the sign of the reward and the same model learns odd digits instead of even ones.</p></div>
       <div class="card"><h3>Two dials, clear roles</h3><p>&tau; sets how fast it converges and &alpha; where it settles, so fine-tuning stays under control.</p></div>
     </div>
-    <div class="cta">
+    <div class="cta left">
       <a class="btn btn-primary" href="https://arxiv.org/abs/2502.06061">Read the paper</a>
       <a class="btn" href="https://openreview.net/forum?id=2IoFFexvuw">OpenReview</a>
     </div>
@@ -370,12 +371,11 @@ permalink: /projects/orw-cfm-w2/
         <h2>The story, as a short film.</h2>
       </div>
     </header>
-    <a class="film-poster" href="/film/#orw-cfm-w2" aria-label="Watch the ORW-CFM-W2 film">
+    <a class="film poster" href="/film/#orw-cfm-w2" aria-label="Watch the ORW-CFM-W2 film">
       <img src="/film/posters/orw-cfm-w2.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async">
-      <span class="fp-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3.5v17L20.5 12z"/></svg></span>
-      <span class="fp-lab" aria-hidden="true">Watch the film</span>
+      <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.500v15l12.500-7.500z"/></svg></span>
     </a>
-    <p class="cap">Opens on the films page.</p>
+    <p class="cap">Opens the film page.</p>
   </div>
 </section>
 
@@ -384,6 +384,7 @@ permalink: /projects/orw-cfm-w2/
     <header class="say">
       <p class="eyebrow">Cite</p>
       <h2>Cite the paper.</h2>
+      <p class="cap">International Conference on Learning Representations 2025 (ICLR 2025).</p>
       <button class="bib-copy-btn" aria-label="Copy BibTeX citation"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-list.png);mask-image:url(/images/icons/h-list.png)"></i>Copy BibTeX</button>
     </header>
     <pre class="show bibtex-block" tabindex="0"><code>@inproceedings{fan2025online,

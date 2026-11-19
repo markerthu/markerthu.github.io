@@ -1,12 +1,11 @@
 <style>
 /* LBC page: only what the shared selfrw style does not already have. Sizes and colours come from its tokens. */
-.hero .venue{font-size:var(--t-label);line-height:1.5;font-weight:600;color:var(--muted);margin-top:10px}
-.hero .venue a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--hair);text-underline-offset:3px}
 .cap sup{line-height:0}
 .k-avg{--k:var(--band);--ke:var(--hair);--kt:var(--muted);--kl:var(--band)}
 .k-p1{--k:var(--ice);--ke:var(--ice-e);--kt:var(--ice-t);--kl:var(--ice-l)}
 .k-p2{--k:var(--lav);--ke:var(--lav-e);--kt:var(--lav-t);--kl:var(--lav-l)}
 .k-p3{--k:var(--rose);--ke:var(--rose-e);--kt:var(--rose-t);--kl:var(--rose-l)}
+.k-n{--k:var(--band);--ke:var(--faint);--kt:var(--ink);--kl:var(--band)}
 
 /* the problem: pick one policy vs blend them all */
 .pk .cst-draw{max-width:470px}
@@ -52,7 +51,7 @@
 .mx-out .mx-hist rect{fill:var(--mint);stroke:var(--mint-e);stroke-width:1.3}
 .mx-out .mx-hist text{font-family:var(--sans);font-size:var(--t-fine);fill:var(--faint)}
 .mx-eq{font-family:var(--mono);font-size:var(--t-fine);line-height:1.7;color:var(--body);background:var(--band);border:1px solid var(--rule);border-radius:10px;padding:9px 12px;margin-top:16px;overflow-wrap:anywhere}
-.steps3{margin-top:16px}
+.steps3{margin-top:var(--sp-fig)}
 .steps3 .card .n{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:8px;font-size:var(--t-fine);font-weight:700;background:var(--k);border:1px solid var(--ke);color:var(--kt);margin-bottom:12px}
 
 /* finding 01: the wall of 57 games */
@@ -75,42 +74,24 @@
 .rbs.anim .bar{transform:scaleX(0)}
 .rbs.anim.in .bar{transform:none;transition:transform 1s cubic-bezier(.2,.7,.2,1) var(--d,0s)}
 
-/* why it matters: three small moving icons */
-.opens .h-ico{display:block;width:44px;height:44px;margin-bottom:14px}
-.opens .h-ico svg{display:block;width:100%;height:100%;fill:none;stroke:var(--mint-e);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
-.opens .h-ico .soft{stroke:var(--hair)}
-.opens .h-ico .thick{stroke-width:6;stroke-linecap:butt}
-.opens .h-ico .dot{fill:var(--mint);stroke:var(--mint-e)}
-.opens .h-ico .p1{fill:var(--ice);stroke:var(--ice-e)}.opens .h-ico .in1,.opens .h-ico .in2,.opens .h-ico .in3{fill-opacity:.82}
-.cta.left{justify-content:flex-start}.opens .h-ico .p2{fill:var(--lav);stroke:var(--lav-e)}.opens .h-ico .p3{fill:var(--rose);stroke:var(--rose-e)}
-.opens .h-ico .bar-up{stroke-dasharray:38}
-@keyframes lbcRise{0%,8%{stroke-dashoffset:38}62%,100%{stroke-dashoffset:0}}
-@keyframes lbcWander{0%,100%{transform:translate(0,0)}25%{transform:translate(7px,5px)}50%{transform:translate(-6px,7px)}75%{transform:translate(-4px,-6px)}}
-@keyframes lbcIn1{0%,15%,100%{transform:translate(0,0)}45%,70%{transform:translate(0,12px)}}
-@keyframes lbcIn2{0%,15%,100%{transform:translate(0,0)}45%,70%{transform:translate(11px,-10px)}}
-@keyframes lbcIn3{0%,15%,100%{transform:translate(0,0)}45%,70%{transform:translate(-11px,-10px)}}
-body:not(.no-anim) .opens .bar-up{animation:lbcRise 4.6s ease-in-out infinite}
-body:not(.no-anim) .opens .wander{animation:lbcWander 6s ease-in-out infinite}
-body:not(.no-anim) .opens .in1{animation:lbcIn1 4.8s ease-in-out infinite}
-body:not(.no-anim) .opens .in2{animation:lbcIn2 4.8s ease-in-out infinite}
-body:not(.no-anim) .opens .in3{animation:lbcIn3 4.8s ease-in-out infinite}
-.opens.paused .h-ico *{animation-play-state:paused}
+/* why it matters: the closing call to action, left-aligned under the cards */
+.cta.left{justify-content:flex-start;margin-top:var(--sp-fig)}
 
 /* charts */
-.ch .t-rose{fill:var(--rose-t)}
-.d-hair{fill:var(--band);stroke:var(--hair);stroke-width:1.5}
-.lgd{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:var(--t-fine);color:var(--muted);margin-bottom:6px}
-.lgd span{display:inline-flex;align-items:center;gap:7px}
-.lgd span::before{content:'';width:12px;height:12px;border-radius:3px;background:var(--k);border:1px solid var(--ke)}
+.d-n{fill:var(--card);stroke:var(--hair);stroke-width:1.5}
+.d-mint-o{fill:var(--mint-l);stroke:var(--mint-e);stroke-width:1.2}
+.d-lav-o{fill:var(--lav-l);stroke:var(--lav-e);stroke-width:1.2}
+.d-key{fill:var(--muted);stroke:var(--muted);stroke-width:1.2}
+.d-key-o{fill:var(--band);stroke:var(--hair);stroke-width:1.2}
 
-/* film poster */
+/* film poster, linking to the film page */
 .film.poster{position:relative;display:block;aspect-ratio:16/9;color:inherit}
-.film.poster img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
-.film.poster:hover img{transform:scale(1.015)}
-.film.poster .play{position:absolute;left:50%;top:50%;width:68px;height:68px;margin:-34px 0 0 -34px;border-radius:50%;background:var(--card);box-shadow:0 6px 24px rgba(0,0,0,.28);display:grid;place-items:center;transition:transform .2s ease}
-.film.poster:hover .play{transform:scale(1.06)}
-.film.poster .play svg{width:22px;height:22px;margin-left:4px;fill:var(--ink)}
-body.dark-mode .film.poster img{filter:brightness(.92)}
+.film.poster img{display:block;width:100%;height:100%;object-fit:cover}
+.film.poster .play{position:absolute;left:50%;top:50%;width:72px;height:72px;margin:-36px 0 0 -36px;border-radius:50%;background:var(--card);border:1px solid var(--hair);display:grid;place-items:center;transition:transform .2s,border-color .2s}
+.film.poster .play svg{width:24px;height:24px;margin-left:4px;fill:var(--ink)}
+.film.poster:hover .play{transform:scale(1.06);border-color:var(--mint-e)}
+.film.poster:focus-visible{outline-offset:-4px}
+@media(max-width:560px){.film.poster .play{width:56px;height:56px;margin:-28px 0 0 -28px}.film.poster .play svg{width:20px;height:20px}}
 
 @media(max-width:960px){
   .mx{grid-template-columns:1fr 1fr;gap:28px}
@@ -128,7 +109,6 @@ body.dark-mode .film.poster img{filter:brightness(.92)}
   .mx-w{display:none}
   .mx-t span{display:none}
   .mx-tri svg{max-width:270px}
-  .film.poster .play{width:56px;height:56px;margin:-28px 0 0 -28px}
 }
 @media(max-width:560px){
   .wall{display:flex;flex-wrap:wrap;gap:5px}

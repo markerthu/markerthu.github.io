@@ -63,10 +63,10 @@ permalink: /projects/procedure-aware-rl/
 <section class="hero" aria-label="Summary">
   <div class="wrap">
     <p class="venue">COLM 2026</p>
-    <h1>Procedure&#8209;Aware Reinforcement Learning <span class="l2">for Tool&#8209;Augmented Large Language Models</span></h1>
+    <h1>Procedure&#8209;Aware Reinforcement Learning <span class="l2">for&nbsp;Tool&#8209;Augmented Large Language Models</span></h1>
     <p class="byline">Qinglong&nbsp;Zheng<sup>*</sup>, <a href="/" class="me">Jiajun&nbsp;Fan</a><sup>*</sup>, Chaoran&nbsp;Cheng, <a href="https://geliu.web.illinois.edu/">Ge&nbsp;Liu</a></p>
     <ul class="logos" aria-label="Affiliation"><li><img src="/images/projects/self-rewriting/logo_uiuc.png" alt="" width="66" height="96"><span>UIUC</span></li></ul>
-    <p class="eq"><sup>*</sup>Equal contribution</p>
+    <p class="note"><span><sup>*</sup>Equal contribution</span></p>
     <div class="cta">
       <a class="btn" href="#film"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M5 3.300v9.400L12.500 8z"/></svg>Film</a>
       <a class="btn btn-primary" href="https://openreview.net/forum?id=d4wrBuJ4xo"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M4 1.5h5.5L12.5 4.5v10h-8.5z"/><path d="M9.5 1.5v3h3M6 8h4.5M6 10.5h4.5"/></svg>Paper</a>
@@ -95,7 +95,7 @@ permalink: /projects/procedure-aware-rl/
     <a href="#matters">Why it matters</a>
     <a href="#film">Film</a>
     <a href="#cite">Cite</a>
-    <a class="ch-paper" href="https://openreview.net/forum?id=d4wrBuJ4xo">COLM 2026 paper</a>
+    <a class="ch-paper" href="https://openreview.net/forum?id=d4wrBuJ4xo">OpenReview</a>
   </div>
 </nav>
 
@@ -108,9 +108,9 @@ permalink: /projects/procedure-aware-rl/
         <p class="lead">What if a tool-using agent were rewarded for how it calls its tools, not only for which tools it calls? Score the order of its calls and the state they leave behind, and a 3B agent becomes a markedly better tool user.</p>
       </header>
       <div class="show cards c2">
-        <a class="card result" href="#beats"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><line class="il-ax" x1="14" y1="84" x2="186" y2="84"/><rect class="il-n" x="26" y="44" width="18" height="40" rx="3"/><rect class="il-y" x="48" y="30" width="18" height="54" rx="3"/><rect class="il-n" x="86" y="38" width="18" height="46" rx="3"/><rect class="il-y" x="108" y="24" width="18" height="60" rx="3"/><rect class="il-n" x="146" y="48" width="18" height="36" rx="3"/><rect class="il-y" x="168" y="32" width="18" height="52" rx="3"/></svg></span><span class="r-no">Finding 01<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>It beats correctness-only RL.</h3><p>On all three benchmarks, from the same 3B model and the same training data.</p></a>
+        <a class="card result" href="#beats"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><line class="il-ax" x1="14" y1="84" x2="186" y2="84"/><rect class="il-n" x="26" y="44" width="18" height="40" rx="3"/><rect class="il-y" x="48" y="30" width="18" height="54" rx="3"/><rect class="il-n" x="86" y="38" width="18" height="46" rx="3"/><rect class="il-y" x="108" y="24" width="18" height="60" rx="3"/><rect class="il-n" x="146" y="48" width="18" height="36" rx="3"/><rect class="il-y" x="168" y="32" width="18" height="52" rx="3"/></svg></span><span class="r-no">Finding 01<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>It beats correctness&#8209;only RL.</h3><p>On all three benchmarks, from the same 3B model and the same training data.</p></a>
         <a class="card result" href="#order-matters"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><line class="il-ax" x1="20" y1="84" x2="180" y2="84"/><rect class="il-n" x="40" y="70" width="32" height="14" rx="3"/><rect class="il-n" x="84" y="56" width="32" height="28" rx="3"/><rect class="il-y" x="128" y="18" width="32" height="66" rx="3"/></svg></span><span class="r-no">Finding 02<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>It gains most where order matters.</h3><p>Its multi-turn accuracy on BFCL-V3 nearly doubles over correctness-only RL.</p></a>
-        <a class="card result" href="#learns"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><g class="il-g"><rect x="14" y="40" width="40" height="16" rx="4"/></g><path class="il-ar" d="M58 48h10"/><g class="il-g"><rect class="il-bad" x="72" y="40" width="40" height="16" rx="4"/></g><path class="il-ar" d="M116 44c10 0 12-20 22-20M134 20l4 4-4 4"/><path class="il-ar" d="M116 52c10 0 12 20 22 20M134 68l4 4-4 4" stroke-opacity=".35"/><g class="il-g"><rect class="il-ok" x="142" y="16" width="44" height="16" rx="4"/><rect x="142" y="64" width="44" height="16" rx="4" fill-opacity=".5"/></g></svg></span><span class="r-no">Finding 03<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>It learns the procedure.</h3><p>It navigates before it creates, and recovers from a failed call instead of giving up.</p></a>
+        <a class="card result" href="#learns"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><g class="il-g"><rect x="14" y="40" width="40" height="16" rx="4"/></g><path class="il-ar" d="M58 48h10"/><g class="il-g"><rect class="il-bad" x="72" y="40" width="40" height="16" rx="4"/></g><path class="il-ar" d="M116 44c10 0 12-20 22-20M134 20l4 4-4 4"/><path class="il-ar" d="M116 52c10 0 12 20 22 20M134 68l4 4-4 4" stroke-opacity=".35"/><g class="il-g"><rect class="il-ok" x="142" y="16" width="44" height="16" rx="4"/><rect x="142" y="64" width="44" height="16" rx="4" fill-opacity=".5"/></g></svg></span><span class="r-no">Finding 03<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>It learns the procedure, not just the calls.</h3><p>It navigates before it creates, and recovers from a failed call instead of giving up.</p></a>
         <a class="card result" href="#both"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><line class="il-ax" x1="30" y1="10" x2="30" y2="88"/><line class="il-ax" x1="30" y1="20" x2="104" y2="20"/><circle class="il-dot" cx="104" cy="20" r="4"/><line class="il-ax" x1="30" y1="40" x2="118" y2="40"/><circle class="il-dot" cx="118" cy="40" r="4"/><line class="il-ax" x1="30" y1="60" x2="116" y2="60"/><circle class="il-dot" cx="116" cy="60" r="4"/><path class="il-ln" d="M30 80H170"/><circle class="il-y" cx="170" cy="80" r="6"/></svg></span><span class="r-no">Finding 04<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>Both new rewards count.</h3><p>Remove either one and accuracy drops, every time significantly.</p></a>
       </div>
       <ul class="creed">
@@ -295,7 +295,7 @@ permalink: /projects/procedure-aware-rl/
   <div class="wrap">
     <header class="say">
       <div class="say-main">
-        <p class="eyebrow">Why it matters</p>
+        <p class="eyebrow">Why it matters <span>Finding 05</span></p>
         <h2>A 3B agent that holds its own against larger models.</h2>
         <p class="lead">On BFCL-V3 it posts the highest five-category average in the comparison, ahead of correctness-only RL and of larger models scored by the benchmark&rsquo;s maintainers.</p>
       </div>
@@ -329,7 +329,7 @@ permalink: /projects/procedure-aware-rl/
         <source src="/film/video/procedure-aware-rl.mp4" type="video/mp4">
       </video>
     </div>
-    <p class="cap">1 min 14 s. Also in the <a href="/film/#procedure-aware-rl">film gallery</a>.</p>
+    <p class="cap">1 min 14 s. Also in the <a href="/film/#procedure-aware-rl">film collection</a>.</p>
   </div>
 </section>
 

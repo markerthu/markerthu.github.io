@@ -87,6 +87,7 @@
 .ch .bar-l{font-weight:600}
 .ch .t-faint{fill:var(--faint)}
 .d-hair{fill:var(--band);stroke:var(--hair);stroke-width:1.2}
+.d-n{fill:var(--card);stroke:var(--hair);stroke-width:1.5}
 .d-ice-o{fill:var(--ice-l);stroke:var(--ice-e);stroke-width:1.2}
 .d-mint-o{fill:var(--mint-l);stroke:var(--mint-e);stroke-width:1.2}
 .d-peach-o{fill:var(--peach-l);stroke:var(--peach-e);stroke-width:1.2}
@@ -109,26 +110,20 @@
 body.dark-mode .ts .im{filter:brightness(.9)}
 .ts p{font-size:var(--t-label);line-height:1.45;color:var(--muted);padding:10px 14px 12px}
 .ts p b{display:block;font-size:var(--t-body);font-weight:600;color:var(--ink)}
-@media(max-width:560px){.tsne{gap:10px}.ts p{padding:8px 10px 10px}.ts p b{font-size:var(--t-label)}.ts .im{padding:6px}.film .play{width:56px;height:56px;margin:-28px 0 0 -28px}.film .play svg{width:18px;height:18px}}
+@media(max-width:560px){.tsne{gap:10px}.ts p{padding:8px 10px 10px}.ts p b{font-size:var(--t-label)}.ts .im{padding:6px}}
 @media(max-width:330px){.tsne{grid-template-columns:1fr}}
 
-/* why it matters: follow-up links */
-a.card.next{display:block;color:inherit;transition:border-color .2s,transform .2s}
-a.card.next:hover{border-color:var(--mint-e);transform:translateY(-2px);color:inherit}
-a.card.next .r-no{display:block;font-size:var(--t-label);font-weight:600;color:var(--mint-t);margin-bottom:6px}
+/* why it matters: the closing call to action, left-aligned under the cards */
+.cta.left{justify-content:flex-start;margin-top:var(--sp-fig)}
 
-/* film poster */
-.film a{display:block;position:relative;color:inherit}
-.film img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
-.film .play{position:absolute;left:50%;top:50%;width:76px;height:76px;margin:-38px 0 0 -38px;border-radius:50%;background:var(--card);border:1px solid var(--hair);display:grid;place-items:center;transition:transform .2s}
-.film .play svg{width:24px;height:24px;margin-left:4px;fill:var(--ink)}
-.film a:hover .play{transform:scale(1.06)}
-.film a:focus-visible{outline-offset:-4px}
-
-/* cite: venue line */
-.venue{font-size:var(--t-label);line-height:1.55;color:var(--muted);margin-top:14px;max-width:26em}
-.venue b{font-weight:600;color:var(--body)}
-.venue a{text-decoration:underline;text-decoration-color:var(--hair);text-underline-offset:3px}
+/* film poster, linking to the film page */
+.film.poster{position:relative;display:block;aspect-ratio:16/9;color:inherit}
+.film.poster img{display:block;width:100%;height:100%;object-fit:cover}
+.film.poster .play{position:absolute;left:50%;top:50%;width:72px;height:72px;margin:-36px 0 0 -36px;border-radius:50%;background:var(--card);border:1px solid var(--hair);display:grid;place-items:center;transition:transform .2s,border-color .2s}
+.film.poster .play svg{width:24px;height:24px;margin-left:4px;fill:var(--ink)}
+.film.poster:hover .play{transform:scale(1.06);border-color:var(--mint-e)}
+.film.poster:focus-visible{outline-offset:-4px}
+@media(max-width:560px){.film.poster .play{width:56px;height:56px;margin:-28px 0 0 -28px}.film.poster .play svg{width:20px;height:20px}}
 .fig-note{font-size:var(--t-label);line-height:1.55;color:var(--muted);max-width:30em}
 .op-h{font-size:var(--t-label);color:var(--muted);line-height:1.4}
 .op-h b{font-weight:600;color:var(--ink);margin-right:.6em}

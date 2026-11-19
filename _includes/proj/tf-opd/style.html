@@ -3,8 +3,10 @@
 .stage-steps li:nth-child(2){--sc:var(--peach-e)}
 .stage-steps li:nth-child(3){--sc:var(--lav-e)}
 .stage-steps li:nth-child(4){--sc:var(--mint-e)}
-.tf-contrib{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 18px;margin-top:10px;font-size:var(--t-fine);color:var(--faint)}
-.tf-contrib sup{font-size:.8em;margin-right:2px}
+/* hero note under the logos (*Equal contribution, †Corresponding author), the same on every page that has one */
+.hero .note{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 18px;margin-top:10px;font-size:var(--t-fine);line-height:1.5;color:var(--muted)}
+.hero .note sup{font-size:.8em;margin-right:2px}
+@media(max-width:700px){.hero .note{justify-content:flex-start}}
 
 /* at-a-glance illustrations */
 .il-db line{stroke:var(--hair);stroke-width:2}
@@ -158,9 +160,10 @@ body.dark-mode .tf-samples span.ok{color:var(--ink)}
 .tc-done path{fill:none;stroke:var(--mint-t);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .tc-lb{font-family:var(--sans);font-size:var(--t-label);font-weight:600}
 .tc-lb.t-mint{fill:var(--mint-t)}
-.tf-left{justify-content:flex-start;margin-top:22px}
+/* closing call to action, left-aligned: a figure gap after cards, 22px after the belief line */
+.cta.left{justify-content:flex-start;margin-top:var(--sp-fig)}
+.belief + .cta.left{margin-top:22px}
 #matters .belief{max-width:44em}
-.film + .cap a{text-decoration:underline;text-decoration-color:var(--hair);text-underline-offset:3px}
 
 @media(max-width:1099px){
   .pp-steps{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(8,auto)}
@@ -176,7 +179,6 @@ body.dark-mode .tf-samples span.ok{color:var(--ink)}
   .tf-pair{grid-template-columns:1fr}
 }
 @media(max-width:700px){
-  .tf-contrib{justify-content:flex-start}
   .rt-draw{max-width:400px;margin:12px auto 10px;padding:0 18px}
   .tf-eq .eq{font-size:var(--t-card);white-space:normal}
   .pp{padding:20px 18px}

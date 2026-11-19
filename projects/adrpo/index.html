@@ -63,11 +63,11 @@ permalink: /projects/adrpo/
 <section class="hero" aria-label="Summary">
   <div class="wrap">
     <p class="venue">NeurIPS 2025</p>
-    <h1>Adaptive Divergence Regularized <span class="l2">Policy Optimization for</span> <span class="l2">Fine-tuning Generative Models</span></h1>
+    <h1>Adaptive Divergence Regularized Policy Optimization <span class="l2">for Fine&#8209;tuning Generative Models</span></h1>
     <p class="byline"><a href="/" class="me">Jiajun&nbsp;Fan</a>, Tong&nbsp;Wei, Chaoran&nbsp;Cheng, Yuxin&nbsp;Chen, <a href="https://geliu.web.illinois.edu/">Ge&nbsp;Liu</a></p>
     <ul class="logos" aria-label="Affiliation"><li><img src="/images/projects/self-rewriting/logo_uiuc.png" alt="" width="66" height="96"><span>UIUC</span></li></ul>
     <div class="cta">
-      <a class="btn" href="/film/#adrpo"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M5 3.300v9.400L12.500 8z"/></svg>Film</a>
+      <a class="btn" href="#film"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M5 3.300v9.400L12.500 8z"/></svg>Film</a>
       <a class="btn btn-primary" href="https://arxiv.org/abs/2510.18053"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M4 1.5h5.5L12.5 4.5v10h-8.5z"/><path d="M9.5 1.5v3h3M6 8h4.5M6 10.5h4.5"/></svg>Paper</a>
       <a class="btn" href="#cite"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5c2 0 3-1.5 3-4.5V4.5H3V8h3M9.5 11.5c2 0 3-1.5 3-4.5V4.5h-3V8h3"/></svg>BibTeX</a>
     </div>
@@ -125,7 +125,7 @@ permalink: /projects/adrpo/
   <div class="wrap">
     <header class="say">
       <div class="say-main wide">
-        <p class="eyebrow">The problem <span>One fixed strength</span></p>
+        <p class="eyebrow">The problem</p>
         <h2 class="reveal">Fine-tuning holds every sample back equally hard. <span class="hl nw">That forces a trade.</span></h2>
         <p class="lead">Strong regularization keeps what the model could do but limits how far the reward can rise. Weak regularization lets the reward rise but risks collapse and reward hacking. PPO, GRPO and DPO all pick one strength and use it for every sample.</p>
       </div>
@@ -190,6 +190,7 @@ permalink: /projects/adrpo/
     <ul class="nots" aria-label="What it does without">
       <li>no new networks</li><li>no architectural changes</li><li>no manual schedule</li>
     </ul>
+    <p class="takeaway">Nothing new to train, and no schedule to tune.</p>
   </div>
 </section>
 
@@ -209,7 +210,7 @@ permalink: /projects/adrpo/
     </div>
     <p class="cap">Samples from Figures 1 and 5 of the paper. Prompts from DrawBench and RAFT, and compositional prompts written for the paper.</p>
     <div class="fig panel sub">
-      <ul class="legend"><li class="k-run">SD3 <span>2B</span></li><li class="k-fail">SANA-1.5 <span>4.8B</span></li><li class="k-read">FLUX.1-Dev <span>12B</span></li><li class="k-edit ours">SD3 + ADRPO <span>2B</span></li></ul>
+      <ul class="legend"><li class="k-run">SD3 <span>2B</span></li><li class="k-n">SANA-1.5 <span>4.8B</span></li><li class="k-n">FLUX.1-Dev <span>12B</span></li><li class="k-edit ours">SD3 + ADRPO <span>2B</span></li></ul>
       <div class="ch anim mults" id="ch-sizes" role="img" aria-label="Six metrics from Table 1, mean over 3 seeds. ClipScore: SD3 29.27, SANA-1.5 32.18, FLUX.1-Dev 31.72, SD3 plus ADRPO 32.97. ClipDiversity: 5.08, 4.31, 4.29, 5.13. Aesthetic: 5.53, 5.89, 5.95, 6.27. BLIPScore: 0.501, 0.526, 0.492, 0.567. ImageReward: 0.97, 1.45, 1.11, 1.61. PickScore: 20.81, 21.85, 21.83, 22.78.">
         <div class="mult"></div><div class="mult"></div><div class="mult"></div><div class="mult"></div><div class="mult"></div><div class="mult"></div>
       </div>
@@ -253,7 +254,7 @@ permalink: /projects/adrpo/
     <header class="say">
       <div class="say-main">
         <p class="eyebrow">The evidence <span>Finding 03</span></p>
-        <h2>On a language model, it escapes a local optimum by itself.</h2>
+        <h2>It escapes a local optimum by itself.</h2>
         <p class="lead">Plugged into GRPO to fine-tune Qwen3 (0.6B), ADRPO first narrows its outputs, then widens them again to climb out. GRPO stays at high entropy and struggles to find higher reward.</p>
       </div>
     </header>
@@ -325,7 +326,7 @@ permalink: /projects/adrpo/
       <div class="card"><h3>Exploration when it pays</h3><p>The advantage tells the model when to stay close and when to move on, so it can climb out of a local optimum.</p></div>
       <div class="card"><h3>A drop-in change</h3><p>One coefficient becomes a function of the advantage. In GRPO, nothing else changes.</p></div>
     </div>
-    <div class="cta matters-cta">
+    <div class="cta left">
       <a class="btn btn-primary" href="https://arxiv.org/abs/2510.18053">Read the paper</a>
       <a class="btn" href="https://openreview.net/forum?id=aXO0xg0ttW">OpenReview</a>
     </div>
@@ -340,20 +341,20 @@ permalink: /projects/adrpo/
         <h2>The story, as a short film.</h2>
       </div>
     </header>
-    <a class="film-link" href="/film/#adrpo" aria-label="Watch the ADRPO film">
+    <a class="film poster" href="/film/#adrpo" aria-label="Watch the ADRPO film">
       <img src="/film/posters/adrpo.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async">
-      <span class="play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 2.5v11l9.5-5.5z"/></svg></span>
-      <span class="watch">Watch the film</span>
+      <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.500v15l12.500-7.500z"/></svg></span>
     </a>
-    <p class="cap">Plays on the film page, with the films of the other projects.</p>
+    <p class="cap">Opens the film page.</p>
   </div>
 </section>
 
 <section class="cite" id="cite">
   <div class="wrap duo">
     <header class="say">
-      <p class="eyebrow">Cite <span>NeurIPS 2025</span></p>
+      <p class="eyebrow">Cite</p>
       <h2>Cite the paper.</h2>
+      <p class="cap">Conference on Neural Information Processing Systems 2025 (NeurIPS 2025).</p>
       <button class="bib-copy-btn" aria-label="Copy BibTeX citation"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-list.png);mask-image:url(/images/icons/h-list.png)"></i>Copy BibTeX</button>
     </header>
     <pre class="show bibtex-block" tabindex="0"><code>@inproceedings{fan2025adaptive,
@@ -370,7 +371,7 @@ permalink: /projects/adrpo/
 </main>
 
 <footer>
-  <p>ADRPO &nbsp;|&nbsp; <a href="/">Jiajun Fan</a> · UIUC &nbsp;|&nbsp; <a href="https://arxiv.org/abs/2510.18053">arXiv</a> &middot; <a href="https://openreview.net/forum?id=aXO0xg0ttW">OpenReview</a> &nbsp;|&nbsp; <a href="/projects/">All Projects</a></p>
+  <p>ADRPO &nbsp;|&nbsp; <a href="/">Jiajun Fan</a> · UIUC &nbsp;|&nbsp; <a href="https://arxiv.org/abs/2510.18053">Paper</a> &middot; <a href="https://openreview.net/forum?id=aXO0xg0ttW">OpenReview</a> &nbsp;|&nbsp; <a href="/projects/">All Projects</a></p>
 </footer>
 
 <div id="read-progress" aria-hidden="true"></div>

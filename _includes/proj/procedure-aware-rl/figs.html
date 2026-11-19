@@ -196,9 +196,10 @@
   }
 
   /* Why it matters: Table 1, five-category Avg.Acc. */
-  var RANK=[['Procedure-aware RL','3B, ours',65.67,'m'],['Gemma-3-12b-it','12B, open weights',64.69,'l'],['GPT-4.1-mini','proprietary',64.65,'l'],
-            ['ToolRL','3B, correctness-only RL',63.07,'i'],['Gemini-2.5-Flash-Lite','proprietary',57.94,'l'],['Qwen2.5-3B-Instruct','3B, base model',57.31,'n'],
-            ['GPT-5-mini','proprietary',57.11,'l'],['Claude-Haiku-4.5','proprietary',47.26,'l']];
+  /* colours: ours mint, the one main baseline (ToolRL) ice, every other system neutral */
+  var RANK=[['Procedure-aware RL','3B, ours',65.67,'m'],['Gemma-3-12b-it','12B, open weights',64.69,'n'],['GPT-4.1-mini','proprietary',64.65,'n'],
+            ['ToolRL','3B, correctness-only RL',63.07,'i'],['Gemini-2.5-Flash-Lite','proprietary',57.94,'n'],['Qwen2.5-3B-Instruct','3B, base model',57.31,'n'],
+            ['GPT-5-mini','proprietary',57.11,'n'],['Claude-Haiku-4.5','proprietary',47.26,'n']];
   function rank(el){
     var cw=el.clientWidth||900, small=cw<640, W=Math.round(Math.max(290,cw)), s='';
     var lw=small?0:292, x1=W-62, rowH=small?50:40, top=small?16:12, H=top+RANK.length*rowH+30;

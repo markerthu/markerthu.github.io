@@ -79,7 +79,9 @@ body:not(.no-anim) .sg-cards .h-bob{animation:sgBob 3s ease-in-out infinite}
 .sg-play{position:absolute;left:50%;top:50%;width:72px;height:72px;margin:-36px 0 0 -36px;border-radius:50%;background:var(--card);border:1px solid var(--hair);display:grid;place-items:center;transition:transform .2s,border-color .2s}
 .sg-play svg{width:24px;height:24px;fill:var(--ink);margin-left:4px}
 .sg-poster:hover .sg-play{transform:scale(1.06);border-color:var(--mint-e)}
-@media(max-width:560px){.sg-play{width:56px;height:56px;margin:-28px 0 0 -28px}.sg-play svg{width:20px;height:20px}}
-.finale .cta .btn{min-width:0}
-@media(max-width:700px){.finale .cta .btn svg{display:inline-block}}
+
+/* closing call to action, left-aligned under the cards */
+.cta.left{justify-content:flex-start;margin-top:var(--sp-fig)}
+/* the title at phone width: a hair tighter, so "Reinforcement Learning" holds one line */
+@media(max-width:400px){.hero h1{letter-spacing:-.03em}}
 </style>
