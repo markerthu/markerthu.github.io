@@ -27,8 +27,8 @@ body.dark-mode .page__footer{background:#0f1216!important;color:#8f8a80!importan
 body.dark-mode .page__footer a{color:#8f8a80!important;}
 .ed-head{margin:0 0 1.4em}
 .ed-kicker{font-family:'Inter',system-ui,sans-serif;text-transform:uppercase;letter-spacing:.145em;font-size:.72rem;font-weight:600;color:#6c6860;margin-bottom:.7em}
-.ed-h1{font-family:Newsreader,Georgia,serif!important;font-weight:500!important;font-size:2.6rem!important;line-height:1.1!important;letter-spacing:-.02em;color:#1a1815!important;margin:0 0 .3em!important;text-wrap:balance}
-.ed-sub{font-family:Newsreader,Georgia,serif;font-size:1.12rem;line-height:1.55;color:#6c6860;margin:0 0 .5em;max-width:40em}
+.ed-h1{font-family:'Inter','Segoe UI',system-ui,sans-serif!important;font-weight:500!important;font-size:2.6rem!important;line-height:1.1!important;letter-spacing:-.02em;color:#1a1815!important;margin:0 0 .3em!important;text-wrap:balance}
+.ed-sub{font-family:'Inter','Segoe UI',system-ui,sans-serif;font-size:1.12rem;line-height:1.55;color:#6c6860;margin:0 0 .5em;max-width:40em}
 .ed-meta{font-family:'Inter',system-ui,sans-serif;font-size:.8rem;color:#787369}
 body.dark-mode .ed-h1{color:#ece8e0!important} body.dark-mode .ed-sub,body.dark-mode .ed-kicker,body.dark-mode .ed-meta{color:#8f8a80}
 @media(max-width:600px){.ed-h1{font-size:2.05rem!important}}

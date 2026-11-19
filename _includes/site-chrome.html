@@ -6,5 +6,8 @@
 .masthead-nav{display:flex;gap:2px;align-items:center}
 .masthead-nav a{font-size:17px!important;font-weight:600!important;padding:6px 10px!important;margin:0!important;letter-spacing:0!important}
 @media(max-width:600px){.masthead-title{font-size:17px!important}.masthead-nav a{font-size:14px!important;padding:5px 8px!important}}
-{% unless include.home %}.pg-fab,.ra-btn,.ra-tip,.ra-panel,.dark-toggle,.scroll-top,#pg-dark,#pg-top,#ra-btn,#ra-tip,#darkToggle{display:none!important}
+{% unless include.home %}
+/* One typeface outside the homepage (his 11-19 call: the serif pages "不好看"); Inter carries the hierarchy by weight. */
+:root,body,body.dark-mode{--serif:'Inter','Inter Fallback','Segoe UI',system-ui,-apple-system,sans-serif!important}
+.pg-fab,.ra-btn,.ra-tip,.ra-panel,.dark-toggle,.scroll-top,#pg-dark,#pg-top,#ra-btn,#ra-tip,#darkToggle{display:none!important}
 {% endunless %}</style>
