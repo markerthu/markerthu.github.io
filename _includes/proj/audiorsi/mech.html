@@ -1,0 +1,175 @@
+<script>
+(function(){
+  var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hasIO='IntersectionObserver' in window;
+  function clamp(x){return x<0?0:x>1?1:x;}
+  function ease(x){x=clamp(x);return x*x*(3-2*x);}
+  function seg(t,a,b){return clamp((t-a)/(b-a));}
+  function f1(v){return (Math.round(v*10)/10).toFixed(1);}
+  function qa(el,s){return [].slice.call(el.querySelectorAll(s));}
+
+  /* a looping figure: plays while on screen, restarts from the beginning on every re-entry */
+  function loop(host,T,FINAL,draw,key){
+    var raf=0,t0=0,vis=false, qt=new RegExp('[?&]'+key+'=([\\d.]+)').exec(location.search), fixedM=qt?parseFloat(qt[1]):null;
+    if(fixedM!=null){draw(Math.min(fixedM,T-0.01));return {redraw:function(){draw(Math.min(fixedM,T-0.01));}};}
+    function frame(now){raf=0;if(!vis||document.hidden)return;if(!t0)t0=now;var e=(now-t0)/1000;if(e>=T){t0=now;e=0;}draw(e);raf=requestAnimationFrame(frame);}
+    function start(){if(reduced){draw(FINAL);return;}if(!raf&&vis&&!document.hidden){raf=requestAnimationFrame(frame);}}
+    if(reduced||!hasIO){vis=true;draw(FINAL);if(!reduced&&!hasIO)start();return {redraw:function(){draw(FINAL);}};}
+    draw(0);
+    new IntersectionObserver(function(es){es.forEach(function(e){var was=vis;vis=e.isIntersecting;if(vis&&!was){t0=0;start();}if(!vis&&raf){cancelAnimationFrame(raf);raf=0;}});},{threshold:0.2}).observe(host);
+    document.addEventListener('visibilitychange',function(){if(!document.hidden)start();});
+    return {redraw:function(){if(!raf)draw(vis?0:0);}};
+  }
+
+  /* ---------- The idea: a frozen teacher vs. a teacher that is the student ---------- */
+  (function(){
+    var fig=document.getElementById('ch-idea'); if(!fig) return;
+    var hosts=qa(fig,'.cst-draw'); if(hosts.length!==2) return;
+    var HK=[1/6,2/6,3/6,4/6,5/6], P=[];
+    function sF(x){return 0.1+0.52*(1-Math.exp(-x*3.4));}
+    function sR(x){return 0.1+0.74*(1-Math.exp(-2.1*x))/(1-Math.exp(-2.1));}
+    function build(host,rec){
+      var W=Math.max(280,Math.min(520,Math.round(host.clientWidth))), H=236, L=14, R=W-16, B=H-44, Tp=34;
+      var X=function(x){return L+(R-L)*x;}, Y=function(v){return B-(B-Tp)*v;};
+      var s='<line class="base" x1="'+L+'" x2="'+R+'" y1="'+B+'" y2="'+B+'"/>';
+      s+='<text class="lb" x="'+L+'" y="18">how well it reasons</text><text class="lb sch" x="'+R+'" y="18" text-anchor="end">schematic</text>';
+      s+='<text class="lb" x="'+R+'" y="'+(B+18)+'" text-anchor="end">training</text>';
+      if(rec)HK.forEach(function(h){s+='<line class="hk" x1="'+X(h)+'" x2="'+X(h)+'" y1="'+B+'" y2="'+(B+5)+'"/>';});
+      s+='<path class="sarea"/><path class="tline"/><path class="sline"/><circle class="sdot" r="4.5"/><circle class="pulse" r="9"/>';
+      s+='<text class="lb tlab"></text><text class="lb slab"></text>';
+      if(rec)s+='<text class="lb hlab" x="'+L+'" y="'+(B+18)+'">a handover every 200 steps</text>';
+      host.innerHTML='<svg viewBox="0 0 '+W+' '+H+'" aria-hidden="true">'+s+'</svg>';
+      var g=function(c){return host.querySelector('.'+c);};
+      return {rec:rec,X:X,Y:Y,W:W,L:L,R:R,B:B,t:g('tline'),a:g('sarea'),s:g('sline'),d:g('sdot'),p:g('pulse'),tl:g('tlab'),sl:g('slab'),hk:qa(host,'.hk')};
+    }
+    function setup(){P=[build(hosts[0],false),build(hosts[1],true)];}
+    var RUN=7, HOLD=3.4, OUT=0.6, T=RUN+HOLD+OUT;
+    function draw(t){
+      var px=ease(seg(t,0.4,RUN)), fade=1-seg(t,RUN+HOLD,T);
+      P.forEach(function(p){
+        var n=64, d='', da='', i, x, y, f=p.rec?sR:sF;
+        for(i=0;i<=n;i++){x=px*i/n;y=p.Y(f(x));d+=(i?'L':'M')+p.X(x).toFixed(1)+' '+y.toFixed(1);}
+        da=d+'L'+p.X(px).toFixed(1)+' '+p.B+'L'+p.X(0)+' '+p.B+'Z';
+        p.s.setAttribute('d',d);p.a.setAttribute('d',da);
+        var ex=p.X(px), ey=p.Y(f(px));
+        p.d.setAttribute('cx',ex.toFixed(1));p.d.setAttribute('cy',ey.toFixed(1));
+        var td='', lvl, pulse=0, k=-1;
+        if(!p.rec){lvl=0.55;td='M'+p.X(0)+' '+p.Y(lvl)+'H'+p.R;}
+        else{
+          lvl=f(0);td='M'+p.X(0)+' '+p.Y(lvl);
+          HK.forEach(function(h,j){if(px>=h){var nl=f(h),u=ease(seg(px,h,h+0.035));td+='H'+p.X(h).toFixed(1)+'V'+p.Y(lvl+(nl-lvl)*u).toFixed(1);lvl=lvl+(nl-lvl)*u;k=j;
+            var since=(px-h)/0.06;if(since<1)pulse=Math.max(pulse,1-since);}});
+          td+='H'+p.X(px).toFixed(1);
+          p.hk.forEach(function(e,j){e.classList.toggle('on',j<=k);});
+        }
+        p.t.setAttribute('d',td);
+        if(p.rec&&k>=0){var hx=p.X(HK[k]),hy=p.Y(f(HK[k]));p.p.setAttribute('cx',hx);p.p.setAttribute('cy',hy);p.p.style.opacity=(pulse*0.9).toFixed(2);p.p.setAttribute('r',(6+10*(1-pulse)).toFixed(1));}
+        else p.p.style.opacity=0;
+        var tlY=p.rec?p.Y(f(HK[0]))+20:p.Y(0.55)-8;
+        p.tl.setAttribute('x',p.rec?p.X(HK[0])+6:p.L);p.tl.setAttribute('y',tlY.toFixed(1));
+        p.tl.setAttribute('text-anchor','start');
+        p.tl.textContent=p.rec?'its own teacher':'the teacher, frozen';
+        p.tl.style.opacity=p.rec?(px>HK[0]+0.02?1:0):1;
+        var near=px>0.62;
+        /* the frozen run's label sits right of the dot while the curve still climbs, so it never crosses the line */
+        var lft=ex<p.L+(p.R-p.L)*0.3||(!p.rec&&!near);
+        p.sl.setAttribute('x',(lft?ex+10:ex-8).toFixed(1));p.sl.setAttribute('y',(p.rec?ey-12:(lft?ey+18:ey+24)).toFixed(1));p.sl.setAttribute('text-anchor',lft?'start':'end');
+        p.sl.textContent=p.rec?(near?'it keeps rising':'the student'):(near?'the student stalls':'the student');
+        [p.s,p.a,p.d,p.sl].forEach(function(e){e.style.opacity=fade;});
+        p.t.style.opacity=p.rec?fade:1;p.tl.style.opacity=String(Number(p.tl.style.opacity)*(p.rec?fade:1));
+      });
+      var done=t>RUN-0.2&&t<RUN+HOLD;
+      fig.classList.toggle('done',done||reduced);
+    }
+    setup();
+    var lp=loop(fig,T,RUN+0.1,draw,'mi');
+    var lw=fig.clientWidth;
+    window.addEventListener('resize',function(){if(Math.abs(fig.clientWidth-lw)<30)return;lw=fig.clientWidth;setup();draw(reduced?RUN+0.1:RUN+0.1);});
+  })();
+
+  /* ---------- How it works: one step of AudioRSI, for one question ---------- */
+  (function(){
+    var host=document.getElementById('ch-step'); if(!host) return;
+    var K=8, OK=[1,1,0,1,1,1,0,1], Q=[0.9,0.62,0.22,0.74,0.56,0.86,0.12,0.4];
+    var V=[], PAIRS=[], a, b;
+    for(a=0;a<K;a++){V.push([]);for(b=0;b<K;b++)V[a].push(null);}
+    for(a=0;a<K;a++)for(b=a+1;b<K;b++){var d=Q[a]-Q[b], r=d>0.07?1:d<-0.07?0:0.5;V[a][b]=r;V[b][a]=1-r;PAIRS.push([a,b]);}
+    var rnd=(function(){var s=20261027;return function(){s=(s*1664525+1013904223)%4294967296;return s/4294967296;};})();
+    for(a=PAIRS.length-1;a>0;a--){b=Math.floor(rnd()*(a+1));var tmp=PAIRS[a];PAIRS[a]=PAIRS[b];PAIRS[b]=tmp;}
+    var PS=[]; PAIRS.forEach(function(p,i){PS.push(1.4+i*0.2);});
+    var SC=[], TOT=[], mean=0;
+    for(a=0;a<K;a++){var w=0;for(b=0;b<K;b++)if(b!==a)w+=V[a][b];SC.push(w/(K-1));TOT.push(OK[a]+w/(K-1));mean+=TOT[a]/K;}
+    var E=null, T=15.2, FIN=12.6;
+    function build(){
+      var cw=Math.max(300,Math.round(host.clientWidth)), small=cw<600;
+      var W=small?cw:Math.min(cw,860), g;
+      if(small){var c=Math.min(30,Math.floor((W-54)/8));g={chip:32,cr:Math.min(9,c/2-3),m0:54,c:c,hy:20,y0:72};g.mw=c*K;g.bar0=30;g.u=(W-30-28)/2;g.bpt=24;g.by0=g.y0+K*c+92;}
+      else{g={chip:96,cr:10,m0:132,c:30,hy:24,y0:78};g.mw=g.c*K;g.bar0=g.m0+g.mw+46;g.u=(W-g.bar0-40)/2;g.bpt=g.c;g.by0=g.y0;}
+      g.pt=g.c;
+      var BY=function(a){return g.by0+a*g.bpt+g.bpt/2;};
+      var bEnd=g.by0+K*g.bpt, H=bEnd+(small?100:74), s='';
+      s+='<text class="t-ink mid" x="'+g.chip+'" y="'+g.hy+'" text-anchor="middle">'+(small?'answer':'its answer')+'</text>';
+      s+='<text class="t-ink mid" x="'+(g.m0+g.mw/2)+'" y="'+g.hy+'" text-anchor="middle">every pair, judged</text>';
+      s+='<text class="sm" x="'+(g.m0+g.mw/2)+'" y="'+(g.hy+19)+'" text-anchor="middle">'+(small?'by its teacher, hearing the audio':'by its own teacher, hearing the audio')+'</text>';
+      var rh=small?g.by0-44:g.hy;
+      s+='<text class="t-ink mid" x="'+g.bar0+'" y="'+rh+'">its reward</text>';
+      s+='<text class="sm" x="'+g.bar0+'" y="'+(rh+19)+'">answer + share of pairs won</text>';
+      for(b=0;b<K;b++)s+='<text class="sm colh" x="'+(g.m0+b*g.c+g.c/2)+'" y="'+(g.y0-8)+'" text-anchor="middle">'+(b+1)+'</text>';
+      for(a=0;a<K;a++){
+        var y=g.y0+a*g.pt+g.pt/2, yb=BY(a);
+        s+='<rect class="rowhl" x="'+(g.m0-2)+'" y="'+(y-g.pt/2+1)+'" width="'+(g.mw+4)+'" height="'+(g.pt-2)+'" rx="6"/>';
+        s+='<text class="rowl" x="'+(small?8:0)+'" y="'+(y+5)+'" text-anchor="'+(small?'middle':'start')+'">'+(small?'':'path ')+(a+1)+'</text>';
+        if(small)s+='<text class="sm" x="8" y="'+(yb+5)+'" text-anchor="middle">'+(a+1)+'</text>';
+        s+='<g class="chip"><circle cx="'+g.chip+'" cy="'+y+'" r="'+g.cr+'" class="'+(OK[a]?'d-ice':'d-peach')+'"/>'+
+          (OK[a]?'<path class="ck" d="M'+(g.chip-g.cr*0.42)+' '+y+'l'+(g.cr*0.3)+' '+(g.cr*0.32)+'l'+(g.cr*0.56)+' '+(-g.cr*0.62)+'"/>':'<path class="cx" d="M'+(g.chip-g.cr*0.36)+' '+(y-g.cr*0.36)+'l'+(g.cr*0.72)+' '+(g.cr*0.72)+'M'+(g.chip+g.cr*0.36)+' '+(y-g.cr*0.36)+'l'+(-g.cr*0.72)+' '+(g.cr*0.72)+'"/>')+'</g>';
+        for(b=0;b<K;b++){
+          var cx=g.m0+b*g.c+1.5, cy=g.y0+a*g.pt+1.5, cs=g.c-3;
+          if(a===b)s+='<rect class="diag" x="'+cx+'" y="'+cy+'" width="'+cs+'" height="'+cs+'" rx="4"/>';
+          else s+='<rect class="cell" data-a="'+a+'" data-b="'+b+'" x="'+cx+'" y="'+cy+'" width="'+cs+'" height="'+cs+'" rx="4"/>';
+        }
+        s+='<rect class="bo d-ice" x="'+g.bar0+'" y="'+(yb-6)+'" width="0" height="12" rx="3"/>';
+        s+='<rect class="bs d-mint" x="'+g.bar0+'" y="'+(yb-6)+'" width="0" height="12" rx="3"/>';
+        s+='<text class="sg" x="0" y="'+(yb+6)+'"></text>';
+      }
+      s+='<line class="track" x1="'+g.bar0+'" x2="'+g.bar0+'" y1="'+(g.by0-2)+'" y2="'+(bEnd+2)+'"/>';
+      var mx=g.bar0+g.u*mean;
+      s+='<g class="meang"><line class="mean" x1="'+mx+'" x2="'+mx+'" y1="'+(g.by0-4)+'" y2="'+(bEnd+6)+'"/><text class="sm" x="'+mx+'" y="'+(bEnd+22)+'" text-anchor="middle">group average</text></g>';
+      var ky=bEnd+(small?54:50), kx=small?0:g.m0, sw=12;
+      [['k-win','win 1'],['k-tie','tie 0.5'],['k-lose','lose 0']].forEach(function(k,i){var x=kx+i*(small?84:86);s+='<rect class="'+k[0]+'" x="'+x+'" y="'+(ky-10)+'" width="'+sw+'" height="'+sw+'" rx="3"/><text class="sm" x="'+(x+sw+6)+'" y="'+ky+'">'+k[1]+'</text>';});
+      var lx=small?0:g.bar0, ly2=small?ky+26:ky;
+      s+='<rect class="d-ice" x="'+lx+'" y="'+(ly2-10)+'" width="12" height="12" rx="3"/><text class="sm" x="'+(lx+18)+'" y="'+ly2+'">right answer</text>';
+      s+='<rect class="d-mint" x="'+(lx+120)+'" y="'+(ly2-10)+'" width="12" height="12" rx="3"/><text class="sm" x="'+(lx+138)+'" y="'+ly2+'">pairs won</text>';
+      host.innerHTML='<svg viewBox="0 0 '+W+' '+H+'" style="max-width:'+W+'px">'+s+'</svg>';
+      var cells={};qa(host,'.cell').forEach(function(c){cells[c.getAttribute('data-a')+'_'+c.getAttribute('data-b')]=c;});
+      E={g:g,cells:cells,rowhl:qa(host,'.rowhl'),rowl:qa(host,'.rowl'),chips:qa(host,'.chip'),bo:qa(host,'.bo'),bs:qa(host,'.bs'),sg:qa(host,'.sg'),meang:host.querySelector('.meang'),colh:qa(host,'.colh')};
+    }
+    function draw(t){
+      if(!E) return; var g=E.g, out=1-seg(t,14.4,15.1), i, cur=-1;
+      for(i=0;i<PAIRS.length;i++){if(t>=PS[i]&&t<PS[i]+0.2){cur=i;break;}}
+      for(a=0;a<K;a++){
+        var ca=ease(seg(t,0.2+a*0.1,0.6+a*0.1));E.chips[a].style.opacity=(ca*out).toFixed(2);
+        var hl=cur>=0&&(PAIRS[cur][0]===a||PAIRS[cur][1]===a);
+        E.rowhl[a].style.opacity=hl?1:0;E.rowl[a].classList.toggle('on',hl);
+        E.bo[a].setAttribute('width',(g.u*OK[a]*ease(seg(t,7.6+a*0.06,8.3+a*0.06))*out).toFixed(1));
+        E.bs[a].setAttribute('x',(g.bar0+g.u*OK[a]).toFixed(1));
+        E.bs[a].setAttribute('width',(g.u*SC[a]*ease(seg(t,8.6+a*0.06,9.4+a*0.06))*out).toFixed(1));
+        var sx=g.bar0+g.u*TOT[a]+8, up=TOT[a]>mean;
+        E.sg[a].setAttribute('x',sx.toFixed(1));E.sg[a].textContent=up?'+':'−';
+        E.sg[a].setAttribute('class','sg '+(up?'t-mint':'t-peach'));
+        E.sg[a].style.opacity=(seg(t,10.6+a*0.07,10.9+a*0.07)*out).toFixed(2);
+      }
+      PAIRS.forEach(function(p,j){
+        var f=seg(t,PS[j]+0.08,PS[j]+0.18)*out;
+        [[p[0],p[1]],[p[1],p[0]]].forEach(function(q){var c=E.cells[q[0]+'_'+q[1]], v=V[q[0]][q[1]];
+          c.setAttribute('class','cell '+(f>0.5?(v===1?'k-win':v===0?'k-lose':'k-tie'):''));});
+      });
+      E.colh.forEach(function(c,k){c.classList.toggle('on',cur>=0&&(PAIRS[cur][0]===k||PAIRS[cur][1]===k));});
+      E.meang.style.opacity=(seg(t,10.0,10.5)*out).toFixed(2);
+    }
+    build();
+    loop(host,T,FIN,draw,'ms');
+    var lw=host.clientWidth;
+    window.addEventListener('resize',function(){if(Math.abs(host.clientWidth-lw)<30)return;lw=host.clientWidth;build();draw(FIN);});
+  })();
+})();
+</script>

@@ -1,0 +1,186 @@
+<script>
+(function(){
+  var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $=function(s,r){return (r||document).querySelector(s);}, $$=function(s,r){return [].slice.call((r||document).querySelectorAll(s));};
+  var hasIO='IntersectionObserver' in window;
+  if(reduced||!hasIO) document.body.classList.add('no-anim');
+  function setLens(root){$$('.draw',root).forEach(function(p){try{p.style.setProperty('--len',Math.ceil(p.getTotalLength())+2);}catch(e){}});}
+  function mm(q){return !!(window.matchMedia&&window.matchMedia(q).matches);}
+  function svg(W,H,s,mw){return '<svg viewBox="0 0 '+W+' '+H+'"'+(mw?' style="max-width:'+W+'px;margin:0 auto"':'')+'>'+s+'</svg>';}
+  function pct(v,d){return v.toFixed(d)+'%';}
+
+  /* Finding 02: the student surpasses its teacher, then becomes it */
+  function teacher(el){
+    var cw=el.clientWidth, small=cw<640, W=small?Math.round(Math.max(320,Math.min(cw,600))):Math.round(Math.min(Math.max(640,cw),900)), H=small?392:380;
+    var m={l:small?44:62,r:small?14:40,t:small?66:62,b:small?118:96};
+    var lo=73.8, hi=76.6, P=[[74.60,'d-ice','t-ice'],[75.10,'d-lav','t-lav'],[76.10,'d-mint','t-mint']];
+    var X=function(i){return m.l+(W-m.l-m.r)*(small?[0.12,0.5,0.88][i]:[0.13,0.5,0.87][i]);}, Y=function(v){return m.t+(H-m.t-m.b)*(1-(v-lo)/(hi-lo));};
+    var s='<text x="0" y="18" class="t-ink mid">Accuracy on MMAU test-mini</text>';
+    [74,74.5,75,75.5,76,76.5].forEach(function(v){s+='<line class="grid" x1="'+m.l+'" x2="'+(W-m.r)+'" y1="'+Y(v)+'" y2="'+Y(v)+'"/>';if(v%1===0)s+='<text x="'+(m.l-10)+'" y="'+(Y(v)+4)+'" text-anchor="end">'+v+'%</text>';});
+    s+='<line class="fade" style="--d:.2s" x1="'+m.l+'" x2="'+(W-m.r)+'" y1="'+Y(74.6)+'" y2="'+Y(74.6)+'" stroke="var(--ice-e)" stroke-width="1.4" stroke-dasharray="4 5"/>';
+    s+='<text class="t-ice fade sm" style="--d:.3s" x="'+(W-m.r)+'" y="'+(Y(74.6)+20)+'" text-anchor="end">'+(small?'the frozen teacher':'the frozen teacher&rsquo;s own score')+'</text>';
+    var d='M'+X(0)+' '+Y(P[0][0])+'H'+X(1)+'V'+Y(P[1][0])+'H'+X(2)+'V'+Y(P[2][0]);
+    s+='<path class="l-mint draw" style="--d:.35s" d="'+d+'"/>';
+    P.forEach(function(p,i){var x=X(i),y=Y(p[0]),dl=(0.3+i*0.6)+'s';
+      if(i===2)s+='<circle class="pop" style="--d:'+dl+'" cx="'+x+'" cy="'+y+'" r="18" fill="var(--mint-l)"/>';
+      s+='<circle class="'+p[1]+' pop" style="--d:'+dl+'" cx="'+x+'" cy="'+y+'" r="'+(i===2?8.5:7)+'"/>';
+      s+='<text class="'+p[2]+' fade '+(i===2?'big':'mid')+'" style="--d:'+(0.5+i*0.6)+'s" x="'+x+'" y="'+(y-(i===2?24:16))+'" text-anchor="middle">'+pct(p[0],2)+'</text>';});
+    var lab=small?[['Ke-Omni-R','the frozen','teacher'],['its student','trained by','that teacher'],['AudioRSI','its own','teacher']]
+                 :[['Ke-Omni-R','the teacher: outcome-only RL',''],['its student','trained with Ke-Omni-R as','a frozen judge'],['AudioRSI','the student becomes','the teacher']];
+    var yb=H-m.b;
+    s+='<line class="ax" x1="'+m.l+'" x2="'+(W-m.r)+'" y1="'+yb+'" y2="'+yb+'"/>';
+    lab.forEach(function(l,i){var x=X(i);
+      s+='<text x="'+x+'" y="'+(yb+26)+'" text-anchor="middle" class="'+(i===2?'t-ink mid':'t-ink')+'" style="font-weight:'+(i===2?600:500)+'">'+l[0]+'</text>';
+      s+='<text x="'+x+'" y="'+(yb+46)+'" text-anchor="middle" class="sm">'+l[1]+'</text>';
+      if(l[2])s+='<text x="'+x+'" y="'+(yb+64)+'" text-anchor="middle" class="sm">'+l[2]+'</text>';});
+    el.innerHTML=svg(W,H,s,!small);setLens(el);
+  }
+
+  /* Finding 03: accuracy during training, frozen judge vs. recursive teacher (redrawn from the paper's figure) */
+  var OURS=[65.2,69.9,67.7,71.0,70.4,72.0,73.7,74.3,74.7,75.0,74.9,75.7,75.6,75.3,75.9,76.3,76.1];
+  var FROZ=[65.2,67.4,70.2,70.7,70.6,71.3,72.1,71.8,72.2,73.6,73.4,73.5,74.6,75.2,75.2,74.9,75.1];
+  function curve(el){
+    var cw=el.clientWidth, small=cw<520, W=Math.round(Math.max(320,Math.min(cw,780))), H=small?366:380;
+    var m={l:46,r:small?12:16,t:small?96:84,b:52};
+    var X=function(s){return m.l+(W-m.l-m.r)*s/6400;}, Y=function(v){return m.t+(H-m.t-m.b)*(1-(v-64)/(77-64));};
+    var s='<text x="0" y="18" class="t-ink mid">Accuracy during training</text>';
+    s+='<rect class="fade" style="--d:.1s" x="'+X(3200)+'" y="'+m.t+'" width="'+(X(6400)-X(3200))+'" height="'+(H-m.t-m.b)+'" fill="var(--mint-l)" rx="6"/>';
+    [64,66,68,70,72,74,76].forEach(function(v){s+='<line class="grid" x1="'+m.l+'" x2="'+(W-m.r)+'" y1="'+Y(v)+'" y2="'+Y(v)+'"/><text x="'+(m.l-8)+'" y="'+(Y(v)+4)+'" text-anchor="end">'+v+'%</text>';});
+    [0,1000,2000,3000,4000,5000,6000].forEach(function(st){if(small&&st%2000)return;s+='<text x="'+X(st)+'" y="'+(H-m.b+20)+'" text-anchor="middle">'+(st?st/1000+'k':'0')+'</text>';});
+    s+='<text x="'+(W-m.r)+'" y="'+(H-6)+'" text-anchor="end" class="sm">training step</text>';
+    if(small)s+='<text class="t-mint fade sm" style="--d:.2s;font-weight:600" x="'+((X(3200)+X(6400))/2)+'" y="'+(Y(64)-24)+'" text-anchor="middle">second half:</text><text class="t-mint fade sm" style="--d:.2s;font-weight:600" x="'+((X(3200)+X(6400))/2)+'" y="'+(Y(64)-8)+'" text-anchor="middle">always ahead</text>';
+    else s+='<text class="t-mint fade sm" style="--d:.2s;font-weight:600" x="'+((X(3200)+X(6400))/2)+'" y="'+(Y(64)-10)+'" text-anchor="middle">second half: ahead at every checkpoint</text>';
+    function path(a){var d='';a.forEach(function(v,i){d+=(i?'L':'M')+X(i*400).toFixed(1)+' '+Y(v).toFixed(1);});return d;}
+    s+='<path class="draw" style="--d:.3s" d="'+path(FROZ)+'" fill="none" stroke="var(--peach-e)" stroke-width="2" stroke-dasharray="none" stroke-linejoin="round"/>';
+    s+='<path class="l-mint draw" style="--d:.5s" d="'+path(OURS)+'"/>';
+    FROZ.forEach(function(v,i){s+='<rect class="pop" style="--d:'+(0.4+i*0.09).toFixed(2)+'s" x="'+(X(i*400)-3).toFixed(1)+'" y="'+(Y(v)-3).toFixed(1)+'" width="6" height="6" rx="1" fill="var(--peach)" stroke="var(--peach-e)" stroke-width="1.2"/>';});
+    OURS.forEach(function(v,i){s+='<circle class="pop" style="--d:'+(0.6+i*0.09).toFixed(2)+'s" cx="'+X(i*400).toFixed(1)+'" cy="'+Y(v).toFixed(1)+'" r="'+(i===0?4.5:3.6)+'" fill="var(--card)" stroke="var(--mint-e)" stroke-width="1.8"/>';});
+    s+='<text class="fade sm" style="--d:.3s" x="'+(X(0)+10)+'" y="'+(Y(65.2)+18)+'">both start at 65.2%</text>';
+    var ly=small?40:44;
+    s+='<line x1="0" x2="24" y1="'+(ly-5)+'" y2="'+(ly-5)+'" class="l-mint"/><text x="32" y="'+ly+'" class="t-ink" style="font-weight:600">AudioRSI: the student keeps becoming the teacher</text>';
+    var ly2=small?ly+24:ly+24;
+    s+='<line x1="0" x2="24" y1="'+(ly2-5)+'" y2="'+(ly2-5)+'" stroke="var(--peach-e)" stroke-width="2"/><text x="32" y="'+ly2+'">'+(small?'a frozen judge (Ke-Omni-R)':'the same recipe with a frozen judge (Ke-Omni-R)')+'</text>';
+    if(small)s=s.replace('AudioRSI: the student keeps becoming the teacher','AudioRSI, its own teacher');
+    el.innerHTML=svg(W,H,s);setLens(el);
+  }
+
+  /* Finding 03: how often to hand over */
+  function period(el){
+    var cw=el.clientWidth, W=Math.round(Math.max(300,Math.min(cw,440))), H=380;
+    var m={l:46,r:14,t:84,b:52}, T=[50,100,200,500,1000], V=[74.60,75.60,76.10,76.00,75.10];
+    var X=function(i){return m.l+(W-m.l-m.r)*(0.1+0.8*i/4);}, Y=function(v){return m.t+(H-m.t-m.b)*(1-(v-74.1)/(76.6-74.1));};
+    var s='<text x="0" y="18" class="t-ink mid">How often it hands over</text><text x="0" y="38" class="sm">MMAU test-mini, total accuracy</text>';
+    [74.5,75,75.5,76,76.5].forEach(function(v){s+='<line class="grid" x1="'+m.l+'" x2="'+(W-m.r)+'" y1="'+Y(v)+'" y2="'+Y(v)+'"/>';if(v%1===0)s+='<text x="'+(m.l-8)+'" y="'+(Y(v)+4)+'" text-anchor="end">'+v+'%</text>';});
+    s+='<line class="fade" x1="'+m.l+'" x2="'+(W-m.r)+'" y1="'+Y(74.6)+'" y2="'+Y(74.6)+'" stroke="var(--faint)" stroke-width="1.3" stroke-dasharray="4 5"/>';
+    s+='<line class="fade" x1="'+m.l+'" x2="'+(W-m.r)+'" y1="'+Y(75.1)+'" y2="'+Y(75.1)+'" stroke="var(--peach-e)" stroke-width="1.3" stroke-dasharray="4 5"/>';
+    s+='<line x1="0" x2="22" y1="58" y2="58" stroke="var(--faint)" stroke-width="1.3" stroke-dasharray="4 5"/><text class="sm" x="28" y="62">outcome only</text>';
+    s+='<line x1="132" x2="154" y1="58" y2="58" stroke="var(--peach-e)" stroke-width="1.3" stroke-dasharray="4 5"/><text class="sm t-peach" x="160" y="62">frozen judge</text>';
+    var d='';V.forEach(function(v,i){d+=(i?'L':'M')+X(i)+' '+Y(v);});
+    s+='<path class="draw" style="--d:.3s" d="'+d+'" fill="none" stroke="var(--ice-e)" stroke-width="2" stroke-linejoin="round"/>';
+    V.forEach(function(v,i){var x=X(i),y=Y(v),dl=(0.35+i*0.22)+'s',win=i===2;
+      if(win)s+='<circle class="pop" style="--d:'+dl+'" cx="'+x+'" cy="'+y+'" r="16" fill="var(--mint-l)"/>';
+      s+='<circle class="'+(win?'d-mint':'d-ice')+' pop" style="--d:'+dl+'" cx="'+x+'" cy="'+y+'" r="'+(win?7.5:5.5)+'"/>';
+      var below=(i===0||i===4);
+      s+='<text class="'+(win?'t-mint mid':'t-ice')+' fade" style="--d:'+(0.5+i*0.22)+'s" x="'+x+'" y="'+(below?y+24:y-(win?22:13))+'" text-anchor="middle">'+v.toFixed(2)+'</text>';
+      s+='<text x="'+x+'" y="'+(H-m.b+22)+'" text-anchor="middle" class="'+(win?'t-ink mid':'')+'">'+(T[i]===1000?'1,000':T[i])+'</text>';});
+    s+='<text x="'+(W-m.r)+'" y="'+(H-6)+'" text-anchor="end" class="sm">steps between handovers</text>';
+    el.innerHTML=svg(W,H,s);setLens(el);
+  }
+
+  /* Finding 04: four benchmarks it never trained on */
+  var BENCH=[
+    {t:'MMAU test-mini',s:'total accuracy, the paper’s main table',ss:['total accuracy,','the paper’s main table'],lo:60,hi:78,ticks:[60,65,70,75],tk:[60,70],d:2,rows:[['AudioRSI',76.10],['Omni-R1 (AVQA)',75.8,1],['Ke-Omni-R',74.60],['Audio Flamingo 3',73.30],['Gemini 2.5 Flash',71.80],['Gemini 2.5 Pro',71.60],['Qwen2.5-Omni-7B',71.5,1],['GPT-4o Audio',62.50]]},
+    {t:'MMAU-Pro, Multi-Audio',s:'its hardest split: one question, several recordings',ss:['its hardest split:','one question, several recordings'],lo:15,hi:40,ticks:[20,25,30,35,40],tk:[20,30,40],d:1,rows:[['AudioRSI',37.9],['Ke-Omni-R',35.6],['GPT-4o Audio',32.6],['Gemini 2.0 Flash',26.5],['Audio Flamingo 3',26.0],['Qwen2.5-Omni-7B',24.3],['Gemini 2.5 Flash',21.2]]},
+    {t:'MMSU',s:'overall accuracy',ss:['overall accuracy'],lo:54,hi:64,ticks:[55,60],tk:[55,60],d:2,rows:[['AudioRSI',62.52],['Audio Flamingo 3',62.30],['Ke-Omni-R',62.08],['Gemini 1.5 Pro',60.68],['Qwen2.5-Omni-7B',60.57],['Kimi-Audio',59.28],['MiniCPM-O',56.53],['GPT-4o Audio',56.38]]},
+    {t:'MMAR',s:'overall, 7B open models without an external reward model',ss:['overall, 7B open models','without an external reward model'],lo:54,hi:66,ticks:[55,60,65],tk:[55,60,65],d:1,rows:[['AudioRSI',64.0],['Omni-R1 (VGGS-GPT)',63.4],['Omni-R1 (AVQA)',61.2],['Ke-Omni-R',60.9],['Qwen2.5-Omni-7B',56.7]]}
+  ];
+  function bench(el){
+    var cards=$$('.bm',el); if(!cards.length){el.innerHTML=BENCH.map(function(){return '<div class="bm"></div>';}).join('');cards=$$('.bm',el);}
+    cards.forEach(function(c,k){
+      var b=BENCH[k], cw=c.clientWidth||300, W=Math.round(Math.max(290,Math.min(cw,560))), nar=W<420, lw=nar?140:156, pt=30, y0=nar?96:78;
+      var H=y0+b.rows.length*pt+30, x0=lw+8, x1=W-58;
+      var X=function(v){return x0+(x1-x0)*(v-b.lo)/(b.hi-b.lo);};
+      var s='<text x="0" y="18" class="t-ink mid">'+b.t+'</text>';
+      (nar?b.ss:[b.s]).forEach(function(l,i){s+='<text x="0" y="'+(40+i*18)+'" class="sm">'+l+'</text>';});
+      var yl=y0+b.rows.length*pt-pt/2+4;
+      ((x1-x0)<240?b.tk:b.ticks).forEach(function(v){s+='<line class="grid" x1="'+X(v)+'" x2="'+X(v)+'" y1="'+(y0-14)+'" y2="'+yl+'"/><text class="sm" x="'+X(v)+'" y="'+(yl+20)+'" text-anchor="middle">'+v+'%</text>';});
+      b.rows.forEach(function(r,i){var y=y0+i*pt, me=r[0]==='AudioRSI', x=X(r[1]), dl=(0.15+i*0.12).toFixed(2)+'s', dx=(X(b.lo)-x).toFixed(1);
+        if(me)s+='<rect x="-4" y="'+(y-pt/2+2)+'" width="'+(W+4)+'" height="'+(pt-4)+'" rx="8" fill="var(--mint-l)" class="fade"/>';
+        s+='<text x="0" y="'+(y+5)+'" class="'+(me?'t-ink mid':'')+'">'+r[0]+'</text>';
+        s+='<line x1="'+x0+'" x2="'+x1+'" y1="'+y+'" y2="'+y+'" stroke="var(--rule)" stroke-width="1"/>';
+        s+='<g class="slide" style="--d:'+dl+';--dx:'+dx+'px"><circle cx="'+x.toFixed(1)+'" cy="'+y+'" r="'+(me?7:5.5)+'" class="'+(me?'d-mint':'dot-o')+'"/></g>';
+        s+='<text class="fade halo'+(me?' on-mint t-mint mid':' sm')+'" style="--d:'+(0.5+i*0.12).toFixed(2)+'s" x="'+(x+12).toFixed(1)+'" y="'+(y+5)+'">'+r[1].toFixed(r[2]?1:b.d)+'</text>';});
+      c.innerHTML=svg(W,H,s);
+    });
+  }
+
+  /* Why it matters: behaviors no reward asked for */
+  var BEH=[['Premise & deduction',94.4,62.7,53.3],['Evidential support',29.7,19.1,17.4],['Explicit justification',22.2,3.5,3.2],['Sequential organization',22.3,17.4,13.3],['Comparative analysis',21.0,19.8,14.2]];
+  function behave(el){
+    var cw=el.clientWidth, small=cw<520, W=Math.round(Math.max(310,Math.min(cw,720))), pt=small?90:86, y0=small?100:80;
+    var H=y0+BEH.length*pt+8, x0=0, x1=W-62, X=function(v){return x0+(x1-x0)*v/100;};
+    var s='<text x="0" y="18" class="t-ink mid">Share of 1,000 reasoning paths that show each behavior</text>';
+    var key=[['AudioRSI','d-mint'],['Ke-Omni-R','d-ice'],['Qwen2.5-Omni-7B','bar-o']], kx=0, ky=small?44:46;
+    key.forEach(function(k,i){var x=small?0:kx, y=small?ky+i*0:ky; if(small){x=[0,100,200][i];}
+      s+='<rect class="'+k[1]+'" x="'+x+'" y="'+(y-10)+'" width="12" height="12" rx="3"/><text x="'+(x+18)+'" y="'+y+'" class="sm">'+k[0]+'</text>';kx+=[110,110,0][i];});
+    if(small)s=s.replace('Share of 1,000 reasoning paths that show each behavior','Paths showing each behavior');
+    BEH.forEach(function(b,i){var y=y0+i*pt;
+      s+='<text x="0" y="'+y+'" class="t-ink" style="font-weight:600">'+b[0].replace('&','&amp;')+'</text>';
+      [[b[1],'d-mint','t-mint mid'],[b[2],'d-ice','sm'],[b[3],'bar-o','sm']].forEach(function(v,j){var yy=y+12+j*16, w=Math.max(2,X(v[0])-x0);
+        s+='<rect class="'+v[1]+' grow" style="--d:'+(0.2+i*0.12+j*0.05).toFixed(2)+'s" x="'+x0+'" y="'+yy+'" width="'+w.toFixed(1)+'" height="'+(j?9:11)+'" rx="3"/>';
+        s+='<text class="fade '+v[2]+'" style="--d:'+(0.6+i*0.12).toFixed(2)+'s" x="'+(x0+w+8).toFixed(1)+'" y="'+(yy+(j?9:10))+'">'+v[0].toFixed(1)+'%</text>';});
+    });
+    el.innerHTML=svg(W,H,s);
+  }
+  function judge(el){
+    var cw=el.clientWidth, W=Math.round(Math.max(290,Math.min(cw,460))), H=290;
+    var rows=[['against the base model,','Qwen2.5-Omni-7B',81.2,1.0,17.8],['against outcome-only RL,','Ke-Omni-R',74.7,1.2,24.1]];
+    var s='<text x="0" y="18" class="t-ink mid">An outside judge agrees</text><text x="0" y="40" class="sm">GPT-4o Audio, never used in training,</text><text x="0" y="58" class="sm">compares the reasoning on 1,000 questions</text>';
+    rows.forEach(function(r,i){var y=104+i*80, X=function(v){return W*v/100;};
+      s+='<text x="0" y="'+y+'">'+r[0]+' <tspan class="t-ink" style="font-weight:600">'+r[1]+'</tspan></text>';
+      var y2=y+14, a=X(r[2]), b=X(r[3]);
+      s+='<rect class="d-mint grow" style="--d:'+(0.2+i*0.3)+'s" x="0" y="'+y2+'" width="'+a.toFixed(1)+'" height="26" rx="5"/>';
+      s+='<rect class="fade" style="--d:'+(0.9+i*0.3)+'s" x="'+(a+1).toFixed(1)+'" y="'+y2+'" width="'+Math.max(2,b-1).toFixed(1)+'" height="26" fill="var(--hair)"/>';
+      s+='<rect class="d-peach fade" style="--d:'+(0.9+i*0.3)+'s" x="'+(a+b+1).toFixed(1)+'" y="'+y2+'" width="'+(W-a-b-1).toFixed(1)+'" height="26" rx="5"/>';
+      s+='<text class="fade mid" style="--d:'+(0.8+i*0.3)+'s;fill:var(--mint-t)" x="10" y="'+(y2+18)+'">'+r[2].toFixed(1)+'%</text>';
+      s+='<text class="fade t-peach" style="--d:'+(1.1+i*0.3)+'s" x="'+(W-8)+'" y="'+(y2+18)+'" text-anchor="end">'+r[4].toFixed(1)+'%</text>';});
+    s+='<rect class="d-mint" x="0" y="'+(H-36)+'" width="12" height="12" rx="3"/><text class="sm" x="18" y="'+(H-26)+'">prefers AudioRSI</text>';
+    s+='<rect class="d-peach" x="'+(W>340?150:132)+'" y="'+(H-36)+'" width="12" height="12" rx="3"/><text class="sm" x="'+(W>340?168:150)+'" y="'+(H-26)+'">prefers the other</text>';
+    s+='<text class="sm" x="0" y="'+(H-4)+'">ties, grey: 1.0% and 1.2%</text>';
+    el.innerHTML=svg(W,H,s);
+  }
+
+  var charts=[['#ch-teacher',teacher],['#ch-curve',curve],['#ch-period',period],['#ch-bench',bench],['#ch-behave',behave],['#ch-judge',judge]], lastW=0;
+  function build(){charts.forEach(function(c){var el=$(c[0]);if(el)c[1](el);});}
+  build();
+  var rt=0;window.addEventListener('resize',function(){if(Math.abs(window.innerWidth-lastW)<40)return;clearTimeout(rt);rt=setTimeout(function(){lastW=window.innerWidth;build();},180);});
+  lastW=window.innerWidth;
+
+  /* every figure plays when it scrolls into view, and plays again on the next visit */
+  var targets=$$('.reveal,.anim,.replayable');
+  if(reduced||!hasIO){targets.forEach(function(e){e.classList.add('in');});}
+  else{
+    var inIO=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('in');});},{threshold:0.25,rootMargin:'0px 0px -6% 0px'});
+    var outIO=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting&&e.target.classList.contains('in')){e.target.classList.remove('in');e.target.dispatchEvent(new CustomEvent('arsi:reset'));}});},{threshold:0});
+    targets.forEach(function(e){inIO.observe(e);outIO.observe(e);});
+    var pauseIO=new IntersectionObserver(function(es){es.forEach(function(e){e.target.classList.toggle('paused',!e.isIntersecting);});},{threshold:0.02});
+    $$('.pausable').forEach(function(e){e.classList.add('paused');pauseIO.observe(e);});
+  }
+
+  /* its own teacher, typing its verdict */
+  (function(){
+    var box=$('#verdict'); if(!box) return;
+    var out=$('.vt',box), full=out.getAttribute('data-text')||out.textContent, timer=0;
+    function reset(){clearTimeout(timer);out.textContent='';box.classList.remove('typed');}
+    function type(){
+      if(reduced){out.textContent=full;box.classList.add('typed');return;}
+      reset();var i=0;
+      (function tick(){i+=2;out.textContent=full.slice(0,i);if(i<full.length)timer=setTimeout(tick,22);else box.classList.add('typed');})();
+    }
+    out.textContent=full;
+    if(reduced||!hasIO){box.classList.add('typed');return;}
+    reset();
+    new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)type();else reset();});},{threshold:0.45}).observe(box);
+  })();
+})();
+</script>

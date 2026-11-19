@@ -1,0 +1,262 @@
+<script>
+(function(){
+  var cv=document.getElementById('arsi-stage'); if(!cv||!cv.getContext) return;
+  var ctx=cv.getContext('2d'), W=0, H=0, dpr=1, G=null, C=null, sc=1, ox=0, oy=0;
+  var mq=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)'):{matches:false};
+  var steps=[].slice.call(document.querySelectorAll('.stage-steps li'));
+  var T=15.4, FINAL=13.1, cycle=0, visible=true, raf=0, t0=0, lastStep=-1;
+  var qt=/[?&]t=([\d.]+)/.exec(location.search), fixed=qt?parseFloat(qt[1]):null;
+
+  function hex(s){s=s.trim().replace('#','');if(s.length===3)s=s[0]+s[0]+s[1]+s[1]+s[2]+s[2];return [parseInt(s.slice(0,2),16),parseInt(s.slice(2,4),16),parseInt(s.slice(4,6),16)];}
+  function mix(a,b,t){t=t<0?0:t>1?1:t;return [a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t,a[2]+(b[2]-a[2])*t];}
+  function rgba(c,a){a=a==null?1:a<0?0:a>1?1:a;return 'rgba('+(c[0]|0)+','+(c[1]|0)+','+(c[2]|0)+','+a+')';}
+  function clamp(x){return x<0?0:x>1?1:x;}
+  function ease(x){x=clamp(x);return x*x*(3-2*x);}
+  function seg(t,a,b){return clamp((t-a)/(b-a));}
+  function gauss(d,s){return Math.exp(-d*d/(2*s*s));}
+  function colors(){
+    var cs=getComputedStyle(document.body), v=function(n){return hex(cs.getPropertyValue(n));};
+    var fs=parseFloat(getComputedStyle(document.documentElement).fontSize)||16;
+    C={card:v('--card'),ink:v('--ink'),body:v('--body'),muted:v('--muted'),faint:v('--faint'),hair:v('--hair'),rule:v('--rule'),
+       mint:v('--mint'),mintE:v('--mint-e'),mintT:v('--mint-t'),mintL:v('--mint-l'),
+       peach:v('--peach'),peachE:v('--peach-e'),peachT:v('--peach-t'),
+       ice:v('--ice'),iceE:v('--ice-e'),iceT:v('--ice-t'),
+       lav:v('--lav'),lavE:v('--lav-e'),lavT:v('--lav-t'),lavL:v('--lav-l'),
+       dark:document.body.classList.contains('dark-mode'),sans:cs.getPropertyValue('--sans'),
+       fl:Math.round(fs*0.875), ff:Math.round(fs*0.8125)};
+  }
+
+  /* eight reasoning paths: whether each answer is right, and how well each is reasoned (drives the pairwise verdicts) */
+  var K=8, OK=[1,1,0,1,1,1,0,1], Q=[0.9,0.62,0.22,0.74,0.56,0.86,0.12,0.4];
+  var PAIRS=[], a, b;
+  for(a=0;a<K;a++)for(b=a+1;b<K;b++){var d=Q[a]-Q[b];PAIRS.push([a,b,d>0.07?1:d<-0.07?0:0.5]);}
+  var rnd=(function(){var s=20261027;return function(){s=(s*1664525+1013904223)%4294967296;return s/4294967296;};})();
+  for(a=PAIRS.length-1;a>0;a--){b=Math.floor(rnd()*(a+1));var tmp=PAIRS[a];PAIRS[a]=PAIRS[b];PAIRS[b]=tmp;}
+  var PT=[], PD=[], tt=3.9;
+  PAIRS.forEach(function(p,i){var dd=i<3?0.6:0.096;PT.push(tt);PD.push(dd);tt+=dd;});
+  var SL=[], R=[], mean=0;
+  for(a=0;a<K;a++){SL.push([]);}
+  PAIRS.forEach(function(p,i){
+    SL[p[0]][p[1]<p[0]?p[1]:p[1]-1]={p:i,v:p[2]};
+    SL[p[1]][p[0]<p[1]?p[0]:p[0]-1]={p:i,v:1-p[2]};
+  });
+  for(a=0;a<K;a++){var w=0;SL[a].forEach(function(s){w+=s.v;});R.push(OK[a]+w/(K-1));mean+=R[a]/K;}
+  var ADV=R.map(function(r){return r-mean;});
+
+  function layout(){
+    var r=cv.getBoundingClientRect();W=Math.max(280,r.width);H=Math.max(240,r.height);
+    dpr=Math.min(2,window.devicePixelRatio||1);cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);
+    if(W>=620) G={w:780,h:390,wide:1,sx:112,tx:668,n:9,dx:9.5,s:10,k:5,yc:160,hh:112,lift:9,
+      y0:104,pt:16,x0:204,x1:414,nd:15,dot:2.6,chip:438,cr:7.2,pip0:462,pp:12.6,pr:3.7,br:556,
+      wcx:390,wy:46,ww:212,wn:44,wa:15,bw:2.4,lab:248,sub:267,cap:243,ay0:282,ay1:330,al1:360,al2:380,al3:0};
+    else G={w:360,h:412,wide:0,sx:50,tx:310,n:6,dx:7,s:7,k:3.5,yc:178,hh:96,lift:6,
+      y0:130,pt:13.6,x0:92,x1:174,nd:8,dot:2.2,chip:189,cr:5.4,pip0:205,pp:7.7,pr:2.8,br:262,
+      wcx:180,wy:62,ww:148,wn:30,wa:12,bw:2,lab:272,sub:289,cap:250,ay0:302,ay1:336,al1:364,al2:382,al3:400};
+    sc=Math.min(W/G.w,H/G.h);ox=(W-G.w*sc)/2;oy=(H-G.h*sc)/2;
+  }
+  function half(){return (G.n-1)*G.dx/2+G.s;}
+  function bez(p,u){var o=1-u;return [o*o*o*p[0][0]+3*o*o*u*p[1][0]+3*o*u*u*p[2][0]+u*u*u*p[3][0],o*o*o*p[0][1]+3*o*o*u*p[1][1]+3*o*u*u*p[2][1]+u*u*u*p[3][1]];}
+  function strokeBez(p,u0,u1,n){ctx.beginPath();for(var q=0;q<=n;q++){var pt=bez(p,u0+(u1-u0)*q/n);if(q)ctx.lineTo(pt[0],pt[1]);else ctx.moveTo(pt[0],pt[1]);}ctx.stroke();}
+  function text(s,x,y,size,weight,col,al,align){ctx.font=weight+' '+size+'px '+C.sans;ctx.fillStyle=rgba(col,al);ctx.textAlign=align||'center';ctx.fillText(s,x,y);}
+
+  function stack(cx,base,baseE,mint,act,phase,t,motion){
+    var g=G, x0=cx-(g.n-1)*g.dx/2, yA0=g.yc-g.hh/2, yB0=g.yc+g.hh/2;
+    for(var i=0;i<g.n;i++){
+      var x=x0+i*g.dx, m=mint(i), w=act*gauss(i-phase,1.3);
+      var lift=g.lift*w+motion*1.1*Math.sin(t*1.25-i*0.45), yA=yA0-lift, yB=yB0-lift;
+      var fill=mix(mix(base,C.mint,m),C.dark?C.iceT:C.card,w*0.4), edge=mix(baseE,C.mintE,m);
+      ctx.beginPath();ctx.moveTo(x-g.s,yA+g.k);ctx.lineTo(x+g.s,yA-g.k);ctx.lineTo(x+g.s,yB-g.k);ctx.lineTo(x-g.s,yB+g.k);ctx.closePath();
+      ctx.fillStyle=rgba(fill,0.62+0.3*w);ctx.fill();ctx.lineWidth=1;ctx.strokeStyle=rgba(edge,C.dark?0.85:0.75);ctx.stroke();
+      var nd=g.wide?8:6, dc=mix(edge,C.ink,0.15);
+      for(var d=0;d<nd;d++){var yy=yA+(yB-yA)*(d+0.5)/nd, wob=((i*7+d*13)%6)/6, sz=g.wide?2.4:1.9;
+        ctx.fillStyle=rgba(dc,Math.min(1,0.2+0.45*wob+0.6*w));ctx.fillRect(x-sz/2,yy-sz/2,sz,sz);}
+    }
+  }
+
+  function draw(t){
+    if(!G||!C) return;
+    var g=G, first=(cycle===0), motion=(!mq.matches)?1:0;
+    ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,W,H);
+    ctx.setTransform(dpr*sc,0,0,dpr*sc,dpr*ox,dpr*oy);
+    ctx.textBaseline='alphabetic';
+    var old=first?0:1-seg(t,0,0.7);
+    var step=t<3.75?0:t<8.3?1:t<10.3?2:3;
+    if(!first&&t<0.9) step=0;
+    if(step!==lastStep){lastStep=step;steps.forEach(function(el,k){el.classList.toggle('on',k===step);});}
+
+    /* the recording, heard by both roles */
+    var listenS=seg(t,0.2,0.6)*(1-seg(t,3.3,3.7)), listenT=seg(t,3.7,4.1)*(1-seg(t,7.9,8.3)), play=Math.max(listenS,listenT);
+    var wk=seg(t,3.5,4.0)*(1-seg(t,8.2,8.8)), wcol=mix(C.iceE,C.lavE,wk), i;
+    for(i=0;i<g.wn;i++){
+      var wx=g.wcx-g.ww/2+i*g.ww/(g.wn-1), env=0.22+0.78*Math.pow(Math.sin(Math.PI*(i+0.5)/g.wn),0.7)*(0.55+0.45*((i*37%11)/10));
+      var live=0.2+0.8*Math.abs(Math.sin(t*4.1+i*0.62)*Math.cos(t*2.3-i*0.31));
+      var hgt=Math.max(2,g.wa*env*((1-play*motion)*0.6+play*motion*live)*2);
+      ctx.fillStyle=rgba(wcol,0.5+0.45*play);ctx.beginPath();
+      if(ctx.roundRect)ctx.roundRect(wx-g.bw/2,g.wy-hgt/2,g.bw,hgt,g.bw/2);else ctx.rect(wx-g.bw/2,g.wy-hgt/2,g.bw,hgt);ctx.fill();
+    }
+    text(g.wide?'one recording, heard by both':'one recording',g.wcx,g.wy-g.wa-14,C.ff,500,C.muted,0.95);
+    var sTop=g.yc-g.hh/2-g.k-10, wl=g.wcx-g.ww/2-10, wr=g.wcx+g.ww/2+10;
+    var LS=[[wl,g.wy],[g.sx+(wl-g.sx)*0.35,g.wy],[g.sx,g.wy+(sTop-g.wy)*0.25],[g.sx,sTop]];
+    var LT=[[wr,g.wy],[g.tx-(g.tx-wr)*0.35,g.wy],[g.tx,g.wy+(sTop-g.wy)*0.25],[g.tx,sTop]];
+    ctx.lineWidth=1.3;ctx.strokeStyle=rgba(C.hair,1);strokeBez(LS,0,1,40);strokeBez(LT,0,1,40);
+    [[LS,listenS,C.iceE,0.3],[LT,listenT,C.lavE,3.8]].forEach(function(L){
+      if(L[1]<0.02||!motion) return;
+      for(var q=0;q<3;q++){var u=((t-L[3])*0.75+q/3)%1;if(u<0)continue;var p=bez(L[0],u);
+        ctx.beginPath();ctx.arc(p[0],p[1],2.6,0,6.2832);ctx.fillStyle=rgba(L[2],L[1]*Math.sin(Math.PI*u));ctx.fill();}
+    });
+    ctx.beginPath();ctx.arc(g.sx,sTop,2.4,0,6.2832);ctx.fillStyle=rgba(C.iceE,1);ctx.fill();
+    ctx.beginPath();ctx.arc(g.tx,sTop,2.4,0,6.2832);ctx.fillStyle=rgba(C.lavE,1);ctx.fill();
+
+    /* which pair the teacher is judging */
+    var cur=-1;
+    if(t>=PT[0]&&t<PT[PT.length-1]+PD[PD.length-1])for(i=0;i<PT.length;i++){if(t>=PT[i]&&t<PT[i]+PD[i]){cur=i;break;}}
+
+    /* the student and its own teacher: the same model */
+    var sEdge=g.sx+half()+3, tEdge=g.tx-half()-3;
+    var actS=seg(t,0.9,1.3)*(1-seg(t,3.3,3.7)), actT=seg(t,3.8,4.2)*(1-seg(t,7.9,8.3));
+    var phS=((t-0.9)*3.4)%(g.n+3)-1.5, phT=((t-3.8)*3.4)%(g.n+3)-1.5;
+    stack(g.sx,C.ice,C.iceE,function(k){
+      if(!first&&t<0.9) return 1-seg(t,0,0.9);
+      return seg(t,9.45+k*0.07,9.85+k*0.07);},actS,phS,t,motion);
+    stack(g.tx,C.lav,C.lavE,function(k){
+      if(!first&&t<0.9) return 1-seg(t,0,0.9);
+      return seg(t,12.0+k*0.08,12.4+k*0.08);},actT,phT,t,motion);
+    var onS=step===0||step===2, onT=step===1||step===3;
+    text('the student',g.sx,g.lab,C.fl,600,onS?C.ink:C.muted,1);
+    text(g.wide?'writes 8 reasoning paths':'8 paths',g.sx,g.sub,C.ff,500,C.muted,onS?1:0.8);
+    text(g.wide?'its own teacher':'its teacher',g.tx,g.lab,C.fl,600,onT?C.ink:C.muted,1);
+    text(g.wide?'hears the audio, judges pairs':'judges pairs',g.tx,g.sub,C.ff,500,C.muted,onT?1:0.8);
+
+    /* the paths: reasoning, answer, and one slot per opponent */
+    if(cur>=0){
+      var pa=PAIRS[cur], bandA=Math.min(1,(t-PT[cur])/0.08)*Math.min(1,(PT[cur]+PD[cur]-t)/0.05+0.4);
+      [pa[0],pa[1]].forEach(function(r){var ry=g.y0+r*g.pt;ctx.fillStyle=rgba(C.lavL,0.95*bandA);ctx.beginPath();
+        if(ctx.roundRect)ctx.roundRect(g.x0-10,ry-g.pt/2+1,g.br-g.x0+14,g.pt-2,(g.pt-2)/2);else ctx.rect(g.x0-10,ry-g.pt/2+1,g.br-g.x0+14,g.pt-2);ctx.fill();});
+    }
+    var glow=seg(t,8.3,8.55)*(1-seg(t,8.9,9.3));
+    for(var r=0;r<K;r++){
+      var ry=g.y0+r*g.pt, ap=t<1?(first?0:1):seg(t,1.0+r*0.17,2.4+r*0.17), vis=t<1?old:1;
+      if(vis<=0.01) continue;
+      var ey=g.yc+(r-3.5)*g.pt*0.32, eA=t<1?old:seg(t,1.0+r*0.17,1.35+r*0.17);
+      if(eA>0){ctx.lineWidth=1.1;ctx.strokeStyle=rgba(C.iceE,0.45*eA);ctx.beginPath();ctx.moveTo(sEdge,ey);
+        ctx.bezierCurveTo(sEdge+(g.x0-sEdge)*0.55,ey,g.x0-(g.x0-sEdge)*0.55,ry,g.x0-6,ry);ctx.stroke();}
+      if(glow>0){ctx.fillStyle=rgba(C.mintL,glow*0.95);ctx.beginPath();var gx=g.chip-g.cr-5;
+        if(ctx.roundRect)ctx.roundRect(gx,ry-g.pt/2+1,g.pip0+6*g.pp+g.pr+5-gx,g.pt-2,(g.pt-2)/2);else ctx.rect(gx,ry-g.pt/2+1,g.pip0+6*g.pp+g.pr+5-gx,g.pt-2);ctx.fill();}
+      for(var d=0;d<g.nd;d++){
+        var f=d/(g.nd-1); if(f>ap+1e-6) break;
+        var wob=((r*5+d*11)%7)/7, dx=g.x0+(g.x1-g.x0)*f;
+        ctx.fillStyle=rgba(C.iceE,vis*(0.35+0.45*wob));ctx.beginPath();ctx.arc(dx,ry,g.dot*(0.75+0.35*wob),0,6.2832);ctx.fill();
+      }
+      var cp=t<1?old:ease(seg(t,2.35+r*0.17,2.6+r*0.17));
+      if(cp>0){
+        var okr=OK[r], rr=g.cr*(t<1?1:(0.4+0.6*cp))*(1+0.25*glow);
+        ctx.beginPath();ctx.arc(g.chip,ry,rr,0,6.2832);ctx.fillStyle=rgba(okr?C.ice:C.peach,cp*(C.dark?0.8:1));ctx.fill();
+        ctx.lineWidth=1.2;ctx.strokeStyle=rgba(okr?C.iceE:C.peachE,cp);ctx.stroke();
+        ctx.lineWidth=1.5;ctx.strokeStyle=rgba(okr?C.iceT:C.peachT,cp);ctx.lineCap='round';ctx.beginPath();
+        var q=rr*0.42;
+        if(okr){ctx.moveTo(g.chip-q,ry);ctx.lineTo(g.chip-q*0.25,ry+q*0.75);ctx.lineTo(g.chip+q,ry-q*0.7);}
+        else{ctx.moveTo(g.chip-q*0.75,ry-q*0.75);ctx.lineTo(g.chip+q*0.75,ry+q*0.75);ctx.moveTo(g.chip+q*0.75,ry-q*0.75);ctx.lineTo(g.chip-q*0.75,ry+q*0.75);}
+        ctx.stroke();ctx.lineCap='butt';
+      }
+      for(var j=0;j<K-1;j++){
+        var s=SL[r][j], px=g.pip0+j*g.pp, vt=PT[s.p]+PD[s.p]*0.5;
+        var fp=t<1?old:seg(t,vt,vt+0.12), slotA=t<1?old:seg(t,2.6+r*0.17,2.9+r*0.17);
+        if(slotA<=0) continue;
+        var pr=g.pr*(1+0.45*Math.sin(Math.PI*seg(t,vt,vt+0.3))*(t<1?0:1));
+        ctx.beginPath();ctx.arc(px,ry,pr,0,6.2832);ctx.lineWidth=1;
+        ctx.strokeStyle=rgba(fp>0.5&&s.v===0?C.faint:C.hair,slotA);ctx.stroke();
+        if(fp>0&&s.v>0){
+          ctx.fillStyle=rgba(C.mint,fp);ctx.strokeStyle=rgba(C.mintE,fp);
+          ctx.beginPath();if(s.v===1)ctx.arc(px,ry,pr,0,6.2832);else{ctx.arc(px,ry,pr,Math.PI/2,Math.PI*1.5);ctx.closePath();}
+          ctx.fill();ctx.stroke();
+        }
+      }
+      /* the reward flows back into the student: above the group mean it is reinforced, below it is pushed down */
+      var u=seg(t,8.85+r*0.05,9.75+r*0.05);
+      if(u>0&&u<1){
+        var pxp,pyp,uu=ease(u),span=g.chip-g.x0, tot=span+(g.x0-sEdge);
+        var dist=uu*tot;
+        if(dist<=span){pxp=g.chip-dist;pyp=ry;}else{var v2=(dist-span)/(g.x0-sEdge);pxp=g.x0-(g.x0-sEdge)*v2;pyp=ry+(ey-ry)*v2;}
+        var pc=ADV[r]>0?C.mintE:C.peachE, prad=(g.wide?2.6:2)+(g.wide?6:4)*Math.abs(ADV[r]);
+        var hg=ctx.createRadialGradient(pxp,pyp,0,pxp,pyp,prad*2.6);hg.addColorStop(0,rgba(pc,0.45*Math.sin(Math.PI*u)));hg.addColorStop(1,rgba(pc,0));
+        ctx.fillStyle=hg;ctx.beginPath();ctx.arc(pxp,pyp,prad*2.6,0,6.2832);ctx.fill();
+        ctx.beginPath();ctx.arc(pxp,pyp,prad,0,6.2832);ctx.fillStyle=rgba(pc,0.9*Math.sin(Math.PI*u));ctx.fill();
+      }
+    }
+    /* the teacher's comparison of one pair */
+    if(cur>=0){
+      var pa2=PAIRS[cur], ya=g.y0+pa2[0]*g.pt, yb=g.y0+pa2[1]*g.pt, ym=(ya+yb)/2, x=g.br;
+      ctx.lineWidth=1.6;ctx.strokeStyle=rgba(C.lavE,1);ctx.beginPath();
+      ctx.moveTo(x-6,ya);ctx.lineTo(x,ya);ctx.lineTo(x,yb);ctx.lineTo(x-6,yb);ctx.stroke();
+      ctx.lineWidth=1.2;ctx.strokeStyle=rgba(C.lavE,0.85);ctx.beginPath();ctx.moveTo(tEdge,g.yc);
+      ctx.bezierCurveTo(tEdge-(tEdge-x)*0.5,g.yc,x+(tEdge-x)*0.5,ym,x+3,ym);ctx.stroke();
+      ctx.beginPath();ctx.arc(x,ym,2.6,0,6.2832);ctx.fillStyle=rgba(C.lavE,1);ctx.fill();
+    }
+    /* caption under the paths */
+    var cx=(g.x0+g.br)/2, capS, capA=1;
+    if(step===0){capS=g.wide?'8 reasoning paths, each with its answer':'8 paths, 8 answers';capA=t<1?0:seg(t,1.1,1.5);}
+    else if(step===1){
+      capS=g.wide?'every path meets every other, one pair at a time':'every pair, judged';
+      capA=seg(t,3.85,4.1);
+    }
+    else if(step===2){capS=g.wide?'reward: a right answer, plus the pairs it wins':'answer + pairs won';capA=seg(t,8.35,8.6);}
+    else{capS='';}
+    if(capS) text(capS,cx,g.cap,C.ff,500,step===1?C.lavT:step===2?C.mintT:C.muted,capA);
+
+    /* the handover: every 200 steps the student becomes the teacher */
+    var arc=[[g.sx,g.ay0],[g.sx,g.ay1+16],[g.tx,g.ay1+16],[g.tx,g.ay0]];
+    ctx.save();ctx.setLineDash([3,4]);ctx.lineWidth=1.2;ctx.strokeStyle=rgba(C.hair,1);strokeBez(arc,0,1,60);ctx.restore();
+    var ah=seg(t,11.05,12.05), af=first?1:(t<0.9?1-seg(t,0,0.8):1);
+    if(!first&&t<0.9) ah=1;
+    if(ah>0&&af>0.01){
+      ctx.save();ctx.globalAlpha=af;ctx.lineCap='round';ctx.lineJoin='round';
+      if(C.dark)ctx.globalCompositeOperation='lighter';
+      [[14,C.dark?0.06:0.05],[7,C.dark?0.11:0.09],[3.5,C.dark?0.3:0.22]].forEach(function(L){ctx.lineWidth=L[0];ctx.strokeStyle=rgba(C.mintE,L[1]);strokeBez(arc,0,ah,60);});
+      ctx.globalCompositeOperation='source-over';ctx.lineWidth=1.6;ctx.strokeStyle=rgba(C.dark?mix(C.mintE,C.ink,0.3):C.mintE,0.95);strokeBez(arc,0,ah,60);
+      if(motion&&t>11.05&&t<13.4){for(var q2=0;q2<5;q2++){var uq=((t*0.4+q2/5)%1)*ah, pq=bez(arc,uq), qa=Math.sin(Math.PI*uq/Math.max(ah,0.01));
+        ctx.beginPath();ctx.arc(pq[0],pq[1],2.4,0,6.2832);ctx.fillStyle=rgba(C.card,qa);ctx.fill();ctx.lineWidth=1;ctx.strokeStyle=rgba(C.mintE,qa);ctx.stroke();}}
+      var hd=bez(arc,ah);
+      if(ah<1){var hr=16+2*Math.sin(t*5),h2=ctx.createRadialGradient(hd[0],hd[1],0,hd[0],hd[1],hr);h2.addColorStop(0,rgba(C.mintE,C.dark?0.5:0.38));h2.addColorStop(1,rgba(C.mintE,0));
+        ctx.fillStyle=h2;ctx.beginPath();ctx.arc(hd[0],hd[1],hr,0,6.2832);ctx.fill();
+        ctx.beginPath();ctx.arc(hd[0],hd[1],4,0,6.2832);ctx.fillStyle=rgba(C.mintE,1);ctx.fill();}
+      else{ctx.lineWidth=1.8;ctx.strokeStyle=rgba(C.mintE,1);ctx.beginPath();ctx.moveTo(g.tx-5,g.ay0+6);ctx.lineTo(g.tx,g.ay0);ctx.lineTo(g.tx+5,g.ay0+6);ctx.stroke();}
+      ctx.restore();
+    }
+    ctx.beginPath();ctx.arc(g.sx,g.ay0,3,0,6.2832);ctx.fillStyle=rgba(step===3?C.mintE:C.hair,1);ctx.fill();
+    var on3=step===3?1:0, l2;
+    if(step===3) l2=t<11.1?'step '+Math.round(200*ease(seg(t,10.35,11.05)))+' of 200':'it has not regressed, so it takes over';
+    else l2='only if it has not regressed';
+    if(g.wide){
+      text('every 200 steps, the student becomes the teacher',(g.sx+g.tx)/2,g.al1,C.fl,600,C.ink,0.5+0.5*on3);
+      text(l2,(g.sx+g.tx)/2,g.al2,C.ff,500,on3&&t>=11.1?C.mintT:C.muted,0.7+0.3*on3);
+    }else{
+      text('every 200 steps, the student',(g.sx+g.tx)/2,g.al1,C.fl,600,C.ink,0.5+0.5*on3);
+      text('becomes the teacher',(g.sx+g.tx)/2,g.al2,C.fl,600,C.ink,0.5+0.5*on3);
+      text(l2,(g.sx+g.tx)/2,g.al3,C.ff,500,on3&&t>=11.1?C.mintT:C.muted,0.7+0.3*on3);
+    }
+  }
+
+  function frame(now){
+    raf=0;if(fixed!=null||mq.matches||!visible||document.hidden) return;
+    if(!t0)t0=now;var e=(now-t0)/1000;
+    if(e>=T){cycle++;t0=now;e=0;}
+    draw(e);raf=requestAnimationFrame(frame);
+  }
+  function still(){cycle=0;draw(fixed!=null?fixed:FINAL);}
+  function kick(){
+    if(fixed!=null||mq.matches){still();return;}
+    if(!raf&&visible&&!document.hidden){t0=0;raf=requestAnimationFrame(frame);}
+  }
+  function refresh(){colors();layout();if(fixed!=null||mq.matches||!raf)still();}
+  colors();layout();
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){var was=visible;visible=es[0].isIntersecting;if(visible&&!was){cycle=0;t0=0;}if(visible)kick();},{threshold:0.05}).observe(cv);
+  }
+  document.addEventListener('visibilitychange',kick);
+  window.addEventListener('resize',function(){layout();if(fixed!=null||mq.matches)still();});
+  if(mq.addEventListener)mq.addEventListener('change',function(){if(mq.matches)still();else kick();});
+  new MutationObserver(function(){colors();if(mq.matches)still();}).observe(document.body,{attributes:true,attributeFilter:['class']});
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(refresh);
+  kick();
+})();
+</script>

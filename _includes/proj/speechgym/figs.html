@@ -1,0 +1,310 @@
+<script>
+(function(){
+  /* SpeechGym figures. Every chart is drawn at the width of its box, so SVG text keeps the page's
+     type sizes; each animates when it scrolls into view and restarts when it comes back. */
+  var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hasIO='IntersectionObserver' in window;
+  if(reduced||!hasIO)document.body.classList.add('no-anim');
+  var $=function(s,r){return (r||document).querySelector(s);}, $$=function(s,r){return [].slice.call((r||document).querySelectorAll(s));};
+  function R(v){return Math.round(v*10)/10;}
+  function tx(x,y,s,cls,anc,extra){return '<text x="'+R(x)+'" y="'+R(y)+'"'+(cls?' class="'+cls+'"':'')+(anc&&anc!=='start'?' text-anchor="'+anc+'"':'')+(extra||'')+'>'+s+'</text>';}
+  function D(v){return ' style="--d:'+v.toFixed(2)+'s"';}
+  function rect(x,y,w,h,r,cls,extra){return '<rect'+(cls?' class="'+cls+'"':'')+' x="'+R(x)+'" y="'+R(y)+'" width="'+R(Math.max(0,w))+'" height="'+R(Math.max(0,h))+'" rx="'+R(r)+'"'+(extra||'')+'/>';}
+  function setLens(root){$$('.draw',root).forEach(function(p){try{p.style.setProperty('--len',Math.ceil(p.getTotalLength())+2);}catch(e){}});}
+  function svg(W,H,inner){return '<svg viewBox="0 0 '+Math.round(W)+' '+Math.round(H)+'" width="'+Math.round(W)+'" height="'+Math.round(H)+'">'+inner+'</svg>';}
+  function tick(cx,cy,s,extra){return '<path class="gk'+(extra?' '+extra:'')+'" d="M'+R(cx-s*0.42)+' '+R(cy+s*0.02)+'L'+R(cx-s*0.1)+' '+R(cy+s*0.34)+'L'+R(cx+s*0.44)+' '+R(cy-s*0.3)+'"/>';}
+  function cross(cx,cy,s,extra){var q=s*0.34;return '<path class="gx'+(extra?' '+extra:'')+'" d="M'+R(cx-q)+' '+R(cy-q)+'L'+R(cx+q)+' '+R(cy+q)+'M'+R(cx+q)+' '+R(cy-q)+'L'+R(cx-q)+' '+R(cy+q)+'"/>';}
+  function person(cx,cy,s){return '<circle class="sg-icu" cx="'+R(cx)+'" cy="'+R(cy-s*0.12)+'" r="'+R(s*0.13)+'"/><path class="sg-icu" d="M'+R(cx-s*0.23)+' '+R(cy+s*0.27)+'a'+R(s*0.23)+' '+R(s*0.2)+' 0 0 1 '+R(s*0.46)+' 0"/>';}
+  function dbI(cx,cy,s){var w=s*0.25,h=s*0.08,t=cy-s*0.19,b=cy+s*0.19;
+    return '<ellipse class="sg-ic" cx="'+R(cx)+'" cy="'+R(t)+'" rx="'+R(w)+'" ry="'+R(h)+'"/><path class="sg-ic" d="M'+R(cx-w)+' '+R(t)+'V'+R(b)+'a'+R(w)+' '+R(h)+' 0 0 0 '+R(2*w)+' 0V'+R(t)+'M'+R(cx-w)+' '+R((t+b)/2)+'a'+R(w)+' '+R(h)+' 0 0 0 '+R(2*w)+' 0"/>';}
+  function cells(cx,cy,s,lrn,d0){var n=3,c=s*0.17,g=s*0.065,w=n*c+(n-1)*g,x0=cx-w/2,y0=cy-w/2,o='',ord=[4,0,8,2,6,1,7,3,5];
+    for(var i=0;i<9;i++){var r=Math.floor(i/3),k=i%3;o+=rect(x0+k*(c+g),y0+r*(c+g),c,c,c*0.25,'sg-cell'+(lrn?' lrn':''),lrn?D(d0+ord.indexOf(i)*0.08):'');}
+    return o;}
+  function wave(cx,cy,n,pitch,hmax){var o='',x0=cx-(n-1)*pitch/2;
+    for(var i=0;i<n;i++){var env=Math.sin(Math.PI*(i+0.5)/n),h=Math.max(3,hmax*env*(0.55+0.45*((i*7)%5)/4));
+      o+=rect(x0+i*pitch-1.2,cy-h/2,2.4,h,1.2,'sg-wv sg-osc',' style="--o:'+(-(i%4)*0.22).toFixed(2)+'s"');}
+    return o;}
+  function lines(cx,cy,w){var x=cx-w/2;return rect(x,cy-7,w,3,1.5,'sg-txl')+rect(x,cy-1.5,w*0.74,3,1.5,'sg-txl')+rect(x,cy+4,w*0.88,3,1.5,'sg-txl');}
+  function mover(inner,x0,x1,y0,y1,dur,dl){return '<g class="sg-mv" style="--x0:'+R(x0)+'px;--dx:'+R(x1)+'px;--y0:'+R(y0)+'px;--dy:'+R(y1)+'px;--dur:'+dur+'s;--dl:'+dl+'s">'+inner+'</g>';}
+  function arrowHead(x,y,dir,cls,extra){var a=5.5,p=dir==='up'?'M'+R(x-a)+' '+R(y+a)+'L'+R(x)+' '+R(y)+'L'+R(x+a)+' '+R(y+a):dir==='down'?'M'+R(x-a)+' '+R(y-a)+'L'+R(x)+' '+R(y)+'L'+R(x+a)+' '+R(y-a):dir==='left'?'M'+R(x+a)+' '+R(y-a)+'L'+R(x)+' '+R(y)+'L'+R(x+a)+' '+R(y+a):'M'+R(x-a)+' '+R(y-a)+'L'+R(x)+' '+R(y)+'L'+R(x-a)+' '+R(y+a);
+    return '<path class="'+cls+'" d="'+p+'"'+(extra||'')+'/>';}
+
+  /* ---------- The problem: three kinds of environment ---------- */
+  function ill(host){
+    var k=+host.getAttribute('data-k'), W=Math.max(220,Math.round(host.clientWidth)), s=Math.min(52,Math.round(W*0.16)), o='';
+    var xs=[W*0.13,W*0.5,W*0.87], ny=26+s/2, e=s/2+8;
+    var tops=[['user','caller via TTS','open model'],['agent','realtime API','open model'],['tools','tools','tools']];
+    for(var i=0;i<3;i++)o+=tx(xs[i],14,tops[i][k],'sm'+(k===1&&i<2?' t-peach':''),'middle');
+    o+='<path class="sg-dash" d="M'+R(xs[0]+e)+' '+R(ny)+'H'+R(xs[1]-e-(k===1?8:0))+'M'+R(xs[1]+e+(k===1?8:0))+' '+R(ny)+'H'+R(xs[2]-e)+'"/>';
+    o+='<circle class="sg-user" cx="'+R(xs[0])+'" cy="'+R(ny)+'" r="'+R(s/2)+'"/>'+person(xs[0],ny,s);
+    o+=rect(xs[1]-s/2,ny-s/2,s,s,s*0.24,'sg-agent')+cells(xs[1],ny,s,k!==1,1.7);
+    o+=rect(xs[2]-s/2,ny-s/2,s,s,s*0.24,'sg-node')+dbI(xs[2],ny,s);
+    var L=(xs[1]-e)-(xs[0]+e)-28, mid=(xs[0]+xs[1])/2;
+    var pk=k===0?lines(mid,ny,20):wave(mid,ny,6,4.2,s*0.4);
+    o+=mover(pk,-L/2,L/2,0,0,2.4,0);
+    var L2=(xs[2]-e)-(xs[1]+e)-16, mid2=(xs[1]+xs[2])/2;
+    o+=mover('<circle class="sg-dot" cx="'+R(mid2)+'" cy="'+R(ny)+'" r="3"/>',-L2/2,L2/2,0,0,1.6,0.5);
+    if(k===1){
+      o+=rect(xs[1]-s/2-7,ny-s/2-7,s+14,s+14,s*0.24+6,'sg-dash');
+      var lx=xs[1]-s/2-6, ly=ny+s/2+10;
+      o+='<path class="sg-ic" d="M'+R(lx-4)+' '+R(ly-7)+'v-3a4 4 0 0 1 8 0v3"/>'+rect(lx-7.5,ly-7,15,12,3,'sg-node');
+    }
+    var yb=ny+s/2+5, gy=ny+s/2+26;
+    if(k===1){
+      o+='<path class="sg-lnp draw"'+D(0.3)+' d="M'+R(xs[2])+' '+R(yb)+'V'+R(gy)+'H'+R(xs[1]+s/2+22)+'"/>';
+      o+='<g class="pop"'+D(1.5)+'>'+'<circle cx="'+R(xs[1]+s/2+11)+'" cy="'+R(gy)+'" r="9" class="sg-pl"/>'+cross(xs[1]+s/2+11,gy,16)+'</g>';
+      o+=tx((xs[1]+xs[2])/2+6,gy+24,'no gradient crosses','sm t-peach fade','middle',D(1.6));
+    }else{
+      o+='<path class="sg-lnm draw"'+D(0.3)+' d="M'+R(xs[2])+' '+R(yb)+'V'+R(gy)+'H'+R(xs[1])+'V'+R(yb+1)+'"/>';
+      o+=arrowHead(xs[1],yb,'up','sg-lnm pop',D(1.5));
+      o+=tx((xs[1]+xs[2])/2,gy+24,'reward reaches the agent','sm t-mint fade','middle',D(1.6));
+    }
+    host.innerHTML=svg(W,gy+30,o);host.classList.add('anim','ch');setLens(host);
+  }
+  function axes(){
+    var fig=$('#axes'); if(!fig) return;
+    var acts=$$('.pdm-act',fig), spans=$$('.pdm-no span',fig), hosts=$$('.pdm-ill',fig);
+    hosts.forEach(ill);
+    function finalState(){fig.classList.remove('pdm-live');acts.forEach(function(a){a.classList.remove('on');a.classList.add('done');a.style.removeProperty('--p');});hosts.forEach(function(h){h.classList.add('in');});spans.forEach(function(s){s.classList.add('in');});fig.classList.add('lit');}
+    if(reduced||!hasIO){finalState();return {rebuild:function(){hosts.forEach(ill);hosts.forEach(function(h){h.classList.add('in');});}};}
+    var A=[0,3.3,6.6], DUR=3.3, LIT=9.9, T=17, raf=0, t0=0, vis=false;
+    fig.classList.add('pdm-live');
+    function apply(t){
+      acts.forEach(function(a,k){var on=t>=A[k]&&t<A[k]+DUR, done=t>=A[k]+DUR;
+        a.classList.toggle('on',on);a.classList.toggle('done',done);
+        a.style.setProperty('--p',Math.max(0,Math.min(1,(t-A[k])/DUR)).toFixed(3));
+        hosts[k].classList.toggle('in',t>=A[k]);});
+      fig.classList.toggle('lit',t>=LIT);
+      spans.forEach(function(s,i){s.classList.toggle('in',t>=LIT+0.25+i*0.22);});
+    }
+    function frame(now){raf=0;if(!vis||document.hidden)return;if(!t0)t0=now;var t=(now-t0)/1000;if(t>=T){t0=now;t=0;}apply(t);raf=requestAnimationFrame(frame);}
+    new IntersectionObserver(function(es){var v=es[0].isIntersecting;if(v&&!vis){t0=0;apply(0);}vis=v;fig.classList.toggle('paused',!v);if(v&&!raf)raf=requestAnimationFrame(frame);},{threshold:0.2}).observe(fig);
+    document.addEventListener('visibilitychange',function(){if(!document.hidden&&vis&&!raf){t0=0;raf=requestAnimationFrame(frame);}});
+    apply(0);
+    return {rebuild:function(){hosts.forEach(ill);}};
+  }
+
+  /* ---------- The idea: only the channel changes ---------- */
+  function chan(el){
+    var W=Math.round(el.clientWidth), o='', H;
+    if(W>=760){
+      var LW=Math.min(170,W*0.16), bw=118, bh=58, tw=156, cw=140, xU=LW, xC=W-cw-14, xT=xC-40-tw, xA=xT-86-bw, cy=[98,214], top=46, bot=cy[1]+bh/2+16;
+      var c0=xU+bw+12, c1=xA-12;
+      o+=rect(c0,top,c1-c0,bot-top,16,'sg-hlb fade',D(0.2));
+      o+=tx((c0+c1)/2,26,'the only variable','t-mint','middle');
+      o+=rect(xT-14,top,W-(xT-14)-1,bot-top,16,'sg-dash fade',D(0.5));
+      o+=tx((xT-14+W)/2,26,'inherited unchanged','mid','middle');
+      var rows=[['Text benchmark','τ²-bench','types','reads, types'],['SpeechGym','the same tasks','speaks','hears, speaks']];
+      rows.forEach(function(r,i){var y=cy[i];
+        o+=tx(0,y-4,r[0],'t-ink mid')+tx(0,y+15,r[1],'sm');
+        o+=rect(xU,y-bh/2,bw,bh,14,'sg-user')+tx(xU+bw/2,y-3,'User','t-ink mid','middle')+tx(xU+bw/2,y+16,r[2],'sm','middle');
+        o+=rect(xA,y-bh/2,bw,bh,14,'sg-agent')+tx(xA+bw/2,y-3,'Agent','t-ink mid','middle')+tx(xA+bw/2,y+16,r[3],'sm','middle');
+        o+=rect(xT,y-bh/2,tw,bh,14,'sg-node')+tx(xT+tw/2,y-3,'Tools, database','t-ink mid','middle')+tx(xT+tw/2,y+16,'and policy','sm','middle');
+        o+=rect(xC,y-bh/2,cw,bh,14,'sg-node')+tx(xC+cw/2,y-3,'Success check','t-ink mid','middle')+tx(xC+cw/2,y+16,'the reward','sm','middle');
+        var a0=xU+bw+22, a1=xA-22, mid=(a0+a1)/2, L=a1-a0-44;
+        o+='<path class="sg-dash" d="M'+R(a0)+' '+R(y)+'H'+R(a1)+'"/>';
+        o+=tx(mid,y-14,i===0?'text':'native speech',i===0?'sm':'sm t-lav','middle',i===1?' style="font-weight:600"':'');
+        o+=mover(i===0?lines(mid,y+12,28):wave(mid,y+12,13,4.4,26),-L/2,L/2,0,0,2.6,i*0.4);
+        var t0=xA+bw+8, t1=xT-8;
+        o+='<path class="sg-ln" d="M'+R(t0)+' '+R(y)+'H'+R(t1-2)+'"/>'+arrowHead(t1,y,'right','sg-ln');
+        o+=tx((t0+t1)/2,y-9,'tool call','sm','middle');
+        o+='<path class="sg-ln" d="M'+R(xT+tw+8)+' '+R(y)+'H'+R(xC-10)+'"/>'+arrowHead(xC-8,y,'right','sg-ln');
+      });
+      H=bot+6;
+    }else{
+      var g=14, cwid=(W-g)/2, cx=[cwid/2,cwid+g+cwid/2], bh2=46, yU=62, yCh=130, yA=198, yT=286, yC=356, bw2=Math.min(cwid,170);
+      o+=rect(0,yCh-34,W,68,14,'sg-hlb fade',D(0.2));
+      o+=tx(W/2,yCh-16,'the only variable','t-mint','middle');
+      o+=rect(1,yT-bh2/2-12,W-2,(yC+bh2/2+12)-(yT-bh2/2-12),14,'sg-dash fade',D(0.5));
+      o+=tx(W/2,yC+bh2/2+34,'inherited unchanged','mid','middle');
+      var cols=[['Text benchmark','types','reads, types','text'],['SpeechGym','speaks','hears, speaks','native speech']];
+      cols.forEach(function(c,i){var x=cx[i], xl=x-bw2/2;
+        o+=tx(x,18,c[0],'t-ink mid','middle');
+        o+=rect(xl,yU-bh2/2,bw2,bh2,12,'sg-user')+tx(x,yU-2,'User','t-ink mid','middle')+tx(x,yU+15,c[1],'sm','middle');
+        o+='<path class="sg-dash" d="M'+R(x)+' '+R(yU+bh2/2+4)+'V'+R(yA-bh2/2-4)+'"/>';
+        o+=tx(x+(i===0?14:-14),yCh+12,c[3],'sm'+(i===1?' t-lav':''),i===0?'start':'end',i===1?' style="font-weight:600"':'');
+        o+=mover(i===0?lines(x,yCh+8,18):wave(x,yCh+8,6,4,16),0,0,-12,12,2.2,i*0.4);
+        o+=rect(xl,yA-bh2/2,bw2,bh2,12,'sg-agent')+tx(x,yA-2,'Agent','t-ink mid','middle')+tx(x,yA+15,c[2],'sm','middle');
+        o+='<path class="sg-ln" d="M'+R(x)+' '+R(yA+bh2/2+4)+'V'+R(yT-bh2/2-6)+'"/>'+arrowHead(x,yT-bh2/2-4,'down','sg-ln');
+        o+=tx(x+8,(yA+yT)/2+4,'tool call','sm');
+        o+=rect(xl,yT-bh2/2,bw2,bh2,12,'sg-node')+tx(x,yT-2,'Tools, database','t-ink mid','middle')+tx(x,yT+15,'and policy','sm','middle');
+        o+='<path class="sg-ln" d="M'+R(x)+' '+R(yT+bh2/2+4)+'V'+R(yC-bh2/2-6)+'"/>'+arrowHead(x,yC-bh2/2-4,'down','sg-ln');
+        o+=rect(xl,yC-bh2/2,bw2,bh2,12,'sg-node')+tx(x,yC-2,'Success check','t-ink mid','middle')+tx(x,yC+15,'the reward','sm','middle');
+      });
+      H=yC+bh2/2+44;
+    }
+    el.innerHTML=svg(W,H,o);
+  }
+
+  /* ---------- How it works: four failing rollouts, two rewards ---------- */
+  function group(el){
+    var W=Math.round(el.clientWidth), small=W<640, o='';
+    var seqs=[[1,1,1],[1,0,0],[1,1],[0,1,1]], vals=[0.3,-0.1,0.2,0.1], labs=['+0.30','−0.10','+0.20','+0.10'];
+    var LW=small?20:98, cs=small?22:26, pitch=small?27:32, y0=small?66:70, rh=small?46:52, pillX=LW+pitch*3+(small?4:10), pillW=small?42:84;
+    var oX=small?pillX+pillW+28:Math.round(W*0.44), pX0=small?oX+30:Math.round(W*0.56), pX1=W-(small?44:70), zero=pX0+(pX1-pX0)*0.25, unit=(pX1-zero)/0.3;
+    if(small){o+=tx(0,18,'Four rollouts of one task, all failing','t-ink mid');o+=tx(oX,46,'outcome','sm','middle');o+=tx((pX0+pX1)/2+10,46,'per turn','sm','middle');}
+    else{o+=tx(0,20,'Four rollouts of one task, all failing','t-ink mid');o+=tx(oX,20,'Outcome-only reward','t-ink mid','middle');o+=tx((pX0+pX1)/2,20,'Per-turn reward','t-ink mid','middle');
+      o+=tx(0,40,'each tool call: executed or failed','sm');o+=tx(oX,40,'1 if the task succeeds, else 0','sm','middle');o+=tx((pX0+pX1)/2,40,'+0.1 per executed call, −0.1 per failed one','sm','middle');}
+    o+='<line class="ax" x1="'+R(zero)+'" x2="'+R(zero)+'" y1="'+R(y0-rh/2+4)+'" y2="'+R(y0+3*rh+rh/2-8)+'"/>';
+    seqs.forEach(function(sq,i){var y=y0+i*rh;
+      o+=tx(0,y+5,small?String(i+1):'rollout '+(i+1),'');
+      sq.forEach(function(ok,j){var cx=LW+j*pitch+cs/2, dd=0.15+i*0.3+j*0.09;
+        o+='<g class="pop"'+D(dd)+'>'+rect(cx-cs/2,y-cs/2,cs,cs,6,ok?'sg-ok':'sg-bad')+(ok?tick(cx,y,cs*0.62):cross(cx,y,cs*0.62))+'</g>';});
+      o+='<g class="fade"'+D(0.5+i*0.3)+'>'+rect(pillX,y-12,pillW,24,12,'sg-pl')+tx(pillX+pillW/2,y+4.5,small?'fails':'task fails','sm t-peach','middle',' style="font-weight:600"')+'</g>';
+      o+=tx(oX,y+5,'0','t-ink mid fade','middle',D(1.7+i*0.08));
+      var v=vals[i], x1=zero+v*unit;
+      if(v>=0)o+=rect(zero,y-8,x1-zero,16,4,'d-mint grow',D(2.3+i*0.15));
+      else o+=rect(x1,y-8,zero-x1,16,4,'d-peach growl',D(2.3+i*0.15));
+      var lxp=v>=0?x1+8:(small?zero+8:x1-8);
+      o+=tx(lxp,y+5,labs[i],(v>=0?'t-mint':'t-peach mid')+' fade',(v>=0||small)?'start':'end',D(2.6+i*0.15));
+    });
+    var yf=y0+3*rh+rh/2+(small?16:20);
+    if(small){o+=tx(0,yf,'Outcome only: all four score 0, no gradient.','sm t-peach fade','start',D(2.0));o+=tx(0,yf+20,'Per turn: they differ, and the gradient points to 1.','sm t-mint fade','start',D(3.3));}
+    else{o+=tx(oX,yf,'all equal: no gradient','t-peach fade','middle',D(2.0));o+=tx((pX0+pX1)/2,yf,'they differ: a gradient toward rollout 1','t-mint fade','middle',D(3.3));}
+    el.innerHTML=svg(W,yf+(small?30:12),o);setLens(el);
+  }
+
+  /* ---------- Finding 01: the cascade ---------- */
+  function casc(el){
+    var W=Math.round(el.clientWidth), small=W<700, o='';
+    var rows=[['Mis-hears a slot value','the wrong name, ID or digit',32,2,'16×'],['The tool call fails','the misheard argument meets the database',42,26,'1.6×'],['It loops','re-issues the same failing call',29,18,'1.6×']];
+    var x0=small?22:310, x1=W-(small?52:110), sc=(x1-x0)/50, rh=small?118:96, y0=small?44:66, bh=small?14:16;
+    o+=rect(small?22:22,8,12,12,3,'d-peach')+tx(40,19,'speech','sm');
+    o+=rect(102,8,12,12,3,'sg-ice')+tx(120,19,'text','sm');
+    o+=tx(W-(small?24:40),19,small?'ratio':'speech \u00f7 text','sm','middle');
+    if(!small)[0,25,50].forEach(function(v){var x=x0+v*sc;o+='<line class="grid" x1="'+R(x)+'" x2="'+R(x)+'" y1="'+(y0-14)+'" y2="'+(y0+2*rh+44)+'"/>'+tx(x,y0-22,v+'%','sm','middle');});
+    var rail='M6 '+(y0+(small?2:8));
+    rows.forEach(function(r,i){var y=y0+i*rh, by=small?y+44:y;
+      o+=tx(small?22:22,small?y+6:y+8,r[0],'t-ink mid');
+      o+=tx(small?22:22,small?y+25:y+28,r[1],'sm');
+      var ws=r[2]*sc, wt=Math.max(3,r[3]*sc);
+      o+=rect(x0,by-2,ws,bh,4,'d-peach grow',D(0.3+i*0.55));
+      o+=tx(x0+ws+8,by+bh/2+2.5,r[2]+'%','t-peach mid fade','start',D(0.7+i*0.55));
+      o+=rect(x0,by+bh+4,wt,bh,4,'sg-ice grow',D(0.4+i*0.55));
+      o+=tx(x0+wt+8,by+bh*1.5+6.5,r[3]+'%','t-ice fade','start',D(0.8+i*0.55));
+      var px=W-(small?24:40), py=by+bh+1;
+      o+='<g class="pop"'+D(0.9+i*0.55)+'>'+rect(px-(small?24:32),py-13,small?48:64,26,13,i===0?'sg-pl':'sg-nb')+tx(px,py+5,r[4],i===0?'t-peach mid':'t-ink mid','middle')+'</g>';
+      o+='<circle class="pop" cx="6" cy="'+R(small?y+2:y+4)+'" r="4.5" fill="var(--peach)" stroke="var(--peach-e)" stroke-width="1.3"'+D(0.2+i*0.55)+'/>';
+    });
+    var yEnd=y0+3*rh-(small?22:28);
+    o+='<path class="sg-lnp draw"'+D(0.2)+' d="M6 '+R(y0+(small?8:10))+'V'+R(yEnd-6)+'"/>'+arrowHead(6,yEnd-2,'down','sg-lnp pop',D(1.9));
+    o+=tx(22,yEnd+2,small?'until the step budget runs out:':'until the step budget runs out, and the episode scores 0','t-peach mid fade','start',D(2.0));
+    if(small)o+=tx(22,yEnd+22,'the episode scores 0','t-peach mid fade','start',D(2.0));
+    el.innerHTML=svg(W,yEnd+(small?30:12),o);setLens(el);
+  }
+
+  /* ---------- Finding 02: groups that carry a gradient ---------- */
+  function waf(el){
+    var W=Math.round(el.clientWidth), small=W<720, o='';
+    var pw=small?W:(W-56)/2, cols=25, rowsN=10, g=small?2.5:3, c=Math.min(16,(pw-(cols-1)*g)/cols), ww=cols*c+(cols-1)*g;
+    var P=[['Outcome-only reward','16%',40,['84% of groups are skipped:','every rollout scored the same'],'t-peach'],['Per-turn reward','99.6%',249,['0.4% of groups are skipped'],'t-mint']];
+    var H1=0;
+    P.forEach(function(p,k){var ox=small?0:k*(pw+56), oy=small?k*(108+rowsN*(c+g)+56):0, wy=oy+92;
+      o+=tx(ox,oy+18,p[0],'t-ink mid');
+      o+=tx(ox,oy+56,p[1],'big '+(k?'t-mint':'t-peach')+' fade','start',D(0.2+k*0.4));
+      o+=tx(ox,oy+78,'of rollout groups carry a gradient','sm fade','start',D(0.3+k*0.4));
+      for(var i=0;i<cols*rowsN;i++){var r=Math.floor(i/cols),q=i%cols, on=i<p[2];
+        o+=rect(ox+q*(c+g),wy+r*(c+g),c,c,Math.max(1.5,c*0.2),on?'sg-ok pop':'sg-hc pop',D(0.25+k*0.25+(r*cols+q)*0.0045));}
+      var fy=wy+rowsN*(c+g)+16;
+      var ft=small?p[3]:[p[3].join(' ')];
+      ft.forEach(function(l,j){o+=tx(ox,fy+j*18,l,'sm '+(k?'':'t-peach')+' fade','start',D(1.6+k*0.3));});
+      H1=Math.max(H1,fy+(ft.length-1)*18+8);
+    });
+    el.innerHTML=svg(W,H1,o);
+  }
+
+  /* ---------- Finding 03: transfer to tau-Voice ---------- */
+  function tv(el){
+    var W=Math.round(el.clientWidth), o='', H=320, m={l:40,r:6,t:70,b:44};
+    var dom=[['Airline',24,62],['Retail',45,73],['Telecom',4,24],['Overall',24,53]];
+    var Y=function(v){return m.t+(H-m.t-m.b)*(1-v/80);}, gw=(W-m.l-m.r)/4, bw=Math.min(34,gw*0.3);
+    o+=tx(0,18,'pass@1 on τ-Voice, by domain','t-ink mid');
+    o+=rect(0,32,12,12,3,'sg-ice')+tx(18,43,'before training','sm')+rect(126,32,12,12,3,'d-mint')+tx(144,43,'after SpeechGym','sm');
+    [0,20,40,60,80].forEach(function(v){o+='<line class="grid" x1="'+m.l+'" x2="'+(W-m.r)+'" y1="'+R(Y(v))+'" y2="'+R(Y(v))+'"/>'+tx(m.l-8,Y(v)+4,v+'%','sm','end');});
+    dom.forEach(function(d,i){var cx=m.l+gw*(i+0.5), xb=cx-bw-3, xa=cx+3, last=i===3;
+      o+=rect(xb,Y(d[1]),bw,Y(0)-Y(d[1]),4,'sg-ice growy',D(0.2+i*0.18));
+      o+=rect(xa,Y(d[2]),bw,Y(0)-Y(d[2]),4,'d-mint growy',D(0.35+i*0.18));
+      o+=tx(xb+bw/2,Y(d[1])-7,d[1]+'%','sm t-ice fade','middle',D(0.7+i*0.18));
+      o+=tx(xa+bw/2,Y(d[2])-7,d[2]+'%','t-mint fade','middle',D(0.85+i*0.18));
+      o+=tx(cx,H-m.b+22,d[0],last?'t-ink mid':'','middle');
+      if(i===2)o+=tx(xa+bw/2,Y(d[2])-26,'6×','sm t-mint fade','middle',D(1.2)+' style="font-weight:600"');
+    });
+    el.innerHTML=svg(W,H,o);
+  }
+  function lb(el){
+    var W=Math.round(el.clientWidth), small=W<420, o='';
+    var rows=[['Grok-Voice (xAI)',67,0],['Ours, after SpeechGym',53,2],['GPT-Realtime-2',51,0],['Cascaded baseline',31,0],['GPT-Realtime-1.0',30,0],['Gemini-Live-2.5',26,0],['Same model, before RL',24,1]];
+    var x0=small?22:206, x1=W-40, sc=(x1-x0)/70, y0=small?78:70, rh=small?50:34, bh=small?14:16, by=small?9:0;
+    o+=tx(0,18,'The τ-Voice leaderboard','t-ink mid');
+    o+=tx(0,40,'average pass@1','sm');
+    rows.forEach(function(r,i){var y=y0+i*rh, cls=r[2]===2?'d-mint':r[2]===1?'sg-ice':'sg-hc', w=r[1]*sc;
+      if(r[2])o+=rect(-2,y-rh/2+(small?4:2),W+2,rh-(small?6:4),10,r[2]===2?'sg-hlb fade':'fade',D(1.4)+(r[2]===1?' fill="var(--ice-l)"':''));
+      var ty=small?y-6:y+5;
+      o+=tx(14,ty,String(i+1),'sm t-faint','end');
+      o+=tx(22,ty,r[0],(r[2]?'t-ink':'')+(r[2]?' mid':''));
+      o+=rect(x0,y+by-bh/2,w,bh,4,cls+' grow',D(0.2+i*0.1));
+      o+=tx(x0+w+7,y+by+5,r[1]+'%',(r[2]===2?'t-mint':r[2]===1?'t-ice mid':'')+' fade','start',D(0.6+i*0.1));
+    });
+    var H=y0+6*rh+(small?30:26);
+    el.innerHTML=svg(W,H,o);
+  }
+
+  /* ---------- Finding 04: what moved ---------- */
+  function beh(el){
+    var W=Math.round(el.clientWidth), o='';
+    var rows=[['Wrong writes','unauthorised, lower is better',23,10,'−13'],['Dead loops when stuck','lower is better',14,5,'−9'],['Recovers after a mis-hearing','higher is better',42,62,'+20']];
+    var x0=10, x1=W-58, sc=(x1-x0)/70, y0=64, rh=96;
+    o+=tx(0,18,'Share of τ-Voice tasks','t-ink mid');
+    o+='<circle cx="6" cy="38" r="5.5" class="sg-ice"/>'+tx(16,43,'before','sm')+'<circle cx="76" cy="38" r="6" class="d-mint"/>'+tx(87,43,'after SpeechGym','sm');
+    rows.forEach(function(r,i){var y=y0+i*rh, ly=y+52, xb=x0+r[2]*sc, xa=x0+r[3]*sc, up=r[3]>r[2];
+      o+=tx(0,y+14,r[0],'t-ink mid')+tx(0,y+32,r[1],'sm');
+      o+='<line class="grid" x1="'+R(x0)+'" x2="'+R(x1)+'" y1="'+R(ly)+'" y2="'+R(ly)+'"/>';
+      o+='<path class="sg-lnm draw"'+D(0.4+i*0.3)+' d="M'+R(xb+(up?8:-8))+' '+R(ly)+'H'+R(xa+(up?-12:12))+'"/>';
+      o+=arrowHead(xa+(up?-11:11),ly,up?'right':'left','sg-lnm pop',D(1.5+i*0.3));
+      o+='<circle class="sg-ice pop"'+D(0.2+i*0.3)+' cx="'+R(xb)+'" cy="'+R(ly)+'" r="6.5"/>';
+      o+='<circle class="d-mint pop"'+D(1.4+i*0.3)+' cx="'+R(xa)+'" cy="'+R(ly)+'" r="8"/>';
+      o+=tx(xb,ly+26,r[2]+'%','sm t-ice fade','middle',D(0.4+i*0.3));
+      o+=tx(xa,ly+26,r[3]+'%','t-mint fade','middle',D(1.6+i*0.3));
+      o+=tx(W,ly+5,r[4],'t-mint fade','end',D(1.8+i*0.3));
+    });
+    el.innerHTML=svg(W,y0+3*rh-2,o);setLens(el);
+  }
+  function eff(el){
+    var W=Math.round(el.clientWidth), o='';
+    var rows=[['pass@1',24,53,'24%','53%','more than doubles',1],['Agent turns',26,24,'26','24','−8%',0],['Tokens per task',51195,48398,'51,195','48,398','−5%',0],['Turns on the tasks it fixes',23.4,17.5,'23.4','17.5','−25%',0]];
+    var x0=0, x1=W-70, y0=64, rh=64;
+    o+=tx(0,18,'Per task, before and after','t-ink mid');
+    o+=rect(0,32,12,12,3,'sg-ice')+tx(18,43,'before','sm')+rect(76,32,12,12,3,'d-mint')+tx(94,43,'after SpeechGym','sm');
+    rows.forEach(function(r,i){var y=y0+i*rh, mx=Math.max(r[1],r[2]), wb=(x1-x0)*r[1]/mx, wa=(x1-x0)*r[2]/mx;
+      o+=tx(0,y+8,r[0],'t-ink mid');
+      o+=tx(W,y+8,r[5],'t-mint fade','end',D(1.3+i*0.2));
+      o+=rect(x0,y+18,wb,12,3,'sg-ice grow',D(0.2+i*0.2));
+      o+=tx(x0+wb+6,y+28.5,r[3],'sm t-ice fade','start',D(0.6+i*0.2));
+      o+=rect(x0,y+34,wa,12,3,'d-mint grow',D(0.35+i*0.2));
+      o+=tx(x0+wa+6,y+44.5,r[4],'sm t-mint fade','start',D(0.75+i*0.2)+' style="font-weight:600"');
+    });
+    el.innerHTML=svg(W,y0+4*rh-6,o);
+  }
+
+  /* ---------- build, rebuild on resize, animate on view ---------- */
+  var charts=[['#ch-chan',chan],['#ch-group',group],['#ch-casc',casc],['#ch-waf',waf],['#ch-tv',tv],['#ch-lb',lb],['#ch-beh',beh],['#ch-eff',eff]];
+  var ax=null;
+  function build(){charts.forEach(function(c){var el=$(c[0]);if(el){try{c[1](el);}catch(err){if(window.console)console.error(c[0],err);}}});if(ax)ax.rebuild();}
+  ax=axes();build();
+  var lastW=window.innerWidth, rt=0;
+  window.addEventListener('resize',function(){if(Math.abs(window.innerWidth-lastW)<24)return;clearTimeout(rt);rt=setTimeout(function(){lastW=window.innerWidth;build();},160);});
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){build();});
+
+  var anims=$$('.reveal,.anim').filter(function(e){return !e.classList.contains('pdm-ill');});
+  if(reduced||!hasIO){anims.forEach(function(e){e.classList.add('in');});}
+  else{
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){
+      if(e.isIntersecting&&e.intersectionRatio>=0.18)e.target.classList.add('in');
+      else if(!e.isIntersecting)e.target.classList.remove('in');
+    });},{threshold:[0,0.18],rootMargin:'0px 0px -4% 0px'});
+    anims.forEach(function(e){io.observe(e);});
+    var pio=new IntersectionObserver(function(es){es.forEach(function(e){e.target.classList.toggle('paused',!e.isIntersecting);});},{threshold:0.02});
+    $$('.fig.panel,.sg-cards').forEach(function(e){pio.observe(e);});
+  }
+})();
+</script>

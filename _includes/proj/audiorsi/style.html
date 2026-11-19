@@ -1,0 +1,121 @@
+<style>
+/* AudioRSI page: only what the shared design system (selfrw/style.html) does not already have */
+.il-ice{fill:var(--ice);stroke:var(--ice-e);stroke-width:1.5}
+.il-lav{fill:var(--lav);stroke:var(--lav-e);stroke-width:1.5}
+.il-pe{fill:var(--peach);stroke:var(--peach-e);stroke-width:1.3}
+.il-mint{fill:var(--mint);stroke:var(--mint-e);stroke-width:1.3}
+.il-dash{fill:none;stroke:var(--peach-e);stroke-width:1.8;stroke-dasharray:4 4;stroke-linecap:round}
+.il-wave{fill:var(--ice-e)}
+.il-lb{fill:none;stroke:var(--lav-e);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.il-ck{fill:none;stroke:var(--mint-t);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.il-x{fill:none;stroke:var(--peach-t);stroke-width:1.8;stroke-linecap:round}
+.il-row{fill:var(--hair)}
+
+/* the problem: three supervisors that never learn */
+.prob{padding:0 0 20px;overflow:hidden}
+.prob .p-ill{display:block;height:128px;padding:14px 16px 8px;border-bottom:1px solid var(--rule);background:var(--bg)}
+.prob .p-ill svg{display:block;height:100%;width:auto;max-width:100%;margin:0 auto;overflow:visible}
+.prob .p-no{display:block;padding:14px 20px 0;font-size:var(--t-label);font-weight:600;color:var(--peach-t)}
+.prob h3{margin-top:6px;padding:0 20px}
+.prob p{padding:0 20px;font-size:var(--t-label);line-height:1.5}
+.pi-t{font-family:var(--sans);font-size:var(--t-fine);fill:var(--muted)}
+.pi-t.k{fill:var(--mint-t);font-weight:600}
+.pi-ln{fill:none;stroke:var(--ice-e);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.pi-ln.w{stroke:var(--faint);stroke-width:1.6}
+.pi-trk{stroke:var(--hair);stroke-width:3;stroke-linecap:round}
+.pi-knob{fill:var(--card);stroke:var(--peach-e);stroke-width:1.6}
+.pi-ok{fill:var(--mint);stroke:var(--mint-e);stroke-width:1.3}
+.pi-frz{fill:none;stroke:var(--peach-e);stroke-width:2;stroke-dasharray:5 5;stroke-linecap:round}
+.pi-base{stroke:var(--hair);stroke-width:1.2}
+.prob .pi-d{stroke-dasharray:240;stroke-dashoffset:0}
+.cards.in .prob .pi-d{animation:piDraw 5.5s ease-in-out infinite}
+.cards.in .prob .pi-pop{animation:piPop 5.5s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+.cards.in .prob .pi-k1{animation:piK1 4.2s ease-in-out infinite}
+.cards.in .prob .pi-k2{animation:piK2 3.4s ease-in-out infinite}
+.cards.in .prob .pi-k3{animation:piK3 5s ease-in-out infinite}
+.paused .prob .pi-d,.paused .prob .pi-pop,.paused .prob .pi-k1,.paused .prob .pi-k2,.paused .prob .pi-k3{animation-play-state:paused}
+@keyframes piDraw{0%{stroke-dashoffset:240}45%,100%{stroke-dashoffset:0}}
+@keyframes piPop{0%,40%{opacity:0;transform:scale(.4)}52%,100%{opacity:1;transform:none}}
+@keyframes piK1{0%,100%{transform:translateX(0)}50%{transform:translateX(46px)}}
+@keyframes piK2{0%,100%{transform:translateX(0)}50%{transform:translateX(-52px)}}
+@keyframes piK3{0%,100%{transform:translateX(0)}35%{transform:translateX(30px)}70%{transform:translateX(-24px)}}
+
+/* the idea: a frozen teacher vs. a teacher that is the student */
+.cst-act.frz{--k:var(--peach);--ke:var(--peach-e);--kt:var(--peach-t);--kl:var(--peach-l)}
+.cst .tline{fill:none;stroke-width:2;stroke-linejoin:round}
+.cst .frz .tline{stroke:var(--peach-e);stroke-dasharray:5 5}
+.cst .own .tline{stroke:var(--lav-e)}
+.cst .sline{fill:none;stroke:var(--ice-e);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.cst .own .sline{stroke:var(--mint-e)}
+.cst .sarea{fill:var(--ice-l);opacity:.7}
+.cst .own .sarea{fill:var(--mint-l)}
+.cst .sdot{fill:var(--card);stroke:var(--ice-e);stroke-width:2}
+.cst .own .sdot{stroke:var(--mint-e)}
+.cst .pulse{fill:none;stroke:var(--lav-e);stroke-width:1.5}
+.cst .hk{stroke:var(--hair);stroke-width:1.2}
+.cst .hk.on{stroke:var(--lav-e);stroke-width:1.6}
+.cst .tlab{font-weight:600}
+.cst .frz .tlab{fill:var(--peach-t)}
+.cst .own .tlab{fill:var(--lav-t)}
+.cst .slab{fill:var(--ice-t);font-weight:600}
+.cst .own .slab{fill:var(--mint-t)}
+.cst .hlab{fill:var(--lav-t)}
+
+/* how it works: one step, for one question */
+#ch-step svg{display:block;width:100%;height:auto;margin:0 auto}
+#ch-step .cell{fill:var(--bg);stroke:var(--rule);stroke-width:1;transition:fill .25s,stroke .25s}
+#ch-step .diag{fill:none;stroke:var(--rule);stroke-width:1;stroke-dasharray:2 3}
+#ch-step .k-win,#ch-step .cell.k-win{fill:var(--mint);stroke:var(--mint-e)}
+#ch-step .k-tie,#ch-step .cell.k-tie{fill:var(--lav);stroke:var(--lav-e)}
+#ch-step .k-lose,#ch-step .cell.k-lose{fill:var(--peach-l);stroke:var(--peach-e)}
+#ch-step .rowhl{fill:var(--lav-l);opacity:0;transition:opacity .15s}
+#ch-step .rowl{fill:var(--muted);transition:fill .15s}
+#ch-step .rowl.on{fill:var(--lav-t);font-weight:600}
+#ch-step .colh.on{fill:var(--lav-t);font-weight:600}
+#ch-step .ck{fill:none;stroke:var(--ice-t);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+#ch-step .cx{fill:none;stroke:var(--peach-t);stroke-width:1.8;stroke-linecap:round}
+#ch-step .mean{stroke:var(--ink);stroke-width:1.3;stroke-dasharray:3 4}
+#ch-step .track{stroke:var(--hair);stroke-width:1.2}
+#ch-step .sg{font-size:var(--t-card);font-weight:700}
+#ch-step .chip{transition:opacity .2s}
+
+/* evidence charts */
+.cta.left{justify-content:flex-start;margin-top:var(--sp-fig)}
+.dot-o{fill:var(--card);stroke:var(--faint);stroke-width:1.5}
+.bar-o{fill:var(--hair)}
+.anim .slide{opacity:0;transform:translateX(var(--dx,0))}
+.anim.in .slide{opacity:1;transform:none;transition:opacity .3s ease var(--d,0s),transform 1s cubic-bezier(.2,.7,.2,1) var(--d,0s)}
+.no-anim .anim .slide{opacity:1;transform:none}
+.pair2{display:grid;grid-template-columns:minmax(0,1.75fr) minmax(0,1fr);gap:24px 44px;align-items:start}
+.benchg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:34px 48px}
+.benchg .bm svg{display:block;width:100%;height:auto;overflow:visible}
+.fig .ch svg{margin:0 auto}
+.ch .halo{paint-order:stroke;stroke:var(--card);stroke-width:5px;stroke-linejoin:round}
+.ch .halo.on-mint{stroke:var(--mint-l)}
+
+/* Finding 01: its own teacher, judging two paths */
+#judge-duel .term .scr{height:auto;font-family:var(--sans);font-size:var(--t-body);line-height:1.5;color:var(--ink)}
+#judge-duel .term .scr::after{display:none}
+#judge-duel .term .scr mark{background:none;color:var(--kt);font-weight:600;border-bottom:2px solid var(--ke)}
+#judge-duel .term .verdict b{min-width:0}
+.vbox{grid-column:1/-1;border-radius:14px;border:1px solid var(--lav-e);background:var(--lav-l);padding:14px 16px 14px;min-width:0}
+.vbox h4{font-size:var(--t-label);font-weight:600;color:var(--lav-t);margin-bottom:8px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 12px}
+.vbox h4 span{font-weight:400;color:var(--muted)}
+.vbox .vq{font-size:var(--t-body);line-height:1.5;color:var(--ink);min-height:3em}
+.vbox .vq .caret{background:var(--lav-e)}
+.vbox.typed .vq .caret{display:none}
+.vbox .ann{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:12px;font-size:var(--t-label);color:var(--muted)}
+.vbox .ann .an{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--mint-e);background:var(--card);color:var(--mint-t);font-weight:600;border-radius:999px;padding:3px 11px;opacity:0;transform:translateY(4px);transition:opacity .35s,transform .35s}
+.vbox.typed .ann .an{opacity:1;transform:none}
+.vbox.typed .ann .an:nth-child(3){transition-delay:.15s}.vbox.typed .ann .an:nth-child(4){transition-delay:.3s}
+.vbox .ann b{font-weight:600;color:var(--ink)}
+.cases.txt.judged .case{grid-row:span 4}
+.case .vd{font-size:var(--t-label);line-height:1.45;color:var(--lav-t);margin:12px 16px 0;padding-top:10px;border-top:1px solid var(--rule)}
+.case .vd b{font-weight:600}
+.case .vd span{display:block;color:var(--muted);margin-top:2px}
+
+@media(max-width:1099px){.pair2{grid-template-columns:1fr;gap:34px}}
+@media(max-width:900px){.cases.txt.judged .case{display:block}}
+@media(max-width:760px){.benchg{grid-template-columns:1fr}}
+@media(max-width:700px){.prob .p-ill{height:118px}.vbox{padding:12px 14px}}
+</style>
