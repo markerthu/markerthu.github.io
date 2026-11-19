@@ -1,0 +1,77 @@
+<div class="fig panel mixer pausable" id="mixer">
+  <div class="mx">
+    <div class="mx-col mx-pols">
+      <p class="mx-h">Three policies<span>each at its own temperature</span></p>
+      <div class="mx-list">
+        <div class="mx-pol k-p1"><p class="mx-n"><span class="no">1</span>Policy 1<span class="mx-w" aria-hidden="true"><b></b></span></p><svg class="mx-hist" viewBox="0 0 180 46" aria-hidden="true"></svg><label class="mx-t"><span>explore</span><input type="range" min="0.2" max="3" step="0.01" value="1.4" aria-label="Temperature of policy 1"><span>exploit</span></label></div>
+        <div class="mx-pol k-p2"><p class="mx-n"><span class="no">2</span>Policy 2<span class="mx-w" aria-hidden="true"><b></b></span></p><svg class="mx-hist" viewBox="0 0 180 46" aria-hidden="true"></svg><label class="mx-t"><span>explore</span><input type="range" min="0.2" max="3" step="0.01" value="1.4" aria-label="Temperature of policy 2"><span>exploit</span></label></div>
+        <div class="mx-pol k-p3"><p class="mx-n"><span class="no">3</span>Policy 3<span class="mx-w" aria-hidden="true"><b></b></span></p><svg class="mx-hist" viewBox="0 0 180 46" aria-hidden="true"></svg><label class="mx-t"><span>explore</span><input type="range" min="0.2" max="3" step="0.01" value="1.4" aria-label="Temperature of policy 3"><span>exploit</span></label></div>
+      </div>
+    </div>
+    <div class="mx-col mx-tri">
+      <p class="mx-h">How much each one counts<span>drag the point inside the triangle</span></p>
+      <svg viewBox="0 0 300 262" role="img" aria-label="A triangle whose corners are the three policies. The point inside sets how much each policy counts in the blend: the closer to a corner, the more that policy counts."></svg>
+    </div>
+    <div class="mx-col mx-out">
+      <p class="mx-h">The behavior it plays<span>one blend of all three</span></p>
+      <svg class="mx-hist" viewBox="0 0 240 112" aria-hidden="true"></svg>
+      <p class="mx-eq">&mu; = &omega;<sub>1</sub>&middot;softmax(&tau;<sub>1</sub>&Phi;<sub>1</sub>) + &omega;<sub>2</sub>&middot;softmax(&tau;<sub>2</sub>&Phi;<sub>2</sub>) + &omega;<sub>3</sub>&middot;softmax(&tau;<sub>3</sub>&Phi;<sub>3</sub>)</p>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var root=document.getElementById('mixer'); if(!root) return;
+  var mq=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)'):{matches:false};
+  var PHI=[[2.2,.6,.2,.9,.1,.4],[.3,.5,2.0,.4,1.2,.2],[.2,1.0,.3,.2,.6,2.3]];
+  var pols=[].slice.call(root.querySelectorAll('.mx-pol')), sl=pols.map(function(p){return p.querySelector('input');});
+  var hs=pols.map(function(p){return p.querySelector('.mx-hist');}), wb=pols.map(function(p){return p.querySelector('.mx-w b');});
+  var tri=root.querySelector('.mx-tri svg'), out=root.querySelector('.mx-out .mx-hist');
+  var CX=150, CY=150, R=104, S3=Math.sqrt(3)/2, VX=[[CX,CY-R],[CX-R*S3,CY+R/2],[CX+R*S3,CY+R/2]];
+  var w=[1/3,1/3,1/3], auto=!mq.matches, visible=false, raf=0, t0=0, tA=0;
+  function f(v){return v.toFixed(1);}
+  function soft(phi,t){var m=-1e9,i,e=[],s=0;for(i=0;i<phi.length;i++)m=Math.max(m,t*phi[i]);for(i=0;i<phi.length;i++){e.push(Math.exp(t*phi[i]-m));s+=e[i];}return e.map(function(x){return x/s;});}
+  function bars(svg,W,Hb,base,n,gap){var s='',bw=(W-gap*(n-1))/n;for(var i=0;i<n;i++)s+='<rect x="'+f(i*(bw+gap))+'" y="'+base+'" width="'+f(bw)+'" height="0" rx="3"/>';s+='<line x1="-3" x2="'+(W+3)+'" y1="'+(base+.5)+'" y2="'+(base+.5)+'"/>';return s;}
+  hs.forEach(function(h){h.innerHTML=bars(h,180,40,44,6,9);});
+  out.innerHTML=bars(out,240,100,108,6,12);
+  var off=[[0,-18],[-16,12],[16,12]], s='<path class="tri" d="M'+VX.map(function(v){return f(v[0])+' '+f(v[1]);}).join('L')+'Z"/>';
+  VX.forEach(function(v,k){s+='<line class="tk k-p'+(k+1)+'" stroke="var(--ke)" x1="'+v[0]+'" y1="'+v[1]+'" x2="'+CX+'" y2="'+CY+'"/>';});
+  VX.forEach(function(v,k){s+='<g class="k-p'+(k+1)+'"><circle cx="'+f(v[0]+off[k][0])+'" cy="'+f(v[1]+off[k][1])+'" r="12" fill="var(--k)" stroke="var(--ke)" stroke-width="1.3"/><text x="'+f(v[0]+off[k][0])+'" y="'+f(v[1]+off[k][1]+4.5)+'" fill="var(--kt)">'+(k+1)+'</text></g>';});
+  s+='<circle class="ptr" r="20" cx="'+CX+'" cy="'+CY+'"/><circle class="pt" r="9" cx="'+CX+'" cy="'+CY+'" tabindex="0" aria-label="Blend point. Arrow keys move it."/>';
+  tri.innerHTML=s;
+  var ticks=[].slice.call(tri.querySelectorAll('.tk')), pt=tri.querySelector('.pt'), ptr=tri.querySelector('.ptr');
+  function at(w){return [w[0]*VX[0][0]+w[1]*VX[1][0]+w[2]*VX[2][0],w[0]*VX[0][1]+w[1]*VX[1][1]+w[2]*VX[2][1]];}
+  function bary(x,y){var a=VX[0],b=VX[1],c=VX[2],d=(b[1]-c[1])*(a[0]-c[0])+(c[0]-b[0])*(a[1]-c[1]);
+    var l1=((b[1]-c[1])*(x-c[0])+(c[0]-b[0])*(y-c[1]))/d, l2=((c[1]-a[1])*(x-c[0])+(a[0]-c[0])*(y-c[1]))/d, l3=1-l1-l2;
+    var v=[l1,l2,l3].map(function(z){return Math.max(.02,z);}),s=v[0]+v[1]+v[2];return v.map(function(z){return z/s;});}
+  function setH(svg,p,base,H,pmax){[].slice.call(svg.querySelectorAll('rect')).forEach(function(r,i){var h=Math.max(1.5,H*Math.min(1,p[i]/pmax));r.setAttribute('y',f(base-h));r.setAttribute('height',f(h));});}
+  function render(){
+    var P=PHI.map(function(phi,k){return soft(phi,+sl[k].value);});
+    P.forEach(function(p,k){setH(hs[k],p,44,40,.75);wb[k].style.width=Math.round(w[k]*100)+'%';sl[k].style.setProperty('--p',((sl[k].value-sl[k].min)/(sl[k].max-sl[k].min)*100).toFixed(1)+'%');});
+    var m=[0,1,2,3,4,5].map(function(i){return w[0]*P[0][i]+w[1]*P[1][i]+w[2]*P[2][i];});
+    setH(out,m,108,100,.6);
+    var xy=at(w);pt.setAttribute('cx',f(xy[0]));pt.setAttribute('cy',f(xy[1]));ptr.setAttribute('cx',f(xy[0]));ptr.setAttribute('cy',f(xy[1]));
+    ticks.forEach(function(l,k){l.setAttribute('x2',f(xy[0]));l.setAttribute('y2',f(xy[1]));l.setAttribute('stroke-width',(1+9*w[k]).toFixed(2));l.setAttribute('stroke-opacity',(.25+.7*w[k]).toFixed(2));});
+  }
+  function wander(t){var a=[Math.sin(t*.55+.2),Math.sin(t*.79+2.3),Math.sin(t*.43+4.2)].map(function(x){return Math.exp(1.3*x);}),s=a[0]+a[1]+a[2];return a.map(function(x){return x/s;});}
+  function frame(now){
+    raf=0;if(!auto||!visible||document.hidden)return;
+    if(!t0)t0=now;var t=(now-t0)/1000+tA;
+    w=wander(t);sl.forEach(function(x,k){x.value=(1.6+1.1*Math.sin(t*(.37+.11*k)+k*1.9)).toFixed(2);});
+    render();raf=requestAnimationFrame(frame);
+  }
+  function stopAuto(){auto=false;}
+  sl.forEach(function(x){x.addEventListener('input',function(){stopAuto();render();});});
+  function fromEvent(e){var r=tri.getBoundingClientRect(),x=(e.clientX-r.left)*300/r.width,y=(e.clientY-r.top)*262/r.height;w=bary(x,y);render();}
+  var drag=false;
+  tri.addEventListener('pointerdown',function(e){drag=true;stopAuto();try{tri.setPointerCapture(e.pointerId);}catch(_){}fromEvent(e);e.preventDefault();});
+  tri.addEventListener('pointermove',function(e){if(drag)fromEvent(e);});
+  ['pointerup','pointercancel'].forEach(function(n){tri.addEventListener(n,function(){drag=false;});});
+  pt.addEventListener('keydown',function(e){var d={ArrowLeft:[-6,0],ArrowRight:[6,0],ArrowUp:[0,-6],ArrowDown:[0,6]}[e.key];if(!d)return;e.preventDefault();stopAuto();var xy=at(w);w=bary(xy[0]+d[0],xy[1]+d[1]);render();});
+  render();
+  if('IntersectionObserver' in window&&!mq.matches){
+    new IntersectionObserver(function(es){visible=es[0].isIntersecting;if(visible&&auto&&!raf){t0=0;raf=requestAnimationFrame(frame);}},{threshold:.2}).observe(root);
+    document.addEventListener('visibilitychange',function(){if(!document.hidden&&visible&&auto&&!raf){t0=0;raf=requestAnimationFrame(frame);}});
+  }
+})();
+</script>

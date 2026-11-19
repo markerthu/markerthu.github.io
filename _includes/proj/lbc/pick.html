@@ -1,0 +1,97 @@
+<figure class="cst pk pausable" id="ch-pick">
+  <div class="cst-stage">
+    <article class="cst-act tts">
+      <header><h3>Pick one policy</h3><p>as population-based agents such as Agent57 do</p></header>
+      <div class="cst-draw" data-mode="pick" role="img" aria-label="Schematic. A triangle whose corners are three policies. The choice jumps from corner to corner: each choice plays exactly one policy, so the agent can only ever play as many behaviors as it has policies."></div>
+      <p class="cst-say">Its behaviors are only as many as its policies.</p>
+      <ul class="pdm-yn"><li class="n"><i aria-hidden="true"></i>Every policy shapes each behavior</li><li class="n"><i aria-hidden="true"></i>More behaviors without more policies</li></ul>
+    </article>
+    <article class="cst-act own">
+      <header><h3>Blend all of them</h3><p>as LBC does, with a new blend every episode</p></header>
+      <div class="cst-draw" data-mode="blend" role="img" aria-label="Schematic. The same triangle of three policies. The choice moves anywhere inside it: every point is a blend of all three policies, and the behaviors it visits fill the whole triangle."></div>
+      <p class="cst-say">The same policies open a continuous space of behaviors.</p>
+      <ul class="pdm-yn"><li class="y"><i aria-hidden="true"></i>Every policy shapes each behavior</li><li class="y"><i aria-hidden="true"></i>More behaviors without more policies</li></ul>
+    </article>
+  </div>
+  <figcaption class="cap">Schematic: the action probabilities are illustrative, not measured.</figcaption>
+</figure>
+<script>
+(function(){
+  var fig=document.getElementById('ch-pick'); if(!fig) return;
+  var hosts=[].slice.call(fig.querySelectorAll('.cst-draw')); if(hosts.length!==2) return;
+  var mq=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)'):{matches:false};
+  var PHI=[[2.2,.6,.2,.9,.1,.4],[.3,.5,2.0,.4,1.2,.2],[.2,1.0,.3,.2,.6,2.3]], TAU=1.5;
+  var S3=Math.sqrt(3)/2, NB=6, GAP=8, W, Hh, CX, CY, R, VX, HX, HW, HB, HH, BW, AX, narrow=null;
+  function geom(n){
+    narrow=n;
+    if(n){W=330;Hh=212;CX=84;CY=108;R=68;HX=184;HW=138;HB=140;HH=80;AX=152;}
+    else{W=440;Hh=232;CX=112;CY=124;R=86;HX=262;HW=166;HB=158;HH=96;AX=222;}
+    VX=[[CX,CY-R],[CX-R*S3,CY+R/2],[CX+R*S3,CY+R/2]];BW=(HW-GAP*(NB-1))/NB;
+  }
+  var SEQ=[0,2,1,0,1,2], HOP=1.6, LOOP=SEQ.length*HOP;
+  var P=[], visible=false, raf=0, t0=0, ns='http://www.w3.org/2000/svg';
+  function soft(phi,t){var m=-1e9,i,e=[],s=0;for(i=0;i<phi.length;i++)m=Math.max(m,t*phi[i]);for(i=0;i<phi.length;i++){e.push(Math.exp(t*phi[i]-m));s+=e[i];}return e.map(function(x){return x/s;});}
+  var PP=PHI.map(function(p){return soft(p,TAU);});
+  function clamp(x){return x<0?0:x>1?1:x;}
+  function ease(x){x=clamp(x);return x*x*(3-2*x);}
+  function at(w){return [w[0]*VX[0][0]+w[1]*VX[1][0]+w[2]*VX[2][0],w[0]*VX[0][1]+w[1]*VX[1][1]+w[2]*VX[2][1]];}
+  function f(v){return v.toFixed(1);}
+  function halton(i,b){var f=1,r=0;while(i>0){f/=b;r+=f*(i%b);i=Math.floor(i/b);}return r;}
+  var HOPS=[];(function(){for(var i=1;i<=60;i++){var u=.04+.92*halton(i,2),v=halton(i,3),q=Math.sqrt(u);HOPS.push([1-q,q*(1-v),q*v]);}})();
+  var BH=.42, NH=30;
+  function build(host,mode){
+    var s='<svg viewBox="0 0 '+W+' '+Hh+'" aria-hidden="true">';
+    s+='<path class="tri" d="M'+VX.map(function(v){return f(v[0])+' '+f(v[1]);}).join('L')+'Z"/>';
+    s+='<g class="trail"></g>';
+    var off=[[0,-17],[-15,10],[15,10]];
+    VX.forEach(function(v,k){s+='<g class="k-p'+(k+1)+'"><circle class="vx" cx="'+f(v[0]+off[k][0])+'" cy="'+f(v[1]+off[k][1])+'" r="11" fill="var(--k)" stroke="var(--ke)"/><text class="vn" x="'+f(v[0]+off[k][0])+'" y="'+f(v[1]+off[k][1]+4.5)+'" fill="var(--kt)">'+(k+1)+'</text></g>';});
+    s+='<circle class="pt" r="6.5" cx="'+CX+'" cy="'+CY+'"/>';
+    s+='<path class="arr" d="M'+AX+' '+(HB-HH/2)+'h'+(narrow?20:24)+'M'+(AX+(narrow?14:18))+' '+(HB-HH/2-5)+'l6 5-6 5"/>';
+    for(var i=0;i<NB;i++)s+='<rect class="bar" x="'+f(HX+i*(BW+GAP))+'" y="'+HB+'" width="'+f(BW)+'" height="0" rx="3"/>';
+    s+='<line class="bl" x1="'+(HX-3)+'" x2="'+(HX+HW+3)+'" y1="'+(HB+.5)+'" y2="'+(HB+.5)+'"/>';
+    s+='<text class="lb s" x="'+(HX+HW/2)+'" y="'+(HB+26)+'" text-anchor="middle">the behavior it plays</text>';
+    s+='<text class="lb" x="'+CX+'" y="'+(Hh-6)+'" text-anchor="middle">'+(mode==='pick'?'one policy at a time':'any blend of all three')+'</text>';
+    host.innerHTML=s+'</svg>';
+    var q=function(x){return [].slice.call(host.querySelectorAll(x));};
+    return {mode:mode,host:host,pt:q('.pt')[0],bars:q('.bar'),trail:q('.trail')[0],dots:[],last:-1,cls:mode==='pick'?'k-run':'k-edit'};
+  }
+  function setBars(p,probs){p.bars.forEach(function(b,i){var h=Math.max(1.5,HH*Math.min(1,probs[i]/.7));b.setAttribute('y',f(HB-h));b.setAttribute('height',f(h));});}
+  function dot(p,x,y,k){var c=document.createElementNS(ns,'circle');c.setAttribute('cx',f(x));c.setAttribute('cy',f(y));c.setAttribute('r','3');c.setAttribute('class','trl');p.trail.appendChild(c);p.dots.push(c);return c;}
+  function draw(t){
+    P.forEach(function(p){
+      var w,probs;
+      if(p.mode==='pick'){
+        var hop=Math.floor((t%LOOP)/HOP), u=(t%LOOP)-hop*HOP, from=SEQ[(hop+SEQ.length-1)%SEQ.length], to=SEQ[hop], e=ease(u/.45);
+        var a=[0,0,0],b=[0,0,0];a[from]=1;b[to]=1;w=a.map(function(x,k){return x+(b[k]-x)*e;});
+        probs=PP[to].map(function(x,i){return PP[from][i]+(x-PP[from][i])*e;});
+        var col=e<.5?from:to; if(p.col!==col){p.col=col;p.bars.forEach(function(b){b.setAttribute('class','bar k-p'+(col+1));});}
+        if(e>=1&&p.last!==to){p.last=to;var have=p.dots.some(function(d){return d._k===to;});if(!have){var v=VX[to],c=dot(p,v[0],v[1]);c._k=to;c.setAttribute('r','5');c.setAttribute('class','trl k-p'+(to+1));}}
+      }else{
+        var tl=t%(NH*BH+2.4), h=Math.min(NH-1,Math.floor(tl/BH)), uu=ease((tl-h*BH)/.26), from=h>0?HOPS[h-1]:HOPS[NH-1];
+        w=[0,1,2].map(function(k){return from[k]+(HOPS[h][k]-from[k])*uu;});
+        probs=[0,1,2,3,4,5].map(function(i){return w[0]*PP[0][i]+w[1]*PP[1][i]+w[2]*PP[2][i];});
+        if(tl<(p.lastT||0)){p.dots.forEach(function(d){d.remove();});p.dots=[];}
+        p.lastT=tl;
+        while(p.dots.length<=h&&p.dots.length<NH&&uu>=1||p.dots.length<h){var q=at(HOPS[p.dots.length]);dot(p,q[0],q[1]).setAttribute('fill','var(--mint-e)');}
+      }
+      var xy=at(w);p.pt.setAttribute('cx',f(xy[0]));p.pt.setAttribute('cy',f(xy[1]));setBars(p,probs);
+    });
+  }
+  function still(){
+    P.forEach(function(p){p.dots.forEach(function(d){d.remove();});p.dots=[];p.last=-1;p.lastT=0;});
+    var pk=P[0];pk.col=-1;[0,1,2].forEach(function(k){var v=VX[k],c=dot(pk,v[0],v[1]);c._k=k;c.setAttribute('r','5');c.setAttribute('class','trl k-p'+(k+1));});
+    var bl=P[1];for(var i=0;i<NH;i++){var q=at(HOPS[i]);dot(bl,q[0],q[1]).setAttribute('fill','var(--mint-e)');}
+    draw(NH*BH+1);
+  }
+  function frame(now){raf=0;if(!visible||document.hidden||mq.matches)return;if(!t0)t0=now;draw((now-t0)/1000);raf=requestAnimationFrame(frame);}
+  function start(){P.forEach(function(p){p.dots.forEach(function(d){d.remove();});p.dots=[];p.last=-1;p.lastT=0;});t0=0;if(!raf)raf=requestAnimationFrame(frame);}
+  function setup(){var n=hosts[0].clientWidth<400;if(n===narrow)return false;geom(n);P=[build(hosts[0],'pick'),build(hosts[1],'blend')];return true;}
+  setup();
+  still();
+  window.addEventListener('resize',function(){if(setup()){if(raf||visible)start();else still();}});
+  if(!mq.matches&&'IntersectionObserver' in window){
+    new IntersectionObserver(function(es){var v=es[0].isIntersecting;if(v&&!visible){visible=true;start();}else if(!v){visible=false;}},{threshold:.2}).observe(fig);
+    document.addEventListener('visibilitychange',function(){if(!document.hidden&&visible&&!raf)raf=requestAnimationFrame(frame);});
+  }
+})();
+</script>

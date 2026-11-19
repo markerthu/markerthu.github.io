@@ -1,0 +1,215 @@
+<script>
+/* LBC hero: three policies, one space of blends, a bandit that picks a blend per episode and learns from the return. Schematic. */
+(function(){
+  var cv=document.getElementById('lbc-stage'); if(!cv||!cv.getContext) return;
+  var ctx=cv.getContext('2d'), W=0, H=0, dpr=1, G=null, C=null;
+  var mq=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)'):{matches:false};
+  var steps=[].slice.call(document.querySelectorAll('.stage-steps li'));
+  var PHI=[[2.2,.6,.2,.9,.1,.4],[.3,.5,2.0,.4,1.2,.2],[.2,1.0,.3,.2,.6,2.3]];
+  var EP=[
+    {w:[.12,.76,.12],tau:[1.2,1.7,.8],r:.32},
+    {w:[.10,.16,.74],tau:[.9,.6,1.9],r:.48},
+    {w:[.44,.36,.20],tau:[1.7,1.1,.7],r:.88},
+    {w:[.80,.10,.10],tau:[2.3,.8,.8],r:.40},
+    {w:[.48,.34,.18],tau:[1.5,1.3,.6],r:.95}
+  ];
+  var NS=4, D=3.2, HOLD=2.6, T=EP.length*D+HOLD, SPEED=1, FINAL=EP.length*D-0.05, cycle=0, visible=true, raf=0, t0=0, lastStep=-1;
+  var REG=[], PERM=[];
+
+  function hex(s){s=s.trim().replace('#','');if(s.length===3)s=s[0]+s[0]+s[1]+s[1]+s[2]+s[2];return [parseInt(s.slice(0,2),16),parseInt(s.slice(2,4),16),parseInt(s.slice(4,6),16)];}
+  function mix(a,b,t){t=t<0?0:t>1?1:t;return [a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t,a[2]+(b[2]-a[2])*t];}
+  function rgba(c,a){return 'rgba('+(c[0]|0)+','+(c[1]|0)+','+(c[2]|0)+','+(a==null?1:a<0?0:a>1?1:a)+')';}
+  function clamp(x){return x<0?0:x>1?1:x;}
+  function ease(x){x=clamp(x);return x*x*(3-2*x);}
+  function seg(t,a,b){return clamp((t-a)/(b-a));}
+  function lerp(a,b,t){return a+(b-a)*t;}
+  function colors(){
+    var cs=getComputedStyle(document.body), v=function(n){return hex(cs.getPropertyValue(n));};
+    C={bg:v('--bg'),card:v('--card'),ink:v('--ink'),muted:v('--muted'),faint:v('--faint'),hair:v('--hair'),rule:v('--rule'),
+       mint:v('--mint'),mintE:v('--mint-e'),mintT:v('--mint-t'),mintL:v('--mint-l'),
+       P:[[v('--ice'),v('--ice-e'),v('--ice-t')],[v('--lav'),v('--lav-e'),v('--lav-t')],[v('--rose'),v('--rose-e'),v('--rose-t')]],
+       dark:document.body.classList.contains('dark-mode'),sans:cs.getPropertyValue('--sans')};
+  }
+  function soft(phi,tau){var m=-1e9,i,e=[],s=0;for(i=0;i<phi.length;i++)m=Math.max(m,tau*phi[i]);for(i=0;i<phi.length;i++){e.push(Math.exp(tau*phi[i]-m));s+=e[i];}return e.map(function(x){return x/s;});}
+
+  /* the 16 regions of the triangle (the bandit's arms), as barycentric corner triples */
+  (function(){
+    function bc(i,j){return [(NS-i-j)/NS,i/NS,j/NS];}
+    for(var i=0;i<NS;i++)for(var j=0;j<NS-i;j++){
+      REG.push({c:[bc(i,j),bc(i+1,j),bc(i,j+1)],key:'u'+i+'_'+j});
+      if(i+j<=NS-2)REG.push({c:[bc(i+1,j),bc(i,j+1),bc(i+1,j+1)],key:'d'+i+'_'+j});
+    }
+    REG.forEach(function(r){r.m=[0,1,2].map(function(k){return (r.c[0][k]+r.c[1][k]+r.c[2][k])/3;});});
+    for(var k=0;k<REG.length;k++)PERM.push((k*7+3)%REG.length);
+  })();
+  function regionOf(w){
+    var i=w[1]*NS,j=w[2]*NS,fi=Math.min(NS-1,Math.floor(i)),fj=Math.min(NS-1-fi,Math.floor(j)),up=(i-fi)+(j-fj)<1;
+    var key=(up?'u':'d')+fi+'_'+fj; for(var k=0;k<REG.length;k++)if(REG[k].key===key)return k; return 0;
+  }
+  var V=[], V0=[];
+  (function(){
+    var v=REG.map(function(){return .05;}); V0=v.slice(); V.push(v.slice());
+    EP.forEach(function(e){e.k=regionOf(e.w);v[e.k]=v[e.k]+.62*(e.r-v[e.k]);V.push(v.slice());});
+  })();
+
+  function layout(){
+    var r=cv.getBoundingClientRect();W=Math.max(280,r.width);H=Math.max(240,r.height);
+    dpr=Math.min(2,window.devicePixelRatio||1);cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);
+    var wide=W>=620;G={wide:wide};
+    if(wide){
+      G.cx=W*.5;G.cy=H*.46;G.R=Math.min(138,H*.35);
+      G.px=Math.max(12,W*.03);G.pw=Math.min(150,W*.19);G.ph=46;G.py=[H*.24,H*.5,H*.76];
+      G.ox=W*.735;G.ow=Math.min(176,W-G.ox-14);G.oy=H*.42;G.oh=74;G.my=H*.64;
+    }else{
+      G.cx=W/2+18;G.cy=196;G.R=Math.min(92,W*.26);
+      G.px=12;G.gap=14;G.pw=(W-24-2*G.gap)/3;G.ph=34;G.py=[45,45,45];
+      G.ox=12;G.ow=W*.5;G.oy=360;G.oh=50;G.my=337;
+    }
+    var R=G.R,s=Math.sqrt(3)/2;
+    G.V=[[G.cx,G.cy-R],[G.cx-R*s,G.cy+R/2],[G.cx+R*s,G.cy+R/2]];
+  }
+  function at(w){return [w[0]*G.V[0][0]+w[1]*G.V[1][0]+w[2]*G.V[2][0], w[0]*G.V[0][1]+w[1]*G.V[1][1]+w[2]*G.V[2][1]];}
+  function polyPath(pts){ctx.beginPath();ctx.moveTo(pts[0][0],pts[0][1]);for(var i=1;i<pts.length;i++)ctx.lineTo(pts[i][0],pts[i][1]);ctx.closePath();}
+  function hist(x,y,w,h,p,fill,edge,pmax,a){
+    var n=p.length,g=w*.06,bw=(w-g*(n-1))/n;
+    for(var i=0;i<n;i++){var bh=Math.max(1.5,h*Math.min(1,p[i]/pmax));
+      ctx.beginPath();if(ctx.roundRect)ctx.roundRect(x+i*(bw+g),y+h-bh,bw,bh,[3,3,1,1]);else ctx.rect(x+i*(bw+g),y+h-bh,bw,bh);
+      ctx.fillStyle=rgba(fill,a);ctx.fill();ctx.lineWidth=1.1;ctx.strokeStyle=rgba(edge,a);ctx.stroke();}
+    ctx.beginPath();ctx.moveTo(x-3,y+h+.5);ctx.lineTo(x+w+3,y+h+.5);ctx.lineWidth=1;ctx.strokeStyle=rgba(C.hair,1);ctx.stroke();
+  }
+  function label(s,x,y,wt,col,al){ctx.font=wt+' '+(G.wide?14:13)+'px '+C.sans;ctx.fillStyle=rgba(col,al==null?1:al);ctx.fillText(s,x,y);}
+  function small(s,x,y,col,al){ctx.font='500 13px '+C.sans;ctx.fillStyle=rgba(col,al==null?1:al);ctx.fillText(s,x,y);}
+  function node(x,y,k,r){ctx.beginPath();ctx.arc(x,y,r,0,6.2832);ctx.fillStyle=rgba(C.P[k][0],1);ctx.fill();ctx.lineWidth=1.3;ctx.strokeStyle=rgba(C.P[k][1],1);ctx.stroke();
+    ctx.font='600 13px '+C.sans;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle=rgba(C.P[k][2],1);ctx.fillText(String(k+1),x,y+.5);ctx.textBaseline='alphabetic';}
+
+  function state(t){
+    var n=EP.length, e=Math.min(n-1,Math.floor(t/D)), u=t-e*D, hold=t>=n*D;
+    if(hold){e=n-1;u=D;}
+    var prev=e>0?EP[e-1]:(cycle>0?EP[n-1]:{w:[1/3,1/3,1/3],tau:[1,1,1],r:0});
+    var mv=ease(seg(u,.6,1.45)), cur=EP[e];
+    var w=[0,1,2].map(function(k){return lerp(prev.w[k],cur.w[k],mv);}), tau=[0,1,2].map(function(k){return lerp(prev.tau[k],cur.tau[k],mv);});
+    var vA=V[e], vB=V[e+1], vt=ease(seg(u,2.75,3.1)), val=vA.map(function(x,k){return lerp(x,vB[k],vt);});
+    if(cycle>0&&e===0){var rs=ease(seg(u,0,.7));val=val.map(function(x,k){return lerp(V[n][k],x,rs);});}
+    var meter=u<1.5?(e>0||cycle>0?prev.r*(1-seg(u,0,.45)):0):cur.r*ease(seg(u,1.5,2.3));
+    var stp=hold?3:u<.8?0:u<1.5?1:u<2.35?2:3;
+    return {e:e,u:u,hold:hold,w:w,tau:tau,val:val,meter:meter,step:stp,cur:cur};
+  }
+
+  function draw(t,still){
+    if(!G||!C) return;
+    ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,W,H);
+    var S=state(t), wide=G.wide, k, i;
+    if(S.step!==lastStep){lastStep=S.step;steps.forEach(function(el,j){el.classList.toggle('on',j===S.step);});}
+    var P=[0,1,2].map(function(j){return soft(PHI[j],S.tau[j]);});
+    var mixp=[0,1,2,3,4,5].map(function(a){return S.w[0]*P[0][a]+S.w[1]*P[1][a]+S.w[2]*P[2][a];});
+    var psi=at(S.w);
+
+    /* soft floor glow under the triangle */
+    var gr=ctx.createRadialGradient(G.cx,G.cy+G.R*.62,4,G.cx,G.cy+G.R*.62,G.R*1.3);
+    gr.addColorStop(0,rgba(C.dark?C.mintE:C.ink,C.dark?.16:.06));gr.addColorStop(1,rgba(C.ink,0));
+    ctx.save();ctx.translate(0,G.cy+G.R*.62);ctx.scale(1,.12);ctx.translate(0,-(G.cy+G.R*.62));ctx.fillStyle=gr;ctx.fillRect(G.cx-G.R*1.4,G.cy-G.R*.8,G.R*2.8,G.R*2.8);ctx.restore();
+
+    /* the regions: each a bandit arm, filled by what it has learned */
+    REG.forEach(function(r,j){
+      var pts=r.c.map(at), v=S.val[j];
+      polyPath(pts);ctx.fillStyle=rgba(mix(C.card,C.mint,C.dark?.35+.65*v:.08+.92*v),1);ctx.fill();
+      ctx.lineWidth=1;ctx.strokeStyle=rgba(C.rule,1);ctx.stroke();
+    });
+    /* the bandit picks: a quick sweep, then the chosen region */
+    if(!S.hold&&S.u<.56&&!still){var pk=REG[PERM[(Math.floor(S.u/.07)+S.e*5)%REG.length]];
+      polyPath(pk.c.map(at));ctx.lineWidth=1.6;ctx.strokeStyle=rgba(C.mintE,.55);ctx.stroke();}
+    var ch=REG[S.cur.k], ca=S.hold?1:seg(S.u,.45,.75);
+    if(ca>0){polyPath(ch.c.map(at));ctx.lineWidth=2;ctx.strokeStyle=rgba(C.ink,ca*.9);ctx.stroke();}
+    polyPath(G.V);ctx.lineWidth=1.4;ctx.strokeStyle=rgba(C.hair,1);ctx.stroke();
+
+    /* the policies */
+    var anchors=[];
+    for(k=0;k<3;k++){
+      var hx,hy,hw=G.pw,hh=G.ph;
+      if(wide){hx=G.px+30;hw=G.pw;hy=G.py[k]-hh/2;node(G.px+10,G.py[k],k,10);anchors.push([hx+hw+8,G.py[k]]);}
+      else{hx=G.px+k*(G.pw+G.gap);hy=G.py[k]-hh/2+6;node(hx+8,hy-14,k,9);anchors.push([hx+hw/2,hy+hh+6]);}
+      hist(hx,hy,hw,hh,P[k],C.P[k][0],C.P[k][1],.75,1);
+    }
+    /* the weights: one line from every policy into the chosen blend */
+    for(k=0;k<3;k++){
+      var a=anchors[k], wk=S.w[k];
+      ctx.beginPath();ctx.moveTo(a[0],a[1]);
+      if(wide)ctx.bezierCurveTo(a[0]+60,a[1],psi[0]-70,psi[1],psi[0],psi[1]);
+      else ctx.bezierCurveTo(a[0],a[1]+40,psi[0],psi[1]-60,psi[0],psi[1]);
+      ctx.lineCap='round';ctx.lineWidth=.8+7*wk;ctx.strokeStyle=rgba(C.P[k][1],.18+.7*wk);ctx.stroke();
+    }
+    for(k=0;k<3;k++){var vx=G.V[k];node(vx[0]+(k===0?0:k===1?-15:15),vx[1]+(k===0?-15:9),k,wide?10:9);}
+
+    /* the blend it plays */
+    var ox=G.ox, oy, ow=G.ow, oh=G.oh, inx, iny;
+    if(wide){oy=G.oy-oh/2;inx=ox-10;iny=G.oy;}
+    else{oy=G.oy-oh;inx=ox+ow/2;iny=oy-8;}
+    ctx.beginPath();ctx.moveTo(psi[0],psi[1]);
+    if(wide)ctx.bezierCurveTo(psi[0]+90,psi[1],inx-70,iny,inx,iny);else ctx.bezierCurveTo(psi[0],psi[1]+50,inx,iny-50,inx,iny);
+    ctx.lineWidth=2.4;ctx.strokeStyle=rgba(C.mintE,.85);ctx.stroke();
+    hist(ox,oy,ow,oh,mixp,C.mint,C.mintE,.6,1);
+
+    /* the point the bandit chose */
+    var pr=13+2*Math.sin(t*4), hg=ctx.createRadialGradient(psi[0],psi[1],0,psi[0],psi[1],pr*1.6);
+    hg.addColorStop(0,rgba(C.mintE,C.dark?.5:.35));hg.addColorStop(1,rgba(C.mintE,0));
+    ctx.fillStyle=hg;ctx.beginPath();ctx.arc(psi[0],psi[1],pr*1.6,0,6.2832);ctx.fill();
+    ctx.beginPath();ctx.arc(psi[0],psi[1],6.5,0,6.2832);ctx.fillStyle=rgba(C.card,1);ctx.fill();ctx.lineWidth=2.6;ctx.strokeStyle=rgba(C.ink,1);ctx.stroke();
+
+    /* the episode's return */
+    var mx0,my,mw;
+    if(wide){mx0=ox;my=G.my;mw=ow;}else{mx0=W*.6;my=G.my;mw=W-12-mx0;}
+    ctx.beginPath();if(ctx.roundRect)ctx.roundRect(mx0,my-6,mw,12,6);else ctx.rect(mx0,my-6,mw,12);ctx.fillStyle=rgba(C.rule,1);ctx.fill();
+    if(S.meter>.005){ctx.beginPath();if(ctx.roundRect)ctx.roundRect(mx0,my-6,Math.max(12,mw*S.meter),12,6);else ctx.rect(mx0,my-6,mw*S.meter,12);ctx.fillStyle=rgba(C.mintE,1);ctx.fill();}
+
+    /* the return flows back into the region it came from */
+    var flow=S.hold?0:seg(S.u,2.3,2.95), rm=at(ch.m);
+    var fx0=wide?mx0:mx0+mw*S.cur.r, fy0=wide?my:my-8, cpx=wide?mx0-26:W-6, cpy=wide?my-86:G.cy+G.R*.5;
+    if(flow>0&&flow<1){
+      ctx.beginPath();var q,N=40;for(q=0;q<=N*flow;q++){var uu=q/N,o=1-uu,xx=o*o*fx0+2*o*uu*cpx+uu*uu*rm[0],yy=o*o*fy0+2*o*uu*cpy+uu*uu*rm[1];if(q===0)ctx.moveTo(xx,yy);else ctx.lineTo(xx,yy);}
+      ctx.setLineDash([3,5]);ctx.lineWidth=1.5;ctx.strokeStyle=rgba(C.mintE,.7);ctx.stroke();ctx.setLineDash([]);
+      var o2=1-flow,hx2=o2*o2*fx0+2*o2*flow*cpx+flow*flow*rm[0],hy2=o2*o2*fy0+2*o2*flow*cpy+flow*flow*rm[1];
+      ctx.beginPath();ctx.arc(hx2,hy2,4.5,0,6.2832);ctx.fillStyle=rgba(C.mintE,1);ctx.fill();
+    }
+    var ring=S.hold?0:seg(S.u,2.9,3.2);
+    if(ring>0&&ring<1){ctx.beginPath();ctx.arc(rm[0],rm[1],6+22*ring,0,6.2832);ctx.lineWidth=2;ctx.strokeStyle=rgba(C.mintE,1-ring);ctx.stroke();}
+
+    /* words */
+    ctx.textAlign='center';ctx.textBaseline='alphabetic';
+    if(wide){
+      var ty=G.V[1][1]+44;
+      label('every blend of the three',G.cx,ty,'600',C.ink);
+      small('the bandit’s choices, one per episode',G.cx,ty+18,C.muted);
+      ctx.textAlign='left';
+      label('three policies',G.px,G.py[0]-G.ph/2-24,'600',C.ink);
+      small('learned side by side',G.px,G.py[2]+G.ph/2+28,C.muted);
+      label('the behavior it plays',ox,oy-16,'600',C.ink);
+      small('episode return',mx0,my+28,C.muted);
+    }else{
+      ctx.textAlign='left';
+      label('every blend',12,G.cy-6,'600',C.ink);
+      label('of the three',12,G.cy+12,'600',C.ink);
+      label('the behavior it plays',ox,G.oy+26,'600',C.ink);
+      small('episode return',mx0,G.oy+26,C.muted);
+    }
+    ctx.textAlign='left';
+  }
+
+  function frame(now){
+    raf=0;if(mq.matches||!visible||document.hidden) return;
+    if(!t0)t0=now;var e=(now-t0)/1000*SPEED;
+    if(e>=T){cycle++;t0=now;e=0;}
+    draw(e);raf=requestAnimationFrame(frame);
+  }
+  function still(){cycle=0;draw(FINAL,true);}
+  function kick(){if(mq.matches){still();return;}if(!raf&&visible&&!document.hidden){t0=0;cycle=0;raf=requestAnimationFrame(frame);}}
+  function refresh(){colors();layout();if(mq.matches||!raf)still();}
+  colors();layout();still();
+  if('IntersectionObserver' in window){new IntersectionObserver(function(es){visible=es[0].isIntersecting;if(visible)kick();},{threshold:.05}).observe(cv);}
+  document.addEventListener('visibilitychange',kick);
+  window.addEventListener('resize',function(){layout();if(mq.matches||!raf)still();});
+  if(mq.addEventListener)mq.addEventListener('change',function(){if(mq.matches)still();else kick();});
+  new MutationObserver(function(){colors();if(mq.matches||!raf)still();}).observe(document.body,{attributes:true,attributeFilter:['class']});
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(refresh);
+  kick();
+})();
+</script>
