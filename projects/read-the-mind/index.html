@@ -8,192 +8,37 @@ permalink: /projects/read-the-mind/
 <meta charset="UTF-8">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Can We Read the Mind of an Audio LLM? A Verbalizable, Multilingual Middle-Layer Workspace">
-  <meta property="og:description" content="Reading a base Qwen3-Omni with a logit lens at the audio-token positions: the answer to a spoken question becomes legible, in words, in the middle layers — before the model emits a single token.">
+  <meta property="og:description" content="Reading a base Qwen3-Omni with a logit lens at the audio-token positions, the answer to a spoken question becomes legible, in words, in the model's middle layers, before it emits any token. The readout holds concepts the clip never names, in several languages at once, and the model uses it.">
   <meta property="og:image" content="https://www.jiajunfan.com/images/og/read-the-mind.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
   <meta property="og:url" content="https://www.jiajunfan.com/projects/read-the-mind/">
   <link rel="canonical" href="https://www.jiajunfan.com/projects/read-the-mind/">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Can We Read the Mind of an Audio LLM?">
-  <meta name="twitter:description" content="A verbalizable, multilingual middle-layer workspace in an audio LLM — readable with a logit lens, before any token is emitted.">
+  <meta name="twitter:description" content="Read with a logit lens while it listens, an audio LLM's answer is legible in words in its middle layers, before it says anything. No chain-of-thought needed.">
   <meta name="twitter:image" content="https://www.jiajunfan.com/images/og/read-the-mind.jpg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Can We Read the Mind of an Audio LLM? | Jiajun Fan</title>
-<meta name="description" content="A verbalizable, multilingual middle-layer workspace in an audio language model.">
+<title>Can We Read the Mind of an Audio LLM? A Verbalizable, Multilingual Middle-Layer Workspace | Jiajun Fan</title>
+<meta name="description" content="Reading a base Qwen3-Omni with a logit lens at the audio-token positions, the answer to a spoken question becomes legible, in words, in the model's middle layers, before it emits any token.">
 <meta name="theme-color" content="#fdfcfa">
 <meta name="theme-color" content="#0f1216" media="(prefers-color-scheme: dark)">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
 <link rel="icon" href="/images/favicon.ico">
-<meta name="robots" content="index,follow">
 <script>try{if(localStorage.getItem('darkMode')==='true'){document.documentElement.style.background='#0f1216';}}catch(e){}</script>
-<style>
-@font-face{font-family:'Newsreader Fallback';src:local('Georgia');size-adjust:91.7%;ascent-override:80.2%;descent-override:28.9%;line-gap-override:0%;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:'Inter Fallback';src:local('Arial');size-adjust:107.1%;ascent-override:90.4%;descent-override:22.5%;line-gap-override:0%;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-:root{
-  --serif:'Newsreader','Newsreader Fallback',Georgia,'Times New Roman',serif;
-  --sans:'Inter','Inter Fallback','Segoe UI',system-ui,-apple-system,sans-serif;
-  --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
-  --bg:#fdfcfa; --band:#f6f3ec; --ink:#1a1815; --body:#2b2823; --muted:#6c6860; --faint:#6b665c;
-  --rule:#e8e3d9; --link:#2F4B8F; --on-link:#ffffff; --link-h:#23396E; --card:#ffffff; --fig-border:#e6e0d5;
-  --good:#2F4B8F; --bad:#c0392b;
-}
-body.dark-mode{
-  --bg:#0f1216; --band:#151a20; --ink:#ece8e0; --body:#cdc8be; --muted:#8f8a80; --faint:#8a857b;
-  --rule:#262b33; --link:#6ea8fe; --on-link:#0f1216; --link-h:#93c0ff; --card:#161a20; --fig-border:#2a2f38;
-  --good:#9DB8EA; --bad:#f7a8b8;
-}
-.lbl-ico{display:inline-block;width:1em;height:1em;vertical-align:-0.14em;margin-right:5px;background-color:currentColor;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;flex-shrink:0;}
-*{box-sizing:border-box;margin:0;padding:0}
-html{overflow-x:hidden;scroll-behavior:smooth;}
-body{font-family:var(--serif);background:var(--bg);color:var(--body);line-height:1.72;font-size:19px;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s;}
-a{color:var(--link);text-decoration:none}a:hover{color:var(--link-h)}
-::selection{background:rgba(47,75,143,.16);}
-
-/* ── masthead (shared) ── */
-.site-masthead{background:var(--bg);box-shadow:0 1px 0 var(--rule);position:sticky;top:0;z-index:200;font-size:16px;font-family:var(--sans);}
-.site-masthead::after{content:'';display:block;height:3px;background:linear-gradient(to right,#2F4B8F 0%,#6F94C6 50%,#E39A7A 100%)}
-.masthead-inner{max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:56px}
-.masthead-title{font-weight:800;font-size:1.35em;color:var(--ink)!important;text-decoration:none!important;letter-spacing:-.02em}
-.masthead-nav{display:flex;gap:2px;align-items:center}
-.masthead-nav a{font-weight:600;font-size:0.98em;color:var(--muted)!important;text-decoration:none!important;padding:6px 10px;border-radius:6px;transition:color .2s,background .2s}
-.masthead-nav a:hover{color:var(--link)!important;background:rgba(47,75,143,.07)}
-.masthead-nav a.nav-active{color:var(--link)!important}
-@media(max-width:600px){.masthead-inner{flex-wrap:wrap;height:auto;padding:8px 14px 7px;row-gap:1px;justify-content:center}.masthead-title{width:100%;text-align:center}.masthead-nav{width:100%;justify-content:center;flex-wrap:wrap}}
-@media(max-width:560px){.masthead-nav a{font-size:0.86em;padding:5px 8px}.masthead-title{font-size:1.15em}}
-
-/* ── hero (editorial) ── */
-.hero{max-width:820px;margin:0 auto;padding:52px 24px 8px;text-align:center;}
-.kicker{font-family:var(--sans);text-transform:uppercase;letter-spacing:.145em;font-size:.72rem;font-weight:700;color:var(--link);margin-bottom:1em;}
-.hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.12;letter-spacing:-.015em;color:var(--ink);margin:0 auto .5em;max-width:15em;}
-.hero .short{font-family:var(--serif);font-size:1.2rem;color:var(--muted);margin-bottom:1.3em;}
-.hero .short strong{color:var(--body);font-weight:600;}
-.authors{font-family:var(--sans);font-size:.92rem;color:var(--muted);max-width:720px;margin:0 auto .5em;line-height:1.9}
-.authors .me{font-weight:700;color:var(--ink)}
-.affil{font-family:var(--sans);font-size:.82rem;color:var(--faint);margin-bottom:1.5em;line-height:1.6}
-.btn-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
-.btn{display:inline-flex;align-items:center;gap:7px;padding:9px 20px;border-radius:999px;font-family:var(--sans);font-size:.85rem;font-weight:600;transition:.18s;border:1px solid var(--rule);}
-.btn:hover{transform:translateY(-1px)}
-.btn-primary{background:var(--link);color:var(--on-link);border-color:var(--link)}
-.btn-primary:hover{color:var(--on-link)}
-.btn-secondary{background:var(--card);color:var(--link)}
-.btn-neutral{background:var(--band);color:var(--body)}
-.hero-rule{max-width:820px;margin:2.2em auto 0;border:none;border-top:1px solid var(--rule);}
-
-/* ── layout ── */
-.container{max-width:720px;margin:0 auto;padding:0 24px}
-section{padding:34px 0 8px}
-section p{color:var(--body);margin-bottom:1em;font-size:1.06rem;line-height:1.72}
-h2{font-family:var(--sans);font-size:1.45rem;font-weight:700;color:var(--ink);margin:1.4em 0 .7em;line-height:1.25;letter-spacing:-.01em}
-h2 .lbl-ico{color:var(--link);}
-h3,h4{font-family:var(--sans);color:var(--ink);}
-em{font-style:italic}
-strong{font-weight:600;color:var(--ink)}
-
-/* ── abstract / TL;DR ── */
-.tldr{font-family:var(--serif);font-size:1.16rem;line-height:1.6;color:var(--body);border-left:3px solid var(--rule);padding:2px 0 2px 22px;margin:.4em 0 .2em;}
-.tldr strong{color:var(--link);font-weight:600}
-
-/* ── stat cards ── */
-.results-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:20px 0}
-.result-card{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:20px 14px;text-align:center}
-.result-card .rnum{font-family:var(--sans);font-size:1.7rem;font-weight:800;color:var(--link);line-height:1.1;white-space:nowrap}
-.result-card .rdesc{font-family:var(--sans);font-size:.76rem;color:var(--muted);margin-top:8px;line-height:1.5}
-
-/* ── method steps ── */
-.method-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;margin:20px 0}
-.step{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:18px;text-align:center}
-.step .step-num{width:34px;height:34px;background:var(--link);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--sans);font-weight:800;font-size:.9em;margin:0 auto 11px}
-.step h3{font-family:var(--sans);font-size:.86rem;font-weight:700;color:var(--ink);margin-bottom:7px}
-.step p{font-family:var(--sans);font-size:.8rem;color:var(--muted);margin:0;line-height:1.55}
-
-/* ── problem / solution ── */
-.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0}
-.problem-card,.solution-card{border-radius:12px;padding:18px 20px;background:var(--card);border:1px solid var(--rule)}
-.problem-card{border-left:3px solid var(--bad)} .solution-card{border-left:3px solid var(--good)}
-.problem-card h3,.solution-card h3{font-family:var(--sans);font-size:.86rem;font-weight:700;margin-bottom:8px}
-.problem-card h3{color:var(--bad)} .solution-card h3{color:var(--good)}
-.problem-card p,.solution-card p{font-family:var(--sans);font-size:.86rem;color:var(--body);margin:0;line-height:1.6}
-
-/* ── comparison table ── */
-.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:20px 0}
-.compare-table{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:.9rem}
-.compare-table th{background:var(--band);color:var(--muted);padding:11px 15px;text-align:left;font-weight:600;border-bottom:1px solid var(--rule);font-size:.76rem;text-transform:uppercase;letter-spacing:.04em}
-.compare-table td{padding:11px 15px;border-bottom:1px solid var(--rule);color:var(--body)}
-.compare-table tr:last-child td{border-bottom:none}
-.compare-table .highlight td{background:rgba(47,75,143,.06);font-weight:600;color:var(--ink)}
-body.dark-mode .badge-win{background:#1A2333}
-.badge-win{background:#E6EEF8;color:var(--good);padding:2px 9px;border-radius:6px;font-weight:700;font-size:.82em}
-
-/* ── figures (native inline SVG charts) ── */
-figure.chart{margin:1.8em auto;color:var(--muted);max-width:640px;}
-figure.chart.wide{max-width:100%;}
-figure.chart.narrow{max-width:460px;}
-figure.chart svg{display:block;width:100%;height:auto;}
-figure.chart figcaption{font-family:var(--sans);font-size:.82rem;color:var(--muted);margin-top:.9em;text-align:center;line-height:1.55;max-width:600px;margin-left:auto;margin-right:auto;}
-figure.chart figcaption b,figure.chart figcaption strong{color:var(--link);font-weight:600}
-
-/* ── timeline ── */
-.tl{position:relative;padding-left:24px;margin:10px 0}
-.tl-line{position:absolute;left:8px;top:4px;bottom:4px;width:2px;background:var(--rule)}
-.tl-item{position:relative;margin-bottom:18px}
-.tl-dot{position:absolute;left:-20px;top:5px;width:11px;height:11px;border-radius:50%;background:var(--c-var,#BFD8EC);border:1.5px solid var(--c-var-line,#6F94C6);box-shadow:0 0 0 3px var(--bg)}
-.tl-dot.done{background:var(--good);border-color:var(--good)}
-.tl-date{font-family:var(--sans);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--link)}
-.tl-dot.done ~ .tl-date{color:var(--good)}
-.tl-title{font-family:var(--sans);font-weight:600;font-size:.95rem;color:var(--ink);margin:1px 0 2px}
-.tl-desc{font-family:var(--sans);font-size:.84rem;color:var(--muted);line-height:1.55}
-
-/* ── BibTeX ── */
-.bib-copy-btn{display:inline-flex;align-items:center;gap:6px;margin-bottom:10px;padding:6px 15px;border-radius:8px;border:1px solid var(--rule);cursor:pointer;font-family:var(--sans);font-size:.8rem;font-weight:600;background:var(--band);color:var(--body);transition:.18s}
-.bib-copy-btn:hover{border-color:var(--link);color:var(--link)}
-.bib-copy-btn.copied{background:var(--good);color:#fff;border-color:var(--good)}
-.bibtex-block{background:var(--band);color:var(--body);border:1px solid var(--rule);border-radius:12px;padding:18px 20px;overflow-x:auto;font-family:var(--mono);font-size:.8rem;line-height:1.7}
-
-/* ── footer ── */
-footer{font-family:var(--sans);background:transparent;color:var(--muted);text-align:center;padding:26px 24px;font-size:.86rem;border-top:1px solid var(--rule);margin-top:2.4em}
-footer a{color:var(--link)}
-
-/* ── controls ── */
-#read-progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,#2F4B8F,#6F94C6 60%,#E39A7A);z-index:9999;transition:width .08s linear;pointer-events:none}
-.pg-fab{position:fixed;right:22px;width:42px;height:42px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.18);z-index:9990;transition:transform .2s,opacity .2s}
-.pg-fab:hover{transform:translateY(-2px) scale(1.06)}
-#pg-top{bottom:22px;background:var(--link);color:var(--on-link);opacity:0;pointer-events:none}
-#pg-top.show{opacity:1;pointer-events:auto}
-#pg-dark{bottom:126px;background:#fff;color:#2F4B8F;border:1.5px solid rgba(0,0,0,.15)}
-body.dark-mode #pg-dark{background:#1A2333;color:#F5C8B5;border-color:#2B3A55}
-.pg-dico{width:20px;height:20px;display:inline-block;background-color:currentColor;-webkit-mask:url(/images/icons/h-moon.png) center/contain no-repeat;mask:url(/images/icons/h-moon.png) center/contain no-repeat}
-body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-image:url(/images/icons/h-sun.png)}
-.pg-up{width:11px;height:11px;border-top:2.6px solid currentColor;border-right:2.6px solid currentColor;transform:rotate(-45deg) translateY(2px);display:inline-block}
-
-@media(max-width:640px){figure.chart.wide{overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:6px;}figure.chart.wide svg{min-width:520px;}figure.chart.wide:not(.anim-fig) svg{min-width:0;}figure.chart.wide figcaption{position:sticky;left:0;max-width:calc(100vw - 48px);}}
-@media(max-width:640px){.problem-grid{grid-template-columns:1fr}.method-steps{grid-template-columns:1fr 1fr}.results-grid{grid-template-columns:1fr 1fr}.hero h1{font-size:2rem}}
-@media print{.site-masthead,.pg-fab,#read-progress{display:none!important}}
-@media (prefers-reduced-motion:reduce){*{transition-duration:.001ms!important}html{scroll-behavior:auto}}
-@view-transition{navigation:auto}
-::view-transition-old(root),::view-transition-new(root){animation-duration:.18s}
-@media (prefers-reduced-motion:reduce){::view-transition-old(root),::view-transition-new(root){animation:none!important}}
-
-/* the AI-agent panel (bottom:120px, z-index:9991) covers this FAB while open — hide it, as the agent does with its own launcher */
-.ra-panel.show ~ #pg-dark{opacity:0;pointer-events:none;}
-
-/* figure palette (shared by every chart and animation; Jev-style: navy = ours, misty blue = our variant,
-   peach = competing RL baseline, cool gray = base model / others) */
-:root{--c-ours:#2F4B8F;--c-ours-fill:#90A4C5;--c-var:#BFD8EC;--c-var-line:#6F94C6;--c-rl:#F5C8B5;--c-rl-line:#E39A7A;
-  --c-base:#DDE2EA;--c-base-line:#8F97A8;--c-other:#C9CED8;--c-other-line:#9AA1B0;--c-grid:#E4E8EF;--c-ink2:#5B6273}
-body.dark-mode{--c-rl-ink:#E9A98C;--c-ours:#9DB8EA;--c-ours-fill:#5E77A8;--c-var:#3F5F86;--c-var-line:#7FA6D3;--c-rl:#9A6E5D;--c-rl-line:#E9A98C;
-  --c-base:#3A414E;--c-base-line:#8F97A8;--c-other:#4A5260;--c-other-line:#9AA1B0;--c-grid:#2A303A;--c-ink2:#A6ADBB}
-figure.anim-fig{--link:var(--c-ours);--good:#3E7D5A;--bad:var(--c-rl-line)}
-body.dark-mode figure.anim-fig{--good:#7FC79A}
-.problem-card{border-left-color:var(--c-rl-line)!important}.problem-card h3{color:#A14F2C!important}
-.solution-card{border-left-color:var(--c-ours)!important}.solution-card h3{color:var(--c-ours)!important}
-body.dark-mode .problem-card h3{color:#F0B49A!important}
-
-h1,h2,h3,.bx-title,.p-title,.pub-title,.card-title{text-wrap:balance}
-p,li{text-wrap:pretty}
-p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcaption a,td a{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px;text-decoration-color:rgba(47,75,143,.45)}body.dark-mode p a:not([class]),body.dark-mode li a:not([class]),body.dark-mode .authors a,body.dark-mode .tl-desc a,body.dark-mode .note a,body.dark-mode figcaption a,body.dark-mode td a{text-decoration-color:rgba(157,184,234,.5)}
-</style>
+{% include selfrw/style.html %}
+{% include proj/read-the-mind/style.html %}
+<noscript><style>.hl{background-size:100% 36%}.rm-lang li,.rm-gap span,.rm-out .rm-cap .scr,.rm-out .rm-ans .scr span,.rm-type .ch-t{opacity:1;transform:none}.stage canvas{display:none}.chapters{position:static}</style></noscript>
+<script type="application/ld+json">{
+  "@context":"https://schema.org","@type":"ScholarlyArticle",
+  "name":"Can We Read the Mind of an Audio LLM? A Verbalizable, Multilingual Middle-Layer Workspace",
+  "description":"Reading a base Qwen3-Omni with a logit lens at the audio-token positions, the answer to a spoken question becomes legible, in words, in the model's middle layers, before it emits any token.",
+  "author":[{"@type":"Person","name":"Jiajun Fan"},{"@type":"Person","name":"Jingyuan Li"},{"@type":"Person","name":"Prashanth Gurunath Shivakumar"},{"@type":"Person","name":"Qi Luo"},{"@type":"Person","name":"Jia-Hong Huang"},{"@type":"Person","name":"M. Maruf"},{"@type":"Person","name":"Roger Ren"},{"@type":"Person","name":"Yile Gu"},{"@type":"Person","name":"Rahul Pandey"},{"@type":"Person","name":"Ge Liu"},{"@type":"Person","name":"Ivan Bulyko"}],
+  "datePublished":"2026-08-25",
+  "url":"https://www.jiajunfan.com/projects/read-the-mind/","sameAs":"https://arxiv.org/abs/2608.24958",
+  "keywords":"interpretability, audio language models, logit lens, global workspace, multilingual representations, chain-of-thought monitoring"
+}</script>
   <script data-goatcounter="https://jiajunfan.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 {% include site-chrome.html %}
 </head>
@@ -213,100 +58,364 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
   </div>
 </header>
 
-<div class="hero" role="region" aria-label="Project summary">
-  <div class="kicker">Preprint &middot; arXiv 2608.24958</div>
-  <h1>Can We Read the Mind of an Audio LLM?</h1>
-  <p class="short">A verbalizable, multilingual <strong>middle-layer workspace</strong> &mdash; the answer becomes legible in words before the model speaks.</p>
-  <div class="authors">
-    <a href="/" class="me">Jiajun Fan</a><sup>1,2</sup>, Jingyuan Li<sup>1</sup>,
-    Prashanth G. Shivakumar<sup>1</sup>, Qi Luo<sup>1</sup>, Jia-Hong Huang<sup>1</sup>,
-    M. Maruf<sup>1</sup>, Roger Ren<sup>1</sup>, Yile Gu<sup>1</sup>, Rahul Pandey<sup>1</sup>,
-    <a href="https://geliu.web.illinois.edu/">Ge Liu</a><sup>2</sup>, Ivan Bulyko<sup>1</sup>
+<main>
+
+<section class="hero" aria-label="Summary">
+  <div class="wrap">
+    <h1>Can We Read the Mind of an Audio&nbsp;LLM? <span class="l2">A Verbalizable, Multilingual Middle&#8209;Layer Workspace</span></h1>
+    <p class="byline"><a href="/" class="me">Jiajun&nbsp;Fan</a><sup>1,2</sup>, Jingyuan&nbsp;Li<sup>1</sup>, Prashanth&nbsp;Gurunath&nbsp;Shivakumar<sup>1</sup>, Qi&nbsp;Luo<sup>1</sup>, Jia&#8209;Hong&nbsp;Huang<sup>1</sup>, M.&nbsp;Maruf<sup>1</sup>, Roger&nbsp;Ren<sup>1</sup>, Yile&nbsp;Gu<sup>1</sup>, Rahul&nbsp;Pandey<sup>1</sup>, <a href="https://geliu.web.illinois.edu/">Ge&nbsp;Liu</a><sup>2</sup>, Ivan&nbsp;Bulyko<sup>1</sup></p>
+    <ul class="logos" aria-label="Affiliations"><li><sup>1</sup><img src="/images/projects/read-the-mind/logo_amazon.png" alt="Amazon" width="317" height="96"><span>AGI Foundations</span></li><li><sup>2</sup><img src="/images/projects/self-rewriting/logo_uiuc.png" alt="" width="66" height="96"><span>UIUC</span></li></ul>
+    <div class="cta">
+      <a class="btn" href="/film/#read-the-mind"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M5 3.300v9.400L12.500 8z"/></svg>Film</a>
+      <a class="btn btn-primary" href="https://arxiv.org/abs/2608.24958"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M4 1.5h5.5L12.5 4.5v10h-8.5z"/><path d="M9.5 1.5v3h3M6 8h4.5M6 10.5h4.5"/></svg>Paper</a>
+      <a class="btn" href="#cite"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5c2 0 3-1.5 3-4.5V4.5H3V8h3M9.5 11.5c2 0 3-1.5 3-4.5V4.5h-3V8h3"/></svg>BibTeX</a>
+    </div>
+    <div class="stage">
+      <canvas id="rm-stage" role="img" aria-label="Animation of one clip: a spoken question about which president was forced to resign enters the model, whose own transcript of it is garbled. The forward pass fills 48 layers. At the audio positions, concepts form in order: water and gate, scandal, Nixon, and the role president, which persists through the middle layers as Chinese zongtong. A logit lens reads each one out as a word, and the chain resolves to the answer, Nixon, while the model has still said nothing."></canvas>
+      <ol class="stage-steps" aria-hidden="true">
+        <li><b>It listens</b>to a spoken question</li>
+        <li><b>It works it out</b>in its middle layers</li>
+        <li><b>We read it</b>with its own output head</li>
+        <li><b>Before it speaks</b>the answer is already there</li>
+      </ol>
+    </div>
   </div>
-  <div class="affil"><sup>1</sup>Amazon AGI Foundations &nbsp;&nbsp; <sup>2</sup>University of Illinois Urbana-Champaign</div>
-  <div class="btn-row">
-    <a class="btn btn-primary" href="https://arxiv.org/abs/2608.24958">Paper (arXiv)</a>
-    <a class="btn btn-secondary" href="/posts/2026/08/read-the-mind-audio-llm/">Blog post</a>
-    <a class="btn btn-neutral" href="/">Author Homepage</a>
+</section>
+
+<nav class="chapters" aria-label="Parts of this page">
+  <div class="wrap">
+    <a href="#results">At a glance</a>
+    <a href="#problem">The problem</a>
+    <a href="#idea">The idea</a>
+    <a href="#how">How it works</a>
+    <a href="#evidence">The evidence</a>
+    <span class="ch-sub"><a href="#mind" aria-label="Finding 01">01</a><a href="#languages" aria-label="Finding 02">02</a><a href="#hears" aria-label="Finding 03">03</a><a href="#middle" aria-label="Finding 04">04</a></span>
+    <a href="#matters">Why it matters</a>
+    <a href="#film">Film</a>
+    <a href="#cite">Cite</a>
+    <a class="ch-paper" href="https://arxiv.org/abs/2608.24958">arXiv 2608.24958</a>
   </div>
-  <hr class="hero-rule">
+</nav>
+
+<section class="scene band" id="results">
+  <div class="wrap">
+    <div class="duo">
+      <header class="say">
+        <p class="eyebrow">At a glance</p>
+        <h2>The paper in four results.</h2>
+        <p class="lead">What does an audio model work out before it speaks? Read with a logit lens while it listens, the answer to a spoken question becomes legible, in words, in its middle layers, before it emits a single token.</p>
+      </header>
+      <div class="show cards c2">
+        <a class="card result" href="#mind"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><path class="il-ar" d="M30 48H170" stroke-dasharray="3 5"/><rect class="il-ice" x="14" y="38" width="34" height="20" rx="10"/><rect class="il-ice" x="58" y="38" width="30" height="20" rx="10"/><rect class="il-lav" x="98" y="38" width="30" height="20" rx="10"/><circle class="il-y" cx="160" cy="48" r="16"/><path class="il-ck" d="M152.500 48.500l5 5 10-10.500"/></svg></span><span class="r-no">Finding 01<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>We can read its mind.</h3><p>A hidden chain of concepts behind the answer, read with no chain-of-thought.</p></a>
+        <a class="card result" href="#languages"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><rect class="il-ice" x="22" y="18" width="46" height="20" rx="8"/><rect class="il-peach" x="76" y="18" width="52" height="20" rx="8"/><rect class="il-lav" x="136" y="18" width="42" height="20" rx="8"/><rect class="il-rose" x="46" y="50" width="48" height="20" rx="8"/><rect class="il-y" x="102" y="50" width="34" height="20" rx="8"/><line class="il-ax" x1="20" y1="84" x2="180" y2="84"/></svg></span><span class="r-no">Finding 02<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>It thinks in many languages.</h3><p>One concept surfaces in several scripts at once, on inputs entirely in English.</p></a>
+        <a class="card result" href="#hears"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><g class="il-wave"><rect x="22" y="38" width="5" height="20" rx="2.500"/><rect x="31" y="26" width="5" height="44" rx="2.500"/><rect x="40" y="32" width="5" height="32" rx="2.500"/><rect x="49" y="20" width="5" height="56" rx="2.500"/><rect x="58" y="34" width="5" height="28" rx="2.500"/><rect x="67" y="40" width="5" height="16" rx="2.500"/></g><circle class="il-y" cx="96" cy="48" r="9"/><g class="il-g"><rect x="122" y="26" width="58" height="8" rx="2"/><rect x="122" y="40" width="46" height="8" rx="2"/><rect x="122" y="54" width="54" height="8" rx="2"/></g><circle class="il-pe" cx="112" cy="70" r="6"/></svg></span><span class="r-no">Finding 03<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>It hears what words drop.</h3><p>Only the audio mind forms the speaker&rsquo;s role, the affect, the true source.</p></a>
+        <a class="card result" href="#middle"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><rect class="il-band" x="78" y="10" width="72" height="74" rx="4"/><line class="il-ax" x1="16" y1="84" x2="184" y2="84"/><path class="il-ln" d="M20 76L30 74L40 77L48 60L60 56L74 50L90 38L104 42L118 36L132 40L146 34L160 30L176 26"/><circle class="il-dot" cx="48" cy="60" r="4"/></svg></span><span class="r-no">Finding 04<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>It lives in the middle, and is used.</h3><p>Swap the sound and the readout follows; patch it back and the answer returns.</p></a>
+      </div>
+      <ul class="creed">
+        <li><b>It listens at the entry.</b><span>delete the entry layer and accuracy drops by 65 points</span></li>
+        <li><b>It recalls throughout.</b><span>no single interior layer is essential</span></li>
+        <li><b>It answers at the exit.</b><span>delivering the answer sits in the output layer</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="scene" id="problem">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">The problem</p>
+        <h2>We see what it says, never what it worked out.</h2>
+        <p class="lead">Chain-of-thought monitoring helps only if a model writes its reasoning down. An audio model that answers a spoken question directly writes nothing, and its own transcript of the sound can fail.</p>
+      </div>
+    </header>
+    <div class="fig panel">
+      <div class="rm-out anim" id="rm-out">
+        <p class="duel-q"><span>One clip from the paper, and everything we can see from outside</span>&ldquo;Which president was forced to resign due to the event?&rdquo; <span class="rm-ansq">Answer: Richard Nixon</span></p>
+        <div class="rm-box k-fail">
+          <h4>Its own transcript</h4>
+          <div class="scr rm-type" id="rm-asr" data-text="The ote &mdash; [End of Audio]">The ote &mdash; [End of Audio]</div>
+          <p class="verdict"><b>Empty garbling.</b></p>
+        </div>
+        <div class="rm-box k-fail rm-cap">
+          <h4>Its own caption</h4>
+          <div class="scr">&hellip; president of &hellip; political officer &hellip; politician &hellip; senator &hellip;</div>
+          <p class="verdict"><b>Only the generic scene.</b></p>
+        </div>
+        <div class="rm-box k-fail rm-ans">
+          <h4>Its written reasoning</h4>
+          <div class="scr"><span>nothing written</span></div>
+          <p class="verdict"><b>None.</b> It answers directly.</p>
+        </div>
+        <p class="rm-gap">Named in none of them: <span style="--d:3.2s">Watergate</span><span style="--d:3.4s">scandal</span><span style="--d:3.6s">Nixon</span></p>
+      </div>
+    </div>
+    <p class="takeaway">Whatever it works out on the way to the answer, we cannot see.</p>
+  </div>
+</section>
+
+<section class="scene band" id="idea">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main wide">
+        <p class="eyebrow">The idea <span>Read the middle</span></p>
+        <h2 class="reveal">A chain-of-thought monitor reads what a model writes. <span class="hl">We read what it works out.</span></h2>
+      </div>
+    </header>
+    <figure class="cst rm-idea" id="rm-idea">
+      <div class="cst-stage">
+        <article class="cst-act tts">
+          <header><h3>Chain-of-thought monitoring</h3><p>reads the reasoning a model writes out</p></header>
+          <div class="cst-draw ch anim pausable" id="ch-idea-cot" role="img" aria-label="Schematic. A spoken question goes into the model. Its written reasoning lane stays empty because it answers directly; a monitor scanning that lane finds nothing to read. Then it speaks the answer."></div>
+          <p class="cst-say">A model that answers directly leaves it nothing to read.</p>
+          <ul class="pdm-yn"><li class="n"><i aria-hidden="true"></i>Works when nothing is written down</li><li class="n"><i aria-hidden="true"></i>Independent of the model&rsquo;s own account</li></ul>
+        </article>
+        <article class="cst-act own">
+          <header><h3>Reading its workspace</h3><p>a logit lens on its middle layers, while it listens</p></header>
+          <div class="cst-draw ch anim pausable" id="ch-idea-ws" role="img" aria-label="Schematic. The same spoken question goes into the model. A lens on the middle layers reads concepts out as words, scandal and the Chinese word for president, before the answer comes out."></div>
+          <p class="cst-say">Its middle layers already hold the answer, in words.</p>
+          <ul class="pdm-yn"><li class="y"><i aria-hidden="true"></i>Works when nothing is written down</li><li class="y"><i aria-hidden="true"></i>Independent of the model&rsquo;s own account</li></ul>
+        </article>
+      </div>
+      <figcaption class="cap">Schematic: nothing in it is measured.</figcaption>
+    </figure>
+    <p class="takeaway">No chain-of-thought needed: the model&rsquo;s own output head turns its middle layers into words.</p>
+  </div>
+</section>
+
+<section class="scene" id="how">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main wide">
+        <p class="eyebrow">How it works</p>
+        <h2 class="reveal">A lens on the sound, <span class="hl">and a control that changes only the sound.</span></h2>
+        <p class="lead">The logit lens decodes a middle layer with the model&rsquo;s own output head, at the audio positions. The audio comes before the question, so those positions cannot see the text. To rule out a guess from the printed options, the text stays byte-identical and only the waveform changes.</p>
+      </div>
+      <ul class="nots" aria-label="What it does without">
+        <li>no chain-of-thought</li><li>no training</li><li>no trained probe</li>
+      </ul>
+    </header>
+    <div class="fig panel">
+      <div class="rm-two">
+        <div class="ch anim" id="ch-lens" role="img" aria-label="Schematic of the logit lens. A grid of input positions against the 48 layers of a base Qwen3-Omni: audio rows first, then the question and options. The forward pass fills the grid. At a middle layer, the states at the audio positions go through the model's own output head and read out as a word, the Chinese word for president. The answer slot is still empty: nothing has been said yet."></div>
+        <div class="ch anim pausable" id="ch-swap" role="img" aria-label="Schematic of the audio-swap control. The question and options stay byte-identical while the waveform is swapped among the real clip, a mismatched clip of the same category, and silence. The readout is compared across the three."></div>
+      </div>
+    </div>
+    <p class="cap">Schematic. The model is the 48-layer Thinker of Qwen3-Omni-30B-A3B-Instruct; the middle band, layers 17 to 38 (about 35 to 80% of depth), is fixed in advance from work on text models, not tuned on these data.</p>
+    <p class="takeaway">If the readout follows the sound, it is the sound the model is thinking about.</p>
+  </div>
+</section>
+
+<div id="evidence">
+
+<section class="scene band" id="mind">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">The evidence <span>Finding 01</span></p>
+        <h2>We can read its mind.</h2>
+        <p class="lead">On the clip its own transcript garbles, the readout assembles the chain behind the answer: the event first, then the actor.</p>
+      </div>
+    </header>
+    <div class="fig panel">
+      <div class="ch anim" id="ch-chain" role="img" aria-label="Schematic of the paper's Figure 2, the Nixon clip. Along the depth of the model, at the audio positions: water and gate, reconstructing Watergate, and scandal become readable early; Nixon and the role president reach rank 1 across the transition into the middle layers, the role persisting there as Chinese zongtong. The model then answers Richard Nixon."></div>
+    </div>
+    <p class="cap">Schematic of the paper&rsquo;s Figure 2; positions approximate. Watergate and scandal appear in neither the question, the options, its transcript nor its caption. Nixon is a printed option, but it is read over the audio.</p>
+    <div class="cases reads" id="read-cases">
+      <article class="case"><p class="bn">Speech content</p><p class="q">Kidney</p><div class="ba k-edit"><b>Read at the audio positions</b><samp>kidney</samp><code>rank 1 &middot; layer 17 &middot; 35% depth</code></div></article>
+      <article class="case"><p class="bn">Sound source</p><p class="q">Lion</p><div class="ba k-edit"><b>Read at the audio positions</b><samp>lions</samp><code>rank 1 &middot; layer 19 &middot; 40% depth</code></div></article>
+      <article class="case"><p class="bn">Sound source</p><p class="q">Bird</p><div class="ba k-edit"><b>Read at the audio positions</b><samp>&#40479;&#31867; <small>ni&#462;ol&egrave;i, birds</small></samp><code>rank 1 &middot; layer 33 &middot; 69% depth</code></div></article>
+      <article class="case"><p class="bn">Sound source</p><p class="q">Music</p><div class="ba k-edit"><b>Read at the audio positions</b><samp>m&uacute;sica</samp><code>rank 1 &middot; layer 18 &middot; 38% depth</code></div></article>
+      <article class="case"><p class="bn">Sound source</p><p class="q">Train</p><div class="ba k-edit"><b>Read at the audio positions</b><samp>rail</samp><code>rank 1 &middot; layer 19 &middot; 40% depth</code></div></article>
+      <article class="case"><p class="bn">Sound source</p><p class="q">Whip</p><div class="ba k-edit"><b>Read at the audio positions</b><samp>&#38829; <small>bi&#257;n, whip</small></samp><code>rank 1 &middot; layer 32 &middot; 67% depth</code></div></article>
+    </div>
+    <button type="button" class="more" id="more-reads" aria-controls="read-cases" aria-expanded="false">Show three more</button>
+    <p class="cap">Six curated clips from the paper&rsquo;s Table 1, by answer: the strongest middle-layer readout over the audio, its rank among all 152,064 tokens, and the layer of 48 where it is most stably rank 1. Ten unrelated placebo words fill 0.12% of middle-layer cells; the true answer fills 1 to 34%.</p>
+    <p class="takeaway">The reasoning happened. It was never written down.</p>
+  </div>
+</section>
+
+<section class="scene" id="languages">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">The evidence <span>Finding 02</span></p>
+        <h2>It thinks in many languages.</h2>
+        <p class="lead">Clip and prompt are entirely in English, yet one concept surfaces in several scripts at once.</p>
+      </div>
+    </header>
+    <div class="fig panel">
+      <div class="rm-two">
+        <div class="rm-lang anim" id="rm-lang">
+          <div class="row"><b>Music</b><ul><li class="k-run" style="--d:.1s"><span>music</span><small>English</small></li><li class="k-fail" style="--d:.25s"><span>m&uacute;sica</span><small>Spanish</small></li><li class="k-de" style="--d:.4s"><span>Musik</span><small>German</small></li><li class="k-test" style="--d:.55s"><span>musica</span><small>Italian</small></li><li class="k-edit" style="--d:.7s"><span>&#38899;&#20048;</span><small>Chinese</small></li></ul></div>
+          <div class="row"><b>President</b><ul><li class="k-run" style="--d:.9s"><span>president</span><small>English</small></li><li class="k-de" style="--d:1.05s"><span>&#45824;&#53685;&#47161;</span><small>Korean</small></li><li class="k-edit" style="--d:1.2s"><span>&#24635;&#32479;</span><small>Chinese</small></li></ul></div>
+          <div class="row"><b>Water</b><ul><li class="k-run" style="--d:1.4s"><span>water</span><small>English</small></li><li class="k-fail" style="--d:1.55s"><span>agua</span><small>Spanish</small></li><li class="k-test" style="--d:1.7s"><span>&#39;eau</span><small>French</small></li></ul></div>
+        </div>
+        <div class="ch anim" id="ch-share" role="img" aria-label="Top-1 readouts across 863,770 middle-layer cells over 948 clips, real words only: 52.6% English, 38.5% Chinese. And a frequency control: the Chinese word for music is rank 1 on 30% of music clips but on 6% of the 610 non-music clips, a 5 times lift."></div>
+      </div>
+    </div>
+    <p class="cap">Left: one concept in several scripts, each among the top readouts at the audio positions, most at rank 1. Right: the top-1 readout across 863,770 middle-layer cells over 948 clips, real words only; and a frequency control showing the Chinese form is specific to the clip, not the lens&rsquo;s bias toward frequent tokens.</p>
+    <p class="takeaway">It holds the idea, not an English word.</p>
+  </div>
+</section>
+
+<section class="scene band" id="hears">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">The evidence <span>Finding 03</span></p>
+        <h2>It hears what words drop.</h2>
+        <p class="lead">Give it the same clip twice: as sound, and as its own emotion-free caption. Only the audio mind forms the true source, the speaker&rsquo;s role, the affect.</p>
+      </div>
+    </header>
+    <div class="fig panel">
+      <div class="rm-two">
+        <div class="ch anim" id="ch-minds" role="img" aria-label="Schematic of the paper's Figure 4. The question asks for the source of the roars, with options Lion, Dog, Wolf and Bear. Hearing the clip, the concept lion lights up across the middle layers over the audio span, and the model answers Lion, correctly. Given only its own caption of the same clip, lion appears almost nowhere but the printed option, and the model answers Wolf."></div>
+        <div class="ch anim" id="ch-role" role="img" aria-label="On the 27 clips where the two minds disagree, the audio mind forms the correct speaker role on 88.9% of them, the caption mind on 70.4%. Of the 39 affects the audio mind reads, 33 are absent from the caption mind's readout."></div>
+      </div>
+    </div>
+    <p class="cap">Left: schematic of the paper&rsquo;s Figure 4, the roaring clip; cell positions approximate. Right: the clips where the two minds disagree.</p>
+    <div class="cases two">
+      <article class="case"><p class="bn">A speaker&rsquo;s role</p><div class="ba k-edit"><b>Hearing the clip, it reads</b><samp>priest</samp></div><div class="ba k-fail"><b>From its own caption, it hears only</b><samp>father</samp></div></article>
+      <article class="case"><p class="bn">A sarcastic voice</p><div class="ba k-edit"><b>Hearing the clip, it reads</b><samp>frustration</samp></div><div class="ba k-fail"><b>From its own caption</b><samp>named nowhere</samp><code>nor anywhere in the prompt</code></div></article>
+    </div>
+    <p class="cap">Over the 1000-clip MMAU-mini, answering from the sound beats answering from its caption on every track: by 7.6 points overall and 11.1 on the sound track.</p>
+    <p class="takeaway">The concept the answer depends on forms in one mind and not in the other.</p>
+  </div>
+</section>
+
+<section class="scene" id="middle">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">The evidence <span>Finding 04</span></p>
+        <h2>It lives in the middle, and the model uses it.</h2>
+        <p class="lead">Swap only the sound and the readout follows it. The gap over the text prior opens a tenth of the way in and stays open; patch the sound back in and the answer returns.</p>
+      </div>
+    </header>
+    <div class="fig panel">
+      <div class="rm-two">
+        <div class="ch anim" id="ch-onset" role="img" aria-label="The audio-driven gap, layer by layer: balanced four-way readout accuracy with the real clip minus with silence, at each of 49 depths, with a 95% bootstrap band. The gap is null at the input, becomes significant at about 12% depth and stays open, densest inside the middle band; 37 of the 49 depths are significant."></div>
+        <div>
+          <div class="ch anim" id="ch-rank" role="img" aria-label="Median rank of the correct answer among 152,064 tokens: number 2,297 with the real clip, 5,040 with a mismatched clip, 26,241 with silence."></div>
+          <div class="ch anim" id="ch-patch" role="img" aria-label="Activation patching on clips the model answers correctly only with its audio: copying the real-audio states back at the early band restores the answer on 10 of 10 clips, at the middle band on 9 of 10, at the late band on 0 of 10."></div>
+        </div>
+      </div>
+    </div>
+    <p class="cap">Left: real clip minus silence, per depth; band: 95% bootstrap interval; filled: significant (paired McNemar). Right, below: copying the real-audio states back into a run whose audio was zeroed. The same signature holds on Qwen2.5-Omni-7B.</p>
+    <details class="fold" id="ablate-more">
+      <summary class="more">What deleting one layer does</summary>
+      <div class="fig panel">
+        <div class="ch anim" id="ch-ablate" role="img" aria-label="Accuracy lost when one layer is bypassed, over 40 clips: only the entry layer, layer 0, is critical, costing 65 points; every interior layer costs at most 10. On one clip, perception is lost when layer 0 or 1 is deleted, delivery when layer 0 or 47 is deleted, and retrieval for no single layer."></div>
+      </div>
+      <p class="cap">Bars: accuracy drop when each layer is replaced by an identity skip, over 40 clips. Lanes: which ability one deleted layer breaks, on the paper&rsquo;s Kennedy clip.</p>
+    </details>
+    <p class="takeaway">The sound&rsquo;s content is used, and committed before the last fifth of the network.</p>
+  </div>
+</section>
+
 </div>
 
-<div class="container" role="main">
-
-<section>
-  <p class="tldr"><strong>TL;DR</strong> &mdash; An audio LLM is a black box in a specific way: we see what it says, never what it worked out on the way there, and chain-of-thought monitoring only helps if the model writes its reasoning down. Reading a base Qwen3-Omni with a <strong>logit lens at the audio-token positions</strong>, the answer to a spoken question becomes legible &mdash; <em>in words</em> &mdash; in the middle layers, before a single token is emitted.</p>
-  {% include film-card.html id="read-the-mind" name="Read the Mind" %}
-  {% include anim/read-the-mind_lens.html %}
+<section class="scene band" id="matters">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">Why it matters <span>Finding 05</span></p>
+        <h2>A hallucination is born early, where it can be seen.</h2>
+        <p class="lead">Fed its own caption instead of the sound, the model sometimes settles on a plausible wrong answer. Reading its layers shows where: usually early, and never revised.</p>
+      </div>
+    </header>
+    <div class="fig panel">
+      <div class="ch anim" id="ch-halluc" role="img" aria-label="On 73 clips the model answers correctly from the sound and wrongly from its own caption, the depth where the wrong concept first takes over: in the early band on 46 clips, in the middle band on 10, in the late band on 17. Median onset: 12% depth."></div>
+    </div>
+    <p class="cap">Each dot is one clip, in the band of layers where the wrong concept first takes over the run fed its caption. 84.9% of the wrong answers form before the output layer. Reading both minds side by side detects the hallucination, since the audio mind holds the right concept where the text mind holds the wrong one, and shows where it entered.</p>
+    <h3 class="eyebrow sub">What this opens up</h3>
+    <div class="cards c3 opens">
+      <div class="card"><h3>Oversight before it acts</h3><p>If a speech agent&rsquo;s decisions are legible this way, a monitor need not wait for it to speak, or trust it to narrate.</p></div>
+      <div class="card"><h3>A signal for training</h3><p>A readout of the middle layers is a target for the process, where a scalar reward sees only the final answer.</p></div>
+      <div class="card"><h3>Almost free to run</h3><p>A logit-lens probe costs one matrix product per position read.</p></div>
+    </div>
+  </div>
 </section>
 
-<section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-sparkle.png);mask-image:url(/images/icons/h-sparkle.png)"></i>A hidden multi-hop chain, with no chain-of-thought</h2>
-  <p>On a clip whose verbatim transcription is empty garbling, the readout reconstructs <em>Watergate</em> and <em>scandal</em>; then the person and the role surface together: <em>Nixon</em> and <em>president</em> both appear across the transition into the middle layers, the role persisting there as Chinese 总统 &mdash; an event-then-actor chain, not a strict word-by-word order. <em>Watergate</em> and <em>scandal</em> appear in neither the question, the options, nor the model's own transcription; <em>Nixon</em> is a printed option, but it is decoded over the audio positions, not merely read off the choice. The reasoning happened; it simply was never written down.</p>
-  {% include anim/readmind.html %}
-  <figure class="chart wide">
-    {% include figures/rm_readout.svg %}
-    <figcaption><b>Figure 1.</b> Where the task-relevant concept becomes readable, for seven curated cases. The strongest readout lands in the middle band of the network &mdash; and the word that surfaces is often not in the language of the question.</figcaption>
-  </figure>
+<section class="scene finale closing" id="close">
+  <div class="wrap">
+    <p class="eyebrow">In short</p>
+    <h2>Before an audio model speaks, its answer is already there, in words, in its middle layers.</h2>
+    <p class="lead">It never wrote its reasoning down. We read it anyway.</p>
+    <div class="cta">
+      <a class="btn btn-primary" href="https://arxiv.org/abs/2608.24958">Read the paper</a>
+      <a class="btn" href="/posts/2026/08/read-the-mind-audio-llm/">Read the blog post</a>
+    </div>
+  </div>
 </section>
 
-<section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-reason.png);mask-image:url(/images/icons/h-reason.png)"></i>What the workspace looks like</h2>
-  {% include anim/strip_readmind.html %}
-  <p>A waveform-swap control runs throughout: identical text, only the sound changed. That is what separates a genuinely audio-driven signal from a prior over the printed answer options.</p>
-  {% include anim/read-the-mind_swap.html %}
+<section class="scene band" id="film">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">The film</p>
+        <h2>The story, as a short film.</h2>
+      </div>
+    </header>
+    <a class="rm-film" href="/film/#read-the-mind" aria-label="Watch the short film on the films page">
+      <img src="/film/posters/read-the-mind.jpg" alt="Film poster: Read the Mind, a particle waveform of the spoken clip" width="1280" height="720" loading="lazy">
+      <span class="rm-film-l"><span class="rm-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3.500v17L20.500 12z"/></svg></span>Watch the film</span>
+    </a>
+  </div>
 </section>
 
-<section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-chart.png);mask-image:url(/images/icons/h-chart.png)"></i>Deleting layers maps the pipeline</h2>
-  <p>Reading is correlational; deleting is causal. Bypassing one layer at a time gives a clean functional map: listening is localized at the entry, delivery at the output, and retrieval is spread across the interior &mdash; no single interior layer is essential.</p>
-  <figure class="chart" style="max-width:520px">
-    {% include figures/rm_layers.svg %}
-    <figcaption><b>Figure 2.</b> Accuracy lost when a single layer is deleted (identity skip, averaged over clips). Only the encoder-to-text entry layer is critical; every interior layer costs at most ten points.</figcaption>
-  </figure>
-  <p>The same tooling shows where hallucinations come from: in text mode the wrong concept usually takes over early, and is never revised afterwards.</p>
-</section>
-
-<section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-shield.png);mask-image:url(/images/icons/h-shield.png)"></i>Why it matters, and what it is not</h2>
-  <p>If what a model is about to say is legible mid-stack, monitoring need not wait for it to speak, and need not trust it to narrate its own reasoning. But this is a deliberately qualitative account of one model family: a readable correlate is not a complete mechanism, and the paper is conservative about what the lens can and cannot establish.</p>
-</section>
-
-<section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-book.png);mask-image:url(/images/icons/h-book.png)"></i>BibTeX</h2>
-  <button class="bib-copy-btn" aria-label="Copy BibTeX citation"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-list.png);mask-image:url(/images/icons/h-list.png)"></i>Copy BibTeX</button>
-  <pre class="bibtex-block" tabindex="0"><code>@article{fan2026readmind,
+<section class="cite" id="cite">
+  <div class="wrap duo">
+    <header class="say">
+      <p class="eyebrow">Cite</p>
+      <h2>Cite the paper.</h2>
+      <button class="bib-copy-btn" aria-label="Copy BibTeX citation"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-list.png);mask-image:url(/images/icons/h-list.png)"></i>Copy BibTeX</button>
+    </header>
+    <pre class="show bibtex-block" tabindex="0"><code>@article{fan2026readmind,
   title   = {Can We Read the Mind of an Audio {LLM}? A Verbalizable,
-             Multilingual Middle-Layer Workspace},
+  Multilingual Middle-Layer Workspace},
   author  = {Jiajun Fan and Jingyuan Li and Prashanth Gurunath Shivakumar
-             and Qi Luo and Jia-Hong Huang and M. Maruf and Roger Ren
-             and Yile Gu and Rahul Pandey and Ge Liu and Ivan Bulyko},
+  and Qi Luo and Jia-Hong Huang and M. Maruf and Roger Ren
+  and Yile Gu and Rahul Pandey and Ge Liu and Ivan Bulyko},
   journal = {arXiv preprint arXiv:2608.24958},
   year    = {2026}
 }</code></pre>
+  </div>
 </section>
 
-</div>
+</main>
 
 <footer>
-  <p>Read the Mind of an Audio LLM &nbsp;|&nbsp; <a href="/">Jiajun Fan</a> · Amazon &amp; UIUC &nbsp;|&nbsp; <a href="https://arxiv.org/abs/2608.24958">Paper</a> &nbsp;|&nbsp; <a href="/projects/">All Projects</a></p>
+  <p>Read the Mind of an Audio LLM &nbsp;|&nbsp; <a href="/">Jiajun Fan</a> · Amazon AGI Foundations &amp; UIUC &nbsp;|&nbsp; <a href="https://arxiv.org/abs/2608.24958">Paper</a> &nbsp;|&nbsp; <a href="/posts/2026/08/read-the-mind-audio-llm/">Blog post</a> &nbsp;|&nbsp; <a href="/projects/">All Projects</a></p>
 </footer>
 
 <div id="read-progress" aria-hidden="true"></div>
-<button id="pg-dark" class="pg-fab" aria-label="Toggle dark mode" title="Toggle dark mode"><i class="pg-dico"></i></button>
-<button id="pg-top" class="pg-fab" aria-label="Back to top" title="Back to top"><span class="pg-up"></span></button>
 <script>
 (function(){
-  try{if(localStorage.getItem('darkMode')==='true')document.body.classList.add('dark-mode');}catch(e){}
-  var bar=document.getElementById('read-progress'),top=document.getElementById('pg-top'),dk=document.getElementById('pg-dark');
-  function onScroll(){var st=window.scrollY||document.documentElement.scrollTop,h=document.documentElement.scrollHeight-window.innerHeight;
-    if(bar)bar.style.width=(h>0?(st/h*100):0)+'%'; if(top){st>400?top.classList.add('show'):top.classList.remove('show');}}
-  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
-  if(top)top.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
-  if(dk)dk.addEventListener('click',function(){var on=document.body.classList.toggle('dark-mode');try{localStorage.setItem('darkMode',on);}catch(e){}});
+  var bar=document.getElementById('read-progress'), nav=document.querySelector('.chapters'), strip=nav?nav.querySelector('.wrap'):null;
+  function pairs(sel){return [].slice.call(document.querySelectorAll(sel)).map(function(a){return [a,document.getElementById(a.getAttribute('href').slice(1))];}).filter(function(p){return p[1];});}
+  var parts=pairs('.chapters .wrap > a[href^="#"]'), subs=pairs('.chapters .ch-sub a'), shown=null;
+  function mark(list,cur){list.forEach(function(p){if(p[0]===cur)p[0].setAttribute('aria-current','true');else p[0].removeAttribute('aria-current');});}
+  function onScroll(){
+    var st=window.scrollY||document.documentElement.scrollTop,h=document.documentElement.scrollHeight-window.innerHeight,line=Math.min(window.innerHeight*0.38,340),cur=null,sub=null;
+    if(bar)bar.style.width=(h>0?(st/h*100):0)+'%';
+    parts.forEach(function(p){if(p[1].getBoundingClientRect().top<=line)cur=p[0];});
+    if(h>0&&st>=h-2&&parts.length)cur=parts[parts.length-1][0];
+    if(cur&&cur.getAttribute('href')==='#evidence')subs.forEach(function(p){if(p[1].getBoundingClientRect().top<=line)sub=p[0];});
+    mark(parts,cur);mark(subs,sub);
+    if(cur!==shown&&strip&&strip.scrollWidth>strip.clientWidth){strip.scrollLeft=cur?Math.max(0,cur.offsetLeft-16):0;}
+    shown=cur;
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});window.addEventListener('resize',onScroll);onScroll();
+  var grid=document.getElementById('read-cases'), more=document.getElementById('more-reads');
+  if(grid&&more){
+    grid.classList.add('fold');
+    more.addEventListener('click',function(){grid.classList.remove('fold');more.setAttribute('aria-expanded','true');});
+  }
   document.querySelectorAll('.bib-copy-btn').forEach(function(btn){
     btn.addEventListener('click',function(){
-      var pre=btn.nextElementSibling,text=pre?pre.innerText||pre.textContent:'';
+      var pre=document.querySelector('.bibtex-block'),text=pre?pre.innerText||pre.textContent:'';
       if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(function(){
         btn.innerHTML='<i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-check.png);mask-image:url(/images/icons/h-check.png)"></i> Copied!';btn.classList.add('copied');
         setTimeout(function(){btn.innerHTML='<i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-list.png);mask-image:url(/images/icons/h-list.png)"></i> Copy BibTeX';btn.classList.remove('copied');},2000);});}
@@ -314,5 +423,7 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
   });
 })();
 </script>
+{% include proj/read-the-mind/hero.html %}
+{% include proj/read-the-mind/figs.html %}
 </body>
 </html>
