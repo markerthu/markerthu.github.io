@@ -7,6 +7,9 @@
 .masthead-nav a{font-size:17px!important;font-weight:600!important;padding:6px 10px!important;margin:0!important;letter-spacing:0!important}
 @media(max-width:600px){.masthead-title{font-size:17px!important}.masthead-nav a{font-size:14px!important;padding:5px 8px!important}}
 {% unless include.home %}
+/* Project pages: one venue label above the title, the same on every published paper. */
+.hero p.venue{font-size:14px;line-height:1.5;font-weight:600;color:var(--mint-t);margin:0 0 12px;font-variant-numeric:tabular-nums}
+
 /* One typeface outside the homepage (his 11-19 call: the serif pages "不好看"); Inter carries the hierarchy by weight. */
 :root,body,body.dark-mode{--serif:'Inter','Inter Fallback','Segoe UI',system-ui,-apple-system,sans-serif!important}
 .pg-fab,.ra-btn,.ra-tip,.ra-panel,.dark-toggle,.scroll-top,#pg-dark,#pg-top,#ra-btn,#ra-tip,#darkToggle{display:none!important}

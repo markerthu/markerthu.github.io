@@ -1,0 +1,73 @@
+<figure class="cst idea" id="ch-idea">
+  <div class="cst-stage">
+    <article class="cst-act rlvr">
+      <header><h3>Outcome-only RL</h3><p>rewards the answer and its format</p></header>
+      <div class="cst-draw" role="img" aria-label="Schematic. Three of the chains sampled for one question. A reasons soundly and answers correctly. B answers correctly, but its reasoning does not support the answer. C makes up a detail and answers wrongly. Rewarding only the answer and its format gives A and B the same reward."></div>
+      <p class="cst-say">B is rewarded as much as A, so its broken reasoning is reinforced too.</p>
+      <ul class="pdm-yn"><li class="y"><i></i>Checks the answer and its format</li><li class="n"><i></i>Checks the reasoning</li><li class="n"><i></i>Tells sound reasoning from a lucky guess</li></ul>
+    </article>
+    <article class="cst-act own">
+      <header><h3>CESAR</h3><p>also rewards consistency, structure and calibrated length</p></header>
+      <div class="cst-draw" role="img" aria-label="Schematic. The same three chains scored by CESAR: the answer and format, plus consistency, structure and length. A ranks first, B second and C third, so GRPO reinforces A's reasoning most."></div>
+      <p class="cst-say">Sound reasoning ranks first, and that is what GRPO reinforces.</p>
+      <ul class="pdm-yn"><li class="y"><i></i>Checks the answer and its format</li><li class="y"><i></i>Checks the reasoning</li><li class="y"><i></i>Tells sound reasoning from a lucky guess</li></ul>
+    </article>
+  </div>
+  <figcaption class="cap">Schematic: three of the eight chains sampled for one question. The bars show which terms count, not measured rewards.</figcaption>
+</figure>
+<script>
+(function(){
+  var fig=document.getElementById('ch-idea'); if(!fig) return;
+  var acts=[].slice.call(fig.querySelectorAll('.cst-act')), hosts=acts.map(function(a){return a.querySelector('.cst-draw');});
+  var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* A: sound and right; B: right answer the reasoning does not support; C: a made-up step and a wrong answer */
+  var ROWS=[
+    {id:'A',say:'sound reasoning, right answer',ok:1,bad:-1,brk:0,v:[5,1,1,.9,.6],rk:1},
+    {id:'B',say:'right answer, reasoning does not support it',ok:1,bad:-1,brk:1,v:[5,1,.2,.6,.55],rk:2},
+    {id:'C',say:'a made-up detail, wrong answer',ok:0,bad:3,brk:0,v:[0,1,.3,.5,.5],rk:3}
+  ];
+  var CLS=['s-acc','s-fmt','s-con','s-kw','s-len'], NAMES=['answer','format','consistency','structure','length'];
+  var width=0, timer=0, vis=false;
+  function f(v){return (+v).toFixed(1);}
+  function build(host,own){
+    var W=Math.max(280,Math.min(520,Math.round(host.clientWidth))), n=W<400;
+    var x0=12, cx=x0+30, nd=7, dx=n?11:13, ax=cx+(nd-1)*dx+(n?16:20), bx=ax+(n?18:24), bmax=W-12-(n?22:28), u=(bmax-bx)/9;
+    var Y0=n?78:80, DY=n?62:60, s='', i, d=0;
+    s+='<rect class="bx0" x="'+x0+'" y="14" width="34" height="26" rx="8"/><text class="qa" x="'+(x0+17)+'" y="32" text-anchor="middle">Q</text>';
+    s+='<text class="lb" x="'+(x0+44)+'" y="31">one audio question, eight sampled chains</text>';
+    ROWS.forEach(function(r,k){
+      var y=Y0+k*DY, dl;
+      s+='<text class="lb ink" x="'+x0+'" y="'+(y+4.5)+'">'+r.id+'</text>';
+      for(i=0;i<nd;i++){dl=(0.15+k*0.18+i*0.07).toFixed(2);
+        s+='<circle class="dt pop'+(i===r.bad?' bad':'')+'" style="--d:'+dl+'s" cx="'+(cx+i*dx)+'" cy="'+y+'" r="'+(i===r.bad?4.6:3.4)+'"/>';}
+      dl=(0.15+k*0.18+nd*0.07+0.1).toFixed(2);
+      s+='<path class="lk'+(r.brk?' brk':'')+' fade" style="--d:'+dl+'s" d="M'+(cx+(nd-1)*dx+6)+' '+y+'H'+(ax-10)+'"/>';
+      s+='<g class="pop" style="--d:'+dl+'s"><circle class="'+(r.ok?'ok':'no')+'" cx="'+ax+'" cy="'+y+'" r="9"/>'+(r.ok?'<path class="tk" d="M'+(ax-4)+' '+y+'l2.8 3 5.2-6"/>':'<path class="tx" d="M'+(ax-3.4)+' '+(y-3.4)+'l6.8 6.8M'+(ax+3.4)+' '+(y-3.4)+'l-6.8 6.8"/>')+'</g>';
+      s+='<text class="lb'+(r.bad>=0||r.brk?' bad':'')+' fade" style="--d:'+dl+'s" x="'+cx+'" y="'+(y+24)+'">'+r.say+'</text>';
+      var xx=bx, nseg=own?5:2;
+      for(i=0;i<nseg;i++){var w=r.v[i]*u; if(w<0.5) continue;
+        s+='<rect class="'+CLS[i]+' grow" style="--d:'+(1.15+i*0.42).toFixed(2)+'s" x="'+f(xx)+'" y="'+(y-7)+'" width="'+f(w)+'" height="14" rx="3"/>';xx+=w;}
+      if(own){var rx=bx+r.v.reduce(function(a,b){return a+b;},0)*u+14;
+        s+='<g class="pop" style="--d:'+(3.4+k*0.18).toFixed(2)+'s">'+(r.rk===1?'<circle class="rk1" cx="'+f(rx)+'" cy="'+y+'" r="9"/>':'')+'<text class="rk" x="'+f(rx)+'" y="'+(y+4.5)+'" text-anchor="middle">'+r.rk+'</text></g>';}
+    });
+    if(!own){var tx=bx+6*u+10, ya=Y0, yb=Y0+DY;
+      s+='<path class="tie draw" style="--d:2.2s" d="M'+f(tx)+' '+(ya-6)+'h5v'+(yb-ya+12)+'h-5"/>';
+      s+='<text class="lb bad fade" style="--d:2.6s" x="'+f(tx+10)+'" y="'+(ya+DY/2-2)+'">same</text><text class="lb bad fade" style="--d:2.6s" x="'+f(tx+10)+'" y="'+(ya+DY/2+14)+'">reward</text>';}
+    var ly=Y0+2*DY+52, lx=x0, nl=own?5:2;
+    for(i=0;i<nl;i++){
+      var lw=NAMES[i].length*6.9+26; if(lx+lw>W-6){lx=x0;ly+=20;}
+      s+='<rect class="'+CLS[i]+'" x="'+lx+'" y="'+(ly-9)+'" width="10" height="10" rx="2"/><text class="lb" x="'+(lx+15)+'" y="'+ly+'">'+NAMES[i]+'</text>';lx+=lw;}
+    var H=ly+10;
+    host.innerHTML='<svg class="anim" viewBox="0 0 '+W+' '+H+'" aria-hidden="true">'+s+'</svg>';
+    host.querySelectorAll('.draw').forEach(function(p){try{p.style.setProperty('--len',Math.ceil(p.getTotalLength())+2);}catch(e){}});
+  }
+  function setup(){var w=Math.round(hosts[0].clientWidth);if(Math.abs(w-width)<8)return;width=w;build(hosts[0],false);build(hosts[1],true);if(vis||reduced)play(true);}
+  function svgs(){return [].slice.call(fig.querySelectorAll('svg.anim'));}
+  function play(on){svgs().forEach(function(s){s.classList.toggle('in',on);});}
+  function loop(){clearTimeout(timer);if(reduced||!vis)return;timer=setTimeout(function(){play(false);void fig.offsetWidth;requestAnimationFrame(function(){play(true);loop();});},11000);}
+  setup();
+  if(reduced||!('IntersectionObserver' in window)){play(true);}
+  else new IntersectionObserver(function(es){es.forEach(function(e){vis=e.isIntersecting;if(vis){play(true);loop();}else{clearTimeout(timer);play(false);}});},{threshold:0.3}).observe(fig);
+  var rt=0;window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(setup,180);});
+})();
+</script>

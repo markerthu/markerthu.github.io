@@ -7,200 +7,37 @@ permalink: /projects/procedure-aware-rl/
 <head>
 <meta charset="UTF-8">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Procedure-Aware Reinforcement Learning for Tool-Augmented Large Language Models — COLM 2026">
-  <meta property="og:description" content="Rewarding how tools are called, not just whether the answer is right. A procedural reward (NDCG over invocation order + final-state check) and an error-aware penalty inside GRPO — a 3B model beats correctness-only RL on BFCL-V3, API-Bank and Bamboogle.">
+  <meta property="og:title" content="Procedure-Aware Reinforcement Learning for Tool-Augmented Large Language Models">
+  <meta property="og:description" content="A tool-using agent can call every right tool and still fail, because it called them in the wrong order. We reward the procedure: the order of the calls and the state they leave behind. Only the reward changes, and a 3B agent beats correctness-only RL on BFCL-V3, API-Bank and Bamboogle. COLM 2026.">
   <meta property="og:image" content="https://www.jiajunfan.com/images/og/procedure-aware-rl.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
   <meta property="og:url" content="https://www.jiajunfan.com/projects/procedure-aware-rl/">
   <link rel="canonical" href="https://www.jiajunfan.com/projects/procedure-aware-rl/">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Procedure-Aware RL for Tool-Augmented LLMs — COLM 2026">
-  <meta name="twitter:description" content="Procedural reward + error-aware penalty in GRPO: a 3B tool-use agent that beats correctness-only RL and matches far larger proprietary models.">
+  <meta name="twitter:title" content="Procedure-Aware Reinforcement Learning for Tool-Augmented LLMs">
+  <meta name="twitter:description" content="Reward how an agent calls its tools, not only which tools it calls. A procedural reward and an error-aware penalty inside standard GRPO: a 3B agent that learns the order of things. COLM 2026.">
   <meta name="twitter:image" content="https://www.jiajunfan.com/images/og/procedure-aware-rl.jpg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Procedure-Aware RL for Tool-Augmented LLMs | COLM 2026</title>
-<meta name="description" content="Procedure-Aware Reinforcement Learning for Tool-Augmented Large Language Models. COLM 2026.">
+<title>Procedure-Aware Reinforcement Learning for Tool-Augmented Large Language Models | Jiajun Fan</title>
+<meta name="description" content="A tool-using agent can call every right tool and still fail, because it called them in the wrong order. We reward the procedure: the order of the calls and the state they leave behind. Only the reward changes, and a 3B agent beats correctness-only RL on BFCL-V3, API-Bank and Bamboogle. COLM 2026.">
 <meta name="theme-color" content="#fdfcfa">
 <meta name="theme-color" content="#0f1216" media="(prefers-color-scheme: dark)">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
 <link rel="icon" href="/images/favicon.ico">
-<meta name="robots" content="index,follow">
 <script>try{if(localStorage.getItem('darkMode')==='true'){document.documentElement.style.background='#0f1216';}}catch(e){}</script>
-<style>
-@font-face{font-family:'Newsreader Fallback';src:local('Georgia');size-adjust:91.7%;ascent-override:80.2%;descent-override:28.9%;line-gap-override:0%;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:'Inter Fallback';src:local('Arial');size-adjust:107.1%;ascent-override:90.4%;descent-override:22.5%;line-gap-override:0%;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-:root{
-  --serif:'Newsreader','Newsreader Fallback',Georgia,'Times New Roman',serif;
-  --sans:'Inter','Inter Fallback','Segoe UI',system-ui,-apple-system,sans-serif;
-  --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
-  --bg:#fdfcfa; --band:#f6f3ec; --ink:#1a1815; --body:#2b2823; --muted:#6c6860; --faint:#6b665c;
-  --rule:#e8e3d9; --link:#2F4B8F; --on-link:#ffffff; --link-h:#23396E; --card:#ffffff; --fig-border:#e6e0d5;
-  --good:#2F4B8F; --bad:#c0392b;
-}
-body.dark-mode{
-  --bg:#0f1216; --band:#151a20; --ink:#ece8e0; --body:#cdc8be; --muted:#8f8a80; --faint:#8a857b;
-  --rule:#262b33; --link:#6ea8fe; --on-link:#0f1216; --link-h:#93c0ff; --card:#161a20; --fig-border:#2a2f38;
-  --good:#9DB8EA; --bad:#f7a8b8;
-}
-.lbl-ico{display:inline-block;width:1em;height:1em;vertical-align:-0.14em;margin-right:5px;background-color:currentColor;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;flex-shrink:0;}
-*{box-sizing:border-box;margin:0;padding:0}
-html{overflow-x:hidden;scroll-behavior:smooth;}
-body{font-family:var(--serif);background:var(--bg);color:var(--body);line-height:1.72;font-size:19px;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s;}
-a{color:var(--link);text-decoration:none}a:hover{color:var(--link-h)}
-::selection{background:rgba(47,75,143,.16);}
-
-/* ── masthead (shared) ── */
-.site-masthead{background:var(--bg);box-shadow:0 1px 0 var(--rule);position:sticky;top:0;z-index:200;font-size:16px;font-family:var(--sans);}
-.site-masthead::after{content:'';display:block;height:3px;background:linear-gradient(to right,#2F4B8F 0%,#6F94C6 50%,#E39A7A 100%)}
-.masthead-inner{max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:56px}
-.masthead-title{font-weight:800;font-size:1.35em;color:var(--ink)!important;text-decoration:none!important;letter-spacing:-.02em}
-.masthead-nav{display:flex;gap:2px;align-items:center}
-.masthead-nav a{font-weight:600;font-size:0.98em;color:var(--muted)!important;text-decoration:none!important;padding:6px 10px;border-radius:6px;transition:color .2s,background .2s}
-.masthead-nav a:hover{color:var(--link)!important;background:rgba(47,75,143,.07)}
-.masthead-nav a.nav-active{color:var(--link)!important}
-@media(max-width:600px){.masthead-inner{flex-wrap:wrap;height:auto;padding:8px 14px 7px;row-gap:1px;justify-content:center}.masthead-title{width:100%;text-align:center}.masthead-nav{width:100%;justify-content:center;flex-wrap:wrap}}
-@media(max-width:560px){.masthead-nav a{font-size:0.86em;padding:5px 8px}.masthead-title{font-size:1.15em}}
-
-/* ── hero (editorial) ── */
-.hero{max-width:820px;margin:0 auto;padding:52px 24px 8px;text-align:center;}
-.kicker{font-family:var(--sans);text-transform:uppercase;letter-spacing:.145em;font-size:.72rem;font-weight:700;color:var(--link);margin-bottom:1em;}
-.hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.12;letter-spacing:-.015em;color:var(--ink);margin:0 auto .5em;max-width:15em;}
-.hero .short{font-family:var(--serif);font-size:1.2rem;color:var(--muted);margin-bottom:1.3em;}
-.hero .short strong{color:var(--body);font-weight:600;}
-.authors{font-family:var(--sans);font-size:.92rem;color:var(--muted);max-width:720px;margin:0 auto .5em;line-height:1.9}
-.authors .me{font-weight:700;color:var(--ink)}
-.affil{font-family:var(--sans);font-size:.82rem;color:var(--faint);margin-bottom:1.5em;line-height:1.6}
-.btn-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
-.btn{display:inline-flex;align-items:center;gap:7px;padding:9px 20px;border-radius:999px;font-family:var(--sans);font-size:.85rem;font-weight:600;transition:.18s;border:1px solid var(--rule);}
-.btn:hover{transform:translateY(-1px)}
-.btn-primary{background:var(--link);color:var(--on-link);border-color:var(--link)}
-.btn-primary:hover{color:var(--on-link)}
-.btn-secondary{background:var(--card);color:var(--link)}
-.btn-neutral{background:var(--band);color:var(--body)}
-.hero-rule{max-width:820px;margin:2.2em auto 0;border:none;border-top:1px solid var(--rule);}
-
-/* ── layout ── */
-.container{max-width:720px;margin:0 auto;padding:0 24px}
-section{padding:34px 0 8px}
-section p{color:var(--body);margin-bottom:1em;font-size:1.06rem;line-height:1.72}
-h2{font-family:var(--sans);font-size:1.45rem;font-weight:700;color:var(--ink);margin:1.4em 0 .7em;line-height:1.25;letter-spacing:-.01em}
-h2 .lbl-ico{color:var(--link);}
-h3,h4{font-family:var(--sans);color:var(--ink);}
-em{font-style:italic}
-strong{font-weight:600;color:var(--ink)}
-
-/* ── abstract / TL;DR ── */
-.tldr{font-family:var(--serif);font-size:1.16rem;line-height:1.6;color:var(--body);border-left:3px solid var(--rule);padding:2px 0 2px 22px;margin:.4em 0 .2em;}
-.tldr strong{color:var(--link);font-weight:600}
-
-/* ── stat cards ── */
-.results-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:20px 0}
-.result-card{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:20px 14px;text-align:center}
-.result-card .rnum{font-family:var(--sans);font-size:1.7rem;font-weight:800;color:var(--link);line-height:1.1;white-space:nowrap}
-.result-card .rdesc{font-family:var(--sans);font-size:.76rem;color:var(--muted);margin-top:8px;line-height:1.5}
-
-/* ── method steps ── */
-.method-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;margin:20px 0}
-.step{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:18px;text-align:center}
-.step .step-num{width:34px;height:34px;background:var(--link);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--sans);font-weight:800;font-size:.9em;margin:0 auto 11px}
-.step h3{font-family:var(--sans);font-size:.86rem;font-weight:700;color:var(--ink);margin-bottom:7px}
-.step p{font-family:var(--sans);font-size:.8rem;color:var(--muted);margin:0;line-height:1.55}
-
-/* ── problem / solution ── */
-.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0}
-.problem-card,.solution-card{border-radius:12px;padding:18px 20px;background:var(--card);border:1px solid var(--rule)}
-.problem-card{border-left:3px solid var(--bad)} .solution-card{border-left:3px solid var(--good)}
-.problem-card h3,.solution-card h3{font-family:var(--sans);font-size:.86rem;font-weight:700;margin-bottom:8px}
-.problem-card h3{color:var(--bad)} .solution-card h3{color:var(--good)}
-.problem-card p,.solution-card p{font-family:var(--sans);font-size:.86rem;color:var(--body);margin:0;line-height:1.6}
-
-/* ── comparison table ── */
-.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:20px 0}
-.compare-table{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:.9rem}
-.compare-table th{background:var(--band);color:var(--muted);padding:11px 15px;text-align:left;font-weight:600;border-bottom:1px solid var(--rule);font-size:.76rem;text-transform:uppercase;letter-spacing:.04em}
-.compare-table td{padding:11px 15px;border-bottom:1px solid var(--rule);color:var(--body)}
-.compare-table tr:last-child td{border-bottom:none}
-.compare-table .highlight td{background:rgba(47,75,143,.06);font-weight:600;color:var(--ink)}
-body.dark-mode .badge-win{background:#1A2333}
-.badge-win{background:#E6EEF8;color:var(--good);padding:2px 9px;border-radius:6px;font-weight:700;font-size:.82em}
-
-/* ── figures (native inline SVG charts) ── */
-figure.chart{margin:1.8em auto;color:var(--muted);max-width:640px;}
-figure.chart.wide{max-width:100%;}
-figure.chart.narrow{max-width:460px;}
-figure.chart svg{display:block;width:100%;height:auto;}
-figure.chart figcaption{font-family:var(--sans);font-size:.82rem;color:var(--muted);margin-top:.9em;text-align:center;line-height:1.55;max-width:600px;margin-left:auto;margin-right:auto;}
-figure.chart figcaption b,figure.chart figcaption strong{color:var(--link);font-weight:600}
-
-/* ── timeline ── */
-.tl{position:relative;padding-left:24px;margin:10px 0}
-.tl-line{position:absolute;left:8px;top:4px;bottom:4px;width:2px;background:var(--rule)}
-.tl-item{position:relative;margin-bottom:18px}
-.tl-dot{position:absolute;left:-20px;top:5px;width:11px;height:11px;border-radius:50%;background:var(--c-var,#BFD8EC);border:1.5px solid var(--c-var-line,#6F94C6);box-shadow:0 0 0 3px var(--bg)}
-.tl-dot.done{background:var(--good);border-color:var(--good)}
-.tl-date{font-family:var(--sans);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--link)}
-.tl-dot.done ~ .tl-date{color:var(--good)}
-.tl-title{font-family:var(--sans);font-weight:600;font-size:.95rem;color:var(--ink);margin:1px 0 2px}
-.tl-desc{font-family:var(--sans);font-size:.84rem;color:var(--muted);line-height:1.55}
-
-/* ── BibTeX ── */
-.bib-copy-btn{display:inline-flex;align-items:center;gap:6px;margin-bottom:10px;padding:6px 15px;border-radius:8px;border:1px solid var(--rule);cursor:pointer;font-family:var(--sans);font-size:.8rem;font-weight:600;background:var(--band);color:var(--body);transition:.18s}
-.bib-copy-btn:hover{border-color:var(--link);color:var(--link)}
-.bib-copy-btn.copied{background:var(--good);color:#fff;border-color:var(--good)}
-.bibtex-block{background:var(--band);color:var(--body);border:1px solid var(--rule);border-radius:12px;padding:18px 20px;overflow-x:auto;font-family:var(--mono);font-size:.8rem;line-height:1.7}
-
-/* ── footer ── */
-footer{font-family:var(--sans);background:transparent;color:var(--muted);text-align:center;padding:26px 24px;font-size:.86rem;border-top:1px solid var(--rule);margin-top:2.4em}
-footer a{color:var(--link)}
-
-/* ── controls ── */
-#read-progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,#2F4B8F,#6F94C6 60%,#E39A7A);z-index:9999;transition:width .08s linear;pointer-events:none}
-.pg-fab{position:fixed;right:22px;width:42px;height:42px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.18);z-index:9990;transition:transform .2s,opacity .2s}
-.pg-fab:hover{transform:translateY(-2px) scale(1.06)}
-#pg-top{bottom:22px;background:var(--link);color:var(--on-link);opacity:0;pointer-events:none}
-#pg-top.show{opacity:1;pointer-events:auto}
-#pg-dark{bottom:126px;background:#fff;color:#2F4B8F;border:1.5px solid rgba(0,0,0,.15)}
-body.dark-mode #pg-dark{background:#1A2333;color:#F5C8B5;border-color:#2B3A55}
-.pg-dico{width:20px;height:20px;display:inline-block;background-color:currentColor;-webkit-mask:url(/images/icons/h-moon.png) center/contain no-repeat;mask:url(/images/icons/h-moon.png) center/contain no-repeat}
-body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-image:url(/images/icons/h-sun.png)}
-.pg-up{width:11px;height:11px;border-top:2.6px solid currentColor;border-right:2.6px solid currentColor;transform:rotate(-45deg) translateY(2px);display:inline-block}
-
-@media(max-width:640px){figure.chart.wide{overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:6px;}figure.chart.wide svg{min-width:520px;}figure.chart.wide:not(.anim-fig) svg{min-width:0;}figure.chart.wide figcaption{position:sticky;left:0;max-width:calc(100vw - 48px);}}
-@media(max-width:640px){.problem-grid{grid-template-columns:1fr}.method-steps{grid-template-columns:1fr 1fr}.results-grid{grid-template-columns:1fr 1fr}.hero h1{font-size:2rem}}
-@media print{.site-masthead,.pg-fab,#read-progress{display:none!important}}
-@media (prefers-reduced-motion:reduce){*{transition-duration:.001ms!important}html{scroll-behavior:auto}}
-@view-transition{navigation:auto}
-::view-transition-old(root),::view-transition-new(root){animation-duration:.18s}
-@media (prefers-reduced-motion:reduce){::view-transition-old(root),::view-transition-new(root){animation:none!important}}
-
-/* the AI-agent panel (bottom:120px, z-index:9991) covers this FAB while open — hide it, as the agent does with its own launcher */
-.ra-panel.show ~ #pg-dark{opacity:0;pointer-events:none;}
-
-/* figure palette (shared by every chart and animation; Jev-style: navy = ours, misty blue = our variant,
-   peach = competing RL baseline, cool gray = base model / others) */
-:root{--c-ours:#2F4B8F;--c-ours-fill:#90A4C5;--c-var:#BFD8EC;--c-var-line:#6F94C6;--c-rl:#F5C8B5;--c-rl-line:#E39A7A;
-  --c-base:#DDE2EA;--c-base-line:#8F97A8;--c-other:#C9CED8;--c-other-line:#9AA1B0;--c-grid:#E4E8EF;--c-ink2:#5B6273}
-body.dark-mode{--c-ours:#9DB8EA;--c-ours-fill:#5E77A8;--c-var:#3F5F86;--c-var-line:#7FA6D3;--c-rl:#9A6E5D;--c-rl-line:#E9A98C;
-  --c-base:#3A414E;--c-base-line:#8F97A8;--c-other:#4A5260;--c-other-line:#9AA1B0;--c-grid:#2A303A;--c-ink2:#A6ADBB}
-figure.anim-fig{--link:var(--c-ours);--good:#3E7D5A;--bad:var(--c-rl-line)}
-body.dark-mode figure.anim-fig{--good:#7FC79A}
-.problem-card{border-left-color:var(--c-rl-line)!important}.problem-card h3{color:#A14F2C!important}
-.solution-card{border-left-color:var(--c-ours)!important}.solution-card h3{color:var(--c-ours)!important}
-body.dark-mode .problem-card h3{color:#F0B49A!important}
-
-h1,h2,h3,.bx-title,.p-title,.pub-title,.card-title{text-wrap:balance}
-p,li{text-wrap:pretty}
-p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcaption a,td a{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px;text-decoration-color:rgba(47,75,143,.45)}body.dark-mode p a:not([class]),body.dark-mode li a:not([class]),body.dark-mode .authors a,body.dark-mode .tl-desc a,body.dark-mode .note a,body.dark-mode figcaption a,body.dark-mode td a{text-decoration-color:rgba(157,184,234,.5)}
-</style>
+{% include selfrw/style.html %}
+{% include proj/procedure-aware-rl/style.html %}
+<noscript><style>.hl{background-size:100% 36%}.chapters{position:static}.ox-tabs,.ox-foot{display:none}</style></noscript>
 <script type="application/ld+json">{
   "@context":"https://schema.org","@type":"ScholarlyArticle",
   "name":"Procedure-Aware Reinforcement Learning for Tool-Augmented Large Language Models",
+  "description":"A procedure-aware reinforcement learning framework for tool-augmented language models: a procedural reward for the order of tool calls and the final system state, and an error-aware penalty for malformed calls, inside standard GRPO.",
   "author":[{"@type":"Person","name":"Qinglong Zheng"},{"@type":"Person","name":"Jiajun Fan"},{"@type":"Person","name":"Chaoran Cheng"},{"@type":"Person","name":"Ge Liu"}],
-  "datePublished":"2026","publisher":{"@type":"Organization","name":"COLM 2026"},
+  "datePublished":"2026",
   "url":"https://www.jiajunfan.com/projects/procedure-aware-rl/","sameAs":"https://openreview.net/forum?id=d4wrBuJ4xo",
-  "keywords":"tool use, agentic RL, GRPO, procedural reward, BFCL, API-Bank, function calling"
+  "keywords":"tool use, agentic RL, GRPO, procedural reward, NDCG, BFCL, API-Bank, Bamboogle, function calling"
 }</script>
   <script data-goatcounter="https://jiajunfan.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 {% include site-chrome.html %}
@@ -221,132 +58,331 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
   </div>
 </header>
 
-<div class="hero" role="region" aria-label="Project summary">
-  <div class="kicker">COLM 2026</div>
-  <h1>Procedure-Aware Reinforcement Learning for Tool-Augmented Large Language Models</h1>
-  <p class="short">Reward <strong>how</strong> the tools are called &mdash; not just whether the final answer is right.</p>
-  <div class="authors">
-    Qinglong Zheng<sup>*</sup>, <a href="/" class="me">Jiajun Fan</a><sup>*</sup>,
-    Chaoran Cheng, <a href="https://geliu.web.illinois.edu/">Ge Liu</a>
+<main>
+
+<section class="hero" aria-label="Summary">
+  <div class="wrap">
+    <p class="venue">COLM 2026</p>
+    <h1>Procedure&#8209;Aware Reinforcement Learning <span class="l2">for Tool&#8209;Augmented Large Language Models</span></h1>
+    <p class="byline">Qinglong&nbsp;Zheng<sup>*</sup>, <a href="/" class="me">Jiajun&nbsp;Fan</a><sup>*</sup>, Chaoran&nbsp;Cheng, <a href="https://geliu.web.illinois.edu/">Ge&nbsp;Liu</a></p>
+    <ul class="logos" aria-label="Affiliation"><li><img src="/images/projects/self-rewriting/logo_uiuc.png" alt="" width="66" height="96"><span>UIUC</span></li></ul>
+    <p class="eq"><sup>*</sup>Equal contribution</p>
+    <div class="cta">
+      <a class="btn" href="#film"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M5 3.300v9.400L12.500 8z"/></svg>Film</a>
+      <a class="btn btn-primary" href="https://openreview.net/forum?id=d4wrBuJ4xo"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M4 1.5h5.5L12.5 4.5v10h-8.5z"/><path d="M9.5 1.5v3h3M6 8h4.5M6 10.5h4.5"/></svg>Paper</a>
+      <a class="btn" href="#cite"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5c2 0 3-1.5 3-4.5V4.5H3V8h3M9.5 11.5c2 0 3-1.5 3-4.5V4.5h-3V8h3"/></svg>BibTeX</a>
+    </div>
+    <div class="stage">
+      <canvas id="parl-stage" role="img" aria-label="Animation of one training step. The agent answers one task with a group of rollouts, each making the same three tool calls: look up the address, wrap the gift, ship the package. Some make them in that order, some do not. A correctness reward gives them all the same score. The procedural reward checks the order and the final state, and only the ordered rollouts score in full. The GRPO update then favours the rollouts in the right order."></canvas>
+      <ol class="stage-steps" aria-hidden="true">
+        <li><b>It calls tools</b>a group of rollouts</li>
+        <li><b>Correctness scores</b>which calls, which values</li>
+        <li><b>Procedure scores</b>their order, the final state</li>
+        <li><b>GRPO learns</b>to call in the right order</li>
+      </ol>
+    </div>
   </div>
-  <div class="affil">University of Illinois Urbana-Champaign &nbsp;&nbsp; <sup>*</sup>Equal contribution</div>
-  <div class="btn-row">
-    <a class="btn btn-primary" href="https://openreview.net/forum?id=d4wrBuJ4xo">Paper (OpenReview)</a>
-    <a class="btn btn-neutral" href="/">Author Homepage</a>
+</section>
+
+<nav class="chapters" aria-label="Parts of this page">
+  <div class="wrap">
+    <a href="#results">At a glance</a>
+    <a href="#problem">The problem</a>
+    <a href="#idea">The idea</a>
+    <a href="#how">How it works</a>
+    <a href="#evidence">The evidence</a>
+    <span class="ch-sub"><a href="#beats" aria-label="Finding 01">01</a><a href="#order-matters" aria-label="Finding 02">02</a><a href="#learns" aria-label="Finding 03">03</a><a href="#both" aria-label="Finding 04">04</a></span>
+    <a href="#matters">Why it matters</a>
+    <a href="#film">Film</a>
+    <a href="#cite">Cite</a>
+    <a class="ch-paper" href="https://openreview.net/forum?id=d4wrBuJ4xo">COLM 2026 paper</a>
   </div>
-  <hr class="hero-rule">
+</nav>
+
+<section class="scene band" id="results">
+  <div class="wrap">
+    <div class="duo">
+      <header class="say">
+        <p class="eyebrow">At a glance</p>
+        <h2>The paper in four results.</h2>
+        <p class="lead">What if a tool-using agent were rewarded for how it calls its tools, not only for which tools it calls? Score the order of its calls and the state they leave behind, and a 3B agent becomes a markedly better tool user.</p>
+      </header>
+      <div class="show cards c2">
+        <a class="card result" href="#beats"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><line class="il-ax" x1="14" y1="84" x2="186" y2="84"/><rect class="il-n" x="26" y="44" width="18" height="40" rx="3"/><rect class="il-y" x="48" y="30" width="18" height="54" rx="3"/><rect class="il-n" x="86" y="38" width="18" height="46" rx="3"/><rect class="il-y" x="108" y="24" width="18" height="60" rx="3"/><rect class="il-n" x="146" y="48" width="18" height="36" rx="3"/><rect class="il-y" x="168" y="32" width="18" height="52" rx="3"/></svg></span><span class="r-no">Finding 01<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>It beats correctness-only RL.</h3><p>On all three benchmarks, from the same 3B model and the same training data.</p></a>
+        <a class="card result" href="#order-matters"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><line class="il-ax" x1="20" y1="84" x2="180" y2="84"/><rect class="il-n" x="40" y="70" width="32" height="14" rx="3"/><rect class="il-n" x="84" y="56" width="32" height="28" rx="3"/><rect class="il-y" x="128" y="18" width="32" height="66" rx="3"/></svg></span><span class="r-no">Finding 02<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>It gains most where order matters.</h3><p>Its multi-turn accuracy on BFCL-V3 nearly doubles over correctness-only RL.</p></a>
+        <a class="card result" href="#learns"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><g class="il-g"><rect x="14" y="40" width="40" height="16" rx="4"/></g><path class="il-ar" d="M58 48h10"/><g class="il-g"><rect class="il-bad" x="72" y="40" width="40" height="16" rx="4"/></g><path class="il-ar" d="M116 44c10 0 12-20 22-20M134 20l4 4-4 4"/><path class="il-ar" d="M116 52c10 0 12 20 22 20M134 68l4 4-4 4" stroke-opacity=".35"/><g class="il-g"><rect class="il-ok" x="142" y="16" width="44" height="16" rx="4"/><rect x="142" y="64" width="44" height="16" rx="4" fill-opacity=".5"/></g></svg></span><span class="r-no">Finding 03<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>It learns the procedure.</h3><p>It navigates before it creates, and recovers from a failed call instead of giving up.</p></a>
+        <a class="card result" href="#both"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><line class="il-ax" x1="30" y1="10" x2="30" y2="88"/><line class="il-ax" x1="30" y1="20" x2="104" y2="20"/><circle class="il-dot" cx="104" cy="20" r="4"/><line class="il-ax" x1="30" y1="40" x2="118" y2="40"/><circle class="il-dot" cx="118" cy="40" r="4"/><line class="il-ax" x1="30" y1="60" x2="116" y2="60"/><circle class="il-dot" cx="116" cy="60" r="4"/><path class="il-ln" d="M30 80H170"/><circle class="il-y" cx="170" cy="80" r="6"/></svg></span><span class="r-no">Finding 04<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>Both new rewards count.</h3><p>Remove either one and accuracy drops, every time significantly.</p></a>
+      </div>
+      <ul class="creed">
+        <li><b>Only the reward changes.</b><span>standard GRPO, the same data, the same base model</span></li>
+        <li><b>No extra labels.</b><span>rule-based rewards, read off the reference calls</span></li>
+        <li><b>Nearly free.</b><span>a fraction of a second per training step</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="scene" id="problem">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main wide">
+        <p class="eyebrow">The problem</p>
+        <h2 class="reveal">Correctness-only RL rewards tool calls as <span class="hl">a bag of actions.</span></h2>
+        <p class="lead">It matches each call&rsquo;s tool name, parameter keys and values against the reference, and ignores their order. In a stateful environment, the order decides the result.</p>
+      </div>
+    </header>
+    <div class="fig panel">
+      <div class="ch anim" id="ch-bag" data-loop="11" role="img" aria-label="The paper's sending-a-package example. Rollout A looks up the address, wraps the gift, then ships the package, and ends in the correct state. Rollout B ships the package first, before the address is known, and ends in the wrong state. Both make the same calls with the same parameters, so a correctness-only reward gives them the same score."></div>
+    </div>
+    <p class="cap">The paper&rsquo;s sending-a-package example. Schematic.</p>
+    <p class="takeaway">A reward that cannot see the order cannot teach it.</p>
+  </div>
+</section>
+
+<section class="scene band" id="idea">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main wide">
+        <p class="eyebrow">The idea <span>Reward the procedure</span></p>
+        <h2 class="reveal">A correctness reward asks which calls were made. <span class="hl nw">We also reward how.</span></h2>
+        <p class="lead">Two terms join the reward: one for the order of the calls and the state they leave, one against malformed calls.</p>
+      </div>
+    </header>
+{% include proj/procedure-aware-rl/reward.html %}
+    <p class="takeaway">Only the reward changes. The algorithm, the data and the model stay the same.</p>
+  </div>
+</section>
+
+<section class="scene" id="how">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main wide">
+        <p class="eyebrow">How it works</p>
+        <h2 class="reveal">Near misses earn partial credit. <span class="hl">Detours that end right still count.</span></h2>
+        <p class="lead">Each call earns credit by how close it lands to its place in the reference order, and the first places weigh most. A second check asks only whether the rollout ends on the reference sequence, so a reasonable detour that still gets there is not punished.</p>
+      </div>
+    </header>
+{% include proj/procedure-aware-rl/order.html %}
+    <p class="takeaway">The agent is told how close its procedure came, not just that it missed.</p>
+  </div>
+</section>
+
+<div id="evidence">
+
+<section class="scene band" id="beats">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">The evidence <span>Finding 01</span></p>
+        <h2>It beats correctness-only RL.</h2>
+        <p class="lead">On all three benchmarks, including multi-hop search that lies outside its training data.</p>
+      </div>
+    </header>
+    <div class="fig panel">
+      <div class="ch anim" id="ch-bench" role="img" aria-label="Accuracy of Qwen2.5-3B-Instruct as the base model, after correctness-only RL (ToolRL) and after procedure-aware RL. BFCL-V3, five-category average: 57.31%, 63.07% and 65.67%. API-Bank, average over three levels: 27.28%, 57.92% and 63.66%. Bamboogle: 48.80%, 48.40% and 56.80%."></div>
+    </div>
+    <p class="cap">All three start from Qwen2.5-3B-Instruct; ToolRL is its released checkpoint, trained on the same data with format and correctness rewards only. BFCL-V3 and Bamboogle: mean over runs.</p>
+    <p class="takeaway">The same model, the same data, a different reward.</p>
+  </div>
+</section>
+
+<section class="scene" id="order-matters">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">The evidence <span>Finding 02</span></p>
+        <h2>It gains most where order matters.</h2>
+        <p class="lead">Multi-turn tasks chain calls through a changing state. That is where scoring the order pays off most.</p>
+      </div>
+    </header>
+    <div class="fig panel">
+      <div class="ch anim" id="ch-turn" role="img" aria-label="BFCL-V3 multi-turn accuracy of Qwen2.5-3B-Instruct trained on the same data: 1.92% with supervised fine-tuning, 3.88% with correctness-only RL and 7.25% with procedure-aware RL, 87% higher than correctness-only RL. On API-Bank Level 3, which tests sequential tool coordination: 38.93% for ToolRL and 49.62% for ours, 27% higher. At 7B, BFCL-V3 multi-turn: 15.13% for ToolRL-7B and 17.29% for ours."></div>
+    </div>
+    <p class="cap">Multi-turn at 3B: identical training data for all three. API-Bank Level 3 tests sequential tool coordination. At 7B: the released ToolRL-7B checkpoint against ours, three runs each.</p>
+    <p class="takeaway">Where the order decides the outcome, the procedural reward pays most.</p>
+  </div>
+</section>
+
+<section class="scene band" id="learns">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">The evidence <span>Finding 03</span></p>
+        <h2>It learns the procedure, not just the calls.</h2>
+        <p class="lead">No rule in the reward says to navigate first or to retry after an error. Both emerge from scoring the sequence.</p>
+      </div>
+    </header>
+    <div class="fig panel">
+      <div class="duel pausable" id="duel">
+        <p class="duel-q"><span>A multi-turn file-system task from BFCL-V3, the same task for both</span>Navigate to Documents, create summary.txt, write &ldquo;quantum computing&rdquo; into it, count the words.</p>
+        <div class="term k-fail">
+          <h4>Correctness-only RL <span>ToolRL-3B</span></h4>
+          <div class="scr log"><div>&lt;think&gt; There is no 'Documents' dir, so we need to create one first. &lt;/think&gt;</div><div class="c">mkdir(dir_name="Documents")</div><div class="c">touch(file_name="summary.txt")</div><div class="e">[ERR] "Directory already exists"</div><div class="e">&rarr; File created in root, not Documents!</div><div class="c">touch(file_name="summary.txt")</div><div class="e">[ERR] "File already exists"</div><div>&lt;response&gt; An error occurred because 'summary.txt' already exists. &lt;/response&gt;</div></div>
+          <p class="verdict"><b>Fails.</b> It skipped cd; the remaining turns fail on the wrong state.</p>
+        </div>
+        <div class="term k-edit">
+          <h4>Procedure-aware RL <span>ours, 3B</span></h4>
+          <div class="scr log"><div>&lt;think&gt; We need to first navigate to the 'Documents' directory and then create the file. &lt;/think&gt;</div><div class="c">cd(folder="Documents")</div><div class="c">touch(file_name="summary.txt")</div><div class="o">[OK] cwd: "Documents"</div><div class="c">echo(content="quantum computing", file_name="summary.txt")</div><div class="o">[OK] Written successfully</div><div class="c">wc(file_name="summary.txt", mode="w")</div><div class="o">[OK] {count: 2, type: "words"}</div></div>
+          <p class="verdict"><b>Succeeds.</b> It navigates first, then creates the file.</p>
+        </div>
+      </div>
+    </div>
+    <div class="cases txt" id="learn-cases">
+      <article class="case">
+        <p class="q"><span class="bn">BFCL-V3, recovery</span>Find the distance between Crescent Hollow and Autumnville, then its base-10 logarithm. The first call fails: &ldquo;distance not found in database.&rdquo;</p>
+        <div class="ba k-fail"><b>ToolRL-3B</b><samp>&hellip; The distance is not found in the database. I will inform the user that the distance cannot be determined.</samp><code>Gives up at the first error</code></div>
+        <div class="ba k-edit"><b>Ours, 3B</b><samp>&hellip; This could be due to the zipcodes not being recognized. I will need to find the zipcodes for both locations to proceed.</samp><code>Finds both zipcodes, retries, solves both turns</code></div>
+      </article>
+      <article class="case">
+        <p class="q"><span class="bn">Bamboogle, multi-hop search</span>What rocket was the first spacecraft that ever approached Uranus launched on?</p>
+        <div class="ba k-fail"><b>ToolRL-3B</b><samp>Search: &ldquo;first spacecraft to Uranus launch rocket&rdquo; &hellip; The rocket that launched &hellip; was Voyager 2.</samp><code>One search; mistakes the spacecraft for the rocket</code></div>
+        <div class="ba k-edit"><b>Ours, 3B</b><samp>&hellip; Voyager 2 was the first spacecraft. Now I need to find the rocket. &hellip; The rocket was Titan IIIE / Centaur.</samp><code>Two targeted searches, correct</code></div>
+      </article>
+      <article class="case">
+        <p class="q"><span class="bn">API-Bank, multi-turn</span>Retrieve the total number of likes for user ID 5. Likes for posts 13 and 14 were already retrieved.</p>
+        <div class="ba k-fail"><b>ToolRL-3B</b><samp>LikeCount(post_id="13") LikeCount(post_id="14") LikeCount(post_id="15")</samp><code>Re-queries the posts it already has</code></div>
+        <div class="ba k-edit"><b>Ours, 3B</b><samp>&hellip; already retrieved likes for posts 13 and 14. Now we only need to get likes for post 15. LikeCount(post_id="15")</samp><code>Queries only the remaining post</code></div>
+      </article>
+      <article class="case">
+        <p class="q"><span class="bn">API-Bank, parameter types</span>Get the weather for latitude 37.7749, longitude 122.4194.</p>
+        <div class="ba k-fail"><b>ToolRL-3B</b><samp>GetWeatherForCoordinates(<wbr>latitude=37.7749, longitude=122.4194)</samp><code>[ERR] Invalid parameter type</code></div>
+        <div class="ba k-edit"><b>Ours, 3B</b><samp>GetWeatherForCoordinates(<wbr>latitude="37.7749", longitude="122.4194")</samp><code>Strings, as the schema requires</code></div>
+      </article>
+      <article class="case">
+        <p class="q"><span class="bn">API-Bank, required parameters</span>Reset the password for user &ldquo;foo&rdquo; with email foo@example.com.</p>
+        <div class="ba k-fail"><b>ToolRL-3B</b><samp>ForgotPassword(<wbr>status="Forgot Password", email="foo@example.com")</samp><code>[ERR] Missing required: username</code></div>
+        <div class="ba k-edit"><b>Ours, 3B</b><samp>ForgotPassword(<wbr>status="Forgot Password", username="foo", email="foo@example.com")</samp><code>All required parameters</code></div>
+      </article>
+      <article class="case">
+        <p class="q"><span class="bn">Bamboogle, three hops</span>What was the job of the father of the founder of psychoanalysis?</p>
+        <div class="ba k-fail"><b>ToolRL-3B</b><samp>&hellip; The job was that of an assistant to Professor E. Brucke at the Vienna Institute of Physiology.</samp><code>Gives the son&rsquo;s job to the father</code></div>
+        <div class="ba k-edit"><b>Ours, 3B</b><samp>&hellip; Now, I need to find Jacob Freud's job specifically. &hellip; Jacob Freud was a Galician Jewish wool merchant and fabric salesman.</samp><code>Three searches, correct</code></div>
+      </article>
+    </div>
+    <button type="button" class="more" id="more-cases" aria-controls="learn-cases" aria-expanded="false">Show three more</button>
+    <p class="cap">Cases from the paper where ours succeeds and ToolRL-3B fails; outputs shortened.</p>
+    <p class="takeaway">It learns the preconditions of its tools, and it treats an error as a reason to try another way.</p>
+  </div>
+</section>
+
+<section class="scene" id="both">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">The evidence <span>Finding 04</span></p>
+        <h2>Both new rewards count.</h2>
+        <p class="lead">Remove either one and accuracy drops by more than two points. Remove both and the agent is back to correctness-only RL.</p>
+      </div>
+    </header>
+    <div class="fig panel">
+      <div class="ch anim" id="ch-abl" role="img" aria-label="Ablation on BFCL-V3 with Qwen2.5-3B-Instruct. Average of the non-live, live and multi-turn splits: full model 53.92%, without the error-aware penalty 51.58% (minus 2.34), without the procedural reward 51.65% (minus 2.27), ToolRL-3B with neither 50.73% (minus 3.19). Multi-turn accuracy: 7.25%, 5.50%, 4.50% and 3.88%."></div>
+    </div>
+    <p class="cap">Every drop is significant under a paired bootstrap test on per-sample outcomes (p &lt; 10<sup>&minus;7</sup>).</p>
+    <details class="fold" id="ndcg-more">
+      <summary class="more">Why NDCG to score the order</summary>
+      <div class="fig panel">
+        <div class="ch anim" id="ch-metric" role="img" aria-label="BFCL-V3 five-category average with three ways to score the order inside the procedural reward, same recipe otherwise: NDCG 65.67%, normalized edit distance 64.30%, Kendall's tau 63.75%."></div>
+      </div>
+      <p class="cap">Same recipe; only the order metric changes. NDCG is the only one of the three that weighs early places more.</p>
+    </details>
+    <p class="takeaway">The procedural reward teaches when and in what order to call; the penalty teaches how to call correctly.</p>
+  </div>
+</section>
+
 </div>
 
-<div class="container" role="main">
-
-<section>
-  <p class="tldr"><strong>TL;DR</strong> &mdash; RL with verifiable rewards teaches a tool-using agent <em>what</em> a correct call looks like, but never <em>how</em> to sequence calls. We add a <strong>procedural reward</strong> &mdash; invocation-order quality plus a final-system-state check &mdash; and an <strong>error-aware penalty</strong> to GRPO. A 3B model then beats correctness-only RL on all three benchmarks, and lands in the same range as much larger proprietary models.</p>
-  {% include film-card.html id="procedure-aware-rl" name="Procedure-Aware RL" %}
-</section>
-
-<section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-search.png);mask-image:url(/images/icons/h-search.png)"></i>The problem: correct calls, wrong order</h2>
-  <p>In state-aware environments the <em>order</em> of tool calls decides whether the final system state is right. Wrapping a gift before looking up the address is fine; shipping it first is not. Correctness-only rewards score the tool name and its parameters, so a perfectly-formed call in the wrong position earns the same credit as the right one &mdash; and one misordered call cascades into every later step.</p>
-  {% include anim/parl.html %}
-  <div class="problem-grid">
-    <div class="problem-card">
-      <h3>Correctness-only RLVR</h3>
-      <p>Matches tool names and parameter values against the ground truth. Execution order, failed calls and the resulting system state are invisible to the reward, so the model fits <em>what</em> a call looks like rather than <em>how</em> to reach the goal.</p>
+<section class="scene band" id="matters">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">Why it matters</p>
+        <h2>A 3B agent that holds its own against larger models.</h2>
+        <p class="lead">On BFCL-V3 it posts the highest five-category average in the comparison, ahead of correctness-only RL and of larger models scored by the benchmark&rsquo;s maintainers.</p>
+      </div>
+    </header>
+    <div class="fig panel">
+      <div class="ch anim" id="ch-rank" role="img" aria-label="BFCL-V3 five-category average accuracy: procedure-aware RL, 3B, 65.67%; Gemma-3-12b-it 64.69%; GPT-4.1-mini 64.65%; ToolRL, 3B, 63.07%; Gemini-2.5-Flash-Lite 57.94%; Qwen2.5-3B-Instruct 57.31%; GPT-5-mini 57.11%; Claude-Haiku-4.5 47.26%."></div>
     </div>
-    <div class="solution-card">
-      <h3>Procedure-aware RL</h3>
-      <p>Scores the invocation chain itself: graded credit for partial ordering, a check that the trajectory ends in the correct state, and an explicit penalty for structural call errors &mdash; tool calling becomes a trainable procedural skill.</p>
+    <p class="cap">Larger models: official BFCL leaderboard scores, each under its own evaluation protocol. The 3B models: mean over runs.</p>
+    <h3 class="eyebrow sub">What this opens up</h3>
+    <div class="cards c3 opens">
+      <div class="card"><h3>Better agents from the same data</h3><p>No extra labels, no larger teacher, no new algorithm. A better reward is enough.</p></div>
+      <div class="card"><h3>Almost free to adopt</h3><p>The new rewards are rules, not models: they add a fraction of a second to each training step.</p></div>
+      <div class="card"><h3>The how, not only the what</h3><p>Wherever the order of actions decides the outcome, the procedure itself can be rewarded.</p></div>
+    </div>
+    <div class="cta left">
+      <a class="btn btn-primary" href="https://openreview.net/forum?id=d4wrBuJ4xo">Read the paper</a>
     </div>
   </div>
 </section>
 
-<section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-gear.png);mask-image:url(/images/icons/h-gear.png)"></i>Method</h2>
-  <p>The policy is fine-tuned with <strong>GRPO</strong> (KL-regularized) on a weighted sum of four reward terms. Only the reward changes &mdash; the RL algorithm stays standard.</p>
-  {% include anim/strip_parl.html %}
-  <p>The procedural term uses <strong>normalized discounted cumulative gain</strong> so that partially-correct orderings are ranked above invalid ones, instead of collapsing to a binary match. The state check gives credit whenever the agent eventually reaches the correct final state, which keeps reasonable detours &mdash; listing a directory before creating a file, or recovering from a failed call &mdash; from being punished as mistakes.</p>
-  {% include anim/procedure-aware-rl_ndcg.html %}
-</section>
-
-<section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-chart.png);mask-image:url(/images/icons/h-chart.png)"></i>Results</h2>
-  <div class="results-grid">
-    <div class="result-card"><div class="rnum">+2.6</div><div class="rdesc">BFCL-V3 avg. acc over ToolRL (3B)</div></div>
-    <div class="result-card"><div class="rnum">+5.7</div><div class="rdesc">API-Bank avg. acc over ToolRL</div></div>
-    <div class="result-card"><div class="rnum">+8.4</div><div class="rdesc">Bamboogle accuracy over ToolRL</div></div>
-    <div class="result-card"><div class="rnum">3B</div><div class="rdesc">matches far larger proprietary models</div></div>
+<section class="scene" id="film">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">The film</p>
+        <h2>The story, as a short film.</h2>
+      </div>
+    </header>
+    <div class="film">
+      <video controls playsinline preload="none" poster="/film/posters/procedure-aware-rl.jpg" width="1280" height="720" aria-label="Procedure-Aware RL: a short film">
+        <source src="/film/video/procedure-aware-rl.mp4" type="video/mp4">
+      </video>
+    </div>
+    <p class="cap">1 min 14 s. Also in the <a href="/film/#procedure-aware-rl">film gallery</a>.</p>
   </div>
-  <figure class="chart wide">
-    {% include figures/parl_benchmarks.svg %}
-    <figcaption><b>Figure 1.</b> Qwen2.5-3B-Instruct trained with procedure-aware rewards, against the same base model and ToolRL's released correctness-only checkpoint, on three tool-use benchmarks.</figcaption>
-  </figure>
-  <div class="tbl-wrap">
-  <table class="compare-table"><caption style="caption-side:top;text-align:left;font-family:var(--sans);font-size:.85rem;line-height:1.5;color:var(--muted);padding:0 0 .7em"><b style="color:var(--link)">Table 1.</b> BFCL-V3 accuracy, averaged over its five sub-categories (including relevance and irrelevance detection), and on multi-turn tasks. The base model, ToolRL and Procedure-Aware RL share the Qwen2.5-3B backbone; the other five models are references.</caption>
-    <thead><tr><th>Model</th><th>BFCL-V3 avg. acc</th><th>Multi-turn acc</th></tr></thead>
-    <tbody>
-      <tr><td>Qwen2.5-3B-Instruct (base)</td><td>57.31%</td><td>1.00%</td></tr>
-      <tr><td>ToolRL (correctness-only RL, 3B)</td><td>63.07%</td><td>3.88%</td></tr>
-      <tr><td>GPT-5-mini</td><td>57.11%</td><td>5.50%</td></tr>
-      <tr><td>GPT-4.1-mini</td><td>64.65%</td><td>2.50%</td></tr>
-      <tr><td>Gemma-3-12b-it</td><td>64.69%</td><td>5.75%</td></tr>
-      <tr><td>Gemini-2.5-Flash-Lite</td><td>57.94%</td><td><strong>7.63%</strong></td></tr>
-      <tr><td>Claude-Haiku-4.5</td><td>47.26%</td><td>1.75%</td></tr>
-      <tr class="highlight"><td><strong>Procedure-Aware RL (ours, 3B)</strong></td><td><strong>65.67% <span class="badge-win">Best</span></strong></td><td>7.25%</td></tr>
-    </tbody>
-  </table>
-  </div>
-  <p style="font-size:.92rem;color:var(--muted)">Proprietary and larger open models are evaluated under BFCL's official per-model protocols, so they are a reference point rather than a matched comparison. The matched comparison is the base model and ToolRL, which share the Qwen2.5 backbone.</p>
 </section>
 
-<section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-puzzle.png);mask-image:url(/images/icons/h-puzzle.png)"></i>Both new terms are load-bearing</h2>
-  <figure class="chart">
-    {% include figures/parl_ablation.svg %}
-    <figcaption><b>Figure 2.</b> Removing either term costs more than two points, and both together account for the whole gap to correctness-only RL. Scores here average the three BFCL sub-categories (non-live, live, multi-turn), so they are not directly comparable with the table above.</figcaption>
-  </figure>
-  <p>Dropping the error-aware penalty mostly hurts single-turn accuracy, where invocation errors go unpunished; dropping the procedural reward mostly hurts the multi-turn split, where ordering is what matters. All differences are significant under a paired bootstrap on per-sample outcomes.</p>
-</section>
-
-<section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-sparkle.png);mask-image:url(/images/icons/h-sparkle.png)"></i>What the model learns</h2>
-  <p>Rewarding sequence quality buys behavior nobody wrote into the reward. On a multi-turn file-system task the trained agent navigates before it creates &mdash; <code>cd</code> first, then the file &mdash; while the correctness-only baseline recreates a directory that already exists and then cascades through the resulting state errors. The same training also improves <strong>recovery</strong>: after a failed call the agent retries along a corrected path instead of repeating the failure.</p>
-  {% include anim/procedure-aware-rl_learns.html %}
-</section>
-
-<section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-book.png);mask-image:url(/images/icons/h-book.png)"></i>BibTeX</h2>
-  <button class="bib-copy-btn" aria-label="Copy BibTeX citation"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-list.png);mask-image:url(/images/icons/h-list.png)"></i>Copy BibTeX</button>
-  <pre class="bibtex-block" tabindex="0"><code>@inproceedings{zheng2026procedure,
+<section class="cite" id="cite">
+  <div class="wrap duo">
+    <header class="say">
+      <p class="eyebrow">Cite</p>
+      <h2>Cite the paper.</h2>
+      <button class="bib-copy-btn" aria-label="Copy BibTeX citation"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-list.png);mask-image:url(/images/icons/h-list.png)"></i>Copy BibTeX</button>
+    </header>
+    <pre class="show bibtex-block" tabindex="0"><code>@inproceedings{zheng2026procedure,
   title     = {Procedure-Aware Reinforcement Learning for Tool-Augmented
-               Large Language Models},
+  Large Language Models},
   author    = {Qinglong Zheng and Jiajun Fan and Chaoran Cheng and Ge Liu},
   booktitle = {Conference on Language Modeling (COLM)},
   year      = {2026},
   url       = {https://openreview.net/forum?id=d4wrBuJ4xo}
 }</code></pre>
+  </div>
 </section>
 
-</div>
+</main>
 
 <footer>
-  <p>Procedure-Aware RL · COLM 2026 &nbsp;|&nbsp; <a href="/">Jiajun Fan</a> · UIUC &nbsp;|&nbsp; <a href="https://openreview.net/forum?id=d4wrBuJ4xo">Paper</a> &nbsp;|&nbsp; <a href="/projects/">All Projects</a></p>
+  <p>Procedure-Aware RL &nbsp;|&nbsp; <a href="/">Jiajun Fan</a> · UIUC &nbsp;|&nbsp; <a href="https://openreview.net/forum?id=d4wrBuJ4xo">Paper</a> &nbsp;|&nbsp; <a href="/projects/">All Projects</a></p>
 </footer>
 
 <div id="read-progress" aria-hidden="true"></div>
-<button id="pg-dark" class="pg-fab" aria-label="Toggle dark mode" title="Toggle dark mode"><i class="pg-dico"></i></button>
-<button id="pg-top" class="pg-fab" aria-label="Back to top" title="Back to top"><span class="pg-up"></span></button>
 <script>
 (function(){
-  try{if(localStorage.getItem('darkMode')==='true')document.body.classList.add('dark-mode');}catch(e){}
-  var bar=document.getElementById('read-progress'),top=document.getElementById('pg-top'),dk=document.getElementById('pg-dark');
-  function onScroll(){var st=window.scrollY||document.documentElement.scrollTop,h=document.documentElement.scrollHeight-window.innerHeight;
-    if(bar)bar.style.width=(h>0?(st/h*100):0)+'%'; if(top){st>400?top.classList.add('show'):top.classList.remove('show');}}
-  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
-  if(top)top.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
-  if(dk)dk.addEventListener('click',function(){var on=document.body.classList.toggle('dark-mode');try{localStorage.setItem('darkMode',on);}catch(e){}});
+  var bar=document.getElementById('read-progress'), nav=document.querySelector('.chapters'), strip=nav?nav.querySelector('.wrap'):null;
+  function pairs(sel){return [].slice.call(document.querySelectorAll(sel)).map(function(a){return [a,document.getElementById(a.getAttribute('href').slice(1))];}).filter(function(p){return p[1];});}
+  var parts=pairs('.chapters .wrap > a[href^="#"]'), subs=pairs('.chapters .ch-sub a'), shown=null;
+  function mark(list,cur){list.forEach(function(p){if(p[0]===cur)p[0].setAttribute('aria-current','true');else p[0].removeAttribute('aria-current');});}
+  function onScroll(){
+    var st=window.scrollY||document.documentElement.scrollTop,h=document.documentElement.scrollHeight-window.innerHeight,line=Math.min(window.innerHeight*0.38,340),cur=null,sub=null;
+    if(bar)bar.style.width=(h>0?(st/h*100):0)+'%';
+    parts.forEach(function(p){if(p[1].getBoundingClientRect().top<=line)cur=p[0];});
+    if(h>0&&st>=h-2&&parts.length)cur=parts[parts.length-1][0];
+    if(cur&&cur.getAttribute('href')==='#evidence')subs.forEach(function(p){if(p[1].getBoundingClientRect().top<=line)sub=p[0];});
+    mark(parts,cur);mark(subs,sub);
+    if(cur!==shown&&strip&&strip.scrollWidth>strip.clientWidth){strip.scrollLeft=cur?Math.max(0,cur.offsetLeft-16):0;}
+    shown=cur;
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});window.addEventListener('resize',onScroll);onScroll();
+  var grid=document.getElementById('learn-cases'), more=document.getElementById('more-cases');
+  if(grid&&more){
+    grid.classList.add('fold');
+    more.addEventListener('click',function(){grid.classList.remove('fold');more.setAttribute('aria-expanded','true');});
+  }
   document.querySelectorAll('.bib-copy-btn').forEach(function(btn){
     btn.addEventListener('click',function(){
-      var pre=btn.nextElementSibling,text=pre?pre.innerText||pre.textContent:'';
+      var pre=document.querySelector('.bibtex-block'),text=pre?pre.innerText||pre.textContent:'';
       if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(function(){
         btn.innerHTML='<i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-check.png);mask-image:url(/images/icons/h-check.png)"></i> Copied!';btn.classList.add('copied');
         setTimeout(function(){btn.innerHTML='<i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-list.png);mask-image:url(/images/icons/h-list.png)"></i> Copy BibTeX';btn.classList.remove('copied');},2000);});}
@@ -354,5 +390,7 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
   });
 })();
 </script>
+{% include proj/procedure-aware-rl/hero.html %}
+{% include proj/procedure-aware-rl/figs.html %}
 </body>
 </html>

@@ -1,0 +1,115 @@
+<figure class="ox pausable" id="ox" aria-label="The procedural reward on four rollouts of the sending-a-package task">
+  <div class="ox-top">
+    <div class="ox-tabs" role="tablist" aria-label="Rollout">
+      <button role="tab" aria-selected="true" data-k="0">In order</button>
+      <button role="tab" aria-selected="false" data-k="1">Swapped</button>
+      <button role="tab" aria-selected="false" data-k="2">Reversed</button>
+      <button role="tab" aria-selected="false" data-k="3">Detour</button>
+    </div>
+    <span class="ox-note">Pick a rollout, or let it play</span>
+  </div>
+  <div class="ox-body">
+    <div class="ox-fig ch anim" id="ox-fig" data-manual role="img" aria-label="The reference order is look up the address, wrap the gift, ship the package. Each of the first three calls of the rollout is linked to its place in the reference; a call in its own place earns full credit for that place, a displaced call earns less, and the first places count most. A rollout that ends on the reference sequence, even after a detour, also earns the credit for the final state."></div>
+    <div class="ox-res" aria-live="polite">
+      <div class="ox-m"><span>Credit for the order</span><span class="ox-v">NDCG</span><span class="ox-bar"><b data-r="trace"></b></span></div>
+      <div class="ox-m"><span>Ends on the reference sequence</span><span class="ox-yn" data-r="state">yes</span></div>
+      <div class="ox-m tot"><span>Procedural reward</span><span class="ox-v">half each</span><span class="ox-bar"><b data-r="proc"></b></span></div>
+      <p class="ox-say"></p>
+    </div>
+  </div>
+  <div class="ox-foot"><button type="button" class="rp-play" aria-label="Pause"><svg viewBox="0 0 12 12"><rect x="2" y="1.5" width="3" height="9" rx="1"/><rect x="7" y="1.5" width="3" height="9" rx="1"/></svg></button><div class="rp-bar"><b></b></div></div>
+  <figcaption class="cap ox-cap">Schematic: the bars follow the paper&rsquo;s formulas for these rollouts of its sending-a-package example.</figcaption>
+</figure>
+<script>
+(function(){
+  var root=document.getElementById('ox'); if(!root) return;
+  var fig=document.getElementById('ox-fig'), tabs=[].slice.call(root.querySelectorAll('.ox-tabs button'));
+  var say=root.querySelector('.ox-say'), bT=root.querySelector('[data-r=trace]'), bP=root.querySelector('[data-r=proc]'), yn=root.querySelector('[data-r=state]');
+  var play=root.querySelector('.rp-play'), bar=root.querySelector('.rp-bar b');
+  var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var TOOLS=[['look_up_address','address'],['wrap(gift)','wrap'],['ship(package)','ship']];
+  var G=[0,1,2], W8=[1,1/Math.log2(3),0.5], IDCG=W8[0]+W8[1]+W8[2];
+  var CASES=[
+    {o:[0,1,2],say:'Every call in its place, and it ends on the reference sequence: the full reward.'},
+    {o:[1,0,2],say:'Close: partial credit for the order, and none for the final state.'},
+    {o:[2,1,0],say:'The package ships before the address is known: little credit for the order, none for the state.'},
+    {o:[0,0,1,2],say:'It looks the address up twice, then ends on the reference sequence: the detour costs order credit, not the state.'}];
+  /* The paper's Eq. 6-9: trace = NDCG@|G| with rel(i)=1/(1+|i-j*|), gain 2^rel-1, discount 1/log2(i+1);
+     state = 1 if the reference is a suffix of the rollout and does not occur earlier; procedural = half each. */
+  function occurs(P,from){for(var k=0;k<3;k++)if(P[from+k]!==G[k])return false;return true;}
+  CASES.forEach(function(c){
+    var d=0, P=c.o, n=P.length, early=false, k;
+    c.fill=[0,1,2].map(function(i){var rel=1/(1+Math.abs(i-P[i])), g=(Math.pow(2,rel)-1)*W8[i]; d+=g; return g;});
+    for(k=0;k<n-3;k++)if(occurs(P,k))early=true;
+    c.trace=d/IDCG; c.state=occurs(P,n-3)&&!early?1:0; c.proc=0.5*c.trace+0.5*c.state;
+  });
+  var cur=0, playing=!reduced, vis=false, timer=0, DUR=6000, lastW=0;
+  function build(){
+    var cw=fig.clientWidth||600, W=Math.round(Math.max(290,cw)), small=W<520, c=CASES[cur], n=Math.max(3,c.o.length);
+    var H=small?268:270, cwid=Math.min(176,W/n-14), ch=small?30:32, X=function(i){return W*(i+0.5)/n;};
+    var yR=24, yP=small?104:118, yB=yP+ch+(small?32:20), BH=small?62:72, s='';
+    var CH=7.8, fit=function(str){return 31+CH*str.length+6<=cwid;}, mode=fit(TOOLS[0][0])?0:fit(TOOLS[0][1])?1:-1;
+    function label(t,x,y,muted){
+      var str=mode<0?'':TOOLS[t][mode];
+      return '<text class="mono" x="'+(x+31)+'" y="'+(y+ch/2+4.5)+'"'+(muted?' style="fill:var(--muted)"':'')+'>'+str+'</text>';
+    }
+    function badge(t,x,y,k){var bx=mode<0?x+cwid/2:x+15;
+      return '<circle class="badge'+(k?' '+k:'')+'" cx="'+bx+'" cy="'+(y+ch/2)+'" r="9"/><text class="bt'+(k?' '+k:'')+'" x="'+bx+'" y="'+(y+ch/2+4.5)+'" text-anchor="middle">'+(t+1)+'</text>';}
+    s+='<text x="0" y="14" class="sm">reference order</text>';
+    for(var i=0;i<3;i++){var x=X(i)-cwid/2;
+      s+='<rect class="chip ghost" x="'+x.toFixed(1)+'" y="'+yR+'" width="'+cwid.toFixed(1)+'" height="'+ch+'" rx="8"/>'+badge(i,x,yR,'')+label(i,x,yR,true);}
+    if(c.state){var x0=X(n-3)-cwid/2-6, x1=X(n-1)+cwid/2+6;
+      s+='<rect class="hlrow fade" style="--d:1.6s" x="'+x0.toFixed(1)+'" y="'+(yP-6)+'" width="'+(x1-x0).toFixed(1)+'" height="'+(ch+12)+'" rx="12"/>';}
+    c.o.forEach(function(t,i){var scored=i<3, ok=scored&&t===i, k=scored?(ok?'ok':'bad'):'', x=X(i)-cwid/2, dl=(0.15+i*0.2).toFixed(2)+'s';
+      if(scored)s+='<path class="lnk '+k+' draw" style="--d:'+(0.55+i*0.2).toFixed(2)+'s" d="M'+X(i).toFixed(1)+' '+(yP-2)+' L'+X(t).toFixed(1)+' '+(yR+ch+3)+'"/>';
+      s+='<g class="slide" style="--d:'+dl+'"><rect class="chip'+(k?' '+k:'')+'" x="'+x.toFixed(1)+'" y="'+yP+'" width="'+cwid.toFixed(1)+'" height="'+ch+'" rx="8"/>'+badge(t,x,yP,k)+label(t,x,yP,false)+'</g>';});
+    s+=small?'<text x="0" y="'+(yP+ch+17)+'" class="sm">&uarr; the rollout</text>':'<text x="0" y="'+(yP-10)+'" class="sm halo">the rollout</text>';
+    if(n>3&&!small)s+='<text x="'+X(n-1).toFixed(1)+'" y="'+(yP-10)+'" class="sm t-mint fade halo" text-anchor="middle" style="--d:1.8s;font-weight:600">ends on the reference</text>';
+    var bw=small?34:44;
+    for(i=0;i<3;i++){var h=BH*W8[i], f=BH*c.fill[i], bx=X(i)-bw/2, base=yB+BH;
+      s+='<rect class="chip ghost" x="'+bx.toFixed(1)+'" y="'+(base-h).toFixed(1)+'" width="'+bw+'" height="'+h.toFixed(1)+'" rx="4"/>';
+      s+='<rect class="'+(c.o[i]===i?'d-mint':'d-peach')+' growy" style="--d:'+(1.1+i*0.18).toFixed(2)+'s" x="'+bx.toFixed(1)+'" y="'+(base-Math.max(f,2)).toFixed(1)+'" width="'+bw+'" height="'+Math.max(f,2).toFixed(1)+'" rx="4"/>';
+      s+=small?'<text x="'+X(i).toFixed(1)+'" y="'+(base+17)+'" class="sm" text-anchor="middle">place '+(i+1)+'</text>':'<text x="'+(X(i)+bw/2+8).toFixed(1)+'" y="'+(base-4)+'" class="sm">place '+(i+1)+'</text>';}
+    s+='<text x="0" y="'+(H-2)+'" class="sm">'+(small?'credit per place; dashed: the most it can earn':'credit earned at each of the first three places; dashed: the most a place can earn')+'</text>';
+    fig.innerHTML='<svg viewBox="0 0 '+W+' '+H+'">'+s+'</svg>';
+    [].slice.call(fig.querySelectorAll('.draw')).forEach(function(p){try{p.style.setProperty('--len',Math.ceil(p.getTotalLength())+2);}catch(e){}});
+    lastW=cw;
+  }
+  function meters(){
+    var c=CASES[cur];
+    bT.style.setProperty('--d','1.4s');bP.style.setProperty('--d','1.9s');
+    bT.style.width=(c.trace*100).toFixed(1)+'%';bP.style.width=(c.proc*100).toFixed(1)+'%';
+    yn.textContent=c.state?'yes':'no';yn.className='ox-yn '+(c.state?'y':'n');
+    say.textContent=c.say;
+  }
+  function show(k){
+    cur=k;tabs.forEach(function(t,i){t.setAttribute('aria-selected',i===k?'true':'false');});
+    build();
+    bT.style.transition='none';bP.style.transition='none';bT.style.width='0';bP.style.width='0';void bT.offsetWidth;bT.style.transition='';bP.style.transition='';
+    if(reduced){fig.classList.add('in');meters();return;}
+    fig.classList.remove('in');void fig.offsetWidth;
+    if(vis){fig.classList.add('in');meters();}
+    schedule();
+  }
+  function icon(){play.setAttribute('aria-label',playing?'Pause':'Play');play.innerHTML=playing?'<svg viewBox="0 0 12 12"><rect x="2" y="1.5" width="3" height="9" rx="1"/><rect x="7" y="1.5" width="3" height="9" rx="1"/></svg>':'<svg viewBox="0 0 12 12"><path d="M3 1.5v9l7.5-4.5z"/></svg>';}
+  function schedule(){
+    clearTimeout(timer);
+    bar.style.transition='none';bar.style.width='0';void bar.offsetWidth;
+    if(!playing||!vis||reduced)return;
+    bar.style.transition='width '+DUR+'ms linear';bar.style.width='100%';
+    timer=setTimeout(function(){show((cur+1)%CASES.length);},DUR);
+  }
+  tabs.forEach(function(t,i){t.addEventListener('click',function(){playing=false;icon();show(i);});});
+  play.addEventListener('click',function(){playing=!playing;icon();if(playing)show((cur+1)%CASES.length);else schedule();});
+  root.addEventListener('srw:vis',function(e){
+    if(reduced)return;
+    var was=vis;vis=e.detail;
+    if(vis&&!was){show(cur);}
+    else if(!vis){clearTimeout(timer);fig.classList.remove('in');}
+  });
+  if(reduced){playing=false;icon();root.querySelector('.ox-foot').style.display='none';}
+  if(!('IntersectionObserver' in window))vis=true;
+  show(0);
+  var rt=0;window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){if(Math.abs((fig.clientWidth||0)-lastW)>8){build();if(vis||reduced)fig.classList.add('in');}},180);});
+})();
+</script>

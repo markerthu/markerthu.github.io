@@ -1,0 +1,95 @@
+<style>
+/* CESAR page: only what the shared design system (selfrw/style.html) does not already have */
+.hero .venue{font-size:var(--t-label);font-weight:600;color:var(--mint-t);margin:0 0 12px;font-variant-numeric:tabular-nums}
+.hero h1{max-width:21.5em;margin-left:auto;margin-right:auto}
+.stage canvas#ce-stage{height:400px}
+
+/* idea: two columns, outcome-only RL against CESAR (layout from .cst) */
+.cst-act.rlvr{--k:var(--ice);--ke:var(--ice-e);--kt:var(--ice-t);--kl:var(--ice-l)}
+.cst-act.rlvr .cst-say b,.cst-act.own .cst-say b{font-weight:600}
+.idea .cst-draw svg text{font-family:var(--sans)}
+.idea .lb{font-size:var(--t-fine);fill:var(--muted)}
+.idea .lb.ink{fill:var(--ink);font-weight:600}
+.idea .lb.kt{fill:var(--kt);font-weight:600}
+.idea .lb.bad{fill:var(--peach-t);font-weight:600}
+.idea .qa{font-size:var(--t-label);font-weight:600;fill:var(--kt)}
+.idea .bx0{fill:var(--card);stroke:var(--ke);stroke-width:1.2}
+.idea .dt{fill:var(--ice-e)}
+.idea .dt.bad{fill:var(--peach);stroke:var(--peach-e);stroke-width:1.2}
+.idea .lk{fill:none;stroke:var(--hair);stroke-width:1.2}
+.idea .lk.brk{stroke:var(--peach-e);stroke-dasharray:3 3}
+.idea .ok{fill:var(--ice-l);stroke:var(--ice-e);stroke-width:1.2}
+.idea .no{fill:var(--peach-l);stroke:var(--peach-e);stroke-width:1.2}
+.idea .tk{fill:none;stroke:var(--ice-t);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.idea .tx{fill:none;stroke:var(--peach-t);stroke-width:1.8;stroke-linecap:round}
+.idea .s-acc{fill:var(--ice);stroke:var(--ice-e);stroke-width:1}
+.idea .s-fmt{fill:var(--band);stroke:var(--hair);stroke-width:1}
+.idea .s-con{fill:var(--lav);stroke:var(--lav-e);stroke-width:1}
+.idea .s-kw{fill:var(--mint);stroke:var(--mint-e);stroke-width:1}
+.idea .s-len{fill:var(--rose);stroke:var(--rose-e);stroke-width:1}
+.idea .tie{fill:none;stroke:var(--peach-e);stroke-width:1.4}
+.idea .rk{font-size:var(--t-fine);font-weight:700;fill:var(--mint-t)}
+.idea .rk1{fill:var(--mint);stroke:var(--mint-e);stroke-width:1.2}
+
+/* how it works: the reward scorer, built on the reference replay */
+.k-fmt{--k:var(--band);--ke:var(--hair);--kt:var(--body);--kl:var(--band)}
+.scorer .rp-kind{margin-bottom:4px}
+.sc-def{font-size:var(--t-label);line-height:1.5;color:var(--muted);margin-bottom:14px;max-width:46em}
+.sc-q{font-size:var(--t-body);line-height:1.45;color:var(--ink);max-width:44em}
+.sc-q b{font-weight:600;color:var(--muted);margin-right:.5em}
+.sc-ch{font-size:var(--t-label);line-height:1.5;color:var(--muted);margin-top:4px;max-width:52em}
+.sc-out{font-family:var(--mono);font-size:var(--t-label);line-height:1.85;color:var(--body);background:var(--code-bg);border:1px solid var(--rule);border-left:3px solid var(--ke);border-radius:8px;padding:12px 16px;margin-top:14px;overflow-wrap:anywhere;transition:border-color .4s}
+.sc-out .tag{color:var(--faint);border-radius:4px;padding:1px 2px;transition:background .4s,color .4s,box-shadow .4s}
+.sc-out .ans{font-weight:500;color:var(--ink);border-radius:4px;padding:1px 3px;transition:background .4s,box-shadow .4s}
+.sc-out mark{background:none;color:inherit;border-radius:4px;padding:1px 0;transition:background .45s,box-shadow .45s,color .45s}
+.sc[data-k="acc"] .ans{background:var(--ice);box-shadow:0 0 0 1px var(--ice-e)}
+.sc[data-k="fmt"] .tag{background:var(--band);color:var(--ink);box-shadow:0 0 0 1px var(--hair)}
+.sc[data-k="con"] mark.c{background:var(--lav);box-shadow:0 0 0 1px var(--lav-e);color:var(--ink)}
+.sc[data-k="con"] .ans{background:var(--lav-l);box-shadow:0 0 0 1px var(--lav-e)}
+.sc[data-k="kw"] mark.w{background:var(--mint);box-shadow:0 0 0 1px var(--mint-e);color:var(--ink)}
+.sc[data-k="len"] .think{background:var(--rose-l);border-radius:4px;box-shadow:0 0 0 1px var(--rose)}
+.sc-len{display:none;grid-template-columns:auto 1fr;align-items:center;gap:12px;margin-top:14px;font-size:var(--t-fine);color:var(--muted);opacity:0;transition:opacity .4s}
+.sc[data-k="len"] .sc-len{display:grid;opacity:1}
+.sc-len .tr{position:relative;height:8px;border-radius:4px;background:var(--band);box-shadow:inset 0 0 0 1px var(--rule)}
+.sc-len .tr b{position:absolute;left:0;top:0;bottom:0;border-radius:4px;background:var(--rose);box-shadow:inset 0 0 0 1px var(--rose-e);width:0;transition:width 1s cubic-bezier(.2,.7,.2,1) .2s}
+.sc[data-k="len"] .sc-len .tr b{width:var(--w)}
+.sc-say{font-size:var(--t-body);line-height:1.45;color:var(--ink);margin-top:14px;max-width:40em}
+.sc-say small{display:block;font-size:var(--t-label);color:var(--muted);margin-top:4px}
+.scorer .rp-view{min-height:380px}
+
+/* at a glance illustrations */
+.il-dn{fill:none;stroke:var(--peach-e);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.il-pk{fill:var(--peach);stroke:var(--peach-e);stroke-width:1.2}
+.il-md{stroke:var(--ink);stroke-opacity:.45;stroke-width:1.3;stroke-dasharray:3 3}
+.il-b{fill:var(--hair)}
+
+#matters .cta{justify-content:flex-start;margin-top:var(--sp-fig)}
+#cite .bibtex-block{font-size:var(--t-fine)}
+
+/* evidence charts */
+.pair{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:28px 44px;align-items:start}
+.pair > div{min-width:0}
+#ch-onoff svg{max-width:460px}
+#ch-direct svg{max-width:440px}
+.ch .t-rose{fill:var(--rose-t)}
+.ch .lgd{font-size:var(--t-fine)}
+.ch .w6{font-weight:600}
+.ch .thin{stroke-width:1.6px;opacity:.8}
+.anim .growr{transform:scaleX(0);transform-box:fill-box;transform-origin:right center}
+.anim.in .growr{transform:none;transition:transform 1s cubic-bezier(.2,.7,.2,1) var(--d,0s)}
+.cases.txt .case .who{font-size:var(--t-label);font-weight:600;color:var(--muted);margin-top:14px}
+#evidence .cases.more-fold .case.x{display:none}
+.cases.more-fold + .more{display:inline-flex}
+.cases.txt .case .ch-c{display:block;font-size:var(--t-fine);line-height:1.45;color:var(--muted);margin-top:6px}
+#evidence .cases.txt .case{grid-row:span 4}
+@media (prefers-reduced-motion:reduce){.anim *,.anim{transition-delay:0s!important}}
+@media(max-width:900px){
+  .pair{grid-template-columns:1fr}
+  #evidence .cases.txt .case{display:block}
+}
+@media(max-width:700px){
+  .stage canvas#ce-stage{height:420px}
+  .scorer .rp-view{min-height:440px}
+  .sc-out{padding:10px 12px}
+}
+</style>

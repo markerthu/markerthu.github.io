@@ -7,201 +7,37 @@ permalink: /projects/cesar/
 <head>
 <meta charset="UTF-8">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="CESAR: Incentivizing Consistent, Effective and Scalable Reasoning Capability in Audio LLMs via Reasoning Process Rewards — ICLR 2026">
-  <meta property="og:description" content="First to systematically identify and diagnose test-time inverse scaling in Audio LLMs. CESAR uses process-level rewards (GRPO) to guide reasoning quality, achieving SOTA on MMAU — outperforming Gemini 2.5 Pro and GPT-4o Audio.">
+  <meta property="og:title" content="Incentivizing Consistent, Effective and Scalable Reasoning Capability in Audio LLMs via Reasoning Process Rewards">
+  <meta property="og:description" content="Audio language models get worse the longer they reason. CESAR rewards the reasoning process itself, not only the answer: reasoning turns from a loss into a gain, and a 7B model sets the state of the art on MMAU Test-mini, ahead of Gemini 2.5 Pro and GPT-4o Audio. ICLR 2026.">
   <meta property="og:image" content="https://www.jiajunfan.com/images/og/cesar.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
   <meta property="og:url" content="https://www.jiajunfan.com/projects/cesar/">
   <link rel="canonical" href="https://www.jiajunfan.com/projects/cesar/">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="CESAR: Audio LLM Reasoning via Reasoning Process Rewards — ICLR 2026">
-  <meta name="twitter:description" content="Process-level rewards (GRPO) resolve test-time inverse scaling in Audio LLMs — SOTA on MMAU, beating Gemini 2.5 Pro and GPT-4o Audio.">
+  <meta name="twitter:title" content="CESAR: Reasoning Process Rewards for Audio LLMs (ICLR 2026)">
+  <meta name="twitter:description" content="Reward how an audio LLM reasons, not only what it answers, and thinking longer stops hurting: state of the art on MMAU Test-mini, ahead of Gemini 2.5 Pro and GPT-4o Audio.">
   <meta name="twitter:image" content="https://www.jiajunfan.com/images/og/cesar.jpg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CESAR — Audio LLM Reasoning | ICLR 2026</title>
-<meta name="description" content="CESAR: Consistent, Effective, and Scalable Audio Reasoners. ICLR 2026.">
+<title>Incentivizing Consistent, Effective and Scalable Reasoning Capability in Audio LLMs via Reasoning Process Rewards | Jiajun Fan</title>
+<meta name="description" content="Audio language models get worse the longer they reason. CESAR rewards the reasoning process itself, not only the answer: reasoning turns from a loss into a gain, and a 7B model sets the state of the art on MMAU Test-mini, ahead of Gemini 2.5 Pro and GPT-4o Audio. ICLR 2026.">
 <meta name="theme-color" content="#fdfcfa">
 <meta name="theme-color" content="#0f1216" media="(prefers-color-scheme: dark)">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
 <link rel="icon" href="/images/favicon.ico">
-<meta name="robots" content="index,follow">
 <script>try{if(localStorage.getItem('darkMode')==='true'){document.documentElement.style.background='#0f1216';}}catch(e){}</script>
-<style>
-@font-face{font-family:'Newsreader Fallback';src:local('Georgia');size-adjust:91.7%;ascent-override:80.2%;descent-override:28.9%;line-gap-override:0%;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:'Inter Fallback';src:local('Arial');size-adjust:107.1%;ascent-override:90.4%;descent-override:22.5%;line-gap-override:0%;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-:root{
-  --serif:'Newsreader','Newsreader Fallback',Georgia,'Times New Roman',serif;
-  --sans:'Inter','Inter Fallback','Segoe UI',system-ui,-apple-system,sans-serif;
-  --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
-  --bg:#fdfcfa; --band:#f6f3ec; --ink:#1a1815; --body:#2b2823; --muted:#6c6860; --faint:#6b665c;
-  --rule:#e8e3d9; --link:#2F4B8F; --on-link:#ffffff; --link-h:#23396E; --card:#ffffff; --fig-border:#e6e0d5;
-  --good:#2F4B8F; --bad:#c0392b;
-}
-body.dark-mode{
-  --bg:#0f1216; --band:#151a20; --ink:#ece8e0; --body:#cdc8be; --muted:#8f8a80; --faint:#8a857b;
-  --rule:#262b33; --link:#6ea8fe; --on-link:#0f1216; --link-h:#93c0ff; --card:#161a20; --fig-border:#2a2f38;
-  --good:#9DB8EA; --bad:#f7a8b8;
-}
-.lbl-ico{display:inline-block;width:1em;height:1em;vertical-align:-0.14em;margin-right:5px;background-color:currentColor;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;flex-shrink:0;}
-*{box-sizing:border-box;margin:0;padding:0}
-html{overflow-x:hidden;scroll-behavior:smooth;}
-body{font-family:var(--serif);background:var(--bg);color:var(--body);line-height:1.72;font-size:19px;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s;}
-a{color:var(--link);text-decoration:none}a:hover{color:var(--link-h)}
-::selection{background:rgba(47,75,143,.16);}
-
-/* ── masthead (shared) ── */
-.site-masthead{background:var(--bg);box-shadow:0 1px 0 var(--rule);position:sticky;top:0;z-index:200;font-size:16px;font-family:var(--sans);}
-.site-masthead::after{content:'';display:block;height:3px;background:linear-gradient(to right,#2F4B8F 0%,#6F94C6 50%,#E39A7A 100%)}
-.masthead-inner{max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:56px}
-.masthead-title{font-weight:800;font-size:1.35em;color:var(--ink)!important;text-decoration:none!important;letter-spacing:-.02em}
-.masthead-nav{display:flex;gap:2px;align-items:center}
-.masthead-nav a{font-weight:600;font-size:0.98em;color:var(--muted)!important;text-decoration:none!important;padding:6px 10px;border-radius:6px;transition:color .2s,background .2s}
-.masthead-nav a:hover{color:var(--link)!important;background:rgba(47,75,143,.07)}
-.masthead-nav a.nav-active{color:var(--link)!important}
-@media(max-width:600px){.masthead-inner{flex-wrap:wrap;height:auto;padding:8px 14px 7px;row-gap:1px;justify-content:center}.masthead-title{width:100%;text-align:center}.masthead-nav{width:100%;justify-content:center;flex-wrap:wrap}}
-@media(max-width:560px){.masthead-nav a{font-size:0.86em;padding:5px 8px}.masthead-title{font-size:1.15em}}
-
-/* ── hero (editorial) ── */
-.hero{max-width:820px;margin:0 auto;padding:52px 24px 8px;text-align:center;}
-.kicker{font-family:var(--sans);text-transform:uppercase;letter-spacing:.145em;font-size:.72rem;font-weight:700;color:var(--link);margin-bottom:1em;}
-.hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.12;letter-spacing:-.015em;color:var(--ink);margin:0 auto .5em;max-width:15em;}
-.hero .short{font-family:var(--serif);font-size:1.2rem;color:var(--muted);margin-bottom:1.3em;}
-.hero .short strong{color:var(--body);font-weight:600;}
-.authors{font-family:var(--sans);font-size:.92rem;color:var(--muted);max-width:720px;margin:0 auto .5em;line-height:1.9}
-.authors .me{font-weight:700;color:var(--ink)}
-.affil{font-family:var(--sans);font-size:.82rem;color:var(--faint);margin-bottom:1.5em;line-height:1.6}
-.btn-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
-.btn{display:inline-flex;align-items:center;gap:7px;padding:9px 20px;border-radius:999px;font-family:var(--sans);font-size:.85rem;font-weight:600;transition:.18s;border:1px solid var(--rule);}
-.btn:hover{transform:translateY(-1px)}
-.btn-primary{background:var(--link);color:var(--on-link);border-color:var(--link)}
-.btn-primary:hover{color:var(--on-link)}
-.btn-secondary{background:var(--card);color:var(--link)}
-.btn-neutral{background:var(--band);color:var(--body)}
-.hero-rule{max-width:820px;margin:2.2em auto 0;border:none;border-top:1px solid var(--rule);}
-
-/* ── layout ── */
-.container{max-width:720px;margin:0 auto;padding:0 24px}
-section{padding:34px 0 8px}
-section p{color:var(--body);margin-bottom:1em;font-size:1.06rem;line-height:1.72}
-h2{font-family:var(--sans);font-size:1.45rem;font-weight:700;color:var(--ink);margin:1.4em 0 .7em;line-height:1.25;letter-spacing:-.01em}
-h2 .lbl-ico{color:var(--link);}
-h3,h4{font-family:var(--sans);color:var(--ink);}
-em{font-style:italic}
-strong{font-weight:600;color:var(--ink)}
-
-/* ── abstract / TL;DR ── */
-.tldr{font-family:var(--serif);font-size:1.16rem;line-height:1.6;color:var(--body);border-left:3px solid var(--rule);padding:2px 0 2px 22px;margin:.4em 0 .2em;}
-.tldr strong{color:var(--link);font-weight:600}
-
-/* ── stat cards ── */
-.results-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:20px 0}
-.result-card{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:20px 14px;text-align:center}
-.result-card .rnum{font-family:var(--sans);font-size:1.7rem;font-weight:800;color:var(--link);line-height:1.1;white-space:nowrap}
-.result-card .rdesc{font-family:var(--sans);font-size:.76rem;color:var(--muted);margin-top:8px;line-height:1.5}
-
-/* ── method steps ── */
-.method-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;margin:20px 0}
-.step{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:18px;text-align:center}
-.step .step-num{width:34px;height:34px;background:var(--link);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--sans);font-weight:800;font-size:.9em;margin:0 auto 11px}
-.step h3{font-family:var(--sans);font-size:.86rem;font-weight:700;color:var(--ink);margin-bottom:7px}
-.step p{font-family:var(--sans);font-size:.8rem;color:var(--muted);margin:0;line-height:1.55}
-
-/* ── problem / solution ── */
-.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0}
-.problem-card,.solution-card{border-radius:12px;padding:18px 20px;background:var(--card);border:1px solid var(--rule)}
-.problem-card{border-left:3px solid var(--bad)} .solution-card{border-left:3px solid var(--good)}
-.problem-card h3,.solution-card h3{font-family:var(--sans);font-size:.86rem;font-weight:700;margin-bottom:8px}
-.problem-card h3{color:var(--bad)} .solution-card h3{color:var(--good)}
-.problem-card p,.solution-card p{font-family:var(--sans);font-size:.86rem;color:var(--body);margin:0;line-height:1.6}
-
-/* ── comparison table ── */
-.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:20px 0}
-.compare-table{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:.9rem}
-.compare-table th{background:var(--band);color:var(--muted);padding:11px 15px;text-align:left;font-weight:600;border-bottom:1px solid var(--rule);font-size:.76rem;text-transform:uppercase;letter-spacing:.04em}
-.compare-table td{padding:11px 15px;border-bottom:1px solid var(--rule);color:var(--body)}
-.compare-table tr:last-child td{border-bottom:none}
-.compare-table .highlight td{background:rgba(47,75,143,.06);font-weight:600;color:var(--ink)}
-body.dark-mode .badge-win{background:#1A2333}
-.badge-win{background:#E6EEF8;color:var(--good);padding:2px 9px;border-radius:6px;font-weight:700;font-size:.82em}
-
-/* ── figures (native inline SVG charts) ── */
-figure.chart{margin:1.8em auto;color:var(--muted);max-width:640px;}
-figure.chart.wide{max-width:100%;}
-figure.chart.narrow{max-width:460px;}
-figure.chart svg{display:block;width:100%;height:auto;}
-figure.chart figcaption{font-family:var(--sans);font-size:.82rem;color:var(--muted);margin-top:.9em;text-align:center;line-height:1.55;max-width:600px;margin-left:auto;margin-right:auto;}
-figure.chart figcaption b,figure.chart figcaption strong{color:var(--link);font-weight:600}
-
-/* ── timeline ── */
-.tl{position:relative;padding-left:24px;margin:10px 0}
-.tl-line{position:absolute;left:8px;top:4px;bottom:4px;width:2px;background:var(--rule)}
-.tl-item{position:relative;margin-bottom:18px}
-.tl-dot{position:absolute;left:-20px;top:5px;width:11px;height:11px;border-radius:50%;background:var(--c-var,#BFD8EC);border:1.5px solid var(--c-var-line,#6F94C6);box-shadow:0 0 0 3px var(--bg)}
-.tl-dot.done{background:var(--good);border-color:var(--good)}
-.tl-date{font-family:var(--sans);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--link)}
-.tl-dot.done ~ .tl-date{color:var(--good)}
-.tl-title{font-family:var(--sans);font-weight:600;font-size:.95rem;color:var(--ink);margin:1px 0 2px}
-.tl-desc{font-family:var(--sans);font-size:.84rem;color:var(--muted);line-height:1.55}
-
-/* ── BibTeX ── */
-.bib-copy-btn{display:inline-flex;align-items:center;gap:6px;margin-bottom:10px;padding:6px 15px;border-radius:8px;border:1px solid var(--rule);cursor:pointer;font-family:var(--sans);font-size:.8rem;font-weight:600;background:var(--band);color:var(--body);transition:.18s}
-.bib-copy-btn:hover{border-color:var(--link);color:var(--link)}
-.bib-copy-btn.copied{background:var(--good);color:#fff;border-color:var(--good)}
-.bibtex-block{background:var(--band);color:var(--body);border:1px solid var(--rule);border-radius:12px;padding:18px 20px;overflow-x:auto;font-family:var(--mono);font-size:.8rem;line-height:1.7}
-
-/* ── footer ── */
-footer{font-family:var(--sans);background:transparent;color:var(--muted);text-align:center;padding:26px 24px;font-size:.86rem;border-top:1px solid var(--rule);margin-top:2.4em}
-footer a{color:var(--link)}
-
-/* ── controls ── */
-#read-progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,#2F4B8F,#6F94C6 60%,#E39A7A);z-index:9999;transition:width .08s linear;pointer-events:none}
-.pg-fab{position:fixed;right:22px;width:42px;height:42px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.18);z-index:9990;transition:transform .2s,opacity .2s}
-.pg-fab:hover{transform:translateY(-2px) scale(1.06)}
-#pg-top{bottom:22px;background:var(--link);color:var(--on-link);opacity:0;pointer-events:none}
-#pg-top.show{opacity:1;pointer-events:auto}
-#pg-dark{bottom:126px;background:#fff;color:#2F4B8F;border:1.5px solid rgba(0,0,0,.15)}
-body.dark-mode #pg-dark{background:#1A2333;color:#F5C8B5;border-color:#2B3A55}
-.pg-dico{width:20px;height:20px;display:inline-block;background-color:currentColor;-webkit-mask:url(/images/icons/h-moon.png) center/contain no-repeat;mask:url(/images/icons/h-moon.png) center/contain no-repeat}
-body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-image:url(/images/icons/h-sun.png)}
-.pg-up{width:11px;height:11px;border-top:2.6px solid currentColor;border-right:2.6px solid currentColor;transform:rotate(-45deg) translateY(2px);display:inline-block}
-
-@media(max-width:640px){figure.chart.wide{overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:6px;}figure.chart.wide svg{min-width:520px;}figure.chart.wide:not(.anim-fig) svg{min-width:0;}figure.chart.wide figcaption{position:sticky;left:0;max-width:calc(100vw - 48px);}}
-figure.chart svg.cs-m{display:none}@media(max-width:640px){figure.chart svg.cs-d{display:none}figure.chart svg.cs-m{display:block}}
-@media(max-width:640px){.problem-grid{grid-template-columns:1fr}.method-steps{grid-template-columns:1fr 1fr}.results-grid{grid-template-columns:1fr 1fr}.hero h1{font-size:2rem}}
-@media print{.site-masthead,.pg-fab,#read-progress{display:none!important}}
-@media (prefers-reduced-motion:reduce){*{transition-duration:.001ms!important}html{scroll-behavior:auto}}
-@view-transition{navigation:auto}
-::view-transition-old(root),::view-transition-new(root){animation-duration:.18s}
-@media (prefers-reduced-motion:reduce){::view-transition-old(root),::view-transition-new(root){animation:none!important}}
-
-/* the AI-agent panel (bottom:120px, z-index:9991) covers this FAB while open — hide it, as the agent does with its own launcher */
-.ra-panel.show ~ #pg-dark{opacity:0;pointer-events:none;}
-
-/* figure palette (shared by every chart and animation; Jev-style: navy = ours, misty blue = our variant,
-   peach = competing RL baseline, cool gray = base model / others) */
-:root{--c-ours:#2F4B8F;--c-ours-fill:#90A4C5;--c-var:#BFD8EC;--c-var-line:#6F94C6;--c-rl:#F5C8B5;--c-rl-line:#E39A7A;
-  --c-base:#DDE2EA;--c-base-line:#8F97A8;--c-other:#C9CED8;--c-other-line:#9AA1B0;--c-grid:#E4E8EF;--c-ink2:#5B6273}
-body.dark-mode{--c-rl-ink:#E9A98C;--c-ours:#9DB8EA;--c-ours-fill:#5E77A8;--c-var:#3F5F86;--c-var-line:#7FA6D3;--c-rl:#9A6E5D;--c-rl-line:#E9A98C;
-  --c-base:#3A414E;--c-base-line:#8F97A8;--c-other:#4A5260;--c-other-line:#9AA1B0;--c-grid:#2A303A;--c-ink2:#A6ADBB}
-figure.anim-fig{--link:var(--c-ours);--good:#3E7D5A;--bad:var(--c-rl-line)}
-body.dark-mode figure.anim-fig{--good:#7FC79A}
-.problem-card{border-left-color:var(--c-rl-line)!important}.problem-card h3{color:#A14F2C!important}
-.solution-card{border-left-color:var(--c-ours)!important}.solution-card h3{color:var(--c-ours)!important}
-body.dark-mode .problem-card h3{color:#F0B49A!important}
-
-h1,h2,h3,.bx-title,.p-title,.pub-title,.card-title{text-wrap:balance}
-p,li{text-wrap:pretty}
-p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcaption a,td a{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px;text-decoration-color:rgba(47,75,143,.45)}body.dark-mode p a:not([class]),body.dark-mode li a:not([class]),body.dark-mode .authors a,body.dark-mode .tl-desc a,body.dark-mode .note a,body.dark-mode figcaption a,body.dark-mode td a{text-decoration-color:rgba(157,184,234,.5)}
-</style>
+{% include selfrw/style.html %}
+{% include proj/cesar/style.html %}
+<noscript><style>.hl{background-size:100% 36%}.chapters{position:static}.anim .pop,.anim .fade{opacity:1;transform:none}.anim .grow,.anim .growy,.anim .growr{transform:none}.stage{display:none}</style></noscript>
 <script type="application/ld+json">{
   "@context":"https://schema.org","@type":"ScholarlyArticle",
   "name":"Incentivizing Consistent, Effective and Scalable Reasoning Capability in Audio LLMs via Reasoning Process Rewards",
+  "description":"Audio language models get worse the longer they reason. CESAR rewards the reasoning process itself, not only the answer: reasoning turns from a loss into a gain, and a 7B model sets the state of the art on MMAU Test-mini, ahead of Gemini 2.5 Pro and GPT-4o Audio.",
   "author":[{"@type":"Person","name":"Jiajun Fan"},{"@type":"Person","name":"Roger Ren"},{"@type":"Person","name":"Jingyuan Li"},{"@type":"Person","name":"Rahul Pandey"},{"@type":"Person","name":"Prashanth Gurunath Shivakumar"},{"@type":"Person","name":"Ivan Bulyko"},{"@type":"Person","name":"Ankur Gandhe"},{"@type":"Person","name":"Ge Liu"},{"@type":"Person","name":"Yile Gu"}],
   "datePublished":"2026","publisher":{"@type":"Organization","name":"ICLR 2026"},
   "url":"https://www.jiajunfan.com/projects/cesar/","sameAs":"https://arxiv.org/abs/2510.20867",
-  "keywords":"audio LLM, reasoning, GRPO, process reward, test-time scaling, MMAU"
+  "keywords":"audio LLM, reasoning, process reward, GRPO, reinforcement learning, test-time scaling, MMAU, MMSU"
 }</script>
   <script data-goatcounter="https://jiajunfan.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 {% include site-chrome.html %}
@@ -222,142 +58,339 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
   </div>
 </header>
 
-<div class="hero" role="region" aria-label="Project summary">
-  <div class="kicker">ICLR 2026</div>
-  <h1>Incentivizing Consistent, Effective and Scalable Reasoning Capability in Audio LLMs via Reasoning Process Rewards</h1>
-  <p class="short">CESAR: <strong>C</strong>onsistent, <strong>E</strong>ffective, and <strong>S</strong>calable <strong>A</strong>udio <strong>R</strong>easoners</p>
-  <div class="authors">
-    <a href="/" class="me">Jiajun Fan</a><sup>1,*</sup>,
-    Roger Ren<sup>2</sup>, Jingyuan Li<sup>2</sup>, Rahul Pandey<sup>2</sup>,
-    Prashanth G. Shivakumar<sup>2</sup>, Ivan Bulyko<sup>2</sup>, Ankur Gandhe<sup>2</sup>,
-    <a href="https://geliu.web.illinois.edu/">Ge Liu</a><sup>1</sup>, Yile Gu<sup>2</sup>
+<main>
+
+<section class="hero" aria-label="Summary">
+  <div class="wrap">
+    <p class="venue">ICLR 2026</p>
+    <h1>Incentivizing Consistent, Effective and Scalable Reasoning Capability in Audio LLMs <span class="l2">via Reasoning Process Rewards</span></h1>
+    <p class="byline"><a href="/" class="me">Jiajun&nbsp;Fan</a><sup>1,2</sup>, Roger&nbsp;Ren<sup>1</sup>, Jingyuan&nbsp;Li<sup>1</sup>, Rahul&nbsp;Pandey<sup>1</sup>, Prashanth&nbsp;Gurunath&nbsp;Shivakumar<sup>1</sup>, Ivan&nbsp;Bulyko<sup>1</sup>, Ankur&nbsp;Gandhe<sup>1</sup>, <a href="https://geliu.web.illinois.edu/">Ge&nbsp;Liu</a><sup>2</sup>, Yile&nbsp;Gu<sup>1</sup></p>
+    <ul class="logos" aria-label="Affiliations"><li><sup>1</sup><img src="/images/projects/cesar/logo_amazon.png" alt="Amazon" width="317" height="96"><span>AGI Foundations</span></li><li><sup>2</sup><img src="/images/projects/self-rewriting/logo_uiuc.png" alt="" width="66" height="96"><span>UIUC</span></li></ul>
+    <div class="cta">
+      <a class="btn" href="#film"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M5 3.300v9.400L12.500 8z"/></svg>Film</a>
+      <a class="btn btn-primary" href="https://arxiv.org/abs/2510.20867"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M4 1.5h5.5L12.5 4.5v10h-8.5z"/><path d="M9.5 1.5v3h3M6 8h4.5M6 10.5h4.5"/></svg>Paper</a>
+      <a class="btn" href="#cite"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5c2 0 3-1.5 3-4.5V4.5H3V8h3M9.5 11.5c2 0 3-1.5 3-4.5V4.5h-3V8h3"/></svg>BibTeX</a>
+    </div>
+    <div class="stage">
+      <canvas id="ce-stage" role="img" aria-label="Animation of one training step. The model hears an audio clip and its question and writes eight chains of reasoning, each ending in an answer; some make up a detail, run too long or give an answer their reasoning does not support. Each chain is scored for its answer, its format, its consistency, its structure and its length. Chains that score above the group's mean are reinforced and flow back into the model."></canvas>
+      <ol class="stage-steps" aria-hidden="true">
+        <li><b>It listens</b>to a clip and a question</li>
+        <li><b>It reasons eight ways</b>each ends in an answer</li>
+        <li><b>Each chain is scored</b>its answer and its reasoning</li>
+        <li><b>The best are reinforced</b>above the group&rsquo;s mean</li>
+      </ol>
+    </div>
   </div>
-  <div class="affil"><sup>1</sup>University of Illinois Urbana-Champaign &nbsp;&nbsp; <sup>2</sup>Amazon &nbsp;&nbsp; <sup>*</sup>Work done as intern at Amazon</div>
-  <div class="btn-row">
-    <a class="btn btn-secondary" href="https://openreview.net/forum?id=DUr48hxO2h">Paper (OpenReview)</a>
-    <a class="btn btn-secondary" href="https://www.amazon.science/publications/incentivizing-consistent-effective-and-scalable-reasoning-capability-in-audio-llms-via-reasoning-process-rewards">Amazon Science</a>
-    <a class="btn btn-primary" href="https://arxiv.org/abs/2510.20867">arXiv</a>
-    <a class="btn btn-neutral" href="/">Author Homepage</a>
+</section>
+
+<nav class="chapters" aria-label="Parts of this page">
+  <div class="wrap">
+    <a href="#results">At a glance</a>
+    <a href="#problem">The problem</a>
+    <a href="#idea">The idea</a>
+    <a href="#how">How it works</a>
+    <a href="#evidence">The evidence</a>
+    <span class="ch-sub"><a href="#gain" aria-label="Finding 01">01</a><a href="#sota" aria-label="Finding 02">02</a><a href="#quality" aria-label="Finding 03">03</a><a href="#listens" aria-label="Finding 04">04</a></span>
+    <a href="#matters">Why it matters</a>
+    <a href="#film">Film</a>
+    <a href="#cite">Cite</a>
+    <a class="ch-paper" href="https://arxiv.org/abs/2510.20867">arXiv 2510.20867</a>
   </div>
-  <hr class="hero-rule">
+</nav>
+
+<section class="scene band" id="results">
+  <div class="wrap">
+    <div class="duo">
+      <header class="say">
+        <p class="eyebrow">At a glance</p>
+        <h2>The paper in four results.</h2>
+        <p class="lead">Why do audio language models get worse the longer they think? Their training never rewards how they reason. Reward the reasoning itself, and thinking turns from a liability into a gain.</p>
+      </header>
+      <div class="show cards c2">
+        <a class="card result" href="#gain"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><line class="il-ax" x1="20" y1="84" x2="180" y2="84"/><path class="il-dn" d="M28 40L70 46L104 58L140 70L172 76"/><path class="il-ln" d="M28 58L70 42L104 22L140 34L172 32"/><circle class="il-dot" cx="104" cy="22" r="4.5"/></svg></span><span class="r-no">Finding 01<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>Reasoning becomes a gain.</h3><p>Where the base model loses accuracy by reasoning, CESAR gains it, up to a sweet spot.</p></a>
+        <a class="card result" href="#sota"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><line class="il-ax" x1="20" y1="30" x2="180" y2="30"/><line class="il-ax" x1="20" y1="52" x2="180" y2="52"/><line class="il-ax" x1="20" y1="74" x2="180" y2="74"/><circle class="il-y" cx="156" cy="30" r="8"/><circle class="il-o" cx="112" cy="52" r="6"/><circle class="il-o" cx="74" cy="74" r="6"/></svg></span><span class="r-no">Finding 02<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>A new state of the art on MMAU.</h3><p>A 7B model ahead of Gemini 2.5 Pro and GPT&#8209;4o Audio.</p></a>
+        <a class="card result" href="#quality"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><rect class="il-y" x="20" y="22" width="112" height="22" rx="5"/><rect class="il-pk" x="135" y="22" width="45" height="22" rx="5"/><rect class="il-y" x="20" y="56" width="90" height="22" rx="5"/><rect class="il-pk" x="113" y="56" width="67" height="22" rx="5"/><line class="il-md" x1="100" y1="12" x2="100" y2="88"/></svg></span><span class="r-no">Finding 03<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>Its reasoning is better, not just its answers.</h3><p>A GPT&#8209;4o Audio judge prefers its reasoning over both baselines.</p></a>
+        <a class="card result" href="#listens"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><line class="il-ax" x1="20" y1="84" x2="180" y2="84"/><rect class="il-b" x="30" y="60" width="10" height="24" rx="3"/><rect class="il-b" x="48" y="50" width="10" height="34" rx="3"/><rect class="il-b" x="66" y="64" width="10" height="20" rx="3"/><rect class="il-b" x="84" y="44" width="10" height="40" rx="3"/><rect class="il-y" x="106" y="40" width="10" height="44" rx="3"/><rect class="il-y" x="124" y="26" width="10" height="58" rx="3"/><rect class="il-y" x="142" y="34" width="10" height="50" rx="3"/><rect class="il-y" x="160" y="16" width="10" height="68" rx="3"/></svg></span><span class="r-no">Finding 04<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>It listens better, too.</h3><p>It beats its base model even without reasoning, and has the best perception average of any model on MMSU.</p></a>
+      </div>
+      <ul class="creed">
+        <li><b>Consistent.</b><span>its answer follows from its reasoning</span></li>
+        <li><b>Effective.</b><span>reasoning adds accuracy instead of costing it</span></li>
+        <li><b>Scalable.</b><span>more thinking helps, up to its sweet spot</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="scene" id="problem">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main wide">
+        <p class="eyebrow">The problem <span>Test-time inverse scaling</span></p>
+        <h2 class="reveal">Audio language models get <span class="hl">worse the longer they think.</span></h2>
+        <p class="lead">Chain-of-thought helps language models on text. In audio it backfires: the longer the base model reasons, the lower its accuracy, and a model trained with outcome-only RL gains nothing clear from reasoning.</p>
+      </div>
+      <ul class="nots" aria-label="How unguided reasoning fails">
+        <li>made-up facts</li><li>flawed logic</li><li>answers that contradict the reasoning</li><li>reasoning that loops</li>
+      </ul>
+    </header>
+    <div class="fig panel">
+      <div class="ch anim" id="ch-inverse" role="img" aria-label="Total accuracy on MMAU Test-mini against the average number of reasoning tokens. Qwen2.5-Omni-7B, the base model, is at 68.60% without reasoning and falls steadily as it reasons longer. Ke-Omni-R, trained with outcome-only RL, stays flat."></div>
+    </div>
+    <p class="cap">The paper&rsquo;s test-time scaling sweep: the limit on thinking length is raised step by step, and each point is placed at the average length the model actually used.</p>
+    <p class="takeaway">The culprit is not reasoning itself. It is training that never looks at the reasoning.</p>
+  </div>
+</section>
+
+<section class="scene band" id="idea">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main wide">
+        <p class="eyebrow">The idea <span>From outcomes to process</span></p>
+        <h2 class="reveal">Reward the reasoning, <span class="hl">not only the answer.</span></h2>
+        <p class="lead">Outcome-only RL cannot tell a sound chain of reasoning from a lucky one. CESAR scores how the model got to its answer, so sound reasoning is what gets reinforced.</p>
+      </div>
+    </header>
+{% include proj/cesar/idea.html %}
+    <p class="takeaway">Reasoning stops being a side effect and becomes a skill the model is trained for.</p>
+  </div>
+</section>
+
+<section class="scene" id="how">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main wide">
+        <p class="eyebrow">How it works <span>The reward suite</span></p>
+        <h2 class="reveal">Two rewards check the outcome. <span class="hl">Three shape the reasoning.</span></h2>
+        <p class="lead">For each training question the model writes eight answers. Each gets one score, the weighted sum of five terms, and GRPO reinforces the answers that beat the group&rsquo;s average.</p>
+      </div>
+    </header>
+{% include proj/cesar/reward.html %}
+    <details class="fold" id="adds-more">
+      <summary class="more">What each part adds</summary>
+      <div class="fig panel">
+        <div class="ch anim" id="ch-stair" role="img" aria-label="Accuracy on MMAU Test-mini as each part of CESAR is added: 65.20% for the base model without RL; 74.60% with RL on the answer alone, which is Ke-Omni-R; 75.20% with the consistency reward; 76.20% with the keywords reward; 76.50% with data augmentation; 77.10% with the overthinking penalty, the full CESAR."></div>
+      </div>
+      <p class="cap">MMAU Test-mini. The paper&rsquo;s progressive ablation, read from the base model up; every model reasons, at its own sweet spot.</p>
+    </details>
+    <p class="takeaway">The three reasoning terms target the ways reasoning fails: drifting from the question, contradicting its own answer, wandering without structure, overthinking.</p>
+  </div>
+</section>
+
+<div id="evidence">
+
+<section class="scene band" id="gain">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">The evidence <span>Finding 01</span></p>
+        <h2>Reasoning becomes a gain.</h2>
+        <p class="lead">Turn reasoning on, and the base model loses accuracy while CESAR gains it. Give it more room to think, and its accuracy peaks at a sweet spot.</p>
+      </div>
+    </header>
+    <div class="fig panel">
+      <div class="pair">
+        <div class="ch anim" id="ch-sweet" role="img" aria-label="Total accuracy on MMAU Test-mini against average reasoning tokens for three RL-trained models. CESAR starts at 73.70% without reasoning and peaks at 77.10%, its sweet spot. CESAR without the overthinking penalty climbs from 75.00% to a peak of 76.50% with longer chains. Ke-Omni-R shows no clear gain."></div>
+        <div class="ch anim" id="ch-onoff" role="img" aria-label="Accuracy without and with reasoning. Qwen2.5-Omni-7B: 68.60% without, 65.20% with. Ke-Omni-R: 74.50% without, 74.60% with. CESAR without the overthinking penalty: 75.00% without, 76.50% with. CESAR: 73.70% without, 77.10% with."></div>
+      </div>
+    </div>
+    <p class="cap">MMAU Test-mini, total accuracy. The sweep raises the thinking-length limit from 0 to 250 in steps of 25; the second chart shows each model without reasoning and with reasoning at its best length.</p>
+    <p class="takeaway">A model must first learn to think well before thinking more pays off.</p>
+  </div>
+</section>
+
+<section class="scene" id="sota">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">The evidence <span>Finding 02</span></p>
+        <h2>A new state of the art on MMAU.</h2>
+        <p class="lead">With 7B parameters, CESAR is ahead of Gemini 2.5 Pro, Gemini 2.5 Flash and GPT&#8209;4o Audio on MMAU Test-mini, a benchmark that shares nothing with its training data.</p>
+      </div>
+    </header>
+    <div class="fig panel">
+      <div class="ch anim" id="ch-mmau" role="img" aria-label="Total accuracy on MMAU Test-mini: CESAR 77.10%, Ke-Omni-R 74.60%, Gemini 2.5 Flash 71.80%, Gemini 2.5 Pro 71.60%, Qwen2.5-Omni-7B 68.60%, Kimi-Audio 68.20%, Audio Reasoner 67.70%, GPT-4o Audio 62.50%."></div>
+    </div>
+    <p class="cap">Qwen2.5-Omni-7B and Ke-Omni-R were run by the paper under the same protocol, each shown in its better mode; the other scores come from the MMAU paper. CESAR also has the best Sound and Music scores in the paper&rsquo;s table.</p>
+    <p class="takeaway">The gain comes from scaling the reasoning, not the parameter count.</p>
+  </div>
+</section>
+
+<section class="scene band" id="quality">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">The evidence <span>Finding 03</span></p>
+        <h2>Its reasoning is better, not just its answers.</h2>
+        <p class="lead">Asked which of two reasoning traces is more logical and more faithful to the audio, a GPT&#8209;4o Audio judge picks CESAR&rsquo;s most of the time.</p>
+      </div>
+    </header>
+    <div class="fig panel">
+      <div class="ch anim" id="ch-judge" role="img" aria-label="Head-to-head judgments of reasoning quality by GPT-4o Audio. CESAR against Qwen2.5-Omni-7B: CESAR's reasoning judged better in 76.40% of comparisons, the other in 23.60%. CESAR against Ke-Omni-R: 63.85% against 36.15%."></div>
+    </div>
+    <p class="cap">MMAU Test-mini. The judge sees the audio, the question, the choices, the correct answer and both traces; ties are split evenly between the two.</p>
+    <div class="cases txt" id="judge-cases">
+      <article class="case">
+        <p class="who">Against the base model</p>
+        <p class="q">Based on the given audio, identify the source of the speech.<span class="ch-c">man &middot; woman &middot; child &middot; robot</span></p>
+        <div class="ba k-fail"><b>Qwen2.5-Omni-7B</b><samp>The audio is a speech, and the voice is male. The options provided do not include &lsquo;man&rsquo;, so the closest match is &lsquo;robot&rsquo;.</samp><code>Answers robot: it invents a missing choice</code></div>
+        <div class="ba k-edit"><b>CESAR</b><samp>Given the options, the speech is likely from a man. The tone and volume suggest an adult male. The other options are less probable.</samp><code>Answers man, correct</code></div>
+      </article>
+      <article class="case">
+        <p class="who">Against outcome-only RL</p>
+        <p class="q">What is the characteristic of the chord played from 0:02 to 0:03 in the audio?<span class="ch-c">A:min/P5 &middot; E:maj/P1 &middot; D:maj/M3 &middot; G:maj/P1</span></p>
+        <div class="ba k-fail"><b>Ke-Omni-R</b><samp>The chord progression from 0:02 to 0:03 involves a progression from a lower note to a higher one&hellip; The progression is from a lower note to a lower one&hellip; The progression is from a lower note to a lower one&hellip;</samp><code>Answers E:maj/P1: it goes in circles</code></div>
+        <div class="ba k-edit"><b>CESAR</b><samp>Considering the options, &lsquo;A:min/P5&rsquo; seems the most fitting as it&rsquo;s a minor chord and &lsquo;P5&rsquo; indicates a perfect fifth. &hellip;</samp><code>Answers A:min/P5, correct</code></div>
+      </article>
+      <article class="case">
+        <p class="who">Against CESAR without the overthinking penalty</p>
+        <p class="q">What is the sound event taking place in the audio?<span class="ch-c">a person crying &middot; laughing &middot; coughing &middot; yawning</span></p>
+        <div class="ba k-fail"><b>Without the penalty</b><samp>&hellip; This could be interpreted as either laughing or crying &hellip; Given the ambiguity, the more intense and emotionally significant possibility is often a safer bet in interpretation &hellip;</samp><code>Answers crying: it thinks itself into a mistake</code></div>
+        <div class="ba k-edit"><b>CESAR</b><samp>The audio contains a series of sharp, rhythmic vocal bursts. The pitch and cadence are consistent with joyful laughter. &hellip; Therefore, the sound is a person laughing.</samp><code>Answers laughing, correct</code></div>
+      </article>
+      <article class="case x">
+        <p class="who">Against outcome-only RL</p>
+        <p class="q">How many times does the telephone ring in the audio?<span class="ch-c">2 &middot; 4 &middot; 5 &middot; 3</span></p>
+        <div class="ba k-fail"><b>Ke-Omni-R</b><samp>The telephone rings three times, as indicated by the three distinct ring sounds in the audio.</samp><code>Answers 2: its reasoning says three</code></div>
+        <div class="ba k-edit"><b>CESAR</b><samp>Considering the options, the telephone rings three times. The audio clearly shows three distinct rings.</samp><code>Answers 3, correct</code></div>
+      </article>
+      <article class="case x">
+        <p class="who">Against outcome-only RL</p>
+        <p class="q">Given that an infant is crying, name a famous person known for their association with the animal heard in the background.<span class="ch-c">George Orwell &middot; Ernest Hemingway &middot; Charles Darwin &middot; Charles Dickens</span></p>
+        <div class="ba k-fail"><b>Ke-Omni-R</b><samp>Considering the context of the question, the animal in the background is a pig. Ernest Hemmanway is famously associated with pigs in his works, particularly in &ldquo;The Old Man and the Sea.&rdquo;</samp><code>Answers &ldquo;Ernest Hemmanway&rdquo;: a made-up fact</code></div>
+        <div class="ba k-edit"><b>CESAR</b><samp>Among the options, Ernest Hemingway is known for his love of animals, particularly cats. The animal sound could be a cat. &hellip;</samp><code>Answers Ernest Hemingway, correct</code></div>
+      </article>
+      <article class="case x">
+        <p class="who">Against the base model</p>
+        <p class="q">What kind of event could be taking place in the audio?<span class="ch-c">a quiet library &middot; a heated argument &middot; a military parade &middot; a gentle breeze</span></p>
+        <div class="ba k-fail"><b>Qwen2.5-Omni-7B</b><samp>The audio contains the sound of a man speaking, followed by a loud, chaotic noise. &hellip; The chaotic noise could be interpreted as a violent escalation, so a heated argument is the most likely scenario.</samp><code>Answers a heated argument: a leap from &ldquo;noise&rdquo;</code></div>
+        <div class="ba k-edit"><b>CESAR</b><samp>The presence of marching, music, and shouting suggests a large-scale event. &hellip; A military parade fits the description best, as it involves a marching band and organized shouting.</samp><code>Answers a military parade, correct</code></div>
+      </article>
+    </div>
+    <button type="button" class="more" id="more-cases" aria-controls="judge-cases" aria-expanded="false">Show three more</button>
+    <p class="cap">Reasoning traces from the paper&rsquo;s qualitative comparison on MMAU Test-mini; &hellip; marks a cut. Choices are shortened where the full option is longer.</p>
+    <p class="takeaway">Its answers follow from its reasoning, and its reasoning follows the audio.</p>
+  </div>
+</section>
+
+<section class="scene" id="listens">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">The evidence <span>Finding 04</span></p>
+        <h2>It listens better, too.</h2>
+        <p class="lead">Trained to reason well, it also answers better than its base model when it does not reason at all. On MMSU it has the best perception and reasoning averages of any model, and passes humans on semantic reasoning.</p>
+      </div>
+    </header>
+    <div class="fig panel">
+      <div class="pair">
+        <div class="ch anim" id="ch-mmsu" role="img" aria-label="Average accuracy on MMSU. Perception tasks: CESAR 48.45%, Ke-Omni-R 47.09%, Gemini 1.5 Pro 46.10%, Qwen2.5-Omni 42.50%, GPT-4o Audio 39.67%. Reasoning tasks: CESAR 81.07%, Qwen2.5-Omni 79.83%, Ke-Omni-R 78.06%, Gemini 1.5 Pro 76.16%, GPT-4o Audio 71.96%; humans 86.77%."></div>
+        <div class="ch anim" id="ch-direct" role="img" aria-label="On MMAU without reasoning, Qwen2.5-Omni-7B scores 68.60% and CESAR 73.70%. On MMSU semantic reasoning tasks, humans score 82.16% and CESAR 88.72%."></div>
+      </div>
+    </div>
+    <p class="cap">MMSU separates perception tasks from reasoning tasks. Ke-Omni-R is the paper&rsquo;s own run; the other MMSU scores come from the MMSU paper.</p>
+    <p class="takeaway">Better thinking, it turns out, leads to better hearing.</p>
+  </div>
+</section>
+
 </div>
 
-<div class="container" role="main">
-
-<section>
-  <p class="tldr"><strong>TL;DR</strong> — Audio LLMs trained only on outcome rewards produce <em>hallucinatory, inconsistent, and unscalable</em> reasoning chains. CESAR instead <strong>rewards the reasoning process itself</strong> via online RL (GRPO), resolving test-time inverse scaling and reaching SOTA on MMAU — outperforming Gemini 2.5 Pro and GPT-4o Audio.</p>
-  {% include film-card.html id="cesar" name="CESAR" %}
-</section>
-
-<section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-search.png);mask-image:url(/images/icons/h-search.png)"></i>The problem: test-time inverse scaling</h2>
-  <p>Adding chain-of-thought reasoning to Audio LLMs often <em>degrades</em> performance — a phenomenon we term <strong>test-time inverse scaling</strong>. Longer reasoning chains yield progressively worse results, because outcome-only rewards leave the reasoning <em>process</em> completely unsupervised.</p>
-  <div class="problem-grid">
-    <div class="problem-card">
-      <h3>Without process rewards</h3>
-      <p>The reasoning chain is invisible to the reward. Models produce hallucinatory, inconsistent reasoning that accumulates errors over longer chains — reasoning becomes a liability.</p>
+<section class="scene band" id="matters">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main wide">
+        <p class="eyebrow">Why it matters</p>
+        <h2 class="reveal">Reasoning no longer has to be a matter of chance. <span class="hl">It&nbsp;can be a matter of design.</span></h2>
+        <p class="lead">One reward term changes how the model reasons. Without the overthinking penalty it becomes a depth specialist that does best with long chains on hard questions; with it, a calibrated generalist that peaks with short ones and gains more from reasoning.</p>
+      </div>
+    </header>
+    <div class="fig panel">
+      <div class="ch anim" id="ch-arch" role="img" aria-label="Total accuracy on MMAU Test-mini against average reasoning tokens for two models that differ in one reward term. Without the overthinking penalty, accuracy peaks late, at 76.50%, 1.5 points above its 75.00% without reasoning. With it, CESAR peaks early, at 77.10%, 3.4 points above its 73.70% without reasoning."></div>
     </div>
-    <div class="solution-card">
-      <h3>With CESAR</h3>
-      <p>Process rewards score consistency, structured analytical patterns, causal reasoning, and calibrated depth — turning reasoning into a genuine, scalable capability.</p>
+    <p class="cap">MMAU Test-mini, from the same sweep as Finding 01. Dashed: each model without reasoning.</p>
+    <h3 class="eyebrow sub">What this opens up</h3>
+    <div class="cards c3 opens">
+      <div class="card"><h3>Train the reasoning, then set its budget</h3><p>First teach the model to reason well. Then sweep its thinking length at test time to find the sweet spot, with no further training.</p></div>
+      <div class="card"><h3>Small models that reason</h3><p>A 7B model ahead of proprietary systems, by scaling how it reasons rather than how big it is.</p></div>
+      <div class="card"><h3>A measure of reasoning itself</h3><p>A judge that compares reasoning traces head to head shows what accuracy alone cannot.</p></div>
+    </div>
+    <div class="cta">
+      <a class="btn btn-primary" href="https://arxiv.org/abs/2510.20867">Read the paper</a>
+      <a class="btn" href="https://openreview.net/forum?id=DUr48hxO2h">OpenReview</a>
+      <a class="btn" href="https://www.amazon.science/publications/incentivizing-consistent-effective-and-scalable-reasoning-capability-in-audio-llms-via-reasoning-process-rewards">On Amazon Science</a>
     </div>
   </div>
-  {% include anim/cesar_inverse.html %}
 </section>
 
-<section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-gear.png);mask-image:url(/images/icons/h-gear.png)"></i>Method</h2>
-  <p>CESAR uses <strong>Group Relative Policy Optimization (GRPO)</strong> with a multi-faceted reward suite that goes beyond simple correctness — every component targets a specific failure mode of unsupervised reasoning.</p>
-  {% include anim/strip_cesar.html %}
-  {% include anim/cesar_group.html %}
-</section>
-
-<section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-chart.png);mask-image:url(/images/icons/h-chart.png)"></i>Results</h2>
-  <div class="results-grid">
-    <div class="result-card"><div class="rnum">SOTA</div><div class="rdesc">MMAU Test-mini</div></div>
-    <div class="result-card"><div class="rnum">&gt; 2.5 Pro</div><div class="rdesc">beats Gemini 2.5 Pro</div></div>
-    <div class="result-card"><div class="rnum">&gt; GPT-4o</div><div class="rdesc">beats GPT-4o Audio</div></div>
-    <div class="result-card"><div class="rnum">+0.038</div><div class="rdesc">positive scaling slope</div></div>
-  </div>
-  <div class="tbl-wrap">
-  <table class="compare-table"><caption style="caption-side:top;text-align:left;font-family:var(--sans);font-size:.85rem;line-height:1.5;color:var(--muted);padding:0 0 .7em"><b style="color:var(--link)">Table 1.</b> MMAU Test-mini total accuracy per model, and how its accuracy changes as it reasons longer (test-time scaling).</caption>
-    <thead><tr><th>Model</th><th>MMAU (total)</th><th>Test-time scaling</th></tr></thead>
-    <tbody>
-      <tr><td>Qwen2.5-Omni-7B (base)</td><td>65.2%</td><td>Inverse (slope −0.51)</td></tr>
-      <tr><td>Ke-Omni-R (outcome-only RL)</td><td>74.6%</td><td>Flat (slope −0.007)</td></tr>
-      <tr><td>CESAR w/o overthinking penalty</td><td>76.5%</td><td>Positive</td></tr>
-      <tr class="highlight"><td><strong>CESAR (Ours)</strong></td><td><strong>77.1% <span class="badge-win">Best</span></strong></td><td><strong>Positive (slope +0.038)</strong></td></tr>
-    </tbody>
-  </table>
-  </div>
-  <figure class="chart">
-    {% include figures/cesar_radar.svg %}
-    <figcaption><b>Figure 1.</b> Per-category MMAU accuracy. CESAR leads the base model (Qwen2.5-Omni-7B) and the outcome-only baseline (Ke-Omni-R) on Sound, Music, Speech and overall; its no-penalty variant does too, except on Music where it matches Ke-Omni-R — process rewards improve perception, not just reasoning.</figcaption>
-  </figure>
-</section>
-
-<section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-target.png);mask-image:url(/images/icons/h-target.png)"></i>Test-time scaling</h2>
-  <p>With process rewards, more reasoning stops hurting and starts helping. The base model collapses as its reasoning grows longer; CESAR climbs from 73.7% without reasoning to a peak of 77.1% at about 35 reasoning tokens.</p>
-  <figure class="chart wide">
-    {% include figures/cesar_scaling.svg %}
-    {% include figures/cesar_scaling_m.svg %}
-    <figcaption><b>Figure 2.</b> Total accuracy on MMAU vs. average reasoning tokens, redrawn from the paper's test-time scaling plot. Across all four models, Qwen2.5-Omni-7B loses accuracy the longer it reasons (inverse scaling). Zoomed in on the RL models, CESAR rises from 73.7% to 77.1%, while Ke-Omni-R stays near its no-reasoning accuracy.</figcaption>
-  </figure>
-  <figure class="chart">
-    {% include figures/cesar_slope.svg %}
-    <figcaption><b>Figure 3.</b> Fitted scaling slopes (change in accuracy per reasoning token, fit through the no-reasoning accuracy). Qwen2.5-Omni-7B is strongly negative (−0.51); Ke-Omni-R is flat (−0.007); only CESAR is clearly positive (+0.038) — reasoning genuinely helps.</figcaption>
-  </figure>
-</section>
-
-<section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-deadlines.png);mask-image:url(/images/icons/sh-deadlines.png)"></i>Publication journey</h2>
-  <div class="tl">
-    <div class="tl-line"></div>
-    <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">Sep 2025</div><div class="tl-title">Submitted to ICLR 2026</div><div class="tl-desc">The Fourteenth International Conference on Learning Representations (Submission #8335).</div></div>
-    <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">Oct 2025</div><div class="tl-title">arXiv preprint released</div><div class="tl-desc">arXiv:2510.20867.</div></div>
-    <div class="tl-item"><div class="tl-dot done"></div><div class="tl-date">Jan 2026</div><div class="tl-title">Accepted at ICLR 2026 (Poster)</div><div class="tl-desc"><a href="https://openreview.net/forum?id=DUr48hxO2h">OpenReview</a>.</div></div>
-    <div class="tl-item"><div class="tl-dot done"></div><div class="tl-date">Apr 2026</div><div class="tl-title">Presented · Rio de Janeiro, Brazil</div><div class="tl-desc">ICLR 2026.</div></div>
+<section class="scene" id="film">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">The film</p>
+        <h2>The story, as a short film.</h2>
+      </div>
+    </header>
+    <div class="film">
+      <video controls playsinline preload="none" poster="/film/posters/cesar.jpg" width="1280" height="720" aria-label="CESAR: a short film">
+        <source src="/film/video/cesar.mp4" type="video/mp4">
+      </video>
+    </div>
+    <p class="cap">1 min 17 s. Also on the <a href="/film/#cesar">film page</a>.</p>
   </div>
 </section>
 
-<section>
-  <h2><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-book.png);mask-image:url(/images/icons/h-book.png)"></i>BibTeX</h2>
-  <button class="bib-copy-btn" aria-label="Copy BibTeX citation"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-list.png);mask-image:url(/images/icons/h-list.png)"></i>Copy BibTeX</button>
-  <pre class="bibtex-block" tabindex="0"><code>@inproceedings{fan2026incentivizing,
+<section class="cite" id="cite">
+  <div class="wrap duo">
+    <header class="say">
+      <p class="eyebrow">Cite</p>
+      <h2>Cite the paper.</h2>
+      <p class="cap">International Conference on Learning Representations 2026 (ICLR 2026). Featured on <a href="https://www.amazon.science/publications/incentivizing-consistent-effective-and-scalable-reasoning-capability-in-audio-llms-via-reasoning-process-rewards">Amazon Science</a>.</p>
+      <button class="bib-copy-btn" aria-label="Copy BibTeX citation"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-list.png);mask-image:url(/images/icons/h-list.png)"></i>Copy BibTeX</button>
+    </header>
+    <pre class="show bibtex-block" tabindex="0"><code>@inproceedings{fan2026incentivizing,
   title     = {Incentivizing Consistent, Effective and Scalable Reasoning
-               Capability in Audio {LLM}s via Reasoning Process Rewards},
+  Capability in Audio {LLM}s via Reasoning Process Rewards},
   author    = {Jiajun Fan and Roger Ren and Jingyuan Li and Rahul Pandey and
-               Prashanth Gurunath Shivakumar and Ivan Bulyko and Ankur Gandhe
-               and Ge Liu and Yile Gu},
+  Prashanth Gurunath Shivakumar and Ivan Bulyko and Ankur Gandhe
+  and Ge Liu and Yile Gu},
   booktitle = {The Fourteenth International Conference on Learning Representations},
   year      = {2026},
   url       = {https://openreview.net/forum?id=DUr48hxO2h}
 }</code></pre>
+  </div>
 </section>
 
-</div>
+</main>
 
 <footer>
-  <p>CESAR · ICLR 2026 &nbsp;|&nbsp; <a href="/">Jiajun Fan</a> · UIUC &amp; Amazon &nbsp;|&nbsp; <a href="https://openreview.net/forum?id=DUr48hxO2h">Paper</a> &nbsp;|&nbsp; <a href="/projects/">All Projects</a></p>
+  <p>CESAR &nbsp;|&nbsp; <a href="/">Jiajun Fan</a> · Amazon AGI Foundations &amp; UIUC &nbsp;|&nbsp; <a href="https://arxiv.org/abs/2510.20867">Paper</a> &nbsp;|&nbsp; <a href="/projects/">All Projects</a></p>
 </footer>
 
 <div id="read-progress" aria-hidden="true"></div>
-<button id="pg-dark" class="pg-fab" aria-label="Toggle dark mode" title="Toggle dark mode"><i class="pg-dico"></i></button>
-<button id="pg-top" class="pg-fab" aria-label="Back to top" title="Back to top"><span class="pg-up"></span></button>
 <script>
 (function(){
-  try{if(localStorage.getItem('darkMode')==='true')document.body.classList.add('dark-mode');}catch(e){}
-  var bar=document.getElementById('read-progress'),top=document.getElementById('pg-top'),dk=document.getElementById('pg-dark');
-  function onScroll(){var st=window.scrollY||document.documentElement.scrollTop,h=document.documentElement.scrollHeight-window.innerHeight;
-    if(bar)bar.style.width=(h>0?(st/h*100):0)+'%'; if(top){st>400?top.classList.add('show'):top.classList.remove('show');}}
-  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
-  if(top)top.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
-  if(dk)dk.addEventListener('click',function(){var on=document.body.classList.toggle('dark-mode');try{localStorage.setItem('darkMode',on);}catch(e){}});
+  var bar=document.getElementById('read-progress'), nav=document.querySelector('.chapters'), strip=nav?nav.querySelector('.wrap'):null;
+  function pairs(sel){return [].slice.call(document.querySelectorAll(sel)).map(function(a){return [a,document.getElementById(a.getAttribute('href').slice(1))];}).filter(function(p){return p[1];});}
+  var parts=pairs('.chapters .wrap > a[href^="#"]'), subs=pairs('.chapters .ch-sub a'), shown=null;
+  function mark(list,cur){list.forEach(function(p){if(p[0]===cur)p[0].setAttribute('aria-current','true');else p[0].removeAttribute('aria-current');});}
+  function onScroll(){
+    var st=window.scrollY||document.documentElement.scrollTop,h=document.documentElement.scrollHeight-window.innerHeight,line=Math.min(window.innerHeight*0.38,340),cur=null,sub=null;
+    if(bar)bar.style.width=(h>0?(st/h*100):0)+'%';
+    parts.forEach(function(p){if(p[1].getBoundingClientRect().top<=line)cur=p[0];});
+    if(h>0&&st>=h-2&&parts.length)cur=parts[parts.length-1][0];
+    if(cur&&cur.getAttribute('href')==='#evidence')subs.forEach(function(p){if(p[1].getBoundingClientRect().top<=line)sub=p[0];});
+    mark(parts,cur);mark(subs,sub);
+    if(cur!==shown&&strip&&strip.scrollWidth>strip.clientWidth){strip.scrollLeft=cur?Math.max(0,cur.offsetLeft-16):0;}
+    shown=cur;
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});window.addEventListener('resize',onScroll);onScroll();
+  var grid=document.getElementById('judge-cases'), more=document.getElementById('more-cases');
+  if(grid&&more){
+    grid.classList.add('more-fold');
+    more.addEventListener('click',function(){grid.classList.remove('more-fold');more.setAttribute('aria-expanded','true');more.hidden=true;});
+  }
   document.querySelectorAll('.bib-copy-btn').forEach(function(btn){
     btn.addEventListener('click',function(){
-      var pre=btn.nextElementSibling,text=pre?pre.innerText||pre.textContent:'';
+      var pre=document.querySelector('.bibtex-block'),text=pre?pre.innerText||pre.textContent:'';
       if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(function(){
         btn.innerHTML='<i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-check.png);mask-image:url(/images/icons/h-check.png)"></i> Copied!';btn.classList.add('copied');
         setTimeout(function(){btn.innerHTML='<i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-list.png);mask-image:url(/images/icons/h-list.png)"></i> Copy BibTeX';btn.classList.remove('copied');},2000);});}
@@ -365,5 +398,7 @@ p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcap
   });
 })();
 </script>
+{% include proj/cesar/hero.html %}
+{% include proj/cesar/figs.html %}
 </body>
 </html>

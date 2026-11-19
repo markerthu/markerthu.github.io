@@ -1,0 +1,84 @@
+<div class="replay scorer" id="scorer">
+  <div class="rp-top">
+    <div class="rp-tabs" role="tablist" aria-label="Example">
+      <button role="tab" aria-selected="true" data-s="parade">A military parade</button>
+      <button role="tab" aria-selected="false" data-s="phone">A ringing telephone</button>
+    </div>
+    <span class="rp-note">Two of CESAR&rsquo;s reasoning traces from the paper</span>
+  </div>
+  <div class="rp-body">
+    <div class="rp-rail"></div>
+    <div class="rp-view sc" data-k="acc" aria-live="polite"></div>
+  </div>
+</div>
+<p class="cap">MMAU Test-mini questions. The highlights show what each term looks at; they illustrate the rewards, they are not the computed scores.</p>
+<script>
+(function(){
+  var root=document.getElementById('scorer'); if(!root) return;
+  var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $=function(s,r){return (r||root).querySelector(s);}, $$=function(s,r){return [].slice.call((r||root).querySelectorAll(s));};
+  /* the reward terms, in the order of the paper's total reward */
+  var TERMS=[
+    ['acc','k-run','Correct answer','weight 5.0','1 if its answer is the right one. The heaviest term, so that better reasoning does not come at the expense of accuracy.'],
+    ['fmt','k-fmt','Format','weight 1.0','1 if it reasons inside the think tags and answers inside the answer tags.'],
+    ['con','k-read','Consistency','weight 1.0','How much its reasoning shares with the question and its choices, and with the answer it gives.'],
+    ['kw','k-edit','Keywords','weight 1.0','Structured steps, logical links and audio terms, from three keyword lists in the paper.'],
+    ['len','k-test','Overthinking penalty','weight 1.0','1 minus its length over the 256 maximum: shorter reasoning keeps more of this term.']
+  ];
+  /* traces quoted from the paper; c = shares words with the question, choices or answer; w = rewarded keywords as the paper marks them */
+  var EX={
+    parade:{
+      q:'What kind of event could be taking place in the audio?',
+      ch:'A quiet library during study hours · A heated argument escalating to violence · A military parade with a marching band · A gentle breeze blowing through trees',
+      t:'The presence of marching, <mark class="w">music</mark>, and <mark class="w">shouting</mark> <mark class="w">suggests</mark> a large-scale <mark class="c">event</mark>. The options are a <mark class="c">quiet library</mark>, a <mark class="c">heated argument</mark>, a <mark class="c">military parade</mark>, and a <mark class="c">gentle breeze</mark>. A <mark class="c">military parade</mark> <mark class="w">fits the description best</mark>, as it involves a <mark class="c">marching band</mark> and organized <mark class="w">shouting</mark>.',
+      a:'A military parade with a marching band', words:43,
+      say:{acc:'Correct: the base model, Qwen2.5-Omni-7B, hears &ldquo;chaotic noise&rdquo; here and answers a heated argument.',
+           fmt:'Reasoning first, then one answer, each in its own tags.',
+           con:'It weighs every choice by name and ends on the one it picks.',
+           kw:'Audio terms, an evidence word and a justification: what the keyword term rewards.',
+           len:'Three sentences: short reasoning keeps most of this term.'}},
+    phone:{
+      q:'How many times does the telephone ring in the audio?',
+      ch:'2 · 4 · 5 · 3',
+      t:'<mark class="w">Considering the options</mark>, the <mark class="c">telephone</mark> <mark class="w">rings</mark> <mark class="c">three</mark> times. The <mark class="w">audio</mark> clearly shows <mark class="c">three</mark> distinct <mark class="w">rings</mark>.',
+      a:'3', words:15,
+      say:{acc:'Correct. Ke-Omni-R, trained on the answer alone, also says three rings, then answers 2.',
+           fmt:'Reasoning first, then one answer, each in its own tags.',
+           con:'It says three, and it answers 3: what the consistency term asks for.',
+           kw:'It reviews the options and names what it hears, as the keyword lists reward.',
+           len:'Two sentences: almost none of this term is lost.'}}
+  };
+  var rail=$('.rp-rail'), view=$('.rp-view'), tabs=$$('.rp-tabs button');
+  var cur='parade', at=0, playing=!reduced, vis=false, timer=0, DUR=5200;
+  function renderRail(){
+    rail.innerHTML=TERMS.map(function(st,i){return '<button type="button" class="'+st[1]+'" data-i="'+i+'"><span class="n">'+(i+1)+'</span><span>'+st[2]+'<small>'+st[3]+'</small></span></button>';}).join('');
+  }
+  function show(i){
+    at=i;var st=TERMS[i], ex=EX[cur];
+    $$('button',rail).forEach(function(b,k){b.setAttribute('aria-current',k===i?'true':'false');b.classList.toggle('done',k<i);});
+    var act=$('button[aria-current=true]',rail);if(act&&rail.scrollWidth>rail.clientWidth)rail.scrollTo({left:act.offsetLeft-60,behavior:reduced?'auto':'smooth'});
+    view.className='rp-view sc '+st[1];view.setAttribute('data-k',st[0]);
+    var h='<p class="rp-kind">'+st[2]+'<span>'+st[3]+'</span></p><p class="sc-def">'+st[4]+'</p>';
+    h+='<p class="sc-q"><b>Question</b>'+ex.q+'</p><p class="sc-ch">Choices: '+ex.ch+'</p>';
+    h+='<div class="sc-out"><span class="tag">&lt;think&gt;</span> <span class="think">'+ex.t+'</span> <span class="tag">&lt;/think&gt;</span> <span class="tag">&lt;answer&gt;</span><span class="ans">'+ex.a+'</span><span class="tag">&lt;/answer&gt;</span></div>';
+    h+='<div class="sc-len" aria-hidden="true"><span>its length</span><span class="tr" style="--w:'+(ex.words/256*100).toFixed(1)+'%"><b></b></span></div>';
+    h+='<p class="sc-say rp-item">'+ex.say[st[0]]+'</p>';
+    h+='<div class="rp-foot"><button type="button" class="rp-play" aria-label="'+(playing?'Pause':'Play')+'">'+(playing?'<svg viewBox="0 0 12 12"><rect x="2" y="1.5" width="3" height="9" rx="1"/><rect x="7" y="1.5" width="3" height="9" rx="1"/></svg>':'<svg viewBox="0 0 12 12"><path d="M3 1.5v9l7.5-4.5z"/></svg>')+'</button><div class="rp-bar"><i></i></div></div>';
+    view.innerHTML=h;schedule();
+  }
+  function schedule(){
+    clearTimeout(timer);var bar=$('.rp-bar i',view);if(!bar)return;
+    bar.style.transition='none';bar.style.width='0';
+    if(!playing||!vis)return;
+    void bar.offsetWidth;bar.style.transition='width '+DUR+'ms linear';bar.style.width='100%';
+    timer=setTimeout(function(){show((at+1)%TERMS.length);},DUR);
+  }
+  rail.addEventListener('click',function(e){var b=e.target.closest('button');if(b)show(+b.getAttribute('data-i'));});
+  view.addEventListener('click',function(e){if(e.target.closest('.rp-play')){playing=!playing;show(at);}});
+  tabs.forEach(function(t){t.addEventListener('click',function(){cur=t.getAttribute('data-s');tabs.forEach(function(o){o.setAttribute('aria-selected',o===t?'true':'false');});show(0);});});
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){es.forEach(function(e){var was=vis;vis=e.isIntersecting;if(vis&&!was&&playing)show(0);else schedule();});},{threshold:0.25}).observe(root);
+  }else vis=true;
+  renderRail();show(0);
+})();
+</script>
