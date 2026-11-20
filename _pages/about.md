@@ -83,6 +83,12 @@ body.dark-mode .section-header .sh-icon { filter: brightness(1.55) saturate(1.1)
   padding: 9px 0; border-bottom: 1px solid #f0f0f0; font-size: 0.906em;
 }
 .news-list li:last-child { border-bottom: none; }
+/* the pinned news item (Self-Rewriting), owner's 11-20 request: stand out at the top */
+.news-list li.news-pinned { background: #F3F6FB; border: 1px solid #DCE7F5; border-left: 3px solid #2F4B8F; border-radius: 8px; padding: 12px 14px; margin: 4px 0 10px; }
+.news-list li.news-pinned:last-child { border-bottom: 1px solid #DCE7F5; }
+.nb-pin { background: #2F4B8F; color: #fff; }
+body.dark-mode .news-list li.news-pinned { background: #141B26 !important; border-color: #2B3A55 !important; border-left-color: #6ea8fe !important; }
+body.dark-mode .nbadge.nb-pin { background: #6ea8fe !important; color: #0f1216 !important; }
 .news-date { min-width: 78px; color: #767676; font-size: 0.836em; font-weight: 700; padding-top: 2px; }
 .nbadge {
   display: inline-block; padding: 1px 7px; border-radius: 4px;
@@ -1330,9 +1336,9 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
 <h2 class="section-header" id="news"><img class="sh-icon" src="/images/icons/sh-news.png" alt="">Latest News</h2>
 
 <ul class="news-list">
-  <li>
+  <li class="news-pinned">
     <span class="news-date">Nov 2026</span>
-    <span><span class="nbadge nb-find">Finding</span><strong>Language Models Can Rewrite Their Own Weights</strong> is on arXiv. A third way to make a model better: for the first time, to our knowledge, a language model rewrites its own weights by its own reasoning and becomes better, with no gradients and no training. The model is its own optimizer. It takes no frontier model: the model surpasses itself on problems it never saw, keeps getting better session after session, and repairs a damaged copy of itself without ever seeing its original weights; the ability emerges with scale. No training pipeline, no cluster, no added cost per answer. Affordable. Scalable. Recursive. <a href="/projects/self-rewriting/">Project page</a> &middot; <a href="/film/#self-rewriting">Video</a> &middot; <a href="https://arxiv.org/abs/2611.21885" target="_blank" rel="noopener noreferrer">Paper</a></span>
+    <span><span class="nbadge nb-pin">Pinned</span><span class="nbadge nb-find">Finding</span><strong>Language Models Can Rewrite Their Own Weights</strong> is on arXiv. A third way to make a model better: for the first time, to our knowledge, a language model rewrites its own weights by its own reasoning and becomes better, with no gradients and no training. The model is its own optimizer. It takes no frontier model: the model surpasses itself on problems it never saw, keeps getting better session after session, and repairs a damaged copy of itself without ever seeing its original weights; the ability emerges with scale. No training pipeline, no cluster, no added cost per answer. Affordable. Scalable. Recursive. <a href="/projects/self-rewriting/">Project page</a> &middot; <a href="/film/#self-rewriting">Video</a> &middot; <a href="https://arxiv.org/abs/2611.21885" target="_blank" rel="noopener noreferrer">Paper</a></span>
   </li>
   <li>
     <span class="news-date">Nov 2026</span>
