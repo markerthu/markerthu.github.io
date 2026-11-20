@@ -1,0 +1,423 @@
+---
+layout: null
+permalink: /projects/vanguard/
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Vanguard: Knowing When to Trust the Draft in Speculative Vision-Language Agents">
+  <meta property="og:description" content="Let a small model go first, and it can be right more often than the large model: Vanguard checks each drafted step against the screen with a general decision model, keeps it when confident, and calls the large model only when needed. Training-free, across model families.">
+  <meta property="og:image" content="https://www.jiajunfan.com/images/og/vanguard.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://www.jiajunfan.com/projects/vanguard/">
+  <link rel="canonical" href="https://www.jiajunfan.com/projects/vanguard/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Vanguard: Knowing When to Trust the Draft in Speculative Vision-Language Agents">
+  <meta name="twitter:description" content="Let a small model go first: a general decision model checks each drafted step against the screen, and the large model writes only the steps it rejects. Training-free, across model families.">
+  <meta name="twitter:image" content="https://www.jiajunfan.com/images/og/vanguard.jpg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vanguard: Knowing When to Trust the Draft in Speculative Vision-Language Agents | Jiajun Fan</title>
+<meta name="description" content="Let a small model go first, and it can be right more often than the large model: Vanguard checks each drafted step against the screen with a general decision model, keeps it when confident, and calls the large model only when needed. Training-free, across model families.">
+<meta name="theme-color" content="#fdfcfa">
+<meta name="theme-color" content="#0f1216" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="icon" href="/images/favicon.ico">
+<script>try{if(localStorage.getItem('darkMode')==='true'){document.documentElement.style.background='#0f1216';}}catch(e){}</script>
+{% include selfrw/style.html %}
+{% include proj/vanguard/style.html %}
+<noscript><style>.hl{background-size:100% 36%}.chapters{position:static}.m2w-rows li{opacity:1;transform:none}.m2w-rows .trk i{transform:none}.anim .pop,.anim .fade{opacity:1;transform:none}.anim .grow,.anim .growy{transform:none}.anim .draw{stroke-dasharray:none;stroke-dashoffset:0}.stage{display:none}</style></noscript>
+<script type="application/ld+json">{
+  "@context":"https://schema.org","@type":"ScholarlyArticle",
+  "name":"Vanguard: Knowing When to Trust the Draft in Speculative Vision-Language Agents",
+  "description":"Let a small model go first, and it can be right more often than the large model: Vanguard checks each drafted step against the screen with a general decision model, keeps it when confident, and calls the large model only when needed. Training-free, across model families.",
+  "author":[{"@type":"Person","name":"Hanqi Mao"},{"@type":"Person","name":"Jiajun Fan"},{"@type":"Person","name":"Ruihan Guo"},{"@type":"Person","name":"Shuaike Shen"},{"@type":"Person","name":"Ziwen Wang"},{"@type":"Person","name":"Hui Ren"},{"@type":"Person","name":"Xianrui Zhong"},{"@type":"Person","name":"Ge Liu"}],
+  "datePublished":"2026-11-18",
+  "url":"https://www.jiajunfan.com/projects/vanguard/","sameAs":"https://arxiv.org/abs/2611.23917",
+  "keywords":"speculative decoding, step-level speculation, vision-language agents, GUI agents, decision model, process reward, training-free"
+}</script>
+  <script data-goatcounter="https://jiajunfan.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+{% include site-chrome.html %}
+</head>
+<body id="top">
+<script>try{if(localStorage.getItem('darkMode')==='true')document.body.classList.add('dark-mode');}catch(e){}</script>
+
+<header class="site-masthead">
+  <div class="masthead-inner">
+    <a class="masthead-title" href="/">Jiajun Fan</a>
+    <nav class="masthead-nav" aria-label="Site navigation">
+      <a href="/publications/">Publications</a>
+      <a href="/projects/" class="nav-active">Projects</a>
+      <a href="/year-archive/">Blog</a>
+      <a href="/cv/">CV</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="hero" aria-label="Summary">
+  <div class="wrap">
+    <h1>Vanguard: Knowing When to Trust the Draft <span class="l2">in Speculative Vision&#8209;Language Agents</span></h1>
+    <p class="byline">Hanqi&nbsp;Mao<sup>1,*</sup>, <a href="/" class="me">Jiajun&nbsp;Fan</a><sup>1,*</sup>, Ruihan&nbsp;Guo<sup>1</sup>, Shuaike&nbsp;Shen<sup>2</sup>, Ziwen&nbsp;Wang<sup>1,3</sup>, Hui&nbsp;Ren<sup>1</sup>, Xianrui&nbsp;Zhong<sup>4</sup>, <a href="https://geliu.web.illinois.edu/">Ge&nbsp;Liu</a><sup>1</sup></p>
+    <ul class="logos" aria-label="Affiliations"><li><sup>1</sup><img src="/images/projects/self-rewriting/logo_uiuc.png" alt="" width="66" height="96"><span>UIUC</span></li><li><sup>2</sup><img src="/images/projects/self-rewriting/logo_cmu.png" alt="" width="96" height="96"><span>CMU</span></li><li><sup>3</sup><img src="/images/projects/vanguard/logo_nyu.png" alt="" width="96" height="96"><span>NYU</span></li><li><sup>4</sup><img src="/images/projects/vanguard/logo_northeastern.png" alt="" width="87" height="96"><span>Northeastern</span></li></ul>
+    <p class="note"><span><sup>*</sup>Equal contribution</span></p>
+    <div class="cta">
+      <a class="btn" href="#film"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M5 3.300v9.400L12.500 8z"/></svg>Film</a>
+      <a class="btn btn-primary" href="https://arxiv.org/abs/2611.23917"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M4 1.5h5.5L12.5 4.5v10h-8.5z"/><path d="M9.5 1.5v3h3M6 8h4.5M6 10.5h4.5"/></svg>Paper</a>
+      <a class="btn" href="#cite"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5c2 0 3-1.5 3-4.5V4.5H3V8h3M9.5 11.5c2 0 3-1.5 3-4.5V4.5h-3V8h3"/></svg>BibTeX</a>
+    </div>
+    <div class="stage">
+      <canvas id="vg-stage" role="img" aria-label="Schematic animation of the method over four steps of an agent. At each step the small model drafts four candidate steps. A decision model looks at the screen and the goal together with each candidate and gives it a probability of being right. When the best candidate clears the threshold tau, it is kept; when none does, the large model writes the step. Three of the four steps are kept drafts and one is written by the large model."></canvas>
+      <ol class="stage-steps" aria-hidden="true">
+        <li><b>The small model drafts</b>four candidate steps</li>
+        <li><b>A decision model checks</b>each against the screen</li>
+        <li><b>A confident draft is kept</b>when it clears &tau;</li>
+        <li><b>The large model writes</b>only when none clears &tau;</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<nav class="chapters" aria-label="Parts of this page">
+  <div class="wrap">
+    <a href="#results">At a glance</a>
+    <a href="#problem">The problem</a>
+    <a href="#finding">The finding</a>
+    <a href="#how">How it works</a>
+    <a href="#evidence">The evidence</a>
+    <span class="ch-sub"><a href="#web" aria-label="Finding 01">01</a><a href="#places" aria-label="Finding 02">02</a><a href="#families" aria-label="Finding 03">03</a><a href="#rule" aria-label="Finding 04">04</a></span>
+    <a href="#matters">Why it matters</a>
+    <a href="#film">Film</a>
+    <a href="#cite">Cite</a>
+    <a class="ch-paper" href="https://arxiv.org/abs/2611.23917">arXiv 2611.23917</a>
+  </div>
+</nav>
+
+<section class="scene band" id="results">
+  <div class="wrap">
+    <div class="duo">
+      <header class="say">
+        <p class="eyebrow">At a glance</p>
+        <h2>The paper in four results.</h2>
+        <p class="lead">What if the small model went first, and the large model wrote only the steps it gets wrong? With a judge that checks each drafted step against the screen, the small model&rsquo;s drafts can be more accurate than the large model alone.</p>
+      </header>
+      <div class="show cards c2">
+        <a class="card result" href="#web"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><line class="il-ax" x1="20" y1="84" x2="180" y2="84"/><rect class="il-dr" x="38" y="52" width="30" height="32" rx="3"/><rect class="il-tg" x="85" y="34" width="30" height="50" rx="3"/><rect class="il-vg" x="132" y="22" width="30" height="62" rx="3"/></svg></span><span class="r-no">Finding 01<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>A small draft surpasses its large target.</h3><p>On websites it has never seen, the large model writes only about a quarter of the steps, and the result is more accurate than the large model alone.</p></a>
+        <a class="card result" href="#places"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><rect class="il-fr2" x="14" y="20" width="60" height="48" rx="5"/><path class="il-fr" d="M14 30h60"/><rect class="il-vg" x="22" y="38" width="20" height="10" rx="2"/><rect class="il-fr2" x="46" y="38" width="20" height="10" rx="2"/><path class="il-fr" d="M22 58h32"/><rect class="il-fr2" x="90" y="14" width="30" height="58" rx="6"/><path class="il-fr" d="M101 66h8"/><rect class="il-vg" x="96" y="26" width="18" height="9" rx="2"/><path class="il-fr" d="M96 44h18M96 51h12"/><path class="il-fr" d="M136 44 161 22l25 22"/><path class="il-fr" d="M141 40v32h40V40"/><rect class="il-vg" x="155" y="52" width="12" height="20" rx="1.5"/><line class="il-ax" x1="14" y1="86" x2="186" y2="86"/></svg></span><span class="r-no">Finding 02<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>On the web, on phones and in homes.</h3><p>As accurate as the large model on phones, more accurate in homes, and far more episodes solved in closed loop.</p></a>
+        <a class="card result" href="#families"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><circle class="il-lv" cx="28" cy="50" r="10"/><path class="il-fr" d="M43 50h12M51 46l4 4-4 4"/><rect class="il-tg" x="62" y="30" width="40" height="40" rx="9"/><path class="il-fr" d="M120 14v70h68"/><circle class="il-tg" cx="134" cy="66" r="6"/><path class="il-acc" d="M141 61 168 35"/><path class="il-acc" d="M159 35h9v9"/><path class="il-spd" d="M150 24h10M146 31h8"/><circle class="il-vg" cx="176" cy="28" r="7"/></svg></span><span class="r-no">Finding 03<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>Across model families: faster and more accurate.</h3><p>A small Qwen draft with a large Gemma target is faster than the large model alone, and more accurate on all three agent tasks.</p></a>
+        <a class="card result" href="#rule"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><path class="il-fr" d="M20 12v72h164"/><path class="il-fit" d="M26 78 180 18"/><circle class="il-pt h" cx="40" cy="74" r="4.5"/><circle class="il-pt h" cx="62" cy="66" r="4.5"/><circle class="il-pt" cx="76" cy="54" r="4.5"/><circle class="il-pt h" cx="92" cy="60" r="4.5"/><circle class="il-pt" cx="106" cy="46" r="4.5"/><circle class="il-pt" cx="124" cy="42" r="4.5"/><circle class="il-pt" cx="142" cy="34" r="4.5"/><circle class="il-pt" cx="166" cy="20" r="4.5"/></svg></span><span class="r-no">Finding 04<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>One rule says when it pays off.</h3><p>The gain grows with how often the small model&rsquo;s drafts hold a right step that the large model misses.</p></a>
+      </div>
+      <ul class="creed">
+        <li><b>Training-free.</b><span>only the question and one threshold are set, on development data</span></li>
+        <li><b>Across model families.</b><span>no draft heads and no shared tokenizer, so the target can be another family</span></li>
+        <li><b>Sees the screen.</b><span>each drafted step is judged with the screenshot in view</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="scene" id="problem">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main wide">
+        <p class="eyebrow">The problem</p>
+        <h2 class="reveal">Step-level speculation rests on its judge, and it has been measured by <span class="hl nw">how little it loses.</span></h2>
+        <p class="lead">Agents that act from screenshots reason before every action, so every step waits for a large model. Step-level speculation lets a small model draft the step, and the large model writes only the steps a judge rejects.</p>
+      </div>
+    </header>
+    <div class="cards c4 vg-judges">
+      <div class="card"><span class="vg-ill anim" aria-hidden="true"><svg viewBox="0 0 220 96"><line class="ax" x1="8" y1="80" x2="212" y2="80"/><rect class="pk growy" style="--d:.1s" x="12" y="16" width="16" height="64" rx="2"/><rect class="pk growy" style="--d:.16s" x="32" y="70" width="16" height="10" rx="2"/><rect class="pk growy" style="--d:.22s" x="52" y="75" width="16" height="5" rx="1.5"/><rect class="pk growy" style="--d:.28s" x="72" y="77" width="16" height="3" rx="1"/><rect class="pk growy" style="--d:.34s" x="92" y="78" width="16" height="2" rx="1"/><rect class="pk growy" style="--d:.4s" x="112" y="78" width="16" height="2" rx="1"/><rect class="pk growy" style="--d:.46s" x="132" y="77" width="16" height="3" rx="1"/><rect class="pk growy" style="--d:.52s" x="152" y="74" width="16" height="6" rx="1.5"/><rect class="pk growy" style="--d:.58s" x="172" y="68" width="16" height="12" rx="2"/><rect class="pk growy" style="--d:.64s" x="192" y="10" width="16" height="70" rx="2"/><line class="tau fade" style="--d:.9s" x1="110" y1="4" x2="110" y2="80"/><text class="t-ice fade" style="--d:1s" x="116" y="16">&tau;</text><text x="20" y="96" text-anchor="middle">0</text><text x="200" y="96" text-anchor="middle">1</text></svg></span><h3>The large model grades</h3><p>Its probabilities sit almost all near 0 or 1, so a threshold on them accepts or rejects nearly everything.</p></div>
+      <div class="card"><span class="vg-ill anim" aria-hidden="true"><svg viewBox="0 0 220 96"><rect class="scr" x="8" y="8" width="112" height="78" rx="8"/><path class="crv draw" style="--d:.2s" d="M20 22C40 58 62 66 108 72"/><rect class="box" x="136" y="8" width="76" height="78" rx="8"/><circle class="q fade" style="--d:1.2s" cx="174" cy="47" r="13"/><text class="fade" style="--d:1.3s;fill:var(--peach-t);font-weight:600" x="174" y="52" text-anchor="middle">?</text></svg></span><h3>A process reward model</h3><p>It is specialised to one domain and must be trained for it.</p></div>
+      <div class="card"><span class="vg-ill anim" aria-hidden="true"><svg viewBox="0 0 220 96"><rect class="lvl" x="8" y="34" width="104" height="30" rx="7"/><circle cx="21" cy="49" r="3.5" style="fill:var(--lav-e)"/><line class="ln" x1="32" y1="49" x2="92" y2="49" style="stroke:var(--lav-e);opacity:.55"/><path class="x pop" style="--d:1.2s" d="M100 16l12 12M112 16l-12 12"/><text x="128" y="30">confidence</text><rect class="btn" x="128" y="44" width="84" height="10" rx="5"/><rect class="lv grow" style="--d:.3s" x="128" y="44" width="78" height="10" rx="5"/></svg></span><h3>The small model&rsquo;s own signals</h3><p>They inherit whatever it fails to notice about its own mistakes.</p></div>
+      <div class="card"><span class="vg-ill anim" aria-hidden="true"><svg viewBox="0 0 220 96"><rect class="scr" x="8" y="10" width="84" height="76" rx="7"/><path class="ax" d="M8 22h84"/><circle class="dot3" cx="16" cy="16" r="2"/><circle class="dot3" cx="23" cy="16" r="2"/><circle class="dot3" cx="30" cy="16" r="2"/><line class="ln" x1="18" y1="34" x2="66" y2="34"/><rect class="btn" x="18" y="46" width="28" height="14" rx="3"/><rect class="btn" x="52" y="46" width="28" height="14" rx="3"/><line class="ln" x1="18" y1="72" x2="54" y2="72"/><path class="q draw" style="--d:.3s" d="M94 48H130"/><circle class="fade" style="--d:1s;fill:var(--card);stroke:var(--peach-e);stroke-width:1.5" cx="112" cy="48" r="10"/><text class="fade" style="--d:1.1s;fill:var(--peach-t);font-weight:600" x="112" y="52.5" text-anchor="middle">?</text><text x="134" y="28">text only</text><rect class="lvl" x="134" y="36" width="78" height="26" rx="7"/><line class="ln" x1="146" y1="49" x2="198" y2="49" style="stroke:var(--lav-e);opacity:.55"/></svg></span><h3>A judge that reads only text</h3><p>A fluent step can click an element that is not on the screen, and a text-only judge cannot tell.</p></div>
+    </div>
+    <p class="takeaway">The judge decides what is saved and what is lost, and whether the small model can end up ahead.</p>
+  </div>
+</section>
+
+<section class="scene band" id="finding">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main wide">
+        <p class="eyebrow">The finding</p>
+        <h2 class="reveal">Four drafts of a small model hold a right step <span class="hl">about as often as the large model is right.</span></h2>
+        <p class="lead">Sample the 2B draft four times on the same step: one of its four answers is right about as often as the 8B gets the step right, and not always on the same steps.</p>
+      </div>
+    </header>
+    <div class="fig panel">
+      <div class="ch anim" id="ch-pass" role="img" aria-label="Mind2Web: one of the four 2B drafts is right on 62.8% of steps; the 8B alone is right on 63.8%. EB-ALFRED: 76.3% for one of four 2B drafts, 74.2% for the 8B alone."></div>
+    </div>
+    <p class="cap">Qwen3-VL 2B draft, four samples at temperature 0.7, against the Qwen3-VL 8B target decoding greedily. Mind2Web pools held-out tasks and unseen websites.</p>
+    <p class="takeaway">The raw material for beating the large model is already there. What is missing is a judge that can pick it out.</p>
+  </div>
+</section>
+
+<section class="scene" id="how">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main wide">
+        <p class="eyebrow">How it works</p>
+        <h2 class="reveal">One question, asked <span class="hl">with the screen in view.</span></h2>
+        <p class="lead">For each drafted step, a general decision model is asked whether the step is right, given the goal, the screenshot and the previous actions. The best draft is kept if the answer is confident; otherwise the large model writes the step.</p>
+      </div>
+      <ul class="nots" aria-label="What it does without">
+        <li>no training</li><li>no draft heads</li><li>no shared tokenizer</li><li>no generated text</li>
+      </ul>
+    </header>
+    <figure class="vg-pipe" id="pipe">
+      <ol class="vg-steps">
+        <li class="vp k-draft">
+          <p class="vp-n"><span class="n">1</span>Draft</p>
+          <div class="vp-fig anim" role="img" aria-label="The small model samples four candidate steps."><svg viewBox="0 0 240 124"><path class="sv-lv" d="M14 42 22 38V86L14 90Z"/><path class="sv-lv" d="M22 42 30 38V86L22 90Z"/><path class="sv-lv" d="M30 42 38 38V86L30 90Z"/><path class="sv-lv" d="M38 42 46 38V86L38 90Z"/><path class="sv-lv" d="M46 42 54 38V86L46 90Z"/><text class="t-lav" x="34" y="112" text-anchor="middle">small model</text><path class="sv-ar draw" style="--d:.1s" d="M62 64C90 64 92 16 116 16"/><path class="sv-ar draw" style="--d:.2s" d="M62 64C90 64 92 46 116 46"/><path class="sv-ar draw" style="--d:.3s" d="M62 64C90 64 92 76 116 76"/><path class="sv-ar draw" style="--d:.4s" d="M62 64C90 64 92 106 116 106"/><g class="pop" style="--d:.9s"><rect class="sv-lvl" x="118" y="6" width="112" height="20" rx="6"/><circle cx="129" cy="16" r="3" style="fill:var(--lav-e)"/><line class="sv-ln" x1="138" y1="16" x2="208" y2="16" style="stroke:var(--lav-e);opacity:.5"/></g><g class="pop" style="--d:1.05s"><rect class="sv-lvl" x="118" y="36" width="112" height="20" rx="6"/><circle cx="129" cy="46" r="3" style="fill:var(--lav-e)"/><line class="sv-ln" x1="138" y1="46" x2="196" y2="46" style="stroke:var(--lav-e);opacity:.5"/></g><g class="pop" style="--d:1.2s"><rect class="sv-lvl" x="118" y="66" width="112" height="20" rx="6"/><circle cx="129" cy="76" r="3" style="fill:var(--lav-e)"/><line class="sv-ln" x1="138" y1="76" x2="212" y2="76" style="stroke:var(--lav-e);opacity:.5"/></g><g class="pop" style="--d:1.35s"><rect class="sv-lvl" x="118" y="96" width="112" height="20" rx="6"/><circle cx="129" cy="106" r="3" style="fill:var(--lav-e)"/><line class="sv-ln" x1="138" y1="106" x2="190" y2="106" style="stroke:var(--lav-e);opacity:.5"/></g></svg></div>
+          <p class="vp-say">The small model samples candidate steps, each with its reasoning and an action.</p>
+          <p class="vp-num"><b>K&nbsp;=&nbsp;4</b> candidates per step</p>
+        </li>
+        <li class="vp k-ours">
+          <p class="vp-n"><span class="n">2</span>Ask</p>
+          <div class="vp-fig anim" role="img" aria-label="The decision model receives the goal, the screenshot, the previous actions and one proposed action, and is asked whether the step is right."><svg viewBox="0 0 240 124"><g class="fade" style="--d:.1s"><rect class="sv-bar" x="0" y="4" width="124" height="22" rx="7"/><text x="62" y="19.5" text-anchor="middle" style="fill:var(--body)">goal</text></g><g class="fade" style="--d:.25s"><rect class="sv-bar" x="0" y="34" width="124" height="22" rx="7"/><rect x="18" y="39.5" width="15" height="11" rx="2" style="fill:var(--card);stroke:var(--faint);stroke-width:1.2"/><text x="72" y="49.5" text-anchor="middle" style="fill:var(--body)">screenshot</text></g><g class="fade" style="--d:.4s"><rect class="sv-bar" x="0" y="64" width="124" height="22" rx="7"/><text x="62" y="79.5" text-anchor="middle" style="fill:var(--body)">previous actions</text></g><g class="fade" style="--d:.55s"><rect class="sv-lvl" x="0" y="94" width="124" height="22" rx="7"/><text x="62" y="109.5" text-anchor="middle" class="t-lav">proposed action</text></g><path class="sv-ar ice draw" style="--d:.7s" d="M126 15C152 15 154 58 170 60"/><path class="sv-ar ice draw" style="--d:.75s" d="M126 45C146 45 154 58 170 60"/><path class="sv-ar ice draw" style="--d:.8s" d="M126 75C146 75 154 62 170 60"/><path class="sv-ar ice draw" style="--d:.85s" d="M126 105C152 105 154 62 170 60"/><circle class="sv-d pop" style="--d:1.4s" cx="200" cy="60" r="26"/><text class="t-ice fade" style="--d:1.5s" x="200" y="64.5" text-anchor="middle">D</text><text class="fade" style="--d:1.7s" x="200" y="106" text-anchor="middle">is it right?</text></svg></div>
+          <p class="vp-say">A general decision model sees the goal, the screenshot, the previous actions and one proposed action. It does not see the candidate&rsquo;s reasoning.</p>
+          <p class="vp-num"><b>One</b> yes-or-no question per candidate</p>
+        </li>
+        <li class="vp k-ours">
+          <p class="vp-n"><span class="n">3</span>Score</p>
+          <div class="vp-fig anim" role="img" aria-label="Schematic. Each candidate gets the probability of yes, compared with a threshold tau."><svg viewBox="0 0 240 124"><rect class="sv-lvl" x="2" y="19" width="18" height="18" rx="5"/><text class="t-lav" x="11" y="32.5" text-anchor="middle">1</text><rect class="sv-lvl" x="2" y="45" width="18" height="18" rx="5"/><text class="t-lav" x="11" y="58.5" text-anchor="middle">2</text><rect class="sv-lvl" x="2" y="71" width="18" height="18" rx="5"/><text class="t-lav" x="11" y="84.5" text-anchor="middle">3</text><rect class="sv-lvl" x="2" y="97" width="18" height="18" rx="5"/><text class="t-lav" x="11" y="110.5" text-anchor="middle">4</text><rect class="sv-bar" x="30" y="22" width="200" height="12" rx="6"/><rect class="sv-bar" x="30" y="48" width="200" height="12" rx="6"/><rect class="sv-bar" x="30" y="74" width="200" height="12" rx="6"/><rect class="sv-bar" x="30" y="100" width="200" height="12" rx="6"/><rect class="sv-ic grow" style="--d:.2s" x="30" y="22" width="184" height="12" rx="6"/><rect class="sv-ic grow" style="--d:.4s" x="30" y="48" width="172" height="12" rx="6"/><rect class="sv-icl grow" style="--d:.6s" x="30" y="74" width="28" height="12" rx="6"/><rect class="sv-icl grow" style="--d:.8s" x="30" y="100" width="60" height="12" rx="6"/><line class="sv-tau" x1="130" y1="14" x2="130" y2="118"/><text class="t-ice" x="136" y="11">&tau;</text></svg></div>
+          <p class="vp-say">It reads the probability of yes in one forward pass, without generating any text.</p>
+          <p class="vp-num"><b>P(yes)</b> for each candidate</p>
+        </li>
+        <li class="vp k-tgt">
+          <p class="vp-n"><span class="n">4</span>Keep or fall back</p>
+          <div class="vp-fig anim" role="img" aria-label="If the best probability clears tau, the draft is kept; otherwise the large model writes the step."><svg viewBox="0 0 240 124"><path class="sv-icl" d="M34 38 58 62 34 86 10 62Z"/><text class="t-ice" x="34" y="66.5" text-anchor="middle">&ge; &tau;</text><path class="sv-ar ice draw" style="--d:.2s" d="M58 62C82 62 84 24 106 24"/><path class="sv-ar pk draw" style="--d:.2s" d="M58 62C82 62 84 100 106 100"/><text class="t-ice fade" style="--d:.6s" x="66" y="38" text-anchor="end">yes</text><text class="t-peach fade" style="--d:.6s" x="72" y="98" text-anchor="end">no</text><g class="pop" style="--d:1.1s"><rect class="sv-ic" x="106" y="11" width="130" height="26" rx="8"/><path class="sv-ok" d="M116 24l3.5 3.5 6.5-7"/><text class="t-ice" x="134" y="28.5">draft kept</text></g><g class="pop" style="--d:1.3s"><rect class="sv-pk" x="106" y="87" width="130" height="26" rx="8"/><text class="t-peach" x="171" y="104.5" text-anchor="middle">large model writes</text></g></svg></div>
+          <p class="vp-say">The best candidate is kept if its probability clears &tau;. Otherwise the large model writes the step itself.</p>
+          <p class="vp-num"><b>&tau;&nbsp;=&nbsp;0.5</b> on web and phone tasks, <b>0.451</b> in homes</p>
+        </li>
+      </ol>
+      <p class="vp-total"><b>Training-free.</b> Only the wording of the question and &tau; are chosen, on development data; the decision model is used as it is. The draft needs no heads trained for the target, so the target can come from another family, and it composes with token-level speculation.</p>
+    </figure>
+    <p class="takeaway">It has to see the screen: with the screenshot removed, or swapped for another task&rsquo;s, it falls to or below the large model.</p>
+  </div>
+</section>
+
+<div id="evidence">
+
+<section class="scene band" id="web">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">The evidence <span>Finding 01</span></p>
+        <h2>A small draft surpasses its large target.</h2>
+        <p class="lead">On Multimodal-Mind2Web the 2B draft judged by Vanguard is more accurate than the 8B alone, while the 8B writes about a quarter of the steps.</p>
+      </div>
+    </header>
+    <div class="fig panel">
+      <div class="ch anim" id="ch-web" role="img" aria-label="Step success on Mind2Web. Held-out tasks, 820 steps: 2B draft alone 42.4%, vote gate 56.1%, Qwen-VL-PRM-7B 63.0%, the 8B asked the same question 65.5%, Vanguard 66.5% with the 8B writing 26% of the steps; the 8B alone 64.4%. Unseen websites, 975 steps: 43.8%, 56.9%, 61.0%, 65.1%, Vanguard 66.8% with the 8B writing 23% of the steps; the 8B alone 63.3%."></div>
+    </div>
+    <div class="vg-ex">
+      <p class="bn">An unseen website <span>&middot; one held-out step, the 2B draft judged by Vanguard</span></p>
+      <div class="m2w anim" id="m2w">
+        <div class="m2w-scr" aria-label="Part of the screen: six buttons, AMD Ryzen 3, 5 and 7, and Intel Core i3, i5 and i7. Intel Core i3 carries the mark G, Intel Core i7 the mark H." role="img"><span>AMD Ryzen 3</span><span>AMD Ryzen 5</span><span>AMD Ryzen 7</span><span class="g"><i>G</i>Intel Core i3</span><span>Intel Core i5</span><span class="h"><i>H</i>Intel Core i7</span></div>
+        <ol class="m2w-rows">
+          <li class="k-ours" style="--d:.15s"><span class="who">Drafts 1 and 2</span><span class="act">click G, Intel Core i3</span><span class="sc"><span class="trk"><i style="--p:.97"></i></span><b>D 0.97 &ge; &tau;: kept</b></span></li>
+          <li class="k-draft" style="--d:.55s"><span class="who">Drafts 3 and 4</span><span class="act">click H, Intel Core i7</span><span class="sc"><span class="trk"><i style="--p:.02"></i></span><b>D 0.02</b></span></li>
+          <li class="k-tgt r-tgt" style="--d:.95s"><span class="who">8B alone</span><span class="act">types into the memory field</span><span class="sc"><b>wrong</b></span></li>
+        </ol>
+      </div>
+    </div>
+    <p class="cap">Mind2Web step success (%). Every judge gets the same four drafts and the same fallback to the 8B. In the example, the decision model separates the right drafts from the wrong ones, and the step is kept.</p>
+    <p class="takeaway">Given the same four drafts, none of the other judges shown here surpasses the 8B significantly. Vanguard does, on websites it has never seen.</p>
+  </div>
+</section>
+
+<section class="scene" id="places">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">The evidence <span>Finding 02</span></p>
+        <h2>It matches the large model on phones, beats it in homes, and in closed loop solves far more episodes.</h2>
+        <p class="lead">When each step builds on the agent&rsquo;s own previous actions, better steps add up.</p>
+      </div>
+    </header>
+    <div class="fig panel">
+      <div class="ch anim" id="ch-agents" role="img" aria-label="AndroidControl step success: 2B alone 32.4%, 8B alone 48.8%, Vanguard 51.0% with the 8B writing 19% of the steps. EB-ALFRED: 60.6%, 74.2%, Vanguard 77.4% with 28%. BabyAI GoToLocal, episodes solved out of 100: 37, 61, Vanguard 86 with 25%. BabyAI PickupLoc: 16, 36, Vanguard 65 with 25%."></div>
+    </div>
+    <div class="vg-ex">
+      <p class="bn">BabyAI GoToLocal, closed loop <span>&middot; one held-out episode: go to a grey key</span></p>
+      <div class="bb anim" id="bb">
+        <figure class="lose">
+          <svg viewBox="0 0 260 260" role="img" aria-label="The 8B alone walks up the right-hand column to the top and repeats itself there, and fails after 32 actions.">
+            <g class="gl"><path d="M50 10V250M90 10V250M130 10V250M170 10V250M210 10V250M10 50H250M10 90H250M10 130H250M10 170H250M10 210H250"/></g>
+            <rect class="wall" x="10" y="10" width="240" height="240" rx="3"/>
+            <g style="stroke:var(--rose-e)" fill="none" stroke-width="3"><rect x="179" y="19" width="22" height="22" rx="2"/><path d="M179 30h22"/></g>
+            <g style="stroke:var(--faint)" fill="none" stroke-width="3" stroke-linecap="round"><circle cx="150" cy="63" r="5"/><path d="M150 68v14M150 76h5M150 81h5"/><rect x="99" y="99" width="22" height="22" rx="2"/><path d="M99 110h22"/><circle cx="30" cy="143" r="5"/><path d="M30 148v14M30 156h5M30 161h5"/></g>
+            <circle cx="190" cy="150" r="9" style="fill:var(--rose);stroke:var(--rose-e);stroke-width:2"/>
+            <g style="stroke:var(--mint-e)" fill="none" stroke-width="3" stroke-linecap="round"><circle cx="70" cy="183" r="5"/><path d="M70 188v14M70 196h5M70 201h5"/></g>
+            <g style="stroke:var(--lav-e)" fill="none" stroke-width="3" stroke-linecap="round"><circle cx="150" cy="183" r="5"/><path d="M150 188v14M150 196h5M150 201h5"/><rect x="19" y="219" width="22" height="22" rx="2"/><path d="M19 230h22"/></g>
+            <path class="p-t draw bbp" style="--d:.3s;--du:2s" d="M230 222V30"/>
+            <g class="pop" style="--d:2.3s"><g class="spin"><path class="loop" d="M241 30a11 11 0 1 1-4-8.5"/><path class="loop" d="M238 16.5l-1 5 5 1"/></g></g>
+            <path class="agent" d="M230 219l9 17h-18z"/>
+          </svg>
+          <figcaption><b>8B alone: fails after 32 actions</b>walks up the right column and repeats itself</figcaption>
+        </figure>
+        <div class="bb-key" aria-hidden="true"><span>kept draft</span><span class="pk">8B step</span></div>
+        <figure class="win">
+          <svg viewBox="0 0 260 260" role="img" aria-label="Vanguard: two kept draft steps up, one step written by the 8B, then kept draft steps left to the grey key, reached in 11 actions.">
+            <g class="gl"><path d="M50 10V250M90 10V250M130 10V250M170 10V250M210 10V250M10 50H250M10 90H250M10 130H250M10 170H250M10 210H250"/></g>
+            <rect class="wall" x="10" y="10" width="240" height="240" rx="3"/>
+            <g style="stroke:var(--rose-e)" fill="none" stroke-width="3"><rect x="179" y="19" width="22" height="22" rx="2"/><path d="M179 30h22"/></g>
+            <g style="stroke:var(--faint)" fill="none" stroke-width="3" stroke-linecap="round"><circle cx="150" cy="63" r="5"/><path d="M150 68v14M150 76h5M150 81h5"/><rect x="99" y="99" width="22" height="22" rx="2"/><path d="M99 110h22"/><circle cx="30" cy="143" r="5"/><path d="M30 148v14M30 156h5M30 161h5"/></g>
+            <circle cx="190" cy="150" r="9" style="fill:var(--rose);stroke:var(--rose-e);stroke-width:2"/>
+            <g style="stroke:var(--mint-e)" fill="none" stroke-width="3" stroke-linecap="round"><circle cx="70" cy="183" r="5"/><path d="M70 188v14M70 196h5M70 201h5"/></g>
+            <g style="stroke:var(--lav-e)" fill="none" stroke-width="3" stroke-linecap="round"><circle cx="150" cy="183" r="5"/><path d="M150 188v14M150 196h5M150 201h5"/><rect x="19" y="219" width="22" height="22" rx="2"/><path d="M19 230h22"/></g>
+            <path class="p-v draw bbp" style="--d:.3s;--du:.7s" d="M230 222V150"/>
+            <path class="p-t draw bbp" style="--d:1s;--du:.4s" d="M230 150V110"/>
+            <path class="p-v draw bbp" style="--d:1.4s;--du:.8s" d="M230 110H150"/>
+            <circle class="goal pop" style="--d:2.3s" cx="150" cy="70" r="17"/>
+            <path class="agent" d="M230 219l9 17h-18z"/>
+          </svg>
+          <figcaption><b>Vanguard: reaches the key in 11 actions</b>kept draft steps up, one 8B step, then left to the key</figcaption>
+        </figure>
+      </div>
+    </div>
+    <p class="cap">Success (%) on AndroidControl (525 steps) and EB-ALFRED (1,849 steps); episodes solved out of 100 on the two BabyAI tasks. With each Vanguard bar: the share of steps the 8B writes.</p>
+    <p class="takeaway">In closed loop the 2B draft judged by Vanguard solves 86 episodes where the 8B alone solves 61, and 65 where it solves 36.</p>
+  </div>
+</section>
+
+<section class="scene band" id="families">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">The evidence <span>Finding 03</span></p>
+        <h2>Across model families: faster and more accurate.</h2>
+        <p class="lead">Vanguard exchanges whole steps, not tokens, so the target can come from another family. With a Qwen3-VL 2B draft and a Gemma-3 27B target, it is faster than the 27B alone and more accurate on all three agent tasks.</p>
+      </div>
+    </header>
+    <div class="fig panel">
+      <div class="ch anim" id="ch-family" role="img" aria-label="Qwen3-VL 2B draft with a Gemma-3 27B target, end to end against the 27B alone on the same steps: Mind2Web 65.0% to 67.7% at 1.34 times the speed; AndroidControl 36.0% to 45.0% at 1.33 times; EB-ALFRED 78.3% to 83.7% at 1.36 times. On the full test sets: Mind2Web 64.1% to 66.6%, AndroidControl 34.1% to 45.9%, EB-ALFRED 76.6% to 78.3%. Qwen2.5-VL 3B to 7B: Mind2Web 50.5% to 58.6%, EB-ALFRED 67.9% to 76.3%. Gemma-3 12B to 27B: Mind2Web 64.1% to 69.1%, AndroidControl 34.1% to 39.4%."></div>
+    </div>
+    <p class="cap">Step success (%). Top: end to end at batch size 1, on the first 300, 200 and 300 test steps of Mind2Web, AndroidControl and EB-ALFRED. Bottom: full test sets; all seven gains are significant.</p>
+    <p class="takeaway">No draft heads, no shared tokenizer: a small model of one family can lead a large model of another.</p>
+  </div>
+</section>
+
+<section class="scene" id="rule">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">The evidence <span>Finding 04</span></p>
+        <h2>One rule says when it pays off.</h2>
+        <p class="lead">A judge can only choose among the drafts, so the small model can surpass its target only where its four drafts hold a right step that the target misses. Across sixteen results in four model families, the gain grows with that headroom.</p>
+      </div>
+    </header>
+    <div class="fig panel">
+      <div class="ch anim" id="ch-rule" role="img" aria-label="Scatter of sixteen draft-target-task results. Horizontal: headroom, the draft's pass at four minus the target's accuracy, in points, from minus 10.1 to 18.7. Vertical: Vanguard minus the target, in points, from minus 3.58 to 11.82. The points rise along a least-squares line, y equals 0.516 x plus 1.662; Pearson r equals 0.95."></div>
+    </div>
+    <p class="cap">Sixteen (draft, target, task) results across Qwen3-VL, Qwen2.5-VL, Qwen3.5 and Gemma-3, on Mind2Web, AndroidControl and EB-ALFRED. Filled: significant gain over the target. Dashed: least-squares line. Pearson <span class="nw">r = 0.95.</span></p>
+    <p class="takeaway">Where the headroom is largest, Vanguard turns more than half of it into a significant gain.</p>
+  </div>
+</section>
+
+</div>
+
+<section class="scene band" id="matters">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">Why it matters</p>
+        <h2>A judge that can tell lets the large model write only the steps the small one gets wrong.</h2>
+        <p class="lead">Vanguard is the most accurate judge compared on the agent tasks, tied only by Qwen3-VL-32B on Mind2Web, and its scores are calibrated, so one threshold carries over from development data.</p>
+      </div>
+    </header>
+    <div class="fig panel vg-why">
+      <div class="ch anim" id="ch-judge" role="img" aria-label="Left: as a judge, Vanguard is significantly more accurate than Qwen-VL-PRM-7B in all nine (model family, task) cells, and than the target asked the same question in seven of nine. Right: expected calibration error, lower is better: Vanguard 0.106, the 8B asked the same question 0.282, Qwen-VL-PRM-7B 0.272."></div>
+    </div>
+    <p class="cap">Judge accuracy over three model families and three agent tasks. With one &tau; = 0.5, the 8B writes 23% of the development steps, 26% on held-out tasks and 23% on unseen websites.</p>
+    <h3 class="eyebrow sub">What this opens up</h3>
+    <div class="cards c3 opens">
+      <div class="card"><h3>Nothing to train</h3><p>No draft heads, no shared tokenizer, no new reward model. The draft and the target stay as they are.</p></div>
+      <div class="card"><h3>With token-level speculation</h3><p>With EAGLE-3 inside both models, Vanguard comes close to EAGLE-3&rsquo;s speed and is more accurate on Mind2Web: 70.0% at 1.50&times;, against 67.0% at 1.55&times;.</p></div>
+      <div class="card"><h3>Beyond agents</h3><p>On MathVista and ProcessBench it is on par with process reward models trained for these domains; picking one of four solutions on MATH-500, it significantly beats the math reward model.</p></div>
+    </div>
+    <p class="belief">Speculation was measured by how little it loses. Now the small model can lead.</p>
+    <div class="cta left">
+      <a class="btn btn-primary" href="https://arxiv.org/abs/2611.23917">Read the paper</a>
+    </div>
+  </div>
+</section>
+
+<section class="scene" id="film">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">The film</p>
+        <h2>The story, as a short film.</h2>
+      </div>
+    </header>
+    <div class="film">
+      <video controls playsinline preload="none" poster="/film/posters/vanguard.jpg" width="1280" height="720" aria-label="Vanguard: a short film">
+        <source src="/film/video/vanguard.mp4" type="video/mp4">
+      </video>
+    </div>
+    <p class="cap">2 min 54 s, narrated. Also in the <a href="/film/#vanguard">film collection</a>.</p>
+  </div>
+</section>
+
+<section class="cite" id="cite">
+  <div class="wrap duo">
+    <header class="say">
+      <p class="eyebrow">Cite</p>
+      <h2>Cite the paper.</h2>
+      <button class="bib-copy-btn" aria-label="Copy BibTeX citation"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-list.png);mask-image:url(/images/icons/h-list.png)"></i>Copy BibTeX</button>
+    </header>
+    <pre class="show bibtex-block" tabindex="0"><code>@article{mao2026vanguard,
+  title={Vanguard: Knowing When to Trust the Draft in Speculative Vision-Language Agents},
+  author={Mao, Hanqi and Fan, Jiajun and Guo, Ruihan and Shen, Shuaike and Wang, Ziwen and Ren, Hui and Zhong, Xianrui and Liu, Ge},
+  journal={arXiv preprint arXiv:2611.23917},
+  year={2026},
+  url={https://arxiv.org/abs/2611.23917}
+}</code></pre>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>Vanguard &nbsp;|&nbsp; <a href="/">Jiajun Fan</a> · UIUC, CMU, NYU &amp; Northeastern &nbsp;|&nbsp; <a href="https://arxiv.org/abs/2611.23917">Paper</a> &nbsp;|&nbsp; <a href="/projects/">All Projects</a></p>
+</footer>
+
+<div id="read-progress" aria-hidden="true"></div>
+<script>
+(function(){
+  var bar=document.getElementById('read-progress'), nav=document.querySelector('.chapters'), strip=nav?nav.querySelector('.wrap'):null;
+  function pairs(sel){return [].slice.call(document.querySelectorAll(sel)).map(function(a){return [a,document.getElementById(a.getAttribute('href').slice(1))];}).filter(function(p){return p[1];});}
+  var parts=pairs('.chapters .wrap > a[href^="#"]'), subs=pairs('.chapters .ch-sub a'), shown=null;
+  function mark(list,cur){list.forEach(function(p){if(p[0]===cur)p[0].setAttribute('aria-current','true');else p[0].removeAttribute('aria-current');});}
+  function onScroll(){
+    var st=window.scrollY||document.documentElement.scrollTop,h=document.documentElement.scrollHeight-window.innerHeight,line=Math.min(window.innerHeight*0.38,340),cur=null,sub=null;
+    if(bar)bar.style.width=(h>0?(st/h*100):0)+'%';
+    parts.forEach(function(p){if(p[1].getBoundingClientRect().top<=line)cur=p[0];});
+    if(h>0&&st>=h-2&&parts.length)cur=parts[parts.length-1][0];
+    if(cur&&cur.getAttribute('href')==='#evidence')subs.forEach(function(p){if(p[1].getBoundingClientRect().top<=line)sub=p[0];});
+    mark(parts,cur);mark(subs,sub);
+    if(cur!==shown&&strip&&strip.scrollWidth>strip.clientWidth){strip.scrollLeft=cur?Math.max(0,cur.offsetLeft-16):0;}
+    shown=cur;
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});window.addEventListener('resize',onScroll);onScroll();
+  document.querySelectorAll('.bib-copy-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var pre=document.querySelector('.bibtex-block'),text=pre?pre.innerText||pre.textContent:'';
+      if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(function(){
+        btn.innerHTML='<i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-check.png);mask-image:url(/images/icons/h-check.png)"></i> Copied!';btn.classList.add('copied');
+        setTimeout(function(){btn.innerHTML='<i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-list.png);mask-image:url(/images/icons/h-list.png)"></i> Copy BibTeX';btn.classList.remove('copied');},2000);});}
+    });
+  });
+})();
+</script>
+{% include proj/vanguard/hero.html %}
+{% include proj/vanguard/figs.html %}
+</body>
+</html>
