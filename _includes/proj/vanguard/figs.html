@@ -37,7 +37,7 @@
   }
 
   /* Finding 01: Mind2Web, every judge on the same four drafts (Tab. 1). */
-  var WEB={sets:[['Held-out tasks','820 steps',64.4,[26]],['Unseen websites','975 steps',63.3,[23]]],
+  var WEB={sets:[['Held-out tasks','820 steps',64.4,[26],0],['Unseen websites','975 steps',63.3,[23],1]],
     rows:[['2B draft alone',[42.4,43.8],'m-draft'],['Vote gate',[56.1,56.9],'m-oth'],['Qwen-VL-PRM-7B',[63.0,61.0],'m-oth'],['8B, same question',[65.5,65.1],'m-oth'],['Vanguard',[66.5,66.8],'m-ours']],share:[26,23]};
   function web(el){
     var cw=el.clientWidth, side=cw>=760, W=Math.round(Math.max(300,Math.min(cw,1060)));
@@ -58,7 +58,7 @@
         o+='<line class="lolli grow"'+d(dl)+' x1="'+f(X(40))+'" x2="'+f(X(v))+'" y1="'+f(cy)+'" y2="'+f(cy)+'"/>';
         o+='<circle class="'+r[2]+' pop"'+d(dl+0.35)+' cx="'+f(X(v))+'" cy="'+f(cy)+'" r="'+(ours?8:6)+'"/>';
         var left=!ours&&xt>X(v)&&xt<X(v)+52;
-        o+=tx(left?X(v)-12:X(v)+(ours?14:12),cy+5,f1(v),'fade '+(ours?'t-ours':'t-ink'),left?'end':'',' style="--d:'+(dl+0.5).toFixed(2)+'s'+(ours?'':';font-weight:600')+'"');
+        o+=tx(left?X(v)-12:X(v)+(ours?14:12),cy+5,f1(v)+(ours&&set[4]?'*':''),'fade '+(ours?'t-ours':'t-ink'),left?'end':'',' style="--d:'+(dl+0.5).toFixed(2)+'s'+(ours?'':';font-weight:600')+'"');
         if(ours&&side)o+=tx(X(v)+14,cy+22,'8B writes '+set[3][0]+'%','sm fade','',' style="--d:'+(dl+0.7).toFixed(2)+'s;fill:var(--ice-t)"');
       });
       return o;
@@ -70,7 +70,7 @@
   }
 
   /* Finding 02: phones, homes and closed loop (Fig. 2, Tab. 3 and 4). */
-  var AG=[['AndroidControl','step success, %',[32.4,48.8,51.0],19],['EB-ALFRED','step success, %',[60.6,74.2,77.4],28],['GoToLocal','episodes of 100',[37,61,86],25],['PickupLoc','episodes of 100',[16,36,65],25]];
+  var AG=[['AndroidControl','step success, %',[32.4,48.8,51.0],19,0],['EB-ALFRED','step success, %',[60.6,74.2,77.4],28,1],['GoToLocal','episodes of 100',[37,61,86],25,1],['PickupLoc','episodes of 100',[16,36,65],25,1]];
   function agents(el){
     var cw=el.clientWidth, cols=cw>=760?4:2, W=Math.round(Math.max(300,Math.min(cw,1060))), gx=cols===4?28:18, mw=(W-(cols-1)*gx)/cols;
     var ph=cols===4?170:150, top=58, mh=top+ph+(cols===4?30:26), rows=Math.ceil(AG.length/cols), H=rows*mh+(rows-1)*22, s='';
@@ -83,7 +83,7 @@
       a[2].forEach(function(v,j){
         var bx=px0+slot*j+(slot-bw)/2, ours=j===2, dl=0.2+i*0.12+j*0.14;
         s+='<rect class="'+cls[j]+' growy"'+d(dl)+' x="'+f(bx)+'" y="'+f(Y(v))+'" width="'+f(bw)+'" height="'+f(Y(0)-Y(v))+'" rx="3"/>';
-        s+=tx(bx+bw/2,Y(v)-7,dec?f1(v):String(v),'fade '+(ours?'t-ours':j===1?'t-tgt':'t-body'),'middle',' style="--d:'+(dl+0.6).toFixed(2)+'s'+(ours?'':';font-weight:600')+'"');
+        s+=tx(bx+bw/2,Y(v)-7,(dec?f1(v):String(v))+(ours&&a[4]?'*':''),'fade '+(ours?'t-ours':j===1?'t-tgt':'t-body'),'middle',' style="--d:'+(dl+0.6).toFixed(2)+'s'+(ours?'':';font-weight:600')+'"');
         if(ours)s+=tx(bx+bw/2,cols===4?Y(0)-9:Y(0)+17,a[3]+'%','sm t-in fade','middle',d(dl+0.8));
         if(cols===4)s+=tx(bx+bw/2,Y(0)+18,nm[j],'sm','middle',ours?' style="fill:var(--ice-t);font-weight:600"':'');
       });
@@ -92,7 +92,7 @@
   }
 
   /* Finding 03: across families (Tab. 2, App. D.6). */
-  var SPEED=[['Mind2Web',65.0,67.7,'1.34'],['AndroidControl',36.0,45.0,'1.33'],['EB-ALFRED',78.3,83.7,'1.36']];
+  var SPEED=['1.34','1.33','1.36'];
   var FULL=[['Qwen3-VL 2B &rarr; Gemma-3 27B',[['Mind2Web',64.1,66.6],['AndroidControl',34.1,45.9],['EB-ALFRED',76.6,78.3]]],
     ['Qwen2.5-VL 3B &rarr; 7B',[['Mind2Web',50.5,58.6],['EB-ALFRED',67.9,76.3]]],
     ['Gemma-3 12B &rarr; 27B',[['Mind2Web',64.1,69.1],['AndroidControl',34.1,39.4]]]];
@@ -113,15 +113,15 @@
       if(extra&&!small){var cx=W-sc+10;o+='<rect class="spd fade"'+d(dl+1.2)+' x="'+f(cx)+'" y="'+f(cy-14)+'" width="'+(sc-10)+'" height="28" rx="14"/>'+tx(cx+(sc-10)/2,cy+5,extra+'&times; faster','t-ours fade','middle',d(dl+1.3));}
       k++;return o;
     }
-    s+=tx(0,16,tiny?'Against the 27B alone, same steps':'Against the Gemma-3 27B alone, on the same steps','t-ink mid');
-    s+=tx(0,34,'Qwen3-VL 2B draft, end to end','sm');
+    s+=tx(0,16,tiny?'Qwen3-VL 2B &rarr; Gemma-3 27B':'Qwen3-VL 2B draft, Gemma-3 27B target from another family','t-ink mid');
+    s+=tx(0,34,tiny?'full test sets; speed end to end':'step success on the full test sets; speed end to end','sm');
     if(!small)s+=tx(W-sc+10+(sc-10)/2,34,'speed','sm','middle');
     y=52;var ya=y;
-    SPEED.forEach(function(r){s+=row(r[0],r[1],r[2],y+rh/2+(small?8:0),r[3]);y+=rh+(small?8:0);});
+    FULL[0][1].forEach(function(r,i){s+=row(r[0],r[1],r[2],y+rh/2+(small?8:0),SPEED[i]);y+=rh+(small?8:0);});
     s=axis(ya-4,y+2)+s;y+=48;
-    s+=tx(0,y+16,'Full test sets, three draft&ndash;target pairs','t-ink mid');y+=34;
+    s+=tx(0,y+16,'Two more pairs, full test sets','t-ink mid');y+=34;
     var yb=y, body='';
-    FULL.forEach(function(g){
+    FULL.slice(1).forEach(function(g){
       body+=tx(0,y+16,g[0],'sm','',' style="font-weight:600;fill:var(--ink)"');y+=small?24:22;
       g[1].forEach(function(r){body+=row(r[0],r[1],r[2],y+rh2/2+(small?6:0));y+=rh2+(small?6:0);});
       y+=small?6:10;
