@@ -1,9 +1,9 @@
 {
   "_updated": "2026-11-20",
   "_timezone": "America/Los_Angeles",
-  "_refreshed": "2026-11-20T12:17:49Z",
+  "_refreshed": "2026-11-20T13:17:43Z",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 1034,
+  "_total": 1038,
   "_days": 30,
   "_range": "Oct. 22nd - Nov. 20th",
   "locations": [
@@ -154,10 +154,10 @@
     {
       "code": "DE",
       "name": "Germany",
-      "count": 10,
+      "count": 11,
       "cx": 190.7,
       "cy": 33.0,
-      "r": 2.14
+      "r": 2.15
     },
     {
       "code": "US",
@@ -165,6 +165,14 @@
       "count": 9,
       "cx": 108.5,
       "cy": 41.8,
+      "r": 2.12
+    },
+    {
+      "code": "TR",
+      "name": "Turkey",
+      "count": 9,
+      "cx": 216.9,
+      "cy": 45.6,
       "r": 2.12
     },
     {
@@ -213,14 +221,6 @@
       "count": 6,
       "cx": 188.3,
       "cy": 37.2,
-      "r": 2.06
-    },
-    {
-      "code": "TR",
-      "name": "Turkey",
-      "count": 6,
-      "cx": 216.9,
-      "cy": 45.6,
       "r": 2.06
     },
     {
@@ -537,7 +537,12 @@
     {
       "code": "DE",
       "name": "Germany",
-      "count": 10
+      "count": 11
+    },
+    {
+      "code": "TR",
+      "name": "Turkey",
+      "count": 9
     },
     {
       "code": "CN",
@@ -557,11 +562,6 @@
     {
       "code": "CH",
       "name": "Switzerland",
-      "count": 6
-    },
-    {
-      "code": "TR",
-      "name": "Turkey",
       "count": 6
     },
     {
@@ -871,7 +871,7 @@
     {
       "path": "/projects/self-rewriting",
       "title": "Language Models Can Rewrite Their Own Weights | Jiajun Fan",
-      "count": 228
+      "count": 232
     },
     {
       "path": "/visitors",
@@ -993,7 +993,7 @@
     {
       "name": "(unknown)",
       "id": "",
-      "count": 400
+      "count": 401
     },
     {
       "name": "www.jiajunfan.com",
@@ -1008,17 +1008,17 @@
     {
       "name": "t.co",
       "id": "t.co",
-      "count": 82
+      "count": 83
+    },
+    {
+      "name": "www.linkedin.com",
+      "id": "www.linkedin.com",
+      "count": 48
     },
     {
       "name": "www.jiajunfan.com/projects",
       "id": "www.jiajunfan.com/projects",
       "count": 48
-    },
-    {
-      "name": "www.linkedin.com",
-      "id": "www.linkedin.com",
-      "count": 46
     },
     {
       "name": "scholar.google.com",
@@ -1120,12 +1120,12 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 807
+      "count": 808
     },
     {
       "name": "Safari",
       "id": "Safari",
-      "count": 304
+      "count": 307
     },
     {
       "name": "(unknown)",
@@ -1142,12 +1142,12 @@
     {
       "name": "macOS",
       "id": "macOS",
-      "count": 557
+      "count": 558
     },
     {
       "name": "iOS",
       "id": "iOS",
-      "count": 303
+      "count": 305
     },
     {
       "name": "Windows",
@@ -1157,7 +1157,7 @@
     {
       "name": "Android",
       "id": "Android",
-      "count": 95
+      "count": 96
     },
     {
       "name": "Linux",
@@ -1284,21 +1284,76 @@
     },
     {
       "day": "2026-11-20",
-      "n": 53
+      "n": 57
     }
   ],
   "periods": {
-    "today": 53,
+    "today": 57,
     "yesterday": 328,
-    "d7": 577,
+    "d7": 581,
     "d7_prev": 106,
-    "d30": 1034,
+    "d30": 1038,
     "d30_prev": 810,
-    "day_frac": 0.178,
+    "day_frac": 0.22,
     "yesterday_day": "2026-11-19"
   },
-  "_last_visit": "2026-11-20 04:14",
+  "_last_visit": "2026-11-20 05:02",
   "recent": [
+    {
+      "date": "2026-11-20 05:02",
+      "ts": "2026-11-20T13:02:33Z",
+      "loc": "Turkey",
+      "path": "/projects/self-rewriting",
+      "ref": "",
+      "browser": "Safari 27.0",
+      "system": "macOS 10.15",
+      "screen": "1728px",
+      "first": false
+    },
+    {
+      "date": "2026-11-20 04:53",
+      "ts": "2026-11-20T12:53:20Z",
+      "loc": "Turkey",
+      "path": "/projects/self-rewriting",
+      "ref": "www.linkedin.com",
+      "browser": "Safari 27.0",
+      "system": "macOS 10.15",
+      "screen": "1728px",
+      "first": true
+    },
+    {
+      "date": "2026-11-20 04:49",
+      "ts": "2026-11-20T12:49:33Z",
+      "loc": "Turkey",
+      "path": "/projects/self-rewriting",
+      "ref": "www.linkedin.com",
+      "browser": "Safari 11.0",
+      "system": "iOS 18.7",
+      "screen": "414px",
+      "first": true
+    },
+    {
+      "date": "2026-11-20 04:49",
+      "ts": "2026-11-20T12:49:46Z",
+      "loc": "Turkey",
+      "path": "/projects/self-rewriting",
+      "ref": "",
+      "browser": "Safari 27.0",
+      "system": "iOS 18.7",
+      "screen": "414px",
+      "first": true
+    },
+    {
+      "date": "2026-11-20 04:48",
+      "ts": "2026-11-20T12:48:05Z",
+      "loc": "Germany",
+      "path": "/projects/self-rewriting",
+      "ref": "t.co",
+      "browser": "Chrome 159",
+      "system": "Android 17",
+      "screen": "412px",
+      "first": true
+    },
     {
       "date": "2026-11-20 04:14",
       "ts": "2026-11-20T12:14:46Z",
@@ -1573,63 +1628,8 @@
       "system": "macOS 10.15",
       "screen": "1512px",
       "first": true
-    },
-    {
-      "date": "2026-11-20 01:45",
-      "ts": "2026-11-20T09:45:54Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 156",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": true
-    },
-    {
-      "date": "2026-11-20 01:26",
-      "ts": "2026-11-20T09:26:32Z",
-      "loc": "Wisconsin, US",
-      "path": "/projects/self-rewriting",
-      "ref": "com.linkedin.android",
-      "browser": "Chrome 157",
-      "system": "Android 10",
-      "screen": "412px",
-      "first": true
-    },
-    {
-      "date": "2026-11-20 01:09",
-      "ts": "2026-11-20T09:09:31Z",
-      "loc": "South Korea",
-      "path": "/projects/self-rewriting",
-      "ref": "com.linkedin.android",
-      "browser": "Chrome 148",
-      "system": "Android 10",
-      "screen": "360px",
-      "first": false
-    },
-    {
-      "date": "2026-11-20 01:07",
-      "ts": "2026-11-20T09:07:55Z",
-      "loc": "South Korea",
-      "path": "/projects/self-rewriting",
-      "ref": "com.linkedin.android",
-      "browser": "Chrome 148",
-      "system": "Android 10",
-      "screen": "360px",
-      "first": true
-    },
-    {
-      "date": "2026-11-20 01:03",
-      "ts": "2026-11-20T09:03:01Z",
-      "loc": "Japan",
-      "path": "/projects/self-rewriting",
-      "ref": "t.co",
-      "browser": "Firefox 160",
-      "system": "Windows 10",
-      "screen": "1920px",
-      "first": true
     }
   ],
-  "_recent_total": 5546,
+  "_recent_total": 5551,
   "_recent_shown": 30
 }
