@@ -16,123 +16,124 @@ sitemap: false
 <script>try{if(localStorage.getItem('darkMode')==='true'){document.documentElement.style.background='#0f1216';}}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"></noscript>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
 <link rel="icon" href="/images/favicon.ico">
-{% include selfrw/style.html %}
 <style>
-/* Visitors on the self-rewriting design system: same tokens, hero, scene, band, eyebrow, card and btn. */
-.hero{padding-bottom:clamp(32px,3.6vw,48px)}
-.scene{padding:clamp(48px,5.6vw,80px) 0}
-.hero .lead{max-width:none;margin:14px auto 0;color:var(--muted)}
-.stats{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 26px;margin-top:22px;font-size:var(--t-label);color:var(--muted);font-variant-numeric:tabular-nums}
-.stats b{color:var(--ink);font-weight:600;margin-right:5px}
-.hero .cta{margin-top:24px}
-.delta{font-size:var(--t-fine);font-weight:600;margin-left:6px;white-space:nowrap}
-.delta.up{color:var(--mint-t)}
-.delta.down{color:var(--rose-t)}
+:root{
+  --serif:'Newsreader',Georgia,'Times New Roman',serif;
+  --sans:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+  --bg:#fdfcfa; --band:#f6f3ec; --ink:#1a1815; --body:#2b2823; --muted:#6c6860; --faint:#6b665c;
+  --rule:#e8e3d9; --link:#2F4B8F; --on-link:#ffffff; --link-h:#23396E; --card:#ffffff; --fig-border:#e6e0d5;
+  --sea:#3b7ea3; --land:#ffffff; --dot:#e8262d;
+}
+body.dark-mode{
+  --bg:#0f1216; --band:#151a20; --ink:#ece8e0; --body:#cdc8be; --muted:#8f8a80; --faint:#8a857b;
+  --rule:#262b33; --link:#6ea8fe; --on-link:#0f1216; --link-h:#93c0ff; --card:#161a20; --fig-border:#2a2f38;
+  --sea:#2b5f7d; --land:#e9eef2; --dot:#ff6b6b;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:var(--serif);background:var(--bg);color:var(--body);line-height:1.72;font-size:19px;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s}
+a{color:var(--link);text-decoration:none}a:hover{color:var(--link-h)}
 
-.say .cap{max-width:46em;margin-top:.9em}
-.cap a{text-decoration:underline;text-decoration-color:var(--hair);text-underline-offset:3px}
-.say + .vis-block{margin-top:var(--sp-fig)}
-.vis-block + .vis-block{margin-top:var(--gap)}
+.site-masthead{background:var(--bg);box-shadow:0 1px 0 var(--rule);position:sticky;top:0;z-index:200;font-size:16px;font-family:var(--sans)}
+.site-masthead::after{content:'';display:block;height:3px;background:linear-gradient(to right,#2F4B8F 0%,#6F94C6 50%,#E39A7A 100%)}
+.masthead-inner{max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:56px}
+.masthead-title{font-weight:800;letter-spacing:-.02em;color:var(--ink);font-size:19px}
+.masthead-nav a{color:var(--muted);margin-left:22px;font-weight:500}
+.masthead-nav a:hover{color:var(--link)}
+@media(max-width:600px){.masthead-inner{flex-wrap:wrap;height:auto;padding:8px 14px 7px;row-gap:1px;justify-content:center}.masthead-title{width:100%;text-align:center;white-space:nowrap}.masthead-nav{width:100%;justify-content:center;flex-wrap:wrap;display:flex}.masthead-nav a{margin:0 6px}}
 
-/* the map: pale sea, white land, rose dots */
-.vis-map{background:var(--ice-l);padding:24px}
-.vmap-svg{display:block;width:100%;height:auto}
-.vmap-land{fill:var(--card);stroke:var(--ice);stroke-width:.7;stroke-linejoin:round}
-.vmap-dot{fill:var(--rose-e);fill-opacity:.88;stroke:var(--card);stroke-width:.9}
-body.dark-mode .vmap-land{fill:var(--hair);stroke:var(--ice-l)}
-.vis-map .cap{font-size:var(--t-label);line-height:1.55;margin-top:16px;max-width:none}
+.wrap{max-width:1000px;margin:0 auto;padding:0 24px}
+.hero{padding:54px 0 26px;border-bottom:1px solid var(--rule)}
+.kicker{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:14px}
+h1{font-family:var(--serif);font-weight:600;font-size:44px;line-height:1.14;letter-spacing:-.015em;color:var(--ink);margin:0 0 12px}
+.sub{font-size:20px;color:var(--muted);margin:0 0 6px;max-width:60ch}
+.meta{font-family:var(--sans);font-size:13px;color:var(--faint);margin-top:14px}
 
-/* daily trend */
-.vis-trend{padding:20px 24px 18px}
-.vis-hd{display:flex;justify-content:space-between;align-items:baseline;gap:4px 18px;flex-wrap:wrap}
-.vis-hd h3{font-size:var(--t-card);line-height:1.25}
-.vis-hd .rng{font-size:var(--t-label);color:var(--muted)}
-.trend-svg{display:block;width:100%;height:auto;overflow:visible;margin-top:18px}
-.trend-bar{fill:var(--mint-e);opacity:.78;transition:opacity .15s}
+.statrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:30px 0 26px}
+.stat{background:var(--card);border:1px solid var(--fig-border);border-radius:10px;padding:15px 16px}
+.stat .n{font-family:var(--sans);font-size:27px;font-weight:800;color:var(--ink);letter-spacing:-.02em;line-height:1.1}
+.stat .l{font-family:var(--sans);font-size:11.5px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--faint);margin-top:5px}
+
+/* ── audience trend ── */
+.trend{background:var(--card);border:1px solid var(--fig-border);border-radius:12px;padding:16px 18px 12px;margin:0 0 26px}
+.trend-hd{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.trend-hd h2{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin:0}
+.trend-hd .rng{font-family:var(--sans);font-size:11.5px;color:var(--faint)}
+.trend-svg{display:block;width:100%;height:auto;overflow:visible}
+.trend-bar{fill:var(--link);opacity:.72}
 .trend-bar:hover{opacity:1}
-.trend-base{stroke:var(--hair);stroke-width:1;vector-effect:non-scaling-stroke}
-.trend-axis{display:flex;justify-content:space-between;margin-top:8px;font-size:var(--t-fine);color:var(--faint)}
+.trend-base{stroke:var(--rule);stroke-width:1}
+.trend-axis{display:flex;justify-content:space-between;margin-top:6px;font-family:var(--mono);font-size:10.5px;color:var(--faint)}
+.delta{font-family:var(--sans);font-size:11px;font-weight:700;margin-left:6px;white-space:nowrap}
+.delta.up{color:#1b7f4b}.delta.down{color:#b3452f}.delta.flat{color:var(--faint)}
+body.dark-mode .delta.up{color:#4ade80}body.dark-mode .delta.down{color:#f7a8b8}
+.mapcard{background:var(--sea);border-radius:12px;padding:16px 14px 14px;margin:8px 0 34px}
+.mapcard h2{margin:0 0 3px;font-family:var(--sans);font-size:17px;font-weight:700;color:#fff;text-align:center;letter-spacing:-.01em}
+.mapcard .r{text-align:center;color:#fff;opacity:.8;font-family:var(--sans);font-size:12px;margin-bottom:11px}
+.mapcard .mapnote{text-align:center;color:#fff;font-family:var(--sans);font-size:12px;line-height:1.45;margin:10px auto 0;max-width:62ch}
+.vmap-svg{display:block;width:100%;height:auto}
+.vmap-land{fill:var(--land);stroke:var(--sea);stroke-width:.7;stroke-linejoin:round}
+.vmap-dot{fill:var(--dot);fill-opacity:.88;stroke:#fff;stroke-width:.9}
 
-/* table cards */
-.vis-card{padding:20px 0 6px;overflow:hidden}
-.vis-card > .vis-hd,.vis-card > .cap,.vis-card > .tzbar{padding-left:24px;padding-right:24px}
-.vis-card > .cap{font-size:var(--t-label);line-height:1.55;margin-top:6px;max-width:none}
-.vis-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--gap);align-items:stretch}
-.vis-pair > :only-child{grid-column:1/-1}
-.tablewrap{overflow-x:auto;margin-top:14px}
-.cap + .tablewrap{margin-top:20px}
-table{width:100%;border-collapse:collapse;font-size:var(--t-label);line-height:1.45}
-thead th{text-align:left;font-size:var(--t-fine);font-weight:600;color:var(--muted);padding:0 10px 10px;border-bottom:1px solid var(--hair);white-space:nowrap}
-tbody td{padding:10px;border-bottom:1px solid var(--rule);color:var(--body);vertical-align:top}
-tbody tr:last-child td{border-bottom:0}
-th:first-child,td:first-child{padding-left:24px}
-th:last-child,td:last-child{padding-right:24px}
-tbody tr:hover td{background:var(--band)}
-td.num,th.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+h2.sec{font-family:var(--serif);font-weight:600;font-size:27px;color:var(--ink);letter-spacing:-.01em;margin:40px 0 4px}
+.sec-note{font-family:var(--sans);font-size:13.5px;color:var(--faint);margin:0 0 16px}
+
+table{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:14px}
+thead th{text-align:left;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);border-bottom:1px solid var(--rule);padding:0 10px 8px}
+tbody td{padding:9px 10px;border-bottom:1px solid var(--rule);color:var(--body);vertical-align:top}
+tbody tr:hover{background:var(--band)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 td.n{color:var(--ink);font-weight:600}
-.dim{color:var(--muted)}
-.mono{overflow-wrap:break-word}
-.n .dim{font-weight:500}
-td a{color:var(--link)}
-td a:hover{color:var(--link-h)}
-.track{height:6px;border-radius:3px;background:var(--rule);overflow:hidden;margin-top:7px}
-.bar{height:6px;border-radius:3px;background:var(--mint-e);min-width:3px}
-.t-visits{min-width:780px}
-.t-visits td.n{white-space:nowrap}
-/* a long referrer breaks inside its cell on phones instead of pushing the card sideways */
-#reading td{overflow-wrap:anywhere}
-/* "United States US" stays on one line; the bar column gives way instead */
-.t-regions td.dim{white-space:nowrap}
-.pill{display:inline-block;font-size:var(--t-fine);font-weight:600;line-height:1.45;padding:0 8px;border-radius:999px;background:var(--band);color:var(--muted);border:1px solid var(--rule);white-space:nowrap}
-.pill.new{background:var(--mint-l);color:var(--mint-t);border-color:var(--mint)}
-.empty,.card p.empty{font-size:var(--t-label);line-height:1.55;color:var(--muted);background:var(--band);border:1px dashed var(--hair);border-radius:14px;padding:16px 18px}
-.vis-card > .empty{margin:14px 24px 18px}
-
-/* time-zone picker */
-.tzbar{display:flex;align-items:center;gap:8px 12px;flex-wrap:wrap;padding-bottom:16px;border-bottom:1px solid var(--rule)}
-.tzbar + .tablewrap{margin-top:16px}
-.tzlab{font-size:var(--t-label);font-weight:600;color:var(--ink)}
-.tzsel{font-family:var(--sans);font-size:var(--t-label);font-weight:600;color:var(--ink);background-color:var(--card);
-  border:1px solid var(--hair);border-radius:999px;padding:8px 36px 8px 16px;cursor:pointer;max-width:100%;min-width:0;
-  appearance:none;-webkit-appearance:none;transition:border-color .18s;
+.track{height:6px;border-radius:3px;background:var(--rule);overflow:hidden;margin-top:5px}
+.bar{height:6px;border-radius:3px;background:var(--link);opacity:.45;min-width:3px}
+.mono{font-family:var(--mono);font-size:12.5px}
+.dim{color:var(--faint)}
+.pill{display:inline-block;font-family:var(--sans);font-size:10.5px;font-weight:700;letter-spacing:.04em;padding:1px 7px;border-radius:99px;background:var(--band);color:var(--muted);border:1px solid var(--rule)}
+.pill.new{background:rgba(27,127,75,.12);color:#1b7f4b;border-color:rgba(27,127,75,.3)}
+body.dark-mode .pill.new{background:rgba(74,222,128,.14);color:#4ade80;border-color:rgba(74,222,128,.3)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:34px}
+.tablewrap{overflow-x:auto}
+.tzbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 12px;font-family:var(--sans);font-size:12px}
+.tzlab{color:var(--faint);font-weight:600;letter-spacing:.04em;text-transform:uppercase;font-size:10.5px}
+.tzbtn{font-family:var(--sans);font-size:12px;font-weight:600;padding:3px 11px;border-radius:99px;border:1px solid var(--rule);background:transparent;color:var(--muted);cursor:pointer;transition:all .15s}
+.tzbtn:hover{border-color:var(--link);color:var(--link)}
+.tzbtn[aria-pressed="true"]{background:var(--link);border-color:var(--link);color:var(--on-link)}
+.tzsel{font-family:var(--sans);font-size:12px;font-weight:600;color:var(--body);background:var(--card);
+  border:1px solid var(--rule);border-radius:8px;padding:4px 26px 4px 10px;cursor:pointer;max-width:15em;
+  appearance:none;-webkit-appearance:none;
   background-image:linear-gradient(45deg,transparent 50%,currentColor 50%),linear-gradient(135deg,currentColor 50%,transparent 50%);
-  background-position:calc(100% - 19px) 54%,calc(100% - 14px) 54%;background-size:5px 5px,5px 5px;background-repeat:no-repeat}
-.tzsel:hover{border-color:var(--mint-e)}
-.tzoff{font-size:var(--t-fine);color:var(--muted)}
-.tzreset{padding:7px 15px}
-.tzreset[hidden]{display:none}
-footer .ft-note{margin-top:6px;color:var(--faint)}
+  background-position:calc(100% - 14px) 52%,calc(100% - 9px) 52%;background-size:5px 5px,5px 5px;background-repeat:no-repeat}
+.tzsel:focus{outline:2px solid var(--link);outline-offset:1px}
+.tzoff{font-family:var(--mono);font-size:11px;color:var(--faint)}
+.tzreset{font-family:var(--sans);font-size:11.5px;font-weight:600;color:var(--link);background:none;
+  border:none;padding:2px 4px;cursor:pointer;text-decoration:underline}
+.empty{font-family:var(--sans);font-size:14px;color:var(--faint);background:var(--band);border:1px dashed var(--rule);border-radius:10px;padding:16px 18px}
 
-@media(max-width:860px){.vis-pair{grid-template-columns:minmax(0,1fr)}}
-@media(max-width:560px){
-  /* the numbers carry the same data; the bar column would squeeze the country names */
-  .t-regions th:last-child,.t-regions td:last-child{display:none}
-  .t-regions th.num,.t-regions td.num{padding-right:18px}
-}
-@media(max-width:400px){.t-regions td.dim{white-space:normal}}
-/* the hero turns left-aligned at 700px (shared style), so the stats line follows it there */
-@media(max-width:700px){.hero .lead{margin-left:0}.stats{justify-content:flex-start}}
-@media(max-width:640px){.stats{display:grid;grid-template-columns:repeat(2,max-content);justify-content:start;gap:6px 28px}}
-@media(max-width:600px){.hero .cta{display:flex;flex-wrap:wrap;gap:8px}.hero .cta .btn{min-width:0;padding:9px 16px}}
-@media(max-width:700px){
-  .vis-trend{padding:18px 18px 16px}
-  .vis-card > .vis-hd,.vis-card > .cap,.vis-card > .tzbar{padding-left:18px;padding-right:18px}
-  th:first-child,td:first-child{padding-left:18px}
-  th:last-child,td:last-child{padding-right:18px}
-  .vis-card > .empty{margin:14px 18px 18px}
-  .tzsel{order:3;flex:1 1 100%}
-  .tzreset{order:4}
-  .vis-map{padding:12px 10px 16px}
-  .vis-map .cap{padding:0 8px}
-}
+footer.pg{border-top:1px solid var(--rule);margin-top:56px;padding:24px 0 60px;font-family:var(--sans);font-size:13px;color:var(--faint)}
+footer.pg a{color:var(--muted)}
+
+.pg-fab{position:fixed;right:22px;width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:9990;box-shadow:0 4px 14px rgba(0,0,0,.18);border:0;transition:opacity .2s}
+#pg-dark{bottom:22px;background:#fff;color:#2F4B8F;border:1.5px solid rgba(0,0,0,.15)}
+body.dark-mode #pg-dark{background:#1A2333;color:#F5C8B5;border-color:#2B3A55}
+.pg-dico{width:20px;height:20px;display:inline-block;background-color:currentColor;-webkit-mask:url(/images/icons/h-moon.png) center/contain no-repeat;mask:url(/images/icons/h-moon.png) center/contain no-repeat}
 @media print{
-  /* the page paints through custom properties, so dark mode must be undone for paper */
-  body.dark-mode{--bg:#fff;--band:#fff;--card:#fff;--ink:#000;--body:#000;--muted:#333;--faint:#444;--rule:#ccc;--hair:#ccc;--link:#000;--link-h:#000;--ice-l:#fff}
-  .site-masthead{display:none!important}
+  /* the page paints through custom properties, so dark mode must be undone for
+     paper or every non-link heading prints near-white on white */
+  body.dark-mode{--bg:#fff;--band:#fff;--card:#fff;--pill:#fff;--ink:#000;--body:#000;
+    --muted:#333;--faint:#444;--rule:#ccc;--link:#000;--link-h:#000;--on-link:#fff;
+    --sea:#fff;--land:#fff;--fig-border:#ccc}
+.pg-fab{display:none}}
+@media(max-width:700px){
+  h1{font-size:33px}
+  .wrap{padding:0 18px}
+  .grid2{grid-template-columns:1fr;gap:8px}
+  body{font-size:18px}
 }
+p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcaption a,td a{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px;text-decoration-color:rgba(47,75,143,.45)}body.dark-mode p a:not([class]),body.dark-mode li a:not([class]),body.dark-mode .authors a,body.dark-mode .tl-desc a,body.dark-mode .note a,body.dark-mode figcaption a,body.dark-mode td a{text-decoration-color:rgba(157,184,234,.5)}
 </style>
 {% include site-chrome.html %}
 </head>
@@ -152,275 +153,230 @@ footer .ft-note{margin-top:6px;color:var(--faint)}
   </div>
 </header>
 
-<main>
-{%- assign pd = v.periods -%}
-<section class="hero" aria-label="Site analytics">
-  <div class="wrap">
-    <p class="venue">Site analytics</p>
+<main class="wrap">
+  <div class="hero" role="region" aria-label="Project summary">
+    <div class="kicker">Site analytics</div>
     <h1>Who stops by</h1>
-    <p class="lead">Where readers of this site come from, what they read, and how they got here.</p>
-    <p class="stats">
-      <span><b>{{ pd.today | default: 0 }}</b>today so far</span>
-      <span><b>{{ pd.yesterday | default: 0 }}</b>yesterday</span>
-      <span><b>{{ pd.d7 | default: 0 }}</b>last 7 days{% if pd.d7_prev and pd.d7_prev > 0 %}{% assign d7 = pd.d7 | minus: pd.d7_prev %}{% if d7 > 0 %} <span class="delta up">+{{ d7 }}</span>{% elsif d7 < 0 %} <span class="delta down">{{ d7 }}</span>{% endif %}{% endif %}</span>
-      <span><b>{{ v._total | default: 0 }}</b>last {{ v._days | default: 30 }} days{% if pd.d30_prev and pd.d30_prev > 0 %}{% assign d30 = pd.d30 | minus: pd.d30_prev %}{% if d30 > 0 %} <span class="delta up">+{{ d30 }}</span>{% elsif d30 < 0 %} <span class="delta down">{{ d30 }}</span>{% endif %}{% endif %}</span>
-      <span><b>{{ v.countries | size }}</b>countries</span>
-      <span><b>{{ v.pages | size }}{% if v.pages.size >= 25 %}+{% endif %}</b>pages visited</span>
-    </p>
-    <div class="cta">
-      <a class="btn btn-primary" href="https://jiajunfan.goatcounter.com" target="_blank" rel="noopener">Full dashboard</a>
-      <a class="btn" href="#visits">Recent visits</a>
+    <p class="sub">Where readers of this site come from, what they read, and how they got here.</p>
+    <div class="meta">
+      Measured with <a href="https://www.goatcounter.com" rel="noopener">GoatCounter</a>, an open-source analytics tool.
+      No cookies, no tracking across sites, and no IP addresses are stored. Location is resolved to a country,
+      and to a state or province for the few countries that report one &mdash; never to a person.
+      Refreshed several times a day{% if v._refreshed %}; last refreshed <span id="vrefreshed" data-ts="{{ v._refreshed }}">{{ v._refreshed | replace: "T", " " | slice: 0, 16 }} UTC</span>{% else %}; last run covered {{ v._updated }}{% if v._timezone %} ({{ v._timezone }} time){% endif %}{% endif %}, so &ldquo;today so far&rdquo; only counts up to the last refresh.
     </div>
   </div>
-</section>
 
-<section class="scene band" id="audience" aria-labelledby="au-h">
-  <div class="wrap">
-    <header class="say">
-      <div class="say-main">
-        <p class="eyebrow">Audience overview <span>{{ v._range }}</span></p>
-        <h2 id="au-h">{{ v._total | default: 0 }} Pageviews</h2>
-        <p class="cap">
-          Measured with <a href="https://www.goatcounter.com" rel="noopener">GoatCounter</a>, an open-source analytics tool.
-          No cookies, no tracking across sites, and no IP addresses are stored. Location is resolved to a country,
-          and to a state or province for the few countries that report one &mdash; never to a person.
-          Refreshed several times a day{% if v._refreshed %}; last refreshed <span id="vrefreshed" data-ts="{{ v._refreshed }}">{{ v._refreshed | replace: "T", " " | slice: 0, 16 }} UTC</span>{% else %}; last run covered {{ v._updated }}{% if v._timezone %} ({{ v._timezone }} time){% endif %}{% endif %}, so &ldquo;today so far&rdquo; only counts up to the last refresh.
-        </p>
-      </div>
-    </header>
-
-    <div class="card vis-block vis-map">
-      {% include visitor-map-svg.html %}
-      {%- assign dot_sum = 0 -%}{%- for l in v.locations -%}{%- assign dot_sum = dot_sum | plus: l.count -%}{%- endfor %}
-      <p class="cap mapnote">The dots hold {{ dot_sum }} views by location{% if dot_sum != v._total %}, tallied by UTC day like the country table below, so they need not match the {{ v._total | default: 0 }} pageviews above{% endif %}.</p>
+  {%- assign pd = v.periods -%}
+  <div class="statrow">
+    <div class="stat">
+      <div class="n">{{ pd.today | default: 0 }}</div>
+      <div class="l">Today so far</div>
     </div>
-
-    {%- assign dseries = v.daily -%}
-    {% if dseries and dseries.size > 1 %}
-    {%- assign dmax = 1 -%}{% for d in dseries %}{% if d.n > dmax %}{% assign dmax = d.n %}{% endif %}{% endfor %}
-    {%- assign dn = dseries | size -%}
-    {%- assign slot = 300 | divided_by: dn -%}
-    <div class="card vis-block vis-trend">
-      <div class="vis-hd">
-        <h3>Daily pageviews</h3>
-        <span class="rng">{{ v._range }} &middot; peak {{ dmax }}/day{% if v._last_visit %}{% assign lv0 = v.recent | first %} &middot; last visit <span class="vtime"{% if lv0.ts %} data-ts="{{ lv0.ts }}"{% endif %} data-site="{{ v._last_visit }}">{{ v._last_visit }}</span>{% endif %}</span>
-      </div>
-      <svg class="trend-svg" viewBox="0 0 300 60" preserveAspectRatio="none" role="img"
-           aria-label="Daily pageviews over the last {{ dn }} days">
-        {%- for d in dseries -%}
-          {%- assign h = d.n | times: 50 | divided_by: dmax -%}
-          {%- if d.n > 0 and h < 1 -%}{%- assign h = 1 -%}{%- endif -%}
-          {%- assign x = forloop.index0 | times: slot -%}
-          <rect class="trend-bar" x="{{ x }}" y="{{ 54 | minus: h }}" width="{{ slot | minus: 1 }}" height="{{ h }}" rx="0.6"><title>{{ d.day }}: {{ d.n }}</title></rect>
-        {%- endfor -%}
-        <line class="trend-base" x1="0" y1="55" x2="300" y2="55"/>
-      </svg>
-      {%- assign dfirst = dseries | first -%}{%- assign dlast = dseries | last -%}
-      <div class="trend-axis"><span>{{ dfirst.day }}</span><span>{{ dlast.day }}</span></div>
+    <div class="stat">
+      <div class="n">{{ pd.yesterday | default: 0 }}</div>
+      <div class="l">Yesterday</div>
     </div>
-    {% endif %}
+    <div class="stat">
+      <div class="n">{{ pd.d7 | default: 0 }}</div>
+      <div class="l">Last 7 days{% if pd.d7_prev and pd.d7_prev > 0 %}{% assign d7 = pd.d7 | minus: pd.d7_prev %}{% if d7 > 0 %} <span class="delta up">+{{ d7 }}</span>{% elsif d7 < 0 %} <span class="delta down">{{ d7 }}</span>{% endif %}{% endif %}</div>
+    </div>
+    <div class="stat">
+      <div class="n">{{ v._total | default: 0 }}</div>
+      <div class="l">Last {{ v._days | default: 30 }} days{% if pd.d30_prev and pd.d30_prev > 0 %}{% assign d30 = pd.d30 | minus: pd.d30_prev %}{% if d30 > 0 %} <span class="delta up">+{{ d30 }}</span>{% elsif d30 < 0 %} <span class="delta down">{{ d30 }}</span>{% endif %}{% endif %}</div>
+    </div>
+    <div class="stat"><div class="n">{{ v.countries | size }}</div><div class="l">Countries</div></div>
+    <div class="stat"><div class="n">{{ v.pages | size }}{% if v.pages.size >= 25 %}+{% endif %}</div><div class="l">Pages visited</div></div>
   </div>
-</section>
 
-<section class="scene" id="visits" aria-labelledby="rv-h">
-  <div class="wrap">
-    {%- assign nrecent = v.recent | size -%}
-    <header class="say">
-      <div class="say-main">
-        <p class="eyebrow">Visit log <span>newest first</span></p>
-        <h2 id="rv-h">Recent visits</h2>
-        {% if nrecent > 0 %}
-        <p class="cap">
-          {%- assign rtotal = v._recent_total | default: nrecent -%}
-          Every visit since per-visit logging began, newest first &mdash; {{ rtotal }} recorded{% if rtotal > nrecent %}, showing the {{ nrecent }} most recent{% endif %}.
-          Logging of individual visits started on 4 Aug 2026, so the count covers everything since then, while the
-          figures above and the tables below cover a rolling {{ v._days | default: 30 }}-day window. GoatCounter also
-          counts the two differently &mdash; the aggregates are filtered more strictly than the raw visit log &mdash;
-          so treat this list as a feed, not as something that should sum to the totals.
-          There is no IP column: GoatCounter resolves the location when the request arrives and never stores the address.
-        </p>
-        {% endif %}
-      </div>
-    </header>
-    {% if nrecent > 0 %}
-    {%- assign screens = v.recent | map: "screen" | join: "" -%}
-    <div class="card vis-block vis-card">
-      <div class="tzbar" id="tzbar" data-site-tz="{{ v._timezone | default: "UTC" }}">
-        <label class="tzlab" for="tz-pick">Times in</label>
-        <select id="tz-pick" class="tzsel"></select>
-        <span class="tzoff" id="tz-off"></span>
-        <button type="button" class="btn tzreset" id="tz-reset" hidden>use my timezone</button>
-      </div>
-      <div class="tablewrap">
-        <table class="t-visits">
-          <thead><tr><th>When</th><th>From</th><th>Page</th><th>Came via</th><th>Browser</th><th>System</th>{% if screens != "" %}<th>Screen</th>{% endif %}</tr></thead>
+  {%- assign dseries = v.daily -%}
+  {% if dseries and dseries.size > 1 %}
+  {%- assign dmax = 1 -%}{% for d in dseries %}{% if d.n > dmax %}{% assign dmax = d.n %}{% endif %}{% endfor %}
+  {%- assign dn = dseries | size -%}
+  {%- assign slot = 300 | divided_by: dn -%}
+  <div class="trend">
+    <div class="trend-hd">
+      <h2>Audience overview</h2>
+      <span class="rng">{{ v._range }} &middot; peak {{ dmax }}/day{% if v._last_visit %}{% assign lv0 = v.recent | first %} &middot; last visit <span class="vtime"{% if lv0.ts %} data-ts="{{ lv0.ts }}"{% endif %} data-site="{{ v._last_visit }}">{{ v._last_visit }}</span>{% endif %}</span>
+    </div>
+    <svg class="trend-svg" viewBox="0 0 300 60" preserveAspectRatio="none" role="img"
+         aria-label="Daily pageviews over the last {{ dn }} days">
+      {%- for d in dseries -%}
+        {%- assign h = d.n | times: 50 | divided_by: dmax -%}
+        {%- if d.n > 0 and h < 1 -%}{%- assign h = 1 -%}{%- endif -%}
+        {%- assign x = forloop.index0 | times: slot -%}
+        <rect class="trend-bar" x="{{ x }}" y="{{ 54 | minus: h }}" width="{{ slot | minus: 1 }}" height="{{ h }}" rx="0.6"><title>{{ d.day }}: {{ d.n }}</title></rect>
+      {%- endfor -%}
+      <line class="trend-base" x1="0" y1="55" x2="300" y2="55"/>
+    </svg>
+    {%- assign dfirst = dseries | first -%}{%- assign dlast = dseries | last -%}
+    <div class="trend-axis"><span>{{ dfirst.day }}</span><span>{{ dlast.day }}</span></div>
+  </div>
+  {% endif %}
+
+  <div class="mapcard">
+    <h2>{{ v._total | default: 0 }} Pageviews</h2>
+    <div class="r">{{ v._range }}</div>
+    {% include visitor-map-svg.html %}
+    {%- assign dot_sum = 0 -%}{%- for l in v.locations -%}{%- assign dot_sum = dot_sum | plus: l.count -%}{%- endfor %}
+    <p class="mapnote">The dots hold {{ dot_sum }} views by location{% if dot_sum != v._total %}, tallied by UTC day like the country table below, so they need not match the {{ v._total | default: 0 }} pageviews above{% endif %}.</p>
+  </div>
+
+  <h2 class="sec">Recent visits</h2>
+  {%- assign nrecent = v.recent | size -%}
+  {% if nrecent > 0 %}
+  {%- assign screens = v.recent | map: "screen" | join: "" -%}
+  <p class="sec-note">
+    {%- assign rtotal = v._recent_total | default: nrecent -%}
+    Every visit since per-visit logging began, newest first &mdash; {{ rtotal }} recorded{% if rtotal > nrecent %}, showing the {{ nrecent }} most recent{% endif %}.
+    Logging of individual visits started on 4 Aug 2026, so the count covers everything since then, while the
+    figures above and the tables below cover a rolling {{ v._days | default: 30 }}-day window. GoatCounter also
+    counts the two differently &mdash; the aggregates are filtered more strictly than the raw visit log &mdash;
+    so treat this list as a feed, not as something that should sum to the totals.
+    There is no IP column: GoatCounter resolves the location when the request arrives and never stores the address.
+  </p>
+  <div class="tzbar" id="tzbar" data-site-tz="{{ v._timezone | default: "UTC" }}">
+    <label class="tzlab" for="tz-pick">Times in</label>
+    <select id="tz-pick" class="tzsel"></select>
+    <span class="tzoff" id="tz-off"></span>
+    <button type="button" class="tzreset" id="tz-reset" hidden>use my timezone</button>
+  </div>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>When</th><th>From</th><th>Page</th><th>Came via</th><th>Browser</th><th>System</th>{% if screens != "" %}<th>Screen</th>{% endif %}</tr></thead>
+      <tbody>
+      {% for r in v.recent %}
+        <tr>
+          <td class="mono dim vtime"{% if r.ts %} data-ts="{{ r.ts }}"{% endif %} data-site="{{ r.date }}">{{ r.date }}</td>
+          <td class="n">{% if r.loc and r.loc != "" %}{{ r.loc | escape }}{% else %}—{% endif %}{% if r.first %} <span class="pill new">new</span>{% endif %}</td>
+          <td class="mono">{{ r.path | escape }}</td>
+          <td class="dim">{% if r.ref and r.ref != "" %}{{ r.ref | escape }}{% else %}direct{% endif %}</td>
+          <td>{% if r.browser and r.browser != "" %}{{ r.browser | escape }}{% else %}—{% endif %}</td>
+          <td>{% if r.system and r.system != "" %}{{ r.system | escape }}{% else %}—{% endif %}</td>
+          {% if screens != "" %}<td class="dim mono">{% if r.screen and r.screen != "" %}{{ r.screen | escape }}{% else %}—{% endif %}</td>{% endif %}
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <p class="empty">No per-visit rows yet. GoatCounter only keeps individual pageviews when &ldquo;Individual pageviews&rdquo; is enabled under Settings &rarr; Data collection, and it applies from that point forward &mdash; earlier visits are only ever kept as the aggregate counts you see below.</p>
+  {% endif %}
+
+  {%- assign nreg = v.regions | size -%}
+  {% if nreg > 0 %}
+  <h2 class="sec">Regions</h2>
+  <p class="sec-note">States and provinces, where the country reports them. Each located region gets its own dot on the map above; a country&rsquo;s remaining views (no region reported, or a region the map cannot place) share one dot at the country&rsquo;s centre.</p>
+  {%- assign topr = v.regions | first -%}
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Region</th><th>Country</th><th class="num">Views</th><th style="width:32%"></th></tr></thead>
+      <tbody>
+      {% for r in v.regions %}
+        <tr>
+          <td class="n">{{ r.name | escape }}{% unless r.located %} <span class="pill">no map dot</span>{% endunless %}</td>
+          <td class="dim">{{ r.country_name | escape }} <span class="mono">{{ r.country | escape }}</span></td>
+          <td class="num">{{ r.count }}</td>
+          <td><div class="track"><div class="bar" style="width:{{ r.count | times: 100 | divided_by: topr.count }}%"></div></div></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endif %}
+
+  <h2 class="sec">Countries</h2>
+  {%- assign csum = 0 -%}{%- for c in v.countries -%}{%- assign csum = csum | plus: c.count -%}{%- endfor %}
+  <p class="sec-note">Every country a visit came from, {{ csum }} views in all.{% if csum != v._total %} GoatCounter tallies countries, browsers and systems by UTC day, so these tables cover a slightly different span from the {{ v._days | default: 30 }}-day chart above and need not add up to its {{ v._total | default: 0 }} pageviews.{% endif %}</p>
+  {%- assign topc = v.countries | first -%}
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Country</th><th class="num">Views</th><th style="width:38%"></th></tr></thead>
+      <tbody>
+      {% for c in v.countries %}
+        <tr>
+          <td class="n">{{ c.name | escape }} <span class="dim mono">{{ c.code | escape }}</span></td>
+          <td class="num">{{ c.count }}</td>
+          <td><div class="track"><div class="bar" style="width:{{ c.count | times: 100 | divided_by: topc.count }}%"></div></div></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grid2">
+    <div>
+      <h2 class="sec">Most-read pages</h2>
+      <p class="sec-note">&nbsp;</p>
+      {% if v.pages and v.pages.size > 0 %}
+<div class="tablewrap">
+        <table>
+          <thead><tr><th>Page</th><th class="num">Views</th></tr></thead>
           <tbody>
-          {% for r in v.recent %}
-            <tr>
-              <td class="mono dim vtime nw"{% if r.ts %} data-ts="{{ r.ts }}"{% endif %} data-site="{{ r.date }}">{{ r.date }}</td>
-              <td class="n">{% if r.loc and r.loc != "" %}{{ r.loc | escape }}{% else %}—{% endif %}{% if r.first %} <span class="pill new">new</span>{% endif %}</td>
-              <td class="mono">{{ r.path | escape }}</td>
-              <td class="dim">{% if r.ref and r.ref != "" %}{{ r.ref | escape }}{% else %}direct{% endif %}</td>
-              <td class="nw">{% if r.browser and r.browser != "" %}{{ r.browser | escape }}{% else %}—{% endif %}</td>
-              <td class="nw">{% if r.system and r.system != "" %}{{ r.system | escape }}{% else %}—{% endif %}</td>
-              {% if screens != "" %}<td class="dim mono nw">{% if r.screen and r.screen != "" %}{{ r.screen | escape }}{% else %}—{% endif %}</td>{% endif %}
-            </tr>
+          {% for p in v.pages %}
+            <tr><td><a class="mono" href="{{ p.path | escape }}">{{ p.path | escape }}</a></td><td class="num">{{ p.count }}</td></tr>
           {% endfor %}
           </tbody>
         </table>
       </div>
+{% else %}<p class="empty">No data for this window.</p>{% endif %}
     </div>
-    {% else %}
-    <p class="empty vis-block">No per-visit rows yet. GoatCounter only keeps individual pageviews when &ldquo;Individual pageviews&rdquo; is enabled under Settings &rarr; Data collection, and it applies from that point forward &mdash; earlier visits are only ever kept as the aggregate counts you see below.</p>
-    {% endif %}
-  </div>
-</section>
-
-<section class="scene band" id="places" aria-labelledby="pl-h">
-  <div class="wrap">
-    <header class="say">
-      <div class="say-main">
-        <p class="eyebrow">Location <span>{{ v.countries | size }} countries</span></p>
-        <h2 id="pl-h">Regions and countries</h2>
+    <div>
+      <h2 class="sec">How they got here</h2>
+      <p class="sec-note">&nbsp;</p>
+      {% if v.referrers and v.referrers.size > 0 %}
+<div class="tablewrap">
+        <table>
+          <thead><tr><th>Referrer</th><th class="num">Views</th></tr></thead>
+          <tbody>
+          {% for r in v.referrers %}
+            <tr><td>{{ r.name | escape }}</td><td class="num">{{ r.count }}</td></tr>
+          {% endfor %}
+          </tbody>
+        </table>
       </div>
-    </header>
-    <div class="vis-pair vis-block">
-      {%- assign nreg = v.regions | size -%}
-      {% if nreg > 0 %}
-      <div class="card vis-card">
-        <div class="vis-hd"><h3>Regions</h3></div>
-        <p class="cap">States and provinces, where the country reports them. Each located region gets its own dot on the map above; a country&rsquo;s remaining views (no region reported, or a region the map cannot place) share one dot at the country&rsquo;s centre.</p>
-        {%- assign topr = v.regions | first -%}
-        <div class="tablewrap">
-          <table class="t-regions">
-            <thead><tr><th>Region</th><th>Country</th><th class="num">Views</th><th style="width:28%"></th></tr></thead>
-            <tbody>
-            {% for r in v.regions %}
-              <tr>
-                <td class="n">{{ r.name | escape }}{% unless r.located %} <span class="pill">no map dot</span>{% endunless %}</td>
-                <td class="dim">{{ r.country_name | escape }} <span class="mono">{{ r.country | escape }}</span></td>
-                <td class="num">{{ r.count }}</td>
-                <td><div class="track"><div class="bar" style="width:{{ r.count | times: 100 | divided_by: topr.count }}%"></div></div></td>
-              </tr>
-            {% endfor %}
-            </tbody>
-          </table>
-        </div>
-      </div>
-      {% endif %}
-
-      <div class="card vis-card">
-        <div class="vis-hd"><h3>Countries</h3></div>
-        {%- assign csum = 0 -%}{%- for c in v.countries -%}{%- assign csum = csum | plus: c.count -%}{%- endfor %}
-        <p class="cap">Every country a visit came from, {{ csum }} views in all.{% if csum != v._total %} GoatCounter tallies countries, browsers and systems by UTC day, so these tables cover a slightly different span from the {{ v._days | default: 30 }}-day chart above and need not add up to its {{ v._total | default: 0 }} pageviews.{% endif %}</p>
-        {%- assign topc = v.countries | first -%}
-        <div class="tablewrap">
-          <table>
-            <thead><tr><th>Country</th><th class="num">Views</th><th style="width:34%"></th></tr></thead>
-            <tbody>
-            {% for c in v.countries %}
-              <tr>
-                <td class="n">{{ c.name | escape }} <span class="dim mono">{{ c.code | escape }}</span></td>
-                <td class="num">{{ c.count }}</td>
-                <td><div class="track"><div class="bar" style="width:{{ c.count | times: 100 | divided_by: topc.count }}%"></div></div></td>
-              </tr>
-            {% endfor %}
-            </tbody>
-          </table>
-        </div>
-      </div>
+{% else %}<p class="empty">No data for this window.</p>{% endif %}
     </div>
   </div>
-</section>
 
-<section class="scene" id="reading" aria-labelledby="rd-h">
-  <div class="wrap">
-    <header class="say">
-      <div class="say-main">
-        <p class="eyebrow">Reading <span>pages and referrers</span></p>
-        <h2 id="rd-h">What they read, and how they got here</h2>
+  <div class="grid2">
+    <div>
+      <h2 class="sec">Browsers</h2>
+      <p class="sec-note">&nbsp;</p>
+      {% if v.browsers and v.browsers.size > 0 %}
+<div class="tablewrap">
+        <table>
+          <thead><tr><th>Browser</th><th class="num">Views</th></tr></thead>
+          <tbody>
+          {% for b in v.browsers %}<tr><td>{{ b.name | escape }}</td><td class="num">{{ b.count }}</td></tr>{% endfor %}
+          </tbody>
+        </table>
       </div>
-    </header>
-    <div class="vis-pair vis-block">
-      <div class="card vis-card">
-        <div class="vis-hd"><h3>Most-read pages</h3></div>
-        {% if v.pages and v.pages.size > 0 %}
-        <div class="tablewrap">
-          <table>
-            <thead><tr><th>Page</th><th class="num">Views</th></tr></thead>
-            <tbody>
-            {% for p in v.pages %}
-              <tr><td><a class="mono" href="{{ p.path | escape }}">{{ p.path | escape }}</a></td><td class="num">{{ p.count }}</td></tr>
-            {% endfor %}
-            </tbody>
-          </table>
-        </div>
-        {% else %}<p class="empty">No data for this window.</p>{% endif %}
+{% else %}<p class="empty">No data for this window.</p>{% endif %}
+    </div>
+    <div>
+      <h2 class="sec">Systems</h2>
+      <p class="sec-note">&nbsp;</p>
+      {% if v.systems and v.systems.size > 0 %}
+<div class="tablewrap">
+        <table>
+          <thead><tr><th>System</th><th class="num">Views</th></tr></thead>
+          <tbody>
+          {% for s in v.systems %}<tr><td>{{ s.name | escape }}</td><td class="num">{{ s.count }}</td></tr>{% endfor %}
+          </tbody>
+        </table>
       </div>
-      <div class="card vis-card">
-        <div class="vis-hd"><h3>How they got here</h3></div>
-        {% if v.referrers and v.referrers.size > 0 %}
-        <div class="tablewrap">
-          <table>
-            <thead><tr><th>Referrer</th><th class="num">Views</th></tr></thead>
-            <tbody>
-            {% for r in v.referrers %}
-              <tr><td>{{ r.name | escape }}</td><td class="num">{{ r.count }}</td></tr>
-            {% endfor %}
-            </tbody>
-          </table>
-        </div>
-        {% else %}<p class="empty">No data for this window.</p>{% endif %}
-      </div>
+{% else %}<p class="empty">No data for this window.</p>{% endif %}
     </div>
   </div>
-</section>
 
-<section class="scene band" id="devices" aria-labelledby="dv-h">
-  <div class="wrap">
-    <header class="say">
-      <div class="say-main">
-        <p class="eyebrow">Devices</p>
-        <h2 id="dv-h">Browsers and systems</h2>
-      </div>
-    </header>
-    <div class="vis-pair vis-block">
-      <div class="card vis-card">
-        <div class="vis-hd"><h3>Browsers</h3></div>
-        {% if v.browsers and v.browsers.size > 0 %}
-        <div class="tablewrap">
-          <table>
-            <thead><tr><th>Browser</th><th class="num">Views</th></tr></thead>
-            <tbody>
-            {% for b in v.browsers %}<tr><td>{{ b.name | escape }}</td><td class="num">{{ b.count }}</td></tr>{% endfor %}
-            </tbody>
-          </table>
-        </div>
-        {% else %}<p class="empty">No data for this window.</p>{% endif %}
-      </div>
-      <div class="card vis-card">
-        <div class="vis-hd"><h3>Systems</h3></div>
-        {% if v.systems and v.systems.size > 0 %}
-        <div class="tablewrap">
-          <table>
-            <thead><tr><th>System</th><th class="num">Views</th></tr></thead>
-            <tbody>
-            {% for s in v.systems %}<tr><td>{{ s.name | escape }}</td><td class="num">{{ s.count }}</td></tr>{% endfor %}
-            </tbody>
-          </table>
-        </div>
-        {% else %}<p class="empty">No data for this window.</p>{% endif %}
-      </div>
-    </div>
-  </div>
-</section>
+  <footer class="pg">
+    <a href="/">&larr; Back to the site</a> &nbsp;&middot;&nbsp;
+    <a href="https://jiajunfan.goatcounter.com" target="_blank" rel="noopener">Full dashboard</a> &nbsp;&middot;&nbsp;
+    Refreshed several times a day from GoatCounter. No cookies, no IP addresses, nothing here identifies a person.
+  </footer>
 </main>
 
-<footer>
-  <p>Visitors &nbsp;|&nbsp; <a href="/">Back to the site</a> &nbsp;|&nbsp; <a href="https://jiajunfan.goatcounter.com" target="_blank" rel="noopener">Full dashboard</a></p>
-  <p class="ft-note">Refreshed several times a day from GoatCounter. No cookies, no IP addresses, nothing here identifies a person.</p>
-</footer>
-
+<button id="pg-dark" class="pg-fab" aria-label="Toggle dark mode" title="Toggle dark mode"><i class="pg-dico"></i></button>
 <script>
 (function(){
   var dk=document.getElementById('pg-dark');
