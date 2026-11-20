@@ -1,0 +1,73 @@
+---
+layout: null
+title: "404 — Page Not Found"
+sitemap: false
+permalink: /404.html
+excerpt: "Page not found — Jiajun Fan's academic website."
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page not found | Jiajun Fan</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#fdfcfa">
+<meta name="theme-color" content="#0f1216" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="icon" href="/images/favicon.ico">
+<script>try{if(localStorage.getItem('darkMode')==='true'){document.documentElement.style.background='#0f1216';}}catch(e){}</script>
+{% include selfrw/style.html %}
+<style>
+/* the not-found page on the self-rewriting design system */
+.hero{padding-bottom:clamp(48px,6vw,88px)}
+.nf-art{display:block;width:min(420px,88%);height:auto;margin:6px auto 22px;border-radius:var(--radius)}
+body.dark-mode .nf-art{opacity:.92}
+.hero .lead{max-width:30em;margin:14px auto 0;color:var(--muted);text-wrap:balance}
+.hero .cta{margin-top:26px}
+@media(max-width:700px){.nf-art{margin-left:0}.hero .lead{margin-left:0}}
+@media(max-width:600px){.hero .cta{display:flex;flex-wrap:wrap;gap:8px}.hero .cta .btn{min-width:0;padding:9px 16px}}
+</style>
+<script data-goatcounter="https://jiajunfan.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+{% include site-chrome.html %}
+</head>
+<body id="top">
+<script>try{if(localStorage.getItem('darkMode')==='true')document.body.classList.add('dark-mode');}catch(e){}</script>
+<header class="site-masthead">
+  <div class="masthead-inner">
+    <a class="masthead-title" href="/">Jiajun Fan</a>
+    <nav class="masthead-nav" aria-label="Site navigation">
+      <a href="/publications/">Publications</a>
+      <a href="/projects/">Projects</a>
+      <a href="/year-archive/">Blog</a>
+      <a href="/cv/">CV</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero" aria-label="Page not found">
+  <div class="wrap">
+    <img class="nf-art" src="/images/illustrations/404-map.png" width="640" height="342" alt="A dotted path on a paper map stops at the torn edge of the map; a small flag waits across the gap.">
+    <p class="venue">Error 404</p>
+    <h1>This page is not on the map</h1>
+    <p class="lead">It may have moved or never existed. These pages will get you back on track.</p>
+    <div class="cta">
+      <a class="btn btn-primary" href="/">Home</a>
+      <a class="btn" href="/publications/">Publications</a>
+      <a class="btn" href="/projects/">Projects</a>
+      <a class="btn" href="/contact/">Contact</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p>Page not found &nbsp;|&nbsp; <a href="/">Jiajun Fan</a> &nbsp;|&nbsp; <a href="/publications/">Publications</a> &middot; <a href="/projects/">Projects</a></p>
+</footer>
+</body>
+</html>
