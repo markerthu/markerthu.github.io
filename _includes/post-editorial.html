@@ -32,11 +32,9 @@ body.dark-mode .ed{--ed-pin:#f0834a;--ed-pin-strong:#f0834a}
   padding:26px 28px 24px;margin-top:var(--sp-fig);margin-bottom:var(--sp-fig)}
 .ed .fig svg{display:block;width:100%;height:auto;overflow:visible}
 /* figures drawn by the posts themselves: their numbers are set in var(--mono), which inside a
-   figure resolves to Inter (one typeface); a few column heads set in
-   letter-spaced capitals read as plain labels; the loop figure's hard-coded reward arrows take
+   figure resolves to Inter (one typeface); the loop figure's hard-coded reward arrows take
    the reward box's colour; large accent-filled areas (waffle squares) take the fill tone */
 .ed svg{--mono:var(--sans)}
-.ed svg .dh,.ed svg .pm2h{text-transform:capitalize;letter-spacing:0}
 .ed svg [stroke="#c2760f"]{stroke:var(--ed-rewardln)}
 .ed svg rect[fill="var(--ed-accent)"]{fill:var(--ed-fill)}
 .ed .figscroll{overflow-x:auto}
@@ -691,9 +689,9 @@ function initBrainmap(){
       });
     });
     /* band labels on the right, like the viewer */
-    o.push('<text class="bmbandlab" x="'+(W-6)+'" y="'+(yTop(17)+3)+'" text-anchor="end" fill="var(--muted)">SENSORY</text>');
-    o.push('<text class="bmbandlab" x="'+(W-6)+'" y="'+(yTop(57)+3)+'" text-anchor="end" fill="var(--ed-accent)">WORKSPACE</text>');
-    o.push('<text class="bmbandlab" x="'+(W-6)+'" y="'+(yTop(90)+3)+'" text-anchor="end" fill="var(--muted)">MOTOR</text>');
+    o.push('<text class="bmbandlab" x="'+(W-6)+'" y="'+(yTop(17)+3)+'" text-anchor="end" fill="var(--muted)">Sensory</text>');
+    o.push('<text class="bmbandlab" x="'+(W-6)+'" y="'+(yTop(57)+3)+'" text-anchor="end" fill="var(--ed-accent)">Workspace</text>');
+    o.push('<text class="bmbandlab" x="'+(W-6)+'" y="'+(yTop(90)+3)+'" text-anchor="end" fill="var(--muted)">Motor</text>');
     [0,25,50,75,100].forEach(function(d){
       o.push('<text class="bmax" x="'+(padL-6)+'" y="'+(yTop(d)+3)+'" text-anchor="end">'+d+'%</text>');
     });
@@ -791,9 +789,9 @@ function initTwoMap(){
       o.push('<text x="'+(padL-4)+'" y="'+(yb(t)+3)+'" text-anchor="end" font-size="8" fill="var(--muted)">'+t+'%</text>');
     });
     var RX = padL + np*cw + 5;
-    o.push('<text x="'+RX+'" y="'+(yb(90)+3)+'" font-size="8" font-weight="700" fill="var(--muted)">MOTOR</text>');
-    o.push('<text x="'+RX+'" y="'+(yb(57)+3)+'" font-size="8" font-weight="700" fill="var(--ed-accent)">WORKSPACE</text>');
-    o.push('<text x="'+RX+'" y="'+(yb(17)+3)+'" font-size="8" font-weight="700" fill="var(--muted)">SENSORY</text>');
+    o.push('<text x="'+RX+'" y="'+(yb(90)+3)+'" font-size="8" font-weight="700" fill="var(--muted)">Motor</text>');
+    o.push('<text x="'+RX+'" y="'+(yb(57)+3)+'" font-size="8" font-weight="700" fill="var(--ed-accent)">Workspace</text>');
+    o.push('<text x="'+RX+'" y="'+(yb(17)+3)+'" font-size="8" font-weight="700" fill="var(--muted)">Sensory</text>');
     /* rotated token labels */
     for (var t2 = 0; t2 < np; t2++) {
       var lab = d.surface[t2];
@@ -907,9 +905,9 @@ function initGal(){
     }
     [0,50,100].forEach(function(d){ o.push('<text x="'+(padL-4)+'" y="'+(yb(d)+3)
       +'" text-anchor="end" font-size="9" fill="'+C.muted+'">'+d+'%</text>'); });
-    o.push('<text x="'+(padL+np*cw+4)+'" y="'+yb(90)+'" font-size="8.5" fill="'+C.muted+'" font-weight="700">MOTOR</text>');
-    o.push('<text x="'+(padL+np*cw+4)+'" y="'+yb(57)+'" font-size="8.5" fill="'+C.wst+'" font-weight="700">WORKSPACE</text>');
-    o.push('<text x="'+(padL+np*cw+4)+'" y="'+yb(17)+'" font-size="8.5" fill="'+C.muted+'" font-weight="700">SENSORY</text>');
+    o.push('<text x="'+(padL+np*cw+4)+'" y="'+yb(90)+'" font-size="8.5" fill="'+C.muted+'" font-weight="700">Motor</text>');
+    o.push('<text x="'+(padL+np*cw+4)+'" y="'+yb(57)+'" font-size="8.5" fill="'+C.wst+'" font-weight="700">Workspace</text>');
+    o.push('<text x="'+(padL+np*cw+4)+'" y="'+yb(17)+'" font-size="8.5" fill="'+C.muted+'" font-weight="700">Sensory</text>');
     for(var t=0;t<np;t++){ var lab=c.surface[t];
       if(!lab||lab==='\u2423'||String(lab).trim()==='') continue;
       var short = lab.length>7 ? lab.slice(0,7) : lab;
