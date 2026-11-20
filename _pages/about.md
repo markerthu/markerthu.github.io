@@ -1336,6 +1336,10 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
   </li>
   <li>
     <span class="news-date">Nov 2026</span>
+    <span><span class="nbadge nb-find">Finding</span><strong>Keystone</strong> is on arXiv. An image model decides what it will draw in its first few steps, yet test-time search finishes every candidate before judging it. Keystone judges candidates at those key steps instead, from the model&rsquo;s own blurry previews, with an off-the-shelf decision model that answers questions compiled from the prompt: more accurate than best-of-8 with every other verifier, at under half its compute. Training-free, and a drop-in judge for existing search methods. <a href="/projects/keystone/">Project page</a> &middot; <a href="/film/#keystone">Video</a> &middot; <a href="https://arxiv.org/abs/2611.25530" target="_blank" rel="noopener noreferrer">Paper</a></span>
+  </li>
+  <li>
+    <span class="news-date">Nov 2026</span>
     <span><span class="nbadge nb-find">Finding</span><strong>Vanguard</strong> is on arXiv. Step-level speculative decoding has so far been judged by how little accuracy it gives up. Let a small model go first, check each of its drafted steps against the screen, and it can be right more often than the large model it was meant to imitate: a general decision model scores the small model&rsquo;s drafts in one forward pass, and the large model writes only the steps it rejects. Training-free, and the large model can come from another model family. <a href="/projects/vanguard/">Project page</a> &middot; <a href="/film/#vanguard">Video</a> &middot; <a href="https://arxiv.org/abs/2611.23917" target="_blank" rel="noopener noreferrer">Paper</a></span>
   </li>
   <li>
@@ -1590,6 +1594,22 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
       <a class="pub-link pl-paper" href="https://openreview.net/forum?id=2IoFFexvuw" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-pubs.png);mask-image:url(/images/icons/sh-pubs.png)"></i>Paper</a>
       <a class="pub-link pl-project" href="/projects/orw-cfm-w2/"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-link.png);mask-image:url(/images/icons/h-link.png)"></i>Project</a>
       <a class="pub-link pl-arxiv" href="https://arxiv.org/abs/2502.06061" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-paperclip.png);mask-image:url(/images/icons/h-paperclip.png)"></i>arXiv</a>
+    </div>
+  </div>
+</div>
+
+<div class="pub-entry" role="article" data-venue="Preprint" data-year="2026" data-arxiv="2611.25530">
+  <div class="pub-left">
+    <span class="pb pb-arxiv">Preprint</span><span class="pub-year">2026</span></div>
+  <div class="pub-right">
+    <div class="pub-thumb-wrap"><img loading="lazy" src="/images/featured/keystone-ai.jpg" width="1000" height="333" alt="Keystone: a grid of candidate images, some faded; one candidate sits under the keystone of an arch above a timeline marked at an early step, and an arrow leads to a finished image of four bananas with a check mark"></div>
+    <div class="pub-title"><a href="https://arxiv.org/abs/2611.25530" target="_blank" rel="noopener noreferrer">Keystone: Judging Previews at Key Steps for Test-Time Search in Diffusion Models</a></div>
+    <div class="pub-authors"><strong>J. Fan*</strong>, C. Cheng, Z. Wang, C. Yang, B. Yang, Q. Zheng, G. Liu</div>
+    <div class="pub-desc">Keystone: an off-the-shelf decision model judges each candidate from the model&rsquo;s own blurry preview at the key steps, so test-time search stops finishing images that were doomed from the start. Training-free.</div>
+    <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>More accurate than every other verifier&rsquo;s best-of-8 at under half its compute &middot; Without retuning, the gain holds on average across four base models and three benchmarks</div>
+    <div class="pub-links">
+      <a class="pub-link pl-project" href="/projects/keystone/"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-link.png);mask-image:url(/images/icons/h-link.png)"></i>Project</a>
+      <a class="pub-link pl-arxiv" href="https://arxiv.org/abs/2611.25530" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-paperclip.png);mask-image:url(/images/icons/h-paperclip.png)"></i>arXiv</a>
     </div>
   </div>
 </div>
@@ -2735,7 +2755,7 @@ function drawGraph(container) {
 <script>
 /* Video button: every publication with a project film gets one, right after its Project link */
 (function(){
-  var FILMS = ['vanguard','self-rewriting','audiorsi','tf-opd','speechgym','read-the-mind','proteinzero','procedure-aware-rl','cesar','adrpo','orw-cfm-w2','ac-flow','lbc','gdi'];
+  var FILMS = ['keystone','vanguard','self-rewriting','audiorsi','tf-opd','speechgym','read-the-mind','proteinzero','procedure-aware-rl','cesar','adrpo','orw-cfm-w2','ac-flow','lbc','gdi'];
   document.querySelectorAll('.pub-entry').forEach(function(entry){
     var proj = entry.querySelector('.pub-links a.pl-project') || entry.querySelector('a.pub-project');
     if (!proj) return;
