@@ -1,116 +1,17 @@
 ---
-layout: null
+layout: archive
 permalink: /tags/
-title: "Topics"
+title: "Posts by Tags"
+author_profile: true
 ---
-{%- assign tag_names = '' | split: '' -%}
-{%- for t in site.tags -%}{%- assign tag_names = tag_names | push: t[0] -%}{%- endfor -%}
-{%- assign tag_names = tag_names | sort_natural -%}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Blog topics | Jiajun Fan</title>
-<meta name="description" content="Every post on Jiajun Fan's blog, grouped by topic: reinforcement learning, generative models, audio LLMs and agentic RL.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Blog topics — Jiajun Fan">
-<meta property="og:description" content="Every post on the blog, grouped by topic.">
-<meta property="og:image" content="https://www.jiajunfan.com/images/og-banner.png">
-<meta property="og:url" content="https://www.jiajunfan.com/tags/">
-<link rel="canonical" href="https://www.jiajunfan.com/tags/">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#fdfcfa">
-<meta name="theme-color" content="#0f1216" media="(prefers-color-scheme: dark)">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
-<link rel="icon" href="/images/favicon.ico">
-<script>try{if(localStorage.getItem('darkMode')==='true'){document.documentElement.style.background='#0f1216';}}catch(e){}</script>
-{% include selfrw/style.html %}
-<style>
-/* Blog topics on the self-rewriting design system: one card per topic, the posts listed inside */
-.hero{padding-bottom:clamp(32px,3.6vw,48px)}
-.hero .lead{max-width:none;margin:14px auto 0;color:var(--muted);text-wrap:balance}
-.hero .stats{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 26px;margin-top:22px;font-size:var(--t-label);color:var(--muted);font-variant-numeric:tabular-nums}
-.stats b{color:var(--ink);font-weight:600;margin-right:5px}
-.hero .cta{margin-top:24px}
-.tjump{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
-.tjump a{display:inline-flex;align-items:center;gap:6px;padding:5px 13px;border-radius:999px;border:1px solid var(--hair);background:var(--card);font-size:var(--t-label);font-weight:600;color:var(--body);transition:border-color .18s,color .18s}
-.tjump a span{font-weight:500;color:var(--muted);font-variant-numeric:tabular-nums}
-.tjump a:hover{border-color:var(--mint-e);color:var(--ink)}
-.tgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gap);margin-top:32px}
-.tcard{scroll-margin-top:24px;transition:border-color .25s,box-shadow .25s}
-.tcard:target{border-color:var(--mint-e);box-shadow:0 0 0 3px var(--mint-l)}
-body.dark-mode .tcard:target{box-shadow:0 0 0 3px rgba(134,201,184,.18)}
-.tcard h3{font-size:var(--t-card);line-height:1.3;font-weight:600;letter-spacing:-.01em;color:var(--ink);margin:0}
-.tcard .tcount{margin:4px 0 0;font-size:var(--t-label);color:var(--mint-t);font-weight:600;font-variant-numeric:tabular-nums}
-.tcard ul{list-style:none;margin:14px 0 0;padding:12px 0 0;border-top:1px solid var(--rule);display:flex;flex-direction:column;gap:12px}
-.tcard li a{display:block;font-size:var(--t-body);line-height:1.4;font-weight:600;color:var(--ink);transition:color .15s}
-.tcard li a:hover{color:var(--link)}
-.tcard li time{display:block;margin-top:3px;font-size:var(--t-fine);font-weight:500;color:var(--muted);font-variant-numeric:tabular-nums}
-@media(max-width:1000px){.tgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:640px){.tgrid{grid-template-columns:1fr}.hero .lead{margin-left:0}.hero .stats{justify-content:flex-start}}
-@media(max-width:600px){.hero .cta{display:flex;flex-wrap:wrap;gap:8px}.hero .cta .btn{min-width:0;padding:9px 16px}}
-@media(prefers-reduced-motion:reduce){.tcard,.tjump a{transition:none}}
-</style>
-<script data-goatcounter="https://jiajunfan.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-{% include site-chrome.html %}
-</head>
-<body id="top">
-<script>try{if(localStorage.getItem('darkMode')==='true')document.body.classList.add('dark-mode');}catch(e){}</script>
-<header class="site-masthead">
-  <div class="masthead-inner">
-    <a class="masthead-title" href="/">Jiajun Fan</a>
-    <nav class="masthead-nav" aria-label="Site navigation">
-      <a href="/publications/">Publications</a>
-      <a href="/projects/">Projects</a>
-      <a href="/year-archive/" class="nav-active">Blog</a>
-      <a href="/cv/">CV</a>
-      <a href="/contact/">Contact</a>
-    </nav>
-  </div>
-</header>
 
-<main>
-<section class="hero" aria-label="Blog topics">
-  <div class="wrap">
-    <p class="venue">Writing</p>
-    <h1>Topics</h1>
-    <p class="lead">Every post on the blog, grouped by what it is about.</p>
-    <p class="stats"><span><b>{{ site.posts | size }}</b>posts</span><span><b>{{ tag_names | size }}</b>topics</span></p>
-    <div class="cta">
-      <a class="btn btn-primary" href="/year-archive/">All posts</a>
-      <a class="btn" href="/blog/reading-papers/">What's happening in my field</a>
-    </div>
-  </div>
-</section>
+{% include base_path %}
+{% include group-by-array collection=site.posts field="tags" %}
 
-<section class="scene band" id="topics" aria-labelledby="tp-h">
-  <div class="wrap">
-    <p class="eyebrow">Topics <span>A to Z</span></p>
-    <h2 id="tp-h">Pick a topic.</h2>
-    <nav class="tjump" aria-label="Jump to a topic" style="margin-top:22px">
-      {% for name in tag_names %}<a href="#{{ name | slugify }}">{{ name }} <span>{{ site.tags[name] | size }}</span></a>{% endfor %}
-    </nav>
-    <div class="tgrid">
-      {% for name in tag_names %}{% assign tposts = site.tags[name] %}
-      <article class="card tcard" id="{{ name | slugify }}">
-        <h3>{{ name }}</h3>
-        <p class="tcount">{{ tposts | size }} {% if tposts.size == 1 %}post{% else %}posts{% endif %}</p>
-        <ul>
-          {% for post in tposts %}<li><a href="{{ post.url | relative_url }}">{{ post.title | strip_html }}</a><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %-d, %Y" }}</time></li>{% endfor %}
-        </ul>
-      </article>
-      {% endfor %}
-    </div>
-  </div>
-</section>
-</main>
-
-<footer>
-  <p>Topics &nbsp;|&nbsp; <a href="/">Jiajun Fan</a> &nbsp;|&nbsp; <a href="/year-archive/">All Posts</a></p>
-</footer>
-</body>
-</html>
+{% for tag in group_names %}
+  {% assign posts = group_items[forloop.index0] %}
+  <h2 id="{{ tag | slugify }}" class="archive__subtitle">{{ tag }}</h2>
+  {% for post in posts %}
+    {% include archive-single.html %}
+  {% endfor %}
+{% endfor %}

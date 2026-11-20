@@ -26,118 +26,181 @@ redirect_from:
 <meta name="theme-color" content="#0f1216" media="(prefers-color-scheme: dark)">
 <script>try{if(localStorage.getItem('darkMode')==='true'){document.documentElement.style.background='#0f1216';}}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"></noscript>
-{% include selfrw/style.html %}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600&display=swap"></noscript>
 <style>
-/* CV on the self-rewriting design system (tokens, hero, scene, eyebrow, card, btn), like /projects/ and /publications/.
-   New here: the quiet stats strip, the timeline rows (date on the left, entry on the right) and the awards grid. */
-.hero{padding-bottom:clamp(32px,3.6vw,48px)}
-.hero .lead{max-width:40em;margin:14px auto 0;color:var(--muted)}
-/* topics are quiet filled tags; outlined pills are reserved for things you can click */
-.areas{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;max-width:40em;margin:20px auto 0}
-.areas li,.card .tags span{padding:4px 11px;border-radius:999px;background:var(--band);font-size:var(--t-fine);font-weight:500;line-height:1.5;color:var(--body)}
-body.dark-mode .card .tags span{background:var(--rule)}
-.hero .cta{margin-top:24px}
-.btn .lbl-ico{width:15px;height:15px;margin-right:0;vertical-align:0}
-main .scene{padding:clamp(44px,5vw,72px) 0}
-h2.eyebrow{letter-spacing:0}
-
-/* at a glance: one quiet row of figures, each under a short coloured tick */
-.glance{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:22px var(--gap);margin-top:6px}
-.glance > div{position:relative;padding-top:14px;border-top:1px solid var(--hair);min-width:0}
-.glance > div::before{content:'';position:absolute;left:0;top:-1px;width:28px;height:2px;background:var(--tick,var(--mint-e))}
-.glance > div:nth-child(4n+1){--tick:var(--ice-e)}
-.glance > div:nth-child(4n+2){--tick:var(--lav-e)}
-.glance > div:nth-child(4n+3){--tick:var(--mint-e)}
-.glance > div:nth-child(4n+4){--tick:var(--peach-e)}
-.glance b{display:block;font-size:var(--t-card);font-weight:600;line-height:1.2;letter-spacing:-.01em;color:var(--ink);font-variant-numeric:tabular-nums}
-.glance span{display:block;font-size:var(--t-label);line-height:1.4;color:var(--muted);margin-top:4px}
-.glance + .cards{margin-top:var(--sp-fig)}
-.cards.ov{gap:var(--gap)}
-.ov .card{display:flex;flex-direction:column}
-.ov .card p strong{font-weight:600;color:var(--ink)}
-.card .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
-.rev{margin-top:12px}
-.rev li{padding:8px 0;border-top:1px solid var(--rule);font-size:var(--t-label);line-height:1.45;color:var(--muted);font-variant-numeric:tabular-nums}
-.rev li:first-child{border-top:0;padding-top:2px}
-.rev li:last-child{padding-bottom:0}
-.rev .s-venue{font-weight:600;color:var(--ink)}
-.rev strong{font-weight:600;color:var(--body)}
-.ov .opp{border-color:var(--mint);background:linear-gradient(180deg,var(--mint-l),var(--card) 78%)}
-.opp .btn{margin-top:auto;align-self:flex-start}
-.opp p{margin-bottom:20px}
-
-/* timeline rows: the same two-column rhythm as the publications list */
-.cv-list{margin-top:6px}
-.cv-row{display:grid;grid-template-columns:168px minmax(0,1fr);gap:var(--gap);padding:22px 0;border-top:1px solid var(--rule)}
-.cv-list > .cv-row:first-child{border-top:0;padding-top:4px}
-.cv-row:last-child{padding-bottom:0}
-.cv-when{font-size:var(--t-label);line-height:1.45;font-weight:600;color:var(--mint-t);padding-top:3px;font-variant-numeric:tabular-nums}
-.cv-when span{display:block;font-weight:500;color:var(--muted);margin-top:2px}
-.cv-row h3{font-size:var(--t-card);line-height:1.3;letter-spacing:-.01em}
-.cv-row h3 a{color:var(--ink)}
-.cv-row h3 a:hover{color:var(--link)}
-/* flex, so a chip that wraps on a phone starts flush left under the degree */
-.cv-sub{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:2px;row-gap:6px;font-size:var(--t-body);line-height:1.5;color:var(--body);margin-top:4px}
-.chip{display:inline-block;padding:1px 10px;border-radius:999px;border:1px solid var(--mint);background:var(--mint-l);color:var(--mint-t);font-size:var(--t-fine);font-weight:600;line-height:1.55;white-space:nowrap;vertical-align:1px;font-variant-numeric:tabular-nums}
-.cv-notes{margin-top:10px;max-width:46em}
-.cv-notes li{position:relative;padding-left:18px;font-size:var(--t-body);line-height:1.55;color:var(--muted)}
-.cv-notes li + li{margin-top:6px}
-.cv-notes li::before{content:'';position:absolute;left:3px;top:.68em;width:5px;height:5px;border-radius:50%;background:var(--mint-e)}
-.cv-notes strong{font-weight:600;color:var(--ink)}
-.cv-notes a{color:inherit;text-decoration:underline;text-decoration-color:var(--hair);text-underline-offset:3px}
-.cv-notes a:hover{color:var(--link)}
-.cv-auth{font-size:var(--t-label);line-height:1.55;color:var(--muted);margin-top:6px;max-width:62em}
-.cv-auth strong{font-weight:600;color:var(--ink)}
-.cv-auth em{font-style:normal}
-.cv-find{font-size:var(--t-label);font-weight:600;line-height:1.45;color:var(--ink);margin-top:10px;padding-left:12px;border-left:2px solid var(--mint-e);max-width:62em}
-
-/* awards: two aligned columns, newest first along each row */
-.awards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:calc(var(--gap)*2);margin-top:6px}
-.awards li{display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:14px;align-items:baseline;padding:12px 0;border-top:1px solid var(--rule)}
-.award-year{font-size:var(--t-label);font-weight:600;color:var(--mint-t);font-variant-numeric:tabular-nums}
-/* the name's text and its distinction chip sit in their own columns, so the chips line up on the right */
-.award-name{display:contents;font-size:var(--t-body);line-height:1.45;color:var(--body)}
-.award-name .chip{grid-column:3;justify-self:end}
-
-@media(max-width:1000px){.glance{grid-template-columns:repeat(4,minmax(0,1fr))}}
-/* tablet: Research takes the full row, Reviewer and Opportunities share the next one */
-@media(min-width:561px) and (max-width:1100px){.cards.c3.ov{grid-template-columns:repeat(2,minmax(0,1fr))}.ov .card:first-child{grid-column:1/-1}}
-@media(max-width:760px){.awards{grid-template-columns:1fr}}
-@media(max-width:640px){
-  .hero .lead{margin-left:0}
-  .areas{justify-content:flex-start;margin-left:0}
-  .cv-row{grid-template-columns:1fr;gap:6px;padding:18px 0}
-  .cv-when span{display:inline;margin-left:8px}
-  #h-pubs{flex-wrap:wrap;row-gap:2px}
-  #h-pubs span{flex-basis:100%;border-left:0;padding-left:32px}
+:root{
+  --serif:'Newsreader',Georgia,'Times New Roman',serif;
+  --sans:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;
+  --bg:#fdfcfa; --band:#f6f3ec; --ink:#1a1815; --body:#2b2823; --muted:#6c6860; --faint:#6b665c;
+  --rule:#e8e3d9; --link:#2F4B8F; --on-link:#ffffff; --link-h:#23396E; --card:#ffffff; --pill:#f0ede6;
+  --accent:#8A4A2E; --accent-bg:#FBEDE6; --accent-bd:#F5C8B5;
 }
-@media(max-width:560px){.glance{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px var(--gap)}}
-@media(max-width:600px){.hero .cta{display:flex;flex-wrap:wrap;gap:8px}.hero .cta .btn{min-width:0;padding:9px 16px}}
+body.dark-mode{
+  --bg:#0f1216; --band:#151a20; --ink:#ece8e0; --body:#cdc8be; --muted:#8f8a80; --faint:#8a857b;
+  --rule:#262b33; --link:#6ea8fe; --on-link:#0f1216; --link-h:#93c0ff; --card:#161a20; --pill:#1a1f27;
+  --accent:#F2C3AE; --accent-bg:#33241F; --accent-bd:#5A3A2E;
+}
+.lbl-ico{display:inline-block;width:1em;height:1em;vertical-align:-0.14em;margin-right:5px;background-color:currentColor;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;flex-shrink:0;}
+*{box-sizing:border-box;margin:0;padding:0}
+html{overflow-x:hidden;scroll-behavior:smooth}
+body{font-family:var(--serif);background:var(--bg);color:var(--body);line-height:1.7;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s}
+a{color:var(--link);text-decoration:none}
+a:hover{color:var(--link-h)}
+::selection{background:rgba(47,75,143,.16)}
+
+/* ── masthead (shared with projects / publications) ── */
+.site-masthead{background:var(--bg);box-shadow:0 1px 0 var(--rule);position:sticky;top:0;z-index:200;font-size:16px;font-family:var(--sans)}
+.site-masthead::after{content:'';display:block;height:3px;background:linear-gradient(to right,#2F4B8F 0%,#6F94C6 50%,#E39A7A 100%)}
+.masthead-inner{max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:56px}
+.masthead-title{font-weight:800;font-size:1.35em;color:var(--ink)!important;text-decoration:none!important;letter-spacing:-.02em}
+.masthead-nav{display:flex;gap:2px;align-items:center}
+.masthead-nav a{font-weight:600;font-size:0.98em;color:var(--muted)!important;text-decoration:none!important;padding:6px 10px;border-radius:6px;transition:color .2s,background .2s}
+.masthead-nav a:hover{color:var(--link)!important;background:rgba(47,75,143,.07)}
+.masthead-nav a.nav-active{color:var(--link)!important}
+.masthead-nav .pdf-dl{background:var(--link);color:var(--on-link)!important;border-radius:6px;font-weight:700;margin-left:6px}
+.masthead-nav .pdf-dl:hover{background:var(--link-h)!important;color:#fff!important}
+@media(max-width:600px){.masthead-inner{flex-wrap:wrap;height:auto;min-height:0;padding:8px 14px 7px;row-gap:1px;justify-content:center}.masthead-title{width:100%;text-align:center;white-space:nowrap}.masthead-nav{width:100%;justify-content:center;flex-wrap:wrap}}
+@media(max-width:560px){.masthead-nav a{font-size:0.86em;padding:5px 8px}.masthead-title{font-size:1.15em}.masthead-nav .pdf-dl{display:none}}
+
+/* ── editorial hero (replaces the animated navy gradient) ── */
+.cv-hero{max-width:1000px;margin:0 auto;padding:52px 24px 26px;text-align:left;border-bottom:1px solid var(--rule)}
+.cv-name{margin:0;font-family:var(--serif);font-size:clamp(2.1em,5vw,3em);font-weight:500;letter-spacing:-.022em;line-height:1.08;color:var(--ink);margin-bottom:6px}
+.cv-role{font-family:var(--serif);font-size:1.12em;color:var(--muted);margin-bottom:18px;font-weight:400}
+.cv-contact{display:flex;flex-wrap:wrap;gap:7px;justify-content:flex-start;margin-bottom:16px}
+.cv-contact a{display:inline-flex;align-items:center;gap:5px;background:var(--pill);border:1px solid var(--rule);color:var(--link)!important;padding:4px 13px;border-radius:20px;font-family:var(--sans);font-size:0.78em;font-weight:600;text-decoration:none!important;transition:border-color .2s,background .2s}
+.cv-contact a:hover{border-color:var(--link);background:rgba(47,75,143,.08)}
+.cv-badges{display:flex;flex-wrap:wrap;gap:7px;justify-content:flex-start}
+.cv-badge{background:var(--band);border:1px solid var(--rule);color:var(--muted);padding:3px 12px;border-radius:20px;font-family:var(--sans);font-size:0.74em;font-weight:600}
+
+/* ── layout ── */
+.cv-body{max-width:1000px;margin:0 auto;padding:30px 24px 60px;display:grid;grid-template-columns:1fr 260px;gap:34px;align-items:start}
+@media(max-width:720px){.cv-body{grid-template-columns:1fr}}
+@media screen and (max-width:720px){.cv-body{gap:18px}.sidebar-col{display:contents}.sidebar-card{margin-bottom:0}.sidebar-col>.sidebar-card:first-child{order:-1}}
+
+/* ── section titles ── */
+.sec-title{font-family:var(--sans);font-size:0.70em;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--faint);margin:0 0 14px;padding-bottom:7px;border-bottom:1px solid var(--rule)}
+
+/* ── education ── */
+.edu-card{background:transparent;border:none;border-bottom:1px solid var(--rule);border-radius:0;padding:15px 0;margin-bottom:0}
+.edu-card:last-child{border-bottom:none}
+.edu-card:hover{box-shadow:none}
+.edu-school{font-family:var(--serif);font-weight:600;font-size:1.14em;color:var(--ink);letter-spacing:-.01em}
+.edu-degree{font-family:var(--sans);font-size:0.9em;color:var(--body);margin-top:3px}
+.edu-meta{font-family:var(--sans);font-size:0.76em;color:var(--faint);margin-top:3px;display:flex;gap:12px;flex-wrap:wrap}
+.edu-gpa{display:inline-block;background:var(--pill);color:var(--link);border:1px solid var(--rule);padding:1px 8px;border-radius:4px;font-weight:700;font-size:0.85em}
+.edu-notes{font-family:var(--sans);font-size:0.85em;color:var(--muted);margin-top:8px;line-height:1.6;padding-left:1.1em}
+.edu-notes li{margin-bottom:2px}
+
+/* ── publications ── */
+.pub-item{display:grid;grid-template-columns:8.6rem minmax(0,1fr);gap:12px;padding:13px 0;border-bottom:1px solid var(--rule);align-items:start}
+.pub-item:last-child{border-bottom:none}
+.pub-badge{display:inline-block;padding:2px 9px;border-radius:20px;font-family:var(--sans);font-size:0.68em;font-weight:800;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap;line-height:1.5;flex-shrink:0;margin-top:4px;background:var(--pill);border:1px solid var(--rule);color:var(--link)}
+.pub-badge{justify-self:start}
+@media(max-width:600px){.pub-item{grid-template-columns:minmax(0,1fr);gap:6px}.pub-badge{margin-top:0}}
+.pb-oral{background:var(--accent-bg)!important;border-color:var(--accent-bd)!important;color:var(--accent)!important}
+.pb-iclr,.pb-neurips,.pb-icml,.pb-journal,.pb-arxiv{background:var(--pill);border-color:var(--rule);color:var(--link)}
+.pub-title{font-family:var(--serif);font-weight:600;font-size:1.03em;color:var(--ink);line-height:1.38;letter-spacing:-.005em}
+.pub-title a{color:var(--ink)}
+.pub-title a:hover{color:var(--link)}
+.pub-authors{font-family:var(--sans);font-size:0.77em;color:var(--muted);margin-top:3px;line-height:1.55}
+.pub-authors strong{color:var(--body);font-weight:600}
+.pub-hl{display:inline-block;background:var(--band);border-left:2px solid #E39A7A;padding:2px 9px;border-radius:0 5px 5px 0;font-family:var(--sans);font-size:0.73em;color:var(--muted);margin-top:6px;font-weight:600}
+body.dark-mode .pub-hl{border-left-color:#E9A98C}
+
+/* ── sidebar ── */
+.sidebar-card{background:var(--card);border-radius:12px;border:1px solid var(--rule);padding:17px 19px;margin-bottom:16px}
+.sidebar-card .sec-title{font-size:0.66em}
+.research-blurb{font-family:var(--serif);font-size:0.95em;color:var(--muted);margin-bottom:10px;line-height:1.6}
+.cta-card{background:var(--band);border-color:var(--rule)}
+.cta-title{color:var(--faint)}
+.cta-text{font-family:var(--serif);font-size:0.95em;color:var(--body);line-height:1.6;margin-bottom:12px}
+.cta-btn{display:block;text-align:center;background:var(--link);color:var(--on-link)!important;padding:8px;border-radius:7px;font-family:var(--sans);font-weight:700;font-size:0.8em;text-decoration:none!important;transition:background .2s}
+.cta-btn:hover{background:var(--link-h)}
+
+/* ── stats ── */
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:9px}
+.stat-grid .stat-item:last-child:nth-child(odd){grid-column:1/-1}
+.stat-item{text-align:center;background:var(--band);border:1px solid var(--rule);border-radius:9px;padding:11px 8px}
+.stat-num{font-family:var(--sans);font-size:1.45em;font-weight:800;color:var(--ink);line-height:1;letter-spacing:-.02em}
+.stat-lbl{font-family:var(--sans);font-size:0.74em;color:var(--faint);margin-top:5px;line-height:1.35;font-weight:600}
+
+/* ── service ── */
+.service-list{margin:0;padding:0;list-style:none}
+.service-list li{font-family:var(--sans);font-size:0.79em;color:var(--muted);padding:4px 0;border-bottom:1px solid var(--rule);line-height:1.45}
+.service-list li:last-child{border-bottom:none}
+.s-venue{font-weight:700;color:var(--body)}
+
+/* ── research ── */
+.interest-tag{display:inline-block;background:var(--pill);color:var(--link);border:1px solid var(--rule);border-radius:20px;padding:3px 11px;font-family:var(--sans);font-size:0.75em;font-weight:600;margin:3px 3px 3px 0}
+
+/* ── awards ── */
+.award-list{margin:0;padding:0;list-style:none}
+.award-item{display:flex;gap:9px;padding:6px 0;border-bottom:1px solid var(--rule);align-items:baseline;font-family:var(--sans);font-size:0.8em}
+.award-item:last-child{border-bottom:none}
+.award-year{min-width:38px;font-weight:800;color:var(--faint);font-size:0.9em}
+.award-name{color:var(--body);line-height:1.45}
+.award-top{font-weight:700;background:var(--accent-bg);border:1px solid var(--accent-bd);border-radius:4px;padding:0 5px;color:var(--accent);font-size:0.82em;margin-left:4px}
+
+/* ── main sections ── */
+.main-section{background:transparent;border:none;border-radius:0;padding:0;margin-bottom:34px}
+
+footer{background:transparent;color:var(--muted);text-align:center;padding:26px 24px;font-family:var(--sans);font-size:0.84em;border-top:1px solid var(--rule)}
+footer a{color:var(--link)}
+footer a:hover{color:var(--link-h)}
+
+#theme-toggle::before{content:'';display:inline-block;width:1em;height:1em;background-color:currentColor;-webkit-mask:url(/images/icons/h-moon.png) center/contain no-repeat;mask:url(/images/icons/h-moon.png) center/contain no-repeat}
+body.dark-mode #theme-toggle::before{-webkit-mask-image:url(/images/icons/h-sun.png);mask-image:url(/images/icons/h-sun.png)}
+#theme-toggle{color:var(--muted);border-color:var(--rule)}
 
 @media print{
   body{background:#fff!important;color:#000!important;font-size:11pt}
   /* the page paints through custom properties, so dark mode must be undone for paper
      or every non-link heading prints near-white on white */
-  body.dark-mode{--bg:#fff;--band:#fff;--card:#fff;--ink:#000;--body:#000;--muted:#333;--faint:#444;
-    --rule:#ccc;--hair:#ccc;--link:#000;--link-h:#000;--on-link:#fff;
-    --mint:#ccc;--mint-e:#999;--mint-t:#000;--mint-l:#fff}
-  .site-masthead,#read-progress{display:none!important}
-  .hero{padding:0 0 12pt}
-  main .scene{padding:14pt 0 0;border-top:0}
-  .glance{grid-template-columns:repeat(4,minmax(0,1fr))}
-  .cards.c3{grid-template-columns:repeat(3,minmax(0,1fr))}
+  body.dark-mode{--bg:#fff;--band:#fff;--card:#fff;--pill:#fff;--ink:#000;--body:#000;
+    --muted:#333;--faint:#444;--rule:#ccc;--link:#000;--link-h:#000;--on-link:#fff;
+    --accent:#000;--accent-bg:#fff;--accent-bd:#ccc}
+  .site-masthead{display:none!important}
+  .cv-hero{padding:0 0 12pt;border-bottom:1pt solid #ccc}
+  .cv-body{grid-template-columns:1fr!important;gap:0!important;padding:12pt 0 0!important}
+  .sidebar-col{width:100%!important;background:none!important;border:none!important;padding:0!important;margin-bottom:12pt;border-bottom:1pt solid #ccc}
+  .main-col{padding:0!important}
   /* sections may run across pages; only single entries stay whole */
-  .cv-row,.awards li,.glance > div,.card{break-inside:avoid}
-  .eyebrow{break-after:avoid}
+  .main-section{margin-bottom:14pt}
+  .edu-card,.award-item,.stat-item,.sidebar-card{break-inside:avoid}
+  .sec-title{break-after:avoid}
   /* links that only make sense on screen: the PDF itself, mail button, site footer */
-  a[href="/files/CV.pdf"],.opp .btn,body > footer{display:none!important}
-  .chip{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  a[href="/files/CV.pdf"],.cta-btn,body > footer{display:none!important}
+  .pub-item{break-inside:avoid;padding:4pt 0;border-bottom:0.5pt solid #eee}
+  .pub-badge{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   a{color:#000!important;text-decoration:none!important}
   a[href]::after{content:""}
+  .pub-hl{font-size:9pt;color:#444!important}
+  h1,h2,h3{page-break-after:avoid}
 }
+
+@view-transition{navigation:auto}
+::view-transition-old(root),::view-transition-new(root){animation-duration:.18s}
+@media (prefers-reduced-motion:reduce){::view-transition-old(root),::view-transition-new(root){animation:none!important}}
+
+#read-progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,#2F4B8F,#6F94C6 60%,#E39A7A);z-index:9999;transition:width .08s linear;pointer-events:none}
+.pg-fab{position:fixed;right:22px;width:42px;height:42px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.18);z-index:9990;transition:transform .2s,opacity .2s,background .2s}
+.pg-fab:hover{transform:translateY(-2px) scale(1.06)}
+#pg-top{bottom:22px;background:var(--link);color:var(--on-link);opacity:0;pointer-events:none}
+#pg-top.show{opacity:1;pointer-events:auto}
+#pg-dark{bottom:126px;background:#fff;color:#2F4B8F;border:1.5px solid rgba(0,0,0,.15)}
+body.dark-mode #pg-dark{background:#1A2333;color:#F5C8B5;border-color:#2B3A55}
+/* the agent panel (bottom:120, z-index 9991) covers this FAB while open */
+.ra-panel.show ~ #pg-dark{opacity:0;pointer-events:none}
+.pg-dico{width:20px;height:20px;display:inline-block;background-color:currentColor;-webkit-mask:url(/images/icons/h-moon.png) center/contain no-repeat;mask:url(/images/icons/h-moon.png) center/contain no-repeat}
+body.dark-mode .pg-dico{-webkit-mask-image:url(/images/icons/h-sun.png);mask-image:url(/images/icons/h-sun.png)}
+.pg-up{width:11px;height:11px;border-top:2.6px solid currentColor;border-right:2.6px solid currentColor;transform:rotate(-45deg) translateY(2px);display:inline-block}
+@media print{#read-progress,.pg-fab{display:none!important}}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;transition-duration:.001ms!important}html{scroll-behavior:auto}#read-progress,.pg-fab{transition:none}}
+
+h1,h2,h3,.bx-title,.p-title,.pub-title,.card-title{text-wrap:balance}
+p,li{text-wrap:pretty}
+p a:not([class]),li a:not([class]),.authors a,.tl-desc a,.note a,.affil a,figcaption a,td a{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px;text-decoration-color:rgba(47,75,143,.45)}body.dark-mode p a:not([class]),body.dark-mode li a:not([class]),body.dark-mode .authors a,body.dark-mode .tl-desc a,body.dark-mode .note a,body.dark-mode figcaption a,body.dark-mode td a{text-decoration-color:rgba(157,184,234,.5)}
 </style>
   <script data-goatcounter="https://jiajunfan.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 {% include site-chrome.html %}
@@ -158,350 +221,336 @@ h2.eyebrow{letter-spacing:0}
   </div>
 </header>
 
-<main>
-<section class="hero" aria-label="CV summary">
-  <div class="wrap">
-    <h1>Jiajun Fan</h1>
-    <p class="lead">CS Ph.D. Student · University of Illinois Urbana-Champaign</p>
-    <ul class="areas" aria-label="Research areas">
-      <li>RL Post-Training for Generative Models</li>
-      <li>Multimodal Reasoning LLMs</li>
-      <li>Superhuman Deep RL</li>
-      <li>Agentic RL</li>
-      <li>Recursive Self-Improvement</li>
-      <li>Agentic Scientific Discovery</li>
-    </ul>
-    <div class="cta">
-      <a class="btn btn-primary" href="/files/CV.pdf"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-list.png);mask-image:url(/images/icons/h-list.png)"></i>Full CV (PDF)</a>
-      <a class="btn" href="mailto:jiajunf3@illinois.edu">jiajunf3@illinois.edu</a>
-      <a class="btn" href="https://www.jiajunfan.com/" target="_blank" rel="noopener noreferrer">jiajunfan.com</a>
-      <a class="btn" href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Google Scholar</a>
+<div class="cv-hero" role="region" aria-label="CV summary">
+  <h1 class="cv-name">Jiajun Fan</h1>
+  <div class="cv-role">CS Ph.D. Student · University of Illinois Urbana-Champaign</div>
+  <div class="cv-contact">
+    <a href="mailto:jiajunf3@illinois.edu"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-email.png);mask-image:url(/images/icons/h-email.png)"></i>jiajunf3@illinois.edu</a>
+    <a href="https://www.jiajunfan.com/" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-link.png);mask-image:url(/images/icons/h-link.png)"></i>jiajunfan.com</a>
+    <a href="https://scholar.google.com/citations?user=EjmzseUAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-scholar.png);mask-image:url(/images/icons/h-scholar.png)"></i>Google Scholar</a>
+    <a href="/files/CV.pdf"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-list.png);mask-image:url(/images/icons/h-list.png)"></i>Full CV (PDF)</a>
+  </div>
+  <div class="cv-badges">
+    <span class="cv-badge">RL Post-Training for Generative Models</span>
+    <span class="cv-badge">Multimodal Reasoning LLMs</span>
+    <span class="cv-badge">Superhuman Deep RL</span>
+    <span class="cv-badge">Agentic RL</span>
+    <span class="cv-badge">Recursive Self-Improvement</span>
+    <span class="cv-badge">Agentic Scientific Discovery</span>
+  </div>
+</div>
+
+<div class="cv-body" role="main">
+
+<!-- ═══ MAIN COLUMN ═══ -->
+<div class="main-col">
+
+  <!-- Experience -->
+  <div class="main-section">
+    <div class="sec-title"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-impact.png);mask-image:url(/images/icons/sh-impact.png)"></i>Experience</div>
+
+    <div class="edu-card">
+      <div class="edu-school">Amazon &mdash; AGI Foundations (Audio / Multimodal LLM)</div>
+      <div class="edu-degree">Applied Scientist Intern (Returning Intern)</div>
+      <div class="edu-meta"><span><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-pin.png);mask-image:url(/images/icons/h-pin.png)"></i>Seattle, WA, USA</span><span>May 2026 &ndash; Present</span></div>
+      <ul class="edu-notes">
+        <li><strong>Full-stack RL for multimodal agentic systems:</strong> invited back as a returning intern; building full-stack distributed RL training for multimodal agentic systems.</li>
+      </ul>
+    </div>
+
+    <div class="edu-card">
+      <div class="edu-school">Amazon &mdash; AGI Foundations (Audio / Multimodal LLM)</div>
+      <div class="edu-degree">Applied Scientist Intern</div>
+      <div class="edu-meta"><span><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-pin.png);mask-image:url(/images/icons/h-pin.png)"></i>Seattle, WA, USA</span><span>May 2025 &ndash; Dec 2025</span></div>
+      <ul class="edu-notes">
+        <li><strong>Full-stack distributed RL post-training:</strong> sole owner of the end-to-end pipeline for multimodal reasoning LLMs &mdash; training infrastructure, algorithm and reward design, evaluation and model delivery &mdash; and sole first author of the resulting publication (<a href="/projects/cesar/">CESAR</a>, ICLR 2026).</li>
+        <li>Built and scaled a <strong>multi-node, multi-GPU GRPO training stack</strong> for omni-modal LLMs, and designed a process-reward framework that moves RLVR beyond outcome verification and removes any dependence on human-annotated reasoning traces.</li>
+      </ul>
     </div>
   </div>
-</section>
 
-<section class="scene band" id="glance" aria-labelledby="h-glance">
-  <div class="wrap">
-    <h2 class="eyebrow" id="h-glance">At a Glance</h2>
-    <div class="glance">
-      <div><b>13+</b><span>Top Venue Papers</span></div>
-      <div><b>24</b><span>Atari Records</span></div>
-      <div><b>500×</b><span>Data Efficiency vs Agent57</span></div>
-      <div><b>SOTA</b><span>MMAU Audio Reasoning</span></div>
-      <div><b>{{ site.data.citations._total | default: 560 }}+</b><span>Scholar Citations</span></div><div><b>{{ site.data.citations._h_index | default: 12 }}</b><span>h-index</span></div>
-      <div><b>4.0</b><span>UIUC Ph.D. GPA</span></div>
+  <!-- Education -->
+  <div class="main-section">
+    <div class="sec-title"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-scholar.png);mask-image:url(/images/icons/h-scholar.png)"></i>Education</div>
+
+    <div class="edu-card">
+      <div class="edu-school">University of Illinois Urbana-Champaign</div>
+      <div class="edu-degree">Ph.D. in Computer Science &nbsp;<span class="edu-gpa">GPA 4.0/4.0</span></div>
+      <div class="edu-meta"><span><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-pin.png);mask-image:url(/images/icons/h-pin.png)"></i>Urbana, IL, USA</span><span>Aug 2024 – Dec 2027 (expected)</span></div>
+      <ul class="edu-notes">
+        <li><strong>Research:</strong> Autonomous RL post-training for flow/diffusion models &amp; multimodal reasoning LLMs</li>
+        <li><strong>Service:</strong> Reviewer @ ICML 2025–26, ICLR 2025–26, NeurIPS 2024–26, COLM 2026, CVPR 2026, WACV 2027, AAAI 2025 &amp; 2027, AISTATS 2025, KDD 2024, TMLR</li>
+      </ul>
     </div>
 
-    <div class="cards c3 ov">
-      <!-- Research Interests -->
-      <article class="card">
-        <h3>Research</h3>
-        <p>Making AI systems that <strong>never stop improving themselves</strong> — progressively removing human scaffolding from RL post-training.</p>
-        <p class="tags">
-          <span>RL Post-Training</span>
-          <span>Flow/Diffusion RLHF</span>
-          <span>Audio/Visual Reasoning LLMs</span>
-          <span>Deep RL (Atari)</span>
-          <span>Adaptive KL Control</span>
-          <span>Process Reward Design</span>
-          <span>Recursive Self-Improvement</span>
-        </p>
-      </article>
+    <div class="edu-card">
+      <div class="edu-school">Tsinghua University</div>
+      <div class="edu-degree">M.Eng. in Computer Technology &nbsp;<span class="edu-gpa">GPA 3.97/4.0 · Top 1.3%</span></div>
+      <div class="edu-meta"><span><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-pin.png);mask-image:url(/images/icons/h-pin.png)"></i>Beijing, China</span><span>Sept 2021 – Jun 2024</span></div>
+      <ul class="edu-notes">
+        <li><strong>Service:</strong> Reviewer @ NeurIPS 2022–23, ICML 2023–24, ICLR 2024</li>
+      </ul>
+    </div>
 
-      <!-- Academic Service -->
-      <article class="card">
-        <h3>Reviewer</h3>
-        <ul class="rev">
-          <li><span class="s-venue">ICML</span> 2023–2024 · <strong>2025 · 2026</strong></li>
-          <li><span class="s-venue">ICLR</span> 2024 · <strong>2025 · 2026</strong></li>
-          <li><span class="s-venue">NeurIPS</span> 2022–2023 · <strong>2024–2026</strong></li>
-          <li><span class="s-venue">COLM</span> <strong>2026</strong> &nbsp;·&nbsp; <span class="s-venue">CVPR</span> <strong>2026</strong></li>
-          <li><span class="s-venue">WACV</span> <strong>2027</strong></li>
-          <li><span class="s-venue">AAAI</span> 2025 · <strong>2027</strong> &nbsp;·&nbsp; <span class="s-venue">AISTATS</span> 2025</li>
-          <li><span class="s-venue">KDD</span> 2024 &nbsp;·&nbsp; <span class="s-venue">TMLR</span></li>
-        </ul>
-      </article>
-
-      <!-- Internship CTA -->
-      <article class="card opp">
-        <h3>Opportunities</h3>
-        <p><strong>Seeking research internship — Spring &amp; Summer 2027.</strong><br>Happy to discuss collaborations on generative model post-training, reasoning LLMs, or RL.</p>
-        <a href="mailto:jiajunf3@illinois.edu" class="btn btn-primary"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-email.png);mask-image:url(/images/icons/h-email.png)"></i>Get in Touch</a>
-      </article>
+    <div class="edu-card">
+      <div class="edu-school">Nankai University</div>
+      <div class="edu-degree">B.Eng. in Intelligent Science and Technology &nbsp;<span class="edu-gpa">Rank 1/83</span></div>
+      <div class="edu-meta"><span><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-pin.png);mask-image:url(/images/icons/h-pin.png)"></i>Tianjin, China</span><span>Sept 2017 – Jun 2021</span></div>
+      <ul class="edu-notes">
+        <li>GPA 93.28/100 (3.9/4.0) · National Scholarship ×2 (Top 1%)</li>
+      </ul>
     </div>
   </div>
-</section>
 
-<section class="scene" id="experience" aria-labelledby="h-exp">
-  <div class="wrap">
-    <h2 class="eyebrow" id="h-exp">Experience</h2>
-    <div class="cv-list">
+  <!-- Publications -->
+  <div class="main-section">
+    <div class="sec-title"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-pubs.png);mask-image:url(/images/icons/sh-pubs.png)"></i>Selected Publications <span style="font-size:0.85em;font-weight:400;color:var(--faint);text-transform:none;letter-spacing:0">* = first / co-first author</span></div>
 
-      <article class="cv-row">
-        <p class="cv-when">May 2026 &ndash; Present<span>Seattle, WA, USA</span></p>
-        <div>
-          <h3>Amazon &mdash; AGI Foundations (Audio / Multimodal LLM)</h3>
-          <p class="cv-sub">Applied Scientist Intern (Returning Intern)</p>
-          <ul class="cv-notes">
-            <li><strong>Full-stack RL for multimodal agentic systems:</strong> invited back as a returning intern; building full-stack distributed RL training for multimodal agentic systems.</li>
-          </ul>
-        </div>
-      </article>
+    <div class="pub-item">
+      <span class="pub-badge pb-iclr">COLM 2026</span>
+      <div>
+        <div class="pub-title"><a href="https://openreview.net/forum?id=d4wrBuJ4xo">Procedure-Aware Reinforcement Learning for Tool-Augmented Large Language Models</a></div>
+        <div class="pub-authors">Q. Zheng*, <strong>J. Fan*</strong>, C. Cheng, G. Liu</div>
+        <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>3B model competitive with GPT-5-mini and Claude-Haiku-4.5 on BFCL-V3</div>
+      </div>
+    </div>
 
-      <article class="cv-row">
-        <p class="cv-when">May 2025 &ndash; Dec 2025<span>Seattle, WA, USA</span></p>
-        <div>
-          <h3>Amazon &mdash; AGI Foundations (Audio / Multimodal LLM)</h3>
-          <p class="cv-sub">Applied Scientist Intern</p>
-          <ul class="cv-notes">
-            <li><strong>Full-stack distributed RL post-training:</strong> sole owner of the end-to-end pipeline for multimodal reasoning LLMs &mdash; training infrastructure, algorithm and reward design, evaluation and model delivery &mdash; and sole first author of the resulting publication (<a href="/projects/cesar/">CESAR</a>, ICLR 2026).</li>
-            <li>Built and scaled a <strong>multi-node, multi-GPU GRPO training stack</strong> for omni-modal LLMs, and designed a process-reward framework that moves RLVR beyond outcome verification and removes any dependence on human-annotated reasoning traces.</li>
-          </ul>
-        </div>
-      </article>
+    <div class="pub-item">
+      <span class="pub-badge pb-journal">TMLR 2026</span>
+      <div>
+        <div class="pub-title"><a href="https://arxiv.org/abs/2506.07459">ProteinZero: Self-Improving Protein Generation via Online Reinforcement Learning</a></div>
+        <div class="pub-authors">Z. Wang*, <strong>J. Fan*</strong>, R. Guo, T. Nguyen, H. Ji, G. Liu</div>
+        <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>Online RL for self-improving protein design, without human-curated data</div>
+      </div>
+    </div>
 
+    <div class="pub-item">
+      <span class="pub-badge pb-iclr">ICLR 2026</span>
+      <div>
+        <div class="pub-title"><a href="https://openreview.net/forum?id=DUr48hxO2h">Incentivizing Consistent, Effective and Scalable Reasoning Capability in Audio LLMs via Reasoning Process Rewards</a></div>
+        <div class="pub-authors"><strong>J. Fan*</strong>, R. Ren, J. Li, R. Pandey, P.G. Shivakumar, I. Bulyko, A. Gandhe, G. Liu, Y. Gu</div>
+        <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>SOTA MMAU · Outperforms Gemini 2.5 Pro &amp; GPT-4o Audio</div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <span class="pub-badge pb-neurips">NeurIPS 2025</span>
+      <div>
+        <div class="pub-title"><a href="https://openreview.net/forum?id=aXO0xg0ttW">Adaptive Divergence Regularized Policy Optimization for Fine-tuning Generative Models</a></div>
+        <div class="pub-authors"><strong>J. Fan*</strong>, T. Wei, C. Cheng, Y. Chen, G. Liu</div>
+        <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-rocket.png);mask-image:url(/images/icons/h-rocket.png)"></i>2B SD3 surpasses 4.8B &amp; 12B models</div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <span class="pub-badge pb-iclr">ICLR 2025</span>
+      <div>
+        <div class="pub-title"><a href="https://openreview.net/forum?id=2IoFFexvuw">Online Reward-Weighted Fine-Tuning of Flow Matching with Wasserstein Regularization</a></div>
+        <div class="pub-authors"><strong>J. Fan*</strong>, S. Shen, C. Cheng, Y. Chen, C. Liang, G. Liu</div>
+        <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-sparkle.png);mask-image:url(/images/icons/h-sparkle.png)"></i>First online RLHF for flow matching models</div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <span class="pub-badge pb-arxiv">2026</span>
+      <div>
+        <div class="pub-title"><a href="https://arxiv.org/abs/2611.21885">Language Models Can Rewrite Their Own Weights</a></div>
+        <div class="pub-authors"><strong>J. Fan*</strong>, N. He, C. Yang, A. Mao, X. Zhu, C. Cheng, K. Liang, S. Shen, Z. Li, R. Guo, G. Liu</div>
+        <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>A third way to make a model better: it rewrites its own weights, with no gradients and no training</div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <span class="pub-badge pb-arxiv">2026</span>
+      <div>
+        <div class="pub-title"><a href="https://arxiv.org/abs/2610.36578">AudioRSI: Recursively Self-Improving Audio Reasoners</a></div>
+        <div class="pub-authors"><strong>J. Fan*</strong>, R. Ren, J. Li, R. Pandey, P.G. Shivakumar, A. Gandhe, Y. Gu, G. Liu, I. Bulyko</div>
+        <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>The student surpasses its teacher, then becomes it</div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <span class="pub-badge pb-arxiv">2026</span>
+      <div>
+        <div class="pub-title"><a href="https://arxiv.org/abs/2610.22236">Training-Free On-Policy Distillation</a></div>
+        <div class="pub-authors">B. Yang*, <strong>J. Fan*</strong>, Z. Zhu, H. Ma, G. Liu</div>
+        <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>Zero gradient steps &middot; the fused model beats either specialist on average</div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <span class="pub-badge pb-arxiv">2025</span>
+      <div>
+        <div class="pub-title"><a href="https://arxiv.org/abs/2510.18072">Fine-tuning Flow Matching Generative Models with Intermediate Feedback</a></div>
+        <div class="pub-authors"><strong>J. Fan*</strong>, C. Cheng, S. Shen, X. Zhou, G. Liu <em>· Under Review</em></div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <span class="pub-badge pb-oral">ICLR 2023 Oral<i class="lbl-ico" style="color:#E39A7A;-webkit-mask-image:url(/images/icons/h-star.png);mask-image:url(/images/icons/h-star.png)"></i></span>
+      <div>
+        <div class="pub-title"><a href="https://openreview.net/forum?id=FeWvD0L_a4">Learnable Behavior Control: Breaking Atari Human World Records via Sample-Efficient Behavior Selection</a></div>
+        <div class="pub-authors"><strong>J. Fan*</strong>, Y. Zhuang, Y. Liu, J. Hao, B. Wang, J. Zhu, H. Wang, S.-T. Xia</div>
+        <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>Ranked 5/4176 · 24 Atari world records · 100× data efficiency</div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <span class="pub-badge pb-icml">ICML 2022</span>
+      <div>
+        <div class="pub-title"><a href="https://proceedings.mlr.press/v162/fan22c.html">Generalized Data Distribution Iteration</a></div>
+        <div class="pub-authors"><strong>J. Fan*</strong>, C. Xiao</div>
+        <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-chart.png);mask-image:url(/images/icons/h-chart.png)"></i>2× Agent57's mean human-normalized score with 500× less data · 22 world records</div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <span class="pub-badge pb-neurips">NeurIPS 2026</span>
+      <div>
+        <div class="pub-title"><a href="https://arxiv.org/abs/2605.29438">ElegantVLA: Learning When to Think for Efficient Vision-Language-Action Models</a></div>
+        <div class="pub-authors">Y. Li, H. Liu, K. Ji, Y. Meng, <strong>J. Fan</strong>, Y. Wang, S. Qin, C. Wu, S.-T. Xia, Z. Wang</div>
+        <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>Up to 2.55&times; (GR00T) / 3.77&times; (CogACT) speedup &middot; 13.8 &rarr; 26.3 Hz on real-world GR00T tasks</div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <span class="pub-badge pb-neurips">NeurIPS 2026</span>
+      <div>
+        <div class="pub-title"><a href="https://arxiv.org/abs/2607.09039">Variable-Length Generative Protein Design via Generalized Poisson Flow</a></div>
+        <div class="pub-authors">C. Cheng*, Z. Ni*, Y. Qu*, Y. Chen, R. Guo, <strong>J. Fan</strong>, G. Liu</div>
+        <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>First on 10 of 16 motif-scaffolding tasks &middot; over 10&times; more unique successes on several hard targets</div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <span class="pub-badge pb-icml">ICML 2026</span>
+      <div>
+        <div class="pub-title"><a href="https://openreview.net/forum?id=Tt8lCe1NrW">Rethinking the Reranker: Boundary-Aware Evidence Selection for Robust Retrieval-Augmented Generation</a></div>
+        <div class="pub-authors">J. Sun, P. Jiang, S. Wang, <strong>J. Fan</strong>, H. Wang, S. Ouyang, M. Zhong, Y. Jiao, C. Huang, X. Xu, P. Han, P. Li, J. Huang, G. Liu, H. Ji, J. Han</div>
+        <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>+10.3% over strong RAG and reranking baselines</div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <span class="pub-badge pb-icml">ICML 2026</span>
+      <div>
+        <div class="pub-title"><a href="https://openreview.net/forum?id=8Oc3Mx754M">Batched Contextual Reinforcement</a></div>
+        <div class="pub-authors">B. Yang*, H. Ma*, <strong>J. Fan</strong>, G. Liu</div>
+        <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>15.8&ndash;62.6% fewer tokens at equal or better accuracy</div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <span class="pub-badge pb-iclr">ICLR 2026</span>
+      <div>
+        <div class="pub-title"><a href="https://openreview.net/forum?id=RwdGIIjPlC">SP-VLA: A Joint Model Scheduling and Token Pruning Approach for VLA Model Acceleration</a></div>
+        <div class="pub-authors">Y. Li, Y. Meng, Z. Sun, K. Ji, C. Tang, <strong>J. Fan</strong>, X. Ma, S.-T. Xia, Z. Wang, W. Zhu</div>
+        <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-impact.png);mask-image:url(/images/icons/sh-impact.png)"></i>1.5× lossless speedup (LIBERO) · 2.4× (SimplerEnv)</div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <span class="pub-badge pb-journal">TPAMI 2026</span>
+      <div>
+        <div class="pub-title"><a href="https://arxiv.org/abs/2407.05010">PRANCE: Joint Token-Optimization and Structural Channel-Pruning for Adaptive ViT Inference</a></div>
+        <div class="pub-authors">Y. Li*, C. Tang*, Y. Meng, <strong>J. Fan</strong>, Z. Chai, X. Ma, Z. Wang, W. Zhu</div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <span class="pub-badge pb-neurips">NeurIPS 2025</span>
+      <div>
+        <div class="pub-title"><a href="https://openreview.net/forum?id=uOOlHOq500">Variational Supervised Contrastive Learning</a></div>
+        <div class="pub-authors">Z. Wang, <strong>J. Fan</strong>, T. Nguyen, H. Ji, G. Liu</div>
+        <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-chart.png);mask-image:url(/images/icons/h-chart.png)"></i>SOTA among contrastive learning methods · 79.36% Top-1 on ImageNet-1K (ResNet-50)</div>
+      </div>
     </div>
   </div>
-</section>
 
-<section class="scene band" id="education" aria-labelledby="h-edu">
-  <div class="wrap">
-    <h2 class="eyebrow" id="h-edu">Education</h2>
-    <div class="cv-list">
-
-      <article class="cv-row">
-        <p class="cv-when">Aug 2024 – Dec 2027 (expected)<span>Urbana, IL, USA</span></p>
-        <div>
-          <h3>University of Illinois Urbana-Champaign</h3>
-          <p class="cv-sub">Ph.D. in Computer Science &nbsp;<span class="chip">GPA 4.0/4.0</span></p>
-          <ul class="cv-notes">
-            <li><strong>Research:</strong> Autonomous RL post-training for flow/diffusion models &amp; multimodal reasoning LLMs</li>
-            <li><strong>Service:</strong> Reviewer @ ICML 2025–26, ICLR 2025–26, NeurIPS 2024–26, COLM 2026, CVPR 2026, WACV 2027, AAAI 2025 &amp; 2027, AISTATS 2025, KDD 2024, TMLR</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="cv-row">
-        <p class="cv-when">Sept 2021 – Jun 2024<span>Beijing, China</span></p>
-        <div>
-          <h3>Tsinghua University</h3>
-          <p class="cv-sub">M.Eng. in Computer Technology &nbsp;<span class="chip">GPA 3.97/4.0 · Top 1.3%</span></p>
-          <ul class="cv-notes">
-            <li><strong>Service:</strong> Reviewer @ NeurIPS 2022–23, ICML 2023–24, ICLR 2024</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="cv-row">
-        <p class="cv-when">Sept 2017 – Jun 2021<span>Tianjin, China</span></p>
-        <div>
-          <h3>Nankai University</h3>
-          <p class="cv-sub">B.Eng. in Intelligent Science and Technology &nbsp;<span class="chip">Rank 1/83</span></p>
-          <ul class="cv-notes">
-            <li>GPA 93.28/100 (3.9/4.0) · National Scholarship ×2 (Top 1%)</li>
-          </ul>
-        </div>
-      </article>
-
-    </div>
-  </div>
-</section>
-
-<section class="scene" id="publications" aria-labelledby="h-pubs">
-  <div class="wrap">
-    <h2 class="eyebrow" id="h-pubs">Selected Publications <span>* = first / co-first author</span></h2>
-    <div class="cv-list">
-
-      <article class="cv-row">
-        <p class="cv-when">COLM 2026</p>
-        <div>
-          <h3><a href="https://openreview.net/forum?id=d4wrBuJ4xo">Procedure-Aware Reinforcement Learning for Tool-Augmented Large Language Models</a></h3>
-          <p class="cv-auth">Q. Zheng*, <strong>J. Fan*</strong>, C. Cheng, G. Liu</p>
-          <p class="cv-find">3B model competitive with GPT-5-mini and Claude-Haiku-4.5 on BFCL-V3</p>
-        </div>
-      </article>
-
-      <article class="cv-row">
-        <p class="cv-when">TMLR 2026</p>
-        <div>
-          <h3><a href="https://arxiv.org/abs/2506.07459">ProteinZero: Self-Improving Protein Generation via Online Reinforcement Learning</a></h3>
-          <p class="cv-auth">Z. Wang*, <strong>J. Fan*</strong>, R. Guo, T. Nguyen, H. Ji, G. Liu</p>
-          <p class="cv-find">Online RL for self-improving protein design, without human-curated data</p>
-        </div>
-      </article>
-
-      <article class="cv-row">
-        <p class="cv-when">ICLR 2026</p>
-        <div>
-          <h3><a href="https://openreview.net/forum?id=DUr48hxO2h">Incentivizing Consistent, Effective and Scalable Reasoning Capability in Audio LLMs via Reasoning Process Rewards</a></h3>
-          <p class="cv-auth"><strong>J. Fan*</strong>, R. Ren, J. Li, R. Pandey, P.G. Shivakumar, I. Bulyko, A. Gandhe, G. Liu, Y. Gu</p>
-          <p class="cv-find">SOTA MMAU · Outperforms Gemini 2.5 Pro &amp; GPT-4o Audio</p>
-        </div>
-      </article>
-
-      <article class="cv-row">
-        <p class="cv-when">NeurIPS 2025</p>
-        <div>
-          <h3><a href="https://openreview.net/forum?id=aXO0xg0ttW">Adaptive Divergence Regularized Policy Optimization for Fine-tuning Generative Models</a></h3>
-          <p class="cv-auth"><strong>J. Fan*</strong>, T. Wei, C. Cheng, Y. Chen, G. Liu</p>
-          <p class="cv-find">2B SD3 surpasses 4.8B &amp; 12B models</p>
-        </div>
-      </article>
-
-      <article class="cv-row">
-        <p class="cv-when">ICLR 2025</p>
-        <div>
-          <h3><a href="https://openreview.net/forum?id=2IoFFexvuw">Online Reward-Weighted Fine-Tuning of Flow Matching with Wasserstein Regularization</a></h3>
-          <p class="cv-auth"><strong>J. Fan*</strong>, S. Shen, C. Cheng, Y. Chen, C. Liang, G. Liu</p>
-          <p class="cv-find">First online RLHF for flow matching models</p>
-        </div>
-      </article>
-
-      <article class="cv-row">
-        <p class="cv-when">2026</p>
-        <div>
-          <h3><a href="https://arxiv.org/abs/2611.21885">Language Models Can Rewrite Their Own Weights</a></h3>
-          <p class="cv-auth"><strong>J. Fan*</strong>, N. He, C. Yang, A. Mao, X. Zhu, C. Cheng, K. Liang, S. Shen, Z. Li, R. Guo, G. Liu</p>
-          <p class="cv-find">A third way to make a model better: it rewrites its own weights, with no gradients and no training</p>
-        </div>
-      </article>
-
-      <article class="cv-row">
-        <p class="cv-when">2026</p>
-        <div>
-          <h3><a href="https://arxiv.org/abs/2610.36578">AudioRSI: Recursively Self-Improving Audio Reasoners</a></h3>
-          <p class="cv-auth"><strong>J. Fan*</strong>, R. Ren, J. Li, R. Pandey, P.G. Shivakumar, A. Gandhe, Y. Gu, G. Liu, I. Bulyko</p>
-          <p class="cv-find">The student surpasses its teacher, then becomes it</p>
-        </div>
-      </article>
-
-      <article class="cv-row">
-        <p class="cv-when">2026</p>
-        <div>
-          <h3><a href="https://arxiv.org/abs/2610.22236">Training-Free On-Policy Distillation</a></h3>
-          <p class="cv-auth">B. Yang*, <strong>J. Fan*</strong>, Z. Zhu, H. Ma, G. Liu</p>
-          <p class="cv-find">Zero gradient steps &middot; the fused model beats either specialist on average</p>
-        </div>
-      </article>
-
-      <article class="cv-row">
-        <p class="cv-when">2025</p>
-        <div>
-          <h3><a href="https://arxiv.org/abs/2510.18072">Fine-tuning Flow Matching Generative Models with Intermediate Feedback</a></h3>
-          <p class="cv-auth"><strong>J. Fan*</strong>, C. Cheng, S. Shen, X. Zhou, G. Liu <em>· Under Review</em></p>
-        </div>
-      </article>
-
-      <article class="cv-row">
-        <p class="cv-when">ICLR 2023 <span>Oral</span></p>
-        <div>
-          <h3><a href="https://openreview.net/forum?id=FeWvD0L_a4">Learnable Behavior Control: Breaking Atari Human World Records via Sample-Efficient Behavior Selection</a></h3>
-          <p class="cv-auth"><strong>J. Fan*</strong>, Y. Zhuang, Y. Liu, J. Hao, B. Wang, J. Zhu, H. Wang, S.-T. Xia</p>
-          <p class="cv-find">Ranked 5/4176 · 24 Atari world records · 100× data efficiency</p>
-        </div>
-      </article>
-
-      <article class="cv-row">
-        <p class="cv-when">ICML 2022</p>
-        <div>
-          <h3><a href="https://proceedings.mlr.press/v162/fan22c.html">Generalized Data Distribution Iteration</a></h3>
-          <p class="cv-auth"><strong>J. Fan*</strong>, C. Xiao</p>
-          <p class="cv-find">2× Agent57's mean human-normalized score with 500× less data · 22 world records</p>
-        </div>
-      </article>
-
-      <article class="cv-row">
-        <p class="cv-when">NeurIPS 2026</p>
-        <div>
-          <h3><a href="https://arxiv.org/abs/2605.29438">ElegantVLA: Learning When to Think for Efficient Vision-Language-Action Models</a></h3>
-          <p class="cv-auth">Y. Li, H. Liu, K. Ji, Y. Meng, <strong>J. Fan</strong>, Y. Wang, S. Qin, C. Wu, S.-T. Xia, Z. Wang</p>
-          <p class="cv-find">Up to 2.55&times; (GR00T) / 3.77&times; (CogACT) speedup &middot; 13.8 &rarr; 26.3 Hz on real-world GR00T tasks</p>
-        </div>
-      </article>
-
-      <article class="cv-row">
-        <p class="cv-when">NeurIPS 2026</p>
-        <div>
-          <h3><a href="https://arxiv.org/abs/2607.09039">Variable-Length Generative Protein Design via Generalized Poisson Flow</a></h3>
-          <p class="cv-auth">C. Cheng*, Z. Ni*, Y. Qu*, Y. Chen, R. Guo, <strong>J. Fan</strong>, G. Liu</p>
-          <p class="cv-find">First on 10 of 16 motif-scaffolding tasks &middot; over 10&times; more unique successes on several hard targets</p>
-        </div>
-      </article>
-
-      <article class="cv-row">
-        <p class="cv-when">ICML 2026</p>
-        <div>
-          <h3><a href="https://openreview.net/forum?id=Tt8lCe1NrW">Rethinking the Reranker: Boundary-Aware Evidence Selection for Robust Retrieval-Augmented Generation</a></h3>
-          <p class="cv-auth">J. Sun, P. Jiang, S. Wang, <strong>J. Fan</strong>, H. Wang, S. Ouyang, M. Zhong, Y. Jiao, C. Huang, X. Xu, P. Han, P. Li, J. Huang, G. Liu, H. Ji, J. Han</p>
-          <p class="cv-find">+10.3% over strong RAG and reranking baselines</p>
-        </div>
-      </article>
-
-      <article class="cv-row">
-        <p class="cv-when">ICML 2026</p>
-        <div>
-          <h3><a href="https://openreview.net/forum?id=8Oc3Mx754M">Batched Contextual Reinforcement</a></h3>
-          <p class="cv-auth">B. Yang*, H. Ma*, <strong>J. Fan</strong>, G. Liu</p>
-          <p class="cv-find">15.8&ndash;62.6% fewer tokens at equal or better accuracy</p>
-        </div>
-      </article>
-
-      <article class="cv-row">
-        <p class="cv-when">ICLR 2026</p>
-        <div>
-          <h3><a href="https://openreview.net/forum?id=RwdGIIjPlC">SP-VLA: A Joint Model Scheduling and Token Pruning Approach for VLA Model Acceleration</a></h3>
-          <p class="cv-auth">Y. Li, Y. Meng, Z. Sun, K. Ji, C. Tang, <strong>J. Fan</strong>, X. Ma, S.-T. Xia, Z. Wang, W. Zhu</p>
-          <p class="cv-find">1.5× lossless speedup (LIBERO) · 2.4× (SimplerEnv)</p>
-        </div>
-      </article>
-
-      <article class="cv-row">
-        <p class="cv-when">TPAMI 2026</p>
-        <div>
-          <h3><a href="https://arxiv.org/abs/2407.05010">PRANCE: Joint Token-Optimization and Structural Channel-Pruning for Adaptive ViT Inference</a></h3>
-          <p class="cv-auth">Y. Li*, C. Tang*, Y. Meng, <strong>J. Fan</strong>, Z. Chai, X. Ma, Z. Wang, W. Zhu</p>
-        </div>
-      </article>
-
-      <article class="cv-row">
-        <p class="cv-when">NeurIPS 2025</p>
-        <div>
-          <h3><a href="https://openreview.net/forum?id=uOOlHOq500">Variational Supervised Contrastive Learning</a></h3>
-          <p class="cv-auth">Z. Wang, <strong>J. Fan</strong>, T. Nguyen, H. Ji, G. Liu</p>
-          <p class="cv-find">SOTA among contrastive learning methods · 79.36% Top-1 on ImageNet-1K (ResNet-50)</p>
-        </div>
-      </article>
-
-    </div>
-  </div>
-</section>
-
-<section class="scene band" id="awards" aria-labelledby="h-awards">
-  <div class="wrap">
-    <h2 class="eyebrow" id="h-awards">Awards &amp; Honors</h2>
-    <ul class="awards">
-      <li><span class="award-year">2024</span><span class="award-name">GPA 4.0/4.0, UIUC Ph.D. Program</span></li>
-      <li><span class="award-year">2024</span><span class="award-name">GPA 3.97/4.0, Top 1.3% — Tsinghua University M.Eng.</span></li>
-      <li><span class="award-year">2021</span><span class="award-name">Outstanding Graduates — Nankai University<span class="chip">Top 1%</span></span></li>
-      <li><span class="award-year">2021</span><span class="award-name">Excellent Graduation Thesis — Nankai University</span></li>
-      <li><span class="award-year">2021</span><span class="award-name">Tang Lixin Scholarship<span class="chip">Top 1%</span></span></li>
-      <li><span class="award-year">2020</span><span class="award-name">National Scholarship (Rank 1/83)<span class="chip">Top 1%</span></span></li>
-      <li><span class="award-year">2020</span><span class="award-name">Nomination for Zhou Enlai Scholarship</span></li>
-      <li><span class="award-year">2019</span><span class="award-name">National Scholarship (Rank 1/83)<span class="chip">Top 1%</span></span></li>
-      <li><span class="award-year">2019</span><span class="award-name">3rd Prize, RoboCup@Home Education World Final — Sydney, Australia</span></li>
-      <li><span class="award-year">2019</span><span class="award-name">Bronze Medal, ACM/ICPC Asia Regional — Xuzhou</span></li>
-      <li><span class="award-year">2018</span><span class="award-name">National 2nd Prize, National College Students Mathematical Contest in Modeling<span class="chip">Top 5%</span></span></li>
-      <li><span class="award-year">2018</span><span class="award-name">First Prize Scholarship — Nankai University (Rank 2/83)</span></li>
+  <!-- Awards -->
+  <div class="main-section">
+    <div class="sec-title"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>Awards &amp; Honors</div>
+    <ul class="award-list">
+      <li class="award-item"><span class="award-year">2024</span><span class="award-name">GPA 4.0/4.0, UIUC Ph.D. Program</span></li>
+      <li class="award-item"><span class="award-year">2024</span><span class="award-name">GPA 3.97/4.0, Top 1.3% — Tsinghua University M.Eng.</span></li>
+      <li class="award-item"><span class="award-year">2021</span><span class="award-name">Outstanding Graduates — Nankai University<span class="award-top">Top 1%</span></span></li>
+      <li class="award-item"><span class="award-year">2021</span><span class="award-name">Excellent Graduation Thesis — Nankai University</span></li>
+      <li class="award-item"><span class="award-year">2021</span><span class="award-name">Tang Lixin Scholarship<span class="award-top">Top 1%</span></span></li>
+      <li class="award-item"><span class="award-year">2020</span><span class="award-name">National Scholarship (Rank 1/83)<span class="award-top">Top 1%</span></span></li>
+      <li class="award-item"><span class="award-year">2020</span><span class="award-name">Nomination for Zhou Enlai Scholarship</span></li>
+      <li class="award-item"><span class="award-year">2019</span><span class="award-name">National Scholarship (Rank 1/83)<span class="award-top">Top 1%</span></span></li>
+      <li class="award-item"><span class="award-year">2019</span><span class="award-name">3rd Prize, RoboCup@Home Education World Final — Sydney, Australia</span></li>
+      <li class="award-item"><span class="award-year">2019</span><span class="award-name">Bronze Medal, ACM/ICPC Asia Regional — Xuzhou</span></li>
+      <li class="award-item"><span class="award-year">2018</span><span class="award-name">National 2nd Prize, National College Students Mathematical Contest in Modeling<span class="award-top">Top 5%</span></span></li>
+      <li class="award-item"><span class="award-year">2018</span><span class="award-name">First Prize Scholarship — Nankai University (Rank 2/83)</span></li>
     </ul>
   </div>
-</section>
-</main>
+
+</div><!-- /main-col -->
+
+<!-- ═══ SIDEBAR ═══ -->
+<div class="sidebar-col">
+
+  <!-- Impact Stats -->
+  <div class="sidebar-card">
+    <div class="sec-title"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-impact.png);mask-image:url(/images/icons/sh-impact.png)"></i>At a Glance</div>
+    <div class="stat-grid">
+      <div class="stat-item"><div class="stat-num">13+</div><div class="stat-lbl">Top Venue Papers</div></div>
+      <div class="stat-item"><div class="stat-num">24</div><div class="stat-lbl">Atari Records</div></div>
+      <div class="stat-item"><div class="stat-num">500×</div><div class="stat-lbl">Data Efficiency vs Agent57</div></div>
+      <div class="stat-item"><div class="stat-num">SOTA</div><div class="stat-lbl">MMAU Audio Reasoning</div></div>
+      <div class="stat-item"><div class="stat-num">{{ site.data.citations._total | default: 560 }}+</div><div class="stat-lbl">Scholar Citations</div></div><div class="stat-item"><div class="stat-num">{{ site.data.citations._h_index | default: 12 }}</div><div class="stat-lbl">h-index</div></div>
+      <div class="stat-item"><div class="stat-num">4.0</div><div class="stat-lbl">UIUC Ph.D. GPA</div></div>
+    </div>
+  </div>
+
+  <!-- Research Interests -->
+  <div class="sidebar-card">
+    <div class="sec-title"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-research.png);mask-image:url(/images/icons/sh-research.png)"></i>Research</div>
+    <p class="research-blurb">Making AI systems that <strong>never stop improving themselves</strong> — progressively removing human scaffolding from RL post-training.</p>
+    <div>
+      <span class="interest-tag"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-agentic.png);mask-image:url(/images/icons/h-agentic.png)"></i>RL Post-Training</span>
+    <span class="interest-tag"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-flow.png);mask-image:url(/images/icons/h-flow.png)"></i>Flow/Diffusion RLHF</span>
+      <span class="interest-tag"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-reason.png);mask-image:url(/images/icons/h-reason.png)"></i>Audio/Visual Reasoning LLMs</span>
+      <span class="interest-tag"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-game.png);mask-image:url(/images/icons/h-game.png)"></i>Deep RL (Atari)</span>
+      <span class="interest-tag"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-gear.png);mask-image:url(/images/icons/h-gear.png)"></i>Adaptive KL Control</span>
+      <span class="interest-tag"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-chart.png);mask-image:url(/images/icons/h-chart.png)"></i>Process Reward Design</span>
+      <span class="interest-tag"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-refresh.png);mask-image:url(/images/icons/h-refresh.png)"></i>Recursive Self-Improvement</span>
+    </div>
+  </div>
+
+  <!-- Academic Service -->
+  <div class="sidebar-card">
+    <div class="sec-title"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-search.png);mask-image:url(/images/icons/h-search.png)"></i>Reviewer</div>
+    <ul class="service-list">
+      <li><span class="s-venue">ICML</span> 2023–2024 · <strong>2025 · 2026</strong></li>
+      <li><span class="s-venue">ICLR</span> 2024 · <strong>2025 · 2026</strong></li>
+      <li><span class="s-venue">NeurIPS</span> 2022–2023 · <strong>2024–2026</strong></li>
+      <li><span class="s-venue">COLM</span> <strong>2026</strong> &nbsp;·&nbsp; <span class="s-venue">CVPR</span> <strong>2026</strong></li>
+      <li><span class="s-venue">WACV</span> <strong>2027</strong></li>
+      <li><span class="s-venue">AAAI</span> 2025 · <strong>2027</strong> &nbsp;·&nbsp; <span class="s-venue">AISTATS</span> 2025</li>
+      <li><span class="s-venue">KDD</span> 2024 &nbsp;·&nbsp; <span class="s-venue">TMLR</span></li>
+    </ul>
+  </div>
+
+  <!-- Internship CTA -->
+  <div class="sidebar-card cta-card">
+    <div class="sec-title cta-title"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-megaphone.png);mask-image:url(/images/icons/h-megaphone.png)"></i>Opportunities</div>
+    <p class="cta-text"><strong>Seeking research internship — Spring &amp; Summer 2027.</strong><br>Happy to discuss collaborations on generative model post-training, reasoning LLMs, or RL.</p>
+    <a href="mailto:jiajunf3@illinois.edu" class="cta-btn"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-email.png);mask-image:url(/images/icons/h-email.png)"></i>Get in Touch</a>
+  </div>
+
+</div><!-- /sidebar-col -->
+
+</div><!-- /cv-body -->
 
 <footer>
-  <p>CV &nbsp;|&nbsp; <a href="/">Jiajun Fan</a> · UIUC CS Ph.D. &nbsp;|&nbsp; <a href="/files/CV.pdf">Download PDF CV</a></p>
+  <p><a href="/">Jiajun Fan</a> · UIUC CS Ph.D. · <a href="/files/CV.pdf">Download PDF CV</a></p>
 </footer>
 
 <div id="read-progress" aria-hidden="true"></div>
+<button id="pg-dark" class="pg-fab" aria-label="Toggle dark mode" title="Toggle dark mode"><i class="pg-dico"></i></button>
+<button id="pg-top" class="pg-fab" aria-label="Back to top" title="Back to top"><span class="pg-up"></span></button>
 <script>
 (function(){
   var bar=document.getElementById('read-progress'), top=document.getElementById('pg-top'), dk=document.getElementById('pg-dark');

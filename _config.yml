@@ -212,12 +212,15 @@ defaults:
     values:
       layout: single
       author_profile: true
-  # _publications: one standalone page per paper on the project-page design system
+  # _publications
   - scope:
       path: ""
       type: publications
     values:
-      layout: publication
+      layout: single
+      author_profile: true
+      share: true
+      comments: true
   # keep the noindex lab pages and the search-console verification files out of sitemap.xml
   - scope:
       path: "lab"
