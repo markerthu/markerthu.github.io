@@ -63,6 +63,16 @@ permalink: /projects/
 .reveal-card{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
 .reveal-card.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.reveal-card{opacity:1;transform:none;transition:none}.pcard,.pc-img img{transition:none}}
+
+/* header: left-aligned, same type as /publications/ and the blog list */
+.hero{text-align:left;padding-top:54px}
+.hero .kicker{font-family:var(--sans);text-transform:uppercase;letter-spacing:.145em;font-size:11.52px;line-height:1.7;font-weight:600;color:#6c6860;margin:0 0 .7em}
+.hero h1{font-size:43.2px;font-weight:500;line-height:1.1;letter-spacing:-.02em;color:#1a1815;margin:0 0 .24em}
+.hero .lead{font-size:18.56px;line-height:1.55;color:#6c6860;max-width:44em;margin:0}
+.hero .cta{justify-content:flex-start;margin-top:1.5em}
+body.dark-mode .hero h1{color:#ece8e0}
+body.dark-mode .hero .kicker,body.dark-mode .hero .lead{color:#8f8a80}
+@media(max-width:640px){.hero{padding-top:58px}.hero h1{font-size:33.6px}}
 </style>
 <script data-goatcounter="https://jiajunfan.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 {% include site-chrome.html %}
@@ -86,6 +96,7 @@ permalink: /projects/
 <main>
 <section class="hero" aria-label="Projects">
   <div class="wrap">
+    <p class="kicker">Research</p>
     <h1>Projects</h1>
     <p class="lead">One page per paper: the idea, the evidence, a short film and the BibTeX.</p>
     <div class="cta">

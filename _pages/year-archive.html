@@ -66,11 +66,12 @@ body.dark-mode .blog-index{
 }
 
 /* ── editorial header ── */
-.bx-head{margin:0 0 1.6em;}
+.bx-head{margin:0 0 1.6em;padding-top:18px}
+@media(max-width:600px){.bx-head{padding-top:28px}}
 .bx-sub,.bx-head p{max-width:44em}
-.bx-kicker{font-family:var(--bx-sans);text-transform:uppercase;letter-spacing:.145em;font-size:.72rem;font-weight:600;color:var(--bx-muted);margin-bottom:.7em;}
-.bx-h1{font-family:var(--bx-serif)!important;font-weight:500!important;font-size:2.6rem!important;line-height:1.1!important;letter-spacing:-.02em;color:var(--bx-ink)!important;margin:0 0 .28em!important;}
-.bx-sub{font-family:var(--bx-serif);font-size:1.15rem;line-height:1.55;color:var(--bx-muted);margin:0 0 1.2em;max-width:42em;}
+.bx-kicker{font-family:var(--bx-sans);text-transform:uppercase;letter-spacing:.145em;font-size:11.52px;line-height:1.7;font-weight:600;color:var(--bx-muted);margin-bottom:.7em;}
+.bx-h1{font-family:var(--bx-serif)!important;font-weight:500!important;font-size:43.2px!important;line-height:1.1!important;letter-spacing:-.02em;color:var(--bx-ink)!important;margin:0 0 .24em!important;}
+.bx-sub{font-family:var(--bx-serif);font-size:18.56px;line-height:1.55;color:var(--bx-muted);margin:0 0 1.2em;max-width:44em;}
 .bx-cta{display:inline-flex;align-items:center;gap:8px;font-family:var(--bx-sans);font-size:.86rem;font-weight:600;color:var(--bx-link)!important;text-decoration:none!important;border:1px solid var(--bx-rule);border-radius:999px;padding:7px 16px;transition:.18s;}
 .bx-cta:hover{border-color:var(--bx-link);background:rgba(47,75,143,.06);}
 .lbl-ico{display:inline-block;width:1em;height:1em;vertical-align:-0.14em;margin-right:5px;background-color:currentColor;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;}
@@ -96,7 +97,7 @@ body.dark-mode .blog-index{
 body.dark-mode .bx-thumb{filter:brightness(.92);}
 
 @media(max-width:600px){
-  .bx-h1{font-size:2.05rem!important;}
+  .bx-h1{font-size:33.6px!important;}
   .bx-title{font-size:1.28rem!important;}
   .bx-entry{padding:1.1em .85em;margin:0 -.85em;}
   .bx-entry.has-thumb{grid-template-columns:1fr;gap:14px;}
