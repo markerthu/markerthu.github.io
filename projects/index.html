@@ -74,14 +74,8 @@ body.dark-mode .hero h1{color:#ece8e0}
 body.dark-mode .hero .kicker,body.dark-mode .hero .lead{color:#8f8a80}
 @media(max-width:640px){.hero{padding-top:58px}.hero h1{font-size:33.6px}}
 
-/* the pinned project (Self-Rewriting), owner's 11-20 request: one full-width card at the top */
-.pgrid > .pcard.pc-featured{flex-basis:100%;flex-direction:row;border-color:var(--mint-e)}
-.pc-featured .pc-img{flex:0 0 56%;aspect-ratio:auto;border-bottom:0;border-right:1px solid var(--rule)}
-.pc-featured .pc-body{padding:30px 34px 28px;justify-content:center}
-.pcard.pc-featured h3{font-size:var(--t-h2);line-height:1.2;margin-top:8px}
-.pcard.pc-featured p.pc-desc{font-size:var(--t-body);max-width:34em}
+/* the pinned project (Self-Rewriting) is simply the first card, with a 'Pinned' pill */
 .pc-pin{display:inline-block;padding:2px 10px;margin-right:9px;border-radius:999px;background:var(--ink);color:var(--bg);font-size:var(--t-fine);font-weight:600;line-height:1.5;vertical-align:1px}
-@media(max-width:860px){.pgrid > .pcard.pc-featured{flex-direction:column}.pc-featured .pc-img{flex:none;aspect-ratio:16/9;border-right:0;border-bottom:1px solid var(--rule)}.pc-featured .pc-body{padding:18px 22px 20px}.pcard.pc-featured h3{font-size:var(--t-card)}}
 </style>
 <script data-goatcounter="https://jiajunfan.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 {% include site-chrome.html %}
@@ -120,7 +114,7 @@ body.dark-mode .hero .kicker,body.dark-mode .hero .lead{color:#8f8a80}
   <div class="wrap">
     <p class="eyebrow">2026 <span>10 projects</span> <span class="pc-note">* first or co-first author</span></p>
     <div class="pgrid">
-      <article class="card pcard pc-featured">
+      <article class="card pcard">
         <a class="pc-img" href="/projects/self-rewriting/" tabindex="-1" aria-hidden="true"><img src="/images/featured/selfrw-ai.jpg" alt="" width="600" height="338" loading="eager" decoding="async"></a>
         <div class="pc-body">
           <p class="pc-venue"><span class="pc-pin">Pinned</span>Preprint 2026</p>
