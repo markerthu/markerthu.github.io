@@ -1,0 +1,69 @@
+<figure class="fig panel" id="ks-f01">
+  <div class="ks-two even">
+    <div>
+      <p class="ks-ttl">Change the noise of one step<span>how often the official verdict changes</span></p>
+      <div class="ch anim" id="ch-decide" role="img"></div>
+    </div>
+    <div>
+      <p class="ks-ttl">Order candidates from the preview<span>candidate pairs ordered correctly, by the step that is read</span></p>
+      <p class="ks-key" aria-hidden="true"><span class="k-ours">Keystone score</span><span class="k-vqa">VQAScore</span><span class="k-hps">HPSv2.1</span><span class="k-ir">ImageReward</span></p>
+      <div class="ch anim" id="ch-read" role="img"></div>
+    </div>
+  </div>
+  <figcaption class="cap">SD3.5-Medium, development prompts. Left: 40 sibling groups per step. Right: counting and two-object prompts pooled, 40-step Euler sampler.</figcaption>
+</figure>
+<script>
+(function(){
+  /* Left: steps 1 to 7 of a 10-step stochastic sampler; the printed percentages are the paper's. */
+  var DEC={"steps":[0,1,2,3,4,5,6],"frac":[0.725,0.65,0.425,0.25,0.2,0.25,0.125]}, PCT=[73,65,43,25,20,25,13];
+  /* Right: pairs ordered correctly at each read step, development prompts. */
+  var RD={"ks":{"steps":["4","6","8","10","12","16","20","final"],"acc":[0.6483,0.7383,0.7955,0.8343,0.8358,0.8532,0.8657,0.8871]},"hps":{"steps":["4","6","8","10","12","16","20","final"],"acc":[0.5622,0.5711,0.6219,0.6826,0.7164,0.7522,0.7751,0.808]},"ir":{"steps":["4","6","8","10","12","16","20","final"],"acc":[0.5154,0.5055,0.5652,0.6338,0.7045,0.7323,0.7443,0.804]},"vqa":{"steps":["4","6","8","10","12","16","20","final"],"acc":[0.5194,0.6095,0.6557,0.7199,0.7522,0.7761,0.7925,0.8194]}};
+  var NAMES={ks:'Keystone score',vqa:'VQAScore',hps:'HPSv2.1',ir:'ImageReward'}, ORDER=['ir','hps','vqa','ks'];
+  function f(v){return (Math.round(v*10)/10).toString();}
+  function tx(x,y,s,cls,anchor,extra){return '<text x="'+f(x)+'" y="'+f(y)+'"'+(cls?' class="'+cls+'"':'')+(anchor?' text-anchor="'+anchor+'"':'')+(extra||'')+'>'+s+'</text>';}
+  var dEl=document.getElementById('ch-decide'), rEl=document.getElementById('ch-read');
+  dEl.setAttribute('aria-label','Changing only the noise of one step of a 10-step stochastic sampler changes the official verdict in '+PCT.map(function(p,i){return p+'% of groups for step '+(DEC.steps[i]+1);}).join(', ')+'. The first two steps change it most often.');
+  rEl.setAttribute('aria-label','Fraction of candidate pairs ordered correctly from the preview read at steps 4, 6, 8, 10, 12, 16, 20 and from the finished image; chance is 0.50. '+['ks','vqa','hps','ir'].map(function(k){return NAMES[k]+': '+RD[k].acc.map(function(v){return v.toFixed(2);}).join(', ');}).join('. ')+'.');
+
+  function decide(el){
+    var cw=el.clientWidth; if(!cw) return;
+    var W=Math.round(Math.max(290,Math.min(cw,520))), H=300, m={l:38,r:6,t:52,b:46}, n=DEC.frac.length, bw=(W-m.l-m.r)/n;
+    var Y=function(v){return m.t+(H-m.t-m.b)*(1-v/0.8);}, s='';
+    [0,0.2,0.4,0.6,0.8].forEach(function(v){s+='<line class="grid" x1="'+m.l+'" x2="'+(W-m.r)+'" y1="'+f(Y(v))+'" y2="'+f(Y(v))+'"/>'+tx(m.l-8,Y(v)+4,Math.round(v*100)+'%','sm','end');});
+    DEC.frac.forEach(function(v,i){
+      var x=m.l+bw*i+bw*0.18, w=bw*0.64, key=i<2, dl=(0.2+i*0.1).toFixed(2);
+      s+='<rect class="'+(key?'d-mint':'d-ir')+' growy" style="--d:'+dl+'s" x="'+f(x)+'" y="'+f(Y(v))+'" width="'+f(w)+'" height="'+f(Y(0)-Y(v))+'" rx="3"/>';
+      s+=tx(x+w/2,Y(v)-7,PCT[i]+'%',(key?'t-mint ':'')+'sm fade','middle',' style="--d:'+(+dl+0.5).toFixed(2)+'s;font-weight:'+(key?700:600)+(key?'':';fill:var(--body)')+'"');
+      s+=tx(x+w/2,H-m.b+18,String(DEC.steps[i]+1),'sm','middle');
+    });
+    s+=tx(m.l+(W-m.l-m.r)/2,H-6,'step whose noise is changed, of 10','sm','middle');
+    var bx0=m.l+bw*0.18, bx1=m.l+bw+bw*0.82, by=Y(0.8)-18;
+    s+='<path class="brk draw" style="--d:1.2s" d="M'+f(bx0)+','+f(by+7)+'V'+f(by)+'H'+f(bx1)+'V'+f(by+7)+'"/>';
+    s+=tx(bx1+8,by+5,'decided here','t-mint fade','',' style="--d:1.5s;font-weight:700"');
+    el.innerHTML='<svg viewBox="0 0 '+W+' '+H+'" style="max-width:'+W+'px" aria-hidden="true">'+s+'</svg>';
+  }
+  function readable(el){
+    var cw=el.clientWidth; if(!cw) return;
+    var W=Math.round(Math.max(290,Math.min(cw,540))), H=290, m={l:40,r:10,t:22,b:46}, st=RD.ks.steps, n=st.length;
+    var X=function(i){return m.l+(W-m.l-m.r)*i/(n-1);}, Y=function(v){return m.t+(H-m.t-m.b)*(0.95-v)/0.45;}, s='', i8=st.indexOf('8');
+    s+='<rect class="mark8 fade" style="--d:.1s" x="'+f(X(i8)-12)+'" y="'+m.t+'" width="24" height="'+f(Y(0.5)-m.t)+'" rx="5"/>';
+    [0.5,0.6,0.7,0.8,0.9].forEach(function(v){s+='<line class="grid" x1="'+m.l+'" x2="'+(W-m.r)+'" y1="'+f(Y(v))+'" y2="'+f(Y(v))+'"/>'+tx(m.l-8,Y(v)+4,v.toFixed(1),'sm','end');});
+    s+='<line class="chance" x1="'+m.l+'" x2="'+(W-m.r)+'" y1="'+f(Y(0.5))+'" y2="'+f(Y(0.5))+'"/>'+tx(W-m.r,Y(0.5)-6,'chance','sm t-mut','end');
+    st.forEach(function(lab,i){s+=tx(i===n-1?W:X(i),H-m.b+18,lab,'sm'+(i===i8?' t-mint':''),i===n-1?'end':'middle',i===i8?' style="font-weight:700"':'');});
+    s+=tx(m.l+(W-m.l-m.r)/2,H-6,'step that is read','sm','middle');
+    ORDER.forEach(function(k,j){
+      var a=RD[k].acc, d='', dl=(0.2+j*0.2).toFixed(2), cls={ks:'ours',vqa:'vqa',hps:'hps',ir:'ir'}[k];
+      a.forEach(function(v,i){d+=(i?'L':'M')+f(X(i))+','+f(Y(v));});
+      s+='<path class="l-'+cls+' draw" style="--d:'+dl+'s" d="'+d+'"/>';
+      s+='<circle class="m-'+cls+' pop" style="--d:'+(+dl+0.9).toFixed(2)+'s" cx="'+f(X(i8))+'" cy="'+f(Y(a[i8]))+'" r="'+(k==='ks'?5.5:4.5)+'"/>';
+      if(W>=420||k==='ks') s+=tx(X(i8)-10,Y(a[i8])+4,a[i8].toFixed(2),'sm fade halo','end',' style="--d:'+(+dl+1.1).toFixed(2)+'s;font-weight:'+(k==='ks'?700:600)+';fill:var('+(k==='ks'?'--mint-t':k==='vqa'?'--ice-t':k==='hps'?'--lav-t':'--muted')+')"');
+    });
+    el.innerHTML='<svg viewBox="0 0 '+W+' '+H+'" style="max-width:'+W+'px" aria-hidden="true">'+s+'</svg>';
+    [].slice.call(el.querySelectorAll('.draw')).forEach(function(p){try{p.style.setProperty('--len',Math.ceil(p.getTotalLength())+2);}catch(e){}});
+  }
+  function build(){decide(dEl);readable(rEl);[].slice.call(dEl.querySelectorAll('.draw')).forEach(function(p){try{p.style.setProperty('--len',Math.ceil(p.getTotalLength())+2);}catch(e){}});}
+  build();
+  var lw=window.innerWidth,rt=0;
+  window.addEventListener('resize',function(){if(Math.abs(window.innerWidth-lw)<30)return;clearTimeout(rt);rt=setTimeout(function(){lw=window.innerWidth;build();},180);});
+})();
+</script>

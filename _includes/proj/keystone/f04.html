@@ -1,0 +1,41 @@
+<div class="cards c3 ks-drop" style="margin-top:var(--sp-fig)">
+  <div class="card"><h3>Best-of-N</h3><p>Better than every other verifier at every N from 2 to 8.</p><div class="ch anim mini-bon" id="ch-bon" role="img"></div></div>
+  <div class="card"><h3>Progressive seed pruning</h3><p class="v">+0.071</p><p>with the Keystone score in place of ImageReward</p><svg class="swap anim" viewBox="0 0 300 44" aria-hidden="true"><rect class="sw-off" x="1" y="8" width="118" height="28" rx="14"/><text x="60" y="27" text-anchor="middle" class="sw-t-off">ImageReward</text><path class="sw-ar draw" style="--d:.3s;--len:52" d="M128 22h34m-6-6 6 6-6 6"/><rect class="sw-on pop" style="--d:.7s" x="170" y="8" width="128" height="28" rx="14"/><text x="234" y="27" text-anchor="middle" class="sw-t-on fade" style="--d:.8s">Keystone score</text></svg></div>
+  <div class="card"><h3>FK steering</h3><p class="v"><small>0.709 &rarr; 0.754</small>+0.045</p><p>with the Keystone score in place of ImageReward</p><svg class="swap anim" viewBox="0 0 300 44" aria-hidden="true"><rect class="sw-off" x="1" y="8" width="118" height="28" rx="14"/><text x="60" y="27" text-anchor="middle" class="sw-t-off">ImageReward</text><path class="sw-ar draw" style="--d:.3s;--len:52" d="M128 22h34m-6-6 6 6-6 6"/><rect class="sw-on pop" style="--d:.7s" x="170" y="8" width="128" height="28" rx="14"/><text x="234" y="27" text-anchor="middle" class="sw-t-on fade" style="--d:.8s">Keystone score</text></svg></div>
+</div>
+<div class="ks-gal anim" id="ks-gal">
+  <div class="mod"><h3>SD3.5-Medium</h3><div class="ims"><img style="--d:.1s" src="/images/projects/keystone/gallery_sd35m_0.jpg" alt="An open book with a quill pen" width="320" height="320" loading="lazy"><img style="--d:.16s" src="/images/projects/keystone/gallery_sd35m_1.jpg" alt="A man in a brown hat, seen from behind" width="320" height="320" loading="lazy"><img style="--d:.22s" src="/images/projects/keystone/gallery_sd35m_2.jpg" alt="A green and an orange jack-o’-lantern" width="320" height="320" loading="lazy"></div></div>
+  <div class="mod"><h3>FLUX.1-dev</h3><div class="ims"><img style="--d:.3s" src="/images/projects/keystone/gallery_flux_0.jpg" alt="A steam locomotive behind potted plants on a windowsill" width="320" height="320" loading="lazy"><img style="--d:.36s" src="/images/projects/keystone/gallery_flux_1.jpg" alt="A hot dog on an orange suitcase" width="320" height="320" loading="lazy"><img style="--d:.42s" src="/images/projects/keystone/gallery_flux_2.jpg" alt="A red and black city bus on a street" width="320" height="320" loading="lazy"></div></div>
+  <div class="mod"><h3>SDXL</h3><div class="ims"><img style="--d:.5s" src="/images/projects/keystone/gallery_sdxl_0.jpg" alt="A pink and green motorcycle in front of a pink wall" width="320" height="320" loading="lazy"><img style="--d:.56s" src="/images/projects/keystone/gallery_sdxl_1.jpg" alt="A yellow kitchen with a keyboard on the counter" width="320" height="320" loading="lazy"><img style="--d:.62s" src="/images/projects/keystone/gallery_sdxl_2.jpg" alt="A brown suitcase on the deck of a boat" width="320" height="320" loading="lazy"></div></div>
+  <div class="mod"><h3>Sana-0.6B</h3><div class="ims"><img style="--d:.7s" src="/images/projects/keystone/gallery_sana_0.jpg" alt="Airplanes flying in a blue sky" width="320" height="320" loading="lazy"><img style="--d:.76s" src="/images/projects/keystone/gallery_sana_1.jpg" alt="Rows of colourful cars" width="320" height="320" loading="lazy"><img style="--d:.82s" src="/images/projects/keystone/gallery_sana_2.jpg" alt="A brown backpack and a blue cow" width="320" height="320" loading="lazy"></div></div>
+</div>
+<p class="ks-bench"><b>Benchmarks</b><span>GenEval</span><span>T2I-CompBench</span><span>GenAI-Bench</span></p>
+<p class="cap">Drop-in: GenEval overall on SD3.5-Medium, same candidates, only the judge changes. Other models: a language model writes each prompt&rsquo;s slots once; each benchmark&rsquo;s own metric scores the images.</p>
+<script>
+(function(){
+  /* best-of-N with each verifier, N = 1 to 8 (40 network evaluations each); "ks" is the Keystone score. */
+  var BON={"ks":[[40,0.6785],[80,0.7437],[120,0.7731],[160,0.7906],[200,0.8021],[240,0.8102],[280,0.816],[320,0.8201]],"vqa":[[40,0.6785],[80,0.7271],[120,0.747],[160,0.7581],[200,0.7655],[240,0.7711],[280,0.7757],[320,0.7798]],"ir":[[40,0.6785],[80,0.7237],[120,0.7413],[160,0.751],[200,0.7571],[240,0.7613],[280,0.7644],[320,0.7669]],"hps":[[40,0.6785],[80,0.7192],[120,0.7353],[160,0.7435],[200,0.7483],[240,0.7513],[280,0.7531],[320,0.7542]]};
+  var NAMES={ks:'Keystone score',vqa:'VQAScore',ir:'ImageReward',hps:'HPSv2.1'};
+  var el=document.getElementById('ch-bon'); if(!el) return;
+  el.setAttribute('aria-label','Best-of-N on GenEval with SD3.5-Medium, N from 1 to 8. '+['ks','vqa','ir','hps'].map(function(k){return NAMES[k]+': '+BON[k].map(function(p){return p[1].toFixed(2);}).join(', ');}).join('. ')+'.');
+  function f(v){return (Math.round(v*10)/10).toString();}
+  function tx(x,y,s,cls,anchor,extra){return '<text x="'+f(x)+'" y="'+f(y)+'"'+(cls?' class="'+cls+'"':'')+(anchor?' text-anchor="'+anchor+'"':'')+(extra||'')+'>'+s+'</text>';}
+  function build(){
+    var cw=el.clientWidth; if(!cw) return;
+    var W=Math.round(Math.max(220,Math.min(cw,420))), H=118, m={l:4,r:4,t:14,b:22};
+    var X=function(n){return m.l+(W-m.l-m.r)*(n-1)/7;}, Y=function(v){return m.t+(H-m.t-m.b)*(0.83-v)/(0.83-0.67);}, s='';
+    [1,4,8].forEach(function(n){s+='<line class="grid" x1="'+f(X(n))+'" x2="'+f(X(n))+'" y1="'+m.t+'" y2="'+(H-m.b)+'"/>'+tx(X(n),H-6,'N = '+n,'sm',n===1?'start':n===8?'end':'middle');});
+    ['hps','ir','vqa','ks'].forEach(function(k,j){
+      var d='';BON[k].forEach(function(p,i){d+=(i?'L':'M')+f(X(i+1))+','+f(Y(p[1]));});
+      s+='<path class="l-'+(k==='ks'?'ours':k)+' draw" style="--d:'+(0.2+j*0.2).toFixed(2)+'s" d="'+d+'"/>';
+    });
+    var e=BON.ks[7];
+    s+='<circle class="m-ours pop" style="--d:1.4s" cx="'+f(X(8))+'" cy="'+f(Y(e[1]))+'" r="4.5"/>'+tx(X(8)-8,Y(e[1])-8,'Keystone score','t-mint sm fade','end',' style="--d:1.5s;font-weight:700"');
+    el.innerHTML='<svg viewBox="0 0 '+W+' '+H+'" aria-hidden="true">'+s+'</svg>';
+    [].slice.call(el.querySelectorAll('.draw')).forEach(function(p){try{p.style.setProperty('--len',Math.ceil(p.getTotalLength())+2);}catch(e){}});
+  }
+  build();
+  var lw=window.innerWidth,rt=0;
+  window.addEventListener('resize',function(){if(Math.abs(window.innerWidth-lw)<30)return;clearTimeout(rt);rt=setTimeout(function(){lw=window.innerWidth;build();},180);});
+})();
+</script>

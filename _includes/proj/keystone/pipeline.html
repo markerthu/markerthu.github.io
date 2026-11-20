@@ -1,0 +1,92 @@
+<figure class="ks-pipe anim" id="ks-pipe">
+  <ol class="pp-steps">
+    <li class="pp k-hps" style="--d:.1s">
+      <p class="pp-n"><span class="n">1</span>Compile</p>
+      <div class="pp-fig" data-k="compile" role="img" aria-label="Schematic. The prompt becomes typed questions: presence and count, colour, and position."></div>
+      <p class="pp-say">The prompt becomes typed questions: <b>presence and count, colour, position</b>.</p>
+    </li>
+    <li class="pp k-vqa" style="--d:.5s">
+      <p class="pp-n"><span class="n">2</span>Read</p>
+      <div class="pp-fig" data-k="read" role="img" aria-label="The step-8 preview of a candidate for a photo of four bananas is read; its Keystone score is 0.94, the smallest of its answers."></div>
+      <p class="pp-say">At a key step the decision model answers every question from the preview; the score is <b>the smallest answer</b>.</p>
+    </li>
+    <li class="pp k-edit" style="--d:.9s">
+      <p class="pp-n"><span class="n">3</span>Search</p>
+      <div class="pp-fig" data-k="search" role="img" aria-label="Schematic. Adaptive search: one candidate is read at step 16; with a score of 0.85 or more it is finished, otherwise five more are drawn and the best is finished. Pruning: eight candidates, four kept at step 8, two kept at step 16, and the two finished images are compared."></div>
+      <p class="pp-say"><b>Adaptive search</b> reads one candidate at step 16 and finishes it at 0.85 or above, else draws five more and finishes the best. <b>Pruning</b> keeps four of eight at step 8 and two at step 16, then compares the two finished images.</p>
+    </li>
+  </ol>
+</figure>
+<script>
+(function(){
+  var hosts=[].slice.call(document.querySelectorAll('#ks-pipe .pp-fig')); if(!hosts.length) return;
+  function f(v){return (Math.round(v*10)/10).toString();}
+  function tx(x,y,s,cls,anchor,extra){return '<text x="'+f(x)+'" y="'+f(y)+'"'+(cls?' class="'+cls+'"':'')+(anchor?' text-anchor="'+anchor+'"':'')+(extra||'')+'>'+s+'</text>';}
+  function compile(W){
+    var s='', cw=Math.min(W-8,250), cx=W/2, y0=8;
+    s+='<rect class="pf-card fade" style="--d:.15s" x="'+f(cx-cw/2)+'" y="'+y0+'" width="'+f(cw)+'" height="34" rx="8"/>';
+    s+=tx(cx,y0+22,'&ldquo;a photo of four bananas&rdquo;','t-ink fade','middle',' style="--d:.2s"');
+    var types=[['presence and count',0],['colour',1],['position',2]], qw=Math.min((W-16)/3,104), gap=(W-3*qw)/2;
+    types.forEach(function(q,i){var qx=i*(qw+gap), qy=86;
+      s+='<path class="pf-ln draw" style="--d:'+(0.45+i*0.15).toFixed(2)+'s" d="M'+f(cx)+','+(y0+34)+' C'+f(cx)+','+(y0+58)+' '+f(qx+qw/2)+','+(qy-26)+' '+f(qx+qw/2)+','+(qy-2)+'"/>';
+      s+='<rect class="pf-q pop" style="--d:'+(0.9+i*0.15).toFixed(2)+'s" x="'+f(qx)+'" y="'+qy+'" width="'+f(qw)+'" height="40" rx="8"/>';
+      var lines=q[0]==='presence and count'?['presence','and count']:[q[0]];
+      lines.forEach(function(l,k){s+=tx(qx+qw/2,qy+(lines.length>1?17+k*14:25),l,'t-lav w6 fade','middle',' style="--d:'+(1.0+i*0.15).toFixed(2)+'s"');});
+    });
+    return {s:s,h:134};
+  }
+  function read(W){
+    var s='', im=Math.min(110,W*0.42), x=4, y=6, ox=x+im+26, ow=W-ox-4;
+    s+='<defs><clipPath id="pp-clip"><rect x="'+x+'" y="'+y+'" width="'+f(im)+'" height="'+f(im)+'" rx="8"/></clipPath><linearGradient id="pp-scan" x1="0" x2="1"><stop offset="0" stop-color="var(--ice-e)" stop-opacity="0"/><stop offset="1" stop-color="var(--ice-e)" stop-opacity=".55"/></linearGradient></defs>';
+    s+='<image href="/images/projects/keystone/bananas_b3_8.jpg" x="'+x+'" y="'+y+'" width="'+f(im)+'" height="'+f(im)+'" clip-path="url(#pp-clip)" preserveAspectRatio="xMidYMid slice"/>';
+    s+='<rect x="'+x+'" y="'+y+'" width="'+f(im)+'" height="'+f(im)+'" rx="8" fill="none" stroke="var(--rule)"/>';
+    s+='<g clip-path="url(#pp-clip)"><rect class="scan" style="--tx:'+f(im)+'px" x="'+f(x-28)+'" y="'+y+'" width="28" height="'+f(im)+'" fill="url(#pp-scan)"/></g>';
+    s+=tx(x+im/2,y+im+20,'preview, step 8','','middle');
+    s+='<path class="pf-ln draw" style="--d:1.5s" d="M'+f(x+im+6)+','+f(y+im/2)+'H'+f(ox-6)+'M'+f(ox-11)+','+f(y+im/2-5)+'L'+f(ox-6)+','+f(y+im/2)+'L'+f(ox-11)+','+f(y+im/2+5)+'"/>';
+    var bw=Math.min(ow,120), by=y+im/2-26;
+    s+='<rect class="pf-min pop" style="--d:1.8s" x="'+f(ox)+'" y="'+f(by)+'" width="'+f(bw)+'" height="52" rx="10"/>';
+    s+=tx(ox+bw/2,by+22,'score','t-mint fade','middle',' style="--d:1.9s;font-weight:600"');
+    s+=tx(ox+bw/2,by+42,'0.94','t-mint fade','middle',' style="--d:1.9s;font-weight:700;font-size:var(--t-label)"');
+    return {s:s,h:Math.ceil(y+im+26)};
+  }
+  function search(W){
+    var s='', L=8, R=W-8, X=function(v){return L+(R-L)*v/40;}, d=0;
+    /* adaptive search */
+    s+=tx(0,12,'adaptive search','t-ink w6');
+    var ya=38, yb=58;
+    s+='<line class="pf-ln draw" style="--d:.2s" x1="'+f(X(0))+'" x2="'+f(X(16))+'" y1="'+ya+'" y2="'+ya+'"/>';
+    s+='<circle class="pf-dot pop" style="--d:.15s" cx="'+f(X(0))+'" cy="'+ya+'" r="4.5"/>';
+    s+='<rect class="pf-min pop" style="--d:.8s" x="'+f(X(16)-5)+'" y="'+(ya-5)+'" width="10" height="10" rx="2" transform="rotate(45 '+f(X(16))+' '+ya+')"/>';
+    s+='<line class="pf-ln draw" style="--d:1.0s;stroke:var(--mint-e)" x1="'+f(X(16)+7)+'" x2="'+f(X(40)-6)+'" y1="'+ya+'" y2="'+ya+'"/>';
+    s+='<rect class="pf-dot fin pop" style="--d:1.5s" x="'+f(X(40)-6)+'" y="'+(ya-6)+'" width="12" height="12" rx="3"/>';
+    s+=tx(X(28),ya-8,'&ge; 0.85: finish','t-mint fade','middle',' style="--d:1.2s"');
+    s+='<path class="pf-ln draw" style="--d:1.0s" d="M'+f(X(16))+','+(ya+7)+'V'+yb+'"/>';
+    for(var k=0;k<5;k++){var xx=X(16)+(X(40)-X(16))*(k+0.6)/6;s+='<circle class="pf-dot pop" style="--d:'+(1.3+k*0.08).toFixed(2)+'s" cx="'+f(xx)+'" cy="'+yb+'" r="3.6"/>';}
+    s+=tx(X(16)-6,yb+4,'else','fade','end',' style="--d:1.2s"');
+    s+=tx(X(28),yb+20,'five more, finish the best','fade','middle',' style="--d:1.6s"');
+    /* pruning */
+    var y0=110, gap=12;
+    s+='<line class="pf-sep" x1="0" x2="'+W+'" y1="'+(yb+36)+'" y2="'+(yb+36)+'"/>';
+    s+=tx(0,y0-4,'pruning','t-ink w6');
+    var K4=[1,3,4,5], K2=[1,4], yy=function(i){return y0+12+i*gap;};
+    for(var i=0;i<8;i++){
+      var e=K2.indexOf(i)>=0?40:K4.indexOf(i)>=0?16:8;
+      s+='<line class="pf-ln draw" style="--d:'+(1.8+i*0.04).toFixed(2)+'s;'+(e===40?'stroke:var(--mint-e)':'')+'" x1="'+f(X(0))+'" x2="'+f(X(e)-(e===40?6:0))+'" y1="'+f(yy(i))+'" y2="'+f(yy(i))+'"/>';
+      s+='<circle class="pf-dot pop" style="--d:'+(1.75+i*0.04).toFixed(2)+'s" cx="'+f(X(0))+'" cy="'+f(yy(i))+'" r="3"/>';
+      if(e<40)s+='<circle class="pf-dot off pop" style="--d:'+(2.3+(e===16?0.4:0)).toFixed(2)+'s" cx="'+f(X(e))+'" cy="'+f(yy(i))+'" r="3"/>';
+      else s+='<rect class="pf-dot '+(i===4?'fin':'on')+' pop" style="--d:2.9s" x="'+f(X(40)-5)+'" y="'+f(yy(i)-5)+'" width="10" height="10" rx="2.5"/>';
+    }
+    [[8,'step 8'],[16,'16'],[40,'40']].forEach(function(p){s+='<line x1="'+f(X(p[0]))+'" x2="'+f(X(p[0]))+'" y1="'+(y0+4)+'" y2="'+f(yy(7)+8)+'" stroke="var(--hair)" stroke-dasharray="2 3"/>'+tx(X(p[0]),yy(7)+22,p[1],'','middle');});
+    return {s:s,h:Math.ceil(yy(7)+28)};
+  }
+  function build(h){
+    var W=Math.round(Math.max(220,Math.min(420,h.clientWidth))), k=h.getAttribute('data-k'), r=k==='compile'?compile(W):k==='read'?read(W):search(W);
+    h.innerHTML='<svg viewBox="0 0 '+W+' '+r.h+'" aria-hidden="true">'+r.s+'</svg>';
+    [].slice.call(h.querySelectorAll('.draw')).forEach(function(p){try{p.style.setProperty('--len',Math.ceil(p.getTotalLength())+2);}catch(e){}});
+  }
+  var lw=0;
+  function all(){hosts.forEach(build);lw=window.innerWidth;}
+  all();
+  var rt=0;window.addEventListener('resize',function(){if(Math.abs(window.innerWidth-lw)<30)return;clearTimeout(rt);rt=setTimeout(all,180);});
+})();
+</script>

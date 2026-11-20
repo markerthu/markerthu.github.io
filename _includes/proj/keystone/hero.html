@@ -1,0 +1,167 @@
+<script>
+/* Hero: Keystone's pruning on "a photo of four bananas". Eight candidates rise out of noise along the 40 denoising
+   steps; each tile's height is the step it has reached. Read at step 8 (keep four) and step 16 (keep two); the two
+   kept are finished and the higher final score is kept. Scores are the Keystone scores of these previews. */
+(function(){
+  var cv=document.getElementById('ks-stage'); if(!cv||!cv.getContext) return;
+  var ctx=cv.getContext('2d'), W=0, H=0, dpr=1, G=null, C=null;
+  var mq=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)'):{matches:false};
+  var steps=[].slice.call(document.querySelectorAll('.stage-steps li'));
+  var T=16.6, FINAL=15.2, visible=true, raf=0, t0=0, lastStep=-1;
+  var S8=[0.90,0.93,0.05,0.94,0.94,0.93,0.93,0.07], S16=[0.92,0.96,0.04,0.93,0.95,0.91,0.92,0.04], SF={1:0.90,4:0.93};
+  function top(ids,sc,k){return ids.slice().sort(function(a,b){return sc[b]-sc[a]||a-b;}).slice(0,k);}
+  var ALL=[0,1,2,3,4,5,6,7], K8=top(ALL,S8,4), K16=top(K8,S16,2), PICK=K16.slice().sort(function(a,b){return SF[b]-SF[a];})[0];
+  var STOP=ALL.map(function(b){return K16.indexOf(b)>=0?40:K8.indexOf(b)>=0?16:8;});
+  var FR=[4,8,12,16,20,40], IMG={};
+  function src(b,s){return '/images/projects/keystone/bananas_b'+b+'_'+(s===40?'final':s)+'.jpg';}
+  function img(b,s){var k=b+'_'+s;if(!IMG[k]){var i=new Image();i.decoding='async';i.onload=function(){if(mq.matches)still();};i.src=src(b,s);IMG[k]=i;}return IMG[k];}
+  ALL.forEach(function(b){FR.forEach(function(s){if(s<=STOP[b])img(b,s);});});
+
+  function hex(s){s=s.trim().replace('#','');if(s.length===3)s=s[0]+s[0]+s[1]+s[1]+s[2]+s[2];return [parseInt(s.slice(0,2),16),parseInt(s.slice(2,4),16),parseInt(s.slice(4,6),16)];}
+  function rgba(c,a){return 'rgba('+(c[0]|0)+','+(c[1]|0)+','+(c[2]|0)+','+(a==null?1:a<0?0:a>1?1:a)+')';}
+  function clamp(x){return x<0?0:x>1?1:x;}
+  function ease(x){x=clamp(x);return x*x*(3-2*x);}
+  function seg(t,a,b){return clamp((t-a)/(b-a));}
+  function colors(){
+    var cs=getComputedStyle(document.body), v=function(n){return hex(cs.getPropertyValue(n));};
+    C={bg:v('--bg'),card:v('--card'),ink:v('--ink'),body:v('--body'),muted:v('--muted'),faint:v('--faint'),hair:v('--hair'),rule:v('--rule'),
+       mint:v('--mint'),mintE:v('--mint-e'),mintT:v('--mint-t'),mintL:v('--mint-l'),lavE:v('--lav-e'),lavT:v('--lav-t'),iceE:v('--ice-e'),
+       dark:document.body.classList.contains('dark-mode'),sans:cs.getPropertyValue('--sans')};
+  }
+
+  /* one fixed field of colour noise per candidate */
+  var rnd=(function(){var s=20261119;return function(){s=(s*1664525+1013904223)%4294967296;return s/4294967296;};})();
+  var NOISE=ALL.map(function(){
+    var n=24, c=document.createElement('canvas');c.width=n;c.height=n;var g=c.getContext('2d'), d=g.createImageData(n,n);
+    for(var i=0;i<n*n;i++){var base=128+(rnd()-0.5)*120;d.data[i*4]=base+(rnd()-0.5)*90;d.data[i*4+1]=base+(rnd()-0.5)*90;d.data[i*4+2]=base+(rnd()-0.5)*90;d.data[i*4+3]=255;}
+    g.putImageData(d,0,0);return c;
+  });
+
+  function layout(){
+    var rc=cv.getBoundingClientRect();W=Math.max(280,rc.width);H=Math.max(240,rc.height);
+    dpr=Math.min(2,window.devicePixelRatio||1);cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);
+    var wide=W>=620;G={wide:wide};
+    if(wide){
+      /* one row of eight; the axis on the left; a tile's centre sits at the step it has reached */
+      G.ax=34;G.x0=50;var pitch=(W-G.x0-2)/8;G.ts=Math.round(Math.min(82,pitch-12,(H-70)/3.3));
+      G.cols=ALL.map(function(b){return G.x0+pitch*(b+0.5);});G.rowOf=ALL.map(function(){return 0;});
+      G.bands=[[36+G.ts/2,H-20-G.ts/2]];G.lab=13;
+    }else{
+      /* two rows of four, each with its own copy of the axis */
+      G.ax=26;G.x0=38;var p2=(W-G.x0-6)/4;G.ts=Math.round(Math.min(64,p2-14));
+      G.cols=ALL.map(function(b){return G.x0+p2*(b%4+0.5);});G.rowOf=ALL.map(function(b){return b<4?0:1;});
+      var hb=(H-28)/2;G.bands=[[30+G.ts/2,28+hb-G.ts/2-14],[30+hb+G.ts/2,H-G.ts/2-14]];G.lab=12;
+    }
+  }
+  /* the step scale is compressed (power 0.6) so that steps 8 and 16 stand apart; the ticks give the true steps */
+  function sc(s){return Math.pow(Math.max(0,s)/40,0.6);}
+  function ys(b,s){var bd=G.bands[G.rowOf[b]];return bd[1]-(bd[1]-bd[0])*sc(s);}
+  function yb(r,s){var bd=G.bands[r];return bd[1]-(bd[1]-bd[0])*sc(s);}
+  function rr(x,y,w,h,r){ctx.beginPath();if(ctx.roundRect)ctx.roundRect(x,y,w,h,r);else ctx.rect(x,y,w,h);}
+  function fnt(w,s){return w+' '+s+'px '+C.sans;}
+  function text(s,x,y,f,col,a,al){if(a<=0.01)return;ctx.globalAlpha=a;ctx.font=f;ctx.fillStyle=rgba(col,1);ctx.textAlign=al||'center';ctx.textBaseline='alphabetic';ctx.fillText(s,x,y);ctx.globalAlpha=1;}
+  function ready(i){return i&&i.complete&&i.naturalWidth>0;}
+
+  /* the image a candidate shows at step s: the recorded previews, cross-faded, out of noise */
+  function face(b,x,y,sz,s){
+    var lo=0,hi=FR[0];
+    for(var k=0;k<FR.length;k++){if(FR[k]<=s)lo=FR[k];if(FR[k]>s){hi=FR[k];break;}if(k===FR.length-1)hi=FR[k];}
+    var u=hi>lo?(s-lo)/(hi-lo):1;
+    ctx.save();rr(x,y,sz,sz,8);ctx.clip();
+    ctx.fillStyle=rgba(C.hair,1);ctx.fillRect(x,y,sz,sz);
+    if(lo===0){ctx.imageSmoothingEnabled=false;ctx.drawImage(NOISE[b],x,y,sz,sz);ctx.imageSmoothingEnabled=true;}
+    else{var a=img(b,lo);if(ready(a))ctx.drawImage(a,x,y,sz,sz);}
+    if(u>0&&hi!==lo){var c=img(b,hi);if(ready(c)){ctx.globalAlpha=lo===0?ease(u):u;ctx.drawImage(c,x,y,sz,sz);ctx.globalAlpha=1;}}
+    ctx.restore();
+  }
+  function pill(txt,cx,cy,col,edge,a){
+    if(a<=0.01)return;ctx.font=fnt(600,12);var w=ctx.measureText(txt).width+14,h=19;
+    ctx.globalAlpha=a;rr(cx-w/2,cy-h/2,w,h,h/2);ctx.fillStyle=rgba(C.card,1);ctx.fill();ctx.lineWidth=1;ctx.strokeStyle=rgba(edge,1);ctx.stroke();ctx.globalAlpha=1;
+    text(txt,cx,cy+4.3,fnt(600,12),col,a);
+  }
+
+  function draw(t){
+    if(!G||!C) return;
+    ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,W,H);
+    var fade=seg(t,0,0.5)*(1-seg(t,T-0.6,T));
+    var step=t<3.4?0:t<7.6?1:t<9.8?2:3;
+    if(step!==lastStep){lastStep=step;steps.forEach(function(el,k){el.classList.toggle('on',k===step);});}
+    var s=t<3.4?8*ease(seg(t,0.4,3.4)):t<5.6?8:t<7.6?8+8*ease(seg(t,5.6,7.6)):t<9.8?16:16+24*ease(seg(t,9.8,13));
+    var r8=seg(t,3.4,3.7)*(1-seg(t,5.3,5.8)), r16=seg(t,7.6,7.9)*(1-seg(t,9.5,10)), cut8=ease(seg(t,4.9,5.5)), cut16=ease(seg(t,9,9.6));
+    var pick=ease(seg(t,13.5,14.1));
+    ctx.globalAlpha=1;
+    ctx.save();ctx.globalAlpha=fade;
+
+    /* the step axis, once per row */
+    var rows=G.wide?1:2, xL=G.x0+4, xR=W-2;
+    text('“a photo of four bananas”',G.wide?W/2:W/2,16,fnt(600,G.lab+1),C.ink,fade);
+    for(var r=0;r<rows;r++){
+      var y0=yb(r,0), y40=yb(r,40);
+      ctx.lineWidth=1;ctx.strokeStyle=rgba(C.hair,fade);ctx.beginPath();ctx.moveTo(G.ax,y0);ctx.lineTo(G.ax,y40);ctx.stroke();
+      [0,8,16,40].forEach(function(v){var y=yb(r,v);
+        ctx.strokeStyle=rgba(C.hair,fade);ctx.beginPath();ctx.moveTo(G.ax-4,y);ctx.lineTo(G.ax,y);ctx.stroke();
+        text(String(v),G.ax-8,y+4,fnt(500,12),C.muted,fade,'right');});
+      if(r===0)text('step',2,y40-16,fnt(500,12),C.faint,fade,'left');
+      [[8,r8],[16,r16]].forEach(function(p){var y=yb(r,p[0]);
+        ctx.save();ctx.setLineDash([3,5]);ctx.lineWidth=p[1]>0.05?1.5:1;ctx.strokeStyle=p[1]>0.05?rgba(C.mintE,(0.35+0.65*p[1])*fade):rgba(C.hair,0.9*fade);
+        ctx.beginPath();ctx.moveTo(xL,y);ctx.lineTo(xR,y);ctx.stroke();ctx.restore();});
+      /* the playhead */
+      var py=yb(r,s);ctx.beginPath();ctx.moveTo(G.ax+1,py);ctx.lineTo(G.ax+8,py-5);ctx.lineTo(G.ax+8,py+5);ctx.closePath();ctx.fillStyle=rgba(C.ink,fade);ctx.fill();
+      ctx.lineWidth=3;ctx.strokeStyle=rgba(C.mintE,0.85*fade);ctx.beginPath();ctx.moveTo(G.ax,y0);ctx.lineTo(G.ax,py);ctx.stroke();
+    }
+
+    /* the candidates */
+    var order=ALL.slice().sort(function(a,b){return STOP[a]-STOP[b];});
+    order.forEach(function(b){
+      var se=Math.min(s,STOP[b]), ts=G.ts, cx=G.cols[b], cy=ys(b,se), rise=seg(t,0.4+b*0.05,1.3+b*0.05);
+      cy+=(1-ease(rise))*14;
+      var x=cx-ts/2, y=cy-ts/2, stopped=(STOP[b]===8&&cut8>0)?cut8:(STOP[b]===16&&cut16>0)?cut16:0;
+      /* the column: how far it has run */
+      var r=G.rowOf[b], yBase=yb(r,0);
+      ctx.lineWidth=2;ctx.strokeStyle=rgba(stopped>0.5?C.hair:C.mintE,(stopped>0.5?0.9:0.45)*fade);
+      ctx.beginPath();ctx.moveTo(cx,yBase+ts/2);ctx.lineTo(cx,cy);ctx.stroke();
+      ctx.globalAlpha=fade*ease(rise);face(b,x,y,ts,se);ctx.globalAlpha=fade;
+      if(stopped>0){ctx.save();rr(x,y,ts,ts,8);ctx.clip();ctx.fillStyle=rgba(C.bg,0.62*stopped);ctx.fillRect(x,y,ts,ts);ctx.restore();}
+      var dimPick=(b!==PICK&&STOP[b]===40)?pick:0;
+      if(dimPick>0){ctx.save();rr(x,y,ts,ts,8);ctx.clip();ctx.fillStyle=rgba(C.bg,0.4*dimPick);ctx.fillRect(x,y,ts,ts);ctx.restore();}
+      /* frame */
+      var keep=(K8.indexOf(b)>=0?cut8:0)*(STOP[b]===16?1-cut16:1);
+      rr(x,y,ts,ts,8);ctx.lineWidth=1;ctx.strokeStyle=rgba(C.rule,fade*ease(rise));ctx.stroke();
+      if(keep>0.01&&!(b!==PICK&&STOP[b]===40&&pick>0.5)){rr(x-1.5,y-1.5,ts+3,ts+3,9);ctx.lineWidth=b===PICK?2.4+1.4*pick:2.4;ctx.strokeStyle=rgba(C.mintE,keep*fade);ctx.stroke();}
+      /* the score: step 8 for everyone, step 16 for the four kept, then the finished image */
+      var a8=seg(t,3.55+b*0.11,3.8+b*0.11), sw16=K8.indexOf(b)>=0?seg(t,7.9+K8.indexOf(b)*0.14,8.15+K8.indexOf(b)*0.14):0, swF=STOP[b]===40?seg(t,13.0,13.3):0;
+      var val=swF>0.5?SF[b]:sw16>0.5?S16[b]:S8[b], pa=a8*(sw16>0&&sw16<1?Math.abs(sw16-0.5)*2:1)*(swF>0&&swF<1?Math.abs(swF-0.5)*2:1);
+      var live=keep>0.5||(stopped<0.5&&t<4.9);
+      pill(val.toFixed(2),cx,y+ts,live?(keep>0.5?C.mintT:C.ink):C.muted,live&&keep>0.5?C.mintE:C.hair,pa*fade*(stopped>0.5?0.75:1));
+      if(b===PICK&&pick>0.01){
+        var bx=x+ts-2,by=y+2;ctx.globalAlpha=pick*fade;ctx.beginPath();ctx.arc(bx,by,10,0,6.2832);ctx.fillStyle=rgba(C.mintE,1);ctx.fill();
+        ctx.lineWidth=2;ctx.strokeStyle=rgba(C.card,1);ctx.lineCap='round';ctx.lineJoin='round';ctx.beginPath();ctx.moveTo(bx-4.5,by);ctx.lineTo(bx-1.2,by+3.4);ctx.lineTo(bx+4.6,by-3.4);ctx.stroke();ctx.globalAlpha=fade;
+      }
+    });
+    ctx.restore();
+  }
+
+  function frame(now){
+    raf=0;if(mq.matches||!visible||document.hidden) return;
+    if(!t0)t0=now;var e=(now-t0)/1000;
+    if(e>=T){t0=now;e=0;}
+    draw(e);raf=requestAnimationFrame(frame);
+  }
+  function still(){draw(FINAL);}
+  function kick(){
+    if(mq.matches){still();return;}
+    if(!raf&&visible&&!document.hidden){t0=0;raf=requestAnimationFrame(frame);}
+  }
+  function refresh(){colors();layout();if(mq.matches||!raf)still();}
+  colors();layout();
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){var was=visible;visible=es[0].isIntersecting;if(visible&&!was){t0=0;}if(visible)kick();},{threshold:0.05}).observe(cv);
+  }
+  document.addEventListener('visibilitychange',kick);
+  window.addEventListener('resize',function(){layout();if(mq.matches)still();});
+  if(mq.addEventListener)mq.addEventListener('change',function(){if(mq.matches)still();else kick();});
+  new MutationObserver(function(){colors();if(mq.matches)still();}).observe(document.body,{attributes:true,attributeFilter:['class']});
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(refresh);
+  kick();
+})();
+</script>

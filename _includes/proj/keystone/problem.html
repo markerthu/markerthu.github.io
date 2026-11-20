@@ -1,0 +1,55 @@
+<figure class="fig panel" id="ks-problem" style="margin-top:var(--sp-fig)">
+  <div class="ks-two">
+    <div>
+      <p class="ks-ttl">Best-of-8 on &ldquo;a photo of four bananas&rdquo;<span>every candidate runs all 40 steps before any is judged</span></p>
+      <div class="ks-runs anim" role="img" aria-label="Eight candidates for the prompt a photo of four bananas, each shown as its preview at step 8 and its finished image. Every candidate runs all 40 steps, so all eight are paid for in full. One finished image is kept. Two candidates already show two bananas and three bananas in their step-8 previews, yet they are finished too.">
+        <div class="ks-run hd" aria-hidden="true"><span>step 8</span><span class="axl"><span style="left:0">0</span><span style="left:20%">8</span><span style="right:0">40</span></span><span>final</span></div>
+      </div>
+    </div>
+    <div>
+      <p class="ks-ttl">Reward models reading the step-8 preview<span>candidate pairs ordered correctly</span></p>
+      <p class="ks-key" aria-hidden="true"><span class="sq k-hps">HPSv2.1</span><span class="sq k-ir">ImageReward</span></p>
+      <div class="ch anim" id="ch-prob" role="img" aria-label="Fraction of candidate pairs with different official verdicts that each reward model orders correctly from the step-8 preview; chance is 0.50. Two objects: HPSv2.1 0.58, ImageReward 0.61. Counting: HPSv2.1 0.66, ImageReward 0.52. Colours: HPSv2.1 0.50, ImageReward 0.52. Position: HPSv2.1 0.52, ImageReward 0.57."></div>
+    </div>
+  </div>
+  <figcaption class="cap">SD3.5-Medium, development prompts. Right: fraction of candidate pairs with different official verdicts that each judge orders correctly from the step-8 preview.</figcaption>
+</figure>
+<script>
+(function(){
+  var fig=document.getElementById('ks-problem'); if(!fig) return;
+  /* left: the eight candidates. Two show the wrong count already at step 8; the kept one is HPSv2.1's best-of-8 pick. */
+  var runs=fig.querySelector('.ks-runs'), DOOM={2:'two bananas',7:'three bananas'}, KEPT=0, h='';
+  for(var b=0;b<8;b++){
+    var d=(0.15+b*0.12).toFixed(2), d8=(0.15+b*0.12+0.35).toFixed(2), dF=(0.15+b*0.12+1.5).toFixed(2);
+    h+='<div class="ks-run'+(DOOM[b]?' doom':'')+(b===KEPT?' kept':'')+'">'
+      +'<span class="im pre anim-i" style="--d:'+d8+'s"><img src="/images/projects/keystone/bananas_b'+b+'_8.jpg" alt="" width="52" height="52" loading="lazy"></span>'
+      +'<span class="tr"><i style="--d:'+d+'s"></i><span class="s8"></span>'
+      +(DOOM[b]?'<span class="lb" style="--d:'+(+d8+0.5).toFixed(2)+'s">'+DOOM[b]+'</span>':'')
+      +(b===KEPT?'<span class="kp" style="--d:2.9s">kept</span>':'')+'</span>'
+      +'<span class="im fin anim-i" style="--d:'+dF+'s"><img src="/images/projects/keystone/bananas_b'+b+'_final.jpg" alt="" width="52" height="52" loading="lazy"></span></div>';
+  }
+  runs.insertAdjacentHTML('beforeend',h);
+
+  /* right: Table 1, step-8 preview columns */
+  var ROWS=[['Two objects',0.58,0.61],['Counting',0.66,0.52],['Colours',0.50,0.52],['Position',0.52,0.57]];
+  function f(v){return (Math.round(v*10)/10).toString();}
+  function tx(x,y,s,cls,anchor,extra){return '<text x="'+f(x)+'" y="'+f(y)+'"'+(cls?' class="'+cls+'"':'')+(anchor?' text-anchor="'+anchor+'"':'')+(extra||'')+'>'+s+'</text>';}
+  function build(){
+    var el=document.getElementById('ch-prob'), cw=el.clientWidth; if(!cw) return;
+    var W=Math.round(Math.max(280,Math.min(cw,520))), rh=78, top=8, H=top+ROWS.length*rh+26, x1=W-44, X=function(v){return x1*v;}, s='';
+    [0,0.5,1].forEach(function(v){s+='<line class="grid" x1="'+f(X(v))+'" x2="'+f(X(v))+'" y1="'+top+'" y2="'+(H-22)+'"/>'+tx(X(v),H-6,v===0?'0':v===1?'1':'0.5, chance',v===0.5?'sm t-mut':'sm',v===0?'start':'middle');});
+    s+='<line class="chance" x1="'+f(X(0.5))+'" x2="'+f(X(0.5))+'" y1="'+top+'" y2="'+(H-22)+'"/>';
+    ROWS.forEach(function(r,i){
+      var y=top+i*rh, dl=0.25+i*0.2;
+      s+=tx(0,y+14,r[0],'sm halo','',' style="fill:var(--ink);font-weight:600"');
+      [[r[1],'d-hps','t-lav'],[r[2],'d-ir','t-mut']].forEach(function(b,j){var yy=y+22+j*24;
+        s+='<rect class="'+b[1]+' grow" style="--d:'+(dl+j*0.12).toFixed(2)+'s" x="0" y="'+yy+'" width="'+f(X(b[0]))+'" height="18" rx="4"/>';
+        s+=tx(X(b[0])+7,yy+14,b[0].toFixed(2),'sm fade '+b[2],'',' style="--d:'+(dl+0.6+j*0.12).toFixed(2)+'s;font-weight:600"');});
+    });
+    el.innerHTML='<svg viewBox="0 0 '+W+' '+H+'" style="max-width:'+W+'px" aria-hidden="true">'+s+'</svg>';
+  }
+  build();
+  var lw=window.innerWidth,rt=0;
+  window.addEventListener('resize',function(){if(Math.abs(window.innerWidth-lw)<30)return;clearTimeout(rt);rt=setTimeout(function(){lw=window.innerWidth;build();},180);});
+})();
+</script>

@@ -1,0 +1,245 @@
+<style>
+/* Keystone page: additions to the shared design system (selfrw/style.html). Colours and sizes only from its tokens.
+   Keystone (ours) = mint; VQAScore = ice; HPSv2.1 = lavender; ImageReward = neutral; a wrong verdict = peach. */
+.stage-steps li:nth-child(1){--sc:var(--faint)}
+.stage-steps li:nth-child(2){--sc:var(--lav-e)}
+.stage-steps li:nth-child(3){--sc:var(--ice-e)}
+.stage-steps li:nth-child(4){--sc:var(--mint-e)}
+
+/* at-a-glance illustrations */
+.il-ok{fill:none;stroke:var(--mint-t);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.il-x{fill:none;stroke:var(--peach-t);stroke-width:2.2;stroke-linecap:round}
+.il-blur{fill:var(--hair);opacity:.55}
+.il-blob{fill:var(--card);opacity:.9}
+.il-slot{fill:var(--card);stroke:var(--hair);stroke-width:1.5}
+.il-dash{fill:none;stroke:var(--faint);stroke-width:1.4;stroke-dasharray:3 4}
+
+/* shared bits of the figures */
+.ks-two{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:24px 44px;align-items:start}
+.ks-two.even{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.ks-two > div{min-width:0}
+/* footer: an item never splits from its separator; on a phone the separators give way to plain gaps */
+footer .ks-foot span{white-space:nowrap}
+footer .ks-foot i{font-style:normal;padding:0 .7em}
+@media (max-width:480px){footer .ks-foot{display:flex;flex-wrap:wrap;gap:4px 16px}footer .ks-foot i{display:none}}
+#ks-problem .ks-two > div:last-child,#ks-f03 .ks-two > div:last-child{align-self:center}
+.ks-ttl{font-size:var(--t-label);line-height:1.45;font-weight:600;color:var(--ink);margin-bottom:12px}
+.ks-ttl span{display:block;font-weight:400;color:var(--muted);margin-top:2px}
+.ks-key{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:var(--t-fine);color:var(--muted);margin-bottom:10px}
+.ks-key span{display:inline-flex;align-items:center;gap:7px}
+.ks-key span::before{content:'';width:14px;height:3px;border-radius:2px;background:var(--ke)}
+.ks-key .dot::before{width:10px;height:10px;border-radius:50%;background:var(--k);border:1.5px solid var(--ke)}
+.ks-key .sq::before{width:12px;height:12px;border-radius:3px;background:var(--k);border:1px solid var(--ke)}
+.k-ours{--k:var(--mint);--ke:var(--mint-e);--kt:var(--mint-t);--kl:var(--mint-l)}
+.k-vqa{--k:var(--ice);--ke:var(--ice-e);--kt:var(--ice-t);--kl:var(--ice-l)}
+.k-hps{--k:var(--lav);--ke:var(--lav-e);--kt:var(--lav-t);--kl:var(--lav-l)}
+.k-ir{--k:var(--hair);--ke:var(--faint);--kt:var(--muted);--kl:var(--band)}
+.ch .t-faint{fill:var(--faint)}
+.ch .t-mut{fill:var(--muted)}
+.ch .l-vqa,.ch .l-hps,.ch .l-ir,.ch .l-ours{fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.ch .l-vqa{stroke:var(--ice-e)}.ch .l-hps{stroke:var(--lav-e)}.ch .l-ir{stroke:var(--faint)}.ch .l-ours{stroke:var(--mint-e);stroke-width:3}
+.ch .m-vqa{fill:var(--ice);stroke:var(--ice-e);stroke-width:1.5}
+.ch .m-hps{fill:var(--lav);stroke:var(--lav-e);stroke-width:1.5}
+.ch .m-ir{fill:var(--card);stroke:var(--faint);stroke-width:1.6}
+.ch .m-ours{fill:var(--mint);stroke:var(--mint-e);stroke-width:2}
+.ch .d-ir{fill:var(--hair);stroke:var(--faint);stroke-width:1}
+.ch .d-hps{fill:var(--lav);stroke:var(--lav-e);stroke-width:1}
+.ch .d-vqa{fill:var(--ice);stroke:var(--ice-e);stroke-width:1}
+.ch .chance{stroke:var(--muted);stroke-width:1.2;stroke-dasharray:4 4;fill:none}
+.ch .mark8{fill:var(--mint-l)}
+.ch text.halo{paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round}
+.ch .brk{fill:none;stroke:var(--mint-e);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+
+/* the problem: eight candidates, every one finished */
+.ks-runs{display:grid;gap:6px}
+.ks-run{display:grid;grid-template-columns:52px minmax(0,1fr) 52px;gap:12px;align-items:center}
+.ks-run.hd{font-size:var(--t-fine);color:var(--muted);font-weight:600;align-items:end;margin-bottom:2px}
+.ks-run.hd span:last-child{text-align:center}
+.ks-run.hd span:first-child{text-align:center}
+.ks-run .im{position:relative;width:52px;height:52px;border-radius:8px;overflow:hidden;background:var(--band)}
+.ks-run .im img{width:100%;height:100%;object-fit:cover}
+.ks-run .im.fin{box-shadow:0 0 0 1px var(--rule)}
+.ks-run .tr{position:relative;height:52px;min-width:0}
+.ks-run .tr::before{content:'';position:absolute;left:0;right:0;top:30px;height:8px;border-radius:4px;background:var(--band);box-shadow:inset 0 0 0 1px var(--rule)}
+.ks-run .tr i{position:absolute;left:0;right:0;top:30px;height:8px;border-radius:4px;background:var(--faint);opacity:.75}
+.ks-run .tr .s8{position:absolute;left:20%;top:24px;height:20px;border-left:1.5px dashed var(--muted)}
+.ks-run .lb{position:absolute;left:calc(20% + 8px);top:4px;font-size:var(--t-fine);font-weight:600;color:var(--peach-t);white-space:nowrap}
+.ks-run.doom .im.pre{box-shadow:0 0 0 2px var(--peach-e)}
+.ks-run.kept .im.fin{box-shadow:0 0 0 2.5px var(--ink)}
+.ks-run .kp{position:absolute;right:0;top:4px;font-size:var(--t-fine);font-weight:600;color:var(--ink)}
+.ks-runs .anim-i{opacity:0;transition:opacity .5s ease var(--d,0s)}
+.ks-runs.in .anim-i,.no-anim .ks-runs .anim-i{opacity:1}
+.ks-runs .tr i{transform:scaleX(0);transform-origin:left center}
+.ks-runs.in .tr i,.no-anim .ks-runs .tr i{transform:none;transition:transform 1.5s cubic-bezier(.4,0,.2,1) var(--d,0s)}
+.ks-runs .lb,.ks-runs .kp,.ks-run.doom .im.pre::after{opacity:0}
+.ks-runs.in .lb,.ks-runs.in .kp,.no-anim .ks-runs .lb,.no-anim .ks-runs .kp{opacity:1;transition:opacity .5s ease var(--d,0s)}
+.ks-runs .axl{position:relative;display:block;height:1.4em}
+.ks-runs .axl span{position:absolute;top:0;white-space:nowrap}
+.ks-runs .axl span:nth-child(2){transform:translateX(-50%)}
+.ks-runs .foot{font-size:var(--t-fine);color:var(--muted);margin-top:6px;padding-left:64px}
+
+/* the idea: two filmstrips */
+.ks-strips{display:grid;gap:22px}
+.ks-strip h3{display:flex;align-items:center;gap:10px;font-size:var(--t-label);font-weight:600;color:var(--ink);margin-bottom:10px}
+.ks-strip h3 i{flex:none;width:10px;height:10px;border-radius:50%;background:var(--k);border:1.5px solid var(--ke)}
+.ks-fr{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:8px}
+.ks-fr figure{margin:0;min-width:0;text-align:center;opacity:0;transform:translateY(8px)}
+.ks-strips.in .ks-fr figure,.no-anim .ks-fr figure{opacity:1;transform:none;transition:opacity .5s ease var(--d,0s),transform .5s ease var(--d,0s)}
+.ks-fr .sc{display:block;font-size:var(--t-label);font-weight:600;color:var(--kt);font-variant-numeric:tabular-nums;margin-bottom:6px}
+.ks-fr img{width:100%;height:auto;aspect-ratio:1;object-fit:cover;border-radius:8px;box-shadow:0 0 0 1px var(--rule)}
+.ks-fr figcaption{font-size:var(--t-fine);color:var(--muted);margin-top:6px;font-variant-numeric:tabular-nums}
+.ks-fr figure.k8 img{box-shadow:0 0 0 2.5px var(--mint-e)}
+.ks-fr figure.k8 figcaption{color:var(--mint-t);font-weight:600}
+.ks-strips .k8tag{font-size:var(--t-fine);color:var(--mint-t);font-weight:600}
+
+/* the idea: compiled questions */
+.ks-cmp{display:grid;grid-template-columns:minmax(0,2.7fr) 34px minmax(0,.9fr) 34px minmax(0,.75fr);align-items:center;margin:16px 0 0;border:1px solid var(--rule);border-radius:var(--radius);background:var(--card);padding:24px 26px}
+.ks-cmp .pairs{display:grid;grid-template-columns:minmax(0,1fr) 30px minmax(0,1.3fr);gap:10px 6px;align-items:stretch;min-width:0}
+.ks-cmp .lbl{font-size:var(--t-fine);font-weight:600;color:var(--muted)}
+.ks-cmp .pr{font-size:var(--t-label);line-height:1.4;color:var(--ink);background:var(--band);border:1px solid var(--rule);border-radius:10px;padding:10px 12px;display:flex;align-items:center;min-width:0}
+.ks-cmp .qs{border:1px solid var(--lav-e);background:var(--card);border-radius:10px;padding:8px 12px;display:flex;flex-direction:column;justify-content:center;gap:4px;font-size:var(--t-label);line-height:1.35;color:var(--body);min-width:0}
+.ks-cmp .qs b{font-size:var(--t-fine);font-weight:600;color:var(--lav-t)}
+.ks-cmp .qa{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.ks-cmp .yn{flex:none;font-size:var(--t-fine);font-weight:600;padding:1px 9px;border-radius:999px;border:1px solid var(--hair);color:var(--ink)}
+.ks-cmp .sw{display:flex;gap:4px;flex-wrap:wrap}
+.ks-cmp .sw i{width:11px;height:11px;border-radius:50%;border:1px solid var(--muted)}
+.ks-cmp .bx{flex:none;width:104px;height:30px;overflow:visible}
+.ks-cmp .bx rect{fill:none;stroke-width:1.5}
+.ks-cmp .bx text{font-family:var(--sans);font-weight:600;font-size:var(--t-fine)}
+.ks-cmp .arr{display:block;width:100%;height:20px;overflow:visible;align-self:center}
+.ks-cmp .arr path{fill:none;stroke:var(--faint);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.ks-cmp .dm{border:1.5px solid var(--lav-e);background:var(--lav-l);border-radius:14px;padding:16px 12px;text-align:center;font-size:var(--t-label);font-weight:600;line-height:1.35;color:var(--lav-t)}
+.ks-cmp .dm span{display:block;font-size:var(--t-fine);font-weight:400;color:var(--muted);margin-top:6px}
+.ks-cmp .dm svg{display:block;width:36px;height:36px;margin:0 auto 8px;fill:none;stroke:var(--lav-e);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.ks-cmp .out{border:1.5px solid var(--mint-e);background:var(--mint-l);border-radius:14px;padding:16px 10px;text-align:center;font-size:var(--t-label);font-weight:600;line-height:1.35;color:var(--mint-t)}
+.ks-cmp .st{opacity:0;transform:translateY(6px)}
+.ks-cmp.in .st,.no-anim .ks-cmp .st{opacity:1;transform:none;transition:opacity .5s ease var(--d,0s),transform .5s ease var(--d,0s)}
+
+/* how it works: the three-stage strip (the same build as the sibling pages' pipeline strips) */
+.ks-pipe{margin-top:var(--sp-fig);border:1px solid var(--rule);border-radius:var(--radius);background:var(--card);overflow:hidden}
+.ks-pipe .pp-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:auto auto auto}
+.ks-pipe .pp{position:relative;display:grid;grid-row:span 3;grid-template-rows:subgrid;row-gap:0;padding:22px 24px 24px;min-width:0}
+.ks-pipe .pp + .pp{border-left:1px solid var(--rule)}
+.ks-pipe .pp::before{content:'';position:absolute;left:0;right:0;top:0;height:2px;background:var(--ke);transform:scaleX(0);transform-origin:left;transition:transform .8s ease var(--d,0s)}
+.ks-pipe.in .pp::before,.no-anim .ks-pipe .pp::before{transform:none}
+.ks-pipe .pp-n{display:flex;align-items:center;gap:10px;font-size:var(--t-card);font-weight:600;color:var(--ink);line-height:1.2}
+.ks-pipe .pp-n .n{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;font-size:var(--t-fine);font-weight:700;background:var(--k);border:1px solid var(--ke);color:var(--kt);flex:none}
+.ks-pipe .pp-fig{margin:18px 0 14px;align-self:center;min-width:0}
+.ks-pipe .pp-fig svg{display:block;width:100%;height:auto;overflow:visible}
+.ks-pipe .pp-fig text{font-family:var(--sans);font-size:var(--t-fine);fill:var(--muted)}
+.ks-pipe .pp-say{font-size:var(--t-label);line-height:1.5;color:var(--muted)}
+.ks-pipe .pp-say b{color:var(--ink);font-weight:600}
+.pp-fig .t-ink{fill:var(--ink)}.pp-fig .t-mint{fill:var(--mint-t)}.pp-fig .t-lav{fill:var(--lav-t)}.pp-fig .t-peach{fill:var(--peach-t)}
+.pp-fig .w6{font-weight:600}
+.pf-card{fill:var(--band);stroke:var(--rule);stroke-width:1}
+.pf-q{fill:var(--card);stroke:var(--lav-e);stroke-width:1.2}
+.pf-ln{fill:none;stroke:var(--faint);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.pf-bar{fill:var(--lav);stroke:var(--lav-e);stroke-width:1}
+.pf-min{fill:var(--mint);stroke:var(--mint-e);stroke-width:1.2}
+.pf-dot{fill:var(--card);stroke:var(--faint);stroke-width:1.4}
+.pf-dot.on{fill:var(--mint);stroke:var(--mint-e)}
+.pf-dot.off{fill:var(--band);stroke:var(--hair)}
+.pf-dot.fin{fill:var(--mint-e);stroke:var(--mint-e)}
+.pf-img{stroke:var(--mint-e);stroke-width:2;fill:none}
+.pf-sep{stroke:var(--rule);stroke-width:1}
+
+/* finding 02: pruning examples */
+.ks-ex{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:16px}
+.ks-ex .case{display:flex;flex-direction:column;padding:4px 16px 16px}
+.ks-ex .case>p{margin:10px 0 0}
+.ks-ex .q{min-height:2.7em}
+.ks-ex .pv{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 6px;margin-top:12px}
+.ks-ex .pv figure{position:relative;margin:0;min-width:0}
+.ks-ex .pv img{width:100%;height:auto;aspect-ratio:1;object-fit:cover;border-radius:6px;box-shadow:0 0 0 1px var(--rule);transition:opacity .5s ease var(--d,0s)}
+.ks-ex .pv figcaption{position:absolute;left:50%;bottom:-8px;transform:translateX(-50%);font-size:var(--t-fine);font-weight:600;line-height:1;padding:3px 6px;border-radius:999px;background:var(--card);border:1px solid var(--hair);color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.ks-ex .pv figure.kp img{box-shadow:0 0 0 2.5px var(--mint-e)}
+.ks-ex .pv figure.kp figcaption{color:var(--mint-t);border-color:var(--mint-e)}
+.ks-ex .pvl{font-size:var(--t-fine);color:var(--muted);margin-top:16px}
+.ks-ex .pvl b{color:var(--mint-t);font-weight:600}
+.ks-ex .res{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.ks-ex .res .ba{margin:0;padding:8px 8px 9px}
+.ks-ex .res img{width:100%;height:auto;aspect-ratio:1;object-fit:cover;border-radius:6px;margin-bottom:8px}
+.ks-ex .res .ba b{font-size:var(--t-fine);line-height:1.3}
+.ks-ex .res .ba code{padding-top:4px}
+.ks-ex .pv figure,.ks-ex .res .ba{opacity:0;transform:translateY(6px)}
+.ks-ex.in .pv figure,.ks-ex.in .res .ba,.no-anim .ks-ex .pv figure,.no-anim .ks-ex .res .ba{opacity:1;transform:none;transition:opacity .45s ease var(--d,0s),transform .45s ease var(--d,0s)}
+.ks-ex .pv figure:not(.kp) img{opacity:1}
+.ks-ex.in .pv figure:not(.kp) img,.no-anim .ks-ex .pv figure:not(.kp) img{opacity:.45;transition-delay:1.5s}
+body.dark-mode .ks-ex img,body.dark-mode .ks-fr img,body.dark-mode .ks-run img,body.dark-mode .ks-gal img{filter:brightness(.92)}
+
+/* finding 04: drop-in, models, benchmarks */
+.ks-drop .card{display:flex;flex-direction:column}
+.ks-drop .v{font-size:var(--t-card);font-weight:600;color:var(--mint-t);margin-top:12px;font-variant-numeric:tabular-nums}
+.ks-drop .v small{font-size:var(--t-label);font-weight:500;color:var(--muted);margin-right:6px}
+.ks-drop .mini-bon{margin-top:auto;padding-top:14px}
+.ks-drop .swap{display:block;width:100%;max-width:300px;height:auto;margin-top:auto;padding-top:16px;overflow:visible}
+.ks-drop .swap text{font-family:var(--sans);font-size:var(--t-fine);font-weight:600}
+.sw-off{fill:var(--band);stroke:var(--hair);stroke-width:1}
+.sw-t-off{fill:var(--faint);text-decoration:line-through}
+.sw-on{fill:var(--mint-l);stroke:var(--mint-e);stroke-width:1.5}
+.sw-t-on{fill:var(--mint-t)}
+.sw-ar{fill:none;stroke:var(--faint);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.ks-gal{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:16px}
+.ks-gal .mod{min-width:0;border:1px solid var(--rule);border-radius:var(--radius);background:var(--card);padding:14px 14px 16px}
+.ks-gal h3{font-size:var(--t-label);font-weight:600;color:var(--ink);margin-bottom:10px}
+.ks-gal .ims{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.ks-gal img{width:100%;height:auto;aspect-ratio:1;object-fit:cover;border-radius:6px;opacity:0;transform:scale(.94)}
+.ks-gal.in img,.no-anim .ks-gal img{opacity:1;transform:none;transition:opacity .5s ease var(--d,0s),transform .5s ease var(--d,0s)}
+.ks-bench{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:16px;font-size:var(--t-label);color:var(--body)}
+.ks-bench b{font-weight:600;color:var(--muted);margin-right:4px}
+.ks-bench span{border:1px solid var(--mint-e);background:var(--mint-l);color:var(--mint-t);font-weight:600;border-radius:999px;padding:5px 14px}
+
+/* closing call to action, left-aligned (as on the sibling pages) */
+.cta.left{justify-content:flex-start;margin-top:var(--sp-fig)}
+
+/* why it matters: icons */
+.ks-why{margin-top:var(--sp-fig)}
+.ks-why .h-ico svg{stroke:var(--mint-e)}
+.ks-why .h-ico .fill{fill:var(--mint);stroke:var(--mint-e)}
+.ks-why .h-ico .dim{stroke:var(--hair)}
+@keyframes ksBranch{0%,30%{stroke-dashoffset:24;opacity:0}45%{opacity:1}70%,100%{stroke-dashoffset:0;opacity:1}}
+@keyframes ksBlink{0%,100%{opacity:.25}50%{opacity:1}}
+@keyframes ksStep{0%{transform:translateY(0)}100%{transform:translateY(0)}}
+body:not(.no-anim) .ks-why .k-br{stroke-dasharray:24;animation:ksBranch 4s ease-in-out infinite}
+body:not(.no-anim) .ks-why .k-eye{animation:ksBlink 2.8s ease-in-out infinite}
+body:not(.no-anim) .ks-why .k-s1{animation:ksBlink 2.4s ease-in-out infinite}
+body:not(.no-anim) .ks-why .k-s2{animation:ksBlink 2.4s ease-in-out .3s infinite}
+body:not(.no-anim) .ks-why .k-s3{animation:ksBlink 2.4s ease-in-out .6s infinite}
+body:not(.no-anim) .ks-why .k-s4{animation:ksBlink 2.4s ease-in-out .9s infinite}
+
+@media(max-width:1099px){
+  .ks-ex{grid-template-columns:1fr 1fr}
+  .ks-gal{grid-template-columns:1fr 1fr}
+  .ks-cmp{grid-template-columns:minmax(0,1fr);padding:20px 20px}
+  .ks-cmp > .arr{width:24px;height:30px;margin:8px auto}
+  .ks-cmp > .arr path{transform:rotate(90deg);transform-origin:12px 10px}
+  .ks-cmp .dm,.ks-cmp .out{max-width:360px;width:100%;margin:0 auto}
+}
+@media(max-width:900px){
+  .ks-two,.ks-two.even{grid-template-columns:1fr;gap:34px}
+  .ks-pipe .pp-steps{grid-template-columns:1fr;grid-template-rows:none}
+  .ks-pipe .pp{display:block;grid-row:auto}
+  .ks-pipe .pp + .pp{border-left:0;border-top:1px solid var(--rule)}
+  .ks-pipe .pp-fig{max-width:420px}
+}
+@media(max-width:700px){
+  .ks-ex{grid-template-columns:1fr}
+  .ks-fr{grid-template-columns:repeat(4,minmax(0,1fr));row-gap:12px}
+  .ks-pipe .pp{padding:20px 18px}
+  .ks-cmp{padding:18px 14px}
+  .ks-cmp .pairs{grid-template-columns:minmax(0,1fr)}
+  .ks-cmp .pairs > .lbl,.ks-cmp .pairs > span{display:none}
+  .ks-cmp .pairs .arr{height:18px}
+  .ks-cmp .pairs .arr path{transform:rotate(90deg);transform-origin:12px 10px}
+  .ks-cmp .qs{margin-bottom:12px}
+}
+@media(max-width:560px){
+  .ks-gal{grid-template-columns:1fr}
+  .ks-run{grid-template-columns:44px minmax(0,1fr) 44px;gap:10px}
+  .ks-run .im{width:44px;height:44px}
+  .ks-run .tr{height:44px}
+  .ks-run .tr::before,.ks-run .tr i{top:26px}
+  .ks-run .tr .s8{top:20px}
+  .ks-runs .foot{padding-left:54px}
+}
+</style>

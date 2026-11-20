@@ -1,0 +1,327 @@
+---
+layout: null
+permalink: /projects/keystone/
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Keystone: Judging Previews at Key Steps for Test-Time Search in Diffusion Models">
+  <meta property="og:description" content="Text-to-image test-time search finishes every candidate before judging it. Keystone judges candidates at the beginning, from the model's own blurry previews, with an off-the-shelf decision model asked the prompt's own questions, and spends compute only where the outcome is still open.">
+  <meta property="og:image" content="https://www.jiajunfan.com/images/og/keystone.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://www.jiajunfan.com/projects/keystone/">
+  <link rel="canonical" href="https://www.jiajunfan.com/projects/keystone/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Keystone: Judging Previews at Key Steps for Test-Time Search in Diffusion Models">
+  <meta name="twitter:description" content="Test-time search for text-to-image models finishes every candidate before it judges it. Keystone judges candidates at the beginning, from the model's own blurry previews, and spends compute only where the outcome is still open.">
+  <meta name="twitter:image" content="https://www.jiajunfan.com/images/og/keystone.jpg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Keystone: Judging Previews at Key Steps for Test-Time Search in Diffusion Models | Jiajun Fan</title>
+<meta name="description" content="Text-to-image test-time search finishes every candidate before judging it. Keystone judges candidates at the beginning, from the model's own blurry previews, with an off-the-shelf decision model asked the prompt's own questions, and spends compute only where the outcome is still open.">
+<meta name="theme-color" content="#fdfcfa">
+<meta name="theme-color" content="#0f1216" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="icon" href="/images/favicon.ico">
+<script>try{if(localStorage.getItem('darkMode')==='true'){document.documentElement.style.background='#0f1216';}}catch(e){}</script>
+{% include selfrw/style.html %}
+{% include proj/keystone/style.html %}
+<noscript><style>.hl{background-size:100% 36%}.chapters{position:static}.ks-runs .anim-i,.ks-runs .lb,.ks-runs .kp,.ks-fr figure,.ks-cmp .st,.ks-ex .pv figure,.ks-ex .res .ba,.ks-gal img{opacity:1;transform:none}.ks-runs .tr i{transform:none}</style></noscript>
+<script type="application/ld+json">{
+  "@context":"https://schema.org","@type":"ScholarlyArticle",
+  "name":"Keystone: Judging Previews at Key Steps for Test-Time Search in Diffusion Models",
+  "description":"Text-to-image test-time search finishes every candidate before judging it. Keystone judges candidates at the beginning, from the model's own blurry previews, with an off-the-shelf decision model asked the prompt's own questions, and spends compute only where the outcome is still open.",
+  "author":[{"@type":"Person","name":"Jiajun Fan"},{"@type":"Person","name":"Chaoran Cheng"},{"@type":"Person","name":"Ziwen Wang"},{"@type":"Person","name":"Changyi Yang"},{"@type":"Person","name":"Bangji Yang"},{"@type":"Person","name":"Qinglong Zheng"},{"@type":"Person","name":"Ge Liu"}],
+  "datePublished":"2026-11-19",
+  "url":"https://www.jiajunfan.com/projects/keystone/","sameAs":"https://arxiv.org/abs/2611.25530",
+  "keywords":"test-time search, diffusion models, flow models, text-to-image, verifiers, best-of-N, pruning, previews, decision model"
+}</script>
+  <script data-goatcounter="https://jiajunfan.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+{% include site-chrome.html %}
+</head>
+<body id="top">
+<script>try{if(localStorage.getItem('darkMode')==='true')document.body.classList.add('dark-mode');}catch(e){}</script>
+
+<header class="site-masthead">
+  <div class="masthead-inner">
+    <a class="masthead-title" href="/">Jiajun Fan</a>
+    <nav class="masthead-nav" aria-label="Site navigation">
+      <a href="/publications/">Publications</a>
+      <a href="/projects/" class="nav-active">Projects</a>
+      <a href="/year-archive/">Blog</a>
+      <a href="/cv/">CV</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="hero" aria-label="Summary">
+  <div class="wrap">
+    <h1>Keystone: Judging Previews at Key Steps <span class="l2">for Test&#8209;Time Search in Diffusion Models</span></h1>
+    <p class="byline"><a href="/" class="me">Jiajun&nbsp;Fan</a><sup>1</sup>, Chaoran&nbsp;Cheng<sup>1</sup>, Ziwen&nbsp;Wang<sup>1,2</sup>, Changyi&nbsp;Yang<sup>3</sup>, Bangji&nbsp;Yang<sup>1</sup>, Qinglong&nbsp;Zheng<sup>1</sup>, <a href="https://geliu.web.illinois.edu/">Ge&nbsp;Liu</a><sup>1</sup></p>
+    <ul class="logos" aria-label="Affiliations"><li><sup>1</sup><img src="/images/projects/self-rewriting/logo_uiuc.png" alt="" width="66" height="96"><span>UIUC</span></li><li><sup>2</sup><img src="/images/projects/keystone/logo_nyu.png" alt="" width="96" height="96"><span>NYU</span></li><li><sup>3</sup><img src="/images/projects/self-rewriting/logo_cmu.png" alt="" width="96" height="96"><span>CMU</span></li></ul>
+    <div class="cta">
+      <a class="btn" href="#film"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M5 3.300v9.400L12.500 8z"/></svg>Film</a>
+      <a class="btn btn-primary" href="https://arxiv.org/abs/2611.25530"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M4 1.5h5.5L12.5 4.5v10h-8.5z"/><path d="M9.5 1.5v3h3M6 8h4.5M6 10.5h4.5"/></svg>Paper</a>
+      <a class="btn" href="#cite"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5c2 0 3-1.5 3-4.5V4.5H3V8h3M9.5 11.5c2 0 3-1.5 3-4.5v-3h-3V8h3"/></svg>BibTeX</a>
+    </div>
+    <div class="stage">
+      <canvas id="ks-stage" role="img" aria-label="Animation of Keystone's pruning on the prompt a photo of four bananas. Eight candidate images rise out of noise along a scale of 40 denoising steps. At step 8 each blurry preview gets its Keystone score: 0.90, 0.93, 0.05, 0.94, 0.94, 0.93, 0.93 and 0.07. The four highest are kept and the other four stop. At step 16 the four kept candidates score 0.96, 0.93, 0.95 and 0.91; the two highest are kept and the other two stop. Only those two are finished, scoring 0.90 and 0.93, and the one scoring 0.93 is kept."></canvas>
+      <ol class="stage-steps" aria-hidden="true">
+        <li><b>Eight candidates</b>start from noise</li>
+        <li><b>Read at step 8</b>keep four</li>
+        <li><b>Read at step 16</b>keep two</li>
+        <li><b>Finish only those</b>keep the best</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<nav class="chapters" aria-label="Parts of this page">
+  <div class="wrap">
+    <a href="#results">At a glance</a>
+    <a href="#problem">The problem</a>
+    <a href="#idea">The idea</a>
+    <a href="#how">How it works</a>
+    <a href="#evidence">The evidence</a>
+    <span class="ch-sub"><a href="#decided" aria-label="Finding 01">01</a><a href="#previews" aria-label="Finding 02">02</a><a href="#compute" aria-label="Finding 03">03</a><a href="#dropin" aria-label="Finding 04">04</a></span>
+    <a href="#matters">Why it matters</a>
+    <a href="#film">Film</a>
+    <a href="#cite">Cite</a>
+    <a class="ch-paper" href="https://arxiv.org/abs/2611.25530">arXiv 2611.25530</a>
+  </div>
+</nav>
+
+<section class="scene band" id="results">
+  <div class="wrap">
+    <div class="duo">
+      <header class="say">
+        <p class="eyebrow">At a glance</p>
+        <h2>The paper in four findings.</h2>
+        <p class="lead">Test-time search for text-to-image models finishes every candidate before it judges it. Keystone judges candidates at the beginning, from the model&rsquo;s own blurry previews, and spends compute only where the outcome is still open.</p>
+      </header>
+      <div class="show cards c2">
+        <a class="card result" href="#decided"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><line class="il-ax" x1="20" y1="84" x2="180" y2="84"/><rect class="il-y" x="28" y="20" width="16" height="64" rx="3"/><rect class="il-y" x="50" y="28" width="16" height="56" rx="3"/><rect class="il-n" x="72" y="48" width="16" height="36" rx="3"/><rect class="il-n" x="94" y="63" width="16" height="21" rx="3"/><rect class="il-n" x="116" y="67" width="16" height="17" rx="3"/><rect class="il-n" x="138" y="63" width="16" height="21" rx="3"/><rect class="il-n" x="160" y="73" width="16" height="11" rx="3"/></svg></span><span class="r-no">Finding 01<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>The outcome is decided in the first steps.</h3><p>Change the noise of one of the first two steps and the verdict changes most often; by step 8 of 40 it can already be read.</p></a>
+        <a class="card result" href="#previews"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><defs><filter id="il-soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="2.6"/></filter></defs><rect class="il-slot" x="40" y="12" width="72" height="72" rx="10"/><g filter="url(#il-soft)"><rect class="il-blur" x="50" y="22" width="11" height="52" rx="5"/><rect class="il-blur" x="65" y="22" width="11" height="52" rx="5"/><rect class="il-blur" x="80" y="22" width="11" height="52" rx="5"/><rect class="il-blur" x="95" y="22" width="11" height="52" rx="5"/></g><circle class="il-y" cx="148" cy="48" r="20"/><path class="il-ok" d="M138 48l7 7 13-14"/></svg></span><span class="r-no">Finding 02<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>A blurry preview, read better than a finished image.</h3><p>Asked the prompt&rsquo;s own questions, an off-the-shelf decision model reads counts and positions from a step-8 preview better than reward models read them from the finished image.</p></a>
+        <a class="card result" href="#compute"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><line class="il-ax" x1="20" y1="84" x2="180" y2="84"/><rect class="il-n" x="24" y="52" width="150" height="18" rx="4"/><rect class="il-y" x="24" y="22" width="68" height="18" rx="4"/><path class="il-ok" d="M104 31l6 6 11-12"/></svg></span><span class="r-no">Finding 03<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>More accurate, at under half the compute.</h3><p>Keystone&rsquo;s searches beat <span class="nw">best-of-8</span> with every other verifier while finishing far fewer images.</p></a>
+        <a class="card result" href="#dropin"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><rect class="il-slot" x="22" y="30" width="44" height="36" rx="8"/><rect class="il-slot" x="78" y="30" width="44" height="36" rx="8"/><rect class="il-slot" x="134" y="30" width="44" height="36" rx="8"/><rect class="il-y" x="32" y="40" width="24" height="16" rx="4"/><rect class="il-y" x="88" y="40" width="24" height="16" rx="4"/><rect class="il-y" x="144" y="40" width="24" height="16" rx="4"/><path class="il-dash" d="M44 14v12M100 14v12M156 14v12"/></svg></span><span class="r-no">Finding 04<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>A drop-in judge that travels.</h3><p>It lifts best-of-N, progressive seed pruning and FK steering, and the gain holds without retuning, on average, across four base models and three benchmarks.</p></a>
+      </div>
+      <ul class="creed">
+        <li><b>Training-free.</b><span>a released judge; no step labels, no reward model trained on noise</span></li>
+        <li><b>Reads previews.</b><span>the model&rsquo;s own clean-image estimate, at no extra network evaluations</span></li>
+        <li><b>Plugs in.</b><span>any diffusion or flow sampler, any search that keeps candidates</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="scene" id="problem">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main wide">
+        <p class="eyebrow">The problem</p>
+        <h2 class="reveal">Search finishes every image before it judges it, <span class="hl">even the ones doomed from the start.</span></h2>
+        <p class="lead">Text-to-image models still miscount, drop and misplace objects. The standard remedy, <span class="nw">best-of-N</span>, draws several complete images and keeps the one a verifier prefers. The verifiers are reward models trained on finished images, so the generator pays in full for every candidate the search will throw away.</p>
+      </div>
+    </header>
+{% include proj/keystone/problem.html %}
+    <p class="takeaway">The image was never the problem. The judge was.</p>
+  </div>
+</section>
+
+<section class="scene band" id="idea">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main wide">
+        <p class="eyebrow">The idea</p>
+        <h2 class="reveal">The layout is in place long before the picture is: <span class="hl">ask the preview the prompt&rsquo;s own questions.</span></h2>
+        <p class="lead">Every denoising step yields the model&rsquo;s own estimate of the finished image. Decoded, it is a blurry preview, but how many objects there are, which ones and where is already visible.</p>
+      </div>
+    </header>
+{% include proj/keystone/idea.html %}
+{% include proj/keystone/compile.html %}
+    <p class="takeaway">Keystone changes the judge instead of training one.</p>
+  </div>
+</section>
+
+<section class="scene" id="how">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main wide">
+        <p class="eyebrow">How it works</p>
+        <h2 class="reveal">Compile the prompt, read at the key steps, <span class="hl">search where it matters.</span></h2>
+        <p class="lead">Three parts, and none of them is trained.</p>
+      </div>
+      <ul class="nots" aria-label="What it does without">
+        <li>no training</li><li>no step labels</li><li>no gradient through the judge</li><li>no change to the sampler</li>
+      </ul>
+    </header>
+{% include proj/keystone/pipeline.html %}
+    <p class="takeaway">The previews&rsquo; answers decide which candidates receive further compute; nothing is differentiated through the judge and the sampler is unchanged.</p>
+  </div>
+</section>
+
+<div id="evidence">
+
+<section class="scene band" id="decided">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">The evidence <span>Finding 01</span></p>
+        <h2>Decided in the first steps, readable by step 8.</h2>
+        <p class="lead">Change only the noise of one step and see how often the official verdict changes; then ask how well each judge orders candidates from the preview at each step.</p>
+      </div>
+    </header>
+{% include proj/keystone/f01.html %}
+    <p class="takeaway">Search should branch at the start and read shortly after.</p>
+  </div>
+</section>
+
+<section class="scene" id="previews">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">The evidence <span>Finding 02</span></p>
+        <h2>A step-8 preview, read better than a finished image.</h2>
+        <p class="lead">On identical candidates, the Keystone score reads counts and positions from step-8 previews better than reward models read them from finished images.</p>
+      </div>
+    </header>
+{% include proj/keystone/f02.html %}
+    <p class="takeaway">Reading the preview well is what lets search stop early.</p>
+  </div>
+</section>
+
+<section class="scene band" id="compute">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">The evidence <span>Finding 03</span></p>
+        <h2>More accurate than every other verifier&rsquo;s <span class="nw">best-of-8</span>, at under half its compute.</h2>
+        <p class="lead">On GenEval with SD3.5-Medium, both searches lie above <span class="nw">best-of-N</span> with every judge at the same cost.</p>
+      </div>
+    </header>
+{% include proj/keystone/f03.html %}
+    <p class="takeaway">Pruning reaches 0.82 at 144 network evaluations; every other verifier&rsquo;s <span class="nw">best-of-8</span> costs 320 and stays at or below 0.78.</p>
+  </div>
+</section>
+
+<section class="scene" id="dropin">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">The evidence <span>Finding 04</span></p>
+        <h2>A drop-in judge, across models and benchmarks.</h2>
+        <p class="lead">Swap the judge inside existing methods, or move to other models and benchmarks without retuning.</p>
+      </div>
+    </header>
+{% include proj/keystone/f04.html %}
+    <p class="takeaway">Averaged over models, both searches beat the strongest other verifier&rsquo;s <span class="nw">best-of-N</span> on all three benchmarks.</p>
+  </div>
+</section>
+
+</div>
+
+<section class="scene" id="matters">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">Why it matters</p>
+        <h2 class="reveal">Test-time search no longer has to finish an image <span class="hl">to judge it.</span></h2>
+      </div>
+    </header>
+{% include proj/keystone/matters.html %}
+    <div class="cta left">
+      <a class="btn btn-primary" href="https://arxiv.org/abs/2611.25530">Read the paper</a>
+    </div>
+  </div>
+</section>
+
+<section class="scene band" id="film">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main">
+        <p class="eyebrow">The film</p>
+        <h2>The story, as a short film.</h2>
+      </div>
+    </header>
+    <div class="film">
+      <video controls playsinline preload="none" poster="/film/posters/keystone.jpg" width="1280" height="720" aria-label="Keystone: a short film with narration">
+        <source src="/film/video/keystone.mp4" type="video/mp4">
+      </video>
+    </div>
+    <p class="cap">3 min 57 s, with narration. The voice is synthesized.</p>
+  </div>
+</section>
+
+<section class="cite" id="cite">
+  <div class="wrap duo">
+    <header class="say">
+      <p class="eyebrow">Cite</p>
+      <h2>Cite the paper.</h2>
+      <button class="bib-copy-btn" aria-label="Copy BibTeX citation"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-list.png);mask-image:url(/images/icons/h-list.png)"></i>Copy BibTeX</button>
+    </header>
+    <pre class="show bibtex-block" tabindex="0"><code>@article{fan2026keystone,
+  title   = {Keystone: Judging Previews at Key Steps for Test-Time Search in Diffusion Models},
+  author  = {Fan, Jiajun and Cheng, Chaoran and Wang, Ziwen and Yang, Changyi and Yang, Bangji and Zheng, Qinglong and Liu, Ge},
+  journal = {arXiv preprint arXiv:2611.25530},
+  year    = {2026}
+}</code></pre>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p class="ks-foot"><span>Keystone</span><span><i aria-hidden="true">|</i><a href="/">Jiajun Fan</a> · UIUC, NYU &amp; CMU</span><span><i aria-hidden="true">|</i><a href="https://arxiv.org/abs/2611.25530">Paper</a></span><span><i aria-hidden="true">|</i><a href="/projects/">All Projects</a></span></p>
+</footer>
+
+<div id="read-progress" aria-hidden="true"></div>
+<script>
+(function(){
+  var bar=document.getElementById('read-progress'), nav=document.querySelector('.chapters'), strip=nav?nav.querySelector('.wrap'):null;
+  function pairs(sel){return [].slice.call(document.querySelectorAll(sel)).map(function(a){return [a,document.getElementById(a.getAttribute('href').slice(1))];}).filter(function(p){return p[1];});}
+  var parts=pairs('.chapters .wrap > a[href^="#"]'), subs=pairs('.chapters .ch-sub a'), shown=null;
+  function mark(list,cur){list.forEach(function(p){if(p[0]===cur)p[0].setAttribute('aria-current','true');else p[0].removeAttribute('aria-current');});}
+  function onScroll(){
+    var st=window.scrollY||document.documentElement.scrollTop,h=document.documentElement.scrollHeight-window.innerHeight,line=Math.min(window.innerHeight*0.38,340),cur=null,sub=null;
+    if(bar)bar.style.width=(h>0?(st/h*100):0)+'%';
+    parts.forEach(function(p){if(p[1].getBoundingClientRect().top<=line)cur=p[0];});
+    if(h>0&&st>=h-2&&parts.length)cur=parts[parts.length-1][0];
+    if(cur&&cur.getAttribute('href')==='#evidence')subs.forEach(function(p){if(p[1].getBoundingClientRect().top<=line)sub=p[0];});
+    mark(parts,cur);mark(subs,sub);
+    if(cur!==shown&&strip&&strip.scrollWidth>strip.clientWidth){strip.scrollLeft=cur?Math.max(0,cur.offsetLeft-16):0;}
+    shown=cur;
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});window.addEventListener('resize',onScroll);onScroll();
+  document.querySelectorAll('.bib-copy-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var pre=document.querySelector('.bibtex-block'),text=pre?pre.innerText||pre.textContent:'';
+      if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(function(){
+        btn.innerHTML='<i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-check.png);mask-image:url(/images/icons/h-check.png)"></i> Copied!';btn.classList.add('copied');
+        setTimeout(function(){btn.innerHTML='<i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-list.png);mask-image:url(/images/icons/h-list.png)"></i> Copy BibTeX';btn.classList.remove('copied');},2000);});}
+    });
+  });
+})();
+</script>
+{% include proj/keystone/hero.html %}
+<script>
+/* Reveal on entry; reset when fully out of view, so every figure plays again on re-entry. */
+(function(){
+  var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches, hasIO='IntersectionObserver' in window;
+  var els=[].slice.call(document.querySelectorAll('.reveal,.anim'));
+  if(reduced||!hasIO){document.body.classList.add('no-anim');els.forEach(function(e){e.classList.add('in');});return;}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    var r=e.boundingClientRect, vh=window.innerHeight||800;
+    if(e.isIntersecting&&(e.intersectionRatio>=0.25||r.top<vh*0.7))e.target.classList.add('in');
+    else if(!e.isIntersecting)e.target.classList.remove('in');
+  });},{threshold:[0,0.1,0.25,0.5]});
+  els.forEach(function(e){io.observe(e);});
+})();
+</script>
+</body>
+</html>

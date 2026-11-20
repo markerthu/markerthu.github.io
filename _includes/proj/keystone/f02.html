@@ -1,0 +1,80 @@
+<figure class="fig panel" id="ks-f02">
+  <div class="ks-two even">
+    <div>
+      <p class="ks-ttl">Counting<span>candidate pairs ordered correctly</span></p>
+      <div class="ch anim" id="ch-cnt" role="img" aria-label="Counting: pairs ordered correctly. Keystone score from the step-8 preview 0.86; from the finished image, HPSv2.1 0.77, ImageReward 0.72. Chance is 0.50."></div>
+    </div>
+    <div>
+      <p class="ks-ttl">Position<span>candidate pairs ordered correctly</span></p>
+      <div class="ch anim" id="ch-pos" role="img" aria-label="Position: pairs ordered correctly. Keystone score from the step-8 preview 0.87; from the finished image, VQAScore 0.79, HPSv2.1 0.52, ImageReward 0.66. Chance is 0.50."></div>
+    </div>
+  </div>
+  <p class="cap">SD3.5-Medium, development prompts (the paper&rsquo;s Table 1). The Keystone score reads the step-8 preview; the other judges read the finished image.</p>
+</figure>
+<div class="ks-ex anim" id="ks-examples">
+  <article class="case">
+    <p class="bn">Counting</p>
+    <p class="q">a photo of three handbags</p>
+    <div class="pv" role="img" aria-label="Counting prompt, a photo of three handbags. Keystone scores of the eight step-8 previews: 0.13, 0.86, 0.74, 0.95, 0.65, 0.23, 0.68, 0.64. The four highest are kept. Keystone's pruning ends on a correct image; ImageReward's pruning ends on a wrong one.">
+      <figure style="--d:0.10s"><img src="/images/projects/keystone/q201_c0_8.jpg" alt="" width="320" height="320" loading="lazy"><figcaption>0.13</figcaption></figure><figure class="kp" style="--d:0.16s"><img src="/images/projects/keystone/q201_c1_8.jpg" alt="" width="320" height="320" loading="lazy"><figcaption>0.86</figcaption></figure><figure class="kp" style="--d:0.22s"><img src="/images/projects/keystone/q201_c2_8.jpg" alt="" width="320" height="320" loading="lazy"><figcaption>0.74</figcaption></figure><figure class="kp" style="--d:0.28s"><img src="/images/projects/keystone/q201_c3_8.jpg" alt="" width="320" height="320" loading="lazy"><figcaption>0.95</figcaption></figure><figure style="--d:0.34s"><img src="/images/projects/keystone/q201_c4_8.jpg" alt="" width="320" height="320" loading="lazy"><figcaption>0.65</figcaption></figure><figure style="--d:0.40s"><img src="/images/projects/keystone/q201_c5_8.jpg" alt="" width="320" height="320" loading="lazy"><figcaption>0.23</figcaption></figure><figure class="kp" style="--d:0.46s"><img src="/images/projects/keystone/q201_c6_8.jpg" alt="" width="320" height="320" loading="lazy"><figcaption>0.68</figcaption></figure><figure style="--d:0.52s"><img src="/images/projects/keystone/q201_c7_8.jpg" alt="" width="320" height="320" loading="lazy"><figcaption>0.64</figcaption></figure>
+    </div>
+    <p class="pvl">Step-8 previews and their Keystone scores; <b>four kept</b></p>
+    <div class="res">
+      <div class="ba k-edit" style="--d:1.9s"><img src="/images/projects/keystone/q201_c3_final.jpg" alt="Three handbags in a row: black, pink and brown" width="320" height="320" loading="lazy"><b>Keystone&rsquo;s pruning ends on</b><code>Correct</code></div>
+      <div class="ba k-fail" style="--d:2.1s"><img src="/images/projects/keystone/q201_c4_final.jpg" alt="Two handbags, orange and purple" width="320" height="320" loading="lazy"><b>ImageReward&rsquo;s pruning ends on</b><code>Wrong</code></div>
+    </div>
+  </article>
+  <article class="case">
+    <p class="bn">Position</p>
+    <p class="q">a photo of a laptop left of a cow</p>
+    <div class="pv" role="img" aria-label="Position prompt, a photo of a laptop left of a cow. Keystone scores of the eight step-8 previews: 0.06, 0.53, 0.03, 0.30, 0.12, 0.53, 0.02, 0.03. The four highest are kept. Keystone's pruning ends on a correct image; ImageReward's pruning ends on a wrong one.">
+      <figure style="--d:0.10s"><img src="/images/projects/keystone/q356_c0_8.jpg" alt="" width="320" height="320" loading="lazy"><figcaption>0.06</figcaption></figure><figure class="kp" style="--d:0.16s"><img src="/images/projects/keystone/q356_c1_8.jpg" alt="" width="320" height="320" loading="lazy"><figcaption>0.53</figcaption></figure><figure style="--d:0.22s"><img src="/images/projects/keystone/q356_c2_8.jpg" alt="" width="320" height="320" loading="lazy"><figcaption>0.03</figcaption></figure><figure class="kp" style="--d:0.28s"><img src="/images/projects/keystone/q356_c3_8.jpg" alt="" width="320" height="320" loading="lazy"><figcaption>0.30</figcaption></figure><figure class="kp" style="--d:0.34s"><img src="/images/projects/keystone/q356_c4_8.jpg" alt="" width="320" height="320" loading="lazy"><figcaption>0.12</figcaption></figure><figure class="kp" style="--d:0.40s"><img src="/images/projects/keystone/q356_c5_8.jpg" alt="" width="320" height="320" loading="lazy"><figcaption>0.53</figcaption></figure><figure style="--d:0.46s"><img src="/images/projects/keystone/q356_c6_8.jpg" alt="" width="320" height="320" loading="lazy"><figcaption>0.02</figcaption></figure><figure style="--d:0.52s"><img src="/images/projects/keystone/q356_c7_8.jpg" alt="" width="320" height="320" loading="lazy"><figcaption>0.03</figcaption></figure>
+    </div>
+    <p class="pvl">Step-8 previews and their Keystone scores; <b>four kept</b></p>
+    <div class="res">
+      <div class="ba k-edit" style="--d:1.9s"><img src="/images/projects/keystone/q356_c1_final.jpg" alt="A laptop on the left and a cow on the right" width="320" height="320" loading="lazy"><b>Keystone&rsquo;s pruning ends on</b><code>Correct</code></div>
+      <div class="ba k-fail" style="--d:2.1s"><img src="/images/projects/keystone/q356_c5_final.jpg" alt="A cow standing in a field behind a laptop" width="320" height="320" loading="lazy"><b>ImageReward&rsquo;s pruning ends on</b><code>Wrong</code></div>
+    </div>
+  </article>
+  <article class="case">
+    <p class="bn">Colour attribution</p>
+    <p class="q">a photo of a black broccoli and a yellow cake</p>
+    <div class="pv" role="img" aria-label="Colour attribution prompt, a photo of a black broccoli and a yellow cake. Keystone scores of the eight step-8 previews: 0.75, 0.75, 0.50, 0.41, 0.62, 0.25, 0.16, 0.36. The four highest are kept. Keystone's pruning ends on a correct image; ImageReward's pruning ends on a wrong one.">
+      <figure class="kp" style="--d:0.10s"><img src="/images/projects/keystone/q478_c0_8.jpg" alt="" width="320" height="320" loading="lazy"><figcaption>0.75</figcaption></figure><figure class="kp" style="--d:0.16s"><img src="/images/projects/keystone/q478_c1_8.jpg" alt="" width="320" height="320" loading="lazy"><figcaption>0.75</figcaption></figure><figure class="kp" style="--d:0.22s"><img src="/images/projects/keystone/q478_c2_8.jpg" alt="" width="320" height="320" loading="lazy"><figcaption>0.50</figcaption></figure><figure style="--d:0.28s"><img src="/images/projects/keystone/q478_c3_8.jpg" alt="" width="320" height="320" loading="lazy"><figcaption>0.41</figcaption></figure><figure class="kp" style="--d:0.34s"><img src="/images/projects/keystone/q478_c4_8.jpg" alt="" width="320" height="320" loading="lazy"><figcaption>0.62</figcaption></figure><figure style="--d:0.40s"><img src="/images/projects/keystone/q478_c5_8.jpg" alt="" width="320" height="320" loading="lazy"><figcaption>0.25</figcaption></figure><figure style="--d:0.46s"><img src="/images/projects/keystone/q478_c6_8.jpg" alt="" width="320" height="320" loading="lazy"><figcaption>0.16</figcaption></figure><figure style="--d:0.52s"><img src="/images/projects/keystone/q478_c7_8.jpg" alt="" width="320" height="320" loading="lazy"><figcaption>0.36</figcaption></figure>
+    </div>
+    <p class="pvl">Step-8 previews and their Keystone scores; <b>four kept</b></p>
+    <div class="res">
+      <div class="ba k-edit" style="--d:1.9s"><img src="/images/projects/keystone/q478_c4_final.jpg" alt="A slice of yellow cake beside dark broccoli" width="320" height="320" loading="lazy"><b>Keystone&rsquo;s pruning ends on</b><code>Correct</code></div>
+      <div class="ba k-fail" style="--d:2.1s"><img src="/images/projects/keystone/q478_c0_final.jpg" alt="Green broccoli on top of a yellow cake" width="320" height="320" loading="lazy"><b>ImageReward&rsquo;s pruning ends on</b><code>Wrong</code></div>
+    </div>
+  </article>
+</div>
+<p class="cap">Examples: official test prompts, chosen by the paper&rsquo;s fixed rule (App. D.16.2).</p>
+<script>
+(function(){
+  /* Table 1, development prompts: the Keystone score reads the step-8 preview, the other judges read the finished image. */
+  var G={cnt:[0.86,null,0.77,0.72],pos:[0.87,0.79,0.52,0.66]};
+  var ROWS=[['Keystone score','step-8 preview','ours'],['VQAScore','finished image','vqa'],['HPSv2.1','finished image','hps'],['ImageReward','finished image','ir']];
+  function f(v){return (Math.round(v*10)/10).toString();}
+  function tx(x,y,s,cls,anchor,extra){return '<text x="'+f(x)+'" y="'+f(y)+'"'+(cls?' class="'+cls+'"':'')+(anchor?' text-anchor="'+anchor+'"':'')+(extra||'')+'>'+s+'</text>';}
+  function bars(el,vals){
+    var cw=el.clientWidth; if(!cw) return;
+    var rows=ROWS.filter(function(r,i){return vals[i]!=null;}), v2=vals.filter(function(v){return v!=null;});
+    var W=Math.round(Math.max(280,Math.min(cw,520))), rh=48, top=8, H=top+rows.length*rh+30, x0=0, x1=W-44;
+    var X=function(v){return x0+(x1-x0)*v;}, s='';
+    [0,0.5,1].forEach(function(v){s+=(v===0.5?'':'<line class="grid" x1="'+f(X(v))+'" x2="'+f(X(v))+'" y1="'+top+'" y2="'+(H-24)+'"/>')+tx(X(v),H-8,v===0?'0':v===1?'1':'0.5, chance',v===0.5?'sm t-mut':'sm',v===0?'start':'middle');});
+    rows.forEach(function(r,i){
+      var y=top+i*rh, ours=r[2]==='ours', cls=ours?'d-mint':'d-'+r[2], dl=(0.2+i*0.15).toFixed(2);
+      s+=tx(0,y+14,'<tspan style="font-weight:'+(ours?700:600)+';fill:var(--ink)">'+r[0]+'</tspan><tspan dx="6" class="t-mut">'+r[1]+'</tspan>','sm halo');
+      s+='<rect class="'+cls+' grow" style="--d:'+dl+'s" x="'+f(X(0))+'" y="'+(y+20)+'" width="'+f(X(v2[i])-X(0))+'" height="16" rx="4"/>';
+      s+='<line class="chance" x1="'+f(X(0.5))+'" x2="'+f(X(0.5))+'" y1="'+(y+19)+'" y2="'+(i===rows.length-1?H-24:y+38)+'"/>';
+      s+=tx(X(v2[i])+7,y+33,v2[i].toFixed(2),(ours?'t-mint ':'')+'fade','',' style="--d:'+(+dl+0.6).toFixed(2)+'s;font-weight:'+(ours?700:600)+(ours?'':';fill:var(--body)')+'"');
+    });
+    el.innerHTML='<svg viewBox="0 0 '+W+' '+H+'" style="max-width:'+W+'px" aria-hidden="true">'+s+'</svg>';
+  }
+  function build(){bars(document.getElementById('ch-cnt'),G.cnt);bars(document.getElementById('ch-pos'),G.pos);}
+  build();
+  var lw=window.innerWidth,rt=0;
+  window.addEventListener('resize',function(){if(Math.abs(window.innerWidth-lw)<30)return;clearTimeout(rt);rt=setTimeout(function(){lw=window.innerWidth;build();},180);});
+})();
+</script>

@@ -1,0 +1,26 @@
+<figure class="fig panel" id="ks-idea" style="margin-top:var(--sp-fig)">
+  <p class="ks-ttl">Two candidates for &ldquo;a photo of four bananas&rdquo;<span>the Keystone score of each preview above it</span></p>
+  <div class="ks-strips anim" id="ks-strips"></div>
+</figure>
+<script>
+(function(){
+  var host=document.getElementById('ks-strips'); if(!host) return;
+  var STEPS=['4','6','8','10','12','16','20','final'];
+  var STRIPS=[
+    {b:3,k:'k-ours',title:'Ends with four bananas',sc:[0.44,0.52,0.94,0.81,0.70,0.93,0.93,0.96]},
+    {b:2,k:'k-fail',title:'Ends with two bananas',sc:[0.07,0.07,0.05,0.05,0.04,0.04,0.06,0.03]}];
+  var h='';
+  STRIPS.forEach(function(st,si){
+    var aria=st.title+'. Keystone score at '+STEPS.map(function(s,i){return (s==='final'?'the finished image':'step '+s)+' '+st.sc[i].toFixed(2);}).join(', ')+'.';
+    h+='<div class="ks-strip '+st.k+'"><h3><i aria-hidden="true"></i>'+st.title+'</h3><div class="ks-fr" role="img" aria-label="'+aria+'">';
+    STEPS.forEach(function(s,i){
+      var d=(0.1+si*0.5+i*0.09).toFixed(2);
+      h+='<figure class="'+(s==='8'?'k8':'')+'" style="--d:'+d+'s"><span class="sc">'+st.sc[i].toFixed(2)+'</span>'
+        +'<img src="/images/projects/keystone/bananas_b'+st.b+'_'+s+'.jpg" alt="" width="384" height="384" loading="lazy">'
+        +'<figcaption>'+(s==='final'?'final':'step '+s)+'</figcaption></figure>';
+    });
+    h+='</div></div>';
+  });
+  host.innerHTML=h;
+})();
+</script>
