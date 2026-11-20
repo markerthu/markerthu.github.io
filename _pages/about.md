@@ -1350,7 +1350,7 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
   </li>
   <li>
     <span class="news-date">Nov 2026</span>
-    <span><span class="nbadge nb-find">Finding</span><strong>Vanguard</strong> is on arXiv. Step-level speculative decoding has so far been judged by how little accuracy it gives up. Let a small model go first, check each of its drafted steps against the screen, and it can be right more often than the large model it was meant to imitate: a general decision model scores the small model&rsquo;s drafts in one forward pass, and the large model writes only the steps it rejects. Training-free, and the large model can come from another model family. <a href="/projects/vanguard/">Project page</a> &middot; <a href="/film/#vanguard">Video</a> &middot; <a href="https://arxiv.org/abs/2611.23917" target="_blank" rel="noopener noreferrer">Paper</a></span>
+    <span><span class="nbadge nb-find">Finding</span><strong>Vanguard</strong> is on arXiv. Step-level speculative decoding has so far been judged by how little accuracy it gives up. Let a small model go first, check each of its drafted steps against the screen, and it can be right more often than the large model it was meant to imitate: a general decision model scores each of the small model&rsquo;s drafts in one forward pass, and the large model writes only the steps it rejects. Training-free, and the large model can come from another model family. <a href="/projects/vanguard/">Project page</a> &middot; <a href="/film/#vanguard">Video</a> &middot; <a href="https://arxiv.org/abs/2611.23917" target="_blank" rel="noopener noreferrer">Paper</a></span>
   </li>
   <li>
     <span class="news-date">Oct 2026</span>

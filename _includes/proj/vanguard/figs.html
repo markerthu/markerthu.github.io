@@ -155,7 +155,7 @@
     s+=tx(X(small?10.5:13),Y(0.516*(small?10.5:13)+1.662)+(small?24:26),'r = 0.95','t-ours fade','',d(2.4));
     var order=PTS.map(function(p,i){return i;}).sort(function(a,b){return PTS[a][0]-PTS[b][0];});
     order.forEach(function(i,k){var p=PTS[i], fam=FAM[p[2]];
-      s+='<g class="pop"'+d(0.2+k*0.06)+'><title>'+fam[0].replace('&rarr;','→')+', '+TASK[p[3]]+': headroom '+p[0]+', gain '+p[1]+(p[4]?' (significant)':'')+'</title>'+shape(p[3],X(p[0]),Y(p[1]),r,'pt '+fam[1]+(p[4]?'':' hollow'),'')+'</g>';});
+      s+='<g class="pop"'+d(0.2+k*0.06)+'><title>'+fam[0].replace('&rarr;','→')+', '+TASK[p[3]]+': headroom '+p[0].toFixed(1)+', gain '+p[1].toFixed(1)+(p[4]?' (significant)':'')+'</title>'+shape(p[3],X(p[0]),Y(p[1]),r,'pt '+fam[1]+(p[4]?'':' hollow'),'')+'</g>';});
     if(!small){
       s+=tx(X(18.7)-16,Y(11.82)+4,'Qwen3-VL 2B &rarr; Gemma-3 27B, AndroidControl','sm fade','end',d(2.2));
       s+=tx(X(-10.1)+12,Y(-3.58)+22,'Qwen3.5, AndroidControl','sm fade','',d(2.2));
@@ -181,7 +181,7 @@
     var a='<div>'+svg(W,y-6,s)+'</div>';
     var W2=Math.round(Math.max(290,Math.min(rw,480))), bars=[['Vanguard',0.106,'m-ours'],['Qwen-VL-PRM-7B',0.272,'m-oth'],['8B, same question',0.282,'m-oth']];
     var lbw=small?128:150, X=function(v){return lbw+(W2-lbw-54)*v/0.3;}, t='', rh=44, top=58, H2=top+bars.length*rh+28;
-    t+=tx(0,16,'Calibration error (ECE)','t-ink mid')+tx(0,34,'lower is better','sm');
+    t+=tx(0,16,'Calibration error (ECE)','t-ink mid')+tx(0,34,'on Mind2Web, lower is better','sm');
     [0,0.1,0.2,0.3].forEach(function(v){t+='<line class="grid" x1="'+f(X(v))+'" x2="'+f(X(v))+'" y1="'+(top-6)+'" y2="'+(H2-24)+'"/>'+tx(X(v),H2-6,v===0?'0':v.toFixed(1),'sm','middle');});
     bars.forEach(function(b,i){var cy=top+i*rh+rh/2-4, ours=b[2]==='m-ours';
       t+=tx(0,cy+5,b[0],ours?'t-ours':'t-body',null,small?' style="font-size:var(--t-fine)"':'');
