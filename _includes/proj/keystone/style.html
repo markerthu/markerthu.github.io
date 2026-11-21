@@ -5,6 +5,8 @@
 .stage-steps li:nth-child(2){--sc:var(--lav-e)}
 .stage-steps li:nth-child(3){--sc:var(--ice-e)}
 .stage-steps li:nth-child(4){--sc:var(--mint-e)}
+/* phones: the stage list is a 2x2 grid, so the active bar goes under its own label, not on the row line above */
+@media(max-width:700px){.stage-steps li::before{top:auto;bottom:-1px}}
 
 /* at-a-glance illustrations */
 .il-ok{fill:none;stroke:var(--mint-t);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}

@@ -83,7 +83,7 @@ body.dark-mode .section-header .sh-icon { filter: brightness(1.55) saturate(1.1)
   padding: 9px 0; border-bottom: 1px solid #f0f0f0; font-size: 0.906em;
 }
 .news-list li:last-child { border-bottom: none; }
-/* the pinned news item (Self-Rewriting), owner's 11-20 request: stand out at the top */
+/* the pinned news item (Self-Rewriting): stands out at the top */
 .news-list li.news-pinned { background: #F3F6FB; border: 1px solid #DCE7F5; border-left: 3px solid #2F4B8F; border-radius: 8px; padding: 12px 14px; margin: 4px 0 10px; }
 .news-list li.news-pinned:last-child { border-bottom: 1px solid #DCE7F5; }
 .nb-pin { background: #2F4B8F; color: #fff; }
@@ -1346,7 +1346,7 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
   </li>
   <li>
     <span class="news-date">Nov 2026</span>
-    <span><span class="nbadge nb-find">Finding</span><strong>Keystone</strong> is on arXiv. An image model decides what it will draw in its first few steps, yet test-time search finishes every candidate before judging it. Keystone judges candidates at those key steps instead, from the model&rsquo;s own blurry previews, with an off-the-shelf decision model that answers questions compiled from the prompt: more accurate than best-of-8 with every other verifier, at under half its compute. Training-free, and a drop-in judge for existing search methods. <a href="/projects/keystone/">Project page</a> &middot; <a href="/film/#keystone">Video</a> &middot; <a href="https://arxiv.org/abs/2611.25530" target="_blank" rel="noopener noreferrer">Paper</a></span>
+    <span><span class="nbadge nb-find">Finding</span><strong>Keystone</strong> is on arXiv. An image model decides what it will draw in its first few steps, yet best-of-N search finishes every candidate before judging it. Keystone judges candidates at those key steps instead, from the model&rsquo;s own blurry previews, with an off-the-shelf decision model that answers questions compiled from the prompt, so search stops finishing images that were doomed from the start. Training-free, and a drop-in judge for existing search methods. <a href="/projects/keystone/">Project page</a> &middot; <a href="/film/#keystone">Video</a> &middot; <a href="https://arxiv.org/abs/2611.25530" target="_blank" rel="noopener noreferrer">Paper</a></span>
   </li>
   <li>
     <span class="news-date">Nov 2026</span>
@@ -1612,7 +1612,7 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
     <div class="pub-title"><a href="https://arxiv.org/abs/2611.25530" target="_blank" rel="noopener noreferrer">Keystone: Judging Previews at Key Steps for Test-Time Search in Diffusion Models</a></div>
     <div class="pub-authors"><strong>J. Fan*</strong>, C. Cheng, Z. Wang, C. Yang, B. Yang, Q. Zheng, G. Liu</div>
     <div class="pub-desc">Keystone: an off-the-shelf decision model judges each candidate from the model&rsquo;s own blurry preview at the key steps, so test-time search stops finishing images that were doomed from the start. Training-free.</div>
-    <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>More accurate than every other verifier&rsquo;s best-of-8 at under half its compute &middot; Without retuning, the gain holds on average across four base models and three benchmarks</div>
+    <div class="pub-hl"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-awards.png);mask-image:url(/images/icons/sh-awards.png)"></i>On GenEval with SD3.5-Medium, more accurate than every other verifier&rsquo;s best-of-8 at under half its compute &middot; Without retuning, both searches stay above every other verifier&rsquo;s best-of-N on average across four base models and three benchmarks</div>
     <div class="pub-links">
       <a class="pub-link pl-project" href="/projects/keystone/"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-link.png);mask-image:url(/images/icons/h-link.png)"></i>Project</a>
       <a class="pub-link pl-arxiv" href="https://arxiv.org/abs/2611.25530" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-paperclip.png);mask-image:url(/images/icons/h-paperclip.png)"></i>arXiv</a>

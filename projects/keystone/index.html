@@ -8,17 +8,17 @@ permalink: /projects/keystone/
 <meta charset="UTF-8">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Keystone: Judging Previews at Key Steps for Test-Time Search in Diffusion Models">
-  <meta property="og:description" content="Text-to-image test-time search finishes every candidate before judging it. Keystone judges candidates at the beginning, from the model's own blurry previews, with an off-the-shelf decision model asked the prompt's own questions, and spends compute only where the outcome is still open.">
+  <meta property="og:description" content="Best-of-N search for text-to-image finishes every candidate before judging it. Keystone judges candidates at the beginning, from the model's own blurry previews, with an off-the-shelf decision model asked the prompt's own questions, and spends compute only where the outcome is still open.">
   <meta property="og:image" content="https://www.jiajunfan.com/images/og/keystone.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
   <meta property="og:url" content="https://www.jiajunfan.com/projects/keystone/">
   <link rel="canonical" href="https://www.jiajunfan.com/projects/keystone/">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Keystone: Judging Previews at Key Steps for Test-Time Search in Diffusion Models">
-  <meta name="twitter:description" content="Test-time search for text-to-image models finishes every candidate before it judges it. Keystone judges candidates at the beginning, from the model's own blurry previews, and spends compute only where the outcome is still open.">
+  <meta name="twitter:description" content="Best-of-N search for text-to-image models finishes every candidate before it judges it. Keystone judges candidates at the beginning, from the model's own blurry previews, and spends compute only where the outcome is still open.">
   <meta name="twitter:image" content="https://www.jiajunfan.com/images/og/keystone.jpg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Keystone: Judging Previews at Key Steps for Test-Time Search in Diffusion Models | Jiajun Fan</title>
-<meta name="description" content="Text-to-image test-time search finishes every candidate before judging it. Keystone judges candidates at the beginning, from the model's own blurry previews, with an off-the-shelf decision model asked the prompt's own questions, and spends compute only where the outcome is still open.">
+<meta name="description" content="Best-of-N search for text-to-image finishes every candidate before judging it. Keystone judges candidates at the beginning, from the model's own blurry previews, with an off-the-shelf decision model asked the prompt's own questions, and spends compute only where the outcome is still open.">
 <meta name="theme-color" content="#fdfcfa">
 <meta name="theme-color" content="#0f1216" media="(prefers-color-scheme: dark)">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,7 +33,7 @@ permalink: /projects/keystone/
 <script type="application/ld+json">{
   "@context":"https://schema.org","@type":"ScholarlyArticle",
   "name":"Keystone: Judging Previews at Key Steps for Test-Time Search in Diffusion Models",
-  "description":"Text-to-image test-time search finishes every candidate before judging it. Keystone judges candidates at the beginning, from the model's own blurry previews, with an off-the-shelf decision model asked the prompt's own questions, and spends compute only where the outcome is still open.",
+  "description":"Best-of-N search for text-to-image finishes every candidate before judging it. Keystone judges candidates at the beginning, from the model's own blurry previews, with an off-the-shelf decision model asked the prompt's own questions, and spends compute only where the outcome is still open.",
   "author":[{"@type":"Person","name":"Jiajun Fan"},{"@type":"Person","name":"Chaoran Cheng"},{"@type":"Person","name":"Ziwen Wang"},{"@type":"Person","name":"Changyi Yang"},{"@type":"Person","name":"Bangji Yang"},{"@type":"Person","name":"Qinglong Zheng"},{"@type":"Person","name":"Ge Liu"}],
   "datePublished":"2026-11-19",
   "url":"https://www.jiajunfan.com/projects/keystone/","sameAs":"https://arxiv.org/abs/2611.25530",
@@ -103,13 +103,13 @@ permalink: /projects/keystone/
       <header class="say">
         <p class="eyebrow">At a glance</p>
         <h2>The paper in four findings.</h2>
-        <p class="lead">Test-time search for text-to-image models finishes every candidate before it judges it. Keystone judges candidates at the beginning, from the model&rsquo;s own blurry previews, and spends compute only where the outcome is still open.</p>
+        <p class="lead">Best-of-N search for text-to-image models finishes every candidate before it judges it. Keystone judges candidates at the beginning, from the model&rsquo;s own blurry previews, and spends compute only where the outcome is still open.</p>
       </header>
       <div class="show cards c2">
         <a class="card result" href="#decided"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><line class="il-ax" x1="20" y1="84" x2="180" y2="84"/><rect class="il-y" x="28" y="20" width="16" height="64" rx="3"/><rect class="il-y" x="50" y="28" width="16" height="56" rx="3"/><rect class="il-n" x="72" y="48" width="16" height="36" rx="3"/><rect class="il-n" x="94" y="63" width="16" height="21" rx="3"/><rect class="il-n" x="116" y="67" width="16" height="17" rx="3"/><rect class="il-n" x="138" y="63" width="16" height="21" rx="3"/><rect class="il-n" x="160" y="73" width="16" height="11" rx="3"/></svg></span><span class="r-no">Finding 01<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>The outcome is decided in the first steps.</h3><p>Change the noise of one of the first two steps and the verdict changes most often; by step 8 of 40 it can already be read.</p></a>
         <a class="card result" href="#previews"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><defs><filter id="il-soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="2.6"/></filter></defs><rect class="il-slot" x="40" y="12" width="72" height="72" rx="10"/><g filter="url(#il-soft)"><rect class="il-blur" x="50" y="22" width="11" height="52" rx="5"/><rect class="il-blur" x="65" y="22" width="11" height="52" rx="5"/><rect class="il-blur" x="80" y="22" width="11" height="52" rx="5"/><rect class="il-blur" x="95" y="22" width="11" height="52" rx="5"/></g><circle class="il-y" cx="148" cy="48" r="20"/><path class="il-ok" d="M138 48l7 7 13-14"/></svg></span><span class="r-no">Finding 02<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>A blurry preview, read better than a finished image.</h3><p>Asked the prompt&rsquo;s own questions, an off-the-shelf decision model reads counts and positions from a step-8 preview better than reward models read them from the finished image.</p></a>
         <a class="card result" href="#compute"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><line class="il-ax" x1="20" y1="84" x2="180" y2="84"/><rect class="il-n" x="24" y="52" width="150" height="18" rx="4"/><rect class="il-y" x="24" y="22" width="68" height="18" rx="4"/><path class="il-ok" d="M104 31l6 6 11-12"/></svg></span><span class="r-no">Finding 03<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>More accurate, at under half the compute.</h3><p>Keystone&rsquo;s searches beat <span class="nw">best-of-8</span> with every other verifier while finishing far fewer images.</p></a>
-        <a class="card result" href="#dropin"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><rect class="il-slot" x="22" y="30" width="44" height="36" rx="8"/><rect class="il-slot" x="78" y="30" width="44" height="36" rx="8"/><rect class="il-slot" x="134" y="30" width="44" height="36" rx="8"/><rect class="il-y" x="32" y="40" width="24" height="16" rx="4"/><rect class="il-y" x="88" y="40" width="24" height="16" rx="4"/><rect class="il-y" x="144" y="40" width="24" height="16" rx="4"/><path class="il-dash" d="M44 14v12M100 14v12M156 14v12"/></svg></span><span class="r-no">Finding 04<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>A drop-in judge that travels.</h3><p>It lifts best-of-N, progressive seed pruning and FK steering, and the gain holds without retuning, on average, across four base models and three benchmarks.</p></a>
+        <a class="card result" href="#dropin"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><rect class="il-slot" x="22" y="30" width="44" height="36" rx="8"/><rect class="il-slot" x="78" y="30" width="44" height="36" rx="8"/><rect class="il-slot" x="134" y="30" width="44" height="36" rx="8"/><rect class="il-y" x="32" y="40" width="24" height="16" rx="4"/><rect class="il-y" x="88" y="40" width="24" height="16" rx="4"/><rect class="il-y" x="144" y="40" width="24" height="16" rx="4"/><path class="il-dash" d="M44 14v12M100 14v12M156 14v12"/></svg></span><span class="r-no">Finding 04<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>A drop-in judge that travels.</h3><p>It lifts best-of-N, progressive seed pruning and FK steering; without retuning, its own searches stay above every other verifier&rsquo;s best-of-N, on average, across four base models and three benchmarks.</p></a>
       </div>
       <ul class="creed">
         <li><b>Training-free.</b><span>a released judge; no step labels, no reward model trained on noise</span></li>
@@ -125,7 +125,7 @@ permalink: /projects/keystone/
     <header class="say">
       <div class="say-main wide">
         <p class="eyebrow">The problem</p>
-        <h2 class="reveal">Search finishes every image before it judges it, <span class="hl">even the ones doomed from the start.</span></h2>
+        <h2 class="reveal"><span class="nw">Best-of-N</span> finishes every image before it judges it, <span class="hl">even the ones doomed from the start.</span></h2>
         <p class="lead">Text-to-image models still miscount, drop and misplace objects. The standard remedy, <span class="nw">best-of-N</span>, draws several complete images and keeps the one a verifier prefers. The verifiers are reward models trained on finished images, so the generator pays in full for every candidate the search will throw away.</p>
       </div>
     </header>
