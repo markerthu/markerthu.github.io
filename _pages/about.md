@@ -1394,7 +1394,7 @@ I am a CS Ph.D. student at <strong>UIUC</strong>, where I study how to train <st
   </li>
   <li>
     <span class="news-date">Jul 2026</span>
-    <span><span class="nbadge nb-accept">Accept</span>Papers accepted at <strong>COLM 2026</strong> (San Francisco, Oct 6–9). See you in San Francisco&nbsp;<img class="g-ico" src="/images/icons/flag-us.png" alt=""></span>
+    <span><span class="nbadge nb-accept">Accept</span>Paper accepted at <strong>COLM 2026</strong> (San Francisco, Oct 6–9). See you in San Francisco&nbsp;<img class="g-ico" src="/images/icons/flag-us.png" alt=""></span>
   </li>
   <li>
     <span class="news-date">Apr 2026</span>
@@ -2068,7 +2068,7 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
         {label:'Decisions',        date:'2026-12-16'},
       ]},
     { name:'CVPR 2027', abbr:'CVPR', type:'CV', color:'#059669',
-      location:'Seattle, WA, USA', conf:'Jun 20\u201325, 2027', url:'https://cvpr.thecvf.com/Conferences/2027/CallForPapers',
+      location:'Seattle, WA, USA', conf:'Jun 20\u201324, 2027', url:'https://cvpr.thecvf.com/Conferences/2027/CallForPapers',
       deadlines:[
         {label:'Paper Enrollment', date:'2026-11-10'},
         {label:'Paper Submission', date:'2026-11-16'},

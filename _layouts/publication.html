@@ -18,7 +18,9 @@ layout: null
 {%- if vmain == 'arXiv' -%}{%- assign is_preprint = true -%}{%- endif -%}
 {%- assign authors = page.citation | split: '&quot;' | first | strip | append: '#' | replace: ',#', '' | replace: '.#', '' | remove: '#' -%}
 {%- assign author_list = authors | split: ', ' -%}
-{%- assign summary = content | strip_html | strip_newlines | strip -%}
+{%- assign summary = content | replace: '</p>', ' </p>' | strip_html | strip_newlines | strip -%}
+{%- comment -%} the lead keeps the record's links (e.g. Code, Amazon Science); paragraphs join with a space {%- endcomment -%}
+{%- assign lead = content | replace: '</p>', ' ' | remove: '<p>' | remove: '<strong>' | remove: '</strong>' | remove: '<em>' | remove: '</em>' | strip_newlines | strip -%}
 {%- assign short = page.title | split: ':' | first | strip -%}
 {%- if short.size > 48 -%}{%- assign short = 'Paper' -%}{%- endif -%}
 <!DOCTYPE html>
@@ -109,7 +111,7 @@ layout: null
       <h2>What the paper does.</h2>
     </header>
     <div class="show">
-      <p class="lead">{{ summary }}</p>
+      <p class="lead">{{ lead }}</p>
       <dl class="meta">
         <dt>Published in</dt><dd>{% if is_preprint %}arXiv preprint{% else %}{{ vfull }}{% endif %}</dd>
         {% if page.paperurl and page.paperurl != '' %}<dt>Paper</dt><dd><a href="{{ page.paperurl }}" target="_blank" rel="noopener noreferrer">{{ page.paperurl | remove: 'https://' | remove: 'http://' }}</a></dd>{% endif %}
