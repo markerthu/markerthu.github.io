@@ -1,86 +1,86 @@
 {
-  "updated": "2026-11-16",
+  "updated": "2026-11-23",
   "papers": [
     {
-      "id": "2611.18370",
-      "title": "f-Divergence Self-Play for Tabular Anomaly Detection via Large Language Models",
-      "authors": "Hoang Tran Vuong, Linh Ngo Van, Dang Nguyen et al.",
-      "summary": "Anomaly detection in tabular data poses significant challenges due to heterogeneous feature types-mixing numerical, categorical, and textual attributes, which complicate learning meaningful representa…",
-      "date": "2026-11-13",
-      "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2611.18370"
+      "id": "2611.27068",
+      "title": "Decision Models Are General-Purpose Process Reward Models",
+      "authors": "Jiajun Fan, Qinglong Zheng, Ziwen Wang et al.",
+      "summary": "Reinforcement learning (RL) from verifiable outcomes gives a language agent one reward per episode: every step is credited alike, and nothing about the task is learned when all rollouts fail. The last…",
+      "date": "2026-11-20",
+      "tag": "Reasoning",
+      "url": "https://arxiv.org/abs/2611.27068"
     },
     {
-      "id": "2611.16409",
-      "title": "Experience-Handoff Reinforcement Learning for Recursive Self-Improvement",
-      "authors": "Doyoung Kim, Byeongguk Jeon, Kailin Zhang et al.",
-      "summary": "It is common to train Large Language Models (LLMs) for agentic tasks with Reinforcement Learning (RL) from scalar rewards. However, this throws away the fine-grained information about the environment …",
-      "date": "2026-11-12",
-      "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2611.16409"
-    },
-    {
-      "id": "2611.15885",
-      "title": "Reward-Driven Collider Physics Challenges for Self-Improving Agentic AI via Reinforcement Learning",
-      "authors": "Alexander Yue, Qibin Liu, Julia Gonski",
-      "summary": "Recent advances in agentic AI have demonstrated the potential to automate complex high-energy physics (HEP) workflows. We focus on the regime of HEP tasks where frontier models still struggle to provi…",
-      "date": "2026-11-11",
-      "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2611.15885"
-    },
-    {
-      "id": "2611.13545",
-      "title": "Closing the BF16-FP16 Convergence Speed Gap in RL Post-Training with Stochastic Rounding",
-      "authors": "Mahdi Nazemi, Oleg Rybakov, Tijmen Blankevoort et al.",
-      "summary": "BF16 is widely used to pretrain large language models because it has the same dynamic range as FP32 and converges similarly to FP32 training. However, in reinforcement learning with verifiable rewards…",
-      "date": "2026-11-10",
-      "tag": "RL Training",
-      "url": "https://arxiv.org/abs/2611.13545"
-    },
-    {
-      "id": "2611.14326",
-      "title": "When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents",
-      "authors": "Runxuan Tang, Haoyu Gao, Yuyan Ding et al.",
-      "summary": "LLM agents increasingly operate in long-horizon, verifier-rich environments, but current self-improvement mechanisms often write episode-derived lessons directly into memory, making local success an u…",
-      "date": "2026-11-10",
-      "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2611.14326"
-    },
-    {
-      "id": "2611.13524",
-      "title": "The RSI Tax: When Recursive Self-Improvement Is Not Worth the Cost",
-      "authors": "Yitong Zhang, Ang Li, Yisen Wang",
-      "summary": "Recursive self-improvement (RSI) seeks to improve an agent using its own task experience. Its practical value depends on whether performance gains justify the full cost of self-improvement and task ex…",
-      "date": "2026-11-10",
-      "tag": "Self-Improvement",
-      "url": "https://arxiv.org/abs/2611.13524"
-    },
-    {
-      "id": "2611.12478",
-      "title": "AuDiR: Diagnosing Audio Reasoning with Rule and Percept Interventions",
-      "authors": "Chengwei Wei, Yi Ma, Nancy F. Chen",
-      "summary": "Answer accuracy alone does not distinguish failures in acoustic perception, rule knowledge, and rule application. AuDiR (Audio Diagnostic Reasoning) examines these distinctions through controlled inpu…",
-      "date": "2026-11-09",
-      "tag": "Audio Reasoning",
-      "url": "https://arxiv.org/abs/2611.12478"
-    },
-    {
-      "id": "2611.11421",
-      "title": "GenRM-Flow: Generators are Process-aware Reward Models in Flow Matching",
-      "authors": "Siming Fu, Ruizhe He, Zheming Fu et al.",
-      "summary": "Aligning video generation models with human preference depends critically on the quality of the reward model that scores generated videos. Current video reward models, however, source their reward sig…",
-      "date": "2026-11-08",
+      "id": "2611.26627",
+      "title": "RL Post-Training in Diffusion Transformers Is Activation Steering",
+      "authors": "Tuna Han Salih Meral, Kaan Oktay, Alec Helbling et al.",
+      "summary": "Reinforcement learning (RL) post-training substantially improves the visual quality, text rendering, and compositional accuracy of diffusion transformers. Because capabilities such as rendering reques…",
+      "date": "2026-11-19",
       "tag": "Flow Matching",
-      "url": "https://arxiv.org/abs/2611.11421"
+      "url": "https://arxiv.org/abs/2611.26627"
     },
     {
-      "id": "2611.10844",
-      "title": "What Broke & Why: Practical Lessons from Reinforcement Learning Post-Training",
-      "authors": "Luv Verma",
-      "summary": "Reinforcement learning with verifiable rewards (RLVR) has become an important way to improve how language models reason, solve problems, and use tools. But getting it to work in practice is not always…",
-      "date": "2026-11-07",
+      "id": "2611.25960",
+      "title": "When Sounds Turn Heads: Recovering Event Timing That Audio LLMs Fail to Say",
+      "authors": "Jongbhin Woo, Jaewook Jeong, Joon Son Chung",
+      "summary": "Audio LLMs can know when a queried sound occurs but fail to say it. We find a few attention heads that track the queried sound: they shift when the query changes, follow the sound when it moves, and r…",
+      "date": "2026-11-19",
+      "tag": "Audio Reasoning",
+      "url": "https://arxiv.org/abs/2611.25960"
+    },
+    {
+      "id": "2611.25742",
+      "title": "Goal-Guided Reinforcement Learning via Fine-Tuning Vision-Language Models",
+      "authors": "Yajie Qi, Wei Wei, Lin Li et al.",
+      "summary": "Exploration remains a major challenge for reinforcement learning (RL) agents in Craftax-style environments due to sparse rewards and long horizons. Large language models (LLMs) can guide exploration b…",
+      "date": "2026-11-19",
+      "tag": "Multimodal",
+      "url": "https://arxiv.org/abs/2611.25742"
+    },
+    {
+      "id": "2611.25197",
+      "title": "From Self-Play RL to Constrained Control: Distilling DiffMPC Students with DAgger",
+      "authors": "Luca M. Hartmann, Parinaz Naghizadeh",
+      "summary": "Self-play reinforcement learning (RL) produces strong driving policies, but these policies are hard to verify or interpret. Differentiable model predictive control (DiffMPC) can enforce explicit const…",
+      "date": "2026-11-18",
+      "tag": "Self-Improvement",
+      "url": "https://arxiv.org/abs/2611.25197"
+    },
+    {
+      "id": "2611.24876",
+      "title": "Learning to Interact in Multi-Agent Self-Play for Controllable Autonomous Driving Scenario Generation",
+      "authors": "Beyazit Yalcinkaya, Ethan Pronovost, Maximilian Naumann et al.",
+      "summary": "Large-scale, multi-agent self-play trains robust driving policies effectively in simulation, but controlling these models to generate specific, safety-critical edge cases remains a key challenge. Exis…",
+      "date": "2026-11-18",
+      "tag": "Self-Improvement",
+      "url": "https://arxiv.org/abs/2611.24876"
+    },
+    {
+      "id": "2611.22838",
+      "title": "Better Rankers, Worse Retrievers: The Hidden Cost of RL Post-Training in Generative Recommendation",
+      "authors": "Yuheng Chen, Fan Zhang, Yixuan Xu et al.",
+      "summary": "Generative recommenders decode the semantic ID of a user's next item with a language model, and post-training them with reinforcement learning (RL) after supervised fine-tuning (SFT) has become standa…",
+      "date": "2026-11-17",
       "tag": "RL Training",
-      "url": "https://arxiv.org/abs/2611.10844"
+      "url": "https://arxiv.org/abs/2611.22838"
+    },
+    {
+      "id": "2611.23476",
+      "title": "GUARD: Stabilizing Recursive Self-Improvement with Regret Guidance",
+      "authors": "Minghe Zhang, Xuetao Kang, Yifei Ming et al.",
+      "summary": "Autonomous AI agents pair a frozen base model with an editable harness of prompts, skills, tool rules, and memory. Recursive self-improvement (RSI) adapts this harness from experience without weight u…",
+      "date": "2026-11-17",
+      "tag": "Self-Improvement",
+      "url": "https://arxiv.org/abs/2611.23476"
+    },
+    {
+      "id": "2611.23219",
+      "title": "Do LLM Agents Still Need to Be Told How to Self-Improve?",
+      "authors": "Shobhita Sundaram, Cansu Sancaktar, Phillip Isola",
+      "summary": "LLM agents increasingly drive their own learning. Self-improvement methods delegate various components of model optimization to the models themselves. As models become more capable, this motivates a b…",
+      "date": "2026-11-17",
+      "tag": "Self-Improvement",
+      "url": "https://arxiv.org/abs/2611.23219"
     }
   ]
 }
