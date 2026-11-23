@@ -1,9 +1,9 @@
 {
   "_updated": "2026-11-23",
   "_timezone": "America/Los_Angeles",
-  "_refreshed": "2026-11-23T15:17:52Z",
+  "_refreshed": "2026-11-23T15:26:01Z",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 2053,
+  "_total": 2054,
   "_days": 30,
   "_range": "Oct. 25th - Nov. 23rd",
   "locations": [
@@ -34,10 +34,10 @@
     {
       "code": "IN",
       "name": "India",
-      "count": 96,
+      "count": 97,
       "cx": 263.6,
       "cy": 60.0,
-      "r": 2.77
+      "r": 2.78
     },
     {
       "code": "US",
@@ -502,7 +502,7 @@
     {
       "code": "IN",
       "name": "India",
-      "count": 96
+      "count": 97
     },
     {
       "code": "SG",
@@ -991,7 +991,7 @@
     {
       "path": "/projects/self-rewriting",
       "title": "Language Models Can Rewrite Their Own Weights | Jiajun Fan",
-      "count": 785
+      "count": 786
     },
     {
       "path": "/",
@@ -1245,7 +1245,7 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 1387
+      "count": 1388
     },
     {
       "name": "Safari",
@@ -1272,7 +1272,7 @@
     {
       "name": "macOS",
       "id": "macOS",
-      "count": 885
+      "count": 886
     },
     {
       "name": "iOS",
@@ -1414,21 +1414,32 @@
     },
     {
       "day": "2026-11-23",
-      "n": 144
+      "n": 145
     }
   ],
   "periods": {
-    "today": 144,
+    "today": 145,
     "yesterday": 338,
-    "d7": 1593,
+    "d7": 1594,
     "d7_prev": 109,
-    "d30": 2053,
+    "d30": 2054,
     "d30_prev": 815,
-    "day_frac": 0.303,
+    "day_frac": 0.309,
     "yesterday_day": "2026-11-22"
   },
-  "_last_visit": "2026-11-23 07:17",
+  "_last_visit": "2026-11-23 07:20",
   "recent": [
+    {
+      "date": "2026-11-23 07:20",
+      "ts": "2026-11-23T15:20:51Z",
+      "loc": "Illinois, US",
+      "path": "/projects/self-rewriting",
+      "ref": "",
+      "browser": "Safari 26.6",
+      "system": "iOS 18.7",
+      "screen": "393px",
+      "first": false
+    },
     {
       "date": "2026-11-23 07:17",
       "ts": "2026-11-23T15:17:01Z",
@@ -1450,6 +1461,28 @@
       "system": "Windows 10",
       "screen": "1366px",
       "first": true
+    },
+    {
+      "date": "2026-11-23 07:17",
+      "ts": "2026-11-23T15:17:15Z",
+      "loc": "India",
+      "path": "/projects/self-rewriting",
+      "ref": "on24static.akamaized.net",
+      "browser": "Chrome 156",
+      "system": "macOS 10.15",
+      "screen": "1920px",
+      "first": true
+    },
+    {
+      "date": "2026-11-23 07:17",
+      "ts": "2026-11-23T15:17:25Z",
+      "loc": "United Kingdom",
+      "path": "/projects/self-rewriting",
+      "ref": "",
+      "browser": "Safari 26.5",
+      "system": "macOS 10.15",
+      "screen": "1920px",
+      "first": false
     },
     {
       "date": "2026-11-23 07:16",
@@ -1725,41 +1758,8 @@
       "system": "macOS 10.15",
       "screen": "1512px",
       "first": true
-    },
-    {
-      "date": "2026-11-23 06:02",
-      "ts": "2026-11-23T14:02:33Z",
-      "loc": "Germany",
-      "path": "/projects/self-rewriting",
-      "ref": "",
-      "browser": "Chrome 157",
-      "system": "macOS 10.15",
-      "screen": "1920px",
-      "first": true
-    },
-    {
-      "date": "2026-11-23 05:56",
-      "ts": "2026-11-23T13:56:34Z",
-      "loc": "New York, US",
-      "path": "/projects/self-rewriting",
-      "ref": "t.co",
-      "browser": "",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": true
-    },
-    {
-      "date": "2026-11-23 05:56",
-      "ts": "2026-11-23T13:56:46Z",
-      "loc": "New York, US",
-      "path": "/projects/self-rewriting",
-      "ref": "t.co",
-      "browser": "",
-      "system": "iOS 26.6",
-      "screen": "430px",
-      "first": false
     }
   ],
-  "_recent_total": 7200,
+  "_recent_total": 7203,
   "_recent_shown": 30
 }
