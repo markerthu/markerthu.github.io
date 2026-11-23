@@ -1,9 +1,9 @@
 {
   "_updated": "2026-11-23",
   "_timezone": "America/Los_Angeles",
-  "_refreshed": "2026-11-23T11:17:47Z",
+  "_refreshed": "2026-11-23T12:17:57Z",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 1990,
+  "_total": 2002,
   "_days": 30,
   "_range": "Oct. 25th - Nov. 23rd",
   "locations": [
@@ -18,15 +18,15 @@
     {
       "code": "US",
       "name": "California, US",
-      "count": 250,
+      "count": 251,
       "cx": 60.0,
       "cy": 46.9,
-      "r": 3.37
+      "r": 3.38
     },
     {
       "code": "JP",
       "name": "Japan",
-      "count": 107,
+      "count": 108,
       "cx": 316.0,
       "cy": 48.3,
       "r": 2.83
@@ -65,18 +65,18 @@
     },
     {
       "code": "US",
+      "name": "United States, other regions",
+      "count": 44,
+      "cx": 89.6,
+      "cy": 45.7,
+      "r": 2.46
+    },
+    {
+      "code": "US",
       "name": "Washington, US",
       "count": 43,
       "cx": 58.1,
       "cy": 36.6,
-      "r": 2.45
-    },
-    {
-      "code": "US",
-      "name": "United States, other regions",
-      "count": 43,
-      "cx": 89.6,
-      "cy": 45.7,
       "r": 2.45
     },
     {
@@ -170,10 +170,10 @@
     {
       "code": "GB",
       "name": "United Kingdom",
-      "count": 17,
+      "count": 18,
       "cx": 176.9,
       "cy": 30.1,
-      "r": 2.21
+      "r": 2.22
     },
     {
       "code": "IT",
@@ -184,6 +184,14 @@
       "r": 2.2
     },
     {
+      "code": "FR",
+      "name": "France",
+      "count": 15,
+      "cx": 183.3,
+      "cy": 37.0,
+      "r": 2.19
+    },
+    {
       "code": "US",
       "name": "Georgia, US",
       "count": 14,
@@ -192,12 +200,12 @@
       "r": 2.17
     },
     {
-      "code": "FR",
-      "name": "France",
-      "count": 14,
-      "cx": 183.3,
-      "cy": 37.0,
-      "r": 2.17
+      "code": "US",
+      "name": "Arizona, US",
+      "count": 13,
+      "cx": 67.2,
+      "cy": 49.5,
+      "r": 2.16
     },
     {
       "code": "US",
@@ -256,14 +264,6 @@
       "r": 2.13
     },
     {
-      "code": "US",
-      "name": "Arizona, US",
-      "count": 10,
-      "cx": 67.2,
-      "cy": 49.5,
-      "r": 2.11
-    },
-    {
       "code": "CH",
       "name": "Switzerland",
       "count": 10,
@@ -280,19 +280,19 @@
       "r": 2.1
     },
     {
+      "code": "AU",
+      "name": "Australia",
+      "count": 9,
+      "cx": 313.2,
+      "cy": 107.8,
+      "r": 2.1
+    },
+    {
       "code": "US",
       "name": "Utah, US",
       "count": 8,
       "cx": 68.1,
       "cy": 44.3,
-      "r": 2.08
-    },
-    {
-      "code": "AU",
-      "name": "Australia",
-      "count": 8,
-      "cx": 313.2,
-      "cy": 107.8,
       "r": 2.08
     },
     {
@@ -408,6 +408,14 @@
       "r": 2.0
     },
     {
+      "code": "MY",
+      "name": "Malaysia",
+      "count": 4,
+      "cx": 294.8,
+      "cy": 80.3,
+      "r": 2.0
+    },
+    {
       "code": "PH",
       "name": "Philippines",
       "count": 4,
@@ -478,26 +486,18 @@
       "cx": 172.3,
       "cy": 30.5,
       "r": 1.97
-    },
-    {
-      "code": "IL",
-      "name": "Israel",
-      "count": 3,
-      "cx": 215.1,
-      "cy": 52.0,
-      "r": 1.97
     }
   ],
   "countries": [
     {
       "code": "US",
       "name": "United States",
-      "count": 1318
+      "count": 1323
     },
     {
       "code": "JP",
       "name": "Japan",
-      "count": 107
+      "count": 108
     },
     {
       "code": "IN",
@@ -542,7 +542,7 @@
     {
       "code": "GB",
       "name": "United Kingdom",
-      "count": 17
+      "count": 18
     },
     {
       "code": "IT",
@@ -552,7 +552,7 @@
     {
       "code": "FR",
       "name": "France",
-      "count": 14
+      "count": 15
     },
     {
       "code": "BR",
@@ -582,7 +582,7 @@
     {
       "code": "AU",
       "name": "Australia",
-      "count": 8
+      "count": 9
     },
     {
       "code": "PL",
@@ -620,6 +620,11 @@
       "count": 4
     },
     {
+      "code": "MY",
+      "name": "Malaysia",
+      "count": 4
+    },
+    {
       "code": "PH",
       "name": "Philippines",
       "count": 4
@@ -650,8 +655,8 @@
       "count": 3
     },
     {
-      "code": "MY",
-      "name": "Malaysia",
+      "code": "IR",
+      "name": "Iran",
       "count": 3
     },
     {
@@ -677,11 +682,6 @@
     {
       "code": "GE",
       "name": "Georgia",
-      "count": 2
-    },
-    {
-      "code": "IR",
-      "name": "Iran",
       "count": 2
     },
     {
@@ -795,6 +795,11 @@
       "count": 1
     },
     {
+      "code": "TN",
+      "name": "Tunisia",
+      "count": 1
+    },
+    {
       "code": "UG",
       "name": "Uganda",
       "count": 1
@@ -817,7 +822,7 @@
       "country": "US",
       "country_name": "United States",
       "name": "California",
-      "count": 250,
+      "count": 251,
       "located": true
     },
     {
@@ -886,6 +891,13 @@
     {
       "country": "US",
       "country_name": "United States",
+      "name": "Arizona",
+      "count": 13,
+      "located": true
+    },
+    {
+      "country": "US",
+      "country_name": "United States",
       "name": "Florida",
       "count": 13,
       "located": true
@@ -902,13 +914,6 @@
       "country_name": "United States",
       "name": "South Carolina",
       "count": 12,
-      "located": true
-    },
-    {
-      "country": "US",
-      "country_name": "United States",
-      "name": "Arizona",
-      "count": 10,
       "located": true
     },
     {
@@ -986,12 +991,12 @@
     {
       "path": "/projects/self-rewriting",
       "title": "Language Models Can Rewrite Their Own Weights | Jiajun Fan",
-      "count": 734
+      "count": 743
     },
     {
       "path": "/",
       "title": "Jiajun Fan",
-      "count": 472
+      "count": 473
     },
     {
       "path": "/publications",
@@ -1011,7 +1016,7 @@
     {
       "path": "/projects",
       "title": "",
-      "count": 74
+      "count": 75
     },
     {
       "path": "/publication/2026-11-17-Self-Rewriting",
@@ -1041,7 +1046,7 @@
     {
       "path": "/projects/speechgym",
       "title": "SpeechGym — Training Voice Agents with RL | Jiajun Fan",
-      "count": 16
+      "count": 17
     },
     {
       "path": "/projects/procedure-aware-rl",
@@ -1113,12 +1118,12 @@
     {
       "name": "(unknown)",
       "id": "",
-      "count": 667
+      "count": 670
     },
     {
       "name": "www.jiajunfan.com",
       "id": "www.jiajunfan.com",
-      "count": 289
+      "count": 291
     },
     {
       "name": "Google",
@@ -1128,12 +1133,12 @@
     {
       "name": "t.co",
       "id": "t.co",
-      "count": 192
+      "count": 197
     },
     {
       "name": "www.linkedin.com",
       "id": "www.linkedin.com",
-      "count": 131
+      "count": 132
     },
     {
       "name": "www.jiajunfan.com/projects",
@@ -1171,14 +1176,14 @@
       "count": 27
     },
     {
-      "name": "www.jiajunfan.com/cv",
-      "id": "www.jiajunfan.com/cv",
+      "name": "huggingface.co",
+      "id": "huggingface.co",
       "count": 26
     },
     {
-      "name": "huggingface.co",
-      "id": "huggingface.co",
-      "count": 25
+      "name": "www.jiajunfan.com/cv",
+      "id": "www.jiajunfan.com/cv",
+      "count": 26
     },
     {
       "name": "Hacker News",
@@ -1240,22 +1245,22 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 1345
+      "count": 1353
     },
     {
       "name": "Safari",
       "id": "Safari",
-      "count": 574
+      "count": 575
     },
     {
       "name": "(unknown)",
       "id": "",
-      "count": 67
+      "count": 69
     },
     {
       "name": "Firefox",
       "id": "Firefox",
-      "count": 29
+      "count": 30
     },
     {
       "name": "Dalvik",
@@ -1272,17 +1277,17 @@
     {
       "name": "iOS",
       "id": "iOS",
-      "count": 554
+      "count": 557
     },
     {
       "name": "Windows",
       "id": "Windows",
-      "count": 330
+      "count": 335
     },
     {
       "name": "Android",
       "id": "Android",
-      "count": 184
+      "count": 188
     },
     {
       "name": "Linux",
@@ -1409,21 +1414,252 @@
     },
     {
       "day": "2026-11-23",
-      "n": 81
+      "n": 93
     }
   ],
   "periods": {
-    "today": 81,
+    "today": 93,
     "yesterday": 338,
-    "d7": 1530,
+    "d7": 1542,
     "d7_prev": 109,
-    "d30": 1990,
+    "d30": 2002,
     "d30_prev": 815,
-    "day_frac": 0.137,
+    "day_frac": 0.178,
     "yesterday_day": "2026-11-22"
   },
-  "_last_visit": "2026-11-23 03:15",
+  "_last_visit": "2026-11-23 04:16",
   "recent": [
+    {
+      "date": "2026-11-23 04:16",
+      "ts": "2026-11-23T12:16:49Z",
+      "loc": "Malaysia",
+      "path": "/projects/self-rewriting",
+      "ref": "t.co",
+      "browser": "",
+      "system": "iOS 27.2",
+      "screen": "402px",
+      "first": true
+    },
+    {
+      "date": "2026-11-23 04:16",
+      "ts": "2026-11-23T12:16:58Z",
+      "loc": "United Kingdom",
+      "path": "/projects/self-rewriting",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 27.2",
+      "screen": "393px",
+      "first": true
+    },
+    {
+      "date": "2026-11-23 04:12",
+      "ts": "2026-11-23T12:12:03Z",
+      "loc": "California, US",
+      "path": "/projects/self-rewriting",
+      "ref": "",
+      "browser": "Chrome 155",
+      "system": "Windows 10",
+      "screen": "1920px",
+      "first": true
+    },
+    {
+      "date": "2026-11-23 04:09",
+      "ts": "2026-11-23T12:09:44Z",
+      "loc": "United States",
+      "path": "/projects/self-rewriting",
+      "ref": "",
+      "browser": "Chrome 155",
+      "system": "Windows 10",
+      "screen": "1920px",
+      "first": true
+    },
+    {
+      "date": "2026-11-23 04:05",
+      "ts": "2026-11-23T12:05:07Z",
+      "loc": "Japan",
+      "path": "/projects/self-rewriting",
+      "ref": "t.co",
+      "browser": "Chrome 157",
+      "system": "Android 17",
+      "screen": "750px",
+      "first": true
+    },
+    {
+      "date": "2026-11-23 04:02",
+      "ts": "2026-11-23T12:02:29Z",
+      "loc": "Australia",
+      "path": "/projects/self-rewriting",
+      "ref": "t.co",
+      "browser": "",
+      "system": "iOS 27.2",
+      "screen": "420px",
+      "first": true
+    },
+    {
+      "date": "2026-11-23 03:57",
+      "ts": "2026-11-23T11:57:41Z",
+      "loc": "Iran",
+      "path": "/projects/self-rewriting",
+      "ref": "www.linkedin.com",
+      "browser": "Chrome 157",
+      "system": "Windows 10",
+      "screen": "1536px",
+      "first": true
+    },
+    {
+      "date": "2026-11-23 03:56",
+      "ts": "2026-11-23T11:56:55Z",
+      "loc": "Illinois, US",
+      "path": "/projects/self-rewriting",
+      "ref": "",
+      "browser": "Chrome 158",
+      "system": "macOS 10.15",
+      "screen": "1512px",
+      "first": false
+    },
+    {
+      "date": "2026-11-23 03:47",
+      "ts": "2026-11-23T11:47:02Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 27.2",
+      "screen": "430px",
+      "first": false
+    },
+    {
+      "date": "2026-11-23 03:46",
+      "ts": "2026-11-23T11:46:58Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 27.2",
+      "screen": "430px",
+      "first": false
+    },
+    {
+      "date": "2026-11-23 03:44",
+      "ts": "2026-11-23T11:44:33Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 27.2",
+      "screen": "430px",
+      "first": false
+    },
+    {
+      "date": "2026-11-23 03:39",
+      "ts": "2026-11-23T11:39:13Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 27.2",
+      "screen": "430px",
+      "first": false
+    },
+    {
+      "date": "2026-11-23 03:39",
+      "ts": "2026-11-23T11:39:15Z",
+      "loc": "Illinois, US",
+      "path": "/visitors",
+      "ref": "www.jiajunfan.com",
+      "browser": "Safari 11.0",
+      "system": "iOS 27.2",
+      "screen": "430px",
+      "first": false
+    },
+    {
+      "date": "2026-11-23 03:34",
+      "ts": "2026-11-23T11:34:01Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 27.2",
+      "screen": "430px",
+      "first": false
+    },
+    {
+      "date": "2026-11-23 03:34",
+      "ts": "2026-11-23T11:34:05Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Safari 11.0",
+      "system": "iOS 27.2",
+      "screen": "430px",
+      "first": false
+    },
+    {
+      "date": "2026-11-23 03:31",
+      "ts": "2026-11-23T11:31:02Z",
+      "loc": "France",
+      "path": "/projects/self-rewriting",
+      "ref": "t.co",
+      "browser": "Firefox 160",
+      "system": "Windows 10",
+      "screen": "1920px",
+      "first": true
+    },
+    {
+      "date": "2026-11-23 03:31",
+      "ts": "2026-11-23T11:31:06Z",
+      "loc": "Arizona, US",
+      "path": "/projects",
+      "ref": "www.jiajunfan.com",
+      "browser": "Chrome 157",
+      "system": "Android 10",
+      "screen": "384px",
+      "first": true
+    },
+    {
+      "date": "2026-11-23 03:30",
+      "ts": "2026-11-23T11:30:30Z",
+      "loc": "Arizona, US",
+      "path": "/",
+      "ref": "t.co",
+      "browser": "Chrome 157",
+      "system": "Android 10",
+      "screen": "384px",
+      "first": true
+    },
+    {
+      "date": "2026-11-23 03:30",
+      "ts": "2026-11-23T11:30:48Z",
+      "loc": "Arizona, US",
+      "path": "/projects/speechgym",
+      "ref": "www.jiajunfan.com",
+      "browser": "Chrome 157",
+      "system": "Android 10",
+      "screen": "384px",
+      "first": true
+    },
+    {
+      "date": "2026-11-23 03:21",
+      "ts": "2026-11-23T11:21:06Z",
+      "loc": "Illinois, US",
+      "path": "/",
+      "ref": "",
+      "browser": "Chrome 158",
+      "system": "macOS 10.15",
+      "screen": "1512px",
+      "first": false
+    },
+    {
+      "date": "2026-11-23 03:21",
+      "ts": "2026-11-23T11:21:37Z",
+      "loc": "Tunisia",
+      "path": "/projects/self-rewriting",
+      "ref": "huggingface.co",
+      "browser": "Chrome 157",
+      "system": "Windows 10",
+      "screen": "1536px",
+      "first": true
+    },
     {
       "date": "2026-11-23 03:15",
       "ts": "2026-11-23T11:15:54Z",
@@ -1522,239 +1758,8 @@
       "system": "iOS 27.2",
       "screen": "440px",
       "first": true
-    },
-    {
-      "date": "2026-11-23 02:55",
-      "ts": "2026-11-23T10:55:52Z",
-      "loc": "Illinois, US",
-      "path": "/projects/self-rewriting",
-      "ref": "",
-      "browser": "Chrome 158",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": true
-    },
-    {
-      "date": "2026-11-23 02:46",
-      "ts": "2026-11-23T10:46:08Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 158",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": false
-    },
-    {
-      "date": "2026-11-23 02:46",
-      "ts": "2026-11-23T10:46:22Z",
-      "loc": "Poland",
-      "path": "/publications",
-      "ref": "www.jiajunfan.com/projects/self-rewriting",
-      "browser": "Chrome 157",
-      "system": "macOS 10.15",
-      "screen": "1728px",
-      "first": true
-    },
-    {
-      "date": "2026-11-23 02:46",
-      "ts": "2026-11-23T10:46:26Z",
-      "loc": "Poland",
-      "path": "/year-archive",
-      "ref": "www.jiajunfan.com/publications",
-      "browser": "Chrome 157",
-      "system": "macOS 10.15",
-      "screen": "1728px",
-      "first": true
-    },
-    {
-      "date": "2026-11-23 02:46",
-      "ts": "2026-11-23T10:46:29Z",
-      "loc": "Poland",
-      "path": "/",
-      "ref": "www.jiajunfan.com/year-archive",
-      "browser": "Chrome 157",
-      "system": "macOS 10.15",
-      "screen": "1728px",
-      "first": true
-    },
-    {
-      "date": "2026-11-23 02:44",
-      "ts": "2026-11-23T10:44:45Z",
-      "loc": "Poland",
-      "path": "/projects/self-rewriting",
-      "ref": "www.linkedin.com",
-      "browser": "Chrome 157",
-      "system": "macOS 10.15",
-      "screen": "1728px",
-      "first": true
-    },
-    {
-      "date": "2026-11-23 02:42",
-      "ts": "2026-11-23T10:42:58Z",
-      "loc": "Illinois, US",
-      "path": "/visitors",
-      "ref": "www.jiajunfan.com",
-      "browser": "Chrome 158",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": false
-    },
-    {
-      "date": "2026-11-23 02:41",
-      "ts": "2026-11-23T10:41:09Z",
-      "loc": "New Zealand",
-      "path": "/projects/self-rewriting",
-      "ref": "t.co",
-      "browser": "Chrome 157",
-      "system": "Android 16",
-      "screen": "364px",
-      "first": true
-    },
-    {
-      "date": "2026-11-23 02:41",
-      "ts": "2026-11-23T10:41:16Z",
-      "loc": "New Zealand",
-      "path": "/",
-      "ref": "www.jiajunfan.com/projects/self-rewriting",
-      "browser": "Chrome 157",
-      "system": "Android 16",
-      "screen": "364px",
-      "first": true
-    },
-    {
-      "date": "2026-11-23 02:41",
-      "ts": "2026-11-23T10:41:45Z",
-      "loc": "New Zealand",
-      "path": "/projects/self-rewriting",
-      "ref": "t.co",
-      "browser": "Chrome 157",
-      "system": "Android 16",
-      "screen": "364px",
-      "first": false
-    },
-    {
-      "date": "2026-11-23 02:39",
-      "ts": "2026-11-23T10:39:13Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 158",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": false
-    },
-    {
-      "date": "2026-11-23 02:39",
-      "ts": "2026-11-23T10:39:14Z",
-      "loc": "Illinois, US",
-      "path": "/visitors",
-      "ref": "www.jiajunfan.com",
-      "browser": "Chrome 158",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": false
-    },
-    {
-      "date": "2026-11-23 02:36",
-      "ts": "2026-11-23T10:36:13Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 158",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": false
-    },
-    {
-      "date": "2026-11-23 02:36",
-      "ts": "2026-11-23T10:36:57Z",
-      "loc": "California, US",
-      "path": "/projects/self-rewriting",
-      "ref": "",
-      "browser": "Chrome 157",
-      "system": "Windows 10",
-      "screen": "1536px",
-      "first": true
-    },
-    {
-      "date": "2026-11-23 02:33",
-      "ts": "2026-11-23T10:33:05Z",
-      "loc": "Singapore",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 151",
-      "system": "Windows 10",
-      "screen": "1920px",
-      "first": true
-    },
-    {
-      "date": "2026-11-23 02:33",
-      "ts": "2026-11-23T10:33:07Z",
-      "loc": "Singapore",
-      "path": "/",
-      "ref": "",
-      "browser": "Chrome 151",
-      "system": "Windows 10",
-      "screen": "1920px",
-      "first": true
-    },
-    {
-      "date": "2026-11-23 02:33",
-      "ts": "2026-11-23T10:33:19Z",
-      "loc": "Switzerland",
-      "path": "/projects/self-rewriting",
-      "ref": "www.linkedin.com",
-      "browser": "Chrome 157",
-      "system": "macOS 10.15",
-      "screen": "1512px",
-      "first": true
-    },
-    {
-      "date": "2026-11-23 02:33",
-      "ts": "2026-11-23T10:33:45Z",
-      "loc": "United Kingdom",
-      "path": "/projects/self-rewriting",
-      "ref": "",
-      "browser": "Chrome 158",
-      "system": "macOS 10.15",
-      "screen": "1470px",
-      "first": true
-    },
-    {
-      "date": "2026-11-23 02:29",
-      "ts": "2026-11-23T10:29:13Z",
-      "loc": "United States",
-      "path": "/publications",
-      "ref": "",
-      "browser": "Chrome 156",
-      "system": "Android 16",
-      "screen": "400px",
-      "first": true
-    },
-    {
-      "date": "2026-11-23 02:29",
-      "ts": "2026-11-23T10:29:24Z",
-      "loc": "Japan",
-      "path": "/projects/self-rewriting",
-      "ref": "",
-      "browser": "Chrome 158",
-      "system": "macOS 10.15",
-      "screen": "1296px",
-      "first": true
-    },
-    {
-      "date": "2026-11-23 02:23",
-      "ts": "2026-11-23T10:23:01Z",
-      "loc": "Hong Kong",
-      "path": "/projects",
-      "ref": "www.jiajunfan.com/year-archive",
-      "browser": "Chrome 156",
-      "system": "Linux",
-      "screen": "2048px",
-      "first": true
     }
   ],
-  "_recent_total": 7119,
+  "_recent_total": 7140,
   "_recent_shown": 30
 }
