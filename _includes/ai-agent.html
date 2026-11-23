@@ -282,10 +282,10 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
     { id:'talks', kw:['talks','give a talk','gave a talk','given talks','given a talk','invited talk','talk invitation','*presentation','*presentations','*presented','seminar','*speaker','speak at','igb','演讲','报告'],
       a:["Most recent: a talk at the IGB (Lunch with CNRG) on building LLM post-training projects with an AI coding agent; earlier, I presented CESAR at ICLR 2026 in Rio de Janeiro. I'm always happy to give talks on LLM post-training with RL and on AI scientists — agentic methods for automated scientific discovery — just reach out at jiajunf3 [at] illinois.edu."],
       act:[{t:'🔗 IGB event', h:'https://www.igb.illinois.edu/igb-calendar/lunch-cnrg-building-llm-post-training-projects-claude-code'},{t:'✉️ Email Jiajun', h:'mailto:jiajunf3@illinois.edu'}] },
-    { id:'contact', kw:['contact','email','*reach','reach out','=reach him','=reach you','=reach jiajun','get in touch','collaborate','collaboration','collaborating','=collaborations','=talk to him','=talk to jiajun','=talk with him','=talk with jiajun','=i can talk to','=can i talk to','=talk to someone','=talk to a person','=talk to a human','=meet him','=work with him','=work with you','=work with jiajun','=get involved in his','=get involved with his','=get involved in your','=project with him','=projects with him','=research with him','message','interview','interviews','=interview him','linkedin','邮箱','邮件','联系'],
+    { id:'contact', kw:['contact','email','*reach','reach out','=reach him','=reach you','=reach jiajun','get in touch','collaborate','collaboration','collaborating','=collaborations','=talk to him','=talk to jiajun','=talk with him','=talk with jiajun','=i can talk to','=can i talk to','=talk to someone','=talk to a person','=talk to a human','=meet him','=work with him','=work with you','=work with jiajun','=get involved in his','=get involved with his','=get involved in your','=project with him','=projects with him','=research with him','message','interview','interviews','=interview him','linkedin','twitter','邮箱','邮件','联系'],
       a:["Easiest way is email: jiajunf3 [at] illinois.edu. Always happy to talk RL post-training, generative models, or multimodal reasoning.",
          "Drop me an email — jiajunf3 [at] illinois.edu. I read everything, and research conversations are the best part of my day."],
-      act:[{t:'✉️ Email Jiajun', h:'mailto:jiajunf3@illinois.edu'},{t:'💼 LinkedIn', h:'https://www.linkedin.com/in/jiajun-fan-57b12b26b'}] },
+      act:[{t:'✉️ Email Jiajun', h:'mailto:jiajunf3@illinois.edu'},{t:'💼 LinkedIn', h:'https://www.linkedin.com/in/jiajun-fan-57b12b26b'},{t:'𝕏 Twitter', h:'https://x.com/FanJiajun67938'}] },
     /* pri: the plural 'papers' with a venue asks for the list ("his ICLR 2026 papers"), not one paper */
     { id:'pubs', gen:1, kw:['publication','publications','paper','papers','published','~conference','~venue','~venues','list','all papers','latest papers','how many papers','=track record','~neurips','~icml','~iclr','accepted','acceptance','acceptances','first-author','first author','论文','发表'],
       pri:/^(?=.*\b(?:papers|publications)\b)(?=.*\b(?:neurips|icml|iclr|colm|tmlr|tpami|cvpr|aaai|kdd|aistats|wacv)\b)/,
@@ -1028,7 +1028,7 @@ body.dark-mode .ra-tip { background: #21262d; color: #e6edf3; }
       var a=document.createElement('a');
       a.className='ra-act'; a.href=ac.h;
       (function(){
-        var IM={'🔗':'h-link','📎':'h-paperclip','📄':'sh-pubs','✉️':'h-email','✉':'h-email','🎓':'h-scholar','💻':'h-github','⬇️':'h-cv','⬇':'h-cv','📰':'sh-news','🎧':'h-music','🏠':'h-home','💼':'h-linkedin','📋':'h-list','📬':'sh-contact'};
+        var IM={'🔗':'h-link','📎':'h-paperclip','📄':'sh-pubs','✉️':'h-email','✉':'h-email','🎓':'h-scholar','💻':'h-github','⬇️':'h-cv','⬇':'h-cv','📰':'sh-news','🎧':'h-music','🏠':'h-home','💼':'h-linkedin','𝕏':'h-x','📋':'h-list','📬':'sh-contact'};
         var t=ac.t, key=null;
         for(var k in IM){ if(t.indexOf(k)===0){ key=k; break; } }
         if(key){

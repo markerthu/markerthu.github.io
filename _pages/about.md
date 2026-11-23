@@ -2151,6 +2151,7 @@ Happy to discuss research, internships, or collaborations. Best reached by email
 <i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-building.png);mask-image:url(/images/icons/h-building.png)"></i>Siebel Center for CS, UIUC &nbsp;·&nbsp;
 <a href="/cv/"><strong>CV</strong></a> &nbsp;·&nbsp;
 <a href="https://www.linkedin.com/in/jiajun-fan-57b12b26b" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-linkedin.png);mask-image:url(/images/icons/h-linkedin.png)"></i>LinkedIn</a> &nbsp;·&nbsp;
+<a href="https://x.com/FanJiajun67938" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-x.png);mask-image:url(/images/icons/h-x.png)"></i>Twitter</a> &nbsp;·&nbsp;
 <a href="https://orcid.org/0000-0002-0263-2103" target="_blank" rel="noopener noreferrer"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/sh-research.png);mask-image:url(/images/icons/sh-research.png)"></i>ORCID</a>
 </p>
 
@@ -2818,6 +2819,7 @@ function drawGraph(container) {
     {i:'/images/icons/h-scholar.png', t:'Google Scholar', k:'scholar citations profile', h:'https://scholar.google.com/citations?user=EjmzseUAAAAJ', hint:'External'},
     {i:'/images/icons/h-github.png', t:'GitHub', k:'github code repos', h:'https://github.com/markerthu', hint:'External'},
     {i:'/images/icons/h-linkedin.png', t:'LinkedIn', k:'linkedin profile', h:'https://www.linkedin.com/in/jiajun-fan-57b12b26b', hint:'External'},
+    {i:'/images/icons/h-x.png', t:'Twitter / X', k:'twitter x tweets profile', h:'https://x.com/FanJiajun67938', hint:'External'},
     {i:'/images/icons/h-email.png', t:'Email Jiajun', k:'email contact mail', h:'mailto:jiajunf3@illinois.edu', hint:'Action'},
     {i:'/images/icons/h-moon.png', t:'Toggle Dark Mode', k:'dark mode theme light toggle', act:'dark', hint:'Action'},
     {i:'/images/icons/h-agentic.png', t:'Ask the AI Agent', k:'ai agent chat assistant ask', act:'agent', hint:'Action'}
