@@ -1,9 +1,9 @@
 {
   "_updated": "2026-11-25",
   "_timezone": "America/Los_Angeles",
-  "_refreshed": "2026-11-25T15:17:53Z",
+  "_refreshed": "2026-11-25T16:08:52Z",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 2747,
+  "_total": 2748,
   "_days": 30,
   "_range": "Oct. 27th - Nov. 25th",
   "locations": [
@@ -50,10 +50,10 @@
     {
       "code": "SG",
       "name": "Singapore",
-      "count": 88,
+      "count": 89,
       "cx": 283.8,
       "cy": 82.7,
-      "r": 2.7
+      "r": 2.71
     },
     {
       "code": "HK",
@@ -507,7 +507,7 @@
     {
       "code": "SG",
       "name": "Singapore",
-      "count": 88
+      "count": 89
     },
     {
       "code": "HK",
@@ -1071,7 +1071,7 @@
     {
       "path": "/projects/audiorsi",
       "title": "AudioRSI — Recursively Self-Improving Audio Reasoners | Jiajun Fan",
-      "count": 24
+      "count": 25
     },
     {
       "path": "/projects/tf-opd",
@@ -1213,7 +1213,7 @@
     {
       "name": "chatgpt.com",
       "id": "chatgpt.com",
-      "count": 32
+      "count": 33
     },
     {
       "name": "www.jiajunfan.com/cv",
@@ -1280,7 +1280,7 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 1872
+      "count": 1873
     },
     {
       "name": "Safari",
@@ -1307,7 +1307,7 @@
     {
       "name": "macOS",
       "id": "macOS",
-      "count": 1174
+      "count": 1175
     },
     {
       "name": "iOS",
@@ -1449,21 +1449,32 @@
     },
     {
       "day": "2026-11-25",
-      "n": 68
+      "n": 69
     }
   ],
   "periods": {
-    "today": 68,
+    "today": 69,
     "yesterday": 261,
-    "d7": 2172,
+    "d7": 2173,
     "d7_prev": 227,
-    "d30": 2747,
+    "d30": 2748,
     "d30_prev": 822,
-    "day_frac": 0.303,
+    "day_frac": 0.339,
     "yesterday_day": "2026-11-24"
   },
-  "_last_visit": "2026-11-25 07:17",
+  "_last_visit": "2026-11-25 07:49",
   "recent": [
+    {
+      "date": "2026-11-25 07:49",
+      "ts": "2026-11-25T15:49:19Z",
+      "loc": "Singapore",
+      "path": "/projects/audiorsi",
+      "ref": "chatgpt.com",
+      "browser": "Chrome 158",
+      "system": "macOS 10.15",
+      "screen": "1728px",
+      "first": true
+    },
     {
       "date": "2026-11-25 07:17",
       "ts": "2026-11-25T15:17:08Z",
@@ -1782,19 +1793,8 @@
       "system": "Linux",
       "screen": "1920px",
       "first": true
-    },
-    {
-      "date": "2026-11-25 04:40",
-      "ts": "2026-11-25T12:40:45Z",
-      "loc": "Brazil",
-      "path": "/projects/self-rewriting",
-      "ref": "www.jiajunfan.com/publication/2026-11-17-Self-Rewriting",
-      "browser": "Chrome 158",
-      "system": "Linux",
-      "screen": "1920px",
-      "first": true
     }
   ],
-  "_recent_total": 8205,
+  "_recent_total": 8206,
   "_recent_shown": 30
 }
