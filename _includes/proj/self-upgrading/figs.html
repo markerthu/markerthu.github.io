@@ -1,0 +1,830 @@
+<script>
+(function(){
+  /* Figures of the self-upgrading page. Every value is read from the data block (#su-data); charts are drawn at the
+     width of their box so SVG text keeps the page's type sizes, and each animates once when it enters the view. */
+  var src=document.getElementById('su-data'); if(!src) return;
+  var D=JSON.parse(src.textContent);
+  var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hasIO='IntersectionObserver' in window;
+  if(reduced||!hasIO)document.body.classList.add('no-anim');
+  var $=function(s,r){return (r||document).querySelector(s);}, $$=function(s,r){return [].slice.call((r||document).querySelectorAll(s));};
+  function R(v){return Math.round(v*10)/10;}
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+  /* the agent's words as the paper typesets them: one kind of apostrophe, quotes inside its words as single quotes */
+  function aq(s){return esc(String(s).replace(/"([^"]*)"/g,'\u2018$1\u2019').replace(/'/g,'\u2019'));}
+  function minus(s){return String(s).replace(/(^|[\s(=:·,])-(?=\d)/g,'$1−');}
+  function num(n){return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,',');}
+  function D_(v){return ' style="--d:'+v.toFixed(2)+'s"';}
+  function tx(x,y,s,cls,anc,extra){return '<text x="'+R(x)+'" y="'+R(y)+'"'+(cls?' class="'+cls+'"':'')+(anc&&anc!=='start'?' text-anchor="'+anc+'"':'')+(extra||'')+'>'+s+'</text>';}
+  function rect(x,y,w,h,r,cls,extra){return '<rect'+(cls?' class="'+cls+'"':'')+' x="'+R(x)+'" y="'+R(y)+'" width="'+R(Math.max(0,w))+'" height="'+R(Math.max(0,h))+'" rx="'+R(r)+'"'+(extra||'')+'/>';}
+  function line(x1,y1,x2,y2,cls,extra){return '<line class="'+cls+'" x1="'+R(x1)+'" y1="'+R(y1)+'" x2="'+R(x2)+'" y2="'+R(y2)+'"'+(extra||'')+'/>';}
+  function svg(W,H,inner,defs){return '<svg viewBox="0 0 '+Math.round(W)+' '+Math.round(H)+'" width="'+Math.round(W)+'" height="'+Math.round(H)+'">'+(defs||'')+inner+'</svg>';}
+  function setLens(root){$$('.draw',root).forEach(function(p){try{p.style.setProperty('--len',Math.ceil(p.getTotalLength())+2);}catch(e){}});}
+  var mctx=document.createElement('canvas').getContext('2d');
+  function px(cls){var p=document.createElement('span');p.className=cls;p.style.position='absolute';p.style.visibility='hidden';document.body.appendChild(p);var v=parseFloat(getComputedStyle(p).fontSize);p.remove();return v;}
+  var FS={label:14,fine:13};
+  function tw(s,size,weight){mctx.font=(weight||400)+' '+size+'px '+getComputedStyle(document.body).fontFamily;return mctx.measureText(s).width;}
+  var HATCH='<defs><pattern id="su-hatch" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line class="su-hatch-l" x1="0" y1="0" x2="0" y2="4"/></pattern></defs>';
+  var KIND=D.kinds;
+
+  /* ---------- an episode strip: one bar a step, height = tokens of the reply against the limit ---------- */
+  function strip(steps,W,h,opt){
+    opt=opt||{};var n=opt.n||D.setting.steps_limit, lim=D.setting.token_limit, gap=W/n>5?1.2:0.6, bw=W/n-gap, o='', top=opt.top||0;
+    if(opt.limit!==false)o+=line(0,top,W,top,'lim');
+    steps.forEach(function(s,i){
+      var k=s.kind, hh=Math.max(0.16,Math.min(1,s.tokens/lim))*h, x=i*(bw+gap);
+      o+=rect(x,top+h-hh,bw,hh,Math.min(1.5,bw/3),'sb-'+k+(opt.anim?' growy':''),opt.anim?D_((opt.d0||0)+i*(opt.dt||0.07)):'');
+    });
+    return o;
+  }
+  function kindsKey(list){
+    var seen={};list.forEach(function(k){seen[k]=1;});
+    var order=['waste','none','new','again','open','take','tool','put','look'], cls={waste:'su-k-waste',new:'su-k-unch',again:'',open:'',take:'',tool:'su-k-read',put:'su-k-edit',look:'',none:''};
+    var var_={waste:['--su-waste-bar','--su-waste-bar-e'],none:['--card','--su-open-e'],new:['--ice','--ice-e'],again:['--su-again','--su-again-e'],open:['--card','--su-open-e'],take:['--su-take','--su-take-e'],tool:['--lav','--lav-e'],put:['--su-put','--su-put-e'],look:['--su-look','--su-look-e']};
+    return '<p class="su-key" aria-hidden="true">'+order.filter(function(k){return seen[k];}).map(function(k){
+      return '<span><i style="--k:var('+var_[k][0]+');--ke:var('+var_[k][1]+')'+(KIND[k].hatched?';background:repeating-linear-gradient(45deg,var(--card) 0 2px,var(--su-open-e) 2px 3px)':'')+'"></i>'+esc(KIND[k].label.replace(/ \(([^)]*)\)/,', $1'))+'</span>';}).join('')+'<span><i style="height:0;width:14px;border:0;border-top:1px dashed var(--faint);border-radius:0;background:none"></i>the limit of '+D.setting.token_limit+' tokens</span></p>';
+  }
+
+  /* ---------- at a glance: the glyph of two strips ---------- */
+  function glanceStrips(){
+    var el=$('.gl-strips'); if(!el) return;
+    var A=D.alarm, o='', w=172, x0=14, n=A.unchanged.step_list.length, bw=w/n;
+    o+=line(x0,16,x0+w,16,'lim');
+    A.unchanged.step_list.forEach(function(s,i){var h=Math.max(0.16,s.tokens/512)*30;o+=rect(x0+i*bw,46-h,bw-0.6,h,0.6,s.kind==='waste'?'b-w':'b-u');});
+    o+='<g class="grow-l">';A.edited.step_list.forEach(function(s,i){var h=Math.max(0.16,s.tokens/512)*30;o+=rect(x0+i*bw,84-h,bw-0.6,h,0.6,'b-e');});o+='</g>';
+    o+=line(x0,54,x0+w,54,'lim');
+    el.innerHTML=o;
+  }
+
+  /* ---------- by day: one episode of the unchanged agent ---------- */
+  function ep1(el){
+    var W=Math.round(el.clientWidth), H=W<500?118:150, A=D.alarm.unchanged, o='';
+    o+=strip(A.step_list,W,H-24,{anim:true,dt:0.075,top:6});
+    o+=tx(0,H-2,'step 1','sm');o+=tx(W,H-2,'step '+A.steps,'sm','end');
+    o+=tx(W,0,'','sm','end');
+    el.innerHTML=svg(W,H,o,HATCH);
+    var k=$('#su-ep1 .su-key');if(k)k.remove();
+    el.insertAdjacentHTML('afterend',kindsKey(A.step_list.map(function(s){return s.kind;})));
+  }
+  function ep1Run(){
+    var box=$('#su-ep1'), cnt=$('#su-ep1-n'), cut=$('#su-ep1 .su-cut'), end=$('#su-ep1-end'), rep=$('#su-ep1-reply'), A=D.alarm;
+    if(!box)return;
+    var RE=A.reply_ends.unchanged;
+    if(rep)rep.textContent=(RE.abridged_at_start?'… ':'')+RE.lines.join('\n');
+    var steps=A.unchanged.step_list, total=steps.filter(function(s){return s.action==='none';}).length;
+    if(reduced||!hasIO){if(cnt)cnt.textContent=total;cut&&cut.classList.add('on');end&&end.classList.add('on');return;}
+    var done=false;
+    new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting||done||e.intersectionRatio<0.3)return;done=true;
+      var t0=performance.now(), dt=75;
+      (function tick(now){var i=Math.min(steps.length,Math.floor((now-t0)/dt)), c=0;for(var j=0;j<i;j++)if(steps[j].action==='none')c++;
+        if(cnt)cnt.textContent=c; if(i>=A.part_at&&cut)cut.classList.add('on');
+        if(i<steps.length)requestAnimationFrame(tick);else{end&&end.classList.add('on');}})(t0);
+    });},{threshold:[0,0.3]}).observe(box);
+  }
+
+  /* ---------- by day: the habit, the unchanged agent alone ---------- */
+  function share(el){
+    var W=Math.round(el.clientWidth), H=84, v=parseFloat(D.habit.share), o='', bh=26;
+    o+=rect(0,10,W,bh,6,'sb-new');
+    o+=rect(0,10,W*v/100,bh,6,'sb-waste grow',D_(0.2));
+    o+=tx(0,10+bh+28,D.habit.share+'%','big t-rose fade','start',D_(0.9));
+    o+=tx(tw(D.habit.share+'%',19,600)+10,10+bh+27,'of its steps: a reply cut at the token limit','sm fade','start',D_(1.0));
+    el.innerHTML=svg(W,H,o);
+  }
+  function runs(el){
+    var W=Math.round(el.clientWidth), H=170, N=D.habit.next, v=N.unchanged, labs=N.in_a_row_before, o='', n=v.length;
+    var top=26, base=H-36, bw=Math.min(54,(W-(n-1)*10)/n), gap=(W-n*bw)/(n-1);
+    o+=line(0,base,W,base,'ax');
+    v.forEach(function(p,i){var h=(base-top)*p/100, x=i*(bw+gap);
+      o+=rect(x,base-h,bw,h,4,'sb-waste growy',D_(0.15+i*0.12));
+      o+=tx(x+bw/2,base+18,esc(labs[i]),'sm','middle');
+    });
+    o+=tx(0,H-2,'wasted steps in a row just before','sm');
+    el.innerHTML=svg(W,H,o);
+  }
+
+  /* ---------- at night: the record it read, its tests ---------- */
+  function record(el){
+    var W=Math.round(el.clientWidth), M=D.kept.marks, cols=D.setting.steps_limit, cw=W/cols, rh=W<300?1.5:W>=460?(el.closest('.sn-live')?2.3:3.1):1.8, H=Math.ceil(M.length*rh)+2, a='', x='';
+    M.forEach(function(s,r){for(var i=0;i<s.length;i++){var d='M'+R(i*cw)+' '+R(r*rh)+'h'+R(cw-0.5)+'v'+R(rh-0.3)+'h'+R(-(cw-0.5))+'z';if(s[i]==='x')x+=d;else a+=d;}});
+    var o='<path class="sb-new" style="stroke:none" d="'+a+'"/><path class="sb-waste" style="stroke:none" d="'+x+'"/>';
+    o+='<rect class="su-wipe" x="0" y="0" width="'+W+'" height="'+H+'"/>';
+    el.innerHTML=svg(W,H,o);
+    var c=D.kept.counts;
+    $('#su-st-rec').innerHTML='<b>'+num(c.steps_without_action)+'</b> of the '+num(c.steps_of_those_episodes)+' steps of its '+c.opening_episodes+' opening episodes end without an action. One row an episode, one mark a step.';
+    var f=D.kept.found.text, k=f.indexOf('the token limit.');
+    $('#su-st-found').innerHTML='&ldquo;'+aq(k>0?f.slice(0,k+'the token limit.'.length):f)+'&rdquo;';
+  }
+  function tests(el){
+    var W=Math.round(el.clientWidth), T=D.kept.tests, n=T.length, rowH=17, top=22, H=top+n*rowH+6, o='';
+    var labW=W<380?118:170, mx=Math.max.apply(null,T.map(function(t){return Math.abs(t.change_points);})), z=W-14, sc=(z-labW-44)/mx;
+    o+=tx(0,12,'layer, strength, episodes','sm');o+=tx(z,12,'0','sm','middle');
+    o+=line(z,top-4,z,top+n*rowH,'zero');
+    var dt=el.closest('.sn-live')?0.3:0.1;
+    T.forEach(function(t,i){var cy=top+i*rowH+rowH/2, d=0.15+i*dt;
+      o+=tx(0,cy+4.5,'layer '+t.layer+', '+minus(t.strength)+', '+t.episodes,'sm fade','start',D_(d));
+      if(t.clear){var w=Math.abs(t.change_points)*sc;o+=rect(z-w,cy-5.5,w,11,3,'lg-for grow',D_(d)+' data-o="r"');o+=tx(z-w-6,cy+4.5,minus(t.printed),'sm t-edit w6 fade','end',D_(d+0.4));}
+      else o+='<circle class="lg-within pop" cx="'+R(z)+'" cy="'+R(cy)+'" r="4.5"'+D_(d)+'/>';
+    });
+    el.innerHTML=svg(W,H,o);
+    $$('rect[data-o]',el).forEach(function(r){r.style.transformOrigin='right center';});
+  }
+  function stationsText(){
+    var u=D.kept.update;$('#su-st-formula').textContent=u.formula;$('#su-st-code').textContent=u.lines.join('\n');
+    $('#su-st-where').innerHTML=esc('W is '+D.kept.tensor.words+'; u is a direction it read from its own hidden states. The component of that layer’s output along this single direction is multiplied by eleven, and nothing else in the network moves. In its code the strength is −10, in the convention of the helper it called, ')+'<span class="nw">W ← W − α u uᵀ W</span>.';
+    var c=D.kept.confirmation;
+    $('#su-st-conf').innerHTML='<b>'+minus(c.steps_without_action.printed)+' points</b> of steps without an action, edited against unchanged, on '+c.reserved_tasks+' practice tasks reserved from it all night.';
+    var C=D.kept.cards, q=function(id,i){var e=$(id);if(e&&C[i]&&!C[i].words.own_word_for_tasks)e.innerHTML='&ldquo;'+aq(C[i].words.text)+'&rdquo;';};
+    q('#sn-q-exam',3);q('#sn-q-conf',7);
+    [['#sn-t0',0],['#sn-t2',3],['#sn-t3',7]].forEach(function(p){var e=$(p[0]);if(e&&C[p[1]])e.textContent=C[p[1]].turns;});
+  }
+  /* a number that counts up, and a text that is typed; the text keeps its full room from the start, so nothing moves */
+  function countUp(el,to,ms,delay){if(!el)return;var id=(el._cu=(el._cu||0)+1), t0=performance.now()+(delay||0);
+    (function tick(now){if(el._cu!==id)return;var p=Math.max(0,Math.min(1,(now-t0)/ms)), e=1-Math.pow(1-p,3);el.textContent=num(Math.round(to*e));if(p<1)requestAnimationFrame(tick);})(performance.now());}
+  function typeInto(el,text,ms,delay,done){if(!el)return;var id=(el._ty=(el._ty||0)+1), t0=performance.now()+(delay||0);
+    el.classList.remove('ty-done');el.classList.add('ty-on');el.innerHTML='<span class="ty-a"></span><span class="ty-rest"></span>';var a=el.firstChild, r=el.lastChild;r.textContent=text;
+    (function tick(now){if(el._ty!==id)return;var k=Math.max(0,Math.min(text.length,Math.floor((now-t0)/ms*text.length)));a.textContent=text.slice(0,k);r.textContent=text.slice(k);
+      if(k<text.length)requestAnimationFrame(tick);else{el.classList.add('ty-done');if(done)done();}})(performance.now());}
+
+  /* the confirmation: a mark that leaves "no change" and settles at the measured change, with two standard errors */
+  function conf(el){
+    var W=Math.round(el.clientWidth), c=D.kept.confirmation.steps_without_action, v=parseFloat(c.printed), se=parseFloat(c.printed_se), H=172, o='', y=104;
+    var z=W-40, x0=6, lim=Math.abs(v)+2*se+1.4, X=function(t){return z+t/lim*(z-x0);}, a=X(v-2*se), b=X(v+2*se);
+    o+=line(x0,y,z,y,'ax');o+=line(z,y-44,z,y+16,'zero');
+    o+=tx(z,y-54,'no change','sm','middle');o+=tx(z,y+34,'0','sm','middle');
+    o+=rect(a,y-14,b-a,28,14,'cf-band fade',D_(1.45));
+    o+=line(a,y,b,y,'cf-w fade',D_(1.45))+line(a,y-6,a,y+6,'cf-w fade',D_(1.45))+line(b,y-6,b,y+6,'cf-w fade',D_(1.45));
+    o+='<g class="cf-slide" style="--dx:'+R(z-X(v))+'px;--d:0.30s"><circle class="cf-halo" cx="'+R(X(v))+'" cy="'+y+'" r="15"/><circle class="cf-dot" cx="'+R(X(v))+'" cy="'+y+'" r="7.5"/></g>';
+    o+=tx(X(v),y-30,minus(c.printed),'cf-val fade','middle',D_(1.6));
+    var cl='steps without an action, edited − unchanged, points';
+    if(tw(cl,FS.fine,400)<z-x0-22)o+=tx(x0,y+34,cl,'sm');else{o+=tx(x0,y+34,'steps without an action,','sm');o+=tx(x0,y+51,'edited − unchanged, points','sm');H+=14;}
+    el.innerHTML=svg(W,H,o);
+  }
+
+  /* one night, played: four stations, one at a time. A reader who asked for no motion gets the four side by side. */
+  function nightPlayer(){
+    var box=$('#su-stations');if(!box)return;var st=$$('.su-st',box), rail=$('.sn-rail',box);
+    if(reduced||!hasIO||!rail){st.forEach(function(s){s.classList.add('on','done');});return;}
+    var names=[['Diagnose','it reads its own record'],['Rewrite','one tensor, in code'],['Examine','against its unchanged self'],['Confirm','once, on reserved tasks']];
+    rail.innerHTML=names.map(function(n,i){return '<button type="button" class="sn-step" data-i="'+i+'"><span class="n">'+(i+1)+'</span><span class="t"><b>'+n[0]+'</b><small>'+n[1]+'</small></span><i></i></button>';}).join('')+'<button type="button" class="sn-play"></button>';
+    box.classList.add('sn-live');build();      /* the stages now share one cell at full width: their charts are drawn at that width */
+    var steps=$$('.sn-step',rail), play=$('.sn-play',rail), at=0, playing=true, vis=false, timer=0, late=0, DUR=[7000,7400,8200,7800];
+    var ICON={pause:'<svg viewBox="0 0 12 12" aria-hidden="true"><rect x="2" y="1.5" width="3" height="9" rx="1"/><rect x="7" y="1.5" width="3" height="9" rx="1"/></svg>',play:'<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1.5v9l7.5-4.5z"/></svg>'};
+    var code=D.kept.update.lines.join('\n');
+    function fx(i){clearTimeout(late);
+      if(i===0)countUp($('#su-st-rec b'),D.kept.counts.steps_without_action,1500,500);
+      if(i===1)typeInto($('#su-st-code'),code,2600,1100);
+      if(i===3)late=setTimeout(function(){if(at===3)st[3].classList.add('done');},3300);}
+    function mark(){play.innerHTML=playing?ICON.pause:ICON.play;play.setAttribute('aria-label',playing?'Pause the night':'Resume the night');}
+    function run(){clearTimeout(timer);var u=$('i',steps[at]);u.style.transition='none';u.style.width='0';mark();
+      if(!playing||!vis)return;
+      void u.offsetWidth;u.style.transition='width '+DUR[at]+'ms linear';u.style.width='100%';
+      timer=setTimeout(function(){show((at+1)%st.length);},DUR[at]);}
+    function show(i){at=i;
+      st.forEach(function(s,k){s.classList.toggle('cur',k===i);s.classList.remove('play','done');});
+      steps.forEach(function(b,k){b.setAttribute('aria-current',k===i?'true':'false');b.classList.toggle('done',k<i);var u=$('i',b);u.style.transition='none';u.style.width='';});
+      var s=st[i];$$('.anim',s).forEach(function(e){e.classList.remove('in');void e.offsetWidth;e.classList.add('in');e.dataset.seen=1;});
+      void s.offsetWidth;s.classList.add('play');fx(i);run();}
+    rail.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
+      if(b===play){playing=!playing;if(playing)show(at);else run();return;}
+      show(+b.getAttribute('data-i'));});
+    show(0);
+    new IntersectionObserver(function(es){var v=es[0].isIntersecting&&es[0].intersectionRatio>=0.2;if(v===vis)return;vis=v;if(vis)show(at);else run();},{threshold:[0,0.2]}).observe(box);
+  }
+
+  /* the step where the two part: both replies are written at the same pace against the same limit of tokens; one runs
+     into the limit and is cut, the other ends in an action */
+  function lens(){
+    var box=$('#su-part');if(!box)return;var A=D.alarm, RE=A.reply_ends, lim=D.setting.token_limit, T=3600;
+    var side=function(k,cls,name){var r=RE[k];return '<div class="'+cls+(r.cut?' cutside':'')+'" data-k="'+k+'"><b>'+name+', step '+A.part_at+'</b>'+
+      '<p class="tk"><span class="tk-bar"><i></i></span><span class="tk-t"><span class="tk-n">'+r.tokens+'</span> of '+lim+' tokens</span></p>'+
+      '<pre class="su-mono"></pre><p class="lp-end">'+(r.cut?'cut at the limit: no action':'it ends in an action')+'</p></div>';};
+    box.innerHTML=side('unchanged','k-unch','unchanged agent')+side('edited','k-edit','after its own edit');
+    var cards=$$('[data-k]',box);
+    var full=function(r){return (r.abridged_at_start?'… ':'')+r.lines.join('\n');};
+    var fin=function(c){var r=RE[c.getAttribute('data-k')], pre=$('pre',c), L=r.lines, last=L[L.length-1], act=/^<action>/.test(last);
+      pre.classList.remove('ty-on');
+      pre.innerHTML=esc((r.abridged_at_start?'… ':'')+L.slice(0,act?-1:L.length).join('\n'))+(act?'\n<span class="act">'+esc(last)+'</span>':'')+(r.cut?'<span class="cutmark">cut</span>':'');
+      c.style.setProperty('--p',r.tokens/lim);$('.tk-n',c).textContent=r.tokens;c.classList.add('done');};
+    if(reduced||!hasIO){cards.forEach(fin);return;}
+    function playAll(){cards.forEach(function(c){var r=RE[c.getAttribute('data-k')], ms=T*r.tokens/lim, id=(c._run=(c._run||0)+1), t0=performance.now()+350, n=$('.tk-n',c);
+      c.classList.remove('done');c.style.setProperty('--p',0);n.textContent='0';
+      typeInto($('pre',c),full(r),ms,350,function(){if(c._run===id)fin(c);});
+      (function tick(now){if(c._run!==id)return;var p=Math.max(0,Math.min(1,(now-t0)/ms));c.style.setProperty('--p',p*r.tokens/lim);n.textContent=Math.round(p*r.tokens);if(p<1)requestAnimationFrame(tick);})(performance.now());});}
+    cards.forEach(function(c){$('pre',c).innerHTML='<span class="ty-rest">'+esc(full(RE[c.getAttribute('data-k')]))+'</span>';c.style.setProperty('--p',0);$('.tk-n',c).textContent='0';});
+    var seen=false;
+    new IntersectionObserver(function(es){var e=es[0];if(e.isIntersecting&&e.intersectionRatio>=0.5){if(!seen){seen=true;playAll();}}else if(!e.isIntersecting)seen=false;},{threshold:[0,0.5]}).observe(box);
+    var rb=$('#su-lens-replay');if(rb)rb.addEventListener('click',playAll);
+  }
+
+  /* ---------- the night in its own words: eight cards ---------- */
+  function glossFor(block){var cap=block.nextElementSibling;while(cap&&!cap.classList.contains('cap'))cap=cap.nextElementSibling;var g=cap&&cap.querySelector('[data-gloss]');return g&&g.textContent.trim()===D.gloss.trim();}
+  function nightCards(){
+    var box=$('#su-ncards');if(!box)return;var cols=$$('.su-ncol',box), hasGloss=glossFor(box);
+    var kind={1:'su-k-waste',2:'su-k-unch',3:'su-k-read',4:'su-k-unch',5:'su-k-edit',6:'su-k-edit',7:'su-k-edit',8:'su-k-edit'};
+    D.kept.cards.forEach(function(c,i){
+      if(c.words.own_word_for_tasks&&!hasGloss){if(window.console)console.error('no gloss for card',c.number);return;}
+      var b=c.badges.map(function(t){t=t.replace(/ \(SE ([\d.]+)\)/g,', SE $1').replace(/ \((\d+)\),/g,' $1,');var m=/\bSE\b/.test(t)&&t.match(/·\s*-?(\d+(\.\d+)?)/), w=m?Math.min(100,parseFloat(m[1])/11*100):0;
+        return '<span class="su-badge">'+esc(minus(t))+(w?'<i style="--w:'+w.toFixed(0)+'%"></i>':'')+'</span>';}).join('');
+      var h='<article class="su-nc '+kind[c.number]+'" style="--d:'+(0.12*i).toFixed(2)+'s"><span class="n">'+c.number+'</span><h5>'+esc(c.title)+'<span>'+esc(c.turns)+'</span></h5><blockquote>&ldquo;'+aq(c.words.text)+'&rdquo;</blockquote><div class="su-badges">'+b+'</div></article>';
+      cols[i<4?0:1].insertAdjacentHTML('beforeend',h);
+    });
+    box.classList.add('anim');
+  }
+
+  /* ---------- one tensor among all of them ---------- */
+  function wall(el){
+    var W=Math.round(el.clientWidth), N=parseInt(String(D.kept.tensor.one_of).replace(/,/g,''),10), cols=W<420?32:(W<640?56:48), g=W<420?1.5:2, c=(W-(cols-1)*g)/cols, rows=Math.ceil(N/cols), H=rows*(c+g)-g+2;
+    var at=Math.round(N*D.kept.tensor.layer/64), p='', o='';
+    for(var i=0;i<N;i++){if(i===at)continue;var x=(i%cols)*(c+g), y=Math.floor(i/cols)*(c+g);p+='M'+R(x)+' '+R(y)+'h'+R(c)+'v'+R(c)+'h'+R(-c)+'z';}
+    o+='<path class="wl-c fade" d="'+p+'"'+D_(0.1)+'/>';
+    var ax=(at%cols)*(c+g), ay=Math.floor(at/cols)*(c+g);
+    o+=rect(ax-3,ay-3,c+6,c+6,3,'wl-ring pop',D_(1.2));
+    o+=rect(ax,ay,c,c,1.5,'wl-one pop',D_(0.9));
+    el.innerHTML=svg(W,H,o);
+    var wn=$('#su-wall-n');if(wn)wn.textContent=D.kept.tensor.one_of;
+  }
+
+  /* ---------- its own examiner: the ledger of the four nights ---------- */
+  function ledger(el){
+    var cs=getComputedStyle(el), W=Math.round(el.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight))-1, N=D.nights, wide=W>=760, big=W>=1000, o='', s=big?18:wide?14:12, sg=big?4:3;
+    var conf=function(n){return n.confirmation&&n.confirmation.steps_without_action;};
+    var lo=-9.5, hi=3.6, head=wide?54:0, rowH=big?48:wide?40:0;
+    if(wide){
+      var nameW=big?118:150, tilesW=20*(s+sg), pillW=104, cx0=nameW+tilesW+28, cW=W-cx0-pillW-24, X=function(v){return cx0+(v-lo)/(hi-lo)*cW;};
+      o+=tx(0,16,'night','lg-head');o+=tx(nameW,16,'one tile for each round of forward passes, in order','lg-head');
+      o+=tx(cx0,16,'confirmation of the kept edit, '+D.kept.counts.reserved_tasks+' reserved practice tasks:','lg-head');o+=tx(cx0,32,'steps without an action, this night − last night, points','lg-head');
+      o+=tx(W,16,'decision','lg-head','end');
+      var y0=head, H=head+N.length*rowH+18;
+      o+=line(X(0),y0-6,X(0),y0+N.length*rowH,'zero');o+=tx(X(0),H-2,'0','sm','middle');
+      N.forEach(function(n,r){var y=y0+r*rowH, cy=y+rowH/2, d=0.15+r*0.35, k=n.decision==='kept';
+        o+='<g class="fade"'+D_(d)+'>'+tx(0,cy+5,esc(n.name),k?'t-edit w6':'t-ink')+'</g>';
+        n.tiles.forEach(function(t,j){o+=rect(nameW+j*(s+sg),cy-s/2,s,s,3,'lg-'+t.result+' pop',D_(d+0.05+j*0.03));if(t.kind==='candidates')o+=tx(nameW+j*(s+sg)+s/2,cy+(big?4.3:3.5),'c','lg-c'+(big?' b':'')+' fade','middle',D_(d+0.1+j*0.03));});
+        var c=conf(n);
+        if(c){var x1=X(c.change_points-2*c.se), x2=X(c.change_points+2*c.se);
+          o+=line(x1,cy,x2,cy,'lg-ci'+(k?' k':'')+' fade',D_(d+0.7));o+='<circle class="lg-dot'+(k?' k':'')+' pop" cx="'+R(X(c.change_points))+'" cy="'+R(cy)+'" r="5"'+D_(d+0.75)+'/>';
+          if(k)o+=tx(x1-10,cy+6.5,minus(c.printed),'cf-val fade','end',D_(d+0.9));}
+        o+=rect(W-pillW,cy-12,pillW,24,12,'lg-pill'+(k?' k':'')+' fade',D_(d+1.0));o+=tx(W-pillW/2,cy+5,n.decision,(k?'t-edit w6':'sm')+' fade','middle',D_(d+1.0));
+        if(r<N.length-1)o+=line(0,y+rowH,W,y+rowH,'lg-row');
+      });
+      el.innerHTML=svg(W,H,o);
+    }else{
+      var blockH=86, extra=54, H=30+N.length*blockH+extra, yAcc=24, X2=function(v){return 10+(v-lo)/(hi-lo)*(W-20);};
+      o+=tx(0,10,'one tile for each round, in order','lg-head');
+      N.forEach(function(n,r){var y=yAcc, d=0.1+r*0.25, k=n.decision==='kept';yAcc+=blockH+(k?extra:0);
+        o+=tx(0,y+12,esc(n.name),(k?'t-edit w6':'t-ink')+' fade','start',D_(d));
+        o+=rect(W-86,y-2,86,20,10,'lg-pill'+(k?' k':'')+' fade',D_(d));o+=tx(W-43,y+12,n.decision,(k?'t-edit w6':'sm')+' fade','middle',D_(d));
+        n.tiles.forEach(function(t,j){o+=rect(j*(s+sg),y+24,s,s,3,'lg-'+t.result+' pop',D_(d+0.05+j*0.025));if(t.kind==='candidates')o+=tx(j*(s+sg)+s/2,y+24+s/2+3.5,'c','lg-c fade','middle',D_(d+0.1+j*0.025));});
+        var cy=y+(k?68:56), c=conf(n);
+        if(c){o+=line(X2(0),cy-8,X2(0),cy+8,'zero');o+=line(X2(c.change_points-2*c.se),cy,X2(c.change_points+2*c.se),cy,'lg-ci'+(k?' k':'')+' fade',D_(d+0.5));o+='<circle class="lg-dot'+(k?' k':'')+' pop" cx="'+R(X2(c.change_points))+'" cy="'+cy+'" r="5"'+D_(d+0.55)+'/>';
+          if(k){o+=tx(X2(c.change_points),cy-12,minus(c.printed),'mid t-edit fade','middle',D_(d+0.7));o+=tx(X2(0)+7,cy+4,'0','sm','start');
+            o+=tx(0,cy+26,'its confirmation on reserved practice tasks:','lg-head');o+=tx(0,cy+42,'steps without an action, this night − last night','lg-head');}}
+        if(r<N.length-1)o+=line(0,yAcc-10,W,yAcc-10,'lg-row');
+      });
+      el.innerHTML=svg(W,H,o);
+    }
+    el.classList.add('ch','anim');
+    var k=$('#su-ledger-key');if(!k){el.insertAdjacentHTML('beforeend','<p class="su-key" id="su-ledger-key" aria-hidden="true"><span><i style="--k:var(--lav);--ke:var(--lav-e)"></i>a read of its hidden states</span><span><i style="--k:var(--mint);--ke:var(--mint-e)"></i>a test clearly in favour of the edit</span><span><i style="--k:var(--su-waste-bar);--ke:var(--rose-e)"></i>a test clearly against it</span><span><i style="--k:var(--card);--ke:var(--faint)"></i>a test within two standard errors</span><span><i class="su-key-c">c</i>several candidates side by side: coloured by the best one</span><span><i style="height:2px;width:16px;border:0;border-radius:0;background:var(--mint-e)"></i>the kept edit&rsquo;s confirmation, with two standard errors</span></p>');}
+  }
+  function withdrawCards(){
+    var box=$('#su-wcards');if(!box)return;var hasGloss=glossFor(box);
+    D.nights.forEach(function(n){var f=n.final_answer;
+      if(!hasGloss){if(window.console)console.error('no gloss for',n.name);return;}
+      box.insertAdjacentHTML('beforeend','<article class="su-wc'+(n.decision==='kept'?' k':'')+'"><h4>'+esc(n.name)+(f.heading?'<span>'+esc(f.heading)+'</span>':'')+'</h4><blockquote>&ldquo;'+aq(f.text)+'&rdquo;</blockquote><code>'+esc(f.decision_line)+'</code></article>');});
+  }
+  function nightTable(){
+    var box=$('#su-ntable');if(!box)return;
+    var c=function(cf,key){if(!cf)return '–';if(cf.result)return esc(cf.result);var m=cf[key];return minus(m.printed)+', SE '+m.printed_se;};
+    var h='<table class="su-table"><thead><tr><th>Night</th><th>Rounds used</th><th>Tasks in a comparison, median</th><th>Confirmation: steps without an action, this night − last night, points</th><th>Confirmation: tasks completed, this night − last night, points</th><th>Decision</th></tr></thead><tbody>';
+    D.nights.forEach(function(n){var k=n.decision==='kept', cf=n.confirmation;
+      h+='<tr'+(k?' class="k"':'')+'><td>'+esc(n.name)+'</td><td>'+n.rounds_used+' of '+n.rounds_allowed+'</td><td>'+n.tasks_median+'</td><td>'+c(cf,'steps_without_action')+'</td><td>'+c(cf,'tasks_completed')+'</td><td class="'+(k?'k':'')+'">'+(k?'<b>kept</b>':'withdrawn')+'</td></tr>';});
+    box.innerHTML=h+'</tbody></table>';
+  }
+
+  /* ---------- finding 01: the pair ---------- */
+  function pairStrip(el,side){
+    var W=Math.round(el.clientWidth), H=W<420?74:86, A=D.alarm[side], o='';
+    o+=strip(A.step_list,W,H-22,{top:4});
+    o+=tx(0,H-2,'step 1','sm');if(side==='unchanged')o+=tx(W,H-2,'step '+A.steps,'sm','end');
+    else{var x=(A.steps)*(W/D.setting.steps_limit);o+=tx(x+8,H-26,'completed','sm t-edit w6 rm-done-t');}
+    el.innerHTML=svg(W,H,o,side==='unchanged'?HATCH:'');
+    if(EP.apply)EP.apply();
+  }
+
+  /* ---------- the episode, drawn: the agent in the room of its task, step by step ----------
+     ALFWorld is text: the room is drawn from the steps of the episode (where the agent goes, what it takes, what it uses).
+     Both agents run on one clock of steps; the first steps go slowly, the rest of the unchanged agent's 50 quickly. */
+  var EP={};
+  function botGlyph(lit){var by=-76;
+    return '<line class="rm-bot-l" x1="0" y1="'+by+'" x2="0" y2="'+(by+10)+'"/><circle class="rm-ant'+(lit?' e':'')+'" cx="0" cy="'+(by-2)+'" r="3.4"/>'+
+      rect(-15,by+10,30,22,6,'rm-bot')+'<circle class="rm-bot-d" cx="-6" cy="'+(by+21)+'" r="2.2"/><circle class="rm-bot-d" cx="6" cy="'+(by+21)+'" r="2.2"/>'+
+      rect(-23,by+36,46,30,7,'rm-bot')+[0,1,2].map(function(j){return rect(-17+j*12,by+45,10,12,2,'rm-w'+(j<lit?' e':''));}).join('')+
+      '<circle class="rm-wheel" cx="-12" cy="'+(by+70)+'" r="5.5"/><circle class="rm-wheel" cx="12" cy="'+(by+70)+'" r="5.5"/>';}
+  function clockGlyph(){return '<circle class="rm-clock-b" cx="-6.5" cy="-8.5" r="2.8"/><circle class="rm-clock-b" cx="6.5" cy="-8.5" r="2.8"/><circle class="rm-clock" r="9"/><path class="rm-clock-h" d="M0 -5V0L3.6 2.2"/>';}
+  function lampGlyph(){return '<path class="rm-light" d="M12 -27L26 30H70L22 -33Z"/><rect class="rm-lamp" x="-9" y="-3.2" width="18" height="3.2" rx="1.6"/><path class="rm-lamp-l" d="M0 -3V-22L10 -31"/><path class="rm-shade" d="M4 -36L18 -39L25 -27L10 -22Z"/>';}
+  function room(el,side){
+    var W=Math.round(el.clientWidth), H=206, F=H-30, ed=side==='edited', o='';
+    var d1=Math.max(56,W*0.165), d2=W-d1, top=F-46, P={start:W/2};P['desk 1']=d1+98;P['desk 2']=d2-98;   /* the robot stops clear of the desk, so a clock in its hand never crosses it */
+    o+=line(6,F,W-6,F,'rm-floor');
+    [[d1,'desk 1'],[d2,'desk 2']].forEach(function(d){o+=line(d[0]-34,top+7,d[0]-34,F,'rm-leg')+line(d[0]+34,top+7,d[0]+34,F,'rm-leg')+rect(d[0]-46,top,92,7,3.5,'rm-desk')+tx(d[0],F+21,d[1],'sm','middle');});
+    o+='<g transform="translate('+R(d1-14)+' '+R(top)+')">'+lampGlyph()+'</g>';
+    o+='<g class="rm-ondesk" transform="translate('+R(d2+10)+' '+R(top-9.8)+')">'+clockGlyph()+'</g>';
+    o+='<g class="rm-robot" style="transform:translateX('+R(P.start)+'px)"><g transform="translate(0 '+R(F)+')">'+
+      '<ellipse class="rm-shadow" cx="0" cy="1.5" rx="27" ry="3.2"/><g class="rm-held" style="display:none"><line class="rm-bot-l rm-arm" x1="22" y1="-32" x2="27" y2="-32"/><g class="rm-heldc" transform="translate(36 -32)">'+clockGlyph()+'</g></g>'+botGlyph(ed?1:0)+
+      '<g class="rm-bub" style="display:none"><rect x="-30" y="-124" width="60" height="26" rx="13"/><path class="rm-bub-p" d="M-5 -98.6L0 -92L5 -98.6"/><text x="0" y="-106.6" text-anchor="middle"></text></g></g></g>';
+    o+='<g class="rm-tag" style="display:none"><rect x="0" y="4" width="10" height="24" rx="12"/><text x="0" y="20.5" text-anchor="end"></text></g>';
+    el.innerHTML=svg(W,H,o);el._P=P;el._W=W;
+    if(EP.apply)EP.apply();
+  }
+  function stateAt(L,k){var s={x:'start',hold:false,lamp:false,w:0,last:null}, m;
+    for(var i=0;i<k&&i<L.length;i++){var st=L[i], a=st.action;
+      if(a==='none')s.w++;
+      else if((m=/^go to (.+)$/.exec(a))){if(st.kind!=='none')s.x=m[1];}
+      else if(/^take /.test(a))s.hold=true;
+      else if(/^move .+ to /.test(a))s.hold=false;
+      else if(/^use desklamp/.test(a))s.lamp=true;
+      s.last=st;}
+    return s;}
+  function applyRoom(side,k){
+    var el=$(side==='unchanged'?'#ch-room-u':'#ch-room-e'), A=D.alarm[side], L=A.step_list, n=L.length, kk=Math.min(k,n), s=stateAt(L,kk), fin=kk===n;
+    if(el&&el._P){var P=el._P, W=el._W, x=P[s.x]||P.start, left=s.x==='desk 1';
+      $('.rm-robot',el).style.transform='translateX('+R(x)+'px)';
+      var held=$('.rm-held',el);held.style.display=s.hold?'':'none';
+      $('.rm-heldc',el).setAttribute('transform','translate('+(left?-36:36)+' -32)');
+      var arm=$('.rm-arm',el);arm.setAttribute('x1',left?-22:22);arm.setAttribute('x2',left?-27:27);
+      $('.rm-ondesk',el).style.display=s.hold?'none':'';
+      el.classList.toggle('lamp-on',s.lamp);
+      var bub=$('.rm-bub',el), st=s.last, ant=$('.rm-ant',el);
+      if(!st){bub.style.display='none';ant.classList.remove('w');}
+      else{var cut=st.action==='none', t=cut?'reply cut: no action':st.action+(st.kind==='none'?' · no effect':''), w=Math.ceil(tw(t,12,cut?600:400)*(cut?1:1.16))+26, dx=Math.max(6+w/2-x,Math.min(W-6-w/2-x,0));
+        bub.style.display='';bub.setAttribute('class','rm-bub'+(cut?' w':st.kind==='none'?' n':''));
+        var r=$('rect',bub), tt=$('text',bub);r.setAttribute('x',R(dx-w/2));r.setAttribute('width',w);tt.setAttribute('x',R(dx));tt.textContent=t;
+        ant.classList.toggle('w',cut);
+        if(bub._k!==kk){bub._k=kk;bub.classList.remove('blip');void bub.getBoundingClientRect();bub.classList.add('blip');}}
+      var tag=$('.rm-tag',el);
+      if(fin){var done=A.completed, tt2=done?'task completed':'not completed', w2=Math.ceil(tw(tt2,13,600))+26;
+        tag.style.display='';tag.setAttribute('class','rm-tag '+(done?'ok':'no'));var r2=$('rect',tag), t2=$('text',tag);r2.setAttribute('x',W-4-w2);r2.setAttribute('width',w2);t2.setAttribute('x',W-4-13);t2.textContent=tt2;}
+      else tag.style.display='none';}
+    var sv=$(side==='unchanged'?'#ch-pair-u':'#ch-pair-e');
+    if(sv){$$('rect',sv).forEach(function(r,i){r.style.opacity=i<kk?1:0;});var dt=$('.rm-done-t',sv);if(dt)dt.style.opacity=fin?1:0;}
+    var out=$(side==='unchanged'?'#su-pair-u':'#su-pair-e');
+    if(out){if(side==='unchanged')out.innerHTML=fin?'not completed · <b>'+A.steps_without_action+'</b> of '+A.steps+' steps without an action · '+num(A.tokens_total)+' tokens':'step '+kk+' of '+A.steps+' · <b>'+s.w+'</b> without an action';
+      else out.innerHTML=fin?'completed in '+A.steps+' steps · '+num(A.tokens_total)+' tokens':'step '+kk+' of its '+A.steps;}
+  }
+  /* ---------- the cost, as a schematic that runs: a remedy at test time is carried at every step, an edit is paid once at night.
+     Nothing in it is measured: the measured lead is the figure under it. */
+  var CS={k:0};
+  function cost(el){
+    var W=Math.round(el.clientWidth), wide=W>=760, gap=wide?52:0, pw=wide?(W-gap)/2:W, ph=178, n=12, o='';
+    var sides=[['r','A remedy at test time','reflection, memory, search, a longer prompt','paid again at every step'],['e','An edit to its weights','made once, at night','adds nothing to any step']];
+    el._cs=[];
+    sides.forEach(function(sd,h){var ox=wide?h*(pw+gap):0, oy=wide?0:h*(ph+30), nw=wide?46:38, x0=ox+nw+22, x1=ox+pw-4, st=(x1-x0)/n, ts=Math.min(26,st-6), fl=oy+104, sy=fl+9, cy=sy+ts+6, bh=13;
+      o+='<g class="cs-'+sd[0]+'">'+tx(ox,oy+18,sd[1],'t-ink mid')+tx(ox,oy+37,sd[2],'sm')+tx(ox+pw,oy+18,sd[3],'cs-say '+sd[0],'end');
+      /* the night before the work: on the right the edit is paid there; on the left nothing is done at night */
+      o+='<g class="cs-once">'+rect(ox,fl-44,nw,44+9+ts,10,'cs-night'+(h?'':' off'))+'<path class="cs-moon'+(h?'':' off')+'" transform="translate('+R(ox+nw/2-2)+' '+R(fl-24)+') scale(.7)" d="M3.5 -8.5A9 9 0 1 0 8.6 4.4A7.2 7.2 0 0 1 3.5 -8.5Z"/>'+(h?rect(ox+nw/2-ts/2+2,sy+2,ts-4,ts-4,4,'cs-blk e'):'')+'</g>';
+      o+=line(x0-6,fl,x1+4,fl,'cs-floor');
+      for(var i=0;i<n;i++){var cx=x0+st*(i+0.5);
+        o+=rect(cx-ts/2,sy,ts,ts,6,'cs-step');
+        if(h===0)o+=rect(cx-ts/2+2,cy,ts-4,bh,3.5,'cs-blk r cs-add');}
+      o+=tx(x0-8,sy+ts/2+4.5,'','sm');
+      o+='<g class="cs-bot" style="transform:translateX('+R(x0-st*0.5)+'px)"><g transform="translate(0 '+R(fl-1)+') scale(.5)">'+botGlyph(h)+'</g></g>';
+      o+='</g>';
+      el._cs.push({x0:x0,st:st});});
+    el.innerHTML=svg(W,wide?ph-22:2*ph+8,o);el._n=n;
+    costApply(el);
+  }
+  function costApply(el){if(!el||!el._cs)return;var k=CS.k, n=el._n;
+    $$('.cs-bot',el).forEach(function(b,h){var c=el._cs[h];b.style.transform='translateX('+R(c.x0+c.st*(Math.min(Math.max(k,0.0001),n)-0.5))+'px)';});
+    $$('.cs-r .cs-step,.cs-e .cs-step',el).forEach(function(r,i){r.classList.toggle('on',(i%n)<k);});
+    $$('.cs-add',el).forEach(function(r,i){r.classList.toggle('on',i<k);});
+    $$('.cs-once',el).forEach(function(g){g.classList.toggle('on',k>0);});
+  }
+  function costRun(){
+    var el=$('#ch-cost');if(!el)return;var timer=0, vis=false, n=12;
+    if(reduced||!hasIO){CS.k=n;costApply(el);return;}
+    function tick(){CS.k++;costApply(el);timer=setTimeout(CS.k<n?tick:function(){if(vis)start();},CS.k<n?430:3600);}
+    function start(){clearTimeout(timer);CS.k=0;costApply(el);timer=setTimeout(tick,900);}
+    new IntersectionObserver(function(es){var v=es[0].isIntersecting&&es[0].intersectionRatio>=0.4;if(v===vis)return;vis=v;if(vis)start();else clearTimeout(timer);},{threshold:[0,0.4]}).observe(el);
+  }
+
+  function episodeRun(){
+    var box=$('#su-rooms');if(!box)return;var N=Math.max(D.alarm.unchanged.step_list.length,D.alarm.edited.step_list.length), k=0, timer=0, vis=false;
+    EP.apply=function(){applyRoom('unchanged',k);applyRoom('edited',k);};
+    if(reduced||!hasIO){k=N;EP.apply();return;}
+    function tick(){k++;EP.apply();
+      if(k<N)timer=setTimeout(tick,k<6?1150:175);
+      else timer=setTimeout(function(){if(vis)start();},5600);}
+    function start(){clearTimeout(timer);k=0;EP.apply();timer=setTimeout(tick,1000);}
+    new IntersectionObserver(function(es){var v=es[0].isIntersecting&&es[0].intersectionRatio>=0.3;if(v===vis)return;vis=v;if(vis)start();else clearTimeout(timer);},{threshold:[0,0.3]}).observe(box);
+    var rb=$('#su-room-replay');if(rb)rb.addEventListener('click',start);
+    EP.apply();
+  }
+
+  function pairText(){
+    if(!$('#su-rooms')||!$('#su-steps'))return;
+    var A=D.alarm;
+    var k=$('#su-pair .su-key');if(!k)$('#su-rooms').insertAdjacentHTML('afterend',kindsKey(A.unchanged.step_list.concat(A.edited.step_list).map(function(s){return s.kind;})));
+    $('#su-steps').innerHTML=stepsTable(A.unchanged.step_list,A.edited.step_list,true);
+    if(!$('#su-steps-hint'))$('#su-steps').insertAdjacentHTML('afterend','<p class="su-steps-hint" id="su-steps-hint">scroll the table for all '+A.unchanged.steps+' steps of the unchanged agent</p>');
+  }
+  function stepsTable(U,E,full){
+    /* step numbers are positions: they come from a CSS counter; tokens of single steps are drawn, never printed */
+    var n=Math.max(U.length,E.length), lim=D.setting.token_limit;
+    function cell(s,done){if(!s)return '<td class="x"></td>'+(full?'<td class="env"></td>':'');
+      var dn=done?'<span class="su-done">task completed; the episode ends</span>':'';
+      var a=s.action==='none'?'<td class="w">none: cut at '+lim+' tokens'+dn+'</td>':'<td class="a">'+esc(s.action)+dn+'</td>';
+      return a+(full?'<td class="env">'+esc(s.env)+'</td>':'');}
+    var h='<table><thead><tr><th>step</th><th>unchanged agent</th>'+(full?'<th class="env">the environment</th>':'')+'<th>after its own edit</th>'+(full?'<th class="env">the environment</th>':'')+'</tr></thead><tbody>';
+    for(var i=0;i<n;i++){var e=E[i];
+      h+='<tr><td class="n"></td>'+cell(U[i])+(e?cell(e,i===E.length-1):'<td class="x"'+(full?' colspan="2"':'')+'></td>')+'</tr>';}
+    return h+'</tbody></table>';
+  }
+
+  /* ---------- finding 01: six cards ---------- */
+  function cases(){
+    var box=$('#su-cases');if(!box)return;
+    D.cards.forEach(function(c){
+      var u=c.unchanged,e=c.edited;
+      var steps=function(side){return side.kinds.map(function(k,i){return {kind:k,tokens:side.tokens[i]};});};
+      var mk=function(side){var W=300,H=46,o=strip(steps(side),W,H-4,{top:2,n:D.setting.steps_limit});return svg(W,H,o,HATCH).replace('<svg ','<svg aria-hidden="true" preserveAspectRatio="none" ');};
+      var op=c.opened&&D.opened[c.letter];
+      box.insertAdjacentHTML('beforeend','<article class="case"><p class="bn">'+esc(c.type)+'<span>'+esc(c.room)+'</span></p><p class="q">&ldquo;'+esc(c.task)+'&rdquo;</p>'+
+        '<div class="ba k-unch"><b>unchanged agent</b>'+mk(u)+'<code>not completed · '+u.steps_wasted+' steps wasted</code></div>'+
+        '<div class="ba k-edit"><b>after its own edit</b>'+mk(e)+'<code>completed in '+e.steps+' steps</code></div>'+
+        '<p class="ov">over its '+c.over.seeds+' episodes: completed '+c.over.completed_unchanged+' times, then '+c.over.completed_edited+'</p>'+
+        (op?'<details><summary>step by step</summary><div class="su-steps">'+stepsTable(op.unchanged.step_list,op.edited.step_list,false)+'</div><p class="su-steps-hint">scroll the table for all '+op.unchanged.step_list.length+' steps of the unchanged agent</p></details>':'<div></div>')+'</article>');
+    });
+  }
+
+  /* ---------- finding 01: five measures ---------- */
+  /* a bar with its own radius at the left and at the right end */
+  function rr(x,y,w,h,a,b,cls,extra){w=Math.max(0,w);a=Math.min(a,w/2,h/2);b=Math.min(b,w/2,h/2);
+    return '<path'+(cls?' class="'+cls+'"':'')+' d="M'+R(x+a)+' '+R(y)+'H'+R(x+w-b)+(b?'a'+R(b)+' '+R(b)+' 0 0 1 '+R(b)+' '+R(b):'')+'V'+R(y+h-b)+(b?'a'+R(b)+' '+R(b)+' 0 0 1 '+R(-b)+' '+R(b):'')+'H'+R(x+a)+(a?'a'+R(a)+' '+R(a)+' 0 0 1 '+R(-a)+' '+R(-a):'')+'V'+R(y+a)+(a?'a'+R(a)+' '+R(a)+' 0 0 1 '+R(a)+' '+R(-a):'')+'Z"'+(extra||'')+'/>';}
+  /* five measures, one line each: the bar is the agent after its own edit, the tick is where its unchanged self stood,
+     and the stretch between the two is what it gained (filled) or no longer spends (dashed). Bars start at zero. */
+  function results(el){
+    var W=Math.round(el.clientWidth), M=[D.headline.main].concat(D.headline.further), wide=W>=680, o='', Lc=D.levels.completed;
+    var labW=wide?236:0, valW=wide?236:0, x0=labW, x1=W-valW-(wide?22:0), bw=x1-x0, y=wide?20:6;
+    var pct=function(m){return m.id!=='tokens'&&m.id!=='steps';}, pTop=Math.max.apply(null,M.filter(pct).map(function(m){return Math.max(m.unchanged.value,m.edited.value);}).concat([Lc.edited.interval[1]]));
+    var fmt=function(m,s){return m.id==='tokens'?s+' thousand':m.id==='steps'?s:s+'%';};
+    M.forEach(function(m,r){var u=m.unchanged.value, e=m.edited.value, up=m.better==='up', first=r===0, d=0.12+r*0.14;
+      var top=pct(m)?pTop:Math.max(u,e);
+      var sc=bw/(top*1.03), bh=first?22:16, rowH=wide?(first?78:58):(first?100:84), by=wide?y+(first?12:10):y+(first?40:28), cy=by+bh/2, xu=x0+u*sc, xe=x0+e*sc;
+      if(wide){o+=tx(0,cy-2,esc(m.label),'t-ink mid');o+=tx(0,cy+16,up?'more is better':'fewer is better','sm');}
+      else{o+=tx(0,y+14,esc(m.label),'t-ink mid');o+=tx(W,y+14,up?'more is better':'fewer is better','sm','end');}
+      o+=rect(x0,by,bw,bh,bh/2,'rs-track');
+      if(up){o+=rect(x0,by,e*sc,bh,bh/2,'rs-gain grow',D_(d+0.55));o+=rr(x0,by,u*sc,bh,bh/2,0,'rs-e grow',D_(d+0.1));}
+      else{o+=rr(xe-bh/2,by,xu-xe+bh/2,bh,0,0,'rs-saved fade',D_(d+0.95));o+=rect(x0,by,e*sc,bh,bh/2,'rs-e grow',D_(d+0.1));}
+      o+=line(xu,by-5,xu,by+bh+5,'rs-tick fade',D_(d+0.05));
+      if(first){[['unchanged','u'],['edited','e']].forEach(function(q){var iv=Lc[q[0]].interval, a=x0+iv[0]*sc, b=x0+iv[1]*sc, wy=by-11;
+        o+=line(a,wy,b,wy,'rs-ci '+q[1]+' fade',D_(d+1.1));o+=line(a,wy-4,a,wy+4,'rs-ci '+q[1]+' fade',D_(d+1.1));o+=line(b,wy-4,b,wy+4,'rs-ci '+q[1]+' fade',D_(d+1.1));});}
+      var val='<tspan class="t-unch">'+fmt(m,m.unchanged.text)+'</tspan><tspan class="rs-arrow" dx="8">→</tspan><tspan class="t-edit w6'+(first&&wide?' rs-big':'')+'" dx="8">'+fmt(m,m.edited.text)+'</tspan>';
+      if(wide)o+=tx(W,cy+5,val,'rs-val fade','end',D_(d+0.7));else o+=tx(0,by+bh+19,val,'rs-val fade','start',D_(d+0.7));
+      if(first&&wide&&m.change)o+=tx(W,cy+25,m.change.text+' '+m.change.unit,'sm t-edit fade','end',D_(d+0.9));
+      y+=rowH;});
+    el.innerHTML=svg(W,y+2,o);
+    var key='<span><i style="--k:var(--mint);--ke:var(--mint-e)"></i>after its own edit</span><span><i class="tk"></i>its unchanged self</span><span><i class="gn"></i>gained</span><span><i class="gh"></i>no longer spent</span><span><i class="wh"></i>whiskers: over '+D.setting.seeds_a_task+' seeds</span>';
+    var k=$('#su-res-key');if(k)k.innerHTML=key;else el.insertAdjacentHTML('afterend','<p class="su-key" id="su-res-key" aria-hidden="true">'+key+'</p>');
+  }
+
+  /* ---------- finding 01: shares of the tasks, ordinary bars that fill 100%, the tie drawn and labelled ---------- */
+  function shareRow(W,y,parts,d){
+    /* parts: [[share, class, label], ...] in order; returns svg of one bar and, under it, its labels on as many lines as needed */
+    var o='', x=0, bh=18, tot=parts.reduce(function(a,p){return a+p[0];},0)||100;
+    parts.forEach(function(p,i){var w=W*p[0]/tot;if(w>0)o+=rect(x,y,w,bh,i===0?4:0,p[1]+' grow',D_(d+i*0.15));x+=w;});
+    o+='<rect class="sh-frame" x="0" y="'+R(y)+'" width="'+R(W)+'" height="'+bh+'" rx="4"/>';
+    /* each label under the start of its own segment; one that would run into the label before it goes a line down */
+    var xs=[], xa=0, ly=y+bh+18, gapW=14, prevEnd=-1e9; parts.forEach(function(p){xs.push(xa);xa+=W*p[0]/tot;});
+    parts.forEach(function(p,i){var s=p[2]+' '+p[0]+'%', w=tw(s,FS.fine,600), lx=xs[i];
+      if(lx+w>W)lx=Math.max(0,W-w); if(lx<prevEnd+gapW)ly+=18;
+      o+=tx(lx,ly,esc(s),'sm w6 '+p[3]+' fade','start',D_(d+0.5));prevEnd=lx+w;});
+    return {svg:o,bottom:ly};
+  }
+  function share1(el){
+    var W=Math.round(el.clientWidth), S=D.shares.completed, o='', y=24, head='share of the held-out tasks, by their completed episodes';
+    if(tw(head,FS.fine,400)<=W)o+=tx(0,14,head,'lg-head');else{o+=tx(0,14,'share of the held-out tasks,','lg-head');o+=tx(0,31,'by their completed episodes','lg-head');y=41;}
+    var r_=shareRow(W,y,[[S.more,'sh-e','more often with the edit','t-edit'],[S.as_many,'sh-q','as often','t-ink'],[S.fewer,'sh-u','less often','t-unch']],0.3);
+    el.innerHTML=svg(W,r_.bottom+6,o+r_.svg,HATCH);
+  }
+  function shares(el){
+    var W=Math.round(el.clientWidth), M=D.shares.by_measure, o='', y=0;
+    M.forEach(function(m,i){o+=tx(0,y+15,esc(m.label),'t-ink mid');
+      var r_=shareRow(W,y+24,[[m.edited_ahead,'sh-e','edited agent ahead','t-edit'],[m.equal,'sh-q','equal','t-ink'],[m.unchanged_ahead,'sh-u','unchanged agent ahead','t-unch']],0.15+i*0.15);
+      o+=r_.svg;y=r_.bottom+22;});
+    el.innerHTML=svg(W,y-12,o,HATCH);
+    if(!$('#su-sh-key'))el.insertAdjacentHTML('afterend','<p class="su-key" id="su-sh-key" aria-hidden="true"><span><i style="--k:var(--mint);--ke:var(--mint-e)"></i>the edited agent ahead</span><span><i style="--k:var(--card);--ke:var(--faint)"></i>equal</span><span><i style="--k:var(--ice);--ke:var(--ice-e)"></i>the unchanged agent ahead</span></p>');
+  }
+  function byType(el){
+    var W=Math.round(el.clientWidth), T=D.by_type, wide=W>=700, o='', colW=wide?(W-48)/2:W, rowH=30;
+    var labW=Math.min(150,colW*0.42), mx=Math.max.apply(null,T.map(function(t){return Math.abs(t.noaction_value);})), bw=colW-labW-60;
+    o+=tx(0,14,'steps without an action, edited − unchanged, points','lg-head');
+    T.forEach(function(t,i){var y=30+i*rowH, w=Math.abs(t.noaction_value)/mx*bw, d=0.1+i*0.1;
+      o+=tx(0,y+13,esc(t.type),'sm t-ink');o+=rect(labW,y,w,18,4,'bt-bar grow',D_(d));o+=tx(labW+w+8,y+14,minus(t.noaction),'sm t-rose w6 fade','start',D_(d+0.5));});
+    var C=T.filter(function(t){return t.completed;}), x0=wide?colW+48:0, y0=wide?0:30+T.length*rowH+24;
+    o+=tx(x0,y0+14,'tasks completed, % of a task’s episodes','lg-head');
+    var mx2=Math.max.apply(null,C.map(function(t){return t.completed.edited;}))*1.12, bw2=colW-labW-60;
+    C.forEach(function(t,i){var y=y0+30+i*56, d=0.2+i*0.15;
+      o+=tx(x0,y+13,esc(t.type),'sm t-ink');
+      o+=rect(x0+labW,y,t.completed.unchanged/mx2*bw2,16,4,'rs-u grow',D_(d));o+=tx(x0+labW+t.completed.unchanged/mx2*bw2+8,y+13,t.completed.unchanged.toFixed(1)+'%','sm t-unch w6 fade','start',D_(d+0.5));
+      o+=rect(x0+labW,y+21,t.completed.edited/mx2*bw2,16,4,'rs-e grow',D_(d+0.1));o+=tx(x0+labW+t.completed.edited/mx2*bw2+8,y+34,t.completed.edited.toFixed(1)+'%','sm t-edit w6 fade','start',D_(d+0.6));});
+    var H=wide?Math.max(30+T.length*rowH,30+C.length*56)+4:y0+30+C.length*56;
+    el.innerHTML=svg(W,H,o);
+  }
+
+  /* ---------- finding 02: a task's running totals over its 48 episodes, edited minus unchanged, a mean over tasks.
+     A trend: no number label inside a panel, no ticks; only the zero line ---------- */
+  function path(xs,ys,X,Y){return xs.map(function(x,i){return (i?'L':'M')+R(X(x))+' '+R(Y(ys[i]));}).join('');}
+  /* the lead that grows: one panel a measure, the mean running total with its band, and at the end of the curve the mean
+     it has reached after the 48 episodes of a task, in words */
+  function ahead(el){
+    var W=Math.round(el.clientWidth), A=D.ahead, T=D.a_task, n=A.curves.length, wide=W>=760, gap=36, pw=wide?(W-gap*(n-1))/n:W, ph=wide?272:236, o='';
+    var x0=A.x[0], x1=A.x[A.x.length-1];
+    var say={wasted_steps:T.fewer_wasted_steps+' fewer',tokens:T.thousand_fewer_tokens+' thousand fewer',tasks_completed:T.more_episodes_completed+' more'};
+    A.curves.forEach(function(c,k){var ox=wide?k*(pw+gap):0, oy=wide?0:k*(ph+44), top=oy+66, bot=oy+ph-34, padL=2, padR=16, last=c.y.length-1;
+      var lo=Math.min(0,Math.min.apply(null,c.lo)), hi=Math.max(0,Math.max.apply(null,c.hi)), sp0=(hi-lo)||1;
+      if(hi>0)hi+=sp0*0.08; if(lo<0)lo-=sp0*0.08; var sp=(hi-lo)||1;   /* headroom: the band ends inside the panel */
+      var X=function(x){return ox+padL+(x-x0)/(x1-x0)*(pw-padL-padR);}, Y=function(v){return bot-(v-lo)/sp*(bot-top);};
+      var ex=X(A.x[last]), ey=Y(c.y[last]);
+      o+='<g class="ah-'+(k+1)+'">';
+      o+=tx(ox,oy+18,esc(c.means),'t-ink mid');o+=tx(ox,oy+37,'edited − unchanged, a task’s running total','sm');
+      var band=path(A.x,c.hi,X,Y)+path(A.x.slice().reverse(),c.lo.slice().reverse(),X,Y).replace('M','L')+'Z';
+      var area=path(A.x,c.y,X,Y)+'L'+R(ex)+' '+R(Y(0))+'L'+R(X(x0))+' '+R(Y(0))+'Z';
+      o+='<path class="ah-area fade" d="'+area+'"'+D_(1.0+k*0.2)+'/>';
+      o+='<path class="ah-band fade" d="'+band+'"'+D_(1.2+k*0.2)+'/>';
+      o+=line(X(x0),Y(0),ox+pw,Y(0),'zero');
+      o+='<path class="ah-l draw" d="'+path(A.x,c.y,X,Y)+'"'+D_(0.2+k*0.2)+'/>';
+      o+='<circle class="ah-halo pop" cx="'+R(ex)+'" cy="'+R(ey)+'" r="11"'+D_(1.6+k*0.2)+'/><circle class="ah-dot pop" cx="'+R(ex)+'" cy="'+R(ey)+'" r="5.5"'+D_(1.65+k*0.2)+'/>';
+      /* the lead after the 48 episodes: the gap from the level of its unchanged self to the end of the curve, and its size in words */
+      var dn=c.y[last]<0;
+      o+=line(ex,Y(0)+(dn?3:-3),ex,ey+(dn?-8:8),'ah-gap fade',D_(1.55+k*0.2));
+      o+=tx(ex-12,Y(0)+(dn?28:-14),esc(say[c.id]),'ah-end fade','end',D_(1.85+k*0.2));
+      o+=tx(X(x0),bot+26,'the 48 episodes of a task, in order','sm');
+      o+='</g>';});
+    var H=wide?ph+4:n*(ph+44)-40;
+    el.innerHTML=svg(W,H,o);
+  }
+
+  function bystep(el){
+    var W=Math.round(el.clientWidth), B=D.by_step, keys=[['steps_without_action_so_far','steps without an action so far','% of the steps so far'],['tokens_so_far','tokens generated so far','thousands of tokens'],['completed_by_step','episodes completed by this step','% of a task’s episodes']];
+    var wide=W>=760, gap=28, pw=wide?(W-gap*2)/3:W, ph=170, o='', n=B.step.length;
+    keys.forEach(function(k,j){var C=B.curves[k[0]], ox=wide?j*(pw+gap):0, oy=wide?0:j*(ph+50), top=oy+44, bot=oy+ph-22;
+      var mx=Math.max(Math.max.apply(null,C.unchanged),Math.max.apply(null,C.edited))*1.05, X=function(s){return ox+(s-1)/(n-1)*pw;}, Y=function(v){return bot-v/mx*(bot-top);};
+      o+=tx(ox,oy+16,k[1],'t-ink mid');o+=tx(ox,oy+34,k[2],'sm');
+      o+=line(ox,bot,ox+pw,bot,'ax');
+      o+='<path class="bs-u draw" d="'+path(B.step,C.unchanged,X,Y)+'"'+D_(0.2)+'/>';
+      o+='<path class="bs-e draw" d="'+path(B.step,C.edited,X,Y)+'"'+D_(0.4)+'/>';
+      o+=tx(ox,bot+18,'step 1','sm');o+=tx(ox+pw,bot+18,'step '+B.step[n-1],'sm','end');});
+    var H=wide?ph+4:3*(ph+50)-46;
+    el.innerHTML=svg(W,H,o);
+    if(!$('#su-bs-key'))el.insertAdjacentHTML('afterend','<p class="su-key" id="su-bs-key" aria-hidden="true"><span><i style="height:3px;border:0;border-radius:0;background:var(--ice-e)"></i>unchanged agent</span><span><i style="height:3px;border:0;border-radius:0;background:var(--mint-e)"></i>after its own edit</span></p>');
+  }
+
+  /* ---------- finding 03: the level after each night ---------- */
+  /* the agent in use after each night, three measures over one line of nights. The night that kept its edit is one
+     column through all three; before it the line is the unchanged agent's, after it the edited agent's, and the stretch
+     that follows is where the upgrade holds. A night that withdrew has no measurement of its own: its point is hollow. */
+  function levels(el){
+    var W=Math.round(el.clientWidth), Lv=D.levels, dec=D.hero.decision, use=D.hero.agent_in_use, wide=W>=760, o='', kept=dec.indexOf('kept'), n=use.length;
+    var rows=[['completed','Tasks completed','more is better','%'],['noaction','Steps without an action','fewer is better','%'],['tokens','Tokens an episode','fewer is better',' thousand']];
+    var gutL=wide?250:0, gutR=wide?132:10, padX=wide?36:18, x0=gutL+padX, x1=W-gutR-padX, top=wide?44:40, lab=wide?0:28;
+    var rh=[wide?168:150,wide?112:104,wide?112:104], X=function(i){return x0+i*(x1-x0)/(n-1);}, sp=(x1-x0)/(n-1);
+    var y=top, tops=[];rows.forEach(function(r,j){tops.push(y);y+=rh[j]+lab;});
+    var bodyBot=y, footH=wide?84:64, H=bodyBot+footH, colW=Math.min(wide?112:60,sp*0.74);
+    o+=rect(X(kept)-colW/2,top-10,colW,H-top+6,16,'lv-col fade',D_(0.05));
+    o+=tx(X(kept),top-22,'the night that kept its edit','sm lv-col-t fade','middle',D_(0.35));
+    rows.forEach(function(r,j){var L=Lv[r[0]], u=L.unchanged.value, e=L.edited.value, ry=tops[j], up=e>u, hh=rh[j];
+      var py0=ry+lab+(j===0?48:34), py1=ry+lab+hh-(j===0?42:32), lo=Math.min(u,e), hi=Math.max(u,e);
+      if(j===0){lo=Math.min(L.unchanged.interval[0],L.edited.interval[0]);hi=Math.max(L.unchanged.interval[1],L.edited.interval[1]);}
+      var Y=function(v){return py1-(v-lo)/(hi-lo)*(py1-py0);}, yu=Y(u), ye=Y(e), dj=j*0.15;
+      if(j>0)o+=line(0,ry,W,ry,'lv-sep');
+      if(wide){var my=ry+hh/2;o+=tx(0,my-(j===0?12:3),r[1],'t-ink mid');o+=tx(0,my+(j===0?7:16),r[2],'sm');if(j===0)o+=tx(0,my+26,'whiskers: over '+D.setting.seeds_a_task+' seeds','sm');}
+      else{o+=tx(0,ry+20,r[1],'t-ink mid');o+=tx(W,ry+20,r[2],'sm','end');}
+      o+=rect(X(kept),ye-13,X(n-1)-X(kept)+17,26,13,'lv-hold grow',D_(1.3+dj));
+      o+='<path class="lv-l lv-pre draw" d="M'+R(X(0))+' '+R(yu)+'H'+R(X(kept))+'"'+D_(0.25+dj)+'/>';
+      o+='<path class="lv-l lv-post draw" d="M'+R(X(kept))+' '+R(yu)+'V'+R(ye)+'H'+R(X(n-1))+'"'+D_(0.8+dj)+'/>';
+      use.forEach(function(a,i){var x=X(i), yy=a==='edited'?ye:yu, c=a==='edited'?'e':'u', m=i===0||i===kept, dl=0.3+dj+i*0.2;
+        if(i===kept)o+='<circle class="lv-halo pop" cx="'+R(x)+'" cy="'+R(yy)+'" r="13"'+D_(dl)+'/>';
+        if(j===0&&m){var iv=L[a].interval;o+=line(x,Y(iv[0]),x,Y(iv[1]),'lv-ci '+c+' fade',D_(dl+0.3));o+=line(x-5,Y(iv[0]),x+5,Y(iv[0]),'lv-ci '+c+' fade',D_(dl+0.3));o+=line(x-5,Y(iv[1]),x+5,Y(iv[1]),'lv-ci '+c+' fade',D_(dl+0.3));}
+        o+='<circle class="lv-pt '+c+(m?'':' h')+' pop" cx="'+R(x)+'" cy="'+R(yy)+'" r="'+(i===kept?7:m?6:5)+'"'+D_(dl+0.05)+'/>';
+      });
+      var tu=L.unchanged.text+r[3], te=L.edited.text+r[3];
+      if(wide){o+=tx(X(0)-15,yu+5,tu,'t-unch w6 fade','end',D_(0.6+dj));o+=tx(X(n-1)+28,ye+6.5,te,'lv-end fade','start',D_(1.9+dj));}
+      else{o+=tx(X(0)-6,yu+(up?(j===0?34:22):-13),tu,'sm t-unch w6 fade','start',D_(0.6+dj));o+=tx(X(n-1)+6,ye+(up?-17:27),te,'t-edit w6 fade','end',D_(1.9+dj));}
+      if(j===0)o+=tx((X(kept)+X(n-1))/2+sp*0.12,ye+(up?36:-24),'the upgrade holds','sm lv-hold-t fade','middle',D_(2.1));
+    });
+    var fy=bodyBot+(wide?16:10), cfs=FS.fine, cwW=function(f,pad){return Math.ceil(tw('withdrawn',f,400))+(pad||12);};
+    while(cfs>10.5&&sp<cwW(cfs,8)+8)cfs-=0.5;
+    use.forEach(function(a,i){var x=X(i), dl=0.2+i*0.12, k=dec[i]==='kept';
+      if(i===0){o+=tx(x,fy+(wide?20:15),'start','sm','middle');return;}
+      var cy0;
+      if(wide){var cw=86,ch=30;cy0=fy+ch+8;
+        o+='<g class="pop"'+D_(dl)+'>'+rect(x-cw/2,fy,cw,ch,10,'lv-night')+'<path class="lv-moon" transform="translate('+R(x-cw/2+18)+' '+R(fy+ch/2)+') scale(.7)" d="M3.5 -8.5A9 9 0 1 0 8.6 4.4A7.2 7.2 0 0 1 3.5 -8.5Z"/>'+tx(x+10,fy+ch/2+4.5,'Night '+i,'lv-night-t','middle')+'</g>';}
+      else{cy0=fy+24;o+=tx(x,fy+15,'night '+i,'sm','middle');}
+      var w2=k?46:wide?cwW(FS.fine):cwW(cfs,8), px=Math.min(x,W-1-w2/2);
+      o+=rect(px-w2/2,cy0,w2,22,11,'lv-chip'+(k?' k':'')+' fade',D_(dl+0.25));
+      o+=tx(px,cy0+15,k?'kept':'withdrawn',(k?'t-edit w6':'sm')+' fade','middle',k||wide?D_(dl+0.25):' style="--d:'+(dl+0.25).toFixed(2)+'s;font-size:'+cfs+'px"');
+    });
+    el.innerHTML=svg(W,H,o);
+  }
+
+  /* ---------- finding 04: four sizes ---------- */
+  function sizes(){
+    var box=$('#su-sizes');if(!box)return;var order={'2B':0,'4B':1,'9B':2,'27B':3};
+    D.sizes.slice().sort(function(a,b){return order[a.size]-order[b.size];}).forEach(function(s,i){var c=s.card, win=c.ending==='kept';
+      var tl=c.tiles&&c.tiles.length?'<div class="tl" aria-hidden="true">'+c.tiles.map(function(t,j){return '<i class="'+t.result+(t.kind==='candidates'?' c':'')+'" style="--d:'+(0.55+i*0.45+j*0.09).toFixed(2)+'s"></i>';}).join('')+'</div>':(c.tiles===null?'<div class="tl empty"></div>':'<div class="tl empty">no round of forward passes</div>');
+      var w=c.words?'<blockquote>&ldquo;'+aq(c.words.text)+'&rdquo;</blockquote>':c.its_code?'<pre class="su-mono wait">'+esc(c.its_code.lines.join('\n'))+'</pre>':c.note_of_the_paper?'<blockquote>'+esc(c.note_of_the_paper)+'</blockquote>':'';
+      box.insertAdjacentHTML('beforeend','<article class="su-sz'+(win?' win':'')+'" style="--i:'+i+';--e:'+(0.9+i*0.45+(c.tiles?c.tiles.length:0)*0.09).toFixed(2)+'s"><p class="sz"><b><i class="sq" aria-hidden="true" style="--q:'+[10,14,20,30][i]+'px"></i>'+s.size+'</b><span>'+esc(c.ending)+'</span></p><h4>'+esc(c.title)+'</h4><p class="ln">'+esc(minus(c.line))+'</p>'+tl+w+(c.ending_note?'<p class="end">'+esc(minus(c.ending_note))+'</p>':'')+'</article>');
+    });
+    box.classList.add('anim');
+  }
+
+  /* ---------- what it opens: the routes ---------- */
+  function routes(){
+    var box=$('#su-routes');if(!box)return;var P=D.routes.properties;
+    var star=function(i){return P[i]==='The agent itself tests every change'?'<sup>*</sup>':'';};
+    var h='<ol class="su-rt-key">'+P.map(function(p,i){return '<li><b>'+(i+1)+'</b><span>'+esc(p)+star(i)+'</span></li>';}).join('')+'</ol>';
+    h+='<table class="su-rt"><thead><tr><th class="r">Route to a better agent</th>'+P.map(function(p,i){return '<th><span class="f">'+esc(p)+star(i)+'</span><span class="k" aria-hidden="true">'+(i+1)+star(i)+'</span></th>';}).join('')+'</tr></thead><tbody>';
+    D.routes.routes.forEach(function(r,i){var me=r.this_paper, nm=esc(r.route);
+      if(/^Self-rewriting/.test(r.route))nm+='<small>Language Models Can Rewrite Their Own Weights, <a href="https://arxiv.org/abs/2611.21885">arXiv 2611.21885</a></small>';
+      h+='<tr'+(me?' class="me"':'')+'><td class="r">'+nm+'</td>'+r.has.map(function(y,j){return '<td><span class="mk '+(y?'y':'n')+'" style="--d:'+(0.1+i*0.16+j*0.04).toFixed(2)+'s" role="img" aria-label="'+esc(P[j])+': '+(y?'yes':'no')+'"></span></td>';}).join('')+'</tr>';});
+    box.innerHTML=h+'</tbody></table><p class="su-rt-note"><sup>*</sup> Before a change is kept, the agent itself measures it against itself without the change.</p>';
+  }
+
+  /* ---------- build, rebuild on resize, animate on view ---------- */
+
+  /* ---------- the self-upgrading loop, as a schematic (the paper's Fig. 1, drawn here) ---------- */
+  function loop(el){
+    var W=Math.round(el.clientWidth), o='', n=7, tail=58, gap=Math.round(Math.max(16,W*0.02)), cw=(W-tail-(n-1)*gap)/n;
+    var lvH=92, top=lvH+16, ch=236, y0=top+ch+40, ph=280, H=y0+ph+2;
+    var X=function(i){return i*(cw+gap);};
+    var defs='<defs><marker id="lp-ah" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="lp-ah" d="M1 1.5L8.5 5L1 8.5"/></marker>'+
+      '<marker id="lp-ahk" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="lp-ah k" d="M1 1.5L8.5 5L1 8.5"/></marker></defs>';
+    /* how well it works: a level that climbs only when a night keeps its edit */
+    var l0=lvH-12, l1=lvH-42, l2=lvH-72, r1=X(1)+cw+gap/2, r2=X(5)+cw+gap/2, xe=X(6)+cw;
+    var lv='M0 '+l0+'H'+R(r1)+'V'+l1+'H'+R(r2)+'V'+l2+'H'+R(xe);
+    o+='<path class="lp-area fade" d="'+lv+'V'+lvH+'H0Z"'+D_(1.5)+'/>';
+    o+=line(0,lvH,xe,lvH,'lp-base');
+    o+='<path class="lp-axis" d="M0 '+lvH+'V8" marker-end="url(#lp-ah)"/>';
+    o+='<path class="lp-level draw" id="lp-level" d="'+lv+'"'+D_(0.3)+'/>';
+    o+=tx(12,l2+5,'how well it works','t-edit w6');
+    o+=tx(r1+12,l1+18,'it climbs only when a night keeps its edit','sm fade','start',D_(1.7));
+    var dot='<circle class="lp-dot" r="5" style="transform:translate(0px,'+l0+'px);opacity:0"/>';
+    /* the days and the nights */
+    var theta=function(x,y,k,cls){return '<text class="lp-theta '+cls+'" x="'+R(x)+'" y="'+R(y)+'">θ<tspan class="lp-sub" dy="6">'+k+'</tspan></text>';};
+    var waste=[[1,4,5,7,8],[3,6],[3,6],[5]], capt=['much waste','less waste','the same','less still'], lit=[0,1,1,2];
+    var nights=[{k:true,rows:[1],d:'Δ₁'},{k:false,rows:[3],d:'Δ'},{k:true,rows:[1,3],d:'Δ₂'}];
+    for(var i=0;i<n;i++){
+      var x=X(i), d=0.25+i*0.26, cx=x+cw/2, g='';
+      if(i%2===0){
+        var k=i/2;
+        g+=rect(x,top,cw,ch,12,'lp-day');
+        g+='<g transform="translate('+R(x+22)+' '+R(top+27)+')"><circle class="lp-sun" r="6.5"/>'+[0,45,90,135,180,225,270,315].map(function(a){return '<line class="lp-ray" x1="0" y1="-9.5" x2="0" y2="-13" transform="rotate('+a+')"/>';}).join('')+'</g>';
+        g+=tx(x+41,top+32,'Day '+(k+1),'mid t-ink');
+        /* the agent: a head with an antenna, a body that shows its weights, two wheels */
+        var bx=x+cw*0.36, by=top+84;
+        g+='<g class="pop lp-botg"'+D_(d+0.15)+'><line class="lp-bot-l" x1="'+R(bx)+'" y1="'+R(by)+'" x2="'+R(bx)+'" y2="'+R(by+10)+'"/><circle class="lp-bot-d'+(lit[k]?' e':'')+'" cx="'+R(bx)+'" cy="'+R(by-2)+'" r="3.2"/>'+
+          rect(bx-15,by+10,30,22,6,'lp-bot')+'<circle class="lp-bot-d" cx="'+R(bx-6)+'" cy="'+R(by+21)+'" r="2.2"/><circle class="lp-bot-d" cx="'+R(bx+6)+'" cy="'+R(by+21)+'" r="2.2"/>'+
+          rect(bx-23,by+36,46,30,7,'lp-bot')+[0,1,2].map(function(j){return rect(bx-17+j*12,by+45,10,12,2,'lp-w'+(j<lit[k]?' e':''));}).join('')+
+          '<circle class="lp-wheel" cx="'+R(bx-12)+'" cy="'+R(by+70)+'" r="5.5"/><circle class="lp-wheel" cx="'+R(bx+12)+'" cy="'+R(by+70)+'" r="5.5"/></g>';
+        g+='<g class="fade"'+D_(d+0.25)+'>'+theta(x+cw*0.66,by+48,lit[k],lit[k]?'e':'')+'</g>';
+        var s=Math.min(9,(cw-28)/10-2.4), sx=cx-(10*s+9*2.4)/2;
+        for(var j=0;j<10;j++)g+=rect(sx+j*(s+2.4),top+ch-62,s,s,1.5,'lp-sq'+(waste[k].indexOf(j)>=0?' w':'')+' pop',D_(d+0.3+j*0.025));
+        g+=tx(cx,top+ch-24,capt[k],'sm','middle');
+      }else{
+        var nt=nights[(i-1)/2];
+        g+=rect(x,top,cw,ch,12,'lp-night');
+        g+=rect(x+10,top+12,cw-20,34,17,'lp-nhead');
+        g+='<path class="lp-moon" transform="translate('+R(x+27)+' '+R(top+29)+')" d="M3.5 -8.5A9 9 0 1 0 8.6 4.4A7.2 7.2 0 0 1 3.5 -8.5Z"/>';
+        g+=tx(x+48,top+34,'Night','mid lp-on');
+        var q=Math.min(10,(cw-52)/6-3), gx=cx-(6*q+5*3)/2-8;
+        for(var r=0;r<4;r++)for(var c=0;c<6;c++){var hit=nt.rows.indexOf(r)>=0;
+          g+=rect(gx+c*(q+3),top+60+r*(q+3),q,q,1.5,'lp-nq'+(hit?(nt.k?' e':' w'):'')+(hit?' pop':''),hit?D_(d+0.35+c*0.04):'');}
+        g+='<text class="lp-delta'+(nt.k?' e':' w')+' fade" x="'+R(gx+6*(q+3)+3)+'" y="'+R(top+60+nt.rows[nt.rows.length-1]*(q+3)+q)+'"'+D_(d+0.6)+'>'+nt.d+'</text>';
+        g+=tx(cx,top+150,'edits itself,','sm lp-on2','middle')+tx(cx,top+168,'tests the edit','sm lp-on2','middle');
+        var pw=nt.k?64:98;
+        g+='<g class="pop"'+D_(d+0.75)+'>'+rect(cx-pw/2,top+ch-48,pw,28,14,'lp-chip'+(nt.k?' k':''))+tx(cx,top+ch-29,nt.k?'kept':'withdrawn',(nt.k?'t-edit w6':'lp-on2')+' sm','middle')+'</g>';
+      }
+      o+='<g class="fade lp-card"'+D_(d)+'>'+g+'</g>';
+      if(i<n-1)o+='<path class="lp-arrow fade" d="M'+R(x+cw+4)+' '+R(top+ch/2)+'H'+R(X(i+1)-5)+'" marker-end="url(#lp-ah)"'+D_(d+0.2)+'/>';
+    }
+    o+='<g class="fade"'+D_(2.2)+'><path class="lp-arrow" d="M'+R(xe+4)+' '+R(top+ch/2)+'h14" marker-end="url(#lp-ah)"/>'+tx(xe+24,top+ch/2+5,'…','mid')+tx(xe+tail/2+4,top+ch/2+32,'for life','sm','middle')+'</g>';
+    /* one night, step by step */
+    var nx=X(1)+cw/2, pd=2.5;
+    o+='<g class="fade"'+D_(pd)+'><path class="lp-panel" d="M14 '+y0+'H'+R(nx-16)+'L'+R(nx)+' '+(y0-15)+'L'+R(nx+16)+' '+y0+'H'+(W-14)+'a14 14 0 0 1 14 14V'+(y0+ph-14)+'a14 14 0 0 1 -14 14H14a14 14 0 0 1 -14 -14V'+(y0+14)+'a14 14 0 0 1 14 -14Z"/>'+
+      tx(26,y0+38,'One night, step by step','big t-ink')+tx(W-26,y0+38,'forward passes only: &#160;no gradient &#160;·&#160; no reward model &#160;·&#160; no second model','sm','end')+'</g>';
+    var ow=Math.min(212,W*0.2), ox=W-ow-22, cy=y0+136, rr=40, sx0=118, st=(ox-104-sx0)/3;
+    var S=[['Diagnose','reads its own record of the','day: where are steps wasted?','w'],['Rewrite','finds the cause inside its','network, edits weights in code','e'],
+           ['Examine','edited self against last night’s','self: same tasks, same seeds','u'],['Confirm','once, on tasks that were','kept from it all night','n']];
+    S.forEach(function(s,j){
+      var cx=sx0+j*st, d=pd+0.35+j*0.45, g='<circle class="lp-st '+s[3]+'" cx="'+R(cx)+'" cy="'+cy+'" r="'+rr+'"/>';
+      if(j<2){for(var r=0;r<3;r++)for(var c=0;c<5;c++){var on=j===0?[[1,2,4],[0,2,3],[3,4]][r].indexOf(c)>=0:r===1;g+=rect(cx-21.5+c*9,cy-13+r*9,7,7,1.2,'lp-sq'+(on?(j===0?' w':' e'):''));}}
+      else if(j===2){g+=line(cx-20,cy+15,cx+20,cy+15,'lp-ic')+rect(cx-12,cy-13,10,28,1.5,'lp-bar u')+rect(cx+3,cy-1,10,16,1.5,'lp-bar e')+line(cx-7,cy-20,cx-7,cy-7,'lp-ic')+line(cx+8,cy-7,cx+8,cy+4,'lp-ic');}
+      else{g+='<path class="lp-ic" fill="none" d="M'+R(cx-7)+' '+(cy-3)+'v-6a7 7 0 0 1 14 0v6"/>'+rect(cx-12,cy-3,24,19,4,'lp-lock')+'<circle class="lp-keyhole" cx="'+R(cx)+'" cy="'+(cy+6.5)+'" r="2.4"/>';}
+      g+='<circle class="lp-badge '+s[3]+'" cx="'+R(cx-rr*0.74)+'" cy="'+R(cy-rr*0.74)+'" r="11"/>'+tx(cx-rr*0.74,cy-rr*0.74+4.5,String(j+1),'lp-num','middle');
+      o+='<g class="pop lp-stg"'+D_(d)+'>'+g+'</g>';
+      o+='<g class="fade"'+D_(d+0.15)+'>'+tx(cx,cy+rr+30,s[0],'lp-name','middle')+tx(cx,cy+rr+52,s[1],'sm','middle')+tx(cx,cy+rr+70,s[2],'sm','middle')+'</g>';
+      if(j<3)o+='<g class="fade"'+D_(d+0.25)+'><path class="lp-arrow draw" d="M'+R(cx+rr+10)+' '+cy+'H'+R(cx+st-rr-12)+'" marker-end="url(#lp-ah)"'+D_(d+0.25)+'/></g>';
+    });
+    var c2=sx0+st, c3=sx0+2*st, c4=sx0+3*st, ay=cy-rr-6;
+    o+='<g class="fade"'+D_(pd+2.2)+'><path class="lp-arrow soft draw" d="M'+R(c3-12)+' '+ay+'C'+R(c3-40)+' '+(ay-34)+' '+R(c2+46)+' '+(ay-34)+' '+R(c2+16)+' '+(ay-2)+'" marker-end="url(#lp-ah)"'+D_(pd+2.2)+'/></g>';
+    o+=tx((c2+c3)/2,ay-34,'not yet: try again','sm fade','middle',D_(pd+2.4));
+    var bh=64, b1=cy-12-bh, b2=cy+12, bd=pd+2.5;
+    o+='<g class="fade"'+D_(bd)+'><path class="lp-arrow k draw" d="M'+R(c4+rr+9)+' '+R(cy-rr*0.36)+'L'+R(ox-9)+' '+R(b1+bh/2+4)+'" marker-end="url(#lp-ahk)"'+D_(bd)+'/></g>';
+    o+='<g class="fade"'+D_(bd+0.2)+'><path class="lp-arrow draw" d="M'+R(c4+rr+9)+' '+R(cy+rr*0.36)+'L'+R(ox-9)+' '+R(b2+bh/2-4)+'" marker-end="url(#lp-ah)"'+D_(bd+0.2)+'/></g>';
+    o+='<g class="fade"'+D_(bd+0.3)+'>'+rect(ox,b1,ow,bh,10,'lp-out k')+tx(ox+ow/2,b1+26,'it holds: the edit is kept','mid t-edit','middle')+'<text class="lp-form e" x="'+R(ox+ow/2)+'" y="'+(b1+50)+'" text-anchor="middle">θ ← θ ⊕ Δ</text></g>';
+    o+='<g class="fade"'+D_(bd+0.5)+'>'+rect(ox,b2,ow,bh,10,'lp-out')+tx(ox+ow/2,b2+26,'it does not: withdrawn','mid t-ink','middle')+'<text class="lp-form" x="'+R(ox+ow/2)+'" y="'+(b2+49)+'" text-anchor="middle"><tspan class="lp-it">θ</tspan> stays as it was</text></g>';
+    o+='<g class="fade"'+D_(bd+0.8)+'>'+tx(ox+ow/2,y0+ph-34,'the next day starts from','sm','middle')+tx(ox+ow/2,y0+ph-16,'the weights the night left','sm','middle')+'</g>';
+    el.innerHTML=svg(W,H,o+dot,defs);
+    el.classList.add('ch');
+    el._lp={x:[0,1,2,3,4,5,6].map(function(i){return X(i)+cw/2;}),y:[l0,l0,l1,l1,l1,l1,l2]};
+    loopCycle(el);
+  }
+  /* the loop is run through: a mark goes from day to night to day along the level, the agent of the day that runs moves,
+     and in a night the four stations of the panel light one after the other */
+  var LP={t:0};
+  function loopCycle(el){clearInterval(LP.t);if(reduced||!hasIO)return;
+    var cards=$$('.lp-card',el), sts=$$('.lp-stg',el), dot=$('.lp-dot',el), P=el._lp, i=-1, sub=0, wait=9;
+    LP.t=setInterval(function(){if(!document.body.contains(el)){clearInterval(LP.t);return;}
+      if(el.classList.contains('paused')||document.hidden||!el.classList.contains('in'))return;
+      if(wait>0){wait--;return;}          /* the figure draws itself first */
+      sub++;
+      if(i<0||sub>=(i%2?5:3)){i=(i+1)%cards.length;sub=0;cards.forEach(function(c,k){c.classList.toggle('now',k===i);});
+        dot.style.opacity=1;dot.style.transform='translate('+R(P.x[i])+'px,'+P.y[i]+'px)';}
+      sts.forEach(function(g,j){g.classList.toggle('now',i%2===1&&j===sub-1);});
+    },520);}
+
+  /* ---------- 1951 to 2026: the year axis under the two statements ---------- */
+  function yearAxis(el){
+    var W=Math.round(el.clientWidth), y=16, o='', x0=7, x1=W-7, a=1951, b=2026, X=function(v){return x0+(v-a)/(b-a)*(x1-x0);};
+    o+='<defs><linearGradient id="yl-g" gradientUnits="userSpaceOnUse" x1="'+x0+'" y1="0" x2="'+x1+'" y2="0"><stop offset="0" class="yl-s0"/><stop offset="1" class="yl-s1"/></linearGradient></defs>';
+    o+='<path class="yl-line draw" stroke="url(#yl-g)" d="M'+x0+' '+y+'H'+x1+'"'+D_(0.2)+'/>';
+    for(var v=1960;v<=2020;v+=10){var d=0.2+1.6*(v-a)/(b-a);o+='<g class="fade"'+D_(d)+'>'+line(X(v),y-4,X(v),y+4,'yl-tick')+tx(X(v),y+24,String(v),'sm yl-dec','middle')+'</g>';}
+    o+='<circle class="yl-then pop" cx="'+x0+'" cy="'+y+'" r="6"'+D_(0)+'/><circle class="yl-now pop" cx="'+x1+'" cy="'+y+'" r="6.5"'+D_(1.8)+'/>';
+    el.innerHTML=svg(W,44,o);
+    el.classList.add('ch');
+  }
+
+  window.SUF={setLens:setLens,D_:D_,D:D,$:$,$$:$$,R:R,esc:esc,num:num,minus:minus,tx:tx,rect:rect,line:line,svg:svg,tw:tw,strip:strip,kindsKey:kindsKey,botGlyph:botGlyph,clockGlyph:clockGlyph,lampGlyph:lampGlyph,reduced:reduced,hasIO:hasIO,HATCH:HATCH,D_:D_};
+  var charts=[['#ch-ep1',ep1],['#ch-share',share],['#ch-runs',runs],['#ch-record',record],['#ch-tests',tests],['#ch-wall',wall],['#su-ledger',ledger],
+    ['#ch-room-u',function(el){room(el,'unchanged');}],['#ch-room-e',function(el){room(el,'edited');}],['#ch-pair-u',function(el){pairStrip(el,'unchanged');}],['#ch-pair-e',function(el){pairStrip(el,'edited');}],['#ch-results',results],['#ch-bytype',byType],
+    ['#ch-share1',share1],['#ch-shares',shares],['#ch-ahead',ahead],['#ch-bystep',bystep],['#ch-levels',levels],['#su-loop',loop],['#ch-conf',conf],['#ch-cost',cost]];
+  function build(){charts.forEach(function(c){var el=$(c[0]);if(el&&el.clientWidth>0){try{c[1](el);setLens(el);}catch(err){if(window.console)console.error(c[0],err);}}});}
+  function once(){[glanceStrips,stationsText,nightCards,withdrawCards,nightTable,pairText,cases,sizes,routes].forEach(function(f){try{f();}catch(err){}});}
+  once();build();[ep1Run,nightPlayer,lens,episodeRun,costRun].forEach(function(f){try{f();}catch(err){if(window.console)console.error(err);}});
+  var lastW=window.innerWidth, rt=0;
+  window.addEventListener('resize',function(){if(Math.abs(window.innerWidth-lastW)<24)return;clearTimeout(rt);rt=setTimeout(function(){lastW=window.innerWidth;build();$$('.anim,.reveal').forEach(function(e){if(e.dataset.seen)e.classList.add('in');});},160);});
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){build();$$('.anim,.reveal').forEach(function(e){if(e.dataset.seen)e.classList.add('in');});});
+  $$('details.fold').forEach(function(d){d.addEventListener('toggle',function(){if(d.open){build();$$('.anim',d).forEach(function(e){e.classList.remove('in');void e.offsetWidth;e.classList.add('in');e.dataset.seen=1;});}});});
+
+  var anims=$$('.reveal,.anim');
+  if(reduced||!hasIO){anims.forEach(function(e){e.classList.add('in');});}
+  else{
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){
+      if(e.isIntersecting&&e.intersectionRatio>=0.15){e.target.classList.add('in');e.target.dataset.seen=1;io.unobserve(e.target);}
+    });},{threshold:[0,0.15],rootMargin:'0px 0px -4% 0px'});
+    anims.forEach(function(e){io.observe(e);});
+    var pio=new IntersectionObserver(function(es){es.forEach(function(e){e.target.classList.toggle('paused',!e.isIntersecting);});},{threshold:0.02});
+    $$('.pausable,#glance-cards,#su-sizes').forEach(function(e){pio.observe(e);});
+  }
+})();
+</script>
+<script>
+/* 1951 to 2026: the years run along the line, as in the film. The dot
+   stops at three years of the paper's own account of the work before it, then reaches 2026; there the 2026 answer comes up and the
+   three phrases of 1951 take the colours of the three sentences set beside them. It runs again while the section is in view. */
+(function(){
+  var sec=document.getElementById('su-era'), run=document.getElementById('su-run'); if(!sec||!run) return;
+  var fill=run.querySelector('.su-run-fill'), dot=run.querySelector('.su-run-dot'), now=run.querySelector('.su-run-now'), stops=run.querySelectorAll('.su-run-stop'), cap=run.querySelector('.su-run-cap');
+  var A=1951, B=2026, K=[[0,1951],[1600,1995],[2600,1995],[3400,2016],[4400,2016],[4900,2023],[5900,2023],[6400,2026]], HOLD=4200, END=K[K.length-1][0];
+  var STOPS=[1995,2016,2023], CAPS={1995:'1995 · Lifelong robot learning: a goal',2016:'2016 · Continual learning, trained from outside',2023:'2023 · Language-model agents, frozen weights',2026:'2026 · An embodied agent upgrades itself'};
+  var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var spans={}; cap.innerHTML=''; [1995,2016,2023,2026].forEach(function(y){var s=document.createElement('span');s.textContent=CAPS[y];s.style.position='absolute';s.style.left='0';s.style.right='0';cap.appendChild(s);spans[y]=s;});
+  cap.style.minHeight='3em';
+  var lastY=A; dot.style.left='0';   /* the dot moves by a transform, so nothing is laid out again on a frame */
+  function ease(u){return u<0.5?2*u*u:1-Math.pow(-2*u+2,2)/2;}
+  function yearAt(ms){if(ms<=0)return A;if(ms>=END)return B;for(var i=1;i<K.length;i++)if(ms<=K[i][0]){var u=(ms-K[i-1][0])/(K[i][0]-K[i-1][0]);return K[i-1][1]+(K[i][1]-K[i-1][1])*ease(u);}return B;}
+  function draw(y){
+    var p=(y-A)/(B-A); lastY=y; fill.style.transform='scaleX('+p+')'; dot.style.transform='translateX('+(p*dot.parentNode.clientWidth).toFixed(1)+'px)';
+    now.textContent=String(Math.round(y)); now.classList.toggle('l',p<0.06); now.classList.toggle('r',p>0.94);
+    now.style.opacity=(y<=A+0.01||y>=B-0.01)?'0':'1';   /* at either end the year stands under the line already */
+    for(var i=0;i<stops.length;i++)stops[i].classList.toggle('hit',y>=STOPS[i]-0.01);
+    var at=null; [1995,2016,2023,2026].forEach(function(s){if(Math.abs(y-s)<0.02)at=s;});
+    for(var k in spans)spans[k].classList.toggle('on',+k===at);
+    if(y>=B-0.01&&!sec.classList.contains('arrived')){sec.classList.add('arrived');sec.classList.add('lit');}
+  }
+  window.addEventListener('resize',function(){draw(lastY);});
+  if(reduced||!('IntersectionObserver' in window)){draw(B);sec.classList.add('arrived','lit');return;}
+  var t0=null, raf=0, vis=false;
+  function tick(ts){ if(t0===null)t0=ts; var e=ts-t0; if(e>END+HOLD){t0=ts;e=0;} draw(yearAt(e)); if(vis)raf=requestAnimationFrame(tick); }
+  draw(A);
+  /* the answer of 2026 never stays dim: when it is on screen and the line is not, it lights at once */
+  var nowEl=sec.querySelector('.su-era-now'), nowVis=false;
+  function settle(){if(nowVis&&!vis)sec.classList.add('arrived','lit');}
+  new IntersectionObserver(function(es){es.forEach(function(en){
+    vis=en.isIntersecting; cancelAnimationFrame(raf); settle();
+    if(vis){t0=null;raf=requestAnimationFrame(tick);}
+  });},{threshold:0.25}).observe(run);
+  if(nowEl)new IntersectionObserver(function(es){nowVis=es[0].isIntersecting;settle();},{threshold:0.5}).observe(nowEl);
+})();
+</script>
+

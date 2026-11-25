@@ -1,0 +1,19 @@
+<style>
+/* hero stage: the canvas holds the network, the strip of its steps, the level line and the tests of the night */
+.su-stage{margin-top:16px}
+.su-stage canvas{height:372px}
+@media(min-width:768px) and (max-height:960px){.su-stage canvas{height:348px}}
+@media(min-width:768px) and (max-height:860px){.su-stage canvas{height:326px}}
+@media(min-width:768px) and (max-height:800px){.su-stage canvas{height:272px}}
+@media(max-width:767px){.su-stage canvas{height:432px}}
+</style>
+    <div class="stage su-stage">
+      <canvas id="su-stage" role="img" aria-label="The agent's own network, drawn as a stack of plates, one for each of its layers, through its days and its four nights as they happened. By day forward passes run through the stack, and its steps fill a strip below it, some of them without an action. At night it reads its hidden states, edits its own weights and tests each edit against itself as it was. The first night withdraws, and the stack is exactly as it was. The second night keeps its edit: one plate, the tensor it rewrote in layer 16, stays changed; the next day fewer of its steps are without an action, and tasks completed step up once. The third and the fourth night try again and withdraw: the upgrade holds, without collapse. No number is drawn. Beside the strip the agent is drawn as a small figure: awake by day, its eyes closed at night while it works on itself, and one pane of its chest takes the colour of the edit once a night has kept one."></canvas>
+      <ol class="stage-steps" aria-hidden="true">
+        <li><b>By day it works</b>with the weights it has</li>
+        <li><b>At night it works on itself</b>reads its record, rewrites its weights, tests the edit</li>
+        <li><b>It keeps only what holds</b>a night that does not hold leaves it exactly as it was</li>
+        <li><b>The upgrade holds</b>through the nights that follow, without collapse</li>
+      </ol>
+      <p class="su-fine">A day is any stretch of work, a night the time between two days; nothing depends on the clock.</p>
+    </div>

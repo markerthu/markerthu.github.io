@@ -1,0 +1,490 @@
+<figure class="su3" id="su-third">
+  <div class="su3-stage">
+    <article class="su3-act">
+      <header><h3>Train it again</h3><p>more&nbsp;training</p></header>
+      <canvas role="img" aria-label="Animation, first of four acts. Training: the agent stops its work, data streams into its weights on a training stack standing next to it, gradients flow backwards through its layers, optimizer states pile up beside the weights. New weights come out, they are frozen again, and it goes back to work."></canvas>
+      <p class="su3-say">Separate training, with gradients, away from its work.</p>
+      <ul class="su3-yn">
+        <li class="n"><i role="img" aria-label="Does not hold:"></i>No training</li>
+        <li class="y"><i role="img" aria-label="Holds:"></i>No added cost per step</li>
+        <li class="y"><i role="img" aria-label="Holds:"></i>Kept in its weights</li>
+        <li class="y"><i role="img" aria-label="Holds:"></i>An agent that acts, with no larger model</li>
+      </ul>
+    </article>
+    <article class="su3-act">
+      <header><h3>Aid it at every step</h3><p>reflection&nbsp;&middot; memory&nbsp;&middot; search&nbsp;&middot; prompts</p></header>
+      <canvas role="img" aria-label="Animation, second act. Aids at test time: the same frozen weights are wrapped in reflection, memory, search and prompts. At every step of a task the four are stacked on again and paid again. Then the task changes, the aids fall away, and the weights have not changed."></canvas>
+      <p class="su3-say">Paid again at every step, and lost when the task changes.</p>
+      <ul class="su3-yn">
+        <li class="y"><i role="img" aria-label="Holds:"></i>No training</li>
+        <li class="n"><i role="img" aria-label="Does not hold:"></i>No added cost per step</li>
+        <li class="n"><i role="img" aria-label="Does not hold:"></i>Kept in its weights</li>
+        <li class="y"><i role="img" aria-label="Holds:"></i>An agent that acts, with no larger model</li>
+      </ul>
+    </article>
+    <article class="su3-act">
+      <header><h3>Edit weights by reasoning, so far</h3><p>weight&#8209;space&nbsp;programming</p></header>
+      <canvas role="img" aria-label="Animation, third act. Weight-space programming so far, in two halves. Above: a far larger model edits the weights of a smaller network. Below: a model rewrites its own weights, but it only reasons, with text in and text out, no room and no actions. The row of steps at work stays empty."></canvas>
+      <p class="su3-say">It has stayed with models that only reason, or relied on a far larger commercial model.</p>
+      <ul class="su3-yn">
+        <li class="y"><i role="img" aria-label="Holds:"></i>No training</li>
+        <li class="y"><i role="img" aria-label="Holds:"></i>No added cost per step</li>
+        <li class="y"><i role="img" aria-label="Holds:"></i>Kept in its weights</li>
+        <li class="n"><i role="img" aria-label="Does not hold:"></i>An agent that acts, with no larger model</li>
+      </ul>
+    </article>
+    <article class="su3-act ours">
+      <header><h3>Let it upgrade itself</h3><p>its&nbsp;own&nbsp;weights&nbsp;&middot; its&nbsp;own&nbsp;experience</p></header>
+      <canvas role="img" aria-label="Animation, fourth act. Self-upgrading: by day the agent works, one step after another. At night it reads its record, traces a habit to one direction, rewrites one tensor of its own weights, tests the edit against its unchanged self and keeps it. The next day every step costs what it cost before, and the upgrade stays in its weights."></canvas>
+      <p class="su3-say"><span>Between its tasks, on the one GPU that serves it.</span> <span>Every step costs what it cost before.</span></p>
+      <ul class="su3-yn">
+        <li class="y"><i role="img" aria-label="Holds:"></i>No training</li>
+        <li class="y"><i role="img" aria-label="Holds:"></i>No added cost per step</li>
+        <li class="y"><i role="img" aria-label="Holds:"></i>Kept in its weights</li>
+        <li class="y"><i role="img" aria-label="Holds:"></i>An agent that acts, with no larger model</li>
+      </ul>
+    </article>
+    <p class="su3-no"><b>Self&#8209;upgrading needs</b> <span>no training<i class="vh">,</i></span> <span>no gradient<i class="vh">,</i></span> <span>no reward model<i class="vh">,</i></span> <span>no second model<i class="vh">,</i></span> <span>no test&#8209;time scaling<i class="vh">,</i></span> <span>no harness or prompt engineering</span></p>
+  </div>
+  <figcaption class="cap">Four ways for an embodied agent to get better, shown in turn. A schematic: nothing drawn here is measured.</figcaption>
+</figure>
+<style>
+.say + .su3{margin-top:var(--sp-fig)}
+.su3{margin:0}
+.su3-stage{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:auto auto auto auto auto;border:1px solid var(--rule);border-radius:20px;background:var(--card);text-align:left}
+.su3-act{--pc:var(--ice-e);position:relative;display:grid;grid-row:span 4;grid-template-rows:subgrid;row-gap:0;padding:24px 0 22px;min-width:0;overflow:hidden}
+.su3-act:nth-child(2){--pc:var(--lav-e)}
+.su3-act:nth-child(3){--pc:var(--peach-e)}
+.su3-act.ours{--pc:var(--mint-e)}
+.su3-act+.su3-act{border-left:1px solid var(--rule)}
+.su3-act:first-child{border-radius:19px 0 0 0}
+.su3-act.ours{border-radius:0 19px 0 0}
+.su3-act::before{content:'';position:absolute;left:0;right:0;top:0;height:2px;background:var(--pc);transform:scaleX(var(--p,1));transform-origin:left;transition:opacity .6s}
+.su3-act.ours::after{content:'';position:absolute;inset:0;background:radial-gradient(120% 70% at 50% 34%,var(--mint-l),transparent 72%),linear-gradient(180deg,var(--mint-l),transparent 78%);transition:opacity 1.4s ease}
+.su3-act>*{position:relative;z-index:1}
+.su3-act header,.su3-say,.su3-yn{margin:0 20px}
+.su3-act h3{font-size:var(--t-card);line-height:1.15;text-wrap:balance;transition:color .6s}
+.su3-act header p{font-size:var(--t-fine);line-height:1.5;color:var(--muted);margin-top:.4em;text-wrap:balance}
+.su3-act canvas{display:block;width:100%;aspect-ratio:320/338;margin:8px 0 12px;align-self:end;justify-self:center}
+.su3-say{font-family:var(--sans);font-size:var(--t-body);line-height:1.4;color:var(--ink);padding-bottom:18px;text-wrap:balance;transition:opacity .8s ease}
+.su3-say span{display:inline-block}
+.su3-yn{list-style:none;padding:0;font-size:var(--t-label);border-top:1px solid var(--rule);align-self:end}
+.su3-yn li{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--rule);color:var(--body);line-height:1.35;transition:color .5s}
+.su3-yn li:last-child{border-bottom:0;padding-bottom:0}
+.su3-yn li i{flex:none;width:18px;height:18px;border-radius:50%;border:1.5px solid var(--hair);position:relative;transition:background .5s,border-color .5s}
+.su3-yn li i::after{transition:opacity .5s,border-color .5s,background .5s}
+.su3-yn li:nth-child(2) i,.su3-yn li:nth-child(2) i::after{transition-delay:.12s}
+.su3-yn li:nth-child(3) i,.su3-yn li:nth-child(3) i::after{transition-delay:.24s}
+.su3-yn li:nth-child(4) i,.su3-yn li:nth-child(4) i::after{transition-delay:.36s}
+.su3-yn li.y i{background:var(--mint);border-color:var(--mint-e)}
+.su3-yn li.y i::after{content:'';position:absolute;left:5px;top:2.5px;width:4px;height:8px;border:solid var(--mint-t);border-width:0 1.8px 1.8px 0;transform:rotate(42deg)}
+body.dark-mode .su3-yn li.y i::after{border-color:#E9F6F2}
+.su3-yn li.n{color:var(--muted)}
+.su3-yn li.n i{background:var(--peach-l);border-color:var(--peach-e)}
+.su3-yn li.n i::after{content:'';position:absolute;left:3.5px;right:3.5px;top:50%;height:1.6px;border-radius:1px;background:var(--peach-e);transform:translateY(-50%)}
+.su3-no{grid-column:1/-1;position:relative;margin:0;border-top:1px solid var(--rule);border-radius:0 0 19px 19px;padding:17px 24px 18px;text-align:center;text-wrap:balance;font-size:var(--t-label);line-height:2;color:var(--body);overflow:hidden}
+.su3-no::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,var(--mint-l) 62%);transition:opacity 1.4s ease}
+.su3-no b{position:relative;font-family:var(--sans);font-weight:400;font-size:var(--t-body);color:var(--ink);margin-right:.5em;white-space:nowrap;transition:opacity .6s ease}
+.su3-no span{position:relative;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;margin:0 .62em;transition:opacity .6s ease}
+.su3-no span::before{content:'';flex:none;width:10px;height:10px;border-radius:50%;border:1.3px solid var(--mint-e);background:linear-gradient(135deg,transparent 43%,var(--mint-e) 43%,var(--mint-e) 57%,transparent 57%)}
+.su3-live .su3-act:not(.on):not(.done)::before{opacity:0}
+.su3-live .su3-act:not(.on):not(.done) h3{color:var(--faint)}
+.su3-live .su3-act:not(.done) p.su3-say{opacity:0}
+.su3-live .su3-no span:not(.in){opacity:.5}
+.su3-live:not(.lit) .su3-no b{opacity:.62}
+.su3-live:not(.lit) .su3-no::before{opacity:0}
+.su3-live .su3-act:not(.done) .su3-yn li{color:var(--muted)}
+.su3-live .su3-act:not(.done) .su3-yn li i{background:none;border-color:var(--hair)}
+.su3-live .su3-act:not(.done) .su3-yn li.y i::after{border-color:var(--faint)}
+.su3-live .su3-act:not(.done) .su3-yn li.n i::after{background:var(--faint)}
+.su3-live:not(.lit) .su3-act.ours::after{opacity:0}
+@media(max-width:1099px){
+  .su3-stage{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(9,auto)}
+  .su3-act header,.su3-say,.su3-yn{margin:0 24px}
+  .su3-act:nth-child(3){border-left:0}
+  .su3-act:nth-child(n+3){border-top:1px solid var(--rule)}
+  .su3-act:nth-child(2){border-radius:0 19px 0 0}
+  .su3-act.ours{border-radius:0}
+  .su3-act canvas{max-width:380px}
+  .su3-no::before{background:var(--mint-l)}
+}
+@media(max-width:700px){
+  .su3-stage{grid-template-columns:1fr;grid-template-rows:none}
+  .su3-act{display:block;grid-row:auto;padding:22px 0 20px}
+  .su3-act+.su3-act{border-left:0;border-top:1px solid var(--rule)}
+  .su3-act:first-child{border-radius:19px 19px 0 0}
+  .su3-act:nth-child(2){border-radius:0}
+  .su3-act canvas{max-width:400px;margin:6px auto 12px}
+  .su3-act header,.su3-say,.su3-yn{margin:0 max(18px,calc(50% - 172px))}
+  .su3-no{padding:16px 18px 17px;line-height:1.9;text-wrap:wrap}
+  .su3-no b{display:block;margin:0 0 2px}
+}
+</style>
+<script>
+(function(){
+  /* Four ways for an embodied agent to get better, one canvas an act, shown in turn: plates for the weights, a pause
+     off screen, a still frame under reduced motion. Each act carries one lane at the bottom, its steps at work.
+     Schematic: nothing here is measured. */
+  var fig=document.getElementById('su-third'); if(!fig) return;
+  var acts=[].slice.call(fig.querySelectorAll('.su3-act')), cvs=acts.map(function(a){return a.querySelector('canvas');});
+  if(acts.length!==4||!cvs[0].getContext) return;
+  var cx=cvs.map(function(v){return v.getContext('2d');}), nos=[].slice.call(fig.querySelectorAll('.su3-no span'));
+  var mq=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)'):{matches:false};
+  var LW=320, LH=338, D=[5.8,5.8,6.0,11.6], A=[0,5.8,11.6,17.6], END=A[3]+D[3], HOLD=6.4, OUT=0.8, T=END+HOLD, FINAL=END+1.4;
+  var NT=[2.4,5.0,7.0,8.0,9.6,10.5], LIT=9.0;
+  var c=null, C=null, sc=1, dpr=1, fixed=null, visible=!('IntersectionObserver' in window), raf=0, last=0, tc=0;
+  var rows=[[0,1,2,3]], frow=0, seenPx=[0,0,0,0], key='', P=[-1,-1,-1,-1];
+  var N=12, DX=9.4, PS=11, PK=5, PH=72, MX=160, MY=136, X0=MX-(N-1)*DX/2, Y0=MY-PH/2, Y1=MY+PH/2;
+  var LX0=22, LX1=298, LN=18, LP=(LX1-LX0)/LN, TW=11.4, TH=10, LY=318;
+
+  function hex(s){s=s.trim().replace('#','');if(s.length===3)s=s[0]+s[0]+s[1]+s[1]+s[2]+s[2];return [parseInt(s.slice(0,2),16),parseInt(s.slice(2,4),16),parseInt(s.slice(4,6),16)];}
+  function mix(a,b,t){t=t<0?0:t>1?1:t;return [a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t,a[2]+(b[2]-a[2])*t];}
+  function rgba(k,a){return 'rgba('+(k[0]|0)+','+(k[1]|0)+','+(k[2]|0)+','+(a==null?1:a<0?0:a>1?1:a)+')';}
+  function clamp(x){return x<0?0:x>1?1:x;}
+  function ease(x){x=clamp(x);return x*x*(3-2*x);}
+  function seg(t,a,b){return clamp((t-a)/(b-a));}
+  function gauss(d,s){return Math.exp(-d*d/(2*s*s));}
+  function colors(){
+    var cs=getComputedStyle(document.body), v=function(n,f){var s=cs.getPropertyValue(n);return s&&s.trim()?hex(s):f;};
+    C={card:v('--card'),ink:v('--ink'),muted:v('--muted'),hair:v('--hair'),rule:v('--rule'),
+       mint:v('--mint'),mintE:v('--mint-e'),mintT:v('--mint-t'),mintL:v('--mint-l'),
+       peach:v('--peach'),peachE:v('--peach-e'),ice:v('--ice'),iceE:v('--ice-e'),iceT:v('--ice-t'),
+       lav:v('--lav'),lavE:v('--lav-e'),rose:v('--rose'),roseE:v('--rose-e'),
+       dark:document.body.classList.contains('dark-mode'),serif:cs.getPropertyValue('--serif'),sans:cs.getPropertyValue('--sans')};
+    C.sun=v('--su-sun',[251,232,174]);C.sunE=v('--su-sun-e',[210,166,69]);
+    C.night=v('--su-night',[43,53,80]);C.nightE=v('--su-night-e',[43,53,80]);C.onNight=v('--su-on-night',[255,255,255]);
+  }
+  function layout(){
+    var w=cvs[0].getBoundingClientRect().width||LW;sc=w/LW;dpr=Math.min(2,window.devicePixelRatio||1);
+    cvs.forEach(function(v){v.width=Math.round(w*dpr);v.height=Math.round(w*LH/LW*dpr);});
+    var top=null;rows=[];
+    acts.forEach(function(a,k){var t=a.offsetTop;if(top===null||t>top+20){rows.push([k]);top=t;}else rows[rows.length-1].push(k);});
+    if(frow>=rows.length)frow=0;
+  }
+
+  function F(wt,px,fam){return wt+' '+Math.max(px,11/sc).toFixed(2)+'px '+(fam||C.sans);}
+  function txt(s,x,y,a,col,al,font){if(a<=.01)return;c.font=font||F(500,11.6);c.textAlign=al||'center';c.fillStyle=rgba(col||C.muted,a);c.fillText(s,x,y);}
+  function rr(x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();}
+  function dot(x,y,r,col,a){c.beginPath();c.arc(x,y,r,0,6.2832);c.fillStyle=rgba(col,a);c.fill();}
+  function line(x0,y0,x1,y1,col,a,w){c.beginPath();c.moveTo(x0,y0);c.lineTo(x1,y1);c.lineWidth=w||1;c.strokeStyle=rgba(col,a);c.stroke();}
+  function head(x,y,ang,col,a){c.save();c.translate(x,y);c.rotate(ang);c.beginPath();c.moveTo(-4,-3);c.lineTo(0,0);c.lineTo(-4,3);c.lineWidth=1.3;c.lineCap='round';c.lineJoin='round';c.strokeStyle=rgba(col,a);c.stroke();c.restore();}
+  function glow(x,y,r,col,a){var g=c.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,rgba(col,a));g.addColorStop(1,rgba(col,0));
+    if(C.dark)c.globalCompositeOperation='lighter';c.fillStyle=g;c.beginPath();c.arc(x,y,r,0,6.2832);c.fill();c.globalCompositeOperation='source-over';}
+  function bez(S,E,c1,c2,v){var o=1-v;return [o*o*o*S[0]+3*o*o*v*c1[0]+3*o*v*v*c2[0]+v*v*v*E[0],o*o*o*S[1]+3*o*o*v*c1[1]+3*o*v*v*c2[1]+v*v*v*E[1]];}
+  function px(i){return X0+DX*i;}
+  /* the weights, as skewed plates; inT() draws a whole stack at another place and size */
+  function inT(x,y,k,fn){c.save();c.translate(x,y);c.scale(k,k);c.translate(-MX,-MY);fn();c.restore();}
+  function map(x,y,k,X,Y){return [x+(X-MX)*k,y+(Y-MY)*k];}
+  function plates(o){
+    var tops=[],a=o.a==null?1:o.a,fr=o.frost||0,lw=o.lw||1,i,d;
+    for(i=0;i<N;i++){
+      var full=i%4===3,s=o.st?o.st(i,full):{},m=s.m||0,lv=s.lv||0,ro=s.ro||0,hot=s.hot||0,pe=s.pe||0;
+      var x=px(i)+(o.ox||0),ins=full?4:0,yA=Y0-(s.lift||0)+ins+(o.oy||0),yB=Y1-(s.lift||0)-ins+(o.oy||0);
+      var fill=full?mix(C.card,C.ice,C.dark?.45:.3):C.ice,edge=C.iceE;
+      fill=mix(fill,C.iceE,(s.dp||0)*.2);
+      fill=mix(fill,C.peach,pe*.6);edge=mix(edge,C.peachE,pe*.7);
+      fill=mix(fill,C.mint,m);edge=mix(edge,C.mintE,m);
+      fill=mix(fill,C.lav,lv*.95);edge=mix(edge,C.lavE,lv);
+      fill=mix(fill,C.rose,ro*.8);edge=mix(edge,C.roseE,ro);
+      fill=mix(mix(fill,C.dark?C.iceT:C.card,hot*.5),C.card,fr*.42);
+      c.beginPath();c.moveTo(x-PS,yA+PK);c.lineTo(x+PS,yA-PK);c.lineTo(x+PS,yB-PK);c.lineTo(x-PS,yB+PK);c.closePath();
+      c.fillStyle=rgba(fill,a*(.6+.3*Math.max(lv,hot,ro,m*.8)));c.fill();
+      c.lineWidth=lw;c.strokeStyle=rgba(edge,a*(C.dark?.8:.74)*(1-fr*.34));c.stroke();
+      if(!full&&!o.ghost){
+        var ox=-PS+DX*.5,oy=-PK*ox/PS,dc=mix(mix(mix(C.iceE,C.peachE,pe*.7),C.mintT,m),C.lavE,lv),h2=Math.max(lv,hot,ro);
+        for(d=0;d<6;d++){
+          var yy=yA+(yB-yA)*(d+.5)/6+oy,wob=((i*7+d*13)%6)/6,pk=s.pk?s.pk(d):0,sz=2.1+1.5*pk;
+          c.fillStyle=rgba(pk>0?mix(dc,C.peachE,pk):h2>.3?mix(dc,C.card,h2*.5):dc,a*((.22+.5*wob)*(1-fr*.55)+.6*h2+pk));
+          c.fillRect(x+ox-sz/2,yy-sz/2,sz,sz);
+        }
+      }
+      tops.push(yA);
+    }
+    return tops;
+  }
+  function ground(col,a){var gy=Y1+PK+9,g=c.createRadialGradient(MX,gy,3,MX,gy,84);g.addColorStop(0,rgba(col,a));g.addColorStop(1,rgba(col,0));
+    c.save();c.translate(0,gy);c.scale(1,.1);c.translate(0,-gy);c.fillStyle=g;c.fillRect(MX-90,gy-90,180,180);c.restore();}
+  function shade(a){ground(C.dark?C.iceE:C.ink,(C.dark?.16:.07)*(a==null?1:a));}
+  function tok(w,col,a,ox,oy){for(var p=0;p<5;p++){var l=w-1-p*1.5;if(l<0||l>N-1)continue;dot(px(l)+(ox||0),Y0+PH*(.18+.64*((p*37%5)/4))+(oy||0),2-p*.15,col,a*(.85-p*.1));}}
+  function lock(x,y,col,a){c.lineWidth=1.3;c.strokeStyle=rgba(col,a);c.beginPath();c.arc(x,y-3,2.5,Math.PI,0);c.stroke();rr(x-4.2,y-3,8.4,6.6,1.6);c.fillStyle=rgba(col,a);c.fill();}
+  function cap(s,a,lk,col){if(a<=.01)return;c.font=F(500,11.6);var w=c.measureText(s).width,x=MX+(lk?7:0);txt(s,x,202,a,col||C.muted);if(lk)lock(x-w/2-9,198,col||C.muted,a);}
+  function chip(x,y,z,lit,a){rr(x,y,z,z,z*.24);c.fillStyle=rgba(mix(C.card,C.ice,.25+.75*lit),a);c.fill();c.lineWidth=1;c.strokeStyle=rgba(C.iceE,a*(.4+.5*lit));c.stroke();
+    c.fillStyle=rgba(C.iceE,a*(.18+.72*lit));c.fillRect(x+z*.32,y+z*.32,z*.36,z*.36);}
+  /* a glowing arc with a head: the pen */
+  function arc(S,E,c1,c2,grow,fade,col,w,sparks){
+    if(grow*fade<=.01)return;
+    var pts=[],n=44,upto=Math.max(1,Math.round(n*grow)),q;
+    for(q=0;q<=n;q++)pts.push(bez(S,E,c1,c2,q/n));
+    c.save();c.globalAlpha=fade;c.lineCap='round';c.lineJoin='round';
+    c.beginPath();c.moveTo(pts[0][0],pts[0][1]);for(q=1;q<=upto;q++)c.lineTo(pts[q][0],pts[q][1]);
+    if(C.dark)c.globalCompositeOperation='lighter';
+    c.lineWidth=11;c.strokeStyle=rgba(col,C.dark?.08:.07);c.stroke();c.lineWidth=4.5;c.strokeStyle=rgba(col,C.dark?.26:.2);c.stroke();
+    c.globalCompositeOperation='source-over';c.lineWidth=1.4;c.strokeStyle=rgba(C.dark?mix(col,C.ink,.35):col,.95);c.stroke();
+    for(q=0;q<3;q++){var uu=(w*.4+q/3)%1,fi=uu*upto,f0=Math.min(upto-1,Math.floor(fi)),ff=fi-f0,qx=pts[f0][0]+(pts[f0+1][0]-pts[f0][0])*ff,qy=pts[f0][1]+(pts[f0+1][1]-pts[f0][1])*ff,qa=Math.sin(Math.PI*uu);
+      glow(qx,qy,8,col,.45*qa);dot(qx,qy,1.9,C.dark?mix(col,C.ink,.6):C.card,qa);c.lineWidth=1;c.strokeStyle=rgba(col,qa);c.stroke();}
+    var hd=pts[upto];
+    if(sparks>.2)for(q=0;q<7;q++){var age=(w*1.5+q/7)%1,ang=q*2.399;dot(hd[0]+Math.cos(ang)*(4+age*13),hd[1]-age*17+Math.sin(ang)*4,1.7*(1-age),col,(1-age)*.9*sparks);}
+    glow(hd[0],hd[1],15,col,C.dark?.55:.42);dot(hd[0],hd[1],3.6,col,1);dot(hd[0],hd[1],1.4,C.card,1);dot(S[0],S[1],2.4,col,1);
+    c.restore();
+  }
+  /* the lane: its steps at work, one tile a step */
+  function lx(i){return LX0+LP*i+(LP-TW)/2;}
+  function lane(a,legend){
+    line(LX0,LY+.5,LX1,LY+.5,C.hair,1);txt('its steps at work',LX0,332,.9,C.muted,'left');txt('schematic',LX1,332,.62,C.muted,'right');
+    if(legend&&a>.01){c.font=F(500,11.6);var s='wasted',w=c.measureText(s).width,x=176-w/2;
+      rr(x-13,324,9,8,2);c.fillStyle=rgba(C.rose,a);c.fill();c.lineWidth=1;c.strokeStyle=rgba(C.roseE,a*.9);c.stroke();txt(s,x,332,.9*a,C.muted,'left');}
+  }
+  function tile(i,kind,a,lift){
+    if(a<=.01)return;var x=lx(i),y=LY-TH-(lift||0);rr(x,y,TW,TH,2.4);
+    if(kind==='empty'){c.setLineDash([2,2.4]);c.lineWidth=1;c.strokeStyle=rgba(C.muted,a*.55);c.stroke();c.setLineDash([]);return;}
+    var f=kind==='waste'?C.rose:kind==='edit'?C.mint:mix(C.card,C.ice,C.dark?.95:.9),e=kind==='waste'?C.roseE:kind==='edit'?C.mintE:C.iceE;
+    c.fillStyle=rgba(f,a);c.fill();c.lineWidth=1;c.strokeStyle=rgba(e,a*.9);c.stroke();
+  }
+  function sun(x,y,r,a){if(a<=.01)return;dot(x,y,r,C.sun,a);c.lineWidth=1;c.strokeStyle=rgba(C.sunE,a);c.stroke();
+    for(var q=0;q<8;q++){var an=q*Math.PI/4;line(x+Math.cos(an)*(r+1.9),y+Math.sin(an)*(r+1.9),x+Math.cos(an)*(r+4),y+Math.sin(an)*(r+4),C.sunE,a,1.1);}}
+
+  /* act 1: train it again */
+  function s1(u,out){
+    var on=u>=0,ap=on?ease(seg(u,0,.7))*(1-out):0;
+    var tr=on?ease(seg(u,1.0,1.6))*(1-ease(seg(u,4.3,4.9)))*(1-out):0;
+    var thaw=on?ease(seg(u,.8,1.4))*(1-ease(seg(u,4.9,5.6)))*(1-out):0;
+    var nw=on?ease(seg(u,4.4,5.1))*(1-out):0,i,q,r;
+    var x1=Math.min(Math.max(u-4.3,0),.6),U1=Math.min(u,4.3)+x1-x1*x1/1.2;
+    r=(U1*.5)%1;
+    line(53,20,267,20,C.hair,ap);
+    for(i=0;i<5;i++){var nx=44+58*i,pu=gauss(r*4.6-.3-i,.42)*tr;rr(nx-9,14,18,12,3.6);c.fillStyle=rgba(mix(C.card,C.ice,.2+.8*pu),ap);c.fill();c.lineWidth=1;c.strokeStyle=rgba(mix(C.hair,C.iceE,.35+.65*pu),ap);c.stroke();dot(nx,20,1.5,C.iceE,ap*(.35+.65*pu));}
+    if(tr>.01)dot(38+244*r,20,2.2,C.iceE,tr*Math.sin(Math.PI*r));
+    txt('a training pipeline',MX,46,ap);
+    var S=[px(N-1)+PS+5,Y0-PK-5],E=[X0-PS-4,Y0+PK-8],c1=[S[0]+3,50],c2=[E[0]-3,50];
+    c.beginPath();c.moveTo(S[0],S[1]);c.bezierCurveTo(c1[0],c1[1],c2[0],c2[1],E[0],E[1]);
+    c.setLineDash([3,4]);c.lineDashOffset=U1*12;c.lineWidth=1.3;c.strokeStyle=rgba(C.iceE,ap*(.45+.4*tr));c.stroke();c.setLineDash([]);
+    head(E[0],E[1]+1,Math.PI/2,C.iceE,ap*(.6+.4*tr));dot(S[0],S[1],2,C.iceE,ap*(.6+.4*tr));
+    for(q=0;q<3;q++){var gv=(U1*.55+q/3)%1,gp=bez(S,E,c1,c2,gv);dot(gp[0],gp[1],2.2,C.iceE,tr*Math.sin(Math.PI*gv));}
+    txt('gradients',MX,81,ap);
+    for(i=-1;i<=1;i++)for(q=0;q<3;q++){var dv=(U1*.4+q/3+i*.19+1)%1;rr(10+dv*(X0-PS-28),MY+i*17-2,9,4,2);c.fillStyle=rgba(C.muted,ap*Math.sin(Math.PI*dv)*(.4+.5*tr));c.fill();}
+    txt('data',46,182,ap);
+    var g1=on?ease(seg(u,1.7,2.5)):0,g2=on?ease(seg(u,2.5,3.3)):0;
+    shade();
+    if(g2>.01)plates({ghost:1,ox:15*g2,oy:10*g2,a:.3*ap*g2});
+    if(g1>.01)plates({ghost:1,ox:7.5*g1,oy:5*g1,a:.46*ap*g1});
+    txt('optimizer',248,146,ap*g1,null,'left');txt('states',248,160,ap*g1,null,'left');
+    var sh=-2+(N+4)*seg(u,4.9,5.6),shOn=on&&u>4.9&&u<5.7;
+    plates({frost:1-thaw,st:function(i){return {dp:nw,hot:tr*.5*(.5+.5*Math.sin(u*7-i*.9))+(shOn?gauss(i-sh,1.5)*.9:0),lift:tr*1.8*Math.sin(u*5+i*.7)};}});
+    if(tr>.01)tok(-2+(N+7)*((u*.8)%1),C.iceE,tr);
+    var again=on?seg(u,5.1,5.6)*(1-seg(out,0,.5)):0;
+    cap('frozen weights',on?Math.max(1-seg(u,.7,1.2),seg(out,.5,1)):1,1);cap('frozen again',again,1,C.iceT);
+    for(r=0;r<3;r++)for(q=0;q<14;q++)chip(37+18*q,214+15*r,12,.3+.7*tr*(.5+.5*Math.sin(u*4.2-q*.5-r*1.1)),ap);
+    txt('a training stack',MX,275,ap);
+    lane(1-out);
+    for(i=0;i<4;i++)tile(i,'act',(on?ease(seg(u,.1+.2*i,.3+.2*i)):0)*(1-out));
+    var gap=on?ease(seg(u,1.0,1.5))*(1-out):0;
+    if(gap>.01){var gx=lx(4)-1.5,gw=lx(12)+TW+1.5-gx;rr(gx,LY-16.5,gw,16,4);c.fillStyle=rgba(C.peach,gap*(C.dark?.3:.34));c.fill();
+      c.setLineDash([3,3]);c.lineDashOffset=-U1*9;c.lineWidth=1;c.strokeStyle=rgba(C.peachE,gap*.95);c.stroke();c.setLineDash([]);
+      txt('away from its work',gx+gw/2,LY-4.6,gap,C.dark?C.ink:mix(C.peachE,C.ink,.62));}
+    for(i=13;i<LN;i++)tile(i,'act',(on?ease(seg(u,5.0+.13*(i-13),5.2+.13*(i-13))):0)*(1-out));
+  }
+
+  /* act 2: aid it at every step */
+  var AK=[.9,1.45,2,2.55,3.1,3.65], AIDS=['reflection','memory','search','prompts'];
+  function s2(u,out){
+    var on=u>=0,ap=on?ease(seg(u,0,.6))*(1-out):0,gone=on?ease(seg(u,4.1,4.9)):0,live=1-gone,i,j,k;
+    var hp=on?ease(seg(u,.5,1.1)):0,ha=ap*hp*live,pulse=0;
+    if(on)for(k=0;k<6;k++)pulse=Math.max(pulse,gauss(u-AK[k]+.12,.12));
+    /* the four aids, a row of chips above the weights */
+    c.font=F(500,11.6);
+    var pad=7,gx=5,ws=AIDS.map(function(s){return c.measureText(s).width;}),tot=ws[0]+ws[1]+ws[2]+ws[3]+pad*8+gx*3;
+    if(tot>306){pad=4;gx=3;tot=ws[0]+ws[1]+ws[2]+ws[3]+pad*8+gx*3;}
+    var x=MX-tot/2,cy=22,chh=20;
+    for(j=0;j<4;j++){
+      var w=ws[j]+pad*2,cp=on?ease(seg(u,.12+j*.11,.5+j*.11)):0,ph=pulse*live*(.6+.4*Math.sin(j*1.7+u*9));
+      if(gone>.01){rr(x,cy,w,chh,6);c.setLineDash([2.5,3]);c.lineWidth=1;c.strokeStyle=rgba(C.muted,ap*gone*.5);c.stroke();c.setLineDash([]);txt(AIDS[j],x+w/2,cy+chh/2+4.2,ap*gone*.5,C.muted);}
+      if(live>.01){c.save();c.translate(x+w/2,cy+chh/2+gone*gone*34+j*2.5*gone);c.rotate((j-1.5)*.13*gone);
+        rr(-w/2,-chh/2,w,chh,6);c.fillStyle=rgba(mix(C.card,C.lav,.5+.5*ph),ap*cp*live);c.fill();c.lineWidth=1;c.strokeStyle=rgba(C.lavE,ap*cp*live*.9);c.stroke();
+        txt(AIDS[j],0,4.2,ap*cp*live,C.dark?C.ink:mix(C.lavE,C.ink,.62));c.restore();}
+      x+=w+gx;
+    }
+    /* the wrap around the frozen weights */
+    rr(92,83,136,106,14);c.setLineDash([3,4]);c.lineDashOffset=-u*7*live;c.lineWidth=1.3;c.strokeStyle=rgba(C.lavE,ha*.9);c.stroke();c.setLineDash([]);
+    line(118,cy+chh+2,118,83,C.lavE,ha*.7);line(202,83,202,cy+chh+2,C.lavE,ha*.7);head(118,81,Math.PI/2,C.lavE,ha);head(202,cy+chh+4,-Math.PI/2,C.lavE,ha);
+    if(on&&live>.01)for(k=0;k<6;k++){var pv=seg(u,AK[k]-.32,AK[k]+.04);if(pv>0&&pv<1){dot(118,cy+chh+2+(81-cy-chh)*pv,2.2,C.lavE,Math.sin(Math.PI*pv)*live);}}
+    shade();
+    plates({frost:1,st:function(i){var h=0;if(on)for(var k=0;k<6;k++)if(u>AK[k]-.2&&u<AK[k]+.3)h=Math.max(h,gauss(i-(-2+(N+4)*seg(u,AK[k]-.2,AK[k]+.3)),1.7)*.55*live);return {hot:h};}});
+    var nv=on?gone*(1-out):0;
+    cap('frozen weights',1-seg(nv,0,.45),1);cap('the weights never change',seg(nv,.55,1),1,C.iceT);
+    /* the lane: every step carries the four again */
+    lane(1-out);
+    txt('paid at every step',LX0,278,(on?ease(seg(u,1.1,1.6)):0)*(1-out)*(1-.35*gone),C.dark?C.ink:mix(C.lavE,C.ink,.62),'left');
+    for(k=0;k<6;k++){
+      tile(k,'act',(on?ease(seg(u,AK[k]+.22,AK[k]+.4)):0)*(1-out));
+      for(j=0;j<4;j++){var ba=(on?ease(seg(u,AK[k]+.26+j*.07,AK[k]+.4+j*.07)):0)*(1-out)*(1-.4*gone);
+        if(ba>.01){rr(lx(k),LY-TH-2-(j+1)*5.2,TW,3.6,1.4);c.fillStyle=rgba(C.lav,ba);c.fill();c.lineWidth=1;c.strokeStyle=rgba(C.lavE,ba*.9);c.stroke();}}
+    }
+    var dv=(on?ease(seg(u,3.95,4.35)):0)*(1-out),dx=lx(6)+TW/2;
+    if(dv>.01){c.setLineDash([2.5,3]);line(dx,LY-34,dx,LY,C.muted,dv*.8,1);c.setLineDash([]);txt('the task changes',dx+7,LY-22,dv,C.muted,'left');}
+    for(k=7;k<10;k++)tile(k,'act',(on?ease(seg(u,4.85+.25*(k-7),5.05+.25*(k-7))):0)*(1-out));
+  }
+
+  /* act 3: editing weights by reasoning, so far */
+  function s3(u,out){
+    var on=u>=0,ap=on?ease(seg(u,0,.6))*(1-out):0,i;
+    var sw=on?ease(seg(u,2.8,3.2)):0,back=on?ease(seg(u,5.5,6)):0,tA=ap*(1-.5*sw*(1-back)),tB=ap*(.3+.7*sw);
+    /* before its turn and between turns the three stacks wait, frosted */
+    var idle=on?seg(out,.3,1):1,sA=Math.max(tA,.5*idle),sB=Math.max(tB,.5*idle),live=on?1-out:0;
+    var BX=100,BY=88,BK=.9,SX=252,SY=94,SK=.46,CX=160,CY=218,CK=.62;
+    /* above: a far larger model edits a smaller network */
+    var think=on?seg(u,.5,.8)*(1-seg(u,2.4,2.8))*(1-out):0;
+    var pen=-1.5+(N+2.5)*seg(u,1.3,2.4),penOn=on?seg(u,1.2,1.4)*(1-seg(u,2.4,2.7)):0;
+    inT(BX,BY,BK,function(){shade(sA);
+      plates({a:sA,lw:1/BK,frost:idle,st:function(i){return {pe:.62*live,hot:think*.5*(.5+.5*Math.sin(u*7-i*.9)),lift:think*1.6*Math.sin(u*5+i*.7)};}});
+      if(think>.01)tok(-2+(N+7)*((u*.8)%1),C.peachE,think);});
+    inT(SX,SY,SK,function(){shade(sA);
+      plates({a:sA,lw:1/SK,frost:idle,st:function(i,full){var m=full?0:(on&&u>=1.3?(u>=2.4?1:clamp((pen-i)/1.6)):0)*live,hp=gauss(i-pen,1.4)*penOn;return {m:m,hot:hp*.7,lift:5*hp};}});});
+    var li=clamp(pen/(N-1))*(N-1),S=map(BX,BY,BK,px(N-1)+PS+6,Y0-PK-4),E=map(SX,SY,SK,px(li),Y0-PK*.2-9),c1=[S[0]+16,S[1]-34],c2=[E[0]-4,E[1]-40];
+    var rel=on?ease(seg(u,.8,1.3)):0;
+    if(rel>.01){var E0=map(SX,SY,SK,px(5),Y0-PK*.2-9),k2=[E0[0]-4,E0[1]-40];
+      c.beginPath();c.moveTo(S[0],S[1]);c.bezierCurveTo(c1[0],c1[1],k2[0],k2[1],E0[0],E0[1]);c.setLineDash([3,4]);c.lineWidth=1.2;c.strokeStyle=rgba(C.peachE,tA*rel*.7*(1-penOn));c.stroke();c.setLineDash([]);
+      head(E0[0],E0[1]+1,Math.PI/2,C.peachE,tA*rel*.8*(1-penOn));dot(S[0],S[1],2,C.peachE,tA*rel*.8*(1-penOn));}
+    arc(S,E,c1,c2,seg(u,.8,1.3),on?(1-seg(u,2.4,2.8))*tA:0,C.peachE,u,penOn);
+    txt('a far larger model',BX,144,tA);txt('the network it edits',SX,144,tA);
+    var orA=ap*(on?ease(seg(u,2.5,2.9)):0);
+    line(64,158,142,158,C.hair,orA);line(178,158,256,158,C.hair,orA);txt('or',MX,162,orA);
+    /* below: a model rewrites itself, and only reasons */
+    var thaw=on?ease(seg(u,3.2,3.7)):0,pb=-1.5+(N+2.5)*seg(u,3.9,5),pbOn=on?seg(u,3.8,4)*(1-seg(u,5,5.3)):0;
+    inT(CX,CY,CK,function(){shade(sB);
+      plates({a:sB,lw:1/CK,frost:Math.max(1-thaw,idle),st:function(i,full){var m=full?0:(on&&u>=3.9?(u>=5?1:clamp((pb-i)/1.6)):0)*live,hp=gauss(i-pb,1.4)*pbOn;return {m:m,hot:hp*.7,lift:5*hp};}});
+      if(on&&u>3.3&&u<3.9)tok(-2+(N+4)*seg(u,3.3,3.9),C.iceE,tB);
+      if(on&&u>5&&u<5.6)tok(-2+(N+4)*seg(u,5,5.6),C.mintE,tB);});
+    var lb=clamp(pb/(N-1))*(N-1),S2=map(CX,CY,CK,px(N-1)+PS+6,Y0-PK-4),E2=map(CX,CY,CK,px(lb),Y0-PK*.2-9),d1=[S2[0]+8,S2[1]-17],d2=[E2[0],E2[1]-19];
+    var self=on?ease(seg(u,5.2,5.7)):0;
+    if(self>.01){var E3=map(CX,CY,CK,px(5),Y0-PK*.2-9),k3=[E3[0],E3[1]-19];
+      c.beginPath();c.moveTo(S2[0],S2[1]);c.bezierCurveTo(d1[0],d1[1],k3[0],k3[1],E3[0],E3[1]);c.setLineDash([3,4]);c.lineWidth=1.2;c.strokeStyle=rgba(C.mintE,tB*self*.8);c.stroke();c.setLineDash([]);
+      head(E3[0],E3[1]+1,Math.PI/2,C.mintE,tB*self*.9);dot(S2[0],S2[1],2,C.mintE,tB*self*.9);}
+    arc(S2,E2,d1,d2,seg(u,3.5,3.9),on?(1-seg(u,5,5.4))*tB:0,C.mintE,u,pbOn);
+    var dy=CY-14,tin=on?ease(seg(u,3.0,3.4)):0,tout=on?ease(seg(u,5.1,5.6)):0;
+    function doc(x,lit,n){rr(x,dy,38,28,4.5);c.fillStyle=rgba(mix(C.card,C.ice,.3+.4*lit),tB);c.fill();c.lineWidth=1;c.strokeStyle=rgba(C.iceE,tB*(.5+.4*lit));c.stroke();
+      for(var j=0;j<3;j++)if(j<n)line(x+6,dy+8+j*6,x+(j===2?22:32),dy+8+j*6,C.iceE,tB*(.35+.5*lit),1.2);}
+    doc(34,tin,3);doc(248,tout,Math.round(3*tout+.001));
+    line(74,CY,112,CY,C.iceE,tB*.6);head(112,CY,0,C.iceE,tB*.8);line(208,CY,246,CY,C.iceE,tB*.6);head(246,CY,0,C.iceE,tB*.8);
+    if(on){var e1=seg(u,3.1,3.5),e2=seg(u,5.05,5.45);if(e1>0&&e1<1)dot(74+38*e1,CY,2.2,C.iceE,tB*Math.sin(Math.PI*e1));if(e2>0&&e2<1)dot(208+38*e2,CY,2.2,C.mintE,tB*Math.sin(Math.PI*e2));}
+    txt('text in',53,CY+31,tB);txt('text out',267,CY+31,tB);txt('a model that only reasons',CX,CY+50,tB);
+    /* no agent at work: the lane stays empty */
+    lane(1-out);
+    for(i=0;i<LN;i++)tile(i,'empty',ap*(on?ease(seg(u,.3+i*.03,.6+i*.03)):0));
+  }
+
+  /* act 4: let it upgrade itself */
+  var DAY1=[0,1,0,1,1,0], DAY2=[0,0,1,0,0,1,0,1], PI=5, NB0=6, NB1=9;
+  function win(u,a,b){return seg(u,a,a+.4)*(b?1-seg(u,b-.4,b):1);}
+  function s4(w,out){
+    var on=w>=0,ap=on?ease(seg(w,0,.6))*(1-out):0,i,q;
+    var thaw=on?ease(seg(w,2.3,3))*(1-out):0;
+    var scanOn=on?seg(w,2.6,2.9)*(1-seg(w,4.25,4.55)):0,scan=N-.5-(N+1)*ease(seg(w,2.8,4.3));
+    var one=on?ease(seg(w,4.2,4.7)):0,penOn=on?seg(w,4.9,5.2)*(1-seg(w,6.4,6.8)):0,wrote=on?ease(seg(w,5.3,6.3))*(1-out):0;
+    var tw=-2+(N+4)*seg(w,7.3,8.3),tOn=on&&w>7.3&&w<8.4;
+    var gh=on?ease(seg(w,6.9,7.3))*(1-ease(seg(w,8.5,8.9))):0;
+    var kept=on?ease(seg(w,8.5,9))*(1-out):0,done=on?ease(seg(w,9,9.8))*(1-out):0,d2=on?ease(seg(w,9,9.5))*(1-out):0;
+    ground(C.dark?mix(C.iceE,C.mintE,done):C.ink,C.dark?.16+.1*done:.07);
+    if(done>.01&&!C.dark)glow(MX,MY,104,C.mint,.2*done);
+    if(gh>.01){plates({ghost:1,ox:9*gh,oy:8*gh,a:.5*gh});if(tOn)tok(tw,C.iceE,.8,9,8);}
+    var dayTok=-9,dayCol=C.iceE;
+    if(on){for(i=0;i<6;i++){var t0=.4+.27*i;if(w>t0-.08&&w<t0+.3)dayTok=-2+(N+4)*seg(w,t0-.08,t0+.3);}
+      for(i=0;i<8;i++){var t1=9.3+.26*i;if(w>t1-.08&&w<t1+.3){dayTok=-2+(N+4)*seg(w,t1-.08,t1+.3);dayCol=C.mintE;}}}
+    var tops=plates({frost:1-thaw,st:function(i,full){
+      var m=i===PI?wrote:0,lv=gauss(i-scan,1.7)*scanOn,all=full||!on||w<2.8?0:clamp((i-scan)/1.2)*(1-one)*(1-out),hp=i===PI?penOn:0,the=i===PI?one*(1-wrote)*(1-out):0;
+      return {m:m,lv:lv,pe:Math.max(all*.5,the*.9),hot:hp*.7+(dayTok>-5?gauss(i-dayTok,1.6)*.35:0),lift:5*Math.max(lv,hp,the*.5,m*.35),
+        pk:function(d){return i===PI?Math.max((i*5+d*3)%7<2?all:0,d===2||d===3?the:0):(i*5+d*3)%7<2?all:0;}};
+    }});
+    if(dayTok>-5)tok(dayTok,dayCol,.9*(1-out));
+    if(tOn)tok(tw,C.mintE,.9);
+    /* the arc: lavender while it reads, mint while it writes the one plate, and it stays */
+    var S=[px(N-1)+PS+6,Y0-PK-4],rew=on&&w>=4.7,li=rew?PI:clamp(scan/(N-1))*(N-1),i0=Math.floor(li),i1=Math.min(N-1,i0+1),f=li-i0;
+    var E=[px(li),tops[i0]*(1-f)+tops[i1]*f-(i0%4===3?5:1)-PK*.2-5],c1=[S[0]+7,40],c2=[E[0],42];
+    if(on){
+      if(!rew)arc(S,E,c1,c2,seg(w,2.4,2.9),(1-seg(w,4.4,4.7))*(1-out),C.lavE,w,0);
+      else arc(S,E,c1,c2,w<8.9?seg(w,4.7,5.2):1,(w<8.9?1-seg(w,6.6,6.9):ease(seg(w,9,9.6)))*(1-out),C.mintE,w,penOn);
+    }
+    var ph=[['by day it works','with the weights it was given',win(w,.15,2.2)],['at night it reads its record','and traces a habit to one direction',win(w,2.3,4.7)],
+            ['it rewrites one tensor','no gradient, no training',win(w,4.8,6.8)],['it tests the edit','against its unchanged self',win(w,6.9,9)],
+            ['the next day','every step costs what it cost before',win(w,9.1)]];
+    if(on)ph.forEach(function(p){var a=p[2]*(1-out);txt(p[0],MX,20,a,C.ink,'center',F('500',15,C.sans));txt(p[1],MX,36,a);});
+    if(kept>.01){dot(247,104,6.5,C.mint,kept);c.lineWidth=1.2;c.strokeStyle=rgba(C.mintE,kept);c.stroke();
+      c.beginPath();c.moveTo(244,104.2);c.lineTo(246.3,106.6);c.lineTo(250.2,101.6);c.lineWidth=1.5;c.lineCap='round';c.lineJoin='round';c.strokeStyle=rgba(C.dark?C.ink:C.mintT,kept);c.stroke();c.lineCap='butt';
+      txt('kept',258,108,kept,C.mintT,'left',F(600,11.6));}
+    cap('frozen weights',on?Math.max(1-seg(w,2.3,2.8),seg(out,.5,1)):1,1);cap('the upgrade stays in its weights',on?seg(w,9.2,9.8)*(1-seg(out,0,.5)):0,0,C.mintT);
+    var work=on&&w>2.3&&w<9?.5+.5*Math.sin(w*4):.45,z=24,zx=MX-z/2,zy=224;
+    for(i=0;i<3;i++){line(zx-4,zy+6+i*6,zx,zy+6+i*6,C.iceE,ap*.7);line(zx+z,zy+6+i*6,zx+z+4,zy+6+i*6,C.iceE,ap*.7);}
+    chip(zx,zy,z,.35+.5*work,ap);
+    txt('the one GPU that serves it',MX,272,ap);
+    /* the lane: a day of steps, the night between, the next day */
+    lane(ap,1);
+    var ring=on?seg(w,2.6,3)*(1-seg(w,4.3,4.7))*(1-out):0;
+    for(i=0;i<6;i++){var a1=(on?ease(seg(w,.4+.27*i,.6+.27*i)):0)*(1-out);tile(i,DAY1[i]?'waste':'act',a1,DAY1[i]?2.5*ring:0);
+      if(DAY1[i]&&ring>.01){rr(lx(i)-2,LY-TH-2-2.5*ring,TW+4,TH+4,3.6);c.lineWidth=1.3;c.strokeStyle=rgba(C.lavE,ring);c.stroke();}}
+    sun((lx(0)+lx(5)+TW)/2,LY-TH-11,3,ap);
+    var nt=(on?ease(seg(w,2,2.5)):0)*(1-out);
+    if(nt>.01){var nx=lx(NB0)-1,nw=lx(NB1)+TW+1-nx;rr(nx,LY-16.5,nw,16,4.5);c.fillStyle=rgba(C.night,nt);c.fill();c.lineWidth=1;c.strokeStyle=rgba(C.nightE,nt);c.stroke();
+      dot(nx+10,LY-8.6,3.5,C.sun,nt);dot(nx+11.8,LY-9.8,3,C.night,nt);
+      txt('night',nx+17+(nw-21)/2,LY-4.5,nt,C.onNight,'center',F(600,11));}
+    for(i=0;i<8;i++)tile(NB1+1+i,DAY2[i]?'waste':'edit',(on?ease(seg(w,9.3+.26*i,9.5+.26*i)):0)*(1-out));
+    sun((lx(NB1+1)+lx(NB1+8)+TW)/2,LY-TH-11,3,d2);
+  }
+
+  var scenes=[s1,s2,s3,s4];
+  function draw(u,outs){
+    if(!C)return;
+    for(var k=0;k<4;k++){c=cx[k];c.setTransform(dpr*sc,0,0,dpr*sc,0,0);c.clearRect(0,0,LW,LH);c.textBaseline='alphabetic';scenes[k](u[k],outs[k]);}
+    var s='',st,p;
+    for(k=0;k<4;k++){st=outs[k]>.5||u[k]<0?0:u[k]<D[k]?1:2;s+=st;p=st?clamp(u[k]/D[k]):P[k];if(p!==P[k]){P[k]=p;acts[k].style.setProperty('--p',p.toFixed(3));}}
+    var n=0,lit=u[3]>=LIT&&outs[3]<=.5?1:0;if(outs[3]<=.5)while(n<6&&u[3]>=NT[n])n++;
+    s+=n+''+lit;if(s===key)return;key=s;
+    acts.forEach(function(a,k){a.classList.toggle('on',s.charAt(k)==='1');a.classList.toggle('done',s.charAt(k)==='2');});
+    nos.forEach(function(e,j){e.classList.toggle('in',j<n);});
+    fig.classList.toggle('lit',!!lit);
+  }
+  /* one row of acts: all four in turn. Wrapped onto more rows: the acts of the row most in view, in turn */
+  function whole(){return rows.length===1||fixed!=null||mq.matches;}
+  function g0(){return rows[frow][0];}
+  function g1(){var r=rows[frow];return r[r.length-1];}
+  function start(){return whole()?0:A[g0()];}
+  function end(){return whole()?T:A[g1()]+D[g1()]+HOLD;}
+  function at(t){
+    var o=ease(seg(t,end()-OUT,end())),u=[],outs=[],k;
+    for(k=0;k<4;k++){u[k]=t-A[k];outs[k]=o;}
+    if(!whole())for(k=0;k<4;k++){if(k<g0()){u[k]=99;outs[k]=0;}else if(k>g1())u[k]=-1;}
+    draw(u,outs);
+  }
+  function frame(now){
+    raf=0;if(fixed!=null||mq.matches||!visible||document.hidden)return;
+    if(last)tc+=Math.min(.1,(now-last)/1000);last=now;
+    if(tc>=end()||tc<start())tc=start();
+    at(tc);raf=requestAnimationFrame(frame);
+  }
+  function still(){at(fixed!=null?fixed:mq.matches?FINAL:tc);}
+  function kick(){
+    if(fixed!=null||mq.matches){still();return;}
+    if(!raf&&visible&&!document.hidden){last=0;raf=requestAnimationFrame(frame);}
+  }
+  function refresh(){colors();layout();if(!raf)still();}
+  fig.classList.add('su3-live');colors();layout();tc=0;still();
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){seenPx[acts.indexOf(e.target)]=e.isIntersecting?e.intersectionRect.height:0;});
+      var was=visible,sums=rows.map(function(r){var s=0;r.forEach(function(k){s+=seenPx[k];});return s/r.length;}),f=sums.indexOf(Math.max.apply(null,sums));
+      if(sums[f]<sums[frow]*1.2+24&&sums[frow]>0)f=frow;
+      visible=seenPx[0]+seenPx[1]+seenPx[2]+seenPx[3]>0;
+      if(visible&&!was)tc=rows.length===1?0:A[rows[f][0]];
+      else if(rows.length>1&&f!==frow)tc=A[rows[f][0]];
+      frow=f;if(visible)kick();
+    },{threshold:[0,.15,.3,.45,.6,.75,.9,1]});
+    acts.forEach(function(a){io.observe(a);});
+  }
+  document.addEventListener('visibilitychange',kick);
+  window.addEventListener('resize',function(){layout();if(!raf)still();});
+  if(mq.addEventListener)mq.addEventListener('change',function(){if(mq.matches)still();else kick();});
+  new MutationObserver(function(){colors();if(!raf)still();}).observe(document.body,{attributes:true,attributeFilter:['class']});
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(refresh);
+  /* for a still at a chosen time: window.__su3(t), and window.__su3(null) to let it move again */
+  window.__su3=function(t){fixed=t;if(t==null){kick();}else still();};
+  kick();
+})();
+</script>

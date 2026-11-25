@@ -1,0 +1,391 @@
+---
+layout: null
+permalink: /projects/self-upgrading/
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Self-Upgrading Embodied Agents">
+  <meta property="og:description" content="An embodied agent that upgrades itself on the job: it works by day, rewrites its own weights at night, and keeps only the changes that hold.">
+  <meta property="og:image" content="https://www.jiajunfan.com/images/og/self-upgrading.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://www.jiajunfan.com/projects/self-upgrading/">
+  <link rel="canonical" href="https://www.jiajunfan.com/projects/self-upgrading/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Self-Upgrading Embodied Agents">
+  <meta name="twitter:description" content="An embodied agent that upgrades itself on the job: it works by day, rewrites its own weights at night, and keeps only the changes that hold.">
+  <meta name="twitter:image" content="https://www.jiajunfan.com/images/og/self-upgrading.jpg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Self-Upgrading Embodied Agents | Jiajun Fan</title>
+<meta name="description" content="An embodied agent that upgrades itself on the job: it works by day, rewrites its own weights at night, and keeps only the changes that hold.">
+<meta name="theme-color" content="#fdfcfa">
+<meta name="theme-color" content="#0f1216" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="icon" href="/images/favicon.ico">
+<script>try{if(localStorage.getItem('darkMode')==='true'){document.documentElement.style.background='#0f1216';}}catch(e){}</script>
+{% include selfrw/style.html %}
+{% include proj/self-upgrading/style.html %}
+<noscript><style>.hl{background-size:100% 36%}.chapters{position:static}.su-era-now{opacity:1;transform:none}.su-era mark{background-size:100% 34%}.su-js{display:none}</style></noscript>
+<script type="application/ld+json">{
+  "@context":"https://schema.org","@type":"ScholarlyArticle",
+  "name":"Self-Upgrading Embodied Agents",
+  "description":"An embodied agent that upgrades itself on the job: it works by day, rewrites its own weights at night, and keeps only the changes that hold.",
+  "author":[{"@type":"Person","name":"Jiajun Fan"},{"@type":"Person","name":"Neil He"},{"@type":"Person","name":"Qinglong Zheng"},{"@type":"Person","name":"Changyi Yang"},{"@type":"Person","name":"Tong Wei"},{"@type":"Person","name":"Andy Mao"},{"@type":"Person","name":"Zetian Li"},{"@type":"Person","name":"Chaoran Cheng"},{"@type":"Person","name":"Hui Ren"},{"@type":"Person","name":"Ruihan Guo"},{"@type":"Person","name":"Xianrui Zhong"},{"@type":"Person","name":"Xizheng Yu"},{"@type":"Person","name":"Jingyuan Li"},{"@type":"Person","name":"Xi Zhu"},{"@type":"Person","name":"Kaiqu Liang"},{"@type":"Person","name":"Chang Xu"},{"@type":"Person","name":"Zun Qian"},{"@type":"Person","name":"Zidi Xiong"},{"@type":"Person","name":"Yuezhu Zhao"},{"@type":"Person","name":"Xu Huang"},{"@type":"Person","name":"Ge Liu"}],
+  "datePublished":"2026-11",
+  "url":"https://www.jiajunfan.com/projects/self-upgrading/","sameAs":"https://arxiv.org/abs/2611.31117",
+  "keywords":"self-upgrading agents, embodied agents, weight editing, self-improvement, continual learning, lifelong learning"
+}</script>
+  <script data-goatcounter="https://jiajunfan.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+{% include site-chrome.html %}
+</head>
+<body id="top">
+<script>try{if(localStorage.getItem('darkMode')==='true')document.body.classList.add('dark-mode');}catch(e){}</script>
+
+<header class="site-masthead">
+  <div class="masthead-inner">
+    <a class="masthead-title" href="/">Jiajun Fan</a>
+    <nav class="masthead-nav" aria-label="Site navigation">
+      <a href="/publications/">Publications</a>
+      <a href="/projects/" class="nav-active">Projects</a>
+      <a href="/year-archive/">Blog</a>
+      <a href="/cv/">CV</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="hero su-hero" aria-label="Summary">
+  <div class="wrap">
+    <h1>Self-Upgrading Embodied Agents</h1>
+    <p class="su-claim">An embodied agent upgrades its own weights on the job: <b><span class="nb">multi-round</span>, stable, continual <span class="nb">self-improvement</span>, without collapse.</b></p>
+    <p class="byline"><a href="/" class="me">Jiajun&nbsp;Fan</a><sup>1</sup>, Neil&nbsp;He<sup>1,14</sup>, Qinglong&nbsp;Zheng<sup>1</sup>, Changyi&nbsp;Yang<sup>2</sup>, Tong&nbsp;Wei<sup>3</sup>, Andy&nbsp;Mao<sup>1</sup>, Zetian&nbsp;Li<sup>4</sup>, Chaoran&nbsp;Cheng<sup>1</sup>, Hui&nbsp;Ren<sup>1</sup>, Ruihan&nbsp;Guo<sup>1</sup>, Xianrui&nbsp;Zhong<sup>5</sup>, Xizheng&nbsp;Yu<sup>6</sup>, Jingyuan&nbsp;Li<sup>7</sup>, Xi&nbsp;Zhu<sup>8</sup>, Kaiqu&nbsp;Liang<sup>9</sup>, Chang&nbsp;Xu<sup>10</sup>, Zun&nbsp;Qian<sup>11</sup>, Zidi&nbsp;Xiong<sup>6</sup>, Yuezhu&nbsp;Zhao<sup>12</sup>, Xu&nbsp;Huang<sup>13</sup>, Ge&nbsp;Liu<sup>1</sup></p>
+    <ul class="logos su-logos" aria-label="Affiliations">
+      <li><sup>1</sup><img src="/images/projects/self-rewriting/logo_uiuc.png" alt="" width="66" height="96"><span>UIUC</span></li>
+      <li><sup>2</sup><img src="/images/projects/self-rewriting/logo_cmu.png" alt="" width="96" height="96"><span>CMU</span></li>
+      <li><sup>3</sup><img src="/images/projects/self-upgrading/logo_brown.png" alt="" width="66" height="96"><span>Brown</span></li>
+      <li><sup>4</sup><img src="/images/projects/self-rewriting/logo_stanford.png" alt="" width="63" height="96"><span>Stanford</span></li>
+      <li><sup>5</sup><img src="/images/projects/vanguard/logo_northeastern.png" alt="" width="87" height="96"><span>Northeastern</span></li>
+      <li><sup>6</sup><img src="/images/projects/self-upgrading/logo_harvard.png" alt="" width="82" height="96"><span>Harvard</span></li>
+      <li><sup>7</sup><img src="/images/projects/self-upgrading/logo_uw.png" alt="" width="142" height="96"><span>UW</span></li>
+      <li class="su-br" aria-hidden="true"></li>
+      <li><sup>8</sup><img src="/images/projects/self-rewriting/logo_rutgers.png" alt="" width="109" height="96"><span>Rutgers</span></li>
+      <li><sup>9</sup><img src="/images/projects/self-rewriting/logo_princeton.png" alt="" width="69" height="96"><span>Princeton</span></li>
+      <li><sup>10</sup><img src="/images/projects/self-upgrading/logo_umich.png" alt="" width="133" height="96"><span>UMich</span></li>
+      <li><sup>11</sup><img src="/images/projects/self-upgrading/logo_columbia.png" alt="" width="109" height="96"><span>Columbia</span></li>
+      <li><sup>12</sup><img src="/images/projects/vanguard/logo_nyu.png" alt="" width="96" height="96"><span>NYU</span></li>
+      <li><sup>13</sup><img src="/images/projects/self-upgrading/logo_berkeley.png" alt="" width="96" height="96"><span>UC Berkeley</span></li>
+      <li><sup>14</sup><img src="/images/projects/self-rewriting/logo_yale.png" alt="" width="91" height="96"><span>Yale</span></li>
+    </ul>
+    <div class="cta">
+      <a class="btn btn-primary" href="https://arxiv.org/abs/2611.31117"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M4 1.5h5.5L12.5 4.5v10h-8.5z"/><path d="M9.5 1.5v3h3M6 8h4.5M6 10.5h4.5"/></svg>Paper</a>
+      <a class="btn" href="#cite"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5c2 0 3-1.5 3-4.5V4.5H3V8h3M9.5 11.5c2 0 3-1.5 3-4.5V4.5h-3V8h3"/></svg>BibTeX</a>
+    </div>
+{% include proj/self-upgrading/hero_stage.html %}
+  </div>
+</section>
+
+<nav class="chapters" aria-label="Parts of this page">
+  <div class="wrap">
+    <a href="#glance">At a glance</a>
+    <a href="#era">1951 to 2026</a>
+    <a href="#third">The problem</a>
+    <a href="#loop">How it works</a>
+    <a href="#evidence">The evidence</a>
+    <span class="ch-sub"><a href="#examiner" aria-label="Finding 01">01</a><a href="#better" aria-label="Finding 02">02</a><a href="#holds" aria-label="Finding 03">03</a><a href="#scale" aria-label="Finding 04">04</a></span>
+    <a href="#horizon">What it opens</a>
+    <a href="#cite">Cite</a>
+    <a class="ch-paper" href="https://arxiv.org/abs/2611.31117">arXiv 2611.31117</a>
+  </div>
+</nav>
+
+<section class="scene" id="glance">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main wide">
+        <p class="eyebrow">At a glance</p>
+        <h2>The paper in four results.</h2>
+        <p class="lead">We introduce the self-upgrading embodied agent, to our knowledge the first that learns from its own experience by upgrading its own weights on the job, between its tasks.</p>
+      </div>
+      <ul class="nots" aria-label="What it does without">
+        <li>no training</li><li>no gradient</li><li>no reward model</li><li>no second model</li><li>no test-time scaling</li><li>no harness or prompt engineering</li>
+      </ul>
+    </header>
+    <div class="cards su-glance" id="glance-cards">
+      <a class="card result" href="#examiner"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><g class="gl-nts"><rect class="gl-nt" x="26" y="26" width="30" height="44" rx="5"/><rect class="gl-nt gl-kept" x="68" y="26" width="30" height="44" rx="5"/><rect class="gl-nt" x="110" y="26" width="30" height="44" rx="5"/><rect class="gl-nt" x="152" y="26" width="30" height="44" rx="5"/></g><path class="gl-tick" d="M76 49l5 5 9-11"/></svg></span><span class="r-no">Finding one<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>It is its own examiner.</h3><p>It tests every change against its unchanged self on practice tasks and keeps only what holds.</p></a>
+      <a class="card result" href="#better"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96" class="gl-strips"></svg></span><span class="r-no">Finding two<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>When an edit holds, the next day it is a better agent.</h3><p>Significantly more tasks completed, in fewer steps, with fewer wasted and fewer tokens, at the same cost per step.</p></a>
+      <a class="card result" href="#holds"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><line class="il-ax" x1="14" y1="84" x2="190" y2="84"/><path class="gl-step" d="M22 64H98V38H182"/><circle class="gl-sd" cx="58" cy="64" r="4.5"/><circle class="gl-sd gl-sk" cx="98" cy="38" r="5.5"/><circle class="gl-sd" cx="138" cy="38" r="4.5"/><circle class="gl-sd" cx="178" cy="38" r="4.5"/></svg></span><span class="r-no">Finding three<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>The upgrade holds, without collapse.</h3><p>Through the nights that follow, what it gained is still there.</p></a>
+      <a class="card result" href="#scale"><span class="r-ill" aria-hidden="true"><svg viewBox="0 0 200 96"><line class="il-ax" x1="14" y1="84" x2="190" y2="84"/><rect class="gl-sz" x="24" y="72" width="12" height="12" rx="2"/><rect class="gl-sz" x="52" y="64" width="20" height="20" rx="3"/><rect class="gl-sz" x="90" y="54" width="30" height="30" rx="4"/><rect class="gl-sz gl-big" x="140" y="40" width="44" height="44" rx="5"/></svg></span><span class="r-no">Finding four<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9.5M3.8 8.5 8 12.7l4.2-4.2"/></svg></span><h3>The ability appears with scale.</h3><p>The same night at four sizes of one model family.</p></a>
+    </div>
+    <ul class="creed su-creed">
+      <li><b>Multi-round.</b><span>night after night, it works on itself</span></li>
+      <li><b>Stable.</b><span>a night that does not hold leaves it exactly as it was</span></li>
+      <li><b>Continual.</b><span>what it gains stays, in every episode that follows</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="scene" id="era">
+  <div class="wrap">
+  <div class="su-era su-era-top" id="su-era">
+    <p class="eyebrow">1951 to 2026</p>
+    <figure class="su-era-then">
+      <p class="su-era-yr">1951</p>
+      <blockquote>&ldquo;There is &hellip; <mark class="m-level">a certain minimum level</mark> where this <mark class="m-degen">degenerative</mark> characteristic ceases to be universal. At this point automata which can reproduce themselves, or even <mark class="m-higher">construct higher entities</mark>, become possible.&rdquo;</blockquote>
+      <figcaption>John von Neumann, <cite>The General and Logical Theory of Automata</cite>, 1951</figcaption>
+    </figure>
+    <div class="su-run" id="su-run" aria-hidden="true">
+      <div class="su-run-track"><i class="su-run-fill"></i><i class="su-run-stop" style="--x:58.667%"></i><i class="su-run-stop" style="--x:86.667%"></i><i class="su-run-stop" style="--x:96%"></i><b class="su-run-dot"><span class="su-run-now">1951</span></b></div>
+      <p class="su-run-lab"><span>1951</span><span class="su-run-mid">seventy-five years</span><span class="su-run-end">2026</span></p>
+      <p class="su-run-cap"><span class="on">From the epigraph to now</span></p>
+    </div>
+    <div class="su-era-now">
+      <p class="su-era-yr now">2026</p>
+      <p class="lead">Seventy-five years later, an embodied agent <mark class="m-higher">upgrades its own weights</mark> on the job, and night after night the upgrade holds, <mark class="m-degen">without collapse</mark>. Of four sizes of its family, <mark class="m-level">only the 27B agent</mark> does this.</p>
+      <p class="su-era-line">The era of <span class="hl">self-upgrading embodied agents</span> begins here.</p>
+    </div>
+    <p class="su-era-key">The colour marks are ours: three phrases of 1951, set beside three of 2026.</p>
+  </div>
+  </div>
+</section>
+
+<section class="scene band" id="third">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main wide">
+        <p class="eyebrow">The problem <span>A way out</span></p>
+        <h2 class="reveal">An embodied agent goes to work with the weights it was given <span class="hl">and keeps them for life.</span></h2>
+      </div>
+    </header>
+{% include proj/self-upgrading/third.html %}
+    <p class="takeaway">It learns from its own experience by upgrading its own weights on the job, between its tasks.</p>
+  </div>
+</section>
+
+<section class="scene" id="loop">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main wide">
+        <p class="eyebrow">How it works <span>One night</span></p>
+        <h2 class="reveal">By day it works. <span class="hl">At night it rewrites one tensor of its weights.</span></h2>
+        <p class="lead">By day the agent works in a household environment. At night it reads its record, finds many of its steps wasted on replies that reach the token limit before any action, traces the habit to one direction in its hidden states, and rewrites one tensor of its weights.</p>
+      </div>
+    </header>
+    <div class="su-night pausable" id="su-stations">
+      <div class="sn-rail" id="sn-rail"></div>
+      <div class="sn-stages">
+        <div class="su-st" data-i="0">
+          <div class="sn-art">
+            <div class="ch anim" id="ch-record" role="img" aria-label="The record of its 128 opening episodes, one mark a step: 1,366 of the 4,418 steps end without an action."></div>
+            <p class="su-st-n" id="su-st-rec"></p>
+          </div>
+          <div class="sn-say">
+            <p class="su-st-k">Diagnose<span id="sn-t0"></span></p>
+            <h4>It reads its record.</h4>
+            <blockquote class="sn-q" id="su-st-found"></blockquote>
+          </div>
+        </div>
+        <div class="su-st" data-i="1">
+          <div class="sn-art">
+            <div class="ch anim" id="ch-wall" role="img" aria-label="A wall of 1,184 small squares, one for each tensor of its network; one square, the output projection of the linear attention of layer 16, is the one it rewrote."></div>
+            <p class="su-st-n">one square for each of the <b id="su-wall-n"></b> tensors of its network; the one it rewrote is lit</p>
+          </div>
+          <div class="sn-say">
+            <p class="su-st-k">Rewrite</p>
+            <h4>One tensor, plus a rank-one term.</h4>
+            <p class="su-formula" id="su-st-formula"></p>
+            <p class="su-st-n" id="su-st-where"></p>
+            <pre class="su-mono su-code" id="su-st-code"></pre>
+            <p class="su-st-n">its code, as it wrote it; only the path of the tensor is shortened</p>
+          </div>
+        </div>
+        <div class="su-st" data-i="2">
+          <div class="sn-art">
+            <div class="ch anim" id="ch-tests" role="img" aria-label="Its 13 paired tests in the order it ran them, the change in the share of steps without an action, edited minus unchanged, on the same practice tasks and seeds: eight within two standard errors, and five clearly in favour of the edit, at −8.4, −7.2, −9.4, −10.4 and −7.6 points. None clearly against."></div>
+            <p class="su-st-n">edited &minus; unchanged, steps without an action, in points; in this night last night&rsquo;s self is the unchanged agent; hollow: within two standard errors</p>
+          </div>
+          <div class="sn-say">
+            <p class="su-st-k">Examine<span id="sn-t2"></span></p>
+            <h4>Paired tests against its unchanged self.</h4>
+            <blockquote class="sn-q" id="sn-q-exam"></blockquote>
+            <p class="su-st-loop"><b>not yet</b>it tries again, back to Rewrite</p>
+          </div>
+        </div>
+        <div class="su-st" data-i="3">
+          <div class="sn-art">
+            <div class="ch anim" id="ch-conf" role="img" aria-label="Its one confirmation, on 256 practice tasks reserved from it all night: the share of steps without an action, edited minus unchanged, is &minus;6.3 points, clear of zero by more than two standard errors."></div>
+            <p class="su-big-say" id="su-st-conf"></p>
+          </div>
+          <div class="sn-say">
+            <p class="su-st-k">Confirm<span id="sn-t3"></span></p>
+            <h4>Once, on 256 reserved practice tasks.</h4>
+            <blockquote class="sn-q" id="sn-q-conf"></blockquote>
+            <ul class="su-exits">
+              <li class="su-ex-y"><b>it holds</b>the edit is kept</li>
+              <li class="su-ex-n"><b>it does not</b>withdrawn</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cap">The night that kept its edit, as it happened, in 7.7 hours on the one GPU that serves it. The agent is Qwen3.5-27B with its published weights, at work in ALFWorld, a simulated household environment in text.</div>
+    <p class="takeaway">Nothing in the loop is training: there are only forward passes, which is what the agent runs when it works.</p>
+  </div>
+</section>
+
+<div id="evidence">
+
+<section class="scene" id="examiner">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main wide">
+        <p class="eyebrow">The evidence <span>Finding 01</span></p>
+        <h2 class="reveal">It is its own examiner <span class="hl">and keeps only what holds.</span></h2>
+        <p class="lead">An agent that rewrites itself must first never break itself. It tests every change against its unchanged self on practice tasks, and what does not hold is withdrawn.</p>
+      </div>
+    </header>
+    <div class="fig panel su-ledger pausable" id="su-ledger" role="img" aria-label="The four nights, one row each, in order. Each row shows one tile for each round of forward passes: reads of its hidden states, paired tests within two standard errors, tests clearly in favour of the edit and tests clearly against it. Night 2 kept its edit after a confirmation on 256 reserved practice tasks, at −6.3 points of steps without an action. Nights 1, 3 and 4 withdrew."></div>
+    <div class="cap">Four nights in a row: one edit kept; every night that did not hold left it exactly as it was.</div>
+    <p class="takeaway">Letting an agent change its own weights is the easy part. Keeping only the changes that hold is the hard part.</p>
+  </div>
+</section>
+
+<section class="scene" id="better">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main wide">
+        <p class="eyebrow">The evidence <span>Finding 02</span></p>
+        <h2 class="reveal">When an edit holds, the next day it is <span class="hl nw">a better agent,</span> at the same cost per step.</h2>
+        <p class="lead">Over thousands of held-out episodes, 48 fresh seeds a task, its one kept edit makes it complete significantly more tasks, in fewer steps, with fewer wasted and fewer tokens.</p>
+      </div>
+    </header>
+    <div class="fig panel">
+      <div class="ch anim pausable" id="ch-bars" role="img" aria-label="Five measures fixed in advance, the agent as it was against the agent after its own edit, on held-out tasks. Tasks completed: 41.6% to 45.2%, +3.6 points, 95% interval +1.9 to +5.2, p below ten to the minus four. Completed within 40 steps: 36.5% to 40.0%. Steps an episode: 38.5 to 37.2. Steps without an action: 45.9% to 39.5%. Tokens an episode: 15.1 thousand to 13.9 thousand."></div>
+    </div>
+    <div class="cap">Held-out tasks, 48 fresh seeds each. All five measures were fixed in advance, and all five improve, <span class="nw">each p&nbsp;&lt;&nbsp;10<sup>&minus;4</sup></span>; tasks completed: +3.6 points, 95% interval +1.9 to +5.2. Whiskers: each agent&rsquo;s 95% interval over the 48 seeds.</div>
+    <h3 class="eyebrow sub">The more it works, the further ahead it gets</h3>
+    <div class="fig panel">
+      <div class="ch" id="ch-lead" role="img" aria-label="Three curves of the edited agent's running advantage over its unchanged self through the 48 episodes of a task, a mean over tasks, with a 95% band: the steps without an action it saves add up, so do the tokens, and so do the episodes it completes. The axes carry no numbers."></div>
+    </div>
+    <div class="cap">Edited minus unchanged, added up over the 48 episodes of a task: a mean over tasks, with its 95% band.</div>
+    <h3 class="eyebrow sub">The same tasks, with and without its own edit</h3>
+    <div class="fig panel su-rows pausable" id="su-rows" role="group" aria-label="Four held-out tasks, one row each, each with the same seed for both agents and drawn from the steps of the episode. On the left the unchanged agent: it runs out of its 50 steps, with 41, 36, 31 and 10 of them without an action. On the right the agent after its own edit: it completes the task, in 5, 10, 8 and 10 steps."></div>
+    <div class="cap">Four held-out tasks, the same seed for both agents, chosen by rule: of a task type, the task whose completed episodes rise most with the edit; of its seeds, the one the edited agent finishes in the fewest steps. ALFWorld is a household environment in text: each room is drawn from the steps of its episode.</div>
+    <p class="takeaway">An edit to the weights adds nothing to any step: an episode costs it about 8% fewer tokens.</p>
+  </div>
+</section>
+
+<section class="scene" id="holds">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main wide">
+        <p class="eyebrow">The evidence <span>Finding 03</span></p>
+        <h2 class="reveal">Multi-round, stable and continual: <span class="hl">the upgrade holds, without collapse.</span></h2>
+        <p class="lead">The third and the fourth night started from the edit of the second, found no edit that held, and withdrew: what the second night gave it was still there on the fourth.</p>
+      </div>
+    </header>
+    <div class="fig panel">
+      <div class="ch anim" id="ch-levels" role="img" aria-label="The agent in use at the start and after each of the four nights, on the held-out tasks. Steps without an action: 45.9%, then 39.5% from the second night on. Tokens an episode: 15.1 thousand, then 13.9 thousand. Tasks completed: 41.6%, then 45.2%. One step at the second night, then level; nights one, three and four withdrew."></div>
+    </div>
+    <div class="cap">The agent in use after each of the four nights, on the held-out tasks. Nights 1, 3 and 4 withdrew: the level after them is not a new measurement, and those points are drawn hollow.</div>
+    <p class="takeaway">Over four nights of work on itself, the agent upgraded itself, held the upgrade through every night after it, and never collapsed.</p>
+  </div>
+</section>
+
+<section class="scene" id="scale">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main wide">
+        <p class="eyebrow">The evidence <span>Finding 04</span></p>
+        <h2 class="reveal">The ability appears <span class="hl">with scale.</span></h2>
+        <p class="lead">Of four sizes of its family, only the 27B agent does this.</p>
+      </div>
+    </header>
+    <div class="su-sizes" id="su-sizes"></div>
+    <div class="cap">The four sizes are Qwen3.5 at 2B, 4B, 9B and 27B; the smaller models ran the same protocol.</div>
+  </div>
+</section>
+
+</div>
+
+<section class="scene" id="horizon">
+  <div class="wrap">
+    <header class="say">
+      <div class="say-main wide">
+        <p class="eyebrow">What it opens</p>
+        <h2 class="reveal">From here on, an embodied agent need not keep <span class="hl">training and inference apart.</span></h2>
+        <p class="lead">As it works, it gathers its own experience and upgrades itself, with no separate pre-training or post-training and no human intervention.</p>
+      </div>
+    </header>
+    <div class="fig su-door pausable" id="su-door" role="img" aria-label="An illustration. On the left, until now: training and work kept in two rooms, with a wall between them. A door in the wall opens. On the right, from here on: one unbroken line of days and nights, the agent working by day and working on itself at night, on and on."></div>
+    <p class="cap">An illustration of what we believe this opens, not an experiment.</p>
+    <p class="belief">We believe this opens the door to lifelong continual learning for robots: <b>stable, continual, recursive <span class="nw">self-improvement.</span></b></p>
+    <div class="cta">
+      <a class="btn btn-primary" href="https://arxiv.org/abs/2611.31117">Read the paper</a>
+    </div>
+  </div>
+</section>
+
+<section class="cite" id="cite">
+  <div class="wrap duo">
+    <header class="say">
+      <p class="eyebrow">Cite</p>
+      <h2>Cite the paper.</h2>
+      <button class="bib-copy-btn" aria-label="Copy BibTeX citation"><i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-list.png);mask-image:url(/images/icons/h-list.png)"></i>Copy BibTeX</button>
+    </header>
+    <pre class="show bibtex-block" tabindex="0"><code>{% raw %}@article{fan2026selfupgrading,
+  title = {Self-Upgrading Embodied Agents},
+  author = {Jiajun Fan and Neil He and Qinglong Zheng and Changyi Yang and Tong Wei and Andy Mao and Zetian Li and Chaoran Cheng and Hui Ren and Ruihan Guo and Xianrui Zhong and Xizheng Yu and Jingyuan Li and Xi Zhu and Kaiqu Liang and Chang Xu and Zun Qian and Zidi Xiong and Yuezhu Zhao and Xu Huang and Ge Liu},
+  journal = {arXiv preprint arXiv:2611.31117},
+  eprint = {2611.31117},
+  archivePrefix = {arXiv},
+  year = {2026}
+}{% endraw %}</code></pre>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>Self-Upgrading Embodied Agents <span class="su-sep">|</span> <a href="/">Jiajun Fan</a> · UIUC, CMU, Brown, Stanford, Northeastern, Harvard, UW, Rutgers, Princeton, UMich, Columbia, NYU, UC&nbsp;Berkeley&nbsp;&amp;&nbsp;Yale <span class="su-sep">|</span> <a href="https://arxiv.org/abs/2611.31117">Paper</a> <span class="su-sep">|</span> <a href="/projects/">All Projects</a></p>
+</footer>
+
+<div id="read-progress" aria-hidden="true"></div>
+<script>
+(function(){
+  var bar=document.getElementById('read-progress'), nav=document.querySelector('.chapters'), strip=nav?nav.querySelector('.wrap'):null;
+  function pairs(sel){return [].slice.call(document.querySelectorAll(sel)).map(function(a){return [a,document.getElementById(a.getAttribute('href').slice(1))];}).filter(function(p){return p[1];});}
+  var parts=pairs('.chapters .wrap > a[href^="#"]'), subs=pairs('.chapters .ch-sub a'), shown=null;
+  function mark(list,cur){list.forEach(function(p){if(p[0]===cur)p[0].setAttribute('aria-current','true');else p[0].removeAttribute('aria-current');});}
+  function onScroll(){
+    var st=window.scrollY||document.documentElement.scrollTop,h=document.documentElement.scrollHeight-window.innerHeight,line=Math.min(window.innerHeight*0.38,340),cur=null,sub=null;
+    if(bar)bar.style.width=(h>0?(st/h*100):0)+'%';
+    parts.forEach(function(p){if(p[1].getBoundingClientRect().top<=line)cur=p[0];});
+    if(h>0&&st>=h-2&&parts.length)cur=parts[parts.length-1][0];
+    if(cur&&cur.getAttribute('href')==='#evidence')subs.forEach(function(p){if(p[1].getBoundingClientRect().top<=line)sub=p[0];});
+    mark(parts,cur);mark(subs,sub);
+    if(cur!==shown&&strip&&strip.scrollWidth>strip.clientWidth){strip.scrollLeft=cur?Math.max(0,cur.offsetLeft-16):0;}
+    shown=cur;
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});window.addEventListener('resize',onScroll);onScroll();
+  document.querySelectorAll('.bib-copy-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var pre=document.querySelector('.bibtex-block'),text=pre?pre.innerText||pre.textContent:'';
+      if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(function(){
+        btn.innerHTML='<i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-check.png);mask-image:url(/images/icons/h-check.png)"></i> Copied!';btn.classList.add('copied');
+        setTimeout(function(){btn.innerHTML='<i class="lbl-ico" style="-webkit-mask-image:url(/images/icons/h-list.png);mask-image:url(/images/icons/h-list.png)"></i> Copy BibTeX';btn.classList.remove('copied');},2000);});}
+    });
+  });
+})();
+</script>
+{% include proj/self-upgrading/data.html %}
+{% include proj/self-upgrading/hero.html %}
+{% include proj/self-upgrading/figs.html %}
+{% include proj/self-upgrading/figs2.html %}
+</body>
+</html>

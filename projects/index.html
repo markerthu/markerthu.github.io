@@ -74,7 +74,7 @@ body.dark-mode .hero h1{color:#ece8e0}
 body.dark-mode .hero .kicker,body.dark-mode .hero .lead{color:#8f8a80}
 @media(max-width:640px){.hero{padding-top:58px}.hero h1{font-size:33.6px}}
 
-/* the pinned project (Self-Rewriting) is simply the first card, with a 'Pinned' pill */
+/* the pinned projects (Self-Upgrading, Self-Rewriting) are simply the first cards, each with a 'Pinned' pill */
 .pc-pin{display:inline-block;padding:2px 10px;margin-right:9px;border-radius:999px;background:var(--ink);color:var(--bg);font-size:var(--t-fine);font-weight:600;line-height:1.5;vertical-align:1px}
 </style>
 <script data-goatcounter="https://jiajunfan.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -112,8 +112,19 @@ body.dark-mode .hero .kicker,body.dark-mode .hero .lead{color:#8f8a80}
 <div id="projects-list">
 <section class="scene band" id="y2026" aria-label="2026">
   <div class="wrap">
-    <p class="eyebrow">2026 <span>10 projects</span> <span class="pc-note">* first or co-first author</span></p>
+    <p class="eyebrow">2026 <span>11 projects</span> <span class="pc-note">* first or co-first author</span></p>
     <div class="pgrid">
+      <article class="card pcard">
+        <a class="pc-img" href="/projects/self-upgrading/" tabindex="-1" aria-hidden="true"><img src="/images/featured/selfupgrading-ai.jpg" alt="" width="600" height="338" loading="eager" decoding="async"></a>
+        <div class="pc-body">
+          <p class="pc-venue"><span class="pc-pin">Pinned</span>Preprint 2026</p>
+          <h3><a href="/projects/self-upgrading/">Self-Upgrading Embodied Agents</a></h3>
+          <p class="pc-auth"><strong>J. Fan*</strong>, N. He, Q. Zheng, C. Yang, T. Wei, A. Mao, Z. Li, C. Cheng, H. Ren, R. Guo, X. Zhong, X. Yu, J. Li, X. Zhu, K. Liang, C. Xu, Z. Qian, Z. Xiong, Y. Zhao, X. Huang, G. Liu</p>
+          <p class="pc-find">An agent that upgrades its own weights on the job</p>
+          <p class="pc-desc">To our knowledge the first embodied agent that learns from its own experience by upgrading its own weights on the job, between its tasks, with no training, no gradient and no second model. By day it works; at night it reads its own record, rewrites its own weights and keeps only what holds. When an edit holds, the next day it is a better agent, and through the nights that follow the upgrade holds, without collapse.</p>
+          <p class="pc-links"><a class="pc-l pc-main" href="/projects/self-upgrading/">Project</a><a class="pc-l" href="https://arxiv.org/abs/2611.31117">arXiv</a></p>
+        </div>
+      </article>
       <article class="card pcard">
         <a class="pc-img" href="/projects/self-rewriting/" tabindex="-1" aria-hidden="true"><img src="/images/featured/selfrw-ai.jpg" alt="" width="600" height="338" loading="eager" decoding="async"></a>
         <div class="pc-body">
