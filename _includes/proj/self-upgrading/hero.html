@@ -58,8 +58,8 @@
     var dd=d===0?2.1:d===keptAt+1?2.4:d===HN.length?2.7:1.25;
     DS.push({a:tt,b:tt+dd});tt+=dd;
     if(d<HN.length){
-      var n=HN[d],kept=n.decision==='kept',nd=kept?4.7:(d===0?3.4:(d===HN.length-1?2.4:2.7)),a=tt,b=tt+nd,dT=b-(kept?1.25:0.95);
-      var wts=n.tiles.map(function(x){return x.kind==='read'?(kept?6:d===0?8:4):1;}),sum=0;wts.forEach(function(v){sum+=v;});
+      var n=HN[d],kept=n.decision==='kept',nd=kept?7.0:(d===0?5.2:(d===HN.length-1?3.8:4.2)),a=tt,b=tt+nd,dT=b-(kept?1.25:0.95);
+      var wts=n.tiles.map(function(x){return x.kind==='read'?(kept?7:d===0?9:5):1;}),sum=0;wts.forEach(function(v){sum+=v;});
       var ts=[],te=[],u=a+0.45,span=dT-0.12-u;
       wts.forEach(function(v){ts.push(u);u+=span*v/sum;te.push(u);});
       var mv=-1;if(kept){for(var q=0;q<n.tiles.length;q++){if(n.tiles[q].result==='for'){mv=Math.max(1,q-1);break;}}if(mv<0)mv=Math.floor(n.tiles.length/2);}
