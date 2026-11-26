@@ -460,7 +460,7 @@ body.dark-mode .dr-day{fill:#4E4020;stroke:#D2A645}
     var el=$('#ch-bars'); if(!el||!el.clientWidth) return;
     var W=Math.round(el.clientWidth), M=D.headline.main, F={}, Lv=D.levels;D.headline.further.forEach(function(f){F[f.id]=f;});
     var dl=function(c,u){return S.minus(c.text)+u;};
-    var MAIN={t:'More tasks completed',s:'of a task’s episodes',u:M.unchanged,e:M.edited,un:'%',ci:Lv.completed,main:1,chip:dl(M.change,' points')};
+    var MAIN={t:'More tasks completed',s:'of a task’s episodes',u:M.unchanged,e:M.edited,un:'%',main:1,chip:dl(M.change,' points')};
     var SIDE=[{t:'Sooner',s:'completed within 40 steps',u:F.within.unchanged,e:F.within.edited,un:'%',chip:dl(F.within.change,' points')},
               {t:'Fewer steps',s:'steps an episode',u:F.steps.unchanged,e:F.steps.edited,un:'',chip:dl(F.steps.change,' steps')},
               {t:'Fewer wasted',s:'steps without an action',u:F.noaction.unchanged,e:F.noaction.edited,un:'%',chip:dl(F.noaction.change,' points')},
