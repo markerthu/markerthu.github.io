@@ -107,6 +107,13 @@ body.dark-mode .dr-day{fill:#4E4020;stroke:#D2A645}
 .dr-lab.on{fill:var(--mint-t)}
 .dr-sm{font-size:13px;fill:var(--body)}
 .dr-big{font-size:16px;font-weight:600;fill:var(--mint-t)}
+.dr-dark{fill:var(--su-night)}
+.dr-step{fill:var(--ice);stroke:var(--ice-e);stroke-width:1}
+.dr-nl{font-size:12.5px;fill:var(--body)}
+.dr-oc rect{fill:var(--card);stroke:var(--hair);stroke-width:1.2;stroke-dasharray:3 3}
+.dr-oc text{font-size:12.5px;fill:var(--muted)}
+.dr-oc.k rect{fill:var(--mint);stroke:var(--mint-e);stroke-dasharray:none}
+.dr-oc.k text{fill:var(--mint-t);font-weight:600}
 #horizon .belief{max-width:38em;font-size:clamp(20px,2.2vw,27px);line-height:1.38;font-weight:500;color:var(--ink);margin-top:26px;text-wrap:balance}
 #horizon .belief b{color:var(--mint-t);font-weight:700}
 #horizon .cap{max-width:none}
@@ -379,32 +386,68 @@ body.dark-mode .dr-day{fill:#4E4020;stroke:#D2A645}
     else if(tw(capB,13,400)*1.06<=room)o+=tx(x0,cy,capB,'dr-sm');
     else o+=tx(x0,cy,'by day it works,','dr-sm')+tx(x0,cy+17,'at night, on itself','dr-sm');
     o+=tx(W-16,F+34,'lifelong continual learning','dr-big','end');
-    /* the agent: it waits in the old room, goes through, and on under the days; the days to come stay dim */
-    var bx=Math.max(24*bs+4,xw-jam-(wide?70:tight?32:48)), lastLit=n>=7?n-3:Math.max(1,n-2), ex=x0+lastLit*(ts+gap)+ts/2;
-    o+='<g class="dr-bot" style="transform:translateX('+R(bx)+'px)"><g transform="translate(0 '+F+')"><ellipse class="rm-shadow" cx="0" cy="1.5" rx="'+R(27*bs)+'" ry="3"/><g transform="scale('+bs+')">'+S.botGlyph(1)+'</g></g></g>';
+    /* the agent: it waits in the old room, goes through, and on under the days; the days to come stay dim.
+       By day it works as it goes and leaves its steps behind it; at night it stops, the room darkens, it reads the
+       day's steps and rewrites a pane of its weights; a night keeps its edit or withdraws it (they alternate here,
+       so the picture never says that every night improves it), and a kept edit stays lit in its chest. */
+    var bx=Math.max(24*bs+4,xw-jam-(wide?70:tight?32:48)), lastLit=n>=7?n-3:Math.min(n-1,Math.max(3,n-2)), ex=x0+lastLit*(ts+gap)+ts/2;
+    var tc=function(i){return x0+i*(ts+gap)+ts/2;}, sched=[], days=[], nights=[], tt=1.9, xc=bx, nk=0, prevDay=null;
+    sched.push({k:'m',t0:tt,t1:tt+1.5,a:bx,b:tc(0)-ts/2});tt+=1.5;xc=tc(0)-ts/2;
+    for(var i2=0;i2<=lastLit;i2++){
+      if(i2%2===0){var xe=i2===lastLit?tc(i2):tc(i2)+ts/2+gap/2, dd={k:'d',t0:tt,t1:tt+1.15,a:xc,b:xe,i:i2,marks:[]};sched.push(dd);days.push(dd);prevDay=dd;tt+=1.15;xc=xe;}
+      else{sched.push({k:'m',t0:tt,t1:tt+0.35,a:xc,b:tc(i2)});tt+=0.35;xc=tc(i2);
+        var nn={k:'n',t0:tt,t1:tt+2.0,a:xc,b:xc,i:i2,kept:nk%2===0,day:prevDay};sched.push(nn);nights.push(nn);if(prevDay)prevDay.next=nn;tt+=2.0;nk++;
+        if(i2<lastLit){var xo=tc(i2)+ts/2+gap/2;sched.push({k:'m',t0:tt,t1:tt+0.35,a:xc,b:xo});tt+=0.35;xc=xo;}}
+    }
+    var tEnd=tt, xEnd=xc, dk='', mk='', sq=Math.max(5,Math.round(ts*0.16)), sgp=(ts-4*sq)/3;
+    nights.forEach(function(nt){dk+=rect(tc(nt.i)-ts/2-gap/2,ty+ts+4,ts+gap,F-(ty+ts+4),0,'dr-dark',' opacity="0"');});
+    days.forEach(function(d){for(var j=0;j<4;j++)mk+=rect(tc(d.i)-ts/2+j*(sq+sgp),F+6,sq,sq,1,'dr-step',' opacity="0"');});
+    o=o.replace('<line class="dr-floor"','<g class="dr-darks">'+dk+'</g><line class="dr-floor"')+'<g class="dr-steps">'+mk+'</g>';
+    var nlx=R(30*bs+6), nly=R(-44*bs), wk=Math.ceil(tw('kept',12.5,600))+18, ww=Math.ceil(tw('withdrawn',12.5,400))+18;
+    var words2='<text class="dr-nl" x="'+nlx+'" y="'+nly+'" opacity="0"></text><g class="dr-oc" opacity="0">'+rect(30*bs+6,-44*bs-14,ww,20,10,'')+'<text x="'+R(30*bs+15)+'" y="'+R(-44*bs)+'"></text></g>';
+    o+='<g class="dr-bot" style="transform:translateX('+R(bx)+'px)"><g transform="translate(0 '+F+')"><ellipse class="rm-shadow" cx="0" cy="1.5" rx="'+R(27*bs)+'" ry="3"/><g transform="scale('+bs+')">'+S.botGlyph(1)+'</g>'+words2+'</g></g>';
     o+=rect(xw-jam,8,jam,F-8,0,'dr-wallb')+rect(xw+dw,8,jam,F-8,0,'dr-wallb')+rect(xw,8,dw,F-dh-8,0,'dr-wallb')+rect(xw-jam,8,dw+2*jam,F-8,0,'dr-wallo')+rect(xw,F-dh,dw,dh,2,'dr-openo');
     /* the leaf, with its two panels and its knob, hung on the left of the doorway */
     var ph=Math.round(dh*0.4);
     o+='<g class="dr-leafg" style="transform-origin:'+xw+'px '+R(F-dh/2)+'px">'+rect(xw,F-dh,dw,dh,2,'dr-leaf')+rect(xw+6,F-dh+7,dw-12,ph,2,'dr-pan')+rect(xw+6,F-dh+ph+14,dw-12,dh-ph-21,2,'dr-pan')+'<circle class="dr-knob" cx="'+(xw+dw-5.5)+'" cy="'+R(F-dh+ph+10.5)+'" r="2.4"/></g>';
     el.innerHTML='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" style="color:var(--su-sun-e)">'+o+'</svg>';
     DR.g={leaf:$('.dr-leafg',el),glow:$('.dr-glow',el),bot:$('.dr-bot',el),big:$('.dr-big',el),bx:bx,ex:ex,ts:ts,
-      tiles:$$('.dr-t',el).map(function(q,i){return {el:q,cx:x0+i*(ts+gap)+ts/2};})};
+      tiles:$$('.dr-t',el).map(function(q,i){return {el:q,cx:x0+i*(ts+gap)+ts/2};}),
+      sched:sched,tEnd:tEnd,xEnd:xEnd,nights:nights,days:days,ws:$$('.dr-bot .rm-w',el),
+      nl:$('.dr-nl',el),oc:$('.dr-oc',el),ocr:$('.dr-oc rect',el),oct:$('.dr-oc text',el),wk:wk,ww:ww,cx0:30*bs+6,words:wide};
+    var cols=$$('.dr-dark',el), stp=$$('.dr-step',el);nights.forEach(function(nt,k){nt.col=cols[k];nt.left=tc(nt.i)+30*bs+6+(nt.kept?wk:ww)>W-6;});days.forEach(function(d,k){d.marks=stp.slice(k*4,k*4+4);});
+    DR.T=tEnd+2.4;DR.stillT=nights.length?nights[0].t0+1.6:tEnd;
     doorAt(DR.hold!=null?DR.hold:DR.still!=null?DR.still:DR.t);
   }
   function doorAt(t){
     var g=DR.g; if(!g) return;
-    var open=sm(sg(t,1.0,2.1))*(1-sm(sg(t,10.5,11.3))), p=sg(t,1.9,9.0), pe=0.35*sm(p)+0.65*p, back=t>=11.0;
-    var x=back?g.bx:g.bx+(g.ex-g.bx)*pe, a=t<10.3?1:t<10.8?1-(t-10.3)/0.5:t<11.2?0:cl((t-11.2)/0.5), off=1-sm(sg(t,10.3,11.1));
+    var te=g.tEnd, open=sm(sg(t,1.0,2.1))*(1-sm(sg(t,te+1.0,te+1.8))), back=t>=te+1.5, x=g.bx, i;
+    if(!back){if(t>=te)x=g.xEnd;else for(i=0;i<g.sched.length;i++){var q=g.sched[i];if(t>=q.t0&&t<q.t1){var u=sg(t,q.t0,q.t1);x=q.a+(q.b-q.a)*(q.k==='m'?sm(u):u);break;}}}
+    var a=t<te+0.8?1:t<te+1.3?1-(t-te-0.8)/0.5:t<te+1.7?0:cl((t-te-1.7)/0.5), off=1-sm(sg(t,te+0.8,te+1.6));
     g.leaf.style.transform='scaleX('+(1-0.74*open).toFixed(3)+') skewY('+(-7*open).toFixed(2)+'deg)';
     g.glow.style.opacity=(0.55*open).toFixed(3);
     g.bot.style.transform='translateX('+x.toFixed(1)+'px)';g.bot.style.opacity=a.toFixed(3);
     g.tiles.forEach(function(q){var lit=back?0:cl((x-(q.cx-g.ts*0.55))/(g.ts*0.5));q.el.style.opacity=(0.3+0.7*lit*off).toFixed(3);});
-    g.big.style.opacity=(0.42+0.58*sm(sg(p,0.8,1))*off).toFixed(3);
+    var prog=cl((x-g.bx)/Math.max(1,g.xEnd-g.bx));
+    g.big.style.opacity=(0.42+0.58*sm(sg(prog,0.8,1))*off).toFixed(3);
+    /* the nights: it stops, the room darkens, it reads the day, rewrites a pane, and keeps the edit or withdraws it */
+    var lit=1, blink=-1, label='', chip='', left=false;
+    g.nights.forEach(function(nt){var s0=nt.t0, e0=nt.t1, u=t-s0;
+      nt.col.setAttribute('opacity',(back?0:0.18*sm(sg(t,s0-0.2,s0+0.3))*(1-sm(sg(t,e0,e0+0.45)))*off).toFixed(3));
+      if(back)return;
+      if(u>=0&&u<2.0){if(u<0.6)label='reads its record';else if(u<1.25){label='rewrites its weights';blink=lit;}else{chip=nt.kept?'kept':'withdrawn';left=nt.left;}}
+      if(nt.kept&&u>=1.25)lit++;
+    });
+    g.days.forEach(function(d){if(!back&&!label&&!chip&&t>=d.t0&&t<d.t1)label='works on its tasks';d.marks.forEach(function(m,j){var ta=d.t0+(0.12+0.2*j)*(d.t1-d.t0), on=back?0:sm(sg(t,ta,ta+0.15)), nr=d.next, rd=nr?sm(sg(t,nr.t0+0.1,nr.t0+0.6)):0;
+      m.setAttribute('opacity',(on*(1-0.6*rd)*off).toFixed(3));});});
+    g.ws.forEach(function(w,j){var on=j<Math.min(3,lit)||j===blink;w.classList.toggle('e',on);w.style.opacity=j===blink?(0.45+0.55*(0.5+0.5*Math.sin(t*16))).toFixed(3):'1';});
+    g.nl.textContent=label;g.nl.setAttribute('opacity',label&&g.words?'1':'0');
+    if(chip){g.oct.textContent=chip;g.oc.classList.toggle('k',chip==='kept');var cw=chip==='kept'?g.wk:g.ww;g.ocr.setAttribute('width',cw);g.oc.setAttribute('transform',left?'translate('+(-(2*g.cx0+cw)).toFixed(1)+' 0)':'');g.oc.setAttribute('opacity','1');}else g.oc.setAttribute('opacity','0');
   }
   function doorRun(){
     var el=$('#su-door'); if(!el) return;
     window.__suDoor=function(t){DR.hold=t;doorAt(t);};   /* for a still at time t */
-    if(reduced||!hasIO||!window.requestAnimationFrame){DR.still=9.6;doorAt(9.6);return;}
+    if(reduced||!hasIO||!window.requestAnimationFrame){DR.still=DR.stillT||9.6;doorAt(DR.still);return;}
     var last=0;
     function frame(now){if(!DR.vis||DR.hold!=null){DR.raf=0;return;}
       if(last)DR.t=(DR.t+Math.min(0.1,(now-last)/1000))%DR.T;last=now;doorAt(DR.t);DR.raf=requestAnimationFrame(frame);}
