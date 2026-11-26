@@ -66,9 +66,12 @@ permalink: /projects/self-rewriting/
     <ul class="logos" aria-label="Affiliations"><li><sup>1</sup><img src="/images/projects/self-rewriting/logo_uiuc.png" alt="" width="66" height="96"><span>UIUC</span></li><li><sup>2</sup><img src="/images/projects/self-rewriting/logo_cmu.png" alt="" width="96" height="96"><span>CMU</span></li><li><sup>3</sup><img src="/images/projects/self-rewriting/logo_rutgers.png" alt="" width="109" height="96"><span>Rutgers</span></li><li><sup>4</sup><img src="/images/projects/self-rewriting/logo_princeton.png" alt="" width="69" height="96"><span>Princeton</span></li><li><sup>5</sup><img src="/images/projects/self-rewriting/logo_stanford.png" alt="" width="63" height="96"><span>Stanford</span></li><li><sup>6</sup><img src="/images/projects/self-rewriting/logo_yale.png" alt="" width="91" height="96"><span>Yale</span></li></ul>
     <div class="cta">
       <a class="btn" href="#repair-demo"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M5 3.300v9.400L12.500 8z"/></svg>Demo</a>
+      <a class="btn" href="#news"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.500 3.500h8.500v9H4a1.500 1.500 0 0 1-1.500-1.500z"/><path d="M11 6h2.500v5a1.500 1.500 0 0 1-1.500 1.500M4.800 6.300h3.900M4.800 8.700h3.900M4.800 11h2.400"/></svg>Press</a>
       <a class="btn btn-primary" href="https://arxiv.org/abs/2611.21885"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M4 1.5h5.5L12.5 4.5v10h-8.5z"/><path d="M9.5 1.5v3h3M6 8h4.5M6 10.5h4.5"/></svg>Paper</a>
       <a class="btn" href="#cite"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5c2 0 3-1.5 3-4.5V4.5H3V8h3M9.5 11.5c2 0 3-1.5 3-4.5V4.5h-3V8h3"/></svg>BibTeX</a>
+      <a class="btn" href="https://x.com/FanJiajun67938/status/2123183386801889776" target="_blank" rel="noopener" aria-label="The post on X"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>Post</a>
     </div>
+    {% include selfrw/press_badge.html %}
     <div class="stage">
       <canvas id="srw-stage" role="img" aria-label="Animation of one session: the model answers its practice problems; its own reasoning loops back over its 64 layers, reads them, and rewrites the 48 linear-attention layers; it tests the edit against its unedited self. On 490 problems it never saw, it goes from 57.2% to 63.8% right."></canvas>
       <ol class="stage-steps" aria-hidden="true">
@@ -433,6 +436,8 @@ permalink: /projects/self-rewriting/
     <p class="cap">3 min 24 s, with narration. The voice is synthesized.</p>
   </div>
 </section>
+
+{% include selfrw/press.html %}
 
 <section class="cite" id="cite">
   <div class="wrap duo">
