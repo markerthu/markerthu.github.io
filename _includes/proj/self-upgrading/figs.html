@@ -16,7 +16,7 @@
   function num(n){return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,',');}
   function D_(v){return ' style="--d:'+v.toFixed(2)+'s"';}
   function tx(x,y,s,cls,anc,extra){return '<text x="'+R(x)+'" y="'+R(y)+'"'+(cls?' class="'+cls+'"':'')+(anc&&anc!=='start'?' text-anchor="'+anc+'"':'')+(extra||'')+'>'+s+'</text>';}
-  function rect(x,y,w,h,r,cls,extra){return '<rect'+(cls?' class="'+cls+'"':'')+' x="'+R(x)+'" y="'+R(y)+'" width="'+R(Math.max(0,w))+'" height="'+R(Math.max(0,h))+'" rx="'+R(r)+'"'+(extra||'')+'/>';}
+  function rect(x,y,w,h,r,cls,extra){return '<rect'+(cls?' class="'+cls+'"':'')+' x="'+R(x)+'" y="'+R(y)+'" width="'+R(Math.max(0,w))+'" height="'+R(Math.max(0,h))+'" rx="'+R(Math.max(0,r||0))+'"'+(extra||'')+'/>';}
   function line(x1,y1,x2,y2,cls,extra){return '<line class="'+cls+'" x1="'+R(x1)+'" y1="'+R(y1)+'" x2="'+R(x2)+'" y2="'+R(y2)+'"'+(extra||'')+'/>';}
   function svg(W,H,inner,defs){return '<svg viewBox="0 0 '+Math.round(W)+' '+Math.round(H)+'" width="'+Math.round(W)+'" height="'+Math.round(H)+'">'+(defs||'')+inner+'</svg>';}
   function setLens(root){$$('.draw',root).forEach(function(p){try{p.style.setProperty('--len',Math.ceil(p.getTotalLength())+2);}catch(e){}});}
@@ -600,11 +600,11 @@
       if(wide){var my=ry+hh/2;o+=tx(0,my-(j===0?12:3),r[1],'t-ink mid');o+=tx(0,my+(j===0?7:16),r[2],'sm');if(j===0)o+=tx(0,my+26,'whiskers: over '+D.setting.seeds_a_task+' seeds','sm');}
       else{o+=tx(0,ry+20,r[1],'t-ink mid');o+=tx(W,ry+20,r[2],'sm','end');}
       o+=rect(X(kept),ye-13,X(n-1)-X(kept)+17,26,13,'lv-hold grow',D_(1.3+dj));
-      o+='<path class="lv-l lv-pre draw" d="M'+R(X(0))+' '+R(yu)+'H'+R(X(kept))+'"'+D_(0.25+dj)+'/>';
-      o+='<path class="lv-l lv-post draw" d="M'+R(X(kept))+' '+R(yu)+'V'+R(ye)+'H'+R(X(n-1))+'"'+D_(0.8+dj)+'/>';
+      o+='<path class="lv-l lv-pre draw" d="M'+R(X(0))+' '+R(yu)+'H'+R(X(kept-1))+'"'+D_(0.25+dj)+'/>';
+      o+='<path class="lv-l lv-post draw" d="M'+R(X(kept-1))+' '+R(yu)+'L'+R(X(kept))+' '+R(ye)+'H'+R(X(n-1))+'"'+D_(0.8+dj)+'/>';
       use.forEach(function(a,i){var x=X(i), yy=a==='edited'?ye:yu, c=a==='edited'?'e':'u', m=i===0||i===kept, dl=0.3+dj+i*0.2;
         if(i===kept)o+='<circle class="lv-halo pop" cx="'+R(x)+'" cy="'+R(yy)+'" r="13"'+D_(dl)+'/>';
-        if(j===0&&m){var iv=L[a].interval;o+=line(x,Y(iv[0]),x,Y(iv[1]),'lv-ci '+c+' fade',D_(dl+0.3));o+=line(x-5,Y(iv[0]),x+5,Y(iv[0]),'lv-ci '+c+' fade',D_(dl+0.3));o+=line(x-5,Y(iv[1]),x+5,Y(iv[1]),'lv-ci '+c+' fade',D_(dl+0.3));}
+        var iv=L[a].interval, cc='lv-ci '+c+(m?'':' h')+' fade';o+=line(x,Y(iv[0]),x,Y(iv[1]),cc,D_(dl+0.3))+line(x-5,Y(iv[0]),x+5,Y(iv[0]),cc,D_(dl+0.3))+line(x-5,Y(iv[1]),x+5,Y(iv[1]),cc,D_(dl+0.3));
         o+='<circle class="lv-pt '+c+(m?'':' h')+' pop" cx="'+R(x)+'" cy="'+R(yy)+'" r="'+(i===kept?7:m?6:5)+'"'+D_(dl+0.05)+'/>';
       });
       var tu=L.unchanged.text+r[3], te=L.edited.text+r[3];
