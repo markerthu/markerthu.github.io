@@ -455,7 +455,7 @@ body.dark-mode .dr-day{fill:#4E4020;stroke:#D2A645}
   }
 
 
-  /* ---------- Finding 02: the five measures as bars that rise; the gain, or the saving, is the bright part ---------- */
+  /* ---------- Finding 02: the five measures as bars that rise, each pair side by side ---------- */
   function barsFig(){
     var el=$('#ch-bars'); if(!el||!el.clientWidth) return;
     var W=Math.round(el.clientWidth), M=D.headline.main, F={}, Lv=D.levels;D.headline.further.forEach(function(f){F[f.id]=f;});
@@ -477,9 +477,6 @@ body.dark-mode .dr-day{fill:#4E4020;stroke:#D2A645}
       o+=tx(cx,y+30,p.t,'sl-t'+(big?' br-tm':''),'middle')+tx(cx,y+49,p.s,'sl-s','middle');
       o+=rect(xu,yu,bw,hu,r,'br-u growy',S.D_(d));
       o+='<g class="br-glow">'+rect(xe,ye,bw,he,r,'br-e growy',S.D_(d+0.55))+'</g>';
-      if(up)o+='<path class="br-cap fade" d="M'+R(xe)+' '+R(yu)+'V'+R(ye+r)+'Q'+R(xe)+' '+R(ye)+' '+R(xe+r)+' '+R(ye)+'H'+R(xe+bw-r)+'Q'+R(xe+bw)+' '+R(ye)+' '+R(xe+bw)+' '+R(ye+r)+'V'+R(yu)+'Z"'+S.D_(d+1.35)+'/>';
-      else o+=rect(xe,yu,bw,hu-he,r,'br-ghost fade',S.D_(d+1.35));
-      o+='<path class="br-guide draw" d="M'+R(xu+bw)+' '+R(yu)+'H'+R(xe+bw)+'"'+S.D_(d+0.9)+'/>';
       var lift=0;
       if(p.ci){lift=11;[['unchanged',xu,'u'],['edited',xe,'e']].forEach(function(a){var iv=p.ci[a[0]].interval, c=a[1]+bw/2, y1=bot-iv[0]/mx*hm, y2=bot-iv[1]/mx*hm;
         o+=line(c,y1,c,y2,'lv-ci '+a[2]+' fade',S.D_(d+1.6))+line(c-5,y1,c+5,y1,'lv-ci '+a[2]+' fade',S.D_(d+1.6))+line(c-5,y2,c+5,y2,'lv-ci '+a[2]+' fade',S.D_(d+1.6));});}
