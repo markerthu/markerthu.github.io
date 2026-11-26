@@ -1,9 +1,9 @@
 {
   "_updated": "2026-11-26",
   "_timezone": "America/Los_Angeles",
-  "_refreshed": "2026-11-26T11:18:03Z",
+  "_refreshed": "2026-11-26T12:17:57Z",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 2950,
+  "_total": 2951,
   "_days": 30,
   "_range": "Oct. 28th - Nov. 26th",
   "locations": [
@@ -170,10 +170,10 @@
     {
       "code": "IT",
       "name": "Italy",
-      "count": 32,
+      "count": 33,
       "cx": 192.6,
       "cy": 40.9,
-      "r": 2.33
+      "r": 2.34
     },
     {
       "code": "TW",
@@ -542,7 +542,7 @@
     {
       "code": "IT",
       "name": "Italy",
-      "count": 32
+      "count": 33
     },
     {
       "code": "TW",
@@ -1031,7 +1031,7 @@
     {
       "path": "/projects/self-rewriting",
       "title": "Language Models Can Rewrite Their Own Weights | Jiajun Fan",
-      "count": 1314
+      "count": 1315
     },
     {
       "path": "/",
@@ -1158,7 +1158,7 @@
     {
       "name": "(unknown)",
       "id": "",
-      "count": 1063
+      "count": 1064
     },
     {
       "name": "www.jiajunfan.com",
@@ -1285,7 +1285,7 @@
     {
       "name": "Chrome",
       "id": "Chrome",
-      "count": 2022
+      "count": 2023
     },
     {
       "name": "Safari",
@@ -1322,7 +1322,7 @@
     {
       "name": "Windows",
       "id": "Windows",
-      "count": 539
+      "count": 540
     },
     {
       "name": "Android",
@@ -1454,21 +1454,32 @@
     },
     {
       "day": "2026-11-26",
-      "n": 28
+      "n": 29
     }
   ],
   "periods": {
-    "today": 28,
+    "today": 29,
     "yesterday": 269,
-    "d7": 2073,
+    "d7": 2074,
     "d7_prev": 538,
-    "d30": 2950,
+    "d30": 2951,
     "d30_prev": 837,
-    "day_frac": 0.137,
+    "day_frac": 0.178,
     "yesterday_day": "2026-11-25"
   },
-  "_last_visit": "2026-11-26 02:56",
+  "_last_visit": "2026-11-26 04:06",
   "recent": [
+    {
+      "date": "2026-11-26 04:06",
+      "ts": "2026-11-26T12:06:14Z",
+      "loc": "Italy",
+      "path": "/projects/self-rewriting",
+      "ref": "",
+      "browser": "Chrome 157",
+      "system": "Windows 10",
+      "screen": "1536px",
+      "first": true
+    },
     {
       "date": "2026-11-26 02:56",
       "ts": "2026-11-26T10:56:14Z",
@@ -1787,19 +1798,8 @@
       "system": "macOS 10.15",
       "screen": "1728px",
       "first": true
-    },
-    {
-      "date": "2026-11-26 00:45",
-      "ts": "2026-11-26T08:45:01Z",
-      "loc": "Illinois, US",
-      "path": "/",
-      "ref": "Google",
-      "browser": "Chrome 145",
-      "system": "macOS 10.15",
-      "screen": "1728px",
-      "first": true
     }
   ],
-  "_recent_total": 8561,
+  "_recent_total": 8562,
   "_recent_shown": 30
 }
