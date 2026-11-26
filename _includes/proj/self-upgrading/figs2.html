@@ -471,7 +471,7 @@ body.dark-mode .dr-day{fill:#4E4020;stroke:#D2A645}
     /* one pair of bars, everything centred on cx; its floor at bot, its tallest bar hm high */
     function pair(p,cx,y,w,bot,hm,k){
       var big=!!p.main, up=p.e.value>p.u.value, d=big?0.1:0.45+k*0.2, mx=Math.max(p.u.value,p.e.value);
-      var bw=Math.min(34,(w-40)/3.2), g=18, xu=cx-g/2-bw, xe=cx+g/2;
+      var bw=Math.min(34,(w-40)/3.2), g=30, xu=cx-g/2-bw, xe=cx+g/2;
       var hu=p.u.value/mx*hm, he=p.e.value/mx*hm, yu=bot-hu, ye=bot-he, r=5;
       if(big)o+=rect(cx-w/2+6,y,w-12,bot+72-y,18,'br-hl fade',S.D_(0.05));
       o+=tx(cx,y+30,p.t,'sl-t'+(big?' br-tm':''),'middle')+tx(cx,y+49,p.s,'sl-s','middle');
@@ -481,9 +481,9 @@ body.dark-mode .dr-day{fill:#4E4020;stroke:#D2A645}
       if(p.ci){lift=11;[['unchanged',xu,'u'],['edited',xe,'e']].forEach(function(a){var iv=p.ci[a[0]].interval, c=a[1]+bw/2, y1=bot-iv[0]/mx*hm, y2=bot-iv[1]/mx*hm;
         o+=line(c,y1,c,y2,'lv-ci '+a[2]+' fade',S.D_(d+1.6))+line(c-5,y1,c+5,y1,'lv-ci '+a[2]+' fade',S.D_(d+1.6))+line(c-5,y2,c+5,y2,'lv-ci '+a[2]+' fade',S.D_(d+1.6));});}
       o+=line(xu-14,bot,xe+bw+14,bot,'br-base');
-      o+=tx(xu+bw/2-2,yu-9-lift,p.u.text+p.un,'br-vu fade','end',S.D_(d+0.5));
-      o+=tx(xe+bw/2+2,Math.min(ye,yu)-9-lift,p.e.text+p.un,'br-ve fade','start',S.D_(d+1.45));
-      o+=tx(xu+bw/2+4,bot+20,'unchanged','br-x u','end')+tx(xe+bw/2-4,bot+20,'edited','br-x e','start');
+      o+=tx(xu+bw/2,yu-9-lift,p.u.text+p.un,'br-vu fade','middle',S.D_(d+0.5));
+      o+=tx(xe+bw/2,ye-9-lift,p.e.text+p.un,'br-ve fade','middle',S.D_(d+1.45));
+      o+=tx(xu+bw/2,bot+20,'unchanged','br-x u','middle')+tx(xe+bw/2,bot+20,'edited','br-x e','middle');
       var ct=p.chip+(big?'  ·  p < 10⁻⁴':''), cwid=Math.ceil(tw(ct,13.5,600))+26;
       o+='<g class="pop"'+S.D_(d+1.8)+'>'+rect(cx-cwid/2,bot+34,cwid,26,13,'br-chip'+(big?' m':''))+tx(cx,bot+51.5,ct,'br-chip-t'+(big?' m':''),'middle')+'</g>';
     }
