@@ -1,9 +1,9 @@
 {
   "_updated": "2026-11-27",
   "_timezone": "America/Los_Angeles",
-  "_refreshed": "2026-11-27T11:18:01Z",
+  "_refreshed": "2026-11-27T11:27:17Z",
   "_source": "GoatCounter API (https://jiajunfan.goatcounter.com)",
-  "_total": 3196,
+  "_total": 3198,
   "_days": 30,
   "_range": "Oct. 29th - Nov. 27th",
   "locations": [
@@ -26,7 +26,7 @@
     {
       "code": "JP",
       "name": "Japan",
-      "count": 164,
+      "count": 166,
       "cx": 316.0,
       "cy": 48.3,
       "r": 2.98
@@ -497,7 +497,7 @@
     {
       "code": "JP",
       "name": "Japan",
-      "count": 164
+      "count": 166
     },
     {
       "code": "IN",
@@ -1046,12 +1046,12 @@
     {
       "path": "/projects/self-rewriting",
       "title": "Language Models Can Rewrite Their Own Weights | Jiajun Fan",
-      "count": 1481
+      "count": 1482
     },
     {
       "path": "/",
       "title": "Jiajun Fan",
-      "count": 651
+      "count": 652
     },
     {
       "path": "/publications",
@@ -1183,7 +1183,7 @@
     {
       "name": "t.co",
       "id": "t.co",
-      "count": 328
+      "count": 329
     },
     {
       "name": "Google",
@@ -1198,7 +1198,7 @@
     {
       "name": "www.jiajunfan.com/projects/self-rewriting",
       "id": "www.jiajunfan.com/projects/self-rewriting",
-      "count": 153
+      "count": 154
     },
     {
       "name": "www.jiajunfan.com/projects",
@@ -1310,7 +1310,7 @@
     {
       "name": "(unknown)",
       "id": "",
-      "count": 125
+      "count": 127
     },
     {
       "name": "Firefox",
@@ -1332,7 +1332,7 @@
     {
       "name": "iOS",
       "id": "iOS",
-      "count": 886
+      "count": 888
     },
     {
       "name": "Windows",
@@ -1469,21 +1469,43 @@
     },
     {
       "day": "2026-11-27",
-      "n": 18
+      "n": 20
     }
   ],
   "periods": {
-    "today": 18,
+    "today": 20,
     "yesterday": 281,
-    "d7": 2019,
+    "d7": 2021,
     "d7_prev": 849,
-    "d30": 3196,
+    "d30": 3198,
     "d30_prev": 843,
-    "day_frac": 0.137,
+    "day_frac": 0.144,
     "yesterday_day": "2026-11-26"
   },
-  "_last_visit": "2026-11-27 03:14",
+  "_last_visit": "2026-11-27 03:24",
   "recent": [
+    {
+      "date": "2026-11-27 03:24",
+      "ts": "2026-11-27T11:24:08Z",
+      "loc": "Japan",
+      "path": "/projects/self-rewriting",
+      "ref": "t.co",
+      "browser": "",
+      "system": "iOS 27.3",
+      "screen": "834px",
+      "first": true
+    },
+    {
+      "date": "2026-11-27 03:24",
+      "ts": "2026-11-27T11:24:12Z",
+      "loc": "Japan",
+      "path": "/",
+      "ref": "www.jiajunfan.com/projects/self-rewriting",
+      "browser": "",
+      "system": "iOS 27.3",
+      "screen": "834px",
+      "first": true
+    },
     {
       "date": "2026-11-27 03:14",
       "ts": "2026-11-27T11:14:17Z",
@@ -1791,30 +1813,8 @@
       "system": "iOS 18.7",
       "screen": "440px",
       "first": true
-    },
-    {
-      "date": "2026-11-26 23:47",
-      "ts": "2026-11-27T07:47:16Z",
-      "loc": "Hawaii, US",
-      "path": "/projects/self-rewriting",
-      "ref": "",
-      "browser": "Safari 11.0",
-      "system": "iOS 27.2",
-      "screen": "393px",
-      "first": false
-    },
-    {
-      "date": "2026-11-26 23:47",
-      "ts": "2026-11-27T07:47:49Z",
-      "loc": "Hawaii, US",
-      "path": "/projects/self-rewriting",
-      "ref": "",
-      "browser": "Safari 11.0",
-      "system": "iOS 27.2",
-      "screen": "393px",
-      "first": false
     }
   ],
-  "_recent_total": 8992,
+  "_recent_total": 8994,
   "_recent_shown": 30
 }
