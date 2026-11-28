@@ -2093,8 +2093,8 @@ Today's AI is frozen after training. I work to change that: AI that <strong>neve
     { name:'ICML 2027', abbr:'ICML', type:'ML', color:'#1565c0',
       location:'Rio de Janeiro, Brazil', conf:'Jul 31\u2013Aug 6, 2027', url:'https://icml.cc/Conferences/2027',
       deadlines:[
-        {label:'Abstract',         date:null},
-        {label:'Paper Submission', date:null},
+        {label:'Abstract',         date:'2027-01-14'},
+        {label:'Paper Submission', date:'2027-01-22'},
       ]},
   ];
   /* Deadlines are Anywhere on Earth (UTC-12): a date stays open until 23:59:59 AoE, i.e. 11:59:59 UTC the next day,
